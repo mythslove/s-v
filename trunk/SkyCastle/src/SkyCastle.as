@@ -37,9 +37,7 @@ package
 		
 		private function registerVOs():void
 		{
-			
 		}
-		
 		
 		private function initGame():void
 		{
