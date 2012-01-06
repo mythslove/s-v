@@ -6,8 +6,8 @@ package map.elements
 	import bing.iso.IsoUtils;
 	import bing.iso.Rhombus;
 	import bing.res.ResVO;
+	import bing.utils.ContainerUtil;
 	
-	import comm.GameData;
 	import comm.GameSetting;
 	
 	import flash.display.Bitmap;
@@ -64,7 +64,7 @@ package map.elements
 		
 		public function drawGrid():void
 		{
-			_gridLayer.removeChildren();
+			ContainerUtil.removeChildren(_gridLayer);
 			var points:Vector.<Vector3D> = this.spanPosition ;
 			for each( var point:Vector3D in points)
 			{
@@ -82,7 +82,7 @@ package map.elements
 		protected function resLoadedHandler( e:Event):void
 		{
 			ResourceUtil.instance.removeEventListener( buildingVO.baseVO.alias , resLoadedHandler );
-			_itemLayer.removeChildren();
+			ContainerUtil.removeChildren(_itemLayer);
 			var resVO:ResVO = ResourceUtil.instance.getResVOByName(buildingVO.baseVO.alias);
 			if(buildingVO.baseVO.frames>1) {
 				_skin = new Bitmap();

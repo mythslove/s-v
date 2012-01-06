@@ -6,12 +6,12 @@ package map
 	import bing.iso.IsoWorld;
 	import bing.utils.ObjectUtil;
 	
+	import comm.Assets;
 	import comm.GameData;
 	import comm.GameSetting;
 	
-	import enums.BuildingCurrentOperation;
-	import enums.BuildingType;
-	
+	import flash.display.Bitmap;
+	import flash.display.Loader;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
@@ -26,7 +26,6 @@ package map
 	import utils.PopUpManager;
 	
 	import views.ViewContainer;
-	import views.building.BuildingOperationPanel;
 	
 	public class GameWorld extends IsoWorld
 	{
@@ -61,9 +60,13 @@ package map
 			_instance = this ;
 			this.mouseChildren = false ;
 			
-			this.panTo(GameSetting.MAP_WIDTH>>1 , 120);
-			this.x = -GameSetting.MAP_WIDTH>>2 ;
-			this.y = -80;
+			var bg:Bitmap = new Assets.BackgroundBitmap() ;
+			GameSetting.MAX_WIDTH = bg.width;
+			GameSetting.MAX_HEIGHT = bg.height ;
+			this.setBackGround(bg);
+			
+			this.x = -800 ;
+			this.panTo( GameSetting.MAX_WIDTH>>1 , -400);
 		}
 		
 		private function drawZone():void
@@ -105,7 +108,6 @@ package map
 			_gridScene = new IsoScene(GameSetting.GRID_SIZE);
 			(_gridScene.addChild( new IsoGrid(GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE)) as IsoGrid).render() ;
 			_gridScene.cacheAsBitmap=true;
-			_gridScene.visible=false;
 			this.addScene(_gridScene);
 			
 			_groundScene = new GroundScene();
@@ -128,6 +130,12 @@ package map
 			this.addEventListener(MouseEvent.MOUSE_DOWN , down);
 			this.addEventListener(MouseEvent.MOUSE_MOVE , move);
 			this.addEventListener(MouseEvent.MOUSE_UP , up );
+			this.addEventListener(MouseEvent.ROLL_OUT , rollOut);
+		}
+		
+		private function rollOut(e:MouseEvent):void
+		{
+			this.stopDrag();
 		}
 		
 		private function enterFrame(e:Event):void
@@ -139,10 +147,10 @@ package map
 		private function down(e:MouseEvent):void
 		{
 			var rect:Rectangle = new Rectangle();
-			rect.x = -GameSetting.MAP_WIDTH+stage.stageWidth ;
-			rect.y = -GameSetting.MAP_HEIGHT+stage.stageHeight ;
-			rect.width =GameSetting.MAP_WIDTH-stage.stageWidth ;
-			rect.height = GameSetting.MAP_HEIGHT-stage.stageHeight ;
+			rect.x = -GameSetting.MAX_WIDTH+stage.stageWidth ;
+			rect.y = -GameSetting.MAX_HEIGHT+stage.stageHeight ;
+			rect.width =GameSetting.MAX_WIDTH-stage.stageWidth ;
+			rect.height = GameSetting.MAX_HEIGHT-stage.stageHeight ;
 			this.startDrag( false  , rect );
 			if(mouseBuilding){
 				mouseBuilding.selectedStatus(true); 
@@ -163,27 +171,27 @@ package map
 				var dz:Number = p.y*GameSetting.GRID_SIZE ;
 				
 				var vo:BuildingVO ;
-				if(GameData.buildingCurrOperation==BuildingCurrentOperation.ADD)
-				{
-					vo = ObjectUtil.copyObj( ViewContainer.instance.shopBar.selectedBuilding ) as BuildingVO;
-					var result:Boolean = false ;
-					if(vo.baseVO.type==BuildingType.ROAD){
-						result = _groundScene.addBuilding( dx,dz,vo);
-					}else{
-						result = _buildingScene.addBuilding( dx,dz,vo);
-					}
-				}
-			}
+//				if(GameData.buildingCurrOperation==BuildingCurrentOperation.ADD)
+//				{
+//					vo = ObjectUtil.copyObj( ViewContainer.instance.shopBar.selectedBuilding ) as BuildingVO;
+//					var result:Boolean = false ;
+//					if(vo.baseVO.type==BuildingType.ROAD){
+//						result = _groundScene.addBuilding( dx,dz,vo);
+//					}else{
+//						result = _buildingScene.addBuilding( dx,dz,vo);
+//					}
+//				}
+//			}
 			_isMove = false ;
-			if(mouseBuilding) 
-			{
-				mouseBuilding.selectedStatus(false);
-				if(getTimer()-_mouseDownTime>600)
-				{
-					var operationPanel:BuildingOperationPanel = new BuildingOperationPanel(mouseBuilding);
-					PopUpManager.addPopUpToFront( operationPanel );
-					ViewContainer.instance.shopBar.removeSelectedItem();
-				}
+//			if(mouseBuilding) 
+//			{
+//				mouseBuilding.selectedStatus(false);
+//				if(getTimer()-_mouseDownTime>600)
+//				{
+//					var operationPanel:BuildingOperationPanel = new BuildingOperationPanel(mouseBuilding);
+//					PopUpManager.addPopUpToFront( operationPanel );
+//					ViewContainer.instance.shopBar.removeSelectedItem();
+//				}
 			}
 		}
 		private function move(e:MouseEvent):void
