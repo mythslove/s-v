@@ -1,0 +1,157 @@
+package map
+{
+	import bing.ds.HashMap;
+	import bing.iso.IsoScene;
+	
+	import comm.GameSetting;
+	
+	import enums.BuildingType;
+	
+	import flash.utils.Dictionary;
+	
+	import map.elements.BuildingBase;
+	import map.elements.Road;
+	
+	import models.vos.BuildingVO;
+	
+	public class GroundScene extends IsoScene
+	{
+		private var _groundNodeHash:Dictionary = new Dictionary();
+		
+		
+		public var L:String,R:String, U:String, B:String , M:String ;
+		public var LU:String, LB:String,RU:String , RB:String ;
+		public var LU_M:String, LB_M:String,RU_M:String,RB_M:String;
+		public var LM:String , RM:String ;
+		
+		public function GroundScene()
+		{
+			super(GameSetting.GRID_SIZE);
+			
+			L = "_L";
+			R = "_R";
+			U = "_U";
+			B = "_B";
+			M = "_M";
+			LU = "_LU";
+			LB = "_LB";
+			RU = "_RU";
+			RB = "_RB";
+			LU_M = "_LU_M";
+			LB_M = "_LB_M";
+			RU_M = "_RU_M";
+			RB_M = "_RB_M";
+			LM = "_LM";
+			RM = "_RM";
+		}
+		
+		/**
+		 * 添加一个建筑  
+		 * @param dx 建筑的位置
+		 * @param dy 
+		 * @param buildingVO
+		 * @param updatePos 是否更新周围的方向
+		 * @return 添加成功返回true
+		 */		
+		public function addBuilding( dx:Number , dz:Number , buildingVO:BuildingVO , updatePos:Boolean=true ):Boolean
+		{
+			var obj:BuildingBase ;
+			if( buildingVO.baseVO.type==BuildingType.ROAD){
+				obj= new Road(buildingVO);
+			}
+			obj.x = dx;
+			obj.z = dz;
+			if( obj.getWalkable(this.gridData) )
+			{
+				this.addIsoObject( obj );
+				obj.setWalkable( false , this.gridData );
+				obj.drawGrid(); //显示占了的网格
+				_groundNodeHash[obj.nodeX+"-"+obj.nodeZ]=obj;
+				if(updatePos)updateUI(obj);
+				return true;
+			}
+			return false ;
+		}
+		
+		/**
+		 * 移除建筑 
+		 * @param buildingBase
+		 */		
+		public function removeBuilding( buildingBase:BuildingBase):void
+		{
+			buildingBase.setWalkable( true , this.gridData );
+			this.removeIsoObject( buildingBase );
+			delete _groundNodeHash[buildingBase.nodeX+"-"+buildingBase.nodeZ];
+		}
+		
+		/**
+		 * 更新方向 
+		 * @param buildingBase
+		 */		
+		private function updateUI( buildingBase:BuildingBase ):void
+		{
+			for( var i:int = buildingBase.nodeX-1 ; i<buildingBase.nodeX+2 && i<gridData.numCols ; ++i )
+			{
+				for( var j:int = buildingBase.nodeZ-1 ;  j<buildingBase.nodeZ+2 && j<gridData.numRows ; ++j )
+				{
+					if( _groundNodeHash[i+"-"+j])
+					{
+						updateRoadPosition(  _groundNodeHash[i+"-"+j] );
+					}
+				}
+			}
+		}
+		
+		//周围的四个位置
+		private var _roundRoadHash:HashMap = new HashMap(); 
+		//更新一个路的方向
+		private function updateRoadPosition( building:BuildingBase ):void
+		{
+			var type:int = building.buildingVO.baseVO.type;
+			var luBuilding:BuildingBase = _groundNodeHash[ (building.nodeX-1)+"-"+building.nodeZ];
+			var ruBuilding:BuildingBase = _groundNodeHash[ building.nodeX+"-"+(building.nodeZ-1)];
+			var lbBuilding:BuildingBase = _groundNodeHash[ building.nodeX+"-"+(building.nodeZ+1)];
+			var rbBuilding:BuildingBase = _groundNodeHash[ (building.nodeX+1)+"-"+building.nodeZ];
+			if( luBuilding&&luBuilding.buildingVO.baseVO.type==type ) _roundRoadHash.put( "POS_LU_M",true);
+			if( ruBuilding&&ruBuilding.buildingVO.baseVO.type==type ) _roundRoadHash.put( "POS_RU_M",true);
+			if( lbBuilding&&lbBuilding.buildingVO.baseVO.type==type ) _roundRoadHash.put( "POS_LB_M",true);
+			if( rbBuilding&&rbBuilding.buildingVO.baseVO.type==type ) _roundRoadHash.put( "POS_RB_M",true);
+			
+			const len:int = _roundRoadHash.size() ;
+			if(len==4) (building as Object).updateUI(M); 
+			else if(len==3) check3(building);
+			else if(len==2) check2(building);
+			else if(len==1) check1(building);
+			
+			_roundRoadHash.clear();
+		}
+		
+		private function check3(building:Object):void 
+		{
+			if(!_roundRoadHash.containsKey("POS_LU_M")) building.updateUI(LU_M);
+			else if(!_roundRoadHash.containsKey("POS_RU_M")) building.updateUI(RU_M);
+			else if(!_roundRoadHash.containsKey("POS_LB_M")) building.updateUI(LB_M);
+			else if(!_roundRoadHash.containsKey("POS_RB_M")) building.updateUI(RB_M);
+		}
+		
+		private function check2(building:Object):void
+		{
+			if(_roundRoadHash.containsKey("POS_LU_M") && _roundRoadHash.containsKey("POS_RU_M") ) building.updateUI(B);
+			else if(_roundRoadHash.containsKey("POS_RU_M") && _roundRoadHash.containsKey("POS_RB_M")) building.updateUI(L);
+			else if(_roundRoadHash.containsKey("POS_RB_M")&& _roundRoadHash.containsKey("POS_LB_M")) building.updateUI(U);
+			else if(_roundRoadHash.containsKey("POS_LB_M")&& _roundRoadHash.containsKey("POS_LU_M")) building.updateUI(R);
+			else if(_roundRoadHash.containsKey("POS_LU_M")&& _roundRoadHash.containsKey("POS_RB_M")) building.updateUI(LM);
+			else if(_roundRoadHash.containsKey("POS_RU_M")&& _roundRoadHash.containsKey("POS_LB_M")) building.updateUI(RM);
+		}
+		
+		private function check1(building:Object):void
+		{
+			var temp:String =_roundRoadHash.keys()[0].toString();
+			if( temp=="POS_LU_M") building.updateUI(RB);
+			else if( temp=="POS_RU_M") building.updateUI(LB);
+			else if( temp=="POS_RB_M") building.updateUI(LU);
+			else if( temp=="POS_LB_M") building.updateUI(RU);
+		}
+		
+	}
+}
