@@ -1,11 +1,6 @@
 package views
 {
-	import comm.GameSetting;
-	import comm.GlobalDispatcher;
-	
 	import flash.display.Sprite;
-	
-	import views.shop.ShopBar;
 	
 	public class ViewContainer extends Sprite
 	{
@@ -16,8 +11,6 @@ package views
 			return _instance; 
 		}
 		//======================================
-		private var _shopBar:ShopBar ;
-		public function get shopBar():ShopBar{ return _shopBar; }
 		
 		public function ViewContainer()
 		{
@@ -36,11 +29,6 @@ package views
 		
 		public function showShopBar():void
 		{
-			if(!_shopBar) _shopBar = new ShopBar();
-			else if(this.contains(_shopBar)) return ;
-			
-			_shopBar.x = GameSetting.SCREEN_WIDTH-_shopBar.width ;
-			addChild(_shopBar);
 		}
 		
 		private function configListeners():void
