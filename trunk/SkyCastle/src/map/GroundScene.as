@@ -56,9 +56,9 @@ package map
 		public function addBuilding( dx:Number , dz:Number , buildingVO:BuildingVO , updatePos:Boolean=true ):Boolean
 		{
 			var obj:BuildingBase ;
-			if( buildingVO.baseVO.type==BuildingType.ROAD){
-				obj= new Road(buildingVO);
-			}
+//			if( buildingVO.baseVO.type==BuildingType.ROAD){
+//				obj= new Road(buildingVO);
+//			}
 			obj.x = dx;
 			obj.z = dz;
 			if( obj.getWalkable(this.gridData) )

@@ -2,7 +2,8 @@ package
 {
 	import flash.display.Sprite;
 	import flash.display.StageQuality;
-	import flash.net.registerClassAlias;
+	
+	import map.GameWorld;
 	
 	[SWF( width="760",height="640")]
 	public class SkyCastle extends Sprite
@@ -15,6 +16,7 @@ package
 			stage.quality = StageQuality.MEDIUM;
 			
 			registerVOs();
+			initGame();
 		}
 		
 		private function registerVOs():void
@@ -22,5 +24,9 @@ package
 			
 		}
 		
+		private function initGame():void
+		{
+			addChild(GameWorld.instance);
+		}
 	}
 }
