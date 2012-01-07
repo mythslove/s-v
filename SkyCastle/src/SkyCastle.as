@@ -37,7 +37,7 @@ package
 		
 		/**
 		 * 初始化游戏 
-		 */		
+		 */	
 		private function initGame():void
 		{
 			addChild(GameWorld.instance); //添加游戏世界
