@@ -6,10 +6,11 @@ package map.elements
 	import bing.res.ResVO;
 	import bing.utils.ContainerUtil;
 	
+	import com.greensock.TweenMax;
+	
 	import comm.GameData;
 	import comm.GameSetting;
 	
-	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
@@ -28,7 +29,7 @@ package map.elements
 	public class BuildingBase extends IsoObject
 	{
 		protected var _itemLayer:Sprite ;
-		protected var _gridLayer:Sprite;
+//		protected var _gridLayer:Sprite;
 		protected var _skin:MovieClip ;
 		protected var _itemLayerMatrix:Matrix=new Matrix();
 		
@@ -38,9 +39,10 @@ package map.elements
 			super(GameSetting.GRID_SIZE,buildingVO.baseVO.xSpan , buildingVO.baseVO.zSpan);
 			this.buildingVO = buildingVO ;
 			
-			_gridLayer = new Sprite();
-			_gridLayer.cacheAsBitmap = true ;
-			addChild(_gridLayer);
+//			_gridLayer = new Sprite();
+//			_gridLayer.visible=false;
+//			_gridLayer.cacheAsBitmap = true ;
+//			addChild(_gridLayer);
 			
 			_itemLayer = new Sprite();
 			addChild(_itemLayer);
@@ -64,22 +66,22 @@ package map.elements
 			ResourceUtil.instance.loadRes( resVO );
 		}
 		
-		public function drawGrid():void
-		{
-			ContainerUtil.removeChildren(_gridLayer);
-			var points:Vector.<Vector3D> = this.spanPosition ;
-			for each( var point:Vector3D in points)
-			{
-				var rhomebus:Rhombus = new Rhombus( this.size );
-				var p:Vector3D = point.clone();
-				p.x -=this.x;
-				p.z -=this.z ;
-				var screenPos:Point = IsoUtils.isoToScreen(p);
-				rhomebus.x = screenPos.x ;
-				rhomebus.y = screenPos.y ;
-				_gridLayer.addChild( rhomebus );
-			}
-		}
+//		public function drawGrid():void
+//		{
+//			ContainerUtil.removeChildren(_gridLayer);
+//			var points:Vector.<Vector3D> = this.spanPosition ;
+//			for each( var point:Vector3D in points)
+//			{
+//				var rhomebus:Rhombus = new Rhombus( this.size );
+//				var p:Vector3D = point.clone();
+//				p.x -=this.x;
+//				p.z -=this.z ;
+//				var screenPos:Point = IsoUtils.isoToScreen(p);
+//				rhomebus.x = screenPos.x ;
+//				rhomebus.y = screenPos.y ;
+//				_gridLayer.addChild( rhomebus );
+//			}
+//		}
 		
 		protected function resLoadedHandler( e:Event):void
 		{
@@ -122,9 +124,9 @@ package map.elements
 		public function selectedStatus( flag:Boolean ):void
 		{
 			if(flag ){
-				_gridLayer.visible=true;
+				TweenMax.to(_itemLayer, 0, {dropShadowFilter:{color:0xffcc00, alpha:1, blurX:2, blurY:2, strength:5}});
 			}else{
-				_gridLayer.visible=false;
+				_itemLayer.filters=null ;
 			}
 		}
 		
@@ -146,7 +148,7 @@ package map.elements
 			this.removeEventListener(Event.ADDED_TO_STAGE , addedToStageHandler );
 			ResourceUtil.instance.removeEventListener( buildingVO.baseVO.alias , resLoadedHandler );
 			_itemLayer = null ;
-			_gridLayer = null ;
+//			_gridLayer = null ;
 			buildingVO = null ;
 			_skin = null ;
 			_itemLayerMatrix = null ;

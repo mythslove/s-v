@@ -33,7 +33,7 @@ package map
 			{
 				this.addIsoObject( obj );
 				obj.setWalkable( false , this.gridData );
-				obj.drawGrid(); //显示占了的网格
+//				obj.drawGrid(); //显示占了的网格
 				return true;
 			}
 			return false ;
@@ -59,7 +59,7 @@ package map
 			{
 				buildingBase.setWalkable(true,gridData);
 				buildingBase.scaleX = ~buildingBase.scaleX+1;
-				buildingBase.drawGrid();
+//				buildingBase.drawGrid();
 				buildingBase.setWalkable(false,gridData);
 			}
 		}
