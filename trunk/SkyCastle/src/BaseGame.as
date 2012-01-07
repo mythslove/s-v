@@ -68,11 +68,16 @@ package
 				case ResLoadedEvent.QUEUE_LOADED:
 					ResourceUtil.instance.removeEventListener(ResProgressEvent.RES_LOAD_PROGRESS , queueLoadHandler);
 					ResourceUtil.instance.removeEventListener(ResLoadedEvent.QUEUE_LOADED ,queueLoadHandler);
-					
+					parseConfig();
 					removeLoading();
 					inited();
 					break;
 			}
+		}
+		
+		private function parseConfig():void
+		{
+			
 		}
 		
 		private function removeLoading():void

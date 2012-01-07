@@ -1,5 +1,9 @@
 package comm
 {
+	/**
+	 * 游戏的设置 
+	 * @author zzhanglin
+	 */	
 	public class GameSetting
 	{
 		//屏幕大小 
