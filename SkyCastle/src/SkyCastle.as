@@ -2,6 +2,9 @@ package
 {
 	import map.GameWorld;
 	
+	/**
+	 * 游戏主类 
+	 */	
 	[SWF( width="760",height="640")]
 	public class SkyCastle extends BaseGame
 	{
