@@ -14,8 +14,15 @@ package
 	
 	import utils.ResourceUtil;
 	
+	/**
+	 * 游戏入口基类 
+	 * @author zzhanglin
+	 */	
 	public class BaseGame extends Sprite
 	{
+		/**
+		 * 构造函数 
+		 */		
 		public function BaseGame()
 		{
 			super();
@@ -30,22 +37,35 @@ package
 			initLoad();
 		}
 		
+		/**
+		 * 获取游戏的一些参数和变量 
+		 */		
 		private function init():void
 		{
 			
 		}
 		
+		/**
+		 * 窗口大小变化 
+		 * @param e
+		 */		
 		private function onResizeHandler(e:Event):void
 		{
 			e.stopPropagation();
 			GlobalDispatcher.instance.dispatchEvent( new GlobalEvent(GlobalEvent.RESIZE));
 		}
 		
+		/**
+		 * 添加进度条 
+		 */		
 		private function addLoading():void
 		{
 			
 		}
 		
+		/**
+		 * 下载游戏开始前的资源 
+		 */		
 		private function initLoad():void
 		{
 			var res:Vector.<ResVO> = new Vector.<ResVO>();
@@ -56,6 +76,10 @@ package
 			ResourceUtil.instance.queueLoad( res , 5 );
 		}
 		
+		/**
+		 * 序列下载资源完成 
+		 * @param e
+		 */		
 		private function queueLoadHandler( e:Event):void
 		{
 			switch( e.type)
@@ -72,11 +96,17 @@ package
 			}
 		}
 		
+		/**
+		 * 解析config.xml
+		 */		
 		private function parseConfig():void
 		{
 			
 		}
 		
+		/**
+		 * 删除进度条 
+		 */		
 		private function removeLoading():void
 		{
 			
