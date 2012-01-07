@@ -35,6 +35,7 @@ package
 			stage.align="TL";
 			stage.scaleMode = "noScale";
 			stage.quality = StageQuality.MEDIUM;
+			stage.showDefaultContextMenu = false ;
 			stage.addEventListener(Event.RESIZE , onResizeHandler);
 			stage.addEventListener(FullScreenEvent.FULL_SCREEN , onResizeHandler);
 			

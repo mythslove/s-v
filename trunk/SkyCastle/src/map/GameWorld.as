@@ -21,8 +21,6 @@ package map
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	
-	import map.elements.BuildingBase;
-	
 	import models.ShopModel;
 	import models.vos.BuildingVO;
 	
@@ -55,7 +53,6 @@ package map
 		}
 		
 		protected var _isMove:Boolean=false;
-		public var mouseBuilding:BuildingBase ; //鼠标在哪个上面
 		
 		/**
 		 * 游戏世界构造函数 
@@ -132,8 +129,8 @@ package map
 		{
 			this.stopDrag();
 			_isMove = false ;
-			if(mouseBuilding) {
-				mouseBuilding.selectedStatus(false);
+			if(GameData.mouseBuilding) {
+				GameData.mouseBuilding.selectedStatus(false);
 			}
 		}
 		
@@ -143,7 +140,7 @@ package map
 		 */		
 		protected function onEnterFrameHandler(e:Event):void
 		{
-			mouseBuilding = null ;
+			GameData.mouseBuilding = null ;
 			update() ;
 		}
 		
@@ -191,8 +188,8 @@ package map
 				}
 			}
 			_isMove = false ;
-			if(mouseBuilding) {
-				mouseBuilding.selectedStatus(false);
+			if(GameData.mouseBuilding) {
+				GameData.mouseBuilding.selectedStatus(false);
 			}
 		}
 		
@@ -203,8 +200,8 @@ package map
 		protected function onMouseMoveHandler(e:MouseEvent):void
 		{
 			if(e.buttonDown)_isMove = true ;
-			if(mouseBuilding) {
-				mouseBuilding.selectedStatus(true);
+			if(GameData.mouseBuilding) {
+				GameData.mouseBuilding.selectedStatus(true);
 			}
 		}
 		

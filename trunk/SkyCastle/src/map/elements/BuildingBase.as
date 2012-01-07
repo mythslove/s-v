@@ -29,7 +29,7 @@ package map.elements
 	public class BuildingBase extends IsoObject
 	{
 		protected var _itemLayer:Sprite ;
-//		protected var _gridLayer:Sprite;
+		protected var _gridLayer:Sprite;
 		protected var _skin:MovieClip ;
 		protected var _itemLayerMatrix:Matrix=new Matrix();
 		
@@ -66,8 +66,8 @@ package map.elements
 			ResourceUtil.instance.loadRes( resVO );
 		}
 		
-//		public function drawGrid():void
-//		{
+		public function drawGrid():void
+		{
 //			ContainerUtil.removeChildren(_gridLayer);
 //			var points:Vector.<Vector3D> = this.spanPosition ;
 //			for each( var point:Vector3D in points)
@@ -81,7 +81,7 @@ package map.elements
 //				rhomebus.y = screenPos.y ;
 //				_gridLayer.addChild( rhomebus );
 //			}
-//		}
+		}
 		
 		protected function resLoadedHandler( e:Event):void
 		{
@@ -99,10 +99,10 @@ package map.elements
 		{
 			super.update() ;
 			
-			if(stage && _skin && (GameWorld.instance.mouseBuilding==null || 
-				GameWorld.instance.mouseBuilding.parent==GameWorld.instance.groundScene ||
-				(GameWorld.instance.mouseBuilding.parent==this.parent&&
-				this.parent.getChildIndex(this)>this.parent.getChildIndex(GameWorld.instance.mouseBuilding)))&&
+			if(stage && _skin && (GameData.mouseBuilding==null || 
+				GameData.mouseBuilding.parent==GameWorld.instance.groundScene ||
+				(GameData.mouseBuilding.parent==this.parent&&
+				this.parent.getChildIndex(this)>this.parent.getChildIndex(GameData.mouseBuilding)))&&
 				this.hitTestPoint(stage.mouseX,stage.mouseY))
 			{
 				var bound:Rectangle = _itemLayer.getBounds(_itemLayer);
@@ -112,7 +112,7 @@ package map.elements
 				bmd.draw( _itemLayer,_itemLayerMatrix);
 				if(bmd.hitTest( GameData.zeroPoint , 255 , new Point(_itemLayer.mouseX-bound.x,_itemLayer.mouseY-bound.y) ) )
 				{
-					GameWorld.instance.mouseBuilding = this ;
+					GameData.mouseBuilding = this ;
 				}else{
 					selectedStatus(false);
 				}
@@ -124,7 +124,7 @@ package map.elements
 		public function selectedStatus( flag:Boolean ):void
 		{
 			if(flag ){
-				TweenMax.to(_itemLayer, 0, {dropShadowFilter:{color:0xffcc00, alpha:1, blurX:2, blurY:2, strength:5}});
+				TweenMax.to(_itemLayer, 0, {dropShadowFilter:{color:0xffcc00, alpha:1, blurX:4, blurY:4, strength:8}});
 			}else{
 				_itemLayer.filters=null ;
 			}
@@ -148,7 +148,7 @@ package map.elements
 			this.removeEventListener(Event.ADDED_TO_STAGE , addedToStageHandler );
 			ResourceUtil.instance.removeEventListener( buildingVO.baseVO.alias , resLoadedHandler );
 			_itemLayer = null ;
-//			_gridLayer = null ;
+			_gridLayer = null ;
 			buildingVO = null ;
 			_skin = null ;
 			_itemLayerMatrix = null ;
