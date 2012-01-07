@@ -27,7 +27,7 @@ package map
 	import utils.PopUpManager;
 	import utils.ResourceUtil;
 	
-	import views.ViewContainer;
+	import views.CenterViewContainer;
 	
 	public class GameWorld extends IsoWorld
 	{
