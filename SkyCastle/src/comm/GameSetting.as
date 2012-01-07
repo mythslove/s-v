@@ -6,9 +6,9 @@ package comm
 	 */	
 	public class GameSetting
 	{
-		//屏幕大小 
-		public static var SCREEN_WIDTH:int =760;
-		public static var SCREEN_HEIGHT:int = 640;
+		//屏幕固定大小 
+		public static const SCREEN_WIDTH:int =760;
+		public static const SCREEN_HEIGHT:int = 640;
 		
 		
 		//地图区域的大小

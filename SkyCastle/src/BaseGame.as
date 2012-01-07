@@ -4,7 +4,6 @@ package
 	import bing.res.ResProgressEvent;
 	import bing.res.ResVO;
 	
-	import comm.GameSetting;
 	import comm.GlobalDispatcher;
 	import comm.GlobalEvent;
 	
@@ -39,8 +38,6 @@ package
 		private function onResizeHandler(e:Event):void
 		{
 			e.stopPropagation();
-			GameSetting.SCREEN_WIDTH = stage.stageWidth;
-			GameSetting.SCREEN_HEIGHT = stage.stageHeight ;
 			GlobalDispatcher.instance.dispatchEvent( new GlobalEvent(GlobalEvent.RESIZE));
 		}
 		
