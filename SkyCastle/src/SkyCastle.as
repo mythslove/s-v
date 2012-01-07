@@ -3,7 +3,7 @@ package
 	import map.GameWorld;
 	
 	import views.PopUpContainer;
-	import views.ViewContainer;
+	import views.CenterViewContainer;
 	
 	/**
 	 * 游戏主类 
@@ -29,7 +29,7 @@ package
 		private function initGame():void
 		{
 			addChild(GameWorld.instance);
-			addChild( ViewContainer.instance);
+			addChild( CenterViewContainer.instance);
 			addChild( PopUpContainer.instance);
 		}
 	}
