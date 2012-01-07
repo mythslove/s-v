@@ -17,7 +17,7 @@ package utils
 			if(_instance){
 				throw new Error("重复实例化");
 			}
-			this.cdns = Vector.<String>([""]);
+			this.cdns = Vector.<String>(["../"]);
 			this.maxLoadNum = 5 ;
 		}
 		public static function get instance():ResourceUtil
