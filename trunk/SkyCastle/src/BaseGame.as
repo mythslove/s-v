@@ -4,6 +4,7 @@ package
 	import bing.res.ResProgressEvent;
 	import bing.res.ResVO;
 	
+	import comm.GameSetting;
 	import comm.GlobalDispatcher;
 	import comm.GlobalEvent;
 	
@@ -20,6 +21,8 @@ package
 	 */	
 	public class BaseGame extends Sprite
 	{
+		private var _preLoading:SWC_preLoad ;
+		
 		/**
 		 * 构造函数 
 		 */		
@@ -60,7 +63,10 @@ package
 		 */		
 		private function addLoading():void
 		{
-			
+			_preLoading = new SWC_preLoad();
+			_preLoading.x = (GameSetting.SCREEN_WIDTH-_preLoading.width)>>1;
+			_preLoading.y = (GameSetting.SCREEN_HEIGHT-_preLoading.height)>>1;
+			addChild( _preLoading );
 		}
 		
 		/**
@@ -85,6 +91,8 @@ package
 			switch( e.type)
 			{
 				case ResProgressEvent.RES_LOAD_PROGRESS:
+					var evt:ResProgressEvent = e as ResProgressEvent;
+					_preLoading.loaderBar.gotoAndStop( (evt.loaded/evt.total*100 )>>0 );
 					break;
 				case ResLoadedEvent.QUEUE_LOADED:
 					ResourceUtil.instance.removeEventListener(ResProgressEvent.RES_LOAD_PROGRESS , queueLoadHandler);
@@ -109,7 +117,8 @@ package
 		 */		
 		private function removeLoading():void
 		{
-			
+			removeChild(_preLoading);
+			_preLoading = null ;
 		}
 		
 		/**
