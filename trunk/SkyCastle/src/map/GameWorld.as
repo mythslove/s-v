@@ -104,7 +104,7 @@ package map
 			
 			_buildingScene = new BuildingScene();
 			_buildingScene.mouseEnabled = false ;
-			_buildingScene.gridData = _groundScene.gridData; //共用一个网格数据
+			_buildingScene.createGridData(GameSetting.GRID_X,GameSetting.GRID_Z);
 			addScene(_buildingScene);
 			
 			configListeners();
