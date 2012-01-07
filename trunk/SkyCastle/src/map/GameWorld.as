@@ -59,17 +59,22 @@ package map
 		{
 			super(GameSetting.MAP_WIDTH , GameSetting.MAP_HEIGHT,GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE);
 			if(_instance) throw new Error("只能实例化一个");
-			_instance = this ;
+			else _instance = this ;
 			this.mouseChildren = false ;
 			
+			//设置背景图片
 			var bg:Bitmap = new Bitmap( ResourceUtil.instance.getInstanceByClassName("bg","BG") as BitmapData );
-			GameSetting.MAX_WIDTH = bg.width;
-			GameSetting.MAX_HEIGHT = bg.height ;
 			this.setBackGround(bg);
 			ResourceUtil.instance.deleteRes("bg")//把加载的背景图片卸载了
-			
-			this.x = -800 ;
+				
+			//设置地图显示参数
+			GameSetting.MAX_WIDTH = bg.width;
+			GameSetting.MAX_HEIGHT = bg.height ;
 			this.panTo( GameSetting.MAX_WIDTH>>1 , -400);
+			
+			//地图的初始位置
+			this.x = -2200 ;
+			this.y = -1500;
 		}
 		
 		private function drawZone():void
