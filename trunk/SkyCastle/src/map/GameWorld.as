@@ -23,28 +23,28 @@ package map
 	
 	public class GameWorld extends IsoWorld
 	{
-		private static var _instance:GameWorld;
+		protected static var _instance:GameWorld;
 		public static function get instance():GameWorld
 		{
 			if(!_instance) _instance= new GameWorld();
 			return _instance ;
 		}
 		//=====================================
-		private var _buildingScene:BuildingScene ;
+		protected var _buildingScene:BuildingScene ;
 		public function get buildingScene():BuildingScene{
 			return _buildingScene ;
 		}
-		private var _groundScene:GroundScene;
+		protected var _groundScene:GroundScene;
 		public function get groundScene():GroundScene{
 			return _groundScene ;
 		}
-		private var _gridScene:IsoScene ;
+		protected var _gridScene:IsoScene ;
 		public function get gridScene():IsoScene{
 			return _gridScene;
 		}
 		
-		private var _mouseDownTime:int ;
-		private var _isMove:Boolean=false;
+		protected var _mouseDownTime:int ;
+		protected var _isMove:Boolean=false;
 		public var mouseBuilding:BuildingBase ; //鼠标在哪个上面
 		
 		public function GameWorld()
@@ -93,7 +93,7 @@ package map
 			configListeners();
 		}
 		
-		private function configListeners():void
+		protected function configListeners():void
 		{
 			this.addEventListener(Event.ENTER_FRAME , onEnterFrameHandler );
 			this.addEventListener(MouseEvent.MOUSE_DOWN , onMouseDownHandler);
@@ -102,18 +102,18 @@ package map
 			this.addEventListener(MouseEvent.ROLL_OUT , onMouseRollOut);
 		}
 		
-		private function onMouseRollOut(e:MouseEvent):void
+		protected function onMouseRollOut(e:MouseEvent):void
 		{
 			this.stopDrag();
 		}
 		
-		private function onEnterFrameHandler(e:Event):void
+		protected function onEnterFrameHandler(e:Event):void
 		{
 			mouseBuilding = null ;
 			update() ;
 		}
 		
-		private function onMouseDownHandler(e:MouseEvent):void
+		protected function onMouseDownHandler(e:MouseEvent):void
 		{
 			var rect:Rectangle = new Rectangle();
 			rect.x = -GameSetting.MAX_WIDTH+stage.stageWidth ;
@@ -127,7 +127,7 @@ package map
 			}
 		}
 		
-		private function onMouseUpHandler(e:MouseEvent):void
+		protected function onMouseUpHandler(e:MouseEvent):void
 		{
 			this.stopDrag();
 			if(!_isMove) // && !mouseBuilding
@@ -163,7 +163,7 @@ package map
 //				}
 			}
 		}
-		private function onMouseMoveHandler(e:MouseEvent):void
+		protected function onMouseMoveHandler(e:MouseEvent):void
 		{
 			_mouseDownTime = getTimer();
 			if(e.buttonDown) _isMove = true ;
