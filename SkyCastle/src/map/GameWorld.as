@@ -178,7 +178,13 @@ package map
 			switch( e.type )
 			{
 				case GlobalEvent.RESIZE:
-					
+					//纠正地图位置
+					if(x<-GameSetting.MAX_WIDTH+stage.stageWidth){
+						x = -GameSetting.MAX_WIDTH+stage.stageWidth ;
+					}
+					if(y<-GameSetting.MAX_HEIGHT+stage.stageHeight){
+						y = -GameSetting.MAX_HEIGHT+stage.stageHeight ;
+					}
 					break ;
 			}
 		}
