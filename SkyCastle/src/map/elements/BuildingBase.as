@@ -39,6 +39,7 @@ package map.elements
 			addChild(_gridLayer);
 			
 			_itemLayer = new Sprite();
+			_itemLayer.y = size>>1;
 			addChild(_itemLayer);
 			
 			this.addEventListener(Event.ADDED_TO_STAGE , addedToStageHandler );
@@ -88,7 +89,6 @@ package map.elements
 				_itemLayer.addChild(_skin);
 			}
 		}
-		
 		
 		override public function update():void
 		{
