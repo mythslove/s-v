@@ -66,7 +66,7 @@ package map
 			if(_instance) throw new Error("只能实例化一个GameWorld");
 			else _instance = this ;
 			this.mouseChildren = false ;
-			
+//			this.scaleX=this.scaleY=0.5;
 			//设置背景图片
 			var bg:Bitmap = new Bitmap( ResourceUtil.instance.getInstanceByClassName("bg","BG") as BitmapData );
 			this.setBackGround(bg);
@@ -131,6 +131,10 @@ package map
 		protected function onMouseRollOut(e:MouseEvent):void
 		{
 			this.stopDrag();
+			_isMove = false ;
+			if(mouseBuilding) {
+				mouseBuilding.selectedStatus(false);
+			}
 		}
 		
 		/**
@@ -155,9 +159,6 @@ package map
 			rect.width =GameSetting.MAX_WIDTH-stage.stageWidth ;
 			rect.height = GameSetting.MAX_HEIGHT-stage.stageHeight ;
 			this.startDrag( false  , rect );
-			if(mouseBuilding){
-				mouseBuilding.selectedStatus(true); 
-			}
 		}
 		
 		/**
@@ -167,7 +168,7 @@ package map
 		protected function onMouseUpHandler(e:MouseEvent):void
 		{
 			this.stopDrag();
-			if(!_isMove) // && !mouseBuilding
+			if(!_isMove) 
 			{
 				var xx:int = e.stageX - this.sceneLayerOffsetX -this.x;
 				var yy:int = e.stageY- this.sceneLayerOffsetY -this.y;
@@ -189,10 +190,8 @@ package map
 				}
 			}
 			_isMove = false ;
-			if(mouseBuilding) 
-			{
+			if(mouseBuilding) {
 				mouseBuilding.selectedStatus(false);
-				
 			}
 		}
 		
@@ -202,7 +201,10 @@ package map
 		 */		
 		protected function onMouseMoveHandler(e:MouseEvent):void
 		{
-			if(e.buttonDown) _isMove = true ;
+			if(e.buttonDown)_isMove = true ;
+			if(mouseBuilding) {
+				mouseBuilding.selectedStatus(true);
+			}
 		}
 		
 		/**
