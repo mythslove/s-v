@@ -66,7 +66,7 @@ package map
 			if(_instance) throw new Error("只能实例化一个GameWorld");
 			else _instance = this ;
 			this.mouseChildren = false ;
-//			this.scaleX=this.scaleY=0.5;
+			
 			//设置背景图片
 			var bg:Bitmap = new Bitmap( ResourceUtil.instance.getInstanceByClassName("bg","BG") as BitmapData );
 			this.setBackGround(bg);
@@ -154,10 +154,10 @@ package map
 		protected function onMouseDownHandler(e:MouseEvent):void
 		{
 			var rect:Rectangle = new Rectangle();
-			rect.x = -GameSetting.MAX_WIDTH+stage.stageWidth ;
-			rect.y = -GameSetting.MAX_HEIGHT+stage.stageHeight ;
-			rect.width =GameSetting.MAX_WIDTH-stage.stageWidth ;
-			rect.height = GameSetting.MAX_HEIGHT-stage.stageHeight ;
+			rect.x = -GameSetting.MAX_WIDTH*scaleX+stage.stageWidth ;
+			rect.y = -GameSetting.MAX_HEIGHT*scaleX+stage.stageHeight ;
+			rect.width =GameSetting.MAX_WIDTH*scaleX-stage.stageWidth ;
+			rect.height = GameSetting.MAX_HEIGHT*scaleX-stage.stageHeight ;
 			this.startDrag( false  , rect );
 		}
 		
@@ -170,12 +170,13 @@ package map
 			this.stopDrag();
 			if(!_isMove) 
 			{
-				var xx:int = e.stageX - this.sceneLayerOffsetX -this.x;
-				var yy:int = e.stageY- this.sceneLayerOffsetY -this.y;
+				var xx:int = (e.stageX-this.x)/scaleX - this.sceneLayerOffsetX ;
+				var yy:int = (e.stageY -this.y)/scaleX - this.sceneLayerOffsetY;
+				
 				var p:Point = IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE,xx,yy);
 
-				var dx:Number = p.x*GameSetting.GRID_SIZE ;
-				var dz:Number = p.y*GameSetting.GRID_SIZE ;
+				var dx:int = p.x*GameSetting.GRID_SIZE ;
+				var dz:int = p.y*GameSetting.GRID_SIZE ;
 				
 				var vo:BuildingVO ;
 				if(GameData.buildingCurrOperation==BuildingCurrentOperation.ADD)
@@ -217,11 +218,11 @@ package map
 			{
 				case GlobalEvent.RESIZE:
 					//纠正地图位置
-					if(x<-GameSetting.MAX_WIDTH+stage.stageWidth){
-						x = -GameSetting.MAX_WIDTH+stage.stageWidth ;
+					if(x<-GameSetting.MAX_WIDTH*scaleX+stage.stageWidth){
+						x = -GameSetting.MAX_WIDTH*scaleX+stage.stageWidth ;
 					}
-					if(y<-GameSetting.MAX_HEIGHT+stage.stageHeight){
-						y = -GameSetting.MAX_HEIGHT+stage.stageHeight ;
+					if(y<-GameSetting.MAX_HEIGHT*scaleX+stage.stageHeight){
+						y = -GameSetting.MAX_HEIGHT*scaleX+stage.stageHeight ;
 					}
 					break ;
 			}
