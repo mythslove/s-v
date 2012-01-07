@@ -1,7 +1,5 @@
 package map.elements
 {
-	import bing.animation.ActionVO;
-	import bing.animation.AnimationBitmap;
 	import bing.iso.IsoObject;
 	import bing.iso.IsoUtils;
 	import bing.iso.Rhombus;
@@ -10,9 +8,8 @@ package map.elements
 	
 	import comm.GameSetting;
 	
-	import flash.display.Bitmap;
-	import flash.display.BitmapData;
 	import flash.display.DisplayObjectContainer;
+	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.geom.Point;
@@ -28,8 +25,7 @@ package map.elements
 	{
 		protected var _itemLayer:Sprite ;
 		protected var _gridLayer:Sprite;
-		protected var _skin:Bitmap;
-		protected var _animation:AnimationBitmap;
+		protected var _skin:MovieClip ;
 		
 		public var buildingVO:BuildingVO ;
 		public function BuildingBase(buildingVO:BuildingVO )
@@ -45,20 +41,22 @@ package map.elements
 			_itemLayer = new Sprite();
 			addChild(_itemLayer);
 			
-			this.addEventListener(Event.ADDED_TO_STAGE , addedHandler );
+			this.addEventListener(Event.ADDED_TO_STAGE , addedToStageHandler );
 		}
 		
-		protected function addedHandler(e:Event):void
+		protected function addedToStageHandler(e:Event):void
 		{
-			this.removeEventListener(Event.ADDED_TO_STAGE , addedHandler );
-			
+			this.removeEventListener(Event.ADDED_TO_STAGE , addedToStageHandler );
+			loadRes();
+		}
+		
+		/**
+		 * 加载资源  
+		 */		
+		protected function loadRes():void
+		{
 			ResourceUtil.instance.addEventListener( buildingVO.baseVO.alias , resLoadedHandler );
 			var resVO:ResVO = new ResVO( buildingVO.baseVO.alias , buildingVO.baseVO.url);
-			if(buildingVO.baseVO.frames>0){
-				resVO.frames = buildingVO.baseVO.frames ;
-				resVO.row = buildingVO.baseVO.row ;
-				resVO.col = buildingVO.baseVO.col ;
-			}
 			ResourceUtil.instance.loadRes( resVO );
 		}
 		
@@ -83,28 +81,19 @@ package map.elements
 		{
 			ResourceUtil.instance.removeEventListener( buildingVO.baseVO.alias , resLoadedHandler );
 			ContainerUtil.removeChildren(_itemLayer);
-			var resVO:ResVO = ResourceUtil.instance.getResVOByName(buildingVO.baseVO.alias);
-			if(buildingVO.baseVO.frames>1) {
-				_skin = new Bitmap();
-				_animation = new AnimationBitmap( resVO.resObject as Vector.<BitmapData>, Vector.<ActionVO>([new ActionVO("effect",buildingVO.baseVO.frames)]) ,1 )
-				_animation.playAction("effect");
-				_skin.bitmapData = _skin.bitmapData;
-			} else {
-				_skin = new Bitmap( resVO.resObject as BitmapData );
+			//获取元件
+			_skin = ResourceUtil.instance.getInstanceByClassName( buildingVO.baseVO.alias , buildingVO.baseVO.alias ) as MovieClip;
+			if(_skin){
+				_skin.stop();
+				_itemLayer.addChild(_skin);
 			}
-			_skin.x = buildingVO.baseVO.offsetX;
-			_skin.y = buildingVO.baseVO.offsetY;
-			_itemLayer.addChild(_skin);
 		}
 		
 		
 		override public function update():void
 		{
 			super.update() ;
-			if(_animation){ //播放动画
-				_animation.playAction("effect");
-				_skin.bitmapData =  _animation.animationBmd ;
-			}
+			return;
 			if(stage && _skin && (GameWorld.instance.mouseBuilding==null || 
 				GameWorld.instance.mouseBuilding.parent==GameWorld.instance.groundScene ||
 					(GameWorld.instance.mouseBuilding.parent==this.parent&&
@@ -158,16 +147,12 @@ package map.elements
 		
 		public function dispose():void
 		{
-			this.removeEventListener(Event.ADDED_TO_STAGE , addedHandler );
+			this.removeEventListener(Event.ADDED_TO_STAGE , addedToStageHandler );
 			ResourceUtil.instance.removeEventListener( buildingVO.baseVO.alias , resLoadedHandler );
 			_itemLayer = null ;
 			_gridLayer = null ;
 			buildingVO = null ;
 			_skin = null ;
-			if(_animation){
-				_animation.dispose();
-				_animation = null ;
-			}
 		}
 	}
 }

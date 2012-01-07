@@ -12,7 +12,9 @@ package
 	import flash.display.StageQuality;
 	import flash.events.Event;
 	import flash.events.FullScreenEvent;
-	import flash.utils.setTimeout;
+	
+	import models.BuildingBaseModel;
+	import models.ShopModel;
 	
 	import utils.ResourceUtil;
 	
@@ -110,7 +112,9 @@ package
 		 */		
 		protected function parseConfig():void
 		{
-			
+			var config:XML = XML(ResourceUtil.instance.getResVOByName("config").resObject.toString()) ;
+			BuildingBaseModel.instance.parseConfig( config ) ;
+			ShopModel.instance.parseConfig(config);
 		}
 		
 		/**

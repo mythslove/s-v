@@ -4,10 +4,15 @@ package map
 	import bing.iso.IsoScene;
 	import bing.iso.IsoUtils;
 	import bing.iso.IsoWorld;
+	import bing.utils.ObjectUtil;
 	
+	import comm.GameData;
 	import comm.GameSetting;
 	import comm.GlobalDispatcher;
 	import comm.GlobalEvent;
+	
+	import enums.BuildingCurrentOperation;
+	import enums.BuildingType;
 	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
@@ -18,9 +23,11 @@ package map
 	
 	import map.elements.BuildingBase;
 	
+	import models.ShopModel;
 	import models.vos.BuildingVO;
 	
 	import utils.ResourceUtil;
+
 	/**
 	 * 游戏世界  
 	 * @author zzhanglin
@@ -170,27 +177,22 @@ package map
 				var dz:Number = p.y*GameSetting.GRID_SIZE ;
 				
 				var vo:BuildingVO ;
-//				if(GameData.buildingCurrOperation==BuildingCurrentOperation.ADD)
-//				{
-//					vo = ObjectUtil.copyObj( ViewContainer.instance.shopBar.selectedBuilding ) as BuildingVO;
-//					var result:Boolean = false ;
-//					if(vo.baseVO.type==BuildingType.ROAD){
-//						result = _groundScene.addBuilding( dx,dz,vo);
-//					}else{
-//						result = _buildingScene.addBuilding( dx,dz,vo);
-//					}
-//				}
-//			}
+				if(GameData.buildingCurrOperation==BuildingCurrentOperation.ADD)
+				{
+					vo = ObjectUtil.copyObj( ShopModel.instance.houseArray[0] ) as BuildingVO;
+					var result:Boolean = false ;
+					if(vo.baseVO.type==BuildingType.ROAD){
+						result = _groundScene.addBuilding( dx,dz,vo);
+					}else{
+						result = _buildingScene.addBuilding( dx,dz,vo);
+					}
+				}
+			}
 			_isMove = false ;
-//			if(mouseBuilding) 
-//			{
-//				mouseBuilding.selectedStatus(false);
-//				if(getTimer()-_mouseDownTime>600)
-//				{
-//					var operationPanel:BuildingOperationPanel = new BuildingOperationPanel(mouseBuilding);
-//					PopUpManager.addPopUpToFront( operationPanel );
-//					ViewContainer.instance.shopBar.removeSelectedItem();
-//				}
+			if(mouseBuilding) 
+			{
+				mouseBuilding.selectedStatus(false);
+				
 			}
 		}
 		
