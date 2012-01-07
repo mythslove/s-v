@@ -1,5 +1,7 @@
 package utils
 {
+	import bing.utils.ContainerUtil;
+	
 	import comm.GameSetting;
 	
 	import flash.display.DisplayObject;
@@ -46,7 +48,7 @@ package utils
 		
 		public static  function removeAllPopup():void
 		{
-			PopUpContainer.instance.removeChildren();
+			ContainerUtil.removeChildren(PopUpContainer.instance);
 		}
 	}
 }
