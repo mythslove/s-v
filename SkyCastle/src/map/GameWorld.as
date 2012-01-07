@@ -68,7 +68,7 @@ package map
 			//设置地图显示参数
 			GameSetting.MAX_WIDTH = bg.width;
 			GameSetting.MAX_HEIGHT = bg.height ;
-			this.panTo( GameSetting.MAX_WIDTH>>1 , -400);
+			this.panTo( GameSetting.MAX_WIDTH>>1 , -410);
 			
 			//地图的初始位置
 			this.x = -2200 ;

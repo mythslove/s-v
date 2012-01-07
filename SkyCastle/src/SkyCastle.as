@@ -8,7 +8,7 @@ package
 	/**
 	 * 游戏主类 
 	 */	
-	[SWF( width="760",height="640",backgroundColor="#ffffff")]
+	[SWF( width="760",height="620",backgroundColor="#ffffff")]
 	public class SkyCastle extends BaseGame
 	{
 		/**
