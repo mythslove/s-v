@@ -24,12 +24,12 @@ package bing.iso
 			this._size = size ;
 			this._w  = width ;
 			this._h = height ;
-			addEventListener(Event.ADDED_TO_STAGE , addedHandler );
+			addEventListener(Event.ADDED_TO_STAGE , addedToStageHandler );
 		}
 		
-		protected function addedHandler(e:Event):void
+		protected function addedToStageHandler(e:Event):void
 		{
-			removeEventListener(Event.ADDED_TO_STAGE , addedHandler );
+			removeEventListener(Event.ADDED_TO_STAGE , addedToStageHandler );
 			addChild(_scenesLayer);
 		}
 		

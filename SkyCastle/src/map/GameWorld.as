@@ -71,9 +71,9 @@ package map
 			this.y = -1500;
 		}
 		
-		override protected function addedHandler(e:Event):void
+		override protected function addedToStageHandler(e:Event):void
 		{
-			super.addedHandler(e);
+			super.addedToStageHandler(e);
 			
 			//显示地图网格
 			_gridScene = new IsoScene(GameSetting.GRID_SIZE);
