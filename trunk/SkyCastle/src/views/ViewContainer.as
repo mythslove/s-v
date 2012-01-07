@@ -20,6 +20,7 @@ package views
 			super();
 			if(_instance) throw new Error("只能实例化一个");
 			else _instance=this ;
+			mouseEnabled = false ;
 			
 			init();
 			configListeners();
