@@ -4,30 +4,22 @@ package map
 	import bing.iso.IsoScene;
 	import bing.iso.IsoUtils;
 	import bing.iso.IsoWorld;
-	import bing.utils.ObjectUtil;
 	
-	import comm.Assets;
-	import comm.GameData;
 	import comm.GameSetting;
 	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
-	import flash.display.Loader;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
-	import flash.geom.Vector3D;
 	import flash.utils.getTimer;
 	
 	import map.elements.BuildingBase;
 	
 	import models.vos.BuildingVO;
 	
-	import utils.PopUpManager;
 	import utils.ResourceUtil;
-	
-	import views.CenterViewContainer;
 	
 	public class GameWorld extends IsoWorld
 	{
@@ -77,40 +69,9 @@ package map
 			this.y = -1500;
 		}
 		
-		private function drawZone():void
-		{
-			this.graphics.beginFill(0x49842D);
-			this.graphics.drawRect(0,0,GameSetting.MAP_WIDTH , GameSetting.MAP_HEIGHT);
-			this.graphics.endFill();
-			
-			this.graphics.beginFill(0x549733);
-			this.graphics.moveTo( sceneLayerOffsetX,sceneLayerOffsetY);
-			
-			var p:Vector3D = new Vector3D();
-			var screenPos:Point =new Point();
-			
-			p.x = GameSetting.GRID_X; p.z=0;
-			screenPos = IsoUtils.isoToScreen(p);
-			this.graphics.lineTo( screenPos.x*GameSetting.GRID_SIZE+sceneLayerOffsetX , screenPos.y*GameSetting.GRID_SIZE+sceneLayerOffsetY);
-			
-			p.x = GameSetting.GRID_X; p.z=GameSetting.GRID_Z;
-			screenPos = IsoUtils.isoToScreen(p);
-			this.graphics.lineTo( screenPos.x*GameSetting.GRID_SIZE+sceneLayerOffsetX ,screenPos.y*GameSetting.GRID_SIZE+sceneLayerOffsetY);
-			
-			p.x = 0; p.z=GameSetting.GRID_Z;
-			screenPos = IsoUtils.isoToScreen(p);
-			this.graphics.lineTo( screenPos.x*GameSetting.GRID_SIZE+sceneLayerOffsetX ,screenPos.y*GameSetting.GRID_SIZE+sceneLayerOffsetY);
-			
-			this.graphics.lineTo( sceneLayerOffsetX,sceneLayerOffsetY);
-			
-			this.graphics.endFill();
-		}
-		
 		override protected function addedHandler(e:Event):void
 		{
 			super.addedHandler(e);
-			
-			drawZone();
 			
 			//显示地图网格
 			_gridScene = new IsoScene(GameSetting.GRID_SIZE);
@@ -134,25 +95,25 @@ package map
 		
 		private function configListeners():void
 		{
-			this.addEventListener(Event.ENTER_FRAME , enterFrame );
-			this.addEventListener(MouseEvent.MOUSE_DOWN , down);
-			this.addEventListener(MouseEvent.MOUSE_MOVE , move);
-			this.addEventListener(MouseEvent.MOUSE_UP , up );
-			this.addEventListener(MouseEvent.ROLL_OUT , rollOut);
+			this.addEventListener(Event.ENTER_FRAME , onEnterFrameHandler );
+			this.addEventListener(MouseEvent.MOUSE_DOWN , onMouseDownHandler);
+			this.addEventListener(MouseEvent.MOUSE_MOVE , onMouseMoveHandler);
+			this.addEventListener(MouseEvent.MOUSE_UP , onMouseUpHandler );
+			this.addEventListener(MouseEvent.ROLL_OUT , onMouseRollOut);
 		}
 		
-		private function rollOut(e:MouseEvent):void
+		private function onMouseRollOut(e:MouseEvent):void
 		{
 			this.stopDrag();
 		}
 		
-		private function enterFrame(e:Event):void
+		private function onEnterFrameHandler(e:Event):void
 		{
 			mouseBuilding = null ;
 			update() ;
 		}
 		
-		private function down(e:MouseEvent):void
+		private function onMouseDownHandler(e:MouseEvent):void
 		{
 			var rect:Rectangle = new Rectangle();
 			rect.x = -GameSetting.MAX_WIDTH+stage.stageWidth ;
@@ -166,7 +127,7 @@ package map
 			}
 		}
 		
-		private function up(e:MouseEvent):void
+		private function onMouseUpHandler(e:MouseEvent):void
 		{
 			this.stopDrag();
 			if(!_isMove) // && !mouseBuilding
@@ -202,7 +163,7 @@ package map
 //				}
 			}
 		}
-		private function move(e:MouseEvent):void
+		private function onMouseMoveHandler(e:MouseEvent):void
 		{
 			_mouseDownTime = getTimer();
 			if(e.buttonDown) _isMove = true ;
