@@ -15,14 +15,16 @@ package map
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
-	import flash.utils.getTimer;
 	
 	import map.elements.BuildingBase;
 	
 	import models.vos.BuildingVO;
 	
 	import utils.ResourceUtil;
-	
+	/**
+	 * 游戏世界  
+	 * @author zzhanglin
+	 */	
 	public class GameWorld extends IsoWorld
 	{
 		protected static var _instance:GameWorld;
@@ -45,10 +47,12 @@ package map
 			return _gridScene;
 		}
 		
-		protected var _mouseDownTime:int ;
 		protected var _isMove:Boolean=false;
 		public var mouseBuilding:BuildingBase ; //鼠标在哪个上面
 		
+		/**
+		 * 游戏世界构造函数 
+		 */		
 		public function GameWorld()
 		{
 			super(GameSetting.MAP_WIDTH , GameSetting.MAP_HEIGHT,GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE);
@@ -71,6 +75,10 @@ package map
 			this.y = -1500;
 		}
 		
+		/**
+		 * 添加到舞台上时 
+		 * @param e
+		 */		
 		override protected function addedToStageHandler(e:Event):void
 		{
 			super.addedToStageHandler(e);
@@ -95,6 +103,9 @@ package map
 			configListeners();
 		}
 		
+		/**
+		 * 侦听事件  
+		 */		
 		protected function configListeners():void
 		{
 			this.addEventListener(Event.ENTER_FRAME , onEnterFrameHandler );
@@ -106,17 +117,29 @@ package map
 			GlobalDispatcher.instance.addEventListener(GlobalEvent.RESIZE , globalEventHandler );
 		}
 		
+		/**
+		 * 鼠标移出地图区域时 
+		 * @param e
+		 */		
 		protected function onMouseRollOut(e:MouseEvent):void
 		{
 			this.stopDrag();
 		}
 		
+		/**
+		 *不断地执行 
+		 * @param e
+		 */		
 		protected function onEnterFrameHandler(e:Event):void
 		{
 			mouseBuilding = null ;
 			update() ;
 		}
 		
+		/**
+		 * 鼠标按下 
+		 * @param e
+		 */		
 		protected function onMouseDownHandler(e:MouseEvent):void
 		{
 			var rect:Rectangle = new Rectangle();
@@ -127,10 +150,13 @@ package map
 			this.startDrag( false  , rect );
 			if(mouseBuilding){
 				mouseBuilding.selectedStatus(true); 
-				_mouseDownTime = getTimer() ;
 			}
 		}
 		
+		/**
+		 * 鼠标按下弹起时 
+		 * @param e
+		 */		
 		protected function onMouseUpHandler(e:MouseEvent):void
 		{
 			this.stopDrag();
@@ -167,12 +193,20 @@ package map
 //				}
 			}
 		}
+		
+		/**
+		 * 鼠标移动时 
+		 * @param e
+		 */		
 		protected function onMouseMoveHandler(e:MouseEvent):void
 		{
-			_mouseDownTime = getTimer();
 			if(e.buttonDown) _isMove = true ;
 		}
 		
+		/**
+		 * 处理全局事件  
+		 * @param e
+		 */		
 		protected function globalEventHandler( e:GlobalEvent ):void
 		{
 			switch( e.type )
