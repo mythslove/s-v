@@ -2,6 +2,7 @@ package bing.res
 {
 	import flash.display.Bitmap;
 	import flash.display.Loader;
+	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.events.HTTPStatusEvent;
@@ -13,6 +14,7 @@ package bing.res
 	import flash.system.LoaderContext;
 	import flash.system.SecurityDomain;
 	import flash.utils.Dictionary;
+	import flash.utils.getDefinitionByName;
 	
 	/**
 	 * 资源加载错误
@@ -293,9 +295,24 @@ package bing.res
 			return _resDictionary[name] as ResVO ;
 		}
 		
-		
-		
-		
+		/**
+		 *  反射对象
+		 * @param resName 资源别名
+		 * @param clsName 要反射的类名
+		 * @return 
+		 */		
+		public function getInstanceByClassName( resName:String , clsName:String ):Object
+		{
+			var resVO:ResVO = getResVOByName(resName);
+			var obj:Object= null ;
+			if(resVO && resVO.resObject )
+			{
+				try{
+					obj = new (getDefinitionByName(clsName) as Class)();
+				}catch(e:Error){}
+			}
+			return obj ;
+		}
 		
 		
 		//======================================================
@@ -318,7 +335,7 @@ package bing.res
 			_queueHash = new Dictionary(true) ;
 			_total= resArray.length ;
 			_queueLoaded = 0;
-			for( var i:int=0 ; i<maxNum ; ++i){
+			for( var i:int=0 ; i<maxNum && i<_resArray.length ; ++i){
 				startQueueLoad();
 			}
 		}

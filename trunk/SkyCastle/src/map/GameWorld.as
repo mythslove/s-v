@@ -11,6 +11,7 @@ package map
 	import comm.GameSetting;
 	
 	import flash.display.Bitmap;
+	import flash.display.BitmapData;
 	import flash.display.Loader;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -24,6 +25,7 @@ package map
 	import models.vos.BuildingVO;
 	
 	import utils.PopUpManager;
+	import utils.ResourceUtil;
 	
 	import views.ViewContainer;
 	
@@ -60,10 +62,11 @@ package map
 			_instance = this ;
 			this.mouseChildren = false ;
 			
-			var bg:Bitmap = new Assets.BackgroundBitmap() ;
+			var bg:Bitmap = new Bitmap( ResourceUtil.instance.getInstanceByClassName("bg","BG") as BitmapData );
 			GameSetting.MAX_WIDTH = bg.width;
 			GameSetting.MAX_HEIGHT = bg.height ;
 			this.setBackGround(bg);
+			ResourceUtil.instance.deleteRes("bg")//把加载的背景图片卸载了
 			
 			this.x = -800 ;
 			this.panTo( GameSetting.MAX_WIDTH>>1 , -400);
