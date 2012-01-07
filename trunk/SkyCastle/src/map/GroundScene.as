@@ -65,7 +65,7 @@ package map
 			{
 				this.addIsoObject( obj );
 				obj.setWalkable( false , this.gridData );
-				obj.drawGrid(); //显示占了的网格
+//				obj.drawGrid(); //显示占了的网格
 				_groundNodeHash[obj.nodeX+"-"+obj.nodeZ]=obj;
 				if(updatePos)updateUI(obj);
 				return true;
