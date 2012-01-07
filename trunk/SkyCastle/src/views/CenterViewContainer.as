@@ -1,21 +1,22 @@
 package views
 {
 	import flash.display.Sprite;
+
 	/**
 	 * 视图的容器 
 	 * @author zzhanglin
 	 */	
-	public class ViewContainer extends Sprite
+	public class CenterViewContainer extends Sprite
 	{
-		private static var _instance:ViewContainer;
-		public static function get instance():ViewContainer
+		private static var _instance:CenterViewContainer;
+		public static function get instance():CenterViewContainer
 		{
-			if(!_instance) _instance = new ViewContainer();
+			if(!_instance) _instance = new CenterViewContainer();
 			return _instance; 
 		}
 		//======================================
 		
-		public function ViewContainer()
+		public function CenterViewContainer()
 		{
 			super();
 			if(_instance) throw new Error("只能实例化一个");
@@ -39,5 +40,6 @@ package views
 		{
 			
 		}
+		
 	}
 }
