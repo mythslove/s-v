@@ -6,6 +6,8 @@ package map
 	import bing.iso.IsoWorld;
 	
 	import comm.GameSetting;
+	import comm.GlobalDispatcher;
+	import comm.GlobalEvent;
 	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
@@ -50,7 +52,7 @@ package map
 		public function GameWorld()
 		{
 			super(GameSetting.MAP_WIDTH , GameSetting.MAP_HEIGHT,GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE);
-			if(_instance) throw new Error("只能实例化一个");
+			if(_instance) throw new Error("只能实例化一个GameWorld");
 			else _instance = this ;
 			this.mouseChildren = false ;
 			
@@ -100,6 +102,8 @@ package map
 			this.addEventListener(MouseEvent.MOUSE_MOVE , onMouseMoveHandler);
 			this.addEventListener(MouseEvent.MOUSE_UP , onMouseUpHandler );
 			this.addEventListener(MouseEvent.ROLL_OUT , onMouseRollOut);
+			
+			GlobalDispatcher.instance.addEventListener(GlobalEvent.RESIZE , globalEventHandler );
 		}
 		
 		protected function onMouseRollOut(e:MouseEvent):void
@@ -167,6 +171,16 @@ package map
 		{
 			_mouseDownTime = getTimer();
 			if(e.buttonDown) _isMove = true ;
+		}
+		
+		protected function globalEventHandler( e:GlobalEvent ):void
+		{
+			switch( e.type )
+			{
+				case GlobalEvent.RESIZE:
+					
+					break ;
+			}
 		}
 	}
 }
