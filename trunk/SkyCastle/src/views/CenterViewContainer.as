@@ -43,12 +43,7 @@ package views
 			super();
 			if(_instance) throw new Error("只能实例化一个");
 			else _instance=this ;
-			mouseEnabled = false ;
-			
-			this.graphics.beginFill(0xffcc00,0.5);
-			this.graphics.drawRect(0,0,GameSetting.SCREEN_WIDTH , GameSetting.SCREEN_HEIGHT);
-			this.graphics.endFill();
-			
+			mouseEnabled = false ;			
 			addEventListener(Event.ADDED_TO_STAGE,addedToStageHandler);
 		}
 		
