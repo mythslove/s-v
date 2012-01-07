@@ -1,53 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
 	<buildings>
-		<BuildingBaseVO baseId="1" title="Bird Cage House"  type="1" alias="BirdCageHouse"  xSpan="1" zSpan="1" url="res/house/BirdCageHouse.png" 
-							thumb="res/house/BirdCageHouseThumb.png" offsetX="-65" offsetY="-40">
-		</BuildingBaseVO>
-		<BuildingBaseVO baseId="2" title="Hercules House" type="1" alias="HerculesHouse"  xSpan="2" zSpan="2"  url="res/house/HerculesHouse.png" 
-						thumb="res/house/HerculesHouseThumb.png" offsetX="-60" offsetY="-60">
-		</BuildingBaseVO>
-		<BuildingBaseVO baseId="3" title="Cinderella House" type="1" alias="CinderellaHouse"  xSpan="1" zSpan="1"  url="res/house/CinderellaHouse.png" 
-						thumb="res/house/CinderellaHouseThumb.png" offsetX="-60" offsetY="-290">
-		</BuildingBaseVO>
-		<BuildingBaseVO baseId="4" title="Crystal House" type="1" alias="CrystalHouse"  xSpan="2" zSpan="2"  url="res/house/CrystalHouse.png" 
-						thumb="res/house/CrystalHouseThumb.png" offsetX="-80" offsetY="-20">
-		</BuildingBaseVO>
-		<BuildingBaseVO baseId="5" title="Block House" type="1" alias="BlockHouse"  xSpan="2" zSpan="2"  url="res/house/BlockHouse.png" 
-						thumb="res/house/BlockHouseThumb.png" offsetX="-60" offsetY="-60">
-		</BuildingBaseVO>
-		<BuildingBaseVO baseId="6" title="Fish2" type="1" alias="Fish2"  xSpan="2" zSpan="2"  url="res/house/fish2.png" 
-						thumb="res/house/fish2Thumb.png" offsetX="-110" offsetY="-100" row="3" col="7" frames="21">
-		</BuildingBaseVO>
-		
-		<BuildingBaseVO baseId="7" title="Cement Road" type="2" alias="CementRoad"  xSpan="1" zSpan="1"  url="res/road/CementRoad.png" 
-						thumb="res/road/CementRoadThumb.png" offsetX="-61" offsetY="-1" >
-		</BuildingBaseVO>
+		<BuildingBaseVO baseId="1" title="MoreCity PathCobblestone" type="2" alias="MoreCity_PathCobblestone"  xSpan="1" zSpan="1"  
+		url="res/road/MoreCity_PathCobblestone.swf" thumb="res/road/MoreCity_PathCobblestoneThumb.png" />
 	</buildings>
-	
-	
 	<shop>
 		<house>
 			<BuildingVO baseId="1" price="1"/>
-			<BuildingVO baseId="2" price="8"/>
-			<BuildingVO baseId="3" price="5"/>
-			<BuildingVO baseId="4" price="3"/>
-			<BuildingVO baseId="5" price="4"/>
-			<BuildingVO baseId="6" price="14"/>
-			<BuildingVO baseId="7" price="1"/>
-			
-			<BuildingVO baseId="1" price="1"/>
-			<BuildingVO baseId="2" price="8"/>
-			<BuildingVO baseId="3" price="5"/>
-			<BuildingVO baseId="4" price="3"/>
-			<BuildingVO baseId="5" price="4"/>
-			<BuildingVO baseId="6" price="14"/>
-			
-			<BuildingVO baseId="1" price="1"/>
-			<BuildingVO baseId="2" price="8"/>
-			<BuildingVO baseId="3" price="5"/>
-			<BuildingVO baseId="4" price="3"/>
-			<BuildingVO baseId="5" price="4"/>
 		</house>
 	</shop>
 </config>

@@ -1,6 +1,10 @@
 package
 {
+	import flash.net.registerClassAlias;
+	
 	import map.GameWorld;
+	
+	import models.vos.*;
 	
 	import views.CenterViewContainer;
 	import views.LeftBar;
@@ -33,6 +37,8 @@ package
 		 */		
 		private function registerVOs():void
 		{
+			registerClassAlias("models.vos.BuildingBaseVO",BuildingBaseVO) ;
+			registerClassAlias("models.vos.BuildingVO",BuildingVO) ;
 		}
 		
 		/**

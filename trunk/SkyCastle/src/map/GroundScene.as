@@ -28,21 +28,21 @@ package map
 		{
 			super(GameSetting.GRID_SIZE);
 			
-			L = "_L";
-			R = "_R";
-			U = "_U";
-			B = "_B";
-			M = "_M";
-			LU = "_LU";
-			LB = "_LB";
-			RU = "_RU";
-			RB = "_RB";
-			LU_M = "_LU_M";
-			LB_M = "_LB_M";
-			RU_M = "_RU_M";
-			RB_M = "_RB_M";
-			LM = "_LM";
-			RM = "_RM";
+			L = "L";
+			R = "R";
+			U = "U";
+			B = "B";
+			M = "M";
+			LU = "LU";
+			LB = "LB";
+			RU = "RU";
+			RB = "RB";
+			LU_M = "LUM";
+			LB_M = "LBM";
+			RU_M = "RUM";
+			RB_M = "RBM";
+			LM = "LM";
+			RM = "RM";
 		}
 		
 		/**
@@ -56,9 +56,9 @@ package map
 		public function addBuilding( dx:Number , dz:Number , buildingVO:BuildingVO , updatePos:Boolean=true ):Boolean
 		{
 			var obj:BuildingBase ;
-//			if( buildingVO.baseVO.type==BuildingType.ROAD){
-//				obj= new Road(buildingVO);
-//			}
+			if( buildingVO.baseVO.type==BuildingType.ROAD){
+				obj= new Road(buildingVO);
+			}
 			obj.x = dx;
 			obj.z = dz;
 			if( obj.getWalkable(this.gridData) )

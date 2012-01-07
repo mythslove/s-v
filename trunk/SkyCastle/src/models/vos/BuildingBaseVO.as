@@ -10,12 +10,5 @@ package models.vos
 		public var zSpan:int;
 		public var url:String;
 		public var thumb:String;
-		public var offsetX:Number;
-		public var offsetY:Number;
-		
-		//用于动画
-		public var row:int;
-		public var col:int;
-		public var frames:int;
 	}
 }

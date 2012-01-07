@@ -2,8 +2,6 @@ package enums
 {
 	public class BuildingType
 	{
-		public function BuildingType()
-		{
-		}
+		public static const ROAD:int=2;
 	}
 }

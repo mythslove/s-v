@@ -38,6 +38,11 @@ package models
 			}
 		}
 		
+		/**
+		 * 通过baseId获取BuildingBaseVO 
+		 * @param baseId
+		 * @return  BuildingBaseVO
+		 */		
 		public function getBaseVOById( baseId:int):BuildingBaseVO
 		{
 			var vo:BuildingBaseVO ;
