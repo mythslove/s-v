@@ -12,6 +12,7 @@ package
 	import flash.display.StageQuality;
 	import flash.events.Event;
 	import flash.events.FullScreenEvent;
+	import flash.utils.setTimeout;
 	
 	import utils.ResourceUtil;
 	
@@ -21,7 +22,7 @@ package
 	 */	
 	public class BaseGame extends Sprite
 	{
-		private var _preLoading:SWC_preLoad ;
+		protected var _preLoading:SWC_preLoad ;
 		
 		/**
 		 * 构造函数 
@@ -43,7 +44,7 @@ package
 		/**
 		 * 获取游戏的一些参数和变量 
 		 */		
-		private function init():void
+		protected function init():void
 		{
 			
 		}
@@ -52,7 +53,7 @@ package
 		 * 窗口大小变化 
 		 * @param e
 		 */		
-		private function onResizeHandler(e:Event):void
+		protected function onResizeHandler(e:Event):void
 		{
 			e.stopPropagation();
 			GlobalDispatcher.instance.dispatchEvent( new GlobalEvent(GlobalEvent.RESIZE));
@@ -61,7 +62,7 @@ package
 		/**
 		 * 添加进度条 
 		 */		
-		private function addLoading():void
+		protected function addLoading():void
 		{
 			_preLoading = new SWC_preLoad();
 			_preLoading.x = (GameSetting.SCREEN_WIDTH-_preLoading.width)>>1;
@@ -72,7 +73,7 @@ package
 		/**
 		 * 下载游戏开始前的资源 
 		 */		
-		private function initLoad():void
+		protected function initLoad():void
 		{
 			var res:Vector.<ResVO> = new Vector.<ResVO>();
 			res.push( new ResVO("config","res/config.xml"));
@@ -86,7 +87,7 @@ package
 		 * 序列下载资源完成 
 		 * @param e
 		 */		
-		private function queueLoadHandler( e:Event):void
+		protected function queueLoadHandler( e:Event):void
 		{
 			switch( e.type)
 			{
@@ -98,8 +99,8 @@ package
 					ResourceUtil.instance.removeEventListener(ResProgressEvent.RES_LOAD_PROGRESS , queueLoadHandler);
 					ResourceUtil.instance.removeEventListener(ResLoadedEvent.QUEUE_LOADED ,queueLoadHandler);
 					parseConfig();
-					removeLoading();
 					inited();
+					removeLoading();
 					break;
 			}
 		}
@@ -107,7 +108,7 @@ package
 		/**
 		 * 解析config.xml
 		 */		
-		private function parseConfig():void
+		protected function parseConfig():void
 		{
 			
 		}
@@ -115,7 +116,7 @@ package
 		/**
 		 * 删除进度条 
 		 */		
-		private function removeLoading():void
+		protected function removeLoading():void
 		{
 			removeChild(_preLoading);
 			_preLoading = null ;
