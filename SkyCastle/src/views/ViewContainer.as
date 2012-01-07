@@ -1,7 +1,10 @@
 package views
 {
 	import flash.display.Sprite;
-	
+	/**
+	 * 视图的容器 
+	 * @author zzhanglin
+	 */	
 	public class ViewContainer extends Sprite
 	{
 		private static var _instance:ViewContainer;
