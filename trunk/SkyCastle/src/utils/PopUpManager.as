@@ -6,7 +6,7 @@ package utils
 	
 	import flash.display.DisplayObject;
 	
-	import views.PopUpContainer;
+	import views.CenterViewContainer;
 	import views.base.PopupMask;
 
 	public class PopUpManager
@@ -15,20 +15,20 @@ package utils
 		{
 			if(modal){
 				var popMask:PopupMask = new PopupMask();
-				PopUpContainer.instance.addChild(popMask);
+				CenterViewContainer.instance.popUpContainer.addChild(popMask);
 			}
 			mc.x = (GameSetting.SCREEN_WIDTH-mc.width)*0.5 ;
 			mc.y = (GameSetting.SCREEN_HEIGHT-mc.height)*0.5 ;
-			PopUpContainer.instance.addChild(mc);
+			CenterViewContainer.instance.popUpContainer.addChild(mc);
 		}
 		
 		public static function addPopUpToBehind( mc:DisplayObject , modal:Boolean=true ):void 
 		{
-			PopUpContainer.instance.addChildAt(mc,0);
+			CenterViewContainer.instance.popUpContainer.addChildAt(mc,0);
 			if(modal)
 			{
 				var popMask:PopupMask = new PopupMask();
-				PopUpContainer.instance.addChildAt(popMask,0);
+				CenterViewContainer.instance.popUpContainer.addChildAt(popMask,0);
 				mc.x = (GameSetting.SCREEN_WIDTH-mc.width)*0.5 ;
 				mc.y = (GameSetting.SCREEN_HEIGHT-mc.height)*0.5 ;
 			}
@@ -48,7 +48,7 @@ package utils
 		
 		public static  function removeAllPopup():void
 		{
-			ContainerUtil.removeChildren(PopUpContainer.instance);
+			ContainerUtil.removeChildren(CenterViewContainer.instance.popUpContainer);
 		}
 	}
 }

@@ -2,7 +2,6 @@ package
 {
 	import map.GameWorld;
 	
-	import views.PopUpContainer;
 	import views.CenterViewContainer;
 	
 	/**
@@ -30,7 +29,6 @@ package
 		{
 			addChild(GameWorld.instance);
 			addChild( CenterViewContainer.instance);
-			addChild( PopUpContainer.instance);
 		}
 	}
 }

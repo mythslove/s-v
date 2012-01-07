@@ -118,9 +118,9 @@ package map.elements
 					stage_y+=curr.y ;
 					curr = curr.parent ;
 				}
-				if( stage_x>-100 && stage_x<GameSetting.SCREEN_WIDTH+100
+				if( stage_x>-100 && stage_x<stage.stageWidth+100
 					&& stage_y>-_skin.height 
-					&& stage_y<GameSetting.SCREEN_HEIGHT+_skin.height)
+					&& stage_y<stage.stageHeight+_skin.height)
 				{
 					if(_skin.bitmapData  && _skin.bitmapData.hitTest( new Point(_skin.x,_skin.y),255,new Point(this.mouseX,this.mouseY) ) )
 					{
