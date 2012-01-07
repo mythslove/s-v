@@ -335,7 +335,7 @@ package bing.res
 			_queueHash = new Dictionary(true) ;
 			_total= resArray.length ;
 			_queueLoaded = 0;
-			for( var i:int=0 ; i<maxNum && i<_resArray.length ; ++i){
+			for( var i:int=0 ; i<maxNum && i<_total ; ++i){
 				startQueueLoad();
 			}
 		}
