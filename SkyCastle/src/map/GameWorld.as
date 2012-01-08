@@ -213,7 +213,6 @@ package map
 			switch( e.type )
 			{
 				case GlobalEvent.RESIZE:
-					//纠正地图位置
 					if(x<-GameSetting.MAX_WIDTH*scaleX+stage.stageWidth){
 						x = -GameSetting.MAX_WIDTH*scaleX+stage.stageWidth ;
 					}
@@ -223,5 +222,17 @@ package map
 					break ;
 			}
 		}
+		
+		public function zoom( scale:Number):void
+		{
+			this.scaleX = this.scaleY = scale ;
+			if(x<-GameSetting.MAX_WIDTH*scaleX+stage.stageWidth){
+				x = -GameSetting.MAX_WIDTH*scaleX+stage.stageWidth ;
+			}
+			if(y<-GameSetting.MAX_HEIGHT*scaleX+stage.stageHeight){
+				y = -GameSetting.MAX_HEIGHT*scaleX+stage.stageHeight ;
+			}
+		}
+		
 	}
 }

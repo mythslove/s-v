@@ -41,7 +41,7 @@ package views
 		public function CenterViewContainer()
 		{
 			super();
-			if(_instance) throw new Error("只能实例化一个");
+			if(_instance) throw new Error("只能实例化一个CenterViewContainer");
 			else _instance=this ;
 			mouseEnabled = false ;			
 			addEventListener(Event.ADDED_TO_STAGE,addedToStageHandler);
