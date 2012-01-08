@@ -18,18 +18,17 @@ package views.bottom
 		{
 			super();
 			init();
-			addEventListener(Event.ADDED_TO_STAGE , addedToStageHandler);
-		}
-		
-		private function addedToStageHandler(e:Event):void
-		{
-			trace( btnReturnHome);
-			btnReturnHome.visible = false ;
+			configListeners();
 		}
 		
 		private function init():void
 		{
 			btnReturnHome.visible = false ;
+		}
+		
+		private function configListeners():void
+		{
+			
 		}
 	}
 }
