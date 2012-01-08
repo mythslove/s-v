@@ -1,0 +1,20 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+
+global
+{
+	color: #ffffff;
+	fontFamily:"宋体";
+	fontSize:14px;
+}
+
+s|BorderContainer
+{
+	backgroundColor:#202020;
+}
+
+s|Button
+{
+	chromeColor:#242424;
+}
