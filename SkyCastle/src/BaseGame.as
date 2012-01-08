@@ -36,8 +36,6 @@ package
 			stage.scaleMode = "noScale";
 			stage.quality = StageQuality.MEDIUM;
 			stage.showDefaultContextMenu = false ;
-			stage.addEventListener(Event.RESIZE , onResizeHandler);
-			stage.addEventListener(FullScreenEvent.FULL_SCREEN , onResizeHandler);
 			
 			init();
 			addLoading();
@@ -81,6 +79,7 @@ package
 			var res:Vector.<ResVO> = new Vector.<ResVO>();
 			res.push( new ResVO("config","res/config.xml"));
 			res.push( new ResVO("bg","res/skin/bg.swf"));
+			res.push( new ResVO("ui","res/skin/ui.swf"));
 			ResourceUtil.instance.addEventListener(ResProgressEvent.RES_LOAD_PROGRESS , queueLoadHandler);
 			ResourceUtil.instance.addEventListener(ResLoadedEvent.QUEUE_LOADED ,queueLoadHandler);
 			ResourceUtil.instance.queueLoad( res , 5 );
@@ -132,7 +131,8 @@ package
 		 */		
 		protected function inited():void
 		{
-			
+			stage.addEventListener(Event.RESIZE , onResizeHandler);
+			stage.addEventListener(FullScreenEvent.FULL_SCREEN , onResizeHandler);
 		}
 	}
 }

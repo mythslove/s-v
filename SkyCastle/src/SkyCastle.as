@@ -28,6 +28,7 @@ package
 		 */		
 		override protected function inited():void
 		{
+			super.inited();
 			registerVOs();
 			initGame();
 		}
