@@ -1,6 +1,5 @@
 package map
 {
-	import bing.iso.IsoGrid;
 	import bing.iso.IsoScene;
 	import bing.iso.IsoUtils;
 	import bing.iso.IsoWorld;
@@ -88,10 +87,10 @@ package map
 			super.addedToStageHandler(e);
 			
 			//显示地图网格
-			_gridScene = new IsoScene(GameSetting.GRID_SIZE);
-			(_gridScene.addChild( new IsoGrid(GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE)) as IsoGrid).render() ;
-			_gridScene.cacheAsBitmap=true;
-			this.addScene(_gridScene);
+//			_gridScene = new IsoScene(GameSetting.GRID_SIZE);
+//			(_gridScene.addChild( new IsoGrid(GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE)) as IsoGrid).render() ;
+//			_gridScene.cacheAsBitmap=true;
+//			this.addScene(_gridScene);
 			
 			_groundScene = new GroundScene();
 			_groundScene.cacheAsBitmap = true ;
