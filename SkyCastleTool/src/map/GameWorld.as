@@ -2,17 +2,22 @@ package map
 {
 	import bing.iso.IsoGrid;
 	import bing.iso.IsoScene;
+	import bing.iso.IsoUtils;
 	import bing.iso.IsoWorld;
 	
 	import comm.Assets;
+	import comm.GameData;
 	import comm.GameSetting;
 	import comm.GlobalDispatcher;
 	import comm.GlobalEvent;
+	
+	import enums.BuildingCurrentOperation;
 	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.geom.Point;
 	import flash.geom.Rectangle;
 
 	/**
@@ -81,10 +86,14 @@ package map
 			this.addEventListener(MouseEvent.MOUSE_MOVE , onMouseMoveHandler);
 			this.addEventListener(MouseEvent.MOUSE_UP , onMouseUpHandler );
 			this.addEventListener(MouseEvent.ROLL_OUT , onMouseRollOut);
+			this.addEventListener(MouseEvent.RIGHT_CLICK , onRightClickHandler);
 			
 			GlobalDispatcher.instance.addEventListener(GlobalEvent.RESIZE , globalEventHandler );
 		}
-		
+		protected function onRightClickHandler(e:MouseEvent):void
+		{
+			GameData.buildingCurrOperation = BuildingCurrentOperation.NONE ;
+		}
 		/**
 		 * 鼠标移出地图区域时 
 		 * @param e
@@ -116,6 +125,16 @@ package map
 		protected function onMouseUpHandler(e:MouseEvent):void
 		{
 			this.stopDrag();
+			if(!_isMove)
+			{
+				var xx:int = (e.stageX-this.x)/scaleX - this.sceneLayerOffsetX ;
+				var yy:int = (e.stageY -this.y)/scaleX - this.sceneLayerOffsetY;
+				
+				var p:Point = IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE,xx,yy);
+				
+				var dx:int = p.x*GameSetting.GRID_SIZE ;
+				var dz:int = p.y*GameSetting.GRID_SIZE ;
+			}
 			_isMove = false ;
 		}
 		
