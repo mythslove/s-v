@@ -50,10 +50,10 @@ package map
 		 * @param dx 建筑的位置
 		 * @param dy 
 		 * @param buildingVO
-		 * @param updatePos 是否更新周围的方向
+		 * @param updateDirection 是否更新周围的方向
 		 * @return 添加成功返回true
 		 */		
-		public function addBuilding( dx:Number , dz:Number , buildingVO:BuildingVO , updatePos:Boolean=true ):Boolean
+		public function addBuilding( dx:Number , dz:Number , buildingVO:BuildingVO , updateDirection:Boolean=true ):Boolean
 		{
 			var obj:BuildingBase ;
 			if( buildingVO.baseVO.type==BuildingType.ROAD){
@@ -67,7 +67,7 @@ package map
 				obj.setWalkable( false , this.gridData );
 				obj.drawGrid(); //显示占了的网格
 				_groundNodeHash[obj.nodeX+"-"+obj.nodeZ]=obj;
-				if(updatePos)updateUI(obj);
+				if(updateDirection)updateUI(obj);
 				return true;
 			}
 			return false ;
@@ -96,7 +96,7 @@ package map
 				{
 					if( _groundNodeHash[i+"-"+j])
 					{
-						updateRoadPosition(  _groundNodeHash[i+"-"+j] );
+						updateRoadDirection(  _groundNodeHash[i+"-"+j] );
 					}
 				}
 			}
@@ -105,17 +105,17 @@ package map
 		//周围的四个位置
 		private var _roundRoadHash:HashMap = new HashMap(); 
 		//更新一个路的方向
-		private function updateRoadPosition( building:BuildingBase ):void
+		private function updateRoadDirection( building:BuildingBase ):void
 		{
-			var type:int = building.buildingVO.baseVO.type;
+			var alias:String = building.buildingVO.baseVO.alias;
 			var luBuilding:BuildingBase = _groundNodeHash[ (building.nodeX-1)+"-"+building.nodeZ];
 			var ruBuilding:BuildingBase = _groundNodeHash[ building.nodeX+"-"+(building.nodeZ-1)];
 			var lbBuilding:BuildingBase = _groundNodeHash[ building.nodeX+"-"+(building.nodeZ+1)];
 			var rbBuilding:BuildingBase = _groundNodeHash[ (building.nodeX+1)+"-"+building.nodeZ];
-			if( luBuilding&&luBuilding.buildingVO.baseVO.type==type ) _roundRoadHash.put( "POS_LU_M",true);
-			if( ruBuilding&&ruBuilding.buildingVO.baseVO.type==type ) _roundRoadHash.put( "POS_RU_M",true);
-			if( lbBuilding&&lbBuilding.buildingVO.baseVO.type==type ) _roundRoadHash.put( "POS_LB_M",true);
-			if( rbBuilding&&rbBuilding.buildingVO.baseVO.type==type ) _roundRoadHash.put( "POS_RB_M",true);
+			if( luBuilding&&luBuilding.buildingVO.baseVO.alias==alias ) _roundRoadHash.put( "POS_LU_M",true);
+			if( ruBuilding&&ruBuilding.buildingVO.baseVO.alias==alias ) _roundRoadHash.put( "POS_RU_M",true);
+			if( lbBuilding&&lbBuilding.buildingVO.baseVO.alias==alias ) _roundRoadHash.put( "POS_LB_M",true);
+			if( rbBuilding&&rbBuilding.buildingVO.baseVO.alias==alias ) _roundRoadHash.put( "POS_RB_M",true);
 			
 			const len:int = _roundRoadHash.size() ;
 			if(len==4) (building as Object).updateUI(M); 
