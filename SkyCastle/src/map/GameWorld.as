@@ -218,6 +218,10 @@ package map
 			}
 		}
 		
+		/**
+		 * 地图放大和缩小 
+		 * @param scale
+		 */		
 		public function zoom( scale:Number):void
 		{
 			this.scaleX = this.scaleY = scale ;
