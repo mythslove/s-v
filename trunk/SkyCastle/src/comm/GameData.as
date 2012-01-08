@@ -9,7 +9,7 @@ package comm
 		/**
 		 *  当前对建筑的操作
 		 */		
-		public static var buildingCurrOperation:String = "add";
+		public static var buildingCurrOperation:String = "none";
 		
 		/**
 		 * 鼠标在哪个上面 
