@@ -69,7 +69,7 @@ package views
 		private function onResizeHandler(e:Event):void
 		{
 			x = (stage.stageWidth-GameSetting.SCREEN_WIDTH)>>1;
-			y = (stage.stageHeight-GameSetting.SCREEN_HEIGHT)>>1;
+			_popUpContainer.y = (stage.stageHeight-GameSetting.SCREEN_HEIGHT)>>1;
 			_bottomBar.y = stage.stageHeight;
 		}
 	}
