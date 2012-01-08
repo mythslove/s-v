@@ -11,6 +11,8 @@ package views.bottom
 	import flash.events.MouseEvent;
 	import flash.media.Video;
 	
+	import map.GameWorld;
+	
 	public class SettingBar extends Sprite
 	{
 		public var btnDisplay:BaseToggleButton;
@@ -44,6 +46,8 @@ package views.bottom
 		{
 			GlobalDispatcher.instance.addEventListener(GlobalEvent.RESIZE , onResizeHandler );
 			btnFullScreen.addEventListener(MouseEvent.CLICK , fullScreenHandler );
+			btnZoomIn.addEventListener(MouseEvent.CLICK , zoomHandler);
+			btnZoomOut.addEventListener(MouseEvent.CLICK , zoomHandler );
 		}
 		
 		private function fullScreenHandler ( e:MouseEvent ):void
@@ -51,6 +55,7 @@ package views.bottom
 			e.stopPropagation();
 			if(btnFullScreen.selected){
 				stage.displayState = StageDisplayState.FULL_SCREEN ;
+				GameWorld.instance.zoom(1);
 			}else{
 				stage.displayState = StageDisplayState.NORMAL ;
 			}
@@ -63,6 +68,24 @@ package views.bottom
 				btnFullScreen.selected = true ;
 			}else{
 				btnFullScreen.selected = false ;
+			}
+		}
+		
+		private function zoomHandler(e:MouseEvent):void
+		{
+			e.stopPropagation();
+			switch( e.target)
+			{
+				case btnZoomIn:
+					if( GameWorld.instance.scaleX<1) {
+						GameWorld.instance.zoom(1);
+					}
+					break ;
+				case btnZoomOut:
+					if( GameWorld.instance.scaleX==1 && stage.displayState == StageDisplayState.NORMAL) {
+						GameWorld.instance.zoom(0.6);
+					}
+					break ;
 			}
 		}
 	}
