@@ -52,10 +52,12 @@
 				}else {
 					this.gotoAndStop("up")
 				}
+				this.alpha=1;
 			}
 			else
 			{
-				this.gotoAndStop("disabled")
+				this.gotoAndStop("disabled");
+				this.alpha=0.5;
 			}
 		}
 
