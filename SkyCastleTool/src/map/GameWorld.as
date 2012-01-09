@@ -5,6 +5,7 @@ package map
 	import bing.iso.IsoScene;
 	import bing.iso.IsoUtils;
 	import bing.iso.IsoWorld;
+	import bing.iso.Rhombus;
 	
 	import comm.Assets;
 	import comm.GameData;
@@ -20,6 +21,8 @@ package map
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
+	
+	import models.MapDataModel;
 
 	/**
 	 * 游戏世界  
@@ -43,9 +46,13 @@ package map
 		public function get gridScene():IsoScene{
 			return _gridScene;
 		}
-		protected var _mapDataScene:IsoScene ;
-		public function get mapDataScene():IsoScene{
-			return _mapDataScene;
+		protected var _impactScene:IsoScene ;
+		public function get impactScene():IsoScene{
+			return _impactScene;
+		}
+		protected var _forbiddenScene:IsoScene ;
+		public function get forbiddenScene():IsoScene{
+			return _forbiddenScene;
 		}
 		protected var _isMove:Boolean=false;
 		
@@ -84,10 +91,15 @@ package map
 			_gridScene.cacheAsBitmap=true;
 			this.addScene(_gridScene);
 			
-			_mapDataScene = new IsoScene(GameSetting.GRID_SIZE);
-			(_mapDataScene.addChild( new IsoGrid(GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE)) as IsoGrid).render() ;
-			_mapDataScene.cacheAsBitmap=true;
-			this.addScene(_mapDataScene);
+			_forbiddenScene = new IsoScene(GameSetting.GRID_SIZE);
+			_forbiddenScene.createGridData( GameSetting.GRID_X , GameSetting.GRID_Z);
+			_forbiddenScene.cacheAsBitmap=true;
+			this.addScene(_forbiddenScene);
+			
+			_impactScene = new IsoScene(GameSetting.GRID_SIZE);
+			_impactScene.createGridData( GameSetting.GRID_X , GameSetting.GRID_Z);
+			_impactScene.cacheAsBitmap=true;
+			this.addScene(_impactScene);
 			
 			_mouseContainer = new IsoObject(GameSetting.GRID_SIZE,1,1);
 			_gridScene.addIsoObject(_mouseContainer);
@@ -147,11 +159,45 @@ package map
 			{
 				if(GameData.buildingCurrOperation==BuildingCurrentOperation.ADD_IMPACT)
 				{
-					
+					if(_mouseContainer.getWalkable(_impactScene.gridData))
+					{
+						var obj:IsoObject = new IsoObject(GameSetting.GRID_SIZE,1,1);
+						obj.addChild( new Rhombus(GameSetting.GRID_SIZE , 0xff0000));
+						obj.x = _mouseContainer.x;
+						obj.z = _mouseContainer.z ;
+						obj.setWalkable( false , _impactScene.gridData );
+						MapDataModel.instance.addImpact( obj.nodeX , obj.nodeZ , obj );
+						_impactScene.addIsoObject( obj );
+					}
+					else if( e.ctrlKey) //删除
+					{
+						obj = MapDataModel.instance.deleteImpact( _mouseContainer.nodeX , _mouseContainer.nodeZ ) as IsoObject;
+						if(obj){
+							obj.setWalkable( true , _impactScene.gridData );
+							_impactScene.removeIsoObject( obj );
+						}
+					}
 				}
 				else if(GameData.buildingCurrOperation == BuildingCurrentOperation.ADD_FORBIDDEN)
 				{
-					
+					if(_mouseContainer.getWalkable(_forbiddenScene.gridData))
+					{
+						obj = new IsoObject(GameSetting.GRID_SIZE,1,1);
+						obj.addChild( new Rhombus(GameSetting.GRID_SIZE , 0xffcc00));
+						obj.x = _mouseContainer.x;
+						obj.z = _mouseContainer.z ;
+						obj.setWalkable( false , _forbiddenScene.gridData );
+						MapDataModel.instance.addForbidden( obj.nodeX , obj.nodeZ , obj );
+						_forbiddenScene.addIsoObject( obj );
+					}
+					else if( e.ctrlKey) //删除
+					{
+						obj = MapDataModel.instance.deleteForbidden( _mouseContainer.nodeX , _mouseContainer.nodeZ ) as IsoObject;
+						if(obj){
+							obj.setWalkable( true , _forbiddenScene.gridData );
+							_forbiddenScene.removeIsoObject( obj );
+						}
+					}
 				}
 			}
 			_isMove = false ;

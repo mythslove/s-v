@@ -23,3 +23,9 @@ mx|ToolTip
 {
 	color:#999999;
 }
+
+mx|Alert
+{
+	color:#999999;
+	chromeColor:#202020 ;
+}
