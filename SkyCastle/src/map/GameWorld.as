@@ -1,5 +1,6 @@
 package map
 {
+	import bing.iso.IsoGrid;
 	import bing.iso.IsoScene;
 	import bing.iso.IsoUtils;
 	import bing.iso.IsoWorld;
@@ -224,11 +225,11 @@ package map
 		 */		
 		public function zoom( scale:Number):void
 		{
-			var centerX:Number = (x+GameSetting.SCREEN_WIDTH*0.5)/scaleX+sceneLayerOffsetX ;
-			var centerY:Number = (y+GameSetting.SCREEN_HEIGHT*0.5)/scaleY+sceneLayerOffsetY ;
+			var dx:Number=scaleX<1?-GameSetting.SCREEN_WIDTH:GameSetting.SCREEN_WIDTH ;
+			var dy:Number=scaleX<1?-GameSetting.SCREEN_HEIGHT:GameSetting.SCREEN_HEIGHT ;
 			scaleX = scaleY = scale ;
-			x= (centerX-sceneLayerOffsetX)*scale-GameSetting.SCREEN_WIDTH*0.5
-			y= (centerY-sceneLayerOffsetY)*scale-GameSetting.SCREEN_HEIGHT*0.5
+			x+=dx;
+			y+=dy;
 			modifyMapPosition();
 		}
 		
