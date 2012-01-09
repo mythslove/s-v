@@ -23,11 +23,11 @@ package bing.iso
 		/********************************************************
 		 * 添加对象
 		 * ********************************************************/
-		public function addIsoObject( obj:IsoObject ):IsoObject
+		public function addIsoObject( obj:IsoObject , isSort:Boolean=true ):IsoObject
 		{
 			this.addChildAt( obj,0 );
 			_sprites.push( obj );
-			sortAll();
+			if(isSort) sortAll();
 			return obj ;
 		}
 		/********************************************************
