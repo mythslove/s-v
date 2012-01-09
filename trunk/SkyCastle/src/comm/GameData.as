@@ -17,7 +17,7 @@ package comm
 	public class GameData
 	{
 		//********************************************************************		
-		private static var _buildingCurrOperation:String = "none";
+		private static var _buildingCurrOperation:String = "add";
 		/**
 		 *  设置当前对鼠标的操作，并更改鼠标跟随icon
 		 * @param value BuildingCurrentOperation中的常量

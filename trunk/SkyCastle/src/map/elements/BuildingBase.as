@@ -124,7 +124,7 @@ package map.elements
 		public function selectedStatus( flag:Boolean ):void
 		{
 			if(flag ){
-				TweenMax.to(_itemLayer, 0, {dropShadowFilter:{color:0xffcc00, alpha:1, blurX:4, blurY:4, strength:8}});
+				TweenMax.to(_itemLayer, 0, {dropShadowFilter:{color:0xffff00, alpha:1, blurX:2, blurY:2, strength:5}});
 			}else{
 				_itemLayer.filters=null ;
 			}
