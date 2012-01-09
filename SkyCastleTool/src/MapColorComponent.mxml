@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 width="100%" height="25" >
+	<s:layout>
+		<s:HorizontalLayout gap="0"/>
+	</s:layout>
+	
+	<fx:Script>
+		<![CDATA[
+			import comm.GameData;
+			import comm.GameSetting;
+			protected function radiobuttonClickHandler(event:MouseEvent):void
+			{
+				switch(event.target.label )
+				{
+					case "Map1":
+						GameData.currentMap = 1 ;
+						GameData.currentMapColor = GameSetting.Map1Color ;
+						break ;
+					case "Map2":
+						GameData.currentMap = 2 ;
+						GameData.currentMapColor = GameSetting.Map2Color ;
+						break ;
+					case "Map3":
+						GameData.currentMap = 3 ;
+						GameData.currentMapColor = GameSetting.Map3Color ;
+						break ;
+				}
+			}
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<s:RadioButtonGroup id="color"/>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<s:RadioButton label="Map1" chromeColor="#FF0000" click="radiobuttonClickHandler(event)" selected="true" 
+				   groupName="color"/>
+	<s:RadioButton label="Map2" chromeColor="#FF2D2D" groupName="color" click="radiobuttonClickHandler(event)"/>
+	<s:RadioButton label="Map3" chromeColor="#FF5B5B" groupName="color" click="radiobuttonClickHandler(event)"/>
+</s:Group>

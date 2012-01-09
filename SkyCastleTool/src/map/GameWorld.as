@@ -6,6 +6,7 @@ package map
 	import bing.iso.IsoUtils;
 	import bing.iso.IsoWorld;
 	import bing.iso.Rhombus;
+	import bing.utils.ContainerUtil;
 	
 	import comm.Assets;
 	import comm.GameData;
@@ -123,6 +124,7 @@ package map
 		protected function onRightClickHandler(e:MouseEvent):void
 		{
 			GameData.buildingCurrOperation = BuildingCurrentOperation.NONE ;
+			ContainerUtil.removeChildren(_mouseContainer);
 		}
 		/**
 		 * 鼠标移出地图区域时 
@@ -175,7 +177,7 @@ package map
 				if(_mouseContainer.getWalkable(_impactScene.gridData))
 				{
 					var obj:IsoObject = new IsoObject(GameSetting.GRID_SIZE,1,1);
-					obj.addChild( new Rhombus(GameSetting.GRID_SIZE , 0xff0000));
+					obj.addChild( new Rhombus(GameSetting.GRID_SIZE , GameSetting.RoadColor));
 					obj.x = _mouseContainer.x;
 					obj.z = _mouseContainer.z ;
 					obj.setWalkable( false , _impactScene.gridData );
@@ -196,7 +198,8 @@ package map
 				if(_mouseContainer.getWalkable(_forbiddenScene.gridData))
 				{
 					obj = new IsoObject(GameSetting.GRID_SIZE,1,1);
-					obj.addChild( new Rhombus(GameSetting.GRID_SIZE , 0xffcc00));
+					obj.name=GameData.currentMap +"";
+					obj.addChild( new Rhombus(GameSetting.GRID_SIZE , GameData.currentMapColor));
 					obj.x = _mouseContainer.x;
 					obj.z = _mouseContainer.z ;
 					obj.setWalkable( false , _forbiddenScene.gridData );
@@ -232,7 +235,7 @@ package map
 			_mouseContainer.x = dx;
 			_mouseContainer.z = dz;
 			
-			if(e.buttonDown){
+			if(e.buttonDown && !e.altKey){
 				addRhombus(e);
 			}
 		}
