@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" showStatusBar="false"
-					   xmlns:s="library://ns.adobe.com/flex/spark" width="900" height="700"
-					   xmlns:mx="library://ns.adobe.com/flex/mx" creationComplete="init();"
-					   backgroundColor="#0C0C0C">
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009"
+					   xmlns:s="library://ns.adobe.com/flex/spark"
+					   xmlns:mx="library://ns.adobe.com/flex/mx"
+					   xmlns:ns1="*"
+					   width="900" height="700" backgroundColor="#0C0C0C" creationComplete="init();"
+					   showStatusBar="false">
 	<fx:Declarations>
 		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
 	</fx:Declarations>
@@ -35,14 +37,14 @@
 			private function addImpactClick():void
 			{
 				ContainerUtil.removeChildren(_gameWorld.mouseContainer);
-				_gameWorld.mouseContainer.addChild( new Rhombus(GameSetting.GRID_SIZE,0xff0000));
+				_gameWorld.mouseContainer.addChild( new Rhombus(GameSetting.GRID_SIZE,GameSetting.RoadColor));
 				GameData.buildingCurrOperation = BuildingCurrentOperation.ADD_IMPACT ;
 			}
 			
 			private function addForbiddenClick():void
 			{
 				ContainerUtil.removeChildren(_gameWorld.mouseContainer);
-				_gameWorld.mouseContainer.addChild( new Rhombus(GameSetting.GRID_SIZE,0xffcc00));
+				_gameWorld.mouseContainer.addChild( new Rhombus(GameSetting.GRID_SIZE,GameData.currentMapColor));
 				GameData.buildingCurrOperation = BuildingCurrentOperation.ADD_FORBIDDEN ;
 			}
 			
@@ -76,8 +78,10 @@
 			<s:Button id="loadMap" height="100%" label="加载地图" click="loadClick();" />
 			<s:Button id="saveMap" height="100%" label="保存地图"  click="saveClick();"/>
 			<mx:VRule height="80%" />
-			<s:Button id="addImpact" height="100%" label="添加碰撞点" toolTip="设置角色不能走的地方" click="addImpactClick()"/>
+			<s:Button id="addImpact" height="100%" label="寻路数据" toolTip="设置角色不能走的地方" click="addImpactClick()"/>
 			<s:Button id="addForbidden" height="100%" label="添加建筑禁止区域" toolTip="设置建筑不能放的地方"  click="addForbiddenClick();"/>
+			<ns1:MapColorComponent width="100%">
+			</ns1:MapColorComponent>
 			<mx:VRule height="80%" />
 			<s:Button id="hideImpact" height="100%" label="隐藏和显示碰撞层" click="hideImpactScene();"/>
 			<s:Button id="hideForbidden" height="100%" label="隐藏和显示建筑禁止区域" click="hideForbiddenScene();"/>
