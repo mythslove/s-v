@@ -34,7 +34,7 @@ package models
 		 */		
 		public function addForbidden( nodeX:int , nodeY:int , rho:DisplayObject ):void
 		{
-			if(!forbiddenHash[nodeX+"-"+nodeY] && !impactHash[nodeX+"-"+nodeY] )
+			if(!forbiddenHash[nodeX+"-"+nodeY] )
 			{
 				forbiddenHash[nodeX+"-"+nodeY] = rho ;
 			}
@@ -58,7 +58,7 @@ package models
 		 */		
 		public function addImpact( nodeX:int , nodeY:int , rho:DisplayObject ):void
 		{
-			if(!forbiddenHash[nodeX+"-"+nodeY] && !impactHash[nodeX+"-"+nodeY] )
+			if(!impactHash[nodeX+"-"+nodeY]  )
 			{
 				impactHash[nodeX+"-"+nodeY] = rho ;
 			}
