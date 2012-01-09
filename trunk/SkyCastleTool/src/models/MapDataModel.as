@@ -1,7 +1,5 @@
 package models
 {
-	import bing.iso.Rhombus;
-	
 	import flash.display.DisplayObject;
 	import flash.utils.Dictionary;
 
@@ -12,7 +10,7 @@ package models
 	public class MapDataModel
 	{
 		private static var _instance:MapDataModel;
-		public static function get MapDataModel():MapDataModel
+		public static function get instance():MapDataModel
 		{
 			if(!_instance) _instance = new MapDataModel();
 			return _instance ;
@@ -34,7 +32,7 @@ package models
 		 * @param nodeY
 		 * @param rho
 		 */		
-		public function addForbidden( nodeX:int , nodeY:int , rho:Rhombus ):void
+		public function addForbidden( nodeX:int , nodeY:int , rho:DisplayObject ):void
 		{
 			if(!forbiddenHash[nodeX+"-"+nodeY] && !impactHash[nodeX+"-"+nodeY] )
 			{
@@ -47,9 +45,9 @@ package models
 		 * @param nodeX
 		 * @param nodeY
 		 */		
-		public function deleteForbidden( nodeX:int , nodeY:int ):void
+		public function deleteForbidden( nodeX:int , nodeY:int ):DisplayObject
 		{
-			deleteHash(nodeX,nodeY,forbiddenHash);
+			return deleteHash(nodeX,nodeY,forbiddenHash);
 		}
 		
 		/**
@@ -58,7 +56,7 @@ package models
 		 * @param nodeY
 		 * @param rho
 		 */		
-		public function addImpact( nodeX:int , nodeY:int , rho:Rhombus ):void
+		public function addImpact( nodeX:int , nodeY:int , rho:DisplayObject ):void
 		{
 			if(!forbiddenHash[nodeX+"-"+nodeY] && !impactHash[nodeX+"-"+nodeY] )
 			{
@@ -71,22 +69,20 @@ package models
 		 * @param nodeX
 		 * @param nodeY
 		 */		
-		public function deleteImpact( nodeX:int , nodeY:int ):void
+		public function deleteImpact( nodeX:int , nodeY:int ):DisplayObject
 		{
-			deleteHash(nodeX,nodeY,impactHash);
+			return deleteHash(nodeX,nodeY,impactHash);
 		}
 		
-		private function deleteHash( nodeX:int , nodeY:int , hash:Dictionary ):void
+		private function deleteHash( nodeX:int , nodeY:int , hash:Dictionary ):DisplayObject
 		{
 			if(hash[nodeX+"-"+nodeY] )
 			{
 				var rho:DisplayObject = hash[nodeX+"-"+nodeY] as DisplayObject ;
-				if(rho && rho.parent){
-					rho.parent.removeChild(rho);
-				}
-				
 				delete hash[nodeX+"-"+nodeY];
+				return rho;
 			}
+			return null;
 		}
 	}
 }
