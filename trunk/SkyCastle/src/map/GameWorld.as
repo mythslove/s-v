@@ -18,8 +18,6 @@ package map
 			return _instance ;
 		}
 		//=====================================
-
-		
 		/**
 		 * 游戏世界构造函数 
 		 */		
@@ -29,8 +27,6 @@ package map
 			if(_instance) throw new Error("只能实例化一个GameWorld");
 			else _instance = this ;
 		}
-		
-		
 		
 		/**
 		 * 运行 
