@@ -1,6 +1,7 @@
 package map
 {
 	import bing.iso.IsoGrid;
+	import bing.iso.IsoObject;
 	import bing.iso.IsoScene;
 	import bing.iso.IsoUtils;
 	import bing.iso.IsoWorld;
@@ -14,7 +15,7 @@ package map
 	import enums.BuildingCurrentOperation;
 	
 	import flash.display.Bitmap;
-	import flash.display.BitmapData;
+	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
@@ -33,9 +34,18 @@ package map
 			return _instance ;
 		}
 		//=====================================
+		protected var _mouseContainer:IsoObject ;
+		public function get mouseContainer():IsoObject{
+			return _mouseContainer ;
+		}
+		
 		protected var _gridScene:IsoScene ;
 		public function get gridScene():IsoScene{
 			return _gridScene;
+		}
+		protected var _mapDataScene:IsoScene ;
+		public function get mapDataScene():IsoScene{
+			return _mapDataScene;
 		}
 		protected var _isMove:Boolean=false;
 		
@@ -73,6 +83,14 @@ package map
 			(_gridScene.addChild( new IsoGrid(GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE)) as IsoGrid).render() ;
 			_gridScene.cacheAsBitmap=true;
 			this.addScene(_gridScene);
+			
+			_mapDataScene = new IsoScene(GameSetting.GRID_SIZE);
+			(_mapDataScene.addChild( new IsoGrid(GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE)) as IsoGrid).render() ;
+			_mapDataScene.cacheAsBitmap=true;
+			this.addScene(_mapDataScene);
+			
+			_mouseContainer = new IsoObject(GameSetting.GRID_SIZE,1,1);
+			_gridScene.addIsoObject(_mouseContainer);
 			
 			configListeners();
 		}
@@ -127,13 +145,14 @@ package map
 			this.stopDrag();
 			if(!_isMove)
 			{
-				var xx:int = (e.stageX-this.x)/scaleX - this.sceneLayerOffsetX ;
-				var yy:int = (e.stageY -this.y)/scaleX - this.sceneLayerOffsetY;
-				
-				var p:Point = IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE,xx,yy);
-				
-				var dx:int = p.x*GameSetting.GRID_SIZE ;
-				var dz:int = p.y*GameSetting.GRID_SIZE ;
+				if(GameData.buildingCurrOperation==BuildingCurrentOperation.ADD_IMPACT)
+				{
+					
+				}
+				else if(GameData.buildingCurrOperation == BuildingCurrentOperation.ADD_FORBIDDEN)
+				{
+					
+				}
 			}
 			_isMove = false ;
 		}
@@ -145,6 +164,16 @@ package map
 		protected function onMouseMoveHandler(e:MouseEvent):void
 		{
 			if(e.buttonDown)_isMove = true ;
+			
+			var xx:int = (e.stageX-this.x)/scaleX - this.sceneLayerOffsetX ;
+			var yy:int = (e.stageY -this.y-GameSetting.GRID_SIZE)/scaleX - this.sceneLayerOffsetY;
+			
+			var p:Point = IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE,xx,yy);
+			
+			var dx:int = p.x*GameSetting.GRID_SIZE ;
+			var dz:int = p.y*GameSetting.GRID_SIZE ;
+			_mouseContainer.x = dx;
+			_mouseContainer.z = dz;
 		}
 		
 		/**
