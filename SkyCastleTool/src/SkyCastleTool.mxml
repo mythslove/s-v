@@ -42,6 +42,13 @@
 				GameData.buildingCurrOperation = BuildingCurrentOperation.ADD_IMPACT ;
 			}
 			
+			private function addForbiddenClick():void
+			{
+				ContainerUtil.removeChildren(_gameWorld.mouseContainer);
+				_gameWorld.mouseContainer.addChild( new Rhombus(GameSetting.GRID_SIZE,0xffcc00));
+				GameData.buildingCurrOperation = BuildingCurrentOperation.ADD_FORBIDDEN ;
+			}
+			
 			private function saveClick():void
 			{
 				(new SaveMapDataUtil() ).save() ;
@@ -63,7 +70,7 @@
 			<s:Button id="saveMap" height="100%" label="保存地图"  click="saveClick();"/>
 			<mx:VRule height="80%" />
 			<s:Button id="addImpact" height="100%" label="添加碰撞点" toolTip="设置角色不能走的地方" click="addImpactClick()"/>
-			<s:Button id="addForbidden" height="100%" label="添加建筑禁止区域" toolTip="设置建筑不能放的地方" />
+			<s:Button id="addForbidden" height="100%" label="添加建筑禁止区域" toolTip="设置建筑不能放的地方"  click="addForbiddenClick();"/>
 		</s:BorderContainer>
 		<s:BorderContainer id="borderContainer" width="100%" height="100%">
 			<mx:UIComponent id="container" width="100%" height="100%"/>
