@@ -1,5 +1,9 @@
 package views.bottom
 {
+	import comm.GameData;
+	
+	import enums.BuildingCurrentOperation;
+	
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -47,7 +51,20 @@ package views.bottom
 		{
 			switch( e.target )
 			{
-				case toolsMenu.btnDefault:
+				case toolsMenu.btnMove :
+					GameData.buildingCurrOperation = BuildingCurrentOperation.MOVE ;
+					break;
+				case toolsMenu.btnSell:
+					GameData.buildingCurrOperation = BuildingCurrentOperation.SELL ;
+					break ;
+				case toolsMenu.btnStash:
+					GameData.buildingCurrOperation = BuildingCurrentOperation.STASH ;
+					break ;
+				case toolsMenu.btnRotate:
+					GameData.buildingCurrOperation = BuildingCurrentOperation.ROTATE ;
+					break ;
+				default :
+					GameData.buildingCurrOperation = BuildingCurrentOperation.NONE ;
 					break ;
 			}
 			stageClickHandler(null);

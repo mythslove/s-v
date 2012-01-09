@@ -7,7 +7,6 @@ package views.bottom
 	import enums.BuildingCurrentOperation;
 	
 	import flash.display.Sprite;
-	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
 	public class ToolBox extends Sprite
@@ -48,8 +47,10 @@ package views.bottom
 						toolsMenuAnim.gotoAndPlay(2);
 					}else{
 						GameData.buildingCurrOperation=BuildingCurrentOperation.NONE ;
-						//清空鼠标
 					}
+					break ;
+				case btnCancelTool:
+					GameData.buildingCurrOperation=BuildingCurrentOperation.NONE ;
 					break ;
 			}
 		}
