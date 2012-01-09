@@ -142,6 +142,7 @@ package bing.iso
 				obj = null ;
 			}
 			ContainerUtil.removeChildren( this );
+			_sprites = new Vector.<IsoObject>();
 		}
 	}
 }
