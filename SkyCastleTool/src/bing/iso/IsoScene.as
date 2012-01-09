@@ -132,5 +132,17 @@ package bing.iso
 			_sprites=  null ;
 			ContainerUtil.removeChildren( this );
 		}
+		
+		
+		/********************************************************
+		 * 清空场景
+		 * ********************************************************/
+		public function clear():void
+		{
+			for each( var obj:IsoObject in _sprites){
+				obj = null ;
+			}
+			ContainerUtil.removeChildren( this );
+		}
 	}
 }
