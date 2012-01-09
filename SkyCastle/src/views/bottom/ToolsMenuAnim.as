@@ -45,7 +45,6 @@ package views.bottom
 		
 		private function toolsMenuClickHandler(e:MouseEvent):void
 		{
-			e.stopPropagation();
 			switch( e.target )
 			{
 				case toolsMenu.btnDefault:

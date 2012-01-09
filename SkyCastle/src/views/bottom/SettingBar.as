@@ -26,7 +26,6 @@ package views.bottom
 		public function SettingBar()
 		{
 			super();
-			this.mouseEnabled = false ;
 			addEventListener(Event.ADDED_TO_STAGE , addedToStageHandler );
 		}
 		

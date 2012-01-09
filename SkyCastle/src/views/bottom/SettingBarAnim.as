@@ -1,6 +1,7 @@
 package views.bottom
 {
 	import flash.display.MovieClip;
+	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
 	public class SettingBarAnim extends MovieClip
@@ -11,8 +12,14 @@ package views.bottom
 		public function SettingBarAnim()
 		{
 			super();
+			stop();
+			mouseEnabled = false ;
+			addEventListener(Event.ADDED_TO_STAGE , addedToStageHandler);
+		}
+		
+		private function addedToStageHandler(e:Event):void
+		{
 			init();
-			this.mouseEnabled = false ;
 			configListeners();
 		}
 		
@@ -26,17 +33,32 @@ package views.bottom
 		
 		private function configListeners():void
 		{
-			settingBar.btnDisplay.addEventListener(MouseEvent.CLICK , settingBarClickHandler );
+			settingBar.addEventListener(MouseEvent.CLICK , settingBarClickHandler );
+			stage.addEventListener(MouseEvent.CLICK , stageClickHandler);
+		}
+		
+		private function stageClickHandler(e:MouseEvent):void
+		{
+			if(currentFrame!=1){
+				gotoAndPlay("hide");
+				settingBar.btnDisplay.selected = false ;
+			}
 		}
 		
 		private function settingBarClickHandler( e:MouseEvent):void
 		{
 			e.stopPropagation();
-			if(settingBar.btnDisplay.selected){
-				this.gotoAndPlay(2);
-			}else{
-				this.gotoAndPlay("hide");
+			switch( e.target )
+			{
+				case settingBar.btnDisplay:
+					if(settingBar.btnDisplay.selected){
+						this.gotoAndPlay(2);
+					}else{
+						this.gotoAndPlay("hide");
+					}
+				break;
 			}
+			
 		}
 	}
 }

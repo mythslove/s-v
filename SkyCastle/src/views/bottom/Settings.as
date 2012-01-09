@@ -10,7 +10,7 @@ package views.bottom
 		public function Settings()
 		{
 			super();
-			this.mouseEnabled = false ;
 		}
+		
 	}
 }

@@ -224,7 +224,11 @@ package map
 		 */		
 		public function zoom( scale:Number):void
 		{
-			this.scaleX = this.scaleY = scale ;
+			var centerX:Number = (x+GameSetting.SCREEN_WIDTH*0.5)/scaleX+sceneLayerOffsetX ;
+			var centerY:Number = (y+GameSetting.SCREEN_HEIGHT*0.5)/scaleY+sceneLayerOffsetY ;
+			scaleX = scaleY = scale ;
+			x= (centerX-sceneLayerOffsetX)*scale-GameSetting.SCREEN_WIDTH*0.5
+			y= (centerY-sceneLayerOffsetY)*scale-GameSetting.SCREEN_HEIGHT*0.5
 			modifyMapPosition();
 		}
 		
@@ -233,10 +237,12 @@ package map
 		 */		
 		protected function modifyMapPosition():void
 		{
-			if(x<-GameSetting.MAX_WIDTH*scaleX+stage.stageWidth){
+			if(x>0) x=0 ;
+			else if(x<-GameSetting.MAX_WIDTH*scaleX+stage.stageWidth){
 				x = -GameSetting.MAX_WIDTH*scaleX+stage.stageWidth ;
 			}
-			if(y<-GameSetting.MAX_HEIGHT*scaleX+stage.stageHeight){
+			if(y>0) y=0 ;
+			else if(y<-GameSetting.MAX_HEIGHT*scaleX+stage.stageHeight){
 				y = -GameSetting.MAX_HEIGHT*scaleX+stage.stageHeight ;
 			}
 		}
