@@ -10,15 +10,12 @@
 	<fx:Script>
 		<![CDATA[
 			import bing.iso.Rhombus;
-			import bing.iso.path.Grid;
 			import bing.utils.ContainerUtil;
 			
 			import comm.GameData;
 			import comm.GameSetting;
 			
 			import enums.BuildingCurrentOperation;
-			
-			import flash.net.registerClassAlias;
 			
 			import map.GameWorld;
 			
@@ -58,6 +55,16 @@
 			{
 				( new ReadMapDataUtil()).read();
 			}
+						
+			private function hideImpactScene():void
+			{
+				GameWorld.instance.impactScene.visible = !GameWorld.instance.impactScene.visible;
+			}
+			
+			private function hideForbiddenScene():void
+			{
+				GameWorld.instance.forbiddenScene.visible = !GameWorld.instance.forbiddenScene.visible;
+			}
 		]]>
 	</fx:Script>
 	<s:VGroup x="0" y="0" width="100%" height="100%">
@@ -71,6 +78,9 @@
 			<mx:VRule height="80%" />
 			<s:Button id="addImpact" height="100%" label="添加碰撞点" toolTip="设置角色不能走的地方" click="addImpactClick()"/>
 			<s:Button id="addForbidden" height="100%" label="添加建筑禁止区域" toolTip="设置建筑不能放的地方"  click="addForbiddenClick();"/>
+			<mx:VRule height="80%" />
+			<s:Button id="hideImpact" height="100%" label="隐藏和显示碰撞层" click="hideImpactScene();"/>
+			<s:Button id="hideForbidden" height="100%" label="隐藏和显示建筑禁止区域" click="hideForbiddenScene();"/>
 		</s:BorderContainer>
 		<s:BorderContainer id="borderContainer" width="100%" height="100%">
 			<mx:UIComponent id="container" width="100%" height="100%"/>
