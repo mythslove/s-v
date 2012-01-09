@@ -63,6 +63,5 @@ package comm
 		public static const zeroPoint:Point = new Point();
 
 	
-
 	}
 }

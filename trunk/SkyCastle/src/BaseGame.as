@@ -2,6 +2,7 @@ package
 {
 	import bing.res.ResLoadedEvent;
 	import bing.res.ResProgressEvent;
+	import bing.res.ResType;
 	import bing.res.ResVO;
 	
 	import comm.GameSetting;
@@ -78,8 +79,9 @@ package
 		{
 			var res:Vector.<ResVO> = new Vector.<ResVO>();
 			res.push( new ResVO("config","res/config.xml"));
-			res.push( new ResVO("bg","res/skin/bg.swf"));
 			res.push( new ResVO("ui","res/skin/ui.swf"));
+			res.push( new ResVO("bg","res/skin/bg.swf"));
+			res.push( new ResVO("mapdata","res/mapdata") ); 
 			ResourceUtil.instance.addEventListener(ResProgressEvent.RES_LOAD_PROGRESS , queueLoadHandler);
 			ResourceUtil.instance.addEventListener(ResLoadedEvent.QUEUE_LOADED ,queueLoadHandler);
 			ResourceUtil.instance.queueLoad( res , 5 );

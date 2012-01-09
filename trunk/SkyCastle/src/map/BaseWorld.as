@@ -3,6 +3,7 @@ package map
 	import bing.iso.IsoScene;
 	import bing.iso.IsoUtils;
 	import bing.iso.IsoWorld;
+	import bing.res.ResVO;
 	import bing.utils.ObjectUtil;
 	
 	import comm.GameData;
@@ -80,16 +81,18 @@ package map
 			//			_gridScene.cacheAsBitmap=true;
 			//			this.addScene(_gridScene);
 			
+			var gridResVO:ResVO = ResourceUtil.instance.getResVOByName("mapdata");
 			_groundScene = new GroundScene();
 			_groundScene.cacheAsBitmap = true ;
-			_groundScene.createGridData(GameSetting.GRID_X,GameSetting.GRID_Z);
+			_groundScene.gridData = gridResVO.resObject.groundGrid ;
 			_groundScene.mouseEnabled = false ;
 			addScene(_groundScene);
 			
 			_buildingScene = new BuildingScene();
 			_buildingScene.mouseEnabled = false ;
-			_buildingScene.createGridData(GameSetting.GRID_X,GameSetting.GRID_Z);
+			_buildingScene.gridData = gridResVO.resObject.buildingGrid ;
 			addScene(_buildingScene);
+			ResourceUtil.instance.deleteRes("mapdata"); 
 			
 			configListeners();
 		}
