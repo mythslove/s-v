@@ -147,5 +147,20 @@ package  bing.iso.path
 			return _startNode;
 		}
 		
+		/**
+		 *复制 
+		 */		
+		public function clone():Grid
+		{
+			var gird:Grid = new Grid( this._numCols  , this._numRows );
+			for(var i:int = 0; i < _numCols; i++)
+			{
+				for(var j:int = 0; j < _numRows; j++)
+				{
+					gird.getNode(i,j).walkable = this.getNode(i,j).walkable;
+				}
+			}
+			return gird;
+		}
 	}
 }
