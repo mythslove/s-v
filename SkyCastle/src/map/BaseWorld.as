@@ -61,7 +61,9 @@ package map
 		}
 		
 		protected var _isMove:Boolean=false;
-		
+		public function get isMove():Boolean{
+			return _isMove ;
+		}
 		
 		/**
 		 * 游戏世界基类
@@ -186,9 +188,7 @@ package map
 			{
 				var xx:int = (e.stageX-this.x)/scaleX - this.sceneLayerOffsetX ;
 				var yy:int = (e.stageY -this.y)/scaleX - this.sceneLayerOffsetY;
-				
 				var p:Point = IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE,xx,yy);
-				
 				var dx:int = p.x*GameSetting.GRID_SIZE ;
 				var dz:int = p.y*GameSetting.GRID_SIZE ;
 				
