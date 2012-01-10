@@ -24,6 +24,7 @@ package  bing.components.tooltip
 		private var _textFormat:TextFormat;
 		private var _mouseOffest:Point=new Point(5, 10);
 		private var _showDropShadow:Boolean=true;
+		public var fontName:String="Verdana";
 
 		private static var instance:ToolTipBase;
 
@@ -117,7 +118,7 @@ package  bing.components.tooltip
 		{
 			if (!_textFormat)
 			{
-				_textFormat=new TextFormat("Verdana", 11, textColor);
+				_textFormat=new TextFormat(fontName, 13, textColor);
 			}
 			return _textFormat;
 		}
@@ -282,11 +283,12 @@ package  bing.components.tooltip
 		 */
 		protected function drawBg():void
 		{
-			var w:Number=10 + label.width;
-			var h:Number=4 + label.height;
+			var w:Number=15 + label.width;
+			var h:Number=8 + label.height;
 			toolTipBg.graphics.clear();
+			toolTipBg.graphics.lineStyle(2,0x322640);
 			toolTipBg.graphics.beginFill(bgColor);
-			toolTipBg.graphics.drawRoundRect(0, 0, w, h, 5, 5);
+			toolTipBg.graphics.drawRoundRect(0, 0, w, h, 10, 10);
 			toolTipBg.graphics.endFill();
 		}
 
@@ -315,7 +317,7 @@ package  bing.components.tooltip
 			label.autoSize=TextFieldAutoSize.LEFT;
 			label.selectable=false;
 			label.multiline=false;
-			label.wordWrap=false;
+			label.wordWrap=true;
 			label.defaultTextFormat=textFormat; //
 			label.text="";
 			label.x=5;
@@ -335,9 +337,9 @@ package  bing.components.tooltip
 			this.addChild(toolTipArrow);
 			initLable();
 			//设置投影
-			var dropShadow:DropShadowFilter=new DropShadowFilter();
-			var filtersArray:Array=new Array(dropShadow);
-			this.filters=filtersArray;
+//			var dropShadow:DropShadowFilter=new DropShadowFilter();
+//			var filtersArray:Array=new Array(dropShadow);
+//			this.filters=filtersArray;
 		}
 	}
 }

@@ -7,6 +7,7 @@ package views.bottom
 	import enums.BuildingCurrentOperation;
 	
 	import flash.display.Sprite;
+	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
 	public class ToolBox extends Sprite
@@ -22,12 +23,19 @@ package views.bottom
 		public function ToolBox()
 		{
 			super();
+			addEventListener(Event.ADDED_TO_STAGE , addedToStageHandler);
+		}
+		
+		private function addedToStageHandler(e:Event):void
+		{
+			removeEventListener(Event.ADDED_TO_STAGE , addedToStageHandler );
 			init();
 			configListeners();
 		}
 		
 		private function init():void
 		{
+			btnMultiTool.toolTipText="multiTool multiTool multiTool multiTool\n multiTool multiTool multiTool multiTool multiTool";
 			btnReturnHome.visible = false ;
 			toolsMenuAnim.visible = false ;
 		}
