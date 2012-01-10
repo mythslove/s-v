@@ -1,6 +1,5 @@
 package map
 {
-	import bing.iso.IsoGrid;
 	import bing.iso.IsoScene;
 	import bing.iso.IsoUtils;
 	import bing.iso.IsoWorld;
@@ -76,7 +75,7 @@ package map
 			//设置背景图片
 			var bg:Bitmap = new Bitmap( ResourceUtil.instance.getInstanceByClassName("bg","BG") as BitmapData );
 			this.setBackGround(bg);
-			ResourceUtil.instance.deleteRes("bg")//把加载的背景图片卸载了
+			ResourceUtil.instance.deleteRes("bg"); //把加载的背景图片卸载了
 			
 			//设置地图显示参数
 			GameSetting.MAX_WIDTH = bg.width;
@@ -189,24 +188,47 @@ package map
 				var xx:int = (e.stageX-this.x)/scaleX - this.sceneLayerOffsetX ;
 				var yy:int = (e.stageY -this.y)/scaleX - this.sceneLayerOffsetY;
 				var p:Point = IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE,xx,yy);
-				var dx:int = p.x*GameSetting.GRID_SIZE ;
-				var dz:int = p.y*GameSetting.GRID_SIZE ;
-				
-				var vo:BuildingVO ;
-				if(GameData.buildingCurrOperation==BuildingCurrentOperation.ADD)
-				{
-					vo = ObjectUtil.copyObj( ShopModel.instance.houseArray[0] ) as BuildingVO;
-					var result:Boolean = false ;
-					if(vo.baseVO.type==BuildingType.ROAD){
-						result = _groundScene1.addBuilding( dx,dz,vo);
-					}else{
-						result = _buildingScene1.addBuilding( dx,dz,vo);
-					}
-				}
+				addBuilding( p.x , p.y );
 			}
 			_isMove = false ;
 			if(GameData.mouseBuilding) {
 				GameData.mouseBuilding.selectedStatus(false);
+			}
+		}
+		
+		/**
+		 * 根据node位置，添加建筑 
+		 * @param nodeX
+		 * @param nodeZ
+		 */		
+		protected function addBuilding( nodeX:int , nodeZ:int ):void
+		{
+			var dx:int = nodeX*GameSetting.GRID_SIZE ;
+			var dz:int = nodeZ*GameSetting.GRID_SIZE ;
+			
+			var vo:BuildingVO ;
+			if(GameData.buildingCurrOperation==BuildingCurrentOperation.ADD)
+			{
+				vo = ObjectUtil.copyObj( ShopModel.instance.houseArray[0] ) as BuildingVO;
+				var result:Boolean = false ;
+				if(vo.baseVO.type==BuildingType.ROAD)
+				{
+					var groundScene:GroundScene = _groundScene3.gridData.getNode(nodeX,nodeZ).walkable? _groundScene3: 
+						_groundScene2.gridData.getNode(nodeX,nodeZ).walkable?_groundScene2:
+						_groundScene1.gridData.getNode(nodeX,nodeZ).walkable?_groundScene1:null ;
+					if(groundScene) {
+						result = groundScene.addBuilding( dx,dz,vo);
+					}
+				}
+				else
+				{
+					var buildingScene:BuildingScene = _buildingScene3.gridData.getNode(nodeX,nodeZ).walkable? _buildingScene3: 
+						_buildingScene2.gridData.getNode(nodeX,nodeZ).walkable?_buildingScene2:
+						_buildingScene1.gridData.getNode(nodeX,nodeZ).walkable?_buildingScene1:null ;
+					if(buildingScene) {
+						result = buildingScene.addBuilding( dx,dz,vo);
+					}
+				}
 			}
 		}
 		
