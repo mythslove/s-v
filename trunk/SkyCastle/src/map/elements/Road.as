@@ -3,11 +3,21 @@ package map.elements
 	import flash.events.Event;
 	
 	import models.vos.BuildingVO;
-	
+	/**
+	 * 路 
+	 * @author zhouzhanglin
+	 */	
 	public class Road extends BuildingBase
 	{
+		/**
+		 * 当前的方向 
+		 */		
 		private var _currentLabel:String="NONE";
 		
+		/**
+		 * 路构造函数 
+		 * @param buildingVO
+		 */		
 		public function Road(buildingVO:BuildingVO)
 		{
 			super(buildingVO);

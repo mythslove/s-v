@@ -25,20 +25,27 @@ package map.elements
 	import models.vos.BuildingVO;
 	
 	import utils.ResourceUtil;
-	
+	/**
+	 * 建筑基类 
+	 * @author zhouzhanglin
+	 */	
 	public class BuildingBase extends IsoObject
 	{
-		protected var _itemLayer:Sprite ;
+		protected var _itemLayer:Sprite ; //放skin的容器
 		public function get itemLayer():Sprite{ return _itemLayer; }
 		
-		protected var _gridLayer:BuildingGridLayer;
+		protected var _gridLayer:BuildingGridLayer; //占用的格子
 		public function get gridLayer():BuildingGridLayer{ return _gridLayer; }
 		
-		protected var _skin:MovieClip ;
-		protected var _itemLayerMatrix:Matrix=new Matrix();
-		protected var _hitTestTime:int ;
-		
+		protected var _skin:MovieClip ; //皮肤
+		protected var _itemLayerMatrix:Matrix=new Matrix(); //用于碰撞检测
+		protected var _hitTestTime:int ; //在一定的时间内才检测一次鼠标碰撞
+		/** 当前建筑的builingVO*/
 		public var buildingVO:BuildingVO ;
+		/**
+		 * 构造函数 
+		 * @param buildingVO
+		 */		
 		public function BuildingBase(buildingVO:BuildingVO )
 		{
 			super(GameSetting.GRID_SIZE,buildingVO.baseVO.xSpan , buildingVO.baseVO.zSpan);
@@ -122,6 +129,10 @@ package map.elements
 			}
 		}
 		
+		/**
+		 * 设置是否显示被选择状态 
+		 * @param flag
+		 */		
 		public function selectedStatus( flag:Boolean ):void
 		{
 			if(flag ){
@@ -131,6 +142,10 @@ package map.elements
 			}
 		}
 		
+		/**
+		 * 主要用于旋转建筑，1为正，-1为旋转180度 
+		 * @param value
+		 */		
 		override public function set scaleX(value:Number):void
 		{
 			var flag:Boolean = value==1?false:true;
@@ -144,6 +159,9 @@ package map.elements
 			return _itemLayer.scaleX ;
 		}
 		
+		/**
+		 * 卸载该对象 
+		 */		
 		public function dispose():void
 		{
 			this.removeEventListener(Event.ADDED_TO_STAGE , addedToStageHandler );
