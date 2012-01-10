@@ -78,8 +78,8 @@
 			<s:Button id="loadMap" height="100%" label="加载地图" click="loadClick();" />
 			<s:Button id="saveMap" height="100%" label="保存地图"  click="saveClick();"/>
 			<mx:VRule height="80%" />
-			<s:Button id="addImpact" height="100%" label="寻路数据" toolTip="设置角色不能走的地方" click="addImpactClick()"/>
-			<s:Button id="addForbidden" height="100%" label="添加建筑禁止区域" toolTip="设置建筑不能放的地方"  click="addForbiddenClick();"/>
+			<s:Button id="addImpact" height="100%" label="寻路数据" toolTip="设置角色除了地图区域外还可以走的地方" click="addImpactClick()"/>
+			<s:Button id="addForbidden" height="100%" label="地图区域" toolTip="设置三个地图的建筑区域"  click="addForbiddenClick();"/>
 			<ns1:MapColorComponent width="100%">
 			</ns1:MapColorComponent>
 			<mx:VRule height="80%" />
