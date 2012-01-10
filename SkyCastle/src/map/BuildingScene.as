@@ -13,6 +13,7 @@ package map
 		public function BuildingScene()
 		{
 			super(GameSetting.GRID_SIZE);
+			mouseEnabled = mouseChildren = false ;
 		}
 		
 		/**

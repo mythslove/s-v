@@ -100,7 +100,7 @@ package map.elements
 			super.update() ;
 			
 			if(stage && _skin && (GameData.mouseBuilding==null || 
-				GameData.mouseBuilding.parent==GameWorld.instance.groundScene ||
+				GameData.mouseBuilding.parent==GameWorld.instance.groundScene1 ||
 				(GameData.mouseBuilding.parent==this.parent&&
 				this.parent.getChildIndex(this)>this.parent.getChildIndex(GameData.mouseBuilding)))&&
 				this.hitTestPoint(stage.mouseX,stage.mouseY))

@@ -27,6 +27,7 @@ package map
 		public function GroundScene()
 		{
 			super(GameSetting.GRID_SIZE);
+			mouseEnabled = mouseChildren = false ;
 			
 			L = "L";
 			R = "R";
