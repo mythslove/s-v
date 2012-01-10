@@ -101,11 +101,11 @@ package map.elements
 		override public function update():void
 		{
 			super.update() ;
-			if( getTimer()-_hitTestTime>100 )
+			if(stage && _skin &&  getTimer()-_hitTestTime>100 )
 			{
 				_hitTestTime = getTimer();
 				
-				if(!GameWorld.instance.isMove && stage && _skin && (GameData.mouseBuilding==null || 
+				if(!GameWorld.instance.isMove &&(GameData.mouseBuilding==null || 
 					GameData.mouseBuilding.parent is GroundScene ||
 					(GameData.mouseBuilding.parent==this.parent&&
 					this.parent.getChildIndex(this)>this.parent.getChildIndex(GameData.mouseBuilding)))&&
@@ -118,6 +118,7 @@ package map.elements
 					bmd.draw( _itemLayer,_itemLayerMatrix);
 					if(bmd.hitTest( GameData.zeroPoint , 255 , new Point(_itemLayer.mouseX-bound.x,_itemLayer.mouseY-bound.y) ) )
 					{
+						if(GameData.mouseBuilding) GameData.mouseBuilding.selectedStatus(false);
 						GameData.mouseBuilding = this ;
 					}else{
 						selectedStatus(false);
