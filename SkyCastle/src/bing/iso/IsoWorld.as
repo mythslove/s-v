@@ -101,5 +101,26 @@ package bing.iso
 			}
 		}
 		
+		/********************************************************
+		 * 遍历所有IsoScene，并调用它的dispose方法
+		 * ********************************************************/
+		public function dispose():void
+		{
+			for each(var scene:IsoScene in _scenes){
+				scene.dispose();
+			}
+			_scenes = null ;
+		}
+		
+		/********************************************************
+		 * 遍历所有IsoScene，并调用它的clear方法
+		 * 清空iso世界的所有isoObject对象
+		 * ********************************************************/
+		public function clear():void
+		{
+			for each(var scene:IsoScene in _scenes){
+				scene.clear() ;
+			}
+		}
 	}
 }
