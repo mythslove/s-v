@@ -1,30 +1,18 @@
 package map
 {
-	import bing.iso.IsoGrid;
-	import bing.iso.IsoObject;
-	import bing.iso.IsoScene;
-	import bing.iso.IsoUtils;
-	import bing.iso.IsoWorld;
+	import bing.iso.*;
 	import bing.res.ResVO;
-	import bing.utils.ObjectUtil;
 	
-	import comm.GameData;
-	import comm.GameSetting;
-	import comm.GlobalDispatcher;
-	import comm.GlobalEvent;
+	import comm.*;
 	
 	import enums.BuildingType;
 	
-	import flash.display.Bitmap;
-	import flash.display.BitmapData;
-	import flash.events.Event;
-	import flash.events.MouseEvent;
-	import flash.geom.Point;
-	import flash.geom.Rectangle;
+	import flash.display.*;
+	import flash.events.*;
+	import flash.geom.*;
 	
 	import map.elements.BuildingBase;
 	
-	import models.ShopModel;
 	import models.vos.BuildingVO;
 	
 	import utils.ResourceUtil;
