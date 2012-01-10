@@ -1,6 +1,7 @@
 package map
 {
 	import bing.ds.HashMap;
+	import bing.iso.IsoObject;
 	import bing.iso.IsoScene;
 	
 	import comm.GameSetting;
@@ -155,5 +156,15 @@ package map
 			else if( temp=="POS_LB_M") building.updateUI(RU);
 		}
 		
+		/**
+		 * 清除数据和对象 
+		 */		
+		override public function clear():void
+		{
+			for each( var obj:IsoObject in children){
+				obj.setWalkable( true , gridData );
+			}
+			super.clear();
+		}
 	}
 }

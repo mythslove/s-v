@@ -19,6 +19,9 @@ package bing.iso
 			this._size = size ;
 		}
 		
+		public function get children():Vector.<IsoObject>{
+			return _sprites;
+		}
 		
 		/********************************************************
 		 * 添加对象
