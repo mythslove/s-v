@@ -1,13 +1,11 @@
 package map
 {
-	import bing.iso.IsoUtils;
 	import bing.utils.ContainerUtil;
 	
 	import comm.GameData;
 	import comm.GameSetting;
 	
 	import flash.events.Event;
-	import flash.geom.Point;
 	
 	import map.elements.BuildingBase;
 	
@@ -67,22 +65,8 @@ package map
 		protected function onEnterFrameHandler(e:Event):void
 		{
 			GameData.mouseBuilding = null ;
-			if(_mouseContainer.numChildren>0 && stage )
-			{
-				_mouseContainer.visible = true ;
-				var xx:int = (stage.mouseX-this.x)/scaleX - this.sceneLayerOffsetX ;
-				var yy:int = (stage.mouseY -this.y)/scaleX - this.sceneLayerOffsetY;
-				var p:Point = IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE,xx,yy);
-				_mouseContainer.nodeX = p.x ;
-				_mouseContainer.nodeZ = p.y ;
-			}
-			else if(_mouseContainer.visible )
-			{
-				_mouseContainer.visible = false ;
-			}
 			update() ;
 		}
-		
 		
 		/**
 		 * 地图放大和缩小 

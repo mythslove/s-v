@@ -11,6 +11,7 @@ package utils
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.utils.ByteArray;
+	import flash.utils.Dictionary;
 	
 	import models.AStarRoadGridModel;
 	
@@ -79,6 +80,7 @@ package utils
 			var groundGrid3:Grid = new Grid(GameSetting.GRID_X , GameSetting.GRID_Z); //地面3
 			var buildingGrid3:Grid = new Grid(GameSetting.GRID_X , GameSetting.GRID_Z); //建筑3
 			var roadGrid:Grid = AStarRoadGridModel.instance.roadGrid ;//寻路用的数据
+			var extraHash:Dictionary = new Dictionary(); //额外不能走的
 			var bytes:ByteArray = resLoader as ByteArray;
 			try
 			{
@@ -112,7 +114,10 @@ package utils
 				temp = bytes.readUnsignedShort();
 				for(  i = 0 ; i<temp ; ++ i)
 				{
-					roadGrid.getNode(bytes.readUnsignedByte(),bytes.readUnsignedByte()).walkable = true ;
+					var nodeX:int = bytes.readUnsignedByte() ;
+					var nodeZ:int = bytes.readUnsignedByte() ;
+					roadGrid.getNode(nodeX,nodeZ).walkable = true ;
+					extraHash[nodeX+"-"+nodeZ] = true ;
 				}
 	
 				var obj:Object = new Object();
@@ -122,6 +127,7 @@ package utils
 				obj["buildingGrid2"]=buildingGrid2;
 				obj["groundGrid3"]=groundGrid3 ;
 				obj["buildingGrid3"]=buildingGrid3;
+				obj["extra"]=extraHash;
 				resVO.resObject = obj ;
 			}catch(e:Error){trace(e);}
 			

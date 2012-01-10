@@ -1,8 +1,6 @@
 package map.elements
 {
 	import bing.iso.IsoObject;
-	import bing.iso.IsoUtils;
-	import bing.iso.Rhombus;
 	import bing.res.ResVO;
 	import bing.utils.ContainerUtil;
 	
@@ -18,11 +16,11 @@ package map.elements
 	import flash.geom.Matrix;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
-	import flash.geom.Vector3D;
 	import flash.utils.getTimer;
 	
 	import map.GameWorld;
 	import map.GroundScene;
+	import map.cell.BuildingGridLayer;
 	
 	import models.vos.BuildingVO;
 	
@@ -33,8 +31,8 @@ package map.elements
 		protected var _itemLayer:Sprite ;
 		public function get itemLayer():Sprite{ return _itemLayer; }
 		
-		protected var _gridLayer:Sprite;
-		public function get gridLayer():Sprite{ return _gridLayer; }
+		protected var _gridLayer:BuildingGridLayer;
+		public function get gridLayer():BuildingGridLayer{ return _gridLayer; }
 		
 		protected var _skin:MovieClip ;
 		protected var _itemLayerMatrix:Matrix=new Matrix();
@@ -46,7 +44,7 @@ package map.elements
 			super(GameSetting.GRID_SIZE,buildingVO.baseVO.xSpan , buildingVO.baseVO.zSpan);
 			this.buildingVO = buildingVO ;
 			
-			_gridLayer = new Sprite();
+			_gridLayer = new BuildingGridLayer(this);
 			_gridLayer.visible=false;
 			_gridLayer.cacheAsBitmap = true ;
 			addChild(_gridLayer);
@@ -73,21 +71,12 @@ package map.elements
 			ResourceUtil.instance.loadRes( resVO );
 		}
 		
+		/**
+		 *占用了的网格 
+		 */		
 		public function drawGrid():void
 		{
-			ContainerUtil.removeChildren(_gridLayer);
-			var points:Vector.<Vector3D> = this.spanPosition ;
-			for each( var point:Vector3D in points)
-			{
-				var rhomebus:Rhombus = new Rhombus( this.size );
-				var p:Vector3D = point.clone();
-				p.x -=this.x;
-				p.z -=this.z ;
-				var screenPos:Point = IsoUtils.isoToScreen(p);
-				rhomebus.x = screenPos.x ;
-				rhomebus.y = screenPos.y ;
-				_gridLayer.addChild( rhomebus );
-			}
+			_gridLayer.drawGrid();
 		}
 		
 		protected function resLoadedHandler( e:Event):void
@@ -160,6 +149,7 @@ package map.elements
 			this.removeEventListener(Event.ADDED_TO_STAGE , addedToStageHandler );
 			ResourceUtil.instance.removeEventListener( buildingVO.baseVO.alias , resLoadedHandler );
 			_itemLayer = null ;
+			_gridLayer.dispose();
 			_gridLayer = null ;
 			buildingVO = null ;
 			_skin = null ;
