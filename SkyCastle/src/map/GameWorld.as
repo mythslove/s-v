@@ -15,6 +15,7 @@ package map
 	
 	import map.elements.BuildingBase;
 	
+	import models.AStarRoadGridModel;
 	import models.ShopModel;
 	import models.vos.BuildingVO;
 
@@ -44,7 +45,7 @@ package map
 		override protected function addedToStageHandler(e:Event):void
 		{
 			super.addedToStageHandler(e);
-			var building:BuildingBase = new BuildingBase( ShopModel.instance.houseArray[0]);
+			var building:BuildingBase = new BuildingBase( ShopModel.instance.roadArray[0]);
 			building.drawGrid();
 			building.gridLayer.visible=true;
 			this.addBuilidngOnMouse( building );
@@ -61,6 +62,12 @@ package map
 				var vo:BuildingVO = ObjectUtil.copyObj( (_mouseContainer.getChildAt(0) as BuildingBase).buildingVO ) as BuildingVO;
 				addBuilding( p.x , p.y ,vo );
 				_mouseContainer.parent.setChildIndex( _mouseContainer , _mouseContainer.parent.numChildren-1);
+			}
+			else if( GameData.buildingCurrOperation==BuildingCurrentOperation.ROTATE)
+			{
+				if( GameData.mouseBuilding){
+					GameData.mouseBuilding.rotateBuilding();
+				}
 			}
 		}
 		

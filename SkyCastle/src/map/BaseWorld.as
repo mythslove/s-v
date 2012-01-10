@@ -56,6 +56,9 @@ package map
 		}
 		//跟随鼠标移动的建筑
 		protected var _mouseContainer:IsoObject;
+		public function get mouseContainer():IsoObject{
+			return _mouseContainer ;
+		}
 		
 		/**
 		 * 游戏世界基类
@@ -207,14 +210,14 @@ package map
 			{
 				var groundScene:GroundScene = getMouseGroundScene (nodeX,nodeZ);
 				if(groundScene) {
-					result = groundScene.addBuilding( dx,dz,vo);
+					result = groundScene.addBuildingByVO( dx,dz,vo);
 				}
 			}
 			else
 			{
 				var buildingScene:BuildingScene = getMouseBuildingScene(nodeX,nodeZ);
 				if(buildingScene) {
-					result = buildingScene.addBuilding( dx,dz,vo);
+					result = buildingScene.addBuildingByVO( dx,dz,vo);
 				}
 			}
 			return result;
@@ -269,8 +272,20 @@ package map
 					_mouseContainer.nodeX = p.x ;
 					_mouseContainer.nodeZ = p.y ;
 					var build:BuildingBase = _mouseContainer.getChildAt(0) as BuildingBase;
-					p = IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE,xx,yy);
-					build.gridLayer.update( p.x,p.y);
+					if( build.buildingVO.baseVO.type==BuildingType.ROAD)
+					{
+						var scene:GroundScene = this.getMouseGroundScene(p.x,p.y);
+						if(scene && scene.gridData.getNode(p.x,p.y).walkable){
+							build.gridLayer.setWalkabled(true);
+						}else{
+							build.gridLayer.setWalkabled(false);
+						}
+					}
+					else
+					{
+						p = IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE,xx,yy);
+						build.gridLayer.update( p.x,p.y);
+					}
 				}
 				return ;
 			}
@@ -278,9 +293,8 @@ package map
 			{
 				_mouseContainer.visible = false ;
 			}
-			
-			if(GameData.mouseBuilding) {
-				GameData.mouseBuilding.selectedStatus(true);
+			if(GameData.mouseBuilding){
+				GameData.mouseBuilding.selectedStatus(true);	
 			}
 		}
 		

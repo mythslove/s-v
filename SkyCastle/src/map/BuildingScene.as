@@ -25,7 +25,7 @@ package map
 		 * @param buildingVO
 		 * @return 添加成功返回true
 		 */		
-		public function addBuilding( dx:Number , dz:Number , buildingVO:BuildingVO ):BuildingBase
+		public function addBuildingByVO( dx:Number , dz:Number , buildingVO:BuildingVO ):BuildingBase
 		{
 			var obj:BuildingBase = new BuildingBase(buildingVO);
 			obj.x = dx;
@@ -42,12 +42,27 @@ package map
 		}
 		
 		/**
+		 * 添加建筑 
+		 * @param buildingBase
+		 * @return 
+		 */		
+		public function addBuilding( buildingBase:BuildingBase ):BuildingBase
+		{
+			this.addIsoObject( buildingBase );
+			buildingBase.setWalkable( false , this.gridData );
+			buildingBase.setWalkable(false, AStarRoadGridModel.instance.roadGrid );
+			buildingBase.drawGrid(); //显示占了的网格
+			return buildingBase;
+		}
+		
+		/**
 		 * 移除建筑 
 		 * @param buildingBase
 		 */		
 		public function removeBuilding( buildingBase:BuildingBase):void
 		{
 			buildingBase.setWalkable( true , this.gridData );
+			buildingBase.setWalkable(true, AStarRoadGridModel.instance.roadGrid );
 			this.removeIsoObject( buildingBase );
 		}
 		
