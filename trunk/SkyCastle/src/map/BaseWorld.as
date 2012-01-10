@@ -213,23 +213,47 @@ package map
 				var result:Boolean = false ;
 				if(vo.baseVO.type==BuildingType.ROAD)
 				{
-					var groundScene:GroundScene = _groundScene3.gridData.getNode(nodeX,nodeZ).walkable? _groundScene3: 
-						_groundScene2.gridData.getNode(nodeX,nodeZ).walkable?_groundScene2:
-						_groundScene1.gridData.getNode(nodeX,nodeZ).walkable?_groundScene1:null ;
+					var groundScene:GroundScene = getMouseGroundScene (nodeX,nodeZ);
 					if(groundScene) {
 						result = groundScene.addBuilding( dx,dz,vo);
 					}
 				}
 				else
 				{
-					var buildingScene:BuildingScene = _buildingScene3.gridData.getNode(nodeX,nodeZ).walkable? _buildingScene3: 
-						_buildingScene2.gridData.getNode(nodeX,nodeZ).walkable?_buildingScene2:
-						_buildingScene1.gridData.getNode(nodeX,nodeZ).walkable?_buildingScene1:null ;
+					var buildingScene:BuildingScene = getMouseBuildingScene(nodeX,nodeZ);
 					if(buildingScene) {
 						result = buildingScene.addBuilding( dx,dz,vo);
 					}
 				}
 			}
+		}
+		
+		/**
+		 * 当前鼠标在哪个 GroundScene上是walkable=true
+		 * @param nodeX
+		 * @param nodeZ
+		 * @return 
+		 */		
+		protected function getMouseGroundScene( nodeX:int , nodeZ:int ):GroundScene
+		{
+			var groundScene:GroundScene = _groundScene3.gridData.getNode(nodeX,nodeZ).walkable? _groundScene3: 
+				(_groundScene2.gridData.getNode(nodeX,nodeZ).walkable?_groundScene2:
+				(_groundScene1.gridData.getNode(nodeX,nodeZ).walkable?_groundScene1:null) );
+			return groundScene;
+		}
+		
+		/**
+		 * 当前鼠标在哪个 BuildingScene上是walkable=true
+		 * @param nodeX
+		 * @param nodeZ
+		 * @return 
+		 */		
+		protected function getMouseBuildingScene( nodeX:int , nodeZ:int ):BuildingScene
+		{
+			var buildingScene:BuildingScene = _buildingScene3.gridData.getNode(nodeX,nodeZ).walkable? _buildingScene3: 
+				(_buildingScene2.gridData.getNode(nodeX,nodeZ).walkable?_buildingScene2:
+				(_buildingScene1.gridData.getNode(nodeX,nodeZ).walkable?_buildingScene1:null) );
+			return buildingScene;
 		}
 		
 		/**
