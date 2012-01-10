@@ -196,9 +196,6 @@ package map
 				onClick(e);
 			}
 			_isMove = false ;
-			if(GameData.mouseBuilding) {
-				GameData.mouseBuilding.selectedStatus(false);
-			}
 		}
 		
 		/** 鼠标点击 */
