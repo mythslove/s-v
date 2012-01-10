@@ -26,12 +26,16 @@ package map.cell
 			this.nodeZ = nodeZ ;
 		}
 		
+		/**
+		 * 单独的检测是否可以放 ，主要是检测 AStarRoadGridModel.instance.roadGrid网格数据。
+		 * 即检测buildingScene层的对象，不检测groundScene对象
+		 * @param parentNodeX
+		 * @param parentNodeZ
+		 */		
 		public function update(parentNodeX:int , parentNodeZ:int):void
 		{
 			var curNodeX:int = parentNodeX + nodeX ;
 			var curNodeZ :int = parentNodeZ + nodeZ;
-			
-			
 			
 			var astarModel:AStarRoadGridModel = AStarRoadGridModel.instance ;
 			if(astarModel.roadGrid.checkInGrid(curNodeX,curNodeZ) && 

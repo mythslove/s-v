@@ -1,7 +1,6 @@
 package map.cell
 {
 	import bing.iso.IsoUtils;
-	import bing.iso.path.Grid;
 	import bing.utils.ContainerUtil;
 	
 	import comm.GameSetting;
@@ -18,12 +17,19 @@ package map.cell
 	public class BuildingGridLayer extends Sprite
 	{
 		private var _build:BuildingBase ;
+		/**
+		 * 建筑网格的构造函数 
+		 * @param building 哪个建筑的网格
+		 */		
 		public function BuildingGridLayer( building:BuildingBase )
 		{
 			super();
 			_build = building ;
 		}
 		
+		/**
+		 * 画网格 
+		 */		
 		public function drawGrid():void
 		{
 			ContainerUtil.removeChildren(this);
@@ -41,6 +47,12 @@ package map.cell
 			}
 		}
 		
+		/**
+		 * 更新所有的子格子颜色，会一个一个检查 
+		 * @param nodeX
+		 * @param nodeZ
+		 * 
+		 */		
 		public function update(nodeX:int,nodeZ:int):void
 		{
 			const LEN:int = this.numChildren ;
@@ -50,6 +62,10 @@ package map.cell
 			}
 		}
 		
+		/**
+		 * 设置此网格所有的子格子颜色，直接全部设置，不单独检测
+		 * @param value
+		 */		
 		public function setWalkabled( value:Boolean ):void
 		{
 			const LEN:int = this.numChildren ;
