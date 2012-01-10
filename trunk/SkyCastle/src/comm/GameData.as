@@ -5,6 +5,7 @@ package comm
 	import flash.display.Bitmap;
 	import flash.geom.Point;
 	
+	import map.GameWorld;
 	import map.elements.BuildingBase;
 	
 	import utils.MouseManager;
@@ -29,6 +30,7 @@ package comm
 				case BuildingCurrentOperation.ADD:
 				case BuildingCurrentOperation.NONE:
 					MouseManager.instance.removeMouseIcon();
+					GameWorld.instance.clearMouse();
 					break ;
 				case BuildingCurrentOperation.MOVE:
 					MouseManager.instance.addMouseIcon( new Bitmap( new MoveIconBitmapData ));
