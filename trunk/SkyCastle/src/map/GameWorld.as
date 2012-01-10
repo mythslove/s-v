@@ -2,6 +2,7 @@ package map
 {
 	import bing.iso.IsoUtils;
 	import bing.utils.ContainerUtil;
+	import bing.utils.ObjectUtil;
 	
 	import comm.GameData;
 	import comm.GameSetting;
@@ -15,6 +16,7 @@ package map
 	import map.elements.BuildingBase;
 	
 	import models.ShopModel;
+	import models.vos.BuildingVO;
 
 	/**
 	 * 游戏世界  
@@ -42,7 +44,7 @@ package map
 		override protected function addedToStageHandler(e:Event):void
 		{
 			super.addedToStageHandler(e);
-			var building:BuildingBase = new BuildingBase( ShopModel.instance.houseArray[0]);
+			var building:BuildingBase = new BuildingBase( ShopModel.instance.roadArray[0]);
 			building.drawGrid();
 			building.gridLayer.visible=true;
 			this.addBuilidngOnMouse( building );
@@ -55,7 +57,9 @@ package map
 				var xx:int = (e.stageX-this.x)/scaleX - this.sceneLayerOffsetX ;
 				var yy:int = (e.stageY -this.y)/scaleX - this.sceneLayerOffsetY;
 				var p:Point = IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE,xx,yy);
-				addBuilding( p.x , p.y );
+				
+				var vo:BuildingVO = ObjectUtil.copyObj( (_mouseContainer.getChildAt(0) as BuildingBase).buildingVO ) as BuildingVO;
+				addBuilding( p.x , p.y ,vo );
 			}
 		}
 		
