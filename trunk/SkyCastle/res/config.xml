@@ -8,8 +8,10 @@
 	</buildings>
 	<shop>
 		<house>
-			<BuildingVO baseId="1" price="1"/>
 			<BuildingVO baseId="2" price="1"/>
 		</house>
+		<road>
+			<BuildingVO baseId="1" price="1"/>
+		</road>
 	</shop>
 </config>
