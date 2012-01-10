@@ -208,19 +208,20 @@ package map
 		 * 根据node位置，添加建筑 
 		 * @param nodeX
 		 * @param nodeZ
+		 * @reutrn 是否添加成功
 		 */		
-		protected function addBuilding( nodeX:int , nodeZ:int ):void
+		protected function addBuilding( nodeX:int , nodeZ:int ):Boolean
 		{
 			var dx:int = nodeX*GameSetting.GRID_SIZE ;
 			var dz:int = nodeZ*GameSetting.GRID_SIZE ;
 			
+			var result:Boolean = false ;
 			var vo:BuildingVO ;
 			if(GameData.buildingCurrOperation==BuildingCurrentOperation.ADD)
 			{
-				if(nodeX<0 || nodeZ<0 || nodeX>=GameSetting.GRID_X || nodeZ>=GameSetting.GRID_Z) return  ;
+				if(nodeX<0 || nodeZ<0 || nodeX>=GameSetting.GRID_X || nodeZ>=GameSetting.GRID_Z) return result ;
 				
 				vo = ObjectUtil.copyObj( ShopModel.instance.houseArray[0] ) as BuildingVO;
-				var result:Boolean = false ;
 				if(vo.baseVO.type==BuildingType.ROAD)
 				{
 					var groundScene:GroundScene = getMouseGroundScene (nodeX,nodeZ);
@@ -236,6 +237,7 @@ package map
 					}
 				}
 			}
+			return result;
 		}
 		
 		/**
