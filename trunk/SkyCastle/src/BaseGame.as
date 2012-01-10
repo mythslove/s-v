@@ -1,11 +1,9 @@
 package
 {
-	import bing.components.tooltip.ToolTipStage;
 	import bing.res.ResLoadedEvent;
 	import bing.res.ResProgressEvent;
 	import bing.res.ResVO;
 	
-	import comm.Assets;
 	import comm.GameSetting;
 	import comm.GlobalDispatcher;
 	import comm.GlobalEvent;
@@ -36,7 +34,7 @@ package
 			super();
 			stage.align="TL";
 			stage.scaleMode = "noScale";
-//			stage.quality = StageQuality.MEDIUM;
+			stage.quality = StageQuality.MEDIUM;
 			stage.showDefaultContextMenu = false ;
 			
 			init();
