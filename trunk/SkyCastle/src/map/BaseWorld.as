@@ -1,5 +1,6 @@
 package map
 {
+	import bing.iso.IsoGrid;
 	import bing.iso.IsoObject;
 	import bing.iso.IsoScene;
 	import bing.iso.IsoUtils;
@@ -17,7 +18,6 @@ package map
 	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
-	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
@@ -65,11 +65,8 @@ package map
 		public function get isMove():Boolean{
 			return _isMove ;
 		}
-		
+		//跟随鼠标移动的建筑
 		protected var _mouseContainer:IsoObject;
-		public function get mouseContainer():IsoObject{
-			return _mouseContainer ;
-		}
 		
 		/**
 		 * 游戏世界基类
@@ -102,10 +99,10 @@ package map
 		{
 			super.addedToStageHandler(e);
 			//显示地图网格
-//			_gridScene = new IsoScene(GameSetting.GRID_SIZE);
-//			(_gridScene.addChild( new IsoGrid(GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE)) as IsoGrid).render() ;
-//			_gridScene.cacheAsBitmap=true;
-//			this.addScene(_gridScene);
+			_gridScene = new IsoScene(GameSetting.GRID_SIZE);
+			(_gridScene.addChild( new IsoGrid(GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE)) as IsoGrid).render() ;
+			_gridScene.cacheAsBitmap=true;
+			this.addScene(_gridScene);
 			
 			var gridResVO:ResVO = ResourceUtil.instance.getResVOByName("mapdata");
 			//地图区域1
@@ -131,8 +128,9 @@ package map
 			addScene(_buildingScene3);
 			//删除地图数据
 			ResourceUtil.instance.deleteRes("mapdata"); 
+			//跟随鼠标移动的建筑
 			_mouseContainer = new IsoObject(GameSetting.GRID_SIZE,GameSetting.GRID_X , GameSetting.GRID_Z);
-			
+			_buildingScene3.addIsoObject( _mouseContainer , false );
 			//配置侦听
 			configListeners();
 		}
