@@ -14,6 +14,7 @@ package views
 		public function BottomBar()
 		{
 			super();
+			mouseEnabled=false;
 		}
 	}
 }
