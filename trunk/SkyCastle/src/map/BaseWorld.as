@@ -264,29 +264,7 @@ package map
 			else if(_mouseContainer.numChildren>0 && stage )
 			{
 				_mouseContainer.visible = true ;
-				var xx:int = (stage.mouseX-this.x)/scaleX -sceneLayerOffsetX ;
-				var yy:int = (stage.mouseY -this.y)/scaleX-sceneLayerOffsetY;
-				var p:Point = IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE,xx,yy);
-				if(_mouseContainer.nodeX!=p.x || _mouseContainer.nodeZ!=p.y)
-				{
-					_mouseContainer.nodeX = p.x ;
-					_mouseContainer.nodeZ = p.y ;
-					var build:BuildingBase = _mouseContainer.getChildAt(0) as BuildingBase;
-					if( build.buildingVO.baseVO.type==BuildingType.ROAD)
-					{
-						var scene:GroundScene = this.getMouseGroundScene(p.x,p.y);
-						if(scene && scene.gridData.getNode(p.x,p.y).walkable){
-							build.gridLayer.setWalkabled(true);
-						}else{
-							build.gridLayer.setWalkabled(false);
-						}
-					}
-					else
-					{
-						p = IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE,xx,yy);
-						build.gridLayer.update( p.x,p.y);
-					}
-				}
+				updateMouseBuildingGrid();
 				return ;
 			}
 			else if(_mouseContainer.visible )
@@ -295,6 +273,36 @@ package map
 			}
 			if(GameData.mouseBuilding){
 				GameData.mouseBuilding.selectedStatus(true);	
+			}
+		}
+		
+		/**
+		 *更新鼠标上面的建筑占用的网格的颜色
+		 */		
+		protected function updateMouseBuildingGrid():void
+		{
+			var xx:int = (stage.mouseX-this.x)/scaleX -sceneLayerOffsetX ;
+			var yy:int = (stage.mouseY -this.y)/scaleX-sceneLayerOffsetY;
+			var p:Point = IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE,xx,yy);
+			if(_mouseContainer.nodeX!=p.x || _mouseContainer.nodeZ!=p.y)
+			{
+				_mouseContainer.nodeX = p.x ;
+				_mouseContainer.nodeZ = p.y ;
+				var build:BuildingBase = _mouseContainer.getChildAt(0) as BuildingBase;
+				if( build.buildingVO.baseVO.type==BuildingType.ROAD)
+				{
+					var scene:GroundScene = this.getMouseGroundScene(p.x,p.y);
+					if(scene && scene.gridData.getNode(p.x,p.y).walkable){
+						build.gridLayer.setWalkabled(true);
+					}else{
+						build.gridLayer.setWalkabled(false);
+					}
+				}
+				else
+				{
+					p = IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE,xx,yy);
+					build.gridLayer.update( p.x,p.y);
+				}
 			}
 		}
 		
