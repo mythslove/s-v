@@ -1,5 +1,6 @@
 package map
 {
+	import bing.iso.IsoGrid;
 	import bing.iso.IsoObject;
 	import bing.iso.IsoScene;
 	import bing.iso.IsoUtils;
@@ -12,7 +13,6 @@ package map
 	import comm.GlobalDispatcher;
 	import comm.GlobalEvent;
 	
-	import enums.BuildingCurrentOperation;
 	import enums.BuildingType;
 	
 	import flash.display.Bitmap;
@@ -100,10 +100,10 @@ package map
 		{
 			super.addedToStageHandler(e);
 			//显示地图网格
-//			_gridScene = new IsoScene(GameSetting.GRID_SIZE);
-//			(_gridScene.addChild( new IsoGrid(GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE)) as IsoGrid).render() ;
-//			_gridScene.cacheAsBitmap=true;
-//			this.addScene(_gridScene);
+			_gridScene = new IsoScene(GameSetting.GRID_SIZE);
+			(_gridScene.addChild( new IsoGrid(GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE)) as IsoGrid).render() ;
+			_gridScene.cacheAsBitmap=true;
+			this.addScene(_gridScene);
 			
 			var gridResVO:ResVO = ResourceUtil.instance.getResVOByName("mapdata");
 			//地图区域1
@@ -208,16 +208,14 @@ package map
 		 * @param nodeZ
 		 * @reutrn 添加成功建筑
 		 */		
-		protected function addBuilding( nodeX:int , nodeZ:int ):BuildingBase
+		protected function addBuilding( nodeX:int , nodeZ:int , vo:BuildingVO ):BuildingBase
 		{
 			var dx:int = nodeX*GameSetting.GRID_SIZE ;
 			var dz:int = nodeZ*GameSetting.GRID_SIZE ;
 			
 			var result:BuildingBase  ;
-			var vo:BuildingVO ;
 			if(nodeX<0 || nodeZ<0 || nodeX>=GameSetting.GRID_X || nodeZ>=GameSetting.GRID_Z) return result ;
 			
-			vo = ObjectUtil.copyObj( ShopModel.instance.houseArray[0] ) as BuildingVO;
 			if(vo.baseVO.type==BuildingType.ROAD)
 			{
 				var groundScene:GroundScene = getMouseGroundScene (nodeX,nodeZ);
