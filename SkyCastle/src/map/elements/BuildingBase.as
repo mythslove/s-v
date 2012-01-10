@@ -1,6 +1,8 @@
 package map.elements
 {
 	import bing.iso.IsoObject;
+	import bing.iso.IsoUtils;
+	import bing.iso.Rhombus;
 	import bing.res.ResVO;
 	import bing.utils.ContainerUtil;
 	
@@ -16,6 +18,7 @@ package map.elements
 	import flash.geom.Matrix;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
+	import flash.geom.Vector3D;
 	import flash.utils.getTimer;
 	
 	import map.GameWorld;
@@ -69,19 +72,19 @@ package map.elements
 		
 		public function drawGrid():void
 		{
-//			ContainerUtil.removeChildren(_gridLayer);
-//			var points:Vector.<Vector3D> = this.spanPosition ;
-//			for each( var point:Vector3D in points)
-//			{
-//				var rhomebus:Rhombus = new Rhombus( this.size );
-//				var p:Vector3D = point.clone();
-//				p.x -=this.x;
-//				p.z -=this.z ;
-//				var screenPos:Point = IsoUtils.isoToScreen(p);
-//				rhomebus.x = screenPos.x ;
-//				rhomebus.y = screenPos.y ;
-//				_gridLayer.addChild( rhomebus );
-//			}
+			ContainerUtil.removeChildren(_gridLayer);
+			var points:Vector.<Vector3D> = this.spanPosition ;
+			for each( var point:Vector3D in points)
+			{
+				var rhomebus:Rhombus = new Rhombus( this.size );
+				var p:Vector3D = point.clone();
+				p.x -=this.x;
+				p.z -=this.z ;
+				var screenPos:Point = IsoUtils.isoToScreen(p);
+				rhomebus.x = screenPos.x ;
+				rhomebus.y = screenPos.y ;
+				_gridLayer.addChild( rhomebus );
+			}
 		}
 		
 		protected function resLoadedHandler( e:Event):void

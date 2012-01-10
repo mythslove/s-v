@@ -1,9 +1,17 @@
 package map
 {
+	import bing.iso.IsoUtils;
+	import bing.utils.ContainerUtil;
+	
 	import comm.GameData;
 	import comm.GameSetting;
 	
 	import flash.events.Event;
+	import flash.geom.Point;
+	
+	import map.elements.BuildingBase;
+	
+	import models.ShopModel;
 
 	/**
 	 * 游戏世界  
@@ -26,6 +34,13 @@ package map
 			super();
 			if(_instance) throw new Error("只能实例化一个GameWorld");
 			else _instance = this ;
+		}
+
+		override protected function addedToStageHandler(e:Event):void
+		{
+			super.addedToStageHandler(e);
+			var building:BuildingBase = new BuildingBase( ShopModel.instance.houseArray[1]);
+			this.addBuilidngOnMouse( building );
 		}
 		
 		/**
@@ -50,6 +65,19 @@ package map
 		protected function onEnterFrameHandler(e:Event):void
 		{
 			GameData.mouseBuilding = null ;
+			if(_mouseContainer.numChildren>0 && stage )
+			{
+				_mouseContainer.visible = true ;
+				var xx:int = (stage.mouseX-this.x)/scaleX - this.sceneLayerOffsetX ;
+				var yy:int = (stage.mouseY -this.y)/scaleX - this.sceneLayerOffsetY;
+				var p:Point = IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE,xx,yy);
+				_mouseContainer.nodeX = p.x ;
+				_mouseContainer.nodeZ = p.y ;
+			}
+			else if(_mouseContainer.visible )
+			{
+				_mouseContainer.visible = false ;
+			}
 			update() ;
 		}
 		
@@ -68,5 +96,24 @@ package map
 			modifyMapPosition();
 		}
 		
+		/**
+		 * 添加建筑到鼠标上面跟随 
+		 * @param buildingBase
+		 */		
+		public function addBuilidngOnMouse( buildingBase:BuildingBase):void
+		{
+			_mouseContainer.parent.setChildIndex( _mouseContainer ,_mouseContainer.parent.numChildren-1 );
+			ContainerUtil.removeChildren( _mouseContainer );
+			buildingBase.setScreenPosition(0,0);
+			_mouseContainer.addChild( buildingBase );
+		}
+		
+		/**
+		 *  清除鼠标上面的建筑跟随
+		 */		
+		public function clearMouse():void
+		{
+			ContainerUtil.removeChildren( _mouseContainer );
+		}
 	}
 }
