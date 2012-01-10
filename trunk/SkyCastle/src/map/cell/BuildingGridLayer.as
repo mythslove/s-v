@@ -11,7 +11,10 @@ package map.cell
 	import flash.geom.Vector3D;
 	
 	import map.elements.BuildingBase;
-	
+	/**
+	 * 建筑拥有的格子组
+	 * @author zhouzhanglin
+	 */	
 	public class BuildingGridLayer extends Sprite
 	{
 		private var _build:BuildingBase ;
