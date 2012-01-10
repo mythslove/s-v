@@ -70,7 +70,7 @@ package map
 		 * 旋转建筑 
 		 * @param buildingBase
 		 */		
-		public function roateBuilding( buildingBase:BuildingBase ):void
+		public function rotateBuilding( buildingBase:BuildingBase ):void
 		{
 			if(buildingBase.getRotatable(gridData))
 			{
@@ -78,6 +78,7 @@ package map
 				buildingBase.scaleX = ~buildingBase.scaleX+1;
 				buildingBase.drawGrid();
 				buildingBase.setWalkable(false,gridData);
+				buildingBase.sort();
 			}
 		}
 		

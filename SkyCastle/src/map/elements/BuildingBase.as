@@ -101,7 +101,7 @@ package map.elements
 		
 		override public function update():void
 		{
-			if(stage && _skin && GameWorld.instance.mouseContainer.numChildren==0)
+			if(stage && _skin && GameWorld.instance.mouseIsMove && GameWorld.instance.mouseContainer.numChildren==0)
 			{
 				if(!GameWorld.instance.isMove &&(GameData.mouseBuilding==null || 
 					GameData.mouseBuilding.parent is GroundScene ||
