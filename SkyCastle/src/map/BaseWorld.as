@@ -1,5 +1,6 @@
 package map
 {
+	import bing.iso.IsoObject;
 	import bing.iso.IsoScene;
 	import bing.iso.IsoUtils;
 	import bing.iso.IsoWorld;
@@ -16,6 +17,7 @@ package map
 	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
+	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
@@ -62,6 +64,11 @@ package map
 		protected var _isMove:Boolean=false;
 		public function get isMove():Boolean{
 			return _isMove ;
+		}
+		
+		protected var _mouseContainer:IsoObject;
+		public function get mouseContainer():IsoObject{
+			return _mouseContainer ;
 		}
 		
 		/**
@@ -124,6 +131,8 @@ package map
 			addScene(_buildingScene3);
 			//删除地图数据
 			ResourceUtil.instance.deleteRes("mapdata"); 
+			_mouseContainer = new IsoObject(GameSetting.GRID_SIZE,GameSetting.GRID_X , GameSetting.GRID_Z);
+			
 			//配置侦听
 			configListeners();
 		}
