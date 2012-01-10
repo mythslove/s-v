@@ -91,6 +91,7 @@ package map
 			_mouseContainer.parent.setChildIndex( _mouseContainer ,_mouseContainer.parent.numChildren-1 );
 			ContainerUtil.removeChildren( _mouseContainer );
 			buildingBase.setScreenPosition(0,0);
+			buildingBase.itemLayer.alpha=0.6;
 			_mouseContainer.addChild( buildingBase );
 		}
 		

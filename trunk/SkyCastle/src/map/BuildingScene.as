@@ -6,6 +6,7 @@ package map
 	
 	import map.elements.BuildingBase;
 	
+	import models.AStarRoadGridModel;
 	import models.vos.BuildingVO;
 	
 	public class BuildingScene extends IsoScene
@@ -32,6 +33,7 @@ package map
 			{
 				this.addIsoObject( obj );
 				obj.setWalkable( false , this.gridData );
+				obj.setWalkable(false, AStarRoadGridModel.instance.roadGrid );
 				obj.drawGrid(); //显示占了的网格
 				return true;
 			}

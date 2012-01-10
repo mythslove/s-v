@@ -5,6 +5,10 @@ package map.cell
 	
 	import comm.GameSetting;
 	
+	import map.GameWorld;
+	
+	import models.AStarRoadGridModel;
+	
 	public class BuildingGridRhombus extends Rhombus
 	{
 		public var currColor:uint = 0x00ff00 ;
@@ -14,15 +18,18 @@ package map.cell
 		public function BuildingGridRhombus( nodeX:int , nodeZ:int )
 		{
 			super(GameSetting.GRID_SIZE , currColor );
-			nodeX = nodeX;
-			nodeZ = nodeZ ;
+			this.nodeX = nodeX;
+			this.nodeZ = nodeZ ;
 		}
 		
-		public function update(parentNodeX:int , parentNodeZ:int , grid:Grid ):void
+		public function update(parentNodeX:int , parentNodeZ:int):void
 		{
 			var curNodeX:int = parentNodeX + nodeX ;
 			var curNodeZ :int = parentNodeZ + nodeZ;
-			if(grid.getNode(curNodeX,curNodeZ).walkable)
+			var astarModel:AStarRoadGridModel = AStarRoadGridModel.instance ;
+			if(astarModel.roadGrid.checkInGrid(curNodeX,curNodeZ) && 
+				astarModel.roadGrid.getNode(curNodeX,curNodeZ).walkable &&
+				!astarModel.extraHash[curNodeX+"-"+curNodeZ])
 			{
 				if(this.currColor!=0x00ff00){
 					this.currColor = 0x00ff00 ;

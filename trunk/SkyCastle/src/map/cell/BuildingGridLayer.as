@@ -38,12 +38,12 @@ package map.cell
 			}
 		}
 		
-		public function update(nodeX:int,nodeZ:int,grid:Grid):void
+		public function update(nodeX:int,nodeZ:int):void
 		{
 			const LEN:int = this.numChildren ;
 			for( var i:int =0  ; i<LEN ; ++i  )
 			{
-				(this.getChildAt(i) as BuildingGridRhombus ).update(nodeX,nodeZ,grid);	
+				(this.getChildAt(i) as BuildingGridRhombus ).update(nodeX,nodeZ);
 			}
 		}
 		

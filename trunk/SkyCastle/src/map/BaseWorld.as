@@ -1,6 +1,5 @@
 package map
 {
-	import bing.iso.IsoGrid;
 	import bing.iso.IsoObject;
 	import bing.iso.IsoScene;
 	import bing.iso.IsoUtils;
@@ -22,7 +21,6 @@ package map
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
-	import flash.utils.Dictionary;
 	
 	import map.elements.BuildingBase;
 	
@@ -70,11 +68,6 @@ package map
 		}
 		//跟随鼠标移动的建筑
 		protected var _mouseContainer:IsoObject;
-		//额外的地图数据
-		protected var _extraHash:Dictionary ;
-		public function get extraHash():Dictionary{
-			return _extraHash ;
-		}
 		
 		/**
 		 * 游戏世界基类
@@ -107,10 +100,10 @@ package map
 		{
 			super.addedToStageHandler(e);
 			//显示地图网格
-			_gridScene = new IsoScene(GameSetting.GRID_SIZE);
-			(_gridScene.addChild( new IsoGrid(GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE)) as IsoGrid).render() ;
-			_gridScene.cacheAsBitmap=true;
-			this.addScene(_gridScene);
+//			_gridScene = new IsoScene(GameSetting.GRID_SIZE);
+//			(_gridScene.addChild( new IsoGrid(GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE)) as IsoGrid).render() ;
+//			_gridScene.cacheAsBitmap=true;
+//			this.addScene(_gridScene);
 			
 			var gridResVO:ResVO = ResourceUtil.instance.getResVOByName("mapdata");
 			//地图区域1
@@ -134,13 +127,11 @@ package map
 			_buildingScene3 = new BuildingScene();
 			_buildingScene3.gridData = gridResVO.resObject.buildingGrid3 ;
 			addScene(_buildingScene3);
-			//额外的地图数据
-			_extraHash = gridResVO.resObject.extra ;
 			//删除地图数据
 			ResourceUtil.instance.deleteRes("mapdata"); 
 			//跟随鼠标移动的建筑
 			_mouseContainer = new IsoObject(GameSetting.GRID_SIZE,GameSetting.GRID_X , GameSetting.GRID_Z);
-			_buildingScene3.addIsoObject( _mouseContainer , false );
+			this.addChild( _mouseContainer );
 			//配置侦听
 			configListeners();
 		}
@@ -226,6 +217,8 @@ package map
 			var vo:BuildingVO ;
 			if(GameData.buildingCurrOperation==BuildingCurrentOperation.ADD)
 			{
+				if(nodeX<0 || nodeZ<0 || nodeX>=GameSetting.GRID_X || nodeZ>=GameSetting.GRID_Z) return  ;
+				
 				vo = ObjectUtil.copyObj( ShopModel.instance.houseArray[0] ) as BuildingVO;
 				var result:Boolean = false ;
 				if(vo.baseVO.type==BuildingType.ROAD)
@@ -286,27 +279,16 @@ package map
 			else if(_mouseContainer.numChildren>0 && stage )
 			{
 				_mouseContainer.visible = true ;
-				var xx:int = (stage.mouseX-this.x)/scaleX - this.sceneLayerOffsetX ;
-				var yy:int = (stage.mouseY -this.y)/scaleX - this.sceneLayerOffsetY;
+				var xx:int = (stage.mouseX-this.x)/scaleX  ;
+				var yy:int = (stage.mouseY -this.y)/scaleX ;
 				var p:Point = IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE,xx,yy);
 				if(_mouseContainer.nodeX!=p.x || _mouseContainer.nodeZ!=p.y)
 				{
 					_mouseContainer.nodeX = p.x ;
 					_mouseContainer.nodeZ = p.y ;
-					
 					var build:BuildingBase = _mouseContainer.getChildAt(0) as BuildingBase;
-					var scene:IsoScene ;
-					if(build.buildingVO.baseVO.type==BuildingType.ROAD)
-					{
-						scene = getMouseGroundScene(p.x,p.y);
-						if(!scene) scene = _groundScene1;
-					}
-					else
-					{
-						scene = getMouseBuildingScene(p.x,p.y);
-						if(!scene) scene = _buildingScene1;
-					}
-					build.gridLayer.update( p.x,p.y,scene.gridData);
+					p = IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE,xx-sceneLayerOffsetX,yy-sceneLayerOffsetY)
+					build.gridLayer.update( p.x,p.y);
 				}
 				return ;
 			}
