@@ -28,8 +28,8 @@ package comm
 		
 		
 		public static const Map1Color:uint = 0xff0000;
-		public static const Map2Color:uint = 0xff2d2d;
-		public static const Map3Color:uint = 0xff5b5b ;
+		public static const Map2Color:uint = 0xff5b5b;
+		public static const Map3Color:uint = 0xffc4c4 ;
 		public static const RoadColor:uint = 0xffcc00 ;
 	}
 }
