@@ -45,6 +45,9 @@ package map
 			return _groundScene3 ;
 		}
 		//**********************************************************/
+		protected var _prevMouseX:int ;
+		protected var _prevMouseZ:int ;
+		
 		protected var _gridScene:IsoScene ;
 		public function get gridScene():IsoScene{
 			return _gridScene;
@@ -262,21 +265,17 @@ package map
 		 */		
 		protected function onMouseMoveHandler(e:MouseEvent):void
 		{
-			_mouseIsMove = true ;
 			if(e.buttonDown)
 			{
 				_isMove = true ;
 			}
-			else if(_mouseContainer.numChildren>0 && stage )
+			else if(_mouseContainer.numChildren>0) 
 			{
-				_mouseContainer.visible = true ;
 				updateMouseBuildingGrid();
+				_mouseIsMove = false ;
 				return ;
 			}
-			else if(_mouseContainer.visible )
-			{
-				_mouseContainer.visible = false ;
-			}
+			_mouseIsMove = true ;
 			if(GameData.mouseBuilding){
 				GameData.mouseBuilding.selectedStatus(true);	
 			}
