@@ -1,10 +1,11 @@
 package
 {
+	import bing.components.tooltip.ToolTipStage;
 	import bing.res.ResLoadedEvent;
 	import bing.res.ResProgressEvent;
-	import bing.res.ResType;
 	import bing.res.ResVO;
 	
+	import comm.Assets;
 	import comm.GameSetting;
 	import comm.GlobalDispatcher;
 	import comm.GlobalEvent;
@@ -48,7 +49,7 @@ package
 		 */		
 		protected function init():void
 		{
-			
+			ToolTipStage.getInstance().fontName = Assets.font_ki.fontName ;
 		}
 		
 		/**

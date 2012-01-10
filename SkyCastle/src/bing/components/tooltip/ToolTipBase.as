@@ -8,6 +8,7 @@ package  bing.components.tooltip
 	import flash.events.MouseEvent;
 	import flash.filters.DropShadowFilter;
 	import flash.geom.Point;
+	import flash.text.AntiAliasType;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
@@ -286,9 +287,9 @@ package  bing.components.tooltip
 			var w:Number=15 + label.width;
 			var h:Number=8 + label.height;
 			toolTipBg.graphics.clear();
-			toolTipBg.graphics.lineStyle(2,0x322640);
+			toolTipBg.graphics.lineStyle(1,0x322640);
 			toolTipBg.graphics.beginFill(bgColor);
-			toolTipBg.graphics.drawRoundRect(0, 0, w, h, 10, 10);
+			toolTipBg.graphics.drawRoundRect(0, 0, w, h, 15, 15);
 			toolTipBg.graphics.endFill();
 		}
 
