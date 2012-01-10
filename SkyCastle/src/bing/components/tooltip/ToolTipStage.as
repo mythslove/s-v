@@ -16,7 +16,7 @@ package bing.components.tooltip
 		public function ToolTipStage()
 		{
 			super();
-			this.bgColor = 0x666666;
+			this.bgColor = 0xF6F3FB;
 		}
 		
 		/**
@@ -37,19 +37,19 @@ package bing.components.tooltip
 		override protected function drawBg():void
 		{
 			super.drawBg();
-			toolTipBg.alpha = 0.5;
+//			toolTipBg.alpha = 0.5;
 		}
 		
 		override protected function drawArrow():void
 		{
-			super.drawArrow();
-			toolTipArrow.alpha = 0.5;
+//			super.drawArrow();
+//			toolTipArrow.alpha = 0.5;
 		}
 		
 		override protected function initLable():void
 		{
 			//
-			var format:TextFormat = new TextFormat("Verdana",12,0xffffff);
+			var format:TextFormat = new TextFormat(fontName,13,0x2E1C0A);
 			textFormat = format;
 			//
 			label=new TextField();
