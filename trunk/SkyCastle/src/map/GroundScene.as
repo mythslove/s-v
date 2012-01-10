@@ -56,7 +56,7 @@ package map
 		 * @param updateDirection 是否更新周围的方向
 		 * @return 添加成功添加的建筑
 		 */		
-		public function addBuilding( dx:Number , dz:Number , buildingVO:BuildingVO , updateDirection:Boolean=true ):BuildingBase
+		public function addBuildingByVO( dx:Number , dz:Number , buildingVO:BuildingVO , updateDirection:Boolean=true ):BuildingBase
 		{
 			var obj:BuildingBase ;
 			if( buildingVO.baseVO.type==BuildingType.ROAD){
@@ -74,6 +74,20 @@ package map
 				return obj;
 			}
 			return null ;
+		}
+		
+		/**
+		 * 添加建筑 
+		 * @param buildingBase
+		 */		
+		public function addBuilding( buildingBase:BuildingBase , updateDirection:Boolean=true):BuildingBase
+		{
+			this.addIsoObject( buildingBase );
+			buildingBase.setWalkable( false , this.gridData );
+			buildingBase.drawGrid(); //显示占了的网格
+			_groundNodeHash[buildingBase.nodeX+"-"+buildingBase.nodeZ]=buildingBase;
+			if(updateDirection)updateUI(buildingBase);
+			return buildingBase;
 		}
 		
 		/**

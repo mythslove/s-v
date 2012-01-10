@@ -50,6 +50,15 @@ package map.cell
 			}
 		}
 		
+		public function setWalkabled( value:Boolean ):void
+		{
+			const LEN:int = this.numChildren ;
+			for( var i:int =0  ; i<LEN ; ++i  )
+			{
+				(this.getChildAt(i) as BuildingGridRhombus ).setWalkabled(value);
+			}
+		}
+		
 		public function dispose():void
 		{
 			_build = null ;

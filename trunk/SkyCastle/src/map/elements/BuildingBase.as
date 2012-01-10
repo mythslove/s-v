@@ -1,6 +1,7 @@
 package map.elements
 {
 	import bing.iso.IsoObject;
+	import bing.iso.IsoScene;
 	import bing.res.ResVO;
 	import bing.utils.ContainerUtil;
 	
@@ -18,13 +19,16 @@ package map.elements
 	import flash.geom.Rectangle;
 	import flash.utils.getTimer;
 	
+	import map.BuildingScene;
 	import map.GameWorld;
 	import map.GroundScene;
 	import map.cell.BuildingGridLayer;
 	
+	import models.AStarRoadGridModel;
 	import models.vos.BuildingVO;
 	
 	import utils.ResourceUtil;
+
 	/**
 	 * 建筑基类 
 	 * @author zhouzhanglin
@@ -101,10 +105,8 @@ package map.elements
 		override public function update():void
 		{
 			super.update() ;
-			if(stage && _skin &&  getTimer()-_hitTestTime>100 )
+			if(stage && _skin && GameWorld.instance.mouseContainer.numChildren==0)
 			{
-				_hitTestTime = getTimer();
-				
 				if(!GameWorld.instance.isMove &&(GameData.mouseBuilding==null || 
 					GameData.mouseBuilding.parent is GroundScene ||
 					(GameData.mouseBuilding.parent==this.parent&&
@@ -140,6 +142,34 @@ package map.elements
 				TweenMax.to(_itemLayer, 0, {dropShadowFilter:{color:0xffff00, alpha:1, blurX:2, blurY:2, strength:5}});
 			}else{
 				_itemLayer.filters=null ;
+			}
+		}
+		
+		/** 发送添加到地图上的信息到服务器 */
+		public function addedToMap():void
+		{
+			
+		}
+		
+		/** 旋转建筑 */
+		public function rotateBuilding():void
+		{
+			if(this.getRotatable( AStarRoadGridModel.instance.roadGrid) )
+			{
+				var isoScene:IsoScene = this.parent as IsoScene ;
+				if(isoScene is BuildingScene)
+				{
+					(isoScene as BuildingScene).removeBuilding( this );
+					this.scaleX = ~this.scaleX+1 ;
+					(isoScene as BuildingScene).addBuilding( this );
+				}
+				else if(isoScene is GroundScene)
+				{
+					(isoScene as GroundScene).removeBuilding( this );
+					this.scaleX = ~this.scaleX+1 ;
+					(isoScene as GroundScene).addBuilding( this );
+				}
+				//发送旋转到服务器
 			}
 		}
 		

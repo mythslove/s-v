@@ -30,10 +30,29 @@ package map.cell
 		{
 			var curNodeX:int = parentNodeX + nodeX ;
 			var curNodeZ :int = parentNodeZ + nodeZ;
+			
+			
+			
 			var astarModel:AStarRoadGridModel = AStarRoadGridModel.instance ;
 			if(astarModel.roadGrid.checkInGrid(curNodeX,curNodeZ) && 
 				astarModel.roadGrid.getNode(curNodeX,curNodeZ).walkable &&
 				!astarModel.extraHash[curNodeX+"-"+curNodeZ])
+			{
+				setWalkabled(true);
+			}
+			else
+			{
+				setWalkabled(false);
+			}
+		}
+		
+		/**
+		 *  设置是否可行，主要改变颜色
+		 * @param value
+		 */		
+		public function setWalkabled( value:Boolean ):void
+		{
+			if( value )
 			{
 				if(this.currColor!=0x00ff00){
 					this.currColor = 0x00ff00 ;
