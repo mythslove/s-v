@@ -54,6 +54,10 @@ package map
 		public function get isMove():Boolean{
 			return _isMove ;
 		}
+		protected var _mouseIsMove:Boolean=false;
+		public function get mouseIsMove():Boolean{
+			return _mouseIsMove ;
+		}
 		//跟随鼠标移动的建筑
 		protected var _mouseContainer:IsoObject;
 		public function get mouseContainer():IsoObject{
@@ -122,6 +126,7 @@ package map
 			ResourceUtil.instance.deleteRes("mapdata"); 
 			//跟随鼠标移动的建筑
 			_mouseContainer = new IsoObject(GameSetting.GRID_SIZE,GameSetting.GRID_X , GameSetting.GRID_Z);
+			_mouseContainer.visible=false;
 			_buildingScene3.addChild( _mouseContainer );
 			//配置侦听
 			configListeners();
@@ -257,6 +262,7 @@ package map
 		 */		
 		protected function onMouseMoveHandler(e:MouseEvent):void
 		{
+			_mouseIsMove = true ;
 			if(e.buttonDown)
 			{
 				_isMove = true ;

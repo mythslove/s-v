@@ -17,7 +17,6 @@ package map.elements
 	import flash.geom.Matrix;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
-	import flash.utils.getTimer;
 	
 	import map.BuildingScene;
 	import map.GameWorld;
@@ -43,7 +42,6 @@ package map.elements
 		
 		protected var _skin:MovieClip ; //皮肤
 		protected var _itemLayerMatrix:Matrix=new Matrix(); //用于碰撞检测
-		protected var _hitTestTime:int ; //在一定的时间内才检测一次鼠标碰撞
 		/** 当前建筑的builingVO*/
 		public var buildingVO:BuildingVO ;
 		/**
@@ -57,7 +55,6 @@ package map.elements
 			
 			_gridLayer = new BuildingGridLayer(this);
 			_gridLayer.visible=false;
-			_gridLayer.cacheAsBitmap = true ;
 			addChild(_gridLayer);
 			
 			_itemLayer = new Sprite();
@@ -104,8 +101,7 @@ package map.elements
 		
 		override public function update():void
 		{
-			super.update() ;
-			if(stage && _skin && GameWorld.instance.mouseContainer.numChildren==0)
+			if(stage && _skin && GameWorld.instance.mouseIsMove && GameWorld.instance.mouseContainer.numChildren==0)
 			{
 				if(!GameWorld.instance.isMove &&(GameData.mouseBuilding==null || 
 					GameData.mouseBuilding.parent is GroundScene ||

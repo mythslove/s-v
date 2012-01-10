@@ -45,7 +45,7 @@ package map
 		override protected function addedToStageHandler(e:Event):void
 		{
 			super.addedToStageHandler(e);
-			var building:BuildingBase = new BuildingBase( ShopModel.instance.roadArray[0]);
+			var building:BuildingBase = new BuildingBase( ShopModel.instance.houseArray[0]);
 			building.drawGrid();
 			building.gridLayer.visible=true;
 			this.addBuilidngOnMouse( building );
@@ -121,6 +121,7 @@ package map
 			buildingBase.setScreenPosition(0,0);
 			buildingBase.itemLayer.alpha=0.6;
 			_mouseContainer.addChild( buildingBase );
+			_mouseContainer.visible=true;
 		}
 		
 		/**
@@ -129,6 +130,7 @@ package map
 		public function clearMouse():void
 		{
 			ContainerUtil.removeChildren( _mouseContainer );
+			_mouseContainer.visible=false;
 		}
 	}
 }
