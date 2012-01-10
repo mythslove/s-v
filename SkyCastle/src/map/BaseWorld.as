@@ -22,6 +22,9 @@ package map
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
+	import flash.utils.Dictionary;
+	
+	import map.elements.BuildingBase;
 	
 	import models.ShopModel;
 	import models.vos.BuildingVO;
@@ -67,6 +70,11 @@ package map
 		}
 		//跟随鼠标移动的建筑
 		protected var _mouseContainer:IsoObject;
+		//额外的地图数据
+		protected var _extraHash:Dictionary ;
+		public function get extraHash():Dictionary{
+			return _extraHash ;
+		}
 		
 		/**
 		 * 游戏世界基类
@@ -126,6 +134,8 @@ package map
 			_buildingScene3 = new BuildingScene();
 			_buildingScene3.gridData = gridResVO.resObject.buildingGrid3 ;
 			addScene(_buildingScene3);
+			//额外的地图数据
+			_extraHash = gridResVO.resObject.extra ;
 			//删除地图数据
 			ResourceUtil.instance.deleteRes("mapdata"); 
 			//跟随鼠标移动的建筑
@@ -269,7 +279,42 @@ package map
 		 */		
 		protected function onMouseMoveHandler(e:MouseEvent):void
 		{
-			if(e.buttonDown)_isMove = true ;
+			if(e.buttonDown)
+			{
+				_isMove = true ;
+			}
+			else if(_mouseContainer.numChildren>0 && stage )
+			{
+				_mouseContainer.visible = true ;
+				var xx:int = (stage.mouseX-this.x)/scaleX - this.sceneLayerOffsetX ;
+				var yy:int = (stage.mouseY -this.y)/scaleX - this.sceneLayerOffsetY;
+				var p:Point = IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE,xx,yy);
+				if(_mouseContainer.nodeX!=p.x || _mouseContainer.nodeZ!=p.y)
+				{
+					_mouseContainer.nodeX = p.x ;
+					_mouseContainer.nodeZ = p.y ;
+					
+					var build:BuildingBase = _mouseContainer.getChildAt(0) as BuildingBase;
+					var scene:IsoScene ;
+					if(build.buildingVO.baseVO.type==BuildingType.ROAD)
+					{
+						scene = getMouseGroundScene(p.x,p.y);
+						if(!scene) scene = _groundScene1;
+					}
+					else
+					{
+						scene = getMouseBuildingScene(p.x,p.y);
+						if(!scene) scene = _buildingScene1;
+					}
+					build.gridLayer.update( p.x,p.y,scene.gridData);
+				}
+				return ;
+			}
+			else if(_mouseContainer.visible )
+			{
+				_mouseContainer.visible = false ;
+			}
+			
 			if(GameData.mouseBuilding) {
 				GameData.mouseBuilding.selectedStatus(true);
 			}
