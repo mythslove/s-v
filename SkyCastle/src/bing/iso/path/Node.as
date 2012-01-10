@@ -20,5 +20,10 @@ package  bing.iso.path
 			this.y = y;
 		}
 		
+		public function clone():Node
+		{
+			var node:Node = new Node(x,y);
+			return node;
+		}
 	}
 }
