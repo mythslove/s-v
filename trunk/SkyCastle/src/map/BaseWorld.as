@@ -193,16 +193,17 @@ package map
 			this.stopDrag();
 			if(!_isMove) 
 			{
-				var xx:int = (e.stageX-this.x)/scaleX - this.sceneLayerOffsetX ;
-				var yy:int = (e.stageY -this.y)/scaleX - this.sceneLayerOffsetY;
-				var p:Point = IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE,xx,yy);
-				addBuilding( p.x , p.y );
+				onClick(e);
 			}
 			_isMove = false ;
 			if(GameData.mouseBuilding) {
 				GameData.mouseBuilding.selectedStatus(false);
 			}
 		}
+		
+		/** 鼠标点击 */
+		protected function onClick(e:MouseEvent):void
+		{ }
 		
 		/**
 		 * 根据node位置，添加建筑 
@@ -217,24 +218,21 @@ package map
 			
 			var result:BuildingBase  ;
 			var vo:BuildingVO ;
-			if(GameData.buildingCurrOperation==BuildingCurrentOperation.ADD)
+			if(nodeX<0 || nodeZ<0 || nodeX>=GameSetting.GRID_X || nodeZ>=GameSetting.GRID_Z) return result ;
+			
+			vo = ObjectUtil.copyObj( ShopModel.instance.houseArray[0] ) as BuildingVO;
+			if(vo.baseVO.type==BuildingType.ROAD)
 			{
-				if(nodeX<0 || nodeZ<0 || nodeX>=GameSetting.GRID_X || nodeZ>=GameSetting.GRID_Z) return result ;
-				
-				vo = ObjectUtil.copyObj( ShopModel.instance.houseArray[0] ) as BuildingVO;
-				if(vo.baseVO.type==BuildingType.ROAD)
-				{
-					var groundScene:GroundScene = getMouseGroundScene (nodeX,nodeZ);
-					if(groundScene) {
-						result = groundScene.addBuilding( dx,dz,vo);
-					}
+				var groundScene:GroundScene = getMouseGroundScene (nodeX,nodeZ);
+				if(groundScene) {
+					result = groundScene.addBuilding( dx,dz,vo);
 				}
-				else
-				{
-					var buildingScene:BuildingScene = getMouseBuildingScene(nodeX,nodeZ);
-					if(buildingScene) {
-						result = buildingScene.addBuilding( dx,dz,vo);
-					}
+			}
+			else
+			{
+				var buildingScene:BuildingScene = getMouseBuildingScene(nodeX,nodeZ);
+				if(buildingScene) {
+					result = buildingScene.addBuilding( dx,dz,vo);
 				}
 			}
 			return result;
