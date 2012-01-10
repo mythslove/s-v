@@ -9,6 +9,10 @@ package map.cell
 	
 	import models.AStarRoadGridModel;
 	
+	/**
+	 *  建筑拥有的格子，单个格子 
+	 * @author zhouzhanglin
+	 */	
 	public class BuildingGridRhombus extends Rhombus
 	{
 		public var currColor:uint = 0x00ff00 ;
