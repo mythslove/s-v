@@ -37,7 +37,7 @@ package utils
 				fileStream.open( _file,FileMode.READ );
 				var bytes:ByteArray = new ByteArray();
 				fileStream.readBytes( bytes , 0 , fileStream.bytesAvailable );
-//				bytes.uncompress();
+				bytes.uncompress();
 				
 				for(var i:int = 0 ; i <GameSetting.GRID_X ; ++i)
 				{
