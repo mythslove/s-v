@@ -5,6 +5,7 @@ package bing.components.tooltip
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Stage;
 	import flash.events.MouseEvent;
+	import flash.text.AntiAliasType;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
