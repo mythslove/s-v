@@ -208,14 +208,14 @@ package map
 		 * 根据node位置，添加建筑 
 		 * @param nodeX
 		 * @param nodeZ
-		 * @reutrn 是否添加成功
+		 * @reutrn 添加成功建筑
 		 */		
-		protected function addBuilding( nodeX:int , nodeZ:int ):Boolean
+		protected function addBuilding( nodeX:int , nodeZ:int ):BuildingBase
 		{
 			var dx:int = nodeX*GameSetting.GRID_SIZE ;
 			var dz:int = nodeZ*GameSetting.GRID_SIZE ;
 			
-			var result:Boolean = false ;
+			var result:BuildingBase  ;
 			var vo:BuildingVO ;
 			if(GameData.buildingCurrOperation==BuildingCurrentOperation.ADD)
 			{
