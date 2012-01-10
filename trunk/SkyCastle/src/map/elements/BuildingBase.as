@@ -28,6 +28,7 @@ package map.elements
 	public class BuildingBase extends IsoObject
 	{
 		protected var _itemLayer:Sprite ;
+		public function get itemLayer():Sprite{ return _itemLayer; }
 		protected var _gridLayer:Sprite;
 		protected var _skin:MovieClip ;
 		protected var _itemLayerMatrix:Matrix=new Matrix();

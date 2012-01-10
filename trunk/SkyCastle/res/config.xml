@@ -3,6 +3,8 @@
 	<buildings>
 		<BuildingBaseVO baseId="1" title="MoreCity PathCobblestone" type="2" alias="MoreCity_PathCobblestone"  xSpan="1" zSpan="1"  
 		url="res/road/MoreCity_PathCobblestone.swf" thumb="res/road/MoreCity_PathCobblestoneThumb.png" />
+		<BuildingBaseVO baseId="1" title="HallOfHeroes Ruin" type="2" alias="Basic_HallOfHeroes_Ruin"  xSpan="2" zSpan="3"  
+		url="res/house/Basic_HallOfHeroes_Ruin.swf" thumb="res/house/Basic_HallOfHeroes_RuinThumb.png" />
 	</buildings>
 	<shop>
 		<house>
