@@ -24,7 +24,7 @@ package map
 		 * @param buildingVO
 		 * @return 添加成功返回true
 		 */		
-		public function addBuilding( dx:Number , dz:Number , buildingVO:BuildingVO ):Boolean
+		public function addBuilding( dx:Number , dz:Number , buildingVO:BuildingVO ):BuildingBase
 		{
 			var obj:BuildingBase = new BuildingBase(buildingVO);
 			obj.x = dx;
@@ -35,9 +35,9 @@ package map
 				obj.setWalkable( false , this.gridData );
 				obj.setWalkable(false, AStarRoadGridModel.instance.roadGrid );
 				obj.drawGrid(); //显示占了的网格
-				return true;
+				return obj;
 			}
-			return false ;
+			return null ;
 		}
 		
 		/**

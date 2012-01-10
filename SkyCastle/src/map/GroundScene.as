@@ -53,9 +53,9 @@ package map
 		 * @param dy 
 		 * @param buildingVO
 		 * @param updateDirection 是否更新周围的方向
-		 * @return 添加成功返回true
+		 * @return 添加成功添加的建筑
 		 */		
-		public function addBuilding( dx:Number , dz:Number , buildingVO:BuildingVO , updateDirection:Boolean=true ):Boolean
+		public function addBuilding( dx:Number , dz:Number , buildingVO:BuildingVO , updateDirection:Boolean=true ):BuildingBase
 		{
 			var obj:BuildingBase ;
 			if( buildingVO.baseVO.type==BuildingType.ROAD){
@@ -70,9 +70,9 @@ package map
 				obj.drawGrid(); //显示占了的网格
 				_groundNodeHash[obj.nodeX+"-"+obj.nodeZ]=obj;
 				if(updateDirection)updateUI(obj);
-				return true;
+				return obj;
 			}
-			return false ;
+			return null ;
 		}
 		
 		/**
