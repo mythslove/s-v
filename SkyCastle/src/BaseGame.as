@@ -49,7 +49,6 @@ package
 		 */		
 		protected function init():void
 		{
-			ToolTipStage.getInstance().fontName = Assets.font_ki.fontName ;
 		}
 		
 		/**
