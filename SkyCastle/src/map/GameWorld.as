@@ -39,7 +39,9 @@ package map
 		override protected function addedToStageHandler(e:Event):void
 		{
 			super.addedToStageHandler(e);
-			var building:BuildingBase = new BuildingBase( ShopModel.instance.houseArray[1]);
+			var building:BuildingBase = new BuildingBase( ShopModel.instance.houseArray[0]);
+			building.drawGrid();
+			building.gridLayer.visible=true;
 			this.addBuilidngOnMouse( building );
 		}
 		
