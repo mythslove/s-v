@@ -58,7 +58,7 @@ package utils
 					bytes.writeByte( nodex);
 					bytes.writeByte( nodez);
 				}
-//				bytes.compress();
+				bytes.compress();
 				bytes.position=0;
 				fileStream.writeBytes( bytes,0,bytes.length );
 				Alert.show("保存成功");
