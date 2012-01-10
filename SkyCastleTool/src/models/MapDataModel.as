@@ -1,5 +1,7 @@
 package models
 {
+	import bing.ds.HashMap;
+	
 	import flash.display.DisplayObject;
 	import flash.utils.Dictionary;
 
@@ -24,7 +26,7 @@ package models
 		/**
 		 * 英雄不能走的地方
 		 */		
-		public var impactHash:Dictionary = new Dictionary();
+		public var impactHash:HashMap = new HashMap();
 		
 		/**
 		 *  添加建筑不能放的地方
@@ -58,9 +60,9 @@ package models
 		 */		
 		public function addImpact( nodeX:int , nodeY:int , rho:DisplayObject ):void
 		{
-			if(!impactHash[nodeX+"-"+nodeY]  )
+			if(!impactHash.containsKey(nodeX+"-"+nodeY)  )
 			{
-				impactHash[nodeX+"-"+nodeY] = rho ;
+				impactHash.put( nodeX+"-"+nodeY ,rho);
 			}
 		}
 		
@@ -71,7 +73,9 @@ package models
 		 */		
 		public function deleteImpact( nodeX:int , nodeY:int ):DisplayObject
 		{
-			return deleteHash(nodeX,nodeY,impactHash);
+			var rho:DisplayObject = impactHash.getValue(nodeX+"-"+nodeY) as DisplayObject;
+			impactHash.remove( nodeX+"-"+nodeY);
+			return rho ;
 		}
 		
 		private function deleteHash( nodeX:int , nodeY:int , hash:Dictionary ):DisplayObject
