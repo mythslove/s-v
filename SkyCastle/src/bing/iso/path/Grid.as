@@ -78,6 +78,18 @@ package  bing.iso.path
 		}
 		
 		/**
+		 * 判断是否在区域内 
+		 * @param x
+		 * @param y
+		 * @return 
+		 */		
+		public function checkInGrid( x:int , y:int ):Boolean
+		{
+			if(x<0 || y<0 || x>=_numCols || y>=_numRows) return false;
+			return true;
+		}
+		
+		/**
 		 * Sets the node at the given coords as the start node.
 		 * @param x The x coord.
 		 * @param y The y coord.

@@ -119,7 +119,7 @@ package utils
 					roadGrid.getNode(nodeX,nodeZ).walkable = true ;
 					extraHash[nodeX+"-"+nodeZ] = true ;
 				}
-	
+				AStarRoadGridModel.instance.extraHash = extraHash ;
 				var obj:Object = new Object();
 				obj["groundGrid1"]=groundGrid1 ;
 				obj["buildingGrid1"]=buildingGrid1;
@@ -127,9 +127,12 @@ package utils
 				obj["buildingGrid2"]=buildingGrid2;
 				obj["groundGrid3"]=groundGrid3 ;
 				obj["buildingGrid3"]=buildingGrid3;
-				obj["extra"]=extraHash;
 				resVO.resObject = obj ;
-			}catch(e:Error){trace(e);}
+			}
+			catch(e:Error)
+			{
+				trace(e);
+			}
 			
 		}
 	}
