@@ -119,7 +119,7 @@ package map
 			ResourceUtil.instance.deleteRes("mapdata"); 
 			//跟随鼠标移动的建筑
 			_mouseContainer = new IsoObject(GameSetting.GRID_SIZE,GameSetting.GRID_X , GameSetting.GRID_Z);
-			this.addChild( _mouseContainer );
+			_buildingScene3.addChild( _mouseContainer );
 			//配置侦听
 			configListeners();
 		}
@@ -262,15 +262,15 @@ package map
 			else if(_mouseContainer.numChildren>0 && stage )
 			{
 				_mouseContainer.visible = true ;
-				var xx:int = (stage.mouseX-this.x)/scaleX  ;
-				var yy:int = (stage.mouseY -this.y)/scaleX ;
+				var xx:int = (stage.mouseX-this.x)/scaleX -sceneLayerOffsetX ;
+				var yy:int = (stage.mouseY -this.y)/scaleX-sceneLayerOffsetY;
 				var p:Point = IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE,xx,yy);
 				if(_mouseContainer.nodeX!=p.x || _mouseContainer.nodeZ!=p.y)
 				{
 					_mouseContainer.nodeX = p.x ;
 					_mouseContainer.nodeZ = p.y ;
 					var build:BuildingBase = _mouseContainer.getChildAt(0) as BuildingBase;
-					p = IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE,xx-sceneLayerOffsetX,yy-sceneLayerOffsetY)
+					p = IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE,xx,yy);
 					build.gridLayer.update( p.x,p.y);
 				}
 				return ;
