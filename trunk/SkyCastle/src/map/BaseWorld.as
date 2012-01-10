@@ -29,14 +29,32 @@ package map
 	
 	public class BaseWorld extends IsoWorld
 	{
-		protected var _buildingScene:BuildingScene ;
-		public function get buildingScene():BuildingScene{
-			return _buildingScene ;
+		//***************************************************************
+		protected var _buildingScene1:BuildingScene ;
+		public function get buildingScene1():BuildingScene{
+			return _buildingScene1 ;
 		}
-		protected var _groundScene:GroundScene;
-		public function get groundScene():GroundScene{
-			return _groundScene ;
+		protected var _groundScene1:GroundScene;
+		public function get groundScene1():GroundScene{
+			return _groundScene1 ;
 		}
+		protected var _buildingScene2:BuildingScene ;
+		public function get buildingScene2():BuildingScene{
+			return _buildingScene2 ;
+		}
+		protected var _groundScene2:GroundScene;
+		public function get groundScene2():GroundScene{
+			return _groundScene2 ;
+		}
+		protected var _buildingScene3:BuildingScene ;
+		public function get buildingScene3():BuildingScene{
+			return _buildingScene3 ;
+		}
+		protected var _groundScene3:GroundScene;
+		public function get groundScene3():GroundScene{
+			return _groundScene3 ;
+		}
+		//**********************************************************/
 		protected var _gridScene:IsoScene ;
 		public function get gridScene():IsoScene{
 			return _gridScene;
@@ -75,7 +93,6 @@ package map
 		override protected function addedToStageHandler(e:Event):void
 		{
 			super.addedToStageHandler(e);
-			
 			//显示地图网格
 //			_gridScene = new IsoScene(GameSetting.GRID_SIZE);
 //			(_gridScene.addChild( new IsoGrid(GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE)) as IsoGrid).render() ;
@@ -83,18 +100,30 @@ package map
 //			this.addScene(_gridScene);
 			
 			var gridResVO:ResVO = ResourceUtil.instance.getResVOByName("mapdata");
-			_groundScene = new GroundScene();
-			_groundScene.cacheAsBitmap = true ;
-			_groundScene.gridData = gridResVO.resObject.groundGrid ;
-			_groundScene.mouseEnabled = false ;
-			addScene(_groundScene);
-			
-			_buildingScene = new BuildingScene();
-			_buildingScene.mouseEnabled = false ;
-			_buildingScene.gridData = gridResVO.resObject.buildingGrid ;
-			addScene(_buildingScene);
+			//地图区域1
+			_groundScene1 = new GroundScene();
+			_groundScene1.gridData = gridResVO.resObject.groundGrid1 ;
+			addScene(_groundScene1);
+			_buildingScene1 = new BuildingScene();
+			_buildingScene1.gridData = gridResVO.resObject.buildingGrid1 ;
+			addScene(_buildingScene1);
+			//地图区域2
+			_groundScene2 = new GroundScene();
+			_groundScene2.gridData = gridResVO.resObject.groundGrid2 ;
+			addScene(_groundScene2);
+			_buildingScene2 = new BuildingScene();
+			_buildingScene2.gridData = gridResVO.resObject.buildingGrid2 ;
+			addScene(_buildingScene2);
+			//地图区域3
+			_groundScene3 = new GroundScene();
+			_groundScene3.gridData = gridResVO.resObject.groundGrid3 ;
+			addScene(_groundScene3);
+			_buildingScene3 = new BuildingScene();
+			_buildingScene3.gridData = gridResVO.resObject.buildingGrid3 ;
+			addScene(_buildingScene3);
+			//删除地图数据
 			ResourceUtil.instance.deleteRes("mapdata"); 
-			
+			//配置侦听
 			configListeners();
 		}
 		
@@ -169,9 +198,9 @@ package map
 					vo = ObjectUtil.copyObj( ShopModel.instance.houseArray[0] ) as BuildingVO;
 					var result:Boolean = false ;
 					if(vo.baseVO.type==BuildingType.ROAD){
-						result = _groundScene.addBuilding( dx,dz,vo);
+						result = _groundScene1.addBuilding( dx,dz,vo);
 					}else{
-						result = _buildingScene.addBuilding( dx,dz,vo);
+						result = _buildingScene1.addBuilding( dx,dz,vo);
 					}
 				}
 			}
