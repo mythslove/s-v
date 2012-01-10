@@ -1,11 +1,16 @@
 package map
 {
+	import bing.iso.IsoUtils;
 	import bing.utils.ContainerUtil;
 	
 	import comm.GameData;
 	import comm.GameSetting;
 	
+	import enums.BuildingCurrentOperation;
+	
 	import flash.events.Event;
+	import flash.events.MouseEvent;
+	import flash.geom.Point;
 	
 	import map.elements.BuildingBase;
 	
@@ -41,6 +46,17 @@ package map
 			building.drawGrid();
 			building.gridLayer.visible=true;
 			this.addBuilidngOnMouse( building );
+		}
+		
+		override protected function onClick(e:MouseEvent):void
+		{
+			if(GameData.buildingCurrOperation==BuildingCurrentOperation.ADD)
+			{
+				var xx:int = (e.stageX-this.x)/scaleX - this.sceneLayerOffsetX ;
+				var yy:int = (e.stageY -this.y)/scaleX - this.sceneLayerOffsetY;
+				var p:Point = IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE,xx,yy);
+				addBuilding( p.x , p.y );
+			}
 		}
 		
 		/**
