@@ -1,8 +1,6 @@
 package map.elements
 {
 	import bing.iso.IsoObject;
-	import bing.iso.IsoUtils;
-	import bing.iso.Rhombus;
 	import bing.res.ResVO;
 	import bing.utils.ContainerUtil;
 	
@@ -18,9 +16,10 @@ package map.elements
 	import flash.geom.Matrix;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
-	import flash.geom.Vector3D;
+	import flash.utils.getTimer;
 	
 	import map.GameWorld;
+	import map.GroundScene;
 	
 	import models.vos.BuildingVO;
 	
@@ -32,6 +31,7 @@ package map.elements
 		protected var _gridLayer:Sprite;
 		protected var _skin:MovieClip ;
 		protected var _itemLayerMatrix:Matrix=new Matrix();
+		protected var _hitTestTime:int ;
 		
 		public var buildingVO:BuildingVO ;
 		public function BuildingBase(buildingVO:BuildingVO )
@@ -39,10 +39,10 @@ package map.elements
 			super(GameSetting.GRID_SIZE,buildingVO.baseVO.xSpan , buildingVO.baseVO.zSpan);
 			this.buildingVO = buildingVO ;
 			
-//			_gridLayer = new Sprite();
-//			_gridLayer.visible=false;
-//			_gridLayer.cacheAsBitmap = true ;
-//			addChild(_gridLayer);
+			_gridLayer = new Sprite();
+			_gridLayer.visible=false;
+			_gridLayer.cacheAsBitmap = true ;
+			addChild(_gridLayer);
 			
 			_itemLayer = new Sprite();
 			addChild(_itemLayer);
@@ -98,26 +98,31 @@ package map.elements
 		override public function update():void
 		{
 			super.update() ;
-			
-			if(stage && _skin && (GameData.mouseBuilding==null || 
-				GameData.mouseBuilding.parent==GameWorld.instance.groundScene1 ||
-				(GameData.mouseBuilding.parent==this.parent&&
-				this.parent.getChildIndex(this)>this.parent.getChildIndex(GameData.mouseBuilding)))&&
-				this.hitTestPoint(stage.mouseX,stage.mouseY))
+			if( getTimer()-_hitTestTime>100 )
 			{
-				var bound:Rectangle = _itemLayer.getBounds(_itemLayer);
-				_itemLayerMatrix.identity();
-				_itemLayerMatrix.translate(-bound.x,-bound.y);
-				var bmd:BitmapData = new BitmapData(bound.width,bound.height,true,0xffffff);
-				bmd.draw( _itemLayer,_itemLayerMatrix);
-				if(bmd.hitTest( GameData.zeroPoint , 255 , new Point(_itemLayer.mouseX-bound.x,_itemLayer.mouseY-bound.y) ) )
+				_hitTestTime = getTimer();
+				
+				if(!GameWorld.instance.isMove && stage && _skin && (GameData.mouseBuilding==null || 
+					GameData.mouseBuilding.parent is GroundScene ||
+					(GameData.mouseBuilding.parent==this.parent&&
+					this.parent.getChildIndex(this)>this.parent.getChildIndex(GameData.mouseBuilding)))&&
+					this.hitTestPoint(stage.mouseX,stage.mouseY))
 				{
-					GameData.mouseBuilding = this ;
+					var bound:Rectangle = _itemLayer.getBounds(_itemLayer);
+					_itemLayerMatrix.identity();
+					_itemLayerMatrix.translate(-bound.x,-bound.y);
+					var bmd:BitmapData = new BitmapData(bound.width,bound.height,true,0xffffff);
+					bmd.draw( _itemLayer,_itemLayerMatrix);
+					if(bmd.hitTest( GameData.zeroPoint , 255 , new Point(_itemLayer.mouseX-bound.x,_itemLayer.mouseY-bound.y) ) )
+					{
+						GameData.mouseBuilding = this ;
+					}else{
+						selectedStatus(false);
+					}
 				}else{
 					selectedStatus(false);
 				}
-			}else{
-				selectedStatus(false);
+				
 			}
 		}
 		
