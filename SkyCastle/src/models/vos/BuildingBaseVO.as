@@ -10,5 +10,6 @@ package models.vos
 		public var zSpan:int;
 		public var url:String;
 		public var thumb:String;
+		public var animationAlias:String;
 	}
 }

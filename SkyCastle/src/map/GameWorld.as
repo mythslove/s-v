@@ -8,15 +8,14 @@ package map
 	import comm.GameSetting;
 	
 	import enums.BuildingCurrentOperation;
+	import enums.BuildingType;
 	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	
-	import map.elements.Building;
 	import map.elements.BuildingBase;
 	
-	import models.AStarRoadGridModel;
 	import models.ShopModel;
 	import models.vos.BuildingVO;
 
@@ -60,15 +59,9 @@ package map
 				var yy:int = (e.stageY -this.y)/scaleX - this.sceneLayerOffsetY;
 				var p:Point = IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE,xx,yy);
 				
-				var vo:BuildingVO = ObjectUtil.copyObj( (_mouseContainer.getChildAt(0) as BuildingBase).buildingVO ) as BuildingVO;
+				var vo:BuildingVO = ObjectUtil.copyObj( (mouseContainer.getChildAt(0) as BuildingBase).buildingVO ) as BuildingVO;
 				addBuilding( p.x , p.y ,vo );
-				_mouseContainer.parent.setChildIndex( _mouseContainer , _mouseContainer.parent.numChildren-1);
-			}
-			else if( GameData.buildingCurrOperation==BuildingCurrentOperation.ROTATE)
-			{
-				if( GameData.mouseBuilding){
-					(GameData.mouseBuilding as Building).rotateBuilding();
-				}
+				mouseContainer.parent.setChildIndex( mouseContainer , mouseContainer.parent.numChildren-1);
 			}
 		}
 		
@@ -93,7 +86,6 @@ package map
 		 */		
 		protected function onEnterFrameHandler(e:Event):void
 		{
-			GameData.mouseBuilding = null ;
 			update() ;
 		}
 		
@@ -117,12 +109,15 @@ package map
 		 */		
 		public function addBuilidngOnMouse( buildingBase:BuildingBase):void
 		{
-			_mouseContainer.parent.setChildIndex( _mouseContainer ,_mouseContainer.parent.numChildren-1 );
-			ContainerUtil.removeChildren( _mouseContainer );
+			mouseContainer.parent.setChildIndex( mouseContainer ,mouseContainer.parent.numChildren-1 );
+			ContainerUtil.removeChildren( mouseContainer );
 			buildingBase.setScreenPosition(0,0);
-			buildingBase.itemLayer.alpha=0.6;
-			_mouseContainer.addChild( buildingBase );
-			_mouseContainer.visible=true;
+			if( buildingBase.buildingVO.baseVO.type!=BuildingType.ROAD){
+				buildingBase.itemLayer.alpha=0.6;
+			}
+			buildingBase.itemLayer.mouseEnabled = false ;
+			mouseContainer.addChild( buildingBase );
+			mouseContainer.visible=true;
 		}
 		
 		/**
@@ -130,8 +125,8 @@ package map
 		 */		
 		public function clearMouse():void
 		{
-			ContainerUtil.removeChildren( _mouseContainer );
-			_mouseContainer.visible=false;
+			ContainerUtil.removeChildren( mouseContainer );
+			mouseContainer.visible=false;
 		}
 	}
 }
