@@ -5,7 +5,8 @@ package map
 	
 	import comm.GameSetting;
 	
-	import map.elements.BuildingBase;
+	import map.elements.Building;
+	import map.elements.Building;
 	
 	import models.AStarRoadGridModel;
 	import models.vos.BuildingVO;
@@ -25,9 +26,9 @@ package map
 		 * @param buildingVO
 		 * @return 添加成功返回true
 		 */		
-		public function addBuildingByVO( dx:Number , dz:Number , buildingVO:BuildingVO ):BuildingBase
+		public function addBuildingByVO( dx:Number , dz:Number , buildingVO:BuildingVO ):Building
 		{
-			var obj:BuildingBase = new BuildingBase(buildingVO);
+			var obj:Building = new Building(buildingVO);
 			obj.x = dx;
 			obj.z = dz;
 			if( obj.getWalkable(this.gridData) )
@@ -43,42 +44,42 @@ package map
 		
 		/**
 		 * 添加建筑 
-		 * @param buildingBase
+		 * @param building
 		 * @return 
 		 */		
-		public function addBuilding( buildingBase:BuildingBase ):BuildingBase
+		public function addBuilding( building:Building ):Building
 		{
-			this.addIsoObject( buildingBase );
-			buildingBase.setWalkable( false , this.gridData );
-			buildingBase.setWalkable(false, AStarRoadGridModel.instance.roadGrid );
-			buildingBase.drawGrid(); //显示占了的网格
-			return buildingBase;
+			this.addIsoObject( building );
+			building.setWalkable( false , this.gridData );
+			building.setWalkable(false, AStarRoadGridModel.instance.roadGrid );
+			building.drawGrid(); //显示占了的网格
+			return building;
 		}
 		
 		/**
 		 * 移除建筑 
-		 * @param buildingBase
+		 * @param building
 		 */		
-		public function removeBuilding( buildingBase:BuildingBase):void
+		public function removeBuilding( building:Building):void
 		{
-			buildingBase.setWalkable( true , this.gridData );
-			buildingBase.setWalkable(true, AStarRoadGridModel.instance.roadGrid );
-			this.removeIsoObject( buildingBase );
+			building.setWalkable( true , this.gridData );
+			building.setWalkable(true, AStarRoadGridModel.instance.roadGrid );
+			this.removeIsoObject( building );
 		}
 		
 		/**
 		 * 旋转建筑 
-		 * @param buildingBase
+		 * @param building
 		 */		
-		public function rotateBuilding( buildingBase:BuildingBase ):void
+		public function rotateBuilding( building:Building ):void
 		{
-			if(buildingBase.getRotatable(gridData))
+			if(building.getRotatable(gridData))
 			{
-				buildingBase.setWalkable(true,gridData);
-				buildingBase.scaleX = ~buildingBase.scaleX+1;
-				buildingBase.drawGrid();
-				buildingBase.setWalkable(false,gridData);
-				buildingBase.sort();
+				building.setWalkable(true,gridData);
+				building.scaleX = ~building.scaleX+1;
+				building.drawGrid();
+				building.setWalkable(false,gridData);
+				building.sort();
 			}
 		}
 		

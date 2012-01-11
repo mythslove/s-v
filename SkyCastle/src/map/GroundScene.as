@@ -10,7 +10,7 @@ package map
 	
 	import flash.utils.Dictionary;
 	
-	import map.elements.BuildingBase;
+	import map.elements.Building;
 	import map.elements.Road;
 	
 	import models.vos.BuildingVO;
@@ -56,9 +56,9 @@ package map
 		 * @param updateDirection 是否更新周围的方向
 		 * @return 添加成功添加的建筑
 		 */		
-		public function addBuildingByVO( dx:Number , dz:Number , buildingVO:BuildingVO , updateDirection:Boolean=true ):BuildingBase
+		public function addBuildingByVO( dx:Number , dz:Number , buildingVO:BuildingVO , updateDirection:Boolean=true ):Building
 		{
-			var obj:BuildingBase ;
+			var obj:Building ;
 			if( buildingVO.baseVO.type==BuildingType.ROAD){
 				obj= new Road(buildingVO);
 			}
@@ -78,38 +78,38 @@ package map
 		
 		/**
 		 * 添加建筑 
-		 * @param buildingBase
+		 * @param building
 		 */		
-		public function addBuilding( buildingBase:BuildingBase , updateDirection:Boolean=true):BuildingBase
+		public function addBuilding( building:Building , updateDirection:Boolean=true):Building
 		{
-			this.addIsoObject( buildingBase );
-			buildingBase.setWalkable( false , this.gridData );
-			buildingBase.drawGrid(); //显示占了的网格
-			_groundNodeHash[buildingBase.nodeX+"-"+buildingBase.nodeZ]=buildingBase;
-			if(updateDirection)updateUI(buildingBase);
-			return buildingBase;
+			this.addIsoObject( building );
+			building.setWalkable( false , this.gridData );
+			building.drawGrid(); //显示占了的网格
+			_groundNodeHash[building.nodeX+"-"+building.nodeZ]=building;
+			if(updateDirection)updateUI(building);
+			return building;
 		}
 		
 		/**
 		 * 移除建筑 
-		 * @param buildingBase
+		 * @param building
 		 */		
-		public function removeBuilding( buildingBase:BuildingBase):void
+		public function removeBuilding( building:Building):void
 		{
-			buildingBase.setWalkable( true , this.gridData );
-			this.removeIsoObject( buildingBase );
-			delete _groundNodeHash[buildingBase.nodeX+"-"+buildingBase.nodeZ];
+			building.setWalkable( true , this.gridData );
+			this.removeIsoObject( building );
+			delete _groundNodeHash[building.nodeX+"-"+building.nodeZ];
 		}
 		
 		/**
 		 * 更新方向 
-		 * @param buildingBase
+		 * @param building
 		 */		
-		private function updateUI( buildingBase:BuildingBase ):void
+		private function updateUI( building:Building ):void
 		{
-			for( var i:int = buildingBase.nodeX-1 ; i<buildingBase.nodeX+2 && i<gridData.numCols ; ++i )
+			for( var i:int = building.nodeX-1 ; i<building.nodeX+2 && i<gridData.numCols ; ++i )
 			{
-				for( var j:int = buildingBase.nodeZ-1 ;  j<buildingBase.nodeZ+2 && j<gridData.numRows ; ++j )
+				for( var j:int = building.nodeZ-1 ;  j<building.nodeZ+2 && j<gridData.numRows ; ++j )
 				{
 					if( _groundNodeHash[i+"-"+j])
 					{
@@ -122,13 +122,13 @@ package map
 		//周围的四个位置
 		private var _roundRoadHash:HashMap = new HashMap(); 
 		//更新一个路的方向
-		private function updateRoadDirection( building:BuildingBase ):void
+		private function updateRoadDirection( building:Building ):void
 		{
 			var alias:String = building.buildingVO.baseVO.alias;
-			var luBuilding:BuildingBase = _groundNodeHash[ (building.nodeX-1)+"-"+building.nodeZ];
-			var ruBuilding:BuildingBase = _groundNodeHash[ building.nodeX+"-"+(building.nodeZ-1)];
-			var lbBuilding:BuildingBase = _groundNodeHash[ building.nodeX+"-"+(building.nodeZ+1)];
-			var rbBuilding:BuildingBase = _groundNodeHash[ (building.nodeX+1)+"-"+building.nodeZ];
+			var luBuilding:Building = _groundNodeHash[ (building.nodeX-1)+"-"+building.nodeZ];
+			var ruBuilding:Building = _groundNodeHash[ building.nodeX+"-"+(building.nodeZ-1)];
+			var lbBuilding:Building = _groundNodeHash[ building.nodeX+"-"+(building.nodeZ+1)];
+			var rbBuilding:Building = _groundNodeHash[ (building.nodeX+1)+"-"+building.nodeZ];
 			if( luBuilding&&luBuilding.buildingVO.baseVO.alias==alias ) _roundRoadHash.put( "POS_LU_M",true);
 			if( ruBuilding&&ruBuilding.buildingVO.baseVO.alias==alias ) _roundRoadHash.put( "POS_RU_M",true);
 			if( lbBuilding&&lbBuilding.buildingVO.baseVO.alias==alias ) _roundRoadHash.put( "POS_LB_M",true);

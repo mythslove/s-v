@@ -8,7 +8,7 @@ package map.elements
 	 * 行走的人 
 	 * @author zhouzhanglin
 	 */	
-	public class Character extends BuildingBase
+	public class Character extends Building
 	{
 		public function Character(buildingVO:BuildingVO)
 		{

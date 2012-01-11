@@ -103,7 +103,7 @@ package map.elements
 		{
 			if(stage && _skin && GameWorld.instance.mouseIsMove && GameWorld.instance.mouseContainer.numChildren==0)
 			{
-				if(!GameWorld.instance.isMove &&(GameData.mouseBuilding==null || 
+				if(!GameWorld.instance.mapIsMove &&(GameData.mouseBuilding==null || 
 					GameData.mouseBuilding.parent is GroundScene ||
 					(GameData.mouseBuilding.parent==this.parent&&
 					this.parent.getChildIndex(this)>this.parent.getChildIndex(GameData.mouseBuilding)))&&
@@ -138,34 +138,6 @@ package map.elements
 				TweenMax.to(_itemLayer, 0, {dropShadowFilter:{color:0xffff00, alpha:1, blurX:2, blurY:2, strength:5}});
 			}else{
 				_itemLayer.filters=null ;
-			}
-		}
-		
-		/** 发送添加到地图上的信息到服务器 */
-		public function addedToMap():void
-		{
-			
-		}
-		
-		/** 旋转建筑 */
-		public function rotateBuilding():void
-		{
-			if(this.getRotatable( AStarRoadGridModel.instance.roadGrid) )
-			{
-				var isoScene:IsoScene = this.parent as IsoScene ;
-				if(isoScene is BuildingScene)
-				{
-					(isoScene as BuildingScene).removeBuilding( this );
-					this.scaleX = ~this.scaleX+1 ;
-					(isoScene as BuildingScene).addBuilding( this );
-				}
-				else if(isoScene is GroundScene)
-				{
-					(isoScene as GroundScene).removeBuilding( this );
-					this.scaleX = ~this.scaleX+1 ;
-					(isoScene as GroundScene).addBuilding( this );
-				}
-				//发送旋转到服务器
 			}
 		}
 		

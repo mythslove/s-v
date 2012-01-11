@@ -53,9 +53,9 @@ package map
 			return _gridScene;
 		}
 		
-		protected var _isMove:Boolean=false;
-		public function get isMove():Boolean{
-			return _isMove ;
+		protected var _mapIsMove:Boolean=false;
+		public function get mapIsMove():Boolean{
+			return _mapIsMove ;
 		}
 		protected var _mouseIsMove:Boolean=false;
 		public function get mouseIsMove():Boolean{
@@ -164,7 +164,7 @@ package map
 		protected function onMouseRollOut(e:MouseEvent):void
 		{
 			this.stopDrag();
-			_isMove = false ;
+			_mapIsMove = false ;
 			if(GameData.mouseBuilding) {
 				GameData.mouseBuilding.selectedStatus(false);
 			}
@@ -190,10 +190,10 @@ package map
 		protected function onMouseUpHandler(e:MouseEvent):void
 		{
 			this.stopDrag();
-			if(!_isMove) {
+			if(!_mapIsMove) {
 				onClick(e);
 			}
-			_isMove = false ;
+			_mapIsMove = false ;
 		}
 		
 		/** 鼠标点击 */
@@ -267,7 +267,7 @@ package map
 		{
 			if(e.buttonDown)
 			{
-				_isMove = true ;
+				_mapIsMove = true ;
 			}
 			else if(_mouseContainer.numChildren>0) 
 			{

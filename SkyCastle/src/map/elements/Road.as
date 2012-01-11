@@ -7,7 +7,7 @@ package map.elements
 	 * 路 
 	 * @author zhouzhanglin
 	 */	
-	public class Road extends BuildingBase
+	public class Road extends Building
 	{
 		/**
 		 * 当前的方向 

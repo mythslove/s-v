@@ -13,6 +13,7 @@ package map
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	
+	import map.elements.Building;
 	import map.elements.BuildingBase;
 	
 	import models.AStarRoadGridModel;
@@ -66,7 +67,7 @@ package map
 			else if( GameData.buildingCurrOperation==BuildingCurrentOperation.ROTATE)
 			{
 				if( GameData.mouseBuilding){
-					GameData.mouseBuilding.rotateBuilding();
+					(GameData.mouseBuilding as Building).rotateBuilding();
 				}
 			}
 		}
