@@ -1,7 +1,6 @@
 package map.elements
 {
 	import bing.iso.IsoObject;
-	import bing.iso.IsoScene;
 	import bing.res.ResVO;
 	import bing.utils.ContainerUtil;
 	
@@ -18,12 +17,10 @@ package map.elements
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	
-	import map.BuildingScene;
 	import map.GameWorld;
 	import map.GroundScene;
 	import map.cell.BuildingGridLayer;
 	
-	import models.AStarRoadGridModel;
 	import models.vos.BuildingVO;
 	
 	import utils.ResourceUtil;
@@ -101,7 +98,9 @@ package map.elements
 		
 		override public function update():void
 		{
-			if(stage && _skin && GameWorld.instance.mouseIsMove && GameWorld.instance.mouseContainer.numChildren==0)
+			var world:GameWorld = GameWorld.instance ;
+			if( ( (~(nodeX-world.mouseNodePoint.x-1))<6 ||  (~(nodeZ-world.mouseNodePoint.y-1))<6 ) &&
+				stage && _skin && world.mouseIsMove && world.mouseContainer.numChildren==0)
 			{
 				if(!GameWorld.instance.mapIsMove &&(GameData.mouseBuilding==null || 
 					GameData.mouseBuilding.parent is GroundScene ||

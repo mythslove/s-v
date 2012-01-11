@@ -45,8 +45,8 @@ package map
 			return _groundScene3 ;
 		}
 		//**********************************************************/
-		protected var _prevMouseX:int ;
-		protected var _prevMouseZ:int ;
+		/** 鼠标的node位置*/
+		public var mouseNodePoint:Point = new Point();
 		
 		protected var _gridScene:IsoScene ;
 		public function get gridScene():IsoScene{
@@ -265,6 +265,9 @@ package map
 		 */		
 		protected function onMouseMoveHandler(e:MouseEvent):void
 		{
+			var xx:int = (stage.mouseX-this.x)/scaleX -sceneLayerOffsetX ;
+			var yy:int = (stage.mouseY -this.y)/scaleX-sceneLayerOffsetY;
+			mouseNodePoint = IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE,xx,yy);
 			if(e.buttonDown)
 			{
 				_mapIsMove = true ;
@@ -286,18 +289,16 @@ package map
 		 */		
 		protected function updateMouseBuildingGrid():void
 		{
-			var xx:int = (stage.mouseX-this.x)/scaleX -sceneLayerOffsetX ;
-			var yy:int = (stage.mouseY -this.y)/scaleX-sceneLayerOffsetY;
-			var p:Point = IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE,xx,yy);
-			if(_mouseContainer.nodeX!=p.x || _mouseContainer.nodeZ!=p.y)
+			
+			if(_mouseContainer.nodeX!=mouseNodePoint.x || _mouseContainer.nodeZ!=mouseNodePoint.y)
 			{
-				_mouseContainer.nodeX = p.x ;
-				_mouseContainer.nodeZ = p.y ;
+				_mouseContainer.nodeX = mouseNodePoint.x ;
+				_mouseContainer.nodeZ =mouseNodePoint.y ;
 				var build:BuildingBase = _mouseContainer.getChildAt(0) as BuildingBase;
 				if( build.buildingVO.baseVO.type==BuildingType.ROAD)
 				{
-					var scene:GroundScene = this.getMouseGroundScene(p.x,p.y);
-					if(scene && scene.gridData.getNode(p.x,p.y).walkable){
+					var scene:GroundScene = this.getMouseGroundScene(mouseNodePoint.x,mouseNodePoint.y);
+					if(scene && scene.gridData.getNode(mouseNodePoint.x,mouseNodePoint.y).walkable){
 						build.gridLayer.setWalkabled(true);
 					}else{
 						build.gridLayer.setWalkabled(false);
@@ -305,7 +306,9 @@ package map
 				}
 				else
 				{
-					p = IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE,xx,yy);
+					var xx:int = (stage.mouseX-this.x)/scaleX -sceneLayerOffsetX ;
+					var yy:int = (stage.mouseY -this.y)/scaleX-sceneLayerOffsetY;
+					var p:Point = IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE,xx,yy);
 					build.gridLayer.update( p.x,p.y);
 				}
 			}
