@@ -41,7 +41,10 @@ package map.elements
 		{
 			super(GameSetting.GRID_SIZE,buildingVO.baseVO.xSpan , buildingVO.baseVO.zSpan);
 			this.buildingVO = buildingVO ;
-			mouseEnabled  = false ;
+			this.mouseEnabled  = false ;
+			if(!buildingVO.baseVO.animationAlias || buildingVO.baseVO.animationAlias!="") {
+				this.cacheAsBitmap = true ;	
+			}
 			
 			itemLayer = new InteractivePNG();
 			itemLayer.mouseChildren = false ;

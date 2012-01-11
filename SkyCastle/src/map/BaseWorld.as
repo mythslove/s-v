@@ -31,7 +31,6 @@ package map
 		public var mouseNodePoint:Point = new Point();
 		public var gridScene:IsoScene ;
 		public var mouseContainer:IsoObject; //跟随鼠标移动的建筑
-		
 		private var _mapIsMove:Boolean=false; //地图是否在移动
 		
 		/**

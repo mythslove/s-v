@@ -178,5 +178,17 @@ package map
 			}
 			super.clear();
 		}
+		
+		override public function update():void{}
+		
+		override public function sortAll():void
+		{
+			this.children.sort( groundObjectSort );
+		}
+		
+		private function groundObjectSort( obj1:IsoObject , obj2:IsoObject ):int  
+		{
+			return obj1.depth-obj2.depth;
+		}
 	}
 }
