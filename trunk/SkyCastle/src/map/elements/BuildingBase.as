@@ -50,10 +50,6 @@ package map.elements
 			super(GameSetting.GRID_SIZE,buildingVO.baseVO.xSpan , buildingVO.baseVO.zSpan);
 			this.buildingVO = buildingVO ;
 			
-			_gridLayer = new BuildingGridLayer(this);
-			_gridLayer.visible=false;
-			addChild(_gridLayer);
-			
 			_itemLayer = new Sprite();
 			addChild(_itemLayer);
 			
@@ -76,12 +72,26 @@ package map.elements
 			ResourceUtil.instance.loadRes( resVO );
 		}
 		
-		/**
-		 *占用了的网格 
-		 */		
+		/**添加网格*/		
 		public function drawGrid():void
 		{
+			if(!_gridLayer){
+				_gridLayer = new BuildingGridLayer(this);
+				addChildAt(_gridLayer,0);
+			}
 			_gridLayer.drawGrid();
+		}
+		/** 移除网格*/
+		public function removeGrid():void
+		{
+			if(_gridLayer)
+			{
+				_gridLayer.dispose();
+				if(_gridLayer.parent){
+					_gridLayer.parent.removeChild(_gridLayer);
+				}
+				_gridLayer = null ;
+			}
 		}
 		
 		protected function resLoadedHandler( e:Event):void
@@ -165,8 +175,7 @@ package map.elements
 			this.removeEventListener(Event.ADDED_TO_STAGE , addedToStageHandler );
 			ResourceUtil.instance.removeEventListener( buildingVO.baseVO.alias , resLoadedHandler );
 			_itemLayer = null ;
-			_gridLayer.dispose();
-			_gridLayer = null ;
+			removeGrid();
 			buildingVO = null ;
 			_skin = null ;
 			_itemLayerMatrix = null ;
