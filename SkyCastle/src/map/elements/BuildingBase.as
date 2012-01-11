@@ -109,7 +109,7 @@ package map.elements
 		override public function update():void
 		{
 			var world:GameWorld = GameWorld.instance ;
-			if( ( (~(nodeX-world.mouseNodePoint.x-1))<6 ||  (~(nodeZ-world.mouseNodePoint.y-1))<6 ) &&
+			if( ( (~(nodeX-world.mouseNodePoint.x-1))<4 ||  (~(nodeZ-world.mouseNodePoint.y-1))<4 ) &&
 				stage && _skin && world.mouseIsMove && world.mouseContainer.numChildren==0)
 			{
 				if(!GameWorld.instance.mapIsMove &&(GameData.mouseBuilding==null || 
