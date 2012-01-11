@@ -184,11 +184,16 @@ package map
 		override public function sortAll():void
 		{
 			this.children.sort( groundObjectSort );
+			const LEN:int = this.numChildren;
+			for( var i:int = 0 ; i< LEN ; ++i)
+			{
+				setChildIndex( children[i] , i );
+			}
 		}
 		
 		private function groundObjectSort( obj1:IsoObject , obj2:IsoObject ):int  
 		{
-			return obj2.depth-obj1.depth;
+			return obj1.depth-obj2.depth;
 		}
 	}
 }
