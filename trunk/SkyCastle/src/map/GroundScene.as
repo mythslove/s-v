@@ -188,7 +188,7 @@ package map
 		
 		private function groundObjectSort( obj1:IsoObject , obj2:IsoObject ):int  
 		{
-			return obj1.depth-obj2.depth;
+			return obj2.depth-obj1.depth;
 		}
 	}
 }
