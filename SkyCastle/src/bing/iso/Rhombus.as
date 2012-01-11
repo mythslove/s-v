@@ -13,13 +13,14 @@ package bing.iso
 		{
 			this.color = color ;
 			draw(color , size );
+			cacheAsBitmap = true ;
 		}
 		
 		public function draw(color:uint , size:int ):void 
 		{
 			this.graphics.clear() ;
 			this.color = color ;
-			this.graphics.lineStyle(1,color);
+			this.graphics.lineStyle(3,color);
 			this.graphics.beginFill(color,0.5);
 			this.graphics.moveTo( 0 , 0 );
 			this.graphics.lineTo( size , size/2 );

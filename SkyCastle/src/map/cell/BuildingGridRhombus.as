@@ -1,11 +1,11 @@
 package map.cell
 {
 	import bing.iso.Rhombus;
-	import bing.iso.path.Grid;
+	import bing.utils.ContainerUtil;
 	
 	import comm.GameSetting;
 	
-	import map.GameWorld;
+	import flash.display.Sprite;
 	
 	import models.AStarRoadGridModel;
 	
@@ -13,15 +13,19 @@ package map.cell
 	 *  建筑拥有的格子，单个格子 
 	 * @author zhouzhanglin
 	 */	
-	public class BuildingGridRhombus extends Rhombus
+	public class BuildingGridRhombus extends Sprite
 	{
 		public var currColor:uint = 0x00ff00 ;
 		public var nodeX:int ;
 		public var nodeZ:int ;
+		private var rhombus1:Rhombus ;
+		private var rhombus2:Rhombus ;
 		
 		public function BuildingGridRhombus( nodeX:int , nodeZ:int )
 		{
-			super(GameSetting.GRID_SIZE , currColor );
+			rhombus1 = new Rhombus(GameSetting.GRID_SIZE , currColor);
+			rhombus2 = new Rhombus(GameSetting.GRID_SIZE , 0xff0000);
+			addChild(rhombus1);
 			this.nodeX = nodeX;
 			this.nodeZ = nodeZ ;
 		}
@@ -60,14 +64,16 @@ package map.cell
 			{
 				if(this.currColor!=0x00ff00){
 					this.currColor = 0x00ff00 ;
-					this.draw( currColor , GameSetting.GRID_SIZE );
+					ContainerUtil.removeChildren(this);
+					addChild(rhombus1);
 				}
 			}
 			else
 			{
 				if(this.currColor!=0xff0000){
 					this.currColor = 0xff0000 ;
-					this.draw( currColor , GameSetting.GRID_SIZE );
+					ContainerUtil.removeChildren(this);
+					addChild(rhombus2);
 				}
 			}
 		}
