@@ -67,7 +67,7 @@ package bing.res
 		{
 			if(!checkRes( resVO.name ))
 			{
-				setResType(resVO);
+				if( !resVO.resType ) setResType(resVO);
 				_resDictionary[resVO.name] = resVO ;
 				if(_currentLoadNum<maxLoadNum)
 				{
