@@ -20,52 +20,19 @@ package map
 	public class BaseWorld extends IsoWorld
 	{
 		//***************************************************************
-		protected var _buildingScene1:BuildingScene ;
-		public function get buildingScene1():BuildingScene{
-			return _buildingScene1 ;
-		}
-		protected var _groundScene1:GroundScene;
-		public function get groundScene1():GroundScene{
-			return _groundScene1 ;
-		}
-		protected var _buildingScene2:BuildingScene ;
-		public function get buildingScene2():BuildingScene{
-			return _buildingScene2 ;
-		}
-		protected var _groundScene2:GroundScene;
-		public function get groundScene2():GroundScene{
-			return _groundScene2 ;
-		}
-		protected var _buildingScene3:BuildingScene ;
-		public function get buildingScene3():BuildingScene{
-			return _buildingScene3 ;
-		}
-		protected var _groundScene3:GroundScene;
-		public function get groundScene3():GroundScene{
-			return _groundScene3 ;
-		}
+		public var buildingScene1:BuildingScene ;
+		public var groundScene1:GroundScene;
+		public var buildingScene2:BuildingScene ;
+		public var groundScene2:GroundScene;
+		public var buildingScene3:BuildingScene ;
+		public var groundScene3:GroundScene;
 		//**********************************************************/
 		/** 鼠标的node位置*/
 		public var mouseNodePoint:Point = new Point();
+		public var gridScene:IsoScene ;
+		public var mouseContainer:IsoObject; //跟随鼠标移动的建筑
 		
-		protected var _gridScene:IsoScene ;
-		public function get gridScene():IsoScene{
-			return _gridScene;
-		}
-		
-		protected var _mapIsMove:Boolean=false;
-		public function get mapIsMove():Boolean{
-			return _mapIsMove ;
-		}
-		protected var _mouseIsMove:Boolean=false;
-		public function get mouseIsMove():Boolean{
-			return _mouseIsMove ;
-		}
-		//跟随鼠标移动的建筑
-		protected var _mouseContainer:IsoObject;
-		public function get mouseContainer():IsoObject{
-			return _mouseContainer ;
-		}
+		private var _mapIsMove:Boolean=false; //地图是否在移动
 		
 		/**
 		 * 游戏世界基类
@@ -73,7 +40,6 @@ package map
 		public function BaseWorld()
 		{
 			super(GameSetting.MAP_WIDTH , GameSetting.MAP_HEIGHT,GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE);
-			this.mouseChildren = false ;
 			
 			//设置背景图片
 			var bg:Bitmap = new Bitmap( ResourceUtil.instance.getInstanceByClassName("bg","BG") as BitmapData );
@@ -98,39 +64,39 @@ package map
 		{
 			super.addedToStageHandler(e);
 			//显示地图网格
-//			_gridScene = new IsoScene(GameSetting.GRID_SIZE);
-//			(_gridScene.addChild( new IsoGrid(GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE)) as IsoGrid).render() ;
-//			_gridScene.cacheAsBitmap=true;
-//			this.addScene(_gridScene);
+//			gridScene = new IsoScene(GameSetting.GRID_SIZE);
+//			(gridScene.addChild( new IsoGrid(GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE)) as IsoGrid).render() ;
+//			gridScene.cacheAsBitmap=true;
+//			this.addScene(gridScene);
 			
 			var gridResVO:ResVO = ResourceUtil.instance.getResVOByName("mapdata");
 			//地图区域1
-			_groundScene1 = new GroundScene();
-			_groundScene1.gridData = gridResVO.resObject.groundGrid1 ;
-			addScene(_groundScene1);
-			_buildingScene1 = new BuildingScene();
-			_buildingScene1.gridData = gridResVO.resObject.buildingGrid1 ;
-			addScene(_buildingScene1);
+			groundScene1 = new GroundScene();
+			groundScene1.gridData = gridResVO.resObject.groundGrid1 ;
+			addScene(groundScene1);
+			buildingScene1 = new BuildingScene();
+			buildingScene1.gridData = gridResVO.resObject.buildingGrid1 ;
+			addScene(buildingScene1);
 			//地图区域2
-			_groundScene2 = new GroundScene();
-			_groundScene2.gridData = gridResVO.resObject.groundGrid2 ;
-			addScene(_groundScene2);
-			_buildingScene2 = new BuildingScene();
-			_buildingScene2.gridData = gridResVO.resObject.buildingGrid2 ;
-			addScene(_buildingScene2);
+			groundScene2 = new GroundScene();
+			groundScene2.gridData = gridResVO.resObject.groundGrid2 ;
+			addScene(groundScene2);
+			buildingScene2 = new BuildingScene();
+			buildingScene2.gridData = gridResVO.resObject.buildingGrid2 ;
+			addScene(buildingScene2);
 			//地图区域3
-			_groundScene3 = new GroundScene();
-			_groundScene3.gridData = gridResVO.resObject.groundGrid3 ;
-			addScene(_groundScene3);
-			_buildingScene3 = new BuildingScene();
-			_buildingScene3.gridData = gridResVO.resObject.buildingGrid3 ;
-			addScene(_buildingScene3);
+			groundScene3 = new GroundScene();
+			groundScene3.gridData = gridResVO.resObject.groundGrid3 ;
+			addScene(groundScene3);
+			buildingScene3 = new BuildingScene();
+			buildingScene3.gridData = gridResVO.resObject.buildingGrid3 ;
+			addScene(buildingScene3);
 			//删除地图数据
 			ResourceUtil.instance.deleteRes("mapdata"); 
 			//跟随鼠标移动的建筑
-			_mouseContainer = new IsoObject(GameSetting.GRID_SIZE,GameSetting.GRID_X , GameSetting.GRID_Z);
-			_mouseContainer.visible=false;
-			_buildingScene3.addChild( _mouseContainer );
+			mouseContainer = new IsoObject(GameSetting.GRID_SIZE,GameSetting.GRID_X , GameSetting.GRID_Z);
+			mouseContainer.visible=false;
+			buildingScene3.addChild( mouseContainer );
 			//配置侦听
 			configListeners();
 		}
@@ -165,9 +131,6 @@ package map
 		{
 			this.stopDrag();
 			_mapIsMove = false ;
-			if(GameData.mouseBuilding) {
-				GameData.mouseBuilding.selectedStatus(false);
-			}
 		}
 		/**
 		 * 鼠标按下 
@@ -239,9 +202,9 @@ package map
 		 */		
 		protected function getMouseGroundScene( nodeX:int , nodeZ:int ):GroundScene
 		{
-			var groundScene:GroundScene = _groundScene3.gridData.getNode(nodeX,nodeZ).walkable? _groundScene3: 
-				(_groundScene2.gridData.getNode(nodeX,nodeZ).walkable?_groundScene2:
-				(_groundScene1.gridData.getNode(nodeX,nodeZ).walkable?_groundScene1:null) );
+			var groundScene:GroundScene = groundScene3.gridData.getNode(nodeX,nodeZ).walkable? groundScene3: 
+				(groundScene2.gridData.getNode(nodeX,nodeZ).walkable?groundScene2:
+				(groundScene1.gridData.getNode(nodeX,nodeZ).walkable?groundScene1:null) );
 			return groundScene;
 		}
 		
@@ -253,9 +216,9 @@ package map
 		 */		
 		protected function getMouseBuildingScene( nodeX:int , nodeZ:int ):BuildingScene
 		{
-			var buildingScene:BuildingScene = _buildingScene3.gridData.getNode(nodeX,nodeZ).walkable? _buildingScene3: 
-				(_buildingScene2.gridData.getNode(nodeX,nodeZ).walkable?_buildingScene2:
-				(_buildingScene1.gridData.getNode(nodeX,nodeZ).walkable?_buildingScene1:null) );
+			var buildingScene:BuildingScene = buildingScene3.gridData.getNode(nodeX,nodeZ).walkable? buildingScene3: 
+				(buildingScene2.gridData.getNode(nodeX,nodeZ).walkable?buildingScene2:
+				(buildingScene1.gridData.getNode(nodeX,nodeZ).walkable?buildingScene1:null) );
 			return buildingScene;
 		}
 		
@@ -272,15 +235,10 @@ package map
 			{
 				_mapIsMove = true ;
 			}
-			else if(_mouseContainer.numChildren>0) 
+			else if(mouseContainer.numChildren>0) 
 			{
 				updateMouseBuildingGrid();
-				_mouseIsMove = false ;
 				return ;
-			}
-			_mouseIsMove = true ;
-			if(GameData.mouseBuilding){
-				GameData.mouseBuilding.selectedStatus(true);	
 			}
 		}
 		
@@ -290,11 +248,11 @@ package map
 		protected function updateMouseBuildingGrid():void
 		{
 			
-			if(_mouseContainer.nodeX!=mouseNodePoint.x || _mouseContainer.nodeZ!=mouseNodePoint.y)
+			if(mouseContainer.nodeX!=mouseNodePoint.x || mouseContainer.nodeZ!=mouseNodePoint.y)
 			{
-				_mouseContainer.nodeX = mouseNodePoint.x ;
-				_mouseContainer.nodeZ =mouseNodePoint.y ;
-				var build:BuildingBase = _mouseContainer.getChildAt(0) as BuildingBase;
+				mouseContainer.nodeX = mouseNodePoint.x ;
+				mouseContainer.nodeZ =mouseNodePoint.y ;
+				var build:BuildingBase = mouseContainer.getChildAt(0) as BuildingBase;
 				if( build.buildingVO.baseVO.type==BuildingType.ROAD)
 				{
 					var scene:GroundScene = this.getMouseGroundScene(mouseNodePoint.x,mouseNodePoint.y);

@@ -29,7 +29,7 @@ package map
 		{
 			super(GameSetting.GRID_SIZE);
 			this.cacheAsBitmap = true ;
-			mouseEnabled = mouseChildren = false ;
+			mouseEnabled = false ;
 			
 			L = "L";
 			R = "R";

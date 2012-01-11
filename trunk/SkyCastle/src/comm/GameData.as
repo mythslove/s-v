@@ -6,7 +6,6 @@ package comm
 	import flash.geom.Point;
 	
 	import map.GameWorld;
-	import map.elements.BuildingBase;
 	
 	import utils.MouseManager;
 	
@@ -51,19 +50,7 @@ package comm
 		{
 			return _buildingCurrOperation;
 		}
-		//********************************************************************//
-		
-		
-		/**
-		 * 鼠标在哪个上面 
-		 */		
-		public static var mouseBuilding:BuildingBase ; 
-		
-		/**
-		 * 坐标0点 
-		 */		
-		public static const zeroPoint:Point = new Point();
-
+	
 	
 	}
 }
