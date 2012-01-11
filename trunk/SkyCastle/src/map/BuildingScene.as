@@ -36,7 +36,6 @@ package map
 				this.addIsoObject( obj );
 				obj.setWalkable( false , this.gridData );
 				obj.setWalkable(false, AStarRoadGridModel.instance.roadGrid );
-				obj.drawGrid(); //显示占了的网格
 				return obj;
 			}
 			return null ;
@@ -52,7 +51,6 @@ package map
 			this.addIsoObject( building );
 			building.setWalkable( false , this.gridData );
 			building.setWalkable(false, AStarRoadGridModel.instance.roadGrid );
-			building.drawGrid(); //显示占了的网格
 			return building;
 		}
 		
