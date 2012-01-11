@@ -24,6 +24,7 @@ package map.cell
 		public function BuildingGridLayer( building:BuildingBase )
 		{
 			super();
+			this.mouseChildren = this.mouseEnabled = false ;
 			_build = building ;
 		}
 		
