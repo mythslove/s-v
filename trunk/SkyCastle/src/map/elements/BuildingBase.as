@@ -11,7 +11,6 @@ package map.elements
 	
 	import flash.display.MovieClip;
 	import flash.events.Event;
-	import flash.geom.Matrix;
 	
 	import map.cell.BuildingGridLayer;
 	
@@ -26,7 +25,6 @@ package map.elements
 	public class BuildingBase extends IsoObject
 	{
 		protected var _skin:MovieClip ; //皮肤
-		protected var _itemLayerMatrix:Matrix=new Matrix(); //用于碰撞检测
 		
 		public var gridLayer:BuildingGridLayer; //占用的格子
 		public var itemLayer:InteractivePNG ; //放skin的容器
@@ -41,7 +39,7 @@ package map.elements
 			super(GameSetting.GRID_SIZE,buildingVO.baseVO.xSpan , buildingVO.baseVO.zSpan);
 			this.buildingVO = buildingVO ;
 			this.mouseEnabled  = false ;
-			if(!buildingVO.baseVO.animationAlias || buildingVO.baseVO.animationAlias!="") {
+			if(!buildingVO.baseVO.animationAlias) {//没有动画
 				this.cacheAsBitmap = true ;	
 			}
 			
@@ -52,15 +50,14 @@ package map.elements
 			this.addEventListener(Event.ADDED_TO_STAGE , addedToStageHandler );
 		}
 		
+		/** 添加到舞台上 */
 		protected function addedToStageHandler(e:Event):void
 		{
 			this.removeEventListener(Event.ADDED_TO_STAGE , addedToStageHandler );
 			loadRes();
 		}
 		
-		/**
-		 * 加载资源  
-		 */		
+		/** 加载资源   */		
 		protected function loadRes():void
 		{
 			ResourceUtil.instance.addEventListener( buildingVO.baseVO.alias , resLoadedHandler );
@@ -90,6 +87,7 @@ package map.elements
 			}
 		}
 		
+		/** 资源加载完成 */
 		protected function resLoadedHandler( e:Event):void
 		{
 			ResourceUtil.instance.removeEventListener( buildingVO.baseVO.alias , resLoadedHandler );
@@ -102,10 +100,7 @@ package map.elements
 			}
 		}
 		
-		/**
-		 * 设置是否显示被选择状态 
-		 * @param flag
-		 */		
+		/**设置是否显示被选择状态  */		
 		public function selectedStatus( flag:Boolean ):void
 		{
 			if(flag ){
@@ -115,10 +110,7 @@ package map.elements
 			}
 		}
 		
-		/**
-		 * 主要用于旋转建筑，1为正，-1为旋转180度 
-		 * @param value
-		 */		
+		/**主要用于旋转建筑，1为正，-1为旋转180度 */		
 		override public function set scaleX(value:Number):void
 		{
 			var flag:Boolean = value==1?false:true;
@@ -127,14 +119,13 @@ package map.elements
 			this.buildingVO.scale = value ;
 		}
 		
+		/** 当前是否旋转过*/
 		override public function get scaleX():Number
 		{
 			return itemLayer.scaleX ;
 		}
 		
-		/**
-		 * 卸载该对象 
-		 */		
+		/**  卸载该对象  */		
 		override public function dispose():void
 		{
 			super.dispose();
@@ -145,7 +136,6 @@ package map.elements
 			removeGrid();
 			buildingVO = null ;
 			_skin = null ;
-			_itemLayerMatrix = null ;
 		}
 	}
 }
