@@ -9,6 +9,7 @@ package map
 	
 	import enums.BuildingCurrentOperation;
 	import enums.BuildingType;
+	import enums.LayerType;
 	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -45,6 +46,7 @@ package map
 		override protected function addedToStageHandler(e:Event):void
 		{
 			super.addedToStageHandler(e);
+			
 			var building:BuildingBase = new BuildingBase( ShopModel.instance.roadArray[0]);
 			building.drawGrid();
 			building.gridLayer.visible=true;
@@ -61,6 +63,14 @@ package map
 					var vo:BuildingVO = ObjectUtil.copyObj( (mouseContainer.getChildAt(0) as BuildingBase).buildingVO ) as BuildingVO;
 					addBuildingByVO( mouseContainer.nodeX , mouseContainer.nodeZ ,vo );
 					mouseContainer.parent.setChildIndex( mouseContainer , mouseContainer.parent.numChildren-1);
+					build.gridLayer.updateBuildingGridLayer(mouseContainer.nodeX , mouseContainer.nodeZ,build);
+				}
+				
+				if(getBuildings(LayerType.GROUND ).length>100){
+					build = new BuildingBase( ShopModel.instance.houseArray[0]);
+					build.drawGrid();
+					build.gridLayer.visible=true;
+					this.addBuilidngOnMouse( build );
 				}
 			}
 			else if(GameData.buildingCurrOperation==BuildingCurrentOperation.ROTATE)
@@ -133,6 +143,20 @@ package map
 		{
 			ContainerUtil.removeChildren( mouseContainer );
 			mouseContainer.visible=false;
+		}
+		
+		/**
+		 * 获取所有的建筑 
+		 * @param layerType 层类型
+		 * @return 
+		 */		
+		public function getBuildings( layerType:int ):Vector.<Building>
+		{
+			var spirtes:Vector.<Building> = new Vector.<Building>();
+			if(layerType==LayerType.BUILDING){
+				return spirtes.concat(buildingScene1.children).concat(buildingScene2.children).concat(buildingScene3.children)
+			}
+			return spirtes.concat(groundScene1.children).concat(groundScene2.children).concat(groundScene3.children)
 		}
 	}
 }

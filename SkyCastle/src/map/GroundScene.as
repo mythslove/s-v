@@ -28,6 +28,7 @@ package map
 		public function GroundScene()
 		{
 			super(GameSetting.GRID_SIZE);
+			this.gridData = MapGridDataModel.instance.groundGrid ;
 			this.cacheAsBitmap = true ;
 			mouseEnabled = false ;
 			
@@ -74,8 +75,7 @@ package map
 		public function addBuilding( building:Building , updateDirection:Boolean=true):Building
 		{
 			this.addIsoObject( building );
-			
-			building.setWalkable( false, MapGridDataModel.instance.groundGrid );
+			building.setWalkable( false, gridData );
 			_groundNodeHash[building.nodeX+"-"+building.nodeZ]=building;
 			if(updateDirection)updateUI(building);
 			return building;
@@ -87,7 +87,7 @@ package map
 		 */		
 		public function removeBuilding( building:Building):void
 		{
-			building.setWalkable( true ,  MapGridDataModel.instance.groundGrid  );
+			building.setWalkable( true ,  gridData  );
 			this.removeIsoObject( building );
 			delete _groundNodeHash[building.nodeX+"-"+building.nodeZ];
 		}
@@ -167,7 +167,7 @@ package map
 		override public function clear():void
 		{
 			for each( var obj:IsoObject in children){
-				obj.setWalkable( true , MapGridDataModel.instance.groundGrid );
+				obj.setWalkable( true , gridData );
 			}
 			super.clear();
 		}
