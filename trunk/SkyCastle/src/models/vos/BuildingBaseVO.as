@@ -10,9 +10,9 @@ package models.vos
 		public var title:String; //标题
 		public var info:String;//说明
 		public var type:int ; //类型
-		public var alias:String; //别名，类名
 		public var xSpan:int; //占用x轴的节点长度
 		public var zSpan:int; //占用z轴的节点长度
+		public var alias:String; //别名，类名
 		public var url:String; //swf文件路径
 		public var thumb:String; //缩略图路径
 		public var animationAlias:String; //如果有动画，则动画的别名
