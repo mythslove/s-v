@@ -26,7 +26,7 @@ package map.elements
 		/** 旋转建筑 */
 		public function rotateBuilding():void
 		{
-			if(this.getRotatable( MapGridDataModel.instance.roadGrid) )
+			if(this.getRotatable( MapGridDataModel.instance.astarGrid) )
 			{
 				var isoScene:IsoScene = this.parent as IsoScene ;
 				if(isoScene is BuildingScene)

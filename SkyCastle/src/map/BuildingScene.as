@@ -45,7 +45,7 @@ package map
 			//有些建筑虽然在建筑层，但是可以从上面通过，如门，土地
 			//如果上面不能走，将
 			if( !building.buildingVO.baseVO.walkable ){ 
-				building.setWalkable(false, MapGridDataModel.instance.roadGrid );
+				building.setWalkable(false, MapGridDataModel.instance.astarGrid );
 			}
 			return building;
 		}
@@ -57,7 +57,7 @@ package map
 		public function removeBuilding( building:Building):void
 		{
 			building.setWalkable( true , this.gridData );
-			building.setWalkable(true, MapGridDataModel.instance.roadGrid );
+			building.setWalkable(true, MapGridDataModel.instance.astarGrid );
 			this.removeIsoObject( building );
 		}
 		
@@ -71,14 +71,14 @@ package map
 			{
 				//清除旋转前的数据
 				building.setWalkable(true,gridData);
-				building.setWalkable(true, MapGridDataModel.instance.roadGrid );
+				building.setWalkable(true, MapGridDataModel.instance.astarGrid );
 				//旋转
 				building.scaleX = ~building.scaleX+1;
 				//更新旋转后的数据
 				building.drawGrid();
 				building.setWalkable(false,gridData);
 				if( !building.buildingVO.baseVO.walkable ){ 
-					building.setWalkable(false, MapGridDataModel.instance.roadGrid );
+					building.setWalkable(false, MapGridDataModel.instance.astarGrid );
 				}
 				building.sort();
 			}
@@ -91,7 +91,7 @@ package map
 		{
 			for each( var obj:IsoObject in children){
 				obj.setWalkable( true , gridData );
-				obj.setWalkable( true , MapGridDataModel.instance.roadGrid );
+				obj.setWalkable( true , MapGridDataModel.instance.astarGrid );
 			}
 			super.clear();
 		}

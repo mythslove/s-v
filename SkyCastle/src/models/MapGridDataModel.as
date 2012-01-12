@@ -7,7 +7,7 @@ package models
 	import flash.utils.Dictionary;
 
 	/**
-	 * 寻路用的 
+	 * 地图的网格数据
 	 * @author zhouzhanglin
 	 */	
 	public class MapGridDataModel
@@ -22,12 +22,21 @@ package models
 		/**
 		 * 用于寻路的数据 
 		 */		
-		public var roadGrid:Grid = new Grid(GameSetting.GRID_X , GameSetting.GRID_Z);
-		
+		public var astarGrid:Grid = new Grid(GameSetting.GRID_X , GameSetting.GRID_Z);
 		
 		/**
 		 * 额外的地图数据 
 		 */		
 		public var extraHash:Dictionary ; 
+		
+		/**
+		 * 建筑层数据 
+		 */		
+		public var buildingGrid:Grid  = new Grid(GameSetting.GRID_X , GameSetting.GRID_Z);
+		
+		/**
+		 * 地面层数据 
+		 */		
+		public var groundGrid:Grid = new Grid(GameSetting.GRID_X , GameSetting.GRID_Z);
 	}
 }
