@@ -11,7 +11,6 @@ package map.elements
 	
 	import flash.display.MovieClip;
 	import flash.events.Event;
-	import flash.events.MouseEvent;
 	import flash.geom.Matrix;
 	
 	import map.cell.BuildingGridLayer;
@@ -56,22 +55,7 @@ package map.elements
 		protected function addedToStageHandler(e:Event):void
 		{
 			this.removeEventListener(Event.ADDED_TO_STAGE , addedToStageHandler );
-			itemLayer.addEventListener(MouseEvent.MOUSE_OVER , onMouseHandler );
-			itemLayer.addEventListener(MouseEvent.MOUSE_OUT , onMouseHandler );
 			loadRes();
-		}
-		
-		private function onMouseHandler( e:MouseEvent ):void
-		{
-			switch(e.type)
-			{
-				case MouseEvent.MOUSE_OVER :
-					selectedStatus(true);
-					break ;
-				case MouseEvent.MOUSE_OUT :
-					selectedStatus(false );
-					break ;
-			}
 		}
 		
 		/**
