@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
 	<buildings>
-		<BuildingBaseVO baseId="1" title="MoreCity PathCobblestone" type="2" alias="MoreCity_PathCobblestone"  xSpan="1" zSpan="1"  
-		url="res/road/MoreCity_PathCobblestone.swf" thumb="res/road/MoreCity_PathCobblestoneThumb.png"  animationAlias=""/>
-		<BuildingBaseVO baseId="2" title="HallOfHeroes Ruin" type="1" alias="Basic_HallOfHeroes_Ruin"  xSpan="2" zSpan="3"  
-		url="res/house/Basic_HallOfHeroes_Ruin.swf" thumb="res/house/Basic_HallOfHeroes_RuinThumb.png"  animationAlias=""/>
+		<BuildingBaseVO baseId="1" title="MoreCity PathCobblestone" type="2" alias="MoreCity_PathCobblestone"  xSpan="1" zSpan="1"  layerType="0" gridType="0"
+		url="res/road/MoreCity_PathCobblestone.swf" thumb="res/road/MoreCity_PathCobblestoneThumb.png"  animationAlias=""  walkable="1"/>
+		<BuildingBaseVO baseId="2" title="HallOfHeroes Ruin" type="1" alias="Basic_HallOfHeroes_Ruin"  xSpan="2" zSpan="3"  layerType="1" gridType="1"
+		url="res/house/Basic_HallOfHeroes_Ruin.swf" thumb="res/house/Basic_HallOfHeroes_RuinThumb.png"  animationAlias="" walkable="0"/>
 	</buildings>
 	<shop>
 		<house>
