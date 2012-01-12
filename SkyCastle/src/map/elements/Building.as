@@ -5,7 +5,7 @@ package map.elements
 	import map.BuildingScene;
 	import map.GroundScene;
 	
-	import models.AStarRoadGridModel;
+	import models.MapGridDataModel;
 	import models.vos.BuildingVO;
 	
 	public class Building extends BuildingBase
@@ -26,7 +26,7 @@ package map.elements
 		/** 旋转建筑 */
 		public function rotateBuilding():void
 		{
-			if(this.getRotatable( AStarRoadGridModel.instance.roadGrid) )
+			if(this.getRotatable( MapGridDataModel.instance.roadGrid) )
 			{
 				var isoScene:IsoScene = this.parent as IsoScene ;
 				if(isoScene is BuildingScene)

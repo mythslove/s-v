@@ -7,7 +7,9 @@ package map.cell
 	
 	import flash.display.Sprite;
 	
-	import models.AStarRoadGridModel;
+	import map.BuildingScene;
+	
+	import models.MapGridDataModel;
 	
 	/**
 	 *  建筑拥有的格子，单个格子 
@@ -32,19 +34,21 @@ package map.cell
 		}
 		
 		/**
+		 * 主要用于判断建筑层内容
 		 * 单独的检测是否可以放 ，主要是检测 AStarRoadGridModel.instance.roadGrid网格数据。
 		 * 即检测buildingScene层的对象，不检测groundScene对象
 		 * @param parentNodeX
 		 * @param parentNodeZ
+		 * @param buildingScene
 		 */		
-		public function update(parentNodeX:int , parentNodeZ:int):void
+		public function updateBuildingGridRhombus(parentNodeX:int , parentNodeZ:int , buildingScene:BuildingScene ):void
 		{
 			var curNodeX:int = parentNodeX + nodeX ;
 			var curNodeZ :int = parentNodeZ + nodeZ;
 			
-			var astarModel:AStarRoadGridModel = AStarRoadGridModel.instance ;
-			if(astarModel.roadGrid.checkInGrid(curNodeX,curNodeZ) && 
-				astarModel.roadGrid.getNode(curNodeX,curNodeZ).walkable &&
+			var astarModel:MapGridDataModel = MapGridDataModel.instance ;
+			if(buildingScene.gridData.checkInGrid(curNodeX,curNodeZ) && 
+				buildingScene.gridData.getNode(curNodeX,curNodeZ).walkable &&
 				!astarModel.extraHash[curNodeX+"-"+curNodeZ])
 			{
 				setWalkabled(true);

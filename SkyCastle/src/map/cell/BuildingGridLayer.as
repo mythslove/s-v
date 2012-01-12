@@ -9,7 +9,9 @@ package map.cell
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
 	
+	import map.BuildingScene;
 	import map.elements.BuildingBase;
+
 	/**
 	 * 建筑拥有的格子组
 	 * @author zhouzhanglin
@@ -49,17 +51,22 @@ package map.cell
 		}
 		
 		/**
+		 * 主要检测建筑层数据
 		 * 更新所有的子格子颜色，会一个一个检查 
 		 * @param nodeX
 		 * @param nodeZ
-		 * 
+		 * @param buildingScene
 		 */		
-		public function update(nodeX:int,nodeZ:int):void
+		public function updateBuildingGridLayer(nodeX:int,nodeZ:int , buildingScene:BuildingScene ):void
 		{
+			if(!buildingScene){
+				this.setWalkabled( false );
+				return ;
+			}
 			const LEN:int = this.numChildren ;
 			for( var i:int =0  ; i<LEN ; ++i  )
 			{
-				(this.getChildAt(i) as BuildingGridRhombus ).update(nodeX,nodeZ);
+				(this.getChildAt(i) as BuildingGridRhombus ).updateBuildingGridRhombus(nodeX,nodeZ,buildingScene);
 			}
 		}
 		

@@ -17,7 +17,6 @@ package models.vos
 		public var thumb:String; //缩略图路径
 		public var animationAlias:String; //如果有动画，则动画的别名
 		public var layerType:int ; //0为ground层，1为建筑层
-		public var gridType:int ; //0为占用ground层数据,1为占用building层数据
 		public var walkable:Boolean=true ; //false为不能从上面通过。true为能从上面是通过，寻路时忽略
 	}
 }
