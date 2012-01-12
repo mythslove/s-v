@@ -2,6 +2,7 @@ package map
 {
 	import bing.iso.*;
 	import bing.res.ResVO;
+	import bing.utils.InteractivePNG;
 	
 	import comm.*;
 	
@@ -105,12 +106,62 @@ package map
 		 */		
 		protected function configListeners():void
 		{
-			this.addEventListener(MouseEvent.MOUSE_DOWN , onMouseDownHandler);
-			this.addEventListener(MouseEvent.MOUSE_MOVE , onMouseMoveHandler);
-			this.addEventListener(MouseEvent.MOUSE_UP , onMouseUpHandler );
-			this.addEventListener(MouseEvent.ROLL_OUT , onMouseRollOut);
+			addEventListener(MouseEvent.MOUSE_DOWN , onMouseEventHandler);
+			addEventListener(MouseEvent.MOUSE_MOVE , onMouseEventHandler);
+			addEventListener(MouseEvent.MOUSE_OVER , onMouseEventHandler);
+			addEventListener(MouseEvent.MOUSE_OUT , onMouseEventHandler);
+			addEventListener(MouseEvent.MOUSE_UP , onMouseEventHandler );
+			addEventListener(MouseEvent.ROLL_OUT , onMouseEventHandler);
 			
 			GlobalDispatcher.instance.addEventListener(GlobalEvent.RESIZE , onResizeHandler );
+		}
+		
+		//处理鼠标事件 
+		private function onMouseEventHandler(e:MouseEvent):void
+		{
+			switch(e.type)
+			{
+				case MouseEvent.MOUSE_DOWN:
+					var rect:Rectangle = new Rectangle();
+					rect.x = -GameSetting.MAX_WIDTH*scaleX+stage.stageWidth ;
+					rect.y = -GameSetting.MAX_HEIGHT*scaleX+stage.stageHeight ;
+					rect.width =GameSetting.MAX_WIDTH*scaleX-stage.stageWidth ;
+					rect.height = GameSetting.MAX_HEIGHT*scaleX-stage.stageHeight ;
+					this.startDrag( false  , rect );
+					break;
+				case MouseEvent.MOUSE_MOVE:
+					var xx:int = (stage.mouseX-this.x)/scaleX -sceneLayerOffsetX ;
+					var yy:int = (stage.mouseY -this.y)/scaleX-sceneLayerOffsetY;
+					mouseNodePoint = IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE,xx,yy);
+					if(e.buttonDown)	{
+						_mapIsMove = true ;
+					}else if(mouseContainer.numChildren>0) {
+						updateMouseBuildingGrid();
+						return ;
+					}
+					break;
+				case MouseEvent.MOUSE_OVER:
+					if(e.target is InteractivePNG){
+						(e.target as InteractivePNG).parent["selectedStatus"](true);
+					}
+					break;
+				case MouseEvent.MOUSE_OUT:
+					if(e.target is InteractivePNG){
+						(e.target as InteractivePNG).parent["selectedStatus"](false);
+					}
+					break;
+				case MouseEvent.MOUSE_UP:
+					this.stopDrag();
+					if(!_mapIsMove) {
+						onClick(e);
+					}
+					_mapIsMove = false ;
+					break;
+				case MouseEvent.ROLL_OUT:
+					this.stopDrag();
+					_mapIsMove = false ;
+					break;
+			}
 		}
 		
 		/**
@@ -120,42 +171,6 @@ package map
 		protected function onResizeHandler( e:GlobalEvent ):void
 		{
 			modifyMapPosition();
-		}
-		
-		/**
-		 * 鼠标移出地图区域时 
-		 * @param e
-		 */		
-		protected function onMouseRollOut(e:MouseEvent):void
-		{
-			this.stopDrag();
-			_mapIsMove = false ;
-		}
-		/**
-		 * 鼠标按下 
-		 * @param e
-		 */		
-		protected function onMouseDownHandler(e:MouseEvent):void
-		{
-			var rect:Rectangle = new Rectangle();
-			rect.x = -GameSetting.MAX_WIDTH*scaleX+stage.stageWidth ;
-			rect.y = -GameSetting.MAX_HEIGHT*scaleX+stage.stageHeight ;
-			rect.width =GameSetting.MAX_WIDTH*scaleX-stage.stageWidth ;
-			rect.height = GameSetting.MAX_HEIGHT*scaleX-stage.stageHeight ;
-			this.startDrag( false  , rect );
-		}
-		
-		/**
-		 * 鼠标按下弹起时 
-		 * @param e
-		 */		
-		protected function onMouseUpHandler(e:MouseEvent):void
-		{
-			this.stopDrag();
-			if(!_mapIsMove) {
-				onClick(e);
-			}
-			_mapIsMove = false ;
 		}
 		
 		/** 鼠标点击 */
@@ -219,26 +234,6 @@ package map
 				(buildingScene2.gridData.getNode(nodeX,nodeZ).walkable?buildingScene2:
 				(buildingScene1.gridData.getNode(nodeX,nodeZ).walkable?buildingScene1:null) );
 			return buildingScene;
-		}
-		
-		/**
-		 * 鼠标移动时 
-		 * @param e
-		 */		
-		protected function onMouseMoveHandler(e:MouseEvent):void
-		{
-			var xx:int = (stage.mouseX-this.x)/scaleX -sceneLayerOffsetX ;
-			var yy:int = (stage.mouseY -this.y)/scaleX-sceneLayerOffsetY;
-			mouseNodePoint = IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE,xx,yy);
-			if(e.buttonDown)
-			{
-				_mapIsMove = true ;
-			}
-			else if(mouseContainer.numChildren>0) 
-			{
-				updateMouseBuildingGrid();
-				return ;
-			}
 		}
 		
 		/**
