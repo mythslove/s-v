@@ -73,12 +73,6 @@ package utils
 		 */		
 		private function parseMapData( resVO:ResVO , resLoader:Object ):void
 		{
-			var groundGrid1:Grid = new Grid(GameSetting.GRID_X , GameSetting.GRID_Z); //地面1
-			var buildingGrid1:Grid = new Grid(GameSetting.GRID_X , GameSetting.GRID_Z); //建筑1
-			var groundGrid2:Grid = new Grid(GameSetting.GRID_X , GameSetting.GRID_Z); //地面2
-			var buildingGrid2:Grid = new Grid(GameSetting.GRID_X , GameSetting.GRID_Z); //建筑2
-			var groundGrid3:Grid = new Grid(GameSetting.GRID_X , GameSetting.GRID_Z); //地面3
-			var buildingGrid3:Grid = new Grid(GameSetting.GRID_X , GameSetting.GRID_Z); //建筑3
 			var bytes:ByteArray = resLoader as ByteArray;
 			try
 			{
@@ -89,26 +83,13 @@ package utils
 					for( var j:int = 0 ; j<GameSetting.GRID_Z ; ++ j)
 					{
 						temp = bytes.readUnsignedByte();
+						//哪个isoScene索引
+						MapGridDataModel.instance.sceneHash[i+"-"+j]=temp;
 						if(temp>0){
 							//大于表示这里可以放建筑，所以寻路和建筑，地面数据都需要这些数据
 							MapGridDataModel.instance.astarGrid.getNode(i,j).walkable = true ;
 							MapGridDataModel.instance.buildingGrid.getNode(i,j).walkable = true ;
 							MapGridDataModel.instance.groundGrid.getNode(i,j).walkable = true ;
-						}
-						switch(temp)
-						{
-							case 1:
-								groundGrid1.getNode(i,j).walkable=true ;
-								buildingGrid1.getNode(i,j).walkable=true ;
-								break ;
-							case 2:
-								groundGrid2.getNode(i,j).walkable=true ;
-								buildingGrid2.getNode(i,j).walkable=true ;
-								break ;
-							case 3:
-								groundGrid3.getNode(i,j).walkable=true ;
-								buildingGrid3.getNode(i,j).walkable=true ;
-								break ;
 						}
 					}
 				}
@@ -121,14 +102,6 @@ package utils
 					MapGridDataModel.instance.astarGrid.getNode(nodeX,nodeZ).walkable = true ;
 					MapGridDataModel.instance.extraHash[nodeX+"-"+nodeZ] = true ;
 				}
-				var obj:Object = new Object();
-				obj["groundGrid1"]=groundGrid1 ;
-				obj["buildingGrid1"]=buildingGrid1;
-				obj["groundGrid2"]=groundGrid2 ;
-				obj["buildingGrid2"]=buildingGrid2;
-				obj["groundGrid3"]=groundGrid3 ;
-				obj["buildingGrid3"]=buildingGrid3;
-				resVO.resObject = obj ;
 			}
 			catch(e:Error)
 			{

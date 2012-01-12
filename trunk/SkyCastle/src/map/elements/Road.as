@@ -45,8 +45,6 @@ package map.elements
 		
 		
 		override public function rotateBuilding():void
-		{
-			
-		}
+		{ }
 	}
 }

@@ -27,7 +27,12 @@ package models
 		/**
 		 * 额外的地图数据 
 		 */		
-		public var extraHash:Dictionary ; 
+		public var extraHash:Dictionary = new Dictionary() ;
+		
+		/**
+		 * 每个格子对应的是哪个IsoScene 
+		 */		
+		public var sceneHash:Dictionary = new Dictionary();
 		
 		/**
 		 * 建筑层数据 
