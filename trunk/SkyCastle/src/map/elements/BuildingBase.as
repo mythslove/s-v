@@ -135,8 +135,9 @@ package map.elements
 		/**
 		 * 卸载该对象 
 		 */		
-		public function dispose():void
+		override public function dispose():void
 		{
+			super.dispose();
 			this.removeEventListener(Event.ADDED_TO_STAGE , addedToStageHandler );
 			ResourceUtil.instance.removeEventListener( buildingVO.baseVO.alias , resLoadedHandler );
 			itemLayer.disableInteractivePNG();
