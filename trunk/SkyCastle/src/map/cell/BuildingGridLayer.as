@@ -56,14 +56,14 @@ package map.cell
 		 * 更新所有的子格子颜色，会一个一个检查 
 		 * @param nodeX
 		 * @param nodeZ
-		 * @param build
+		 * @param layerType
 		 */		
-		public function updateBuildingGridLayer(nodeX:int,nodeZ:int , build:BuildingBase ):void
+		public function updateBuildingGridLayer(nodeX:int,nodeZ:int , layerType:int ):void
 		{
 			const LEN:int = this.numChildren ;
 			for( var i:int =0  ; i<LEN ; ++i  )
 			{
-				(this.getChildAt(i) as BuildingGridRhombus ).updateBuildingGridRhombus(nodeX,nodeZ,build);
+				(this.getChildAt(i) as BuildingGridRhombus ).updateBuildingGridRhombus(nodeX,nodeZ,layerType);
 			}
 		}
 		

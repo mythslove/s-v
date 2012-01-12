@@ -63,14 +63,7 @@ package map
 					var vo:BuildingVO = ObjectUtil.copyObj( (mouseContainer.getChildAt(0) as BuildingBase).buildingVO ) as BuildingVO;
 					addBuildingByVO( mouseContainer.nodeX , mouseContainer.nodeZ ,vo );
 					mouseContainer.parent.setChildIndex( mouseContainer , mouseContainer.parent.numChildren-1);
-					build.gridLayer.updateBuildingGridLayer(mouseContainer.nodeX , mouseContainer.nodeZ,build);
-				}
-				
-				if(getBuildings(LayerType.GROUND ).length>100){
-					build = new BuildingBase( ShopModel.instance.houseArray[0]);
-					build.drawGrid();
-					build.gridLayer.visible=true;
-					this.addBuilidngOnMouse( build );
+					build.gridLayer.updateBuildingGridLayer(mouseContainer.nodeX , mouseContainer.nodeZ,vo.baseVO.layerType);
 				}
 			}
 			else if(GameData.buildingCurrOperation==BuildingCurrentOperation.ROTATE)

@@ -1,7 +1,6 @@
 package map
 {
 	import bing.iso.*;
-	import bing.res.ResVO;
 	import bing.utils.InteractivePNG;
 	
 	import comm.*;
@@ -243,7 +242,7 @@ package map
 				mouseContainer.nodeX = mouseNodePoint.x ;
 				mouseContainer.nodeZ =mouseNodePoint.y ;
 				var build:BuildingBase = mouseContainer.getChildAt(0) as BuildingBase;
-				build.gridLayer.updateBuildingGridLayer( mouseNodePoint.x, mouseNodePoint.y , build );
+				build.gridLayer.updateBuildingGridLayer( mouseNodePoint.x, mouseNodePoint.y , build.buildingVO.baseVO.layerType );
 			}
 		}
 		
