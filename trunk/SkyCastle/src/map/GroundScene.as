@@ -7,7 +7,6 @@ package map
 	import comm.GameSetting;
 	
 	import enums.BuildingType;
-	import enums.GridType;
 	
 	import flash.utils.Dictionary;
 	
@@ -19,7 +18,6 @@ package map
 	public class GroundScene extends IsoScene
 	{
 		private var _groundNodeHash:Dictionary = new Dictionary();
-		
 		
 		public var L:String,R:String, U:String, B:String , M:String ;
 		public var LU:String, LB:String,RU:String , RB:String ;
@@ -79,13 +77,6 @@ package map
 			building.setWalkable( false , this.gridData );
 			_groundNodeHash[building.nodeX+"-"+building.nodeZ]=building;
 			if(updateDirection)updateUI(building);
-			
-			//如果还要影响建筑层的格子数据
-			if( building.buildingVO.baseVO.gridType==GridType.BUILDING )
-			{
-				var buildingScene:BuildingScene = GameWorld.instance.getBuildingScene( building.nodeX , building.nodeZ );
-				building.setWalkable( false , buildingScene.gridData );
-			}
 			return building;
 		}
 		
@@ -96,12 +87,6 @@ package map
 		public function removeBuilding( building:Building):void
 		{
 			building.setWalkable( true , this.gridData );
-			//如果还要影响建筑层的格子数据
-			if( building.buildingVO.baseVO.gridType==GridType.BUILDING )
-			{
-				var buildingScene:BuildingScene = GameWorld.instance.getBuildingScene( building.nodeX , building.nodeZ );
-				building.setWalkable( true , buildingScene.gridData );
-			}
 			this.removeIsoObject( building );
 			delete _groundNodeHash[building.nodeX+"-"+building.nodeZ];
 		}

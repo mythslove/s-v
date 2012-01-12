@@ -5,11 +5,9 @@ package map
 	
 	import comm.GameSetting;
 	
-	import enums.GridType;
-	
 	import map.elements.Building;
 	
-	import models.AStarRoadGridModel;
+	import models.MapGridDataModel;
 	import models.vos.BuildingVO;
 	
 	public class BuildingScene extends IsoScene
@@ -44,16 +42,10 @@ package map
 		{
 			this.addIsoObject( building );
 			building.setWalkable( false , this.gridData );
-			
-			//如果还要影响地面的数据格子(特殊情况)
-			if( building.buildingVO.baseVO.gridType == GridType.GROUND ){ 
-				var groundScene:GroundScene = GameWorld.instance.getGroundScene( building.nodeX , building.nodeZ );
-				building.setWalkable( false , groundScene.gridData );
-			}
 			//有些建筑虽然在建筑层，但是可以从上面通过，如门，土地
-			//如果上面不能走
+			//如果上面不能走，将
 			if( !building.buildingVO.baseVO.walkable ){ 
-				building.setWalkable(false, AStarRoadGridModel.instance.roadGrid );
+				building.setWalkable(false, MapGridDataModel.instance.roadGrid );
 			}
 			return building;
 		}
@@ -65,15 +57,7 @@ package map
 		public function removeBuilding( building:Building):void
 		{
 			building.setWalkable( true , this.gridData );
-			//如果还要影响地面的数据格子(特殊情况)
-			if( building.buildingVO.baseVO.gridType == GridType.GROUND ){ 
-				var groundScene:GroundScene = GameWorld.instance.getGroundScene( building.nodeX , building.nodeZ );
-				building.setWalkable( true , groundScene.gridData );
-			}
-			//如果上面不能走，移除地建筑的时候，将寻路数据设置为可行
-			if( !building.buildingVO.baseVO.walkable ){
-				building.setWalkable(true, AStarRoadGridModel.instance.roadGrid );
-			}
+			building.setWalkable(true, MapGridDataModel.instance.roadGrid );
 			this.removeIsoObject( building );
 		}
 		
@@ -85,10 +69,17 @@ package map
 		{
 			if(building.getRotatable(gridData))
 			{
+				//清除旋转前的数据
 				building.setWalkable(true,gridData);
+				building.setWalkable(true, MapGridDataModel.instance.roadGrid );
+				//旋转
 				building.scaleX = ~building.scaleX+1;
+				//更新旋转后的数据
 				building.drawGrid();
 				building.setWalkable(false,gridData);
+				if( !building.buildingVO.baseVO.walkable ){ 
+					building.setWalkable(false, MapGridDataModel.instance.roadGrid );
+				}
 				building.sort();
 			}
 		}
@@ -100,7 +91,7 @@ package map
 		{
 			for each( var obj:IsoObject in children){
 				obj.setWalkable( true , gridData );
-				obj.setWalkable( true , AStarRoadGridModel.instance.roadGrid );
+				obj.setWalkable( true , MapGridDataModel.instance.roadGrid );
 			}
 			super.clear();
 		}

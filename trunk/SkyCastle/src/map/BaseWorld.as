@@ -6,8 +6,6 @@ package map
 	
 	import comm.*;
 	
-	import enums.BuildingType;
-	import enums.GridType;
 	import enums.LayerType;
 	
 	import flash.display.*;
@@ -247,7 +245,7 @@ package map
 				mouseContainer.nodeX = mouseNodePoint.x ;
 				mouseContainer.nodeZ =mouseNodePoint.y ;
 				var build:BuildingBase = mouseContainer.getChildAt(0) as BuildingBase;
-				if( build.buildingVO.baseVO.gridType==GridType.GROUND) //如果是占用地面层的格子数据 
+				if( build.buildingVO.baseVO.layerType==LayerType.GROUND) //如果是地面建筑
 				{
 					var scene:GroundScene = this.getGroundScene(mouseNodePoint.x,mouseNodePoint.y);
 					if(scene && scene.gridData.getNode(mouseNodePoint.x,mouseNodePoint.y).walkable){
@@ -256,16 +254,10 @@ package map
 						build.gridLayer.setWalkabled(false);
 					}
 				}
-				else if( build.buildingVO.baseVO.gridType==GridType.BUILDING )//占用建筑层的数据
+				else//占用建筑层的数据
 				{
-					var xx:int = (stage.mouseX-this.x)/scaleX -sceneLayerOffsetX ;
-					var yy:int = (stage.mouseY -this.y)/scaleX-sceneLayerOffsetY;
-					var p:Point = IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE,xx,yy);
-					build.gridLayer.update( mouseNodePoint.x,mouseNodePoint.y);
-				}
-				else //占用两层
-				{
-					
+					var buildingScene:BuildingScene = this.getBuildingScene(mouseNodePoint.x,mouseNodePoint.y);
+					build.gridLayer.updateBuildingGridLayer( mouseNodePoint.x,mouseNodePoint.y,buildingScene);
 				}
 			}
 		}

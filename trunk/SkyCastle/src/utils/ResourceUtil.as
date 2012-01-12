@@ -13,7 +13,7 @@ package utils
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
 	
-	import models.AStarRoadGridModel;
+	import models.MapGridDataModel;
 	
 	/**
 	 * 游戏资源加载和保存以及处理的管理类 
@@ -79,7 +79,7 @@ package utils
 			var buildingGrid2:Grid = new Grid(GameSetting.GRID_X , GameSetting.GRID_Z); //建筑2
 			var groundGrid3:Grid = new Grid(GameSetting.GRID_X , GameSetting.GRID_Z); //地面3
 			var buildingGrid3:Grid = new Grid(GameSetting.GRID_X , GameSetting.GRID_Z); //建筑3
-			var roadGrid:Grid = AStarRoadGridModel.instance.roadGrid ;//寻路用的数据
+			var roadGrid:Grid = MapGridDataModel.instance.roadGrid ;//寻路用的数据
 			var extraHash:Dictionary = new Dictionary(); //额外不能走的
 			var bytes:ByteArray = resLoader as ByteArray;
 			try
@@ -119,7 +119,7 @@ package utils
 					roadGrid.getNode(nodeX,nodeZ).walkable = true ;
 					extraHash[nodeX+"-"+nodeZ] = true ;
 				}
-				AStarRoadGridModel.instance.extraHash = extraHash ;
+				MapGridDataModel.instance.extraHash = extraHash ;
 				var obj:Object = new Object();
 				obj["groundGrid1"]=groundGrid1 ;
 				obj["buildingGrid1"]=buildingGrid1;

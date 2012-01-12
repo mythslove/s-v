@@ -10,12 +10,12 @@ package models
 	 * 寻路用的 
 	 * @author zhouzhanglin
 	 */	
-	public class AStarRoadGridModel
+	public class MapGridDataModel
 	{
-		private static var _instance:AStarRoadGridModel ;
-		public static function get instance():AStarRoadGridModel
+		private static var _instance:MapGridDataModel ;
+		public static function get instance():MapGridDataModel
 		{
-			if(!_instance) _instance = new AStarRoadGridModel();
+			if(!_instance) _instance = new MapGridDataModel();
 			return _instance;
 		}
 		//=======================================
