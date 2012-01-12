@@ -79,8 +79,6 @@ package utils
 			var buildingGrid2:Grid = new Grid(GameSetting.GRID_X , GameSetting.GRID_Z); //建筑2
 			var groundGrid3:Grid = new Grid(GameSetting.GRID_X , GameSetting.GRID_Z); //地面3
 			var buildingGrid3:Grid = new Grid(GameSetting.GRID_X , GameSetting.GRID_Z); //建筑3
-			var roadGrid:Grid = MapGridDataModel.instance.roadGrid ;//寻路用的数据
-			var extraHash:Dictionary = new Dictionary(); //额外不能走的
 			var bytes:ByteArray = resLoader as ByteArray;
 			try
 			{
@@ -92,7 +90,10 @@ package utils
 					{
 						temp = bytes.readUnsignedByte();
 						if(temp>0){
-							roadGrid.getNode(i,j).walkable = true ;
+							//大于表示这里可以放建筑，所以寻路和建筑，地面数据都需要这些数据
+							MapGridDataModel.instance.astarGrid.getNode(i,j).walkable = true ;
+							MapGridDataModel.instance.buildingGrid.getNode(i,j).walkable = true ;
+							MapGridDataModel.instance.groundGrid.getNode(i,j).walkable = true ;
 						}
 						switch(temp)
 						{
@@ -114,12 +115,12 @@ package utils
 				temp = bytes.readUnsignedShort();
 				for(  i = 0 ; i<temp ; ++ i)
 				{
+					//额外的格子，如楼梯，这里寻路需要这些数据，但建筑不需要这些格子
 					var nodeX:int = bytes.readUnsignedByte() ;
 					var nodeZ:int = bytes.readUnsignedByte() ;
-					roadGrid.getNode(nodeX,nodeZ).walkable = true ;
-					extraHash[nodeX+"-"+nodeZ] = true ;
+					MapGridDataModel.instance.astarGrid.getNode(nodeX,nodeZ).walkable = true ;
+					MapGridDataModel.instance.extraHash[nodeX+"-"+nodeZ] = true ;
 				}
-				MapGridDataModel.instance.extraHash = extraHash ;
 				var obj:Object = new Object();
 				obj["groundGrid1"]=groundGrid1 ;
 				obj["buildingGrid1"]=buildingGrid1;
