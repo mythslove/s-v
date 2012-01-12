@@ -5,9 +5,9 @@ package models.vos
 	public class BuildingVO
 	{
 		public var id:int;
-		public var baseId:int;
+		public var baseId:int; //BuildingBaseVO的id
 		public var price:int;
-		public var scale:int = 1;
+		public var scale:int = 1; //方向1为正，-1为旋转后
 		
 		private var _baseVO:BuildingBaseVO ;
 		public function get baseVO():BuildingBaseVO
