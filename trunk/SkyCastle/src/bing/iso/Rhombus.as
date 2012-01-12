@@ -20,14 +20,23 @@ package bing.iso
 		{
 			this.graphics.clear() ;
 			this.color = color ;
-			this.graphics.lineStyle(3,color);
+			this.graphics.lineStyle(4,color);
 //			this.graphics.beginFill(color,0.5);
 			this.graphics.moveTo( 0 , 0 );
 			this.graphics.lineTo( size , size/2 );
 			this.graphics.lineTo( 0 , size );
 			this.graphics.lineTo( -size , size/2 );
-			this.graphics.lineTo( 0 ,0 );
+			this.graphics.lineTo( 0 , 0);
 //			this.graphics.endFill() ;
+			
+			
+			
+			this.graphics.lineStyle(1,0xffffff);
+			this.graphics.moveTo( 0 , 2 );
+			this.graphics.lineTo( size-2 , size/2 );
+			this.graphics.lineTo( 0 , size-2 );
+			this.graphics.lineTo( -size+2 , size/2 );
+			this.graphics.lineTo( 0 ,2 );
 		}
 	}
 }
