@@ -20,6 +20,7 @@ package map.cell
 		public var nodeZ:int ;
 		private var rhombus1:Rhombus ;
 		private var rhombus2:Rhombus ;
+		public var walkable:Boolean = true ;
 		
 		public function BuildingGridRhombus( nodeX:int , nodeZ:int )
 		{
@@ -60,6 +61,7 @@ package map.cell
 		 */		
 		public function setWalkabled( value:Boolean ):void
 		{
+			walkable = value ;
 			if( value )
 			{
 				if(this.currColor!=0x00ff00){

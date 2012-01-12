@@ -7,6 +7,8 @@ package map
 	import comm.*;
 	
 	import enums.BuildingType;
+	import enums.GridType;
+	import enums.LayerType;
 	
 	import flash.display.*;
 	import flash.events.*;
@@ -20,19 +22,23 @@ package map
 	
 	public class BaseWorld extends IsoWorld
 	{
-		//***************************************************************
-		public var buildingScene1:BuildingScene ;
+		//**----------------------------------------------------------------*
 		public var groundScene1:GroundScene;
-		public var buildingScene2:BuildingScene ;
 		public var groundScene2:GroundScene;
-		public var buildingScene3:BuildingScene ;
 		public var groundScene3:GroundScene;
-		//**********************************************************/
-		/** 鼠标的node位置*/
+		
+		public var buildingScene1:BuildingScene ;
+		public var buildingScene2:BuildingScene ;
+		public var buildingScene3:BuildingScene ;
+		//----------------------------------------------------------------*/
+		/** 鼠标的node位置 */
 		public var mouseNodePoint:Point = new Point();
-		public var gridScene:IsoScene ;
-		public var mouseContainer:IsoObject; //跟随鼠标移动的建筑
-		private var _mapIsMove:Boolean=false; //地图是否在移动
+		/** 跟随鼠标移动的建筑 */
+		public var mouseContainer:IsoObject; 
+		private var _gridScene:IsoScene ; //网格层
+		private var _mapIsMove:Boolean=false; 
+		/** 地图是否在移动 */
+		public function mapIsMove():Boolean{ return _mapIsMove ; }
 		
 		/**
 		 * 游戏世界基类
@@ -164,10 +170,7 @@ package map
 			}
 		}
 		
-		/**
-		 * 窗口大小变化
-		 * @param e
-		 */		
+		/** 窗口大小变化*/		
 		protected function onResizeHandler( e:GlobalEvent ):void
 		{
 			modifyMapPosition();
@@ -178,12 +181,12 @@ package map
 		{ }
 		
 		/**
-		 * 根据node位置，添加建筑 
+		 * 根据node位置和buildingVO，添加建筑 
 		 * @param nodeX
 		 * @param nodeZ
 		 * @reutrn 添加成功建筑
 		 */		
-		protected function addBuilding( nodeX:int , nodeZ:int , vo:BuildingVO ):BuildingBase
+		protected function addBuildingByVO( nodeX:int , nodeZ:int , vo:BuildingVO ):BuildingBase
 		{
 			var dx:int = nodeX*GameSetting.GRID_SIZE ;
 			var dz:int = nodeZ*GameSetting.GRID_SIZE ;
@@ -191,16 +194,16 @@ package map
 			var result:BuildingBase  ;
 			if(nodeX<0 || nodeZ<0 || nodeX>=GameSetting.GRID_X || nodeZ>=GameSetting.GRID_Z) return result ;
 			
-			if(vo.baseVO.type==BuildingType.ROAD)
+			if(vo.baseVO.layerType==LayerType.GROUND) //添加到地面层
 			{
-				var groundScene:GroundScene = getMouseGroundScene (nodeX,nodeZ);
+				var groundScene:GroundScene = getGroundScene (nodeX,nodeZ);
 				if(groundScene) {
 					result = groundScene.addBuildingByVO( dx,dz,vo);
 				}
 			}
-			else
+			else //添加到建筑层
 			{
-				var buildingScene:BuildingScene = getMouseBuildingScene(nodeX,nodeZ);
+				var buildingScene:BuildingScene = getBuildingScene(nodeX,nodeZ);
 				if(buildingScene) {
 					result = buildingScene.addBuildingByVO( dx,dz,vo);
 				}
@@ -214,7 +217,7 @@ package map
 		 * @param nodeZ
 		 * @return 
 		 */		
-		protected function getMouseGroundScene( nodeX:int , nodeZ:int ):GroundScene
+		public function getGroundScene( nodeX:int , nodeZ:int ):GroundScene
 		{
 			var groundScene:GroundScene = groundScene3.gridData.getNode(nodeX,nodeZ).walkable? groundScene3: 
 				(groundScene2.gridData.getNode(nodeX,nodeZ).walkable?groundScene2:
@@ -228,7 +231,7 @@ package map
 		 * @param nodeZ
 		 * @return 
 		 */		
-		protected function getMouseBuildingScene( nodeX:int , nodeZ:int ):BuildingScene
+		public function getBuildingScene( nodeX:int , nodeZ:int ):BuildingScene
 		{
 			var buildingScene:BuildingScene = buildingScene3.gridData.getNode(nodeX,nodeZ).walkable? buildingScene3: 
 				(buildingScene2.gridData.getNode(nodeX,nodeZ).walkable?buildingScene2:
@@ -236,27 +239,24 @@ package map
 			return buildingScene;
 		}
 		
-		/**
-		 *更新鼠标上面的建筑占用的网格的颜色
-		 */		
+		/** 更新鼠标上面的建筑占用的网格的颜色 */		
 		protected function updateMouseBuildingGrid():void
 		{
-			
 			if(mouseContainer.nodeX!=mouseNodePoint.x || mouseContainer.nodeZ!=mouseNodePoint.y)
 			{
 				mouseContainer.nodeX = mouseNodePoint.x ;
 				mouseContainer.nodeZ =mouseNodePoint.y ;
 				var build:BuildingBase = mouseContainer.getChildAt(0) as BuildingBase;
-				if( build.buildingVO.baseVO.type==BuildingType.ROAD)
+				if( build.buildingVO.baseVO.gridType==GridType.GROUND) //如果是占用地面层的格子数据 
 				{
-					var scene:GroundScene = this.getMouseGroundScene(mouseNodePoint.x,mouseNodePoint.y);
+					var scene:GroundScene = this.getGroundScene(mouseNodePoint.x,mouseNodePoint.y);
 					if(scene && scene.gridData.getNode(mouseNodePoint.x,mouseNodePoint.y).walkable){
 						build.gridLayer.setWalkabled(true);
 					}else{
 						build.gridLayer.setWalkabled(false);
 					}
 				}
-				else
+				else //占用建筑层的数据
 				{
 					var xx:int = (stage.mouseX-this.x)/scaleX -sceneLayerOffsetX ;
 					var yy:int = (stage.mouseY -this.y)/scaleX-sceneLayerOffsetY;
@@ -266,9 +266,7 @@ package map
 			}
 		}
 		
-		/**
-		 *  纠正地图位置，防止出界
-		 */		
+		/**纠正地图位置，防止出界*/		
 		protected function modifyMapPosition():void
 		{
 			if(x>0) x=0 ;

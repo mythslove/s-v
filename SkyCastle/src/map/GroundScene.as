@@ -7,6 +7,7 @@ package map
 	import comm.GameSetting;
 	
 	import enums.BuildingType;
+	import enums.GridType;
 	
 	import flash.utils.Dictionary;
 	
@@ -64,15 +65,7 @@ package map
 			}
 			obj.x = dx;
 			obj.z = dz;
-			if( obj.getWalkable(this.gridData) )
-			{
-				this.addIsoObject( obj );
-				obj.setWalkable( false , this.gridData );
-				_groundNodeHash[obj.nodeX+"-"+obj.nodeZ]=obj;
-				if(updateDirection)updateUI(obj);
-				return obj;
-			}
-			return null ;
+			return addBuilding(obj,updateDirection);
 		}
 		
 		/**
@@ -82,9 +75,17 @@ package map
 		public function addBuilding( building:Building , updateDirection:Boolean=true):Building
 		{
 			this.addIsoObject( building );
+			
 			building.setWalkable( false , this.gridData );
 			_groundNodeHash[building.nodeX+"-"+building.nodeZ]=building;
 			if(updateDirection)updateUI(building);
+			
+			//如果还要影响建筑层的格子数据
+			if( building.buildingVO.baseVO.gridType==GridType.BUILDING )
+			{
+				var buildingScene:BuildingScene = GameWorld.instance.getBuildingScene( building.nodeX , building.nodeZ );
+				building.setWalkable( false , buildingScene.gridData );
+			}
 			return building;
 		}
 		
@@ -95,6 +96,12 @@ package map
 		public function removeBuilding( building:Building):void
 		{
 			building.setWalkable( true , this.gridData );
+			//如果还要影响建筑层的格子数据
+			if( building.buildingVO.baseVO.gridType==GridType.BUILDING )
+			{
+				var buildingScene:BuildingScene = GameWorld.instance.getBuildingScene( building.nodeX , building.nodeZ );
+				building.setWalkable( true , buildingScene.gridData );
+			}
 			this.removeIsoObject( building );
 			delete _groundNodeHash[building.nodeX+"-"+building.nodeZ];
 		}

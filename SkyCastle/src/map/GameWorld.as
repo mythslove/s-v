@@ -1,6 +1,5 @@
 package map
 {
-	import bing.iso.IsoUtils;
 	import bing.utils.ContainerUtil;
 	import bing.utils.ObjectUtil;
 	
@@ -12,8 +11,8 @@ package map
 	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
-	import flash.geom.Point;
 	
+	import map.elements.Building;
 	import map.elements.BuildingBase;
 	
 	import models.ShopModel;
@@ -45,7 +44,7 @@ package map
 		override protected function addedToStageHandler(e:Event):void
 		{
 			super.addedToStageHandler(e);
-			var building:BuildingBase = new BuildingBase( ShopModel.instance.roadArray[0]);
+			var building:BuildingBase = new BuildingBase( ShopModel.instance.houseArray[0]);
 			building.drawGrid();
 			building.gridLayer.visible=true;
 			this.addBuilidngOnMouse( building );
@@ -54,14 +53,14 @@ package map
 		override protected function onClick(e:MouseEvent):void
 		{
 			if(GameData.buildingCurrOperation==BuildingCurrentOperation.ADD)
-			{
-				var xx:int = (e.stageX-this.x)/scaleX - this.sceneLayerOffsetX ;
-				var yy:int = (e.stageY -this.y)/scaleX - this.sceneLayerOffsetY;
-				var p:Point = IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE,xx,yy);
-				
-				var vo:BuildingVO = ObjectUtil.copyObj( (mouseContainer.getChildAt(0) as BuildingBase).buildingVO ) as BuildingVO;
-				addBuilding( p.x , p.y ,vo );
-				mouseContainer.parent.setChildIndex( mouseContainer , mouseContainer.parent.numChildren-1);
+			{	
+				var build:BuildingBase = mouseContainer.getChildAt(0) as BuildingBase ;
+				if( build && build.gridLayer && build.gridLayer.getWalkable() )
+				{
+					var vo:BuildingVO = ObjectUtil.copyObj( (mouseContainer.getChildAt(0) as BuildingBase).buildingVO ) as BuildingVO;
+					addBuildingByVO( mouseContainer.nodeX , mouseContainer.nodeZ ,vo );
+					mouseContainer.parent.setChildIndex( mouseContainer , mouseContainer.parent.numChildren-1);
+				}
 			}
 		}
 		
