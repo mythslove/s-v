@@ -9,7 +9,6 @@ package
 	import comm.GlobalEvent;
 	
 	import flash.display.Sprite;
-	import flash.display.StageQuality;
 	import flash.events.Event;
 	import flash.events.FullScreenEvent;
 	
@@ -34,7 +33,6 @@ package
 			super();
 			stage.align="TL";
 			stage.scaleMode = "noScale";
-			stage.quality = StageQuality.MEDIUM;
 			stage.showDefaultContextMenu = false ;
 			
 			init();
