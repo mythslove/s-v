@@ -21,12 +21,13 @@ package bing.iso
 			this.graphics.clear() ;
 			this.color = color ;
 			this.graphics.lineStyle(3,color);
-			this.graphics.beginFill(color,0.5);
+//			this.graphics.beginFill(color,0.5);
 			this.graphics.moveTo( 0 , 0 );
 			this.graphics.lineTo( size , size/2 );
 			this.graphics.lineTo( 0 , size );
 			this.graphics.lineTo( -size , size/2 );
-			this.graphics.endFill() ;
+			this.graphics.lineTo( 0 ,0 );
+//			this.graphics.endFill() ;
 		}
 	}
 }
