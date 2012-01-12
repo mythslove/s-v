@@ -41,7 +41,7 @@ package map
 		public function addBuilding( building:Building ):Building
 		{
 			this.addIsoObject( building );
-			building.setWalkable( false , this.gridData );
+			building.setWalkable( false , MapGridDataModel.instance.buildingGrid );
 			//有些建筑虽然在建筑层，但是可以从上面通过，如门，土地
 			//如果上面不能走，将
 			if( !building.buildingVO.baseVO.walkable ){ 
@@ -56,7 +56,7 @@ package map
 		 */		
 		public function removeBuilding( building:Building):void
 		{
-			building.setWalkable( true , this.gridData );
+			building.setWalkable( true , MapGridDataModel.instance.buildingGrid );
 			building.setWalkable(true, MapGridDataModel.instance.astarGrid );
 			this.removeIsoObject( building );
 		}
@@ -67,16 +67,17 @@ package map
 		 */		
 		public function rotateBuilding( building:Building ):void
 		{
-			if(building.getRotatable(gridData))
+			var mapGrid:MapGridDataModel = MapGridDataModel.instance; 
+			if(building.getRotatable(mapGrid.buildingGrid))
 			{
 				//清除旋转前的数据
-				building.setWalkable(true,gridData);
+				building.setWalkable(true,mapGrid.buildingGrid);
 				building.setWalkable(true, MapGridDataModel.instance.astarGrid );
 				//旋转
 				building.scaleX = ~building.scaleX+1;
 				//更新旋转后的数据
 				building.drawGrid();
-				building.setWalkable(false,gridData);
+				building.setWalkable(false,mapGrid.buildingGrid);
 				if( !building.buildingVO.baseVO.walkable ){ 
 					building.setWalkable(false, MapGridDataModel.instance.astarGrid );
 				}
@@ -90,7 +91,7 @@ package map
 		override public function clear():void
 		{
 			for each( var obj:IsoObject in children){
-				obj.setWalkable( true , gridData );
+				obj.setWalkable( true , MapGridDataModel.instance.buildingGrid );
 				obj.setWalkable( true , MapGridDataModel.instance.astarGrid );
 			}
 			super.clear();

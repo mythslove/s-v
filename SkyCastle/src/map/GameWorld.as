@@ -1,6 +1,7 @@
 package map
 {
 	import bing.utils.ContainerUtil;
+	import bing.utils.InteractivePNG;
 	import bing.utils.ObjectUtil;
 	
 	import comm.GameData;
@@ -60,6 +61,12 @@ package map
 					var vo:BuildingVO = ObjectUtil.copyObj( (mouseContainer.getChildAt(0) as BuildingBase).buildingVO ) as BuildingVO;
 					addBuildingByVO( mouseContainer.nodeX , mouseContainer.nodeZ ,vo );
 					mouseContainer.parent.setChildIndex( mouseContainer , mouseContainer.parent.numChildren-1);
+				}
+			}
+			else if(GameData.buildingCurrOperation==BuildingCurrentOperation.ROTATE)
+			{	
+				if(e.target is InteractivePNG && e.target.parent is Building){
+					(e.target.parent as Building).rotateBuilding() ;
 				}
 			}
 		}

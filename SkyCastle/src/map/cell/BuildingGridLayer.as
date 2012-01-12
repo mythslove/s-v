@@ -10,6 +10,7 @@ package map.cell
 	import flash.geom.Vector3D;
 	
 	import map.BuildingScene;
+	import map.elements.Building;
 	import map.elements.BuildingBase;
 
 	/**
@@ -55,18 +56,14 @@ package map.cell
 		 * 更新所有的子格子颜色，会一个一个检查 
 		 * @param nodeX
 		 * @param nodeZ
-		 * @param buildingScene
+		 * @param build
 		 */		
-		public function updateBuildingGridLayer(nodeX:int,nodeZ:int , buildingScene:BuildingScene ):void
+		public function updateBuildingGridLayer(nodeX:int,nodeZ:int , build:BuildingBase ):void
 		{
-			if(!buildingScene){
-				this.setWalkabled( false );
-				return ;
-			}
 			const LEN:int = this.numChildren ;
 			for( var i:int =0  ; i<LEN ; ++i  )
 			{
-				(this.getChildAt(i) as BuildingGridRhombus ).updateBuildingGridRhombus(nodeX,nodeZ,buildingScene);
+				(this.getChildAt(i) as BuildingGridRhombus ).updateBuildingGridRhombus(nodeX,nodeZ,build);
 			}
 		}
 		
@@ -84,19 +81,6 @@ package map.cell
 				}
 			}
 			return true ;
-		}
-		
-		/**
-		 * 设置此网格所有的子格子颜色，直接全部设置，不单独检测
-		 * @param value
-		 */		
-		public function setWalkabled( value:Boolean ):void
-		{
-			const LEN:int = this.numChildren ;
-			for( var i:int =0  ; i<LEN ; ++i  )
-			{
-				(this.getChildAt(i) as BuildingGridRhombus ).setWalkabled(value);
-			}
 		}
 		
 		public function dispose():void

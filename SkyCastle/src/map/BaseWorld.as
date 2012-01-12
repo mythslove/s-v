@@ -14,6 +14,7 @@ package map
 	
 	import map.elements.BuildingBase;
 	
+	import models.MapGridDataModel;
 	import models.vos.BuildingVO;
 	
 	import utils.ResourceUtil;
@@ -33,8 +34,9 @@ package map
 		public var mouseNodePoint:Point = new Point();
 		/** 跟随鼠标移动的建筑 */
 		public var mouseContainer:IsoObject; 
-		private var _gridScene:IsoScene ; //网格层
-		private var _mapIsMove:Boolean=false; 
+		protected var _gridScene:IsoScene ; //网格层
+		protected var _mapGridData:MapGridDataModel ; //地图数据
+		protected var _mapIsMove:Boolean=false; 
 		/** 地图是否在移动 */
 		public function mapIsMove():Boolean{ return _mapIsMove ; }
 		
@@ -73,27 +75,21 @@ package map
 //			gridScene.cacheAsBitmap=true;
 //			this.addScene(gridScene);
 			
-			var gridResVO:ResVO = ResourceUtil.instance.getResVOByName("mapdata");
+			_mapGridData = MapGridDataModel.instance;
 			//地图区域1
 			groundScene1 = new GroundScene();
-			groundScene1.gridData = gridResVO.resObject.groundGrid1 ;
 			addScene(groundScene1);
 			buildingScene1 = new BuildingScene();
-			buildingScene1.gridData = gridResVO.resObject.buildingGrid1 ;
 			addScene(buildingScene1);
 			//地图区域2
 			groundScene2 = new GroundScene();
-			groundScene2.gridData = gridResVO.resObject.groundGrid2 ;
 			addScene(groundScene2);
 			buildingScene2 = new BuildingScene();
-			buildingScene2.gridData = gridResVO.resObject.buildingGrid2 ;
 			addScene(buildingScene2);
 			//地图区域3
 			groundScene3 = new GroundScene();
-			groundScene3.gridData = gridResVO.resObject.groundGrid3 ;
 			addScene(groundScene3);
 			buildingScene3 = new BuildingScene();
-			buildingScene3.gridData = gridResVO.resObject.buildingGrid3 ;
 			addScene(buildingScene3);
 			//删除地图数据
 			ResourceUtil.instance.deleteRes("mapdata"); 
@@ -217,10 +213,11 @@ package map
 		 */		
 		public function getGroundScene( nodeX:int , nodeZ:int ):GroundScene
 		{
-			var groundScene:GroundScene = groundScene3.gridData.getNode(nodeX,nodeZ).walkable? groundScene3: 
-				(groundScene2.gridData.getNode(nodeX,nodeZ).walkable?groundScene2:
-				(groundScene1.gridData.getNode(nodeX,nodeZ).walkable?groundScene1:null) );
-			return groundScene;
+			var index:int = int(_mapGridData.sceneHash[nodeX+"-"+nodeZ]) ;
+			if(index==1) return groundScene1 ;
+			else if( index==2 ) return groundScene1 ;
+			else if( index==3 ) return groundScene1 ;
+			return null ;
 		}
 		
 		/**
@@ -231,10 +228,11 @@ package map
 		 */		
 		public function getBuildingScene( nodeX:int , nodeZ:int ):BuildingScene
 		{
-			var buildingScene:BuildingScene = buildingScene3.gridData.getNode(nodeX,nodeZ).walkable? buildingScene3: 
-				(buildingScene2.gridData.getNode(nodeX,nodeZ).walkable?buildingScene2:
-				(buildingScene1.gridData.getNode(nodeX,nodeZ).walkable?buildingScene1:null) );
-			return buildingScene;
+			var index:int = int(_mapGridData.sceneHash[nodeX+"-"+nodeZ]) ;
+			if(index==1) return buildingScene1 ;
+			else if( index==2 ) return buildingScene2 ;
+			else if( index==3 ) return buildingScene3 ;
+			return null ;
 		}
 		
 		/** 更新鼠标上面的建筑占用的网格的颜色 */		
@@ -245,20 +243,7 @@ package map
 				mouseContainer.nodeX = mouseNodePoint.x ;
 				mouseContainer.nodeZ =mouseNodePoint.y ;
 				var build:BuildingBase = mouseContainer.getChildAt(0) as BuildingBase;
-				if( build.buildingVO.baseVO.layerType==LayerType.GROUND) //如果是地面建筑
-				{
-					var scene:GroundScene = this.getGroundScene(mouseNodePoint.x,mouseNodePoint.y);
-					if(scene && scene.gridData.getNode(mouseNodePoint.x,mouseNodePoint.y).walkable){
-						build.gridLayer.setWalkabled(true);
-					}else{
-						build.gridLayer.setWalkabled(false);
-					}
-				}
-				else//占用建筑层的数据
-				{
-					var buildingScene:BuildingScene = this.getBuildingScene(mouseNodePoint.x,mouseNodePoint.y);
-					build.gridLayer.updateBuildingGridLayer( mouseNodePoint.x,mouseNodePoint.y,buildingScene);
-				}
+				build.gridLayer.updateBuildingGridLayer( mouseNodePoint.x, mouseNodePoint.y , build );
 			}
 		}
 		

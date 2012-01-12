@@ -13,6 +13,7 @@ package map
 	import map.elements.Building;
 	import map.elements.Road;
 	
+	import models.MapGridDataModel;
 	import models.vos.BuildingVO;
 	
 	public class GroundScene extends IsoScene
@@ -74,7 +75,7 @@ package map
 		{
 			this.addIsoObject( building );
 			
-			building.setWalkable( false , this.gridData );
+			building.setWalkable( false, MapGridDataModel.instance.groundGrid );
 			_groundNodeHash[building.nodeX+"-"+building.nodeZ]=building;
 			if(updateDirection)updateUI(building);
 			return building;
@@ -86,7 +87,7 @@ package map
 		 */		
 		public function removeBuilding( building:Building):void
 		{
-			building.setWalkable( true , this.gridData );
+			building.setWalkable( true ,  MapGridDataModel.instance.groundGrid  );
 			this.removeIsoObject( building );
 			delete _groundNodeHash[building.nodeX+"-"+building.nodeZ];
 		}
@@ -97,9 +98,9 @@ package map
 		 */		
 		private function updateUI( building:Building ):void
 		{
-			for( var i:int = building.nodeX-1 ; i<building.nodeX+2 && i<gridData.numCols ; ++i )
+			for( var i:int = building.nodeX-1 ; i<building.nodeX+2 && i<GameSetting.GRID_X ; ++i )
 			{
-				for( var j:int = building.nodeZ-1 ;  j<building.nodeZ+2 && j<gridData.numRows ; ++j )
+				for( var j:int = building.nodeZ-1 ;  j<building.nodeZ+2 && j<GameSetting.GRID_Z ; ++j )
 				{
 					if( _groundNodeHash[i+"-"+j])
 					{
@@ -166,7 +167,7 @@ package map
 		override public function clear():void
 		{
 			for each( var obj:IsoObject in children){
-				obj.setWalkable( true , gridData );
+				obj.setWalkable( true , MapGridDataModel.instance.groundGrid );
 			}
 			super.clear();
 		}

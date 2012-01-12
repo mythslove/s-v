@@ -1,13 +1,16 @@
 package map.cell
 {
 	import bing.iso.Rhombus;
+	import bing.iso.path.Grid;
 	import bing.utils.ContainerUtil;
 	
 	import comm.GameSetting;
 	
+	import enums.LayerType;
+	
 	import flash.display.Sprite;
 	
-	import map.BuildingScene;
+	import map.elements.BuildingBase;
 	
 	import models.MapGridDataModel;
 	
@@ -34,27 +37,30 @@ package map.cell
 		}
 		
 		/**
-		 * 主要用于判断建筑层内容
-		 * 单独的检测是否可以放 ，主要是检测 AStarRoadGridModel.instance.roadGrid网格数据。
-		 * 即检测buildingScene层的对象，不检测groundScene对象
+		 * 更新单元格
 		 * @param parentNodeX
 		 * @param parentNodeZ
-		 * @param buildingScene
+		 * @param building
 		 */		
-		public function updateBuildingGridRhombus(parentNodeX:int , parentNodeZ:int , buildingScene:BuildingScene ):void
+		public function updateBuildingGridRhombus(parentNodeX:int , parentNodeZ:int , building:BuildingBase ):void
 		{
 			var curNodeX:int = parentNodeX + nodeX ;
 			var curNodeZ :int = parentNodeZ + nodeZ;
 			
-			var astarModel:MapGridDataModel = MapGridDataModel.instance ;
-			if(buildingScene.gridData.checkInGrid(curNodeX,curNodeZ) && 
-				buildingScene.gridData.getNode(curNodeX,curNodeZ).walkable &&
-				!astarModel.extraHash[curNodeX+"-"+curNodeZ])
+			var gridDataModel:MapGridDataModel = MapGridDataModel.instance ;
+			var grid:Grid ;
+			if( building.buildingVO.baseVO.layerType==LayerType.GROUND) {
+				grid = gridDataModel.groundGrid ;
+			} else if( building.buildingVO.baseVO.layerType==LayerType.BUILDING) {
+				grid = gridDataModel.buildingGrid ;
+			}
+			
+			if(grid.checkInGrid(curNodeX,curNodeZ) 
+				&& grid.getNode(curNodeX,curNodeZ).walkable 
+				&&!gridDataModel.extraHash[curNodeX+"-"+curNodeZ])
 			{
 				setWalkabled(true);
-			}
-			else
-			{
+			}else{
 				setWalkabled(false);
 			}
 		}
