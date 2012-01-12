@@ -261,7 +261,7 @@ package map
 					var xx:int = (stage.mouseX-this.x)/scaleX -sceneLayerOffsetX ;
 					var yy:int = (stage.mouseY -this.y)/scaleX-sceneLayerOffsetY;
 					var p:Point = IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE,xx,yy);
-					build.gridLayer.update( p.x,p.y);
+					build.gridLayer.update( mouseNodePoint.x,mouseNodePoint.y);
 				}
 				else //占用两层
 				{
