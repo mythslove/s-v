@@ -18,6 +18,7 @@ package bing.iso
 		protected var _nodeZ:int ; //格子坐标(地图单元格坐标)
 		protected var _spanPosition:Vector.<Vector3D> ; //占用了哪几个格子
 		protected var _isRotate:Boolean=false ; //是否旋转
+		protected var _boundRect:Rectangle = new Rectangle();
 		
 		// a more accurate version of 1.2247...
 		public static const Y_CORRECT:Number = Math.cos(-Math.PI / 6) * Math.SQRT2;
@@ -236,9 +237,16 @@ package bing.iso
 		 */
 		public function get rect():Rectangle
 		{
-			if(this._isRotate)
-				return new Rectangle(x , z  , size*(_zSpan-1) , size*(_xSpan-1) );
-			return new Rectangle(x , z  , size*(_xSpan-1) , size*(_zSpan-1) );
+			_boundRect.x = x ;
+			_boundRect.y = z ;
+			if(this._isRotate){
+				_boundRect.width = size*(_zSpan-1)  ;
+				_boundRect.height = size*(_xSpan-1)  ;
+			}else{
+				_boundRect.height = size*(_zSpan-1)  ;
+				_boundRect.width = size*(_xSpan-1)  ;
+			}
+			return _boundRect ;
 		}
 		
 		/**
@@ -291,6 +299,16 @@ package bing.iso
 		public function get spanPosition():Vector.<Vector3D>
 		{
 			return _spanPosition;
+		}
+		
+		/**
+		 * 消除资源 
+		 */		
+		public function dispose():void
+		{
+			_boundRect = null ;
+			_spanPosition = null ;
+			_position3D = null ;
 		}
 	}
 }
