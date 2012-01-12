@@ -64,6 +64,22 @@ package map.cell
 		}
 		
 		/**
+		 * 获取此建筑是否可以放下 
+		 * @return 
+		 */		
+		public function getWalkable():Boolean
+		{
+			const LEN:int = this.numChildren ;
+			for( var i:int =0  ; i<LEN ; ++i  )
+			{
+				if( !(this.getChildAt(i) as BuildingGridRhombus ).walkable ) {
+					return false;
+				}
+			}
+			return true ;
+		}
+		
+		/**
 		 * 设置此网格所有的子格子颜色，直接全部设置，不单独检测
 		 * @param value
 		 */		

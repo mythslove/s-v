@@ -5,7 +5,8 @@ package map
 	
 	import comm.GameSetting;
 	
-	import map.elements.Building;
+	import enums.GridType;
+	
 	import map.elements.Building;
 	
 	import models.AStarRoadGridModel;
@@ -31,14 +32,7 @@ package map
 			var obj:Building = new Building(buildingVO);
 			obj.x = dx;
 			obj.z = dz;
-			if( obj.getWalkable(this.gridData) )
-			{
-				this.addIsoObject( obj );
-				obj.setWalkable( false , this.gridData );
-				obj.setWalkable(false, AStarRoadGridModel.instance.roadGrid );
-				return obj;
-			}
-			return null ;
+			return addBuilding(obj);
 		}
 		
 		/**
@@ -50,7 +44,17 @@ package map
 		{
 			this.addIsoObject( building );
 			building.setWalkable( false , this.gridData );
-			building.setWalkable(false, AStarRoadGridModel.instance.roadGrid );
+			
+			//如果还要影响地面的数据格子(特殊情况)
+			if( building.buildingVO.baseVO.gridType == GridType.GROUND ){ 
+				var groundScene:GroundScene = GameWorld.instance.getGroundScene( building.nodeX , building.nodeZ );
+				building.setWalkable( false , groundScene.gridData );
+			}
+			//有些建筑虽然在建筑层，但是可以从上面通过，如门，土地
+			//如果上面不能走
+			if( !building.buildingVO.baseVO.walkable ){ 
+				building.setWalkable(false, AStarRoadGridModel.instance.roadGrid );
+			}
 			return building;
 		}
 		
@@ -61,7 +65,15 @@ package map
 		public function removeBuilding( building:Building):void
 		{
 			building.setWalkable( true , this.gridData );
-			building.setWalkable(true, AStarRoadGridModel.instance.roadGrid );
+			//如果还要影响地面的数据格子(特殊情况)
+			if( building.buildingVO.baseVO.gridType == GridType.GROUND ){ 
+				var groundScene:GroundScene = GameWorld.instance.getGroundScene( building.nodeX , building.nodeZ );
+				building.setWalkable( true , groundScene.gridData );
+			}
+			//如果上面不能走，移除地建筑的时候，将寻路数据设置为可行
+			if( !building.buildingVO.baseVO.walkable ){
+				building.setWalkable(true, AStarRoadGridModel.instance.roadGrid );
+			}
 			this.removeIsoObject( building );
 		}
 		
