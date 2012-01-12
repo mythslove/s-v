@@ -15,5 +15,10 @@ package enums
 		 * 建筑层 
 		 */		
 		public static const BUILDING:int = 1;
+		
+		/**
+		 * 地面和建筑层，占用两层的数据
+		 */		
+		public static const GROUND_BUILDING:int = 2;
 	}
 }

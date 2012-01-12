@@ -256,12 +256,16 @@ package map
 						build.gridLayer.setWalkabled(false);
 					}
 				}
-				else //占用建筑层的数据
+				else if( build.buildingVO.baseVO.gridType==GridType.BUILDING )//占用建筑层的数据
 				{
 					var xx:int = (stage.mouseX-this.x)/scaleX -sceneLayerOffsetX ;
 					var yy:int = (stage.mouseY -this.y)/scaleX-sceneLayerOffsetY;
 					var p:Point = IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE,xx,yy);
 					build.gridLayer.update( p.x,p.y);
+				}
+				else //占用两层
+				{
+					
 				}
 			}
 		}
