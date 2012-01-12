@@ -40,18 +40,18 @@ package map.cell
 		 * 更新单元格
 		 * @param parentNodeX
 		 * @param parentNodeZ
-		 * @param building
+		 * @param layerType
 		 */		
-		public function updateBuildingGridRhombus(parentNodeX:int , parentNodeZ:int , building:BuildingBase ):void
+		public function updateBuildingGridRhombus(parentNodeX:int , parentNodeZ:int , layerType:int ):void
 		{
 			var curNodeX:int = parentNodeX + nodeX ;
 			var curNodeZ :int = parentNodeZ + nodeZ;
 			
 			var gridDataModel:MapGridDataModel = MapGridDataModel.instance ;
 			var grid:Grid ;
-			if( building.buildingVO.baseVO.layerType==LayerType.GROUND) {
+			if( layerType==LayerType.GROUND) {
 				grid = gridDataModel.groundGrid ;
-			} else if( building.buildingVO.baseVO.layerType==LayerType.BUILDING) {
+			} else if( layerType==LayerType.BUILDING) {
 				grid = gridDataModel.buildingGrid ;
 			}
 			
