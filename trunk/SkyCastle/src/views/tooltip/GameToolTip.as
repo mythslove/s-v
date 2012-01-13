@@ -41,6 +41,10 @@ package views.tooltip
 			prop.name=title;
 			hitSprite.accessibilityProperties=prop;
 			hitSprite.addEventListener(MouseEvent.MOUSE_OVER , mouseEventHandler );
+			if(this.visible && this._hitSprite==hitSprite){
+				show(hitSprite);
+				move(stage.mouseX , stage.mouseY);
+			}
 		}
 		
 		public function unRegister( hitSprite:InteractiveObject):void {
@@ -68,9 +72,12 @@ package views.tooltip
 		protected function show( hitSprite:InteractiveObject ):void
 		{
 			_hitSprite=hitSprite;
-			_hitSprite.addEventListener(MouseEvent.MOUSE_OUT, this.mouseEventHandler);
-			_hitSprite.addEventListener(MouseEvent.ROLL_OUT, this.mouseEventHandler);
-			_hitSprite.addEventListener(MouseEvent.MOUSE_MOVE, this.mouseEventHandler);
+			if( !_hitSprite.hasEventListener(MouseEvent.MOUSE_OUT))
+				_hitSprite.addEventListener(MouseEvent.MOUSE_OUT, this.mouseEventHandler);
+			if( !_hitSprite.hasEventListener(MouseEvent.ROLL_OUT))
+				_hitSprite.addEventListener(MouseEvent.ROLL_OUT, this.mouseEventHandler);
+			if( !_hitSprite.hasEventListener(MouseEvent.MOUSE_MOVE))
+				_hitSprite.addEventListener(MouseEvent.MOUSE_MOVE, this.mouseEventHandler);
 			txtInfo.text=_hitSprite.accessibilityProperties.description;
 			txtTitle.text=_hitSprite.accessibilityProperties.name;
 			update();
