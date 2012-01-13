@@ -1,8 +1,6 @@
 ﻿package bing.components.button
 {
 	import bing.components.BingComponent;
-	import bing.components.tooltip.ToolTipBase;
-	import bing.components.tooltip.ToolTipStage;
 	
 	import flash.display.FrameLabel;
 	import flash.events.MouseEvent;
@@ -27,16 +25,6 @@
 			this.addEventListener(MouseEvent.MOUSE_UP , mouseEventHandler , false , 0 , true );
 			this.addEventListener(MouseEvent.MOUSE_DOWN , mouseEventHandler , false , 0 , true );
 			this.addEventListener(MouseEvent.MOUSE_OUT , mouseEventHandler , false , 0 , true );
-		}
-		
-		override public function set toolTipText(value:String):void
-		{
-			super.toolTipText = value ;
-			if(value){
-				ToolTipStage.getInstance().registerToStage( this,value,stage );
-			}else{
-				ToolTipBase.getInstance().unregister(this);
-			}
 		}
 
 		override public function set enabled(value:Boolean):void

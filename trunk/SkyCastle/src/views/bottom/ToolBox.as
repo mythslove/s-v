@@ -10,6 +10,8 @@ package views.bottom
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
+	import views.tooltip.GameToolTip;
+	
 	public class ToolBox extends Sprite
 	{
 		public var btnMultiTool:BaseButton ;
@@ -19,6 +21,10 @@ package views.bottom
 		public var btnReturnHome:BaseButton;
 		public var toolsMenuAnim:ToolsMenuAnim;
 		//===============================
+		private var _btnMultiToolTooltip:String="TOOLS: Click to switch to the default tool and view move, rotate, and sell tools.";
+		private var _btnCancelToolTooltip:String="CANCEL: Click to switch to the default tool and cancel all actions";
+		private var _btnShopToolTooltip:String="SHOP: Click to shop for buildings, decorations and more for your city!";
+		private var _btnBagToolTooltip:String="STORAGE: Click to see all the gifts and goodies you have received!";
 		
 		public function ToolBox()
 		{
@@ -35,7 +41,11 @@ package views.bottom
 		
 		private function init():void
 		{
-			btnMultiTool.toolTipText="multiTool multiTool multiTool multiTool\n multiTool multiTool multiTool multiTool multiTool";
+			GameToolTip.instance.register(btnMultiTool,stage,_btnMultiToolTooltip);
+			GameToolTip.instance.register(btnCancelTool,stage,_btnCancelToolTooltip);
+			GameToolTip.instance.register(btnShopTool,stage,_btnShopToolTooltip);
+			GameToolTip.instance.register(btnBagTool,stage,_btnBagToolTooltip);
+			
 			btnReturnHome.visible = false ;
 			toolsMenuAnim.visible = false ;
 		}
