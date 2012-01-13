@@ -30,17 +30,6 @@
 			this.addEventListener(MouseEvent.MOUSE_DOWN , mouseEventHandler , false, 0 , true );
 		}
 		
-		override public function set toolTipText(value:String):void
-		{
-			super.toolTipText = value ;
-			if(value){
-				ToolTipStage.getInstance().registerToStage(this,value,stage);
-			}else{
-				ToolTipStage.getInstance().unregister(this);
-			}
-		}
-
-		
 		override public function set enabled( value:Boolean ):void
 		{
 			super.enabled = value ;
