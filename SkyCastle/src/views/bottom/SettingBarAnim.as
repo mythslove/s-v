@@ -4,10 +4,14 @@ package views.bottom
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
+	import views.tooltip.GameToolTip;
+	
 	public class SettingBarAnim extends MovieClip
 	{
 		public var settingBar:SettingBar ;
 		//=============================
+		private var _btnDisplayToolTips1:String="SETTINGS: Zoom in and out, toggle the music and toggle the sound effects.";
+		private var _btnDisplayToolTips2:String="HIDE SETTINGS: Hide the settings bar";
 		
 		public function SettingBarAnim()
 		{
@@ -25,6 +29,8 @@ package views.bottom
 		
 		private function init():void
 		{
+			GameToolTip.instance.register( settingBar.btnDisplay , stage,_btnDisplayToolTips1);
+			
 			this.addFrameScript( 0,addScript,6,addScript);
 			function addScript():void{
 				stop();
@@ -53,8 +59,10 @@ package views.bottom
 				case settingBar.btnDisplay:
 					if(settingBar.btnDisplay.selected){
 						this.gotoAndPlay(2);
+						GameToolTip.instance.register( settingBar.btnDisplay , stage,_btnDisplayToolTips2);
 					}else{
 						this.gotoAndPlay("hide");
+						GameToolTip.instance.register( settingBar.btnDisplay , stage,_btnDisplayToolTips1);
 					}
 				break;
 			}

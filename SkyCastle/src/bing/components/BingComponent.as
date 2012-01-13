@@ -1,7 +1,5 @@
 package bing.components
 {
-	import bing.components.tooltip.ToolTipStage;
-	
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	 
@@ -13,9 +11,6 @@ package bing.components
 	 */
 	public class BingComponent extends MovieClip 
 	{
-	
-		
-		protected var _toolTipText:String = "";
 
 		/**
 		 * 构造函数
@@ -26,16 +21,6 @@ package bing.components
 		{
 			super();
 			this.addEventListener(Event.ADDED_TO_STAGE, eventHandler);
-		}
-
-		public function get toolTipText():String
-		{
-			return _toolTipText;
-		}
-
-		public function set toolTipText(value:String):void
-		{
-			_toolTipText = value;
 		}
 
 		private function eventHandler(event:Event):void

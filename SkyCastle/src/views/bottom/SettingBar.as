@@ -9,7 +9,6 @@ package views.bottom
 	import flash.display.StageDisplayState;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
-	import flash.media.Video;
 	
 	import map.GameWorld;
 	
@@ -38,6 +37,7 @@ package views.bottom
 		
 		private function init():void
 		{
+			
 			onResizeHandler(null);
 		}
 		
