@@ -1,7 +1,6 @@
 ﻿package bing.components.button
 {
 	import bing.components.BingComponent;
-	import bing.components.tooltip.ToolTipStage;
 	
 	import flash.display.FrameLabel;
 	import flash.events.MouseEvent;

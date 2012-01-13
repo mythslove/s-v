@@ -1,7 +1,5 @@
 package bing.components
 {
-	import bing.components.tooltip.ToolTipStage;
-	
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	 
