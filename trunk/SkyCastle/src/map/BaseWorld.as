@@ -184,38 +184,6 @@ package map
 		protected function onClick(e:MouseEvent):void
 		{ }
 		
-		/**
-		 * 根据node位置和buildingVO，添加建筑 
-		 * @param nodeX
-		 * @param nodeZ
-		 * @param isSort 
-		 * @param updateDirection
-		 * @reutrn 添加成功建筑
-		 */		
-		protected function addBuildingByVO( nodeX:int , nodeZ:int , vo:BuildingVO , isSort:Boolean=true , updateDirection:Boolean=true ):BuildingBase
-		{
-			var dx:int = nodeX*GameSetting.GRID_SIZE ;
-			var dz:int = nodeZ*GameSetting.GRID_SIZE ;
-			
-			var result:BuildingBase  ;
-			if(nodeX<0 || nodeZ<0 || nodeX>=GameSetting.GRID_X || nodeZ>=GameSetting.GRID_Z) return result ;
-			
-			if(vo.baseVO.layerType==LayerType.GROUND) //添加到地面层
-			{
-				var groundScene:GroundScene = getGroundScene (nodeX,nodeZ);
-				if(groundScene) {
-					result = groundScene.addBuildingByVO( dx,dz,vo,isSort,updateDirection);
-				}
-			}
-			else if(vo.baseVO.layerType==LayerType.BUILDING)//添加到建筑层
-			{
-				var buildingScene:BuildingScene = getBuildingScene(nodeX,nodeZ);
-				if(buildingScene) {
-					result = buildingScene.addBuildingByVO( dx,dz,vo,isSort);
-				}
-			}
-			return result;
-		}
 		
 		/**
 		 * 当前鼠标在哪个 GroundScene上是walkable=true
@@ -277,6 +245,39 @@ package map
 			} else if(build.buildingVO.baseVO.layerType==LayerType.GROUND) {
 				getGroundScene(build.nodeX,build.nodeZ).addBuilding( build );
 			}
+		}
+		
+		/**
+		 * 根据node位置和buildingVO，添加建筑 
+		 * @param nodeX
+		 * @param nodeZ
+		 * @param isSort 
+		 * @param updateDirection
+		 * @reutrn 添加成功建筑
+		 */		
+		protected function addBuildingByVO( nodeX:int , nodeZ:int , vo:BuildingVO , isSort:Boolean=true , updateDirection:Boolean=true ):BuildingBase
+		{
+			var dx:int = nodeX*GameSetting.GRID_SIZE ;
+			var dz:int = nodeZ*GameSetting.GRID_SIZE ;
+			
+			var result:BuildingBase  ;
+			if(nodeX<0 || nodeZ<0 || nodeX>=GameSetting.GRID_X || nodeZ>=GameSetting.GRID_Z) return result ;
+			
+			if(vo.baseVO.layerType==LayerType.GROUND) //添加到地面层
+			{
+				var groundScene:GroundScene = getGroundScene (nodeX,nodeZ);
+				if(groundScene) {
+					result = groundScene.addBuildingByVO( dx,dz,vo,isSort,updateDirection);
+				}
+			}
+			else if(vo.baseVO.layerType==LayerType.BUILDING)//添加到建筑层
+			{
+				var buildingScene:BuildingScene = getBuildingScene(nodeX,nodeZ);
+				if(buildingScene) {
+					result = buildingScene.addBuildingByVO( dx,dz,vo,isSort);
+				}
+			}
+			return result;
 		}
 		
 		/**纠正地图位置，防止出界*/		
