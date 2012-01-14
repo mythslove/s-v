@@ -56,7 +56,7 @@ package utils
 					resLoader.unloadAndStop();
 					break ;
 				case ResType.BINARY:
-					if( resVO.name=="mapdata"){
+					if( resVO.resId=="mapdata"){
 						parseMapData( resVO , resLoader );
 					}
 					break ;

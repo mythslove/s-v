@@ -22,7 +22,7 @@ package views.bottom
 		public var btnMusic:BaseToggleButton;
 		public var btnZoomIn:BaseButton;
 		public var btnZoomOut:BaseButton;
-		//=================================
+		//--------------------------------------------------*
 		private var _zoomInTooltip1:String="ZOOM IN: Click to zoom in.";
 		private var _zoomInTooltip2:String="ZOOM IN";
 		private var _zoomoutTooltip1:String="ZOOM OUT: Click to zoom out.";
@@ -33,7 +33,7 @@ package views.bottom
 		private var _soundTooltip2:String="SOUND EFFECTS: Click to turn sound effects on.";
 		private var _fullScreenTooltip1:String="FULLSCREEN";
 		private var _fullScreenTooltip2:String="EXIT FULLSCREEN";
-		
+		//--------------------------------------------------*
 		
 		public function SettingBar()
 		{

@@ -6,12 +6,12 @@ package bing.res
 
 	public class ResVO
 	{
-		public function ResVO( name:String="" , url:String="" )
+		public function ResVO( resId:String="" , url:String="" )
 		{
-			this.name =name ;
+			this.resId =resId ;
 			this.url = url ;
 		}
-		public var name:String ; //文件名或反射类名
+		public var resId:String ; //资源文件的唯一标识
 		public var url:String ; //资源文件地址
 		public var resType:String ; //资源类型
 		public var resObject:Object ; //下载完成后的资源
@@ -27,7 +27,7 @@ package bing.res
 		
 		public function toString():String
 		{
-			return name+"  "+url ;
+			return resId+"  "+url ;
 		}
 		
 		public function dispose():void 

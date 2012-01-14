@@ -65,10 +65,10 @@ package bing.res
 		 */		
 		public function loadRes( resVO:ResVO ):void 
 		{
-			if(!checkRes( resVO.name ))
+			if(!checkRes( resVO.resId ))
 			{
 				if( !resVO.resType ) setResType(resVO);
-				_resDictionary[resVO.name] = resVO ;
+				_resDictionary[resVO.resId] = resVO ;
 				if(_currentLoadNum<maxLoadNum)
 				{
 					loadAResource( resVO ); //下载资源
@@ -130,7 +130,7 @@ package bing.res
 		{
 			var context:LoaderContext = new LoaderContext(false , ApplicationDomain.currentDomain);
 			var loader:Loader = new Loader();
-			loader.name = resVO.name ;
+			loader.name = resVO.resId ;
 			loader.contentLoaderInfo.addEventListener(Event.COMPLETE , loaderHandler);
 			loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR , ioErrorHandler );
 			var url:String = cdns[resVO.loadError]+resVO.url ;
@@ -143,7 +143,7 @@ package bing.res
 		protected function urlLoaderARes(resVO:ResVO):void
 		{
 			var urlLoader:ResURLLoader = new ResURLLoader();
-			urlLoader.name = resVO.name ;
+			urlLoader.name = resVO.resId ;
 			if(resVO.resType==ResType.BINARY){
 				urlLoader.dataFormat = URLLoaderDataFormat.BINARY;
 			}
@@ -160,7 +160,7 @@ package bing.res
 			var resVO:ResVO = _resDictionary[resLoader.name] as ResVO ;
 			handleRes(resVO , resLoader );
 			//抛出资源加载完成事件
-			var resLoadedEvent:ResLoadedEvent = new ResLoadedEvent(resVO.name);
+			var resLoadedEvent:ResLoadedEvent = new ResLoadedEvent(resVO.resId);
 			resLoadedEvent.resVO = resVO ;
 			this.dispatchEvent( resLoadedEvent );
 			_currentLoadNum--;
@@ -179,7 +179,7 @@ package bing.res
 			var resVO:ResVO = _resDictionary[urlLoader.name] as ResVO ;
 			handleRes(resVO , urlLoader.data );
 			//抛出资源加载完成事件
-			var resLoadedEvent:ResLoadedEvent = new ResLoadedEvent(resVO.name);
+			var resLoadedEvent:ResLoadedEvent = new ResLoadedEvent(resVO.resId);
 			resLoadedEvent.resVO = resVO ;
 			this.dispatchEvent( resLoadedEvent );
 			_currentLoadNum--;
@@ -225,18 +225,18 @@ package bing.res
 			var resVO:ResVO  ;
 			if(e.target is ResURLLoader){
 				var urlLoader:ResURLLoader = e.target as ResURLLoader ;
-				resVO = this.getResVOByName( urlLoader.name );
+				resVO = this.getResVOByResId( urlLoader.name );
 				urlLoader.removeEventListener(Event.COMPLETE , urlLoaderHandler);
 				urlLoader.removeEventListener(IOErrorEvent.IO_ERROR , ioErrorHandler );
 			}else{
 				var resLoader:Loader = e.target.loader as Loader;
-				resVO = this.getResVOByName( resLoader.name );
+				resVO = this.getResVOByResId( resLoader.name );
 				resLoader.contentLoaderInfo.removeEventListener(Event.COMPLETE , loaderHandler );
 				resLoader.contentLoaderInfo.removeEventListener(IOErrorEvent.IO_ERROR , ioErrorHandler );
 			}
 			_currentLoadNum--;
 			if(resVO){
-				this.deleteRes( resVO.name );
+				this.deleteRes( resVO.resId );
 				if(resVO.loadError<cdns.length-1){
 					resVO.loadError++;
 					this.loadAResource( resVO );
@@ -250,17 +250,17 @@ package bing.res
 		
 		/**
 		 * 判断资源是否下载完成  
-		 * @param resName 资源名称
+		 * @param resId 资源唯一标识 
 		 * @return 
 		 */		
-		protected function checkRes( resName:String ):Boolean
+		protected function checkRes( resId:String ):Boolean
 		{
-			if(_resDictionary[resName])
+			if(_resDictionary[resId])
 			{
-				var resVO:ResVO = _resDictionary[resName] as ResVO;
+				var resVO:ResVO = _resDictionary[resId] as ResVO;
 				if(resVO.resObject)
 				{
-					var resLoadedEvent:ResLoadedEvent = new ResLoadedEvent(resName);
+					var resLoadedEvent:ResLoadedEvent = new ResLoadedEvent(resId);
 					resLoadedEvent.resVO = resVO ;
 					this.dispatchEvent( resLoadedEvent );
 				}
@@ -272,38 +272,38 @@ package bing.res
 		
 		/**
 		 *  删除资源
-		 * @param resName
+		 * @param resId
 		 */		
-		public function deleteRes( resName:String ):void
+		public function deleteRes( resId:String ):void
 		{
-			if(_resDictionary[resName])
+			if(_resDictionary[resId])
 			{
-				var resVO:ResVO = _resDictionary[resName] as ResVO;
+				var resVO:ResVO = _resDictionary[resId] as ResVO;
 				resVO.dispose();
-				delete _resDictionary[resName] ;
+				delete _resDictionary[resId] ;
 			}
 		}
 		
 		
 		/**
-		 * 获取已经下载的ResVO
-		 * @param name
+		 * 通过resId, 获取已经下载的ResVO
+		 * @param resId
 		 * @return 
 		 */	
-		public function getResVOByName( name:String):ResVO
+		public function getResVOByResId( resId:String):ResVO
 		{
-			return _resDictionary[name] as ResVO ;
+			return _resDictionary[resId] as ResVO ;
 		}
 		
 		/**
 		 *  反射对象
-		 * @param resName 资源别名
+		 * @param resId 资源的唯一标识值
 		 * @param clsName 要反射的类名
 		 * @return 
 		 */		
-		public function getInstanceByClassName( resName:String , clsName:String ):Object
+		public function getInstanceByClassName( resId:String , clsName:String ):Object
 		{
-			var resVO:ResVO = getResVOByName(resName);
+			var resVO:ResVO = getResVOByResId(resId);
 			var obj:Object= null ;
 			if(resVO && resVO.resObject )
 			{
@@ -343,20 +343,20 @@ package bing.res
 		protected function startQueueLoad():void
 		{
 			var content:ResVO = _resArray.shift();
-			this._queueHash[content.name] = content;
-			this.addEventListener( content.name , resObjectLoadedHandler );
+			this._queueHash[content.resId] = content;
+			this.addEventListener( content.resId , resObjectLoadedHandler );
 			this.loadRes( content );
 		}
 		protected function resObjectLoadedHandler(e:Event):void
 		{
 			_queueLoaded ++;
 			var evtLoadedEvt:ResLoadedEvent = (e as ResLoadedEvent);
-			this.removeEventListener( evtLoadedEvt.resVO.name , resObjectLoadedHandler );
+			this.removeEventListener( evtLoadedEvt.resVO.resId , resObjectLoadedHandler );
 			//加载进度
 			var evt:ResProgressEvent = new ResProgressEvent(ResProgressEvent.RES_LOAD_PROGRESS);
 			evt.total = _total ;
 			evt.loaded = _queueLoaded ;
-			evt.name = evtLoadedEvt.resVO.name ;
+			evt.name = evtLoadedEvt.resVO.resId ;
 			this.dispatchEvent( evt );
 			//判断是否还要加载
 			if(_resArray.length>0){

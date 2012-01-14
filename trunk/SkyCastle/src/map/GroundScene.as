@@ -115,15 +115,15 @@ package map
 		//更新一个路的方向
 		private function updateRoadDirection( building:Building ):void
 		{
-			var alias:String = building.buildingVO.baseVO.alias;
+			var clsName:String = building.buildingVO.baseVO.clsName;
 			var luBuilding:Building = _groundNodeHash[ (building.nodeX-1)+"-"+building.nodeZ];
 			var ruBuilding:Building = _groundNodeHash[ building.nodeX+"-"+(building.nodeZ-1)];
 			var lbBuilding:Building = _groundNodeHash[ building.nodeX+"-"+(building.nodeZ+1)];
 			var rbBuilding:Building = _groundNodeHash[ (building.nodeX+1)+"-"+building.nodeZ];
-			if( luBuilding&&luBuilding.buildingVO.baseVO.alias==alias ) _roundRoadHash.put( "POS_LU_M",true);
-			if( ruBuilding&&ruBuilding.buildingVO.baseVO.alias==alias ) _roundRoadHash.put( "POS_RU_M",true);
-			if( lbBuilding&&lbBuilding.buildingVO.baseVO.alias==alias ) _roundRoadHash.put( "POS_LB_M",true);
-			if( rbBuilding&&rbBuilding.buildingVO.baseVO.alias==alias ) _roundRoadHash.put( "POS_RB_M",true);
+			if( luBuilding&&luBuilding.buildingVO.baseVO.clsName==clsName ) _roundRoadHash.put( "POS_LU_M",true);
+			if( ruBuilding&&ruBuilding.buildingVO.baseVO.clsName==clsName ) _roundRoadHash.put( "POS_RU_M",true);
+			if( lbBuilding&&lbBuilding.buildingVO.baseVO.clsName==clsName ) _roundRoadHash.put( "POS_LB_M",true);
+			if( rbBuilding&&rbBuilding.buildingVO.baseVO.clsName==clsName ) _roundRoadHash.put( "POS_RB_M",true);
 			
 			const len:int = _roundRoadHash.size() ;
 			if(len==4) (building as Object).updateUI(M); 

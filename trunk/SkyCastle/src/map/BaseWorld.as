@@ -11,12 +11,16 @@ package map
 	import flash.events.*;
 	import flash.geom.*;
 	
+	import map.elements.Building;
 	import map.elements.BuildingBase;
 	
 	import models.MapGridDataModel;
+	import models.vos.BuildingBaseVO;
 	import models.vos.BuildingVO;
 	
 	import utils.ResourceUtil;
+	
+	import views.tooltip.BuildingToolTip;
 	
 	public class BaseWorld extends IsoWorld
 	{
@@ -35,6 +39,7 @@ package map
 		public var mouseContainer:IsoObject; 
 		protected var _gridScene:IsoScene ; //网格层
 		protected var _mapGridData:MapGridDataModel ; //地图数据
+		protected var _tooltip:BuildingToolTip ;
 		protected var _mapIsMove:Boolean=false; 
 		/** 地图是否在移动 */
 		public function mapIsMove():Boolean{ return _mapIsMove ; }
@@ -96,6 +101,10 @@ package map
 			mouseContainer = new IsoObject(GameSetting.GRID_SIZE,GameSetting.GRID_X , GameSetting.GRID_Z);
 			mouseContainer.visible=false;
 			buildingScene3.addChild( mouseContainer );
+			//tooltip
+			_tooltip = BuildingToolTip.instance ;
+			_tooltip.hideTooltip();
+			addChild(_tooltip);
 			//配置侦听
 			configListeners();
 		}
@@ -134,19 +143,27 @@ package map
 					mouseNodePoint = IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE,xx,yy);
 					if(e.buttonDown)	{
 						_mapIsMove = true ;
+						_tooltip.hideTooltip();
 					}else if(mouseContainer.numChildren>0) {
 						updateMouseBuildingGrid();
 						return ;
+					}else if(e.target is InteractivePNG){
+						_tooltip.updatePosition(e.stageX,e.stageY);
 					}
 					break;
 				case MouseEvent.MOUSE_OVER:
 					if(e.target is InteractivePNG){
 						(e.target as InteractivePNG).parent["selectedStatus"](true);
+						if(mouseContainer.numChildren==0) {
+							var baseVO:BuildingBaseVO = ((e.target as InteractivePNG).parent as Building).buildingVO.baseVO;
+							_tooltip.showTooltip(baseVO.info , baseVO.title );
+						}
 					}
 					break;
 				case MouseEvent.MOUSE_OUT:
 					if(e.target is InteractivePNG){
 						(e.target as InteractivePNG).parent["selectedStatus"](false);
+						_tooltip.hideTooltip();
 					}
 					break;
 				case MouseEvent.MOUSE_UP:
@@ -159,6 +176,7 @@ package map
 				case MouseEvent.ROLL_OUT:
 					this.stopDrag();
 					_mapIsMove = false ;
+					_tooltip.hideTooltip();
 					break;
 			}
 		}
