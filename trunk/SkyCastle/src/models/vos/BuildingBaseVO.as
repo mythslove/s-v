@@ -6,7 +6,7 @@ package models.vos
 	 */	
 	public class BuildingBaseVO
 	{
-		public var baseId:int; //基础id
+		public var baseId:String; //基础id
 		public var title:String; //标题
 		public var info:String;//说明
 		public var type:int ; //类型
