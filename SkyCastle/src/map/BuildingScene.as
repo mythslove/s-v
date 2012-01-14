@@ -24,24 +24,26 @@ package map
 		 * @param dx 建筑的位置
 		 * @param dy 
 		 * @param buildingVO
+		 * @param isSort是否进行深度排序
 		 * @return 添加成功返回true
 		 */		
-		public function addBuildingByVO( dx:Number , dz:Number , buildingVO:BuildingVO ):Building
+		public function addBuildingByVO( dx:Number , dz:Number , buildingVO:BuildingVO , isSort:Boolean=true ):Building
 		{
 			var obj:Building = new Building(buildingVO);
 			obj.x = dx;
 			obj.z = dz;
-			return addBuilding(obj);
+			return addBuilding(obj,isSort);
 		}
 		
 		/**
 		 * 添加建筑 
 		 * @param building
+		 * @param isSort是否进行深度排序
 		 * @return 
 		 */		
-		public function addBuilding( building:Building ):Building
+		public function addBuilding( building:Building , isSort:Boolean=true ):Building
 		{
-			this.addIsoObject( building );
+			this.addIsoObject( building,isSort );
 			building.setWalkable( false , gridData );
 			//有些建筑虽然在建筑层，但是可以从上面通过，如门，土地
 			//如果上面不能走，将
