@@ -8,6 +8,8 @@ package models.vos
 		public var baseId:int; //BuildingBaseVO的id
 		public var price:int;
 		public var scale:int = 1; //1为没有旋转过，-1 为旋转过
+		public var nodeX:int ;
+		public var nodeZ:int;
 		
 		private var _baseVO:BuildingBaseVO ;
 		public function get baseVO():BuildingBaseVO

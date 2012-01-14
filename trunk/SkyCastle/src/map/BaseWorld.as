@@ -188,9 +188,11 @@ package map
 		 * 根据node位置和buildingVO，添加建筑 
 		 * @param nodeX
 		 * @param nodeZ
+		 * @param isSort 
+		 * @param updateDirection
 		 * @reutrn 添加成功建筑
 		 */		
-		protected function addBuildingByVO( nodeX:int , nodeZ:int , vo:BuildingVO ):BuildingBase
+		protected function addBuildingByVO( nodeX:int , nodeZ:int , vo:BuildingVO , isSort:Boolean=true , updateDirection:Boolean=true ):BuildingBase
 		{
 			var dx:int = nodeX*GameSetting.GRID_SIZE ;
 			var dz:int = nodeZ*GameSetting.GRID_SIZE ;
@@ -202,14 +204,14 @@ package map
 			{
 				var groundScene:GroundScene = getGroundScene (nodeX,nodeZ);
 				if(groundScene) {
-					result = groundScene.addBuildingByVO( dx,dz,vo);
+					result = groundScene.addBuildingByVO( dx,dz,vo,isSort,updateDirection);
 				}
 			}
-			else //添加到建筑层
+			else if(vo.baseVO.layerType==LayerType.BUILDING)//添加到建筑层
 			{
 				var buildingScene:BuildingScene = getBuildingScene(nodeX,nodeZ);
 				if(buildingScene) {
-					result = buildingScene.addBuildingByVO( dx,dz,vo);
+					result = buildingScene.addBuildingByVO( dx,dz,vo,isSort);
 				}
 			}
 			return result;
