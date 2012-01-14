@@ -40,6 +40,7 @@ package map
 		protected var _gridScene:IsoScene ; //网格层
 		protected var _mapGridData:MapGridDataModel ; //地图数据
 		protected var _tooltip:BuildingToolTip ;
+		protected var _mouseOverBuild:Building ; //当前鼠标在哪个建筑上面
 		protected var _mapIsMove:Boolean=false; 
 		/** 地图是否在移动 */
 		public function mapIsMove():Boolean{ return _mapIsMove ; }
@@ -99,6 +100,7 @@ package map
 			ResourceUtil.instance.deleteRes("mapdata"); 
 			//跟随鼠标移动的建筑
 			mouseContainer = new IsoObject(GameSetting.GRID_SIZE,GameSetting.GRID_X , GameSetting.GRID_Z);
+			mouseContainer.mouseEnabled= mouseContainer.mouseChildren=false;
 			mouseContainer.visible=false;
 			buildingScene3.addChild( mouseContainer );
 			//tooltip
@@ -109,9 +111,7 @@ package map
 			configListeners();
 		}
 		
-		/**
-		 * 侦听事件  
-		 */		
+		/**  侦听事件   */		
 		protected function configListeners():void
 		{
 			addEventListener(MouseEvent.MOUSE_DOWN , onMouseEventHandler);
@@ -152,31 +152,24 @@ package map
 					}
 					break;
 				case MouseEvent.MOUSE_OVER:
-					if(e.target is InteractivePNG){
-						(e.target as InteractivePNG).parent["selectedStatus"](true);
-						if(mouseContainer.numChildren==0) {
-							var baseVO:BuildingBaseVO = ((e.target as InteractivePNG).parent as Building).buildingVO.baseVO;
-							_tooltip.showTooltip(baseVO.info , baseVO.title );
-						}
-					}
-					break;
-				case MouseEvent.MOUSE_OUT:
-					if(e.target is InteractivePNG){
-						(e.target as InteractivePNG).parent["selectedStatus"](false);
-						_tooltip.hideTooltip();
+					if(mouseContainer.numChildren==0 && e.target is InteractivePNG){
+						_mouseOverBuild = (e.target as InteractivePNG).parent as Building;
+						_mouseOverBuild.selectedStatus( true );
+						var baseVO:BuildingBaseVO = _mouseOverBuild.buildingVO.baseVO;
+						_tooltip.showTooltip(baseVO.info , baseVO.title );
 					}
 					break;
 				case MouseEvent.MOUSE_UP:
-					this.stopDrag();
-					if(!_mapIsMove) {
-						onClick(e);
-					}
-					_mapIsMove = false ;
-					break;
+					if(!_mapIsMove) onClick(e);
 				case MouseEvent.ROLL_OUT:
+				case MouseEvent.MOUSE_OUT:
 					this.stopDrag();
 					_mapIsMove = false ;
 					_tooltip.hideTooltip();
+					if(e.type!=MouseEvent.MOUSE_UP && _mouseOverBuild){
+						_mouseOverBuild.selectedStatus( false );
+						_mouseOverBuild = null ;
+					}
 					break;
 			}
 		}
@@ -261,6 +254,26 @@ package map
 				mouseContainer.nodeZ =mouseNodePoint.y ;
 				var build:BuildingBase = mouseContainer.getChildAt(0) as BuildingBase;
 				build.gridLayer.updateBuildingGridLayer( mouseNodePoint.x, mouseNodePoint.y , build.buildingVO.baseVO.layerType );
+			}
+		}
+		
+		/** 从场景上移除一个建筑 */
+		protected function removeBuildFromScene( build:Building ):void
+		{
+			if(build.parent is BuildingScene) {
+				(build.parent as BuildingScene).removeBuilding( build );
+			} else if(build.parent is GroundScene) {
+				(build.parent as GroundScene).removeBuilding( build );
+			}
+		}
+		
+		/** 添加一个建筑到场景上*/
+		protected function addBuildToScene( build:Building ):void
+		{
+			if(build.buildingVO.baseVO.layerType==LayerType.BUILDING) {
+				getBuildingScene(build.nodeX,build.nodeZ).addBuilding( build );
+			} else if(build.buildingVO.baseVO.layerType==LayerType.GROUND) {
+				getGroundScene(build.nodeX,build.nodeZ).addBuilding( build );
 			}
 		}
 		

@@ -17,6 +17,7 @@ package map
 	import map.elements.Building;
 	import map.elements.BuildingBase;
 	
+	import models.MapGridDataModel;
 	import models.ShopModel;
 	import models.vos.BuildingVO;
 
@@ -33,6 +34,9 @@ package map
 			return _instance ;
 		}
 		//=====================================
+		private var _moveBuildPrevX:int ;
+		private var _moveBuildPrevZ:int ;
+		
 		/**
 		 * 游戏世界构造函数 
 		 */		
@@ -50,7 +54,7 @@ package map
 			var building:BuildingBase = new BuildingBase( ShopModel.instance.houseArray[0]);
 			building.drawGrid();
 			building.gridLayer.visible=true;
-			this.addBuilidngOnMouse( building );
+			this.addBuildingOnMouse( building );
 		}
 		
 		override protected function onClick(e:MouseEvent):void
@@ -68,40 +72,64 @@ package map
 			}
 			else if(GameData.buildingCurrOperation==BuildingCurrentOperation.ROTATE)
 			{	
-				if(e.target is InteractivePNG && e.target.parent is Building){
-					(e.target.parent as Building).rotateBuilding() ;
+				if(_mouseOverBuild && _mouseOverBuild.buildingVO.baseVO.layerType==LayerType.BUILDING){
+					if(_mouseOverBuild.getRotatable(MapGridDataModel.instance.buildingGrid)) {
+						removeBuildFromScene( _mouseOverBuild );
+						_mouseOverBuild.scaleX = ~_mouseOverBuild.scaleX+1 ;
+						addBuildToScene(_mouseOverBuild);
+						_mouseOverBuild.sendRotatedBuilding();
+					}
+				}
+			}
+			else if( GameData.buildingCurrOperation==BuildingCurrentOperation.MOVE)
+			{
+				if(mouseContainer.numChildren==0){
+					if(_mouseOverBuild){
+						_moveBuildPrevX = _mouseOverBuild.x ;
+						_moveBuildPrevZ = _mouseOverBuild.z ;
+						removeBuildFromScene( _mouseOverBuild ); //从场景上先移除
+						_mouseOverBuild.selectedStatus(false); //选择设置成false
+						addBuildingOnMouse( _mouseOverBuild );  //添加在鼠标容器上移动
+						_mouseOverBuild.drawGrid(); //画建筑网格
+						mouseContainer.nodeX = mouseNodePoint.x; //更新当前鼠标容器的位置
+						mouseContainer.nodeZ = mouseNodePoint.y ;
+						_mouseOverBuild = null ;
+					}
+				}else {
+					var building:Building = mouseContainer.getChildAt(0) as Building ;
+					if( building && building.gridLayer && building.gridLayer.getWalkable() )
+					{
+						building.removeGrid(); //移除建筑网格
+						building.nodeX = mouseContainer.nodeX; //设置位置
+						building.nodeZ = mouseContainer.nodeZ;
+						building.itemLayer.alpha=1;
+						addBuildToScene( building );//添加到场景上
+						building.sendMovedBuilding(); //发送移动建筑的消息
+						clearMouse(); //清除鼠标
+						mouseContainer.parent.setChildIndex( mouseContainer , mouseContainer.parent.numChildren-1);
+					}
 				}
 			}
 		}
 		
-		/**
-		 * 运行 
-		 */		
+		/**运行 */		
 		public function start():void{
 			this.removeEventListener(Event.ENTER_FRAME , onEnterFrameHandler );
 			this.addEventListener(Event.ENTER_FRAME , onEnterFrameHandler );
 		}
 		
-		/**
-		 * 停止 
-		 */		
+		/**停止*/		
 		public function stop():void {
 			this.removeEventListener(Event.ENTER_FRAME , onEnterFrameHandler );
 		}
 		
-		/**
-		 *不断地执行 
-		 * @param e
-		 */		
+		/**不断地执行*/		
 		protected function onEnterFrameHandler(e:Event):void
 		{
 			update() ;
 		}
 		
-		/**
-		 * 地图放大和缩小 
-		 * @param scale
-		 */		
+		/**地图放大和缩小 */		
 		public function zoom( scale:Number):void
 		{
 			var dx:Number=scaleX<1?-GameSetting.SCREEN_WIDTH:GameSetting.SCREEN_WIDTH ;
@@ -116,15 +144,16 @@ package map
 		 * 添加建筑到鼠标上面跟随 
 		 * @param buildingBase
 		 */		
-		public function addBuilidngOnMouse( buildingBase:BuildingBase):void
+		public function addBuildingOnMouse( buildingBase:BuildingBase):void
 		{
 			mouseContainer.parent.setChildIndex( mouseContainer ,mouseContainer.parent.numChildren-1 );
-			ContainerUtil.removeChildren( mouseContainer );
+			clearMouse();
+			//将位置设置成0
 			buildingBase.setScreenPosition(0,0);
+			buildingBase.nodeX=buildingBase.nodeZ=0;
 			if( buildingBase.buildingVO.baseVO.type!=BuildingType.ROAD){
 				buildingBase.itemLayer.alpha=0.6;
 			}
-			buildingBase.itemLayer.mouseEnabled = false ;
 			mouseContainer.addChild( buildingBase );
 			mouseContainer.visible=true;
 		}
@@ -150,6 +179,15 @@ package map
 				return spirtes.concat(buildingScene1.children).concat(buildingScene2.children).concat(buildingScene3.children)
 			}
 			return spirtes.concat(groundScene1.children).concat(groundScene2.children).concat(groundScene3.children)
+		}
+		
+		/**
+		 *  填充建筑
+		 * @param buildings 
+		 */		
+		public function fillBuildings( buildings:Vector.<Building> ):void
+		{
+			
 		}
 	}
 }
