@@ -39,7 +39,7 @@ package map.elements
 			super(GameSetting.GRID_SIZE,buildingVO.baseVO.xSpan , buildingVO.baseVO.zSpan);
 			this.buildingVO = buildingVO ;
 			this.mouseEnabled  = false ;
-			if(!buildingVO.baseVO.animationAlias) {//没有动画
+			if(!buildingVO.baseVO.animClsName) {//没有动画
 				this.cacheAsBitmap = true ;	
 			}
 			
@@ -60,8 +60,8 @@ package map.elements
 		/** 加载资源   */		
 		protected function loadRes():void
 		{
-			ResourceUtil.instance.addEventListener( buildingVO.baseVO.alias , resLoadedHandler );
-			var resVO:ResVO = new ResVO( buildingVO.baseVO.alias , buildingVO.baseVO.url);
+			ResourceUtil.instance.addEventListener( buildingVO.baseVO.clsName , resLoadedHandler );
+			var resVO:ResVO = new ResVO( buildingVO.baseVO.resId , buildingVO.baseVO.url);
 			ResourceUtil.instance.loadRes( resVO );
 		}
 		
@@ -90,10 +90,10 @@ package map.elements
 		/** 资源加载完成 */
 		protected function resLoadedHandler( e:Event):void
 		{
-			ResourceUtil.instance.removeEventListener( buildingVO.baseVO.alias , resLoadedHandler );
+			ResourceUtil.instance.removeEventListener( buildingVO.baseVO.resId , resLoadedHandler );
 			ContainerUtil.removeChildren(itemLayer);
 			//获取元件
-			_skin = ResourceUtil.instance.getInstanceByClassName( buildingVO.baseVO.alias , buildingVO.baseVO.alias ) as MovieClip;
+			_skin = ResourceUtil.instance.getInstanceByClassName( buildingVO.baseVO.clsName , buildingVO.baseVO.clsName ) as MovieClip;
 			if(_skin){
 				_skin.stop();
 				itemLayer.addChild(_skin);
@@ -130,7 +130,7 @@ package map.elements
 		{
 			super.dispose();
 			this.removeEventListener(Event.ADDED_TO_STAGE , addedToStageHandler );
-			ResourceUtil.instance.removeEventListener( buildingVO.baseVO.alias , resLoadedHandler );
+			ResourceUtil.instance.removeEventListener( buildingVO.baseVO.resId , resLoadedHandler );
 			itemLayer.disableInteractivePNG();
 			itemLayer = null ;
 			removeGrid();

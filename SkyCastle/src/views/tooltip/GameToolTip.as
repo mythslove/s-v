@@ -23,6 +23,9 @@ package views.tooltip
 		public function GameToolTip()
 		{
 			super();
+			if(_instance) throw new Error("只能有一个GameToolTip实例");
+			else _instance = this ;
+			
 			mouseChildren = mouseEnabled= visible= false ;
 			cacheAsBitmap = true ;
 		}
@@ -87,8 +90,8 @@ package views.tooltip
 		{
 			if (txtTitle.text == "" || txtInfo.text == "") {
 				txtInfo.y = txtTitle.y;
-			} else 	{
-				txtInfo.y = txtTitle.y + txtTitle.textHeight;
+			} else {
+				txtInfo.y = txtTitle.y + txtTitle.textHeight ;
 			}
 			txtInfo.width = 300;
 			txtTitle.width = 300;

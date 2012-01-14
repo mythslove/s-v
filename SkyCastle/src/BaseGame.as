@@ -110,7 +110,7 @@ package
 		 */		
 		protected function parseConfig():void
 		{
-			var config:XML = XML(ResourceUtil.instance.getResVOByName("config").resObject.toString()) ;
+			var config:XML = XML(ResourceUtil.instance.getResVOByResId("config").resObject.toString()) ;
 			BuildingBaseModel.instance.parseConfig( config ) ;
 			ShopModel.instance.parseConfig(config);
 		}
