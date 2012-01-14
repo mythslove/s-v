@@ -43,7 +43,7 @@ package models
 		 * @param baseId
 		 * @return  BuildingBaseVO
 		 */		
-		public function getBaseVOById( baseId:int):BuildingBaseVO
+		public function getBaseVOById( baseId:String):BuildingBaseVO
 		{
 			var vo:BuildingBaseVO ;
 			if(_buildingBaseVOHash){

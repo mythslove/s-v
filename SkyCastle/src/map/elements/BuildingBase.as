@@ -60,7 +60,7 @@ package map.elements
 		/** 加载资源   */		
 		protected function loadRes():void
 		{
-			ResourceUtil.instance.addEventListener( buildingVO.baseVO.clsName , resLoadedHandler );
+			ResourceUtil.instance.addEventListener( buildingVO.baseVO.resId , resLoadedHandler );
 			var resVO:ResVO = new ResVO( buildingVO.baseVO.resId , buildingVO.baseVO.url);
 			ResourceUtil.instance.loadRes( resVO );
 		}
@@ -93,7 +93,7 @@ package map.elements
 			ResourceUtil.instance.removeEventListener( buildingVO.baseVO.resId , resLoadedHandler );
 			ContainerUtil.removeChildren(itemLayer);
 			//获取元件
-			_skin = ResourceUtil.instance.getInstanceByClassName( buildingVO.baseVO.clsName , buildingVO.baseVO.clsName ) as MovieClip;
+			_skin = ResourceUtil.instance.getInstanceByClassName( buildingVO.baseVO.resId , buildingVO.baseVO.clsName ) as MovieClip;
 			if(_skin){
 				_skin.stop();
 				itemLayer.addChild(_skin);
