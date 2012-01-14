@@ -1,7 +1,7 @@
 package map
 {
+	import bing.iso.IsoScene;
 	import bing.utils.ContainerUtil;
-	import bing.utils.InteractivePNG;
 	import bing.utils.ObjectUtil;
 	
 	import comm.GameData;
@@ -57,7 +57,7 @@ package map
 			this.addBuildingOnMouse( building );
 		}
 		
-		override protected function onClick(e:MouseEvent):void
+		override protected function onClick(e:MouseEvent):void 
 		{
 			if(GameData.buildingCurrOperation==BuildingCurrentOperation.ADD)
 			{	
@@ -182,12 +182,17 @@ package map
 		}
 		
 		/**
-		 *  填充建筑
-		 * @param buildings 
+		 *  填充地图 
+		 * @param buildingVos 
 		 */		
-		public function fillBuildings( buildings:Vector.<Building> ):void
+		public function fillMap( buildingVos:Vector.<BuildingVO> ):void
 		{
-			
+			for each( var vo:BuildingVO in buildingVos) {
+				this.addBuildingByVO(vo.nodeX,vo.nodeZ,vo,false,false) ;
+			}
+			for each( var scene:IsoScene in scenes) {
+				scene.sortAll() ;
+			}
 		}
 	}
 }

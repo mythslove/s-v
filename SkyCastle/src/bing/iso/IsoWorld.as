@@ -16,6 +16,12 @@ package bing.iso
 		protected var _scenesLayer:Sprite = new Sprite();
 		protected var _scenes:Vector.<IsoScene> = new Vector.<IsoScene>();
 		
+		/** 返回所有的场景  */
+		public function get scenes():Vector.<IsoScene>
+		{
+			return _scenes ;
+		}
+		
 		public function IsoWorld(width:Number, height:Number ,  gridX:int , gridZ:int ,size:int )
 		{
 			super();

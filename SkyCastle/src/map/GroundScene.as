@@ -54,10 +54,11 @@ package map
 		 * @param dx 建筑的位置
 		 * @param dy 
 		 * @param buildingVO
+		 * @param isSort
 		 * @param updateDirection 是否更新周围的方向
 		 * @return 添加成功添加的建筑
 		 */		
-		public function addBuildingByVO( dx:Number , dz:Number , buildingVO:BuildingVO , updateDirection:Boolean=true ):Building
+		public function addBuildingByVO( dx:Number , dz:Number , buildingVO:BuildingVO ,isSort:Boolean=true, updateDirection:Boolean=true ):Building
 		{
 			var obj:Building ;
 			if( buildingVO.baseVO.type==BuildingType.ROAD){
@@ -65,16 +66,18 @@ package map
 			}
 			obj.x = dx;
 			obj.z = dz;
-			return addBuilding(obj,updateDirection);
+			return addBuilding(obj,isSort,updateDirection);
 		}
 		
 		/**
 		 * 添加建筑 
 		 * @param building
+		 * @param isSort
+		 * @param updateDirection
 		 */		
-		public function addBuilding( building:Building , updateDirection:Boolean=true):Building
+		public function addBuilding( building:Building , isSort:Boolean=true , updateDirection:Boolean=true):Building
 		{
-			this.addIsoObject( building );
+			this.addIsoObject( building,isSort );
 			building.setWalkable( false, gridData );
 			_groundNodeHash[building.nodeX+"-"+building.nodeZ]=building;
 			if(updateDirection)updateUI(building);
