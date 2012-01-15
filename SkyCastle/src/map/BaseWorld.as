@@ -37,8 +37,9 @@ package map
 		public var mouseNodePoint:Point = new Point();
 		/** 跟随鼠标移动的建筑 */
 		public var mouseContainer:IsoObject; 
-		public var mouseOverBuild:Building ; //当前鼠标在哪个建筑上面
-		
+		/** 当前鼠标在哪个建筑上面 */
+		public var mouseOverBuild:Building ; 
+		//----------------------------------------------------------------*/
 		protected var _gridScene:IsoScene ; //网格层
 		protected var _mapGridData:MapGridDataModel ; //地图数据
 		protected var _tooltip:BuildingToolTip ;
@@ -47,10 +48,8 @@ package map
 		public function mapIsMove():Boolean{ 
 			return _mapIsMove ; 
 		}
-		
-		/**
-		 * 游戏世界基类
-		 */		
+		//----------------------------------------------------------------*/
+		/**游戏世界基类*/		
 		public function BaseWorld()
 		{
 			super(GameSetting.MAP_WIDTH , GameSetting.MAP_HEIGHT,GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE);
