@@ -59,7 +59,7 @@ package map
 		
 		override protected function onClick(e:MouseEvent):void 
 		{
-			if(GameData.buildingCurrOperation==BuildingCurrentOperation.ADD)
+			if(GameData.buildingCurrOperation==BuildingCurrentOperation.ADD) //添加
 			{	
 				var build:BuildingBase = mouseContainer.getChildAt(0) as BuildingBase ;
 				if( build && build.gridLayer && build.gridLayer.getWalkable() )
@@ -70,30 +70,30 @@ package map
 					build.gridLayer.updateBuildingGridLayer(mouseContainer.nodeX , mouseContainer.nodeZ,vo.baseVO.layerType);
 				}
 			}
-			else if(GameData.buildingCurrOperation==BuildingCurrentOperation.ROTATE)
+			else if(GameData.buildingCurrOperation==BuildingCurrentOperation.ROTATE) //旋转
 			{	
-				if(_mouseOverBuild && _mouseOverBuild.buildingVO.baseVO.layerType==LayerType.BUILDING){
-					if(_mouseOverBuild.getRotatable(MapGridDataModel.instance.buildingGrid)) {
-						removeBuildFromScene( _mouseOverBuild );
-						_mouseOverBuild.scaleX = ~_mouseOverBuild.scaleX+1 ;
-						addBuildToScene(_mouseOverBuild);
-						_mouseOverBuild.sendRotatedBuilding();
+				if(mouseOverBuild && mouseOverBuild.buildingVO.baseVO.layerType==LayerType.BUILDING){
+					if(mouseOverBuild.getRotatable(MapGridDataModel.instance.buildingGrid)) {
+						removeBuildFromScene( mouseOverBuild );
+						mouseOverBuild.scaleX = ~mouseOverBuild.scaleX+1 ;
+						addBuildToScene(mouseOverBuild);
+						mouseOverBuild.sendRotatedBuilding();
 					}
 				}
 			}
-			else if( GameData.buildingCurrOperation==BuildingCurrentOperation.MOVE)
+			else if( GameData.buildingCurrOperation==BuildingCurrentOperation.MOVE) //移动
 			{
 				if(mouseContainer.numChildren==0){
-					if(_mouseOverBuild){
-						_moveBuildPrevX = _mouseOverBuild.x ;
-						_moveBuildPrevZ = _mouseOverBuild.z ;
-						removeBuildFromScene( _mouseOverBuild ); //从场景上先移除
-						_mouseOverBuild.selectedStatus(false); //选择设置成false
-						addBuildingOnMouse( _mouseOverBuild );  //添加在鼠标容器上移动
-						_mouseOverBuild.drawGrid(); //画建筑网格
+					if(mouseOverBuild){
+						_moveBuildPrevX = mouseOverBuild.x ;
+						_moveBuildPrevZ = mouseOverBuild.z ;
+						removeBuildFromScene( mouseOverBuild ); //从场景上先移除
+						mouseOverBuild.selectedStatus(false); //选择设置成false
+						addBuildingOnMouse( mouseOverBuild );  //添加在鼠标容器上移动
+						mouseOverBuild.drawGrid(); //画建筑网格
 						mouseContainer.nodeX = mouseNodePoint.x; //更新当前鼠标容器的位置
 						mouseContainer.nodeZ = mouseNodePoint.y ;
-						_mouseOverBuild = null ;
+						mouseOverBuild = null ;
 					}
 				}else {
 					var building:Building = mouseContainer.getChildAt(0) as Building ;
@@ -108,6 +108,22 @@ package map
 						clearMouse(); //清除鼠标
 						mouseContainer.parent.setChildIndex( mouseContainer , mouseContainer.parent.numChildren-1);
 					}
+				}
+			}
+			else if(GameData.buildingCurrOperation==BuildingCurrentOperation.STASH) //收藏
+			{
+				if(mouseOverBuild){
+					removeBuildFromScene( mouseOverBuild ); //从场景上先移除
+					mouseOverBuild.selectedStatus(false);
+					mouseOverBuild.sendStashBuilding(); //发送收藏建筑信息到服务器
+					mouseOverBuild = null ;
+				}
+			}
+			else if(GameData.buildingCurrOperation==BuildingCurrentOperation.SELL) //卖出
+			{
+				if(mouseOverBuild){
+					
+					mouseOverBuild = null ;
 				}
 			}
 		}

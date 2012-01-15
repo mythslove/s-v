@@ -20,7 +20,7 @@ package bing.iso
 		{
 			this.graphics.clear() ;
 			this.color = color ;
-			this.graphics.lineStyle(4,color);
+			this.graphics.lineStyle(2,color);
 //			this.graphics.beginFill(color,0.5);
 			this.graphics.moveTo( 0 , 0 );
 			this.graphics.lineTo( size , size/2 );
