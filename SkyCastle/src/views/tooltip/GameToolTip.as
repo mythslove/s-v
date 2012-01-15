@@ -136,7 +136,7 @@ package views.tooltip
 				this.x= stageX + offsetX;
 			}
 			//鼠标在场景上侧
-			if (stageY < this.stage.stageWidth * 0.5) {
+			if (stageY < this.height) {
 				this.y=stageY + offsetY ;
 			} else {
 				this.y= stageY - height - offsetY;
