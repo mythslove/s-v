@@ -148,11 +148,14 @@ package map
 		/**地图放大和缩小 */		
 		public function zoom( scale:Number):void
 		{
-			var dx:Number=scaleX<1?-GameSetting.SCREEN_WIDTH:GameSetting.SCREEN_WIDTH ;
-			var dy:Number=scaleX<1?-GameSetting.SCREEN_HEIGHT:GameSetting.SCREEN_HEIGHT ;
+			var xx:int = -x/scaleX -sceneLayerOffsetX ;
+			var yy:int = -y/scaleX-sceneLayerOffsetY;
 			scaleX = scaleY = scale ;
-			x+=dx;
-			y+=dy;
+			var xx1:int =-x/scaleX -sceneLayerOffsetX ;
+			var yy1:int =-y/scaleX-sceneLayerOffsetY;
+			x-=(xx-xx1)*0.5;
+			y-=(yy-yy1)*0.5;
+			
 			modifyMapPosition();
 		}
 		
