@@ -119,6 +119,7 @@ package map
 		//更新一个路的方向
 		private function updateRoadDirection( building:Building ):void
 		{
+			_roundRoadHash.clear();
 			var clsName:String = building.buildingVO.baseVO.clsName;
 			var luBuilding:Building = _groundNodeHash[ (building.nodeX-1)+"-"+building.nodeZ];
 			var ruBuilding:Building = _groundNodeHash[ building.nodeX+"-"+(building.nodeZ-1)];
@@ -130,12 +131,10 @@ package map
 			if( rbBuilding&&rbBuilding.buildingVO.baseVO.clsName==clsName ) _roundRoadHash.put( "POS_RB_M",true);
 			
 			const len:int = _roundRoadHash.size() ;
-			if(len==4) (building as Object).updateUI(M); 
+			if(len==4||len==0) (building as Object).updateUI(M); 
 			else if(len==3) check3(building);
 			else if(len==2) check2(building);
 			else if(len==1) check1(building);
-			
-			_roundRoadHash.clear();
 		}
 		
 		private function check3(building:Object):void 
