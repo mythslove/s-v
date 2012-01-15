@@ -35,5 +35,12 @@ package map.elements
 			//发送移动建筑消息到服务器
 			
 		}
+		
+		/** 发送收藏建筑的信息到服务器 */
+		public function sendStashBuilding():void
+		{
+			//发送收藏建筑的信息到服务器
+			
+		}
 	}
 }

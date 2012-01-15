@@ -37,13 +37,16 @@ package map
 		public var mouseNodePoint:Point = new Point();
 		/** 跟随鼠标移动的建筑 */
 		public var mouseContainer:IsoObject; 
+		public var mouseOverBuild:Building ; //当前鼠标在哪个建筑上面
+		
 		protected var _gridScene:IsoScene ; //网格层
 		protected var _mapGridData:MapGridDataModel ; //地图数据
 		protected var _tooltip:BuildingToolTip ;
-		protected var _mouseOverBuild:Building ; //当前鼠标在哪个建筑上面
 		protected var _mapIsMove:Boolean=false; 
 		/** 地图是否在移动 */
-		public function mapIsMove():Boolean{ return _mapIsMove ; }
+		public function mapIsMove():Boolean{ 
+			return _mapIsMove ; 
+		}
 		
 		/**
 		 * 游戏世界基类
@@ -153,9 +156,9 @@ package map
 					break;
 				case MouseEvent.MOUSE_OVER:
 					if(mouseContainer.numChildren==0 && e.target is InteractivePNG){
-						_mouseOverBuild = (e.target as InteractivePNG).parent as Building;
-						_mouseOverBuild.selectedStatus( true );
-						var baseVO:BuildingBaseVO = _mouseOverBuild.buildingVO.baseVO;
+						mouseOverBuild = (e.target as InteractivePNG).parent as Building;
+						mouseOverBuild.selectedStatus( true );
+						var baseVO:BuildingBaseVO = mouseOverBuild.buildingVO.baseVO;
 						_tooltip.showTooltip(baseVO.info , baseVO.title );
 					}
 					break;
@@ -166,9 +169,9 @@ package map
 					this.stopDrag();
 					_mapIsMove = false ;
 					_tooltip.hideTooltip();
-					if(e.type!=MouseEvent.MOUSE_UP && _mouseOverBuild){
-						_mouseOverBuild.selectedStatus( false );
-						_mouseOverBuild = null ;
+					if(e.type!=MouseEvent.MOUSE_UP && mouseOverBuild){
+						mouseOverBuild.selectedStatus( false );
+						mouseOverBuild = null ;
 					}
 					break;
 			}
