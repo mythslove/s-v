@@ -163,9 +163,10 @@ package map
 					break;
 				case MouseEvent.MOUSE_UP:
 					if(!_mapIsMove) onClick(e);
-				case MouseEvent.ROLL_OUT:
-				case MouseEvent.MOUSE_OUT:
 					this.stopDrag();
+				case MouseEvent.ROLL_OUT:
+					this.stopDrag();
+				case MouseEvent.MOUSE_OUT:
 					_mapIsMove = false ;
 					_tooltip.hideTooltip();
 					if(e.type!=MouseEvent.MOUSE_UP && mouseOverBuild){
