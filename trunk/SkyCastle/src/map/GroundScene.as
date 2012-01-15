@@ -93,6 +93,7 @@ package map
 			building.setWalkable( true ,  gridData  );
 			this.removeIsoObject( building );
 			delete _groundNodeHash[building.nodeX+"-"+building.nodeZ];
+			updateUI(building);
 		}
 		
 		/**
