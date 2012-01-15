@@ -20,7 +20,7 @@ package utils
 		}
 		//================================
 		
-		public const OFFSET:int = 12 ;
+		public const OFFSET:int = 20 ;
 		
 		private var _currentMouse:DisplayObject ;
 		
