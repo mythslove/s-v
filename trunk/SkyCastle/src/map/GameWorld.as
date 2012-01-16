@@ -65,7 +65,9 @@ package map
 				if( build && build.gridLayer && build.gridLayer.getWalkable() )
 				{
 					var vo:BuildingVO = ObjectUtil.copyObj( (mouseContainer.getChildAt(0) as BuildingBase).buildingVO ) as BuildingVO;
-					addBuildingByVO( mouseContainer.nodeX , mouseContainer.nodeZ ,vo );
+					var addedBuilding:Building = addBuildingByVO( mouseContainer.nodeX , mouseContainer.nodeZ ,vo );
+					addedBuilding.sendAddedToScene(); //发送添加到地图上的消息到服务器
+					//准备添加下一个建筑
 					mouseContainer.parent.setChildIndex( mouseContainer , mouseContainer.parent.numChildren-1);
 					build.gridLayer.updateBuildingGridLayer(mouseContainer.nodeX , mouseContainer.nodeZ,vo.baseVO.layerType);
 				}

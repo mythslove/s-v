@@ -12,7 +12,7 @@ package models.vos
 		public var nodeZ:int;
 		public var direction:String="NONE"; //主要用于自动方向的路
 		
-		private var _baseVO:BuildingBaseVO ;
+		protected var _baseVO:BuildingBaseVO ;
 		public function get baseVO():BuildingBaseVO
 		{
 			if(!_baseVO){

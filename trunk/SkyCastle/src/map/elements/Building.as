@@ -19,20 +19,20 @@ package map.elements
 			
 		}
 		
-		/** 旋转建筑 */
-		public function sendRotatedBuilding():void
-		{
-			buildingVO.scale = this.scaleX; 
-			//发送旋转到服务器
-			
-		}
-		
 		/** 发送移动建筑消息到服务器  */		
 		public function sendMovedBuilding():void
 		{
 			buildingVO.nodeX = nodeX;
 			buildingVO.nodeZ = nodeZ;
 			//发送移动建筑消息到服务器
+			
+		}
+		
+		/** 旋转建筑 */
+		public function sendRotatedBuilding():void
+		{
+			buildingVO.scale = this.scaleX; 
+			//发送旋转到服务器
 			
 		}
 		
