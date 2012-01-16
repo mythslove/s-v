@@ -24,6 +24,10 @@ package comm
 		 */
 		public static function set buildingCurrOperation(value:String):void
 		{
+			if(_buildingCurrOperation==BuildingCurrentOperation.MOVE){ 
+				//如果原来是move,则将原来的建筑还原
+				GameWorld.instance.moveFail();
+			}
 			_buildingCurrOperation = value;
 			switch(value){
 				case BuildingCurrentOperation.ADD:

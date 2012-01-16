@@ -214,10 +214,17 @@ package map
 			}
 		}
 		
-		/** 移动建筑失败 ，恢复到原来的地方 */
+		/** 移动建筑失败,恢复到原来的地方 */
 		public function moveFail():void
 		{
-			
+			if(mouseOverBuild){
+				mouseOverBuild.x=_moveBuildPrevX;
+				mouseOverBuild.z=_moveBuildPrevZ;
+				mouseOverBuild.itemLayer.alpha=1;
+				mouseOverBuild.removeGrid();
+				addBuildToScene(mouseOverBuild);
+				mouseOverBuild = null ;
+			}
 		}
 	}
 }
