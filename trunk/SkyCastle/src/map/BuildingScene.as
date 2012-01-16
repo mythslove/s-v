@@ -45,8 +45,7 @@ package map
 		{
 			this.addIsoObject( building,isSort );
 			building.setWalkable( false , gridData );
-			//有些建筑虽然在建筑层，但是可以从上面通过，如门，土地
-			//如果上面不能走，将
+			//如果上面不能走
 			if( !building.buildingVO.baseVO.walkable ){ 
 				building.setWalkable(false, MapGridDataModel.instance.astarGrid );
 			}
