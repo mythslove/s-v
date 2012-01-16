@@ -258,12 +258,12 @@ package map
 		 * @param updateDirection
 		 * @reutrn 添加成功建筑
 		 */		
-		protected function addBuildingByVO( nodeX:int , nodeZ:int , vo:BuildingVO , isSort:Boolean=true , updateDirection:Boolean=true ):BuildingBase
+		protected function addBuildingByVO( nodeX:int , nodeZ:int , vo:BuildingVO , isSort:Boolean=true , updateDirection:Boolean=true ):Building
 		{
 			var dx:int = nodeX*GameSetting.GRID_SIZE ;
 			var dz:int = nodeZ*GameSetting.GRID_SIZE ;
 			
-			var result:BuildingBase  ;
+			var result:Building  ;
 			if(nodeX<0 || nodeZ<0 || nodeX>=GameSetting.GRID_X || nodeZ>=GameSetting.GRID_Z) return result ;
 			
 			if(vo.baseVO.layerType==LayerType.GROUND) //添加到地面层
