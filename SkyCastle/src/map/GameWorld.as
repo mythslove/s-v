@@ -74,12 +74,13 @@ package map
 			}
 			else if(GameData.buildingCurrOperation==BuildingCurrentOperation.ROTATE) //旋转
 			{	
+				//路一层的建筑才可以旋转
 				if(mouseOverBuild && mouseOverBuild.buildingVO.baseVO.layerType==LayerType.BUILDING){
 					if(mouseOverBuild.getRotatable(MapGridDataModel.instance.buildingGrid)) {
 						removeBuildFromScene( mouseOverBuild );
 						mouseOverBuild.scaleX = ~mouseOverBuild.scaleX+1 ;
 						addBuildToScene(mouseOverBuild);
-						mouseOverBuild.sendRotatedBuilding();
+						mouseOverBuild.sendRotatedBuilding(); //发送旋转建筑消息到服务器
 					}
 				}
 			}
