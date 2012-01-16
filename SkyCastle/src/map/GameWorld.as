@@ -34,7 +34,7 @@ package map
 			return _instance ;
 		}
 		//=====================================
-		private var _moveBuildPrevX:int ;
+		private var _moveBuildPrevX:int ; //移动建筑之前的位置
 		private var _moveBuildPrevZ:int ;
 		
 		/**
@@ -212,6 +212,12 @@ package map
 			for each( var scene:IsoScene in scenes) {
 				scene.sortAll() ;
 			}
+		}
+		
+		/** 移动建筑失败 ，恢复到原来的地方 */
+		public function moveFail():void
+		{
+			
 		}
 	}
 }
