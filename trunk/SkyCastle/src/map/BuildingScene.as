@@ -10,6 +10,8 @@ package map
 	import models.MapGridDataModel;
 	import models.vos.BuildingVO;
 	
+	import utils.BuildingFactory;
+	
 	public class BuildingScene extends IsoScene
 	{
 		public function BuildingScene()
@@ -29,10 +31,10 @@ package map
 		 */		
 		public function addBuildingByVO( dx:Number , dz:Number , buildingVO:BuildingVO , isSort:Boolean=true ):Building
 		{
-			var obj:Building = new Building(buildingVO);
-			obj.x = dx;
-			obj.z = dz;
-			return addBuilding(obj,isSort);
+			var building:Building = BuildingFactory.createBuildingByVO( buildingVO);
+			building.x = dx;
+			building.z = dz;
+			return addBuilding(building,isSort);
 		}
 		
 		/**
