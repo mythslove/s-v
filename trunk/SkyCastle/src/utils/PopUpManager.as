@@ -23,7 +23,7 @@ package utils
 		}
 		
 		/**
-		 * 添加弹出窗口 
+		 * 添加序列显示的弹出窗口 
 		 * @param mc
 		 * @param modal 是否是模式窗口
 		 */		
