@@ -126,7 +126,7 @@ import flash.events.Event;
  */	
 class PopupMask extends Sprite
 {
-	public function PopupMask( color:uint=0 , alpha:Number =0.5 )
+	public function PopupMask( color:uint=0 , alpha:Number =0.6 )
 	{
 		super();
 		this.graphics.beginFill( color , alpha );
