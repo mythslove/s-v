@@ -16,6 +16,8 @@ package map
 	import models.MapGridDataModel;
 	import models.vos.BuildingVO;
 	
+	import utils.BuildingFactory;
+	
 	public class GroundScene extends IsoScene
 	{
 		private var _groundNodeHash:Dictionary = new Dictionary();
@@ -60,13 +62,10 @@ package map
 		 */		
 		public function addBuildingByVO( dx:Number , dz:Number , buildingVO:BuildingVO ,isSort:Boolean=true, updateDirection:Boolean=true ):Building
 		{
-			var obj:Building ;
-			if( buildingVO.baseVO.type==BuildingType.ROAD){
-				obj= new Road(buildingVO);
-			}
-			obj.x = dx;
-			obj.z = dz;
-			return addBuilding(obj,isSort,updateDirection);
+			var building:Building = BuildingFactory.createBuildingByVO( buildingVO);
+			building.x = dx;
+			building.z = dz;
+			return addBuilding(building,isSort,updateDirection);
 		}
 		
 		/**

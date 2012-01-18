@@ -2,13 +2,10 @@ package map
 {
 	import bing.iso.IsoScene;
 	import bing.utils.ContainerUtil;
-	import bing.utils.ObjectUtil;
 	
 	import comm.GameData;
-	import comm.GameSetting;
 	
 	import enums.BuildingCurrentOperation;
-	import enums.BuildingType;
 	import enums.LayerType;
 	
 	import flash.events.Event;
@@ -64,7 +61,7 @@ package map
 				var build:BuildingBase = mouseContainer.getChildAt(0) as BuildingBase ;
 				if( build && build.gridLayer && build.gridLayer.getWalkable() )
 				{
-					var vo:BuildingVO = ObjectUtil.copyObj( (mouseContainer.getChildAt(0) as BuildingBase).buildingVO ) as BuildingVO;
+					var vo:BuildingVO = (mouseContainer.getChildAt(0) as BuildingBase).buildingVO ;
 					var addedBuilding:Building = addBuildingByVO( mouseContainer.nodeX , mouseContainer.nodeZ ,vo );
 					addedBuilding.sendAddedToScene(); //发送添加到地图上的消息到服务器
 					//准备添加下一个建筑
@@ -173,7 +170,7 @@ package map
 			//将位置设置成0
 			buildingBase.setScreenPosition(0,0);
 			buildingBase.nodeX=buildingBase.nodeZ=0;
-			if( buildingBase.buildingVO.baseVO.type!=BuildingType.ROAD){
+			if( buildingBase.buildingVO.baseVO.layerType!=LayerType.GROUND){
 				buildingBase.itemLayer.alpha=0.6;
 			}
 			mouseContainer.addChild( buildingBase );
