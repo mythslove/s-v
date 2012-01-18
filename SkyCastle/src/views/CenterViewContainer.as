@@ -7,6 +7,8 @@ package views
 	import flash.display.Sprite;
 	import flash.events.Event;
 	
+	import utils.PopUpManager;
+	
 	/**
 	 * 始终居中的视图的容器 
 	 * @author zzhanglin
@@ -58,6 +60,7 @@ package views
 			addChild(_bottomBar);
 			_popUpContainer = new PopUpContainer();
 			addChild(_popUpContainer);
+			PopUpManager.registerPopupContainer(_popUpContainer);
 			
 			GlobalDispatcher.instance.addEventListener(GlobalEvent.RESIZE , onResizeHandler );			
 		}
