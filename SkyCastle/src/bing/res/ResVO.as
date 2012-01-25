@@ -15,6 +15,7 @@ package bing.res
 		public var url:String ; //资源文件地址
 		public var resType:String ; //资源类型
 		public var resObject:Object ; //下载完成后的资源
+		public var userData:Object ; //一些其他的信息
 		public var reflectType:String;//反射类型
 		public var priority:int = 1;//下载的优先级
 		
