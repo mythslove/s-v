@@ -6,6 +6,8 @@ package map.cell
 	import flash.display.MovieClip;
 	import flash.geom.Matrix;
 	import flash.geom.Rectangle;
+	import flash.utils.getDefinitionByName;
+	import flash.utils.getQualifiedClassName;
 
 	/**
 	 * 将MovieClip缓存为位图 
@@ -98,7 +100,9 @@ package map.cell
 		
 		/**复制 */	
 		public function clone():BitmapMovieClip{
-			var mc:BitmapMovieClip = new BitmapMovieClip(_mc,_bitmaps,_bounds);
+			var clsName:String = flash.utils.getQualifiedClassName(_mc);
+			var movie:MovieClip = new (getDefinitionByName(clsName) as Class)() as MovieClip ;
+			var mc:BitmapMovieClip = new BitmapMovieClip(movie,_bitmaps,_bounds);
 			return mc ;
 		}
 		
