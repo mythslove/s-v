@@ -52,9 +52,7 @@ package bing.iso
 		 * ********************************************************/
 		override public function update():void
 		{
-			super.update();
-			for each(var obj:IsoObject in _sprites )
-			{
+			for each(var obj:IsoObject in _sprites ) {
 				obj.update();
 				if(obj.isSort)	{
 					setChildIndex( obj,0 );
