@@ -24,6 +24,7 @@ package bing.res
 		public var col:int =1  ;
 		public var frames:int =1 ;
 		public var loadError:int = 0 ;//计算加载错误/	错误的次数
+		public var isQueue:Boolean=false ;//是否是序列加载中
 		
 		
 		public function toString():String
