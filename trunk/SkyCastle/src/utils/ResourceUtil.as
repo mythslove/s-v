@@ -42,7 +42,7 @@ package utils
 		 * @param resVO 
 		 * @param resLoader 加载完成的数据
 		 */		
-		override protected function handleRes(resVO:ResVO , resLoader:Object):void
+		override protected function handleRes(resVO:ResVO, resLoader:Object):void
 		{
 			switch(resVO.resType)
 			{
