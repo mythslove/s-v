@@ -244,6 +244,9 @@ package bing.res
 				else
 				{
 					this.dispatchEvent( e );
+					if(resVO.isQueue){ //如果是序列加载，并且加载失败，则跳过此资源
+						resObjectLoadedHandler(null);
+					}
 				}
 			}
 		}
@@ -343,6 +346,7 @@ package bing.res
 		protected function startQueueLoad():void
 		{
 			var content:ResVO = _resArray.shift();
+			content.isQueue = true ;
 			this._queueHash[content.resId] = content;
 			this.addEventListener( content.resId , resObjectLoadedHandler );
 			this.loadRes( content );
@@ -350,13 +354,18 @@ package bing.res
 		protected function resObjectLoadedHandler(e:Event):void
 		{
 			_queueLoaded ++;
-			var evtLoadedEvt:ResLoadedEvent = (e as ResLoadedEvent);
-			this.removeEventListener( evtLoadedEvt.resVO.resId , resObjectLoadedHandler );
+			var evtLoadedEvt:ResLoadedEvent
+			if(e){
+				evtLoadedEvt = (e as ResLoadedEvent);
+				this.removeEventListener( evtLoadedEvt.resVO.resId , resObjectLoadedHandler );
+			}
 			//加载进度
 			var evt:ResProgressEvent = new ResProgressEvent(ResProgressEvent.RES_LOAD_PROGRESS);
 			evt.total = _total ;
 			evt.loaded = _queueLoaded ;
-			evt.name = evtLoadedEvt.resVO.resId ;
+			if(evtLoadedEvt){
+				evt.name = evtLoadedEvt.resVO.resId ;
+			}
 			this.dispatchEvent( evt );
 			//判断是否还要加载
 			if(_resArray.length>0){
