@@ -97,6 +97,11 @@ package bing.iso
 			}
 		}
 		
+		/**
+		 * 设置屏幕坐标位置(非iso坐标)
+		 * @param x
+		 * @param y
+		 */		
 		public function setScreenPosition(x:Number , y:Number):void 
 		{
 			super.x = x ;
