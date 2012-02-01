@@ -28,6 +28,9 @@ package map.cell
 			return rect;
 		}
 		
+		public function get totalFrame():int{ return _mc.totalFrames; }
+		public function get currentFrame():int{return _mc.currentFrame ;}
+		
 		/**
 		 * MovieClip缓存位图构造方法 
 		 * @param mc 要缓存的影片
@@ -71,33 +74,34 @@ package map.cell
 		
 		public function gotoAndStop( frame:Object ):void
 		{
-			this._mc.gotoAndStop(frame);
+			_mc.gotoAndStop(frame);
 			update();
 		}
 		
 		public function gotoAndPlay( frame:Object ):void
 		{
-			this._mc.gotoAndPlay(frame);
+			_mc.gotoAndPlay(frame);
 			update();
 		}
 		
 		public function stop():void
 		{
-			this._mc.stop();
+			_mc.stop();
 			update();
 		}
 		
 		public function play():void
 		{
-			this._mc.play();
+			_mc.play();
 			update();
 		}
 		
 		public function update():void
 		{
-			if(bitmapData!=_bitmaps[_mc.currentFrame-1]){
-				bitmapData = _bitmaps[_mc.currentFrame-1];
-				_bound =  _bounds[_mc.currentFrame-1];
+			var temp:int = _mc.currentFrame-1 ;
+			if(bitmapData!=_bitmaps[temp]){
+				bitmapData = _bitmaps[temp];
+				_bound =  _bounds[temp];
 			}
 		}
 		
