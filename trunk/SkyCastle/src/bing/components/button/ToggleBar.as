@@ -56,7 +56,9 @@ package bing.components.button
 				if(obj is BaseToggleButton)
 				{
 					btn = obj as BaseToggleButton ;
-					btn.addEventListener(MouseEvent.CLICK , btnClickHandler , false ,0 , true );
+					if(!btn.hasEventListener(MouseEvent.CLICK)){
+						btn.addEventListener(MouseEvent.CLICK , btnClickHandler , false ,0 , true );
+					}
 					_toggleButtons.push( btn );
 				}
 			}
