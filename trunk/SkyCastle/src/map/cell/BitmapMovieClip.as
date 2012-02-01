@@ -20,7 +20,7 @@ package map.cell
 		protected var _mc:MovieClip;
 		
 		protected var _bound:Rectangle =new Rectangle() ;
-		public function get bound( target:DisplayObjectContainer ):Rectangle
+		public function getBound( target:DisplayObjectContainer ):Rectangle
 		{
 			var rect:Rectangle = _bound.clone();
 			rect.x-=target.x ;
