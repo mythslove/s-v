@@ -1,4 +1,4 @@
-package map.cell
+package map.cell 
 {
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
@@ -8,7 +8,7 @@ package map.cell
 	import flash.geom.Rectangle;
 	import flash.utils.getDefinitionByName;
 	import flash.utils.getQualifiedClassName;
-
+	
 	/**
 	 * 将MovieClip缓存为位图 
 	 * @author zzhanglin
@@ -43,6 +43,7 @@ package map.cell
 			if(!bitmaps){
 				cacheAsBitmaps();
 			}
+			_mc.gotoAndPlay(1);
 		}
 		
 		/** 缓存成位图*/
@@ -62,7 +63,7 @@ package map.cell
 				//保存图片
 				matrix.identity();
 				matrix.translate(-rect.x,-rect.y);
-				bmd = new BitmapData(rect.width,bmd.height,true,0xffffff);
+				bmd = new BitmapData(rect.width,rect.height,true,0xffffff);
 				bmd.draw( _mc,matrix);
 				_bitmaps[i] = bmd ;
 			}
@@ -94,8 +95,10 @@ package map.cell
 		
 		public function update():void
 		{
-			this.bitmapData = this._bitmaps[_mc.currentFrame-1];
-			_bound =  this._bounds[_mc.currentFrame-1];
+			if(bitmapData!=_bitmaps[_mc.currentFrame-1]){
+				bitmapData = _bitmaps[_mc.currentFrame-1];
+				_bound =  _bounds[_mc.currentFrame-1];
+			}
 		}
 		
 		/**复制 */	
