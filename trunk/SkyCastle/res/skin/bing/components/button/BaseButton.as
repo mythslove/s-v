@@ -43,9 +43,12 @@
 			switch ( event.type )
 			{
 				case MouseEvent.MOUSE_OUT:
-				case MouseEvent.MOUSE_UP :
 					if(this.enabled) {
 						this.gotoAndStop("up");
+					}
+				case MouseEvent.MOUSE_UP :
+					if(this.enabled) {
+						this.gotoAndStop("over");
 					}
 					break;
 				case MouseEvent.MOUSE_OVER :
