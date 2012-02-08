@@ -29,7 +29,7 @@ package utils
 		 */		
 		public static function addQueuePopUp( mc:DisplayObject , modal:Boolean=true ):void
 		{
-			_queuePopList.push({window:_queuePopList , modal:modal });
+			_queuePopList.push({window:mc , modal:modal });
 			popupNextWindow();
 		}
 		
