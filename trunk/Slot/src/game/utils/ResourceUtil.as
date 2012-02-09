@@ -62,7 +62,7 @@ package game.utils
 		/** 最终加载失败 */
 		private function loadErrorHandler(e:IOErrorEvent):void
 		{
-			sys_debug(e.text);
+			SystemUtil.debug(e.text);
 		}
 	}
 }
