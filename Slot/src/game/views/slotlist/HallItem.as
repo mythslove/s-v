@@ -5,7 +5,11 @@ package game.views.slotlist
 	import flash.events.Event;
 	
 	import game.vos.SlotItemVO;
-
+	/**
+	 * 一个老虎机按钮,有三帧，三个状态
+	 * simple,locked,soon
+	 * @author zzhanglin
+	 */
 	public class HallItem extends MovieClip
 	{
 		private var _itemVO:SlotItemVO ;
@@ -29,7 +33,7 @@ package game.views.slotlist
 
 		private function addedToStageHandler( e:Event ):void
 		{
-			addEventListener(Event.ADDED_TO_STAGE , addedToStageHandler );
+			removeEventListener(Event.ADDED_TO_STAGE , addedToStageHandler );
 			addEventListener(Event.REMOVED_FROM_STAGE , removedHandler );
 			
 			
@@ -38,6 +42,7 @@ package game.views.slotlist
 		private function removedHandler( e:Event ):void
 		{
 			removeEventListener(Event.REMOVED_FROM_STAGE , removedHandler );
+			_itemVO = null ;
 		}
 	}
 }
