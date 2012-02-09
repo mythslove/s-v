@@ -1,112 +1,146 @@
 package utils
 {
-	import bing.utils.ContainerUtil;
-	
 	import comm.GameSetting;
 	
 	import flash.display.DisplayObject;
-	import flash.display.DisplayObjectContainer;
-	
-	import views.CenterViewContainer;
+	import flash.display.Sprite;
 
-	public class PopUpManager
+	public class PopUpManager extends Sprite
 	{
-		private static var _queuePopList:Array =[] ;
-		private static var _container:DisplayObjectContainer ;
-		
-		/**
-		 * 注册弹出窗口的显示容器 
-		 * @param container
-		 */		
-		public static function registerPopupContainer( container:DisplayObjectContainer ):void{
-			_container = container ;
+		private static var _instance:PopUpManager; 
+		public function PopUpManager()	{
+			super();
+			if(_instance) throw new Error("只能有一个");
+			else _instance = this ;
+			
+			this.mouseEnabled = false ;
 		}
+		public static function get instance():PopUpManager
+		{
+			if(!_instance)  _instance= new PopUpManager();
+			return _instance ;
+		}
+		//-----------------------------------------------------------
 		
+		private var _popupList:Array =[] ;
+		private var _currentPopupObj:Object ;//当前弹出的{window:popupwindow , modal: true }
+		
+		
+		//---------------------------序列显示弹出窗口----------------------------------------------
 		/**
-		 * 添加序列显示的弹出窗口 
+		 * 添加弹出窗口 
 		 * @param mc
+		 * @param priority 弹出的优先级
 		 * @param modal 是否是模式窗口
 		 */		
-		public static function addQueuePopUp( mc:DisplayObject , modal:Boolean=true ):void
+		public function addQueuePopUp( mc:DisplayObject ,  modal:Boolean=true , priority:int = 0 ):void
 		{
-			_queuePopList.push({window:mc , modal:modal });
+			if(!mc || this.contains(mc)) return ;
+			
+			_popupList.push({window:mc , modal:modal , priority:priority });
+			sortByPriority();
 			popupNextWindow();
 		}
-		
-		//弹出下一个窗口
-		private static function popupNextWindow():void
-		{
-			if(_container.numChildren==0 && _queuePopList.length>0)
-			{
-				var obj:Object = _queuePopList.pop();
-				var mc:DisplayObject =  obj.window as DisplayObject;
-				addPopUpToFront( mc , obj.modal );
-			}
-		}
-		
 		/**
-		 * 弹出窗口到最上层
-		 * @param mc
-		 * @param modal 是否遮挡下面
+		 * 移除最上面的那个弹出窗口 ，会触发弹出下一个弹出窗口
 		 */		
-		public static function addPopUpToFront( mc:DisplayObject , modal:Boolean=true ):void 
+		public function removeCurrentPopup():void
 		{
-			if(modal){
-				var popMask:PopupMask = new PopupMask();
-				_container.addChild(popMask);
-			}
-			mc.x = (GameSetting.SCREEN_WIDTH-mc.width)*0.5 ;
-			mc.y = (GameSetting.SCREEN_HEIGHT-mc.height)*0.5 ;
-			_container.addChild(mc);
-		}
-		
-		/**
-		 * 弹出窗口到最后面 
-		 * @param mc
-		 * @param modal
-		 */		
-		public static function addPopUpToBehind( mc:DisplayObject , modal:Boolean=true ):void 
-		{
-			_container.addChildAt(mc,0);
-			if(modal){
-				var popMask:PopupMask = new PopupMask();
-				_container.addChildAt(popMask,0);
-				mc.x = (GameSetting.SCREEN_WIDTH-mc.width)*0.5 ;
-				mc.y = (GameSetting.SCREEN_HEIGHT-mc.height)*0.5 ;
-			}
-		}
-		
-		/**
-		 * 移除弹出窗口 
-		 * @param mc
-		 */		
-		public static function removePopup( mc:DisplayObject ):void 
-		{
-			if(mc.parent){
-				var index:int = mc.parent.getChildIndex( mc );
-				if(index-1>=0 && mc.parent.getChildAt(index-1) is PopupMask)
+			if(_currentPopupObj){
+				if(_currentPopupObj.window.parent)
 				{
-					mc.parent.removeChildAt( index-1);
+					_currentPopupObj.window.parent.removeChild(_currentPopupObj.window as DisplayObject);
 				}
-				mc.parent.removeChild( mc );
+				_currentPopupObj = null ;
+				popupNextWindow();
 			}
-			//从queueList中移除
-			for( var i:int = 0 ; i<_queuePopList.length ; ++i)
+		}
+		/**
+		 * 清空queue列表，不包括当前已经弹出的
+		 */		
+		public function clearNextQueuePopups():void
+		{
+			_popupList=[];
+		}
+		/** 弹出下一个 */
+		private function popupNextWindow():void
+		{
+			if(!_currentPopupObj && _popupList.length>0)
 			{
-				var obj:DisplayObject = _queuePopList[i].window ;
-				if( obj==mc){
-					_queuePopList.splice(i,1); //从数组中删除
+				_currentPopupObj = _popupList.pop();
+				var mc:DisplayObject =  _currentPopupObj.window as DisplayObject;
+				if(_currentPopupObj.modal){
+					addChild( new PopupMask());
 				}
+				this.addChild(mc);
+				if(parent){ //将当前对象设置为最上面
+					parent.setChildIndex( this , parent.numChildren-1); 
+				}
+			}
+		}
+		/** 根据优先级来排序 */
+		private function sortByPriority():void
+		{
+			_popupList.sortOn("priority",Array.DESCENDING |Array.NUMERIC);
+		}
+		
+		
+		
+		//---------------------------添加普通弹出窗口----------------------------------------------
+		/**
+		 * 添加普通的弹出窗口 
+		 * @param mc 
+		 * @param topOrBottom 添加到弹出窗口的最上面还是最下面，默认为最上
+		 */		
+		public function addPopUp( mc:DisplayObject , modal:Boolean=true , topOrBottom:Boolean=true):void
+		{
+			if(!mc || this.contains(mc)) return ;
+			
+			if(topOrBottom){ //如果弹到顶层
+				if(_currentPopupObj.modal){
+					addChild( new PopupMask());
+				}
+				addChild(mc);
+			} else {
+				addChildAt(mc,0);
+				if(_currentPopupObj.modal){
+					addChildAt( new PopupMask(),0);
+				}
+			}
+		}
+		/**
+		 * 移除普通弹出窗口 ，不会触发弹出下一个弹出窗口
+		 * @param mc
+		 */		
+		public function removePopUp( mc:DisplayObject ):void
+		{
+			for( var i:int = 0 ; i<_popupList.length ; ++i)
+			{
+				var obj:DisplayObject = _popupList[i].window ;
+				if( obj==mc){
+					_popupList.splice(i,1); //从数组中删除
+					break ;
+				}
+			}
+			if(this.contains(mc)){
+				this.removeChild(mc); //移除弹出窗口
+			}
+			if(this.getChildAt(numChildren-1) is PopupMask){ 
+				this.removeChildAt(numChildren-1); //移除Mask
 			}
 		}
 		
 		/**
-		 * 移除所有的窗口 
+		 * 清除所有的，包含已经弹出的 
 		 */		
-		public static  function removeAllPopup():void
+		public function clearAll():void
 		{
-			ContainerUtil.removeChildren(_container);
-			_queuePopList = [];
+			_currentPopupObj = null ;
+			_popupList = [] ;
+			while(this.numChildren>0)
+			{
+				this.removeChildAt(0);
+			}
 		}
 	}
 }

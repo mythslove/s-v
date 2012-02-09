@@ -25,7 +25,6 @@ package views
 		
 		private var _bottomBar:BottomBar ;
 		private var _topBar:TopBar ;
-		private var _popUpContainer:PopUpContainer ;
 		
 		public function get bottomBar():BottomBar
 		{
@@ -34,10 +33,6 @@ package views
 		public function get topBar():TopBar
 		{
 			return _topBar;
-		}
-		public function get popUpContainer():PopUpContainer
-		{
-			return _popUpContainer;
 		}
 		
 		public function CenterViewContainer()
@@ -55,12 +50,12 @@ package views
 			
 			_topBar = new TopBar();
 			addChild(_topBar);
+			
 			_bottomBar = new BottomBar();
 			_bottomBar.y = stage.stageHeight;
 			addChild(_bottomBar);
-			_popUpContainer = new PopUpContainer();
-			addChild(_popUpContainer);
-			PopUpManager.registerPopupContainer(_popUpContainer);
+			
+			addChild(PopUpManager.instance);
 			
 			GlobalDispatcher.instance.addEventListener(GlobalEvent.RESIZE , onResizeHandler );			
 		}
@@ -72,7 +67,7 @@ package views
 		private function onResizeHandler(e:Event):void
 		{
 			x = (stage.stageWidth-GameSetting.SCREEN_WIDTH)>>1;
-			_popUpContainer.y = (stage.stageHeight-GameSetting.SCREEN_HEIGHT)>>1;
+			PopUpManager.instance.y = (stage.stageHeight-GameSetting.SCREEN_HEIGHT)>>1;
 			_bottomBar.y = stage.stageHeight;
 		}
 	}
