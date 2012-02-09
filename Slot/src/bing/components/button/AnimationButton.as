@@ -36,18 +36,18 @@ package bing.components.button
 			switch ( event.type )
 			{
 				case MouseEvent.MOUSE_OUT:
-					this.gotoAndPlay("up");
+					this.gotoAndPlay(_lblHash["up"]);
 					break ;
 				case MouseEvent.MOUSE_UP :
 					if(this.enabled) {
-						this.gotoAndPlay("over");
+						this.gotoAndPlay(_lblHash["over"]);
 					}
 					break;
 				case MouseEvent.MOUSE_OVER :
-					this.gotoAndPlay("over");
+					this.gotoAndPlay(_lblHash["over"]);
 					break;
 				case MouseEvent.MOUSE_DOWN :
-					this.gotoAndPlay("down");
+					this.gotoAndPlay(_lblHash["down"]);
 					break;
 			}
 		}
