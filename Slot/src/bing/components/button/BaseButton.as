@@ -25,6 +25,7 @@
 			this.addEventListener(MouseEvent.MOUSE_UP , mouseEventHandler , false , 0 , true );
 			this.addEventListener(MouseEvent.MOUSE_DOWN , mouseEventHandler , false , 0 , true );
 			this.addEventListener(MouseEvent.MOUSE_OUT , mouseEventHandler , false , 0 , true );
+			this.addEventListener(MouseEvent.ROLL_OUT , mouseEventHandler , false , 0 , true );
 		}
 
 		override public function set enabled(value:Boolean):void
@@ -44,6 +45,7 @@
 		{
 			switch ( event.type )
 			{
+				case MouseEvent.ROLL_OUT:
 				case MouseEvent.MOUSE_OUT:
 					this.gotoAndStop("up");
 					break ;
