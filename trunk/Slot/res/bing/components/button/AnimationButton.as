@@ -26,7 +26,7 @@ package bing.components.button
 				}else{
 					_lblHash[frameLabel.name] = frameLabel.frame ;
 				}
-				this.addFrameScript(frameLabel.frame,function():void{stop();});
+				this.addFrameScript(frameLabel.frame-1,function():void{stop();});
 			}
 		}
 		
