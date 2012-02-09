@@ -3,6 +3,7 @@ package game.views.topbars
 	import bing.components.button.BaseButton;
 	import bing.components.button.BaseToggleButton;
 	
+	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.display.StageDisplayState;
 	import flash.events.Event;
@@ -17,7 +18,10 @@ package game.views.topbars
 		public var btnBuyCoin:BaseButton;
 		public var btnBackToHall:BaseButton;
 		public var btnFullScreen:BaseToggleButton;
+		public var btnSound:BaseToggleButton;
+		public var levelProgress:MovieClip;
 		public var txtBalance:TextField ;
+		public var txtLevel:TextField;
 		//-------------------------------------------------------
 		
 		public function TopBar()
@@ -29,7 +33,13 @@ package game.views.topbars
 		private function addedToStageHandler( e:Event ):void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE , addedToStageHandler );
+			init();
 			configListeners();
+		}
+		
+		private function init():void
+		{
+			levelProgress.stop();
 		}
 		
 		private function configListeners():void
