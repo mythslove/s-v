@@ -40,7 +40,7 @@
 			}
 		}
 
-		private function mouseEventHandler(event:MouseEvent):void
+		protected function mouseEventHandler(event:MouseEvent):void
 		{
 			switch ( event.type )
 			{
