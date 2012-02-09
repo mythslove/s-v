@@ -1,8 +1,12 @@
 package game.views
 {
 	import flash.display.Sprite;
+	import flash.display.StageDisplayState;
 	import flash.events.Event;
 	
+	import game.comm.GameSetting;
+	import game.comm.GlobalDispatcher;
+	import game.comm.GlobalEvent;
 	import game.utils.PopUpManager;
 	import game.views.topbars.TopBar;
 	
@@ -46,7 +50,18 @@ package game.views
 		
 		private function configListeners():void
 		{
+			GlobalDispatcher.instance.addEventListener(GlobalEvent.RESIZE , onResizeHandler );
+		}
+		
+		private function onResizeHandler(e:Event):void
+		{
+			x = (stage.stageWidth-GameSetting.SCREEN_WIDTH)>>1;
+			PopUpManager.instance.y = (stage.stageHeight-GameSetting.SCREEN_HEIGHT)>>1;
 			
+			if(stage.displayState==StageDisplayState.NORMAL && _topBar.btnFullScreen.selected)
+			{
+				_topBar.btnFullScreen.selected=false;
+			}
 		}
 	}
 }
