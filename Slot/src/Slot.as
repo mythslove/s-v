@@ -3,7 +3,7 @@ package
 	import game.views.CenterView;
 	import game.views.topbars.TopbarBg;
 	
-	[SWF(width="760",height="620")]
+	[SWF(width="760",height="620",backgroundColor="#000000")]
 	public class Slot extends BaseGame
 	{
 		protected var _topbarBg:TopbarBg;
