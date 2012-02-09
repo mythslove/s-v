@@ -1,4 +1,4 @@
-package comm
+package game.comm
 {
 	import flash.events.EventDispatcher;
 	import flash.events.IEventDispatcher;

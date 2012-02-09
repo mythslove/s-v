@@ -5,7 +5,6 @@ package game.utils
 	import bing.res.ResType;
 	import bing.res.ResVO;
 	import bing.utils.SystemUtil;
-	import bing.utils.sys_debug;
 	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
