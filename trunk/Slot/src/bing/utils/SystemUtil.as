@@ -21,7 +21,7 @@ package bing.utils
 	 * trace信息 
 	 * @param params
 	 */		
-	public function sys_debug( ...params):void 
+	public function SystemUtil( ...params):void 
 	{
 		if(sys_showDebug)	trace(params);
 	}
