@@ -21,7 +21,7 @@ package bing.components.button
 			for ( var i:int = 0 ; i< len ;++i )
 			{
 				frameLabel = currentLabels[i] ;
-				if(frameLabel.frame+1){
+				if(frameLabel.frame+1<=this.totalFrames){
 					_lblHash[frameLabel.name] = frameLabel.frame+1 ;
 				}else{
 					_lblHash[frameLabel.name] = frameLabel.frame ;
