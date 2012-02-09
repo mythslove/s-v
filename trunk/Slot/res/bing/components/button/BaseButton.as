@@ -4,7 +4,7 @@
 	
 	import flash.display.FrameLabel;
 	import flash.events.MouseEvent;
-
+	
 	/**
 	 *标签包括
 	 * up , over , down , disabled
@@ -25,8 +25,9 @@
 			this.addEventListener(MouseEvent.MOUSE_UP , mouseEventHandler , false , 0 , true );
 			this.addEventListener(MouseEvent.MOUSE_DOWN , mouseEventHandler , false , 0 , true );
 			this.addEventListener(MouseEvent.MOUSE_OUT , mouseEventHandler , false , 0 , true );
+			this.addEventListener(MouseEvent.ROLL_OUT , mouseEventHandler , false , 0 , true );
 		}
-
+		
 		override public function set enabled(value:Boolean):void
 		{
 			super.enabled = value;
@@ -39,11 +40,12 @@
 				this.alpha=0.5;
 			}
 		}
-
+		
 		protected function mouseEventHandler(event:MouseEvent):void
 		{
 			switch ( event.type )
 			{
+				case MouseEvent.ROLL_OUT:
 				case MouseEvent.MOUSE_OUT:
 					this.gotoAndStop("up");
 					break ;
@@ -79,5 +81,5 @@
 			}
 		}
 	}
-
+	
 }

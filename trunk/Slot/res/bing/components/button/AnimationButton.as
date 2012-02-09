@@ -3,7 +3,7 @@ package bing.components.button
 	import flash.display.FrameLabel;
 	import flash.events.MouseEvent;
 	import flash.utils.Dictionary;
-
+	
 	public class AnimationButton extends BaseButton
 	{
 		protected var _lblHash:Dictionary = new Dictionary();
@@ -27,6 +27,9 @@ package bing.components.button
 					_lblHash[frameLabel.name] = frameLabel.frame ;
 				}
 				this.addFrameScript(frameLabel.frame-1,function():void{stop();});
+				if( frameLabel.name=="end"){
+					this.addFrameScript(frameLabel.frame-1,function():void{stop();gotoAndStop("up");});
+				}
 			}
 		}
 		
@@ -35,19 +38,20 @@ package bing.components.button
 		{
 			switch ( event.type )
 			{
+				case MouseEvent.ROLL_OUT:
 				case MouseEvent.MOUSE_OUT:
-					this.gotoAndPlay("up");
+					this.gotoAndPlay(_lblHash["out"]);
 					break ;
 				case MouseEvent.MOUSE_UP :
 					if(this.enabled) {
-						this.gotoAndPlay("over");
+						this.gotoAndPlay(_lblHash["over"]);
 					}
 					break;
 				case MouseEvent.MOUSE_OVER :
-					this.gotoAndPlay("over");
+					this.gotoAndPlay(_lblHash["over"]);
 					break;
 				case MouseEvent.MOUSE_DOWN :
-					this.gotoAndPlay("down");
+					this.gotoAndPlay(_lblHash["down"]);
 					break;
 			}
 		}
