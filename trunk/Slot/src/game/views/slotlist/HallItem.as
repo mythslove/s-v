@@ -8,16 +8,25 @@ package game.views.slotlist
 
 	public class HallItem extends MovieClip
 	{
-		public var itemVO:SlotItemVO ;
+		private var _itemVO:SlotItemVO ;
 		
-		public function HallItem( vo:SlotItemVO )
+		public function HallItem()
 		{
 			super();
-			this.itemVO = vo ;
 			stop();
 			addEventListener(Event.ADDED_TO_STAGE , addedToStageHandler );
 		}
 		
+		public function get itemVO():SlotItemVO
+		{
+			return _itemVO;
+		}
+
+		public function set itemVO(value:SlotItemVO):void
+		{
+			_itemVO = value;
+		}
+
 		private function addedToStageHandler( e:Event ):void
 		{
 			addEventListener(Event.ADDED_TO_STAGE , addedToStageHandler );
