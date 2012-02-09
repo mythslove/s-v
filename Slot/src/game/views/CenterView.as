@@ -1,5 +1,7 @@
 package game.views
 {
+	import bing.utils.ContainerUtil;
+	
 	import flash.display.Sprite;
 	import flash.display.StageDisplayState;
 	import flash.events.Event;
@@ -8,6 +10,7 @@ package game.views
 	import game.comm.GlobalDispatcher;
 	import game.comm.GlobalEvent;
 	import game.utils.PopUpManager;
+	import game.views.slotlist.HallCenterView;
 	import game.views.topbars.TopBar;
 	
 	public class CenterView extends Sprite
@@ -46,6 +49,9 @@ package game.views
 			addChild(_topBar);
 			
 			addChild( PopUpManager.instance );
+			
+			//默认显示大厅
+			showHall();
 		}
 		
 		private function configListeners():void
@@ -61,6 +67,13 @@ package game.views
 			{
 				_topBar.btnFullScreen.selected=false;
 			}
+		}
+		
+		public function showHall():void
+		{
+			ContainerUtil.removeChildren(_container);
+			var hallView:HallCenterView = new HallCenterView();
+			_container.addChild(hallView);
 		}
 	}
 }
