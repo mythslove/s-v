@@ -62,7 +62,8 @@ package game.views
 		private function onResizeHandler(e:Event):void
 		{
 			x = (stage.stageWidth-GameSetting.SCREEN_WIDTH)>>1;
-			PopUpManager.instance.y = (stage.stageHeight-GameSetting.SCREEN_HEIGHT)>>1;
+			y = (stage.stageHeight-GameSetting.SCREEN_HEIGHT)>>1;
+			_topBar.y=-y;
 			if(stage.displayState==StageDisplayState.NORMAL && _topBar.btnFullScreen.selected)
 			{
 				_topBar.btnFullScreen.selected=false;
