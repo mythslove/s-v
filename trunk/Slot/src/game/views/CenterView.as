@@ -38,12 +38,12 @@ package game.views
 		
 		private function initLayers():void
 		{
-			_topBar = new TopBar();
-			addChild(_topBar);
-			
 			_container = new Sprite();
 			_container.y = 30 ;
 			addChild(_container);
+			
+			_topBar = new TopBar();
+			addChild(_topBar);
 			
 			addChild( PopUpManager.instance );
 		}
@@ -57,7 +57,6 @@ package game.views
 		{
 			x = (stage.stageWidth-GameSetting.SCREEN_WIDTH)>>1;
 			PopUpManager.instance.y = (stage.stageHeight-GameSetting.SCREEN_HEIGHT)>>1;
-			
 			if(stage.displayState==StageDisplayState.NORMAL && _topBar.btnFullScreen.selected)
 			{
 				_topBar.btnFullScreen.selected=false;
