@@ -12,7 +12,10 @@ package game.views
 	import game.utils.PopUpManager;
 	import game.views.slotlist.HallCenterView;
 	import game.views.topbars.TopBar;
-	
+	/**
+	 * 一直居中的容器 
+	 * @author zzhanglin
+	 */	
 	public class CenterView extends Sprite
 	{
 		private static var _instance:CenterView ;
