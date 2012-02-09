@@ -4,12 +4,12 @@ package game.views.slotlist
 	
 	import flash.display.Sprite;
 	
-	public class BlackHallSoonItem extends AnimationButton
+	public class HallNormalItem extends AnimationButton
 	{
 		public var logo_con:Sprite;
 		//-------------------------------------------
 		
-		public function BlackHallSoonItem()
+		public function HallNormalItem()
 		{
 			super();
 		}
