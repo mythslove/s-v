@@ -54,6 +54,7 @@ package game.utils
 					break ;
 				default:
 					resVO.resObject = resLoader ;
+					
 					break;
 			}
 		}
