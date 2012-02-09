@@ -1,4 +1,4 @@
-package comm
+package game.comm
 {
 	import flash.events.Event;
 	

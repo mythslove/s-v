@@ -6,7 +6,10 @@ package
 	
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.events.FullScreenEvent;
 	
+	import game.comm.GlobalDispatcher;
+	import game.comm.GlobalEvent;
 	import game.utils.ResourceUtil;
 	
 	public class BaseGame extends Sprite
@@ -21,8 +24,8 @@ package
 			stage.showDefaultContextMenu = false ;
 			
 			init();
-			addLoading();
-			initLoad();
+//			addLoading();
+//			initLoad();
 		}
 		
 		/**
@@ -42,10 +45,8 @@ package
 		protected function initLoad():void
 		{
 			var res:Vector.<ResVO> = new Vector.<ResVO>();
-			res.push( new ResVO("config","res/config.xml"));
 			res.push( new ResVO("ui","res/skin/ui.swf"));
 			res.push( new ResVO("bg","res/skin/bg.swf"));
-			res.push( new ResVO("mapdata","res/mapdata") ); 
 			ResourceUtil.instance.addEventListener(ResProgressEvent.RES_LOAD_PROGRESS , queueLoadHandler);
 			ResourceUtil.instance.addEventListener(ResLoadedEvent.QUEUE_LOADED ,queueLoadHandler);
 			ResourceUtil.instance.queueLoad( res , 5 );
@@ -53,7 +54,36 @@ package
 		
 		protected function queueLoadHandler(e:Event):void
 		{
-			
+			switch( e.type)
+			{
+				case ResProgressEvent.RES_LOAD_PROGRESS:
+					var evt:ResProgressEvent = e as ResProgressEvent;
+//					_preLoading.loaderBar.gotoAndStop( (evt.loaded/evt.total*100 )>>0 );
+					break;
+				case ResLoadedEvent.QUEUE_LOADED:
+					ResourceUtil.instance.removeEventListener(ResProgressEvent.RES_LOAD_PROGRESS , queueLoadHandler);
+					ResourceUtil.instance.removeEventListener(ResLoadedEvent.QUEUE_LOADED ,queueLoadHandler);
+//					parseConfig();
+					inited();
+//					removeLoading();
+					break;
+			}
+		}
+		
+		protected function inited():void
+		{
+			stage.addEventListener(Event.RESIZE , onResizeHandler);
+			stage.addEventListener(FullScreenEvent.FULL_SCREEN , onResizeHandler);
+		}
+		
+		/**
+		 * 窗口大小变化 
+		 * @param e
+		 */		
+		protected function onResizeHandler(e:Event):void
+		{
+			e.stopPropagation();
+			GlobalDispatcher.instance.dispatchEvent( new GlobalEvent(GlobalEvent.RESIZE));
 		}
 	}
 }
