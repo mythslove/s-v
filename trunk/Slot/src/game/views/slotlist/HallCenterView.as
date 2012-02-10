@@ -1,7 +1,7 @@
 package game.views.slotlist
 {
 	import com.greensock.TweenLite;
-	import com.greensock.easing.Back;
+	import com.greensock.easing.Quart;
 	
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
@@ -66,7 +66,7 @@ package game.views.slotlist
 					break ;
 			}
 			mouseChildren=false;
-			TweenLite.to( hallList,1,{x:-_moveDis*_pageIndex+4,onComplete:moveComplete,ease:Back.easeInOut});
+			TweenLite.to( hallList,0.75,{x:-_moveDis*_pageIndex+5,onComplete:moveComplete,ease:Quart.easeOut});
 		}
 		
 		private function moveComplete():void
