@@ -3,6 +3,7 @@ package game.views.slotlist
 	import com.greensock.TweenLite;
 	import com.greensock.easing.Back;
 	
+	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	
 	import game.views.BaseView;
@@ -15,6 +16,7 @@ package game.views.slotlist
 	 */	
 	public class HallCenterView extends BaseView
 	{
+		public var hallBg:Sprite;
 		public var hallList:HallList ;
 		public var btnNextPage:ListPageButton;
 		public var btnPrevPage:ListPageButton;
@@ -28,6 +30,13 @@ package game.views.slotlist
 		public function HallCenterView()
 		{
 			super();
+			init();
+		}
+		
+		private function init():void
+		{
+			hallBg.mouseChildren=hallBg.mouseEnabled=false;
+			hallBg.cacheAsBitmap=true;
 		}
 		
 		override protected function addedToStage():void
