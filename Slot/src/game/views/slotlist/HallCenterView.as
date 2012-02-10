@@ -6,6 +6,8 @@ package game.views.slotlist
 	import flash.events.MouseEvent;
 	
 	import game.views.BaseView;
+	import game.views.friendsbar.FriendBar;
+	import game.views.specialbar.SpecialBar;
 
 	/**
 	 * 大厅中间的列表视图，有按钮和遮罩
@@ -16,6 +18,8 @@ package game.views.slotlist
 		public var hallList:HallList ;
 		public var btnNextPage:ListPageButton;
 		public var btnPrevPage:ListPageButton;
+		public var specialBar:SpecialBar ;
+		public var friendBar:FriendBar;
 		//-----------------------------------------
 		private var _moveDis:Number ;
 		private var _pageIndex:int=0;
