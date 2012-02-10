@@ -10,11 +10,11 @@ package game.views.slotlist
 	 * simple,locked,soon
 	 * @author zzhanglin
 	 */
-	public class HallItem extends MovieClip
+	public class BlackHallItem extends MovieClip
 	{
 		private var _itemVO:SlotItemVO ;
 		
-		public function HallItem()
+		public function BlackHallItem()
 		{
 			super();
 			stop();
