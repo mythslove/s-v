@@ -1,7 +1,10 @@
 package game.views.slotlist
 {
 	import flash.display.MovieClip;
+	import flash.display.Sprite;
 	
+	import game.models.SlotItemModel;
+	import game.utils.ResourceUtil;
 	import game.views.BaseView;
 
 	/**
@@ -30,6 +33,14 @@ package game.views.slotlist
 			for( i=10;i<16;++i)
 			{
 				(this["item"+i] as MovieClip).gotoAndStop("soon");
+			}
+			
+			//添加图标
+			var icon:Sprite ;
+			for( i=0;i<16;++i)
+			{
+				icon = ResourceUtil.instance.getInstanceByClassName("skin_hallLogo",SlotItemModel.instance.slotItemVOs[i].icon ) as Sprite;
+				((this["item"+i] as MovieClip).getChildAt(0) as MovieClip)["logo_con"].addChild(icon);
 			}
 		}
 	}

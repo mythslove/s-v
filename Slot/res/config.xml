@@ -1,6 +1,20 @@
 <config>
-	<gamelist/>
-		<item id="0" icon="jolly_roger_logo" lines="9" url="">
+	<gamelist>
+		<item id="0" icon="jolly_roger_logo" lines="9" url="" />
+		<item id="1" icon="farm_frenzy_logo" lines="9" url="" />
+		<item id="2" icon="faces_logo" lines="9" url="" />
+		<item id="3" icon="deep_seek_logo" lines="9" url="" />
+		<item id="4" icon="civilitreasures_logo" lines="9" url="" />
+		<item id="5" icon="catcheff_logo" lines="9" url="" />
+		<item id="6" icon="bubbles_logo" lines="9" url="" />
+		<item id="7" icon="beez_logo" lines="9" url="" />
+		<item id="8" icon="vikingz_logo" lines="9" url="" />
+		<item id="9" icon="shining_armor_logo" lines="9" url="" />
+		<item id="10" icon="saveanalien_logo" lines="9" url="" />
+		<item id="11" icon="saloon_rush_logo" lines="9" url="" />
+		<item id="12" icon="reel_mafia_logo" lines="9" url="" />
+		<item id="13" icon="orientalsecrets_logo" lines="9" url="" />
+		<item id="14" icon="magic_forest_logo" lines="9" url="" />
+		<item id="15" icon="machine_placeholder_logo" lines="9" url="" />
 	</gamelist>
-
 </config>
