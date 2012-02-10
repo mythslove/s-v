@@ -66,7 +66,7 @@ package game.views.slotlist
 					break ;
 			}
 			mouseChildren=false;
-			TweenLite.to( hallList,0.75,{x:-_moveDis*_pageIndex+5,onComplete:moveComplete,ease:Quart.easeOut});
+			TweenLite.to( hallList,0.75,{x:-_moveDis*_pageIndex+10,onComplete:moveComplete,ease:Quart.easeOut});
 		}
 		
 		private function moveComplete():void
