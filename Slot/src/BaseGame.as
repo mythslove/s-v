@@ -45,7 +45,8 @@ package
 		protected function initLoad():void
 		{
 			var res:Vector.<ResVO> = new Vector.<ResVO>();
-			res.push( new ResVO("hall","res/rooms/Room_cn.swf"));
+			res.push( new ResVO("skin_room","res/rooms/Room_cn.swf"));
+			res.push( new ResVO("skin_hallLogo","res/rooms/hallLogo.swf"));
 			ResourceUtil.instance.addEventListener(ResProgressEvent.RES_LOAD_PROGRESS , queueLoadHandler);
 			ResourceUtil.instance.addEventListener(ResLoadedEvent.QUEUE_LOADED ,queueLoadHandler);
 			ResourceUtil.instance.queueLoad( res , 5 );
