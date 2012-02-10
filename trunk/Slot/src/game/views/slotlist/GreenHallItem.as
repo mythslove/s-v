@@ -4,7 +4,7 @@ package game.views.slotlist
 	import flash.display.Sprite;
 	import flash.events.Event;
 	
-	import game.vos.SlotItemVO;
+	import game.models.vos.SlotItemVO;
 	/**
 	 * 一个老虎机按钮,有三帧，三个状态
 	 * simple,locked,soon
