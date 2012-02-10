@@ -16,7 +16,7 @@ package game.views
 	 * 一直居中的容器 
 	 * @author zzhanglin
 	 */	
-	public class CenterView extends Sprite
+	public class CenterView extends BaseView
 	{
 		private static var _instance:CenterView ;
 		public static function get instance():CenterView
@@ -33,10 +33,9 @@ package game.views
 		public function CenterView()
 		{
 			super();
-			addEventListener(Event.ADDED_TO_STAGE , addedToStageHandler );
 		}
 		
-		private function addedToStageHandler( e:Event ):void
+		override protected function addedToStage():void
 		{
 			initLayers();
 			configListeners();
