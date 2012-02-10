@@ -7,9 +7,12 @@ package
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.FullScreenEvent;
+	import flash.net.registerClassAlias;
 	
 	import game.comm.GlobalDispatcher;
 	import game.comm.GlobalEvent;
+	import game.models.SlotItemModel;
+	import game.models.vos.*;
 	import game.utils.ResourceUtil;
 	
 	public class BaseGame extends Sprite
@@ -23,9 +26,14 @@ package
 			stage.scaleMode = "noScale";
 			stage.showDefaultContextMenu = false ;
 			
-			init();
+			registerVOs();
 //			addLoading();
 			initLoad();
+		}
+		
+		private function registerVOs():void
+		{
+			registerClassAlias( "game.models.vos.SlotItemVO", SlotItemVO);
 		}
 		
 		/**
@@ -47,6 +55,7 @@ package
 			var res:Vector.<ResVO> = new Vector.<ResVO>();
 			res.push( new ResVO("skin_room","res/rooms/Room_cn.swf"));
 			res.push( new ResVO("skin_hallLogo","res/rooms/hallLogo.swf"));
+			res.push( new ResVO("xml_config","res/config.xml"));
 			ResourceUtil.instance.addEventListener(ResProgressEvent.RES_LOAD_PROGRESS , queueLoadHandler);
 			ResourceUtil.instance.addEventListener(ResLoadedEvent.QUEUE_LOADED ,queueLoadHandler);
 			ResourceUtil.instance.queueLoad( res , 5 );
@@ -63,11 +72,17 @@ package
 				case ResLoadedEvent.QUEUE_LOADED:
 					ResourceUtil.instance.removeEventListener(ResProgressEvent.RES_LOAD_PROGRESS , queueLoadHandler);
 					ResourceUtil.instance.removeEventListener(ResLoadedEvent.QUEUE_LOADED ,queueLoadHandler);
-//					parseConfig();
+					parseConfig();
 					inited();
 //					removeLoading();
 					break;
 			}
+		}
+		
+		protected function parseConfig():void
+		{
+			var config:XML = XML(ResourceUtil.instance.getResVOByResId("xml_config").resObject.toString()) ;
+			SlotItemModel.instance.parseConfig(config);
 		}
 		
 		protected function inited():void
