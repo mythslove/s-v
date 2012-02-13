@@ -90,10 +90,6 @@ package bing.res
 				case "ini":
 					resVO.resType = ResType.TEXT;
 					break ;
-				case "mp3":
-				case "wav":
-					resVO.resType = ResType.SOUND;
-					break ;
 				case "swf":
 					resVO.resType = ResType.SWF;
 					break ;
