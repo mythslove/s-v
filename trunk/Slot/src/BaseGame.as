@@ -74,7 +74,6 @@ package
 					ResourceUtil.instance.removeEventListener(ResLoadedEvent.QUEUE_LOADED ,queueLoadHandler);
 					parseConfig();
 					inited();
-//					removeLoading();
 					break;
 			}
 		}
@@ -99,6 +98,14 @@ package
 		{
 			e.stopPropagation();
 			GlobalDispatcher.instance.dispatchEvent( new GlobalEvent(GlobalEvent.RESIZE));
+		}
+		
+		/**
+		 * 移除进度条 
+		 */		
+		protected function removeLoading():void
+		{
+			
 		}
 	}
 }

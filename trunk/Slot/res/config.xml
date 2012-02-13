@@ -1,20 +1,20 @@
 <config>
 	<gamelist>
-		<item id="0" icon="farm_fortune_logo" lines="9" url="" />
-		<item id="1" icon="bubble_rumble_logo" lines="9" url="" />
-		<item id="2" icon="civilitreasures_logo" lines="9" url="" />
-		<item id="3" icon="slotomafia_logo" lines="9" url="" />
-		<item id="4" icon="forest_of_magic_logo" lines="9" url="" />
-		<item id="5" icon="vikingz_logo" lines="9" url="" />
-		<item id="6" icon="catchef_logo" lines="9" url="" />
-		<item id="7" icon="saveanalien_logo" lines="9" url="" />
-		<item id="8" icon="deep_seek_logo" lines="9" url="" />
-		<item id="9" icon="beeez_logo" lines="9" url="" />
-		<item id="10" icon="orientalsecrets_logo" lines="9" url="" />
-		<item id="11" icon="shining_armor_logo" lines="9" url="" />
-		<item id="12" icon="slotomatey_logo" lines="9" url="" />
-		<item id="13" icon="creepy_fortunes_logo" lines="9" url="" />
-		<item id="14" icon="slotobots_logo" lines="9" url="" />
-		<item id="15" icon="bid_of_luck_logo" lines="9" url="" />
+		<item id="0" icon="farm_fortune_logo" lines="9" url="" enabled="1" minLevel="0" bgurl=""/>
+		<item id="1" icon="bubble_rumble_logo" lines="9" url="" enabled="1" minLevel="2" bgurl=""/>
+		<item id="2" icon="civilitreasures_logo" lines="9" url="" enabled="1" minLevel="4" bgurl=""/>
+		<item id="3" icon="slotomafia_logo" lines="9" url=""  enabled="1" minLevel="6" bgurl=""/>
+		<item id="4" icon="forest_of_magic_logo" lines="9" url=""  enabled="1" minLevel="8" bgurl=""/>
+		<item id="5" icon="vikingz_logo" lines="9" url=""  enabled="1" minLevel="10" bgurl=""/>
+		<item id="6" icon="catchef_logo" lines="9" url=""  enabled="1" minLevel="14" bgurl=""/>
+		<item id="7" icon="saveanalien_logo" lines="9" url=""  enabled="1" minLevel="16" bgurl=""/>
+		<item id="8" icon="deep_seek_logo" lines="9" url=""  enabled="1" minLevel="18" bgurl=""/>
+		<item id="9" icon="beeez_logo" lines="9" url=""  enabled="1" minLevel="20" bgurl=""/>
+		<item id="10" icon="orientalsecrets_logo" lines="9" url=""  enabled="1" minLevel="22" bgurl=""/>
+		<item id="11" icon="shining_armor_logo" lines="9" url=""  enabled="1" minLevel="24" bgurl=""/>
+		<item id="12" icon="slotomatey_logo" lines="9" url=""  enabled="1" minLevel="26" bgurl=""/>
+		<item id="13" icon="creepy_fortunes_logo" lines="9" url=""  enabled="1" minLevel="30" bgurl=""/>
+		<item id="14" icon="slotobots_logo" lines="9" url=""  enabled="1" minLevel="32" bgurl=""/>
+		<item id="15" icon="bid_of_luck_logo" lines="9" url=""  enabled="1" minLevel="34" bgurl=""/>
 	</gamelist>
 </config>
