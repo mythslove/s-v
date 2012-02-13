@@ -36,6 +36,30 @@ package  bing.iso.path
 		////////////////////////////////////////
 		
 		/**
+		 * 改变网格数组大小
+		 * @param numCols
+		 * @param numRows
+		 */		
+		public function changeSize(numCols:int , numRows:int ):void
+		{
+			var nodes:Array = new Array();
+			for(var i:int = 0; i < numCols; i++)
+			{
+				nodes[i] = new Array();
+				for(var j:int = 0; j < numRows; j++)
+				{
+					if(i<_numCols && j<_numCols){
+						nodes[i][j] = _nodes[i][j];
+					}else{
+						nodes[i][j] = new Node(i, j);
+					}
+				}
+			}
+			_numCols = numCols;
+			_numRows = numRows;
+		}
+		
+		/**
 		 * Returns the node at the given coords.
 		 * @param x The x coord.
 		 * @param y The y coord.
