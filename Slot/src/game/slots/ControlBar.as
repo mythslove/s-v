@@ -3,6 +3,7 @@ package game.slots
 	import bing.components.button.BaseButton;
 	
 	import flash.display.Sprite;
+	import flash.events.MouseEvent;
 	
 	import game.views.BaseView;
 	
@@ -25,6 +26,55 @@ package game.slots
 		public function ControlBar()
 		{
 			super();
+		}
+		
+		override protected function addedToStage():void
+		{
+			init();
+			configListeners();
+		}
+		
+		private function init():void
+		{
+			this.mouseEnabled=false ;
+			coins.mouseChildren=coins.mouseEnabled=false ;
+			linesValue.mouseChildren=linesValue.mouseEnabled=false ;
+			betValue.mouseChildren=betValue.mouseEnabled=false ;
+			totalBetValue.mouseChildren=totalBetValue.mouseEnabled=false ;
+			win.mouseChildren=win.mouseEnabled=false ;
+		}
+		
+		private function configListeners():void
+		{
+			stage.addEventListener(MouseEvent.CLICK , controlBarClickHandler);
+		}
+		
+		private function controlBarClickHandler( e:MouseEvent ):void
+		{
+			switch(e.target)
+			{
+				case btnPlay:
+					
+					break ;
+				case btnReduceLines:
+					
+					break ;
+				case btnEnlargeLines:
+					
+					break ;
+				case btnReduceBet:
+					
+					break ;
+				case btnEnlargeBet:
+					
+					break ;
+				case btnMaxLines:
+					
+					break ;
+				case btnStart:
+					
+					break ;
+			}
 		}
 	}
 }
