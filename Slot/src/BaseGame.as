@@ -11,7 +11,7 @@ package
 	
 	import game.comm.GlobalDispatcher;
 	import game.comm.GlobalEvent;
-	import game.models.SlotItemModel;
+	import game.models.SlotItemsModel;
 	import game.models.vos.*;
 	import game.utils.ResourceUtil;
 	
@@ -82,7 +82,7 @@ package
 		protected function parseConfig():void
 		{
 			var config:XML = XML(ResourceUtil.instance.getResVOByResId("xml_config").resObject.toString()) ;
-			SlotItemModel.instance.parseConfig(config);
+			SlotItemsModel.instance.parseConfig(config);
 		}
 		
 		protected function inited():void
