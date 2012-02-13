@@ -80,10 +80,9 @@ package game.slots
 		
 		private function setButtonEnabled( value:Boolean ):void
 		{
-			for( var i:int =0  ; i<numChildren ; ++i)
-			{
+			for( var i:int =0  ; i<numChildren ; ++i ) {
 				if( getChildAt(i) is SimpleButton){
-					( getChildAt(i) as SimpleButton ).enabled=value;
+					( getChildAt(i) as SimpleButton ).enabled=value ;
 				}
 			}
 		}
