@@ -4,12 +4,12 @@ package game.models
 	
 	import game.models.vos.SlotItemVO;
 	
-	public class SlotItemModel
+	public class SlotItemsModel
 	{
-		private static var _instance:SlotItemModel;
-		public static function get  instance():SlotItemModel
+		private static var _instance:SlotItemsModel;
+		public static function get  instance():SlotItemsModel
 		{
-			if(!_instance) _instance = new SlotItemModel();
+			if(!_instance) _instance = new SlotItemsModel();
 			return _instance ;
 		}
 

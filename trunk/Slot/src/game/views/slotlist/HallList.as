@@ -3,7 +3,7 @@ package game.views.slotlist
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	
-	import game.models.SlotItemModel;
+	import game.models.SlotItemsModel;
 	import game.utils.ResourceUtil;
 	import game.views.BaseView;
 
@@ -39,7 +39,7 @@ package game.views.slotlist
 			var icon:Sprite ;
 			for( i=0;i<16;++i)
 			{
-				icon = ResourceUtil.instance.getInstanceByClassName("skin_hallLogo",SlotItemModel.instance.slotItemVOs[i].icon ) as Sprite;
+				icon = ResourceUtil.instance.getInstanceByClassName("skin_hallLogo",SlotItemsModel.instance.slotItemVOs[i].icon ) as Sprite;
 				((this["item"+i] as MovieClip).getChildAt(0) as MovieClip)["logo_con"].addChild(icon);
 			}
 		}
