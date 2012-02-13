@@ -8,7 +8,6 @@ package bing.res
 	{
 		public static const SWF:String = "swf"; //swf
 		public static const IMG:String="img"; //图片
-		public static const SOUND:String = "sound"; //声音
 		public static const TEXT:String = "text"; //文本
 		public static const BINARY:String = "binary"; //二进制
 	}
