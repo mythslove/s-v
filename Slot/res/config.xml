@@ -1,6 +1,6 @@
 <config>
 	<gamelist>
-		<item id="0" icon="farm_fortune_logo" lines="9" url="" enabled="1" minLevel="0" bgurl="" bets="0.25,0.5,1,2,4,6,9"/>
+		<item id="0" icon="farm_fortune_logo" lines="9" url="res/slots/FarmFortune.swf" enabled="1" minLevel="0" bgurl="" bets="0.25,0.5,1,2,4,6,9"/>
 		<item id="1" icon="bubble_rumble_logo" lines="9" url="" enabled="1" minLevel="2" bgurl="" bets="0.25,0.5,1,2,4,6,9"/>
 		<item id="2" icon="civilitreasures_logo" lines="9" url="" enabled="1" minLevel="4" bgurl="" bets=""/>
 		<item id="3" icon="slotomafia_logo" lines="9" url=""  enabled="1" minLevel="6" bgurl="" bets=""/>
