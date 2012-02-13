@@ -43,6 +43,8 @@ package game.slots
 			betValue.mouseChildren=betValue.mouseEnabled=false ;
 			totalBetValue.mouseChildren=totalBetValue.mouseEnabled=false ;
 			win.mouseChildren=win.mouseEnabled=false ;
+			//
+			
 		}
 		
 		private function configListeners():void
@@ -85,6 +87,11 @@ package game.slots
 					( getChildAt(i) as SimpleButton ).enabled=value ;
 				}
 			}
+		}
+		
+		private function refreshTotalBets():void
+		{
+			
 		}
 	}
 }
