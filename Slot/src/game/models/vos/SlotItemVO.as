@@ -8,5 +8,6 @@ package game.models.vos
 		public var icon:String; //图标
 		public var enabled:Boolean; //是否可以用，不能用的显示coming soon
 		public var minLevel:int; //最大等级限制，小于此等级的将是locked
+		public var bets:Array ;//所有的倍率
 	}
 }
