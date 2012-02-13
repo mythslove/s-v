@@ -2,6 +2,7 @@ package game.slots
 {
 	import bing.components.button.BaseButton;
 	
+	import flash.display.SimpleButton;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	
@@ -74,6 +75,16 @@ package game.slots
 				case btnStart:
 					
 					break ;
+			}
+		}
+		
+		private function setButtonEnabled( value:Boolean ):void
+		{
+			for( var i:int =0  ; i<numChildren ; ++i)
+			{
+				if( getChildAt(i) is SimpleButton){
+					( getChildAt(i) as SimpleButton ).enabled=value;
+				}
 			}
 		}
 	}
