@@ -1,5 +1,7 @@
 package
 {
+	import game.models.MeInfoModel;
+	import game.models.vos.UserVO;
 	import game.views.CenterView;
 	import game.views.topbars.TopbarBg;
 	
@@ -16,6 +18,9 @@ package
 		override protected function inited():void
 		{
 			super.inited();
+			//调用getConfigBase接口，获取
+			MeInfoModel.instance.me=new UserVO();
+			MeInfoModel.instance.me.level=5;
 			
 			_topbarBg = new TopbarBg();
 			addChild(_topbarBg);
