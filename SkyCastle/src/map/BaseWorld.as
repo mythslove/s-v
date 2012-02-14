@@ -163,7 +163,6 @@ package map
 					break;
 				case MouseEvent.MOUSE_UP:
 					if(!_mapIsMove) onClick(e);
-					this.stopDrag();
 				case MouseEvent.ROLL_OUT:
 					this.stopDrag();
 				case MouseEvent.MOUSE_OUT:
