@@ -67,8 +67,6 @@ package map
 					addedBuilding.sendAddedToScene(); //发送添加到地图上的消息到服务器
 					build.gridLayer.updateBuildingGridLayer(mouseContainer.nodeX , mouseContainer.nodeZ,vo.baseVO.layerType);
 				}
-				//准备添加下一个建筑
-				mouseContainer.parent.setChildIndex( mouseContainer , mouseContainer.parent.numChildren-1);
 			}
 			else if(GameData.buildingCurrOperation==BuildingCurrentOperation.ROTATE) //旋转
 			{	
@@ -107,7 +105,6 @@ package map
 						addBuildToScene( building );//添加到场景上
 						building.sendMovedBuilding(); //发送移动建筑的消息
 						clearMouse(); //清除鼠标
-						mouseContainer.parent.setChildIndex( mouseContainer , mouseContainer.parent.numChildren-1);
 					}
 				}
 			}
@@ -127,6 +124,8 @@ package map
 					mouseOverBuild = null ;
 				}
 			}
+			//准备添加下一个建筑
+			mouseContainer.parent.setChildIndex( mouseContainer , mouseContainer.parent.numChildren-1);
 		}
 		
 		/**运行 */		

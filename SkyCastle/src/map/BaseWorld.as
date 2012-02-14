@@ -140,13 +140,13 @@ package map
 					this.startDrag( false  , rect );
 					break;
 				case MouseEvent.MOUSE_MOVE:
-					var xx:int = (stage.mouseX-this.x)/scaleX -sceneLayerOffsetX ;
-					var yy:int = (stage.mouseY -this.y)/scaleX-sceneLayerOffsetY;
-					mouseNodePoint = IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE,xx,yy);
 					if(e.buttonDown)	{
 						_mapIsMove = true ;
 						_tooltip.hideTooltip();
 					}else if(mouseContainer.numChildren>0) {
+						var xx:int = (stage.mouseX-this.x)/scaleX -sceneLayerOffsetX ;
+						var yy:int = (stage.mouseY -this.y)/scaleX-sceneLayerOffsetY;
+						mouseNodePoint = IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE,xx,yy);
 						updateMouseBuildingGrid();
 						return ;
 					}else if(e.target is InteractivePNG){
