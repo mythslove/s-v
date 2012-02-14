@@ -47,7 +47,7 @@ package map
 		override protected function addedToStageHandler(e:Event):void
 		{
 			super.addedToStageHandler(e);
-			
+			//测试添加建筑用----------------ShopModel.instance.roadArray[0]
 			var building:BuildingBase = new BuildingBase( ShopModel.instance.houseArray[0]);
 			building.drawGrid();
 			building.gridLayer.visible=true;
