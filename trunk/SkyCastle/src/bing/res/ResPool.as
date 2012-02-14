@@ -201,7 +201,6 @@ package bing.res
 		{
 			switch(resVO.resType)
 			{
-				case ResType.SOUND :
 				case ResType.TEXT :
 				case ResType.BINARY :
 					resVO.resObject = resLoader ;
