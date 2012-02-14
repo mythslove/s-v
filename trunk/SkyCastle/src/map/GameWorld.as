@@ -56,6 +56,7 @@ package map
 		
 		override protected function onClick(e:MouseEvent):void 
 		{
+			mouseContainer.parent.setChildIndex(mouseContainer,0);
 			if(GameData.buildingCurrOperation==BuildingCurrentOperation.ADD) //添加
 			{	
 				var build:BuildingBase = mouseContainer.getChildAt(0) as BuildingBase ;
@@ -64,10 +65,10 @@ package map
 					var vo:BuildingVO = (mouseContainer.getChildAt(0) as BuildingBase).buildingVO ;
 					var addedBuilding:Building = addBuildingByVO( mouseContainer.nodeX , mouseContainer.nodeZ ,vo );
 					addedBuilding.sendAddedToScene(); //发送添加到地图上的消息到服务器
-					//准备添加下一个建筑
-					mouseContainer.parent.setChildIndex( mouseContainer , mouseContainer.parent.numChildren-1);
 					build.gridLayer.updateBuildingGridLayer(mouseContainer.nodeX , mouseContainer.nodeZ,vo.baseVO.layerType);
 				}
+				//准备添加下一个建筑
+				mouseContainer.parent.setChildIndex( mouseContainer , mouseContainer.parent.numChildren-1);
 			}
 			else if(GameData.buildingCurrOperation==BuildingCurrentOperation.ROTATE) //旋转
 			{	
