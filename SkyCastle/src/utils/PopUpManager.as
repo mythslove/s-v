@@ -52,6 +52,10 @@ package utils
 					_currentPopupObj.window.parent.removeChild(_currentPopupObj.window as DisplayObject);
 				}
 				_currentPopupObj = null ;
+				
+				if(this.getChildAt(numChildren-1) is PopupMask){ 
+					this.removeChildAt(numChildren-1); //移除Mask
+				}
 				popupNextWindow();
 			}
 		}
