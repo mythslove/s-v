@@ -47,16 +47,15 @@ package utils
 		public function removeCurrentPopup():void
 		{
 			if(_currentPopupObj){
-				var index:int = getChildIndex(_currentPopupObj.window );
-				if(_currentPopupObj.window.parent)
+				if(contains(_currentPopupObj.window))
 				{
-					_currentPopupObj.window.parent.removeChild(_currentPopupObj.window as DisplayObject);
+					var index:int = getChildIndex(_currentPopupObj.window );
+					removeChild(_currentPopupObj.window as DisplayObject);
+					if(index>0 && this.getChildAt(index-1) is PopupMask){ 
+						this.removeChildAt(index-1); //移除Mask
+					}
 				}
 				_currentPopupObj = null ;
-				
-				if(index>0 && this.getChildAt(index-1) is PopupMask){ 
-					this.removeChildAt(index-1); //移除Mask
-				}
 				popupNextWindow();
 			}
 		}
@@ -128,10 +127,11 @@ package utils
 				}
 			}
 			if(this.contains(mc)){
+				var index:int = this.getChildIndex( mc ) ;
 				this.removeChild(mc); //移除弹出窗口
-			}
-			if(this.getChildAt(numChildren-1) is PopupMask){ 
-				this.removeChildAt(numChildren-1); //移除Mask
+				if(index>0 && this.getChildAt(index-1) is PopupMask){ 
+					this.removeChildAt(index-1); //移除Mask
+				}
 			}
 		}
 		
