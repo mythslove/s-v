@@ -97,13 +97,13 @@ package utils
 			if(!mc || this.contains(mc)) return ;
 			
 			if(topOrBottom){ //如果弹到顶层
-				if(_currentPopupObj.modal){
+				if(modal){
 					addChild( new PopupMask());
 				}
 				addChild(mc);
 			} else {
 				addChildAt(mc,0);
-				if(_currentPopupObj.modal){
+				if(modal){
 					addChildAt( new PopupMask(),0);
 				}
 			}
