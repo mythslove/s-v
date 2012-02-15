@@ -47,14 +47,15 @@ package utils
 		public function removeCurrentPopup():void
 		{
 			if(_currentPopupObj){
+				var index:int = getChildIndex(_currentPopupObj.window );
 				if(_currentPopupObj.window.parent)
 				{
 					_currentPopupObj.window.parent.removeChild(_currentPopupObj.window as DisplayObject);
 				}
 				_currentPopupObj = null ;
 				
-				if(this.getChildAt(numChildren-1) is PopupMask){ 
-					this.removeChildAt(numChildren-1); //移除Mask
+				if(index>0 && this.getChildAt(index-1) is PopupMask){ 
+					this.removeChildAt(index-1); //移除Mask
 				}
 				popupNextWindow();
 			}
