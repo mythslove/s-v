@@ -35,7 +35,7 @@ package bing.utils
 		 * 
 		 */		
 		public static function integer(num:Number):int{
-			return Math.floor(number(num));
+			return number(num)>>0;
 		}
 		
 		/**
@@ -58,7 +58,7 @@ package bing.utils
 		 */		
 		public static function range(num1:Number,num2:Number,isInt:Boolean = true):Number{
 			var num:Number = number(num2 - num1) + num1;
-			if(isInt) num = Math.floor(num);
+			if(isInt) num = num>>0 ;
 			return num;
 		}
 		
@@ -94,7 +94,7 @@ package bing.utils
 		 */		
 		public static function bit(num:int,str:String = "0-9,A-Z,a-z"):String{
 			var reStr:String = "";
-			for(var i:int = 0; i < num; i ++) reStr += string(str);
+			for(var i:int = 0; i < num; ++i ) reStr += string(str);
 			return reStr;
 		}
 		
