@@ -4,6 +4,7 @@ package map
 	import bing.utils.ContainerUtil;
 	
 	import comm.GameData;
+	import comm.GameSetting;
 	
 	import enums.BuildingCurrentOperation;
 	import enums.LayerType;
@@ -148,14 +149,11 @@ package map
 		/**地图放大和缩小 */		
 		public function zoom( scale:Number):void
 		{
-			var xx:int = -x/scaleX -sceneLayerOffsetX ;
-			var yy:int = -y/scaleX-sceneLayerOffsetY;
-			scaleX = scaleY = scale ;
-			var xx1:int =-x/scaleX -sceneLayerOffsetX ;
-			var yy1:int =-y/scaleX-sceneLayerOffsetY;
-			x-=(xx-xx1)*0.5;
-			y-=(yy-yy1)*0.5;
-			
+			var prevW:Number = GameSetting.MAP_WIDTH*scaleX;
+			var prevH:Number = GameSetting.MAP_HEIGHT*scaleX;
+			scaleX= scaleY = scale ;
+			x+=(prevW-GameSetting.MAP_WIDTH*scaleX)>>1;
+			y+=(prevH-GameSetting.MAP_HEIGHT*scaleX)>>1;
 			modifyMapPosition();
 		}
 		
