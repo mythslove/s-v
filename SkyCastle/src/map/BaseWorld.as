@@ -138,18 +138,14 @@ package map
 					rect.width =GameSetting.MAX_WIDTH*scaleX-stage.stageWidth ;
 					rect.height = GameSetting.MAX_HEIGHT*scaleX-stage.stageHeight ;
 					this.startDrag( false  , rect );
+					updateMouseNodePoint();
 					break;
 				case MouseEvent.MOUSE_MOVE:
 					if(e.buttonDown)	{
 						_mapIsMove = true ;
 						_tooltip.hideTooltip();
 					}else if(mouseContainer.numChildren>0) {
-						var building:BuildingBase = mouseContainer.getChildAt(0) as BuildingBase;
-						var offsetY:Number = Math.floor( (building.buildingVO.baseVO.xSpan+building.buildingVO.baseVO.zSpan)/2-1)*GameSetting.GRID_SIZE ;
-						var xx:int = (stage.mouseX-this.x)/scaleX -sceneLayerOffsetX ;
-						var yy:int = (stage.mouseY -this.y)/scaleX-sceneLayerOffsetY-offsetY;
-						mouseNodePoint = IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE,xx,yy);
-						updateMouseBuildingGrid();
+						updateMouseNodePoint();
 						return ;
 					}else if(e.target is InteractivePNG){
 						_tooltip.updatePosition(e.stageX,e.stageY);
@@ -175,6 +171,19 @@ package map
 						mouseOverBuild = null ;
 					}
 					break;
+			}
+		}
+		
+		protected function updateMouseNodePoint():void
+		{
+			if(mouseContainer.numChildren>0) {
+				var building:BuildingBase = mouseContainer.getChildAt(0) as BuildingBase;
+				var offsetY:Number = Math.floor( (building.buildingVO.baseVO.xSpan+building.buildingVO.baseVO.zSpan)/2-1)*GameSetting.GRID_SIZE ;
+				var xx:int = (stage.mouseX-this.x)/scaleX -sceneLayerOffsetX ;
+				var yy:int = (stage.mouseY -this.y)/scaleX-sceneLayerOffsetY-offsetY;
+				mouseNodePoint = IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE,xx,yy);
+				updateMouseBuildingGrid();
+				return ;
 			}
 		}
 		
