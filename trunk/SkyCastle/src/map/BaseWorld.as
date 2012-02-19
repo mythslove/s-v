@@ -144,8 +144,10 @@ package map
 						_mapIsMove = true ;
 						_tooltip.hideTooltip();
 					}else if(mouseContainer.numChildren>0) {
+						var building:BuildingBase = mouseContainer.getChildAt(0) as BuildingBase;
+						var offsetY:Number = Math.floor( (building.buildingVO.baseVO.xSpan+building.buildingVO.baseVO.zSpan)/2-1)*GameSetting.GRID_SIZE ;
 						var xx:int = (stage.mouseX-this.x)/scaleX -sceneLayerOffsetX ;
-						var yy:int = (stage.mouseY -this.y)/scaleX-sceneLayerOffsetY;
+						var yy:int = (stage.mouseY -this.y)/scaleX-sceneLayerOffsetY-offsetY;
 						mouseNodePoint = IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE,xx,yy);
 						updateMouseBuildingGrid();
 						return ;
