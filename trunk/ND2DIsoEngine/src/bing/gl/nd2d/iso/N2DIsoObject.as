@@ -14,7 +14,7 @@ package bing.gl.nd2d.iso
 	 * Stage3D ISO object 基类 
 	 * @author zzhanglin
 	 */	
-	public class GLIsoObject extends Node2D
+	public class N2DIsoObject extends Node2D
 	{
 		public var isSort:Boolean = false ;
 		protected var _position3D:Vector3D; //像素坐标
@@ -37,8 +37,9 @@ package bing.gl.nd2d.iso
 		 * @param zSpan Z坐标上跨多少行
 		 * 
 		 */		
-		public function GLIsoObject(size:Number , xSpan:int = 1, zSpan:int =1 )
+		public function N2DIsoObject(size:Number , xSpan:int = 1, zSpan:int =1 )
 		{
+			super();
 			_size = size;
 			_xSpan = xSpan ;
 			_zSpan = zSpan ;
@@ -316,8 +317,9 @@ package bing.gl.nd2d.iso
 		/**
 		 * 消除iso资源 
 		 */		
-		public function disposeIso():void
+		override public function dispose():void
 		{
+			super.dispose();
 			_boundRect = null ;
 			_spanPosition = null ;
 			_position3D = null ;
