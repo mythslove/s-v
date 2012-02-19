@@ -6,11 +6,11 @@ package
 	import game.views.topbars.TopbarBg;
 	
 	[SWF(width="760",height="620",backgroundColor="#000000")]
-	public class Main extends BaseGame
+	public class Slot extends BaseGame
 	{
 		protected var _topbarBg:TopbarBg;
 		
-		public function Main()
+		public function Slot()
 		{
 			super();
 		}
