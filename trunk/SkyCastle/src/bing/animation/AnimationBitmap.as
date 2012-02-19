@@ -95,7 +95,7 @@ package bing.animation
 		/**
 		 * 停止播放 
 		 */		
-		public function stop():void
+		public function stopAni():void
 		{
 			_isPlay = false ;
 		}
