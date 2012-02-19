@@ -17,7 +17,6 @@ package bing.animation
 		private var _cycleTime:int = 0  ; //循环次数
 		private var _rate:int = 0  ; //播放速率
 		private var _playMode:int = 1  ; //播放模式
-		private var _currentAction:ActionVO = null ; //当前动作
 		private var _actions:Vector.<ActionVO> = null;  //所有的动作
 		private var _animationBmd:BitmapData = null ; //当前帧的bitmapData
 		private var _queueBmds:Vector.<BitmapData> = null  ; //所有的序列图
@@ -66,6 +65,22 @@ package bing.animation
 			_queueBmds = null ;
 		}
 		
+		/** 添加额外的动作 */
+		public function setExtAni( actionName:String , indexArray:Array ):void
+		{
+			var tempQueueBmds:Vector.<BitmapData>  = new Vector.<BitmapData>( indexArray.length,true);
+			var len:int = indexArray.length ; 
+			for( var i:int = 0 ; i<len ; ++i)
+			{
+				tempQueueBmds.push( _queueBmds[indexArray[i]] ) ;
+			}
+			_aniBmdHash.put( actionName , tempQueueBmds );
+		}
+		
+		/**
+		 * 从头开始播放动作 
+		 * @param frame
+		 */		
 		public function start(frame:int=-1):void
 		{
 			if(frame>-1){
@@ -77,11 +92,18 @@ package bing.animation
 			_isPlay = true ;
 		}
 		
-		public function stopAni():void
+		/**
+		 * 停止播放 
+		 */		
+		public function stop():void
 		{
 			_isPlay = false ;
 		}
 		
+		/**
+		 * 播放动画 
+		 * @param actionName 动作的名称
+		 */		
 		public function playAction(actionName:String ):void
 		{
 			if(!_isPlay) return ;
@@ -234,7 +256,6 @@ package bing.animation
 			_animationBmd = null ;
 			_aniBmdHash = null ;
 			_actions = null ;
-			_currentAction =null ;
 		}
 		
 		//===========getter/setter========================
