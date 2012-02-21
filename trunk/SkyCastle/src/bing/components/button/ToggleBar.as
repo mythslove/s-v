@@ -71,12 +71,14 @@ package bing.components.button
 				_selectedName = btn.name ;
 				for each(var btn:BaseToggleButton in _toggleButtons )	{
 					btn.selected = false ;
+					btn.enabled=true;
 				}
 				
 				var evt:ToggleItemEvent = new ToggleItemEvent( ToggleItemEvent.EVENT_ITEM_SELECTED );
 				evt.selectedName = _selectedName ;
 				this.dispatchEvent( evt );
 				( event.target as BaseToggleButton).selected = true ;
+				( event.target as BaseToggleButton).enabled = false ;
 			}
 		}
 	}
