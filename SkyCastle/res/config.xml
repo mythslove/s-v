@@ -9,7 +9,7 @@
 		animClsName="" walkable="1"/>
 		
 		<BuildingBaseVO baseId="2" title="HallOfHeroes Ruin" info="MoreCity PathCobblestone" 
-		type="1" clsName="Basic_HallOfHeroes_Ruin"  xSpan="2" zSpan="3"  layerType="1" 
+		type="2" clsName="Basic_HallOfHeroes_Ruin"  xSpan="2" zSpan="3"  layerType="1" 
 		url="res/house/Basic_HallOfHeroes_Ruin.swf" resId="Basic_HallOfHeroes_Ruin"
 		thumb="res/house/Basic_HallOfHeroes_RuinThumb.png"  
 		animClsName="" walkable="0"/>
