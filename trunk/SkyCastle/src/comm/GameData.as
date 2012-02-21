@@ -1,5 +1,7 @@
 package comm
 {
+	import bing.utils.ContainerUtil;
+	
 	import enums.BuildingCurrentOperation;
 	
 	import flash.display.Bitmap;
@@ -33,7 +35,7 @@ package comm
 				case BuildingCurrentOperation.ADD:
 				case BuildingCurrentOperation.NONE:
 					MouseManager.instance.removeMouseIcon();
-					GameWorld.instance.clearMouse();
+					ContainerUtil.removeChildren( GameWorld.instance.mouseScene );
 					break ;
 				case BuildingCurrentOperation.MOVE:
 					MouseManager.instance.addMouseIcon( new Bitmap( new MoveIconBitmapData ));

@@ -2,6 +2,7 @@ package map
 {
 	import bing.iso.IsoScene;
 	import bing.utils.ContainerUtil;
+	import bing.utils.ObjectUtil;
 	
 	import comm.GameData;
 	import comm.GameSetting;
@@ -53,20 +54,20 @@ package map
 			building.drawGrid();
 			building.gridLayer.visible=true;
 			this.addBuildingOnMouse( building );
+			updateMouseNodePoint();
 		}
 		
 		override protected function onClick(e:MouseEvent):void 
 		{
-			mouseContainer.parent.setChildIndex(mouseContainer,0);
 			if(GameData.buildingCurrOperation==BuildingCurrentOperation.ADD) //添加
 			{	
-				var build:BuildingBase = mouseContainer.getChildAt(0) as BuildingBase ;
+				var build:BuildingBase = mouseScene.getChildAt(0) as BuildingBase ;
 				if( build && build.gridLayer && build.gridLayer.getWalkable() )
 				{
-					var vo:BuildingVO = (mouseContainer.getChildAt(0) as BuildingBase).buildingVO ;
-					var addedBuilding:Building = addBuildingByVO( mouseContainer.nodeX , mouseContainer.nodeZ ,vo );
+					var vo:BuildingVO = ObjectUtil.copyObj(build.buildingVO) as BuildingVO ;
+					var addedBuilding:Building = addBuildingByVO( build.nodeX , build.nodeZ ,vo );
 					addedBuilding.sendAddedToScene(); //发送添加到地图上的消息到服务器
-					build.gridLayer.updateBuildingGridLayer(mouseContainer.nodeX , mouseContainer.nodeZ,vo.baseVO.layerType);
+					build.gridLayer.updateBuildingGridLayer(build.nodeX , build.nodeZ , vo.baseVO.layerType );
 				}
 			}
 			else if(GameData.buildingCurrOperation==BuildingCurrentOperation.ROTATE) //旋转
@@ -83,7 +84,7 @@ package map
 			}
 			else if( GameData.buildingCurrOperation==BuildingCurrentOperation.MOVE) //移动
 			{
-				if(mouseContainer.numChildren==0){
+				if(mouseScene.numChildren==0){
 					if(mouseOverBuild){
 						_moveBuildPrevX = mouseOverBuild.x ;
 						_moveBuildPrevZ = mouseOverBuild.z ;
@@ -91,21 +92,17 @@ package map
 						mouseOverBuild.selectedStatus(false); //选择设置成false
 						addBuildingOnMouse( mouseOverBuild );  //添加在鼠标容器上移动
 						mouseOverBuild.drawGrid(); //画建筑网格
-						mouseContainer.nodeX = mouseNodePoint.x; //更新当前鼠标容器的位置
-						mouseContainer.nodeZ = mouseNodePoint.y ;
 						mouseOverBuild = null ;
 					}
 				}else {
-					var building:Building = mouseContainer.getChildAt(0) as Building ;
+					var building:Building = mouseScene.getChildAt(0) as Building ;
 					if( building && building.gridLayer && building.gridLayer.getWalkable() )
 					{
 						building.removeGrid(); //移除建筑网格
-						building.nodeX = mouseContainer.nodeX; //设置位置
-						building.nodeZ = mouseContainer.nodeZ;
 						building.itemLayer.alpha=1;
 						addBuildToScene( building );//添加到场景上
 						building.sendMovedBuilding(); //发送移动建筑的消息
-						clearMouse(); //清除鼠标
+						ContainerUtil.removeChildren( mouseScene) ; //清除鼠标
 					}
 				}
 			}
@@ -121,12 +118,9 @@ package map
 			else if(GameData.buildingCurrOperation==BuildingCurrentOperation.SELL) //卖出
 			{
 				if(mouseOverBuild){
-					
 					mouseOverBuild = null ;
 				}
 			}
-			//准备添加下一个建筑
-			mouseContainer.parent.setChildIndex( mouseContainer , mouseContainer.parent.numChildren-1);
 		}
 		
 		/**运行 */		
@@ -163,25 +157,14 @@ package map
 		 */		
 		public function addBuildingOnMouse( buildingBase:BuildingBase):void
 		{
-			mouseContainer.parent.setChildIndex( mouseContainer ,mouseContainer.parent.numChildren-1 );
-			clearMouse();
+			ContainerUtil.removeChildren( mouseScene );
 			//将位置设置成0
 			buildingBase.setScreenPosition(0,0);
 			buildingBase.nodeX=buildingBase.nodeZ=0;
 			if( buildingBase.buildingVO.baseVO.layerType!=LayerType.GROUND){
 				buildingBase.itemLayer.alpha=0.6;
 			}
-			mouseContainer.addChild( buildingBase );
-			mouseContainer.visible=true;
-		}
-		
-		/**
-		 *  清除鼠标上面的建筑跟随
-		 */		
-		public function clearMouse():void
-		{
-			ContainerUtil.removeChildren( mouseContainer );
-			mouseContainer.visible=false;
+			mouseScene.addChild( buildingBase );
 		}
 		
 		/**
@@ -215,8 +198,8 @@ package map
 		/** 移动建筑失败,恢复到原来的地方 */
 		public function moveFail():void
 		{
-			if(mouseContainer.numChildren>0){
-				var building:Building = mouseContainer.getChildAt(0) as Building ;
+			if(mouseScene.numChildren>0){
+				var building:Building = mouseScene.getChildAt(0) as Building ;
 				building.x=_moveBuildPrevX;
 				building.z=_moveBuildPrevZ;
 				building.itemLayer.alpha=1;

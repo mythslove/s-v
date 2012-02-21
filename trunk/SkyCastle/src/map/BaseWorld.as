@@ -35,8 +35,8 @@ package map
 		//----------------------------------------------------------------*/
 		/** 鼠标的node位置 */
 		public var mouseNodePoint:Point = new Point();
-		/** 跟随鼠标移动的建筑 */
-		public var mouseContainer:IsoObject; 
+		/** 鼠标拖动建筑层 */
+		public var mouseScene:IsoScene; 
 		/** 当前鼠标在哪个建筑上面 */
 		public var mouseOverBuild:Building ; 
 		//----------------------------------------------------------------*/
@@ -100,11 +100,10 @@ package map
 			addScene(buildingScene3);
 			//删除地图数据
 			ResourceUtil.instance.deleteRes("mapdata"); 
-			//跟随鼠标移动的建筑
-			mouseContainer = new IsoObject(GameSetting.GRID_SIZE,GameSetting.GRID_X , GameSetting.GRID_Z);
-			mouseContainer.mouseEnabled= mouseContainer.mouseChildren=false;
-			mouseContainer.visible=false;
-			buildingScene3.addChild( mouseContainer );
+			//鼠标拖动建筑层
+			mouseScene = new IsoScene(GameSetting.GRID_SIZE,GameSetting.GRID_X , GameSetting.GRID_Z);
+			mouseScene.mouseEnabled= mouseScene.mouseChildren=false;
+			addScene( mouseScene );
 			//tooltip
 			_tooltip = BuildingToolTip.instance ;
 			_tooltip.hideTooltip();
@@ -138,21 +137,19 @@ package map
 					rect.width =GameSetting.MAX_WIDTH*scaleX-stage.stageWidth ;
 					rect.height = GameSetting.MAX_HEIGHT*scaleX-stage.stageHeight ;
 					this.startDrag( false  , rect );
-					updateMouseNodePoint();
 					break;
 				case MouseEvent.MOUSE_MOVE:
 					if(e.buttonDown)	{
 						_mapIsMove = true ;
 						_tooltip.hideTooltip();
-					}else if(mouseContainer.numChildren>0) {
+					}else if(mouseScene.numChildren>0) {
 						updateMouseNodePoint();
-						return ;
 					}else if(e.target is InteractivePNG){
 						_tooltip.updatePosition(e.stageX,e.stageY);
 					}
 					break;
 				case MouseEvent.MOUSE_OVER:
-					if(mouseContainer.numChildren==0 && e.target is InteractivePNG){
+					if(mouseScene.numChildren==0 && e.target is InteractivePNG){
 						mouseOverBuild = (e.target as InteractivePNG).parent as Building;
 						mouseOverBuild.selectedStatus( true );
 						var baseVO:BuildingBaseVO = mouseOverBuild.buildingVO.baseVO;
@@ -176,15 +173,10 @@ package map
 		
 		protected function updateMouseNodePoint():void
 		{
-			if(mouseContainer.numChildren>0) {
-				var building:BuildingBase = mouseContainer.getChildAt(0) as BuildingBase;
-				var offsetY:Number = Math.floor( (building.buildingVO.baseVO.xSpan+building.buildingVO.baseVO.zSpan)/2-1)*GameSetting.GRID_SIZE ;
-				var xx:int = (stage.mouseX-this.x)/scaleX -sceneLayerOffsetX ;
-				var yy:int = (stage.mouseY -this.y)/scaleX-sceneLayerOffsetY-offsetY;
-				mouseNodePoint = IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE,xx,yy);
-				updateMouseBuildingGrid();
-				return ;
-			}
+			var building:BuildingBase = mouseScene.getChildAt(0) as BuildingBase;
+			var offsetY:Number = Math.floor( (building.buildingVO.baseVO.xSpan+building.buildingVO.baseVO.zSpan)*0.5-1)*GameSetting.GRID_SIZE ;
+			mouseNodePoint = pixelPointToGrid(stage.mouseX,stage.mouseY , 0,offsetY); 
+			updateMouseBuildingGrid();
 		}
 		
 		/** 窗口大小变化*/		
@@ -231,11 +223,11 @@ package map
 		/** 更新鼠标上面的建筑占用的网格的颜色 */		
 		protected function updateMouseBuildingGrid():void
 		{
-			if(mouseContainer.nodeX!=mouseNodePoint.x || mouseContainer.nodeZ!=mouseNodePoint.y)
+			var build:BuildingBase = mouseScene.getChildAt(0) as BuildingBase;
+			if(build.nodeX!=mouseNodePoint.x || build.nodeZ!=mouseNodePoint.y)
 			{
-				mouseContainer.nodeX = mouseNodePoint.x ;
-				mouseContainer.nodeZ =mouseNodePoint.y ;
-				var build:BuildingBase = mouseContainer.getChildAt(0) as BuildingBase;
+				build.nodeX = mouseNodePoint.x ;
+				build.nodeZ = mouseNodePoint.y ;
 				build.gridLayer.updateBuildingGridLayer( mouseNodePoint.x, mouseNodePoint.y , build.buildingVO.baseVO.layerType );
 			}
 		}
