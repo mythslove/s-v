@@ -3,7 +3,10 @@ package bing.iso
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	import flash.events.Event;
-	
+	/**
+	 * iso世界，存放isoScene
+	 * @author zhouzhanglin
+	 */	
 	public class IsoWorld extends Sprite
 	{
 		protected var _gridX:int ;

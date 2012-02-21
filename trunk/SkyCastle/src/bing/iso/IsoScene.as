@@ -4,7 +4,11 @@ package bing.iso
 	import bing.utils.ContainerUtil;
 	
 	import flash.geom.Rectangle;
-	
+	/**
+	 * isoScene场景，里面可以直接放IsObject
+	 * 如果想有多个容器，可以先用一个大的IsoScene，里面再放小的IsoScene 
+	 * @author zhouzhanglin
+	 */	
 	public class IsoScene extends IsoObject
 	{
 		protected var _sprites:Vector.<IsoObject> = new Vector.<IsoObject>();
