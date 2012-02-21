@@ -5,7 +5,7 @@ package bing.components.button
 	
 	import flash.display.DisplayObject;
 	import flash.events.MouseEvent;
-
+	
 	/**
 	 * 点击某一个按钮 ,通过selectedName来查看
 	 */	
@@ -25,7 +25,7 @@ package bing.components.button
 		{
 			return _selectedName;
 		}
-
+		
 		public function set selectedName(value:String):void
 		{
 			_selectedName = value;
@@ -34,7 +34,7 @@ package bing.components.button
 				if(btn.name==value)
 				{
 					btn.selected = true ;
-					
+					btn.enabled=false;
 					var evt:ToggleItemEvent = new ToggleItemEvent( ToggleItemEvent.ITEM_SELECTED );
 					evt.selectedName = btn.name ;
 					this.dispatchEvent( evt );
@@ -44,7 +44,7 @@ package bing.components.button
 				}
 			}
 		}
-
+		
 		override protected function addedToStage():void 
 		{
 			_toggleButtons = new Vector.<BaseToggleButton> ;
@@ -62,6 +62,7 @@ package bing.components.button
 					_toggleButtons.push( btn );
 				}
 			}
+			selectedName =  _selectedName ;
 		}
 		
 		private function btnClickHandler( event:MouseEvent):void 
@@ -73,7 +74,6 @@ package bing.components.button
 					btn.selected = false ;
 					btn.enabled=true;
 				}
-				
 				var evt:ToggleItemEvent = new ToggleItemEvent( ToggleItemEvent.ITEM_SELECTED );
 				evt.selectedName = _selectedName ;
 				this.dispatchEvent( evt );
