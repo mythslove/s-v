@@ -4,7 +4,7 @@ package bing.components.events
 	
 	public class ToggleItemEvent extends Event
 	{
-		public static const EVENT_ITEM_SELECTED:String = "itemSelected";
+		public static const ITEM_SELECTED:String = "itemSelected";
 		public var selectedName:String ;
 		public var selectedIndex:int ;
 		

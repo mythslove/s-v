@@ -9,7 +9,7 @@ package bing.components.button
 	/**
 	 * 点击某一个按钮 ,通过selectedName来查看
 	 */	
-	[Event(name="eventItemSelected",type="bing.components.events.ToggleItemEvent")]
+	[Event(name="itemSelected",type="bing.components.events.ToggleItemEvent")]
 	
 	public class ToggleBar extends BingComponent
 	{
@@ -35,7 +35,7 @@ package bing.components.button
 				{
 					btn.selected = true ;
 					
-					var evt:ToggleItemEvent = new ToggleItemEvent( ToggleItemEvent.EVENT_ITEM_SELECTED );
+					var evt:ToggleItemEvent = new ToggleItemEvent( ToggleItemEvent.ITEM_SELECTED );
 					evt.selectedName = btn.name ;
 					this.dispatchEvent( evt );
 					
@@ -74,7 +74,7 @@ package bing.components.button
 					btn.enabled=true;
 				}
 				
-				var evt:ToggleItemEvent = new ToggleItemEvent( ToggleItemEvent.EVENT_ITEM_SELECTED );
+				var evt:ToggleItemEvent = new ToggleItemEvent( ToggleItemEvent.ITEM_SELECTED );
 				evt.selectedName = _selectedName ;
 				this.dispatchEvent( evt );
 				( event.target as BaseToggleButton).selected = true ;
