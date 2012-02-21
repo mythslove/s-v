@@ -3,6 +3,7 @@ package utils
 	import bing.utils.ObjectUtil;
 	
 	import enums.BuildingType;
+	import enums.LayerType;
 	
 	import map.elements.Building;
 	import map.elements.Road;
@@ -27,8 +28,12 @@ package utils
 			var building:Building ;
 			switch( vo.baseVO.type)
 			{
-				case BuildingType.ROAD:
-					building = new Road( vo);
+				case BuildingType.DECORATION:
+					if( vo.baseVO.layerType==LayerType.GROUND ) {
+						building = new Road(vo);
+					}else{
+						building = new Building( vo );
+					}
 					break ;
 				default:
 					building = new Building( vo );
