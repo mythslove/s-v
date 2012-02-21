@@ -3,6 +3,8 @@ package bing.iso
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.geom.Point;
+
 	/**
 	 * iso世界，存放isoScene
 	 * @author zhouzhanglin
@@ -83,6 +85,17 @@ package bing.iso
 		}
 		
 		
+		
+		
+		/********************************************************
+		 * IsoWord坐标转成正确的网格坐标
+		 * ********************************************************/
+		public function pointToGrid( px:Number , py:Number , offsetX:Number=0 , offsetY:Number=0 ):Point
+		{
+			var xx:int = (px-x)/scaleX -sceneLayerOffsetX - offsetX ;
+			var yy:int = (py-y)/scaleY - sceneLayerOffsetY-offsetY;
+			return IsoUtils.screenToIsoGrid( _size,xx,yy);
+		}
 		
 		
 		
