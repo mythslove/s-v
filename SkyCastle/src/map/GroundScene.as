@@ -96,6 +96,21 @@ package map
 		}
 		
 		/**
+		 * 更新所有的方向 
+		 */		
+		public function updateAllUI():void
+		{
+			_roundRoadHash.clear();
+			for each( var obj:IsoObject in children){
+				if(!_roundRoadHash[obj.nodeX+"-"+obj.nodeZ])
+				{
+					updateUI( obj as Building);
+					_roundRoadHash[obj.nodeX+"-"+obj.nodeZ] = true ;
+				}
+			}
+		}
+		
+		/**
 		 * 更新方向 
 		 * @param building
 		 */		
