@@ -41,7 +41,6 @@ package map.elements
 			}else{
 				super.loadRes();
 			}
-			buildingVO.direction = position;
 		}
 		
 	}

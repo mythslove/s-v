@@ -10,7 +10,6 @@ package models.vos
 		public var scale:int = 1; //1为没有旋转过，-1 为旋转过
 		public var nodeX:int ; //位置
 		public var nodeZ:int;
-		public var direction:String="NONE"; //主要用于自动方向的路
 		
 		protected var _baseVO:BuildingBaseVO ;
 		public function get baseVO():BuildingBaseVO
