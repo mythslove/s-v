@@ -11,12 +11,10 @@ package map
 	import flash.events.*;
 	import flash.geom.*;
 	
-	import map.elements.Building;
-	import map.elements.BuildingBase;
+	import map.elements.*;
 	
-	import models.MapGridDataModel;
-	import models.vos.BuildingBaseVO;
-	import models.vos.BuildingVO;
+	import models.*;
+	import models.vos.*;
 	
 	import utils.ResourceUtil;
 	
@@ -53,17 +51,14 @@ package map
 		public function BaseWorld()
 		{
 			super(GameSetting.MAP_WIDTH , GameSetting.MAP_HEIGHT,GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE);
-			
 			//设置背景图片
 			var bg:Bitmap = new Bitmap( ResourceUtil.instance.getInstanceByClassName("bg","BG") as BitmapData );
 			this.setBackGround(bg);
-			ResourceUtil.instance.deleteRes("bg"); //把加载的背景图片卸载了
-			
+			ResourceUtil.instance.deleteRes("bg"); 
 			//设置地图显示参数
 			GameSetting.MAX_WIDTH = bg.width;
 			GameSetting.MAX_HEIGHT = bg.height ;
 			this.panTo( GameSetting.MAX_WIDTH>>1 , -410);
-			
 			//地图的初始位置
 			this.x = -2200 ;
 			this.y = -1500;
@@ -81,7 +76,6 @@ package map
 //			(gridScene.addChild( new IsoGrid(GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE)) as IsoGrid).render() ;
 //			gridScene.cacheAsBitmap=true;
 //			this.addScene(gridScene);
-			
 			_mapGridData = MapGridDataModel.instance;
 			//地图区域1
 			groundScene1 = new GroundScene();
@@ -121,7 +115,7 @@ package map
 			addEventListener(MouseEvent.MOUSE_OUT , onMouseEventHandler);
 			addEventListener(MouseEvent.MOUSE_UP , onMouseEventHandler );
 			addEventListener(MouseEvent.ROLL_OUT , onMouseEventHandler);
-			
+			//global事件
 			GlobalDispatcher.instance.addEventListener(GlobalEvent.RESIZE , onResizeHandler );
 		}
 		
