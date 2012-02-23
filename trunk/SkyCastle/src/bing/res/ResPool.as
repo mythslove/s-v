@@ -383,7 +383,9 @@ package bing.res
 			{
 				resVO.dispose();
 			}
-			init();
+			_resDictionary = new Dictionary();
+			_loadList = new Vector.<ResVO>();
+			_currentLoadNum = 0 ;
 		}
 	}
 }
