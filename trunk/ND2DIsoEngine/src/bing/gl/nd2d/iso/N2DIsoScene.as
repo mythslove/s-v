@@ -2,18 +2,16 @@ package bing.gl.nd2d.iso
 {
 	import bing.iso.path.Grid;
 	
-	import de.nulldesign.nd2d.display.Scene2D;
-	
 	import flash.geom.Rectangle;
 	
-	public class N2DIsoScene extends Scene2D
+	public class N2DIsoScene extends N2DIsoObject
 	{
 		protected var _sprites:Vector.<N2DIsoObject> = new Vector.<N2DIsoObject>();
 		protected var _gridData:Grid;
 		
 		public function N2DIsoScene( size:int, xSpan:int = 1, zSpan:int =1 )
 		{
-			super();
+			super(size,xSpan,zSpan);
 		}
 		
 		/********************************************************
@@ -47,8 +45,9 @@ package bing.gl.nd2d.iso
 		/********************************************************
 		 * 更新：遍历所有的对象，并进行排序和更新操作
 		 * ********************************************************/
-		public function update():void
+		override public function update():void
 		{
+			super.update();
 			for each(var obj:N2DIsoObject in _sprites ) {
 				obj.update();
 				if(obj.isSort)	{
@@ -132,7 +131,6 @@ package bing.gl.nd2d.iso
 				obj = null ;
 			}
 			_sprites=  null ;
-			removeAllChildren();
 		}
 		
 		/********************************************************

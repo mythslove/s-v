@@ -1,11 +1,13 @@
 package bing.gl.nd2d.iso
 {
-	import de.nulldesign.nd2d.display.Node2D;
+	import de.nulldesign.nd2d.display.Scene2D;
 	import de.nulldesign.nd2d.display.Sprite2D;
+	import de.nulldesign.nd2d.display.World2D;
 	
 	import flash.events.Event;
+	import flash.geom.Rectangle;
 	
-	public class N2DIsoWorld extends Node2D
+	public class N2DIsoWorld extends World2D
 	{
 		protected var _gridX:int ;
 		protected var _gridZ:int ;
@@ -13,9 +15,9 @@ package bing.gl.nd2d.iso
 		protected var _w :Number ;
 		protected var _h:Number;
 		
-		protected var _backGround:N2DIsoSprite ;
-		protected var _scenesLayer:N2DIsoSprite = new N2DIsoSprite();
+		protected var _backGround:Sprite2D;
 		protected var _scenes:Vector.<N2DIsoScene> = new Vector.<N2DIsoScene>();
+		private var _defaultScene:Scene2D ;
 		
 		/** 返回所有的场景  */
 		public function get scenes():Vector.<N2DIsoScene>
@@ -23,9 +25,10 @@ package bing.gl.nd2d.iso
 			return _scenes ;
 		}
 		
-		public function N2DIsoWorld(width:Number, height:Number ,  gridX:int , gridZ:int ,size:int )
+		public function N2DIsoWorld( size:int , gridX:int , gridZ:int , renderMode:String, 
+									 frameRate:uint = 60, bounds:Rectangle = null, stageID:uint = 0 )
 		{
-			super();
+			super(renderMode, frameRate, bounds);
 			this._gridX = gridX ;
 			this._gridZ = gridZ ;
 			this._size = size ;
@@ -37,7 +40,8 @@ package bing.gl.nd2d.iso
 		protected function addedToStageHandler(e:Event):void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE , addedToStageHandler );
-			addChild(_scenesLayer);
+			_defaultScene = new Scene2D();
+			this.setActiveScene( _defaultScene );
 		}
 		
 		
@@ -47,21 +51,29 @@ package bing.gl.nd2d.iso
 		public function addScene( scene:N2DIsoScene ):N2DIsoScene
 		{
 			_scenes.push( scene);
-			_scenesLayer.addChild( scene );
+			_defaultScene.addChild( scene );
 			return scene ;
 		}
 		
-		
-		
-		
+		/********************************************************
+		 * 设置背景
+		 * ********************************************************/
+		public function setBackGround( ground:Sprite2D ):void
+		{
+			if(_backGround ){
+				_backGround.parent.removeChild( _backGround );
+			}
+			_backGround = ground ;
+			_defaultScene.addChildAt(_backGround , 0 );
+		}
 		
 		/********************************************************
 		 * 移动位置
 		 * ********************************************************/
 		public function panTo( x:Number , y:Number ):void
 		{
-			this._scenesLayer.x = x ;
-			this._scenesLayer.y = y;
+			_defaultScene.x = x ;
+			_defaultScene.y = y;
 		}
 		/**
 		 * 场景偏移X 
@@ -69,7 +81,7 @@ package bing.gl.nd2d.iso
 		 */		
 		public function get sceneLayerOffsetX():Number
 		{
-			return _scenesLayer.x;
+			return _defaultScene.x;
 		}
 		/**
 		 *  场景偏移Y
@@ -77,24 +89,9 @@ package bing.gl.nd2d.iso
 		 */		
 		public function get sceneLayerOffsetY():Number
 		{
-			return _scenesLayer.y;
+			return _defaultScene.y;
 		}
 		
-		
-		
-		
-		
-		/********************************************************
-		 * 设置背景
-		 * ********************************************************/
-		public function setBackGround( ground:N2DIsoSprite ):void
-		{
-			if(_backGround && _backGround.parent){
-				_backGround.parent.removeChild( _backGround );
-			}
-			_backGround = ground ;
-			addChildAt(_backGround , 0 );
-		}
 		
 		
 		/********************************************************
