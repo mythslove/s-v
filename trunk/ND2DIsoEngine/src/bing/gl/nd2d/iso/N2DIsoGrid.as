@@ -21,7 +21,7 @@ package bing.gl.nd2d.iso
 			_isoGrid.render();
 			var bmd:BitmapData = new BitmapData( _isoGrid.width , _isoGrid.height , true , 0xffffff );
 			bmd.draw( _isoGrid);
-			var texture:Texture2D = Texture2D.textureFromBitmapData( bmd );
+			var texture:Texture2D = Texture2D.textureFromBitmapData( bmd , true ); //上传到gpu之后，自动将这个bitmapData清除
 			this.setTexture( texture);
 		}
 	}
