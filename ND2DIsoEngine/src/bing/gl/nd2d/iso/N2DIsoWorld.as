@@ -1,7 +1,6 @@
 package bing.gl.nd2d.iso
 {
 	import de.nulldesign.nd2d.display.Scene2D;
-	import de.nulldesign.nd2d.display.Sprite2D;
 	import de.nulldesign.nd2d.display.World2D;
 	
 	import flash.events.Event;
@@ -15,7 +14,7 @@ package bing.gl.nd2d.iso
 		protected var _w :Number ;
 		protected var _h:Number;
 		
-		protected var _backGround:Sprite2D;
+		protected var _backGround:N2DIsoSprite;
 		protected var _scenes:Vector.<N2DIsoScene> = new Vector.<N2DIsoScene>();
 		private var _defaultScene:Scene2D ;
 		
@@ -58,7 +57,7 @@ package bing.gl.nd2d.iso
 		/********************************************************
 		 * 设置背景
 		 * ********************************************************/
-		public function setBackGround( ground:Sprite2D ):void
+		public function setBackGround( ground:N2DIsoSprite ):void
 		{
 			if(_backGround ){
 				_backGround.parent.removeChild( _backGround );
