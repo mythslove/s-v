@@ -9,8 +9,9 @@ package
 	{
 		public function ND2DIsoEngine()
 		{
-			var iso:N2DIsoObject = new N2DIsoObject(1,1,1);
-			var world:N2DIsoWorld = new N2DIsoWorld(1,1,1,null);
+//			var iso:N2DIsoObject = new N2DIsoObject(1,1,1);
+//			var world:N2DIsoWorld = new N2DIsoWorld(1,1,1,null);
+			
 		}
 	}
 }
