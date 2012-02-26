@@ -1,7 +1,11 @@
 package local.game.elements
 {
 	import bing.iso.IsoObject;
+	import bing.res.ResVO;
+	import bing.utils.ContainerUtil;
 	import bing.utils.InteractivePNG;
+	
+	import com.greensock.TweenMax;
 	
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
@@ -10,6 +14,7 @@ package local.game.elements
 	import local.comm.GameSetting;
 	import local.map.cell.BuildingGridLayer;
 	import local.model.buildings.vos.BuildingVO;
+	import local.utils.ResourceUtil;
 
 	/**
 	 * 建筑基类 
@@ -21,7 +26,7 @@ package local.game.elements
 		public var gridLayer:BuildingGridLayer ; //建筑占据的网格层
 		public var itemLayer:InteractivePNG ; //皮肤容器层
 		public var effectLayer:Sprite ; //特效层
-		protected var _skin:Sprite ; //皮肤
+		protected var _skin:MovieClip ; //皮肤
 		
 		public function BaseBuilding( vo :BuildingVO )
 		{
@@ -41,13 +46,48 @@ package local.game.elements
 			effectLayer = new Sprite(); //添加特效层
 			effectLayer.mouseChildren = effectLayer.mouseEnabled = false ;
 			addChild(effectLayer);
-			loadRes(); 
+			//加载资源
+			ResourceUtil.instance.addEventListener( buildingVO.baseVO.alias , resLoadedHandler );
+			var resVO:ResVO = new ResVO( buildingVO.baseVO.alias , buildingVO.baseVO.url);
+			ResourceUtil.instance.loadRes( resVO );
 		}
 		
-		/* 加载资源*/
-		protected function loadRes():void
+		/* 加载资源完成*/
+		protected function resLoadedHandler( e:Event ):void
 		{
-			
+			ResourceUtil.instance.removeEventListener( buildingVO.baseVO.alias , resLoadedHandler );
+			ContainerUtil.removeChildren(itemLayer);
+			//获取元件
+			_skin = ResourceUtil.instance.getInstanceByClassName( buildingVO.baseVO.alias , buildingVO.baseVO.alias ) as MovieClip;
+			if(_skin){
+				_skin.stop();
+				itemLayer.addChild(_skin);
+			}
+		}
+		
+		/**主要用于旋转建筑，1为正，-1为旋转180度 */		
+		override public function set scaleX(value:Number):void
+		{
+			var flag:Boolean = value==1?false:true;
+			this.rotateX( flag );
+			itemLayer.scaleX = value ;
+			this.buildingVO.scale = value ;
+		}
+		
+		/** 当前是否旋转过*/
+		override public function get scaleX():Number
+		{
+			return itemLayer.scaleX ;
+		}
+		
+		/**设置是否显示被选择状态  */		
+		public function selectedStatus( flag:Boolean ):void
+		{
+			if(flag ){
+				TweenMax.to(itemLayer, 0, {dropShadowFilter:{color:0xffff00, alpha:1, blurX:2, blurY:2, strength:5}});
+			}else{
+				itemLayer.filters=null ;
+			}
 		}
 		
 		/**还原原来的状态  */		
@@ -86,7 +126,10 @@ package local.game.elements
 			itemLayer = null ;
 			removeGrid();
 			effectLayer = null ;
-			_skin = null ;
+			if(_skin){
+				_skin.stop();
+				_skin = null ;
+			}
 		}
 	}
 }
