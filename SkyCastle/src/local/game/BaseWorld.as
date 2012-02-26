@@ -94,9 +94,15 @@ package local.game
 			configListeners();
 		}
 		
+		/**放大缩小地图 */		
 		public function zoom( value:Number =1 ):void
 		{
-			
+			var prevW:Number = GameSetting.MAP_WIDTH*scaleX;
+			var prevH:Number = GameSetting.MAP_HEIGHT*scaleX;
+			scaleX= scaleY = value ;
+			x+=(prevW-GameSetting.MAP_WIDTH*scaleX)>>1;
+			y+=(prevH-GameSetting.MAP_HEIGHT*scaleX)>>1;
+			modifyMapPosition();
 		}
 		/**
 		 * 当前鼠标在哪个 GroundScene上是walkable=true
