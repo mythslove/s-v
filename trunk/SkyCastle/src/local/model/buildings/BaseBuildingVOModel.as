@@ -1,8 +1,11 @@
 package local.model.buildings
 {
+	import bing.utils.XMLAnalysis;
+	
 	import flash.utils.Dictionary;
 	
-	import local.model.buildings.vos.BaseBuildingVO;
+	import local.enum.BuildingType;
+	import local.model.buildings.vos.*;
 
 	/**
 	 *  BaseBuildingVO数据存储和处理区 
@@ -26,7 +29,51 @@ package local.model.buildings
 		public function parseConfig( config:XML ):void
 		{
 			_buildingBaseVOHash = new Dictionary();
-			
+			var vos:XMLList = config.buildings[0].vo;
+			var len:int = vos.length();
+			var baseVO:BaseBuildingVO ;
+			var type:int ;
+			for ( var i:int = 0 ; i<len ; ++i )
+			{
+				type = int(vos[i].@type) ;
+				switch( type )
+				{
+					case BuildingType.BUILDING :
+						baseVO = XMLAnalysis.createInstanceByXML( vos[i] , BaseBuildingVO ,"," ) as BaseBuildingVO;
+						break ;
+					case BuildingType.BUILDING_HOUSE :
+						baseVO = XMLAnalysis.createInstanceByXML( vos[i] , BaseHouseVO ,"," ) as BaseHouseVO;
+						break ;
+					case BuildingType.BUILDING_FACTORY :
+						baseVO = XMLAnalysis.createInstanceByXML( vos[i] , BaseFactoryVO ,"," ) as BaseFactoryVO;
+						break ;
+					case BuildingType.DECORATION :
+						baseVO = XMLAnalysis.createInstanceByXML( vos[i] , BaseDecorationVO ,"," ) as BaseDecorationVO;
+						break ;
+					case BuildingType.DEC_TREE :
+						baseVO = XMLAnalysis.createInstanceByXML( vos[i] , BaseTreeVO ,"," ) as BaseTreeVO;
+						break ;
+					case BuildingType.DEC_STONE :
+						baseVO = XMLAnalysis.createInstanceByXML( vos[i] , BaseStoneVO ,"," ) as BaseStoneVO;
+						break ;
+					case BuildingType.DEC_ROAD :
+						baseVO = XMLAnalysis.createInstanceByXML( vos[i] , BaseRoadVO ,"," ) as BaseRoadVO;
+						break ;
+					case BuildingType.DEC_OTHER :
+						baseVO = XMLAnalysis.createInstanceByXML( vos[i] , BaseRoadVO ,"," ) as BaseRoadVO;
+						break ;
+					case BuildingType.PLANT :
+						baseVO = XMLAnalysis.createInstanceByXML( vos[i] , BasePlantVO ,"," ) as BasePlantVO;
+						break ;
+					case BuildingType.PLANT_CROP :
+						baseVO = XMLAnalysis.createInstanceByXML( vos[i] , BaseCropVO ,"," ) as BaseCropVO;
+						break ;
+					case BuildingType.PLANT_LAND :
+						baseVO = XMLAnalysis.createInstanceByXML( vos[i] , BaseLandVO ,"," ) as BaseLandVO;
+						break ;
+				}
+				_buildingBaseVOHash[ baseVO.baseId ] = baseVO ;
+			}
 		}
 		
 		/**

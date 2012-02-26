@@ -3,6 +3,7 @@ package
 	import bing.res.ResLoadedEvent;
 	import bing.res.ResProgressEvent;
 	import bing.res.ResVO;
+	import bing.utils.SystemUtil;
 	
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -104,7 +105,11 @@ package
 		protected function parseConfig():void
 		{
 			var config:XML = XML(ResourceUtil.instance.getResVOByResId("init_config").resObject.toString()) ;
-			BaseBuildingVOModel.instance.parseConfig( config );
+			if(config){
+				BaseBuildingVOModel.instance.parseConfig( config );
+			}else{
+				SystemUtil.debug("配置文件加载失败");
+			}
 		}
 		
 		/**
