@@ -13,6 +13,7 @@ package
 	import local.comm.GlobalDispatcher;
 	import local.comm.GlobalEvent;
 	import local.model.buildings.BaseBuildingVOModel;
+	import local.model.shop.ShopModel;
 	import local.utils.ResourceUtil;
 	
 	/**
@@ -107,6 +108,7 @@ package
 			var config:XML = XML(ResourceUtil.instance.getResVOByResId("init_config").resObject.toString()) ;
 			if(config){
 				BaseBuildingVOModel.instance.parseConfig( config );
+				ShopModel.instance.parseConfig( config );
 			}else{
 				SystemUtil.debug("配置文件加载失败");
 			}
