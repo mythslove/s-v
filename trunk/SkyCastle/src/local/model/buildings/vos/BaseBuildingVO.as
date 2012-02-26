@@ -31,5 +31,11 @@ package local.model.buildings.vos
 		
 		/** 最大的等级，可以升到多少级，默认为1*/
 		public var maxLevel:int ;
+		
+		/** 资源的路径 */
+		public var url:String ;
+		
+		/** 缩略图位置*/
+		public var thumb:String ;
 	}
 }
