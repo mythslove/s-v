@@ -1,4 +1,4 @@
-package  local.map.cell
+package local.game.cell
 {
 	import bing.iso.IsoUtils;
 	import bing.utils.ContainerUtil;
