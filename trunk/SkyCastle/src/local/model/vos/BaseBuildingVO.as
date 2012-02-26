@@ -15,9 +15,6 @@ package local.model.vos
 		/** 别名，类名 */
 		public var alias:String ;
 		
-		/** 是否还可以在此建筑上面修新的建筑 */
-		public var onBuildAble:int ;
-		
 		/**  npc或英雄是否可以从上面走  */
 		public var walkable:int ;
 		
