@@ -1,4 +1,4 @@
-package  local.map.cell
+package local.game.cell
 {
 	import bing.iso.Rhombus;
 	import bing.iso.path.Grid;
