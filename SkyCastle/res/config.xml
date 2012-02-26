@@ -1,26 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
 	<buildings>
-	
-		<BuildingBaseVO baseId="1" title="MoreCity PathCobblestone" info="MoreCity PathCobblestone" type="2" 
-		clsName="MoreCity_PathCobblestone" xSpan="1" zSpan="1" layerType="0" 
-		url="res/road/MoreCity_PathCobblestone.swf" resId="MoreCity_PathCobblestone"
-		thumb="res/road/MoreCity_PathCobblestoneThumb.png"  
-		animClsName="" walkable="1"/>
-		
-		<BuildingBaseVO baseId="2" title="HallOfHeroes Ruin" info="MoreCity PathCobblestone" 
-		type="2" clsName="Basic_HallOfHeroes_Ruin"  xSpan="2" zSpan="3"  layerType="1" 
-		url="res/house/Basic_HallOfHeroes_Ruin.swf" resId="Basic_HallOfHeroes_Ruin"
-		thumb="res/house/Basic_HallOfHeroes_RuinThumb.png"  
-		animClsName="" walkable="0"/>
-		
+
+		<vo baseId="1" name="MoreCity PathCobblestone" description="MoreCity PathCobblestone"
+			type="23" onBuildAble="1" alias="MoreCity_PathCobblestone" xSpan="1"
+			zSpan="1" layer="1" url="res/road/MoreCity_PathCobblestone.swf"
+			thumb="res/road/MoreCity_PathCobblestoneThumb.png" maxLevel="1"
+			walkable="1" />
+
+		<vo baseId="2" name="HallOfHeroes Ruin" earnCoin="1" earnExp="1"
+			earnTime="300" earnWood="1" earnStone="1" buildStep="3"
+			description="MoreCity PathCobblestone" type="12" xSpan="2" zSpan="3"
+			layer="1" maxLevel="1" walkable="0"
+			url="res/house/Basic_HallOfHeroes_Ruin.swf" alias="Basic_HallOfHeroes_Ruin"
+			buildSpendEnery="1,1,1" buildWood="4" buildStone="3"
+			thumb="res/house/Basic_HallOfHeroes_RuinThumb.png" />
+
 	</buildings>
 	<shop>
 		<house>
-			<BuildingVO baseId="2" price="1"/>
+			<vo baseId="2" price="1" payType="1" />
 		</house>
 		<road>
-			<BuildingVO baseId="1" price="1"/>
+			<vo baseId="1" price="1" payType="1" />
 		</road>
 	</shop>
 </config>

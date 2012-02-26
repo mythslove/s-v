@@ -15,7 +15,7 @@ package local.model.buildings.vos
 		/** 别名，类名 */
 		public var alias:String ;
 		
-		/**  npc或英雄是否可以从上面走  */
+		/**  npc或英雄是否可以从上面走，0为不可走，1为可以走  */
 		public var walkable:int ;
 		
 		/** 在哪一层，为LayerType的常量*/
