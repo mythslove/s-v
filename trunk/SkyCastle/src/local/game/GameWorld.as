@@ -23,11 +23,6 @@ package local.game
 		//------------------------------------------------------------
 		private var _cacheBuildPos:Point = new Point();//用于缓存移动的建筑的上次位置
 		
-		public function GameWorld()
-		{
-			super();
-		}
-		
 		override protected function onClick(e:MouseEvent):void 
 		{
 			if(GameData.buildingCurrOperation==BuildingOperation.ADD) //添加

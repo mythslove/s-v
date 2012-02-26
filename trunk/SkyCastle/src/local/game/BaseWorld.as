@@ -1,27 +1,18 @@
 package local.game
 {
-	import bing.iso.IsoGrid;
-	import bing.iso.IsoScene;
-	import bing.iso.IsoWorld;
+	import bing.iso.*;
 	import bing.utils.InteractivePNG;
 	
-	import flash.display.Bitmap;
-	import flash.display.BitmapData;
-	import flash.events.Event;
-	import flash.events.MouseEvent;
-	import flash.geom.Point;
-	import flash.geom.Rectangle;
+	import flash.display.*;
+	import flash.events.*;
+	import flash.geom.*;
 	
-	import local.comm.GameSetting;
-	import local.comm.GlobalDispatcher;
-	import local.comm.GlobalEvent;
-	import local.enum.LayerType;
-	import local.game.elements.Building;
-	import local.game.scenes.BuildingScene;
-	import local.game.scenes.GroundScene;
-	import local.model.buildings.vos.BaseBuildingVO;
-	import local.model.buildings.vos.BuildingVO;
-	import local.model.map.MapGridDataModel;
+	import local.comm.*;
+	import local.enum.*;
+	import local.game.elements.*;
+	import local.game.scenes.*;
+	import local.model.buildings.vos.*;
+	import local.model.map.*;
 	import local.utils.ResourceUtil;
 	import local.views.tooltip.BuildingToolTip;
 	
