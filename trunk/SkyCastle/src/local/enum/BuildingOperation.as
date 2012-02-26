@@ -1,4 +1,4 @@
-package local.enums
+package local.enum
 {
 	/**
 	 * 枚举： 当前对地图上的建筑执行什么样的操作 
