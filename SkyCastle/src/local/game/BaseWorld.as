@@ -15,10 +15,12 @@ package local.game
 	import local.comm.GameSetting;
 	import local.comm.GlobalDispatcher;
 	import local.comm.GlobalEvent;
+	import local.enum.LayerType;
 	import local.game.elements.Building;
 	import local.game.scenes.BuildingScene;
 	import local.game.scenes.GroundScene;
 	import local.model.buildings.vos.BaseBuildingVO;
+	import local.model.buildings.vos.BuildingVO;
 	import local.model.map.MapGridDataModel;
 	import local.utils.ResourceUtil;
 	import local.views.tooltip.BuildingToolTip;
@@ -60,10 +62,10 @@ package local.game
 		{
 			super.addedToStageHandler(e);
 			//显示地图网格
-			var gridScene:IsoScene = new IsoScene(GameSetting.GRID_SIZE);
-			(gridScene.addChild( new IsoGrid(GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE)) as IsoGrid).render() ;
-			gridScene.cacheAsBitmap=true;
-			this.addScene(gridScene);
+//			var gridScene:IsoScene = new IsoScene(GameSetting.GRID_SIZE);
+//			(gridScene.addChild( new IsoGrid(GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE)) as IsoGrid).render() ;
+//			gridScene.cacheAsBitmap=true;
+//			this.addScene(gridScene);
 			_mapGridData = MapGridDataModel.instance;
 			//地图区域1
 			groundScene1 = new GroundScene();
@@ -84,7 +86,7 @@ package local.game
 			ResourceUtil.instance.deleteRes("mapdata"); 
 			//iso顶层场景
 			topScene = new IsoScene(GameSetting.GRID_SIZE,GameSetting.GRID_X , GameSetting.GRID_Z);
-			topScene.mouseEnabled= topScene.mouseChildren=false;
+			topScene.visible = topScene.mouseEnabled= topScene.mouseChildren=false;
 			addScene( topScene );
 			//tooltip
 			_tooltip = BuildingToolTip.instance ;
@@ -133,6 +135,88 @@ package local.game
 			else if( index==3 ) return buildingScene3 ;
 			return null ;
 		}
+		
+		
+		/**
+		 * 从场景上移除一个建筑 
+		 * @param build
+		 * @param updateDirection 主要用于地面建筑自动更新UI方向
+		 */
+		protected function removeBuildFromScene( build:Building , updateDirection:Boolean=true   ):void
+		{
+			if(build.parent is BuildingScene) {
+				(build.parent as BuildingScene).removeBuilding( build );
+			} else if(build.parent is GroundScene) {
+				(build.parent as GroundScene).removeBuilding( build , updateDirection );
+			}
+		}
+		
+		/**
+		 * 添加一个建筑到场景上 
+		 * @param build
+		 * @param isSort 是否进行深度排序
+		 * @param updateDirection 主要用于地面建筑自动更新UI方向
+		 */		
+		protected function addBuildToScene( build:Building, isSort:Boolean=true , updateDirection:Boolean=true ):void
+		{
+			if(build.buildingVO.baseVO.layer==LayerType.BUILDING) {
+				getBuildingScene(build.nodeX,build.nodeZ).addBuilding( build );
+			} else if(build.buildingVO.baseVO.layer==LayerType.GROUND) {
+				getGroundScene(build.nodeX,build.nodeZ).addBuilding( build );
+			}
+		}
+		
+		/**
+		 * 根据node位置和buildingVO，添加建筑 
+		 * @param nodeX
+		 * @param nodeZ 
+		 * @param isSort  是否进行深度排序
+		 * @param updateDirection 是否自动改变方向，主要用于Ground层的建筑
+		 * @reutrn 添加成功建筑
+		 */		
+		protected function addBuildingByVO( nodeX:int , nodeZ:int , vo:BuildingVO , isSort:Boolean=true , updateDirection:Boolean=true ):Building
+		{
+			var dx:int = nodeX*GameSetting.GRID_SIZE ;
+			var dz:int = nodeZ*GameSetting.GRID_SIZE ;
+			
+			var result:Building  ;
+			if(nodeX<0 || nodeZ<0 || nodeX>=GameSetting.GRID_X || nodeZ>=GameSetting.GRID_Z) return result ;
+			
+			if(vo.baseVO.layer==LayerType.GROUND) //添加到地面层
+			{
+				var groundScene:GroundScene = getGroundScene (nodeX,nodeZ);
+				if(groundScene) {
+					result = groundScene.addBuildingByVO( dx,dz,vo,isSort,updateDirection);
+				}
+			}
+			else if(vo.baseVO.layer==LayerType.BUILDING)//添加到建筑层
+			{
+				var buildingScene:BuildingScene = getBuildingScene(nodeX,nodeZ);
+				if(buildingScene) {
+					result = buildingScene.addBuildingByVO( dx,dz,vo,isSort);
+				}
+			}
+			return result;
+		}
+		
+		/**运行 */		
+		public function start():void{
+			this.removeEventListener(Event.ENTER_FRAME , onEnterFrameHandler );
+			this.addEventListener(Event.ENTER_FRAME , onEnterFrameHandler );
+		}
+		
+		/**停止*/		
+		public function stop():void {
+			this.removeEventListener(Event.ENTER_FRAME , onEnterFrameHandler );
+		}
+		
+		/**不断地执行*/		
+		protected function onEnterFrameHandler(e:Event):void
+		{
+			update() ;
+		}
+		
+		/** 添加侦听*/
 		protected function configListeners():void
 		{
 			addEventListener(MouseEvent.MOUSE_DOWN , onMouseEventHandler);
@@ -145,7 +229,7 @@ package local.game
 			GlobalDispatcher.instance.addEventListener(GlobalEvent.RESIZE , onResizeHandler );
 		}
 		
-		//处理鼠标事件 
+		/** 处理鼠标事件 */		
 		protected function onMouseEventHandler(e:MouseEvent):void
 		{
 			switch(e.type)

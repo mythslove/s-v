@@ -37,5 +37,8 @@ package local.model.buildings.vos
 		
 		/** 缩略图位置*/
 		public var thumb:String ;
+		
+		/** 建筑的类型 */
+		public var type:int ;
 	}
 }

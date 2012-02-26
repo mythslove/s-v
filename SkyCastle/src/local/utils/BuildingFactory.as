@@ -2,6 +2,8 @@ package local.utils
 {
 	import bing.utils.ObjectUtil;
 	
+	import local.enum.BuildingType;
+	import local.game.elements.Building;
 	import local.model.buildings.vos.BuildingVO;
 
 	/**
@@ -20,18 +22,10 @@ package local.utils
 		{
 			if(isNew) vo = ObjectUtil.copyObj(vo) as BuildingVO;
 			var building:Building ;
-			switch( vo.baseVO.type)
+			switch( vo.baseVO.type )
 			{
 				case BuildingType.DECORATION:
-					if( vo.baseVO.layerType==LayerType.GROUND ) {
-						building = new Road(vo);
-					}else{
-						building = new Building( vo );
-					}
 					break ;
-				default:
-					building = new Building( vo );
-					break;
 			}
 			return building ;
 		}
