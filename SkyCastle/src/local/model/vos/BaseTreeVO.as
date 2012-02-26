@@ -6,9 +6,10 @@ package local.model.vos
 	 */	
 	public class BaseTreeVO extends BaseDecorationVO
 	{
+		/** 每砍一次收获的木材数*/
 		public var earnWoods:Array ;
 		
-		/** 每砍一次*/
+		/** 每砍一次收获的金币数*/
 		public var earnCoins:Array ;
 		
 		/** 每砍一次花费的能量 */
