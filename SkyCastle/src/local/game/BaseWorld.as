@@ -43,7 +43,6 @@ package local.game
 		public function BaseWorld()
 		{
 			super(GameSetting.MAP_WIDTH, GameSetting.MAX_HEIGHT , GameSetting.GRID_X, GameSetting.GRID_Z, GameSetting.GRID_SIZE);
-			mouseEnabled = false ;
 			//设置背景图片
 			var bg:Bitmap = new Bitmap( ResourceUtil.instance.getInstanceByClassName("init_bg","BG") as BitmapData );
 			this.setBackGround(bg);
@@ -171,6 +170,8 @@ package local.game
 						_tooltip.showTooltip(baseVO.description , baseVO.name );
 					}
 					break;
+				case MouseEvent.MOUSE_UP:
+					if(!_mapIsMove) onClick(e);
 				case MouseEvent.ROLL_OUT:
 					this.stopDrag();
 				case MouseEvent.MOUSE_OUT:
@@ -184,11 +185,15 @@ package local.game
 			}
 		}
 		
+		/** 单击*/
+		protected function onClick( e:MouseEvent ):void{}
+		
 		/** 窗口大小变化*/		
 		protected function onResizeHandler( e:GlobalEvent ):void
 		{
 			modifyMapPosition();
 		}
+		
 		/**纠正地图位置，防止出界*/		
 		protected function modifyMapPosition():void
 		{
@@ -201,6 +206,8 @@ package local.game
 				y = -GameSetting.MAX_HEIGHT*scaleX+stage.stageHeight ;
 			}
 		}
+		
+		/** 更新顶部建筑的位置和网格 */
 		protected function updateTopBuild():void
 		{
 			var offsetY:Number = Math.floor( (_topBuilding.buildingVO.baseVO.xSpan+_topBuilding.buildingVO.baseVO.zSpan)*0.5-1)*GameSetting.GRID_SIZE ;
