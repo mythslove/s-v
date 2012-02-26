@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<buildings>
+	
+		<BuildingBaseVO baseId="1" title="MoreCity PathCobblestone" info="MoreCity PathCobblestone" type="2" 
+		clsName="MoreCity_PathCobblestone" xSpan="1" zSpan="1" layerType="0" 
+		url="res/road/MoreCity_PathCobblestone.swf" resId="MoreCity_PathCobblestone"
+		thumb="res/road/MoreCity_PathCobblestoneThumb.png"  
+		animClsName="" walkable="1"/>
+		
+		<BuildingBaseVO baseId="2" title="HallOfHeroes Ruin" info="MoreCity PathCobblestone" 
+		type="2" clsName="Basic_HallOfHeroes_Ruin"  xSpan="2" zSpan="3"  layerType="1" 
+		url="res/house/Basic_HallOfHeroes_Ruin.swf" resId="Basic_HallOfHeroes_Ruin"
+		thumb="res/house/Basic_HallOfHeroes_RuinThumb.png"  
+		animClsName="" walkable="0"/>
+		
+	</buildings>
+	<shop>
+		<house>
+			<BuildingVO baseId="2" price="1"/>
+		</house>
+		<road>
+			<BuildingVO baseId="1" price="1"/>
+		</road>
+	</shop>
+</config>
