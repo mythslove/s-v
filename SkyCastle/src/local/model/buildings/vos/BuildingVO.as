@@ -1,5 +1,7 @@
 package local.model.buildings.vos
 {
+	import local.model.buildings.BaseBuildingVOModel;
+
 	/**
 	 * 真实建筑的VO 
 	 * @author zzhanglin
@@ -36,5 +38,15 @@ package local.model.buildings.vos
 		
 		/** 当前的方向，如果旋转过就是-1，默认为1 */
 		public var scale:int =1 ;
+		
+		protected var _baseVO:BaseBuildingVO;
+		/** 建筑的基础VO*/
+		public function get baseVO():BaseBuildingVO
+		{
+			if( !_baseVO) {
+				_baseVO = BaseBuildingVOModel.instance.getBaseVOById( baseId)  ;
+			}
+			return _baseVO;
+		}
 	}
 }
