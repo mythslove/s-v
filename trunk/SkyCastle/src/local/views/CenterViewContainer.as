@@ -1,19 +1,17 @@
 package  local.views
 {
-	import  local.comm.GameSetting;
-	import  local.comm.GlobalDispatcher;
-	import  local.comm.GlobalEvent;
-	
-	import flash.display.Sprite;
 	import flash.events.Event;
 	
-	import  local.utils.PopUpManager;
+	import local.comm.GameSetting;
+	import local.comm.GlobalDispatcher;
+	import local.comm.GlobalEvent;
+	import local.utils.PopUpManager;
 	
 	/**
 	 * 始终居中的视图的容器 
 	 * @author zzhanglin
 	 */	
-	public class CenterViewContainer extends Sprite
+	public class CenterViewContainer extends BaseView
 	{
 		private static var _instance:CenterViewContainer;
 		public static function get instance():CenterViewContainer
@@ -38,16 +36,11 @@ package  local.views
 		public function CenterViewContainer()
 		{
 			super();
-			if(_instance) throw new Error("只能实例化一个CenterViewContainer");
-			else _instance=this ;
-			mouseEnabled = false ;			
-			addEventListener(Event.ADDED_TO_STAGE,addedToStageHandler);
+			mouseEnabled = false ;
 		}
 		
-		private function addedToStageHandler(e:Event):void
+		override protected function added():void
 		{
-			removeEventListener(Event.ADDED_TO_STAGE,addedToStageHandler);
-			
 			_topBar = new TopBar();
 			addChild(_topBar);
 			

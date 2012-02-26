@@ -24,7 +24,7 @@ package local.views
 			removed();
 		}
 		
-		protected function added(){}
-		protected function removed(){}
+		protected function added():void{}
+		protected function removed():void{}
 	}
 }
