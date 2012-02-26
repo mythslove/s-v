@@ -2,8 +2,6 @@ package local.comm
 {
 	import bing.utils.ContainerUtil;
 	
-	import  local.enums.BuildingCurrentOperation;
-	
 	import flash.display.Bitmap;
 	import flash.geom.Point;
 	

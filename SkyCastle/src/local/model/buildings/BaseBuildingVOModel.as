@@ -41,5 +41,6 @@ package local.model.buildings
 				vo =  _buildingBaseVOHash[baseId];
 			}
 			return vo ;
+		}
 	}
 }

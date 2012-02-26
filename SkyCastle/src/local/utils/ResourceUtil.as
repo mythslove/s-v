@@ -6,14 +6,13 @@ package local.utils
 	import bing.res.ResType;
 	import bing.res.ResVO;
 	
-	import local.comm.GameSetting;
-	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
 	
-	import models.MapGridDataModel;
+	import local.comm.GameSetting;
+	import local.model.map.MapGridDataModel;
 	
 	/**
 	 * 游戏资源加载和保存以及处理的管理类 
@@ -56,7 +55,7 @@ package local.utils
 					resLoader.unloadAndStop();
 					break ;
 				case ResType.BINARY:
-					if( resVO.resId=="mapdata"){
+					if( resVO.resId=="init_mapdata"){
 						parseMapData( resVO , resLoader );
 					}
 					break ;
