@@ -58,5 +58,14 @@ package local.model.map
 		{
 			
 		}
+		
+		/**
+		 * 重置Grid数据 
+		 */		
+		public function clearGridData():void
+		{
+			buildingGrid = new Grid(GameSetting.GRID_X , GameSetting.GRID_Z); 
+			groundGrid = new Grid(GameSetting.GRID_X , GameSetting.GRID_Z);
+		}
 	}
 }
