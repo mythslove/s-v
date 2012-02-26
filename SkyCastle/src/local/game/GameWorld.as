@@ -6,7 +6,7 @@ package local.game
 	{
 		private static var _instance:GameWorld;
 		public static function get instance():GameWorld{
-			if(_instance) _instance = new GameWorld();
+			if(!_instance) _instance = new GameWorld();
 			return _instance ;
 		}
 		//------------------------------------------------------------
