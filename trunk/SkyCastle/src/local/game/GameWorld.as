@@ -52,8 +52,8 @@ package local.game
 			{
 				if(_topBuilding){
 					if(_mouseOverBuild){
-						_cacheBuildPos.x = _mouseOverBuild.x ;
-						_cacheBuildPos.y = _mouseOverBuild.z ;
+						_cacheBuildPos.x = _mouseOverBuild.nodeX ;
+						_cacheBuildPos.y = _mouseOverBuild.nodeZ ;
 						removeBuildFromScene( _mouseOverBuild ); //从场景上先移除
 						_mouseOverBuild.selectedStatus(false); //选择设置成false
 						addBuildingToTop( _mouseOverBuild );  //添加在鼠标容器上移动
@@ -91,9 +91,9 @@ package local.game
 		/**
 		 * 移动建筑失败，建筑返回原来的地点 
 		 */		
-		public function moveFail():void
+		public function moveFail():void 
 		{
-			
+				
 		}
 		
 		/**
