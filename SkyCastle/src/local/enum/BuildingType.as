@@ -38,5 +38,9 @@ package local.enum
 		public static const PLANT_LAND:int = 31 ;
 		/** 种植：农作物*/
 		public static const PLANT_CROP:int = 32 ;
+		
+		
+		/** 大类：人*/
+		public static const CHACTERS:int = 10 ;
 	}
 }
