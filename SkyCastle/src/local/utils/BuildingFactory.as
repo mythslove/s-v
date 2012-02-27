@@ -42,6 +42,15 @@ package local.utils
 				case BuildingType.DECORATION:
 					building = new Decortation( vo );
 					break ;
+				case BuildingType.PLANT:
+					building = new Plant( vo );
+					break ;
+				case BuildingType.PLANT_LAND:
+					building = new Land( vo );
+					break ;
+				case BuildingType.PLANT_CROP:
+					building = new Crop( vo );
+					break ;
 				default:
 					building = new Building( vo );
 					break ;
