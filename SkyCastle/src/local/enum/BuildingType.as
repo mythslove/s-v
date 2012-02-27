@@ -28,8 +28,6 @@ package local.enum
 		public static const DEC_STONE:int = 22 ;
 		/** 装饰：路，草坪，水渠 */
 		public static const DEC_ROAD:int = 23 ;
-		/** 装饰：其他*/
-		public static const DEC_OTHER:int = 24 ;
 		
 		
 		/**

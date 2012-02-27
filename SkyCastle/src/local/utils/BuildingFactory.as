@@ -3,7 +3,7 @@ package local.utils
 	import bing.utils.ObjectUtil;
 	
 	import local.enum.BuildingType;
-	import local.game.elements.Building;
+	import local.game.elements.*;
 	import local.model.buildings.vos.BuildingVO;
 
 	/**
@@ -24,7 +24,26 @@ package local.utils
 			var building:Building ;
 			switch( vo.baseVO.type )
 			{
+				case BuildingType.BUILDING_FACTORY:
+					building = new Factory( vo );
+					break ;
+				case BuildingType.BUILDING_HOUSE:
+					building = new House( vo );
+					break ;
+				case BuildingType.DEC_TREE:
+					building = new Tree( vo );
+					break ;
+				case BuildingType.DEC_STONE:
+					building = new Stone( vo );
+					break ;
+				case BuildingType.DEC_ROAD:
+					building = new Road( vo );
+					break ;
 				case BuildingType.DECORATION:
+					building = new Decortation( vo );
+					break ;
+				default:
+					building = new Building( vo );
 					break ;
 			}
 			return building ;
