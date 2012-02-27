@@ -1,8 +1,7 @@
 package local.comm
 {
-	import flash.display.Bitmap;
-	
 	import local.enum.BuildingOperation;
+	import local.enum.MouseStatus;
 	import local.game.GameWorld;
 	import local.utils.MouseManager;
 	import local.views.icon.*;
@@ -26,20 +25,20 @@ package local.comm
 			switch(value){
 				case BuildingOperation.ADD:
 				case BuildingOperation.NONE:
-					MouseManager.instance.removeMouseIcon();
+					MouseManager.instance.mouseStatus = MouseStatus.NONE ;
 					GameWorld.instance.clearTopScene() ;
 					break ;
 				case BuildingOperation.MOVE:
-					MouseManager.instance.addMouseIcon( new Bitmap( new MoveIconBitmapData ));
+					MouseManager.instance.mouseStatus = MouseStatus.MOVE_BUILDING ;
 					break ;
 				case BuildingOperation.STASH:
-					MouseManager.instance.addMouseIcon( new Bitmap( new StashIconBitmapData ));
+					MouseManager.instance.mouseStatus = MouseStatus.STASH_BUILDING ;
 					break ;
 				case BuildingOperation.SELL:
-					MouseManager.instance.addMouseIcon( new Bitmap( new SellIconBitmapData ));
+					MouseManager.instance.mouseStatus = MouseStatus.SELL_BUILDING ;
 					break ;
 				case BuildingOperation.ROTATE:
-					MouseManager.instance.addMouseIcon( new Bitmap( new RotateIconBitmapData ));
+					MouseManager.instance.mouseStatus = MouseStatus.ROTATE_BUILDING ;
 					break ;
 			}
 		}

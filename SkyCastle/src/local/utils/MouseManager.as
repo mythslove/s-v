@@ -4,7 +4,9 @@ package local.utils
 	import flash.display.DisplayObject;
 	import flash.events.Event;
 	
+	import local.enum.MouseStatus;
 	import local.views.CenterViewContainer;
+	import local.views.icon.*;
 
 	/**
 	 * 鼠标管理 ，物品跟随鼠标移动
@@ -20,15 +22,57 @@ package local.utils
 		}
 		//================================
 		
-		public const OFFSET:int = 20 ;
-		
+		private const OFFSET:int = 20 ;
 		private var _currentMouse:DisplayObject ;
+		private var _mouseStatus:String = MouseStatus.NONE ;
+		/**
+		 * 获得鼠标当前的状态 
+		 * @return 
+		 */		
+		public function get mouseStatus():String {
+			return _mouseStatus;
+		}
+		
+		public function set mouseStatus( value:String ):void
+		{
+			_mouseStatus = value ;
+			switch( value )
+			{
+				case MouseStatus.NONE :
+					removeMouseIcon();
+					break ;
+				case MouseStatus.ROTATE_BUILDING :
+					addMouseIcon( new Bitmap( new RotateIconBitmapData ));
+					break ;
+				case MouseStatus.UPDATE_HOUSE :
+					break ;
+				case MouseStatus.STASH_BUILDING :
+					addMouseIcon( new Bitmap( new StashIconBitmapData ));
+					break ;
+				case MouseStatus.SELL_BUILDING :
+					addMouseIcon( new Bitmap( new SellIconBitmapData ));
+					break ;
+				case MouseStatus.BUILD_BUILDING :
+					break ;
+				case MouseStatus.MOVE_BUILDING :
+					addMouseIcon(new Bitmap( new MoveIconBitmapData ));
+					break ;
+				case MouseStatus.BEAT_STONE :
+					break ;
+				case MouseStatus.CUT_TREES :
+					break ;
+				case MouseStatus.EARN_COIN :
+					break ;
+				case MouseStatus.SHOVEL_BUILDING :
+					break ;
+			}
+		}
 		
 		/**
 		 * 添加跟随鼠标移动的icon 
 		 * @param icon
 		 */		
-		public function addMouseIcon( icon:DisplayObject ):void
+		private function addMouseIcon( icon:DisplayObject ):void
 		{
 			removeMouseIcon();
 			if( CenterViewContainer.instance.stage)
@@ -42,7 +86,7 @@ package local.utils
 		/**
 		 * 移除当前跟随鼠标移动的icon 
 		 */		
-		public function removeMouseIcon():void
+		private function removeMouseIcon():void
 		{
 			if(_currentMouse&&_currentMouse.parent){
 				_currentMouse.parent.removeChild(_currentMouse);
