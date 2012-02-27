@@ -2,7 +2,10 @@ package local.game.elements
 {
 	import local.model.buildings.vos.BaseStoneVO;
 	import local.model.buildings.vos.BuildingVO;
-	
+	/**
+	 * 装饰之石头 
+	 * @author zzhanglin
+	 */	
 	public class Stone extends Decortation
 	{
 		public function Stone(vo:BuildingVO)
