@@ -11,7 +11,7 @@ package local.game.elements
 		}
 		
 		/**
-		 * 新建房子
+		 * 发送操作到服务器
 		 */		
 		public function sendOperation( operation:String ):void
 		{

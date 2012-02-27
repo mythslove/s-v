@@ -129,6 +129,7 @@ package local.game.elements
 			}
 			gridLayer.drawGrid();
 		}
+		
 		/** 移除网格*/
 		public function removeGrid():void
 		{
