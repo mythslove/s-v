@@ -1,5 +1,6 @@
 package local.game
 {
+	import bing.iso.IsoScene;
 	import bing.utils.ContainerUtil;
 	import bing.utils.ObjectUtil;
 	
@@ -113,6 +114,17 @@ package local.game
 		{
 			ContainerUtil.removeChildren(topScene);
 			topScene.visible = false  ;
+		}
+		
+		/**
+		 * 清空世界 
+		 */		
+		public function clearWorld():void
+		{
+			for each( var scene:IsoScene in scenes){
+				scene.clear();
+			}
+			clearTopScene() ;
 		}
 	}
 }

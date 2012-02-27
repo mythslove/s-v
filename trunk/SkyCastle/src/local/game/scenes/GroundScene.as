@@ -77,7 +77,7 @@ package local.game.scenes
 			this.addIsoObject( building,isSort );
 			building.setWalkable( false, gridData );
 			if( (building.baseBuildingVO as BaseRoadVO).onBuildAble==0){
-				//如果上面还不可以修建筑
+				//如果上面不可以修建筑
 				building.setWalkable( false, MapGridDataModel.instance.buildingGrid );
 			}
 			_groundNodeHash[building.nodeX+"-"+building.nodeZ]=building;
@@ -95,7 +95,7 @@ package local.game.scenes
 			building.setWalkable( true ,  gridData  );
 			this.removeIsoObject( building );
 			if( (building.baseBuildingVO as BaseRoadVO).onBuildAble==0){
-				//如果上面还不可以修建筑
+				//如果上面不可以修建筑
 				building.setWalkable( true , MapGridDataModel.instance.buildingGrid );
 			}
 			delete _groundNodeHash[building.nodeX+"-"+building.nodeZ];
@@ -192,6 +192,14 @@ package local.game.scenes
 		{
 			for each( var obj:IsoObject in children){
 				obj.setWalkable( true , gridData );
+				if( (obj as Building).baseBuildingVO.walkable ){
+					//如果上面可以走
+					(obj as Building).setWalkable( true , MapGridDataModel.instance.astarGrid );
+				}
+				if( ((obj as Building).baseBuildingVO as BaseRoadVO).onBuildAble==0){
+					//如果上面还不可以修建筑
+					(obj as Building).setWalkable( true , MapGridDataModel.instance.buildingGrid );
+				}
 			}
 			super.clear();
 		}

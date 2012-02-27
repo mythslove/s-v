@@ -49,9 +49,11 @@ package local.game.scenes
 		{
 			this.addIsoObject( building,isSort );
 			building.setWalkable( false , gridData );
-			//如果上面不能走
-			if( !building.baseBuildingVO.walkable ){ 
-				building.setWalkable(false, MapGridDataModel.instance.astarGrid );
+			//寻路数据
+			if( building.baseBuildingVO.walkable>0 ){
+				building.setWalkable( true , MapGridDataModel.instance.astarGrid );
+			} else {
+				building.setWalkable( false , MapGridDataModel.instance.astarGrid );
 			}
 			return building;
 		}
@@ -63,7 +65,7 @@ package local.game.scenes
 		public function removeBuilding( building:Building):void
 		{
 			building.setWalkable( true , gridData );
-			building.setWalkable(true, MapGridDataModel.instance.astarGrid );
+			building.setWalkable( true , MapGridDataModel.instance.astarGrid ); //寻路数据
 			this.removeIsoObject( building );
 		}
 		
@@ -77,14 +79,17 @@ package local.game.scenes
 			{
 				//清除旋转前的数据
 				building.setWalkable(true,gridData);
-				building.setWalkable(true, MapGridDataModel.instance.astarGrid );
+				building.setWalkable( true , MapGridDataModel.instance.astarGrid );
 				//旋转
 				building.scaleX = ~building.scaleX+1;
 				//更新旋转后的数据
 				building.drawGrid();
-				building.setWalkable(false,gridData);
-				if( !building.baseBuildingVO.walkable ){ 
-					building.setWalkable(false, MapGridDataModel.instance.astarGrid );
+				building.setWalkable(false , gridData);
+				//寻路数据
+				if( building.baseBuildingVO.walkable>0 ){
+					building.setWalkable( true , MapGridDataModel.instance.astarGrid );
+				} else {
+					building.setWalkable( false , MapGridDataModel.instance.astarGrid );
 				}
 				building.sort();
 			}
