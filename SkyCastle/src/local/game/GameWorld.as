@@ -93,7 +93,12 @@ package local.game
 		 */		
 		public function moveFail():void 
 		{
-				
+			if(_topBuilding){
+				_topBuilding.nodeX=_cacheBuildPos.x ;
+				_topBuilding.nodeZ=_cacheBuildPos.y ;
+				this.addBuildToScene( _topBuilding );
+			}
+			clearTopScene();
 		}
 		
 		/**
