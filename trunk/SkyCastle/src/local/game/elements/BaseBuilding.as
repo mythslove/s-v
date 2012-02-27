@@ -92,6 +92,18 @@ package local.game.elements
 			return itemLayer.scaleX ;
 		}
 		
+		override public function set nodeX(value:int):void
+		{
+			super.nodeX = value ;
+			buildingVO.nodeX = value ;
+		}
+		
+		override public function set nodeZ(value:int):void
+		{
+			super.nodeZ = value ;
+			buildingVO.nodeZ = value ;
+		}
+		
 		/**设置是否显示被选择状态  */		
 		public function selectedStatus( flag:Boolean ):void
 		{

@@ -31,7 +31,7 @@ package local.game
 				{
 					var vo:BuildingVO = ObjectUtil.copyObj(_topBuilding.buildingVO) as BuildingVO ;
 					var addedBuilding:Building = addBuildingByVO( _topBuilding.nodeX , _topBuilding.nodeZ ,vo );
-//					addedBuilding.sendAddedToScene(); //发送添加到地图上的消息到服务器
+					addedBuilding.sendAddBuilding(); //发送添加到地图上的消息到服务器
 					_topBuilding.gridLayer.updateBuildingGridLayer(_topBuilding.nodeX , _topBuilding.nodeZ , vo.baseVO.layer );
 				}
 			}
@@ -43,7 +43,7 @@ package local.game
 						removeBuildFromScene( _mouseOverBuild );
 						_mouseOverBuild.scaleX = ~_mouseOverBuild.scaleX+1 ;
 						addBuildToScene(_mouseOverBuild);
-//						_mouseOverBuild.sendRotatedBuilding(); //发送旋转建筑消息到服务器
+						_mouseOverBuild.sendRotateBuilding(); //发送旋转建筑消息到服务器
 					}
 				}
 			}
@@ -65,7 +65,7 @@ package local.game
 						_topBuilding.removeGrid(); //移除建筑网格
 						_topBuilding.itemLayer.alpha=1;
 						addBuildToScene( _topBuilding );//添加到场景上
-//						_topBuilding.sendMovedBuilding(); //发送移动建筑的消息
+						_topBuilding.sendMoveBuilding(); //发送移动建筑的消息
 						ContainerUtil.removeChildren( topScene) ; //清除鼠标
 					}
 				}
@@ -75,7 +75,7 @@ package local.game
 				if(_mouseOverBuild){
 					removeBuildFromScene( _mouseOverBuild ); //从场景上先移除
 					_mouseOverBuild.selectedStatus(false);
-//					_mouseOverBuild.sendStashBuilding(); //发送收藏建筑信息到服务器
+					_mouseOverBuild.sendStashBuilding(); //发送收藏建筑信息到服务器
 					_mouseOverBuild = null ;
 				}
 			}

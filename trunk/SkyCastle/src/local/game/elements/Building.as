@@ -12,7 +12,7 @@ package local.game.elements
 		/**
 		 * 新建房子
 		 */		
-		public function addBuilding():void
+		public function sendAddBuilding():void
 		{
 			
 		}
@@ -20,15 +20,15 @@ package local.game.elements
 		/**
 		 * 旋转建筑 
 		 */		
-		public function rotateBuilding():void
+		public function sendRotateBuilding():void
 		{
-			
+			buildingVO.scale = scaleX ;
 		}
 		
 		/**
 		 * 移动建筑 
 		 */		
-		public function moveBuilding():void
+		public function sendMoveBuilding():void
 		{
 			
 		}
@@ -36,7 +36,7 @@ package local.game.elements
 		/**
 		 * 收藏 建筑
 		 */		
-		public function stashBuilding():void
+		public function sendStashBuilding():void
 		{
 			
 		}
