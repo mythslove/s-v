@@ -5,7 +5,6 @@ package local.model.map
 	import flash.utils.Dictionary;
 	
 	import local.comm.GameSetting;
-	import local.model.buildings.vos.BuildingVO;
 
 	public class MapGridDataModel
 	{
@@ -40,24 +39,6 @@ package local.model.map
 		 * 地面层数据 
 		 */		
 		public var groundGrid:Grid = new Grid(GameSetting.GRID_X , GameSetting.GRID_Z);
-		
-		/**
-		 * 添加一个建筑数据 
-		 * @param vo
-		 */		
-		public function addBuildingGridData( vo:BuildingVO):void
-		{
-			
-		}
-		
-		/**
-		 * 移除一个建筑数据 
-		 * @param vo
-		 */		
-		public function removeBuildingGridData( vo:BuildingVO ):void
-		{
-			
-		}
 		
 		/**
 		 * 重置Grid数据 
