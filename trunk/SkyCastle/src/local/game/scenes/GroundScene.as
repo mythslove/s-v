@@ -132,15 +132,15 @@ package local.game.scenes
 		private function updateRoadDirection( building:Building ):void
 		{
 			_roundRoadHash.clear();
-			var clsName:String = building.buildingVO.baseVO.alias;
+			var clsName:String = building.baseBuildingVO.alias;
 			var luBuilding:Building = _groundNodeHash[ (building.nodeX-1)+"-"+building.nodeZ];
 			var ruBuilding:Building = _groundNodeHash[ building.nodeX+"-"+(building.nodeZ-1)];
 			var lbBuilding:Building = _groundNodeHash[ building.nodeX+"-"+(building.nodeZ+1)];
 			var rbBuilding:Building = _groundNodeHash[ (building.nodeX+1)+"-"+building.nodeZ];
-			if( luBuilding&&luBuilding.buildingVO.baseVO.alias==clsName ) _roundRoadHash.put( "POS_LU_M",true);
-			if( ruBuilding&&ruBuilding.buildingVO.baseVO.alias==clsName ) _roundRoadHash.put( "POS_RU_M",true);
-			if( lbBuilding&&lbBuilding.buildingVO.baseVO.alias==clsName ) _roundRoadHash.put( "POS_LB_M",true);
-			if( rbBuilding&&rbBuilding.buildingVO.baseVO.alias==clsName ) _roundRoadHash.put( "POS_RB_M",true);
+			if( luBuilding&&luBuilding.baseBuildingVO.alias==clsName ) _roundRoadHash.put( "POS_LU_M",true);
+			if( ruBuilding&&ruBuilding.baseBuildingVO.alias==clsName ) _roundRoadHash.put( "POS_RU_M",true);
+			if( lbBuilding&&lbBuilding.baseBuildingVO.alias==clsName ) _roundRoadHash.put( "POS_LB_M",true);
+			if( rbBuilding&&rbBuilding.baseBuildingVO.alias==clsName ) _roundRoadHash.put( "POS_RB_M",true);
 			
 			const len:int = _roundRoadHash.size() ;
 			if(len==4||len==0) (building as Object).updateUI(M); 

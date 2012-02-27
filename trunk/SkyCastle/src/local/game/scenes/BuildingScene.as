@@ -50,7 +50,7 @@ package local.game.scenes
 			this.addIsoObject( building,isSort );
 			building.setWalkable( false , gridData );
 			//如果上面不能走
-			if( !building.buildingVO.baseVO.walkable ){ 
+			if( !building.baseBuildingVO.walkable ){ 
 				building.setWalkable(false, MapGridDataModel.instance.astarGrid );
 			}
 			return building;
@@ -83,7 +83,7 @@ package local.game.scenes
 				//更新旋转后的数据
 				building.drawGrid();
 				building.setWalkable(false,gridData);
-				if( !building.buildingVO.baseVO.walkable ){ 
+				if( !building.baseBuildingVO.walkable ){ 
 					building.setWalkable(false, MapGridDataModel.instance.astarGrid );
 				}
 				building.sort();
