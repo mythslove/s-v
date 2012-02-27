@@ -151,9 +151,9 @@ package local.game
 		protected function addBuildToScene( build:Building, isSort:Boolean=true , updateDirection:Boolean=true ):void
 		{
 			if(build.buildingVO.baseVO.layer==LayerType.BUILDING) {
-				getBuildingScene(build.nodeX,build.nodeZ).addBuilding( build );
+				getBuildingScene(build.nodeX,build.nodeZ).addBuilding( build , isSort );
 			} else if(build.buildingVO.baseVO.layer==LayerType.GROUND) {
-				getGroundScene(build.nodeX,build.nodeZ).addBuilding( build );
+				getGroundScene(build.nodeX,build.nodeZ).addBuilding( build , isSort , updateDirection );
 			}
 		}
 		
