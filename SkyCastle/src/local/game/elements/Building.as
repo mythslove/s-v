@@ -1,5 +1,6 @@
 package local.game.elements
 {
+	import local.enum.BuildingOperation;
 	import local.model.buildings.vos.BuildingVO;
 	
 	public class Building extends BaseBuilding
@@ -12,34 +13,24 @@ package local.game.elements
 		/**
 		 * 新建房子
 		 */		
-		public function sendAddBuilding():void
+		public function sendOperation( operation:String ):void
 		{
-			
+			switch( operation )
+			{
+				case BuildingOperation.ADD:
+					break ;
+				case BuildingOperation.ROTATE:
+					buildingVO.scale = scaleX ;
+					break ;
+				case BuildingOperation.STASH:
+					break ;
+				case BuildingOperation.MOVE:
+					break ;
+				case BuildingOperation.SELL :
+					break ;
+			}
 		}
 		
-		/**
-		 * 旋转建筑 
-		 */		
-		public function sendRotateBuilding():void
-		{
-			buildingVO.scale = scaleX ;
-		}
-		
-		/**
-		 * 移动建筑 
-		 */		
-		public function sendMoveBuilding():void
-		{
-			
-		}
-		
-		/**
-		 * 收藏 建筑
-		 */		
-		public function sendStashBuilding():void
-		{
-			
-		}
 		
 	}
 }
