@@ -11,36 +11,36 @@ package local.enum
 		/**
 		 * 大类：建筑 
 		 */		
-		public static const BUILDING:int = 1; 
+		public static const BUILDING:String = "building"; 
 		/** 建筑：房子*/
-		public static const BUILDING_HOUSE:int = 11 ;
+		public static const BUILDING_HOUSE:String = "house" ;
 		/** 建筑：工厂 */
-		public static const BUILDING_FACTORY:int = 12 ;
+		public static const BUILDING_FACTORY:String = "factory" ;
 		
 		
 		/**
 		 * 大类：装饰 
 		 */		
-		public static const DECORATION:int = 2;
+		public static const DECORATION:String = "decoration";
 		/** 装饰：树，树藤*/
-		public static const DEC_TREE:int = 21 ;
+		public static const DEC_TREE:String = "tree" ;
 		/** 装饰：石头 */
-		public static const DEC_STONE:int = 22 ;
+		public static const DEC_STONE:String = "stone" ;
 		/** 装饰：路，草坪，水渠 */
-		public static const DEC_ROAD:int = 23 ;
+		public static const DEC_ROAD:String = "road" ;
 		
 		
 		/**
 		 * 大类：种植 
 		 */		
-		public static const PLANT:int = 3;
+		public static const PLANT:String = "plant";
 		/** 种植：土地 */
-		public static const PLANT_LAND:int = 31 ;
+		public static const PLANT_LAND:String = "land" ;
 		/** 种植：农作物*/
-		public static const PLANT_CROP:int = 32 ;
+		public static const PLANT_CROP:String = "crop" ;
 		
 		
 		/** 大类：人*/
-		public static const CHACTERS:int = 10 ;
+		public static const CHACTERS:String = "character" ;
 	}
 }

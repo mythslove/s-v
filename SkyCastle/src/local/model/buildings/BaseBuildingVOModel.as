@@ -32,10 +32,10 @@ package local.model.buildings
 			var vos:XMLList = config.buildings[0].vo;
 			var len:int = vos.length();
 			var baseVO:BaseBuildingVO ;
-			var type:int ;
+			var type:String ;
 			for ( var i:int = 0 ; i<len ; ++i )
 			{
-				type = int(vos[i].@type) ;
+				type = String(vos[i].@type) ;
 				switch( type )
 				{
 					case BuildingType.BUILDING :
