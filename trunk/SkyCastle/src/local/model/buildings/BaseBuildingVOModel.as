@@ -59,9 +59,6 @@ package local.model.buildings
 					case BuildingType.DEC_ROAD :
 						baseVO = XMLAnalysis.createInstanceByXML( vos[i] , BaseRoadVO ,"," ) as BaseRoadVO;
 						break ;
-					case BuildingType.DEC_OTHER :
-						baseVO = XMLAnalysis.createInstanceByXML( vos[i] , BaseRoadVO ,"," ) as BaseRoadVO;
-						break ;
 					case BuildingType.PLANT :
 						baseVO = XMLAnalysis.createInstanceByXML( vos[i] , BasePlantVO ,"," ) as BasePlantVO;
 						break ;
