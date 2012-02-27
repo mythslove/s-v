@@ -114,6 +114,7 @@ package local.game
 		{
 			ContainerUtil.removeChildren(topScene);
 			topScene.visible = false  ;
+			_topBuilding = null ;
 		}
 		
 		/**
