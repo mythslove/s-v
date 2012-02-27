@@ -6,7 +6,7 @@ package local.model.buildings.vos
 	 */	
 	public class BaseRoadVO extends BaseDecorationVO
 	{
-		/** 是否还可以在此建筑上面修新的建筑 */
+		/** 是否还可以在此建筑上面修新的建筑，0为不能建，1为可以建 */
 		public var onBuildAble:int ;
 	}
 }

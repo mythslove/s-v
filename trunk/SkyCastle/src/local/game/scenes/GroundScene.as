@@ -8,6 +8,7 @@ package local.game.scenes
 	
 	import local.comm.GameSetting;
 	import local.game.elements.Building;
+	import local.model.buildings.vos.BaseRoadVO;
 	import local.model.buildings.vos.BuildingVO;
 	import local.model.map.MapGridDataModel;
 	import local.utils.BuildingFactory;
@@ -75,6 +76,10 @@ package local.game.scenes
 		{
 			this.addIsoObject( building,isSort );
 			building.setWalkable( false, gridData );
+			if( (building.baseBuildingVO as BaseRoadVO).onBuildAble==0){
+				//如果上面还不可以修建筑
+				building.setWalkable( false, MapGridDataModel.instance.buildingGrid );
+			}
 			_groundNodeHash[building.nodeX+"-"+building.nodeZ]=building;
 			if(updateDirection)updateUI(building);
 			return building;
@@ -89,6 +94,10 @@ package local.game.scenes
 		{
 			building.setWalkable( true ,  gridData  );
 			this.removeIsoObject( building );
+			if( (building.baseBuildingVO as BaseRoadVO).onBuildAble==0){
+				//如果上面还不可以修建筑
+				building.setWalkable( true , MapGridDataModel.instance.buildingGrid );
+			}
 			delete _groundNodeHash[building.nodeX+"-"+building.nodeZ];
 			if(updateDirection)	updateUI(building);
 		}
