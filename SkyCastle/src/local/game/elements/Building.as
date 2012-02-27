@@ -8,5 +8,22 @@ package local.game.elements
 		{
 			super(vo);
 		}
+		
+		public function rotateBuilding( value:int ):void
+		{
+			
+		}
+		
+		public function sellBuilding():void
+		{
+			
+		}
+		
+		public function moveBuilding():void
+		{
+			
+		}
+		
+		
 	}
 }

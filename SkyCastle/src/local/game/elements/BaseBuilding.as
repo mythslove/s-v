@@ -53,6 +53,12 @@ package local.game.elements
 			effectLayer.mouseChildren = effectLayer.mouseEnabled = false ;
 			addChild(effectLayer);
 			//加载资源
+			loadRes();
+		}
+		
+		/* 加载资源 */
+		protected function loadRes():void
+		{
 			ResourceUtil.instance.addEventListener( buildingVO.baseVO.alias , resLoadedHandler );
 			var resVO:ResVO = new ResVO( buildingVO.baseVO.alias , buildingVO.baseVO.url);
 			ResourceUtil.instance.loadRes( resVO );
