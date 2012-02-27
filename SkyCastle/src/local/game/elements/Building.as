@@ -9,21 +9,37 @@ package local.game.elements
 			super(vo);
 		}
 		
-		public function rotateBuilding( value:int ):void
+		/**
+		 * 新建房子
+		 */		
+		public function addBuilding():void
 		{
 			
 		}
 		
-		public function sellBuilding():void
+		/**
+		 * 旋转建筑 
+		 */		
+		public function rotateBuilding():void
 		{
 			
 		}
 		
+		/**
+		 * 移动建筑 
+		 */		
 		public function moveBuilding():void
 		{
 			
 		}
 		
+		/**
+		 * 收藏 建筑
+		 */		
+		public function stashBuilding():void
+		{
+			
+		}
 		
 	}
 }
