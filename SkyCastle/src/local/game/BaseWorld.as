@@ -1,6 +1,7 @@
 package local.game
 {
 	import bing.iso.*;
+	import bing.utils.ContainerUtil;
 	import bing.utils.InteractivePNG;
 	
 	import flash.display.*;
@@ -126,7 +127,6 @@ package local.game
 			else if( index==3 ) return buildingScene3 ;
 			return null ;
 		}
-		
 		
 		/**
 		 * 从场景上移除一个建筑 
