@@ -192,12 +192,8 @@ package local.game.scenes
 		{
 			for each( var obj:IsoObject in children){
 				obj.setWalkable( true , gridData );
-				if( (obj as Building).baseBuildingVO.walkable ){
-					//如果上面可以走
-					(obj as Building).setWalkable( true , MapGridDataModel.instance.astarGrid );
-				}
 				if( ((obj as Building).baseBuildingVO as BaseRoadVO).onBuildAble==0){
-					//如果上面还不可以修建筑
+					//如果上面不可以修建筑
 					(obj as Building).setWalkable( true , MapGridDataModel.instance.buildingGrid );
 				}
 			}
