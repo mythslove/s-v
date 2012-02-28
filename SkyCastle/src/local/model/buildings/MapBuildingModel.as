@@ -38,7 +38,7 @@ package local.model.buildings
 		public var crops:Array = []
 		
 		/**
-		 * 添加一个建筑到地图上 
+		 * 添加一个建筑到地图数据中 
 		 * @param vo
 		 */	
 		public function addBuilding( vo:BuildingVO ):void
@@ -51,7 +51,7 @@ package local.model.buildings
 		}
 		
 		/**
-		 * 移除一个建筑到地图
+		 * 从地图数据中移除一个建筑
 		 * @param vo
 		 */		
 		public function removeBuilding( vo:BuildingVO ):void
