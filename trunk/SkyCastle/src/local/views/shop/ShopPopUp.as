@@ -2,6 +2,7 @@ package local.views.shop
 {
 	import bing.components.button.BaseButton;
 	import bing.components.events.ToggleItemEvent;
+	import bing.utils.ContainerUtil;
 	
 	import com.greensock.TweenLite;
 	import com.greensock.easing.Back;
@@ -12,6 +13,7 @@ package local.views.shop
 	import local.comm.GameSetting;
 	import local.utils.PopUpManager;
 	import local.views.BaseView;
+	import local.views.shop.panels.ShopBuildingPanel;
 
 	/**
 	 * 商店弹窗 
@@ -38,6 +40,7 @@ package local.views.shop
 			
 			tabMenu.addEventListener(ToggleItemEvent.ITEM_SELECTED , tabMenuHandler , false , 0 , true ) ;
 			btnClose.addEventListener( MouseEvent.CLICK , closeClickHandler , false , 0 , true );
+			tabMenu.selectedName = tabMenu.btnBuilding.name;
 		}
 		
 		private function tabMenuHandler( e:ToggleItemEvent):void {
@@ -47,7 +50,13 @@ package local.views.shop
 		public function set selectedName( value :String ):void
 		{
 			_selectedName = value ;
-			
+			ContainerUtil.removeChildren( container );
+			switch( value )
+			{
+				case tabMenu.btnBuilding.name:
+					container.addChild( new ShopBuildingPanel());
+					break ;
+			}
 		}
 		
 		
