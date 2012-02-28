@@ -69,6 +69,23 @@ package local.utils
 		}
 		
 		/**
+		 * 判断当前是操作建筑的状态
+		 * @return
+		 */		
+		public function checkControl():Boolean
+		{
+			if( _mouseStatus==MouseStatus.MOVE_BUILDING || 
+				mouseStatus==MouseStatus.UPDATE_HOUSE ||
+				mouseStatus==MouseStatus.ROTATE_BUILDING||
+				mouseStatus==MouseStatus.SELL_BUILDING||
+				mouseStatus==MouseStatus.STASH_BUILDING)
+			{
+				return true ;
+			}
+			return false ;
+		}
+		
+		/**
 		 * 添加跟随鼠标移动的icon 
 		 * @param icon
 		 */		
