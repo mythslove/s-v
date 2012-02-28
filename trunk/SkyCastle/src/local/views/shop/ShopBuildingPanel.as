@@ -1,4 +1,4 @@
-package local.views.shop.panels
+package local.views.shop
 {
 	import bing.components.button.BaseButton;
 	import bing.components.events.ToggleItemEvent;
@@ -6,6 +6,7 @@ package local.views.shop.panels
 	import flash.display.Sprite;
 	
 	import local.views.BaseView;
+	import local.views.shop.subtab.ShopSubBuildingTabBar;
 
 	/**
 	 * 商店中的建筑面板

@@ -1,4 +1,4 @@
-package local.views.shop.panels
+package local.views.shop.subtab
 {
 	import bing.components.button.BaseToggleButton;
 	import bing.components.button.ToggleBar;
