@@ -1,6 +1,7 @@
 package local.views.shop
 {
 	import bing.components.button.BaseButton;
+	import bing.components.events.ToggleItemEvent;
 	
 	import com.greensock.TweenLite;
 	import com.greensock.easing.Back;
@@ -22,6 +23,7 @@ package local.views.shop
 		public var container:Sprite ;
 		public var btnClose:BaseButton;
 		//==============================
+		private var _selectedName:String ;
 		
 		public function ShopPopUp()
 		{
@@ -34,8 +36,20 @@ package local.views.shop
 			y = GameSetting.SCREEN_HEIGHT>>1;
 			TweenLite.from(this,0.5,{x:-width , ease:Back.easeOut });
 			
+			tabMenu.addEventListener(ToggleItemEvent.ITEM_SELECTED , tabMenuHandler , false , 0 , true ) ;
 			btnClose.addEventListener( MouseEvent.CLICK , closeClickHandler , false , 0 , true );
 		}
+		
+		private function tabMenuHandler( e:ToggleItemEvent):void {
+			selectedName = tabMenu.selectedName ;
+		}
+		
+		public function set selectedName( value :String ):void
+		{
+			_selectedName = value ;
+			
+		}
+		
 		
 		private function closeClickHandler( e:MouseEvent ):void
 		{
