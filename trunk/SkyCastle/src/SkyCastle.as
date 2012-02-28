@@ -12,7 +12,7 @@ package
 	import local.views.CenterViewContainer;
 	import local.views.LeftBar;
 	
-	[SWF( width="760",height="620",backgroundColor="#ffffff")]
+	[SWF( width="760",height="640",backgroundColor="#ffffff")]
 	public class SkyCastle extends BaseGame
 	{
 		/**
