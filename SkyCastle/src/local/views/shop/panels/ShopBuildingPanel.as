@@ -1,7 +1,6 @@
 package local.views.shop.panels
 {
 	import bing.components.button.BaseButton;
-	import bing.components.button.ToggleBar;
 	import bing.components.events.ToggleItemEvent;
 	
 	import flash.display.Sprite;
@@ -16,8 +15,8 @@ package local.views.shop.panels
 	{
 		public var tabMenu:ShopSubBuildingTabBar ;
 		public var container:Sprite;
-		public var btnPrevButton:BaseButton;
-		public var btnNextButton:BaseButton;
+		public var btnPrevPage:BaseButton;
+		public var btnNextPage:BaseButton;
 		//===================================
 		private var _selectedName:String ; 
 		
@@ -28,13 +27,8 @@ package local.views.shop.panels
 		
 		override protected function added():void
 		{
+			tabMenu.addEventListener( ToggleItemEvent.ITEM_SELECTED , tabMenuHandler , false , 0 , true ) ;
 			tabMenu.selectedName = tabMenu.btnAll.name ;
-			configListeners();	
-		}
-		
-		private function configListeners():void
-		{
-			tabMenu.addEventListener( ToggleItemEvent.ITEM_SELECTED , tabMenuHandler , false , 0 , true )
 		}
 		
 		private function tabMenuHandler( e:ToggleItemEvent ):void
@@ -51,13 +45,9 @@ package local.views.shop.panels
 			}
 		}
 		
-		private function removeListeners():void
-		{
-			
-		}
 		override protected function removed():void
 		{
-			
+			tabMenu.removeEventListener( ToggleItemEvent.ITEM_SELECTED , tabMenuHandler );
 		}
 	}
 }
