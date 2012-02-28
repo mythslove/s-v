@@ -160,7 +160,7 @@ import local.comm.GlobalEvent;
  */	
 class PopupMask extends Sprite
 {
-	public function PopupMask( color:uint=0 , alpha:Number =1 )
+	public function PopupMask( color:uint=0 , alpha:Number =0 )
 	{
 		super();
 		this.graphics.beginFill( color , alpha );
