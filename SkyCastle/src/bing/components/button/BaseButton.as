@@ -76,6 +76,15 @@
 				}
 			}
 		}
+		
+		override protected function removedFromStage():void
+		{
+			super.removedFromStage();
+			this.removeEventListener(MouseEvent.MOUSE_OVER , mouseEventHandler );
+			this.removeEventListener(MouseEvent.MOUSE_UP , mouseEventHandler);
+			this.removeEventListener(MouseEvent.MOUSE_DOWN , mouseEventHandler );
+			this.removeEventListener(MouseEvent.MOUSE_OUT , mouseEventHandler);
+		}
 	}
 
 }

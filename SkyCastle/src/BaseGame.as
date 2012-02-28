@@ -43,16 +43,6 @@ package
 		}
 		
 		/**
-		 * 窗口大小变化 
-		 * @param e
-		 */		
-		protected function onResizeHandler(e:Event):void
-		{
-			e.stopPropagation();
-			GlobalDispatcher.instance.dispatchEvent( new GlobalEvent(GlobalEvent.RESIZE));
-		}
-		
-		/**
 		 * 添加进度条 
 		 */		
 		protected function addLoading():void
@@ -130,6 +120,16 @@ package
 		{
 			stage.addEventListener(Event.RESIZE , onResizeHandler);
 			stage.addEventListener(FullScreenEvent.FULL_SCREEN , onResizeHandler);
+		}
+		
+		/**
+		 * 窗口大小变化 
+		 * @param e
+		 */		
+		protected function onResizeHandler(e:Event):void
+		{
+			e.stopPropagation();
+			GlobalDispatcher.instance.dispatchEvent( new GlobalEvent(GlobalEvent.RESIZE));
 		}
 	}
 }
