@@ -33,10 +33,8 @@
 			this.mouseEnabled = value;
 			if (value) {
 				this.gotoAndStop("up");
-				this.alpha=1;
 			} else {
 				this.gotoAndStop("disabled");
-				this.alpha=0.7;
 			}
 		}
 
