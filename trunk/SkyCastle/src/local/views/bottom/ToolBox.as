@@ -2,14 +2,14 @@ package local.views.bottom
 {
 	import bing.components.button.BaseButton;
 	
-	import local.comm.GameData;
-	
-	import local.enum.BuildingOperation;
-	
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
+	import local.comm.GameData;
+	import local.enum.BuildingOperation;
+	import local.utils.PopUpManager;
+	import local.views.shop.ShopPopUp;
 	import local.views.tooltip.GameToolTip;
 	
 	public class ToolBox extends Sprite
@@ -70,6 +70,10 @@ package local.views.bottom
 					break ;
 				case btnCancelTool:
 					GameData.buildingCurrOperation=BuildingOperation.NONE ;
+					break ;
+				case btnShopTool:
+					var shopPop:ShopPopUp = new ShopPopUp();
+					PopUpManager.instance.addQueuePopUp( shopPop );
 					break ;
 			}
 		}
