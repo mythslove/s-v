@@ -25,7 +25,6 @@ package local.views.shop
 		public var container:Sprite ;
 		public var btnClose:BaseButton;
 		//==============================
-		private var _selectedName:String ;
 		
 		public function ShopPopUp()
 		{
@@ -43,22 +42,16 @@ package local.views.shop
 			tabMenu.selectedName = tabMenu.btnBuilding.name;
 		}
 		
-		private function tabMenuHandler( e:ToggleItemEvent):void {
-			selectedName = tabMenu.selectedName ;
-		}
-		
-		public function set selectedName( value :String ):void
+		private function tabMenuHandler( e:ToggleItemEvent):void 
 		{
-			_selectedName = value ;
 			ContainerUtil.removeChildren( container );
-			switch( value )
+			switch(  e.selectedName )
 			{
 				case tabMenu.btnBuilding.name:
 					container.addChild( new ShopBuildingPanel());
 					break ;
 			}
 		}
-		
 		
 		private function closeClickHandler( e:MouseEvent ):void
 		{

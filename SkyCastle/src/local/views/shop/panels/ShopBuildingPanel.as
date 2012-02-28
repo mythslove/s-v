@@ -18,7 +18,6 @@ package local.views.shop.panels
 		public var btnPrevPage:BaseButton;
 		public var btnNextPage:BaseButton;
 		//===================================
-		private var _selectedName:String ; 
 		
 		public function ShopBuildingPanel()
 		{
@@ -31,15 +30,9 @@ package local.views.shop.panels
 			tabMenu.selectedName = tabMenu.btnAll.name ;
 		}
 		
-		private function tabMenuHandler( e:ToggleItemEvent ):void
+		private function tabMenuHandler( e:ToggleItemEvent ):void 
 		{
-			selectedName = e.selectedName ;
-		}
-		
-		public function set selectedName( value :String ):void
-		{
-			_selectedName = value ;
-			switch( name)
+			switch( e.selectedName)
 			{
 				
 			}
