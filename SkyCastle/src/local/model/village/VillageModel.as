@@ -1,5 +1,9 @@
 package local.model.village
 {
+	import bing.utils.Guid;
+	
+	import local.comm.GlobalDispatcher;
+	import local.events.UserInfoEvent;
 	import local.model.village.vos.PlayerVO;
 
 	public class VillageModel
@@ -25,6 +29,22 @@ package local.model.village
 		public function inviteFriendVillage( id:String ):void
 		{
 			
+		}
+		
+		/**
+		 * 获取玩家的信息 
+		 */		
+		public function getMeInfo():void
+		{
+			me = new PlayerVO();
+			me.cash = 100;
+			me.coin = 10 ;
+			me.exp = 1;
+			me.maxExp = 10 ;
+			me.level = 1;
+			me.id = Guid.create();
+			me.name = "binghe";
+			GlobalDispatcher.instance.dispatchEvent( new UserInfoEvent(UserInfoEvent.USER_INFO_UPDATED));
 		}
 	}
 }
