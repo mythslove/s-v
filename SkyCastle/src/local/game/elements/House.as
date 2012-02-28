@@ -1,5 +1,7 @@
 package local.game.elements
 {
+	import local.enum.BuildingStatus;
+	import local.game.scenes.BuildingScene;
 	import local.model.buildings.vos.BaseHouseVO;
 	import local.model.buildings.vos.BuildingVO;
 
@@ -13,9 +15,21 @@ package local.game.elements
 		{
 			super(vo);
 		}
+		
 		/** 获取此建筑的基础VO */
 		public function get baseHouseVO():BaseHouseVO{
 			return buildingVO.baseVO as BaseHouseVO ;
+		}
+		
+		override public function onClick():void
+		{
+			switch( buildingVO.buildingStatus )
+			{
+				case BuildingStatus.PRODUCTION:
+					break;
+				case BuildingStatus.PRODUCT_COMPLETE :
+					break ;
+			}
 		}
 	}
 }
