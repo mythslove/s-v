@@ -81,5 +81,22 @@ package bing.components.button
 				( event.target as BaseToggleButton).enabled = false ;
 			}
 		}
+		
+		override protected function removedFromStage():void
+		{
+			var btn:BaseToggleButton ;
+			var obj:DisplayObject ;
+			const LEN:int = this.numChildren ;
+			for( var i:int = 0 ; i < LEN ; i++){
+				obj = this.getChildAt(i);
+				if(obj is BaseToggleButton)
+				{
+					btn = obj as BaseToggleButton ;
+					if(!btn.hasEventListener(MouseEvent.CLICK)){
+						btn.removeEventListener(MouseEvent.CLICK , btnClickHandler );
+					}
+				}
+			}
+		}
 	}
 }

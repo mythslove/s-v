@@ -145,12 +145,14 @@ package local.utils
 
 //-----------------------------------------------------------**
 //-----------------------------------------------------------**/
+import flash.display.Sprite;
+import flash.display.StageDisplayState;
+import flash.events.Event;
+import flash.geom.Point;
+
 import local.comm.GameSetting;
 import local.comm.GlobalDispatcher;
 import local.comm.GlobalEvent;
-
-import flash.display.Sprite;
-import flash.events.Event;
 
 /**
  * popup窗口弹出时，遮挡下面的内容 
@@ -171,19 +173,28 @@ class PopupMask extends Sprite
 	private function addedToStageHandler(e:Event):void
 	{
 		removeEventListener(Event.ADDED_TO_STAGE , addedToStageHandler);
-		this.x = -parent.x ;
-		this.y = -parent.y ;
+		if(stage.displayState==StageDisplayState.NORMAL){
+			x = y = 0 ;
+		}else{
+			var localPoint:Point = globalToLocal( new Point());
+			this.x = localPoint.x ;
+			this.y = localPoint.y ;
+		}
 		this.width = stage.stageWidth ;
 		this.height = stage.stageHeight;
-		
 		GlobalDispatcher.instance.addEventListener( GlobalEvent.RESIZE , onResizeHandler );
 		addEventListener(Event.REMOVED_FROM_STAGE , removedFromStageHandler);
 	}
 	
 	private function onResizeHandler(e:GlobalEvent):void
 	{
-		this.x = -parent.x ;
-		this.y = -parent.y ;
+		if(stage.displayState==StageDisplayState.NORMAL){
+			x = y = 0 ;
+		}else{
+			var localPoint:Point = globalToLocal( new Point());
+			this.x = localPoint.x ;
+			this.y = localPoint.y ;
+		}
 		this.width = stage.stageWidth ;
 		this.height = stage.stageHeight;
 	}
