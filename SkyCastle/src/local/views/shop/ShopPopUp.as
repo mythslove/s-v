@@ -13,7 +13,6 @@ package local.views.shop
 	import local.comm.GameSetting;
 	import local.utils.PopUpManager;
 	import local.views.BaseView;
-	import local.views.shop.panels.ShopBuildingPanel;
 
 	/**
 	 * 商店弹窗 
