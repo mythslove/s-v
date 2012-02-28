@@ -7,30 +7,32 @@ package local.views.base
 	import flash.events.Event;
 	
 	import local.utils.ResourceUtil;
+	import local.views.BaseView;
 	
-	public class Thumb extends Bitmap
+	public class Image extends BaseView
 	{
 		private var _resId:String;
 		private var _url:String;
+		private var _bitmap:Bitmap;
+		private var _isCenter:Boolean;
+		private var _showLoading:Boolean;
 		
 		/**
 		 * @param resId
 		 * @param url
 		 * @param tempBmd 加载时临时显示的图像
 		 */		
-		public function Thumb( resId:String , url:String , tempBmd:BitmapData = null )
+		public function Image( resId:String , url:String , isCenter:Boolean = true , showLoading:Boolean= true )
 		{
 			super();
 			this._resId = resId ;
 			this._url = url ;
-			this.bitmapData = tempBmd ;
-			addEventListener(Event.ADDED_TO_STAGE , added );
+			this._isCenter = isCenter; 
+			this._showLoading = showLoading ;
 		}
 		
-		private function added(e:Event):void
+		override protected function added():void
 		{
-			removeEventListener(Event.ADDED_TO_STAGE , added);
-			addEventListener(Event.REMOVED_FROM_STAGE , removed );
 			
 			//加载图片资源
 			ResourceUtil.instance.addEventListener( _resId , loadedHandler );
@@ -39,14 +41,18 @@ package local.views.base
 		
 		private function loadedHandler(e:Event):void
 		{
-			ResourceUtil.instance.removeEventListener( _resId , loadedHandler );
-			this.bitmapData=ResourceUtil.instance.getResVOByResId(_resId).resObject as BitmapData;
+			_bitmap = new Bitmap(ResourceUtil.instance.getResVOByResId(_resId).resObject as BitmapData);\
+			if(_isCenter){
+				_bitmap.x = -_bitmap.width>>1;
+				_bitmap.y = - _bitmap.height>>1;
+			}
+			addChild(_bitmap);
 		}
 		
-		private function removed(e:Event):void
+		override protected function removed():void
 		{
-			removeEventListener( Event.REMOVED_FROM_STAGE , removed );
 			ResourceUtil.instance.removeEventListener( _resId , loadedHandler );
+			_bitmap = null ;
 		}
 	}
 }
