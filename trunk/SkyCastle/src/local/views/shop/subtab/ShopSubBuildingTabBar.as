@@ -12,6 +12,9 @@ package local.views.shop.subtab
 		public var btnHouse:BaseToggleButton;
 		public var btnFactory:BaseToggleButton;
 		//================================
+		public static const BTN_ALL:String = "btnAll";
+		public static const BTN_HOUSE:String = "btnHouse";
+		public static const BTN_FACTOR:String = "btnFactory";
 		
 		public function ShopSubBuildingTabBar()
 		{

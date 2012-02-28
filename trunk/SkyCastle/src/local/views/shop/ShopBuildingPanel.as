@@ -1,12 +1,12 @@
 package local.views.shop
 {
 	import bing.components.button.BaseButton;
-	import bing.components.events.ToggleItemEvent;
+	import bing.utils.ContainerUtil;
 	
 	import flash.display.Sprite;
 	
+	import local.model.buildings.vos.BuildingVO;
 	import local.views.BaseView;
-	import local.views.shop.subtab.ShopSubBuildingTabBar;
 
 	/**
 	 * 商店中的建筑面板
@@ -14,34 +14,31 @@ package local.views.shop
 	 */	
 	public class ShopBuildingPanel extends BaseView
 	{
-		public var tabMenu:ShopSubBuildingTabBar ;
 		public var container:Sprite;
 		public var btnPrevPage:BaseButton;
 		public var btnNextPage:BaseButton;
 		//===================================
+		
+		private var _dataProvider:Vector.<BuildingVO>; 
+		
+		private var _totalPage:int ;
+		private var _page:int ;
 		
 		public function ShopBuildingPanel()
 		{
 			super();
 		}
 		
-		override protected function added():void
+		
+		public function set dataProvider( value:Vector.<BuildingVO> ):void
 		{
-			tabMenu.addEventListener( ToggleItemEvent.ITEM_SELECTED , tabMenuHandler , false , 0 , true ) ;
-			tabMenu.selectedName = tabMenu.btnAll.name ;
+			
 		}
 		
-		private function tabMenuHandler( e:ToggleItemEvent ):void 
+		public function clear():void
 		{
-			switch( e.selectedName)
-			{
-				
-			}
-		}
-		
-		override protected function removed():void
-		{
-			tabMenu.removeEventListener( ToggleItemEvent.ITEM_SELECTED , tabMenuHandler );
+			_page = 0 ;
+			ContainerUtil.removeChildren(container);
 		}
 	}
 }

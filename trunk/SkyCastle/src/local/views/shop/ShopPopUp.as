@@ -1,6 +1,7 @@
 package local.views.shop
 {
 	import bing.components.button.BaseButton;
+	import bing.components.button.ToggleBar;
 	import bing.components.events.ToggleItemEvent;
 	import bing.utils.ContainerUtil;
 	
@@ -13,6 +14,7 @@ package local.views.shop
 	import local.comm.GameSetting;
 	import local.utils.PopUpManager;
 	import local.views.BaseView;
+	import local.views.shop.subtab.ShopSubBuildingTabBar;
 
 	/**
 	 * 商店弹窗 
@@ -24,10 +26,13 @@ package local.views.shop
 		public var container:Sprite ;
 		public var btnClose:BaseButton;
 		//==============================
+		private var _subTabBar:ToggleBar ;
+		private var _buildingPanel:ShopBuildingPanel; 
 		
 		public function ShopPopUp()
 		{
 			super();
+			_buildingPanel = new ShopBuildingPanel() ;
 		}
 		
 		override protected function added():void
@@ -43,12 +48,44 @@ package local.views.shop
 		
 		private function tabMenuHandler( e:ToggleItemEvent):void 
 		{
+			//先清除
+			_buildingPanel.clear();
+			if(_subTabBar){
+				_subTabBar.removeEventListener(ToggleItemEvent.ITEM_SELECTED , subTabMenuHandler );
+			}
 			ContainerUtil.removeChildren( container );
 			switch(  e.selectedName )
 			{
 				case tabMenu.btnBuilding.name:
-					container.addChild( new ShopBuildingPanel());
+					container.addChild(_buildingPanel) ;
+					_subTabBar = new ShopSubBuildingTabBar();
+					_subTabBar.x = 20 ;
+					_subTabBar.addEventListener(ToggleItemEvent.ITEM_SELECTED , subTabMenuHandler , false , 0, true );
+					container.addChild( _subTabBar);
+					_subTabBar.selectedName = ShopSubBuildingTabBar.BTN_ALL;
 					break ;
+			}
+			
+		}
+		
+		private function subTabMenuHandler( e:ToggleItemEvent ):void
+		{
+			if(tabMenu.selectedName==tabMenu.btnBuilding.name)
+			{
+				switch( e.selectedName )
+				{
+					case ShopSubBuildingTabBar.BTN_ALL:
+//						_buildingPanel.dataProvider = null ;
+						break ;
+					case ShopSubBuildingTabBar.BTN_HOUSE:
+						break ;
+					case ShopSubBuildingTabBar.BTN_FACTOR:
+						break ;
+				}
+			}
+			else if( tabMenu.selectedName==tabMenu.btnDecoration.name)
+			{
+				
 			}
 		}
 		
@@ -66,6 +103,10 @@ package local.views.shop
 		override protected function removed():void
 		{
 			btnClose.removeEventListener( MouseEvent.CLICK , closeClickHandler);
+			if(_subTabBar){
+				_subTabBar.removeEventListener(ToggleItemEvent.ITEM_SELECTED , subTabMenuHandler );
+			}
+			_buildingPanel = null ;
 		}
 	}
 }
