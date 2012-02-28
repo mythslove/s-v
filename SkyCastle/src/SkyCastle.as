@@ -8,6 +8,7 @@ package
 	import local.game.GameWorld;
 	import local.model.buildings.vos.*;
 	import local.model.village.VillageModel;
+	import local.model.village.vos.PlayerVO;
 	import local.views.CenterViewContainer;
 	import local.views.LeftBar;
 	
@@ -25,13 +26,20 @@ package
 			stage.showDefaultContextMenu = false ;
 		}
 		
+		override protected function init():void
+		{
+			//获取参数
+			var params:Object = loaderInfo.parameters ;
+			//注册vo
+			registerVOs();
+		}
+		
 		/**
-		 * 重写父类方法
+		 * 资源下载完成
 		 */		
 		override protected function inited():void
 		{
 			super.inited();
-			registerVOs();
 			GlobalDispatcher.instance.addEventListener(UserInfoEvent.USER_INFO_UPDATED , getMeInfoHandler );
 			VillageModel.instance.getMeInfo() ;
 		}
@@ -41,8 +49,18 @@ package
 		 */		
 		private function registerVOs():void
 		{
-			registerClassAlias("local.model.buildings.vos.BuildingBaseVO",BaseBuildingVO) ;
+			registerClassAlias("local.model.buildings.vos.BaseBuildingVO",BaseBuildingVO) ;
+			registerClassAlias("local.model.buildings.vos.BaseCharacterVO",BaseCharacterVO) ;
+			registerClassAlias("local.model.buildings.vos.BaseCropVO",BaseCropVO) ;
+			registerClassAlias("local.model.buildings.vos.BaseDecorationVO",BaseDecorationVO) ;
+			registerClassAlias("local.model.buildings.vos.BaseFactoryVO",BaseFactoryVO) ;
+			registerClassAlias("local.model.buildings.vos.BaseHouseVO",BaseHouseVO) ;
+			registerClassAlias("local.model.buildings.vos.BaseLandVO",BaseLandVO) ;
+			registerClassAlias("local.model.buildings.vos.BaseRoadVO",BaseRoadVO) ;
+			registerClassAlias("local.model.buildings.vos.BaseStoneVO",BaseStoneVO) ;
+			registerClassAlias("local.model.buildings.vos.BaseTreeVO",BaseTreeVO) ;
 			registerClassAlias("local.model.buildings.vos.BuildingVO",BuildingVO) ;
+			registerClassAlias("local.model.village.vos.PlayerVO",PlayerVO) ;
 		}
 		
 		/*获得了玩家信息后，进入游戏*/
