@@ -295,7 +295,7 @@ package local.game
 			if(_topBuilding.nodeX!=p.x || _topBuilding.nodeZ!=p.y) {
 				_topBuilding.nodeX = p.x ;
 				_topBuilding.nodeZ= p.y ;
-				_topBuilding.gridLayer.updateBuildingGridLayer( p.x, p.y , _topBuilding.buildingVO.baseVO.layer );
+				_topBuilding.gridLayer.updateBuildingGridLayer( p.x, p.y , _topBuilding.baseBuildingVO.layer );
 			}
 		}
 	}
