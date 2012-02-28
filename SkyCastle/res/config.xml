@@ -3,15 +3,15 @@
 	<buildings>
 
 		<vo baseId="1" name="MoreCity PathCobblestone" description="MoreCity PathCobblestone"
-			type="stone" onBuildAble="1" alias="MoreCity_PathCobblestone" xSpan="1"
+			type="road" onBuildAble="1" alias="MoreCity_PathCobblestone" xSpan="1"
 			zSpan="1" layer="1" url="res/road/MoreCity_PathCobblestone.swf"
 			thumb="res/road/MoreCity_PathCobblestoneThumb.png" maxLevel="1"
 			walkable="1" />
 
 		<vo baseId="2" name="HallOfHeroes Ruin" earnCoin="1" earnExp="1"
 			earnTime="300" earnWood="1" earnStone="1" buildStep="3"
-			description="MoreCity PathCobblestone" type="road" xSpan="2" zSpan="3"
-			layer="1" maxLevel="1" walkable="0"
+			description="MoreCity PathCobblestone" type="house" xSpan="2" zSpan="3"
+			layer="2" maxLevel="1" walkable="0"
 			url="res/house/Basic_HallOfHeroes_Ruin.swf" alias="Basic_HallOfHeroes_Ruin"
 			buildSpendEnery="1,1,1" buildWood="4" buildStone="3"
 			thumb="res/house/Basic_HallOfHeroes_RuinThumb.png" />

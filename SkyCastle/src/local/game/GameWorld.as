@@ -4,6 +4,7 @@ package local.game
 	import bing.utils.ContainerUtil;
 	import bing.utils.ObjectUtil;
 	
+	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	
@@ -13,6 +14,8 @@ package local.game
 	import local.game.elements.Building;
 	import local.model.buildings.vos.BuildingVO;
 	import local.model.map.MapGridDataModel;
+	import local.model.shop.ShopModel;
+	import local.utils.BuildingFactory;
 
 	public class GameWorld extends BaseWorld
 	{
@@ -22,6 +25,12 @@ package local.game
 			return _instance ;
 		}
 		//------------------------------------------------------------
+		
+		override protected function addedToStageHandler(e:Event):void
+		{
+			super.addedToStageHandler(e);
+			addBuildingToTop( BuildingFactory.createBuildingByVO( ShopModel.instance.roadArray[0] ));
+		}
 		
 		//用于缓存移动的建筑的上次位置
 		private var _cacheBuildPos:Point = new Point();
@@ -38,7 +47,7 @@ package local.game
 				{
 					var vo:BuildingVO = ObjectUtil.copyObj(_topBuilding.buildingVO) as BuildingVO ;
 					var addedBuilding:Building = addBuildingByVO( _topBuilding.nodeX , _topBuilding.nodeZ ,vo );
-					_mouseOverBuild.sendOperation(BuildingOperation.ADD); //发送添加到地图上的消息到服务器
+					_topBuilding.sendOperation(BuildingOperation.ADD); //发送添加到地图上的消息到服务器
 					_topBuilding.gridLayer.updateBuildingGridLayer(_topBuilding.nodeX , _topBuilding.nodeZ , vo.baseVO.layer );
 				}
 			}
@@ -54,27 +63,23 @@ package local.game
 					}
 				}
 			}
-			else if( GameData.buildingCurrOperation==BuildingOperation.MOVE) //移动
+			else if( GameData.buildingCurrOperation==BuildingOperation.MOVE) //移动时点击地面
 			{
 				if(_topBuilding){
-					if(_mouseOverBuild){
-						_cacheBuildPos.x = _mouseOverBuild.nodeX ;
-						_cacheBuildPos.y = _mouseOverBuild.nodeZ ;
-						removeBuildFromScene( _mouseOverBuild ); //从场景上先移除
-						_mouseOverBuild.selectedStatus(false); //选择设置成false
-						addBuildingToTop( _mouseOverBuild );  //添加在鼠标容器上移动
-						_mouseOverBuild.drawGrid(); //画建筑网格
-						_mouseOverBuild = null ;
-					}
-				}else {
-					if( _topBuilding && _topBuilding.gridLayer && _topBuilding.gridLayer.getWalkable() )
+					if( _topBuilding.gridLayer.getWalkable() )
 					{
-						_topBuilding.removeGrid(); //移除建筑网格
-						_topBuilding.itemLayer.alpha=1;
 						addBuildToScene( _topBuilding );//添加到场景上
-						_mouseOverBuild.sendOperation(BuildingOperation.STASH); //发送移动建筑的消息
-						ContainerUtil.removeChildren( topScene) ; //清除鼠标
+						_topBuilding.sendOperation(BuildingOperation.MOVE); //发送移动建筑的消息
+						clearTopScene();
 					}
+				}
+				else if(_mouseOverBuild)
+				{
+					_cacheBuildPos.x = _mouseOverBuild.nodeX ;
+					_cacheBuildPos.y = _mouseOverBuild.nodeZ ;
+					removeBuildFromScene( _mouseOverBuild ); //从场景上先移除
+					addBuildingToTop( _mouseOverBuild );  //添加在鼠标容器上移动
+					_mouseOverBuild = null ;
 				}
 			}
 			else if(GameData.buildingCurrOperation==BuildingOperation.STASH) //收藏
@@ -119,7 +124,10 @@ package local.game
 		public function addBuildingToTop( building:Building ):void
 		{
 			_topBuilding = building ;
-			topScene.addIsoObject( _topBuilding , false );
+			building.drawGrid();
+			topScene.addIsoObject( building , false );
+			building.itemLayer.alpha = 0.5 ;
+			building.selectedStatus(false); //选择设置成false
 			topScene.visible = true  ;
 		}
 		
@@ -130,6 +138,10 @@ package local.game
 		{
 			ContainerUtil.removeChildren(topScene);
 			topScene.visible = false  ;
+			if(_topBuilding){
+				_topBuilding.removeGrid();
+				_topBuilding.itemLayer.alpha = 1;
+			}
 			_topBuilding = null ;
 		}
 		

@@ -34,6 +34,14 @@ package local.game.elements
 			super(GameSetting.GRID_SIZE , vo.baseVO.xSpan , vo.baseVO.zSpan );
 			this.buildingVO = vo ;
 			mouseEnabled = false ;
+			
+			itemLayer = new InteractivePNG(); //添加皮肤容器层
+			itemLayer.mouseChildren = false ;
+			addChild(itemLayer);
+			effectLayer = new Sprite(); //添加特效层
+			effectLayer.mouseChildren = effectLayer.mouseEnabled = false ;
+			addChild(effectLayer);
+			
 			this.addEventListener(Event.ADDED_TO_STAGE , addedToStageHandler , false , 0 , true );
 		}
 		
@@ -46,12 +54,6 @@ package local.game.elements
 		protected function addedToStageHandler( e:Event ):void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE , addedToStageHandler );
-			itemLayer = new InteractivePNG(); //添加皮肤容器层
-			itemLayer.mouseChildren = false ;
-			addChild(itemLayer);
-			effectLayer = new Sprite(); //添加特效层
-			effectLayer.mouseChildren = effectLayer.mouseEnabled = false ;
-			addChild(effectLayer);
 			//加载资源
 			loadRes();
 		}

@@ -37,7 +37,7 @@ package local.game.cell
 			var points:Vector.<Vector3D> = _build.spanPosition ;
 			for each( var point:Vector3D in points)
 			{
-				var rhomebus:BuildingGridRhombus = new BuildingGridRhombus(point.x/GameSetting.GRID_SIZE,point.z/GameSetting.GRID_SIZE );
+				var rhomebus:BuildingGridRhombus = new BuildingGridRhombus((point.x-_build.x)/GameSetting.GRID_SIZE,(point.z-_build.z)/GameSetting.GRID_SIZE );
 				var p:Vector3D = point.clone();
 				p.x -=_build.x;
 				p.z -=_build.z ;
