@@ -25,13 +25,6 @@ package local.game
 			return _instance ;
 		}
 		//------------------------------------------------------------
-		
-		override protected function addedToStageHandler(e:Event):void
-		{
-			super.addedToStageHandler(e);
-			addBuildingToTop( BuildingFactory.createBuildingByVO( ShopModel.instance.roadArray[0] ));
-		}
-		
 		//用于缓存移动的建筑的上次位置
 		private var _cacheBuildPos:Point = new Point();
 		
