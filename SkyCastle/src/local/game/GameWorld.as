@@ -89,8 +89,13 @@ package local.game
 			else if(GameData.buildingCurrOperation==BuildingOperation.SELL) //卖出
 			{
 				if(_mouseOverBuild){
+					//弹出卖出窗口
 					_mouseOverBuild = null ;
 				}
+			}
+			else if(_mouseOverBuild)
+			{
+				_mouseOverBuild.onClick() ;
 			}
 		}
 		

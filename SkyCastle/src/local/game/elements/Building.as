@@ -3,7 +3,7 @@ package local.game.elements
 	import local.enum.BuildingOperation;
 	import local.model.buildings.vos.BuildingVO;
 	
-	public class Building extends BaseBuilding
+	public class Building extends InteractiveBuilding
 	{
 		public function Building(vo:BuildingVO)
 		{

@@ -8,7 +8,7 @@ package local.game.elements
 	 * 地图上的人 
 	 * @author zzhanglin
 	 */	
-	public class Character extends BaseBuilding
+	public class Character extends InteractiveBuilding
 	{
 		public function Character(vo:BuildingVO)
 		{

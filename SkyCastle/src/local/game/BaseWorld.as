@@ -246,9 +246,8 @@ package local.game
 				case MouseEvent.MOUSE_OVER:
 					if( !_topBuilding && e.target is InteractivePNG){
 						_mouseOverBuild = (e.target as InteractivePNG).parent as Building;
-						_mouseOverBuild.selectedStatus( true );
-						var baseVO:BaseBuildingVO = _mouseOverBuild.buildingVO.baseVO;
-						_tooltip.showTooltip(baseVO.description , baseVO.name );
+						_mouseOverBuild.onMouseOver() ;
+						_tooltip.showTooltip(_mouseOverBuild.baseBuildingVO.description , _mouseOverBuild.baseBuildingVO.name );
 					}
 					break;
 				case MouseEvent.MOUSE_UP:
@@ -259,7 +258,7 @@ package local.game
 					_mapIsMove = false ;
 					_tooltip.hideTooltip();
 					if(e.type!=MouseEvent.MOUSE_UP && _mouseOverBuild){
-						_mouseOverBuild.selectedStatus( false );
+						_mouseOverBuild.onMouseOut();
 						_mouseOverBuild = null ;
 					}
 					break;
