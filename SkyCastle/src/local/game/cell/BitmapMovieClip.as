@@ -2,7 +2,6 @@ package local.game.cell
 {
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
-	import flash.display.DisplayObjectContainer;
 	import flash.display.MovieClip;
 	import flash.geom.Matrix;
 	import flash.geom.Rectangle;
@@ -20,12 +19,9 @@ package local.game.cell
 		protected var _mc:MovieClip;
 		
 		protected var _bound:Rectangle =new Rectangle() ;
-		public function getBound( target:DisplayObjectContainer ):Rectangle
+		public function getBound():Rectangle
 		{
-			var rect:Rectangle = _bound.clone();
-			rect.x-=target.x ;
-			rect.y-=target.y ;
-			return rect;
+			return _bound;
 		}
 		
 		public function get totalFrame():int{ return _mc.totalFrames; }

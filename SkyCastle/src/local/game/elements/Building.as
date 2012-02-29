@@ -2,8 +2,10 @@ package local.game.elements
 {
 	import flash.display.MovieClip;
 	
+	import local.comm.GameSetting;
 	import local.enum.BuildingOperation;
 	import local.enum.BuildingType;
+	import local.game.GameWorld;
 	import local.model.buildings.vos.BuildingVO;
 	import local.utils.EffectManager;
 	import local.views.effects.BaseMovieClipEffect;
@@ -33,6 +35,7 @@ package local.game.elements
 				case BuildingOperation.STASH:
 					break ;
 				case BuildingOperation.MOVE:
+					playPlaceEffect();
 					break ;
 				case BuildingOperation.SELL :
 					break ;
@@ -50,8 +53,11 @@ package local.game.elements
 				placementMC= new  EffectPlacementDecoration ();
 			}
 			if(placementMC){
+				var offsetY:Number = Math.floor((buildingVO.baseVO.xSpan+buildingVO.baseVO.zSpan)*0.5-1)*GameSetting.GRID_SIZE ;
 				var placementEffect:BaseMovieClipEffect = EffectManager.instance.createMapEffect(placementMC);
-				effectLayer.addChild(placementEffect);
+				placementEffect.y = offsetY+this.screenY ;
+				placementEffect.x = this.screenX;
+				GameWorld.instance.effectScene.addChild(placementEffect);
 			}
 		}
 	}
