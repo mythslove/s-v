@@ -32,6 +32,12 @@ package local.model.shop
 			return _roadArray ;
 		}
 		
+		private var _decorationArray:Vector.<BuildingVO>;
+		/** 商店中所有的装饰*/
+		public function get decorationArray():Vector.<BuildingVO> {
+			return _decorationArray ;
+		}
+		
 		/**
 		 * 解析config配置 
 		 * @param config
@@ -47,6 +53,9 @@ package local.model.shop
 			//路
 			arr = XMLAnalysis.createInstanceArrayByXML(config.shop[0].road[0] , BuildingVO , "," );
 			_roadArray = Vector.<BuildingVO>( arr);
+			//装饰
+			_decorationArray = new Vector.<BuildingVO>();
+			_decorationArray =  _roadArray.concat();
 		}
 	}
 }

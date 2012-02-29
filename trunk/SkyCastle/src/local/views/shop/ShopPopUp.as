@@ -11,7 +11,15 @@ package local.views.shop
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	
+	import local.comm.GameData;
 	import local.comm.GameSetting;
+	import local.comm.GlobalDispatcher;
+	import local.enum.BuildingOperation;
+	import local.events.ShopEvent;
+	import local.game.GameWorld;
+	import local.game.elements.Building;
+	import local.model.shop.ShopModel;
+	import local.utils.BuildingFactory;
 	import local.utils.PopUpManager;
 	import local.views.BaseView;
 	import local.views.shop.subtab.ShopSubBuildingTabBar;
@@ -45,12 +53,26 @@ package local.views.shop
 			tabMenu.addEventListener(ToggleItemEvent.ITEM_SELECTED , tabMenuHandler , false , 0 , true ) ;
 			btnClose.addEventListener( MouseEvent.CLICK , closeClickHandler , false , 0 , true );
 			tabMenu.selectedName = tabMenu.btnBuilding.name;
+			
+			GlobalDispatcher.instance.addEventListener(ShopEvent.SELECTED_BUILDING , shopEventHandler );
+		}
+		
+		private function shopEventHandler( e:ShopEvent ):void
+		{
+			switch( e.type )
+			{
+				case  ShopEvent.SELECTED_BUILDING:
+					var building:Building = BuildingFactory.createBuildingByVO(e.selectedBuilding);
+					GameWorld.instance.addBuildingToTop( building );
+					PopUpManager.instance.removeCurrentPopup();
+					GameData.buildingCurrOperation = BuildingOperation.ADD ;
+					break ;
+			}
 		}
 		
 		private function tabMenuHandler( e:ToggleItemEvent):void 
 		{
 			//先清除
-			_buildingPanel.clear();
 			if(_subTabBar){
 				_subTabBar.removeEventListener(ToggleItemEvent.ITEM_SELECTED , subTabMenuHandler );
 			}
@@ -84,17 +106,27 @@ package local.views.shop
 				switch( e.selectedName )
 				{
 					case ShopSubBuildingTabBar.BTN_ALL:
-//						_buildingPanel.dataProvider = null ;
+						_buildingPanel.dataProvider = ShopModel.instance.buildingArray ;
 						break ;
 					case ShopSubBuildingTabBar.BTN_HOUSE:
+						_buildingPanel.dataProvider = ShopModel.instance.houseArray ;
 						break ;
 					case ShopSubBuildingTabBar.BTN_FACTOR:
+						_buildingPanel.dataProvider = null ;
 						break ;
 				}
 			}
 			else if( tabMenu.selectedName==tabMenu.btnDecoration.name)
 			{
-				
+				switch( e.selectedName)
+				{
+					case ShopSubDecorationTabBar.BTN_ALL:
+						_buildingPanel.dataProvider = ShopModel.instance.decorationArray ;
+						break ;
+					case ShopSubDecorationTabBar.BTN_GROUND:
+						_buildingPanel.dataProvider = ShopModel.instance.roadArray ;
+						break ;
+				}
 			}
 		}
 		
@@ -110,6 +142,7 @@ package local.views.shop
 		
 		override protected function removed():void
 		{
+			GlobalDispatcher.instance.removeEventListener(ShopEvent.SELECTED_BUILDING , shopEventHandler );
 			btnClose.removeEventListener( MouseEvent.CLICK , closeClickHandler);
 			if(_subTabBar){
 				_subTabBar.removeEventListener(ToggleItemEvent.ITEM_SELECTED , subTabMenuHandler );

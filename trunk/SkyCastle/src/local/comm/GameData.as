@@ -10,7 +10,7 @@ package local.comm
 	public class GameData
 	{
 		//********************************************************************		
-		private static var _buildingCurrOperation:String = "add";
+		private static var _buildingCurrOperation:String = BuildingOperation.NONE ;
 		/**
 		 *  设置当前对鼠标的操作，并更改鼠标跟随icon
 		 * @param value BuildingCurrentOperation中的常量

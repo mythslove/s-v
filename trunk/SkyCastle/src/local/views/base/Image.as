@@ -41,7 +41,7 @@ package local.views.base
 		
 		private function loadedHandler(e:Event):void
 		{
-			_bitmap = new Bitmap(ResourceUtil.instance.getResVOByResId(_resId).resObject as BitmapData);\
+			_bitmap = new Bitmap(ResourceUtil.instance.getResVOByResId(_resId).resObject as BitmapData);
 			if(_isCenter){
 				_bitmap.x = -_bitmap.width>>1;
 				_bitmap.y = - _bitmap.height>>1;
