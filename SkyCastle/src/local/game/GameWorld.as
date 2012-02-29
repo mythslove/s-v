@@ -43,7 +43,7 @@ package local.game
 					if(checkMoney(vo) && checkWood(vo) && checkStone(vo) ){
 						buyComplete( vo) ;
 						var addedBuilding:Building = addBuildingByVO( _topBuilding.nodeX , _topBuilding.nodeZ ,vo );
-						_topBuilding.sendOperation(BuildingOperation.ADD); //发送添加到地图上的消息到服务器
+						addedBuilding.sendOperation(BuildingOperation.ADD); //发送添加到地图上的消息到服务器
 						_topBuilding.gridLayer.updateBuildingGridLayer(_topBuilding.nodeX , _topBuilding.nodeZ , vo.baseVO.layer );
 					}
 				}
