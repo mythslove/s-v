@@ -4,18 +4,19 @@ package local.game
 	import bing.utils.ContainerUtil;
 	import bing.utils.ObjectUtil;
 	
-	import flash.events.Event;
+	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	
 	import local.comm.GameData;
 	import local.enum.BuildingOperation;
 	import local.enum.LayerType;
+	import local.enum.PayType;
 	import local.game.elements.Building;
 	import local.model.buildings.vos.BuildingVO;
 	import local.model.map.MapGridDataModel;
-	import local.model.shop.ShopModel;
-	import local.utils.BuildingFactory;
+	import local.model.village.VillageModel;
+	import local.views.effects.MapWordEffectRed;
 
 	public class GameWorld extends BaseWorld
 	{
@@ -39,9 +40,12 @@ package local.game
 				if( _topBuilding && _topBuilding.gridLayer && _topBuilding.gridLayer.getWalkable() )
 				{
 					var vo:BuildingVO = ObjectUtil.copyObj(_topBuilding.buildingVO) as BuildingVO ;
-					var addedBuilding:Building = addBuildingByVO( _topBuilding.nodeX , _topBuilding.nodeZ ,vo );
-					_topBuilding.sendOperation(BuildingOperation.ADD); //发送添加到地图上的消息到服务器
-					_topBuilding.gridLayer.updateBuildingGridLayer(_topBuilding.nodeX , _topBuilding.nodeZ , vo.baseVO.layer );
+					if(checkMoney(vo) && checkWood(vo) && checkStone(vo) ){
+						buyComplete( vo) ;
+						var addedBuilding:Building = addBuildingByVO( _topBuilding.nodeX , _topBuilding.nodeZ ,vo );
+						_topBuilding.sendOperation(BuildingOperation.ADD); //发送添加到地图上的消息到服务器
+						_topBuilding.gridLayer.updateBuildingGridLayer(_topBuilding.nodeX , _topBuilding.nodeZ , vo.baseVO.layer );
+					}
 				}
 			}
 			else if(GameData.buildingCurrOperation==BuildingOperation.ROTATE) //旋转
@@ -97,6 +101,81 @@ package local.game
 			}
 		}
 		
+		/** 判断金钱是否足够，并提示*/	
+		private function checkMoney( vo:BuildingVO ):Boolean
+		{
+			var result:Boolean ;
+			var effect:Sprite ;
+			if( vo.payType==PayType.COIN){
+				if(VillageModel.instance.checkCoinEnough(vo.price) ){
+					result = true ;
+				}else{
+					effect = new MapWordEffectRed("You don't have enough Coin!");
+				}
+			} else if( vo.payType==PayType.CASH) {
+				if(VillageModel.instance.checkCashEnough(vo.price)){
+					result = true ;
+				}else{
+					effect = new MapWordEffectRed("You don't have enough Cash!");
+				}
+			}
+			if(effect && _topBuilding){
+				effect.x = _topBuilding.screenX ;
+				effect.y = _topBuilding.screenY ;
+				addEffect( effect );
+			}
+			return result ;
+		}
+		
+		/** 判断木头是否足够，并提示*/
+		private function checkWood( vo:BuildingVO):Boolean
+		{
+			var result:Boolean = true ;
+			var effect:Sprite ;
+			if(vo.baseVO.hasOwnProperty("buildWood") && !VillageModel.instance.checkWood(vo.baseVO["buildWood"])){
+				result = false ;
+				effect = new MapWordEffectRed("You don't have enough Wood!");
+			}
+			if(effect && _topBuilding){
+				effect.x = _topBuilding.screenX ;
+				effect.y = _topBuilding.screenY ;
+				addEffect( effect );
+			}
+			return result ;
+		}
+		
+		/** 判断石头是否足够，并提示*/
+		private function checkStone( vo:BuildingVO):Boolean
+		{
+			var result:Boolean = true ;
+			var effect:Sprite ;
+			if(vo.baseVO.hasOwnProperty("buildStone") && !VillageModel.instance.checkWood(vo.baseVO["buildStone"])){
+				result = false ;
+				effect = new MapWordEffectRed("You don't have enough Stone!");
+			}
+			if(effect && _topBuilding){
+				effect.x = _topBuilding.screenX ;
+				effect.y = _topBuilding.screenY ;
+				addEffect( effect );
+			}
+			return result ;
+		}
+		
+		private function buyComplete(vo:BuildingVO):void
+		{
+			if(vo.baseVO.hasOwnProperty("buildStone") ){
+				VillageModel.instance.me.stone-=int(vo.baseVO.hasOwnProperty("buildStone"));
+			}
+			if(vo.baseVO.hasOwnProperty("buildWood") ){
+				VillageModel.instance.me.stone-=int(vo.baseVO.hasOwnProperty("buildWood"));
+			}
+			if( vo.payType==PayType.COIN){
+				VillageModel.instance.me.coin-=vo.price ;
+			} else if( vo.payType==PayType.CASH) {
+				VillageModel.instance.me.cash-=vo.price;
+			}
+		}
+		
 		/**
 		 * 移动建筑失败，建筑返回原来的地点 
 		 */		
@@ -143,6 +222,7 @@ package local.game
 		 */		
 		public function clearWorld():void
 		{
+			ContainerUtil.removeChildren(effectScene);
 			for each( var scene:IsoScene in scenes){
 				scene.clear();
 			}
