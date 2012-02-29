@@ -3,20 +3,18 @@ package local.views.shop.subtab
 	import bing.components.button.BaseToggleButton;
 	import bing.components.button.ToggleBar;
 	/**
-	 * 建筑面板的tabBar
+	 *  装饰面板TabBar 
 	 * @author zzhanglin
 	 */	
-	public class ShopSubBuildingTabBar extends ToggleBar
+	public class ShopSubDecorationTabBar extends ToggleBar
 	{
 		public var btnAll:BaseToggleButton ;
-		public var btnHouse:BaseToggleButton;
-		public var btnFactory:BaseToggleButton;
+		public var btnGround:BaseToggleButton;
 		//================================
 		public static const BTN_ALL:String = "btnAll";
-		public static const BTN_HOUSE:String = "btnHouse";
-		public static const BTN_FACTOR:String = "btnFactory";
+		public static const BTN_GROUND:String = "btnGround";
 		
-		public function ShopSubBuildingTabBar()
+		public function ShopSubDecorationTabBar()
 		{
 			super();
 		}

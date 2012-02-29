@@ -15,6 +15,7 @@ package local.views.shop
 	import local.utils.PopUpManager;
 	import local.views.BaseView;
 	import local.views.shop.subtab.ShopSubBuildingTabBar;
+	import local.views.shop.subtab.ShopSubDecorationTabBar;
 
 	/**
 	 * 商店弹窗 
@@ -64,6 +65,14 @@ package local.views.shop
 					container.addChild( _subTabBar);
 					_subTabBar.selectedName = ShopSubBuildingTabBar.BTN_ALL;
 					break ;
+				case tabMenu.btnDecoration.name:
+					container.addChild(_buildingPanel) ;
+					_subTabBar = new ShopSubDecorationTabBar();
+					_subTabBar.x = 20 ;
+					_subTabBar.addEventListener(ToggleItemEvent.ITEM_SELECTED , subTabMenuHandler , false , 0, true );
+					container.addChild( _subTabBar);
+					_subTabBar.selectedName = ShopSubDecorationTabBar.BTN_ALL;
+					break ;
 			}
 			
 		}
@@ -95,8 +104,7 @@ package local.views.shop
 			TweenLite.to(this,0.5,{x:GameSetting.SCREEN_WIDTH+width , ease:Back.easeIn , onComplete:tweenComplete});
 		}
 		
-		private function tweenComplete():void
-		{
+		private function tweenComplete():void {
 			PopUpManager.instance.removeCurrentPopup(); 
 		}
 		
