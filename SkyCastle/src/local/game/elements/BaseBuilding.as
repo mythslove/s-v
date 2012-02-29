@@ -12,6 +12,7 @@ package local.game.elements
 	import flash.events.Event;
 	
 	import local.comm.GameSetting;
+	import local.enum.BuildingType;
 	import local.game.cell.BuildingGridLayer;
 	import local.model.buildings.vos.BaseBuildingVO;
 	import local.model.buildings.vos.BuildingVO;
@@ -48,6 +49,18 @@ package local.game.elements
 		/** 获取此建筑的基础VO */
 		public function get baseBuildingVO():BaseBuildingVO{
 			return buildingVO.baseVO ;
+		}
+		
+		/** 获取此建筑的标题 */
+		public function get title():String 
+		{
+			return buildingVO.baseVO.name;
+		}
+		
+		/** 获取此建筑的描述 */
+		public function get description():String 
+		{
+			return buildingVO.baseVO.description;
 		}
 		
 		/* 添加到舞台上*/

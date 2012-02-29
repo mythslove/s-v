@@ -20,6 +20,15 @@ package local.game.elements
 			return buildingVO.baseVO as BaseFactoryVO ;
 		}
 		
+		/** 获取此建筑的标题 */
+		override public function get title():String 
+		{
+			if( buildingVO.step < baseFactoryVO.buildStep){
+				return buildingVO.baseVO.name+"("+buildingVO.step+"/"+baseFactoryVO.buildStep+")";
+			}
+			return buildingVO.baseVO.name;
+		}
+		
 		override public function onClick():void
 		{
 			switch( buildingVO.buildingStatus )

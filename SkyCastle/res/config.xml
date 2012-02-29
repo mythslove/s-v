@@ -8,12 +8,12 @@
 			thumb="res/road/MoreCity_PathCobblestoneThumb.png" maxLevel="1"
 			walkable="1" />
 
-		<vo baseId="2" name="HallOfHeroes Ruin" earnCoin="1" earnExp="1"
-			earnTime="300" earnWood="1" earnStone="1" buildStep="3"
-			description="MoreCity PathCobblestone" type="house" xSpan="2" zSpan="3"
-			layer="2" maxLevel="1" walkable="0"
-			url="res/house/Basic_HallOfHeroes_Ruin.swf" alias="Basic_HallOfHeroes_Ruin"
-			buildSpendEnery="1,1,1" buildWood="4" buildStone="3"
+		<vo baseId="2" name="HallOfHeroes Ruin" alias="Basic_HallOfHeroes_Ruin" earnCoin="1" earnExp="1"
+			earnTime="300" earnWood="1" earnStone="1" type="house" updateCoins="3,4"
+			description="MoreCity PathCobblestone" xSpan="2" zSpan="3" earnTimes="300,400,500"
+			earnCoins="4,5,7" earnExps="1,2,4" 
+			layer="2" maxLevel="3" walkable="0" buildWood="4" buildStone="3"
+			url="res/house/Basic_HallOfHeroes_Ruin.swf" 
 			thumb="res/house/Basic_HallOfHeroes_RuinThumb.png" />
 
 	</buildings>

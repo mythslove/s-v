@@ -26,6 +26,12 @@ package local.game.elements
 			return buildingVO.baseVO as BaseRoadVO ;
 		}
 		
+		/** 获取此建筑的描述 */
+		override public function get description():String 
+		{
+			return "";
+		}
+		
 		/* 重写资源加载完成   */
 		override protected function resLoadedHandler( e:Event):void
 		{
