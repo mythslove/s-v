@@ -1,4 +1,4 @@
-package local.map.cell 
+package local.game.cell
 {
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;

@@ -42,5 +42,20 @@ package local.enum
 		
 		/** 大类：人*/
 		public static const CHACTERS:String = "character" ;
+		
+		/**
+		 * 获得大的类型 
+		 */		
+		public static function getSumType( type:String ):String 
+		{
+			if(type==BUILDING || type==BUILDING_HOUSE|| type==BUILDING_FACTORY){
+				return BUILDING;
+			}else if( type==DECORATION || type==DEC_TREE|| type==DEC_STONE|| type==DEC_ROAD){
+				return DECORATION ;
+			}else if(type==PLANT|| type==PLANT_LAND|| type==PLANT_CROP){
+				return PLANT ;
+			}
+			return CHACTERS ;
+		}
 	}
 }
