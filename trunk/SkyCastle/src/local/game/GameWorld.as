@@ -222,7 +222,6 @@ package local.game
 		 */		
 		public function clearWorld():void
 		{
-			ContainerUtil.removeChildren(effectScene);
 			for each( var scene:IsoScene in scenes){
 				scene.clear();
 			}
