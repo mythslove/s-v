@@ -83,6 +83,7 @@ package local.game
 			addScene( topScene );
 			//特效层
 			effectScene = new IsoScene(GameSetting.GRID_SIZE,GameSetting.GRID_X , GameSetting.GRID_Z);
+			effectScene.mouseEnabled= effectScene.mouseChildren=false;
 			addScene(effectScene);
 			//tooltip
 			_tooltip = BuildingToolTip.instance ;
@@ -267,7 +268,7 @@ package local.game
 					if( !_topBuilding && e.target is InteractivePNG){
 						_mouseOverBuild = (e.target as InteractivePNG).parent as Building;
 						_mouseOverBuild.onMouseOver() ;
-						_tooltip.showTooltip(_mouseOverBuild.baseBuildingVO.description , _mouseOverBuild.baseBuildingVO.name );
+						_tooltip.showTooltip(_mouseOverBuild.description , _mouseOverBuild.title );
 					}
 					break;
 				case MouseEvent.MOUSE_UP:

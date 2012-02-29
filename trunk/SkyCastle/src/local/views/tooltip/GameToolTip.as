@@ -145,6 +145,8 @@ package  local.views.tooltip
 		
 		protected function hide():void
 		{
+			txtInfo.text="";
+			txtTitle.text="";
 			if (_hitSprite)
 			{
 				_hitSprite.removeEventListener(MouseEvent.MOUSE_OUT, this.mouseEventHandler);

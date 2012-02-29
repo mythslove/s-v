@@ -21,6 +21,12 @@ package local.game.elements
 			return buildingVO.baseVO as BaseHouseVO ;
 		}
 		
+		/** 获取此建筑的标题 */
+		override public function get title():String 
+		{
+			return buildingVO.baseVO.name+"(Lv"+buildingVO.level+")";
+		}
+		
 		override public function onClick():void
 		{
 			switch( buildingVO.buildingStatus )
