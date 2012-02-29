@@ -27,6 +27,7 @@ package local.game
 		public var buildingScene2:BuildingScene ;
 		public var buildingScene3:BuildingScene ;
 		public var topScene:IsoScene;
+		public var effectScene:IsoScene ;
 		//----------------------------------------------------------------*/
 		protected var _mapGridData:MapGridDataModel ; //地图数据
 		protected var _tooltip:BuildingToolTip ;
@@ -80,6 +81,9 @@ package local.game
 			topScene = new IsoScene(GameSetting.GRID_SIZE,GameSetting.GRID_X , GameSetting.GRID_Z);
 			topScene.visible = topScene.mouseEnabled= topScene.mouseChildren=false;
 			addScene( topScene );
+			//特效层
+			effectScene = new IsoScene(GameSetting.GRID_SIZE,GameSetting.GRID_X , GameSetting.GRID_Z);
+			addScene(effectScene);
 			//tooltip
 			_tooltip = BuildingToolTip.instance ;
 			_tooltip.hideTooltip();
@@ -97,6 +101,11 @@ package local.game
 			x+=(prevW-GameSetting.MAP_WIDTH*scaleX)>>1;
 			y+=(prevH-GameSetting.MAP_HEIGHT*scaleX)>>1;
 			modifyMapPosition();
+			//更正特效大小
+			for(var i:int =0  ; i<effectScene.numChildren ; ++i){
+				effectScene.getChildAt(i).scaleX = 1/scaleX;
+				effectScene.getChildAt(i).scaleY = 1/scaleX;
+			}
 		}
 		/**
 		 * 当前鼠标在哪个 GroundScene上是walkable=true
@@ -126,6 +135,17 @@ package local.game
 			else if( index==2 ) return buildingScene2 ;
 			else if( index==3 ) return buildingScene3 ;
 			return null ;
+		}
+		
+		/**
+		 * 添加一个特效 
+		 * @param effect
+		 */		
+		public function addEffect( effect:Sprite ):void
+		{
+			effect.scaleX = 1/scaleX ;
+			effect.scaleY = 1/scaleX; 
+			effectScene.addChild( effect );
 		}
 		
 		/**
@@ -269,8 +289,7 @@ package local.game
 		protected function onClick( e:MouseEvent ):void{}
 		
 		/** 窗口大小变化*/		
-		protected function onResizeHandler( e:GlobalEvent ):void
-		{
+		protected function onResizeHandler( e:GlobalEvent ):void {
 			modifyMapPosition();
 		}
 		

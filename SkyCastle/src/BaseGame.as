@@ -61,6 +61,7 @@ package
 			var res:Vector.<ResVO> = new Vector.<ResVO>();
 			res.push( new ResVO("init_config","res/config.xml"));
 			res.push( new ResVO("init_mapdata","res/mapdata") ); 
+			res.push( new ResVO("init_effect","res/skin/Effect.swf") ); 
 			res.push( new ResVO("init_bg","res/skin/bg.swf"));
 			res.push( new ResVO("init_ui","res/skin/ui.swf"));
 			ResourceUtil.instance.addEventListener(ResProgressEvent.RES_LOAD_PROGRESS , queueLoadHandler);

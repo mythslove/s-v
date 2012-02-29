@@ -42,9 +42,51 @@ package local.model.village
 			me.exp = 1;
 			me.maxExp = 10 ;
 			me.level = 1;
+			me.wood=20;
+			me.stone=29;
 			me.id = Guid.create();
 			me.name = "binghe";
 			GlobalDispatcher.instance.dispatchEvent( new UserInfoEvent(UserInfoEvent.USER_INFO_UPDATED));
+		}
+		
+		/**
+		 * 判断金币是否足够 
+		 * @param spendCoin
+		 * @return 
+		 */		
+		public function checkCoinEnough( spendCoin:int ):Boolean
+		{
+			return me.coin>=spendCoin ;
+		}
+		
+		/**
+		 * 判断钱是否足够 
+		 * @param spendCash
+		 * @return 
+		 */		
+		public function checkCashEnough( spendCash:int ):Boolean
+		{
+			return me.cash>=spendCash ;
+		}
+		
+		/**
+		 * 判断木材是否足够 
+		 * @param spendWood
+		 * @return 
+		 */		
+		public function checkWood( spendWood:int ):Boolean
+		{
+			return me.wood>=spendWood ;
+		}
+		
+		/**
+		 * 判断石头是否足够 
+		 * @param spendStone
+		 * @return 
+		 */		
+		public function checkStone( spendStone:int ):Boolean
+		{
+			return me.stone>=spendStone ;
 		}
 	}
 }
