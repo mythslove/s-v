@@ -23,8 +23,8 @@ package local.views.bottom
 		//-----------------------------------------------*
 		private var _btnMultiToolTooltip:String="TOOLS: Click to switch to the default tool and view move, rotate, and sell tools.";
 		private var _btnCancelToolTooltip:String="CANCEL: Click to switch to the default tool and cancel all actions";
-		private var _btnShopToolTooltip:String="SHOP: Click to shop for buildings, decorations and more for your city!";
-		private var _btnBagToolTooltip:String="STORAGE: Click to see all the gifts and goodies you have received!";
+		private var _btnShopToolTooltip:String="SHOP: Click to shop for buildings, decorations and more for your city.";
+		private var _btnBagToolTooltip:String="STORAGE: Click to see all the gifts and goodies you have received.";
 		//-----------------------------------------------*
 		
 		public function ToolBox()
@@ -72,8 +72,12 @@ package local.views.bottom
 					GameData.buildingCurrOperation=BuildingOperation.NONE ;
 					break ;
 				case btnShopTool:
+					GameData.buildingCurrOperation=BuildingOperation.NONE ;
 					var shopPop:ShopPopUp = new ShopPopUp();
 					PopUpManager.instance.addQueuePopUp( shopPop );
+					break ;
+				case btnBagTool:
+					GameData.buildingCurrOperation=BuildingOperation.NONE ;
 					break ;
 			}
 		}
