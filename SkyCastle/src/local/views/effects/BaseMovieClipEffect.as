@@ -31,16 +31,19 @@ package local.views.effects
 		
 		private function onEnterFrameHandler( e:Event):void
 		{
-			_bmpMC.play();
-			var rect:Rectangle = _bmpMC.getBound();
-			_bmpMC.x = rect.x ;
-			_bmpMC.y = rect.y ;
 			if(_bmpMC.currentFrame==_bmpMC.totalFrame){
 				_bmpMC.stop();
 				removeEventListener(Event.ENTER_FRAME , onEnterFrameHandler );
 				if(parent){
 					parent.removeChild(this);
 				}
+			}
+			else
+			{
+				_bmpMC.play();
+				var rect:Rectangle = _bmpMC.getBound();
+				_bmpMC.x = rect.x ;
+				_bmpMC.y = rect.y ;
 			}
 		}
 		
