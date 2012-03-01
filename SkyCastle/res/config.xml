@@ -16,6 +16,8 @@
 			url="res/house/Basic_HallOfHeroes_Ruin.swf" 
 			thumb="res/house/Basic_HallOfHeroes_RuinThumb.png" />
 
+		<vo baseId="1000" name="Bingheliefeng" alias="Basic_AvatarMale"  description="" type="character" xSpan="1" zSpan="1"
+		layer="2" walkable="1"  url="res/character/Basic_AvatarMale.swf" />
 	</buildings>
 	<shop>
 		<house>
@@ -24,5 +26,8 @@
 		<road>
 			<vo baseId="1" price="1" payType="1" />
 		</road>
+		<character>
+			<vo baseId="1000" />
+		</character>
 	</shop>
 </config>
