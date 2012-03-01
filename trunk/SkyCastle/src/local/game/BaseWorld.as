@@ -330,6 +330,7 @@ package local.game
 				avatar.nodeZ = 59;
 				var scene:IsoScene = this.getBuildingScene( avatar.nodeX , avatar.nodeZ );
 				scene.addIsoObject( avatar ) ;
+				GameData.hero = avatar ;
 			}
 		}
 	}
