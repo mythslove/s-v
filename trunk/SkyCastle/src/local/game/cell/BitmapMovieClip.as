@@ -39,33 +39,28 @@ package local.game.cell
 			this._mc = mc ;
 			this._bitmaps = bitmaps ;
 			this._bounds = bounds ;
-			if(!bitmaps){
-				cacheAsBitmaps();
-			}
+			
+			var len:int = _mc.totalFrames;
+			_bitmaps = new Vector.<BitmapData>(len,true);
+			_bounds = new Vector.<Rectangle>(len,true);
 			_mc.gotoAndPlay(1);
 		}
 		
 		/** 缓存成位图*/
-		protected function cacheAsBitmaps():void
+		protected function cacheAsBitmaps( index:int ):void
 		{
-			const LEN:int = _mc.totalFrames;
-			_bitmaps = new Vector.<BitmapData>(LEN,true);
-			_bounds = new Vector.<Rectangle>(LEN,true);
 			var bmd:BitmapData;
 			var rect:Rectangle ;
 			var matrix:Matrix = new Matrix();
-			for( var i:int = 0 ; i<LEN ; ++i){
-				_mc.gotoAndStop(i+1);
-				//保存位置
-				rect = _mc.getBounds(_mc);
-				_bounds[i] = rect ;
-				//保存图片
-				matrix.identity();
-				matrix.translate(-rect.x,-rect.y);
-				bmd = new BitmapData(rect.width,rect.height,true,0xffffff);
-				bmd.draw( _mc,matrix);
-				_bitmaps[i] = bmd ;
-			}
+			//保存位置
+			rect = _mc.getBounds(_mc);
+			_bounds[index] = rect ;
+			//保存图片
+			matrix.identity();
+			matrix.translate(-rect.x,-rect.y);
+			bmd = new BitmapData(rect.width,rect.height,true,0xffffff);
+			bmd.draw( _mc,matrix);
+			_bitmaps[index] = bmd ;
 		}
 		
 		public function gotoAndStop( frame:Object ):void
@@ -95,6 +90,9 @@ package local.game.cell
 		public function update():void
 		{
 			var temp:int = _mc.currentFrame-1 ;
+			if(!_bitmaps[temp]){
+				cacheAsBitmaps(temp);
+			}
 			if(bitmapData!=_bitmaps[temp]){
 				bitmapData = _bitmaps[temp];
 				_bound =  _bounds[temp];

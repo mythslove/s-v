@@ -12,7 +12,6 @@ package local.game.elements
 	import flash.events.Event;
 	
 	import local.comm.GameSetting;
-	import local.enum.BuildingType;
 	import local.game.cell.BuildingGridLayer;
 	import local.model.buildings.vos.BaseBuildingVO;
 	import local.model.buildings.vos.BuildingVO;

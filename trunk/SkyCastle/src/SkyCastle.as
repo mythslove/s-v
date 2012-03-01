@@ -79,6 +79,7 @@ package
 			addChild( new LeftBar()); //居左的容器
 			addChild( CenterViewContainer.instance); //添加UI的容器
 			
+			GameWorld.instance.initWorld();
 			GameWorld.instance.start();
 		}
 	}

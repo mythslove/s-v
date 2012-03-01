@@ -68,6 +68,9 @@ package local.model.buildings
 					case BuildingType.PLANT_LAND :
 						baseVO = XMLAnalysis.createInstanceByXML( vos[i] , BaseLandVO ,"," ) as BaseLandVO;
 						break ;
+					case BuildingType.CHACTERS:
+						baseVO = XMLAnalysis.createInstanceByXML( vos[i] , BaseCharacterVO ,"," ) as BaseCharacterVO;
+						break ;
 				}
 				_buildingBaseVOHash[ baseVO.baseId ] = baseVO ;
 			}

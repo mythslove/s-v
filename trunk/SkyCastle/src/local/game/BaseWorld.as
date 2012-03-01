@@ -14,6 +14,7 @@ package local.game
 	import local.game.scenes.*;
 	import local.model.buildings.vos.*;
 	import local.model.map.*;
+	import local.model.shop.ShopModel;
 	import local.utils.ResourceUtil;
 	import local.views.tooltip.BuildingToolTip;
 	
@@ -109,7 +110,7 @@ package local.game
 			}
 		}
 		/**
-		 * 当前鼠标在哪个 GroundScene上是walkable=true
+		 * 通过位置获得GroundScene
 		 * @param nodeX
 		 * @param nodeZ
 		 * @return 
@@ -124,7 +125,7 @@ package local.game
 		}
 		
 		/**
-		 * 当前鼠标在哪个 BuildingScene上是walkable=true
+		 * 通过位置获得BuildingScene
 		 * @param nodeX
 		 * @param nodeZ
 		 * @return 
@@ -316,6 +317,19 @@ package local.game
 				_topBuilding.nodeX = p.x ;
 				_topBuilding.nodeZ= p.y ;
 				_topBuilding.gridLayer.updateBuildingGridLayer( p.x, p.y , _topBuilding.baseBuildingVO.layer );
+			}
+		}
+		
+		/** 显示世界 */
+		public function initWorld():void
+		{
+			if(ShopModel.instance.characterArray && ShopModel.instance.characterArray.length>0)
+			{
+				var avatar:Hero = new Hero( ShopModel.instance.characterArray[0]);
+				avatar.nodeX = 59;
+				avatar.nodeZ = 59;
+				var scene:IsoScene = this.getBuildingScene( avatar.nodeX , avatar.nodeZ );
+				scene.addIsoObject( avatar ) ;
 			}
 		}
 	}
