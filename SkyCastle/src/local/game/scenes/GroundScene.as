@@ -110,10 +110,10 @@ package local.game.scenes
 		{
 			_roundRoadHash.clear();
 			for each( var obj:IsoObject in children){
-				if(!_roundRoadHash[obj.nodeX+"-"+obj.nodeZ])
+				if( _roundRoadHash.containsKey(obj.nodeX+"-"+obj.nodeZ )&& !_roundRoadHash.getValue(obj.nodeX+"-"+obj.nodeZ) )
 				{
 					updateUI( obj as Building);
-					_roundRoadHash[obj.nodeX+"-"+obj.nodeZ] = true ;
+					_roundRoadHash.put( obj.nodeX+"-"+obj.nodeZ , true );
 				}
 			}
 		}
