@@ -49,13 +49,15 @@ package local.views.shop
 			_page = page ;
 			var render:ShopItemRenderer ;
 			var col:int = 4 ;
-			for( var i:int = _page ; i<_totalPage && i<_page+COUNT ; ++i )
+			var temp:int = 0 ;
+			for( var i:int = _page*COUNT ; i<_totalPage && i<_page*COUNT+COUNT ; ++i )
 			{
 				render = new ShopItemRenderer();
-				render.x = (i%col)*(render.width + 10);
-				render.y = Math.floor(i/col)*(render.height+10);
+				render.x = (temp%col)*(render.width + 10);
+				render.y = Math.floor(temp/col)*(render.height+10);
 				container.addChild(render);
 				render.showBuilding( _dataProvider[i] );
+				temp++;
 			}
 		}
 		
