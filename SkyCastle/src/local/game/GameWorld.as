@@ -99,6 +99,10 @@ package local.game
 			{
 				_mouseOverBuild.onClick() ;
 			}
+			else
+			{
+				GameData.hero.searchToRun( e.stageX , e.stageY );
+			}
 		}
 		
 		/** 判断金钱是否足够，并提示*/	

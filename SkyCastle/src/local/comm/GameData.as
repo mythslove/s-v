@@ -3,6 +3,7 @@ package local.comm
 	import local.enum.BuildingOperation;
 	import local.enum.MouseStatus;
 	import local.game.GameWorld;
+	import local.game.elements.Hero;
 	import local.utils.MouseManager;
 	import local.views.icon.*;
 	
@@ -47,5 +48,12 @@ package local.comm
 		{
 			return _buildingCurrOperation;
 		}
+		
+		
+		
+		
+		
+		/**英雄*/
+		public static var hero:Hero ;
 	}
 }
