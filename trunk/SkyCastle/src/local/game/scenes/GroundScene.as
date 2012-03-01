@@ -108,13 +108,8 @@ package local.game.scenes
 		 */		
 		public function updateAllUI():void
 		{
-			_roundRoadHash.clear();
 			for each( var obj:IsoObject in children){
-				if(!_roundRoadHash.getValue(obj.nodeX+"-"+obj.nodeZ) )
-				{
-					updateUI( obj as Building);
-					_roundRoadHash.put( obj.nodeX+"-"+obj.nodeZ , true );
-				}
+				updateUI( obj as Building);
 			}
 		}
 		
