@@ -35,6 +35,10 @@ package local.game.elements
 			}
 		}
 		
+		/**
+		 * 播放动作 
+		 * @param action
+		 */		
 		public function gotoAndPlay( action:String ):void
 		{
 			if(_skin){
