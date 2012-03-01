@@ -40,5 +40,8 @@ package local.model.buildings.vos
 		
 		/** 建筑的类型 */
 		public var type:String ;
+		
+		/** 修建获得经验 */
+		public var buildEarnExp:int ;
 	}
 }
