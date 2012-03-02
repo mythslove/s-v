@@ -56,6 +56,7 @@ package local.game.elements
 		{
 			var distance:Number = MathUtil.distance(x,z,point.x,point.y );
 			if(distance < speed){
+				//判断当前在哪个BuildingScene上
 				return true;
 			}
 			if(_currentActions!=AvatarAction.WALK){
@@ -67,9 +68,14 @@ package local.game.elements
 			return false;	
 		}
 		
+		/**
+		 * 寻路移动 
+		 * @param endNodeX
+		 * @param endNodeZ
+		 */		
 		public function searchToRun( endNodeX:int , endNodeZ:int):void
 		{
-			if( MapGridDataModel.instance.astarGrid.getNode(endNodeX,endNodeZ).walkable )
+			if(_currentActions==AvatarAction.IDLE && MapGridDataModel.instance.astarGrid.getNode(endNodeX,endNodeZ).walkable )
 			{
 				var astar:AStar = new AStar();
 				MapGridDataModel.instance.astarGrid.setStartNode( nodeX,nodeZ );
@@ -83,6 +89,18 @@ package local.game.elements
 						nextPoint = this.getNextPoint();
 					}
 				}
+			}
+		}
+		
+		/**
+		 *  到达一个建筑物旁边
+		 * @param building
+		 */		
+		public function seachToBuilding( building:Building ):void
+		{
+			if(_currentActions==AvatarAction.IDLE )
+			{
+				
 			}
 		}
 		
@@ -137,9 +155,6 @@ package local.game.elements
 			roads = null ;
 			gotoAndPlay(AvatarAction.IDLE) ;
 		}
-		
-		
-		
 		
 		
 		
