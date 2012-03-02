@@ -101,7 +101,8 @@ package local.game
 			}
 			else
 			{
-				GameData.hero.searchToRun( e.stageX , e.stageY );
+				var p:Point = pixelPointToGrid(stage.mouseX,stage.mouseY); 
+				GameData.hero.searchToRun( p.x , p.y );
 			}
 		}
 		

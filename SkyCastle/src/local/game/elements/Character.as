@@ -1,5 +1,7 @@
 package local.game.elements
 {
+	import bing.iso.path.AStar;
+	import bing.iso.path.Node;
 	import bing.utils.ContainerUtil;
 	import bing.utils.MathUtil;
 	
@@ -8,9 +10,11 @@ package local.game.elements
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	
+	import local.comm.GameSetting;
 	import local.enum.AvatarAction;
 	import local.game.cell.BitmapMovieClip;
 	import local.model.buildings.vos.BuildingVO;
+	import local.model.map.MapGridDataModel;
 	import local.utils.ResourceUtil;
 	
 	/**
@@ -23,7 +27,7 @@ package local.game.elements
 		protected var _currentActions:String ;
 		public var roads:Array ; //路
 		public var speed:Number = 4.6 ;
-		public var nextPoint:Point ; //下一个坐标
+		public var nextPoint:Node ; //下一个坐标
 		protected var roadIndex:int =0 ;
 		
 		public function Character(vo:BuildingVO)
@@ -36,14 +40,14 @@ package local.game.elements
 		 * @param point
 		 * @return 是否到达该点
 		 */		
-		public function moveToPoint( point:Point):Boolean 
+		public function moveToPoint( point:Node):Boolean 
 		{
 			var distance:Number = MathUtil.distance(x,z,point.x,point.y );
 			if(distance < speed){
 				gotoAndPlay(AvatarAction.IDLE) ;
 				return true;
 			}
-			if( point.y>z ){
+			if( point.y>=screenY ){
 				if(_currentActions!=AvatarAction.WALK){
 					gotoAndPlay(AvatarAction.WALK);
 				}
@@ -53,29 +57,26 @@ package local.game.elements
 				}
 			}
 			var moveNum:Number = distance/this.speed ;
-			this.x += ( (point.x - x)/moveNum)>>0 ;
-			this.y += ( (point.y - y)/moveNum)>>0 ;
+			x += ( (point.x - x)/moveNum)>>0 ;
+			z += ( (point.y - z)/moveNum)>>0 ;
 			return false;	
 		}
 		
-		/** 设置走路的方向 */
-		public function setCurrentForward( point:Point ):void
+		public function searchToRun( endNodeX:int , endNodeZ:int ):void
 		{
-			
-		}
-		
-		public function searchToRun( endNodeX:int , endNodeZ:int ):Boolean
-		{
-			var b:Boolean = false ;
-			var roadsArray:Array = [new Point(endNodeX , endNodeZ)] ;
-			if(roadsArray && roadsArray.length>1){
-				this.roads = roadsArray ;
-				roadIndex = 0 ;
-				this.getNextPoint();
-				nextPoint = this.getNextPoint();
-				b = true ;
+			var astar:AStar = new AStar();
+			MapGridDataModel.instance.astarGrid.setStartNode( nodeX,nodeZ );
+			MapGridDataModel.instance.astarGrid.setEndNode( endNodeX,endNodeZ );
+			if(astar.findPath(MapGridDataModel.instance.astarGrid )) 
+			{
+				var roadsArray:Array = astar.path;
+				if(roadsArray && roadsArray.length>1){
+					this.roads = roadsArray ;
+					roadIndex = 0 ;
+					this.getNextPoint();
+					nextPoint = this.getNextPoint();
+				}
 			}
-			return b ;
 		}
 		
 		/**
@@ -103,11 +104,14 @@ package local.game.elements
 		 * 从路中取出一个点 
 		 * @return 
 		 */		
-		protected function getNextPoint():Point
+		protected function getNextPoint():Node
 		{
 			roadIndex++;
 			if(roadIndex<roads.length){
-				return roads[roadIndex] as Point;
+				var p:Node = roads[roadIndex] as Node ;
+				p.x*= GameSetting.GRID_SIZE;
+				p.y*= GameSetting.GRID_SIZE ;
+				return p ;
 			}
 			else(roads.length>=roadIndex)
 			{
