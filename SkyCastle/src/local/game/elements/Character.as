@@ -25,14 +25,26 @@ package local.game.elements
 	{
 		protected var _bmpMC:BitmapMovieClip;
 		protected var _currentActions:String ;
-		public var roads:Array ; //路
-		public var speed:Number = 4.6 ;
+		protected var _roads:Array ; //路
+		public var speed:Number = 6 ;
 		public var nextPoint:Node ; //下一个坐标
 		protected var roadIndex:int =0 ;
 		
 		public function Character(vo:BuildingVO)
 		{
 			super(vo);
+			itemLayer.y = 20;
+		}
+		
+		public function set roads( value:Array ):void
+		{
+			_roads = value ;
+			if(value==null){
+				gotoAndPlay(AvatarAction.IDLE) ;
+			} 
+		}
+		public function get roads():Array{
+			return _roads ;
 		}
 		
 		/**
@@ -44,17 +56,10 @@ package local.game.elements
 		{
 			var distance:Number = MathUtil.distance(x,z,point.x,point.y );
 			if(distance < speed){
-				gotoAndPlay(AvatarAction.IDLE) ;
 				return true;
 			}
-			if( point.y>=screenY ){
-				if(_currentActions!=AvatarAction.WALK){
-					gotoAndPlay(AvatarAction.WALK);
-				}
-			}else{
-				if(_currentActions!=AvatarAction.WALKBACK){
-					gotoAndPlay(AvatarAction.WALKBACK);
-				}
+			if(_currentActions!=AvatarAction.WALK){
+				gotoAndPlay(AvatarAction.WALK);
 			}
 			var moveNum:Number = distance/this.speed ;
 			x += ( (point.x - x)/moveNum)>>0 ;
@@ -62,19 +67,21 @@ package local.game.elements
 			return false;	
 		}
 		
-		public function searchToRun( endNodeX:int , endNodeZ:int ):void
+		public function searchToRun( endNodeX:int , endNodeZ:int):void
 		{
-			var astar:AStar = new AStar();
-			MapGridDataModel.instance.astarGrid.setStartNode( nodeX,nodeZ );
-			MapGridDataModel.instance.astarGrid.setEndNode( endNodeX,endNodeZ );
-			if(astar.findPath(MapGridDataModel.instance.astarGrid )) 
+			if( MapGridDataModel.instance.astarGrid.getNode(endNodeX,endNodeZ).walkable )
 			{
-				var roadsArray:Array = astar.path;
-				if(roadsArray && roadsArray.length>1){
-					this.roads = roadsArray ;
-					roadIndex = 0 ;
-					this.getNextPoint();
-					nextPoint = this.getNextPoint();
+				var astar:AStar = new AStar();
+				MapGridDataModel.instance.astarGrid.setStartNode( nodeX,nodeZ );
+				MapGridDataModel.instance.astarGrid.setEndNode( endNodeX,endNodeZ );
+				if(astar.findPath(MapGridDataModel.instance.astarGrid )) 
+				{
+					var roadsArray:Array = astar.path;
+					if(roadsArray && roadsArray.length>0){
+						roads = roadsArray ;
+						roadIndex = 0 ;
+						nextPoint = this.getNextPoint();
+					}
 				}
 			}
 		}
@@ -108,7 +115,7 @@ package local.game.elements
 		{
 			roadIndex++;
 			if(roadIndex<roads.length){
-				var p:Node = roads[roadIndex] as Node ;
+				var p:Node = (roads[roadIndex] as Node).clone() ;
 				p.x*= GameSetting.GRID_SIZE;
 				p.y*= GameSetting.GRID_SIZE ;
 				return p ;
@@ -117,6 +124,7 @@ package local.game.elements
 			{
 				roads = null ;
 				nextPoint = null ;
+				gotoAndPlay(AvatarAction.IDLE) ;
 				return null ;
 			}
 		}
@@ -127,6 +135,7 @@ package local.game.elements
 		public function stopMove():void 
 		{
 			roads = null ;
+			gotoAndPlay(AvatarAction.IDLE) ;
 		}
 		
 		
