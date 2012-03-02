@@ -19,7 +19,6 @@ package local.enum
 		public static const PICKAXE:String = "PICKAXE";
 		public static const SHOP:String = "SHOP";
 		public static const WALK:String = "WALK";
-		public static const WALKBACK:String = "WALK-BACK";
 		public static const WATER:String = "WATER";
 	}
 }
