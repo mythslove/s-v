@@ -12,7 +12,9 @@ package local.game.elements
 	
 	import local.comm.GameSetting;
 	import local.enum.AvatarAction;
+	import local.game.GameWorld;
 	import local.game.cell.BitmapMovieClip;
+	import local.game.scenes.BuildingScene;
 	import local.model.buildings.vos.BuildingVO;
 	import local.model.map.MapGridDataModel;
 	import local.utils.ResourceUtil;
@@ -57,6 +59,13 @@ package local.game.elements
 			var distance:Number = MathUtil.distance(x,z,point.x,point.y );
 			if(distance < speed){
 				//判断当前在哪个BuildingScene上
+				var scene:BuildingScene = GameWorld.instance.getBuildingScene(nodeX,nodeZ);
+				if(scene && parent !=scene ){
+					(parent as BuildingScene).removeIsoObject( this );
+					scene.addIsoObject( this );
+				}else{
+					this.sort();
+				}
 				return true;
 			}
 			if(_currentActions!=AvatarAction.WALK){
@@ -75,7 +84,8 @@ package local.game.elements
 		 */		
 		public function searchToRun( endNodeX:int , endNodeZ:int):void
 		{
-			if(_currentActions==AvatarAction.IDLE && MapGridDataModel.instance.astarGrid.getNode(endNodeX,endNodeZ).walkable )
+			if(_currentActions==AvatarAction.IDLE && MapGridDataModel.instance.astarGrid.getNode(endNodeX,endNodeZ).walkable
+				&& MapGridDataModel.instance.astarGrid.getNode(nodeX,nodeZ).walkable)
 			{
 				var astar:AStar = new AStar();
 				MapGridDataModel.instance.astarGrid.setStartNode( nodeX,nodeZ );
@@ -140,6 +150,10 @@ package local.game.elements
 			}
 			else(roads.length>=roadIndex)
 			{
+				if(nextPoint){
+					x= nextPoint.x ;
+					z = nextPoint.y ;
+				}
 				roads = null ;
 				nextPoint = null ;
 				gotoAndPlay(AvatarAction.IDLE) ;
