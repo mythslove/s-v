@@ -83,7 +83,7 @@ package local.game.elements
 		 */		
 		public function searchToRun( endNodeX:int , endNodeZ:int):void
 		{
-			if(_currentActions==AvatarAction.IDLE && MapGridDataModel.instance.astarGrid.getNode(endNodeX,endNodeZ).walkable
+			if(MapGridDataModel.instance.astarGrid.getNode(endNodeX,endNodeZ).walkable
 				&& MapGridDataModel.instance.astarGrid.getNode(nodeX,nodeZ).walkable)
 			{
 				var astar:AStar = new AStar();
