@@ -1,7 +1,6 @@
 package local.game.elements
 {
 	import local.enum.BuildingStatus;
-	import local.game.scenes.BuildingScene;
 	import local.model.buildings.vos.BaseHouseVO;
 	import local.model.buildings.vos.BuildingVO;
 
@@ -29,6 +28,7 @@ package local.game.elements
 		
 		override public function onClick():void
 		{
+			super.onClick();
 			switch( buildingVO.buildingStatus )
 			{
 				case BuildingStatus.PRODUCTION:

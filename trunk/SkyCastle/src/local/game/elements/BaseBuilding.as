@@ -10,11 +10,14 @@ package local.game.elements
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.geom.Vector3D;
 	
 	import local.comm.GameSetting;
+	import local.game.GameWorld;
 	import local.game.cell.BuildingGridLayer;
 	import local.model.buildings.vos.BaseBuildingVO;
 	import local.model.buildings.vos.BuildingVO;
+	import local.model.map.MapGridDataModel;
 	import local.utils.ResourceUtil;
 
 	/**
@@ -154,6 +157,43 @@ package local.game.elements
 				}
 				gridLayer = null ;
 			}
+		}
+		
+		/** 环绕的可用的点*/
+		public function getRoundAblePoint():Vector.<Vector3D>
+		{
+			var arr:Vector.<Vector3D> = new Vector.<Vector3D>();
+			var pos:Vector3D;
+			var nz:int ;
+			var nx:int ;
+			if(_isRotate) {
+				for( i = -1 ;  i<=_zSpan ; i++) {
+					for( j = -1 ; j<=_xSpan ; j++) {
+						if( i==-1|| j==-1 || i==_zSpan || j==_xSpan) {
+							pos = new Vector3D( i*_size+this.x , this.y , j*_size+this.z );
+							nx = pos.x/_size ;
+							nz = pos.z/_size ;
+							if(nx<=GameSetting.GRID_X &&  nz<=GameSetting.GRID_Z && nx>=0 && nz>=0 &&
+								MapGridDataModel.instance.astarGrid.getNode(nx,nz).walkable)
+								arr.push( pos );
+						}
+					}
+				}
+			} else {
+				for( var i:int = -1 ;  i<=_xSpan ; ++i){
+					for( var j:int = -1 ; j<=_zSpan ; ++j) {
+						if( i==-1|| j==-1 || i==_xSpan || j==_zSpan) {
+							pos = new Vector3D( i*_size+this.x , this.y , j*_size+this.z );
+							nx = pos.x/_size ;
+							nz = pos.z/_size ;
+							if(nx<=GameSetting.GRID_X &&  nz<=GameSetting.GRID_Z && nx>=0 && nz>=0 &&
+								MapGridDataModel.instance.astarGrid.getNode(nx,nz).walkable)
+								arr.push( pos );
+						}
+					}
+				}
+			}
+			return arr;
 		}
 		
 		/** 释放资源 */

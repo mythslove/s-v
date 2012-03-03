@@ -15,6 +15,7 @@ package local.game
 	import local.model.buildings.vos.*;
 	import local.model.map.*;
 	import local.model.shop.ShopModel;
+	import local.utils.CharacterManager;
 	import local.utils.ResourceUtil;
 	import local.views.tooltip.BuildingToolTip;
 	
@@ -331,7 +332,7 @@ package local.game
 				avatar.nodeZ = 59;
 				var scene:IsoScene = this.getBuildingScene( avatar.nodeX , avatar.nodeZ );
 				scene.addIsoObject( avatar ) ;
-				GameData.hero = avatar ;
+				CharacterManager.instance.hero = avatar ;
 			}
 		}
 	}

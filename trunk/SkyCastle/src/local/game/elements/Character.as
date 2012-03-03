@@ -7,8 +7,8 @@ package local.game.elements
 	
 	import flash.display.MovieClip;
 	import flash.events.Event;
-	import flash.geom.Point;
 	import flash.geom.Rectangle;
+	import flash.geom.Vector3D;
 	
 	import local.comm.GameSetting;
 	import local.enum.AvatarAction;
@@ -108,9 +108,16 @@ package local.game.elements
 		 */		
 		public function seachToBuilding( building:Building ):void
 		{
-			if(_currentActions==AvatarAction.IDLE )
+			if(_currentActions==AvatarAction.IDLE)
 			{
-				
+				if(!building.baseBuildingVO.walkable){
+					var arr:Vector.<Vector3D> = building.getRoundAblePoint(); 
+					if(arr.length>0){
+						searchToRun( arr[0].x/_size , arr[0].z/_size);
+					}
+				}else{
+					searchToRun( building.nodeX , building.nodeZ );
+				}
 			}
 		}
 		
@@ -141,6 +148,7 @@ package local.game.elements
 		 */		
 		protected function getNextPoint():Node
 		{
+			if(!roads) return null ;
 			roadIndex++;
 			if(roadIndex<roads.length){
 				var p:Node = (roads[roadIndex] as Node).clone() ;
@@ -167,7 +175,6 @@ package local.game.elements
 		public function stopMove():void 
 		{
 			roads = null ;
-			gotoAndPlay(AvatarAction.IDLE) ;
 		}
 		
 		

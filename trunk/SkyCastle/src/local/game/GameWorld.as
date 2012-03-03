@@ -13,10 +13,10 @@ package local.game
 	import local.enum.LayerType;
 	import local.enum.PayType;
 	import local.game.elements.Building;
-	import local.game.elements.Character;
 	import local.model.buildings.vos.BuildingVO;
 	import local.model.map.MapGridDataModel;
 	import local.model.village.VillageModel;
+	import local.utils.CharacterManager;
 	import local.views.effects.MapWordEffectRed;
 
 	public class GameWorld extends BaseWorld
@@ -36,11 +36,7 @@ package local.game
 		 */		
 		override protected function onClick(e:MouseEvent):void 
 		{
-			if(_mouseOverBuild && _mouseOverBuild is Character)
-			{
-				_mouseOverBuild.onClick();
-			}
-			else if(GameData.buildingCurrOperation==BuildingOperation.ADD) //添加
+			if(GameData.buildingCurrOperation==BuildingOperation.ADD) //添加
 			{	
 				if( _topBuilding && _topBuilding.gridLayer && _topBuilding.gridLayer.getWalkable() )
 				{
@@ -107,7 +103,7 @@ package local.game
 			else
 			{
 				var p:Point = pixelPointToGrid(stage.mouseX,stage.mouseY); 
-				GameData.hero.searchToRun( p.x , p.y );
+				CharacterManager.instance.hero.searchToRun( p.x , p.y );
 			}
 		}
 		
