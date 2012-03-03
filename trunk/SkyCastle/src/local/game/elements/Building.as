@@ -76,7 +76,7 @@ package local.game.elements
 			if(!baseBuildingVO.walkable){
 				var arr:Array = getRoundAblePoint(); 
 				if(arr.length>0){
-					arr.sortOn(["x"], Array.DESCENDING |Array.NUMERIC );
+					arr.sortOn("x", Array.DESCENDING |Array.NUMERIC );
 					character.searchToRun( arr[0].x/_size , arr[0].z/_size);
 				}
 			}else{
