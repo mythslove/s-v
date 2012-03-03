@@ -56,10 +56,10 @@ package local.game
 		{
 			super.addedToStageHandler(e);
 			//显示地图网格
-//			var gridScene:IsoScene = new IsoScene(GameSetting.GRID_SIZE);
-//			(gridScene.addChild( new IsoGrid(GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE)) as IsoGrid).render() ;
-//			gridScene.cacheAsBitmap=true;
-//			this.addScene(gridScene);
+			//			var gridScene:IsoScene = new IsoScene(GameSetting.GRID_SIZE);
+			//			(gridScene.addChild( new IsoGrid(GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE)) as IsoGrid).render() ;
+			//			gridScene.cacheAsBitmap=true;
+			//			this.addScene(gridScene);
 			_mapGridData = MapGridDataModel.instance;
 			//地图区域1
 			groundScene1 = new GroundScene();
