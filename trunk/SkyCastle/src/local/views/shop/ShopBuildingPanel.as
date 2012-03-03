@@ -48,9 +48,10 @@ package local.views.shop
 			ContainerUtil.removeChildren(container);
 			_page = page ;
 			var render:ShopItemRenderer ;
+			var len:int = _dataProvider.length;
 			var col:int = 4 ;
 			var temp:int = 0 ;
-			for( var i:int = _page*COUNT ; i<_totalPage && i<_page*COUNT+COUNT ; ++i )
+			for( var i:int = _page*COUNT ; i<len && i<_page*COUNT+COUNT ; ++i )
 			{
 				render = new ShopItemRenderer();
 				render.x = (temp%col)*(render.width + 10);
