@@ -269,6 +269,7 @@ package local.game
 					if( !_topBuilding && e.target is InteractivePNG){
 						_mouseOverBuild = (e.target as InteractivePNG).parent as Building;
 						_mouseOverBuild.onMouseOver() ;
+						_tooltip.updatePosition(e.stageX,e.stageY);
 						_tooltip.showTooltip(_mouseOverBuild.description , _mouseOverBuild.title );
 					}
 					break;
