@@ -7,6 +7,7 @@ package local.game.elements
 	import local.enum.BuildingType;
 	import local.game.GameWorld;
 	import local.model.buildings.vos.BuildingVO;
+	import local.utils.CharacterManager;
 	import local.utils.EffectManager;
 	import local.views.effects.BaseMovieClipEffect;
 	import local.views.effects.EffectPlacementBuilding;
@@ -59,6 +60,11 @@ package local.game.elements
 				placementEffect.x = this.screenX;
 				GameWorld.instance.effectScene.addChild(placementEffect);
 			}
+		}
+		
+		override public function onClick():void
+		{
+			CharacterManager.instance.hero.seachToBuilding(this);
 		}
 	}
 }
