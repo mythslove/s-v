@@ -8,7 +8,6 @@ package local.game.elements
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.geom.Rectangle;
-	import flash.geom.Vector3D;
 	
 	import local.comm.GameSetting;
 	import local.enum.AvatarAction;
@@ -98,25 +97,6 @@ package local.game.elements
 						roadIndex = 0 ;
 						nextPoint = this.getNextPoint();
 					}
-				}
-			}
-		}
-		
-		/**
-		 *  到达一个建筑物旁边
-		 * @param building
-		 */		
-		public function seachToBuilding( building:Building ):void
-		{
-			if(_currentActions==AvatarAction.IDLE)
-			{
-				if(!building.baseBuildingVO.walkable){
-					var arr:Vector.<Vector3D> = building.getRoundAblePoint(); 
-					if(arr.length>0){
-						searchToRun( arr[0].x/_size , arr[0].z/_size);
-					}
-				}else{
-					searchToRun( building.nodeX , building.nodeZ );
 				}
 			}
 		}
