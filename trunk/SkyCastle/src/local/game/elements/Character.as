@@ -99,9 +99,7 @@ package local.game.elements
 							nextPoint = this.getNextPoint();
 						}
 					}
-				}
-				else
-				{
+				}else if(_currentActions==AvatarAction.IDLE){
 					nodeX=endNodeX;
 					nodeZ = endNodeZ;
 					gotoAndPlay(AvatarAction.IDLE);
