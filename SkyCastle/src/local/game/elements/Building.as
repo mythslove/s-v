@@ -64,7 +64,24 @@ package local.game.elements
 		
 		override public function onClick():void
 		{
-			CharacterManager.instance.hero.seachToBuilding(this);
+			characterMoveTo(CharacterManager.instance.hero);
+		}
+		
+		/**
+		 * 人移动到此建筑旁边或上面 
+		 * @param character
+		 */		
+		protected function characterMoveTo( character:Character):void
+		{
+			if(!baseBuildingVO.walkable){
+				var arr:Array = getRoundAblePoint(); 
+				if(arr.length>0){
+					arr.sortOn(["x"], Array.DESCENDING |Array.NUMERIC );
+					character.searchToRun( arr[0].x/_size , arr[0].z/_size);
+				}
+			}else{
+				character.searchToRun( nodeX , nodeZ );
+			}
 		}
 	}
 }

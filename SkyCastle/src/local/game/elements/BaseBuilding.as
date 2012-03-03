@@ -159,10 +159,10 @@ package local.game.elements
 			}
 		}
 		
-		/** 环绕的可用的点*/
-		public function getRoundAblePoint():Vector.<Vector3D>
+		/** 环绕的可用的点 ,返回Vector3D数组*/
+		public function getRoundAblePoint():Array
 		{
-			var arr:Vector.<Vector3D> = new Vector.<Vector3D>();
+			var arr:Array = [];
 			var pos:Vector3D;
 			var nz:int ;
 			var nx:int ;
