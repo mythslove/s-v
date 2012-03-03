@@ -38,12 +38,12 @@ package local.model.village
 		{
 			me = new PlayerVO();
 			me.cash = 100;
-			me.coin = 10 ;
+			me.coin = 1000 ;
 			me.exp = 1;
 			me.maxExp = 10 ;
 			me.level = 1;
-			me.wood=20;
-			me.stone=29;
+			me.wood=200;
+			me.stone=209;
 			me.id = Guid.create();
 			me.name = "binghe";
 			GlobalDispatcher.instance.dispatchEvent( new UserInfoEvent(UserInfoEvent.USER_INFO_UPDATED));
