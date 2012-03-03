@@ -83,20 +83,29 @@ package local.game.elements
 		 */		
 		public function searchToRun( endNodeX:int , endNodeZ:int):void
 		{
-			if(MapGridDataModel.instance.astarGrid.getNode(endNodeX,endNodeZ).walkable
-				&& MapGridDataModel.instance.astarGrid.getNode(nodeX,nodeZ).walkable)
+			if(MapGridDataModel.instance.astarGrid.getNode(endNodeX,endNodeZ).walkable )
 			{
-				var astar:AStar = new AStar();
-				MapGridDataModel.instance.astarGrid.setStartNode( nodeX,nodeZ );
-				MapGridDataModel.instance.astarGrid.setEndNode( endNodeX,endNodeZ );
-				if(astar.findPath(MapGridDataModel.instance.astarGrid )) 
+				if(MapGridDataModel.instance.astarGrid.getNode(nodeX,nodeZ).walkable)
 				{
-					var roadsArray:Array = astar.path;
-					if(roadsArray && roadsArray.length>0){
-						roads = roadsArray ;
-						roadIndex = 0 ;
-						nextPoint = this.getNextPoint();
+					var astar:AStar = new AStar();
+					MapGridDataModel.instance.astarGrid.setStartNode( nodeX,nodeZ );
+					MapGridDataModel.instance.astarGrid.setEndNode( endNodeX,endNodeZ );
+					if(astar.findPath(MapGridDataModel.instance.astarGrid )) 
+					{
+						var roadsArray:Array = astar.path;
+						if(roadsArray && roadsArray.length>0){
+							roads = roadsArray ;
+							roadIndex = 0 ;
+							nextPoint = this.getNextPoint();
+						}
 					}
+				}
+				else
+				{
+					nodeX=endNodeX;
+					nodeZ = endNodeZ;
+					gotoAndPlay(AvatarAction.IDLE);
+					sort();
 				}
 			}
 		}
@@ -155,6 +164,7 @@ package local.game.elements
 		public function stopMove():void 
 		{
 			roads = null ;
+			gotoAndPlay(AvatarAction.IDLE) ;
 		}
 		
 		

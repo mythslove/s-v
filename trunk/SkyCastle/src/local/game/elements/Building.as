@@ -29,14 +29,17 @@ package local.game.elements
 			{
 				case BuildingOperation.ADD:
 					playPlaceEffect();
+					CharacterManager.instance.updateCharacters( this );
 					break ;
 				case BuildingOperation.ROTATE:
 					buildingVO.scale = scaleX ;
+					CharacterManager.instance.updateCharacters( this );
 					break ;
 				case BuildingOperation.STASH:
 					break ;
 				case BuildingOperation.MOVE:
 					playPlaceEffect();
+					CharacterManager.instance.updateCharacters( this );
 					break ;
 				case BuildingOperation.SELL :
 					break ;

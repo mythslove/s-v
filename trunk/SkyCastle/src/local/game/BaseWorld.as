@@ -1,7 +1,6 @@
 package local.game
 {
 	import bing.iso.*;
-	import bing.utils.ContainerUtil;
 	import bing.utils.InteractivePNG;
 	
 	import flash.display.*;
@@ -328,8 +327,8 @@ package local.game
 			if(ShopModel.instance.characterArray && ShopModel.instance.characterArray.length>0)
 			{
 				var avatar:Hero = new Hero( ShopModel.instance.characterArray[0]);
-				avatar.nodeX = 59;
-				avatar.nodeZ = 59;
+				avatar.nodeX = 56;
+				avatar.nodeZ = 34;
 				var scene:IsoScene = this.getBuildingScene( avatar.nodeX , avatar.nodeZ );
 				scene.addIsoObject( avatar ) ;
 				CharacterManager.instance.hero = avatar ;
