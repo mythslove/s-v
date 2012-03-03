@@ -1,5 +1,9 @@
 package local.utils
 {
+	import flash.geom.Vector3D;
+	
+	import local.game.elements.Building;
+	import local.game.elements.Character;
 	import local.game.elements.Hero;
 
 	/**
@@ -18,5 +22,34 @@ package local.utils
 		
 		/**英雄*/
 		public var hero:Hero ;
+		
+		/**
+		 * 更新所有的人，以免得人不能移动 
+		 * @param building
+		 */		
+		public function updateCharacters( building:Building ):void
+		{
+			if(!building.baseBuildingVO.walkable){
+				updateCharacter(hero,building);
+			}
+		}
+		
+		private function updateCharacter ( character:Character , building:Building ):void
+		{
+			var spans:Vector.<Vector3D> = building.spanPosition ;
+			for each( var vec:Vector3D in spans)
+			{
+				if(character.x == vec.x && character.z == vec.z )
+				{
+					var arr:Array = building.getRoundAblePoint() ;
+					if(arr&&arr.length){
+						character.x = arr[arr.length-1].x ;
+						character.z = arr[arr.length-1].z ;
+						character.sort();
+						break ;
+					}
+				}
+			}
+		}
 	}
 }
