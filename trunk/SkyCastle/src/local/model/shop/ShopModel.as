@@ -87,8 +87,9 @@ package local.model.shop
 			arr = XMLAnalysis.createInstanceArrayByXML(config.shop[0].rock[0] , BuildingVO , "," );
 			_rockArray = Vector.<BuildingVO>( arr);
 			//装饰
-			_decorationArray = new Vector.<BuildingVO>();
-			_decorationArray =  _roadArray.concat(_treeArray).concat(_stoneArray).concat(_rockArray);
+			arr = XMLAnalysis.createInstanceArrayByXML(config.shop[0].decoration[0] , BuildingVO , "," );
+			_decorationArray = Vector.<BuildingVO>(arr);
+			_decorationArray =  _decorationArray.concat(_roadArray).concat(_treeArray).concat(_stoneArray).concat(_rockArray);
 			//人
 			arr =  XMLAnalysis.createInstanceArrayByXML(config.shop[0].character[0] , BuildingVO , "," );
 			_characterArray = Vector.<BuildingVO>( arr);

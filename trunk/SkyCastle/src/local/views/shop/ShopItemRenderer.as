@@ -77,6 +77,9 @@ package local.views.shop
 					this["txtStone"].text= baseFactoryVO.buildStone+"";
 					break ;
 				case BuildingType.DECORATION: //装饰
+					btnNormal.addEventListener(MouseEvent.CLICK , clickNormalBtnHandler,false,0,true);
+					var baseDecVO:BaseDecorationVO = vo.baseVO as BaseDecorationVO ;
+					this["txtCoin"].text= vo.price+"";
 					break ;
 				case BuildingType.DEC_TREE: //树
 				case BuildingType.DEC_STONE: //石头
