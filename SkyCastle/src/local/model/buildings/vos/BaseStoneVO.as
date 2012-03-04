@@ -12,7 +12,7 @@ package local.model.buildings.vos
 		/** 每打击一次收获的金币数*/
 		public var earnCoins:Array ;
 		
-		/** 每打击一次花费的能量 */
+		/** 每砍一次得到的经验值 */
 		public var earnExps:Array ;
 		
 		/** 每打击一次花费的能量 */
