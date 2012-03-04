@@ -14,15 +14,7 @@ package local.views.shop
 	import local.comm.GlobalDispatcher;
 	import local.enum.BuildingType;
 	import local.events.ShopEvent;
-	import local.game.elements.Building;
-	import local.model.buildings.vos.BaseBuildingVO;
-	import local.model.buildings.vos.BaseDecorationVO;
-	import local.model.buildings.vos.BaseFactoryVO;
-	import local.model.buildings.vos.BaseHouseVO;
-	import local.model.buildings.vos.BaseRoadVO;
-	import local.model.buildings.vos.BaseStoneVO;
-	import local.model.buildings.vos.BaseTreeVO;
-	import local.model.buildings.vos.BuildingVO;
+	import local.model.buildings.vos.*;
 	import local.views.base.Image;
 	import local.views.tooltip.GameToolTip;
 	
@@ -87,9 +79,9 @@ package local.views.shop
 				case BuildingType.DECORATION: //装饰
 					break ;
 				case BuildingType.DEC_TREE: //树
-					var baseTreeVO:BaseTreeVO = vo.baseVO as BaseTreeVO ;
-					break ;
 				case BuildingType.DEC_STONE: //石头
+				case BuildingType.DEC_ROCK: //磐石
+					btnNormal.addEventListener(MouseEvent.CLICK , clickNormalBtnHandler,false,0,true);
 					break ;
 				case BuildingType.DEC_ROAD: //路
 					btnNormal.addEventListener(MouseEvent.CLICK , clickNormalBtnHandler,false,0,true);
@@ -103,31 +95,7 @@ package local.views.shop
 		private function clickNormalBtnHandler( e:MouseEvent ):void
 		{
 			e.stopPropagation();
-			var type:String = vo.baseVO.type ;
-			switch( type )
-			{
-				case BuildingType.BUILDING://建筑
-					var baseVO:BaseBuildingVO = vo.baseVO ;
-					break ;
-				case BuildingType.BUILDING_HOUSE: //房子
-					GlobalDispatcher.instance.dispatchEvent( new ShopEvent(ShopEvent.SELECTED_BUILDING,vo));
-					break ;
-				case BuildingType.BUILDING_FACTORY: //工厂
-					var baseFactoryVO:BaseFactoryVO = vo.baseVO as BaseFactoryVO ;
-					break ;
-				case BuildingType.DECORATION: //装饰
-					var baseDecVO:BaseDecorationVO = vo.baseVO as BaseDecorationVO ;
-					break ;
-				case BuildingType.DEC_TREE: //树
-					var baseTreeVO:BaseTreeVO = vo.baseVO as BaseTreeVO ;
-					break ;
-				case BuildingType.DEC_STONE: //石头
-					var baseStoneVO:BaseStoneVO = vo.baseVO as BaseStoneVO ;
-					break ;
-				case BuildingType.DEC_ROAD: //路
-					GlobalDispatcher.instance.dispatchEvent( new ShopEvent(ShopEvent.SELECTED_BUILDING,vo));
-					break ;
-			}
+			GlobalDispatcher.instance.dispatchEvent( new ShopEvent(ShopEvent.SELECTED_BUILDING,vo));
 		}
 		
 		private function disabledSprite():void

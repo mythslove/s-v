@@ -4,6 +4,7 @@ package local.views.shop
 	import bing.utils.ContainerUtil;
 	
 	import flash.display.Sprite;
+	import flash.events.MouseEvent;
 	
 	import local.model.buildings.vos.BuildingVO;
 	import local.views.BaseView;
@@ -30,6 +31,27 @@ package local.views.shop
 			super();
 		}
 		
+		override protected function added():void
+		{
+			btnPrevPage.addEventListener(MouseEvent.CLICK , pageBtnHandler , false , 0 , true );
+			btnNextPage.addEventListener(MouseEvent.CLICK , pageBtnHandler , false , 0 , true );
+		}
+		
+		private function pageBtnHandler( e:MouseEvent ):void
+		{
+			e.stopPropagation();
+			switch( e.target)
+			{
+				case btnPrevPage:
+					_page--;
+					break ;
+				case btnNextPage:
+					_page++;
+					break;
+			}
+			showBuildingList(_page);
+			updatePageButton();
+		}
 		
 		public function set dataProvider( value:Vector.<BuildingVO> ):void
 		{
@@ -75,6 +97,13 @@ package local.views.shop
 					btnPrevPage.enabled = false ;
 				}
 			}
+		}
+		
+		override protected function removed():void
+		{
+			btnPrevPage.removeEventListener(MouseEvent.CLICK , pageBtnHandler );
+			btnNextPage.removeEventListener(MouseEvent.CLICK , pageBtnHandler );
+			_dataProvider = null ;
 		}
 	}
 }

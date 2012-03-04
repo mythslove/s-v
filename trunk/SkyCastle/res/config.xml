@@ -20,7 +20,38 @@
 			layer="2" maxLevel="3" walkable="0" buildWood="4" buildStone="3"
 			url="res/house/Basic_HallOfHeroes_Ruin.swf" 
 			thumb="res/house/Basic_HallOfHeroes_RuinThumb.png" />
-
+			
+		<vo baseId="11" name="Fallen Pillar Ruin" alias="Basic_FallenPillar_Ruin" walkable="false" layer="2"
+			description="Fallen Pillar Ruin" xSpan="2" zSpan="1" maxLevel="1" type="rock" buildEarnExp="0" earnStep="1" earnWoods="1"
+			earnStones="1" earnCoins="1" earnExps="1" spendEnergys="1" 
+			url="res/rock/Basic_FallenPillar_Ruin.swf" thumb="res/rock/Basic_FallenPillar_RuinThumb.png" />
+		<vo baseId="12" name="Viney RockA" alias="Basic_VineyRockA" walkable="false" layer="2"
+			description="Viney RockA" xSpan="1" zSpan="1" maxLevel="4" type="rock" buildEarnExp="0" earnStep="4" earnWoods="5,3,2,1"
+			earnStones="5,3,2,1" earnCoins="5,3,2,1" earnExps="5,3,2,0" spendEnergys="2,1,1,1" 
+			url="res/rock/Basic_VineyRockA.swf" thumb="res/rock/Basic_VineyRockAThumb.png" />	
+		<vo baseId="13" name="Viney RockB" alias="Basic_VineyRockB" walkable="false" layer="2"
+			description="Viney RockB" xSpan="1" zSpan="1" maxLevel="3" type="rock" buildEarnExp="0" earnStep="3" earnWoods="4,2,1"
+			earnStones="4,2,1" earnCoins="4,2,1" earnExps="4,2,0" spendEnergys="1,1,1"
+			url="res/rock/Basic_VineyRockB.swf" thumb="res/rock/Basic_VineyRockBThumb.png" />	
+		
+		<vo baseId="14" name="StoneG" alias="Basic_StoneG" walkable="false" layer="2"
+			description="StoneG" xSpan="1" zSpan="1" maxLevel="1" type="stone" buildEarnExp="0" earnStep="4"
+			earnStones="4,3,2,1" earnCoins="2,2,2,2" earnExps="1,1,0,0" spendEnergys="1,1,1,1" 
+			url="res/stone/Basic_StoneG.swf" thumb="res/stone/Basic_StoneGThumb.png" />
+		
+		<vo baseId="15" name="Wood Debris" alias="Basic_WoodDebrisC" walkable="false" layer="2"
+			description="Wood Debris" xSpan="1" zSpan="1" maxLevel="2" type="tree" buildEarnExp="0" earnStep="2" earnWoods="2,1"
+			earnCoins="2,1" earnExps="2,0" spendEnergys="1,1"
+			url="res/tree/Basic_WoodDebrisC.swf" thumb="res/tree/Basic_WoodDebrisCThumb.png" />
+		<vo baseId="16" name="Wreck Tree" alias="Basic_WreckTree" walkable="false" layer="2"
+			description="Wreck Tree" xSpan="2" zSpan="2" maxLevel="1" type="tree" buildEarnExp="0" earnStep="1" earnWoods="4"
+			earnCoins="5" earnExps="3" spendEnergys="1"
+			url="res/tree/Basic_WreckTree.swf" thumb="res/tree/Basic_WreckTreeThumb.png" />
+		<vo baseId="17" name="Garden TreeGiant Happy Oak" alias="Garden_TreeGiantHappyOak" walkable="false" layer="2"
+			description="Garden TreeGiant Happy Oak" xSpan="1" zSpan="1" maxLevel="1" type="tree" buildEarnExp="0" earnStep="1" earnWoods="6"
+			earnCoins="4" earnExps="3" spendEnergys="1"
+			url="res/tree/Garden_TreeGiantHappyOak.swf" thumb="res/tree/Garden_TreeGiantHappyOakThumb.png" />
+		
 		<vo baseId="1000" name="Bingheliefeng" alias="Basic_AvatarMale"  description="" type="character" xSpan="1" zSpan="1"
 		layer="2" walkable="1"  url="res/character/Basic_AvatarMale.swf" />
 	</buildings>
@@ -33,10 +64,17 @@
 			<vo baseId="2" price="2" payType="1" />
 		</road>
 		<tree>
+			<vo baseId="15" price="0" payType="1" />
+			<vo baseId="16" price="0" payType="1" />
+			<vo baseId="17" price="0" payType="1" />
 		</tree>
 		<stone>
+			<vo baseId="14" price="0" payType="1" />
 		</stone>
 		<rock>
+			<vo baseId="11" price="0" payType="1" />
+			<vo baseId="12" price="0" payType="1" />
+			<vo baseId="13" price="0" payType="1" />
 		</rock>
 		<character>
 			<vo baseId="1000" />
