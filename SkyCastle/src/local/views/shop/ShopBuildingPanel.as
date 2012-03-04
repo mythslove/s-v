@@ -29,10 +29,6 @@ package local.views.shop
 		public function ShopBuildingPanel()
 		{
 			super();
-		}
-		
-		override protected function added():void
-		{
 			btnPrevPage.addEventListener(MouseEvent.CLICK , pageBtnHandler , false , 0 , true );
 			btnNextPage.addEventListener(MouseEvent.CLICK , pageBtnHandler , false , 0 , true );
 		}
@@ -98,7 +94,7 @@ package local.views.shop
 			}
 		}
 		
-		override protected function removed():void
+		public function dispose():void
 		{
 			btnPrevPage.removeEventListener(MouseEvent.CLICK , pageBtnHandler );
 			btnNextPage.removeEventListener(MouseEvent.CLICK , pageBtnHandler );
