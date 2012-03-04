@@ -35,8 +35,14 @@ package local.views.shop
 		public var container:Sprite ;
 		public var btnClose:BaseButton;
 		//==============================
+		//缓存商店查看的位置，以便下次进来还是显示上次的位置
+		public static var shopCurrentTab:String ; 
+		public static var shopCurrentSubTab:String;
+		public static var shopCurrentPage:int = 0  ;
+		//==============================
 		private var _subTabBar:ToggleBar ;
 		private var _buildingPanel:ShopBuildingPanel; 
+		private var _isFirstOpen:Boolean=true ; //是否是刚打开此窗口
 		
 		public function ShopPopUp()
 		{
@@ -51,7 +57,11 @@ package local.views.shop
 			
 			tabMenu.addEventListener(ToggleItemEvent.ITEM_SELECTED , tabMenuHandler , false , 0 , true ) ;
 			btnClose.addEventListener( MouseEvent.CLICK , closeClickHandler , false , 0 , true );
-			tabMenu.selectedName = tabMenu.btnBuilding.name;
+			if(shopCurrentTab){
+				tabMenu.selectedName = shopCurrentTab;
+			}else{
+				tabMenu.selectedName = tabMenu.btnBuilding.name;
+			}
 			
 			GlobalDispatcher.instance.addEventListener(ShopEvent.SELECTED_BUILDING , shopEventHandler );
 		}
@@ -73,6 +83,7 @@ package local.views.shop
 		/* 主分类菜单按钮单击*/
 		private function tabMenuHandler( e:ToggleItemEvent):void 
 		{
+			shopCurrentTab=e.selectedName;
 			//先清除子菜单 和 子元素面板
 			if(_subTabBar){
 				_subTabBar.removeEventListener(ToggleItemEvent.ITEM_SELECTED , subTabMenuHandler );
@@ -87,7 +98,6 @@ package local.views.shop
 					_subTabBar.x = 20 ;
 					_subTabBar.addEventListener(ToggleItemEvent.ITEM_SELECTED , subTabMenuHandler , false , 0, true );
 					container.addChild( _subTabBar);
-					_subTabBar.selectedName = ShopSubBuildingTabBar.BTN_ALL;
 					break ;
 				case tabMenu.btnDecoration.name:
 					container.addChild(_buildingPanel) ;
@@ -95,15 +105,19 @@ package local.views.shop
 					_subTabBar.x = 20 ;
 					_subTabBar.addEventListener(ToggleItemEvent.ITEM_SELECTED , subTabMenuHandler , false , 0, true );
 					container.addChild( _subTabBar);
-					_subTabBar.selectedName = ShopSubDecorationTabBar.BTN_ALL;
 					break ;
 			}
-			
+			if(_isFirstOpen &&  _subTabBar && shopCurrentSubTab ){
+				_subTabBar.selectedName = shopCurrentSubTab ;
+			}else if(_subTabBar){
+				_subTabBar.selectedName = "btnAll";
+			}
 		}
 		
 		/* 子分类菜单按钮单击*/
 		private function subTabMenuHandler( e:ToggleItemEvent ):void
 		{
+			shopCurrentSubTab = e.selectedName ;
 			if(tabMenu.selectedName==tabMenu.btnBuilding.name)
 			{
 				switch( e.selectedName )
@@ -140,7 +154,12 @@ package local.views.shop
 						break ;
 				}
 			}
-			_buildingPanel.showBuildingList(0);
+			if(_isFirstOpen){
+				_buildingPanel.showBuildingList(shopCurrentPage);
+			}else{
+				_buildingPanel.showBuildingList(0);
+			}
+			_isFirstOpen = false ;
 		}
 		
 		private function closeClickHandler( e:MouseEvent ):void
