@@ -99,7 +99,7 @@ package bing.iso.path
 				_closed.push(node);
 				if(_open.length == 0)
 				{
-					return false
+					return false ;
 				}
 				_open.sortOn("f", Array.NUMERIC);
 				node = _open.shift() as Node;
