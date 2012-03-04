@@ -72,7 +72,7 @@ package local.views.shop
 			{
 				render = new ShopItemRenderer();
 				render.x = (temp%col)*(render.width + 10);
-				render.y = Math.floor(temp/col)*(render.height+10);
+				render.y = Math.floor(temp/col)*(render.height+20);
 				container.addChild(render);
 				render.showBuilding( _dataProvider[i] );
 				temp++;
