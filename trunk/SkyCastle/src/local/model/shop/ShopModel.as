@@ -32,6 +32,24 @@ package local.model.shop
 			return _roadArray ;
 		}
 		
+		private var _treeArray:Vector.<BuildingVO>;
+		/** 商店中所有的树*/
+		public function get treeArray():Vector.<BuildingVO> {
+			return _treeArray ;
+		}
+		
+		private var _stoneArray:Vector.<BuildingVO>;
+		/** 商店中所有的石头*/
+		public function get stoneArray():Vector.<BuildingVO> {
+			return _stoneArray ;
+		}
+		
+		private var _rockArray:Vector.<BuildingVO>;
+		/** 商店中所有的磐石*/
+		public function get rockArray():Vector.<BuildingVO> {
+			return _rockArray ;
+		}
+		
 		private var _decorationArray:Vector.<BuildingVO>;
 		/** 商店中所有的装饰*/
 		public function get decorationArray():Vector.<BuildingVO> {
@@ -59,9 +77,18 @@ package local.model.shop
 			//路
 			arr = XMLAnalysis.createInstanceArrayByXML(config.shop[0].road[0] , BuildingVO , "," );
 			_roadArray = Vector.<BuildingVO>( arr);
+			//树
+			arr = XMLAnalysis.createInstanceArrayByXML(config.shop[0].tree[0] , BuildingVO , "," );
+			_treeArray = Vector.<BuildingVO>( arr);
+			//石头
+			arr = XMLAnalysis.createInstanceArrayByXML(config.shop[0].stone[0] , BuildingVO , "," );
+			_stoneArray = Vector.<BuildingVO>( arr);
+			//岩石
+			arr = XMLAnalysis.createInstanceArrayByXML(config.shop[0].rock[0] , BuildingVO , "," );
+			_rockArray = Vector.<BuildingVO>( arr);
 			//装饰
 			_decorationArray = new Vector.<BuildingVO>();
-			_decorationArray =  _roadArray.concat();
+			_decorationArray =  _roadArray.concat(_treeArray).concat(_stoneArray).concat(_rockArray);
 			//人
 			arr =  XMLAnalysis.createInstanceArrayByXML(config.shop[0].character[0] , BuildingVO , "," );
 			_characterArray = Vector.<BuildingVO>( arr);

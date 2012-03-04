@@ -126,6 +126,15 @@ package local.views.shop
 					case ShopSubDecorationTabBar.BTN_GROUND:
 						_buildingPanel.dataProvider = ShopModel.instance.roadArray ;
 						break ;
+					case ShopSubDecorationTabBar.BTN_ROCK:
+						_buildingPanel.dataProvider = ShopModel.instance.rockArray ;
+						break ;
+					case ShopSubDecorationTabBar.BTN_TREE:
+						_buildingPanel.dataProvider = ShopModel.instance.treeArray ;
+						break ;
+					case ShopSubDecorationTabBar.BTN_STONE:
+						_buildingPanel.dataProvider = ShopModel.instance.stoneArray ;
+						break ;
 				}
 			}
 		}
