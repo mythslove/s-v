@@ -41,7 +41,6 @@ package local.views.shop
 		public function ShopPopUp()
 		{
 			super();
-			_buildingPanel = new ShopBuildingPanel() ;
 		}
 		
 		override protected function added():void
@@ -57,6 +56,7 @@ package local.views.shop
 			GlobalDispatcher.instance.addEventListener(ShopEvent.SELECTED_BUILDING , shopEventHandler );
 		}
 		
+		/* 商店中选择了一个商品 */
 		private function shopEventHandler( e:ShopEvent ):void
 		{
 			switch( e.type )
@@ -70,13 +70,15 @@ package local.views.shop
 			}
 		}
 		
+		/* 主分类菜单按钮单击*/
 		private function tabMenuHandler( e:ToggleItemEvent):void 
 		{
-			//先清除
+			//先清除子菜单 和 子元素面板
 			if(_subTabBar){
 				_subTabBar.removeEventListener(ToggleItemEvent.ITEM_SELECTED , subTabMenuHandler );
 			}
 			ContainerUtil.removeChildren( container );
+			_buildingPanel = new ShopBuildingPanel();
 			switch(  e.selectedName )
 			{
 				case tabMenu.btnBuilding.name:
@@ -99,6 +101,7 @@ package local.views.shop
 			
 		}
 		
+		/* 子分类菜单按钮单击*/
 		private function subTabMenuHandler( e:ToggleItemEvent ):void
 		{
 			if(tabMenu.selectedName==tabMenu.btnBuilding.name)
@@ -157,6 +160,7 @@ package local.views.shop
 			if(_subTabBar){
 				_subTabBar.removeEventListener(ToggleItemEvent.ITEM_SELECTED , subTabMenuHandler );
 			}
+			_buildingPanel.dispose();
 			_buildingPanel = null ;
 		}
 	}
