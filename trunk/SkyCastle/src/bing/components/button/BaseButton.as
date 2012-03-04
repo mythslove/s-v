@@ -43,18 +43,26 @@
 			switch ( event.type )
 			{
 				case MouseEvent.MOUSE_OUT:
-					this.gotoAndStop("up");
-					break ;
 				case MouseEvent.MOUSE_UP :
 					if(this.enabled) {
-						this.gotoAndStop("over");
+						this.gotoAndStop("up");
+					}else{
+						this.gotoAndStop("disbaled");
 					}
 					break;
 				case MouseEvent.MOUSE_OVER :
-					this.gotoAndStop("over");
+					if(this.enabled) {
+						this.gotoAndStop("over");
+					}else{
+						this.gotoAndStop("disbaled");
+					}
 					break;
 				case MouseEvent.MOUSE_DOWN :
-					this.gotoAndStop("down");
+					if(this.enabled) {
+						this.gotoAndStop("down");
+					}else{
+						this.gotoAndStop("disbaled");
+					}
 					break;
 			}
 		}
