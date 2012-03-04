@@ -1,5 +1,7 @@
 package bing.iso.path
 {
+	import flash.utils.getTimer;
+
 	public class AStar
 	{
 		private var _open:Array;
@@ -40,6 +42,7 @@ package bing.iso.path
 		private function search():Boolean
 		{
 			var node:Node = _startNode;
+			var time:int = getTimer();
 			while(node != _endNode)
 			{
 				var startX:int = Math.max(0, node.x - 1);
@@ -51,6 +54,8 @@ package bing.iso.path
 				{
 					for(var j:int = startY; j <= endY; j++)
 					{
+						if(getTimer()-time>10) return false ;
+						
 						var test:Node = _grid.getNode(i, j);
 						
 						if(!_canDiagonal && test.x!=node.x && test.y != node.y ) continue ;
@@ -91,13 +96,9 @@ package bing.iso.path
 						}
 					}
 				}
-				for(var o:int = 0; o < _open.length; o++)
-				{
-				}
 				_closed.push(node);
 				if(_open.length == 0)
 				{
-					trace("no path found");
 					return false
 				}
 				_open.sortOn("f", Array.NUMERIC);
