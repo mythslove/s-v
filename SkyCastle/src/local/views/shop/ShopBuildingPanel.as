@@ -50,7 +50,6 @@ package local.views.shop
 					break;
 			}
 			showBuildingList(_page);
-			updatePageButton();
 		}
 		
 		public function set dataProvider( value:Vector.<BuildingVO> ):void
@@ -61,13 +60,12 @@ package local.views.shop
 			if(value){
 				_totalPage = Math.ceil(value.length/COUNT);
 			}
-			showBuildingList(0);
-			updatePageButton();
 		}
 		
 		public function showBuildingList( page:int ):void
 		{
 			ContainerUtil.removeChildren(container);
+			if(_dataProvider==null) return ;
 			_page = page ;
 			var render:ShopItemRenderer ;
 			var len:int = _dataProvider.length;
@@ -82,6 +80,7 @@ package local.views.shop
 				render.showBuilding( _dataProvider[i] );
 				temp++;
 			}
+			updatePageButton();
 		}
 		
 		private function updatePageButton():void

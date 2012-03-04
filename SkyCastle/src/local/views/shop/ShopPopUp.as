@@ -137,6 +137,7 @@ package local.views.shop
 						break ;
 				}
 			}
+			_buildingPanel.showBuildingList(0);
 		}
 		
 		private function closeClickHandler( e:MouseEvent ):void
