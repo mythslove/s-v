@@ -21,7 +21,6 @@
 			import map.GameWorld;
 			
 			import mx.controls.Alert;
-			import mx.core.mx_internal;
 			import mx.graphics.codec.PNGEncoder;
 			
 			import utils.ReadMapDataUtil;
@@ -35,6 +34,8 @@
 				borderContainer.contentGroup.clipAndEnableScrolling = true ;
 				_gameWorld  = new GameWorld() ;
 				container.addChild( _gameWorld) ;
+				
+				GameData.mainApp = this ;
 			}
 			
 			private function addImpactClick():void

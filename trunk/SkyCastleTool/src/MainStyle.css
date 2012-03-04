@@ -1,12 +1,19 @@
 /* CSS file */
 @namespace s "library://ns.adobe.com/flex/spark";
 @namespace mx "library://ns.adobe.com/flex/mx";
+@namespace windowClasses "mx.core.windowClasses.*";
 
 global
 {
 	color: #ffffff;
 	fontFamily:"宋体";
 	fontSize:14px;
+}
+
+.normalText{
+	color: #000000;
+	fontFamily:"宋体";
+	fontSize:15px;
 }
 
 s|BorderContainer

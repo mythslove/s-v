@@ -17,7 +17,6 @@ package map
 	import enums.BuildingCurrentOperation;
 	
 	import flash.display.Bitmap;
-	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
@@ -229,6 +228,8 @@ package map
 			var yy:int = (e.stageY -this.y-GameSetting.GRID_SIZE)/scaleX - this.sceneLayerOffsetY;
 			
 			var p:Point = IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE,xx,yy);
+			
+			GameData.mainApp.status = p.toString() ;
 			
 			var dx:int = p.x*GameSetting.GRID_SIZE ;
 			var dz:int = p.y*GameSetting.GRID_SIZE ;
