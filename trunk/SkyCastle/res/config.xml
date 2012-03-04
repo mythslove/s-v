@@ -32,6 +32,12 @@
 			<vo baseId="1" price="1" payType="1" />
 			<vo baseId="2" price="2" payType="1" />
 		</road>
+		<tree>
+		</tree>
+		<stone>
+		</stone>
+		<rock>
+		</rock>
 		<character>
 			<vo baseId="1000" />
 		</character>
