@@ -23,5 +23,8 @@ package comm
 		 * 坐标0点 
 		 */		
 		public static const zeroPoint:Point = new Point();
+		
+		/** 主应用*/
+		public static var mainApp:SkyCastleTool ;
 	}
 }
