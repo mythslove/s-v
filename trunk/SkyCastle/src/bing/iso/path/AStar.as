@@ -54,7 +54,7 @@ package bing.iso.path
 				{
 					for(var j:int = startY; j <= endY; j++)
 					{
-						if(getTimer()-time>10) return false ;
+						if(getTimer()-time>50) return false ;
 						
 						var test:Node = _grid.getNode(i, j);
 						
