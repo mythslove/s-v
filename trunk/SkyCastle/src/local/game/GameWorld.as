@@ -13,6 +13,7 @@ package local.game
 	import local.enum.LayerType;
 	import local.enum.PayType;
 	import local.game.elements.Building;
+	import local.game.elements.Character;
 	import local.model.buildings.vos.BuildingVO;
 	import local.model.map.MapGridDataModel;
 	import local.model.village.VillageModel;
@@ -36,7 +37,10 @@ package local.game
 		 */		
 		override protected function onClick(e:MouseEvent):void 
 		{
-			if(GameData.buildingCurrOperation==BuildingOperation.ADD) //添加
+			if(_mouseOverBuild && _mouseOverBuild is Character){
+				_mouseOverBuild.onClick();
+			}
+			else if(GameData.buildingCurrOperation==BuildingOperation.ADD) //添加
 			{	
 				if( _topBuilding && _topBuilding.gridLayer && _topBuilding.gridLayer.getWalkable() )
 				{
