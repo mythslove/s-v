@@ -10,6 +10,8 @@
 	
 	<fx:Script>
 		<![CDATA[
+			import map.GameWorld;
+			
 			import mx.managers.PopUpManager;
 			
 			import views.ModalWindow;
@@ -17,6 +19,7 @@
 			private function init():void
 			{
 				PopUpManager.addPopUp( new ModalWindow(),this);
+				world.addChild(GameWorld.instance);
 			}
 			
 		]]>
@@ -24,6 +27,7 @@
 	
 	<s:HGroup x="0" y="0" width="100%" height="100%">
 		<s:BorderContainer width="100%" height="100%" borderColor="#B9B9B9">
+			<mx:UIComponent id="world"  width="3072" height="3072" />
 		</s:BorderContainer>
 		<s:BorderContainer width="200" height="100%" backgroundColor="#F0F0F0" borderColor="#B2B2B2">
 			<views:WorldSettingPanel x="0" y="0">

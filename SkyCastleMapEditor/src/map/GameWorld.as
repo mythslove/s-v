@@ -13,11 +13,20 @@ package map
 	
 	public class GameWorld extends IsoWorld
 	{
+		private static var _instance:GameWorld;
+		public static function get instance():GameWorld{
+			if(!_instance) _instance = new GameWorld();
+			return _instance ;
+		}
+		//=================================
 		private var _gridScene:IsoScene;
 		
 		public function GameWorld()
 		{
-			super(GameSetting.MAP_WIDTH, GameSetting.MAP_HEIGHT, GameSetting.GRID_X, GameSetting.GRID_Z, GameSetting.GRID_SIZE);
+			super(GameSetting.MAX_WIDTH, GameSetting.MAX_HEIGHT, GameSetting.GRID_X, GameSetting.GRID_Z, GameSetting.GRID_SIZE);
+			drawZone(GameSetting.GRID_X, GameSetting.GRID_Z);
+			this.x = -GameSetting.MAX_WIDTH*scaleX*0.5+GameSetting.SCREEN_WIDTH*0.5 ;
+			y=-100;
 		}
 		
 		override protected function addedToStageHandler(e:Event):void
@@ -25,9 +34,19 @@ package map
 			super.addedToStageHandler(e);
 			_gridScene = new IsoScene(_size);
 			var grid:IsoGrid = new IsoGrid(GameSetting.GRID_X, GameSetting.GRID_Z,_size);
-			_gridScene.addIsoObject(grid);
-			
+			grid.render();
+			_gridScene.addChild(grid);
+			addScene(_gridScene);
 			configListeners();
+		}
+		
+		/** 画地图区域 */
+		protected function drawZone( xPan:int , zPan:int  ):void
+		{
+			this.graphics.clear();
+			this.graphics.beginFill(0x49842D);
+			this.graphics.drawRect(0,0,GameSetting.MAX_WIDTH , GameSetting.MAX_HEIGHT);
+			this.graphics.endFill();
 		}
 		
 		private function configListeners():void
