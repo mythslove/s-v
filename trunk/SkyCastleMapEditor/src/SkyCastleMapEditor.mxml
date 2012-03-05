@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					   xmlns:s="library://ns.adobe.com/flex/spark" creationComplete="init();"
+					   width="900" height="640"
+					   xmlns:mx="library://ns.adobe.com/flex/mx">
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.managers.PopUpManager;
+			
+			import views.ModalWindow;
+			
+			private function init():void
+			{
+				PopUpManager.addPopUp( new ModalWindow(),this);
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:HGroup x="0" y="0" width="100%" height="100%">
+		<s:BorderContainer width="100%" height="100%" borderColor="#B9B9B9">
+		</s:BorderContainer>
+		<s:BorderContainer width="200" height="100%" backgroundColor="#F0F0F0" borderColor="#B2B2B2">
+		</s:BorderContainer>
+	</s:HGroup>
+</s:WindowedApplication>

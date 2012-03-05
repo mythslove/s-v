@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   xmlns:views="views.*" 
+			   width="836" height="140" creationComplete="init()">
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import comm.GameData;
+			
+			import mx.collections.ArrayCollection;
+			
+			[Bindable]
+			private var modals:ArrayCollection = new ArrayCollection([
+				GameData.TYPE_GRASS1,GameData.TYPE_GRASS2,GameData.TYPE_GROUND1,GameData.TYPE_ROCK1,GameData.TYPE_ROCK2,GameData.TYPE_ROCK2,
+				GameData.TYPE_ROCK4,GameData.TYPE_ROCK5,GameData.TYPE_ROCK6,GameData.TYPE_ROCK7,GameData.TYPE_ROCK8,GameData.TYPE_STONE1,
+				GameData.TYPE_STONE2,GameData.TYPE_WATER1
+			]);
+			
+			private function init():void
+			{
+				
+			}
+			
+		]]>
+	</fx:Script>
+	<mx:Tile  id="container" width="100%" height="100%">
+		<mx:Repeater dataProvider="{modals}">
+			<views:BuildingModalItemRender  buttonMode="true" useHandCursor="true" mouseChildren="false"/>
+		</mx:Repeater>
+	</mx:Tile>
+</s:TitleWindow>
