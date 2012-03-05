@@ -5,8 +5,8 @@
 	<fx:Declarations>
 		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
 	</fx:Declarations>
-	<s:HSlider id="sliderOffsetX" x="0" y="33" width="201" maximum="500" minimum="-500" stepSize="10"/>
-	<s:HSlider id="sliderOffsetY" x="0" y="77" width="201" maximum="500" minimum="-500" stepSize="10"/>
+	<s:HSlider id="sliderOffsetX" x="0" y="33" width="201" maximum="200" minimum="-200" stepSize="5"/>
+	<s:HSlider id="sliderOffsetY" x="0" y="77" width="201" maximum="200" minimum="-200" stepSize="5"/>
 	<s:Label x="10" y="21" text="X偏移"/>
 	<s:Label x="10" y="65" text="Y偏移"/>
 	<s:Label x="10" y="123" text="缩放"/>

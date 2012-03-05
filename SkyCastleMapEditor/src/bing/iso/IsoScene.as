@@ -3,20 +3,22 @@ package bing.iso
 	import bing.iso.path.Grid;
 	import bing.utils.ContainerUtil;
 	
+	import flash.display.Sprite;
 	import flash.geom.Rectangle;
+
 	/**
 	 * isoScene场景，里面可以直接放IsObject
 	 * 如果想有多个容器，可以先用一个大的IsoScene，里面再放小的IsoScene 
 	 * @author zhouzhanglin
 	 */	
-	public class IsoScene extends IsoObject
+	public class IsoScene extends Sprite
 	{
 		protected var _sprites:Vector.<IsoObject> = new Vector.<IsoObject>();
 		protected var _gridData:Grid;
 		
-		public function IsoScene( size:int, xSpan:int = 1, zSpan:int =1 )
+		public function IsoScene( )
 		{
-			super(size, xSpan, zSpan);
+			super();
 		}
 		
 		public function get children():Vector.<IsoObject>{
@@ -54,7 +56,7 @@ package bing.iso
 		/********************************************************
 		 * 更新：遍历所有的对象，并进行排序和更新操作
 		 * ********************************************************/
-		override public function update():void
+		 public function update():void
 		{
 			for each(var obj:IsoObject in _sprites ) {
 				obj.update();
@@ -132,9 +134,8 @@ package bing.iso
 		/********************************************************
 		 * 清除数据，以后不会这个scene时使用。
 		 * ********************************************************/
-		override public function dispose():void
+		public function dispose():void
 		{
-			super.dispose();
 			for each( var obj:IsoObject in _sprites){
 				obj = null ;
 			}
