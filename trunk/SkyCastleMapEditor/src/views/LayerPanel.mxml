@@ -7,24 +7,25 @@
 	</fx:Declarations>
 	<fx:Script>
 		<![CDATA[
+			import bing.iso.path.Grid;
+			
 			import comm.GameData;
+			import comm.GameSetting;
 			import comm.GlobalDispatcher;
-			import comm.GlobalEvent;
 			
 			import events.WorldSettingEvent;
 			
 			import map.MapScene;
-			
-			import model.MapGridModel;
 			
 			private var _renders:Array=[];
 			
 			private function addLayer():void
 			{
 				var scene:MapScene = new MapScene();
-				scene.gridData = MapGridModel.instance.grid ;
+				scene.gridData = new Grid(GameSetting.GRID_X,GameSetting.GRID_Z);
 				var render:LayerRender = new LayerRender();
 				render.scene = scene ;
+				render.y = _renders.length*GameSetting.GRID_SIZE;
 				container.addElement( render);
 				_renders.push(render);
 				var evt:WorldSettingEvent = new WorldSettingEvent(WorldSettingEvent.ADD_LAYER);

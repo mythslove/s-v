@@ -17,7 +17,6 @@ package map
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	
-	import model.MapGridModel;
 	import model.vos.BuildingVO;
 	
 	import utils.BuildingFactory;
@@ -139,7 +138,7 @@ package map
 		
 		private function onClick(e:MouseEvent):void
 		{
-			if(GameData.currentScene && topBuilding && topBuilding.getWalkable(MapGridModel.instance.grid) )
+			if(GameData.currentScene && topBuilding && topBuilding.getWalkable(GameData.currentScene.gridData) )
 			{
 				var vo:BuildingVO = ObjectUtil.copyObj(topBuilding.vo) as BuildingVO ;
 				var building:Building = BuildingFactory.createBuildingByType(vo.clsName);
@@ -148,7 +147,7 @@ package map
 				building.nodeX = topBuilding.nodeX;
 				building.nodeZ = topBuilding.nodeZ;
 				GameData.currentScene.addIsoObject( building );
-				building.setWalkable(false,MapGridModel.instance.grid);
+				building.setWalkable(false,GameData.currentScene.gridData);
 			}
 		}
 		
