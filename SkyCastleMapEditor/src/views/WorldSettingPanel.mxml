@@ -2,6 +2,18 @@
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
 		 xmlns:mx="library://ns.adobe.com/flex/mx" width="200" height="166">
+	
+	<fx:Script>
+		<![CDATA[
+			import map.GameWorld;
+			protected function hslider1_changeHandler(event:Event):void
+			{
+				var world:GameWorld = GameWorld.instance;
+				world.scaleX = world.scaleY = sliderZoom.value;
+			}
+		]]>
+	</fx:Script>
+	
 	<fx:Declarations>
 		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
 	</fx:Declarations>
@@ -10,7 +22,8 @@
 	<s:Label x="10" y="21" text="X偏移"/>
 	<s:Label x="10" y="65" text="Y偏移"/>
 	<s:Label x="10" y="123" text="缩放"/>
-	<s:HSlider x="0" y="136" width="201" maximum="2" minimum="1" stepSize="0.1" value="1"/>
+	<s:HSlider id="sliderZoom" x="0" y="136" width="201" change="hslider1_changeHandler(event)" maximum="2"
+			   minimum="0.5" stepSize="0.1" value="1"/>
 	<s:Label id="lblOffsetX" x="51" y="20"/>
 	<s:Label id="lblOffsetY" x="50" y="65"/>
 </s:Group>
