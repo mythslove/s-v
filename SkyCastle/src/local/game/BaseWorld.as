@@ -38,7 +38,7 @@ package local.game
 		
 		public function BaseWorld()
 		{
-			super(GameSetting.MAP_WIDTH, GameSetting.MAX_HEIGHT , GameSetting.GRID_X, GameSetting.GRID_Z, GameSetting.GRID_SIZE);
+			super(GameSetting.MAX_WIDTH, GameSetting.MAX_HEIGHT , GameSetting.GRID_X, GameSetting.GRID_Z, GameSetting.GRID_SIZE);
 			//设置背景图片
 			var bg:Bitmap = new Bitmap( ResourceUtil.instance.getInstanceByClassName("init_bg","BG") as BitmapData );
 			this.setBackGround(bg);
@@ -97,11 +97,11 @@ package local.game
 		/**放大缩小地图 */		
 		public function zoom( value:Number =1 ):void
 		{
-			var prevW:Number = GameSetting.MAP_WIDTH*scaleX;
-			var prevH:Number = GameSetting.MAP_HEIGHT*scaleX;
+			var prevW:Number = GameSetting.MAX_WIDTH*scaleX;
+			var prevH:Number = GameSetting.MAX_HEIGHT*scaleX;
 			scaleX= scaleY = value ;
-			x+=(prevW-GameSetting.MAP_WIDTH*scaleX)>>1;
-			y+=(prevH-GameSetting.MAP_HEIGHT*scaleX)>>1;
+			x+=(prevW-GameSetting.MAX_WIDTH*scaleX)>>1;
+			y+=(prevH-GameSetting.MAX_HEIGHT*scaleX)>>1;
 			modifyMapPosition();
 			//更正特效大小
 			for(var i:int =0  ; i<effectScene.numChildren ; ++i){
