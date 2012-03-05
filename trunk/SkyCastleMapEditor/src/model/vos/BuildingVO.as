@@ -1,4 +1,4 @@
-package vos
+package model.vos
 {
 	public class BuildingVO
 	{

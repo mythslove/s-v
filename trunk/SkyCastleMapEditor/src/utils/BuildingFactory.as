@@ -5,7 +5,7 @@ package utils
 	
 	import map.Building;
 	
-	import vos.BuildingVO;
+	import model.vos.BuildingVO;
 
 	public class BuildingFactory
 	{
