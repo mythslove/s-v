@@ -3,6 +3,7 @@ package map
 	import bing.iso.IsoGrid;
 	import bing.iso.IsoScene;
 	import bing.iso.IsoWorld;
+	import bing.utils.InteractivePNG;
 	
 	import comm.GameSetting;
 	import comm.GlobalDispatcher;
@@ -10,6 +11,7 @@ package map
 	import events.WorldSettingEvent;
 	
 	import flash.events.Event;
+	import flash.events.MouseEvent;
 	
 	public class GameWorld extends IsoWorld
 	{
@@ -20,13 +22,16 @@ package map
 		}
 		//=================================
 		private var _gridScene:IsoScene;
+		private var _mapIsMove:Boolean;
+		private var _mouseOverBuild:Building;
+		private var _topBuilding:Building;
+		private var _topScene:MapScene;
 		
 		public function GameWorld()
 		{
 			super(GameSetting.MAX_WIDTH, GameSetting.MAX_HEIGHT, GameSetting.GRID_X, GameSetting.GRID_Z, GameSetting.GRID_SIZE);
-			drawZone(GameSetting.GRID_X, GameSetting.GRID_Z);
-			this.x = -GameSetting.MAX_WIDTH*scaleX*0.5+GameSetting.SCREEN_WIDTH*0.5 ;
-			y=-100;
+			drawZone();
+			this.panTo( GameSetting.MAX_WIDTH>>1 , -GameSetting.MAX_HEIGHT>>1);
 		}
 		
 		override protected function addedToStageHandler(e:Event):void
@@ -37,22 +42,71 @@ package map
 			grid.render();
 			_gridScene.addChild(grid);
 			addScene(_gridScene);
+			
+			_topScene = new MapScene();
+			addScene(_topScene);
+			
 			configListeners();
 		}
 		
 		/** 画地图区域 */
-		protected function drawZone( xPan:int , zPan:int  ):void
+		protected function drawZone():void
 		{
 			this.graphics.clear();
 			this.graphics.beginFill(0x49842D);
-			this.graphics.drawRect(0,0,GameSetting.MAX_WIDTH , GameSetting.MAX_HEIGHT);
+			this.graphics.drawRect(-GameSetting.MAX_WIDTH,-GameSetting.MAX_HEIGHT,GameSetting.MAX_WIDTH*2 , GameSetting.MAX_HEIGHT*2);
 			this.graphics.endFill();
 		}
 		
 		private function configListeners():void
 		{
+			addEventListener(MouseEvent.MOUSE_DOWN , onMouseEventHandler);
+			addEventListener(MouseEvent.MOUSE_MOVE , onMouseEventHandler);
+			addEventListener(MouseEvent.MOUSE_OVER , onMouseEventHandler);
+			addEventListener(MouseEvent.MOUSE_OUT , onMouseEventHandler);
+			addEventListener(MouseEvent.MOUSE_UP , onMouseEventHandler );
+			addEventListener(MouseEvent.ROLL_OUT , onMouseEventHandler);
+			
 			GlobalDispatcher.instance.addEventListener(WorldSettingEvent.ADD_LAYER , worldSettingHandler );
 			GlobalDispatcher.instance.addEventListener(WorldSettingEvent.DELETE_LAYER , worldSettingHandler );
+		}
+		
+		/** 处理鼠标事件 */		
+		protected function onMouseEventHandler(e:MouseEvent):void
+		{
+			switch(e.type)
+			{
+				case MouseEvent.MOUSE_DOWN:
+					this.startDrag( false);
+					break;
+				case MouseEvent.MOUSE_MOVE:
+					if(e.buttonDown)	{
+						_mapIsMove = true ;
+					}
+					break;
+				case MouseEvent.MOUSE_OVER:
+					if( !_topBuilding && e.target is InteractivePNG){
+						_mouseOverBuild = (e.target as InteractivePNG).parent as Building;
+//						_mouseOverBuild.onMouseOver() ;
+					}
+					break;
+				case MouseEvent.MOUSE_UP:
+					if(!_mapIsMove) onClick(e);
+				case MouseEvent.ROLL_OUT:
+					this.stopDrag();
+				case MouseEvent.MOUSE_OUT:
+					_mapIsMove = false ;
+					if(e.type!=MouseEvent.MOUSE_UP && _mouseOverBuild){
+//						_mouseOverBuild.onMouseOut();
+						_mouseOverBuild = null ;
+					}
+					break;
+			}
+		}
+		
+		private function onClick(e:MouseEvent):void
+		{
+			
 		}
 		
 		private function worldSettingHandler(e:WorldSettingEvent):void
