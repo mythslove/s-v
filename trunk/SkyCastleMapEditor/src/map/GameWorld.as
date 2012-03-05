@@ -31,7 +31,7 @@ package map
 		{
 			super(GameSetting.MAX_WIDTH, GameSetting.MAX_HEIGHT, GameSetting.GRID_X, GameSetting.GRID_Z, GameSetting.GRID_SIZE);
 			drawZone();
-			this.panTo( GameSetting.MAX_WIDTH>>1 , -GameSetting.MAX_HEIGHT>>1);
+			this.panTo( 0 , -GameSetting.MAX_HEIGHT>>1);
 		}
 		
 		override protected function addedToStageHandler(e:Event):void
