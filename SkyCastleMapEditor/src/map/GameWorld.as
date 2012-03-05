@@ -136,8 +136,10 @@ package map
 			{
 				var vo:BuildingVO = ObjectUtil.copyObj(topBuilding.vo) as BuildingVO ;
 				var building:Building = BuildingFactory.createBuildingByVO( vo );
-				building.vo.nodeX = building.nodeX;
-				building.vo.nodeZ = building.nodeZ;
+				building.vo.nodeX = topBuilding.nodeX;
+				building.vo.nodeZ = topBuilding.nodeZ;
+				building.nodeX = topBuilding.nodeX;
+				building.nodeZ = topBuilding.nodeZ;
 				GameData.currentScene.addIsoObject( building );
 				building.setWalkable(false,MapGridModel.instance.grid);
 			}

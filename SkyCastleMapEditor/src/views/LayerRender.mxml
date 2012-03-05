@@ -37,5 +37,5 @@
 		]]>
 	</fx:Script>
 	<s:Label x="10" y="10" text="地面的层"
-			 color.select="#722626" fontWeight.select="bold"/>
+			 color.select="#722626" fontFamily.select="中易宋体" fontWeight.select="bold"/>
 </s:Group>
