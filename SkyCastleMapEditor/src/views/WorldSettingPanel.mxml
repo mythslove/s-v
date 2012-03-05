@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="200" height="166">
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<s:HSlider id="sliderOffsetX" x="0" y="33" width="201" maximum="500" minimum="-500" stepSize="10"/>
+	<s:HSlider id="sliderOffsetY" x="0" y="77" width="201" maximum="500" minimum="-500" stepSize="10"/>
+	<s:Label x="10" y="21" text="X偏移"/>
+	<s:Label x="10" y="65" text="Y偏移"/>
+	<s:Label x="10" y="123" text="缩放"/>
+	<s:HSlider x="0" y="136" width="201" maximum="2" minimum="1" stepSize="0.1" value="1"/>
+	<s:Label id="lblOffsetX" x="51" y="20"/>
+	<s:Label id="lblOffsetY" x="50" y="65"/>
+</s:Group>
