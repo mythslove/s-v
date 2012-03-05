@@ -11,7 +11,7 @@ package map
 			super( GameSetting.GRID_SIZE ,GameSetting.GRID_X, GameSetting.GRID_Z );
 		}
 		
-		public function toString():String{
+		override public function toString():String{
 			if(parent){
 				return "Layer"+parent.getChildIndex(this);
 			}

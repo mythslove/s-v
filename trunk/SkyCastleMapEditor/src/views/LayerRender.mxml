@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
-		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="30">
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 width="100%" height="30" mouseChildren="false"
+		 contentBackgroundColor.select="#7F0000">
+	<s:states>
+		<s:State name="State1"/>
+		<s:State name="select"/>
+	</s:states>
 	<fx:Declarations>
 		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
 	</fx:Declarations>
@@ -11,7 +17,25 @@
 			
 			public var scene:IsoScene;
 			
+			private var _selected:Boolean;
+			
+			public function get selected():Boolean
+			{
+				return _selected;
+			}
+
+			public function set selected(value:Boolean):void
+			{
+				_selected = value;
+				if(_selected){
+					this.currentState="select";
+				}else{
+					this.currentState=null;
+				}
+			}
+
 		]]>
 	</fx:Script>
-	<s:Label x="10" y="10" text="lblLayer"/>
+	<s:Label x="10" y="10" text="地面的层"
+			 color.select="#722626" fontWeight.select="bold"/>
 </s:Group>

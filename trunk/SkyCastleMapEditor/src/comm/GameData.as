@@ -1,5 +1,9 @@
 package comm
 {
+	import bing.iso.IsoScene;
+	
+	import map.MapScene;
+
 	public class GameData
 	{
 		Grass1; Grass2;Ground1;Water1;Stone1;Stone2;
@@ -18,5 +22,11 @@ package comm
 		public static const TYPE_ROCK8:String = "Rock8";
 		public static const TYPE_STONE1:String = "Stone1";
 		public static const TYPE_STONE2:String = "Stone2";
+		
+		
+		
+		
+		
+		public static var currentScene:IsoScene;
 	}
 }
