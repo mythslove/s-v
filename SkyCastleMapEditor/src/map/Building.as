@@ -1,10 +1,10 @@
 package map
 {
 	import bing.iso.IsoObject;
+	import bing.utils.InteractivePNG;
 	
 	import comm.GameSetting;
 	
-	import flash.display.Sprite;
 	import flash.events.Event;
 	
 	import vos.BuildingVO;
@@ -12,7 +12,7 @@ package map
 	public class Building extends IsoObject
 	{
 		public var vo:BuildingVO ;
-		public var itemLayer:Sprite;
+		public var itemLayer:InteractivePNG;
 		
 		public function Building(vo:BuildingVO)
 		{
@@ -20,7 +20,7 @@ package map
 			this.vo = vo ;
 			addEventListener(Event.ADDED_TO_STAGE , addedToStageHandler );
 			
-			itemLayer = new Sprite();
+			itemLayer = new InteractivePNG();
 			addChild(itemLayer);
 		}
 		
