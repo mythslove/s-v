@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
-		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" mouseChildren="false" click="selectedBuilding()"
 		 xmlns:mx="library://ns.adobe.com/flex/mx" width="110" height="100">
 	<fx:Script>
 		<![CDATA[
+			import events.WorldSettingEvent;
+			
 			import flash.utils.getDefinitionByName;
+			
+			import map.Building;
+			import map.GameWorld;
 			
 			import utils.BuildingFactory;
 			
@@ -18,6 +23,12 @@
 				mc.stop();
 				mc.x = 55 ;
 				img.addChild(mc);
+			}
+			
+			private function selectedBuilding():void
+			{
+				var building:Building = BuildingFactory.createBuildingByType(type);
+				GameWorld.instance.addBuildingToTop( building );
 			}
 		]]>
 	</fx:Script>

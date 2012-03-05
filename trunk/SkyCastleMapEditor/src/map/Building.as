@@ -3,6 +3,8 @@ package map
 	import bing.iso.IsoObject;
 	import bing.utils.InteractivePNG;
 	
+	import com.greensock.TweenMax;
+	
 	import comm.GameSetting;
 	
 	import flash.events.Event;
@@ -34,6 +36,16 @@ package map
 		protected function removedFromStageHandler(e:Event):void
 		{
 			
+		}
+		
+		/**设置是否显示被选择状态  */		
+		public function selectedStatus( flag:Boolean ):void
+		{
+			if(flag ){
+				TweenMax.to(itemLayer, 0, {dropShadowFilter:{color:0xffff00, alpha:1, blurX:2, blurY:2, strength:5}});
+			}else{
+				itemLayer.filters=null ;
+			}
 		}
 	}
 }

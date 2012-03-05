@@ -13,7 +13,7 @@ package utils
 		{
 			var building:Building ;
 			var vo :BuildingVO = new BuildingVO();
-			var cls:Class = getDefinitionByName(type);
+			var cls:Class = getDefinitionByName(type) as Class;
 			var skin:MovieClip = new cls() as MovieClip;
 			if(skin){
 				skin.stop();
@@ -32,11 +32,12 @@ package utils
 		
 		public static function createBuildingByVO( vo:BuildingVO ):Building
 		{
-			var cls:Class = getDefinitionByName(vo.clsName);
+			var cls:Class = getDefinitionByName(vo.clsName) as Class;
 			var skin:MovieClip = new cls() as MovieClip;
 			skin.gotoAndStop(vo.frame);
 			var building:Building = new Building(vo);
 			building.itemLayer.addChild(skin);
+			return building ;
 		}
 	}
 }
