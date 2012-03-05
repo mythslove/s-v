@@ -11,11 +11,14 @@
 			
 			import map.MapScene;
 			
+			import model.MapGridModel;
+			
 			private var _renders:Array=[];
 			
 			private function addLayer():void
 			{
 				var scene:MapScene = new MapScene();
+				scene.gridData = MapGridModel.instance.grid ;
 				var render:LayerRender = new LayerRender();
 				render.scene = scene ;
 				container.addElement( render);
@@ -39,9 +42,6 @@
 								(_renders[i] as LayerRender).selected=false ;
 							}
 						}
-					}
-					else
-					{
 						GameData.currentScene = render.scene;
 					}
 				}
