@@ -42,6 +42,7 @@
 								(_renders[i] as LayerRender).selected=false ;
 							}
 						}
+						render.selected= true ;
 						GameData.currentScene = render.scene;
 					}
 				}
