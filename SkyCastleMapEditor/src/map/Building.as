@@ -9,7 +9,7 @@ package map
 	
 	import flash.events.Event;
 	
-	import vos.BuildingVO;
+	import model.vos.BuildingVO;
 	
 	public class Building extends IsoObject
 	{
