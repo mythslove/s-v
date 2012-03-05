@@ -5,7 +5,9 @@ package map
 	import bing.iso.IsoWorld;
 	import bing.utils.ContainerUtil;
 	import bing.utils.InteractivePNG;
+	import bing.utils.ObjectUtil;
 	
+	import comm.GameData;
 	import comm.GameSetting;
 	import comm.GlobalDispatcher;
 	
@@ -14,6 +16,11 @@ package map
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
+	
+	import model.MapGridModel;
+	import model.vos.BuildingVO;
+	
+	import utils.BuildingFactory;
 	
 	public class GameWorld extends IsoWorld
 	{
@@ -87,6 +94,7 @@ package map
 						_mapIsMove = true ;
 						if(topBuilding) {
 							updateTopBuild();
+							onClick(e);
 						}
 					}else if(topBuilding) {
 						updateTopBuild();
@@ -124,7 +132,15 @@ package map
 		
 		private function onClick(e:MouseEvent):void
 		{
-			
+			if(GameData.currentScene && topBuilding && topBuilding.getWalkable(MapGridModel.instance.grid) )
+			{
+				var vo:BuildingVO = ObjectUtil.copyObj(topBuilding.vo) as BuildingVO ;
+				var building:Building = BuildingFactory.createBuildingByVO( vo );
+				building.vo.nodeX = building.nodeX;
+				building.vo.nodeZ = building.nodeZ;
+				GameData.currentScene.addIsoObject( building );
+				building.setWalkable(false,MapGridModel.instance.grid);
+			}
 		}
 		
 		private function worldSettingHandler(e:WorldSettingEvent):void
