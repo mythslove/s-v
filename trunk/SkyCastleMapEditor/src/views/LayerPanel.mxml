@@ -8,6 +8,10 @@
 	<fx:Script>
 		<![CDATA[
 			import comm.GameData;
+			import comm.GlobalDispatcher;
+			import comm.GlobalEvent;
+			
+			import events.WorldSettingEvent;
 			
 			import map.MapScene;
 			
@@ -23,6 +27,9 @@
 				render.scene = scene ;
 				container.addElement( render);
 				_renders.push(render);
+				var evt:WorldSettingEvent = new WorldSettingEvent(WorldSettingEvent.ADD_LAYER);
+				evt.scene = scene ;
+				GlobalDispatcher.instance.dispatchEvent( evt );
 			}
 			
 			private function removeLayer():void

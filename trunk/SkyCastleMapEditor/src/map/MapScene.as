@@ -8,7 +8,7 @@ package map
 	{
 		public function MapScene()
 		{
-			super( GameSetting.GRID_SIZE ,GameSetting.GRID_X, GameSetting.GRID_Z );
+			super();
 		}
 		
 		override public function toString():String{
