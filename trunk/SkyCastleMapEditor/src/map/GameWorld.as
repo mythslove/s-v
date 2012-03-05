@@ -194,6 +194,7 @@ package map
 			building.itemLayer.alpha = 0.5 ;
 			building.selectedStatus(false); //选择设置成false
 			topScene.visible = true  ;
+			topScene.parent.setChildIndex(topScene,topScene.parent.numChildren-1);
 		}
 		
 		/**
