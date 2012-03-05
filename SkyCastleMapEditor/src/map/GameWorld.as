@@ -3,6 +3,7 @@ package map
 	import bing.iso.IsoGrid;
 	import bing.iso.IsoScene;
 	import bing.iso.IsoWorld;
+	import bing.utils.ContainerUtil;
 	import bing.utils.InteractivePNG;
 	
 	import comm.GameSetting;
@@ -12,6 +13,7 @@ package map
 	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.geom.Point;
 	
 	public class GameWorld extends IsoWorld
 	{
@@ -21,11 +23,11 @@ package map
 			return _instance ;
 		}
 		//=================================
-		private var _gridScene:IsoScene;
 		private var _mapIsMove:Boolean;
-		private var _mouseOverBuild:Building;
-		private var _topBuilding:Building;
-		private var _topScene:MapScene;
+		private var gridScene:IsoScene;
+		private var mouseOverBuild:Building;
+		private var topBuilding:Building;
+		private var topScene:MapScene;
 		
 		public function GameWorld()
 		{
@@ -37,14 +39,14 @@ package map
 		override protected function addedToStageHandler(e:Event):void
 		{
 			super.addedToStageHandler(e);
-			_gridScene = new IsoScene(_size);
+			gridScene = new IsoScene(_size);
 			var grid:IsoGrid = new IsoGrid(GameSetting.GRID_X, GameSetting.GRID_Z,_size);
 			grid.render();
-			_gridScene.addChild(grid);
-			addScene(_gridScene);
+			gridScene.addChild(grid);
+			addScene(gridScene);
 			
-			_topScene = new MapScene();
-			addScene(_topScene);
+			topScene = new MapScene();
+			addScene(topScene);
 			
 			configListeners();
 		}
@@ -77,16 +79,22 @@ package map
 			switch(e.type)
 			{
 				case MouseEvent.MOUSE_DOWN:
-					this.startDrag( false);
+					if( !topBuilding)
+						this.startDrag( false);
 					break;
 				case MouseEvent.MOUSE_MOVE:
 					if(e.buttonDown)	{
 						_mapIsMove = true ;
+						if(topBuilding) {
+							updateTopBuild();
+						}
+					}else if(topBuilding) {
+						updateTopBuild();
 					}
 					break;
 				case MouseEvent.MOUSE_OVER:
-					if( !_topBuilding && e.target is InteractivePNG){
-						_mouseOverBuild = (e.target as InteractivePNG).parent as Building;
+					if( !topBuilding && e.target is InteractivePNG){
+						mouseOverBuild = (e.target as InteractivePNG).parent as Building;
 //						_mouseOverBuild.onMouseOver() ;
 					}
 					break;
@@ -96,11 +104,21 @@ package map
 					this.stopDrag();
 				case MouseEvent.MOUSE_OUT:
 					_mapIsMove = false ;
-					if(e.type!=MouseEvent.MOUSE_UP && _mouseOverBuild){
+					if(e.type!=MouseEvent.MOUSE_UP && mouseOverBuild){
 //						_mouseOverBuild.onMouseOut();
-						_mouseOverBuild = null ;
+						mouseOverBuild = null ;
 					}
 					break;
+			}
+		}
+		
+		/** 更新顶部建筑的位置和网格 */
+		protected function updateTopBuild():void
+		{
+			var p:Point = pixelPointToGrid(stage.mouseX,stage.mouseY ); 
+			if(topBuilding.nodeX!=p.x || topBuilding.nodeZ!=p.y) {
+				topBuilding.nodeX = p.x ;
+				topBuilding.nodeZ= p.y ;
 			}
 		}
 		
@@ -137,6 +155,33 @@ package map
 					break ;
 				}
 			}
+		}
+		
+		/**
+		 * 将建筑加到topScene,跟随鼠标移动 
+		 * @param building
+		 */ 		
+		public function addBuildingToTop( building:Building ):void
+		{
+			clearTopScene();
+			topBuilding = building ;
+			topScene.addIsoObject( building , false );
+			building.itemLayer.alpha = 0.5 ;
+			building.selectedStatus(false); //选择设置成false
+			topScene.visible = true  ;
+		}
+		
+		/**
+		 * 清除topScene 
+		 */		
+		public function clearTopScene():void
+		{
+			ContainerUtil.removeChildren(topScene);
+			topScene.visible = false  ;
+			if(topBuilding){
+				topBuilding.itemLayer.alpha = 1;
+			}
+			topBuilding = null ;
 		}
 	}
 }
