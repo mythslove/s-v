@@ -102,7 +102,7 @@ package map
 			switch(e.type)
 			{
 				case MouseEvent.MOUSE_DOWN:
-					if( !topBuilding)
+					if( !topBuilding && !e.ctrlKey)
 						this.startDrag( false);
 					break;
 				case MouseEvent.MOUSE_MOVE:
@@ -110,8 +110,8 @@ package map
 						_mapIsMove = true ;
 						if(topBuilding) {
 							updateTopBuild();
-							onClick(e);
 						}
+						onClick(e);
 					}else if(topBuilding) {
 						updateTopBuild();
 					}
