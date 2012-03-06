@@ -7,6 +7,7 @@ package map
 	
 	import comm.GameSetting;
 	
+	import flash.display.MovieClip;
 	import flash.events.Event;
 	
 	import model.vos.BuildingVO;
@@ -19,11 +20,17 @@ package map
 		public function Building(vo:BuildingVO)
 		{
 			super(GameSetting.GRID_SIZE, 1, 1);
+			mouseEnabled = false ;
 			this.vo = vo ;
 			addEventListener(Event.ADDED_TO_STAGE , addedToStageHandler );
 			
 			itemLayer = new InteractivePNG();
+			itemLayer.mouseChildren = false ;
 			addChild(itemLayer);
+		}
+		
+		public function get skin():MovieClip{
+			return itemLayer.getChildAt(1) as MovieClip;
 		}
 		
 		protected function addedToStageHandler( e:Event ):void

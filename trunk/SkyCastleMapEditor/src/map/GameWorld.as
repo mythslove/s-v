@@ -13,6 +13,7 @@ package map
 	
 	import events.WorldSettingEvent;
 	
+	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
@@ -84,6 +85,15 @@ package map
 		
 		private function rightClickHandler( e:MouseEvent ):void{
 			clearTopScene();
+			if( !topBuilding && e.target is InteractivePNG){
+				var buillding:Building = (e.target as InteractivePNG).parent as Building;
+				var skin:MovieClip = buillding.skin;
+				if(!skin) return ;
+				if(skin.currentFrame<skin.totalFrames)
+					skin.nextFrame();
+				else skin.gotoAndStop(1);
+				buillding.vo.frame = skin.currentFrame;
+			}
 		}
 		
 		/** 处理鼠标事件 */		
