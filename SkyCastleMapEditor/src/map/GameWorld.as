@@ -148,7 +148,15 @@ package map
 		
 		private function onClick(e:MouseEvent):void
 		{
-			if(GameData.currentScene && topBuilding && topBuilding.getWalkable(GameData.currentScene.gridData) )
+			if(e.ctrlKey && !topBuilding && mouseOverBuild){
+				var scene:IsoScene = mouseOverBuild.parent as IsoScene;
+				if(scene){
+					scene.removeIsoObject(mouseOverBuild);
+					mouseOverBuild.setWalkable(true,scene.gridData);
+					mouseOverBuild = null ;
+				}
+			}
+			else if(GameData.currentScene && topBuilding && topBuilding.getWalkable(GameData.currentScene.gridData) )
 			{
 				var vo:BuildingVO = ObjectUtil.copyObj(topBuilding.vo) as BuildingVO ;
 				var building:Building = BuildingFactory.createBuildingByType(vo.clsName);
