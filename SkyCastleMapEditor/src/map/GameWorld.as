@@ -31,7 +31,7 @@ package map
 		}
 		//=================================
 		private var _mapIsMove:Boolean;
-		private var gridScene:IsoScene;
+		public var gridScene:IsoScene;
 		private var mouseOverBuild:Building;
 		private var topBuilding:Building;
 		private var topScene:MapScene;
@@ -62,7 +62,7 @@ package map
 		}
 		
 		/** 画地图区域 */
-		protected function drawZone():void
+		public function drawZone():void
 		{
 			this.graphics.clear();
 			this.graphics.beginFill(0x49842D);
