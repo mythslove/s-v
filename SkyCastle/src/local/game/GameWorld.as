@@ -2,6 +2,7 @@ package local.game
 {
 	import bing.iso.IsoScene;
 	import bing.utils.ContainerUtil;
+	import bing.utils.MathUtil;
 	import bing.utils.ObjectUtil;
 	
 	import flash.display.Sprite;
@@ -19,6 +20,7 @@ package local.game
 	import local.model.village.VillageModel;
 	import local.utils.CharacterManager;
 	import local.views.effects.MapWordEffectRed;
+	import local.views.effects.MapWordEffectWhite;
 
 	public class GameWorld extends BaseWorld
 	{
@@ -107,7 +109,10 @@ package local.game
 			else
 			{
 				var p:Point = pixelPointToGrid(stage.mouseX,stage.mouseY); 
-				CharacterManager.instance.hero.searchToRun( p.x , p.y );
+				if(!CharacterManager.instance.hero.searchToRun( p.x , p.y )){
+					var effect:MapWordEffectRed = new MapWordEffectRed("I can 't get here!");
+					addEffect( effect , stage.mouseX-sceneLayerOffsetX-x ,stage.mouseY-sceneLayerOffsetY-y);
+				}
 			}
 		}
 		
@@ -130,9 +135,7 @@ package local.game
 				}
 			}
 			if(effect && _topBuilding){
-				effect.x = _topBuilding.screenX ;
-				effect.y = _topBuilding.screenY ;
-				addEffect( effect );
+				addEffect( effect,_topBuilding.screenX  ,_topBuilding.screenY );
 			}
 			return result ;
 		}
@@ -147,9 +150,7 @@ package local.game
 				effect = new MapWordEffectRed("You don't have enough Wood!");
 			}
 			if(effect && _topBuilding){
-				effect.x = _topBuilding.screenX ;
-				effect.y = _topBuilding.screenY ;
-				addEffect( effect );
+				addEffect( effect,_topBuilding.screenX  ,_topBuilding.screenY );
 			}
 			return result ;
 		}
@@ -164,25 +165,40 @@ package local.game
 				effect = new MapWordEffectRed("You don't have enough Stone!");
 			}
 			if(effect && _topBuilding){
-				effect.x = _topBuilding.screenX ;
-				effect.y = _topBuilding.screenY ;
-				addEffect( effect );
+				addEffect( effect,_topBuilding.screenX  ,_topBuilding.screenY );
 			}
 			return result ;
 		}
 		
 		private function buyComplete(vo:BuildingVO):void
 		{
+			var effect:Sprite ;
 			if(vo.baseVO.hasOwnProperty("buildStone") ){
-				VillageModel.instance.me.stone-=int(vo.baseVO.hasOwnProperty("buildStone"));
+				VillageModel.instance.me.stone-=int(vo.baseVO["buildStone"]);
+				effect = new MapWordEffectWhite("Stone -"+int(vo.baseVO["buildStone"]));
+				if(effect && _topBuilding){
+					addEffect( effect,_topBuilding.screenX +Math.random()*100*MathUtil.getRandomFlag()  ,_topBuilding.screenY+Math.random()*100*MathUtil.getRandomFlag()  );
+				}
 			}
 			if(vo.baseVO.hasOwnProperty("buildWood") ){
-				VillageModel.instance.me.stone-=int(vo.baseVO.hasOwnProperty("buildWood"));
+				VillageModel.instance.me.stone-=int(vo.baseVO["buildWood"]);
+				effect = new MapWordEffectWhite("Wood -"+int(vo.baseVO["buildWood"]));
+				if(effect && _topBuilding){
+					addEffect( effect,_topBuilding.screenX +Math.random()*100*MathUtil.getRandomFlag() ,_topBuilding.screenY+Math.random()*100*MathUtil.getRandomFlag()  );
+				}
 			}
 			if( vo.payType==PayType.COIN){
 				VillageModel.instance.me.coin-=vo.price ;
+				effect = new MapWordEffectWhite("Coin -"+vo.price);
+				if(effect && _topBuilding){
+					addEffect( effect,_topBuilding.screenX +Math.random()*100*MathUtil.getRandomFlag()  ,_topBuilding.screenY+Math.random()*100*MathUtil.getRandomFlag()  );
+				}
 			} else if( vo.payType==PayType.CASH) {
 				VillageModel.instance.me.cash-=vo.price;
+				effect = new MapWordEffectWhite("Cash -"+vo.price);
+				if(effect && _topBuilding){
+					addEffect( effect,_topBuilding.screenX +Math.random()*100*MathUtil.getRandomFlag()  ,_topBuilding.screenY+Math.random()*100*MathUtil.getRandomFlag()  );
+				}
 			}
 		}
 		

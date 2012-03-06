@@ -143,8 +143,10 @@ package local.game
 		 * 添加一个特效 
 		 * @param effect
 		 */		
-		public function addEffect( effect:Sprite ):void
+		public function addEffect( effect:Sprite , x:Number , y:Number ):void
 		{
+			effect.x = x ;
+			effect.y = y ;
 			effect.scaleX = 1/scaleX ;
 			effect.scaleY = 1/scaleX; 
 			effectScene.addChild( effect );
