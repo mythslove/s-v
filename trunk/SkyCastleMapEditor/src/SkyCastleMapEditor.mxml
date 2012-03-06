@@ -10,12 +10,16 @@
 	
 	<fx:Script>
 		<![CDATA[
-			import flash.net.registerClassAlias;
+			import bing.iso.IsoScene;
+			
+			import comm.GameSetting;
 			
 			import map.GameWorld;
 			
 			import model.vos.BuildingVO;
 			
+			import mx.controls.Alert;
+			import mx.graphics.codec.PNGEncoder;
 			import mx.managers.PopUpManager;
 			
 			import views.ModalWindow;
@@ -29,6 +33,36 @@
 				world.addChild(GameWorld.instance);
 			}
 			
+			private var _file:File;
+			private function exportPng():void
+			{
+				_file = new File();
+				_file.addEventListener(Event.SELECT , selectedDir );
+				_file.browseForDirectory("保存地址");
+			}
+			
+			private function selectedDir( e:Event ):void
+			{
+				var bmd:BitmapData = new BitmapData(GameSetting.MAX_WIDTH , GameSetting.MAX_HEIGHT,true,0xffffff);
+				GameWorld.instance.gridScene.visible=false;
+				GameWorld.instance.graphics.clear();
+				bmd.draw( GameWorld.instance);
+				var encoder:PNGEncoder = new PNGEncoder();
+				var bytes:ByteArray = encoder.encode(bmd);
+				var stream:FileStream = new FileStream();
+				try{
+					var file:File = new File(_file.url+"/map.png");
+					stream.open( file,FileMode.WRITE);
+					stream.writeBytes( bytes, 0 , bytes.bytesAvailable);
+					Alert.show("导出地图成功");
+				}catch(e:Error){
+					trace(e);
+				}finally{
+					stream.close();
+				}
+				GameWorld.instance.gridScene.visible=true;
+				GameWorld.instance.drawZone();
+			}
 		]]>
 	</fx:Script>
 	
@@ -41,6 +75,7 @@
 			</views:WorldSettingPanel>
 			<views:LayerPanel x="-1" y="186">
 			</views:LayerPanel>
+			<s:Button x="43" y="586" width="117" height="42" label="导出图片" click="exportPng()"/>
 		</s:BorderContainer>
 	</s:HGroup>
 </s:WindowedApplication>
