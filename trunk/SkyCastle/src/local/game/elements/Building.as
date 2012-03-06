@@ -12,6 +12,7 @@ package local.game.elements
 	import local.views.effects.BaseMovieClipEffect;
 	import local.views.effects.EffectPlacementBuilding;
 	import local.views.effects.EffectPlacementDecoration;
+	import local.views.effects.MapWordEffectRed;
 	
 	public class Building extends InteractiveBuilding
 	{
@@ -73,17 +74,22 @@ package local.game.elements
 		/**
 		 * 人移动到此建筑旁边或上面 
 		 * @param character
-		 */		
+		 */
 		protected function characterMoveTo( character:Character):void
 		{
+			var result:Boolean ;
 			if(!baseBuildingVO.walkable){
 				var arr:Array = getRoundAblePoint(); 
 				if(arr.length>0){
 					arr.sortOn("x", Array.DESCENDING |Array.NUMERIC );
-					character.searchToRun( arr[0].x/_size , arr[0].z/_size);
+					result = character.searchToRun( arr[0].x/_size , arr[0].z/_size);
 				}
 			}else{
-				character.searchToRun( nodeX , nodeZ );
+				result = character.searchToRun( nodeX , nodeZ );
+			}
+			if(character is Hero &&!result) {
+				var effect:MapWordEffectRed = new MapWordEffectRed("I can 't get here!");
+				GameWorld.instance.addEffect( effect , screenX , screenY);
 			}
 		}
 	}

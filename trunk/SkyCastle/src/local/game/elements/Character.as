@@ -80,9 +80,11 @@ package local.game.elements
 		 * 寻路移动 
 		 * @param endNodeX
 		 * @param endNodeZ
+		 * @return true表示有路径，false为没有路
 		 */		
-		public function searchToRun( endNodeX:int , endNodeZ:int):void
+		public function searchToRun( endNodeX:int , endNodeZ:int):Boolean
 		{
+			if(endNodeX<0 || endNodeZ<0||endNodeX+1>GameSetting.GRID_X||endNodeZ+1>GameSetting.GRID_Z ) return false;
 			if(MapGridDataModel.instance.astarGrid.getNode(endNodeX,endNodeZ).walkable )
 			{
 				if(MapGridDataModel.instance.astarGrid.getNode(nodeX,nodeZ).walkable)
@@ -98,6 +100,7 @@ package local.game.elements
 							roadIndex = 0 ;
 							nextPoint = this.getNextPoint();
 						}
+						return true;
 					}
 				}else if(_currentActions==AvatarAction.IDLE){
 					nodeX=endNodeX;
@@ -106,6 +109,7 @@ package local.game.elements
 					sort();
 				}
 			}
+			return false;
 		}
 		
 		/**
