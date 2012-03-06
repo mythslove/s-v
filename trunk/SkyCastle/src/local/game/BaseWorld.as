@@ -48,8 +48,8 @@ package local.game
 			GameSetting.MAX_HEIGHT = bg.height ;
 			this.panTo( GameSetting.MAX_WIDTH>>1 , -410);
 			//地图的初始位置
-			this.x = -2200 ;
-			this.y = -1500;
+			this.x = -1800 ;
+			this.y = -1600;
 		}
 		
 		override protected function addedToStageHandler(e:Event):void
@@ -327,8 +327,8 @@ package local.game
 			if(ShopModel.instance.characterArray && ShopModel.instance.characterArray.length>0)
 			{
 				var avatar:Hero = new Hero( ShopModel.instance.characterArray[0]);
-				avatar.nodeX = 56;
-				avatar.nodeZ = 34;
+				avatar.nodeX = 53;
+				avatar.nodeZ = 39;
 				var scene:IsoScene = this.getBuildingScene( avatar.nodeX , avatar.nodeZ );
 				scene.addIsoObject( avatar ) ;
 				CharacterManager.instance.hero = avatar ;
