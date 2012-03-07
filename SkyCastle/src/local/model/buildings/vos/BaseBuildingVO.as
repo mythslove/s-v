@@ -1,5 +1,7 @@
 package local.model.buildings.vos
 {
+	import local.enum.BuildingType;
+
 	/**
 	 * 建筑基础VO 
 	 * @author zzhanglin
@@ -43,5 +45,14 @@ package local.model.buildings.vos
 		
 		/** 修建获得经验 */
 		public var buildEarnExp:int ;
+		
+		/** 是否是基本的建筑，基本建筑包括石头，磐石，树*/
+		public function isBasicBuilding():Boolean
+		{
+			if(type==BuildingType.DEC_ROCK || type==BuildingType.DEC_STONE || type==BuildingType.DEC_TREE){
+				return true ;
+			}
+			return false ;
+		}
 	}
 }
