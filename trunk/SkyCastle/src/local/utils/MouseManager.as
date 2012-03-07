@@ -77,10 +77,10 @@ package local.utils
 		public function checkControl():Boolean
 		{
 			if( _mouseStatus==MouseStatus.MOVE_BUILDING || 
-				mouseStatus==MouseStatus.UPDATE_HOUSE ||
-				mouseStatus==MouseStatus.ROTATE_BUILDING||
-				mouseStatus==MouseStatus.SELL_BUILDING||
-				mouseStatus==MouseStatus.STASH_BUILDING)
+				_mouseStatus==MouseStatus.UPDATE_HOUSE ||
+				_mouseStatus==MouseStatus.ROTATE_BUILDING||
+				_mouseStatus==MouseStatus.SELL_BUILDING||
+				_mouseStatus==MouseStatus.STASH_BUILDING)
 			{
 				return true ;
 			}
