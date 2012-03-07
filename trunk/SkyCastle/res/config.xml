@@ -98,7 +98,7 @@
 			description="Garden Garden Gate" xSpan="1" zSpan="2" maxLevel="1" type="decoration" buildEarnExp="1"
 			url="res/decoration/Garden_GardenGate.swf" thumb="res/decoration/Garden_GardenGateThumb.png" />
 		
-		<vo baseId="1000" name="Bingheliefeng" alias="Basic_AvatarMale"  description="" type="character" xSpan="1" zSpan="1"
+		<vo baseId="1000" name="Click to talk" alias="Basic_AvatarMale"  description="" type="character" xSpan="1" zSpan="1"
 		layer="2" walkable="1"  url="res/character/Basic_AvatarMale.swf" />
 	</buildings>
 	<shop>
