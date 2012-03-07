@@ -30,6 +30,7 @@ package local.game.elements
 		public var speed:Number = 6 ;
 		public var nextPoint:Node ; //下一个坐标
 		protected var roadIndex:int =0 ;
+		private var _firstMove:Boolean;
 		
 		public function Character(vo:BuildingVO)
 		{
@@ -73,6 +74,10 @@ package local.game.elements
 			var moveNum:Number = distance/this.speed ;
 			x += ( (point.x - x)/moveNum)>>0 ;
 			z += ( (point.y - z)/moveNum)>>0 ;
+			if(_firstMove){
+				this.sort();
+				_firstMove = false ;
+			}
 			return false;	
 		}
 		
@@ -145,6 +150,7 @@ package local.game.elements
 				var p:Node = (roads[roadIndex] as Node).clone() ;
 				p.x*= GameSetting.GRID_SIZE;
 				p.y*= GameSetting.GRID_SIZE ;
+				_firstMove = true ;
 				return p ;
 			}
 			else(roads.length>=roadIndex)
