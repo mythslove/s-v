@@ -173,31 +173,33 @@ package local.game
 		private function buyComplete(vo:BuildingVO):void
 		{
 			var effect:Sprite ;
-			if(vo.baseVO.hasOwnProperty("buildStone") ){
+			if(vo.baseVO.hasOwnProperty("buildStone") && int(vo.baseVO["buildStone"])>0 ){
 				VillageModel.instance.me.stone-=int(vo.baseVO["buildStone"]);
 				effect = new MapWordEffectWhite("Stone -"+int(vo.baseVO["buildStone"]));
 				if(effect && _topBuilding){
 					addEffect( effect,_topBuilding.screenX +Math.random()*100*MathUtil.getRandomFlag()  ,_topBuilding.screenY+Math.random()*100*MathUtil.getRandomFlag()  );
 				}
 			}
-			if(vo.baseVO.hasOwnProperty("buildWood") ){
+			if(vo.baseVO.hasOwnProperty("buildWood")&&int(vo.baseVO["buildWood"])>0 ){
 				VillageModel.instance.me.stone-=int(vo.baseVO["buildWood"]);
 				effect = new MapWordEffectWhite("Wood -"+int(vo.baseVO["buildWood"]));
 				if(effect && _topBuilding){
 					addEffect( effect,_topBuilding.screenX +Math.random()*100*MathUtil.getRandomFlag() ,_topBuilding.screenY+Math.random()*100*MathUtil.getRandomFlag()  );
 				}
 			}
-			if( vo.payType==PayType.COIN){
-				VillageModel.instance.me.coin-=vo.price ;
-				effect = new MapWordEffectWhite("Coin -"+vo.price);
-				if(effect && _topBuilding){
-					addEffect( effect,_topBuilding.screenX +Math.random()*100*MathUtil.getRandomFlag()  ,_topBuilding.screenY+Math.random()*100*MathUtil.getRandomFlag()  );
-				}
-			} else if( vo.payType==PayType.CASH) {
-				VillageModel.instance.me.cash-=vo.price;
-				effect = new MapWordEffectWhite("Cash -"+vo.price);
-				if(effect && _topBuilding){
-					addEffect( effect,_topBuilding.screenX +Math.random()*100*MathUtil.getRandomFlag()  ,_topBuilding.screenY+Math.random()*100*MathUtil.getRandomFlag()  );
+			if(vo.price!=0){
+				if( vo.payType==PayType.COIN){
+					VillageModel.instance.me.coin-=vo.price ;
+					effect = new MapWordEffectWhite("Coin -"+vo.price);
+					if(effect && _topBuilding){
+						addEffect( effect,_topBuilding.screenX +Math.random()*100*MathUtil.getRandomFlag()  ,_topBuilding.screenY+Math.random()*100*MathUtil.getRandomFlag()  );
+					}
+				} else if( vo.payType==PayType.CASH) {
+					VillageModel.instance.me.cash-=vo.price;
+					effect = new MapWordEffectWhite("Cash -"+vo.price);
+					if(effect && _topBuilding){
+						addEffect( effect,_topBuilding.screenX +Math.random()*100*MathUtil.getRandomFlag()  ,_topBuilding.screenY+Math.random()*100*MathUtil.getRandomFlag()  );
+					}
 				}
 			}
 		}

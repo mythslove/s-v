@@ -13,6 +13,9 @@ package local.model.buildings.vos
 		/** BaseBuildingVO的id*/
 		public var baseId:String ;
 		
+		/** 使用的玩家等级限制*/
+		public var useableLevel:int ; 
+		
 		/** 如果当前的建筑是计步数，则表示当前在哪一步*/
 		public var step:int ;
 		
@@ -26,7 +29,7 @@ package local.model.buildings.vos
 		public var level:int =1 ;
 		
 		/**支付方式,为PayType的常量*/
-		public var payType:int ;
+		public var payType:int =1 ;
 		
 		/** 在商店中的价格 */
 		public var price:int ;
