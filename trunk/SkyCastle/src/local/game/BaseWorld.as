@@ -152,7 +152,7 @@ package local.game
 		 * 添加一个特效 
 		 * @param effect
 		 */		
-		public function addEffect( effect:Sprite , x:Number , y:Number ):void
+		public function addEffect( effect:DisplayObject , x:Number , y:Number ):void
 		{
 			effect.x = x ;
 			effect.y = y ;
