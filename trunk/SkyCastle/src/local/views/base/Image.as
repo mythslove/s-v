@@ -8,6 +8,7 @@ package local.views.base
 	
 	import local.utils.ResourceUtil;
 	import local.views.BaseView;
+	import local.views.loading.LoaderSmall;
 	
 	public class Image extends BaseView
 	{
@@ -16,6 +17,7 @@ package local.views.base
 		private var _bitmap:Bitmap;
 		private var _isCenter:Boolean;
 		private var _showLoading:Boolean;
+		private var _smallLoading:LoaderSmall;
 		
 		/**
 		 * @param resId
@@ -33,7 +35,10 @@ package local.views.base
 		
 		override protected function added():void
 		{
-			
+			if(_showLoading){
+				_smallLoading = new LoaderSmall();
+				addChild(_smallLoading);
+			}
 			//加载图片资源
 			ResourceUtil.instance.addEventListener( _resId , loadedHandler );
 			ResourceUtil.instance.loadRes( new ResVO(_resId , _url));
@@ -41,6 +46,7 @@ package local.views.base
 		
 		private function loadedHandler(e:Event):void
 		{
+			removeSmallLoading();
 			_bitmap = new Bitmap(ResourceUtil.instance.getResVOByResId(_resId).resObject as BitmapData);
 			if(_isCenter){
 				_bitmap.x = -_bitmap.width>>1;
@@ -49,10 +55,21 @@ package local.views.base
 			addChild(_bitmap);
 		}
 		
+		private function removeSmallLoading():void{
+			if(_smallLoading){
+				_smallLoading.stop();
+				if(_smallLoading.parent){
+					_smallLoading.parent.removeChild(_smallLoading);
+					_smallLoading = null ;
+				}
+			}
+		}
+		
 		override protected function removed():void
 		{
 			ResourceUtil.instance.removeEventListener( _resId , loadedHandler );
 			_bitmap = null ;
+			removeSmallLoading();
 		}
 	}
 }
