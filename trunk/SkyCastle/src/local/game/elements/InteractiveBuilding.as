@@ -1,6 +1,8 @@
 package local.game.elements
 {
+	import local.enum.MouseStatus;
 	import local.model.buildings.vos.BuildingVO;
+	import local.utils.MouseManager;
 	
 	public class InteractiveBuilding extends BaseBuilding
 	{
@@ -22,6 +24,7 @@ package local.game.elements
 		public function onMouseOut():void
 		{
 			selectedStatus( false );
+			MouseManager.instance.mouseStatus = MouseStatus.NONE;
 		}
 	}
 }
