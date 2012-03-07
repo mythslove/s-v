@@ -53,17 +53,19 @@ package local.utils
 					addMouseIcon( new Bitmap( new SellIconBitmapData ));
 					break ;
 				case MouseStatus.BUILD_BUILDING :
+					addMouseIcon( new Bitmap(new IconBuildingHouse ));
 					break ;
 				case MouseStatus.MOVE_BUILDING :
 					addMouseIcon(new Bitmap( new MoveIconBitmapData ));
 					break ;
 				case MouseStatus.BEAT_STONE :
+					addMouseIcon(new Bitmap( new IconChoopingStone ));
 					break ;
 				case MouseStatus.CUT_TREES :
-					break ;
-				case MouseStatus.EARN_COIN :
+					addMouseIcon(new Bitmap( new IconCutTree ));
 					break ;
 				case MouseStatus.SHOVEL_BUILDING :
+					addMouseIcon(new Bitmap( new IconDigBuilding ));
 					break ;
 			}
 		}
