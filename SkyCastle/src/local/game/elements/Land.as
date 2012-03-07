@@ -13,9 +13,20 @@ package local.game.elements
 		{
 			super(vo);
 		}
+		
 		/** 获取此建筑的基础VO */
 		public function get baseLandVO():BaseLandVO{
 			return buildingVO.baseVO as BaseLandVO ;
+		}
+		
+		override public function onMouseOver():void
+		{
+			super.onMouseOver();
+//			if(baseLandVO.earnStep<buildingVO.step){
+//				MouseManager.instance.mouseStatus = MouseStatus.BEAT_STONE ;
+//			}else{
+//				MouseManager.instance.mouseStatus = MouseStatus.SHOVEL_BUILDING ;
+//			}
 		}
 	}
 }

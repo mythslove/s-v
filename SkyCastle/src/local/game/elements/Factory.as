@@ -1,8 +1,10 @@
 package local.game.elements
 {
 	import local.enum.BuildingStatus;
+	import local.enum.MouseStatus;
 	import local.model.buildings.vos.BaseFactoryVO;
 	import local.model.buildings.vos.BuildingVO;
+	import local.utils.MouseManager;
 
 	/**
 	 * 工厂 
@@ -42,6 +44,15 @@ package local.game.elements
 					break;
 				case BuildingStatus.PRODUCT_COMPLETE :
 					break ;
+			}
+		}
+		
+		override public function onMouseOver():void
+		{
+			super.onMouseOver();
+			if(buildingVO.buildingStatus == BuildingStatus.BUILDING )
+			{
+				MouseManager.instance.mouseStatus = MouseStatus.BUILD_BUILDING ;
 			}
 		}
 	}

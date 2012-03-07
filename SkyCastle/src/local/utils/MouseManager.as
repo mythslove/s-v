@@ -98,6 +98,7 @@ package local.utils
 			{
 				_currentMouse = icon ;
 				CenterViewContainer.instance.stage.addChild( _currentMouse );
+				onEnterFrameHandler(null);
 				CenterViewContainer.instance.stage.addEventListener(Event.ENTER_FRAME , onEnterFrameHandler );
 			}
 		}
