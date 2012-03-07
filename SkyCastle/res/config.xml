@@ -52,6 +52,48 @@
 			earnCoins="4" earnExps="3" spendEnergys="1"
 			url="res/tree/Garden_TreeGiantHappyOak.swf" thumb="res/tree/Garden_TreeGiantHappyOakThumb.png" />
 			
+					
+		<vo baseId="18" name="Pine Tree" alias="PineTree1" walkable="0" layer="2"
+			description="Garden Gate" xSpan="1" zSpan="1" maxLevel="1" type="tree" buildEarnExp="0" earnStep="2" earnWoods="2,1"
+			earnCoins="2,1" earnExps="2,1" spendEnergys="1,1"
+			url="res/tree/PineTree1.swf" thumb="res/tree/PineTree1Thumb.png" />	
+		<vo baseId="19" name="Pine Tree" alias="PineTree2" walkable="0" layer="2"
+			description="Garden Gate" xSpan="1" zSpan="1" maxLevel="1" type="tree" buildEarnExp="0" earnStep="2" earnWoods="2,1"
+			earnCoins="2,1" earnExps="2,1" spendEnergys="1,1"
+			url="res/tree/PineTree2.swf" thumb="res/tree/PineTree2Thumb.png" />	
+		<vo baseId="20" name="Pine Tree" alias="PineTree3" walkable="0" layer="2"
+			description="Garden Gate" xSpan="1" zSpan="1" maxLevel="1" type="tree" buildEarnExp="0" earnStep="3" earnWoods="3,2,1"
+			earnCoins="3,2,1" earnExps="3,2,1" spendEnergys="1,1,1"
+			url="res/tree/PineTree3.swf" thumb="res/tree/PineTree3Thumb.png" />		
+		<vo baseId="21" name="Pine Tree" alias="PineTree4" walkable="0" layer="2"
+			description="Garden Gate" xSpan="1" zSpan="1" maxLevel="1" type="tree" buildEarnExp="0" earnStep="4" earnWoods="4,3,2,1"
+			earnCoins="4,3,2,1" earnExps="4,3,2,1" spendEnergys="1,1,1,1"
+			url="res/tree/PineTree4.swf" thumb="res/tree/PineTree4Thumb.png" />				
+		<vo baseId="22" name="Pine Tree" alias="PineTree5" walkable="0" layer="2"
+			description="Garden Gate" xSpan="1" zSpan="1" maxLevel="1" type="tree" buildEarnExp="0" earnStep="5" earnWoods="6,4,3,2,1"
+			earnCoins="6,4,3,2,1" earnExps="6,4,3,2,1" spendEnergys="1,1,1,1,1"
+			url="res/tree/PineTree5.swf" thumb="res/tree/PineTree5Thumb.png" />	
+		<vo baseId="23" name="Pine Tree" alias="PineTree6" walkable="0" layer="2"
+			description="Garden Gate" xSpan="1" zSpan="1" maxLevel="1" type="tree" buildEarnExp="0" earnStep="2" earnWoods="2,1"
+			earnCoins="2,1" earnExps="2,1" spendEnergys="1,1"
+			url="res/tree/PineTree6.swf" thumb="res/tree/PineTree6Thumb.png" />	
+		<vo baseId="24" name="Pine Tree" alias="PineTree7" walkable="0" layer="2"
+			description="Garden Gate" xSpan="1" zSpan="1" maxLevel="1" type="tree" buildEarnExp="0" earnStep="2" earnWoods="2,1"
+			earnCoins="2,1" earnExps="2,1" spendEnergys="1,1"
+			url="res/tree/PineTree7.swf" thumb="res/tree/PineTree7Thumb.png" />	
+		<vo baseId="25" name="Pine Tree" alias="PineTree8" walkable="0" layer="2"
+			description="Garden Gate" xSpan="1" zSpan="1" maxLevel="1" type="tree" buildEarnExp="0" earnStep="3" earnWoods="3,2,1"
+			earnCoins="3,2,1" earnExps="3,2,1" spendEnergys="1,1,1"
+			url="res/tree/PineTree8.swf" thumb="res/tree/PineTree8Thumb.png" />		
+		<vo baseId="26" name="Pine Tree" alias="PineTree9" walkable="0" layer="2"
+			description="Garden Gate" xSpan="1" zSpan="1" maxLevel="1" type="tree" buildEarnExp="0" earnStep="4" earnWoods="4,3,2,1"
+			earnCoins="4,3,2,1" earnExps="4,3,2,1" spendEnergys="1,1,1,1"
+			url="res/tree/PineTree9.swf" thumb="res/tree/PineTree9Thumb.png" />				
+		<vo baseId="27" name="Pine Tree" alias="PineTree10" walkable="0" layer="2"
+			description="Garden Gate" xSpan="1" zSpan="1" maxLevel="1" type="tree" buildEarnExp="0" earnStep="5" earnWoods="6,4,3,2,1"
+			earnCoins="6,4,3,2,1" earnExps="6,4,3,2,1" spendEnergys="1,1,1,1,1"
+			url="res/tree/PineTree10.swf" thumb="res/tree/PineTree10Thumb.png" />	
+			
 		<vo baseId="100" name="Garden Gate" alias="Garden_GardenGate" walkable="1" layer="2"
 			description="Garden Garden Gate" xSpan="1" zSpan="2" maxLevel="1" type="decoration" buildEarnExp="1"
 			url="res/decoration/Garden_GardenGate.swf" thumb="res/decoration/Garden_GardenGateThumb.png" />
@@ -61,16 +103,26 @@
 	</buildings>
 	<shop>
 		<house>
-			<vo baseId="10" price="1" payType="1" />
+			<vo baseId="10" price="1" payType="1" useableLevel="2"/>
 		</house>
 		<road>
-			<vo baseId="1" price="1" payType="1" />
-			<vo baseId="2" price="2" payType="1" />
+			<vo baseId="1" price="1" payType="1" useableLevel="2"/>
+			<vo baseId="2" price="2" payType="1" useableLevel="2"/>
 		</road>
 		<tree>
 			<vo baseId="15" price="0" payType="1" />
 			<vo baseId="16" price="0" payType="1" />
 			<vo baseId="17" price="0" payType="1" />
+			<vo baseId="18"/>
+			<vo baseId="19"/>
+			<vo baseId="20"/>
+			<vo baseId="21"/>
+			<vo baseId="22"/>
+			<vo baseId="23"/>
+			<vo baseId="24"/>
+			<vo baseId="25"/>
+			<vo baseId="26"/>
+			<vo baseId="27"/>
 		</tree>
 		<stone>
 			<vo baseId="14" price="0" payType="1" />
