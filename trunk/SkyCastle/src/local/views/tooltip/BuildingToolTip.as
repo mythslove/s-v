@@ -39,6 +39,8 @@ package  local.views.tooltip
 		public function hideTooltip():void
 		{
 			this.visible=false;
+			txtInfo.text="";
+			txtTitle.text="";
 		}
 		
 		/**

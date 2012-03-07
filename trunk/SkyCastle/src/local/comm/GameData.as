@@ -48,5 +48,7 @@ package local.comm
 			return _buildingCurrOperation;
 		}
 		
+		/** 是否是管理员 */
+		public static var isAdmin:Boolean=true;
 	}
 }

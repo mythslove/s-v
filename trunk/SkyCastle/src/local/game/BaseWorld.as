@@ -15,6 +15,7 @@ package local.game
 	import local.model.map.*;
 	import local.model.shop.ShopModel;
 	import local.utils.CharacterManager;
+	import local.utils.MouseManager;
 	import local.utils.ResourceUtil;
 	import local.views.effects.Cloud;
 	import local.views.tooltip.BuildingToolTip;
@@ -286,16 +287,21 @@ package local.game
 						_tooltip.hideTooltip();
 					}else if(_topBuilding) {
 						updateTopBuild();
-					}else if(e.target is InteractivePNG){
+					}else if(_tooltip.visible && e.target is InteractivePNG){
 						_tooltip.updatePosition(e.stageX,e.stageY);
 					}
 					break;
 				case MouseEvent.MOUSE_OVER:
 					if( !_topBuilding && e.target is InteractivePNG){
 						_mouseOverBuild = (e.target as InteractivePNG).parent as Building;
-						_mouseOverBuild.onMouseOver() ;
-						_tooltip.updatePosition(e.stageX,e.stageY);
-						_tooltip.showTooltip(_mouseOverBuild.description , _mouseOverBuild.title );
+						if(!GameData.isAdmin&&_mouseOverBuild.baseBuildingVO.isBasicBuilding()&& MouseManager.instance.checkControl()){
+							_mouseOverBuild = null ;
+							_tooltip.hideTooltip();
+						}else{
+							_mouseOverBuild.onMouseOver() ;
+							_tooltip.showTooltip(_mouseOverBuild.description , _mouseOverBuild.title );
+							_tooltip.updatePosition(e.stageX,e.stageY);
+						}
 					}
 					break;
 				case MouseEvent.MOUSE_UP:
