@@ -16,6 +16,7 @@ package local.game
 	import local.model.shop.ShopModel;
 	import local.utils.CharacterManager;
 	import local.utils.ResourceUtil;
+	import local.views.effects.Cloud;
 	import local.views.tooltip.BuildingToolTip;
 	
 	public class BaseWorld extends IsoWorld
@@ -27,6 +28,7 @@ package local.game
 		public var buildingScene1:BuildingScene ;
 		public var buildingScene2:BuildingScene ;
 		public var buildingScene3:BuildingScene ;
+		public var skyScene:IsoScene;
 		public var topScene:IsoScene;
 		public var effectScene:IsoScene ;
 		//----------------------------------------------------------------*/
@@ -78,6 +80,10 @@ package local.game
 			addScene(buildingScene3);
 			//删除地图数据
 			ResourceUtil.instance.deleteRes("mapdata"); 
+			//天空层
+			skyScene = new IsoScene(GameSetting.GRID_SIZE,GameSetting.GRID_X , GameSetting.GRID_Z);
+			skyScene.mouseEnabled= skyScene.mouseChildren=false;
+			addScene( skyScene );
 			//iso顶层场景
 			topScene = new IsoScene(GameSetting.GRID_SIZE,GameSetting.GRID_X , GameSetting.GRID_Z);
 			topScene.visible = topScene.mouseEnabled= topScene.mouseChildren=false;
@@ -90,6 +96,8 @@ package local.game
 			_tooltip = BuildingToolTip.instance ;
 			_tooltip.hideTooltip();
 			addChild(_tooltip);
+			//添加天气
+			addWeatherEffects();
 			//配置侦听
 			configListeners();
 		}
@@ -150,6 +158,21 @@ package local.game
 			effect.scaleX = 1/scaleX ;
 			effect.scaleY = 1/scaleX; 
 			effectScene.addChild( effect );
+		}
+		
+		/** 添加天气特效 */
+		protected function addWeatherEffects():void
+		{
+			var land:int = GameSetting.GRID_SIZE-20;
+			var cloud:Cloud ;
+			var nodex:Array = [40,20,68,27,10,35];
+			var nodez:Array = [25,37,58,66,60,44];
+			for(var i:int = 0 ; i<nodex.length ; ++i){
+				cloud = new Cloud() ;
+				cloud.nodeX = nodex[i]; 
+				cloud.nodeZ = nodez[i]; 
+				skyScene.addIsoObject( cloud );
+			}
 		}
 		
 		/**

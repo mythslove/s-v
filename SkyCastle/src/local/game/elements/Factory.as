@@ -50,9 +50,12 @@ package local.game.elements
 		override public function onMouseOver():void
 		{
 			super.onMouseOver();
-			if(buildingVO.buildingStatus == BuildingStatus.BUILDING )
+			if(!MouseManager.instance.checkControl() )
 			{
-				MouseManager.instance.mouseStatus = MouseStatus.BUILD_BUILDING ;
+				if(buildingVO.buildingStatus == BuildingStatus.BUILDING )
+				{
+					MouseManager.instance.mouseStatus = MouseStatus.BUILD_BUILDING ;
+				}
 			}
 		}
 	}

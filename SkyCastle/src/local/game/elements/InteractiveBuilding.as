@@ -24,7 +24,9 @@ package local.game.elements
 		public function onMouseOut():void
 		{
 			selectedStatus( false );
-			MouseManager.instance.mouseStatus = MouseStatus.NONE;
+			if(!MouseManager.instance.checkControl()){
+				MouseManager.instance.mouseStatus = MouseStatus.NONE;
+			}
 		}
 	}
 }

@@ -24,10 +24,13 @@ package local.game.elements
 		override public function onMouseOver():void
 		{
 			super.onMouseOver();
-			if(baseTreeVO.earnStep>buildingVO.step){
-				MouseManager.instance.mouseStatus = MouseStatus.CUT_TREES ;
-			}else{
-				MouseManager.instance.mouseStatus = MouseStatus.SHOVEL_BUILDING ;
+			if(!MouseManager.instance.checkControl() )
+			{
+				if(baseTreeVO.earnStep>buildingVO.step){
+					MouseManager.instance.mouseStatus = MouseStatus.CUT_TREES ;
+				}else{
+					MouseManager.instance.mouseStatus = MouseStatus.SHOVEL_BUILDING ;
+				}
 			}
 		}
 	}

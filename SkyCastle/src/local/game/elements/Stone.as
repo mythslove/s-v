@@ -24,11 +24,15 @@ package local.game.elements
 		override public function onMouseOver():void
 		{
 			super.onMouseOver();
-			if(baseStoneVO.earnStep>buildingVO.step){
-				MouseManager.instance.mouseStatus = MouseStatus.BEAT_STONE ;
-			}else{
-				MouseManager.instance.mouseStatus = MouseStatus.SHOVEL_BUILDING ;
+			if(!MouseManager.instance.checkControl() )
+			{
+				if(baseStoneVO.earnStep>buildingVO.step){
+					MouseManager.instance.mouseStatus = MouseStatus.BEAT_STONE ;
+				}else{
+					MouseManager.instance.mouseStatus = MouseStatus.SHOVEL_BUILDING ;
+				}
 			}
+		
 		}
 	}
 }

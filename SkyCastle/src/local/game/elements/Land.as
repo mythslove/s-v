@@ -2,6 +2,7 @@ package local.game.elements
 {
 	import local.model.buildings.vos.BaseLandVO;
 	import local.model.buildings.vos.BuildingVO;
+	import local.utils.MouseManager;
 
 	/**
 	 * 土地，继承自种植类 
@@ -22,11 +23,14 @@ package local.game.elements
 		override public function onMouseOver():void
 		{
 			super.onMouseOver();
-//			if(baseLandVO.earnStep<buildingVO.step){
-//				MouseManager.instance.mouseStatus = MouseStatus.BEAT_STONE ;
-//			}else{
-//				MouseManager.instance.mouseStatus = MouseStatus.SHOVEL_BUILDING ;
-//			}
+			if(!MouseManager.instance.checkControl() )
+			{
+				//			if(baseLandVO.earnStep<buildingVO.step){
+				//				MouseManager.instance.mouseStatus = MouseStatus.BEAT_STONE ;
+				//			}else{
+				//				MouseManager.instance.mouseStatus = MouseStatus.SHOVEL_BUILDING ;
+				//			}
+			}
 		}
 	}
 }
