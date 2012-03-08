@@ -1,6 +1,7 @@
 package local.game.elements
 {
 	import flash.display.MovieClip;
+	import flash.utils.setTimeout;
 	
 	import local.comm.GameSetting;
 	import local.enum.BasicPickup;
@@ -94,7 +95,8 @@ package local.game.elements
 			}else{
 				result = character.searchToRun( nodeX , nodeZ );
 			}
-			if(character is Hero &&!result) {
+			if(character is Hero && !result) 
+			{
 				var effect:MapWordEffect = new MapWordEffect("I can 't get here!");
 				GameWorld.instance.addEffect( effect , screenX , screenY);
 				CollectQueueUtil.instance.clear(); //不能走到建筑旁边，则清除队列
@@ -107,10 +109,12 @@ package local.game.elements
 		public function execute():void
 		{
 			itemLayer.alpha=1 ;
-			//动作完成后才执行下面的，暂时先不做动作
-			PickupUtil.addPickup2Wold(BasicPickup.PICKUP_COIN,14,screenX,screenY-offsetY);
-			enable=true ;
-			CollectQueueUtil.instance.nextBuilding();
+			setTimeout(function():void{
+				//动作完成后才执行下面的，暂时先不做动作
+				PickupUtil.addPickup2Wold(BasicPickup.PICKUP_COIN , Math.round(Math.random()*50),screenX,screenY-offsetY);
+				enable=true ;
+				CollectQueueUtil.instance.nextBuilding();
+			},400);
 		}
 	}
 }

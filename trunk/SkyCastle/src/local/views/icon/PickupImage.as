@@ -19,14 +19,14 @@ package local.views.icon
 	{
 		private var _value:int ;
 		private var _name:String;
-		private var _type:int;
+		private var _type:String;
 		/**
 		 * 构造
 		 * @param name pickup的名字，如pickupExp1 ,pickupWood2
 		 * @param value 值
 		 * @param type 0为不是基础pickup
 		 */		
-		public function PickupImage(name:String , value:int , type:int=0 )
+		public function PickupImage(name:String , value:int , type:String=null )
 		{
 			super(name, "res/pickup/"+name+".png", true);
 			_name = name ;
@@ -38,37 +38,42 @@ package local.views.icon
 		
 		private function addedToStageHandler( e:Event ):void
 		{
+			mouseEnabled = false ;
 			removeEventListener(Event.ADDED_TO_STAGE , addedToStageHandler );
 			TweenLite.to(this, 0.65, {x: x+(35+Math.random()*75)*MathUtil.getRandomFlag()  , ease:Linear.easeNone});
-			TweenLite.to(this, 0.65, {y: y+75+Math.random()*75 , ease:Bounce.easeOut});
+			TweenLite.to(this, 0.65, {y: y+75+Math.random()*75 , ease:Bounce.easeOut , onComplete:inOver});
+		}
+		
+		private function inOver():void {
+			mouseEnabled = true ;
 		}
 		
 		public function fly():void
 		{
 			mouseEnabled = false ;
-			if(_type>0)
+			if(_type)
 			{
 				var temp:String ="";
 				var me:PlayerVO = VillageModel.instance.me ;
 				switch(_type)
 				{
-					case BasicPickup.COIN:
+					case BasicPickup.PICKUP_COIN:
 						temp="Coin";
 						me.coin+=_value ;
 						break ;
-					case BasicPickup.ENERGY:
+					case BasicPickup.PICKUP_ENERGY:
 						temp="Energy";
 						me.energy+=_value ;
 						break ;
-					case BasicPickup.EXP:
+					case BasicPickup.PICKUP_EXP:
 						temp="Exp";
 						me.exp+=_value ;
 						break ;
-					case BasicPickup.WOOD:
+					case BasicPickup.PICKUP_WOOD:
 						temp="Wood";
 						me.wood+=_value ;
 						break ;
-					case BasicPickup.STONE:
+					case BasicPickup.PICKUP_STONE:
 						temp="Stone";
 						me.stone+=_value ;
 						break ;

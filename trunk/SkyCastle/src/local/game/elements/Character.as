@@ -16,7 +16,6 @@ package local.game.elements
 	import local.game.scenes.BuildingScene;
 	import local.model.buildings.vos.BuildingVO;
 	import local.model.map.MapGridDataModel;
-	import local.utils.CollectQueueUtil;
 	import local.utils.ResourceUtil;
 	
 	/**
