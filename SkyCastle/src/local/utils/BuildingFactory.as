@@ -42,6 +42,9 @@ package local.utils
 				case BuildingType.DEC_ROAD: //路
 					building = new Road( vo );
 					break ;
+				case BuildingType.DEC_SPECIAL: //普通的装饰
+					building = new SpecialDecoration(vo);
+					break;
 				case BuildingType.DECORATION: //其他装饰
 					building = new Decortation( vo );
 					break ;
