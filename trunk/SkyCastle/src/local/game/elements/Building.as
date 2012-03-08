@@ -74,7 +74,7 @@ package local.game.elements
 		override public function onClick():void
 		{
 			characterMoveTo(CharacterManager.instance.hero);
-			PickupUtil.addPickup2Wold(BasicPickup.PICKUP_COIN,32,screenX,screenY-offsetY);
+			PickupUtil.addPickup2Wold(BasicPickup.PICKUP_COIN,14,screenX,screenY-offsetY);
 		}
 		
 		/**
