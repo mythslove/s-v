@@ -6,6 +6,11 @@ package local.model.buildings.vos
 	 */	
 	public class BaseRockVO extends BaseDecorationVO
 	{
+		public function BaseRockVO(){
+			super();
+			_file = "rock";
+		}
+		
 		/** 每砍一次收获的木材数*/
 		public var earnWoods:Array ;
 		

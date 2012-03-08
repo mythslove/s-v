@@ -9,6 +9,9 @@ package local.model.buildings.vos
 		public function BaseDecorationVO()
 		{
 			super();
+			_file = "decoration";
 		}
+		
+		
 	}
 }

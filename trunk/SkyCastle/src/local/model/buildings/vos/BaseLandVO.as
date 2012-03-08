@@ -6,6 +6,9 @@ package local.model.buildings.vos
 	 */	
 	public class BaseLandVO extends BasePlantVO
 	{
-		
+		public function BaseLandVO(){
+			super();
+			_file = "plant";
+		}
 	}
 }

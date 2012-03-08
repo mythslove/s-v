@@ -34,17 +34,32 @@ package local.model.buildings.vos
 		/** 最大的等级，可以升到多少级，默认为1*/
 		public var maxLevel:int ;
 		
-		/** 资源的路径 */
-		public var url:String ;
-		
-		/** 缩略图位置*/
-		public var thumb:String ;
-		
 		/** 建筑的类型 */
 		public var type:String ;
 		
 		/** 修建获得经验 */
 		public var buildEarnExp:int ;
+		
+		
+		//在哪个文件夹
+		protected var _file:String = "building";
+		
+		
+		protected var _url:String ;
+		/** 资源的路径 */
+		public function get url():String
+		{
+			if(!_url) _url="res/"+_file+"/"+alias+".swf";
+			return _url ;
+		}
+		
+		protected var _thumb:String ;
+		/** 缩略图位置*/
+		public function get thumb():String
+		{
+			if(!_thumb) _thumb="res/"+_file+"/"+alias+"Thumb.png";
+			return _thumb ;
+		}
 		
 		/** 是否是基本的建筑，基本建筑包括石头，磐石，树*/
 		public function isBasicBuilding():Boolean

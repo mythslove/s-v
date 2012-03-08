@@ -6,6 +6,10 @@ package local.model.buildings.vos
 	 */	
 	public class BaseFactoryVO extends BaseBuildingVO
 	{
+		public function BaseFactoryVO(){
+			super();
+			_file = "factory";
+		}
 		
 		/** 可收获的金币数*/
 		public var earnCoin:int ;
