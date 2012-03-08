@@ -109,6 +109,7 @@ package local.game.elements
 			itemLayer.alpha=1 ;
 			//动作完成后才执行下面的，暂时先不做动作
 			PickupUtil.addPickup2Wold(BasicPickup.PICKUP_COIN,14,screenX,screenY-offsetY);
+			enable=true ;
 			CollectQueueUtil.instance.nextBuilding();
 		}
 	}

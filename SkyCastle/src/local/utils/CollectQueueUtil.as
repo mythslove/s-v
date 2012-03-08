@@ -20,7 +20,7 @@ package local.utils
 		private var _queue:Array= [];
 		
 		//当前正在处理的建筑
-		public var currentBuilding:Building ;
+		public var currentBuilding:Building=null ;
 		
 		/**
 		 * 添加建筑到队列中 
@@ -29,7 +29,7 @@ package local.utils
 		public function addBuilding( building:Building ):void
 		{
 			_queue.push( building );
-			if(!currentBuilding ){
+			if(currentBuilding==null ){
 				nextBuilding();
 			}
 		}

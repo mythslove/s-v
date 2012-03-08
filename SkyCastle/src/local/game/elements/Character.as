@@ -16,6 +16,7 @@ package local.game.elements
 	import local.game.scenes.BuildingScene;
 	import local.model.buildings.vos.BuildingVO;
 	import local.model.map.MapGridDataModel;
+	import local.utils.CollectQueueUtil;
 	import local.utils.ResourceUtil;
 	
 	/**
@@ -36,11 +37,6 @@ package local.game.elements
 		{
 			super(vo);
 			itemLayer.y = 20;
-		}
-		
-		override public function onClick():void
-		{
-			
 		}
 		
 		public function set roads( value:Array ):void
@@ -109,8 +105,8 @@ package local.game.elements
 							roads = roadsArray ;
 							roadIndex = 0 ;
 							nextPoint = this.getNextPoint();
+							return true;
 						}
-						return true;
 					}
 				}else if(_currentActions==AvatarAction.IDLE){
 					nodeX=endNodeX;
@@ -149,7 +145,10 @@ package local.game.elements
 		 */		
 		protected function getNextPoint():Node
 		{
-			if(!roads) return null ;
+			if(!roads) {
+				arrived();
+				return null ;
+			}
 			roadIndex++;
 			if(roadIndex<roads.length){
 				var p:Node = (roads[roadIndex] as Node).clone() ;
