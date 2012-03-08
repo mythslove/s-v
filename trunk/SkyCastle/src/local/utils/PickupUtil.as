@@ -41,24 +41,31 @@ package local.utils
 					max = BasicPickup.STONE ;
 					break ;
 			}
-			if(max==0)
+			if(max>0)
 			{
-				img = new PickupImage(name+max,value);
-				world.addEffect(img,x,y);
+				//基本物品
+				var type:int = max ;
+				while( value>0 && max>0 )
+				{
+					if(value>=max*5)
+					{
+						img = new PickupImage(name+max,max*5,type);
+						world.addEffect(img,x,y);
+						value-=max*5;
+					}else{
+						max-=5;
+						if(max<5){
+							img = new PickupImage(name+Math.ceil(value/5),max,type);
+							world.addEffect(img,x,y);
+						}
+					}
+				}
 			}
 			else
 			{
-				while( value>0 && max>0 )
-				{
-					if(value>=max)
-					{
-						img = new PickupImage(name+max,max);
-						world.addEffect(img,x,y);
-						value-=max;
-					}else{
-						max--;
-					}
-				}
+				//特殊的物品
+				img = new PickupImage(name+max,value);
+				world.addEffect(img,x,y);
 			}
 		}
 	}
