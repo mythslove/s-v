@@ -4,6 +4,9 @@ package local.views.shop.subtab
 	import bing.components.button.ToggleBar;
 	
 	import flash.display.Sprite;
+	import flash.text.TextField;
+	
+	import local.comm.GameData;
 
 	/**
 	 *  装饰面板TabBar 
@@ -17,6 +20,9 @@ package local.views.shop.subtab
 		public var btnStone:BaseToggleButton;
 		public var btnRock:BaseToggleButton;
 		public var mcMask:Sprite ;
+		public var txtStone:TextField;
+		public var txtTree:TextField;
+		public var txtRock:TextField;
 		//================================
 		public static const BTN_ALL:String = "btnAll";
 		public static const BTN_GROUND:String = "btnGround";
@@ -27,6 +33,11 @@ package local.views.shop.subtab
 		public function ShopSubDecorationTabBar()
 		{
 			super();
+			txtStone.mouseEnabled=txtTree.mouseEnabled = txtRock.mouseEnabled = false ;
+			if(!GameData.isAdmin){
+				btnTree.visible = btnStone.visible=btnRock.visible=false;
+				txtStone.visible=txtTree.visible = txtRock.visible = false ;
+			}
 		}
 	}
 }
