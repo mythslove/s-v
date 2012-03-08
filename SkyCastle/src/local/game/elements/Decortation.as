@@ -13,9 +13,11 @@ package local.game.elements
 		{
 			super(vo);
 		}
+		
 		/** 获取此建筑的基础VO */
 		public function get baseDecorationVO():BaseDecorationVO{
 			return buildingVO.baseVO as BaseDecorationVO ;
 		}
+		
 	}
 }

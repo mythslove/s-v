@@ -9,6 +9,7 @@ package local.game.elements
 	import local.game.GameWorld;
 	import local.model.buildings.vos.BuildingVO;
 	import local.utils.CharacterManager;
+	import local.utils.CollectQueueUtil;
 	import local.utils.EffectManager;
 	import local.utils.PickupUtil;
 	import local.views.effects.BaseMovieClipEffect;
@@ -73,15 +74,15 @@ package local.game.elements
 		
 		override public function onClick():void
 		{
-			characterMoveTo(CharacterManager.instance.hero);
-//			PickupUtil.addPickup2Wold(BasicPickup.PICKUP_COIN,14,screenX,screenY-offsetY);
+			CollectQueueUtil.instance.addBuilding( this ); //添加到处理队列中
+			enable = false ;
 		}
 		
 		/**
 		 * 人移动到此建筑旁边或上面 
 		 * @param character
 		 */
-		protected function characterMoveTo( character:Character):void
+		public function characterMoveTo( character:Character):void
 		{
 			var result:Boolean ;
 			if(!baseBuildingVO.walkable){
@@ -96,7 +97,19 @@ package local.game.elements
 			if(character is Hero &&!result) {
 				var effect:MapWordEffect = new MapWordEffect("I can 't get here!");
 				GameWorld.instance.addEffect( effect , screenX , screenY);
+				CollectQueueUtil.instance.clear(); //不能走到建筑旁边，则清除队列
 			}
+		}
+		
+		/**
+		 * 英雄移动到建筑旁边，开始执行动作 
+		 */		
+		public function execute():void
+		{
+			itemLayer.alpha=1 ;
+			//动作完成后才执行下面的，暂时先不做动作
+			PickupUtil.addPickup2Wold(BasicPickup.PICKUP_COIN,14,screenX,screenY-offsetY);
+			CollectQueueUtil.instance.nextBuilding();
 		}
 	}
 }

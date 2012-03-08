@@ -38,6 +38,11 @@ package local.game.elements
 			itemLayer.y = 20;
 		}
 		
+		override public function onClick():void
+		{
+			
+		}
+		
 		public function set roads( value:Array ):void
 		{
 			_roads = value ;
@@ -162,8 +167,16 @@ package local.game.elements
 				roads = null ;
 				nextPoint = null ;
 				gotoAndPlay(AvatarAction.IDLE) ;
+				arrived();
 				return null ;
 			}
+		}
+		
+		/**
+		 * 到达目的地了
+		 * */
+		protected function arrived():void{
+			
 		}
 		
 		/**
