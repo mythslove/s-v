@@ -7,10 +7,10 @@ package local.model.buildings.vos
 	public class BaseFactoryVO extends BaseBuildingVO
 	{
 		
-		/** 每一等级可收获的金币数*/
+		/** 可收获的金币数*/
 		public var earnCoin:int ;
 		
-		/** 每一等级可收获的经验值*/
+		/** 可收获的经验值*/
 		public var earnExp:int ;
 		
 		/** 收获需要的时间*/
