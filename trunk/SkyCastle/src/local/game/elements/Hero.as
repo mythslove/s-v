@@ -24,5 +24,13 @@ package local.game.elements
 			}
 		}
 		
+		
+		override public function onClick():void
+		{
+			if(!CollectQueueUtil.instance.currentBuilding)
+			{
+				//说话
+			}
+		}
 	}
 }

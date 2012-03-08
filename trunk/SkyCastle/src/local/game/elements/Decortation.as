@@ -19,5 +19,11 @@ package local.game.elements
 			return buildingVO.baseVO as BaseDecorationVO ;
 		}
 		
+		override public function onClick():void
+		{
+			if(baseDecorationVO.isBasicBuilding()){
+				super.onClick();
+			}
+		}
 	}
 }

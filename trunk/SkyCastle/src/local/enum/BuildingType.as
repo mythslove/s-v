@@ -30,8 +30,6 @@ package local.enum
 		public static const DEC_ROCK:String = "rock" ;
 		/** 装饰：路，草坪，水渠 */
 		public static const DEC_ROAD:String = "road" ;
-		/**特殊的装饰*/
-		public static const DEC_SPECIAL:String = "specialDec";
 		
 		/**
 		 * 大类：种植 
