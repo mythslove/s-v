@@ -20,7 +20,7 @@ package local.game
 	import local.model.village.VillageModel;
 	import local.utils.CharacterManager;
 	import local.views.effects.MapWordEffect;
-	import local.views.effects.MapWordEffect;
+
 
 	public class GameWorld extends BaseWorld
 	{

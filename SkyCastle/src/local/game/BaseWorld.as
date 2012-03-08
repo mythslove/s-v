@@ -18,6 +18,7 @@ package local.game
 	import local.utils.MouseManager;
 	import local.utils.ResourceUtil;
 	import local.views.effects.Cloud;
+	import local.views.icon.PickupImage;
 	import local.views.tooltip.BuildingToolTip;
 	
 	public class BaseWorld extends IsoWorld
@@ -91,7 +92,7 @@ package local.game
 			addScene( topScene );
 			//特效层
 			effectScene = new IsoScene(GameSetting.GRID_SIZE,GameSetting.GRID_X , GameSetting.GRID_Z);
-			effectScene.mouseEnabled= effectScene.mouseChildren=false;
+			effectScene.mouseEnabled= false;
 			addScene(effectScene);
 			//tooltip
 			_tooltip = BuildingToolTip.instance ;
@@ -302,6 +303,8 @@ package local.game
 							_tooltip.showTooltip(_mouseOverBuild.description , _mouseOverBuild.title );
 							_tooltip.updatePosition(e.stageX,e.stageY);
 						}
+					}else if(e.target is PickupImage){
+						(e.target as PickupImage).fly();
 					}
 					break;
 				case MouseEvent.MOUSE_UP:

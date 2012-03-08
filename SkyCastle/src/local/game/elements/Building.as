@@ -3,12 +3,14 @@ package local.game.elements
 	import flash.display.MovieClip;
 	
 	import local.comm.GameSetting;
+	import local.enum.BasicPickup;
 	import local.enum.BuildingOperation;
 	import local.enum.BuildingType;
 	import local.game.GameWorld;
 	import local.model.buildings.vos.BuildingVO;
 	import local.utils.CharacterManager;
 	import local.utils.EffectManager;
+	import local.utils.PickupUtil;
 	import local.views.effects.BaseMovieClipEffect;
 	import local.views.effects.EffectPlacementBuilding;
 	import local.views.effects.EffectPlacementDecoration;
@@ -16,9 +18,12 @@ package local.game.elements
 	
 	public class Building extends InteractiveBuilding
 	{
+		public var offsetY:Number ;//可用偏移Y
+		
 		public function Building(vo:BuildingVO)
 		{
 			super(vo);
+			offsetY = Math.floor((buildingVO.baseVO.xSpan+buildingVO.baseVO.zSpan)*0.5-1)*GameSetting.GRID_SIZE ;
 		}
 		
 		/**
@@ -58,7 +63,7 @@ package local.game.elements
 				placementMC= new  EffectPlacementDecoration ();
 			}
 			if(placementMC){
-				var offsetY:Number = Math.floor((buildingVO.baseVO.xSpan+buildingVO.baseVO.zSpan)*0.5-1)*GameSetting.GRID_SIZE ;
+				
 				var placementEffect:BaseMovieClipEffect = EffectManager.instance.createMapEffect(placementMC);
 				placementEffect.y = offsetY+this.screenY ;
 				placementEffect.x = this.screenX;
@@ -69,6 +74,7 @@ package local.game.elements
 		override public function onClick():void
 		{
 			characterMoveTo(CharacterManager.instance.hero);
+			PickupUtil.addPickup2Wold(BasicPickup.PICKUP_COIN,32,screenX,screenY-offsetY);
 		}
 		
 		/**

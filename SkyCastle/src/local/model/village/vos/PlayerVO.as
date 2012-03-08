@@ -26,7 +26,18 @@ package local.model.village.vos
 		
 		private var _exp:int ; //当前经验值
 		
+		private var _energy:int ; //能量
 		
+		public function get energy():int
+		{
+			return _energy;
+		}
+
+		public function set energy(value:int):void
+		{
+			_energy = value;
+		}
+
 		public function get exp():int
 		{
 			return _exp;
