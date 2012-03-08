@@ -12,7 +12,7 @@ package local.game.elements
 	import local.views.effects.BaseMovieClipEffect;
 	import local.views.effects.EffectPlacementBuilding;
 	import local.views.effects.EffectPlacementDecoration;
-	import local.views.effects.MapWordEffectRed;
+	import local.views.effects.MapWordEffect;
 	
 	public class Building extends InteractiveBuilding
 	{
@@ -88,7 +88,7 @@ package local.game.elements
 				result = character.searchToRun( nodeX , nodeZ );
 			}
 			if(character is Hero &&!result) {
-				var effect:MapWordEffectRed = new MapWordEffectRed("I can 't get here!");
+				var effect:MapWordEffect = new MapWordEffect("I can 't get here!");
 				GameWorld.instance.addEffect( effect , screenX , screenY);
 			}
 		}
