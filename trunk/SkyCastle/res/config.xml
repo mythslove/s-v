@@ -14,7 +14,7 @@
 			walkable="1" />
 
 		<vo baseId="10" name="HallOfHeroes Ruin" alias="Basic_HallOfHeroes_Ruin" earnCoin="1" earnExp="1"
-			earnTime="300" earnWood="1" earnStone="1" type="house" updateCoins="3,4"
+			earnTime="300" earnWood="1" earnStone="1" type="house" upgradeCoins="3,4"
 			description="MoreCity PathCobblestone" xSpan="2" zSpan="3" earnTimes="300,400,500"
 			earnCoins="4,5,7" earnExps="1,2,4"  buildEarnExp="2"
 			layer="2" maxLevel="3" walkable="0" buildWood="4" buildStone="3"
