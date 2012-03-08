@@ -19,6 +19,7 @@ package local.game
 	import local.model.map.MapGridDataModel;
 	import local.model.village.VillageModel;
 	import local.utils.CharacterManager;
+	import local.utils.CollectQueueUtil;
 	import local.views.effects.MapWordEffect;
 
 
@@ -108,10 +109,10 @@ package local.game
 			{
 				_mouseOverBuild.onClick() ;
 			}
-			else
+			else if(!CollectQueueUtil.instance.currentBuilding) //当前执行队列里没有建筑
 			{
 				var p:Point = pixelPointToGrid(stage.mouseX,stage.mouseY); 
-				if(!CharacterManager.instance.hero.searchToRun( p.x , p.y )){
+				if( !CharacterManager.instance.hero.searchToRun( p.x , p.y )){
 					var effect:MapWordEffect = new MapWordEffect("I can 't get here!");
 					addEffect( effect , stage.mouseX-sceneLayerOffsetX-x ,stage.mouseY-sceneLayerOffsetY-y);
 				}
