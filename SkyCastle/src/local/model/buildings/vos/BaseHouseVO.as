@@ -6,6 +6,10 @@ package local.model.buildings.vos
 	 */	
 	public class BaseHouseVO extends BaseBuildingVO
 	{
+		public function BaseHouseVO(){
+			super();
+			_file = "house";
+		}
 		
 		/** 每一等级可收获的金币数*/
 		public var earnCoins:Array ;

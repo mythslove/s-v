@@ -7,6 +7,11 @@ package local.model.buildings.vos
 	 */	
 	public class BaseCropVO extends BasePlantVO
 	{
+		public function BaseCropVO(){
+			super();
+			_file = "plant";
+		}
+		
 		/** 生长的步数 */
 		public var growSteps:Array ;
 		

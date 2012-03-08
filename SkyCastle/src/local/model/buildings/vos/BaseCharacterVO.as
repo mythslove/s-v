@@ -9,6 +9,7 @@ package local.model.buildings.vos
 		public function BaseCharacterVO()
 		{
 			super();
+			_file = "character";
 		}
 	}
 }

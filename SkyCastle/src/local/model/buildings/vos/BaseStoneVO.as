@@ -6,6 +6,11 @@ package local.model.buildings.vos
 	 */	
 	public class BaseStoneVO extends BaseDecorationVO
 	{
+		public function BaseStoneVO(){
+			super();
+			_file = "stone";
+		}
+		
 		/** 每打击一次收获的石料数*/
 		public var earnStones:Array ;
 		

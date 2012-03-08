@@ -6,6 +6,11 @@ package local.model.buildings.vos
 	 */	
 	public class BaseTreeVO extends BaseDecorationVO
 	{
+		public function BaseTreeVO(){
+			super();
+			_file = "tree";
+		}
+		
 		/** 每砍一次收获的木材数*/
 		public var earnWoods:Array ;
 		
