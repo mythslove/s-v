@@ -16,8 +16,14 @@ package local.model.buildings.vos
 		/** 收获需要的时间*/
 		public var earnTimes:Array ;
 		
-		/** 升级所需要的金币数 */
-		public var updateCoins:Array ;
+		/** 快速升级需要的钱*/
+		public var upgradeCash:Array;
+		
+		/** 慢速升级所需要的金币数 */
+		public var upgradeCoins:Array ;
+		
+		/** 慢速升级所需要的时间*/
+		public var upgradeTimes:Array;
 		
 		/** 第一次修建时需要的木头数 */
 		public var buildWood:int ;
