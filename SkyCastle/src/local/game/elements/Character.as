@@ -136,6 +136,9 @@ package local.game.elements
 		{
 			if( moveToPoint(nextPoint) ){
 				nextPoint = getNextPoint() ; //取下一个点
+				if(!nextPoint){
+					arrived();
+				}
 			}
 		}
 		
@@ -146,7 +149,6 @@ package local.game.elements
 		protected function getNextPoint():Node
 		{
 			if(!roads) {
-				arrived();
 				return null ;
 			}
 			roadIndex++;
@@ -166,7 +168,6 @@ package local.game.elements
 				roads = null ;
 				nextPoint = null ;
 				gotoAndPlay(AvatarAction.IDLE) ;
-				arrived();
 				return null ;
 			}
 		}
