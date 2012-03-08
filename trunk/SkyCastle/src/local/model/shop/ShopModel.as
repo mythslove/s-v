@@ -2,6 +2,7 @@ package local.model.shop
 {
 	import bing.utils.XMLAnalysis;
 	
+	import local.comm.GameData;
 	import local.model.buildings.vos.BuildingVO;
 
 	public class ShopModel
@@ -89,7 +90,11 @@ package local.model.shop
 			//装饰
 			arr = XMLAnalysis.createInstanceArrayByXML(config.shop[0].decoration[0] , BuildingVO , "," );
 			_decorationArray = Vector.<BuildingVO>(arr);
-			_decorationArray =  _decorationArray.concat(_roadArray).concat(_treeArray).concat(_stoneArray).concat(_rockArray);
+			if(GameData.isAdmin){
+				_decorationArray =  _decorationArray.concat(_roadArray).concat(_treeArray).concat(_stoneArray).concat(_rockArray);
+			}else{
+				_decorationArray =  _decorationArray.concat(_roadArray);
+			}
 			//人
 			arr =  XMLAnalysis.createInstanceArrayByXML(config.shop[0].character[0] , BuildingVO , "," );
 			_characterArray = Vector.<BuildingVO>( arr);
