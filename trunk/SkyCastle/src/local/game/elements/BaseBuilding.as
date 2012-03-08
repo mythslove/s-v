@@ -94,6 +94,19 @@ package local.game.elements
 			}
 		}
 		
+		public function get enable():Boolean{
+			return itemLayer.mouseEnabled ;
+		}
+		
+		public function set enable( value:Boolean ):void{
+			itemLayer.mouseEnabled = value ;
+			if(value){
+				itemLayer.alpha = 1 ;
+			}else{
+				itemLayer.alpha = .5 ;
+			}
+		}
+		
 		/**主要用于旋转建筑，1为正，-1为旋转180度 */		
 		override public function set scaleX(value:Number):void
 		{

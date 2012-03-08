@@ -53,5 +53,8 @@ package local.game.elements
 			}
 		}
 		
+		override public function onClick():void
+		{
+		}
 	}
 }
