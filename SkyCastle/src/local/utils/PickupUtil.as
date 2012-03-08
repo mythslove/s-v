@@ -43,21 +43,26 @@ package local.utils
 			}
 			if(max>0)
 			{
-				//基本物品
 				var type:int = max ;
 				while( value>0 && max>0 )
 				{
 					if(value>=max*5)
 					{
-						img = new PickupImage(name+max,max*5,type);
+						img = new PickupImage(name+max,max*5,name);
 						world.addEffect(img,x,y);
 						value-=max*5;
 					}else{
 						max-=5;
-						if(max<5){
-							img = new PickupImage(name+Math.ceil(value/5),max,type);
-							world.addEffect(img,x,y);
+						var temp:int = Math.ceil(value/5);
+						if(temp==type){
+							temp = ((Math.random()*(type-1) )>>0  )+1 ;
 						}
+						if(max<value){
+							img = new PickupImage(name+temp,value,name);
+						}else{
+							img = new PickupImage(name+temp,max,name);
+						}
+						world.addEffect(img,x,y);
 					}
 				}
 			}

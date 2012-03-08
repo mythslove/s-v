@@ -42,14 +42,31 @@ package local.utils
 			if(_queue.length>0){
 				currentBuilding = _queue.shift() as Building;
 				currentBuilding.characterMoveTo( CharacterManager.instance.hero ); //英雄走到建筑旁边
-			}else{
+			}else if(currentBuilding){
+				currentBuilding.enable = true ;
 				currentBuilding = null ;
 			}
+		}
+		
+		/**
+		 * 判断建筑是否在队列中 
+		 * @param build
+		 * @return 
+		 */		
+		public function checkInQueue( build:Building ):Boolean
+		{
+			for each( var building:Building in _queue){
+				if(build==building) return true ;
+			}
+			return false ;
 		}
 		
 		/** 清除队列 */
 		public function clear():void
 		{
+			for each( var building:Building in _queue){
+				building.enable=true ;
+			}
 			_queue = [] ;
 			currentBuilding = null ;
 		}
