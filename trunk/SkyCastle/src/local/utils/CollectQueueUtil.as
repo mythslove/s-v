@@ -71,6 +71,9 @@ package local.utils
 				building.enable=true ;
 			}
 			_queue = [] ;
+			if(currentBuilding){
+				currentBuilding.enable=true ;
+			}
 			currentBuilding = null ;
 		}
 	}

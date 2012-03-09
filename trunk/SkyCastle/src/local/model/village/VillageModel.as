@@ -44,6 +44,7 @@ package local.model.village
 			me.level = 1;
 			me.wood=200;
 			me.stone=209;
+			me.energy=10;
 			me.id = Guid.create();
 			me.name = "binghe";
 			GlobalDispatcher.instance.dispatchEvent( new UserInfoEvent(UserInfoEvent.USER_INFO_UPDATED));
