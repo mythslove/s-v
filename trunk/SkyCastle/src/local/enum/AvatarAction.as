@@ -16,7 +16,7 @@ package local.enum
 		public static const COLLECT:String = "COLLECT";
 		/** 修建 */
 		public static const CONSTRUCT:String = "CONSTRUCT";
-		/** 茫然 */
+		/** 茫然，晕头 */
 		public static const DAZED:String = "DAZED";
 		/** 挖 */
 		public static const DIG:String = "DIG"; 
@@ -27,6 +27,7 @@ package local.enum
 		public static const IDLE:String = "IDLE";
 		/**用钉头打石头*/
 		public static const PICKAXE:String = "PICKAXE";
+		/** 做买东西 的动作 */
 		public static const SHOP:String = "SHOP";
 		public static const WALK:String = "WALK"; 
 		public static const WATER:String = "WATER"; 

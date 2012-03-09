@@ -49,7 +49,7 @@ package local.game.elements
 			}else{
 				CharacterManager.instance.hero.gotoAndPlay(AvatarAction.DIG);
 			}
-			_timeoutId = setTimeout( showPickup , 2200 );
+			_timeoutId = setTimeout( showPickup , 3000 );
 		}
 		
 		override public function showPickup():void
