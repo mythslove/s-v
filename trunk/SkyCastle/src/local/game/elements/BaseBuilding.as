@@ -89,7 +89,7 @@ package local.game.elements
 			//获取元件
 			_skin = ResourceUtil.instance.getInstanceByClassName( buildingVO.baseVO.alias , buildingVO.baseVO.alias ) as MovieClip;
 			if(_skin){
-				_skin.stop();
+				_skin.gotoAndStop( buildingVO.step );
 				itemLayer.addChild(_skin);
 			}
 		}

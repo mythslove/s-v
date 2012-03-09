@@ -17,7 +17,7 @@ package local.model.buildings.vos
 		public var useableLevel:int ; 
 		
 		/** 如果当前的建筑是计步数，则表示当前在哪一步*/
-		public var step:int ;
+		public var step:int =1 ;
 		
 		/** 当前的建筑状态，为BuildingStaus中的常量*/
 		public var buildingStatus:int ;

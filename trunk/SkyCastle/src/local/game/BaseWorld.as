@@ -239,6 +239,28 @@ package local.game
 			return result;
 		}
 		
+		/**
+		 * 删除建筑 
+		 * @param building
+		 */		
+		public function removeBuilding( building:Building , updateDirection:Boolean=true ):void
+		{
+			if(building.baseBuildingVO.layer==LayerType.GROUND) //添加到地面层
+			{
+				var groundScene:GroundScene = getGroundScene (building.nodeX,building.nodeZ);
+				if(groundScene) {
+					groundScene.removeBuilding(building , updateDirection );
+				}
+			}
+			else if(building.baseBuildingVO.layer==LayerType.BUILDING)//添加到建筑层
+			{
+				var buildingScene:BuildingScene = getBuildingScene(building.nodeX,building.nodeZ);
+				if(buildingScene) {
+					buildingScene.removeBuilding( building );
+				}
+			}
+		}
+		
 		/**运行 */		
 		public function start():void{
 			this.removeEventListener(Event.ENTER_FRAME , onEnterFrameHandler );

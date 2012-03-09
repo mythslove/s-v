@@ -1,5 +1,6 @@
 package local.utils
 {
+	import local.enum.AvatarAction;
 	import local.game.elements.Building;
 
 	/**
@@ -43,6 +44,7 @@ package local.utils
 				currentBuilding = _queue.shift() as Building;
 				currentBuilding.characterMoveTo( CharacterManager.instance.hero ); //英雄走到建筑旁边
 			}else if(currentBuilding){
+				CharacterManager.instance.hero.gotoAndPlay(AvatarAction.IDLE);
 				currentBuilding.enable = true ;
 				currentBuilding = null ;
 			}
@@ -64,6 +66,7 @@ package local.utils
 		/** 清除队列 */
 		public function clear():void
 		{
+			CharacterManager.instance.hero.gotoAndPlay(AvatarAction.IDLE);
 			for each( var building:Building in _queue){
 				building.enable=true ;
 			}
