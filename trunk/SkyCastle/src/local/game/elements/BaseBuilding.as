@@ -122,7 +122,7 @@ package local.game.elements
 					stepLoading.parent.removeChild(stepLoading);
 				}
 			}else{
-				itemLayer.alpha = .7 ;
+				itemLayer.alpha = .6 ;
 			}
 		}
 		
