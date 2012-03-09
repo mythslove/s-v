@@ -21,10 +21,10 @@
 		{
 			this.buttonMode = true ;
 			this.mouseChildren = false;
-			this.addEventListener(MouseEvent.MOUSE_OVER , mouseEventHandler , false , 0 , true );
-			this.addEventListener(MouseEvent.MOUSE_UP , mouseEventHandler , false , 0 , true );
-			this.addEventListener(MouseEvent.MOUSE_DOWN , mouseEventHandler , false , 0 , true );
-			this.addEventListener(MouseEvent.MOUSE_OUT , mouseEventHandler , false , 0 , true );
+			this.addEventListener(MouseEvent.MOUSE_OVER , mouseEventHandler , false , 1000 , true );
+			this.addEventListener(MouseEvent.MOUSE_UP , mouseEventHandler , false , 1000 , true );
+			this.addEventListener(MouseEvent.MOUSE_DOWN , mouseEventHandler , false , 1000 , true );
+			this.addEventListener(MouseEvent.MOUSE_OUT , mouseEventHandler , false , 1000 , true );
 		}
 
 		override public function set enabled(value:Boolean):void
