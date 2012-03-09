@@ -2,6 +2,8 @@ package local.game.elements
 {
 	import local.model.buildings.vos.BaseDecorationVO;
 	import local.model.buildings.vos.BuildingVO;
+	import local.utils.CharacterManager;
+	import local.utils.CollectQueueUtil;
 
 	/**
 	 * 装饰类建筑 
@@ -23,6 +25,8 @@ package local.game.elements
 		{
 			if(baseDecorationVO.isBasicBuilding()){
 				super.onClick();
+			}else if(!CollectQueueUtil.instance.currentBuilding){
+				characterMoveTo( CharacterManager.instance.hero );
 			}
 		}
 	}
