@@ -10,6 +10,7 @@ package local.game.elements
 	import local.model.buildings.vos.BuildingVO;
 	import local.model.village.VillageModel;
 	import local.utils.CharacterManager;
+	import local.utils.CollectQueueUtil;
 	import local.utils.MouseManager;
 	import local.utils.PickupUtil;
 	import local.views.effects.MapWordEffect;
@@ -35,19 +36,41 @@ package local.game.elements
 			super.onMouseOver();
 			if(!MouseManager.instance.checkControl() )
 			{
-				if(baseStoneVO.earnStep>buildingVO.step){
-					MouseManager.instance.mouseStatus = MouseStatus.BEAT_STONE ;
-				}else{
-					MouseManager.instance.mouseStatus = MouseStatus.SHOVEL_BUILDING ;
-				}
+				MouseManager.instance.mouseStatus = MouseStatus.BEAT_STONE ;
 			}
-		
 		}
 		
 		
+		override public function onClick():void
+		{
+			//减能量
+			var value:int = baseStoneVO.spendEnergys[buildingVO.step-1] ;
+			if(value>0&&VillageModel.instance.me.energy<value){
+				var effect:MapWordEffect = new MapWordEffect("You don't have enough Energy!");
+				GameWorld.instance.addEffect(effect,screenX,screenY);
+			}else{
+				super.onClick();
+			}
+		}
 		
 		override public function execute():void
 		{
+			//减能量
+			var value:int = baseStoneVO.spendEnergys[buildingVO.step-1] ;
+			if(value>0){
+				var effect:MapWordEffect ;
+				if(VillageModel.instance.me.energy>=value){
+					effect = new MapWordEffect("Energy -"+value);
+					VillageModel.instance.me.energy-=value ;
+					GameWorld.instance.addEffect(effect,screenX,screenY);
+				}else{
+					CollectQueueUtil.instance.clear();
+					effect = new MapWordEffect("You don't have enough Energy!");
+					GameWorld.instance.addEffect(effect,screenX,screenY);
+					//能量不够，弹出购买能量的窗口
+					return ;
+				}
+			}
 			super.execute();
 			CharacterManager.instance.hero.gotoAndPlay(AvatarAction.PICKAXE);
 			_timeoutId = setTimeout( showPickup , 3000 );
@@ -56,19 +79,8 @@ package local.game.elements
 		override public function showPickup():void
 		{
 			super.showPickup();
-			//减能量
-			var value:int = baseStoneVO.spendEnergys[buildingVO.step-1] ;
-			if(value>0){
-				if(VillageModel.instance.me.energy>value){
-					var effect:MapWordEffect = new MapWordEffect("Energy -"+value);
-					GameWorld.instance.addEffect(effect,screenX,scaleY);
-					VillageModel.instance.me.energy-=value ;
-				}else{
-					//能量不够，弹出购买能量的窗口
-				}
-			}
 			//掉pickup
-			value = baseStoneVO.earnCoins[buildingVO.step-1] ;
+			var value:int = baseStoneVO.earnCoins[buildingVO.step-1] ;
 			if(value>0)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_COIN , value,screenX,screenY-offsetY);
 			value = baseStoneVO.earnStones[buildingVO.step-1] ;
 			if(value)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_STONE , value,screenX,screenY-offsetY);
