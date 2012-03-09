@@ -45,7 +45,7 @@ package local.game.elements
 		{
 			super.execute();
 			if(baseTreeVO.earnStep>buildingVO.step){
-				CharacterManager.instance.hero.gotoAndPlay(AvatarAction.PICKAXE);
+				CharacterManager.instance.hero.gotoAndPlay(AvatarAction.CHOPPING);
 			}else{
 				CharacterManager.instance.hero.gotoAndPlay(AvatarAction.DIG);
 			}
