@@ -38,6 +38,10 @@ package local.game.elements
 			itemLayer.y = 20;
 		}
 		
+		public function get currentActions():String{
+			return  _currentActions;
+		}
+		
 		public function set roads( value:Array ):void
 		{
 			_roads = value ;

@@ -2,8 +2,11 @@ package local.game.elements
 {
 	import flash.events.Event;
 	
+	import local.enum.AvatarAction;
 	import local.model.buildings.vos.BaseRoadVO;
 	import local.model.buildings.vos.BuildingVO;
+	import local.utils.CharacterManager;
+	import local.utils.CollectQueueUtil;
 
 	/**
 	 * 路，草坪，水渠 
@@ -55,6 +58,9 @@ package local.game.elements
 		
 		override public function onClick():void
 		{
+			if(!CollectQueueUtil.instance.currentBuilding){
+				characterMoveTo(CharacterManager.instance.hero);
+			}
 		}
 	}
 }
