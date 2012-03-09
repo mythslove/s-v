@@ -10,7 +10,7 @@ package local.enum
 		public static const ACTIVATEWONDER:String = "ACTIVATE-WONDER";
 		/** 佩服*/
 		public static const ADMIRE:String = "ADMIRE";
-		/**锤*/
+		/**普通斧头砍树*/
 		public static const CHOPPING:String = "CHOPPING";
 		/** 收集*/
 		public static const COLLECT:String = "COLLECT";
@@ -20,12 +20,12 @@ package local.enum
 		public static const DAZED:String = "DAZED";
 		/** 挖 */
 		public static const DIG:String = "DIG"; 
-		/**敲击*/
+		/**用铲子打*/
 		public static const HIT:String = "HIT";
 		/**金斧*/
 		public static const GOLDENAXE:String = "GOLDENAXE";
 		public static const IDLE:String = "IDLE";
-		/**普通斧头*/
+		/**用钉头打石头*/
 		public static const PICKAXE:String = "PICKAXE";
 		public static const SHOP:String = "SHOP";
 		public static const WALK:String = "WALK"; 
