@@ -12,7 +12,7 @@ package local.views.loading
 		private static var _instance:BuildingExecuteLoading;
 		public static function getInstance(offsetY:int ):BuildingExecuteLoading{
 			if(!_instance) _instance = new BuildingExecuteLoading();
-			_instance.y = -offsetY;
+			_instance.y = -offsetY+_instance.height;
 			return _instance;
 		}
 		

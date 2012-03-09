@@ -111,6 +111,9 @@ package local.game.elements
 		{
 			itemLayer.alpha=1 ;
 			TweenMax.to(itemLayer, 0, {dropShadowFilter:{color:0x00ff00, alpha:1, blurX:2, blurY:2, strength:5}});
+			if(stepLoading&&stepLoading.parent){
+				stepLoading.parent.removeChild(stepLoading);
+			}
 		}
 		
 		/**

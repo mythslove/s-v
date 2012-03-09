@@ -56,6 +56,7 @@ package local.game.elements
 				GameWorld.instance.addEffect(effect,screenX,screenY);
 			}else{
 				super.onClick();
+				this.showStep( buildingVO.step-1,baseRockVO.earnStep);
 			}
 		}
 		

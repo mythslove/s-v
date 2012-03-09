@@ -27,6 +27,9 @@ package local.game.elements
 			if(!MouseManager.instance.checkControl()){
 				MouseManager.instance.mouseStatus = MouseStatus.NONE;
 			}
+			if(stepLoading&&stepLoading.parent){
+				stepLoading.parent.removeChild(stepLoading);
+			}
 		}
 	}
 }
