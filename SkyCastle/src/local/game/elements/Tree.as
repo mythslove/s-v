@@ -72,9 +72,9 @@ package local.game.elements
 			value = baseTreeVO.earnCoins[buildingVO.step-1] ;
 			if(value>0)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_COIN , value,screenX,screenY-offsetY);
 			value = baseTreeVO.earnWoods[buildingVO.step-1] ;
-			if(value)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_COIN , value,screenX,screenY-offsetY);
+			if(value)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_WOOD , value,screenX,screenY-offsetY);
 			value = baseTreeVO.earnExps[buildingVO.step-1] ;
-			if(value>0) PickupUtil.addPickup2Wold(BasicPickup.PICKUP_COIN , value,screenX,screenY-offsetY);
+			if(value>0) PickupUtil.addPickup2Wold(BasicPickup.PICKUP_EXP , value,screenX,screenY-offsetY);
 			//物品
 			//-------------------------------------
 			buildingVO.step++;
