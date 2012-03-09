@@ -10,6 +10,7 @@ package local.game.elements
 	import local.model.buildings.vos.BuildingVO;
 	import local.model.village.VillageModel;
 	import local.utils.CharacterManager;
+	import local.utils.CollectQueueUtil;
 	import local.utils.MouseManager;
 	import local.utils.PickupUtil;
 	import local.views.effects.MapWordEffect;
@@ -35,7 +36,7 @@ package local.game.elements
 			super.onMouseOver();
 			if(!MouseManager.instance.checkControl() )
 			{
-				if(baseRockVO.earnStep>buildingVO.step){
+				if( baseRockVO.earnStep==1 || baseRockVO.earnStep>buildingVO.step){
 					MouseManager.instance.mouseStatus = MouseStatus.BEAT_STONE ;
 				}else{
 					MouseManager.instance.mouseStatus = MouseStatus.SHOVEL_BUILDING ;
@@ -45,11 +46,38 @@ package local.game.elements
 		}
 		
 		
+		override public function onClick():void
+		{
+			//减能量
+			var value:int = baseRockVO.spendEnergys[buildingVO.step-1] ;
+			if(value>0&&VillageModel.instance.me.energy<value){
+				var effect:MapWordEffect = new MapWordEffect("You don't have enough Energy!");
+				GameWorld.instance.addEffect(effect,screenX,screenY);
+			}else{
+				super.onClick();
+			}
+		}
 		
 		override public function execute():void
 		{
+			//减能量
+			var value:int = baseRockVO.spendEnergys[buildingVO.step-1] ;
+			if(value>0){
+				var effect:MapWordEffect ;
+				if(VillageModel.instance.me.energy>=value){
+					effect = new MapWordEffect("Energy -"+value);
+					VillageModel.instance.me.energy-=value ;
+					GameWorld.instance.addEffect(effect,screenX,screenY);
+				}else{
+					CollectQueueUtil.instance.clear();
+					effect = new MapWordEffect("You don't have enough Energy!");
+					GameWorld.instance.addEffect(effect,screenX,screenY);
+					//能量不够，弹出购买能量的窗口
+					return ;
+				}
+			}
 			super.execute();
-			if(baseRockVO.earnStep>buildingVO.step){
+			if( baseRockVO.earnStep==1 || baseRockVO.earnStep>buildingVO.step){
 				CharacterManager.instance.hero.gotoAndPlay(AvatarAction.PICKAXE);
 			}else{
 				CharacterManager.instance.hero.gotoAndPlay(AvatarAction.DIG);
