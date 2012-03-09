@@ -14,6 +14,7 @@ package local.game.elements
 	import local.utils.MouseManager;
 	import local.utils.PickupUtil;
 	import local.views.effects.MapWordEffect;
+	import local.views.loading.BuildingExecuteLoading;
 
 	/**
 	 * 装饰之树，树藤 
@@ -81,6 +82,7 @@ package local.game.elements
 				CharacterManager.instance.hero.gotoAndPlay(AvatarAction.DIG);
 			}
 			_timeoutId = setTimeout( showPickup , 3000 );
+			effectLayer.addChild( BuildingExecuteLoading.getInstance(itemLayer.height).setTime(3000));
 		}
 		
 		override public function showPickup():void
