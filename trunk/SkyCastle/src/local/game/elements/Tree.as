@@ -42,6 +42,7 @@ package local.game.elements
 				}else{
 					MouseManager.instance.mouseStatus = MouseStatus.SHOVEL_BUILDING ;
 				}
+				this.showStep( buildingVO.step-1,baseTreeVO.earnStep);
 			}
 		}
 		

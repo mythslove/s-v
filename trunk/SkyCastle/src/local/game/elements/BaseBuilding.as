@@ -13,12 +13,12 @@ package local.game.elements
 	import flash.geom.Vector3D;
 	
 	import local.comm.GameSetting;
-	import local.game.GameWorld;
 	import local.game.cell.BuildingGridLayer;
 	import local.model.buildings.vos.BaseBuildingVO;
 	import local.model.buildings.vos.BuildingVO;
 	import local.model.map.MapGridDataModel;
 	import local.utils.ResourceUtil;
+	import local.views.loading.BuildingStepLoading;
 
 	/**
 	 * 建筑基类 
@@ -31,6 +31,7 @@ package local.game.elements
 		public var itemLayer:InteractivePNG ; //皮肤容器层
 		public var effectLayer:Sprite ; //特效层
 		protected var _skin:MovieClip ; //皮肤
+		private var _stepLoading:BuildingStepLoading;
 		
 		public function BaseBuilding( vo :BuildingVO )
 		{
@@ -94,6 +95,21 @@ package local.game.elements
 			}
 		}
 		
+		/** 显示步数*/
+		public function showStep( value:Number , sum:Number  ):void
+		{
+			effectLayer.addChild(stepLoading);
+			stepLoading.y = -itemLayer.height+stepLoading.height;
+			stepLoading.setValue(value ,sum);
+		}
+		
+		/** 步数loading */
+		public function get stepLoading():BuildingStepLoading
+		{
+			if(!_stepLoading) _stepLoading=new BuildingStepLoading();
+			return _stepLoading;
+		}
+		
 		public function get enable():Boolean{
 			return itemLayer.mouseEnabled ;
 		}
@@ -102,6 +118,9 @@ package local.game.elements
 			itemLayer.mouseEnabled = value ;
 			if(value){
 				itemLayer.alpha = 1 ;
+				if(stepLoading&&stepLoading.parent){
+					stepLoading.parent.removeChild(stepLoading);
+				}
 			}else{
 				itemLayer.alpha = .5 ;
 			}
@@ -222,6 +241,7 @@ package local.game.elements
 				_skin.stop();
 				_skin = null ;
 			}
+			_stepLoading = null ;
 		}
 	}
 }

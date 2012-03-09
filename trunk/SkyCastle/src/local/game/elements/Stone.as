@@ -37,6 +37,7 @@ package local.game.elements
 			if(!MouseManager.instance.checkControl() )
 			{
 				MouseManager.instance.mouseStatus = MouseStatus.BEAT_STONE ;
+				this.showStep( buildingVO.step-1 , baseStoneVO.earnStep);
 			}
 		}
 		
