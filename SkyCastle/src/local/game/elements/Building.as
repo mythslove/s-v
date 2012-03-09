@@ -110,7 +110,7 @@ package local.game.elements
 		public function execute():void
 		{
 			itemLayer.alpha=1 ;
-			TweenMax.to(itemLayer, 0, {dropShadowFilter:{color:0x00ff00, alpha:1, blurX:3, blurY:3, strength:10}});
+			TweenMax.to(itemLayer, 0, {dropShadowFilter:{color:0x00ff00, alpha:1, blurX:2, blurY:2, strength:5}});
 		}
 		
 		/**
