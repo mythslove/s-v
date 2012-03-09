@@ -1,6 +1,7 @@
 ﻿package bing.components.button
 {
 	import bing.components.BingComponent;
+	
 	import flash.display.FrameLabel;
 	import flash.events.MouseEvent;
 
@@ -22,10 +23,11 @@
 		{
 			this.buttonMode=true;
 			this.mouseChildren = false;
-			this.addEventListener(MouseEvent.MOUSE_OVER , mouseEventHandler , false, 0 , true );
-			this.addEventListener(MouseEvent.MOUSE_OUT , mouseEventHandler , false, 0 , true );
-			this.addEventListener(MouseEvent.MOUSE_UP , mouseEventHandler , false, 0 , true );
-			this.addEventListener(MouseEvent.MOUSE_DOWN , mouseEventHandler , false, 0 , true );
+			this.addEventListener(MouseEvent.MOUSE_OVER , mouseEventHandler , false, 1000 , true );
+			this.addEventListener(MouseEvent.MOUSE_OUT , mouseEventHandler , false, 1000 , true );
+			this.addEventListener(MouseEvent.MOUSE_UP , mouseEventHandler , false, 1000 , true );
+			this.addEventListener(MouseEvent.MOUSE_DOWN , mouseEventHandler , false, 1000 , true );
+			this.addEventListener(MouseEvent.CLICK , mouseEventHandler , false, 1000 , true );
 		}
 
 		override public function set enabled( value:Boolean ):void
@@ -69,6 +71,13 @@
 			var temp:String = this.selected ? "selected-":"";
 			switch (event.type)
 			{
+				case MouseEvent.CLICK:
+					if(this.enabled){
+						this._selected = ! this.selected;
+						temp = this.selected ? "selected-":"";
+						this.gotoAndStop( temp+"over");
+					}
+					break ;
 				case MouseEvent.MOUSE_UP:
 				case MouseEvent.MOUSE_OUT :
 					if(this.enabled){
@@ -80,7 +89,6 @@
 					break;
 				case MouseEvent.MOUSE_DOWN :
 					this.gotoAndStop( temp+"down");
-					this._selected = ! this.selected;
 					break;
 			}
 		}
@@ -111,6 +119,7 @@
 			this.removeEventListener(MouseEvent.MOUSE_UP , mouseEventHandler);
 			this.removeEventListener(MouseEvent.MOUSE_DOWN , mouseEventHandler );
 			this.removeEventListener(MouseEvent.MOUSE_OUT , mouseEventHandler);
+			this.removeEventListener(MouseEvent.CLICK , mouseEventHandler);
 		}
 	}
 
