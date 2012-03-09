@@ -1,9 +1,16 @@
 package local.game.elements
 {
+	import flash.utils.setTimeout;
+	
+	import local.enum.AvatarAction;
+	import local.enum.BasicPickup;
 	import local.enum.MouseStatus;
+	import local.game.GameWorld;
 	import local.model.buildings.vos.BaseTreeVO;
 	import local.model.buildings.vos.BuildingVO;
+	import local.utils.CharacterManager;
 	import local.utils.MouseManager;
+	import local.utils.PickupUtil;
 
 	/**
 	 * 装饰之树，树藤 
@@ -32,6 +39,40 @@ package local.game.elements
 					MouseManager.instance.mouseStatus = MouseStatus.SHOVEL_BUILDING ;
 				}
 			}
+		}
+		
+		override public function execute():void
+		{
+			super.execute();
+			if(baseTreeVO.earnStep>buildingVO.step){
+				CharacterManager.instance.hero.gotoAndPlay(AvatarAction.PICKAXE);
+			}else{
+				CharacterManager.instance.hero.gotoAndPlay(AvatarAction.DIG);
+			}
+			_timeoutId = setTimeout( showPickup , 2200 );
+		}
+		
+		override public function showPickup():void
+		{
+			super.showPickup();
+			buildingVO.step++;
+			if(buildingVO.step>baseTreeVO.earnStep){
+				//删除个树
+				GameWorld.instance.removeBuilding(this);
+			}else if(_skin){
+				_skin.gotoAndStop( buildingVO.step);
+			}
+			//掉pickup
+			if(baseTreeVO.earnCoins[buildingVO.step-1]>0){
+				PickupUtil.addPickup2Wold(BasicPickup.PICKUP_COIN , baseTreeVO.earnCoins[buildingVO.step-1],screenX,screenY-offsetY);
+			}
+			if(baseTreeVO.earnWoods[buildingVO.step-1]>0){
+				PickupUtil.addPickup2Wold(BasicPickup.PICKUP_COIN , baseTreeVO.earnWoods[buildingVO.step-1],screenX,screenY-offsetY);
+			}
+			if(baseTreeVO.earnExps[buildingVO.step-1]>0){
+				PickupUtil.addPickup2Wold(BasicPickup.PICKUP_COIN , baseTreeVO.earnExps[buildingVO.step-1],screenX,screenY-offsetY);
+			}
+			//物品
 		}
 	}
 }

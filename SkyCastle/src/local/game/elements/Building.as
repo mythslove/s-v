@@ -1,10 +1,9 @@
 package local.game.elements
 {
 	import flash.display.MovieClip;
-	import flash.utils.setTimeout;
+	import flash.utils.clearTimeout;
 	
 	import local.comm.GameSetting;
-	import local.enum.BasicPickup;
 	import local.enum.BuildingOperation;
 	import local.enum.BuildingType;
 	import local.game.GameWorld;
@@ -12,7 +11,6 @@ package local.game.elements
 	import local.utils.CharacterManager;
 	import local.utils.CollectQueueUtil;
 	import local.utils.EffectManager;
-	import local.utils.PickupUtil;
 	import local.views.effects.BaseMovieClipEffect;
 	import local.views.effects.EffectPlacementBuilding;
 	import local.views.effects.EffectPlacementDecoration;
@@ -21,6 +19,7 @@ package local.game.elements
 	public class Building extends InteractiveBuilding
 	{
 		public var offsetY:Number ;//可用偏移Y
+		protected var _timeoutId:int ;
 		
 		public function Building(vo:BuildingVO)
 		{
@@ -109,12 +108,23 @@ package local.game.elements
 		public function execute():void
 		{
 			itemLayer.alpha=1 ;
-			setTimeout(function():void{
-				//动作完成后才执行下面的，暂时先不做动作
-				PickupUtil.addPickup2Wold(BasicPickup.PICKUP_COIN , Math.round(Math.random()*50),screenX,screenY-offsetY);
-				enable=true ;
-				CollectQueueUtil.instance.nextBuilding();
-			},400);
+		}
+		
+		/**
+		 * 掉物品 ，并接着下一个收集
+		 */		
+		public function showPickup():void
+		{
+			enable=true ;
+			CollectQueueUtil.instance.nextBuilding();
+		}
+		
+		override public function dispose():void
+		{
+			super.dispose();
+			if(_timeoutId>0){
+				clearTimeout(_timeoutId);
+			}
 		}
 	}
 }

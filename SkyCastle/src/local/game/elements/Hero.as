@@ -28,6 +28,11 @@ package local.game.elements
 		{
 			var building:Building = CollectQueueUtil.instance.currentBuilding ;
 			if( building){
+				if(this.screenX>building.screenX){
+					this.scaleX = -1;
+				}else{
+					this.scaleX = 1;
+				}
 				building.execute();
 			}
 		}
