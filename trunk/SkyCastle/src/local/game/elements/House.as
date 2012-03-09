@@ -28,7 +28,7 @@ package local.game.elements
 		
 		override public function onClick():void
 		{
-			super.onClick();
+//			super.onClick();
 			switch( buildingVO.buildingStatus )
 			{
 				case BuildingStatus.PRODUCTION:
