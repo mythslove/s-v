@@ -28,11 +28,6 @@ package  local.views
 			super();
 		}
 		
-		override protected function added():void
-		{
-			GlobalDispatcher.instance.addEventListener( UserInfoEvent.USER_INFO_UPDATED , userInfoUpdateHandler );
-		}
-		
 		private function userInfoUpdateHandler( e:UserInfoEvent ):void
 		{
 			var user:PlayerVO ;
