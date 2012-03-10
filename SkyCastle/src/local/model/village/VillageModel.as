@@ -39,9 +39,9 @@ package local.model.village
 			me = new PlayerVO();
 			me.cash = 100;
 			me.coin = 1000 ;
-			me.exp = 4 ;
+			me.exp = 14 ;
 			me.minExp = 2 ;
-			me.maxExp = 1000 ;
+			me.maxExp = 100 ;
 			me.level = 1;
 			me.wood=200;
 			me.stone=209;
