@@ -43,7 +43,7 @@ package  local.views
 		{
 			coinBar.update( user.coin );
 			energyBar.update( user.energy );
-			expBar.update( [user.exp , user.minExp , user.maxExp ] );
+			expBar.update( [user.exp , user.minExp , user.maxExp , user.level ] );
 			stoneBar.update( user.stone );
 			woodBar.update( user.wood );
 			gemBar.update( user.cash ) ;

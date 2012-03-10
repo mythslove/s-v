@@ -1,15 +1,11 @@
 package local.views.topbar
 {
-	import com.greensock.TweenLite;
-	
 	import flash.display.Sprite;
 	import flash.text.TextField;
 	
-	import local.model.village.vos.PlayerVO;
-	import local.views.BaseView;
 	import local.views.tooltip.GameToolTip;
 	
-	public class TopBarEnergy extends BaseView
+	public class TopBarEnergy extends Sprite
 	{
 		public var txtValue:TextField ;
 		public var bar:Sprite;
@@ -20,14 +16,10 @@ package local.views.topbar
 			super();
 		}
 		
-		override protected function added():void
-		{
-			GameToolTip.instance.register(txtValue , stage , "Your Energy value.");
-		}
-		
 		public function update(obj:Object):void
 		{
 			txtValue.text = String(obj) ;	
+			GameToolTip.instance.register(txtValue , stage , "ENERGY: "+obj);
 //			TweenLite.to( bar , 0.4 , {scaleX: pro/obj[2]});
 		}
 	}

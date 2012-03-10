@@ -19,13 +19,13 @@ package local.views.topbar
 		
 		override protected function added():void
 		{
-			GameToolTip.instance.register(txtValue , stage , "Your Coin value.");
-			GameToolTip.instance.register(btnAddCoin , stage , "Click to add Coins.");
+			GameToolTip.instance.register(btnAddCoin , stage , "Click to add coins.");
 		}
 		
 		public function update(obj:Object):void
 		{
 			txtValue.text = String(obj) ;	
+			GameToolTip.instance.register(txtValue , stage , "COIN: "+obj);
 		}
 	}
 }
