@@ -25,7 +25,7 @@ package local.views.topbar
 		
 		public function update(obj:Object):void
 		{
-			
+			txtValue.text = String(obj) ;	
 		}
 	}
 }

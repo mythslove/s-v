@@ -12,5 +12,10 @@ package local.views.topbar
 		{
 			super();
 		}
+		
+		public function update( obj:Object ):void
+		{
+			txtName.text = String(obj) ;
+		}
 	}
 }
