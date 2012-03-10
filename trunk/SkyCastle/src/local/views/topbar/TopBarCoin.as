@@ -20,6 +20,7 @@ package local.views.topbar
 		override protected function added():void
 		{
 			GameToolTip.instance.register(txtValue , stage , "Your Coin value.");
+			GameToolTip.instance.register(btnAddCoin , stage , "Click to add Coin.");
 		}
 	}
 }
