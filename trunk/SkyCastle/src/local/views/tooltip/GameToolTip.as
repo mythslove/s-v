@@ -76,14 +76,18 @@ package  local.views.tooltip
 		{
 			_hitSprite=hitSprite;
 			if( !_hitSprite.hasEventListener(MouseEvent.MOUSE_OUT))
-				_hitSprite.addEventListener(MouseEvent.MOUSE_OUT, this.mouseEventHandler);
+				_hitSprite.addEventListener(MouseEvent.MOUSE_OUT, this.mouseEventHandler,false,0,true);
 			if( !_hitSprite.hasEventListener(MouseEvent.ROLL_OUT))
-				_hitSprite.addEventListener(MouseEvent.ROLL_OUT, this.mouseEventHandler);
+				_hitSprite.addEventListener(MouseEvent.ROLL_OUT, this.mouseEventHandler,false,0,true);
 			if( !_hitSprite.hasEventListener(MouseEvent.MOUSE_MOVE))
-				_hitSprite.addEventListener(MouseEvent.MOUSE_MOVE, this.mouseEventHandler);
-			txtInfo.text=_hitSprite.accessibilityProperties.description;
-			txtTitle.text=_hitSprite.accessibilityProperties.name;
-			update();
+				_hitSprite.addEventListener(MouseEvent.MOUSE_MOVE, this.mouseEventHandler,false,0,true);
+			if(_hitSprite.accessibilityProperties){
+				txtInfo.text=_hitSprite.accessibilityProperties.description;
+				txtTitle.text=_hitSprite.accessibilityProperties.name;
+				update();
+			}else{
+				hide();
+			}
 		}
 		
 		public function update():void

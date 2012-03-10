@@ -3,7 +3,10 @@ package local.views.topbar
 	import flash.display.Sprite;
 	import flash.text.TextField;
 	
-	public class TopBarStone extends Sprite
+	import local.views.BaseView;
+	import local.views.tooltip.GameToolTip;
+	
+	public class TopBarStone extends BaseView
 	{
 		public var txtValue:TextField ;
 		//====================
@@ -11,6 +14,11 @@ package local.views.topbar
 		public function TopBarStone()
 		{
 			super();
+		}
+
+		override protected function added():void
+		{
+			GameToolTip.instance.register(txtValue , stage , "Your Stone value.");
 		}
 	}
 }
