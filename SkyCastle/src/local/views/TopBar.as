@@ -49,5 +49,15 @@ package  local.views
 			gemBar.update( user.cash ) ;
 			userBar.update( user.name ) ;
 		}
+		
+		/**更新topbar信息*/
+		public function updateTopBar():void
+		{
+			if(VillageModel.instance.isHome){
+				setUserInfo( VillageModel.instance.me );
+			}else{
+				setUserInfo( VillageModel.instance.friend );
+			}
+		}
 	}
 }

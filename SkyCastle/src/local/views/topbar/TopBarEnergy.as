@@ -1,5 +1,7 @@
 package local.views.topbar
 {
+	import com.greensock.TweenLite;
+	
 	import flash.display.Sprite;
 	import flash.text.TextField;
 	
@@ -26,6 +28,7 @@ package local.views.topbar
 		public function update(obj:Object):void
 		{
 			txtValue.text = String(obj) ;	
+//			TweenLite.to( bar , 0.4 , {scaleX: pro/obj[2]});
 		}
 	}
 }

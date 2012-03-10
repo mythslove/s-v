@@ -41,7 +41,7 @@ package local.model.village
 			me.coin = 1000 ;
 			me.exp = 4 ;
 			me.minExp = 2 ;
-			me.maxExp = 10 ;
+			me.maxExp = 1000 ;
 			me.level = 1;
 			me.wood=200;
 			me.stone=209;

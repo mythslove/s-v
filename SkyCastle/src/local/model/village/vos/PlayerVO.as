@@ -23,11 +23,15 @@ package local.model.village.vos
 		
 		private var _cash:int ; //钱
 		
-		private var _maxExp:int ;//最大经验值
+		public var maxExp:int ;//最大经验值
 		
-		private var _minExp:int ; //最小经验值
+		public var minExp:int ; //最小经验值
 		
 		private var _exp:int ; //当前经验值
+		
+		public var maxEnergy:int ; //最大能量
+		
+		public var minEnergy:int ; //最小能量
 		
 		private var _energy:int ; //能量
 		
@@ -49,26 +53,6 @@ package local.model.village.vos
 		public function set exp(value:int):void
 		{
 			_exp = value;
-		}
-
-		public function get minExp():int
-		{
-			return _minExp;
-		}
-
-		public function set minExp(value:int):void
-		{
-			_minExp = value;
-		}
-
-		public function get maxExp():int
-		{
-			return _maxExp;
-		}
-
-		public function set maxExp(value:int):void
-		{
-			_maxExp = value;
 		}
 
 		public function get cash():int

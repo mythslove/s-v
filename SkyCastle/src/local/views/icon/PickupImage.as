@@ -12,6 +12,7 @@ package local.views.icon
 	import local.game.GameWorld;
 	import local.model.village.VillageModel;
 	import local.model.village.vos.PlayerVO;
+	import local.views.CenterViewContainer;
 	import local.views.base.Image;
 	import local.views.effects.MapWordEffect;
 	
@@ -78,6 +79,7 @@ package local.views.icon
 						me.stone+=_value ;
 						break ;
 				}
+				CenterViewContainer.instance.topBar.updateTopBar();
 				var worldEffect:MapWordEffect = new MapWordEffect( temp+" +"+_value , MapWordEffect.WHITE);
 				GameWorld.instance.addEffect( worldEffect , x , y );
 				TweenLite.to( this , 0.5 , {y:y-300,alpha:0 , onComplete:remove });
