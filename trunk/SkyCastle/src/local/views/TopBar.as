@@ -1,5 +1,6 @@
 package  local.views
 {
+	import local.model.village.vos.PlayerVO;
 	import local.views.topbar.TopBarCoin;
 	import local.views.topbar.TopBarEnergy;
 	import local.views.topbar.TopBarExp;
@@ -22,6 +23,11 @@ package  local.views
 		public function TopBar()
 		{
 			super();
+		}
+		
+		public function setUserInfo( user:PlayerVO ):void
+		{
+			
 		}
 		
 		override protected function added():void
