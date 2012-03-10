@@ -25,12 +25,12 @@ package  local.views
 			super();
 		}
 		
-		public function setUserInfo( user:PlayerVO ):void
+		override protected function added():void
 		{
 			
 		}
 		
-		override protected function added():void
+		public function setUserInfo( user:PlayerVO ):void
 		{
 			
 		}
