@@ -46,7 +46,13 @@ package  local.views
 		
 		public function setUserInfo( user:PlayerVO ):void
 		{
-			
+			coinBar.update( user.coin );
+			energyBar.update( user.energy );
+			expBar.update( [user.exp , user.minExp , user.maxExp ] );
+			stoneBar.update( user.stone );
+			woodBar.update( user.wood );
+			gemBar.update( user.cash ) ;
+			userBar.update( user.name ) ;
 		}
 	}
 }
