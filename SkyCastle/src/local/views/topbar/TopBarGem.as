@@ -4,7 +4,10 @@ package local.views.topbar
 	import flash.display.Sprite;
 	import flash.text.TextField;
 	
-	public class TopBarGem extends Sprite
+	import local.views.BaseView;
+	import local.views.tooltip.GameToolTip;
+	
+	public class TopBarGem extends BaseView
 	{
 		public var btnAddGem:SimpleButton;
 		public var txtValue:TextField;
@@ -13,6 +16,11 @@ package local.views.topbar
 		public function TopBarGem()
 		{
 			super();
+		}
+		
+		override protected function added():void
+		{
+			GameToolTip.instance.register(txtValue , stage , "Your Gem value.");
 		}
 	}
 }

@@ -3,7 +3,10 @@ package local.views.topbar
 	import flash.display.Sprite;
 	import flash.text.TextField;
 	
-	public class TopBarEnergy extends Sprite
+	import local.views.BaseView;
+	import local.views.tooltip.GameToolTip;
+	
+	public class TopBarEnergy extends BaseView
 	{
 		public var txtValue:TextField ;
 		public var bar:Sprite;
@@ -12,6 +15,11 @@ package local.views.topbar
 		public function TopBarEnergy()
 		{
 			super();
+		}
+		
+		override protected function added():void
+		{
+			GameToolTip.instance.register(txtValue , stage , "Your Energy value.");
 		}
 	}
 }
