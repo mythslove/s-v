@@ -25,7 +25,9 @@ package local.views.topbar
 		
 		public function update(obj:Object):void
 		{
-			
+			var pro:int = obj[0]-obj[1];
+			txtValue.text = obj[0]+"/"+obj[2];
+			bar.scaleX = pro/obj[2];
 		}
 	}
 }
