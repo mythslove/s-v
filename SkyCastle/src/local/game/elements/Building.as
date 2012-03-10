@@ -76,8 +76,8 @@ package local.game.elements
 		
 		override public function onClick():void
 		{
-			CollectQueueUtil.instance.addBuilding( this ); //添加到处理队列中
 			enable = false ;
+			CollectQueueUtil.instance.addBuilding( this ); //添加到处理队列中
 		}
 		
 		/**
