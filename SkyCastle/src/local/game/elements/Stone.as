@@ -14,6 +14,7 @@ package local.game.elements
 	import local.utils.MouseManager;
 	import local.utils.PickupUtil;
 	import local.views.effects.MapWordEffect;
+	import local.views.loading.BuildingExecuteLoading;
 
 	/**
 	 * 装饰之石头 
@@ -75,6 +76,7 @@ package local.game.elements
 			super.execute();
 			CharacterManager.instance.hero.gotoAndPlay(AvatarAction.PICKAXE);
 			_timeoutId = setTimeout( showPickup , 3000 );
+			GameWorld.instance.effectScene.addChild( BuildingExecuteLoading.getInstance(screenX,screenY-itemLayer.height).setTime(3000));
 		}
 		
 		override public function showPickup():void
