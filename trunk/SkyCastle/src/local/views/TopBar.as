@@ -1,7 +1,5 @@
 package  local.views
 {
-	import flash.display.Sprite;
-	
 	import local.views.topbar.TopBarCoin;
 	import local.views.topbar.TopBarEnergy;
 	import local.views.topbar.TopBarExp;
@@ -10,7 +8,7 @@ package  local.views
 	import local.views.topbar.TopBarUserName;
 	import local.views.topbar.TopBarWood;
 	
-	public class TopBar extends Sprite
+	public class TopBar extends BaseView
 	{
 		public var coinBar:TopBarCoin ;
 		public var energyBar:TopBarEnergy;
@@ -24,6 +22,11 @@ package  local.views
 		public function TopBar()
 		{
 			super();
+		}
+		
+		override protected function added():void
+		{
+			
 		}
 	}
 }
