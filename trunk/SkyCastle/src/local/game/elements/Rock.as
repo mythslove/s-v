@@ -42,10 +42,14 @@ package local.game.elements
 				}else{
 					MouseManager.instance.mouseStatus = MouseStatus.SHOVEL_BUILDING ;
 				}
+				this.showStep( buildingVO.step-1 , baseRockVO.earnStep);
 			}
 			
 		}
 		
+		override public function get description():String  {
+			return "";
+		}
 		
 		override public function onClick():void
 		{

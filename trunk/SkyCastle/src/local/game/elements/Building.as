@@ -5,7 +5,6 @@ package local.game.elements
 	import flash.display.MovieClip;
 	import flash.utils.clearTimeout;
 	
-	import local.comm.GameSetting;
 	import local.enum.BuildingOperation;
 	import local.enum.BuildingType;
 	import local.game.GameWorld;
@@ -20,13 +19,11 @@ package local.game.elements
 	
 	public class Building extends InteractiveBuilding
 	{
-		public var offsetY:Number ;//可用偏移Y
 		protected var _timeoutId:int ;
 		
 		public function Building(vo:BuildingVO)
 		{
 			super(vo);
-			offsetY = Math.floor((buildingVO.baseVO.xSpan+buildingVO.baseVO.zSpan)*0.5-1)*GameSetting.GRID_SIZE ;
 		}
 		
 		/**

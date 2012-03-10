@@ -13,6 +13,7 @@ package local.game.elements
 	import flash.geom.Vector3D;
 	
 	import local.comm.GameSetting;
+	import local.game.GameWorld;
 	import local.game.cell.BuildingGridLayer;
 	import local.model.buildings.vos.BaseBuildingVO;
 	import local.model.buildings.vos.BuildingVO;
@@ -30,6 +31,7 @@ package local.game.elements
 		public var gridLayer:BuildingGridLayer ; //建筑占据的网格层
 		public var itemLayer:InteractivePNG ; //皮肤容器层
 		public var effectLayer:Sprite ; //特效层
+		public var offsetY:Number ;//可用偏移Y
 		protected var _skin:MovieClip ; //皮肤
 		private var _stepLoading:BuildingStepLoading;
 		
@@ -38,6 +40,7 @@ package local.game.elements
 			super(GameSetting.GRID_SIZE , vo.baseVO.xSpan , vo.baseVO.zSpan );
 			this.buildingVO = vo ;
 			mouseEnabled = false ;
+			offsetY = Math.floor((buildingVO.baseVO.xSpan+buildingVO.baseVO.zSpan)*0.5-1)*GameSetting.GRID_SIZE ;
 			
 			itemLayer = new InteractivePNG(); //添加皮肤容器层
 			itemLayer.mouseChildren = false ;
@@ -98,8 +101,9 @@ package local.game.elements
 		/** 显示步数*/
 		public function showStep( value:Number , sum:Number  ):void
 		{
+			stepLoading.scaleX = stepLoading.scaleY = 1/GameWorld.instance.scaleX ;
 			effectLayer.addChild(stepLoading);
-			stepLoading.y = -itemLayer.height+stepLoading.height;
+			stepLoading.y = -itemLayer.height;
 			stepLoading.setValue(value ,sum);
 		}
 		
