@@ -81,6 +81,9 @@ package
 			
 			GameWorld.instance.initWorld();
 			GameWorld.instance.start();
+			
+			//显示玩家信息
+			CenterViewContainer.instance.topBar.setUserInfo( VillageModel.instance.me);
 		}
 	}
 }
