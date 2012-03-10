@@ -85,7 +85,7 @@ package local.game.elements
 				CharacterManager.instance.hero.gotoAndPlay(AvatarAction.DIG);
 			}
 			_timeoutId = setTimeout( showPickup , 3000 );
-			effectLayer.addChild( BuildingExecuteLoading.getInstance(itemLayer.height).setTime(3000));
+			GameWorld.instance.effectScene.addChild( BuildingExecuteLoading.getInstance(screenX,screenY-itemLayer.height).setTime(3000));
 		}
 		
 		override public function showPickup():void

@@ -10,9 +10,10 @@ package local.views.loading
 		public var bar:MovieClip;
 		//====================
 		private static var _instance:BuildingExecuteLoading;
-		public static function getInstance(offsetY:int ):BuildingExecuteLoading{
+		public static function getInstance(x:int , y:int ):BuildingExecuteLoading{
 			if(!_instance) _instance = new BuildingExecuteLoading();
-			_instance.y = -offsetY+_instance.height;
+			_instance.y = y;
+			_instance.x = x ;
 			return _instance;
 		}
 		
