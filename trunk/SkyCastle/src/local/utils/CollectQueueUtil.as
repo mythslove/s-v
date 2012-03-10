@@ -70,10 +70,10 @@ package local.utils
 			for each( var building:Building in _queue){
 				building.enable=true ;
 			}
-			_queue = [] ;
 			if(currentBuilding){
 				currentBuilding.enable=true ;
 			}
+			_queue = [] ;
 			currentBuilding = null ;
 		}
 	}
