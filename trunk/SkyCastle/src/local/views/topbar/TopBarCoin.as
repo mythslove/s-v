@@ -3,6 +3,7 @@ package local.views.topbar
 	import flash.display.SimpleButton;
 	import flash.text.TextField;
 	
+	import local.model.village.vos.PlayerVO;
 	import local.views.BaseView;
 	import local.views.tooltip.GameToolTip;
 	
@@ -21,6 +22,11 @@ package local.views.topbar
 		{
 			GameToolTip.instance.register(txtValue , stage , "Your Coin value.");
 			GameToolTip.instance.register(btnAddCoin , stage , "Click to add Coins.");
+		}
+		
+		public function setPlayer( vo:PlayerVO ):void
+		{
+			
 		}
 	}
 }
