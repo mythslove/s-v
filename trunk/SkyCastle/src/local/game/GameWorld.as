@@ -20,6 +20,7 @@ package local.game
 	import local.model.village.VillageModel;
 	import local.utils.CharacterManager;
 	import local.utils.CollectQueueUtil;
+	import local.views.CenterViewContainer;
 	import local.views.effects.MapWordEffect;
 
 
@@ -205,6 +206,7 @@ package local.game
 					}
 				}
 			}
+			CenterViewContainer.instance.topBar.updateTopBar();
 		}
 		
 		/**

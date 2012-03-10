@@ -13,6 +13,7 @@ package local.game.elements
 	import local.utils.CollectQueueUtil;
 	import local.utils.MouseManager;
 	import local.utils.PickupUtil;
+	import local.views.CenterViewContainer;
 	import local.views.effects.MapWordEffect;
 	import local.views.loading.BuildingExecuteLoading;
 
@@ -71,6 +72,7 @@ package local.game.elements
 				if(VillageModel.instance.me.energy>=value){
 					effect = new MapWordEffect("Energy -"+value);
 					VillageModel.instance.me.energy-=value ;
+					CenterViewContainer.instance.topBar.updateTopBar();
 					GameWorld.instance.addEffect(effect,screenX,screenY);
 				}else{
 					CollectQueueUtil.instance.clear();

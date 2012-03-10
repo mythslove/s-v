@@ -13,6 +13,7 @@ package local.game.elements
 	import local.utils.CollectQueueUtil;
 	import local.utils.MouseManager;
 	import local.utils.PickupUtil;
+	import local.views.CenterViewContainer;
 	import local.views.effects.MapWordEffect;
 	import local.views.loading.BuildingExecuteLoading;
 
@@ -73,6 +74,7 @@ package local.game.elements
 				if(VillageModel.instance.me.energy>=value){
 					effect = new MapWordEffect("Energy -"+value);
 					VillageModel.instance.me.energy-=value ;
+					CenterViewContainer.instance.topBar.updateTopBar();
 					GameWorld.instance.addEffect(effect,screenX,screenY);
 				}else{
 					CollectQueueUtil.instance.clear();
@@ -102,6 +104,7 @@ package local.game.elements
 					var effect:MapWordEffect = new MapWordEffect("Energy -"+value);
 					GameWorld.instance.addEffect(effect,screenX,scaleY);
 					VillageModel.instance.me.energy-=value ;
+					CenterViewContainer.instance.topBar.updateTopBar();
 				}else{
 					//能量不够，弹出购买能量的窗口
 				}
