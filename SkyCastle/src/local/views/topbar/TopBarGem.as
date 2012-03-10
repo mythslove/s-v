@@ -21,7 +21,7 @@ package local.views.topbar
 		override protected function added():void
 		{
 			GameToolTip.instance.register(txtValue , stage , "Your Gem value.");
-			GameToolTip.instance.register(btnAddGem , stage , "Click to add Gem.");
+			GameToolTip.instance.register(btnAddGem , stage , "Click to add Gems.");
 		}
 	}
 }
