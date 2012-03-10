@@ -25,7 +25,7 @@ package local.views.topbar
 			GameToolTip.instance.register(btnAddGem , stage , "Click to add Gems.");
 		}
 		
-		public function setPlayer( vo:PlayerVO ):void
+		public function update(obj:Object):void
 		{
 			
 		}

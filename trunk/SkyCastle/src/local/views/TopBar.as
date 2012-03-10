@@ -1,5 +1,8 @@
 package  local.views
 {
+	import local.comm.GlobalDispatcher;
+	import local.events.UserInfoEvent;
+	import local.model.village.VillageModel;
 	import local.model.village.vos.PlayerVO;
 	import local.views.topbar.TopBarCoin;
 	import local.views.topbar.TopBarEnergy;
@@ -27,7 +30,18 @@ package  local.views
 		
 		override protected function added():void
 		{
-			
+			GlobalDispatcher.instance.addEventListener( UserInfoEvent.USER_INFO_UPDATED , userInfoUpdateHandler );
+		}
+		
+		private function userInfoUpdateHandler( e:UserInfoEvent ):void
+		{
+			var user:PlayerVO ;
+			if(VillageModel.instance.isHome) {
+				user = VillageModel.instance.me; 
+			}else{
+				user = VillageModel.instance.friend;
+			}
+			setUserInfo(user);
 		}
 		
 		public function setUserInfo( user:PlayerVO ):void

@@ -1,9 +1,7 @@
 package local.views.topbar
 {
-	import flash.display.Sprite;
 	import flash.text.TextField;
 	
-	import local.model.village.vos.PlayerVO;
 	import local.views.BaseView;
 	import local.views.tooltip.GameToolTip;
 	
@@ -22,7 +20,7 @@ package local.views.topbar
 			GameToolTip.instance.register(txtValue , stage , "Your Stone value.");
 		}
 		
-		public function setPlayer( vo:PlayerVO ):void
+		public function update(obj:Object):void
 		{
 			
 		}

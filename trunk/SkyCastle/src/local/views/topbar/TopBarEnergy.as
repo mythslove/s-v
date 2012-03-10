@@ -23,7 +23,7 @@ package local.views.topbar
 			GameToolTip.instance.register(txtValue , stage , "Your Energy value.");
 		}
 		
-		public function setPlayer( vo:PlayerVO ):void
+		public function update(obj:Object):void
 		{
 			
 		}
