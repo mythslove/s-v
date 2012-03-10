@@ -46,6 +46,10 @@ package local.game.elements
 			}
 		}
 		
+		override public function get description():String  {
+			return "";
+		}
+		
 		override public function onClick():void
 		{
 			//减能量

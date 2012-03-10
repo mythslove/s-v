@@ -5,6 +5,8 @@ package local.views.loading
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	
+	import local.game.elements.Building;
+	
 	public class BuildingExecuteLoading extends Sprite
 	{
 		public var bar:MovieClip;
@@ -17,11 +19,21 @@ package local.views.loading
 			return _instance;
 		}
 		
+		public static function get instance():BuildingExecuteLoading{
+			if(!_instance) _instance = new BuildingExecuteLoading();
+			return _instance;
+		}
+		
 		public function BuildingExecuteLoading()
 		{
 			super();
 			mouseChildren=mouseEnabled=false;
 			if(_instance) throw new Error("只能有一个实例");
+		}
+		
+		public function setScale( value:Number ):void
+		{
+			scaleX = scaleY = value ;
 		}
 		
 		public function setTime( time:Number ):BuildingExecuteLoading

@@ -19,6 +19,7 @@ package local.game
 	import local.utils.ResourceUtil;
 	import local.views.effects.Cloud;
 	import local.views.icon.PickupImage;
+	import local.views.loading.BuildingExecuteLoading;
 	import local.views.tooltip.BuildingToolTip;
 	
 	public class BaseWorld extends IsoWorld
@@ -118,6 +119,7 @@ package local.game
 				effectScene.getChildAt(i).scaleX = 1/scaleX;
 				effectScene.getChildAt(i).scaleY = 1/scaleX;
 			}
+			BuildingExecuteLoading.instance.setScale(1/scaleX) ;
 		}
 		/**
 		 * 通过位置获得GroundScene
