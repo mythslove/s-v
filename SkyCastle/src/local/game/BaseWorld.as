@@ -333,10 +333,10 @@ package local.game
 					break;
 				case MouseEvent.MOUSE_UP:
 					if(!_mapIsMove) onClick(e);
+					_mapIsMove = false ;
 				case MouseEvent.ROLL_OUT:
 					this.stopDrag();
 				case MouseEvent.MOUSE_OUT:
-					_mapIsMove = false ;
 					_tooltip.hideTooltip();
 					if(e.type!=MouseEvent.MOUSE_UP && _mouseOverBuild){
 						_mouseOverBuild.onMouseOut();
