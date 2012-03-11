@@ -28,9 +28,11 @@ package  local.views.tooltip
 		public function showTooltip( info:String , title:String=""):void
 		{
 			this.visible=true;
-			txtInfo.text=info ;
-			txtTitle.text=title;
-			update();
+			if(txtInfo){
+				txtInfo.text=info ;
+				txtTitle.text=title;
+				update();
+			}
 		}
 		
 		/**
@@ -39,8 +41,10 @@ package  local.views.tooltip
 		public function hideTooltip():void
 		{
 			this.visible=false;
-			txtInfo.text="";
-			txtTitle.text="";
+			if(txtInfo){
+				txtInfo.text="";
+				txtTitle.text="";
+			}
 		}
 		
 		/**
