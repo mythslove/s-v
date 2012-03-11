@@ -43,13 +43,14 @@ package local.views.shop
 		public function ShopPopUpSkin()
 		{
 			super();
+			container.visible=false;
 		}
 		
 		override protected function added():void
 		{
 			x = GameSetting.SCREEN_WIDTH>>1;
 			y = GameSetting.SCREEN_HEIGHT>>1;
-			TweenLite.from(this,0.5,{x:-width , ease:Back.easeOut });
+			TweenLite.from(this,0.5,{x:-width , ease:Back.easeOut , onComplete:inTweenOver });
 			
 			tabMenu.addEventListener(ToggleItemEvent.ITEM_SELECTED , tabMenuHandler , false , 0 , true ) ;
 			btnClose.addEventListener( MouseEvent.CLICK , closeClickHandler , false , 0 , true );
@@ -60,6 +61,11 @@ package local.views.shop
 			}
 			
 			GlobalDispatcher.instance.addEventListener(ShopEvent.SELECTED_BUILDING , shopEventHandler );
+		}
+		
+		private function inTweenOver():void
+		{
+			container.visible=true;
 		}
 		
 		/* 商店中选择了一个商品 */
@@ -161,6 +167,7 @@ package local.views.shop
 		private function closeClickHandler( e:MouseEvent ):void
 		{
 			mouseChildren = false ;
+			container.visible=false;
 			TweenLite.to(this,0.5,{x:GameSetting.SCREEN_WIDTH+width , ease:Back.easeIn , onComplete:tweenComplete});
 		}
 		
