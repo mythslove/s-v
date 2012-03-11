@@ -1,8 +1,5 @@
 package local.model.village.vos
 {
-	
-	
-
 	/**
 	 * 玩家 
 	 * @author zzhanglin
