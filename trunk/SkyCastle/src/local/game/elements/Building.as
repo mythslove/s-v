@@ -5,6 +5,7 @@ package local.game.elements
 	import flash.display.MovieClip;
 	import flash.utils.clearTimeout;
 	
+	import local.enum.BasicPickup;
 	import local.enum.BuildingOperation;
 	import local.enum.BuildingType;
 	import local.game.GameWorld;
@@ -12,6 +13,7 @@ package local.game.elements
 	import local.utils.CharacterManager;
 	import local.utils.CollectQueueUtil;
 	import local.utils.EffectManager;
+	import local.utils.PickupUtil;
 	import local.views.effects.BaseMovieClipEffect;
 	import local.views.effects.EffectPlacementBuilding;
 	import local.views.effects.EffectPlacementDecoration;
@@ -36,6 +38,9 @@ package local.game.elements
 				case BuildingOperation.ADD:
 					playPlaceEffect();
 					CharacterManager.instance.updateCharacters( this );
+					//掉修建经验
+					var value:int = baseBuildingVO.buildEarnExp;
+					if(value>0)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_EXP , value,screenX,screenY-offsetY);
 					break ;
 				case BuildingOperation.ROTATE:
 					buildingVO.scale = scaleX ;
