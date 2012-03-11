@@ -6,7 +6,9 @@ package local.views.icon
 	import com.greensock.easing.Bounce;
 	import com.greensock.easing.Linear;
 	
+	import flash.display.DisplayObject;
 	import flash.events.Event;
+	import flash.geom.Point;
 	
 	import local.enum.BasicPickup;
 	import local.game.GameWorld;
@@ -51,6 +53,7 @@ package local.views.icon
 		
 		public function fly():void
 		{
+			var target:DisplayObject ;
 			mouseEnabled = false ;
 			if(_type)
 			{
@@ -61,28 +64,38 @@ package local.views.icon
 					case BasicPickup.PICKUP_COIN:
 						temp="Coin";
 						me.coin+=_value ;
+						target = CenterViewContainer.instance.topBar.coinBar ;
 						break ;
 					case BasicPickup.PICKUP_ENERGY:
 						temp="Energy";
 						me.energy+=_value ;
+						target = CenterViewContainer.instance.topBar.energyBar ;
 						break ;
 					case BasicPickup.PICKUP_EXP:
 						temp="Exp";
 						me.exp+=_value ;
+						target = CenterViewContainer.instance.topBar.expBar ;
 						break ;
 					case BasicPickup.PICKUP_WOOD:
 						temp="Wood";
 						me.wood+=_value ;
+						target = CenterViewContainer.instance.topBar.woodBar ;
 						break ;
 					case BasicPickup.PICKUP_STONE:
 						temp="Stone";
 						me.stone+=_value ;
+						target = CenterViewContainer.instance.topBar.stoneBar ;
 						break ;
 				}
+				var targetPoint:Point = new Point(target.x+CenterViewContainer.instance.x,target.y+CenterViewContainer.instance.y);
+				var world:GameWorld = GameWorld.instance ;
+				targetPoint.x = (targetPoint.x-world.x)/world.scaleX-world.sceneLayerOffsetX ;
+				targetPoint.y = (targetPoint.y-world.y)/world.scaleX-world.sceneLayerOffsetY ;
+				TweenLite.to( this , 0.5 , {x:targetPoint.x , y:targetPoint.y , alpha:0 , onComplete:remove});
+				
 				CenterViewContainer.instance.topBar.updateTopBar();
 				var worldEffect:MapWordEffect = new MapWordEffect( temp+" +"+_value , MapWordEffect.WHITE);
 				GameWorld.instance.addEffect( worldEffect , x , y );
-				TweenLite.to( this , 0.5 , {y:y-300,alpha:0 , onComplete:remove });
 			}
 			else
 			{
