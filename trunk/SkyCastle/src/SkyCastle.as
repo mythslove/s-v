@@ -2,6 +2,7 @@ package
 {
 	import flash.events.Event;
 	import flash.net.registerClassAlias;
+	import flash.system.Security;
 	
 	import local.comm.GlobalDispatcher;
 	import local.events.UserInfoEvent;
@@ -24,6 +25,7 @@ package
 			stage.align="TL";
 			stage.scaleMode = "noScale";
 			stage.showDefaultContextMenu = false ;
+			Security.allowDomain("*");
 		}
 		
 		override protected function init():void

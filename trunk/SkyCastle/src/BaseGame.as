@@ -60,7 +60,7 @@ package
 		{
 			var res:Vector.<ResVO> = new Vector.<ResVO>();
 			res.push( new ResVO("init_config","res/config.xml"));
-			res.push( new ResVO("init_mapdata","res/mapdata") ); 
+			res.push( new ResVO("init_mapdata","res/mapdata.sc") ); 
 			res.push( new ResVO("init_effect","res/skin/Effect.swf") );
 			res.push( new ResVO("init_bg","res/skin/bg.swf"));
 			res.push( new ResVO("init_ui","res/skin/ui.swf"));
@@ -82,6 +82,7 @@ package
 					_preLoading.loaderBar.gotoAndStop( (evt.loaded/evt.total*100 )>>0 );
 					break;
 				case ResLoadedEvent.QUEUE_LOADED:
+					SystemUtil.debug("初始资源下载完成");
 					ResourceUtil.instance.removeEventListener(ResProgressEvent.RES_LOAD_PROGRESS , queueLoadHandler);
 					ResourceUtil.instance.removeEventListener(ResLoadedEvent.QUEUE_LOADED ,queueLoadHandler);
 					parseConfig();
