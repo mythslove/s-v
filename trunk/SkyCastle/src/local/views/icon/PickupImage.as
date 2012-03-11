@@ -9,6 +9,8 @@ package local.views.icon
 	import flash.display.DisplayObject;
 	import flash.events.Event;
 	import flash.geom.Point;
+	import flash.utils.clearTimeout;
+	import flash.utils.setTimeout;
 	
 	import local.enum.BasicPickup;
 	import local.game.GameWorld;
@@ -23,6 +25,8 @@ package local.views.icon
 		private var _value:int ;
 		private var _name:String;
 		private var _type:String;
+		private var _timeoutId:int ;
+		
 		/**
 		 * 构造
 		 * @param name pickup的名字，如pickupExp1 ,pickupWood2
@@ -49,10 +53,13 @@ package local.views.icon
 		
 		private function inOver():void {
 			mouseEnabled = true ;
+			_timeoutId = setTimeout( fly , 3000+Math.random()*2000 );
 		}
 		
 		public function fly():void
 		{
+			clearTimeout(_timeoutId);
+			_timeoutId = 0 ;
 			var target:DisplayObject ;
 			mouseEnabled = false ;
 			if(_type)
@@ -107,6 +114,9 @@ package local.views.icon
 		{
 			if(parent){
 				parent.removeChild(this);
+			}
+			if(_timeoutId>0){
+				clearTimeout(_timeoutId);
 			}
 		}
 	}
