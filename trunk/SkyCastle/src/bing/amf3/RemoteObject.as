@@ -14,11 +14,11 @@ package bing.amf3
 	/**
 	 * 返回结果
 	 */	
-	[Event(name="result",type="bing.amf3.ResultEvent")]
+	[Event(name="amfResult",type="bing.amf3.ResultEvent")]
 	/**
 	 * 调用后台接口错误信息
 	 */	
-	[Event(name="fault",type="bing.amf3.FaultEvent")]
+	[Event(name="amfFault",type="bing.amf3.FaultEvent")]
 	/**
 	 * AMF3，类似于flex的RemoteObject
 	 * @author zhouzhanglin
