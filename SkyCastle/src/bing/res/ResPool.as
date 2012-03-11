@@ -131,7 +131,7 @@ package bing.res
 			loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR , ioErrorHandler );
 			var url:String = cdns[resVO.loadError]+resVO.url ;
 			if(url.indexOf("http:")==0){
-				context.securityDomain = SecurityDomain.currentDomain;
+//				context.securityDomain = SecurityDomain.currentDomain;
 			}
 			loader.load( new URLRequest(url) ,context);
 			_currentLoadNum++;

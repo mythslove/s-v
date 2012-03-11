@@ -5,6 +5,7 @@ package local.utils
 	import bing.res.ResPool;
 	import bing.res.ResType;
 	import bing.res.ResVO;
+	import bing.utils.SystemUtil;
 	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
@@ -76,37 +77,36 @@ package local.utils
 			try
 			{
 				bytes.uncompress();
-				var temp:int ;
-				for( var i:int = 0 ; i<GameSetting.GRID_X ; ++ i)
-				{
-					for( var j:int = 0 ; j<GameSetting.GRID_Z ; ++ j)
-					{
-						temp = bytes.readUnsignedByte();
-						//哪个isoScene索引
-						MapGridDataModel.instance.sceneHash[i+"-"+j]=temp;
-						if(temp>0){
-							//大于表示这里可以放建筑，所以寻路和建筑，地面数据都需要这些数据
-							MapGridDataModel.instance.astarGrid.getNode(i,j).walkable = true ;
-							MapGridDataModel.instance.buildingGrid.getNode(i,j).walkable = true ;
-							MapGridDataModel.instance.groundGrid.getNode(i,j).walkable = true ;
-						}
-					}
-				}
-				temp = bytes.readUnsignedShort();
-				for(  i = 0 ; i<temp ; ++ i)
-				{
-					//额外的格子，如楼梯，这里寻路需要这些数据，但建筑不需要这些格子
-					var nodeX:int = bytes.readUnsignedByte() ;
-					var nodeZ:int = bytes.readUnsignedByte() ;
-					MapGridDataModel.instance.astarGrid.getNode(nodeX,nodeZ).walkable = true ;
-					MapGridDataModel.instance.extraHash[nodeX+"-"+nodeZ] = true ;
-				}
 			}
 			catch(e:Error)
 			{
-				trace(e);
+				SystemUtil.debug("地图配置没有压缩");
 			}
-			
+			var temp:int ;
+			for( var i:int = 0 ; i<GameSetting.GRID_X ; ++ i)
+			{
+				for( var j:int = 0 ; j<GameSetting.GRID_Z ; ++ j)
+				{
+					temp = bytes.readUnsignedByte();
+					//哪个isoScene索引
+					MapGridDataModel.instance.sceneHash[i+"-"+j]=temp;
+					if(temp>0){
+						//大于表示这里可以放建筑，所以寻路和建筑，地面数据都需要这些数据
+						MapGridDataModel.instance.astarGrid.getNode(i,j).walkable = true ;
+						MapGridDataModel.instance.buildingGrid.getNode(i,j).walkable = true ;
+						MapGridDataModel.instance.groundGrid.getNode(i,j).walkable = true ;
+					}
+				}
+			}
+			temp = bytes.readUnsignedShort();
+			for(  i = 0 ; i<temp ; ++ i)
+			{
+				//额外的格子，如楼梯，这里寻路需要这些数据，但建筑不需要这些格子
+				var nodeX:int = bytes.readUnsignedByte() ;
+				var nodeZ:int = bytes.readUnsignedByte() ;
+				MapGridDataModel.instance.astarGrid.getNode(nodeX,nodeZ).walkable = true ;
+				MapGridDataModel.instance.extraHash[nodeX+"-"+nodeZ] = true ;
+			}
 		}
 	}
 }
