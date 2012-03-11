@@ -1,5 +1,6 @@
 package
 {
+	import flash.display.StageQuality;
 	import flash.events.Event;
 	import flash.net.registerClassAlias;
 	import flash.system.Security;
@@ -22,6 +23,7 @@ package
 		public function SkyCastle()
 		{
 			super();
+			stage.quality = StageQuality.MEDIUM;
 			stage.align="TL";
 			stage.scaleMode = "noScale";
 			stage.showDefaultContextMenu = false ;
