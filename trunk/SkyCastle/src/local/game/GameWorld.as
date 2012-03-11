@@ -115,7 +115,7 @@ package local.game
 				var p:Point = pixelPointToGrid(stage.mouseX,stage.mouseY); 
 				if( !CharacterManager.instance.hero.searchToRun( p.x , p.y )){
 					var effect:MapWordEffect = new MapWordEffect("I can 't get here!");
-					addEffect( effect , stage.mouseX-sceneLayerOffsetX-x ,stage.mouseY-sceneLayerOffsetY-y);
+					addEffect( effect , (stage.mouseX-x)/scaleX-sceneLayerOffsetX,(stage.mouseY-y)/scaleX-sceneLayerOffsetY);
 				}
 			}
 		}
