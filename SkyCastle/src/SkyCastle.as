@@ -1,5 +1,6 @@
 package
 {
+	import flash.display.StageQuality;
 	import flash.events.Event;
 	import flash.net.registerClassAlias;
 	import flash.system.Security;
@@ -24,6 +25,7 @@ package
 			super();
 			stage.align="TL";
 			stage.scaleMode = "noScale";
+			stage.quality = StageQuality.MEDIUM;
 			stage.showDefaultContextMenu = false ;
 			Security.allowDomain("*");
 		}
