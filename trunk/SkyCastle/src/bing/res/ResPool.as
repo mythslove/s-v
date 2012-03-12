@@ -11,6 +11,7 @@ package bing.res
 	import flash.net.URLLoaderDataFormat;
 	import flash.net.URLRequest;
 	import flash.system.ApplicationDomain;
+	import flash.system.ImageDecodingPolicy;
 	import flash.system.LoaderContext;
 	import flash.system.SecurityDomain;
 	import flash.utils.Dictionary;
@@ -125,13 +126,14 @@ package bing.res
 		protected function loaderARes(resVO:ResVO):void
 		{
 			var context:LoaderContext = new LoaderContext(false , ApplicationDomain.currentDomain);
+			context.imageDecodingPolicy = ImageDecodingPolicy.ON_DEMAND;
 			var loader:Loader = new Loader();
 			loader.name = resVO.resId ;
 			loader.contentLoaderInfo.addEventListener(Event.COMPLETE , loaderHandler);
 			loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR , ioErrorHandler );
 			var url:String = cdns[resVO.loadError]+resVO.url ;
 			if(url.indexOf("http:")==0){
-//				context.securityDomain = SecurityDomain.currentDomain;
+				context.securityDomain = SecurityDomain.currentDomain;
 			}
 			loader.load( new URLRequest(url) ,context);
 			_currentLoadNum++;
