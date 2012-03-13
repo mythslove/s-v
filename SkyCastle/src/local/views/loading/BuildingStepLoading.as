@@ -6,7 +6,6 @@ package local.views.loading
 	public class BuildingStepLoading extends Sprite
 	{
 		public var bar:Sprite ;
-		public var txtLoading:TextField;
 		//==================
 		
 		public function BuildingStepLoading()
@@ -16,7 +15,6 @@ package local.views.loading
 		
 		public function setValue(current:int , sum:int ):void
 		{
-			txtLoading.text = current+" / "+sum ;
 			bar.scaleX = current/sum ;
 		}
 	}
