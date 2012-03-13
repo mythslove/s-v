@@ -5,9 +5,10 @@ package local.views.topbar
 	import flash.display.Sprite;
 	import flash.text.TextField;
 	
+	import local.views.BaseView;
 	import local.views.tooltip.GameToolTip;
 	
-	public class TopBarEnergy extends Sprite
+	public class TopBarEnergy extends BaseView
 	{
 		public var txtValue:TextField ;
 		public var bar:Sprite;
@@ -18,12 +19,15 @@ package local.views.topbar
 			super();
 		}
 		
+		override protected function added():void{
+			GameToolTip.instance.register(txtValue , stage , "ENERGY:Used to complete tasks." );
+		}
+		
 		public function update(obj:Object):void
 		{
 			txtValue.text = obj[0]+"/"+obj[2];
 			var pro:int = obj[0]-obj[1];
 			TweenLite.to( bar , 0.4 , {scaleX: pro/obj[2]});
-			GameToolTip.instance.register(txtValue , stage , "ENERGY:Used to complete tasks.You have "+obj[0] );
 		}
 	}
 }
