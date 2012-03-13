@@ -28,8 +28,6 @@ package local.model.village.vos
 		
 		public var maxEnergy:int ; //最大能量
 		
-		public var minEnergy:int ; //最小能量
-		
 		private var _energy:int ; //能量
 		
 		public function get energy():int
@@ -39,6 +37,8 @@ package local.model.village.vos
 
 		public function set energy(value:int):void
 		{
+			if(value<0) value=0 ;
+			else if(value>maxEnergy) value = maxEnergy ;
 			_energy = value;
 		}
 
@@ -49,6 +49,8 @@ package local.model.village.vos
 
 		public function set exp(value:int):void
 		{
+			if(value<minExp) value=minExp ;
+			else if(value>maxExp) value = maxExp ;
 			_exp = value;
 		}
 
