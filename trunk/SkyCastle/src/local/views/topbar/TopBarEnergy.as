@@ -26,7 +26,7 @@ package local.views.topbar
 		public function update(obj:Object):void
 		{
 			txtValue.text = obj[0]+"/"+obj[1];
-			TweenLite.to( bar , 0.4 , {scaleX:  obj[0]/obj[1]});
+			TweenLite.to( bar , 0.2 , {scaleX:  obj[0]/obj[1]});
 		}
 	}
 }
