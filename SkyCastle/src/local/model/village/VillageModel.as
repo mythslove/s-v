@@ -39,15 +39,14 @@ package local.model.village
 			me = new PlayerVO();
 			me.cash = 100;
 			me.coin = 1000 ;
-			me.exp = 14 ;
 			me.minExp = 2 ;
 			me.maxExp = 100 ;
+			me.exp = 14 ;
 			me.level = 1;
 			me.wood=200;
 			me.stone=209;
-			me.energy = 14 ;
-			me.minEnergy = 2 ;
 			me.maxEnergy = 100 ;
+			me.energy = 86 ;
 			me.id = Guid.create();
 			me.name = "binghe";
 			GlobalDispatcher.instance.dispatchEvent( new UserInfoEvent(UserInfoEvent.USER_INFO_UPDATED));
