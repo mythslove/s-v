@@ -22,12 +22,12 @@ package local.views.topbar
 		override protected function added():void
 		{
 			GameToolTip.instance.register(btnAddGem , stage , "Click to add gems.");
+			GameToolTip.instance.register(txtValue , stage , "GEM: Purchase items and energy with gems.");
 		}
 		
 		public function update(obj:Object):void
 		{
 			txtValue.text = String(obj) ;	
-			GameToolTip.instance.register(txtValue , stage , "GEM: "+obj);
 		}
 	}
 }

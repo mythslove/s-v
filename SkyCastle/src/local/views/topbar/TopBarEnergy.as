@@ -1,5 +1,7 @@
 package local.views.topbar
 {
+	import com.greensock.TweenLite;
+	
 	import flash.display.Sprite;
 	import flash.text.TextField;
 	
@@ -18,9 +20,10 @@ package local.views.topbar
 		
 		public function update(obj:Object):void
 		{
-			txtValue.text = String(obj) ;	
-			GameToolTip.instance.register(txtValue , stage , "ENERGY: "+obj);
-//			TweenLite.to( bar , 0.4 , {scaleX: pro/obj[2]});
+			txtValue.text = obj[0]+"/"+obj[2];
+			var pro:int = obj[0]-obj[1];
+			TweenLite.to( bar , 0.4 , {scaleX: pro/obj[2]});
+			GameToolTip.instance.register(txtValue , stage , "ENERGY:Used to complete tasks.You have "+obj[0] );
 		}
 	}
 }
