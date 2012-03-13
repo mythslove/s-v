@@ -13,7 +13,6 @@ package local.game
 	import local.game.scenes.*;
 	import local.model.buildings.vos.*;
 	import local.model.map.*;
-	import local.model.shop.ShopModel;
 	import local.utils.CharacterManager;
 	import local.utils.MouseManager;
 	import local.utils.ResourceUtil;
@@ -382,15 +381,17 @@ package local.game
 		/** 显示世界 */
 		public function initWorld():void
 		{
-			if(ShopModel.instance.characterArray && ShopModel.instance.characterArray.length>0)
-			{
-				var avatar:Hero = new Hero( ShopModel.instance.characterArray[0]);
-				avatar.nodeX = 53;
-				avatar.nodeZ = 39;
-				var scene:IsoScene = this.getBuildingScene( avatar.nodeX , avatar.nodeZ );
-				scene.addIsoObject( avatar ) ;
-				CharacterManager.instance.hero = avatar ;
-			}
+			//添加出生点的英雄 
+			var heroBornPoint:HeroBornPoint = new HeroBornPoint();
+			heroBornPoint.nodeX = 53 ;
+			heroBornPoint.nodeZ = 39 ;
+			var avatar:Hero = new Hero();
+			avatar.nodeX = 53;
+			avatar.nodeZ = 39;
+			var scene:IsoScene = this.getBuildingScene( avatar.nodeX , avatar.nodeZ );
+			(scene as BuildingScene).addBuilding(heroBornPoint,false);
+			scene.addIsoObject( avatar ) ;
+			CharacterManager.instance.hero = avatar ;
 		}
 	}
 }

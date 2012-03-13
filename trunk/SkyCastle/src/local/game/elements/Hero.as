@@ -1,14 +1,45 @@
 package local.game.elements
 {
+	import flash.display.MovieClip;
+	import flash.events.Event;
+	
+	import local.enum.BuildingType;
+	import local.game.cell.BitmapMovieClip;
+	import local.model.buildings.vos.BaseCharacterVO;
 	import local.model.buildings.vos.BuildingVO;
 	import local.utils.CollectQueueUtil;
+	import local.utils.ResourceUtil;
 	
 	public class Hero extends Character
 	{
 		
-		public function Hero(vo:BuildingVO)
+		public function Hero()
 		{
+			var decVO:BaseCharacterVO = new BaseCharacterVO();
+			decVO.alias="Basic_AvatarMale";
+			decVO.walkable=1 ;
+			decVO.xSpan = 1 ;
+			decVO.zSpan = 1 ;
+			decVO.layer = 2 ;
+			decVO.name="Sky Castle";
+			decVO.description = "Click to talk.";
+			decVO.type = BuildingType.CHACTERS ;
+			var vo:BuildingVO = new BuildingVO();
+			vo.baseVO = decVO ;
 			super(vo);
+		}
+		
+		/* 添加到舞台上*/
+		override protected function addedToStageHandler( e:Event ):void
+		{
+			removeEventListener(Event.ADDED_TO_STAGE , addedToStageHandler );
+			//获取元件
+			_skin = ResourceUtil.instance.getInstanceByClassName( "Basic_AvatarMale" , buildingVO.baseVO.alias ) as MovieClip;
+			if(_skin){
+				_bmpMC = new BitmapMovieClip(_skin);
+				itemLayer.addChild(_bmpMC);
+				_bmpMC.play();
+			}
 		}
 		
 		override public function searchToRun(endNodeX:int, endNodeZ:int):Boolean

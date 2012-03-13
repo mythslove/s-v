@@ -51,5 +51,8 @@ package local.model.buildings.vos
 			}
 			return _baseVO;
 		}
+		public function set baseVO( value:BaseBuildingVO ):void{
+			this._baseVO = value ;
+		}
 	}
 }

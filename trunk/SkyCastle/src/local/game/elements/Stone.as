@@ -46,6 +46,10 @@ package local.game.elements
 		override public function get description():String  {
 			return "";
 		}
+		/** 获取此建筑的标题 */
+		override public function get title():String  {
+			return baseBuildingVO.name+": "+(buildingVO.step-1)+"/"+baseStoneVO.earnStep;
+		}
 		
 		override public function onClick():void
 		{
