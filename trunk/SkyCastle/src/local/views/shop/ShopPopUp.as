@@ -54,7 +54,7 @@ package local.views.shop
 		{
 			x = GameSetting.SCREEN_WIDTH>>1;
 			y = GameSetting.SCREEN_HEIGHT>>1;
-			TweenLite.from(this,0.4,{x:-width , ease:Back.easeOut , onComplete:inTweenOver });
+			TweenLite.from(this,0.5,{x:-width , ease:Back.easeOut , onComplete:inTweenOver });
 			
 			tabMenu.addEventListener(ToggleItemEvent.ITEM_SELECTED , tabMenuHandler , false , 0 , true ) ;
 			btnClose.addEventListener( MouseEvent.CLICK , closeClickHandler , false , 0 , true );
