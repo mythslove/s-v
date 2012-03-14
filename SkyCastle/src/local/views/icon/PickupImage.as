@@ -98,7 +98,7 @@ package local.views.icon
 				var world:GameWorld = GameWorld.instance ;
 				targetPoint.x = (targetPoint.x-world.x)/world.scaleX-world.sceneLayerOffsetX ;
 				targetPoint.y = (targetPoint.y-world.y)/world.scaleX-world.sceneLayerOffsetY ;
-				TweenLite.to( this , 0.65 , {x:targetPoint.x , y:targetPoint.y , alpha:0 , onComplete:remove});
+				TweenLite.to( this , 1 , {x:targetPoint.x , y:targetPoint.y , alpha:0 , onComplete:remove});
 				
 				CenterViewContainer.instance.topBar.updateTopBar();
 				var worldEffect:MapWordEffect = new MapWordEffect( temp+" +"+_value , MapWordEffect.WHITE);
