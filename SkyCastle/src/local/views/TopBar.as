@@ -53,11 +53,12 @@ package  local.views
 		/**更新topbar信息*/
 		public function updateTopBar():void
 		{
-			if(VillageModel.instance.isHome){
-				setUserInfo( VillageModel.instance.me );
-			}else{
-				setUserInfo( VillageModel.instance.friend );
-			}
+			setUserInfo( VillageModel.instance.me );
+//			if(VillageModel.instance.isHome){
+//				setUserInfo( VillageModel.instance.me );
+//			}else{
+//				setUserInfo( VillageModel.instance.friend );
+//			}
 		}
 	}
 }
