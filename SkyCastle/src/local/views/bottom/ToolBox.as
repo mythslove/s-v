@@ -8,6 +8,8 @@ package local.views.bottom
 	
 	import local.comm.GameData;
 	import local.enum.BuildingOperation;
+	import local.utils.CharacterManager;
+	import local.utils.CollectQueueUtil;
 	import local.utils.PopUpManager;
 	import local.views.shop.ShopPopUp;
 	import local.views.tooltip.GameToolTip;
@@ -70,6 +72,8 @@ package local.views.bottom
 					break ;
 				case btnCancelTool:
 					GameData.buildingCurrOperation=BuildingOperation.NONE ;
+					CharacterManager.instance.hero.stopMove();
+					CollectQueueUtil.instance.clear();
 					break ;
 				case btnShopTool:
 					GameData.buildingCurrOperation=BuildingOperation.NONE ;
