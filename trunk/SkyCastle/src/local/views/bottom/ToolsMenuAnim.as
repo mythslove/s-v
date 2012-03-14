@@ -1,13 +1,13 @@
 package local.views.bottom
 {
-	import flash.display.MovieClip;
-	import flash.events.Event;
+	import bing.components.BingComponent;
+	
 	import flash.events.MouseEvent;
 	
 	import local.comm.GameData;
 	import local.enum.BuildingOperation;
 	
-	public class ToolsMenuAnim extends MovieClip
+	public class ToolsMenuAnim extends BingComponent
 	{
 		public var toolsMenu:ToolsMenu;
 		//=========================
@@ -17,7 +17,6 @@ package local.views.bottom
 			super();
 			this.mouseEnabled = false ;
 			init();
-			addEventListener(Event.ADDED_TO_STAGE , addedToStageHandler );
 		}
 		
 		private function init():void
@@ -32,9 +31,8 @@ package local.views.bottom
 			}
 		}
 		
-		private function addedToStageHandler( e:Event ):void
+		override protected function addedToStage():void
 		{
-			removeEventListener(Event.ADDED_TO_STAGE , addedToStageHandler ) ;
 			stage.addEventListener(MouseEvent.CLICK , stageClickHandler );
 			toolsMenu.addEventListener(MouseEvent.CLICK , toolsMenuClickHandler );
 		}

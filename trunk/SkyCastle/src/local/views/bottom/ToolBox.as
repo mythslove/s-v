@@ -22,6 +22,7 @@ package local.views.bottom
 		public var btnBagTool:BaseButton ;
 		public var btnReturnHome:BaseButton;
 		public var toolsMenuAnim:ToolsMenuAnim;
+		public var storageMenuAnim:StorageMenuAnim;
 		//-----------------------------------------------*
 		private var _btnMultiToolTooltip:String="TOOLS: Click to switch to the default tool and view move, rotate, and sell tools.";
 		private var _btnCancelToolTooltip:String="CANCEL: Click to switch to the default tool and cancel all actions";
@@ -51,6 +52,7 @@ package local.views.bottom
 			
 			btnReturnHome.visible = false ;
 			toolsMenuAnim.visible = false ;
+			storageMenuAnim.visible=false;
 		}
 		
 		private function configListeners():void
@@ -81,7 +83,12 @@ package local.views.bottom
 					PopUpManager.instance.addQueuePopUp( shopPop );
 					break ;
 				case btnBagTool:
-					GameData.buildingCurrOperation=BuildingOperation.NONE ;
+					if( GameData.buildingCurrOperation==BuildingOperation.NONE){
+						storageMenuAnim.visible = true ;
+						storageMenuAnim.gotoAndPlay(2);
+					}else{
+						GameData.buildingCurrOperation=BuildingOperation.NONE ;
+					}
 					break ;
 			}
 		}
