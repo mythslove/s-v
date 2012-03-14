@@ -60,7 +60,7 @@ package local.views.shop
 		
 		public function showBuildingList( page:int ):void
 		{
-			ShopPopUpSkin.shopCurrentPage = page ;
+			ShopPopUp.shopCurrentPage = page ;
 			ContainerUtil.removeChildren(container);
 			if(_dataProvider==null) return ;
 			_page = page ;
