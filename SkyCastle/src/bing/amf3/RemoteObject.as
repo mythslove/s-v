@@ -83,6 +83,7 @@ package bing.amf3
 		}
 		
 		/**
+		 * 用于AMF通讯
 		 * 覆盖对象的callProperty方法
 		 */
 		override flash_proxy function callProperty(methodName:*, ...parametres:*):*
@@ -92,6 +93,7 @@ package bing.amf3
 		}
 		
 		/**
+		 * 用于AMF
 		 * 获得操作，通过send发送信息
 		 * @param methodName 方法名
 		 * @return 
@@ -99,6 +101,18 @@ package bing.amf3
 		public function getOperation( methodName:String ):PendingCall
 		{
 			return new PendingCall(_nc,_servicePath,methodName, onResult , onFault,null,timeout);
+		}
+		
+		/**
+		 * 通过URLLoader的POST通讯
+		 * @param methodName
+		 * @param getWay
+		 * @return 
+		 */		
+		public function getHttpOperation( methodName:String , getWay:String = null ):HttpCall
+		{
+			if(!getWay) getWay -= _servicePath;
+			return new HttpCall(getWay,methodName, onResult , onFault,null,timeout);
 		}
 		
 		/**
