@@ -3,6 +3,7 @@ package local.game.elements
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	
+	import local.enum.AvatarAction;
 	import local.enum.BuildingType;
 	import local.game.cell.BitmapMovieClip;
 	import local.model.buildings.vos.BaseCharacterVO;
@@ -38,7 +39,7 @@ package local.game.elements
 			if(_skin){
 				_bmpMC = new BitmapMovieClip(_skin);
 				itemLayer.addChild(_bmpMC);
-				_bmpMC.play();
+				this.gotoAndPlay(AvatarAction.IDLE);
 			}
 		}
 		
