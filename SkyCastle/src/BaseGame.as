@@ -62,6 +62,7 @@ package
 			res.push( new ResVO("init_config","res/config.xml"));
 			res.push( new ResVO("init_mapdata","res/mapdata.sc") ); 
 			res.push( new ResVO("init_effect","res/skin/Effect.swf") );
+			res.push( new ResVO("init_Popup","res/skin/Popup.swf") );
 			res.push( new ResVO("init_bg","res/skin/bg.swf"));
 			res.push( new ResVO("init_ui","res/skin/ui.swf"));
 			res.push( new ResVO("Basic_AvatarMale","res/character/Basic_AvatarMale.swf") );
