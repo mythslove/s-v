@@ -1,9 +1,9 @@
 package local.utils
 {
-	import local.comm.GameSetting;
-	
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
+	
+	import local.comm.GameSetting;
 
 	public class PopUpManager extends Sprite
 	{
@@ -25,12 +25,13 @@ package local.utils
 		 * @param mc
 		 * @param priority 弹出的优先级
 		 * @param modal 是否是模式窗口
+		 * @maskAlpha  遮挡的颜色
 		 */		
-		public function addQueuePopUp( mc:DisplayObject ,  modal:Boolean=true , priority:int = 0 ):void
+		public function addQueuePopUp( mc:DisplayObject ,  modal:Boolean=true , priority:int = 0 , maskAlpha:Number=0 ):void
 		{
 			if(!mc || this.contains(mc)) return ;
 			
-			_popupList.push({window:mc , modal:modal , priority:priority });
+			_popupList.push({window:mc , modal:modal , priority:priority,maskAlpha:maskAlpha });
 			sortByPriority();
 			popupNextWindow();
 		}
@@ -67,7 +68,8 @@ package local.utils
 				_currentPopupObj = _popupList.pop();
 				var mc:DisplayObject =  _currentPopupObj.window as DisplayObject;
 				if(_currentPopupObj.modal){
-					addChild( new PopupMask());
+					var popMask:PopupMask = new PopupMask(0,_currentPopupObj.maskAlpha);
+					addChild( popMask);
 				}
 				this.addChild(mc);
 				if(parent){ //将当前对象设置为最上面
@@ -88,20 +90,23 @@ package local.utils
 		 * 添加普通的弹出窗口 
 		 * @param mc 
 		 * @param topOrBottom 添加到弹出窗口的最上面还是最下面，默认为最上
+		 * @maskAlpha  遮挡的颜色
 		 */		
-		public function addPopUp( mc:DisplayObject , modal:Boolean=true , topOrBottom:Boolean=true):void
+		public function addPopUp( mc:DisplayObject , modal:Boolean=true , topOrBottom:Boolean=true, maskAlpha:Number=0):void
 		{
 			if(!mc || this.contains(mc)) return ;
 			
 			if(topOrBottom){ //如果弹到顶层
 				if(modal){
-					addChild( new PopupMask());
+					var popMask:PopupMask = new PopupMask(0,maskAlpha);
+					addChild( popMask);
 				}
 				addChild(mc);
 			} else {
 				addChildAt(mc,0);
 				if(modal){
-					addChildAt( new PopupMask(),0);
+					popMask = new PopupMask(0,maskAlpha);
+					addChildAt( popMask,0);
 				}
 			}
 		}
