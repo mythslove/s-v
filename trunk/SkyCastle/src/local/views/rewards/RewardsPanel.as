@@ -1,4 +1,4 @@
-package local.views.icon
+package local.views.rewards
 {
 	import local.enum.BasicPickup;
 	import local.model.buildings.BaseBuildingVOModel;
@@ -27,34 +27,34 @@ package local.views.icon
 			var iconWidth:int = 100 ;
 			if(rewardsVO.gem>0)
 			{
-				img = new Image("pickupGem","res/pickup/pickupGem.png");
+				img = new RewardsPanelRender("pickupGem","res/pickup/pickupGem.png",rewardsVO.gem);
 				img.x = iconWidth*count;
 				++count ;
 				addChild(img);
 			}
 			if(rewardsVO.coin>0)
 			{
-				img = new Image("pickupCoin"+BasicPickup.COIN,"res/pickup/pickupCoin"+BasicPickup.COIN+".png");
+				img = new Image("pickupCoin"+BasicPickup.COIN,"res/pickup/pickupCoin"+BasicPickup.COIN+".png",rewardsVO.coin);
 				img.x = iconWidth*count;
 				++count ;
 				addChild(img);
 			}
 			if(rewardsVO.wood>0)
 			{
-				img = new Image("pickupWood"+BasicPickup.WOOD,"res/pickup/pickupWood"+BasicPickup.WOOD+".png");
+				img = new Image("pickupWood"+BasicPickup.WOOD,"res/pickup/pickupWood"+BasicPickup.WOOD+".png",rewardsVO.wood);
 				img.x = iconWidth*count;
 				++count ;
 			}
 			if(rewardsVO.stone>0)
 			{
-				img = new Image("pickupStone"+BasicPickup.STONE,"res/pickup/pickupStone"+BasicPickup.STONE+".png");
+				img = new Image("pickupStone"+BasicPickup.STONE,"res/pickup/pickupStone"+BasicPickup.STONE+".png",rewardsVO.stone);
 				img.x = iconWidth*count;
 				++count ;
 				addChild(img);
 			}
 			if(rewardsVO.exp>0)
 			{
-				img = new Image("pickupExp"+BasicPickup.EXP,"res/pickup/pickupExp"+BasicPickup.EXP+".png");
+				img = new Image("pickupExp"+BasicPickup.EXP,"res/pickup/pickupExp"+BasicPickup.EXP+".png",rewardsVO.exp);
 				img.x = iconWidth*count;
 				++count ;
 				addChild(img);
