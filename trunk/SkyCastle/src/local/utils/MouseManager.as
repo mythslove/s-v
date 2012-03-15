@@ -36,38 +36,41 @@ package local.utils
 		public function set mouseStatus( value:String ):void
 		{
 			_mouseStatus = value ;
+			var flag:BuildingOperationFlag = new BuildingOperationFlag();
 			switch( value )
 			{
 				case MouseStatus.NONE :
+					flag = null ;
 					removeMouseIcon();
-					break ;
+					return ;
 				case MouseStatus.ROTATE_BUILDING :
-					addMouseIcon( new Bitmap( new RotateIconBitmapData ));
+					flag.gotoAndStop("rotate");
 					break ;
 				case MouseStatus.UPDATE_HOUSE :
 					break ;
 				case MouseStatus.STASH_BUILDING :
-					addMouseIcon( new Bitmap( new StashIconBitmapData ));
+					flag.gotoAndStop("stash");
 					break ;
 				case MouseStatus.SELL_BUILDING :
-					addMouseIcon( new Bitmap( new SellIconBitmapData ));
+					flag.gotoAndStop("sell");
 					break ;
 				case MouseStatus.BUILD_BUILDING :
-					addMouseIcon( new Bitmap(new IconBuildingHouse ));
+					flag.gotoAndStop("build");
 					break ;
 				case MouseStatus.MOVE_BUILDING :
-					addMouseIcon(new Bitmap( new MoveIconBitmapData ));
+					flag.gotoAndStop("move");
 					break ;
 				case MouseStatus.BEAT_STONE :
-					addMouseIcon(new Bitmap( new IconChoopingStone ));
+					flag.gotoAndStop("choop");
 					break ;
 				case MouseStatus.CUT_TREES :
-					addMouseIcon(new Bitmap( new IconCutTree ));
+					flag.gotoAndStop("cut");
 					break ;
 				case MouseStatus.SHOVEL_BUILDING :
-					addMouseIcon(new Bitmap( new IconDigBuilding ));
+					flag.gotoAndStop("dig");
 					break ;
 			}
+			addMouseIcon( flag);
 		}
 		
 		/**
