@@ -27,34 +27,34 @@ package local.views.icon
 			var iconWidth:int = 100 ;
 			if(rewardsVO.gem>0)
 			{
-				img = new Image("pickupGem","res/pickup/pickupGem.png",false,true);
+				img = new Image("pickupGem","res/pickup/pickupGem.png");
 				img.x = iconWidth*count;
 				++count ;
 				addChild(img);
 			}
 			if(rewardsVO.coin>0)
 			{
-				img = new Image("pickupCoin"+BasicPickup.COIN,"res/pickup/pickupCoin"+BasicPickup.COIN+".png",false,true);
+				img = new Image("pickupCoin"+BasicPickup.COIN,"res/pickup/pickupCoin"+BasicPickup.COIN+".png");
 				img.x = iconWidth*count;
 				++count ;
 				addChild(img);
 			}
 			if(rewardsVO.wood>0)
 			{
-				img = new Image("pickupWood"+BasicPickup.WOOD,"res/pickup/pickupWood"+BasicPickup.WOOD+".png",false,true);
+				img = new Image("pickupWood"+BasicPickup.WOOD,"res/pickup/pickupWood"+BasicPickup.WOOD+".png");
 				img.x = iconWidth*count;
 				++count ;
 			}
 			if(rewardsVO.stone>0)
 			{
-				img = new Image("pickupStone"+BasicPickup.STONE,"res/pickup/pickupStone"+BasicPickup.STONE+".png",false,true);
+				img = new Image("pickupStone"+BasicPickup.STONE,"res/pickup/pickupStone"+BasicPickup.STONE+".png");
 				img.x = iconWidth*count;
 				++count ;
 				addChild(img);
 			}
 			if(rewardsVO.exp>0)
 			{
-				img = new Image("pickupExp"+BasicPickup.EXP,"res/pickup/pickupExp"+BasicPickup.EXP+".png",false,true);
+				img = new Image("pickupExp"+BasicPickup.EXP,"res/pickup/pickupExp"+BasicPickup.EXP+".png");
 				img.x = iconWidth*count;
 				++count ;
 				addChild(img);
@@ -66,7 +66,7 @@ package local.views.icon
 				{
 					baseVO = BaseBuildingVOModel.instance.getBaseVOById( rewardsVO.buildings[i]);
 					if(baseVO){
-						img = new Image(baseVO.alias,baseVO.thumb,false,true);
+						img = new Image(baseVO.alias,baseVO.thumb);
 						img.x = iconWidth*count;
 						++count ;
 						addChild(img);
@@ -77,7 +77,7 @@ package local.views.icon
 			{
 				for( var i:int = 0 ; i<rewardsVO.pickups.length ; ++i)
 				{
-					img = new Image(rewardsVO.pickups[i],"res/pickup/"+rewardsVO.pickups[i]+".png",false,true);
+					img = new Image(rewardsVO.pickups[i],"res/pickup/"+rewardsVO.pickups[i]+".png");
 					img.x = iconWidth*count;
 					++count ;
 					addChild(img);
