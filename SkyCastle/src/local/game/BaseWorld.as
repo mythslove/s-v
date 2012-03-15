@@ -11,6 +11,7 @@ package local.game
 	import local.enum.*;
 	import local.game.elements.*;
 	import local.game.scenes.*;
+	import local.model.buildings.MapBuildingModel;
 	import local.model.buildings.vos.*;
 	import local.model.map.*;
 	import local.utils.CharacterManager;
@@ -205,6 +206,7 @@ package local.game
 			} else if(build.buildingVO.baseVO.layer==LayerType.GROUND) {
 				getGroundScene(build.nodeX,build.nodeZ).addBuilding( build , isSort , updateDirection );
 			}
+			MapBuildingModel.instance.addBuilding( build.buildingVO );
 		}
 		
 		/**
@@ -237,6 +239,7 @@ package local.game
 					result = buildingScene.addBuildingByVO( dx,dz,vo,isSort);
 				}
 			}
+			MapBuildingModel.instance.addBuilding( vo );
 			return result;
 		}
 		
@@ -260,6 +263,7 @@ package local.game
 					buildingScene.removeBuilding( building );
 				}
 			}
+			MapBuildingModel.instance.removeBuilding( building.buildingVO );
 		}
 		
 		/**运行 */		

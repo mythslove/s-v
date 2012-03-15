@@ -26,13 +26,13 @@ package local.model.buildings
 		public var factories:Array = [] ;
 		
 		/** 其他装饰(除了路，石头，树)*/
-		public var decroations:Array [] ; 
+		public var decroations:Array = [] ; 
 		
 		/** 路 */
 		public var roads:Array = [];
 		
 		/** 土地 */
-		public var lands:Array [] ;
+		public var lands:Array = [] ;
 		
 		/** 农作物 */
 		public var crops:Array = []
@@ -57,12 +57,14 @@ package local.model.buildings
 		public function removeBuilding( vo:BuildingVO ):void
 		{
 			var arr:Array  = getArrayByType(  vo.baseVO.type );
-			var len:int = arr.length ;
-			for( var i:int = 0 ; i<len ; ++i)
-			{
-				if( arr[i] == vo){
-					arr.splice( i , 1 );
-					break ;
+			if(arr){
+				var len:int = arr.length ;
+				for( var i:int = 0 ; i<len ; ++i)
+				{
+					if( arr[i] == vo){
+						arr.splice( i , 1 );
+						break ;
+					}
 				}
 			}
 		}
