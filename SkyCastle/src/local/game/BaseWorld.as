@@ -381,15 +381,24 @@ package local.game
 		/** 显示世界 */
 		public function initWorld():void
 		{
-			//添加出生点的英雄 
+			//添加出生点
 			var heroBornPoint:HeroBornPoint = new HeroBornPoint();
-			heroBornPoint.nodeX = 53 ;
-			heroBornPoint.nodeZ = 39 ;
+			heroBornPoint.nodeX = 55 ;
+			heroBornPoint.nodeZ = 40 ;
+			addBuildToScene(heroBornPoint,false,false);
+			heroBornPoint = new HeroBornPoint();
+			heroBornPoint.nodeX = 40 ;
+			heroBornPoint.nodeZ = 30 ;
+			addBuildToScene(heroBornPoint,false,false);
+			heroBornPoint = new HeroBornPoint();
+			heroBornPoint.nodeX = 21 ;
+			heroBornPoint.nodeZ = 17 ;
+			addBuildToScene(heroBornPoint,false,false);
+			//添加英雄
 			var avatar:Hero = new Hero();
-			avatar.nodeX = 53;
-			avatar.nodeZ = 39;
+			avatar.nodeX = 55;
+			avatar.nodeZ = 40;
 			var scene:IsoScene = this.getBuildingScene( avatar.nodeX , avatar.nodeZ );
-			(scene as BuildingScene).addBuilding(heroBornPoint,false);
 			scene.addIsoObject( avatar ) ;
 			CharacterManager.instance.hero = avatar ;
 		}
