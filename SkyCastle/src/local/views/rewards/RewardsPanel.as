@@ -14,7 +14,7 @@ package local.views.rewards
 	{
 		public var rewardsVO:RewardsVO;
 		
-		public function RewardsPanel( vo:RewardsVO )
+		public function RewardsPanel( vo:RewardsVO=null )
 		{
 			super();
 			this.rewardsVO = vo ;
@@ -22,6 +22,7 @@ package local.views.rewards
 		
 		override protected function added():void
 		{
+			if(!this.rewardsVO) return ;
 			var img:Image ;
 			var count:int ;
 			var iconWidth:int = 100 ;
