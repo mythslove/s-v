@@ -15,6 +15,7 @@ package local.game
 	import local.enum.PayType;
 	import local.game.elements.Building;
 	import local.game.elements.Character;
+	import local.game.elements.HeroBornPoint;
 	import local.model.buildings.vos.BuildingVO;
 	import local.model.map.MapGridDataModel;
 	import local.model.village.VillageModel;
@@ -41,6 +42,9 @@ package local.game
 		 */		
 		override protected function onClick(e:MouseEvent):void 
 		{
+			if(_mouseOverBuild is HeroBornPoint){
+				return ;
+			}
 			if(_mouseOverBuild && _mouseOverBuild is Character){
 				_mouseOverBuild.onClick();
 			}
