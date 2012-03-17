@@ -196,10 +196,10 @@ package local.game.elements
 		/* 加载资源完成*/
 		override protected function resLoadedHandler( e:Event ):void
 		{
-			ResourceUtil.instance.removeEventListener( buildingVO.baseVO.alias , resLoadedHandler );
+			ResourceUtil.instance.removeEventListener( buildingVO.baseVO.resId , resLoadedHandler );
 			ContainerUtil.removeChildren(itemLayer);
 			//获取元件
-			_skin = ResourceUtil.instance.getInstanceByClassName( buildingVO.baseVO.alias , buildingVO.baseVO.alias ) as MovieClip;
+			_skin = ResourceUtil.instance.getInstanceByClassName( buildingVO.baseVO.resId , buildingVO.baseVO.alias ) as MovieClip;
 			if(_skin){
 				_bmpMC = new BitmapMovieClip(_skin);
 				itemLayer.addChild(_bmpMC);

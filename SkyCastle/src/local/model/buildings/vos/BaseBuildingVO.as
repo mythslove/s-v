@@ -14,6 +14,9 @@ package local.model.buildings.vos
 		/** 名称或标题 */
 		public var name:String ;
 		
+		/** 资源的id */
+		public var resId:String ;
+		
 		/** 别名，类名 */
 		public var alias:String ;
 		
@@ -49,7 +52,7 @@ package local.model.buildings.vos
 		/** 资源的路径 */
 		public function get url():String
 		{
-			if(!_url) _url="res/"+_file+"/"+alias+".swf";
+			if(!_url) _url="res/"+_file+"/"+resId+".swf";
 			return _url ;
 		}
 		

@@ -80,18 +80,18 @@ package local.game.elements
 		/* 加载资源 */
 		protected function loadRes():void
 		{
-			ResourceUtil.instance.addEventListener( buildingVO.baseVO.alias , resLoadedHandler );
-			var resVO:ResVO = new ResVO( buildingVO.baseVO.alias , buildingVO.baseVO.url);
+			ResourceUtil.instance.addEventListener( buildingVO.baseVO.resId , resLoadedHandler );
+			var resVO:ResVO = new ResVO( buildingVO.baseVO.resId , buildingVO.baseVO.url);
 			ResourceUtil.instance.loadRes( resVO );
 		}
 		
 		/* 加载资源完成*/
 		protected function resLoadedHandler( e:Event ):void
 		{
-			ResourceUtil.instance.removeEventListener( buildingVO.baseVO.alias , resLoadedHandler );
+			ResourceUtil.instance.removeEventListener( buildingVO.baseVO.resId , resLoadedHandler );
 			ContainerUtil.removeChildren(itemLayer);
 			//获取元件
-			_skin = ResourceUtil.instance.getInstanceByClassName( buildingVO.baseVO.alias , buildingVO.baseVO.alias ) as MovieClip;
+			_skin = ResourceUtil.instance.getInstanceByClassName( buildingVO.baseVO.resId , buildingVO.baseVO.alias ) as MovieClip;
 			if(_skin){
 				_skin.gotoAndStop( buildingVO.step );
 				itemLayer.addChild(_skin);
@@ -236,6 +236,7 @@ package local.game.elements
 		override public function dispose():void
 		{
 			super.dispose();
+			ResourceUtil.instance.removeEventListener( buildingVO.baseVO.resId , resLoadedHandler );
 			buildingVO = null ;
 			itemLayer.disableInteractivePNG() ;
 			itemLayer = null ;

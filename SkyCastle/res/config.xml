@@ -49,43 +49,43 @@
 			earnStep="1" earnWoods="6" earnCoins="4" earnExps="3" spendEnergys="1" />
 
 
-		<vo baseId="18" name="Pine Tree" alias="PineTree1" walkable="0"
+		<vo baseId="18" name="Pine Tree" resId="PineTreeA" alias="PineTree1" walkable="0"
 			layer="2" description="Garden Gate" xSpan="1" zSpan="1" maxLevel="1"
 			type="tree" buildEarnExp="0" earnStep="2" earnWoods="2,1" earnCoins="2,1"
 			earnExps="2,1" spendEnergys="1,1" />
-		<vo baseId="19" name="Pine Tree" alias="PineTree2" walkable="0"
+		<vo baseId="19" name="Pine Tree" resId="PineTreeA" alias="PineTree2" walkable="0"
 			layer="2" description="Garden Gate" xSpan="1" zSpan="1" maxLevel="1"
 			type="tree" buildEarnExp="0" earnStep="2" earnWoods="2,1" earnCoins="2,1"
 			earnExps="2,1" spendEnergys="1,1" />
-		<vo baseId="20" name="Pine Tree" alias="PineTree3" walkable="0"
+		<vo baseId="20" name="Pine Tree" resId="PineTreeA" alias="PineTree3" walkable="0"
 			layer="2" description="Garden Gate" xSpan="1" zSpan="1" maxLevel="1"
 			type="tree" buildEarnExp="0" earnStep="3" earnWoods="3,2,1"
 			earnCoins="3,2,1" earnExps="3,2,1" spendEnergys="1,1,1" />
-		<vo baseId="21" name="Pine Tree" alias="PineTree4" walkable="0"
+		<vo baseId="21" name="Pine Tree" resId="PineTreeA" alias="PineTree4" walkable="0"
 			layer="2" description="Garden Gate" xSpan="1" zSpan="1" maxLevel="1"
 			type="tree" buildEarnExp="0" earnStep="4" earnWoods="4,3,2,1"
 			earnCoins="4,3,2,1" earnExps="4,3,2,1" spendEnergys="1,1,1,1" />
-		<vo baseId="22" name="Pine Tree" alias="PineTree5" walkable="0"
+		<vo baseId="22" name="Pine Tree" resId="PineTreeA" alias="PineTree5" walkable="0"
 			layer="2" description="Garden Gate" xSpan="1" zSpan="1" maxLevel="1"
 			type="tree" buildEarnExp="0" earnStep="5" earnWoods="6,4,3,2,1"
 			earnCoins="6,4,3,2,1" earnExps="6,4,3,2,1" spendEnergys="1,1,1,1,1" />
-		<vo baseId="23" name="Pine Tree" alias="PineTree6" walkable="0"
+		<vo baseId="23" name="Pine Tree" resId="PineTreeB" alias="PineTree6" walkable="0"
 			layer="2" description="Garden Gate" xSpan="1" zSpan="1" maxLevel="1"
 			type="tree" buildEarnExp="0" earnStep="2" earnWoods="2,1" earnCoins="2,1"
 			earnExps="2,1" spendEnergys="1,1" />
-		<vo baseId="24" name="Pine Tree" alias="PineTree7" walkable="0"
+		<vo baseId="24" name="Pine Tree" resId="PineTreeB" alias="PineTree7" walkable="0"
 			layer="2" description="Garden Gate" xSpan="1" zSpan="1" maxLevel="1"
 			type="tree" buildEarnExp="0" earnStep="2" earnWoods="2,1" earnCoins="2,1"
 			earnExps="2,1" spendEnergys="1,1" />
-		<vo baseId="25" name="Pine Tree" alias="PineTree8" walkable="0"
+		<vo baseId="25" name="Pine Tree" resId="PineTreeB" alias="PineTree8" walkable="0"
 			layer="2" description="Garden Gate" xSpan="1" zSpan="1" maxLevel="1"
 			type="tree" buildEarnExp="0" earnStep="3" earnWoods="3,2,1"
 			earnCoins="3,2,1" earnExps="3,2,1" spendEnergys="1,1,1" />
-		<vo baseId="26" name="Pine Tree" alias="PineTree9" walkable="0"
+		<vo baseId="26" name="Pine Tree" resId="PineTreeB" alias="PineTree9" walkable="0"
 			layer="2" description="Garden Gate" xSpan="1" zSpan="1" maxLevel="1"
 			type="tree" buildEarnExp="0" earnStep="4" earnWoods="4,3,2,1"
 			earnCoins="4,3,2,1" earnExps="4,3,2,1" spendEnergys="1,1,1,1" />
-		<vo baseId="27" name="Pine Tree" alias="PineTree10" walkable="0"
+		<vo baseId="27" name="Pine Tree" resId="PineTreeB" alias="PineTree10" walkable="0"
 			layer="2" description="Garden Gate" xSpan="1" zSpan="1" maxLevel="1"
 			type="tree" buildEarnExp="0" earnStep="5" earnWoods="6,4,3,2,1"
 			earnCoins="6,4,3,2,1" earnExps="6,4,3,2,1" spendEnergys="1,1,1,1,1" />
