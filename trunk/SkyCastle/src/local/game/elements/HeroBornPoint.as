@@ -21,6 +21,7 @@ package local.game.elements
 		public function HeroBornPoint()
 		{
 			var decVO:BaseDecorationVO = new BaseDecorationVO();
+			decVO.resId="HeroBornPointAnimation";
 			decVO.alias="HeroBornPointAnimation";
 			decVO.walkable=1 ;
 			decVO.xSpan = 1 ;

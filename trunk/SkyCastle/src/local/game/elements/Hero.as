@@ -17,6 +17,7 @@ package local.game.elements
 		public function Hero()
 		{
 			var decVO:BaseCharacterVO = new BaseCharacterVO();
+			decVO.resId="Basic_AvatarMale";
 			decVO.alias="Basic_AvatarMale";
 			decVO.walkable=1 ;
 			decVO.xSpan = 1 ;
