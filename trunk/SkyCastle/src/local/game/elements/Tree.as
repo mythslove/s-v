@@ -58,8 +58,7 @@ package local.game.elements
 		override public function onClick():void
 		{
 			//减能量
-			var value:int = baseTreeVO.spendEnergys[buildingVO.step-1] ;
-			if(value>0&&VillageModel.instance.me.energy<value){
+			if(VillageModel.instance.me.energy<1){
 				 var effect:MapWordEffect = new MapWordEffect("You don't have enough Energy!");
 				GameWorld.instance.addEffect(effect,screenX,screenY);
 			}else{
@@ -70,21 +69,18 @@ package local.game.elements
 		override public function execute():void
 		{
 			//减能量
-			var value:int = baseTreeVO.spendEnergys[buildingVO.step-1] ;
-			if(value>0){
-				var effect:MapWordEffect ;
-				if(VillageModel.instance.me.energy>=value){
-					effect = new MapWordEffect("Energy -"+value);
-					VillageModel.instance.me.energy-=value ;
-					CenterViewContainer.instance.topBar.updateTopBar();
-					GameWorld.instance.addEffect(effect,screenX,screenY);
-				}else{
-					CollectQueueUtil.instance.clear();
-					effect = new MapWordEffect("You don't have enough Energy!");
-					GameWorld.instance.addEffect(effect,screenX,screenY);
-					//能量不够，弹出购买能量的窗口
-					return ;
-				}
+			var effect:MapWordEffect ;
+			if(VillageModel.instance.me.energy>=1){
+				effect = new MapWordEffect("Energy -1");
+				VillageModel.instance.me.energy-- ;
+				CenterViewContainer.instance.topBar.updateTopBar();
+				GameWorld.instance.addEffect(effect,screenX,screenY);
+			}else{
+				CollectQueueUtil.instance.clear();
+				effect = new MapWordEffect("You don't have enough Energy!");
+				GameWorld.instance.addEffect(effect,screenX,screenY);
+				//能量不够，弹出购买能量的窗口
+				return ;
 			}
 			super.execute();
 			if(baseTreeVO.earnStep==1 || baseTreeVO.earnStep>buildingVO.step){

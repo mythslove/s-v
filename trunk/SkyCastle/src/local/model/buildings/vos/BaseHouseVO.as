@@ -11,6 +11,9 @@ package local.model.buildings.vos
 			_file = "house";
 		}
 		
+		/** 最大的等级，可以升到多少级，默认为1*/
+		public var maxLevel:int ;
+		
 		/** 每一等级可收获的金币数*/
 		public var earnCoins:Array ;
 		

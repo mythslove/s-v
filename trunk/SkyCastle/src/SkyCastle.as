@@ -61,6 +61,7 @@ package
 			registerClassAlias("local.model.buildings.vos.BaseLandVO",BaseLandVO) ;
 			registerClassAlias("local.model.buildings.vos.BaseRoadVO",BaseRoadVO) ;
 			registerClassAlias("local.model.buildings.vos.BaseStoneVO",BaseStoneVO) ;
+			registerClassAlias("local.model.buildings.vos.BaseRockVO",BaseRockVO) ;
 			registerClassAlias("local.model.buildings.vos.BaseTreeVO",BaseTreeVO) ;
 			registerClassAlias("local.model.buildings.vos.BuildingVO",BuildingVO) ;
 			registerClassAlias("local.model.village.vos.PlayerVO",PlayerVO) ;

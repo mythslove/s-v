@@ -11,6 +11,9 @@ package local.model.buildings.vos
 			_file = "factory";
 		}
 		
+		/** 最大的等级，可以升到多少级，默认为1*/
+		public var maxLevel:int ;
+		
 		/** 可收获的金币数*/
 		public var earnCoin:int ;
 		
@@ -28,9 +31,6 @@ package local.model.buildings.vos
 		
 		/** 修建需要花费的步数*/
 		public var buildStep:int ;
-		
-		/** 修建一次需要花费的能量值 */
-		public var buildSpendEnery:Array ;
 		
 		/** 第一次修建时需要的木头数 */
 		public var buildWood:int ;
