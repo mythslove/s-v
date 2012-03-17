@@ -23,9 +23,6 @@ package local.model.buildings.vos
 		/** 每砍一次获得的经验值*/
 		public var earnExps:Array ;
 		
-		/** 每砍一次花费的能量 */
-		public var spendEnergys:Array;
-		
 		/** 可砍的次数 */	
 		public var earnStep:int ;
 	}

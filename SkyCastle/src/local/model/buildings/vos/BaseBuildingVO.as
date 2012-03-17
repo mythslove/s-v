@@ -34,9 +34,6 @@ package local.model.buildings.vos
 		/** 占据的网格数*/
 		public var zSpan:int ;
 		
-		/** 最大的等级，可以升到多少级，默认为1*/
-		public var maxLevel:int ;
-		
 		/** 建筑的类型 */
 		public var type:String ;
 		
