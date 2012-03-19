@@ -12,6 +12,9 @@ package local.model.shop.vos
 		
 		public var decorations:Array; //装饰
 		public var roads:Array ; //路
+		public var trees:Array;
+		public var stones:Array;
+		public var rock:Array ;
 		
 		public var plants:Array; //农作物
 		public var lands:Array ; //路
