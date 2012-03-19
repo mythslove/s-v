@@ -11,9 +11,9 @@ package local.game
 	import local.enum.*;
 	import local.game.elements.*;
 	import local.game.scenes.*;
+	import local.model.*;
 	import local.model.buildings.MapBuildingModel;
 	import local.model.buildings.vos.*;
-	import local.model.map.*;
 	import local.utils.CharacterManager;
 	import local.utils.MouseManager;
 	import local.utils.ResourceUtil;

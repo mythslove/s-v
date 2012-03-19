@@ -14,8 +14,8 @@ package local.views.icon
 	
 	import local.enum.BasicPickup;
 	import local.game.GameWorld;
-	import local.model.village.VillageModel;
-	import local.model.village.vos.PlayerVO;
+	import local.model.VillageModel;
+	import local.model.vos.PlayerVO;
 	import local.views.CenterViewContainer;
 	import local.views.base.Image;
 	import local.views.effects.MapWordEffect;

@@ -1,4 +1,4 @@
-package local.model.rewards.vos
+package local.model.vos
 {
 	/**
 	 * 奖励的内容 

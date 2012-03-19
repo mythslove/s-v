@@ -6,7 +6,7 @@ package local.game.scenes
 	import local.comm.GameSetting;
 	import local.game.elements.Building;
 	import local.model.buildings.vos.BuildingVO;
-	import local.model.map.MapGridDataModel;
+	import local.model.MapGridDataModel;
 	import local.utils.BuildingFactory;
 
 	/**

@@ -1,4 +1,4 @@
-package local.model.shop
+package local.model
 {
 	import bing.utils.XMLAnalysis;
 	

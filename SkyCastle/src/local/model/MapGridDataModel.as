@@ -1,4 +1,4 @@
-package local.model.map
+package local.model
 {
 	import bing.iso.path.Grid;
 	

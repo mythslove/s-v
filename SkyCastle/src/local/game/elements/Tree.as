@@ -8,7 +8,7 @@ package local.game.elements
 	import local.game.GameWorld;
 	import local.model.buildings.vos.BaseTreeVO;
 	import local.model.buildings.vos.BuildingVO;
-	import local.model.village.VillageModel;
+	import local.model.VillageModel;
 	import local.utils.CharacterManager;
 	import local.utils.CollectQueueUtil;
 	import local.utils.MouseManager;

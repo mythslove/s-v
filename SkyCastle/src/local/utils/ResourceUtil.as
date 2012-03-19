@@ -13,7 +13,7 @@ package local.utils
 	import flash.utils.Dictionary;
 	
 	import local.comm.GameSetting;
-	import local.model.map.MapGridDataModel;
+	import local.model.MapGridDataModel;
 	
 	/**
 	 * 游戏资源加载和保存以及处理的管理类 

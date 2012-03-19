@@ -1,6 +1,5 @@
-package local.model.config
+package local.model.vos
 {
-	import local.model.shop.vos.ShopVO;
 	/**
 	 * 游戏基础配置 
 	 * @author zzhanglin

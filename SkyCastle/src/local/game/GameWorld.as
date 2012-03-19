@@ -17,8 +17,8 @@ package local.game
 	import local.game.elements.Character;
 	import local.game.elements.HeroBornPoint;
 	import local.model.buildings.vos.BuildingVO;
-	import local.model.map.MapGridDataModel;
-	import local.model.village.VillageModel;
+	import local.model.MapGridDataModel;
+	import local.model.VillageModel;
 	import local.utils.CharacterManager;
 	import local.utils.CollectQueueUtil;
 	import local.views.CenterViewContainer;

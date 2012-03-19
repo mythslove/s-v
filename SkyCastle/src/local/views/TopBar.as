@@ -2,8 +2,8 @@ package  local.views
 {
 	import local.comm.GlobalDispatcher;
 	import local.events.UserInfoEvent;
-	import local.model.village.VillageModel;
-	import local.model.village.vos.PlayerVO;
+	import local.model.VillageModel;
+	import local.model.vos.PlayerVO;
 	import local.views.topbar.TopBarCoin;
 	import local.views.topbar.TopBarEnergy;
 	import local.views.topbar.TopBarExp;

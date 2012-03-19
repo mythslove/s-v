@@ -15,7 +15,7 @@ package local.game.elements
 	import local.game.cell.BitmapMovieClip;
 	import local.game.scenes.BuildingScene;
 	import local.model.buildings.vos.BuildingVO;
-	import local.model.map.MapGridDataModel;
+	import local.model.MapGridDataModel;
 	import local.utils.ResourceUtil;
 	
 	/**

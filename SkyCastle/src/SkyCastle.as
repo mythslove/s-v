@@ -9,8 +9,8 @@ package
 	import local.events.UserInfoEvent;
 	import local.game.GameWorld;
 	import local.model.buildings.vos.*;
-	import local.model.village.VillageModel;
-	import local.model.village.vos.PlayerVO;
+	import local.model.VillageModel;
+	import local.model.vos.PlayerVO;
 	import local.views.CenterViewContainer;
 	import local.views.LeftBar;
 	
