@@ -66,6 +66,7 @@ package
 			registerClassAlias("local.model.buildings.vos.BuildingVO",BuildingVO) ;
 			registerClassAlias("local.model.vos.PlayerVO",PlayerVO) ;
 			registerClassAlias("local.model.vos.FriendVO",FriendVO) ;
+			registerClassAlias("local.model.vos.LevelUpVO",LevelUpVO) ;
 			registerClassAlias("local.model.vos.RewardsVO",RewardsVO) ;
 			registerClassAlias("local.model.vos.ShopVO",ShopVO) ;
 			registerClassAlias("local.model.vos.StorageItemVO",StorageItemVO) ;
