@@ -50,9 +50,9 @@ package bing.iso.path
 				var startY:int = Math.max(0, node.y - 1);
 				var endY:int = Math.min(_grid.numRows - 1, node.y + 1);
 				
-				for(var i:int = startX; i <= endX; i++)
+				for(var i:int = startX; i <= endX; ++i)
 				{
-					for(var j:int = startY; j <= endY; j++)
+					for(var j:int = startY; j <= endY; ++j)
 					{
 						if(getTimer()-time>150) return false ;
 						
