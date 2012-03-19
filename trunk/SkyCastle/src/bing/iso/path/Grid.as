@@ -42,10 +42,10 @@ package  bing.iso.path
 		 */		
 		public function changeSize(numCols:int , numRows:int ):void
 		{
-			var nodes:Array = new Array();
+			var nodes:Array = [];
 			for(var i:int = 0; i < numCols; i++)
 			{
-				nodes[i] = new Array();
+				nodes[i] = [];
 				for(var j:int = 0; j < numRows; j++)
 				{
 					if(i<_numCols && j<_numCols){
@@ -57,6 +57,7 @@ package  bing.iso.path
 			}
 			_numCols = numCols;
 			_numRows = numRows;
+			_nodes = nodes;
 		}
 		
 		/**
