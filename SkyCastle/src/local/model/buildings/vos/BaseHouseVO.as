@@ -24,7 +24,7 @@ package local.model.buildings.vos
 		public var earnTimes:Array ;
 		
 		/** 快速升级需要的钱*/
-		public var upgradeCash:Array;
+		public var upgradeCashs:Array;
 		
 		/** 慢速升级所需要的金币数 */
 		public var upgradeCoins:Array ;
