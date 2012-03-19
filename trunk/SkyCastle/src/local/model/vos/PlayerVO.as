@@ -1,4 +1,4 @@
-package local.model.village.vos
+package local.model.vos
 {
 	/**
 	 * 玩家 

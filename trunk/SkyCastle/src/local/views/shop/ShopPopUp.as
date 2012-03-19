@@ -18,7 +18,7 @@ package local.views.shop
 	import local.events.ShopEvent;
 	import local.game.GameWorld;
 	import local.game.elements.Building;
-	import local.model.shop.ShopModel;
+	import local.model.ShopModel;
 	import local.utils.BuildingFactory;
 	import local.utils.PopUpManager;
 	import local.views.BaseView;

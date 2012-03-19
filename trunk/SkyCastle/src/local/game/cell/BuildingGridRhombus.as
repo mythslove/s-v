@@ -8,7 +8,7 @@ package local.game.cell
 	
 	import local.comm.GameSetting;
 	import local.enum.LayerType;
-	import local.model.map.MapGridDataModel;
+	import local.model.MapGridDataModel;
 	
 	/**
 	 *  建筑拥有的格子，单个格子 

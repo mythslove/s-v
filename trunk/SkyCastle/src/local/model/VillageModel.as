@@ -1,10 +1,10 @@
-package local.model.village
+package local.model
 {
 	import bing.utils.Guid;
 	
 	import local.comm.GlobalDispatcher;
 	import local.events.UserInfoEvent;
-	import local.model.village.vos.PlayerVO;
+	import local.model.vos.PlayerVO;
 
 	public class VillageModel
 	{

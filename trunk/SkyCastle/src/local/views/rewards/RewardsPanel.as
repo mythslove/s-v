@@ -3,7 +3,7 @@ package local.views.rewards
 	import local.enum.BasicPickup;
 	import local.model.buildings.BaseBuildingVOModel;
 	import local.model.buildings.vos.BaseBuildingVO;
-	import local.model.rewards.vos.RewardsVO;
+	import local.model.vos.RewardsVO;
 	import local.views.BaseView;
 	import local.views.base.Image;
 	/**

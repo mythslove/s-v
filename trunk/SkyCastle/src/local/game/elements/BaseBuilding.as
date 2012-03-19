@@ -17,7 +17,7 @@ package local.game.elements
 	import local.game.cell.BuildingGridLayer;
 	import local.model.buildings.vos.BaseBuildingVO;
 	import local.model.buildings.vos.BuildingVO;
-	import local.model.map.MapGridDataModel;
+	import local.model.MapGridDataModel;
 	import local.utils.ResourceUtil;
 	import local.views.loading.BuildingStepLoading;
 

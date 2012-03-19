@@ -13,7 +13,7 @@ package
 	import local.comm.GlobalDispatcher;
 	import local.comm.GlobalEvent;
 	import local.model.buildings.BaseBuildingVOModel;
-	import local.model.shop.ShopModel;
+	import local.model.ShopModel;
 	import local.utils.ResourceUtil;
 	
 	/**

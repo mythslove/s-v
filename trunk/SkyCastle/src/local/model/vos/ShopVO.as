@@ -1,4 +1,4 @@
-package local.model.shop.vos
+package local.model.vos
 {
 	/**
 	 * 商店的 VO 

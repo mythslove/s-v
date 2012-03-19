@@ -1,4 +1,4 @@
-package local.model.friends.vos
+package local.model.vos
 {
 	public class FriendVO
 	{
