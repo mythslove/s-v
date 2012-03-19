@@ -6,14 +6,15 @@ package local.model.shop.vos
 	 */	
 	public class ShopVO
 	{
+		public var buildings:Array;
 		public var houses:Array ; //房子
-		
 		public var factorys:Array ; //工厂
 		
 		public var decorations:Array; //装饰
+		public var roads:Array ; //路
 		
-		public var lands:Array ;
-		
-		public var crops:Array ;
+		public var plants:Array; //农作物
+		public var lands:Array ; //路
+		public var crops:Array ; //作物
 	}
 }
