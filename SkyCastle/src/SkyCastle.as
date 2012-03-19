@@ -68,6 +68,7 @@ package
 			registerClassAlias("local.model.vos.FriendVO",FriendVO) ;
 			registerClassAlias("local.model.vos.RewardsVO",RewardsVO) ;
 			registerClassAlias("local.model.vos.ShopVO",ShopVO) ;
+			registerClassAlias("local.model.vos.StorageItemVO",StorageItemVO) ;
 			registerClassAlias("local.model.vos.ConfigBaseVO",ConfigBaseVO) ;
 		}
 		
