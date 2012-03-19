@@ -8,9 +8,9 @@ package
 	import local.comm.GlobalDispatcher;
 	import local.events.UserInfoEvent;
 	import local.game.GameWorld;
-	import local.model.buildings.vos.*;
 	import local.model.VillageModel;
-	import local.model.vos.PlayerVO;
+	import local.model.buildings.vos.*;
+	import local.model.vos.*;
 	import local.views.CenterViewContainer;
 	import local.views.LeftBar;
 	
@@ -64,7 +64,11 @@ package
 			registerClassAlias("local.model.buildings.vos.BaseRockVO",BaseRockVO) ;
 			registerClassAlias("local.model.buildings.vos.BaseTreeVO",BaseTreeVO) ;
 			registerClassAlias("local.model.buildings.vos.BuildingVO",BuildingVO) ;
-			registerClassAlias("local.model.village.vos.PlayerVO",PlayerVO) ;
+			registerClassAlias("local.model.vos.PlayerVO",PlayerVO) ;
+			registerClassAlias("local.model.vos.FriendVO",FriendVO) ;
+			registerClassAlias("local.model.vos.RewardsVO",RewardsVO) ;
+			registerClassAlias("local.model.vos.ShopVO",ShopVO) ;
+			registerClassAlias("local.model.vos.ConfigBaseVO",ConfigBaseVO) ;
 		}
 		
 		/*获得了玩家信息后，进入游戏*/
