@@ -43,7 +43,7 @@ package local.utils
 					building = new Road( vo );
 					break ;
 				case BuildingType.DECORATION: //其他装饰
-					building = new Decortation( vo );
+					building = new SpecialDecoration( vo );
 					break ;
 				case BuildingType.PLANT: //种植类
 					building = new Plant( vo );
