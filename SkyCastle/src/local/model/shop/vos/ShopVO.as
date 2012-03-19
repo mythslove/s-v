@@ -12,6 +12,6 @@ package local.model.shop.vos
 		
 		public var plants:Array ;
 		
-		public var characters:Array ; //人
+//		public var characters:Array ; //人
 	}
 }
