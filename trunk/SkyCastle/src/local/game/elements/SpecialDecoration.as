@@ -11,9 +11,5 @@ package local.game.elements
 		{
 			super(vo);
 		}
-		
-		override public function onClick():void
-		{
-		}
 	}
 }
