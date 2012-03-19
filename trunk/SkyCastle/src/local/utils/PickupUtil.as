@@ -22,56 +22,47 @@ package local.utils
 		{
 			var world:GameWorld = GameWorld.instance ;
 			var img:PickupImage ;
-			var max:int =0 ;
 			switch(name)
 			{
 				case BasicPickup.PICKUP_COIN:
-					max = BasicPickup.COIN ;
+					if(value>70){
+						img = new PickupImage(name+3,value,name);
+					}else if( value>30){
+						img = new PickupImage(name+2,value,name);
+					}else{
+						img = new PickupImage(name+1,value,name);
+					}
 					break ;
 				case BasicPickup.PICKUP_ENERGY:
-					max = BasicPickup.ENERGY ;
+					if(value>2){
+						img = new PickupImage(name+2,value,name);
+					}else{
+						img = new PickupImage(name+1,value,name);
+					}
 					break ;
 				case BasicPickup.PICKUP_EXP:
-					max = BasicPickup.EXP ;
-					break ;
 				case BasicPickup.PICKUP_WOOD:
-					max = BasicPickup.WOOD ;
+					if(value>100){
+						img = new PickupImage(name+3,value,name);
+					}else if( value>50){
+						img = new PickupImage(name+2,value,name);
+					}else{
+						img = new PickupImage(name+1,value,name);
+					}
 					break ;
 				case BasicPickup.PICKUP_STONE:
-					max = BasicPickup.STONE ;
+					if(value>50){
+						img = new PickupImage(name+2,value,name);
+					}else{
+						img = new PickupImage(name+1,value,name);
+					}
+					break ;
+				default:
+					//特殊的物品
+					img = new PickupImage(name,value);
 					break ;
 			}
-			if(max>0)
-			{
-				var type:int = max ;
-				while( value>0 && max>0 )
-				{
-					if(value>=max*5)
-					{
-						img = new PickupImage(name+max,max*5,name);
-						world.addEffect(img,x,y);
-						value-=max*5;
-					}else{
-						max-=5;
-						var temp:int = Math.ceil(value/5);
-						if(temp==type){
-							temp = ((Math.random()*(type-1) )>>0  )+1 ;
-						}
-						if(max<value){
-							img = new PickupImage(name+temp,value,name);
-						}else{
-							img = new PickupImage(name+temp,max,name);
-						}
-						world.addEffect(img,x,y);
-					}
-				}
-			}
-			else
-			{
-				//特殊的物品
-				img = new PickupImage(name+max,value);
-				world.addEffect(img,x,y);
-			}
+			world.addEffect(img,x,y);
 		}
 	}
 }
