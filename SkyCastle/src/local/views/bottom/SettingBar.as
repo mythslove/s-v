@@ -2,16 +2,15 @@ package local.views.bottom
 {
 	import bing.components.button.*;
 	
-	import local.comm.GlobalDispatcher;
-	import local.comm.GlobalEvent;
-	
 	import flash.display.Sprite;
 	import flash.display.StageDisplayState;
+	import flash.display.StageQuality;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
+	import local.comm.GlobalDispatcher;
+	import local.comm.GlobalEvent;
 	import local.game.GameWorld;
-	
 	import local.views.tooltip.GameToolTip;
 	
 	public class SettingBar extends Sprite
@@ -72,11 +71,12 @@ package local.views.bottom
 			e.stopPropagation();
 			if(btnFullScreen.selected){
 				stage.displayState = StageDisplayState.FULL_SCREEN ;
-				GameWorld.instance.zoom(1);
 				GameToolTip.instance.register( btnFullScreen , stage , _fullScreenTooltip2 );
+				stage.quality = StageQuality.MEDIUM  ;
 			}else{
 				stage.displayState = StageDisplayState.NORMAL ;
 				GameToolTip.instance.register( btnFullScreen , stage , _fullScreenTooltip1 );
+				stage.quality = StageQuality.HIGH  ;
 			}
 		}
 		
