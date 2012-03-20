@@ -2,7 +2,7 @@ package local.events
 {
 	import flash.events.Event;
 	
-	import local.model.buildings.vos.BuildingVO;
+	import local.model.vos.ShopItemVO;
 	
 	public class ShopEvent extends Event
 	{
@@ -11,9 +11,9 @@ package local.events
 		 */		
 		public static const SELECTED_BUILDING:String = "selectedBuilding";
 		
-		public var selectedBuilding:BuildingVO ;
+		public var selectedBuilding:ShopItemVO ;
 		
-		public function ShopEvent(type:String, vo:BuildingVO = null ,  bubbles:Boolean=false, cancelable:Boolean=false)
+		public function ShopEvent(type:String, vo:ShopItemVO = null ,  bubbles:Boolean=false, cancelable:Boolean=false)
 		{
 			super(type, bubbles, cancelable);
 			this.selectedBuilding = vo ;

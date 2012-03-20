@@ -15,6 +15,7 @@ package local.views.shop
 	import local.enum.ItemType;
 	import local.events.ShopEvent;
 	import local.model.buildings.vos.*;
+	import local.model.vos.ShopItemVO;
 	import local.views.base.Image;
 	import local.views.tooltip.GameToolTip;
 	
@@ -29,7 +30,7 @@ package local.views.shop
 		private const LABEL_DEFAULT:String = "defalut";
 		private const LABEL_BUILDING:String = "building";
 		
-		public var vo:BuildingVO;
+		public var itemVO:ShopItemVO;
 		
 		public function ShopItemRenderer()
 		{
@@ -49,9 +50,9 @@ package local.views.shop
 		 * 显示此建筑 
 		 * @param vo
 		 */		
-		public function showBuilding( vo:BuildingVO ):void
+		public function showBuilding( vo:ShopItemVO ):void
 		{
-			this.vo = vo ;
+			this.itemVO = vo ;
 			txtName.text = vo.baseVO.name ; //显示名称
 			container.addChild( new Image(vo.baseVO.alias+"Thumb" , vo.baseVO.thumb) ); //显示缩略图
 			GameToolTip.instance.register(btnBg,stage,vo.baseVO.description); //注册ToolTip
@@ -98,7 +99,7 @@ package local.views.shop
 		private function clickNormalBtnHandler( e:MouseEvent ):void
 		{
 			e.stopPropagation();
-			GlobalDispatcher.instance.dispatchEvent( new ShopEvent(ShopEvent.SELECTED_BUILDING,vo));
+			GlobalDispatcher.instance.dispatchEvent( new ShopEvent(ShopEvent.SELECTED_BUILDING,itemVO));
 		}
 		
 		private function disabledSprite():void
@@ -119,7 +120,7 @@ package local.views.shop
 		{
 			removeEventListener( Event.REMOVED_FROM_STAGE , removedFromStageHandler);
 			btnNormal.removeEventListener(MouseEvent.CLICK , clickNormalBtnHandler );
-			vo = null ;
+			itemVO = null ;
 			GameToolTip.instance.unRegister(btnBg);
 		}
 	}

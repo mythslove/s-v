@@ -7,6 +7,7 @@ package local.views.shop
 	import flash.events.MouseEvent;
 	
 	import local.model.buildings.vos.BuildingVO;
+	import local.model.vos.ShopItemVO;
 	import local.views.BaseView;
 
 	/**
@@ -20,7 +21,7 @@ package local.views.shop
 		public var btnNextPage:BaseButton;
 		//===================================
 		
-		private var _dataProvider:Vector.<BuildingVO>; 
+		private var _dataProvider:Vector.<ShopItemVO>; 
 		
 		private const COUNT:int = 8 ;//一页显示八个
 		private var _totalPage:int ;
@@ -48,7 +49,7 @@ package local.views.shop
 			showBuildingList(_page);
 		}
 		
-		public function set dataProvider( value:Vector.<BuildingVO> ):void
+		public function set dataProvider( value:Vector.<ShopItemVO> ):void
 		{
 			_dataProvider = value ;
 			_page = 0 ;
