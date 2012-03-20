@@ -71,6 +71,7 @@ package local.views.bottom
 			e.stopPropagation();
 			if(btnFullScreen.selected){
 				stage.displayState = StageDisplayState.FULL_SCREEN ;
+				GameWorld.instance.zoom(1);
 				GameToolTip.instance.register( btnFullScreen , stage , _fullScreenTooltip2 );
 				stage.quality = StageQuality.MEDIUM  ;
 			}else{
