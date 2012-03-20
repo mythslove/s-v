@@ -7,7 +7,7 @@ package local.game.elements
 	
 	import local.enum.BasicPickup;
 	import local.enum.BuildingOperation;
-	import local.enum.BuildingType;
+	import local.enum.ItemType;
 	import local.game.GameWorld;
 	import local.model.buildings.vos.BuildingVO;
 	import local.utils.CharacterManager;
@@ -61,10 +61,10 @@ package local.game.elements
 		protected function playPlaceEffect():void
 		{
 			var placementMC:MovieClip;
-			var type:String = BuildingType.getSumType( buildingVO.baseVO.type );
-			if(type==BuildingType.BUILDING){
+			var type:String = ItemType.getSumType( buildingVO.baseVO.type );
+			if(type==ItemType.BUILDING){
 				placementMC= new  EffectPlacementBuilding ();
-			}else if(type==BuildingType.DECORATION){
+			}else if(type==ItemType.DECORATION){
 				placementMC= new  EffectPlacementDecoration ();
 			}
 			if(placementMC){

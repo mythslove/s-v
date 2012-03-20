@@ -1,11 +1,11 @@
 package local.enum
 {
 	/**
-	 * 建筑的类型
-	 * 分为大类型和小类型 
+	 * itemType
+	 * 建筑的类型分为大类型和小类型 
 	 * @author zzhanglin
 	 */	
-	public class BuildingType
+	public class ItemType
 	{
 		
 		/**

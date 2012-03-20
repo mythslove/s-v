@@ -4,7 +4,7 @@ package local.model.buildings
 	
 	import flash.utils.Dictionary;
 	
-	import local.enum.BuildingType;
+	import local.enum.ItemType;
 	import local.model.buildings.vos.*;
 
 	/**
@@ -38,40 +38,40 @@ package local.model.buildings
 				type = String(vos[i].@type) ;
 				switch( type )
 				{
-					case BuildingType.BUILDING :
+					case ItemType.BUILDING :
 						baseVO = XMLAnalysis.createInstanceByXML( vos[i] , BaseBuildingVO ,"," ) as BaseBuildingVO;
 						break ;
-					case BuildingType.BUILDING_HOUSE :
+					case ItemType.BUILDING_HOUSE :
 						baseVO = XMLAnalysis.createInstanceByXML( vos[i] , BaseHouseVO ,"," ) as BaseHouseVO;
 						break ;
-					case BuildingType.BUILDING_FACTORY :
+					case ItemType.BUILDING_FACTORY :
 						baseVO = XMLAnalysis.createInstanceByXML( vos[i] , BaseFactoryVO ,"," ) as BaseFactoryVO;
 						break ;
-					case BuildingType.DECORATION :
+					case ItemType.DECORATION :
 						baseVO = XMLAnalysis.createInstanceByXML( vos[i] , BaseDecorationVO ,"," ) as BaseDecorationVO;
 						break ;
-					case BuildingType.DEC_TREE :
+					case ItemType.DEC_TREE :
 						baseVO = XMLAnalysis.createInstanceByXML( vos[i] , BaseTreeVO ,"," ) as BaseTreeVO;
 						break ;
-					case BuildingType.DEC_STONE :
+					case ItemType.DEC_STONE :
 						baseVO = XMLAnalysis.createInstanceByXML( vos[i] , BaseStoneVO ,"," ) as BaseStoneVO;
 						break ;
-					case BuildingType.DEC_ROCK :
+					case ItemType.DEC_ROCK :
 						baseVO = XMLAnalysis.createInstanceByXML( vos[i] , BaseRockVO ,"," ) as BaseRockVO;
 						break ;
-					case BuildingType.DEC_ROAD :
+					case ItemType.DEC_ROAD :
 						baseVO = XMLAnalysis.createInstanceByXML( vos[i] , BaseRoadVO ,"," ) as BaseRoadVO;
 						break ;
-					case BuildingType.PLANT :
+					case ItemType.PLANT :
 						baseVO = XMLAnalysis.createInstanceByXML( vos[i] , BasePlantVO ,"," ) as BasePlantVO;
 						break ;
-					case BuildingType.PLANT_CROP :
+					case ItemType.PLANT_CROP :
 						baseVO = XMLAnalysis.createInstanceByXML( vos[i] , BaseCropVO ,"," ) as BaseCropVO;
 						break ;
-					case BuildingType.PLANT_LAND :
+					case ItemType.PLANT_LAND :
 						baseVO = XMLAnalysis.createInstanceByXML( vos[i] , BaseLandVO ,"," ) as BaseLandVO;
 						break ;
-					case BuildingType.CHACTERS:
+					case ItemType.CHACTERS:
 						baseVO = XMLAnalysis.createInstanceByXML( vos[i] , BaseCharacterVO ,"," ) as BaseCharacterVO;
 						break ;
 				}
