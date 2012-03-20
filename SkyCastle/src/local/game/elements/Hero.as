@@ -4,7 +4,7 @@ package local.game.elements
 	import flash.events.Event;
 	
 	import local.enum.AvatarAction;
-	import local.enum.BuildingType;
+	import local.enum.ItemType;
 	import local.game.cell.BitmapMovieClip;
 	import local.model.buildings.vos.BaseCharacterVO;
 	import local.model.buildings.vos.BuildingVO;
@@ -25,7 +25,7 @@ package local.game.elements
 			decVO.layer = 2 ;
 			decVO.name="Sky Castle";
 			decVO.description = "Click to talk.";
-			decVO.type = BuildingType.CHACTERS ;
+			decVO.type = ItemType.CHACTERS ;
 			var vo:BuildingVO = new BuildingVO();
 			vo.baseVO = decVO ;
 			super(vo);

@@ -2,7 +2,7 @@ package local.utils
 {
 	import bing.utils.ObjectUtil;
 	
-	import local.enum.BuildingType;
+	import local.enum.ItemType;
 	import local.game.elements.*;
 	import local.model.buildings.vos.BuildingVO;
 
@@ -24,34 +24,34 @@ package local.utils
 			var building:Building ;
 			switch( vo.baseVO.type )
 			{
-				case BuildingType.BUILDING_FACTORY: //工厂
+				case ItemType.BUILDING_FACTORY: //工厂
 					building = new Factory( vo );
 					break ;
-				case BuildingType.BUILDING_HOUSE: //房子
+				case ItemType.BUILDING_HOUSE: //房子
 					building = new House( vo );
 					break ;
-				case BuildingType.DEC_TREE: //树
+				case ItemType.DEC_TREE: //树
 					building = new Tree( vo );
 					break ;
-				case BuildingType.DEC_STONE: //石头
+				case ItemType.DEC_STONE: //石头
 					building = new Stone( vo );
 					break ;
-				case BuildingType.DEC_ROCK: //磐石
+				case ItemType.DEC_ROCK: //磐石
 					building = new Rock( vo );
 					break ;
-				case BuildingType.DEC_ROAD: //路
+				case ItemType.DEC_ROAD: //路
 					building = new Road( vo );
 					break ;
-				case BuildingType.DECORATION: //其他装饰
+				case ItemType.DECORATION: //其他装饰
 					building = new SpecialDecoration( vo );
 					break ;
-				case BuildingType.PLANT: //种植类
+				case ItemType.PLANT: //种植类
 					building = new Plant( vo );
 					break ;
-				case BuildingType.PLANT_LAND: //地
+				case ItemType.PLANT_LAND: //地
 					building = new Land( vo );
 					break ;
-				case BuildingType.PLANT_CROP: //农作物
+				case ItemType.PLANT_CROP: //农作物
 					building = new Crop( vo );
 					break ;
 				default:

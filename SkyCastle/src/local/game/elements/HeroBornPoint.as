@@ -4,7 +4,7 @@ package local.game.elements
 	import flash.events.Event;
 	import flash.geom.Rectangle;
 	
-	import local.enum.BuildingType;
+	import local.enum.ItemType;
 	import local.game.cell.BitmapMovieClip;
 	import local.model.buildings.vos.BaseDecorationVO;
 	import local.model.buildings.vos.BuildingVO;
@@ -27,7 +27,7 @@ package local.game.elements
 			decVO.xSpan = 1 ;
 			decVO.zSpan = 1 ;
 			decVO.layer=2 ;
-			decVO.type = BuildingType.DECORATION ;
+			decVO.type = ItemType.DECORATION ;
 			var vo:BuildingVO = new BuildingVO();
 			vo.baseVO = decVO ;
 			super(vo);

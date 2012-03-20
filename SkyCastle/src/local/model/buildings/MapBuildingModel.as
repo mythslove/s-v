@@ -1,6 +1,6 @@
 package local.model.buildings
 {
-	import local.enum.BuildingType;
+	import local.enum.ItemType;
 	import local.game.elements.Plant;
 	import local.model.buildings.vos.BaseBuildingVO;
 	import local.model.buildings.vos.BuildingVO;
@@ -74,21 +74,21 @@ package local.model.buildings
 			var arr:Array ;
 			switch( type )
 			{
-				case BuildingType.BUILDING_HOUSE :
+				case ItemType.BUILDING_HOUSE :
 					arr = houses ;
 					break ;
-				case BuildingType.BUILDING_FACTORY :
+				case ItemType.BUILDING_FACTORY :
 					arr = factories ;
 					 break ;
-				case BuildingType.DECORATION :
+				case ItemType.DECORATION :
 					arr = decroations ;
 					break ;
-				case BuildingType.DEC_ROAD :
+				case ItemType.DEC_ROAD :
 					arr = roads ;
 					break ;
-				case BuildingType.PLANT_LAND :
+				case ItemType.PLANT_LAND :
 					break ;
-				case BuildingType.PLANT_CROP :
+				case ItemType.PLANT_CROP :
 					arr = crops ;
 					break ;
 			}

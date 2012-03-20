@@ -12,7 +12,7 @@ package local.views.shop
 	import flash.text.TextField;
 	
 	import local.comm.GlobalDispatcher;
-	import local.enum.BuildingType;
+	import local.enum.ItemType;
 	import local.events.ShopEvent;
 	import local.model.buildings.vos.*;
 	import local.views.base.Image;
@@ -58,9 +58,9 @@ package local.views.shop
 			var type:String = vo.baseVO.type ;
 			switch( type )
 			{
-				case BuildingType.BUILDING://建筑
+				case ItemType.BUILDING://建筑
 					break ;
-				case BuildingType.BUILDING_HOUSE: //房子
+				case ItemType.BUILDING_HOUSE: //房子
 					gotoAndStop(LABEL_BUILDING);
 					btnNormal.addEventListener(MouseEvent.CLICK , clickNormalBtnHandler,false,0,true);
 					var baseHouseVO:BaseHouseVO = vo.baseVO as BaseHouseVO ;
@@ -68,7 +68,7 @@ package local.views.shop
 					this["txtWood"].text= baseHouseVO.buildWood+"";
 					this["txtStone"].text= baseHouseVO.buildStone+"";
 					break ;
-				case BuildingType.BUILDING_FACTORY: //工厂
+				case ItemType.BUILDING_FACTORY: //工厂
 					gotoAndStop(LABEL_BUILDING);
 					btnNormal.addEventListener(MouseEvent.CLICK , clickNormalBtnHandler,false,0,true);
 					var baseFactoryVO:BaseFactoryVO = vo.baseVO as BaseFactoryVO ;
@@ -76,17 +76,17 @@ package local.views.shop
 					this["txtWood"].text= baseFactoryVO.buildWood+"";
 					this["txtStone"].text= baseFactoryVO.buildStone+"";
 					break ;
-				case BuildingType.DECORATION: //装饰
+				case ItemType.DECORATION: //装饰
 					btnNormal.addEventListener(MouseEvent.CLICK , clickNormalBtnHandler,false,0,true);
 					var baseDecVO:BaseDecorationVO = vo.baseVO as BaseDecorationVO ;
 					this["txtCoin"].text= vo.price+"";
 					break ;
-				case BuildingType.DEC_TREE: //树
-				case BuildingType.DEC_STONE: //石头
-				case BuildingType.DEC_ROCK: //磐石
+				case ItemType.DEC_TREE: //树
+				case ItemType.DEC_STONE: //石头
+				case ItemType.DEC_ROCK: //磐石
 					btnNormal.addEventListener(MouseEvent.CLICK , clickNormalBtnHandler,false,0,true);
 					break ;
-				case BuildingType.DEC_ROAD: //路
+				case ItemType.DEC_ROAD: //路
 					btnNormal.addEventListener(MouseEvent.CLICK , clickNormalBtnHandler,false,0,true);
 					var baseRoadVO:BaseRoadVO = vo.baseVO as BaseRoadVO;
 					this["txtCoin"].text= vo.price+"";
