@@ -108,7 +108,7 @@ package local.game
 		/**放大缩小地图 */		
 		public function zoom( value:Number =1 ):void
 		{
-			value = value==1?10/6:value;
+			value = value==1?1/scaleX:value;
 			var m:Matrix = this.transform.matrix;
 			m.tx -= stage.stageWidth>>1;
 			m.ty -= stage.stageHeight>>1;
