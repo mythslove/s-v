@@ -1,7 +1,7 @@
 package local.model.vos
 {
 	/**
-	 * 商店中的建筑项
+	 * 商店itemVO 
 	 * @author zhouzhanglin
 	 */	
 	public class ShopItemVO
