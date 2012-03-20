@@ -165,19 +165,19 @@
 			earnExps="1" />
 			
 		<vo baseId="45" name="Mountain Stone1" alias="Basic_MountainStoneA" resId="Basic_MountainStone1" walkable="0"
-			layer="2" description="Mountain Stone1" xSpan="2" zSpan="2" type="stone"
+			layer="2" description="Mountain Stone1" xSpan="1" zSpan="1" type="stone"
 			buildEarnExp="0" earnStones="4,3,2" earnCoins="2,2,2" earnStep="3" 
 			earnExps="1,1,1" />
 		<vo baseId="46" name="Mountain Stone1" alias="Basic_MountainStoneB" resId="Basic_MountainStone1" walkable="0"
-			layer="2" description="Mountain Stone1" xSpan="2" zSpan="2" type="stone"
+			layer="2" description="Mountain Stone1" xSpan="1" zSpan="1" type="stone"
 			buildEarnExp="0" earnStones="4,3,2" earnCoins="2,2,2" earnStep="3" 
 			earnExps="1,1,1" />
 		<vo baseId="47" name="Mountain Stone2" alias="Basic_MountainStoneC" resId="Basic_MountainStone2" walkable="0"
-			layer="2" description="Mountain Stone1" xSpan="2" zSpan="2" type="stone"
+			layer="2" description="Mountain Stone1" xSpan="1" zSpan="1" type="stone"
 			buildEarnExp="0" earnStones="4,3,2" earnCoins="2,2,2" earnStep="3" 
 			earnExps="1,1,1" />
 		<vo baseId="48" name="Mountain Stone2" alias="Basic_MountainStoneD" resId="Basic_MountainStone2" walkable="0"
-			layer="2" description="Mountain Stone1" xSpan="2" zSpan="2" type="stone"
+			layer="2" description="Mountain Stone1" xSpan="1" zSpan="1" type="stone"
 			buildEarnExp="0" earnStones="4,3,2" earnCoins="2,2,2" earnStep="3" 
 			earnExps="1,1,1" />
 
