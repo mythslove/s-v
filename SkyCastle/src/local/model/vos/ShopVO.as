@@ -1,7 +1,7 @@
 package local.model.vos
 {
 	/**
-	 * 商店的 VO 
+	 * 商店的 VO ，全部存BuildingVO
 	 * @author zzhanglin
 	 */	
 	public class ShopVO
