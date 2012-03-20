@@ -18,6 +18,7 @@ package bing.res
 		public var userData:Object ; //一些其他的信息
 		public var reflectType:String;//反射类型
 		public var priority:int = 1;//下载的优先级
+		public var extension:String ; //后缀名
 		
 		public var num:int =1 ; //swf中的数量
 		public var row:int =1 ;

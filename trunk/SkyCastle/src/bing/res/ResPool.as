@@ -80,6 +80,7 @@ package bing.res
 		protected function setResType( resVO:ResVO ):void
 		{
 			var extender:String=  resVO.url.substring( resVO.url.lastIndexOf(".")+1).toLocaleLowerCase();
+			resVO.extension = extender ;
 			switch( extender)
 			{
 				case "txt":
@@ -92,7 +93,7 @@ package bing.res
 					break ;
 				case "png":
 				case "jpg":
-				case "gif":
+				case "jpeg":
 				case "bmp":
 					resVO.resType = ResType.IMG;
 					break ;
