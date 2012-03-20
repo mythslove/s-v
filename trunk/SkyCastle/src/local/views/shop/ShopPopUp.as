@@ -19,6 +19,7 @@ package local.views.shop
 	import local.game.GameWorld;
 	import local.game.elements.Building;
 	import local.model.ShopModel;
+	import local.model.buildings.vos.BuildingVO;
 	import local.utils.BuildingFactory;
 	import local.utils.PopUpManager;
 	import local.views.BaseView;
@@ -79,7 +80,7 @@ package local.views.shop
 			{
 				case  ShopEvent.SELECTED_BUILDING:
 					GameData.buildingCurrOperation = BuildingOperation.ADD ;
-					var building:Building = BuildingFactory.createBuildingByVO(e.selectedBuilding);
+					var building:Building = BuildingFactory.createBuildingByVO(BuildingVO.createVoByShopItem(e.selectedBuilding));
 					GameWorld.instance.addBuildingToTop( building );
 					PopUpManager.instance.removeCurrentPopup();
 					break ;

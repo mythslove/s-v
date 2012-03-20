@@ -1,6 +1,7 @@
 package local.model.buildings.vos
 {
 	import local.model.buildings.BaseBuildingVOModel;
+	import local.model.vos.ShopItemVO;
 
 	/**
 	 * 真实建筑的VO 
@@ -12,9 +13,6 @@ package local.model.buildings.vos
 		
 		/** BaseBuildingVO的id*/
 		public var baseId:String ;
-		
-		/** 使用的玩家等级限制*/
-		public var useableLevel:int ; 
 		
 		/** 如果当前的建筑是计步数，则表示当前在哪一步*/
 		public var step:int =1 ;
@@ -28,12 +26,6 @@ package local.model.buildings.vos
 		/** 当前等级，默认为1 */
 		public var level:int =1 ;
 		
-		/**支付方式,为PayType的常量*/
-		public var payType:int =1 ;
-		
-		/** 在商店中的价格 */
-		public var price:int ;
-		
 		/** 当前位置 */
 		public var nodeX:int ;
 		/** 当前位置 */
@@ -41,6 +33,10 @@ package local.model.buildings.vos
 		
 		/** 当前的方向，如果旋转过就是-1，默认为1 */
 		public var scale:int =1 ;
+		
+		
+		public var payType:int ; 
+		public var price:int ;
 		
 		protected var _baseVO:BaseBuildingVO;
 		/** 建筑的基础VO*/
@@ -53,6 +49,20 @@ package local.model.buildings.vos
 		}
 		public function set baseVO( value:BaseBuildingVO ):void{
 			this._baseVO = value ;
+		}
+		
+		/**
+		 * 通过商店中的shopItemVO来创建一个建筑VO 
+		 * @param vo 商店中的ShopItemVO
+		 * @return 
+		 */		
+		public static function createVoByShopItem( vo:ShopItemVO):BuildingVO
+		{
+			var buildingVO:BuildingVO = new BuildingVO();
+			buildingVO.baseId = vo.itemValue ;
+			buildingVO.payType = vo.payType;
+			buildingVO.price = vo.price ;
+			return buildingVO ;
 		}
 	}
 }

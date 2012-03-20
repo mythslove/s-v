@@ -16,9 +16,9 @@ package local.game
 	import local.game.elements.Building;
 	import local.game.elements.Character;
 	import local.game.elements.HeroBornPoint;
-	import local.model.buildings.vos.BuildingVO;
 	import local.model.MapGridDataModel;
 	import local.model.VillageModel;
+	import local.model.buildings.vos.BuildingVO;
 	import local.utils.CharacterManager;
 	import local.utils.CollectQueueUtil;
 	import local.views.CenterViewContainer;
@@ -127,6 +127,8 @@ package local.game
 		/** 判断金钱是否足够，并提示*/	
 		private function checkMoney( vo:BuildingVO ):Boolean
 		{
+			if(vo.payType==PayType.FREE) return true ;
+			
 			var result:Boolean ;
 			var effect:Sprite ;
 			if( vo.payType==PayType.COIN){
