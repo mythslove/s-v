@@ -49,7 +49,7 @@ package bing.amf3
 		{
 			if(e.info.code!="NetConnection.Connect.Success")
 			{
-				dispatchFaultEvent("NetConnect","connect" , String(e.info)  );
+				dispatchFaultEvent("NetConnect","connect" , String(e.info.code)  );
 			}
 		}
 
