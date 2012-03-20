@@ -12,12 +12,12 @@ package local.enum
 		public static const NONE:int = 0 ;
 		
 		/**
-		 * 修建或生长中 
+		 * 修建中 
 		 */		
 		public static const BUILDING:int = 1 ;
 		
 		/**
-		 *  修建或生长完成
+		 *  修建完成
 		 */		
 		public static const BUILD_COMPLETE:int = 2;
 		
