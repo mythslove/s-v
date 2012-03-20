@@ -108,11 +108,15 @@ package local.game
 		/**放大缩小地图 */		
 		public function zoom( value:Number =1 ):void
 		{
-			var prevW:Number = GameSetting.MAX_WIDTH*scaleX;
-			var prevH:Number = GameSetting.MAX_HEIGHT*scaleX;
-			scaleX= scaleY = value ;
-			x+=(prevW-GameSetting.MAX_WIDTH*scaleX)>>1;
-			y+=(prevH-GameSetting.MAX_HEIGHT*scaleX)>>1;
+			value = value==1?10/6:value;
+			var m:Matrix = this.transform.matrix;
+			m.tx -= stage.stageWidth>>1;
+			m.ty -= stage.stageHeight>>1;
+			m.scale(value, value);
+			m.tx += stage.stageWidth>>1;
+			m.ty += stage.stageHeight>>1;
+			this.transform.matrix=m;
+			//更正位置
 			modifyMapPosition();
 			//更正特效大小
 			for(var i:int =0  ; i<effectScene.numChildren ; ++i){
