@@ -38,11 +38,11 @@ package bing.amf3
 			_nc = new NetConnection();
 			_nc.client = this ;
 			
-			_nc.connect( gateWay);
 			_nc.addEventListener(NetStatusEvent.NET_STATUS, handleNetStatus);
 			_nc.addEventListener(IOErrorEvent.IO_ERROR, handleErrorEvent);
 			_nc.addEventListener(SecurityErrorEvent.SECURITY_ERROR, handleErrorEvent);
 			_nc.addEventListener(AsyncErrorEvent.ASYNC_ERROR, handleErrorEvent);
+			_nc.connect( gateWay);
 		}
 		
 		private function handleNetStatus(e:NetStatusEvent):void 
