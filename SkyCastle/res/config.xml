@@ -188,60 +188,60 @@
 	</buildings>
 	<shop>
 		<house>
-			<vo baseId="10" price="1" payType="1" useableLevel="2" />
+			<vo shopId="SHOP_1" itemId="ITEM_1" itemValue="10" price="1" payType="1" useableLevel="2" />
 		</house>
 		<road>
-			<vo baseId="1" price="1" payType="1" useableLevel="2" />
-			<vo baseId="2" price="2" payType="1" useableLevel="2" />
+			<vo shopId="SHOP_1" itemId="ITEM_2" itemValue="1" price="1" payType="1" useableLevel="2" />
+			<vo shopId="SHOP_1" itemId="ITEM_3" itemValue="2" price="2" payType="1" useableLevel="2" />
 		</road>
 		<tree>
-			<vo baseId="15" price="0" payType="1" />
-			<vo baseId="16" price="0" payType="1" />
-			<vo baseId="17" price="0" payType="1" />
-			<vo baseId="18" />
-			<vo baseId="19" />
-			<vo baseId="20" />
-			<vo baseId="21" />
-			<vo baseId="22" />
-			<vo baseId="23" />
-			<vo baseId="24" />
-			<vo baseId="25" />
-			<vo baseId="26" />
-			<vo baseId="27" />
+			<vo shopId="SHOP_1" itemId="ITEM_4" itemValue="15" price="0" payType="1" useableLevel="0"/>
+			<vo shopId="SHOP_1" itemId="ITEM_5" itemValue="16" price="0" payType="1" useableLevel="0"/>
+			<vo shopId="SHOP_1" itemId="ITEM_6" itemValue="17" price="0" payType="1" useableLevel="0"/>
+			<vo shopId="SHOP_1" itemId="ITEM_7" itemValue="18" price="0" payType="1" useableLevel="0"/>
+			<vo shopId="SHOP_1" itemId="ITEM_8" itemValue="19" price="0" payType="1" useableLevel="0"/>
+			<vo shopId="SHOP_1" itemId="ITEM_9" itemValue="20" price="0" payType="1" useableLevel="0"/>
+			<vo shopId="SHOP_1" itemId="ITEM_10" itemValue="21" price="0" payType="1" useableLevel="0"/>
+			<vo shopId="SHOP_1" itemId="ITEM_11" itemValue="22" price="0" payType="1" useableLevel="0"/>
+			<vo shopId="SHOP_1" itemId="ITEM_12" itemValue="23" price="0" payType="1" useableLevel="0"/>
+			<vo shopId="SHOP_1" itemId="ITEM_13" itemValue="24" price="0" payType="1" useableLevel="0"/>
+			<vo shopId="SHOP_1" itemId="ITEM_14" itemValue="25" price="0" payType="1" useableLevel="0"/>
+			<vo shopId="SHOP_1" itemId="ITEM_15" itemValue="26" price="0" payType="1" useableLevel="0"/>
+			<vo shopId="SHOP_1" itemId="ITEM_16" itemValue="27" price="0" payType="1" useableLevel="0"/>
 		</tree>
 		<stone>
-			<vo baseId="14" price="0" payType="1" />
-			<vo baseId="44" price="0" payType="1" />
-			<vo baseId="45" price="0" payType="1" />
-			<vo baseId="46" price="0" payType="1" />
-			<vo baseId="47" price="0" payType="1" />
-			<vo baseId="48" price="0" payType="1" />
+			<vo itemValue="14" itemId="ITEM_17" price="0" payType="1" useableLevel="0"/>
+			<vo itemValue="44" itemId="ITEM_18" price="0" payType="1" useableLevel="0"/>
+			<vo itemValue="45" itemId="ITEM_19" price="0" payType="1" useableLevel="0"/>
+			<vo itemValue="46" itemId="ITEM_20" price="0" payType="1" useableLevel="0"/>
+			<vo itemValue="47" itemId="ITEM_21" price="0" payType="1" useableLevel="0"/>
+			<vo itemValue="48" itemId="ITEM_22" price="0" payType="1" useableLevel="0"/>
 		</stone>
 		<rock>
-			<vo baseId="11" price="0" payType="1" />
-			<vo baseId="12" price="0" payType="1" />
-			<vo baseId="13" price="0" payType="1" />
+			<vo shopId="SHOP_1" itemId="ITEM_23" itemValue="11" price="0" payType="1" useableLevel="0"/>
+			<vo shopId="SHOP_1" itemId="ITEM_24" itemValue="12" price="0" payType="1" useableLevel="0"/>
+			<vo shopId="SHOP_1" itemId="ITEM_25" itemValue="13" price="0" payType="1" useableLevel="0"/>
 			
 			
-			<vo baseId="28" price="0" payType="1" />
-			<vo baseId="29" price="0" payType="1" />
-			<vo baseId="30" price="0" payType="1" />
-			<vo baseId="31" price="0" payType="1" />
-			<vo baseId="32" price="0" payType="1" />
-			<vo baseId="33" price="0" payType="1" />
-			<vo baseId="34" price="0" payType="1" />
-			<vo baseId="35" price="0" payType="1" />
-			<vo baseId="36" price="0" payType="1" />
-			<vo baseId="37" price="0" payType="1" />
-			<vo baseId="38" price="0" payType="1" />
-			<vo baseId="39" price="0" payType="1" />
-			<vo baseId="40" price="0" payType="1" />
-			<vo baseId="41" price="0" payType="1" />
-			<vo baseId="42" price="0" payType="1" />
-			<vo baseId="43" price="0" payType="1" />
+			<vo shopId="SHOP_1" itemId="ITEM_26" itemValue="28" price="0" payType="1" useableLevel="0"/>
+			<vo shopId="SHOP_1" itemId="ITEM_27" itemValue="29" price="0" payType="1" useableLevel="0"/>
+			<vo shopId="SHOP_1" itemId="ITEM_28" itemValue="30" price="0" payType="1" useableLevel="0"/>
+			<vo shopId="SHOP_1" itemId="ITEM_29" itemValue="31" price="0" payType="1" useableLevel="0"/>
+			<vo shopId="SHOP_1" itemId="ITEM_30" itemValue="32" price="0" payType="1" useableLevel="0"/>
+			<vo shopId="SHOP_1" itemId="ITEM_31" itemValue="33" price="0" payType="1" useableLevel="0"/>
+			<vo shopId="SHOP_1" itemId="ITEM_32" itemValue="34" price="0" payType="1" useableLevel="0"/>
+			<vo shopId="SHOP_1" itemId="ITEM_33" itemValue="35" price="0" payType="1" useableLevel="0"/>
+			<vo shopId="SHOP_1" itemId="ITEM_34" itemValue="36" price="0" payType="1" useableLevel="0"/>
+			<vo shopId="SHOP_1" itemId="ITEM_35" itemValue="37" price="0" payType="1" useableLevel="0"/>
+			<vo shopId="SHOP_1" itemId="ITEM_36" itemValue="38" price="0" payType="1" useableLevel="0"/>
+			<vo shopId="SHOP_1" itemId="ITEM_37" itemValue="39" price="0" payType="1" useableLevel="0"/>
+			<vo shopId="SHOP_1" itemId="ITEM_38" itemValue="40" price="0" payType="1" useableLevel="0"/>
+			<vo shopId="SHOP_1" itemId="ITEM_39" itemValue="41" price="0" payType="1" useableLevel="0"/>
+			<vo shopId="SHOP_1" itemId="ITEM_40" itemValue="42" price="0" payType="1" useableLevel="0"/>
+			<vo shopId="SHOP_1" itemId="ITEM_41" itemValue="43" price="0" payType="1" useableLevel="0"/>
 		</rock>
 		<decoration>
-			<vo baseId="100" price="2" payType="1" />
+			<vo shopId="SHOP_1" itemId="ITEM_42"  itemValue="100" price="2" payType="1" useableLevel="1"/>
 		</decoration>
 		<character>
 		</character>
