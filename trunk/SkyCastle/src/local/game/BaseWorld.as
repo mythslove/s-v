@@ -119,7 +119,8 @@ package local.game
 			//更正位置
 			modifyMapPosition();
 			//更正特效大小
-			for(var i:int =0  ; i<effectScene.numChildren ; ++i){
+			var len:int = effectScene.numChildren ;
+			for(var i:int =0  ; i<len ; ++i){
 				effectScene.getChildAt(i).scaleX = 1/scaleX;
 				effectScene.getChildAt(i).scaleY = 1/scaleX;
 			}
