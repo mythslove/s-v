@@ -39,7 +39,7 @@ package local.game.elements
 					playPlaceEffect();
 					CharacterManager.instance.updateCharacters( this );
 					//掉修建经验
-					var value:int = int(baseBuildingVO.exps[0]);
+					var value:int = baseBuildingVO.buildEarnExp;
 					if(value>0)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_EXP , value,screenX,screenY-offsetY);
 					break ;
 				case BuildingOperation.ROTATE:
