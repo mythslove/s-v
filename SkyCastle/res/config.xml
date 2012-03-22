@@ -4,186 +4,186 @@
 
 		<vo baseId="1" name="MoreCity PathCobblestone" description="MoreCity PathCobblestone"
 			type="road" onBuildAble="1" resId="MoreCity_PathCobblestone" alias="MoreCity_PathCobblestone" xSpan="1"
-			zSpan="1" layer="1" exps="1" walkable="1" />
+			zSpan="1" layer="1" buildEarnExp="1" walkable="1" />
 		<vo baseId="2" name="Garden Path Grassy" description="Garden Path Grassy"
 			type="road" onBuildAble="1" resId="Garden_PathGrassy" alias="Garden_PathGrassy" xSpan="1"
-			zSpan="1" layer="1" exps="1" walkable="1" />
+			zSpan="1" layer="1" buildEarnExp="1" walkable="1" />
 
 		<vo baseId="10" name="HallOfHeroes Ruin" resId="Basic_HallOfHeroes_Ruin" alias="Basic_HallOfHeroes_Ruin"
 			earnCoin="1" earnExp="1" earnTime="300" earnWood="1" earnStone="1"
 			type="house" upgradeCoins="3,4" description="MoreCity PathCobblestone"
 			xSpan="2" zSpan="3" earnTimes="300,400,500" earnCoins="4,5,7"
-			earnExps="1,2,4" exps="2" layer="2" maxLevel="3" walkable="0"
+			earnExps="1,2,4" buildEarnExp="2" layer="2" maxLevel="3" walkable="0"
 			buildWood="4" buildStone="3" />
 
 		<vo baseId="11" name="Fallen Pillar Ruin" resId="Basic_FallenPillar_Ruin" alias="Basic_FallenPillar_Ruin"
 			walkable="0" layer="2" description="Fallen Pillar Ruin" xSpan="2"
-			zSpan="1" type="rock" exps="0" earnStep="1"
+			zSpan="1" type="rock" buildEarnExp="0" earnStep="1"
 			earnWoods="1" earnStones="1" earnCoins="1" earnExps="1" />
 		<vo baseId="12" name="Viney RockA" resId="Basic_VineyRockA" alias="Basic_VineyRockA"
 			walkable="0" layer="2" description="Viney RockA" xSpan="1" zSpan="1"
-			maxLevel="4" type="rock" exps="0" earnStep="4" earnWoods="5,3,2,1"
+			maxLevel="4" type="rock" buildEarnExp="0" earnStep="4" earnWoods="5,3,2,1"
 			earnStones="5,3,2,1" earnCoins="5,3,2,1" earnExps="5,3,2,0" />
 		<vo baseId="13" name="Viney RockB" resId="Basic_VineyRockB" alias="Basic_VineyRockB"
 			walkable="0" layer="2" description="Viney RockB" xSpan="1" zSpan="1"
-			maxLevel="3" type="rock" exps="0" earnStep="3" earnWoods="4,2,1"
+			maxLevel="3" type="rock" buildEarnExp="0" earnStep="3" earnWoods="4,2,1"
 			earnStones="4,2,1" earnCoins="4,2,1" earnExps="4,2,0" />
 
 		<vo baseId="14" name="StoneG" alias="Basic_StoneG" resId="Basic_StoneG" walkable="0"
 			layer="2" description="StoneG" xSpan="1" zSpan="1" type="stone"
-			exps="0" earnStep="4" earnStones="4,3,2,1" earnCoins="2,2,2,2"
+			buildEarnExp="0" earnStep="4" earnStones="4,3,2,1" earnCoins="2,2,2,2"
 			earnExps="1,1,0,0" />
 
 		<vo baseId="15" name="Wood Debris" resId="Basic_WoodDebrisC" alias="Basic_WoodDebrisC"
 			walkable="0" layer="2" description="Wood Debris" xSpan="1" zSpan="1"
-			maxLevel="2" type="tree" exps="0" earnStep="2" earnWoods="2,1"
+			maxLevel="2" type="tree" buildEarnExp="0" earnStep="2" earnWoods="2,1"
 			earnCoins="2,1" earnExps="2,0" />
 		<vo baseId="16" name="Wreck Tree" resId="Basic_WreckTree" alias="Basic_WreckTree" walkable="0"
 			layer="2" description="Wreck Tree" xSpan="2" zSpan="2"
-			type="tree" exps="0" earnStep="1" earnWoods="4" earnCoins="5"
+			type="tree" buildEarnExp="0" earnStep="1" earnWoods="4" earnCoins="5"
 			earnExps="3" />
 		<vo baseId="17" name="Garden TreeGiant Happy Oak" resId="Garden_TreeGiantHappyOak" alias="Garden_TreeGiantHappyOak"
 			walkable="0" layer="2" description="Garden TreeGiant Happy Oak"
-			xSpan="1" zSpan="1" type="tree" exps="0"
+			xSpan="1" zSpan="1" type="tree" buildEarnExp="0"
 			earnStep="1" earnWoods="6" earnCoins="4" earnExps="3" />
 
 
 		<vo baseId="18" name="Pine Tree" resId="PineTreeA" alias="PineTree1" walkable="0"
 			layer="2" description="Garden Gate" xSpan="1" zSpan="1"
-			type="tree" exps="0" earnStep="2" earnWoods="2,1" earnCoins="2,1"
+			type="tree" buildEarnExp="0" earnStep="2" earnWoods="2,1" earnCoins="2,1"
 			earnExps="2,1" spendEnergys="1,1" />
 		<vo baseId="19" name="Pine Tree" resId="PineTreeA" alias="PineTree2" walkable="0"
 			layer="2" description="Garden Gate" xSpan="1" zSpan="1"
-			type="tree" exps="0" earnStep="2" earnWoods="2,1" earnCoins="2,1"
+			type="tree" buildEarnExp="0" earnStep="2" earnWoods="2,1" earnCoins="2,1"
 			earnExps="2,1" spendEnergys="1,1" />
 		<vo baseId="20" name="Pine Tree" resId="PineTreeA" alias="PineTree3" walkable="0"
 			layer="2" description="Garden Gate" xSpan="1" zSpan="1"
-			type="tree" exps="0" earnStep="3" earnWoods="3,2,1"
+			type="tree" buildEarnExp="0" earnStep="3" earnWoods="3,2,1"
 			earnCoins="3,2,1" earnExps="3,2,1" />
 		<vo baseId="21" name="Pine Tree" resId="PineTreeA" alias="PineTree4" walkable="0"
 			layer="2" description="Garden Gate" xSpan="1" zSpan="1"
-			type="tree" exps="0" earnStep="4" earnWoods="4,3,2,1"
+			type="tree" buildEarnExp="0" earnStep="4" earnWoods="4,3,2,1"
 			earnCoins="4,3,2,1" earnExps="4,3,2,1" />
 		<vo baseId="22" name="Pine Tree" resId="PineTreeA" alias="PineTree5" walkable="0"
 			layer="2" description="Garden Gate" xSpan="1" zSpan="1"
-			type="tree" exps="0" earnStep="5" earnWoods="6,4,3,2,1"
+			type="tree" buildEarnExp="0" earnStep="5" earnWoods="6,4,3,2,1"
 			earnCoins="6,4,3,2,1" earnExps="6,4,3,2,1" />
 		<vo baseId="23" name="Pine Tree" resId="PineTreeB" alias="PineTree6" walkable="0"
 			layer="2" description="Garden Gate" xSpan="1" zSpan="1"
-			type="tree" exps="0" earnStep="2" earnWoods="2,1" earnCoins="2,1"
+			type="tree" buildEarnExp="0" earnStep="2" earnWoods="2,1" earnCoins="2,1"
 			earnExps="2,1" spendEnergys="1,1" />
 		<vo baseId="24" name="Pine Tree" resId="PineTreeB" alias="PineTree7" walkable="0"
 			layer="2" description="Garden Gate" xSpan="1" zSpan="1"
-			type="tree" exps="0" earnStep="2" earnWoods="2,1" earnCoins="2,1"
+			type="tree" buildEarnExp="0" earnStep="2" earnWoods="2,1" earnCoins="2,1"
 			earnExps="2,1" spendEnergys="1,1" />
 		<vo baseId="25" name="Pine Tree" resId="PineTreeB" alias="PineTree8" walkable="0"
 			layer="2" description="Garden Gate" xSpan="1" zSpan="1"
-			type="tree" exps="0" earnStep="3" earnWoods="3,2,1"
+			type="tree" buildEarnExp="0" earnStep="3" earnWoods="3,2,1"
 			earnCoins="3,2,1" earnExps="3,2,1" spendEnergys="1,1,1" />
 		<vo baseId="26" name="Pine Tree" resId="PineTreeB" alias="PineTree9" walkable="0"
 			layer="2" description="Garden Gate" xSpan="1" zSpan="1"
-			type="tree" exps="0" earnStep="4" earnWoods="4,3,2,1"
+			type="tree" buildEarnExp="0" earnStep="4" earnWoods="4,3,2,1"
 			earnCoins="4,3,2,1" earnExps="4,3,2,1" spendEnergys="1,1,1,1" />
 		<vo baseId="27" name="Pine Tree" resId="PineTreeB" alias="PineTree10" walkable="0"
 			layer="2" description="Garden Gate" xSpan="1" zSpan="1"
-			type="tree" exps="0" earnStep="5" earnWoods="6,4,3,2,1"
+			type="tree" buildEarnExp="0" earnStep="5" earnWoods="6,4,3,2,1"
 			earnCoins="6,4,3,2,1" earnExps="6,4,3,2,1"/>
 			
 			
 		
 		<vo baseId="28" name="Basic Vine" resId="Basic_Growables1" alias="Basic_VineA"
 			walkable="0" layer="2" description="Basic Vine" xSpan="1"
-			zSpan="1" type="rock" exps="0" earnStep="2"
+			zSpan="1" type="rock" buildEarnExp="0" earnStep="2"
 			earnWoods="1,1" earnStones="1,1" earnCoins="1,1" earnExps="1,1"/>	
 		<vo baseId="29" name="Basic Vine" resId="Basic_Growables1" alias="Basic_VineB"
 			walkable="0" layer="2" description="Basic Vine" xSpan="1"
-			zSpan="1" type="rock" exps="0" earnStep="2"
+			zSpan="1" type="rock" buildEarnExp="0" earnStep="2"
 			earnWoods="1,1" earnStones="1,1" earnCoins="1,1" earnExps="1,1"/>	
 		<vo baseId="30" name="Basic Vine" resId="Basic_Growables1" alias="Basic_VineC"
 			walkable="0" layer="2" description="Basic Vine" xSpan="1"
-			zSpan="1" type="rock" exps="0" earnStep="3"
+			zSpan="1" type="rock" buildEarnExp="0" earnStep="3"
 			earnWoods="2,1,1" earnStones="2,1,1" earnCoins="2,1,1" earnExps="2,1,1"/>	
 		<vo baseId="31" name="Basic Vine" resId="Basic_Growables1" alias="Basic_VineD"
 			walkable="0" layer="2" description="Basic Vine" xSpan="1"
-			zSpan="1" type="rock" exps="0" earnStep="3"
+			zSpan="1" type="rock" buildEarnExp="0" earnStep="3"
 			earnWoods="2,1,1" earnStones="2,1,1" earnCoins="2,1,1" earnExps="2,1,1"/>	
 		<vo baseId="32" name="Basic Vine" resId="Basic_Growables1" alias="Basic_VineE"
 			walkable="0" layer="2" description="Basic Vine" xSpan="1"
-			zSpan="1" type="rock" exps="0" earnStep="4"
+			zSpan="1" type="rock" buildEarnExp="0" earnStep="4"
 			earnWoods="3,2,1,1" earnStones="3,2,1,1" earnCoins="3,2,1,1" earnExps="3,2,1,1"/>	
 		
 		<vo baseId="33" name="Basic Vine" resId="Basic_Growables2" alias="Basic_VineL"
 			walkable="0" layer="2" description="Basic Vine" xSpan="1"
-			zSpan="1" type="rock" exps="0" earnStep="4"
+			zSpan="1" type="rock" buildEarnExp="0" earnStep="4"
 			earnWoods="3,2,1,1" earnStones="3,2,1,1" earnCoins="3,2,1,1" earnExps="3,2,1,1"/>	
 		<vo baseId="34" name="Basic Vine" resId="Basic_Growables2" alias="Basic_VineM"
 			walkable="0" layer="2" description="Basic Vine" xSpan="1"
-			zSpan="1" type="rock" exps="0" earnStep="3"
+			zSpan="1" type="rock" buildEarnExp="0" earnStep="3"
 			earnWoods="2,1,1" earnStones="2,1,1" earnCoins="2,1,1" earnExps="2,1,1"/>	
 		<vo baseId="35" name="Basic Vine" resId="Basic_Growables2" alias="Basic_VineN"
 			walkable="0" layer="2" description="Basic Vine" xSpan="1"
-			zSpan="1" type="rock" exps="0" earnStep="4"
+			zSpan="1" type="rock" buildEarnExp="0" earnStep="4"
 			earnWoods="3,2,1,1" earnStones="3,2,1,1" earnCoins="3,2,1,1" earnExps="3,2,1,1"/>	
 		<vo baseId="36" name="Basic Vine" resId="Basic_Growables2" alias="Basic_VineO"
 			walkable="0" layer="2" description="Basic Vine" xSpan="1"
-			zSpan="1" type="rock" exps="0" earnStep="4"
+			zSpan="1" type="rock" buildEarnExp="0" earnStep="4"
 			earnWoods="3,2,1,1" earnStones="3,2,1,1" earnCoins="3,2,1,1" earnExps="3,2,1,1"/>	
 		<vo baseId="37" name="Basic Vine" resId="Basic_Growables2" alias="Basic_VineK"
 			walkable="0" layer="2" description="Basic Vine" xSpan="1"
-			zSpan="1" type="rock" exps="0" earnStep="4"
+			zSpan="1" type="rock" buildEarnExp="0" earnStep="4"
 			earnWoods="3,2,1,1" earnStones="3,2,1,1" earnCoins="3,2,1,1" earnExps="3,2,1,1"/>		
 			
 		<vo baseId="38" name="Basic Vine" resId="Basic_Growables3" alias="Basic_VineI"
 			walkable="0" layer="2" description="Basic Vine" xSpan="1"
-			zSpan="1" type="rock" exps="0" earnStep="4"
+			zSpan="1" type="rock" buildEarnExp="0" earnStep="4"
 			earnWoods="3,2,1,1" earnStones="3,2,1,1" earnCoins="3,2,1,1" earnExps="3,2,1,1"/>	
 		<vo baseId="39" name="Basic Vine" resId="Basic_Growables3" alias="Basic_VineH"
 			walkable="0" layer="2" description="Basic Vine" xSpan="1"
-			zSpan="1" type="rock" exps="0" earnStep="4"
+			zSpan="1" type="rock" buildEarnExp="0" earnStep="4"
 			earnWoods="3,2,1,1" earnStones="3,2,1,1" earnCoins="3,2,1,1" earnExps="3,2,1,1"/>	
 		<vo baseId="40" name="Basic Vine" resId="Basic_Growables3" alias="Basic_VineG"
 			walkable="0" layer="2" description="Basic Vine" xSpan="1"
-			zSpan="1" type="rock" exps="0" earnStep="4"
+			zSpan="1" type="rock" buildEarnExp="0" earnStep="4"
 			earnWoods="3,2,1,1" earnStones="3,2,1,1" earnCoins="3,2,1,1" earnExps="3,2,1,1"/>	
 		<vo baseId="41" name="Basic Vine" resId="Basic_Growables3" alias="Basic_VineF"
 			walkable="0" layer="2" description="Basic Vine" xSpan="1"
-			zSpan="1" type="rock" exps="0" earnStep="4"
+			zSpan="1" type="rock" buildEarnExp="0" earnStep="4"
 			earnWoods="3,2,1,1" earnStones="3,2,1,1" earnCoins="3,2,1,1" earnExps="3,2,1,1"/>	
 		<vo baseId="42" name="Basic Vine" resId="Basic_Growables3" alias="Basic_VineJ"
 			walkable="0" layer="2" description="Basic Vine" xSpan="1"
-			zSpan="1" type="rock" exps="0" earnStep="4"
+			zSpan="1" type="rock" buildEarnExp="0" earnStep="4"
 			earnWoods="3,2,1,1" earnStones="3,2,1,1" earnCoins="3,2,1,1" earnExps="3,2,1,1"/>		
 		
 		<vo baseId="43" name="Basic Moletron Rock" resId="Basic_MoletronRock" alias="Basic_MoletronRock"
 			walkable="0" layer="2" description="Basic Moletron Rock" xSpan="3"
-			zSpan="5" type="rock" exps="0" earnStep="5"
+			zSpan="5" type="rock" buildEarnExp="0" earnStep="5"
 			earnWoods="1,1,1,1,1" earnStones="1,1,1,1,1" earnCoins="1,1,1,1,1" earnExps="1,1,1,1,1"/>		
 		
 		<vo baseId="44" name="Block Stone" alias="Basic_BlockStone" resId="Basic_BlockStone" walkable="0"
 			layer="2" description="Block Stone" xSpan="1" zSpan="1" type="stone"
-			exps="0" earnStones="2" earnCoins="2" earnStep="1" 
+			buildEarnExp="0" earnStones="2" earnCoins="2" earnStep="1" 
 			earnExps="1" />
 			
 		<vo baseId="45" name="Mountain Stone1" alias="Basic_MountainStoneA" resId="Basic_MountainStone1" walkable="0"
 			layer="2" description="Mountain Stone1" xSpan="1" zSpan="1" type="stone"
-			exps="0" earnStones="4,3,2" earnCoins="2,2,2" earnStep="3" 
+			buildEarnExp="0" earnStones="4,3,2" earnCoins="2,2,2" earnStep="3" 
 			earnExps="1,1,1" />
 		<vo baseId="46" name="Mountain Stone1" alias="Basic_MountainStoneB" resId="Basic_MountainStone1" walkable="0"
 			layer="2" description="Mountain Stone1" xSpan="1" zSpan="1" type="stone"
-			exps="0" earnStones="4,3,2" earnCoins="2,2,2" earnStep="3" 
+			buildEarnExp="0" earnStones="4,3,2" earnCoins="2,2,2" earnStep="3" 
 			earnExps="1,1,1" />
 		<vo baseId="47" name="Mountain Stone2" alias="Basic_MountainStoneC" resId="Basic_MountainStone2" walkable="0"
 			layer="2" description="Mountain Stone1" xSpan="1" zSpan="1" type="stone"
-			exps="0" earnStones="4,3,2" earnCoins="2,2,2" earnStep="3" 
+			buildEarnExp="0" earnStones="4,3,2" earnCoins="2,2,2" earnStep="3" 
 			earnExps="1,1,1" />
 		<vo baseId="48" name="Mountain Stone2" alias="Basic_MountainStoneD" resId="Basic_MountainStone2" walkable="0"
 			layer="2" description="Mountain Stone1" xSpan="1" zSpan="1" type="stone"
-			exps="0" earnStones="4,3,2" earnCoins="2,2,2" earnStep="3" 
+			buildEarnExp="0" earnStones="4,3,2" earnCoins="2,2,2" earnStep="3" 
 			earnExps="1,1,1" />
 
 		<vo baseId="100" name="Garden Gate" resId="Garden_GardenGate" alias="Garden_GardenGate"
 			walkable="1" layer="2" description="Garden Garden Gate" xSpan="1"
-			zSpan="2" type="decoration" exps="1" />
+			zSpan="2" type="decoration" buildEarnExp="1" />
 
 	</buildings>
 	<shop>
