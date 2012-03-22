@@ -37,8 +37,8 @@ package local.model.buildings.vos
 		/** 建筑的类型 */
 		public var type:String ;
 		
-		/** 修建和升级获得的经验，数组第一位为建造 */
-		public var exps:Array ; //buildEarnExp:int ;
+		/** 修建获得的经验 */
+		public var buildEarnExp:int ;
 		
 		
 		//在哪个文件夹
