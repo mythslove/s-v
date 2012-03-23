@@ -19,6 +19,12 @@ package local.views.storage
 		public var tabMenu:ShopMainTab;
 		public var btnClose:BaseButton;
 		public var container:Sprite;
+		public var btnPrevPage:BaseButton;
+		public var btnNextPage:BaseButton;
+		//==============================
+		//缓存收藏箱查看的位置，以便下次进来还是显示上次的位置
+		public static var storageCurrentTab:String ; 
+		public static var storageCurrentPage:int = 0  ;
 		//=========================
 		
 		public function StoragePopUp()

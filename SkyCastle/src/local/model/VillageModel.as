@@ -23,6 +23,15 @@ package local.model
 		public var isHome:Boolean = true ;
 		
 		/**
+		 * 发送玩家升级到服务器 
+		 *@param currentlevel 当前的等级
+		 * */		
+		public function sendLevelUp( currentLevel:int ):void
+		{
+			
+		}
+		
+		/**
 		 * 访问好友的村庄 
 		 * @param id 好友的id
 		 */		
