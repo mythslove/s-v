@@ -1,5 +1,7 @@
 package local.model.vos
 {
+	import local.model.VillageModel;
+
 	/**
 	 * 玩家 
 	 * @author zzhanglin
@@ -49,8 +51,9 @@ package local.model.vos
 
 		public function set exp(value:int):void
 		{
-			if(value<minExp) value=minExp ;
-			else if(value>maxExp) value = maxExp ;
+			if(value>maxExp) {
+				VillageModel.instance.sendLevelUp(_level);
+			}
 			_exp = value;
 		}
 
