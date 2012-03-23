@@ -1,11 +1,15 @@
 package local.views.rewards
 {
 	import local.enum.BasicPickup;
+	import local.model.VillageModel;
 	import local.model.buildings.BaseBuildingVOModel;
 	import local.model.buildings.vos.BaseBuildingVO;
+	import local.model.buildings.vos.BuildingVO;
+	import local.model.vos.PlayerVO;
 	import local.model.vos.RewardsVO;
 	import local.views.BaseView;
 	import local.views.base.Image;
+
 	/**
 	 * 显示奖励列表 
 	 * @author zhouzhanglin
@@ -23,11 +27,13 @@ package local.views.rewards
 		override protected function added():void
 		{
 			if(!this.rewardsVO) return ;
+			var me:PlayerVO = VillageModel.instance.me;
 			var img:Image ;
 			var count:int ;
 			var iconWidth:int = 100 ;
 			if(rewardsVO.gem>0)
 			{
+				me.cash+=rewardsVO.gem ;
 				img = new RewardsPanelRender("pickupGem","res/pickup/pickupGem.png",rewardsVO.gem);
 				img.x = iconWidth*count;
 				++count ;
@@ -35,6 +41,7 @@ package local.views.rewards
 			}
 			if(rewardsVO.coin>0)
 			{
+				me.coin+=rewardsVO.coin ;
 				img = new Image("pickupCoin"+BasicPickup.COIN,"res/pickup/pickupCoin"+BasicPickup.COIN+".png",rewardsVO.coin);
 				img.x = iconWidth*count;
 				++count ;
@@ -42,12 +49,14 @@ package local.views.rewards
 			}
 			if(rewardsVO.wood>0)
 			{
+				me.wood+=rewardsVO.wood ;
 				img = new Image("pickupWood"+BasicPickup.WOOD,"res/pickup/pickupWood"+BasicPickup.WOOD+".png",rewardsVO.wood);
 				img.x = iconWidth*count;
 				++count ;
 			}
 			if(rewardsVO.stone>0)
 			{
+				me.stone+=rewardsVO.stone ;
 				img = new Image("pickupStone"+BasicPickup.STONE,"res/pickup/pickupStone"+BasicPickup.STONE+".png",rewardsVO.stone);
 				img.x = iconWidth*count;
 				++count ;
@@ -55,6 +64,7 @@ package local.views.rewards
 			}
 			if(rewardsVO.exp>0)
 			{
+				me.exp+=rewardsVO.exp ;
 				img = new Image("pickupExp"+BasicPickup.EXP,"res/pickup/pickupExp"+BasicPickup.EXP+".png",rewardsVO.exp);
 				img.x = iconWidth*count;
 				++count ;
@@ -62,16 +72,13 @@ package local.views.rewards
 			}
 			if(rewardsVO.buildings)
 			{
-				var baseVO:BaseBuildingVO ;
+				var buildingVO:BuildingVO ;
 				for( var i:int = 0 ; i<rewardsVO.buildings.length ; ++i)
 				{
-					baseVO = BaseBuildingVOModel.instance.getBaseVOById( rewardsVO.buildings[i]);
-					if(baseVO){
-						img = new Image(baseVO.alias,baseVO.thumb);
-						img.x = iconWidth*count;
-						++count ;
-						addChild(img);
-					}
+					img = new Image(buildingVO.baseVO.alias,buildingVO.baseVO.thumb);
+					img.x = iconWidth*count;
+					++count ;
+					addChild(img);
 				}
 			}
 			if(rewardsVO.pickups)
