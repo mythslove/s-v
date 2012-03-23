@@ -10,5 +10,8 @@ package local.model.vos
 		public var me:PlayerVO ;
 		//奖励
 		public var rewardsVO:RewardsVO;
+		
+		public var shareTitle:String ;
+		public var shareMsg:String ;
 	}
 }

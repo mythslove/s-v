@@ -11,7 +11,7 @@ package local.model.vos
 		public var exp:int ;
 		public var wood:int ;
 		public var stone:int ;
-		public var buildings:Array; //建筑的基础id集合
+		public var buildings:Array; //建筑的集合，商店里的buildingVO
 		public var pickups:Array; //pickup名字集合
 	}
 }
