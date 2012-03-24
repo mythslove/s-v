@@ -8,12 +8,13 @@ package
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.FullScreenEvent;
+	import flash.utils.ByteArray;
 	
 	import local.comm.GameSetting;
 	import local.comm.GlobalDispatcher;
 	import local.comm.GlobalEvent;
-	import local.model.buildings.BaseBuildingVOModel;
 	import local.model.ShopModel;
+	import local.model.buildings.BaseBuildingVOModel;
 	import local.utils.ResourceUtil;
 	
 	/**
@@ -60,6 +61,7 @@ package
 		{
 			var res:Vector.<ResVO> = new Vector.<ResVO>();
 			res.push( new ResVO("init_config","res/config.xml"));
+//			res.push( new ResVO("init_config","res/config.amf"));
 			res.push( new ResVO("init_mapdata","res/mapdata.sc") ); 
 			res.push( new ResVO("init_effect","res/skin/Effect.swf") );
 			res.push( new ResVO("init_Popup","res/skin/Popup.swf") );
@@ -99,6 +101,15 @@ package
 		 */		
 		protected function parseConfig():void
 		{
+//			var bytes:ByteArray = ResourceUtil.instance.getResVOByResId("init_config").resObject as ByteArray ;
+//			try{
+//				bytes.uncompress();
+//			}catch(e:Error){
+//				trace("config没有压缩");
+//			}
+//			var config:Object = bytes.readObject() ;
+			
+			
 			var config:XML = XML(ResourceUtil.instance.getResVOByResId("init_config").resObject.toString()) ;
 			if(config){
 				BaseBuildingVOModel.instance.parseConfig( config );
