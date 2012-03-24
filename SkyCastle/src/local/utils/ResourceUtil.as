@@ -58,6 +58,8 @@ package local.utils
 				case ResType.BINARY:
 					if( resVO.resId=="init_mapdata"){
 						parseMapData( resVO , resLoader );
+					}else{
+						resVO.resObject = resLoader ;
 					}
 					break ;
 				default:
