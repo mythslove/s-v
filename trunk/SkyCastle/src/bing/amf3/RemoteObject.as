@@ -144,7 +144,6 @@ package bing.amf3
 		/**
 		 * 实现 IEventDispatcher 接口
 		 */
-		
 		public function addEventListener( type : String, listener : Function, useCapture : Boolean = false, priority : int = 0, useWeakReference : Boolean = false ) : void {
 			_dispatcher.addEventListener(type, listener, useCapture, priority, useWeakReference);
 		}
