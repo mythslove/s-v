@@ -6,9 +6,9 @@ package local.game.elements
 	import local.enum.BasicPickup;
 	import local.enum.MouseStatus;
 	import local.game.GameWorld;
+	import local.model.VillageModel;
 	import local.model.buildings.vos.BaseRockVO;
 	import local.model.buildings.vos.BuildingVO;
-	import local.model.VillageModel;
 	import local.utils.CharacterManager;
 	import local.utils.CollectQueueUtil;
 	import local.utils.MouseManager;
@@ -21,7 +21,7 @@ package local.game.elements
 	 * 磐石，岩石，结合了石头和树的特点 
 	 * @author zzhanglin
 	 */	
-	public class Rock extends Decortation
+	public class Rock extends BasicDecoration
 	{
 		public function Rock(vo:BuildingVO)
 		{
@@ -54,18 +54,6 @@ package local.game.elements
 		/** 获取此建筑的标题 */
 		override public function get title():String  {
 			return baseBuildingVO.name+": "+(buildingVO.step-1)+"/"+baseRockVO.earnStep;
-		}
-		
-		override public function onClick():void
-		{
-			//减能量
-			if(VillageModel.instance.me.energy<1){
-				var effect:MapWordEffect = new MapWordEffect("You don't have enough Energy!");
-				GameWorld.instance.addEffect(effect,screenX,screenY);
-			}else{
-				super.onClick();
-				this.showStep( buildingVO.step-1,baseRockVO.earnStep);
-			}
 		}
 		
 		override public function execute():void

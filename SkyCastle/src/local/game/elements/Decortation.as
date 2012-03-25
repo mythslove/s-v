@@ -23,7 +23,7 @@ package local.game.elements
 		
 		override public function onClick():void
 		{
-			if(baseDecorationVO.isBasicBuilding()){
+			if(this is BasicDecoration){
 				super.onClick();
 			}else if(!CollectQueueUtil.instance.currentBuilding){
 				characterMoveTo( CharacterManager.instance.hero );

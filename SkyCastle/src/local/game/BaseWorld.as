@@ -327,7 +327,7 @@ package local.game
 				case MouseEvent.MOUSE_OVER:
 					if( !_topBuilding && e.target is InteractivePNG){
 						_mouseOverBuild = (e.target as InteractivePNG).parent as Building;
-						if(!GameData.isAdmin&&_mouseOverBuild.baseBuildingVO.isBasicBuilding()&& MouseManager.instance.checkControl()){
+						if(!GameData.isAdmin&&_mouseOverBuild is BasicDecoration&& MouseManager.instance.checkControl()){
 							_mouseOverBuild = null ;
 							_tooltip.hideTooltip();
 						}else{

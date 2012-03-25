@@ -1,6 +1,6 @@
 package local.model.buildings.vos
 {
-	import local.enum.ItemType;
+	
 
 	/**
 	 * 建筑基础VO 
@@ -59,15 +59,6 @@ package local.model.buildings.vos
 		{
 			if(!_thumb) _thumb="res/"+_file+"/"+alias+"Thumb.png";
 			return _thumb ;
-		}
-		
-		/** 是否是基本的建筑，基本建筑包括石头，磐石，树*/
-		public function isBasicBuilding():Boolean
-		{
-			if(type==ItemType.DEC_ROCK || type==ItemType.DEC_STONE || type==ItemType.DEC_TREE){
-				return true ;
-			}
-			return false ;
 		}
 	}
 }

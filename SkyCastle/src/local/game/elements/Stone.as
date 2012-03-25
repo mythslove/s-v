@@ -6,9 +6,9 @@ package local.game.elements
 	import local.enum.BasicPickup;
 	import local.enum.MouseStatus;
 	import local.game.GameWorld;
+	import local.model.VillageModel;
 	import local.model.buildings.vos.BaseStoneVO;
 	import local.model.buildings.vos.BuildingVO;
-	import local.model.VillageModel;
 	import local.utils.CharacterManager;
 	import local.utils.CollectQueueUtil;
 	import local.utils.MouseManager;
@@ -21,7 +21,7 @@ package local.game.elements
 	 * 装饰之石头 
 	 * @author zzhanglin
 	 */	
-	public class Stone extends Decortation
+	public class Stone extends BasicDecoration
 	{
 		public function Stone(vo:BuildingVO)
 		{
@@ -49,17 +49,6 @@ package local.game.elements
 		/** 获取此建筑的标题 */
 		override public function get title():String  {
 			return baseBuildingVO.name+": "+(buildingVO.step-1)+"/"+baseStoneVO.earnStep;
-		}
-		
-		override public function onClick():void
-		{
-			//减能量
-			if(VillageModel.instance.me.energy<1){
-				var effect:MapWordEffect = new MapWordEffect("You don't have enough Energy!");
-				GameWorld.instance.addEffect(effect,screenX,screenY);
-			}else{
-				super.onClick();
-			}
 		}
 		
 		override public function execute():void
