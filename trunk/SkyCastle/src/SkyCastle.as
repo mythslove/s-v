@@ -1,6 +1,5 @@
 package
 {
-	import flash.display.StageQuality;
 	import flash.events.Event;
 	import flash.net.registerClassAlias;
 	import flash.system.Security;
@@ -52,25 +51,27 @@ package
 		 */		
 		private function registerVOs():void
 		{
-			registerClassAlias("local.model.buildings.vos.BaseBuildingVO",BaseBuildingVO) ;
-			registerClassAlias("local.model.buildings.vos.BaseCharacterVO",BaseCharacterVO) ;
-			registerClassAlias("local.model.buildings.vos.BaseCropVO",BaseCropVO) ;
-			registerClassAlias("local.model.buildings.vos.BaseDecorationVO",BaseDecorationVO) ;
-			registerClassAlias("local.model.buildings.vos.BaseFactoryVO",BaseFactoryVO) ;
-			registerClassAlias("local.model.buildings.vos.BaseHouseVO",BaseHouseVO) ;
-			registerClassAlias("local.model.buildings.vos.BaseLandVO",BaseLandVO) ;
-			registerClassAlias("local.model.buildings.vos.BaseRoadVO",BaseRoadVO) ;
-			registerClassAlias("local.model.buildings.vos.BaseStoneVO",BaseStoneVO) ;
-			registerClassAlias("local.model.buildings.vos.BaseRockVO",BaseRockVO) ;
-			registerClassAlias("local.model.buildings.vos.BaseTreeVO",BaseTreeVO) ;
-			registerClassAlias("local.model.buildings.vos.BuildingVO",BuildingVO) ;
-			registerClassAlias("local.model.vos.PlayerVO",PlayerVO) ;
-			registerClassAlias("local.model.vos.FriendVO",FriendVO) ;
-			registerClassAlias("local.model.vos.LevelUpVO",LevelUpVO) ;
-			registerClassAlias("local.model.vos.RewardsVO",RewardsVO) ;
-			registerClassAlias("local.model.vos.ShopVO",ShopVO) ;
-			registerClassAlias("local.model.vos.StorageItemVO",StorageItemVO) ;
-			registerClassAlias("local.model.vos.ConfigBaseVO",ConfigBaseVO) ;
+			registerClassAlias("BaseBuildingVO",BaseBuildingVO) ;
+			registerClassAlias("BaseCharacterVO",BaseCharacterVO) ;
+			registerClassAlias("BasePlantVO",BasePlantVO) ;
+			registerClassAlias("BaseCropVO",BaseCropVO) ;
+			registerClassAlias("BaseDecorationVO",BaseDecorationVO) ;
+			registerClassAlias("BaseFactoryVO",BaseFactoryVO) ;
+			registerClassAlias("BaseHouseVO",BaseHouseVO) ;
+			registerClassAlias("BaseLandVO",BaseLandVO) ;
+			registerClassAlias("BaseRoadVO",BaseRoadVO) ;
+			registerClassAlias("BaseStoneVO",BaseStoneVO) ;
+			registerClassAlias("BaseRockVO",BaseRockVO) ;
+			registerClassAlias("BaseTreeVO",BaseTreeVO) ;
+			registerClassAlias("BuildingVO",BuildingVO) ;
+			registerClassAlias("PlayerVO",PlayerVO) ;
+			registerClassAlias("FriendVO",FriendVO) ;
+			registerClassAlias("LevelUpVO",LevelUpVO) ;
+			registerClassAlias("RewardsVO",RewardsVO) ;
+			registerClassAlias("ShopVO",ShopVO) ;
+			registerClassAlias("ShopItemVO",ShopItemVO) ;
+			registerClassAlias("StorageItemVO",StorageItemVO) ;
+			registerClassAlias("ConfigBaseVO",ConfigBaseVO) ;
 		}
 		
 		/*获得了玩家信息后，进入游戏*/

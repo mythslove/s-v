@@ -3,6 +3,7 @@ package local.comm
 	import local.enum.BuildingOperation;
 	import local.enum.MouseStatus;
 	import local.game.GameWorld;
+	import local.model.vos.ConfigBaseVO;
 	import local.utils.MouseManager;
 	import local.views.icon.*;
 	
@@ -50,5 +51,8 @@ package local.comm
 		
 		/** 是否是管理员 */
 		public static var isAdmin:Boolean=true;
+		
+		/** 系统配置 */
+		public static var config:ConfigBaseVO ;
 	}
 }
