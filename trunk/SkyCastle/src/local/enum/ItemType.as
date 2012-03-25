@@ -51,7 +51,7 @@ package local.enum
 		{
 			if(type==BUILDING || type==BUILDING_HOUSE|| type==BUILDING_FACTORY){
 				return BUILDING;
-			}else if( type==DECORATION || type==DEC_TREE|| type==DEC_STONE|| type==DEC_ROAD){
+			}else if( type==DECORATION || type==DEC_ROAD){ // || type==DEC_TREE|| type==DEC_STONE || type==DEC_ROCK 
 				return DECORATION ;
 			}else if(type==PLANT|| type==PLANT_LAND|| type==PLANT_CROP){
 				return PLANT ;
