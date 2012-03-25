@@ -1,5 +1,8 @@
 package local.game.elements
 {
+	import bing.amf3.RemoteObject;
+	
+	import local.comm.GameRemote;
 	import local.game.GameWorld;
 	import local.model.VillageModel;
 	import local.model.buildings.vos.BaseRockVO;
@@ -8,6 +11,12 @@ package local.game.elements
 	
 	public class BasicDecoration extends Decortation
 	{
+		private var _mapRo:GameRemote ;
+		public function get mapRo():GameRemote{
+			if(!_mapRo) _mapRo = new GameRemote("mapservice");
+			return _mapRo;
+		}
+		
 		public function BasicDecoration(vo:BuildingVO)
 		{
 			super(vo);
@@ -22,6 +31,15 @@ package local.game.elements
 			}else{
 				super.onClick();
 				this.showStep( buildingVO.step-1,baseBuildingVO["earnStep"]);
+			}
+		}
+		
+		override public function dispose():void
+		{
+			super.dispose();
+			if(_mapRo){
+				_mapRo.dispose();
+				_mapRo = null ;
 			}
 		}
 	}

@@ -111,7 +111,7 @@ package bing.amf3
 		 */		
 		public function getHttpOperation( methodName:String , getWay:String = null ):HttpCall
 		{
-			if(!getWay) getWay -= _servicePath;
+			if(!getWay) getWay = _servicePath;
 			return new HttpCall(getWay,methodName, onResult , onFault,null,timeout);
 		}
 		
