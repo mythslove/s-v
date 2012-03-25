@@ -6,7 +6,7 @@ package local.model.vos
 	 */	
 	public class ConfigBaseVO
 	{
-		public var baseBuildingVOs:Array;  //基础建筑数据
+		public var baseBuildings:Object;  //基础建筑数据
 		public var shopVO:ShopVO; //商店
 	}
 }
