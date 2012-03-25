@@ -54,7 +54,7 @@ package bing.amf3
 		
 		private function completeHandler(e:Event):void
 		{
-			clearTimeout(( _timeoutId );
+			clearTimeout( _timeoutId );
 			this.result = _urlLoader.data ;
 			_onResult(this);
 			removeListeners();

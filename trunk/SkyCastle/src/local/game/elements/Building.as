@@ -5,6 +5,7 @@ package local.game.elements
 	import flash.display.MovieClip;
 	import flash.utils.clearTimeout;
 	
+	import local.comm.GameRemote;
 	import local.enum.BasicPickup;
 	import local.enum.BuildingOperation;
 	import local.enum.ItemType;
@@ -22,6 +23,11 @@ package local.game.elements
 	public class Building extends InteractiveBuilding
 	{
 		protected var _timeoutId:int ;
+		private var _ro:GameRemote ;
+		public function get ro():GameRemote{
+//			if(!_ro) _ro = new GameRemote();
+			return _ro ;
+		}
 		
 		public function Building(vo:BuildingVO)
 		{
@@ -133,6 +139,10 @@ package local.game.elements
 			super.dispose();
 			if(_timeoutId>0){
 				clearTimeout(_timeoutId);
+			}
+			if(_ro){
+				_ro.dispose();
+				_ro = null ;
 			}
 		}
 	}
