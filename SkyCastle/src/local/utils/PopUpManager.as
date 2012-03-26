@@ -63,7 +63,7 @@ package local.utils
 		/** 弹出下一个 */
 		private function popupNextWindow():void
 		{
-			if(!_currentPopupObj && _popupList.length>0)
+			if(numChildren==0 && !_currentPopupObj && _popupList.length>0)
 			{
 				_currentPopupObj = _popupList.pop();
 				var mc:DisplayObject =  _currentPopupObj.window as DisplayObject;
@@ -131,6 +131,7 @@ package local.utils
 					this.removeChildAt(index-1); //移除Mask
 				}
 			}
+			popupNextWindow();
 		}
 		
 		/**
