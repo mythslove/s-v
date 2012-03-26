@@ -1,6 +1,7 @@
 package local.game.elements
 {
 	import bing.amf3.RemoteObject;
+	import bing.amf3.ResultEvent;
 	
 	import local.comm.GameRemote;
 	import local.enum.BuildingOperation;
@@ -15,7 +16,9 @@ package local.game.elements
 	{
 		private var _mapRo:GameRemote ;
 		public function get mapRo():GameRemote{
-			if(!_mapRo) _mapRo = new GameRemote("mapservice");
+			if(!_mapRo){
+				_mapRo = new GameRemote("mapservice");
+			}
 			return _mapRo;
 		}
 		
@@ -41,9 +44,7 @@ package local.game.elements
 			switch( operation )
 			{
 				case BuildingOperation.ADD:
-					playPlaceEffect();
 					CharacterManager.instance.updateCharacters( this );
-					
 					break ;
 				case BuildingOperation.ROTATE:
 					buildingVO.scale = scaleX ;
