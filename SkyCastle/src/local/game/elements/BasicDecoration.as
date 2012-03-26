@@ -3,10 +3,12 @@ package local.game.elements
 	import bing.amf3.RemoteObject;
 	
 	import local.comm.GameRemote;
+	import local.enum.BuildingOperation;
 	import local.game.GameWorld;
 	import local.model.VillageModel;
 	import local.model.buildings.vos.BaseRockVO;
 	import local.model.buildings.vos.BuildingVO;
+	import local.utils.CharacterManager;
 	import local.views.effects.MapWordEffect;
 	
 	public class BasicDecoration extends Decortation
@@ -31,6 +33,28 @@ package local.game.elements
 			}else{
 				super.onClick();
 				this.showStep( buildingVO.step-1,baseBuildingVO["earnStep"]);
+			}
+		}
+		
+		override public function sendOperation(operation:String):void
+		{
+			switch( operation )
+			{
+				case BuildingOperation.ADD:
+					playPlaceEffect();
+					CharacterManager.instance.updateCharacters( this );
+					
+					break ;
+				case BuildingOperation.ROTATE:
+					buildingVO.scale = scaleX ;
+					CharacterManager.instance.updateCharacters( this );
+					break ;
+				case BuildingOperation.MOVE:
+					CharacterManager.instance.updateCharacters( this );
+					break ;
+				case BuildingOperation.STASH:
+				case BuildingOperation.SELL :
+					break ;
 			}
 		}
 		
