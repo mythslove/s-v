@@ -1,5 +1,7 @@
 package local.model.buildings
 {
+	import bing.amf3.ResultEvent;
+	
 	import local.comm.GameRemote;
 	import local.enum.ItemType;
 	import local.model.buildings.vos.BuildingVO;
@@ -17,6 +19,16 @@ package local.model.buildings
 			return _instance; 
 		}
 		//-------------------------------------------------------------------------
+		
+		private var _ro:GameRemote;
+		public function get ro():GameRemote
+		{
+			if(!_ro){
+				_ro = new GameRemote("EditorService");
+				_ro.addEventListener(ResultEvent.RESULT , onResultHandler );
+			}
+			return _ro ;
+		}
 		
 		public var trees:Array =[];
 		public var stones:Array = [] ;
@@ -65,11 +77,26 @@ package local.model.buildings
 		
 		public function send():void
 		{
-			trace("发送修建");
-			return ;
+			if(trees.length==0){
+				ro.getOperation("getConfig").send();
+				return ;
+			}
 			var arr:Array = trees.concat(stones).concat(rocks) ;
-			var ro:GameRemote = new GameRemote("mapservice");
-			ro.getOperation("map").send(arr);
+			var ro:GameRemote = new GameRemote("EditorService");
+			ro.getOperation("saveConfig").send(arr);
+		}
+		
+		private function onResultHandler(e:ResultEvent):void
+		{
+			switch(e.method)
+			{
+				case "saveConfig":
+					trace(e.result);
+					break ;
+				case "getConfig":
+					
+					break ;
+			}
 		}
 	}
 }
