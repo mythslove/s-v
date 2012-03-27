@@ -1,26 +1,15 @@
 package local.game.elements
 {
-	import bing.amf3.RemoteObject;
-	import bing.amf3.ResultEvent;
-	
-	import local.comm.GameRemote;
 	import local.enum.BuildingOperation;
 	import local.game.GameWorld;
 	import local.model.VillageModel;
-	import local.model.buildings.vos.BaseRockVO;
+	import local.model.buildings.BasicBuildingModel;
 	import local.model.buildings.vos.BuildingVO;
 	import local.utils.CharacterManager;
 	import local.views.effects.MapWordEffect;
 	
 	public class BasicDecoration extends Decortation
 	{
-		private var _mapRo:GameRemote ;
-		public function get mapRo():GameRemote{
-			if(!_mapRo){
-				_mapRo = new GameRemote("mapservice");
-			}
-			return _mapRo;
-		}
 		
 		public function BasicDecoration(vo:BuildingVO)
 		{
@@ -45,6 +34,7 @@ package local.game.elements
 			{
 				case BuildingOperation.ADD:
 					CharacterManager.instance.updateCharacters( this );
+					BasicBuildingModel.instance.addBuilding( buildingVO );
 					break ;
 				case BuildingOperation.ROTATE:
 					buildingVO.scale = scaleX ;
@@ -55,6 +45,7 @@ package local.game.elements
 					break ;
 				case BuildingOperation.STASH:
 				case BuildingOperation.SELL :
+					BasicBuildingModel.instance.deleteBuilding( buildingVO );
 					break ;
 			}
 		}
@@ -62,10 +53,6 @@ package local.game.elements
 		override public function dispose():void
 		{
 			super.dispose();
-			if(_mapRo){
-				_mapRo.dispose();
-				_mapRo = null ;
-			}
 		}
 	}
 }
