@@ -10,12 +10,12 @@ package local.model.map
 	 * 初始化地图数据 
 	 * @author zzhanglin
 	 */	
-	public class BasicBuildingModel
+	public class MapModel
 	{
-		private static var _instance:BasicBuildingModel ;
-		public static function get instance():BasicBuildingModel
+		private static var _instance:MapModel ;
+		public static function get instance():MapModel
 		{
-			if(!_instance ) _instance = new BasicBuildingModel();
+			if(!_instance ) _instance = new MapModel();
 			return _instance; 
 		}
 		//-------------------------------------------------------------------------

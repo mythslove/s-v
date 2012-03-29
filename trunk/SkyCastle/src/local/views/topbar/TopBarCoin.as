@@ -4,7 +4,7 @@ package local.views.topbar
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	
-	import local.model.map.BasicBuildingModel;
+	import local.model.map.MapModel;
 	import local.views.BaseView;
 	import local.views.tooltip.GameToolTip;
 	
@@ -30,7 +30,7 @@ package local.views.topbar
 		private function onClickHandler( e:MouseEvent ):void
 		{
 			e.stopPropagation() ;
-			BasicBuildingModel.instance.send();
+			MapModel.instance.send();
 		}
 		
 		public function update(obj:Object):void
