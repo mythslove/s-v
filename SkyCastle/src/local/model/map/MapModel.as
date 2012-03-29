@@ -86,7 +86,6 @@ package local.model.map
 			var arr:Array = trees.concat(stones).concat(rocks) ;
 			var mapVO:MapVO = new MapVO();
 			mapVO.mapItems = arr ;
-			var ro:GameRemote = new GameRemote("EditorService");
 			ro.getOperation("saveConfig").send(mapVO);
 		}
 		
