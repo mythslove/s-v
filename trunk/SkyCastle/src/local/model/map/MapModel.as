@@ -4,6 +4,7 @@ package local.model.map
 	
 	import local.comm.GameRemote;
 	import local.enum.ItemType;
+	import local.game.GameWorld;
 	import local.model.buildings.vos.BuildingVO;
 	import local.model.map.vos.MapVO;
 
@@ -97,7 +98,22 @@ package local.model.map
 					trace(e.result);
 					break ;
 				case "getConfig":
-					
+					var mapVO:MapVO = e.result as MapVO ;
+					if(mapVO.mapItems){
+						for each( var vo:BuildingVO in mapVO.mapItems)
+						{
+							GameWorld.instance.addBuildingByVO(vo.nodeX,vo.nodeZ,vo,false,false);
+						}
+						GameWorld.instance.buildingScene1.sortAll();
+						GameWorld.instance.buildingScene2.sortAll();
+						GameWorld.instance.buildingScene3.sortAll();
+						GameWorld.instance.groundScene1.sortAll();
+						GameWorld.instance.groundScene2.sortAll();
+						GameWorld.instance.groundScene3.sortAll();
+						GameWorld.instance.groundScene1.updateAllUI();
+						GameWorld.instance.groundScene2.updateAllUI();
+						GameWorld.instance.groundScene3.updateAllUI();
+					}
 					break ;
 			}
 		}

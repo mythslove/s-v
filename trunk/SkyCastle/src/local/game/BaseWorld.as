@@ -189,7 +189,7 @@ package local.game
 		 * @param build
 		 * @param updateDirection 主要用于地面建筑自动更新UI方向
 		 */
-		protected function removeBuildFromScene( build:Building , updateDirection:Boolean=true   ):void
+		public function removeBuildFromScene( build:Building , updateDirection:Boolean=true   ):void
 		{
 			if(build.parent is BuildingScene) {
 				(build.parent as BuildingScene).removeBuilding( build );
@@ -204,7 +204,7 @@ package local.game
 		 * @param isSort 是否进行深度排序
 		 * @param updateDirection 主要用于地面建筑自动更新UI方向
 		 */		
-		protected function addBuildToScene( build:Building, isSort:Boolean=true , updateDirection:Boolean=true ):void
+		public function addBuildToScene( build:Building, isSort:Boolean=true , updateDirection:Boolean=true ):void
 		{
 			if(build.buildingVO.baseVO.layer==LayerType.BUILDING) {
 				getBuildingScene(build.nodeX,build.nodeZ).addBuilding( build , isSort );
@@ -222,7 +222,7 @@ package local.game
 		 * @param updateDirection 是否自动改变方向，主要用于Ground层的建筑
 		 * @reutrn 添加成功建筑
 		 */		
-		protected function addBuildingByVO( nodeX:int , nodeZ:int , vo:BuildingVO , isSort:Boolean=true , updateDirection:Boolean=true ):Building
+		public function addBuildingByVO( nodeX:int , nodeZ:int , vo:BuildingVO , isSort:Boolean=true , updateDirection:Boolean=true ):Building
 		{
 			var dx:int = nodeX*GameSetting.GRID_SIZE ;
 			var dz:int = nodeZ*GameSetting.GRID_SIZE ;
@@ -410,6 +410,7 @@ package local.game
 			var scene:IsoScene = this.getBuildingScene( avatar.nodeX , avatar.nodeZ );
 			scene.addIsoObject( avatar ) ;
 			CharacterManager.instance.hero = avatar ;
+			
 		}
 	}
 }
