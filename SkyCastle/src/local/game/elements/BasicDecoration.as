@@ -3,7 +3,7 @@ package local.game.elements
 	import local.enum.BuildingOperation;
 	import local.game.GameWorld;
 	import local.model.VillageModel;
-	import local.model.buildings.BasicBuildingModel;
+	import local.model.map.BasicBuildingModel;
 	import local.model.buildings.vos.BuildingVO;
 	import local.utils.CharacterManager;
 	import local.views.effects.MapWordEffect;
