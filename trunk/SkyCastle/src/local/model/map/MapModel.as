@@ -1,5 +1,6 @@
 package local.model.map
 {
+	import bing.amf3.FaultEvent;
 	import bing.amf3.ResultEvent;
 	
 	import local.comm.GameRemote;
@@ -28,6 +29,7 @@ package local.model.map
 			if(!_ro){
 				_ro = new GameRemote("EditorService");
 				_ro.addEventListener(ResultEvent.RESULT , onResultHandler );
+				_ro.addEventListener(FaultEvent.FAULT , onFaultHandler );
 			}
 			return _ro ;
 		}
@@ -115,6 +117,11 @@ package local.model.map
 					}
 					break ;
 			}
+		}
+		
+		private function onFaultHandler(e:FaultEvent):void
+		{
+			trace(e.toString());
 		}
 	}
 }
