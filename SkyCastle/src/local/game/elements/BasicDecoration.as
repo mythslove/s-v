@@ -3,7 +3,7 @@ package local.game.elements
 	import local.enum.BuildingOperation;
 	import local.game.GameWorld;
 	import local.model.VillageModel;
-	import local.model.map.BasicBuildingModel;
+	import local.model.map.MapModel;
 	import local.model.buildings.vos.BuildingVO;
 	import local.utils.CharacterManager;
 	import local.views.effects.MapWordEffect;
@@ -34,7 +34,7 @@ package local.game.elements
 			{
 				case BuildingOperation.ADD:
 					CharacterManager.instance.updateCharacters( this );
-					BasicBuildingModel.instance.addBuilding( buildingVO );
+					MapModel.instance.addBuilding( buildingVO );
 					break ;
 				case BuildingOperation.ROTATE:
 					buildingVO.scale = scaleX ;
@@ -45,7 +45,7 @@ package local.game.elements
 					break ;
 				case BuildingOperation.STASH:
 				case BuildingOperation.SELL :
-					BasicBuildingModel.instance.deleteBuilding( buildingVO );
+					MapModel.instance.deleteBuilding( buildingVO );
 					break ;
 			}
 		}
