@@ -1,4 +1,4 @@
-package local.model.map.vos
+package local.model.buildings.vos
 {
 	public class MapItemVO
 	{
