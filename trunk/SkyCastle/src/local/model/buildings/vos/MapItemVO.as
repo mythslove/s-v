@@ -1,12 +1,16 @@
 package local.model.buildings.vos
 {
+	/**
+	 * BuildingVO的基类 
+	 * @author zzhanglin
+	 */	
 	public class MapItemVO
 	{
 		/** 编号 */
 		public var id:int = 0;
 		
 		/** 地图ID */
-		public var mapId:int = "1";
+		public var mapId:String = "1";
 		
 		/** 建筑ID */
 		public var baseId:String ;
@@ -14,10 +18,10 @@ package local.model.buildings.vos
 		/** X坐标 */
 		public var nodeX:int = 0;
 		
-		/** Y坐标 */
-		public var nodeY:int = 0;
+		/** Z坐标 */
+		public var nodeZ:int = 0;
 		
-		/** 方向 */
+		/** 当前的方向，如果旋转过就是-1，默认为1 */
 		public var scale:int = 1;
 	}
 }

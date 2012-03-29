@@ -5,6 +5,7 @@ package local.model.map
 	import local.comm.GameRemote;
 	import local.enum.ItemType;
 	import local.model.buildings.vos.BuildingVO;
+	import local.model.map.vos.MapVO;
 
 	/**
 	 * 初始化地图数据 
@@ -82,8 +83,10 @@ package local.model.map
 				return ;
 			}
 			var arr:Array = trees.concat(stones).concat(rocks) ;
+			var mapVO:MapVO = new MapVO();
+			mapVO.mapItems = arr ;
 			var ro:GameRemote = new GameRemote("EditorService");
-			ro.getOperation("saveConfig").send(arr);
+			ro.getOperation("saveConfig").send(mapVO);
 		}
 		
 		private function onResultHandler(e:ResultEvent):void
