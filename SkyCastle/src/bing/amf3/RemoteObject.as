@@ -8,6 +8,7 @@ package bing.amf3
 	import flash.events.NetStatusEvent;
 	import flash.events.SecurityErrorEvent;
 	import flash.net.NetConnection;
+	import flash.net.ObjectEncoding;
 	import flash.utils.Proxy;
 	import flash.utils.flash_proxy;
 
@@ -36,6 +37,7 @@ package bing.amf3
 			_dispatcher = new EventDispatcher();
 			_servicePath = servicePath ;
 			_nc = new NetConnection();
+			_nc.objectEncoding = ObjectEncoding.AMF3 ;
 			_nc.client = this ;
 			
 			_nc.addEventListener(NetStatusEvent.NET_STATUS, handleNetStatus);
