@@ -73,7 +73,6 @@ package
 			registerClassAlias("ShopItemVO",ShopItemVO) ;
 			registerClassAlias("StorageItemVO",StorageItemVO) ;
 			registerClassAlias("ConfigBaseVO",ConfigBaseVO) ;
-			registerClassAlias("MapItemVO",MapItemVO) ;
 			registerClassAlias("MapVO",MapVO) ;
 		}
 		
