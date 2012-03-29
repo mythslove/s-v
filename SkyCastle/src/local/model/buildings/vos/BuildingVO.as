@@ -39,6 +39,11 @@ package local.model.buildings.vos
 		/** 当前等级，默认为1 */
 		public var level:int =1 ;
 		
+		
+		
+		
+		//===================================非必需
+		
 		/** 商店里面显示的支付方法 */
 		public var payType:int ; 
 		/** 商店里面显示的价格 */
