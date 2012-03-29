@@ -9,6 +9,7 @@ package
 	import local.game.GameWorld;
 	import local.model.VillageModel;
 	import local.model.buildings.vos.*;
+	import local.model.map.vos.MapVO;
 	import local.model.vos.*;
 	import local.views.CenterViewContainer;
 	import local.views.LeftBar;
@@ -72,6 +73,8 @@ package
 			registerClassAlias("ShopItemVO",ShopItemVO) ;
 			registerClassAlias("StorageItemVO",StorageItemVO) ;
 			registerClassAlias("ConfigBaseVO",ConfigBaseVO) ;
+			registerClassAlias("MapItemVO",MapItemVO) ;
+			registerClassAlias("MapVO",MapVO) ;
 		}
 		
 		/*获得了玩家信息后，进入游戏*/
