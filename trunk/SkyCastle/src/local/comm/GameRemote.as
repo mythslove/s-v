@@ -9,7 +9,7 @@ package local.comm
 	 */	
 	public class GameRemote extends RemoteObject
 	{
-		public static var gateWay:String ;
+		public static var gateWay:String = "" ;
 		
 		public function GameRemote(servicePath:String)
 		{
