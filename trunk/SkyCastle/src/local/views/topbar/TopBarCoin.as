@@ -4,7 +4,7 @@ package local.views.topbar
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	
-	import local.model.buildings.BasicBuildingModel;
+	import local.model.map.BasicBuildingModel;
 	import local.views.BaseView;
 	import local.views.tooltip.GameToolTip;
 	

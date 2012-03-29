@@ -1,4 +1,4 @@
-package local.model.buildings
+package local.model.map
 {
 	import bing.amf3.ResultEvent;
 	
