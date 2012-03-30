@@ -32,6 +32,7 @@ package local.model.map
 			return _ro ;
 		}
 		
+		private var _mapVO:MapVO;
 		public var trees:Array =[];
 		public var stones:Array = [] ;
 		public var rocks:Array = [] ;
@@ -84,9 +85,9 @@ package local.model.map
 				return ;
 			}
 			var arr:Array = trees.concat(stones).concat(rocks) ;
-			var mapVO:MapVO = new MapVO();
-			mapVO.mapItems = arr ;
-			ro.getOperation("saveConfig").send(mapVO);
+			if(!_mapVO) _mapVO = new MapVO();
+			_mapVO.mapItems = arr ;
+			ro.getOperation("saveConfig").send(_mapVO);
 		}
 		
 		private function onResultHandler(e:ResultEvent):void
@@ -97,9 +98,9 @@ package local.model.map
 					trace(e.result);
 					break ;
 				case "getConfig":
-					var mapVO:MapVO = e.result as MapVO ;
-					if(mapVO.mapItems){
-						for each( var vo:BuildingVO in mapVO.mapItems)
+					_mapVO = e.result as MapVO ;
+					if(_mapVO.mapItems){
+						for each( var vo:BuildingVO in _mapVO.mapItems)
 						{
 							GameWorld.instance.addBuildingByVO(vo.nodeX,vo.nodeZ,vo,false,false);
 						}
