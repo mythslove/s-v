@@ -39,6 +39,7 @@ package local.model.map
 		
 		public function addBuilding( buildingVO:BuildingVO ):void
 		{
+			buildingVO.mapId = "MAP_01";
 			switch( buildingVO.baseVO.type )
 			{
 				case ItemType.DEC_TREE:
