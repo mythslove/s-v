@@ -81,14 +81,11 @@ package local.model.map
 		
 		public function send():void
 		{
-			if(trees.length==0 || !_mapVO){
+			if(!_mapVO){
 				ro.getOperation("getConfig").send();
 				return ;
 			}
 			var arr:Array = trees.concat(stones).concat(rocks) ;
-			if(!_mapVO){
-				_mapVO = new MapVO();
-			}
 			_mapVO.mapItems = arr ;
 			ro.getOperation("saveConfig").send(_mapVO);
 		}
