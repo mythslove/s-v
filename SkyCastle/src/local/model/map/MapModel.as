@@ -85,7 +85,9 @@ package local.model.map
 				return ;
 			}
 			var arr:Array = trees.concat(stones).concat(rocks) ;
-			if(!_mapVO) _mapVO = new MapVO();
+			if(!_mapVO){
+				_mapVO = new MapVO();
+			}
 			_mapVO.mapItems = arr ;
 			ro.getOperation("saveConfig").send(_mapVO);
 		}
