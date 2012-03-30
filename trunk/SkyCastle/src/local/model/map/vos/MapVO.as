@@ -3,7 +3,7 @@ package local.model.map.vos
 	public class MapVO
 	{
 		/** 地图ID */
-		public var mapId:String = "1";
+		public var mapId:String = "MAP_01";
 		
 		/** 地图名字 */
 		public var name:String  = "sky castle";
