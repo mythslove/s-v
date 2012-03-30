@@ -81,7 +81,7 @@ package local.model.map
 		
 		public function send():void
 		{
-			if(trees.length==0){
+			if(trees.length==0 || !_mapVO){
 				ro.getOperation("getConfig").send();
 				return ;
 			}
