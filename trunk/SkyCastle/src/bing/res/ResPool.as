@@ -364,9 +364,9 @@ package bing.res
 			if(_resArray.length>0){
 				startQueueLoad();
 			}else if(_queueLoaded==_total){
-				this.dispatchEvent(new ResLoadedEvent(ResLoadedEvent.QUEUE_LOADED));
 				_resArray = null ;
 				_queueHash = null ;
+				this.dispatchEvent(new ResLoadedEvent(ResLoadedEvent.QUEUE_LOADED));
 			}
 		}
 		
