@@ -1,5 +1,7 @@
 package local.game.elements
 {
+	import bing.amf3.ResultEvent;
+	
 	import com.greensock.TweenMax;
 	
 	import flash.display.MovieClip;
@@ -25,7 +27,10 @@ package local.game.elements
 		protected var _timeoutId:int ;
 		private var _ro:GameRemote ;
 		public function get ro():GameRemote{
-//			if(!_ro) _ro = new GameRemote();
+			if(!_ro) {
+				_ro = new GameRemote("CommService");
+				_ro.addEventListener(ResultEvent.RESULT ,  onResultHandler );
+			}
 			return _ro ;
 		}
 		
@@ -59,6 +64,23 @@ package local.game.elements
 					CharacterManager.instance.updateCharacters( this );
 					break ;
 				case BuildingOperation.SELL :
+					break ;
+			}
+		}
+		
+		protected function onResultHandler( e:ResultEvent ):void
+		{
+			switch( e.method)
+			{
+				case "build":
+					break ;
+				case "sell":
+					 break ;
+				case "stash":
+					break ;
+				case "rotate":
+					break ;
+				case "move":
 					break ;
 			}
 		}
@@ -98,7 +120,7 @@ package local.game.elements
 			if(!baseBuildingVO.walkable){
 				var arr:Array = getRoundAblePoint(); 
 				if(arr.length>0){
-					arr.sortOn("x", Array.DESCENDING |Array.NUMERIC );
+					arr.sortOn("x", Array.DESCENDING|Array.NUMERIC );
 					result = character.searchToRun( arr[0].x/_size , arr[0].z/_size);
 				}
 			}else{
@@ -141,6 +163,7 @@ package local.game.elements
 				clearTimeout(_timeoutId);
 			}
 			if(_ro){
+				_ro.removeEventListener(ResultEvent.RESULT ,  onResultHandler );
 				_ro.dispose();
 				_ro = null ;
 			}
