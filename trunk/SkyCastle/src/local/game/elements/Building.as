@@ -70,6 +70,7 @@ package local.game.elements
 		
 		protected function onResultHandler( e:ResultEvent ):void
 		{
+			trace(e.service , e.method , e.result);
 			switch( e.method)
 			{
 				case "build":
