@@ -1,6 +1,7 @@
 package local.model
 {
 	import local.comm.GameData;
+	import local.enum.ItemType;
 	import local.model.vos.ConfigBaseVO;
 	import local.model.vos.ShopItemVO;
 
@@ -19,7 +20,26 @@ package local.model
 		public function get houseArray():Vector.<ShopItemVO> {
 			return _houseArray ;
 		}
-		
+		private var _factoryArray:Vector.<ShopItemVO> ;
+		/** 商店中所有的工厂 */
+		public function get factoryArray():Vector.<ShopItemVO> {
+			return _factoryArray ;
+		}
+		private var _cropArray:Vector.<ShopItemVO> ;
+		/** 商店中所有的农作物 */
+		public function get cropArray():Vector.<ShopItemVO> {
+			return _cropArray ;
+		}
+		private var _landArray:Vector.<ShopItemVO> ;
+		/** 商店中所有的土地 */
+		public function get landArray():Vector.<ShopItemVO> {
+			return _landArray ;
+		}
+		private var _plantArray:Vector.<ShopItemVO> ;
+		/** 商店中所有的植物 */
+		public function get plantArray():Vector.<ShopItemVO> {
+			return _plantArray ;
+		}
 		private var _buildingArray:Vector.<ShopItemVO>;
 		/** 建筑 */
 		public function get buildingArray():Vector.<ShopItemVO> {
@@ -62,6 +82,12 @@ package local.model
 			return _characterArray ;
 		}
 		
+		private var _allShopItemArray:Vector.<ShopItemVO>;
+		/** 商店中所有的商品*/
+		public function get allShopItemArray():Vector.<ShopItemVO> {
+			return _allShopItemArray ;
+		}
+		
 		/**
 		 * 解析config配置 
 		 * @param config
@@ -73,9 +99,26 @@ package local.model
 			}
 			//房子
 			_houseArray = Vector.<ShopItemVO>( config.shopVO.houses );
+			//工厂
+			_factoryArray = Vector.<ShopItemVO>( config.shopVO.factorys );
 			//建筑
-			_buildingArray = new Vector.<ShopItemVO>();
-			_buildingArray = _houseArray.concat();
+			if(config.shopVO.buildings){
+				_buildingArray = Vector.<ShopItemVO>( config.shopVO.buildings );
+			}else{
+				_buildingArray = new Vector.<ShopItemVO>();
+			}
+			_buildingArray = _buildingArray.concat(_houseArray).concat(_factoryArray);
+			//植物
+			_cropArray = Vector.<ShopItemVO>( config.shopVO.crops );
+			//土地
+			_landArray = Vector.<ShopItemVO>( config.shopVO.lands );
+			//农作物
+			if(config.shopVO.plants){
+				_plantArray = Vector.<ShopItemVO>( config.shopVO.plants );
+			}else{
+				_plantArray = new Vector.<ShopItemVO>();
+			}
+			_plantArray = _plantArray.concat(_cropArray).concat( _landArray ) ;
 			//路
 			_roadArray = Vector.<ShopItemVO>( config.shopVO.roads);
 			//树
@@ -93,6 +136,54 @@ package local.model
 			}
 			//人
 //			_characterArray = Vector.<ShopItemVO>( config.shopVO.characterArray);
+			
+			//所有
+			_allShopItemArray = buildingArray.concat( decorationArray).concat(plantArray);
+		}
+		
+		
+		public function getBuildingShopItemByBaseId( itemId:String , type:int ):ShopItemVO
+		{
+			var arr :Vector.<ShopItemVO>= getArrayByType(type);
+			for each( var vo:ShopItemVO in arr)
+			{
+				if(vo.itemId==itemId){
+					return vo ;
+				}
+			}
+			return null ;
+		}
+		
+		public function getShopItemByItemId( itemId:String ):ShopItemVO
+		{
+			for each( var vo:ShopItemVO in _allShopItemArray)
+			{
+				if(vo.itemId==itemId){
+					return vo ;
+				}
+			}
+			return null ;
+		}
+		
+		private function getArrayByType( type:int ):Vector.<ShopItemVO>
+		{
+			var arr:Vector.<ShopItemVO> ;
+			switch(type)
+			{
+				case ItemType.BUILDING_HOUSE:
+					arr = houseArray ;
+					break ;
+				case ItemType.BUILDING_FACTORY:
+					arr =  _factoryArray ;
+					break ;
+				case ItemType.PLANT_CROP:
+					arr = _cropArray ;
+					break ;
+				case ItemType.PLANT_LAND:
+					arr = _landArray;
+					break ;
+			}
+			return arr ;
 		}
 	}
 }
