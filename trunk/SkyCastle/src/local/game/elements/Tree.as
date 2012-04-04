@@ -1,7 +1,5 @@
 package local.game.elements
 {
-	import bing.amf3.ResultEvent;
-	
 	import flash.utils.setTimeout;
 	
 	import local.enum.AvatarAction;
@@ -55,16 +53,6 @@ package local.game.elements
 		/** 获取此建筑的标题 */
 		override public function get title():String  {
 			return baseBuildingVO.name+": "+(buildingVO.step-1)+"/"+baseTreeVO.earnStep;
-		}
-		
-		override protected function onResultHandler(e:ResultEvent):void
-		{
-			switch(e.method)
-			{
-				case "chop": //砍
-					
-					break ;
-			}
 		}
 		
 		override public function execute():void

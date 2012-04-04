@@ -1,10 +1,12 @@
 package local.game.elements
 {
+	import bing.amf3.ResultEvent;
+	
 	import local.enum.BuildingOperation;
 	import local.game.GameWorld;
 	import local.model.VillageModel;
-	import local.model.map.MapModel;
 	import local.model.buildings.vos.BuildingVO;
+	import local.model.map.MapModel;
 	import local.utils.CharacterManager;
 	import local.views.effects.MapWordEffect;
 	
@@ -46,6 +48,17 @@ package local.game.elements
 				case BuildingOperation.STASH:
 				case BuildingOperation.SELL :
 					MapModel.instance.deleteBuilding( buildingVO );
+					break ;
+			}
+		}
+		
+		
+		override protected function onResultHandler(e:ResultEvent):void
+		{
+			switch(e.method)
+			{
+				case "chop": 
+					
 					break ;
 			}
 		}
