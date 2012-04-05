@@ -118,9 +118,9 @@ package local.game.elements
 			if(_shakeFlag && _skin )
 			{
 				if(_skin.x>=0){
-					_skin.x  = -1 ;
+					_skin.x  = -2 ;
 				}else if(_skin.x<0){
-					_skin.x = 1;
+					_skin.x = 2;
 				}
 				++_shakeFrame ;
 				if(_shakeFrame==10)
