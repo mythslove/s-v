@@ -1,11 +1,13 @@
 package local.game
 {
 	import bing.iso.*;
+	import bing.res.ResVO;
 	import bing.utils.InteractivePNG;
 	
 	import flash.display.*;
 	import flash.events.*;
 	import flash.geom.*;
+	import flash.utils.ByteArray;
 	
 	import local.comm.*;
 	import local.enum.*;
@@ -14,6 +16,7 @@ package local.game
 	import local.model.*;
 	import local.model.buildings.MapBuildingModel;
 	import local.model.buildings.vos.*;
+	import local.model.map.vos.MapVO;
 	import local.utils.CharacterManager;
 	import local.utils.MouseManager;
 	import local.utils.ResourceUtil;
@@ -410,7 +413,30 @@ package local.game
 			var scene:IsoScene = this.getBuildingScene( avatar.nodeX , avatar.nodeZ );
 			scene.addIsoObject( avatar ) ;
 			CharacterManager.instance.hero = avatar ;
-			
+			//添加场景建筑
+			var basicBuildingRes:ResVO = ResourceUtil.instance.getResVOByResId("init_basicmapbuilding");
+			var bytes:ByteArray = basicBuildingRes.resObject as ByteArray ;
+			try{
+				bytes.uncompress();
+			}catch(e:Error){
+				trace("init_basicmapbuilding",e.message);
+			}
+			var mapVO:MapVO = bytes.readObject() as MapVO ;
+			for each( var vo:BuildingVO in mapVO.mapItems)
+			{
+				GameWorld.instance.addBuildingByVO(vo.nodeX,vo.nodeZ,vo,false,false);
+			}
+			GameWorld.instance.buildingScene1.sortAll();
+			GameWorld.instance.buildingScene2.sortAll();
+			GameWorld.instance.buildingScene3.sortAll();
+			GameWorld.instance.groundScene1.sortAll();
+			GameWorld.instance.groundScene2.sortAll();
+			GameWorld.instance.groundScene3.sortAll();
+			GameWorld.instance.groundScene1.updateAllUI();
+			GameWorld.instance.groundScene2.updateAllUI();
+			GameWorld.instance.groundScene3.updateAllUI();
+			//开始
+			this.start();
 		}
 	}
 }

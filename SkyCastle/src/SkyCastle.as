@@ -93,7 +93,6 @@ package
 			addChild( CenterViewContainer.instance); //添加UI的容器
 			
 			GameWorld.instance.initWorld();
-			GameWorld.instance.start();
 			
 			//显示玩家信息
 			CenterViewContainer.instance.topBar.setUserInfo( VillageModel.instance.me);

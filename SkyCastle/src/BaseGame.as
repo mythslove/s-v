@@ -64,6 +64,7 @@ package
 			var res:Vector.<ResVO> = new Vector.<ResVO>();
 			res.push( new ResVO("init_config","res/config.bin"));
 			res.push( new ResVO("init_mapdata","res/mapdata.bin") ); 
+			res.push( new ResVO("init_basicmapbuilding","res/basicmapbuilding.bin"));
 			res.push( new ResVO("init_effect","res/skin/Effect.swf") );
 			res.push( new ResVO("init_Popup","res/skin/Popup.swf") );
 			res.push( new ResVO("init_bg","res/skin/bg.swf"));
