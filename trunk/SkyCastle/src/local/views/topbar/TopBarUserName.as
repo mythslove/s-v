@@ -3,6 +3,8 @@ package local.views.topbar
 	import flash.display.Sprite;
 	import flash.text.TextField;
 	
+	import local.views.tooltip.GameToolTip;
+	
 	public class TopBarUserName extends Sprite
 	{
 		public var txtName:TextField;
@@ -11,6 +13,7 @@ package local.views.topbar
 		public function TopBarUserName()
 		{
 			super();
+			mouseEnabled = mouseChildren = false ;
 		}
 		
 		public function update( obj:Object ):void
