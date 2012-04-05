@@ -8,10 +8,12 @@ package local.game.elements
 	import flash.utils.clearTimeout;
 	
 	import local.comm.GameRemote;
+	import local.comm.GameSetting;
 	import local.enum.BasicPickup;
 	import local.enum.BuildingOperation;
 	import local.enum.ItemType;
 	import local.game.GameWorld;
+	import local.model.MapGridDataModel;
 	import local.model.buildings.vos.BuildingVO;
 	import local.utils.CharacterManager;
 	import local.utils.CollectQueueUtil;
@@ -119,10 +121,27 @@ package local.game.elements
 		{
 			var result:Boolean ;
 			if(!baseBuildingVO.walkable){
-				var arr:Array = getRoundAblePoint(); 
-				if(arr.length>0){
-					arr.sortOn("x", Array.DESCENDING|Array.NUMERIC );
-					result = character.searchToRun( arr[0].x/_size , arr[0].z/_size);
+				var nx:int , nz:int ;
+				if(_isRotate) nx = nodeX + _zSpan;
+				else nx = nodeX + _xSpan;
+				
+				if(nx<=GameSetting.GRID_X && nx>=0 && MapGridDataModel.instance.astarGrid.getNode(nx,nodeZ).walkable) {
+					result = character.searchToRun( nx,nodeZ);
+				}else{
+					if(_isRotate) nz = nodeZ + _xSpan;
+					else nz = nodeZ + _zSpan;
+					
+					if(nz<=GameSetting.GRID_Z && nz>=0 && MapGridDataModel.instance.astarGrid.getNode(nodeX,nz).walkable) {
+						result = character.searchToRun( nodeX,nz);
+					}
+					else
+					{
+						var arr:Array = getRoundAblePoint(); 
+						if(arr.length>0){
+							arr.sortOn("x", Array.DESCENDING|Array.NUMERIC );
+							result = character.searchToRun( arr[0].x/_size , arr[0].z/_size);
+						}
+					}
 				}
 			}else{
 				result = character.searchToRun( nodeX , nodeZ );
