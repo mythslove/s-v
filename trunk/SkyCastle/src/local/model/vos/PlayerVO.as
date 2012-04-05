@@ -12,6 +12,8 @@ package local.model.vos
 		
 		public var name:String ; //名称 
 		
+		public var buildings:Array ; //所有的建筑
+		
 		private var _level:int ; //等级
 		
 		private var _wood:int ; //木材
