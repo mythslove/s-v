@@ -33,7 +33,7 @@ package local.game.scenes
 		 */		
 		public function addBuildingByVO( dx:Number , dz:Number , buildingVO:BuildingVO , isSort:Boolean=true ):Building
 		{
-			var building:Building = BuildingFactory.createBuildingByVO( buildingVO);
+			var building:Building = BuildingFactory.createBuildingByVO( buildingVO,false);
 			building.x = dx;
 			building.z = dz;
 			return addBuilding(building,isSort);
