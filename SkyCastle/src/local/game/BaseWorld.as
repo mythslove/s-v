@@ -211,7 +211,7 @@ package local.game
 			} else if(build.buildingVO.baseVO.layer==LayerType.GROUND) {
 				getGroundScene(build.nodeX,build.nodeZ).addBuilding( build , isSort , updateDirection );
 			}
-			MapBuildingModel.instance.addBuilding( build.buildingVO );
+			MapBuildingModel.instance.addBuilding( build );
 		}
 		
 		/**
@@ -244,7 +244,7 @@ package local.game
 					result = buildingScene.addBuildingByVO( dx,dz,vo,isSort);
 				}
 			}
-			MapBuildingModel.instance.addBuilding( vo );
+			MapBuildingModel.instance.addBuilding( result );
 			return result;
 		}
 		
@@ -268,7 +268,7 @@ package local.game
 					buildingScene.removeBuilding( building );
 				}
 			}
-			MapBuildingModel.instance.removeBuilding( building.buildingVO );
+			MapBuildingModel.instance.removeBuilding( building );
 		}
 		
 		/**运行 */		

@@ -23,6 +23,9 @@ package local.game.elements
 	 */	
 	public class Tree extends BasicDecoration
 	{
+		private var _shakeFlag:Boolean ;
+		private var _shakeFrame:int ;
+		
 		public function Tree(vo:BuildingVO)
 		{
 			super(vo);
@@ -98,6 +101,33 @@ package local.game.elements
 				GameWorld.instance.removeBuilding(this); //删除这棵树
 			}else if(_skin){
 				_skin.gotoAndStop( buildingVO.step);
+			}
+		}
+		
+		/**
+		 * 摇动 
+		 */		
+		public function shake():void
+		{
+			_shakeFlag = true ;
+			_shakeFrame = 0 ;
+		}
+		
+		override public function update():void
+		{
+			if(_shakeFlag && _skin )
+			{
+				if(_skin.x>=0){
+					_skin.x  = -1 ;
+				}else if(_skin.x<0){
+					_skin.x = 1;
+				}
+				++_shakeFrame ;
+				if(_shakeFrame==10)
+				{
+					_shakeFlag = false ;
+					_skin.x = 0 ;
+				}
 			}
 		}
 	}

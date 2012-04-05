@@ -1,6 +1,7 @@
 package local.model.buildings
 {
 	import local.enum.ItemType;
+	import local.game.elements.Building;
 	import local.game.elements.Plant;
 	import local.model.buildings.vos.BaseBuildingVO;
 	import local.model.buildings.vos.BuildingVO;
@@ -35,18 +36,21 @@ package local.model.buildings
 		public var lands:Array = [] ;
 		
 		/** 农作物 */
-		public var crops:Array = []
+		public var crops:Array = [] ;
+			
+		/** 所有的树*/
+		public var trees:Array = [];
 		
 		/**
 		 * 添加一个建筑到地图数据中 
 		 * @param vo
 		 */	
-		public function addBuilding( vo:BuildingVO ):void
+		public function addBuilding( building:Building ):void
 		{
-			var arr:Array  = getArrayByType(  vo.baseVO.type );
+			var arr:Array  = getArrayByType( building.baseBuildingVO.type );
 			if(arr )
 			{
-				arr.push( vo );
+				arr.push( building );
 			}
 		}
 		
@@ -54,14 +58,14 @@ package local.model.buildings
 		 * 从地图数据中移除一个建筑
 		 * @param vo
 		 */		
-		public function removeBuilding( vo:BuildingVO ):void
+		public function removeBuilding( building:Building ):void
 		{
-			var arr:Array  = getArrayByType(  vo.baseVO.type );
+			var arr:Array  = getArrayByType(  building.baseBuildingVO.type );
 			if(arr){
 				var len:int = arr.length ;
 				for( var i:int = 0 ; i<len ; ++i)
 				{
-					if( arr[i] == vo){
+					if( arr[i] == building){
 						arr.splice( i , 1 );
 						break ;
 					}
@@ -90,6 +94,9 @@ package local.model.buildings
 					break ;
 				case ItemType.PLANT_CROP :
 					arr = crops ;
+					break ;
+				case ItemType.DEC_TREE:
+					arr= trees;
 					break ;
 			}
 			return arr ;
