@@ -5,8 +5,11 @@ package local.game.scenes
 	
 	import local.comm.GameSetting;
 	import local.game.elements.Building;
-	import local.model.buildings.vos.BuildingVO;
+	import local.game.elements.Tree;
 	import local.model.MapGridDataModel;
+	import local.model.buildings.MapBuildingModel;
+	import local.model.buildings.vos.BuildingVO;
+	import local.model.map.MapModel;
 	import local.utils.BuildingFactory;
 
 	/**
@@ -15,6 +18,8 @@ package local.game.scenes
 	 */	
 	public class BuildingScene extends IsoScene
 	{
+		private var _treeShakeTime:int ;
+		
 		public function BuildingScene()
 		{
 			super(GameSetting.GRID_SIZE);
@@ -22,6 +27,26 @@ package local.game.scenes
 			mouseEnabled = false ;
 		}
 		
+		override public function update():void
+		{
+			super.update();
+			//树摇动
+			++_treeShakeTime;
+			if(_treeShakeTime>24)
+			{
+				var trees:Array = MapBuildingModel.instance.trees ;
+				if(trees)
+				{
+					var len:int = trees.length-2 ;
+					if(len>0){
+						len = (Math.random()*len)>>0 ;
+						var tree:Tree = trees[len] as Tree ;
+						tree.shake() ;
+					}
+				}
+				_treeShakeTime = 0 ;
+			}
+		}
 		
 		/**
 		 * 添加一个建筑  
