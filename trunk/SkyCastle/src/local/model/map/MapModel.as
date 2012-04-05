@@ -103,6 +103,7 @@ package local.model.map
 						for each( var vo:BuildingVO in _mapVO.mapItems)
 						{
 							GameWorld.instance.addBuildingByVO(vo.nodeX,vo.nodeZ,vo,false,false);
+							this.addBuilding( vo );
 						}
 						GameWorld.instance.buildingScene1.sortAll();
 						GameWorld.instance.buildingScene2.sortAll();
