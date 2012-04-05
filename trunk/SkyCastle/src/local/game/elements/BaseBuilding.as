@@ -45,6 +45,7 @@ package local.game.elements
 			itemLayer = new InteractivePNG(); //添加皮肤容器层
 			itemLayer.mouseChildren = false ;
 			itemLayer.scaleX = vo.scale ;
+			this._isRotate = (vo.scale==-1) ;
 			addChild(itemLayer);
 			effectLayer = new Sprite(); //添加特效层
 			effectLayer.mouseChildren = effectLayer.mouseEnabled = false ;
