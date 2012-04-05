@@ -4,6 +4,7 @@ package  local.views
 	import local.events.UserInfoEvent;
 	import local.model.VillageModel;
 	import local.model.vos.PlayerVO;
+	import local.views.topbar.AddEnergyBar;
 	import local.views.topbar.TopBarCoin;
 	import local.views.topbar.TopBarEnergy;
 	import local.views.topbar.TopBarExp;
@@ -21,6 +22,7 @@ package  local.views
 		public var woodBar:TopBarWood;
 		public var userBar:TopBarUserName;
 		public var gemBar:TopBarGem;
+		public var addEnergyBar:AddEnergyBar ;
 		//===========================
 		
 		public function TopBar()
@@ -54,11 +56,6 @@ package  local.views
 		public function updateTopBar():void
 		{
 			setUserInfo( VillageModel.instance.me );
-//			if(VillageModel.instance.isHome){
-//				setUserInfo( VillageModel.instance.me );
-//			}else{
-//				setUserInfo( VillageModel.instance.friend );
-//			}
 		}
 	}
 }
