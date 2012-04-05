@@ -122,15 +122,13 @@ package local.game.elements
 			var result:Boolean ;
 			if(!baseBuildingVO.walkable){
 				var nx:int , nz:int ;
-				if(_isRotate) nx = nodeX + _zSpan;
-				else nx = nodeX + _xSpan;
-				
+				nx = _isRotate? nodeX + _zSpan: nodeX + _xSpan ;
 				if(nx<=GameSetting.GRID_X && nx>=0 && MapGridDataModel.instance.astarGrid.getNode(nx,nodeZ).walkable) {
 					result = character.searchToRun( nx,nodeZ);
-				}else{
-					if(_isRotate) nz = nodeZ + _xSpan;
-					else nz = nodeZ + _zSpan;
-					
+				}
+				else
+				{
+					nz = _isRotate?nodeZ + _xSpan:nodeZ + _zSpan;
 					if(nz<=GameSetting.GRID_Z && nz>=0 && MapGridDataModel.instance.astarGrid.getNode(nodeX,nz).walkable) {
 						result = character.searchToRun( nodeX,nz);
 					}
