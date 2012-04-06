@@ -8,7 +8,7 @@ package local.model.map.vos
 		/** 地图名字 */
 		public var name:String  = "sky castle";
 		
-		/** 地图数据信息文件 */
+		/** 地图数据信息文件 ********暂时没用*******/
 		public var resUrl:String  = "res/mapdata.bin";
 		
 		/** 描述 */

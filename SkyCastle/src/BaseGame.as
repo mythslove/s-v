@@ -98,7 +98,7 @@ package
 		}
 		
 		/**
-		 * 解析config.xml
+		 * 解析config
 		 */		
 		protected function parseConfig():void
 		{
@@ -110,7 +110,7 @@ package
 			}
 			var config:ConfigBaseVO = bytes.readObject() as ConfigBaseVO;
 			if(config){
-				
+				//各自解析
 				BaseBuildingVOModel.instance.parseConfig( config );
 				ShopModel.instance.parseConfig( config );
 				
