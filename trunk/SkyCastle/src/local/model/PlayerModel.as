@@ -1,10 +1,13 @@
 package local.model
 {
+	import bing.amf3.ResultEvent;
 	import bing.utils.Guid;
 	
+	import local.comm.GameRemote;
 	import local.comm.GlobalDispatcher;
 	import local.events.UserInfoEvent;
 	import local.model.vos.PlayerVO;
+
 	/**
 	 * 玩家信息Model 
 	 * @author zzhanglin
@@ -22,6 +25,24 @@ package local.model
 		public var me:PlayerVO ; //当前玩家的信息
 		
 		public var friend:PlayerVO ; //去好友玩家的信息
+		
+		private var _ro:GameRemote ;
+		public function PlayerModel()
+		{
+			_ro = new GameRemote("CommService");
+			_ro.addEventListener(ResultEvent.RESULT ,  onResultHandler );
+		}
+		
+		private function onResultHandler( e:ResultEvent ):void
+		{
+			switch( e.method )
+			{
+				case "getMeInfo":
+					me = e.result as PlayerVO ;
+					GlobalDispatcher.instance.dispatchEvent( new UserInfoEvent(UserInfoEvent.USER_INFO_UPDATED));
+					break;
+			}
+		}
 		
 		/**
 		 * 发送玩家升级到服务器 
@@ -48,6 +69,9 @@ package local.model
 		 */		
 		public function getMeInfo( uid:String , mapId:String ):void
 		{
+//			_ro.getOperation("getMeInfo").send( uid , mapId );
+			
+			//下面为模拟玩家数据
 			me = new PlayerVO();
 			me.cash = 100;
 			me.coin = 1000 ;
