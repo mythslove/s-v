@@ -20,8 +20,6 @@ package local.model
 		
 		public var friend:PlayerVO ; //到好友的村庄
 		
-		public var isHome:Boolean = true ;
-		
 		/**
 		 * 发送玩家升级到服务器 
 		 *@param currentlevel 当前的等级
@@ -57,7 +55,7 @@ package local.model
 			me.maxEnergy = 100 ;
 			me.energy = 86 ;
 			me.id = Guid.create();
-			me.name = "binghe";
+			me.name = "bingheliefeng";
 			GlobalDispatcher.instance.dispatchEvent( new UserInfoEvent(UserInfoEvent.USER_INFO_UPDATED));
 		}
 		
