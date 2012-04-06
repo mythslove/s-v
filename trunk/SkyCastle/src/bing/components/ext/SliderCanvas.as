@@ -218,6 +218,25 @@ package local.views.base
 			else if(_endY<-_container.height*scaleY+_het){
 				_endY = -_container.height*scaleY+_het ;
 			}
+			//优化显示renders
+			optimizeDisplayRender();
+		}
+		
+		/*优化显示区域*/
+		private function optimizeDisplayRender():void
+		{
+			for each( var render:Sprite in _renders)
+			{
+				if(render.x+_endX>=-_wid && render.x+_endX<=_wid*2 
+					&&render.y+_endY>=-_het && render.y+_endY<=_het*2 )
+				{
+					render.visible=true;
+				}
+				else
+				{
+					render.visible=false ;
+				}
+			}
 		}
 		
 		public function set renders(value:Array ):void{
@@ -236,6 +255,8 @@ package local.views.base
 			}
 			_endX = _container.x= 0 ;
 			_endY = _container.y= 0 ;
+			//优化显示renders
+			optimizeDisplayRender();
 		}
 		public function get renders():Array{
 			return _renders ;
