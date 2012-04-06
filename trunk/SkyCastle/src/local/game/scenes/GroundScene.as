@@ -31,7 +31,6 @@ package local.game.scenes
 			super(GameSetting.GRID_SIZE);
 			this.gridData = MapGridDataModel.instance.groundGrid ;
 			mouseEnabled = false ;
-			cacheAsBitmap=true;
 			
 			L = "L";
 			R = "R";
