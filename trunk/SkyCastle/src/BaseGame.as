@@ -62,11 +62,11 @@ package
 		{
 			var res:Vector.<ResVO> = new Vector.<ResVO>();
 			res.push( new ResVO("init_config","res/config.bin"));
-			res.push( new ResVO("init_mapdata","res/mapdata.bin") ); 
-			res.push( new ResVO("init_basicmapbuilding","res/basicmapbuilding.bin"));
+			res.push( new ResVO("MAP_01_DATA","res/map/MAP_01_DATA.bin") ); 
+			res.push( new ResVO("MAP_01_BUILDINGS","res/map/MAP_01_BUILDINGS.bin") ); 
+			res.push( new ResVO("MAP_01_BACKGROUND","res/map/MAP_01_BACKGROUND.swf"));
 			res.push( new ResVO("init_effect","res/skin/Effect.swf") );
 			res.push( new ResVO("init_Popup","res/skin/Popup.swf") );
-			res.push( new ResVO("init_bg","res/skin/bg.swf"));
 			res.push( new ResVO("init_ui","res/skin/ui.swf"));
 			res.push( new ResVO("Basic_AvatarMale","res/character/Basic_AvatarMale.swf") );
 			ResourceUtil.instance.addEventListener(ResProgressEvent.RES_LOAD_PROGRESS , queueLoadHandler);

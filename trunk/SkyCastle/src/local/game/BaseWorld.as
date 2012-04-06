@@ -48,9 +48,8 @@ package local.game
 		{
 			super(GameSetting.MAX_WIDTH, GameSetting.MAX_HEIGHT , GameSetting.GRID_X, GameSetting.GRID_Z, GameSetting.GRID_SIZE);
 			//设置背景图片
-			var bg:Bitmap = new Bitmap( ResourceUtil.instance.getInstanceByClassName("init_bg","BG") as BitmapData );
+			var bg:Bitmap = new Bitmap( ResourceUtil.instance.getInstanceByClassName("MAP_01_BACKGROUND","MAP_01_BACKGROUND") as BitmapData );
 			this.setBackGround(bg);
-			ResourceUtil.instance.deleteRes("bg"); 
 			//设置地图显示参数
 			GameSetting.MAX_WIDTH = bg.width;
 			GameSetting.MAX_HEIGHT = bg.height ;
@@ -414,12 +413,12 @@ package local.game
 			scene.addIsoObject( avatar ) ;
 			CharacterManager.instance.hero = avatar ;
 			//添加场景建筑
-			var basicBuildingRes:ResVO = ResourceUtil.instance.getResVOByResId("init_basicmapbuilding");
+			var basicBuildingRes:ResVO = ResourceUtil.instance.getResVOByResId("MAP_01_BUILDINGS");
 			var bytes:ByteArray = basicBuildingRes.resObject as ByteArray ;
 			try{
 				bytes.uncompress();
 			}catch(e:Error){
-				trace("init_basicmapbuilding",e.message);
+				trace("MAP_01_BUILDINGS",e.message);
 			}
 			var mapVO:MapVO = bytes.readObject() as MapVO ;
 			for each( var vo:BuildingVO in mapVO.mapItems)
