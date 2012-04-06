@@ -55,7 +55,7 @@ package local.model
 			me.stone=209;
 			me.maxEnergy = 100 ;
 			me.energy = 86 ;
-			me.id = Guid.create();
+			me.uid = Guid.create();
 			me.name = "bingheliefeng";
 			GlobalDispatcher.instance.dispatchEvent( new UserInfoEvent(UserInfoEvent.USER_INFO_UPDATED));
 		}

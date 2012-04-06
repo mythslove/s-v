@@ -9,7 +9,9 @@ package local.model.vos
 	 */	
 	public class PlayerVO
 	{
-		public var id:String ; //玩家id
+		public var uid:String ; //玩家id
+		
+		public var pfid:String ; //第三方平台id
 		
 		public var name:String ; //名称 
 		
