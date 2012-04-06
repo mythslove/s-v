@@ -66,17 +66,20 @@ package local.views.icon
 			{
 				var temp:String ="";
 				var me:PlayerVO = VillageModel.instance.me ;
+				var color:uint = MapWordEffect.YELLOW ;
 				switch(_type)
 				{
 					case BasicPickup.PICKUP_COIN:
 						temp="Coin";
 						me.coin+=_value ;
 						target = CenterViewContainer.instance.topBar.coinBar ;
+						color = MapWordEffect.WHITE ;
 						break ;
 					case BasicPickup.PICKUP_ENERGY:
 						temp="Energy";
 						me.energy+=_value ;
 						target = CenterViewContainer.instance.topBar.energyBar ;
+						color = MapWordEffect.ENERGY_COLOR ;
 						break ;
 					case BasicPickup.PICKUP_EXP:
 						temp="Exp";
@@ -87,11 +90,13 @@ package local.views.icon
 						temp="Wood";
 						me.wood+=_value ;
 						target = CenterViewContainer.instance.topBar.woodBar ;
+						color = MapWordEffect.WOOD_COLOR ;
 						break ;
 					case BasicPickup.PICKUP_STONE:
 						temp="Stone";
 						me.stone+=_value ;
 						target = CenterViewContainer.instance.topBar.stoneBar ;
+						color = MapWordEffect.STONE_COLOR ;
 						break ;
 				}
 				var targetPoint:Point = new Point(target.x+CenterViewContainer.instance.x,target.y+CenterViewContainer.instance.y);
@@ -101,7 +106,7 @@ package local.views.icon
 				TweenLite.to( this , 1 , {x:targetPoint.x , y:targetPoint.y , alpha:0 , onComplete:remove});
 				
 				CenterViewContainer.instance.topBar.updateTopBar();
-				var worldEffect:MapWordEffect = new MapWordEffect( temp+" +"+_value , MapWordEffect.WHITE);
+				var worldEffect:MapWordEffect = new MapWordEffect( temp+" +"+_value ,color );
 				GameWorld.instance.addEffect( worldEffect , x , y );
 			}
 			else
