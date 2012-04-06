@@ -12,6 +12,7 @@ package local.utils
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
 	
+	import local.comm.GameData;
 	import local.comm.GameSetting;
 	import local.model.MapGridDataModel;
 	
@@ -56,7 +57,7 @@ package local.utils
 					resLoader.unloadAndStop();
 					break ;
 				case ResType.BINARY:
-					if( resVO.resId=="MAP_01_DATA"){
+					if( resVO.resId==GameData.currentMapId+"_DATA"){
 						parseMapData( resVO , resLoader );
 					}else{
 						resVO.resObject = resLoader ;

@@ -62,9 +62,9 @@ package
 		{
 			var res:Vector.<ResVO> = new Vector.<ResVO>();
 			res.push( new ResVO("init_config","res/config.bin"));
-			res.push( new ResVO("MAP_01_DATA","res/map/MAP_01_DATA.bin") ); 
-			res.push( new ResVO("MAP_01_BUILDINGS","res/map/MAP_01_BUILDINGS.bin") ); 
-			res.push( new ResVO("MAP_01_BACKGROUND","res/map/MAP_01_BACKGROUND.swf"));
+			res.push( new ResVO(GameData.currentMapId+"_DATA","res/map/"+GameData.currentMapId+"_DATA.bin") ); 
+			res.push( new ResVO(GameData.currentMapId+"_BUILDINGS","res/map/"+GameData.currentMapId+"_BUILDINGS.bin") ); 
+			res.push( new ResVO(GameData.currentMapId+"_BACKGROUND","res/map/"+GameData.currentMapId+"_BACKGROUND.swf"));
 			res.push( new ResVO("init_effect","res/skin/Effect.swf") );
 			res.push( new ResVO("init_Popup","res/skin/Popup.swf") );
 			res.push( new ResVO("init_ui","res/skin/ui.swf"));
