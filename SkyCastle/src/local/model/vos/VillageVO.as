@@ -6,7 +6,7 @@ package local.model.vos
 	 * 游戏初始化时取得的vo 
 	 * @author zhouzhanglin
 	 */	
-	public class GameInitVO
+	public class VillageVO
 	{
 		/**
 		 *玩家信息 
