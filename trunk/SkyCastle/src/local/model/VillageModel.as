@@ -40,8 +40,9 @@ package local.model
 		
 		/**
 		 * 获取玩家的信息 
+		 * @param mapId 地图id
 		 */		
-		public function getMeInfo():void
+		public function getMeInfo( mapId:String ):void
 		{
 			me = new PlayerVO();
 			me.cash = 100;

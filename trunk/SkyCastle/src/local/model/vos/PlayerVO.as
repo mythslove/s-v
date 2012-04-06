@@ -1,6 +1,7 @@
 package local.model.vos
 {
 	import local.model.VillageModel;
+	import local.model.map.vos.MapVO;
 
 	/**
 	 * 玩家 
@@ -11,6 +12,8 @@ package local.model.vos
 		public var id:String ; //玩家id
 		
 		public var name:String ; //名称 
+		
+		public var mapVO:MapVO ; //地图信息
 		
 		private var _level:int ; //等级
 		
