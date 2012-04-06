@@ -14,6 +14,7 @@ package local.views.topbar
 		public var txtValue:TextField ;
 		public var bar:Sprite;
 		//====================
+		private var _inited:Boolean ;
 		
 		public function TopBarExp()
 		{
@@ -28,8 +29,15 @@ package local.views.topbar
 		{
 			txtValue.text = obj[0]+"/"+obj[2];
 			txtLevel.text = obj[3] ;
-			var pro:int = obj[0]-obj[1];
-			TweenLite.to( bar , 0.4 , {scaleX: pro/obj[2]});
+			if(_inited){
+				TweenLite.to( bar , 0.4 , {scaleX:  obj[0]/obj[2]});
+			}else{
+				bar.scaleX = obj[0]/obj[2] ;
+				_inited = true ;
+			}
+			if(bar.scaleX>1){
+				bar.scaleX = 1;
+			}
 			GameToolTip.instance.register(txtLevel , stage , "LEVEL: "+obj[3] );
 		}
 	}
