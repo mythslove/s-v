@@ -42,8 +42,7 @@ package
 		 * 获取游戏的一些参数和变量 
 		 */		
 		protected function init():void
-		{
-		}
+		{ }
 		
 		/**
 		 * 添加进度条 
