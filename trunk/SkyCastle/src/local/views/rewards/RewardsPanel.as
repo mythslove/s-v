@@ -1,7 +1,7 @@
 package local.views.rewards
 {
 	import local.enum.BasicPickup;
-	import local.model.VillageModel;
+	import local.model.PlayerModel;
 	import local.model.buildings.BaseBuildingVOModel;
 	import local.model.buildings.vos.BaseBuildingVO;
 	import local.model.buildings.vos.BuildingVO;
@@ -27,7 +27,7 @@ package local.views.rewards
 		override protected function added():void
 		{
 			if(!this.rewardsVO) return ;
-			var me:PlayerVO = VillageModel.instance.me;
+			var me:PlayerVO = PlayerModel.instance.me;
 			var img:Image ;
 			var count:int ;
 			var iconWidth:int = 100 ;

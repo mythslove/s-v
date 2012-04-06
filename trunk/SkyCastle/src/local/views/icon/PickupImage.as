@@ -14,7 +14,7 @@ package local.views.icon
 	
 	import local.enum.BasicPickup;
 	import local.game.GameWorld;
-	import local.model.VillageModel;
+	import local.model.PlayerModel;
 	import local.model.vos.PlayerVO;
 	import local.views.CenterViewContainer;
 	import local.views.base.Image;
@@ -65,7 +65,7 @@ package local.views.icon
 			if(_type)
 			{
 				var temp:String ="";
-				var me:PlayerVO = VillageModel.instance.me ;
+				var me:PlayerVO = PlayerModel.instance.me ;
 				var color:uint = MapWordEffect.YELLOW ;
 				switch(_type)
 				{
