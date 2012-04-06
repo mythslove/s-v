@@ -5,7 +5,10 @@ package local.model
 	import local.comm.GlobalDispatcher;
 	import local.events.UserInfoEvent;
 	import local.model.vos.PlayerVO;
-
+	/**
+	 * 玩家信息Model 
+	 * @author zzhanglin
+	 */	
 	public class PlayerModel
 	{
 		private static var _instance:PlayerModel;
@@ -16,9 +19,9 @@ package local.model
 		}
 		//=================================
 		
-		public var me:PlayerVO ;
+		public var me:PlayerVO ; //当前玩家的信息
 		
-		public var friend:PlayerVO ; //到好友的村庄
+		public var friend:PlayerVO ; //去好友玩家的信息
 		
 		/**
 		 * 发送玩家升级到服务器 
@@ -31,18 +34,19 @@ package local.model
 		
 		/**
 		 * 访问好友的村庄 
-		 * @param id 好友的id
+		 * @param uid 好友的uid
 		 */		
-		public function inviteFriendVillage( id:String ):void
+		public function inviteFriendVillage( uid:String ):void
 		{
 			
 		}
 		
 		/**
 		 * 获取玩家的信息 
+		 * @param uid 玩家uid
 		 * @param mapId 地图id
 		 */		
-		public function getMeInfo( mapId:String ):void
+		public function getMeInfo( uid:String , mapId:String ):void
 		{
 			me = new PlayerVO();
 			me.cash = 100;
