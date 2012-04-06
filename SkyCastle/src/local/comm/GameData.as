@@ -54,5 +54,8 @@ package local.comm
 		
 		/** 系统配置 */
 		public static var config:ConfigBaseVO ;
+		
+		/** 当前的地图 */
+		public static var currentMapId:String = "MAP_01";
 	}
 }
