@@ -50,6 +50,7 @@ package local.game
 			//设置背景图片
 			var bg:Bitmap = new Bitmap( ResourceUtil.instance.getInstanceByClassName("MAP_01_BACKGROUND","MAP_01_BACKGROUND") as BitmapData );
 			this.setBackGround(bg);
+			ResourceUtil.instance.deleteRes("MAP_01_BACKGROUND");
 			//设置地图显示参数
 			GameSetting.MAX_WIDTH = bg.width;
 			GameSetting.MAX_HEIGHT = bg.height ;
