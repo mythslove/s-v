@@ -70,7 +70,7 @@ package local.model
 		{
 //			_ro.getOperation("getPlayer").send( uid , mapId );
 			
-			//下面为模拟玩家数据
+			//下面为模拟玩家数据，要测试接口的话，注释掉下面的
 			me = new PlayerVO();
 			me.cash = 100;
 			me.coin = 1000 ;
