@@ -57,5 +57,8 @@ package local.comm
 		
 		/** 当前的地图 */
 		public static var currentMapId:String = "MAP_01";
+		
+		/** 是否在自己的村庄*/
+		public static var isHome:Boolean = true ;
 	}
 }

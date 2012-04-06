@@ -1,6 +1,6 @@
 package  local.views
 {
-	import local.comm.GlobalDispatcher;
+	import local.comm.GameData;
 	import local.events.UserInfoEvent;
 	import local.model.VillageModel;
 	import local.model.vos.PlayerVO;
@@ -33,11 +33,12 @@ package  local.views
 		private function userInfoUpdateHandler( e:UserInfoEvent ):void
 		{
 			var user:PlayerVO ;
-			if(VillageModel.instance.isHome) {
-				user = VillageModel.instance.me; 
-			}else{
-				user = VillageModel.instance.friend;
-			}
+			user = VillageModel.instance.me; 
+//			if(GameData.isHome) {
+//				user = VillageModel.instance.me; 
+//			}else{
+//				user = VillageModel.instance.friend;
+//			}
 			setUserInfo(user);
 		}
 		
