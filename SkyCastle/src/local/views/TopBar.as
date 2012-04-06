@@ -2,7 +2,7 @@ package  local.views
 {
 	import local.comm.GameData;
 	import local.events.UserInfoEvent;
-	import local.model.VillageModel;
+	import local.model.PlayerModel;
 	import local.model.vos.PlayerVO;
 	import local.views.topbar.AddEnergyBar;
 	import local.views.topbar.TopBarCoin;
@@ -33,7 +33,7 @@ package  local.views
 		private function userInfoUpdateHandler( e:UserInfoEvent ):void
 		{
 			var user:PlayerVO ;
-			user = VillageModel.instance.me; 
+			user = PlayerModel.instance.me; 
 //			if(GameData.isHome) {
 //				user = VillageModel.instance.me; 
 //			}else{
@@ -56,7 +56,7 @@ package  local.views
 		/**更新topbar信息*/
 		public function updateTopBar():void
 		{
-			setUserInfo( VillageModel.instance.me );
+			setUserInfo( PlayerModel.instance.me );
 		}
 	}
 }

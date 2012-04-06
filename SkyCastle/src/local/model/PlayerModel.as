@@ -6,12 +6,12 @@ package local.model
 	import local.events.UserInfoEvent;
 	import local.model.vos.PlayerVO;
 
-	public class VillageModel
+	public class PlayerModel
 	{
-		private static var _instance:VillageModel;
-		public static function get instance():VillageModel
+		private static var _instance:PlayerModel;
+		public static function get instance():PlayerModel
 		{
-			if(!_instance) _instance = new VillageModel();
+			if(!_instance) _instance = new PlayerModel();
 			return _instance; 
 		}
 		//=================================

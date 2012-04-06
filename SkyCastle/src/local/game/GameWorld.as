@@ -17,7 +17,7 @@ package local.game
 	import local.game.elements.Character;
 	import local.game.elements.HeroBornPoint;
 	import local.model.MapGridDataModel;
-	import local.model.VillageModel;
+	import local.model.PlayerModel;
 	import local.model.buildings.vos.BuildingVO;
 	import local.utils.CharacterManager;
 	import local.utils.CollectQueueUtil;
@@ -132,13 +132,13 @@ package local.game
 			var result:Boolean ;
 			var effect:Sprite ;
 			if( vo.payType==PayType.COIN){
-				if(VillageModel.instance.checkCoinEnough(vo.price) ){
+				if(PlayerModel.instance.checkCoinEnough(vo.price) ){
 					result = true ;
 				}else{
 					effect = new MapWordEffect("You don't have enough Coin!");
 				}
 			} else if( vo.payType==PayType.CASH) {
-				if(VillageModel.instance.checkCashEnough(vo.price)){
+				if(PlayerModel.instance.checkCashEnough(vo.price)){
 					result = true ;
 				}else{
 					effect = new MapWordEffect("You don't have enough Cash!");
@@ -155,7 +155,7 @@ package local.game
 		{
 			var result:Boolean = true ;
 			var effect:Sprite ;
-			if(vo.baseVO.hasOwnProperty("buildWood") && !VillageModel.instance.checkWood(vo.baseVO["buildWood"])){
+			if(vo.baseVO.hasOwnProperty("buildWood") && !PlayerModel.instance.checkWood(vo.baseVO["buildWood"])){
 				result = false ;
 				effect = new MapWordEffect("You don't have enough Wood!");
 			}
@@ -170,7 +170,7 @@ package local.game
 		{
 			var result:Boolean = true ;
 			var effect:Sprite ;
-			if(vo.baseVO.hasOwnProperty("buildStone") && !VillageModel.instance.checkWood(vo.baseVO["buildStone"])){
+			if(vo.baseVO.hasOwnProperty("buildStone") && !PlayerModel.instance.checkWood(vo.baseVO["buildStone"])){
 				result = false ;
 				effect = new MapWordEffect("You don't have enough Stone!");
 			}
@@ -184,14 +184,14 @@ package local.game
 		{
 			var effect:Sprite ;
 			if(vo.baseVO.hasOwnProperty("buildStone") && int(vo.baseVO["buildStone"])>0 ){
-				VillageModel.instance.me.stone-=int(vo.baseVO["buildStone"]);
+				PlayerModel.instance.me.stone-=int(vo.baseVO["buildStone"]);
 				effect = new MapWordEffect("Stone -"+int(vo.baseVO["buildStone"]));
 				if(effect && _topBuilding){
 					addEffect( effect,_topBuilding.screenX +Math.random()*60*MathUtil.getRandomFlag()  ,_topBuilding.screenY+Math.random()*60*MathUtil.getRandomFlag()  );
 				}
 			}
 			if(vo.baseVO.hasOwnProperty("buildWood")&&int(vo.baseVO["buildWood"])>0 ){
-				VillageModel.instance.me.stone-=int(vo.baseVO["buildWood"]);
+				PlayerModel.instance.me.stone-=int(vo.baseVO["buildWood"]);
 				effect = new MapWordEffect("Wood -"+int(vo.baseVO["buildWood"]));
 				if(effect && _topBuilding){
 					addEffect( effect,_topBuilding.screenX +Math.random()*60*MathUtil.getRandomFlag() ,_topBuilding.screenY+Math.random()*60*MathUtil.getRandomFlag()  );
@@ -199,13 +199,13 @@ package local.game
 			}
 			if(vo.price!=0){
 				if( vo.payType==PayType.COIN){
-					VillageModel.instance.me.coin-=vo.price ;
+					PlayerModel.instance.me.coin-=vo.price ;
 					effect = new MapWordEffect("Coin -"+vo.price);
 					if(effect && _topBuilding){
 						addEffect( effect,_topBuilding.screenX +Math.random()*60*MathUtil.getRandomFlag()  ,_topBuilding.screenY+Math.random()*60*MathUtil.getRandomFlag()  );
 					}
 				} else if( vo.payType==PayType.CASH) {
-					VillageModel.instance.me.cash-=vo.price;
+					PlayerModel.instance.me.cash-=vo.price;
 					effect = new MapWordEffect("Cash -"+vo.price);
 					if(effect && _topBuilding){
 						addEffect( effect,_topBuilding.screenX +Math.random()*60*MathUtil.getRandomFlag()  ,_topBuilding.screenY+Math.random()*60*MathUtil.getRandomFlag()  );

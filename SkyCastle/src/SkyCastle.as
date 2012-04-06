@@ -8,7 +8,7 @@ package
 	import local.comm.GlobalDispatcher;
 	import local.events.UserInfoEvent;
 	import local.game.GameWorld;
-	import local.model.VillageModel;
+	import local.model.PlayerModel;
 	import local.model.buildings.vos.*;
 	import local.model.map.vos.MapVO;
 	import local.model.vos.*;
@@ -45,7 +45,7 @@ package
 		{
 			super.inited();
 			GlobalDispatcher.instance.addEventListener(UserInfoEvent.USER_INFO_UPDATED , getMeInfoHandler );
-			VillageModel.instance.getMeInfo( GameData.currentMapId ) ;
+			PlayerModel.instance.getMeInfo( GameData.currentMapId ) ;
 		}
 		
 		/**
@@ -96,7 +96,7 @@ package
 			GameWorld.instance.initWorld();
 			
 			//显示玩家信息
-			CenterViewContainer.instance.topBar.setUserInfo( VillageModel.instance.me);
+			CenterViewContainer.instance.topBar.setUserInfo( PlayerModel.instance.me);
 		}
 	}
 }

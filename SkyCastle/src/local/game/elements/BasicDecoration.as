@@ -4,7 +4,7 @@ package local.game.elements
 	
 	import local.enum.BuildingOperation;
 	import local.game.GameWorld;
-	import local.model.VillageModel;
+	import local.model.PlayerModel;
 	import local.model.buildings.vos.BuildingVO;
 	import local.model.map.MapModel;
 	import local.utils.CharacterManager;
@@ -21,7 +21,7 @@ package local.game.elements
 		override public function onClick():void
 		{
 			//减能量
-			if(VillageModel.instance.me.energy<1){
+			if(PlayerModel.instance.me.energy<1){
 				var effect:MapWordEffect = new MapWordEffect("You don't have enough Energy!");
 				GameWorld.instance.addEffect(effect,screenX,screenY);
 			}else{

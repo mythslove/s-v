@@ -6,7 +6,7 @@ package local.game.elements
 	import local.enum.BasicPickup;
 	import local.enum.MouseStatus;
 	import local.game.GameWorld;
-	import local.model.VillageModel;
+	import local.model.PlayerModel;
 	import local.model.buildings.vos.BaseRockVO;
 	import local.model.buildings.vos.BuildingVO;
 	import local.utils.CharacterManager;
@@ -60,9 +60,9 @@ package local.game.elements
 		{
 			//减能量
 			var effect:MapWordEffect ;
-			if(VillageModel.instance.me.energy>=1){
+			if(PlayerModel.instance.me.energy>=1){
 				effect = new MapWordEffect("Energy -1");
-				VillageModel.instance.me.energy-- ;
+				PlayerModel.instance.me.energy-- ;
 				CenterViewContainer.instance.topBar.updateTopBar();
 				GameWorld.instance.addEffect(effect,screenX,screenY);
 			}else{

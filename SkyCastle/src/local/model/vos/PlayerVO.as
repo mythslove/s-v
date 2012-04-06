@@ -1,6 +1,6 @@
 package local.model.vos
 {
-	import local.model.VillageModel;
+	import local.model.PlayerModel;
 	import local.model.map.vos.MapVO;
 
 	/**
@@ -57,7 +57,7 @@ package local.model.vos
 		public function set exp(value:int):void
 		{
 			if(value>maxExp) {
-				VillageModel.instance.sendLevelUp(_level);
+				PlayerModel.instance.sendLevelUp(_level);
 			}
 			_exp = value;
 		}
