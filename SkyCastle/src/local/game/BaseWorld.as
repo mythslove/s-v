@@ -83,8 +83,6 @@ package local.game
 			addScene(groundScene3);
 			buildingScene3 = new BuildingScene();
 			addScene(buildingScene3);
-			//删除地图数据
-			ResourceUtil.instance.deleteRes("mapdata"); 
 			//天空层
 			skyScene = new IsoScene(GameSetting.GRID_SIZE,GameSetting.GRID_X , GameSetting.GRID_Z);
 			skyScene.mouseEnabled= skyScene.mouseChildren=false;
