@@ -13,6 +13,7 @@ package local.views.topbar
 		public var txtValue:TextField ;
 		public var bar:Sprite;
 		//====================
+		private var _inited:Boolean ;
 		
 		public function TopBarEnergy()
 		{
@@ -26,7 +27,15 @@ package local.views.topbar
 		public function update(obj:Object):void
 		{
 			txtValue.text = obj[0]+"/"+obj[1];
-			TweenLite.to( bar , 0.2 , {scaleX:  obj[0]/obj[1]});
+			if(_inited){
+				TweenLite.to( bar , 0.4 , {scaleX:  obj[0]/obj[1]});
+			}else{
+				bar.scaleX = obj[0]/obj[1] ;
+				_inited = true ;
+			}
+			if(bar.scaleX>1){
+				bar.scaleX = 1 ;
+			}
 		}
 	}
 }
