@@ -81,6 +81,7 @@ package
 		private function getMeInfoHandler( e:Event ):void
 		{
 			GlobalDispatcher.instance.removeEventListener(UserInfoEvent.USER_INFO_UPDATED , getMeInfoHandler );
+			removeLoading();
 			initGame();
 		}
 		

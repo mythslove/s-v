@@ -92,7 +92,6 @@ package
 					ResourceUtil.instance.removeEventListener(ResLoadedEvent.QUEUE_LOADED ,queueLoadHandler);
 					parseConfig();
 					inited();
-					removeLoading();
 					break;
 			}
 		}

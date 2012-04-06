@@ -60,5 +60,10 @@ package local.comm
 		
 		/** 是否在自己的村庄*/
 		public static var isHome:Boolean = true ;
+		
+		
+		
+		/** 当前用户的uid*/
+		public static var me_uid:String ;
 	}
 }

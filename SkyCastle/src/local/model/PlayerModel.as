@@ -3,6 +3,7 @@ package local.model
 	import bing.amf3.ResultEvent;
 	import bing.utils.Guid;
 	
+	import local.comm.GameData;
 	import local.comm.GameRemote;
 	import local.comm.GlobalDispatcher;
 	import local.events.UserInfoEvent;
@@ -38,7 +39,14 @@ package local.model
 			switch( e.method )
 			{
 				case "getPlayer":
-					me = e.result as PlayerVO ;
+					var player:PlayerVO = e.result as PlayerVO ;
+					if(player.uid==GameData.me_uid) {
+						GameData.isHome = true ;
+						me = player ;
+					} else {
+						GameData.isHome = false ;
+						friend = player ;
+					}
 					GlobalDispatcher.instance.dispatchEvent( new UserInfoEvent(UserInfoEvent.USER_INFO_UPDATED));
 					break;
 			}
