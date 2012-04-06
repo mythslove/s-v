@@ -37,7 +37,7 @@ package local.model
 		{
 			switch( e.method )
 			{
-				case "getMeInfo":
+				case "getPlayer":
 					me = e.result as PlayerVO ;
 					GlobalDispatcher.instance.dispatchEvent( new UserInfoEvent(UserInfoEvent.USER_INFO_UPDATED));
 					break;
@@ -54,22 +54,13 @@ package local.model
 		}
 		
 		/**
-		 * 访问好友的村庄 
-		 * @param uid 好友的uid
-		 */		
-		public function inviteFriendVillage( uid:String ):void
-		{
-			
-		}
-		
-		/**
 		 * 获取玩家的信息 
 		 * @param uid 玩家uid
 		 * @param mapId 地图id
 		 */		
-		public function getMeInfo( uid:String , mapId:String ):void
+		public function getPlayer( uid:String , mapId:String ):void
 		{
-//			_ro.getOperation("getMeInfo").send( uid , mapId );
+//			_ro.getOperation("getPlayer").send( uid , mapId );
 			
 			//下面为模拟玩家数据
 			me = new PlayerVO();
