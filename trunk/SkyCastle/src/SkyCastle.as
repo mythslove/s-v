@@ -4,6 +4,7 @@ package
 	import flash.net.registerClassAlias;
 	import flash.system.Security;
 	
+	import local.comm.GameData;
 	import local.comm.GlobalDispatcher;
 	import local.events.UserInfoEvent;
 	import local.game.GameWorld;
@@ -44,7 +45,7 @@ package
 		{
 			super.inited();
 			GlobalDispatcher.instance.addEventListener(UserInfoEvent.USER_INFO_UPDATED , getMeInfoHandler );
-			VillageModel.instance.getMeInfo() ;
+			VillageModel.instance.getMeInfo( GameData.currentMapId ) ;
 		}
 		
 		/**
