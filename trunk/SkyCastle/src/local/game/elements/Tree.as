@@ -46,7 +46,7 @@ package local.game.elements
 				}else{
 					MouseManager.instance.mouseStatus = MouseStatus.SHOVEL_BUILDING ;
 				}
-				this.showStep( buildingVO.step-1,baseTreeVO.earnStep);
+				this.showStep( buildingVO.step,baseTreeVO.earnStep);
 			}
 		}
 		
@@ -55,7 +55,7 @@ package local.game.elements
 		}
 		/** 获取此建筑的标题 */
 		override public function get title():String  {
-			return baseBuildingVO.name+": "+(buildingVO.step-1)+"/"+baseTreeVO.earnStep;
+			return baseBuildingVO.name+": "+buildingVO.step+"/"+baseTreeVO.earnStep;
 		}
 		
 		override public function execute():void
@@ -80,7 +80,7 @@ package local.game.elements
 			}else{
 				CharacterManager.instance.hero.gotoAndPlay(AvatarAction.DIG);
 			}
-			_timeoutId = setTimeout( showPickup , 3000 );
+			_timeoutId = setTimeout( showPickup , 3500 );
 			GameWorld.instance.effectScene.addChild( BuildingExecuteLoading.getInstance(screenX,screenY-itemLayer.height).setTime(3000));
 		}
 		
@@ -88,19 +88,19 @@ package local.game.elements
 		{
 			super.showPickup();
 			//掉pickup
-			var value:int =baseTreeVO.earnCoins[buildingVO.step-1] ;
+			var value:int =baseTreeVO.earnCoins[buildingVO.step] ;
 			if(value>0)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_COIN , value,screenX,screenY-offsetY);
-			value = baseTreeVO.earnWoods[buildingVO.step-1] ;
+			value = baseTreeVO.earnWoods[buildingVO.step] ;
 			if(value)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_WOOD , value,screenX,screenY-offsetY);
-			value = baseTreeVO.earnExps[buildingVO.step-1] ;
+			value = baseTreeVO.earnExps[buildingVO.step] ;
 			if(value>0) PickupUtil.addPickup2Wold(BasicPickup.PICKUP_EXP , value,screenX,screenY-offsetY);
 			//特殊物品
 			//-------------------------------------
 			buildingVO.step++;
-			if(buildingVO.step>baseTreeVO.earnStep){
+			if(buildingVO.step>=baseTreeVO.earnStep){
 				GameWorld.instance.removeBuilding(this); //删除这棵树
 			}else if(_skin){
-				_skin.gotoAndStop( buildingVO.step);
+				_skin.gotoAndStop( buildingVO.step+1);
 			}
 		}
 		

@@ -284,6 +284,7 @@ package local.game
 			var mapVO:MapVO = bytes.readObject() as MapVO ;
 			for each( var vo:BuildingVO in mapVO.mapItems)
 			{
+				vo.step = 0 ;
 				GameWorld.instance.addBuildingByVO(vo.nodeX,vo.nodeZ,vo,false,false);
 			}
 			GameWorld.instance.buildingScene1.sortAll();

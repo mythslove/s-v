@@ -39,7 +39,7 @@ package local.game.elements
 			if(!MouseManager.instance.checkControl() )
 			{
 				MouseManager.instance.mouseStatus = MouseStatus.BEAT_STONE ;
-				this.showStep( buildingVO.step-1 , baseStoneVO.earnStep);
+				this.showStep( buildingVO.step , baseStoneVO.earnStep);
 			}
 		}
 		
@@ -48,7 +48,7 @@ package local.game.elements
 		}
 		/** 获取此建筑的标题 */
 		override public function get title():String  {
-			return baseBuildingVO.name+": "+(buildingVO.step-1)+"/"+baseStoneVO.earnStep;
+			return baseBuildingVO.name+": "+buildingVO.step+"/"+baseStoneVO.earnStep;
 		}
 		
 		override public function execute():void
@@ -69,7 +69,7 @@ package local.game.elements
 			}
 			super.execute();
 			CharacterManager.instance.hero.gotoAndPlay(AvatarAction.PICKAXE);
-			_timeoutId = setTimeout( showPickup , 3000 );
+			_timeoutId = setTimeout( showPickup , 3500 );
 			GameWorld.instance.effectScene.addChild( BuildingExecuteLoading.getInstance(screenX,screenY-itemLayer.height).setTime(3000));
 		}
 		
@@ -77,19 +77,19 @@ package local.game.elements
 		{
 			super.showPickup();
 			//掉pickup
-			var value:int = baseStoneVO.earnCoins[buildingVO.step-1] ;
+			var value:int = baseStoneVO.earnCoins[buildingVO.step] ;
 			if(value>0)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_COIN , value,screenX,screenY-offsetY);
-			value = baseStoneVO.earnStones[buildingVO.step-1] ;
+			value = baseStoneVO.earnStones[buildingVO.step] ;
 			if(value)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_STONE , value,screenX,screenY-offsetY);
-			value = baseStoneVO.earnExps[buildingVO.step-1] ;
+			value = baseStoneVO.earnExps[buildingVO.step] ;
 			if(value>0) PickupUtil.addPickup2Wold(BasicPickup.PICKUP_EXP , value,screenX,screenY-offsetY);
 			//物品
 			//-------------------------------------
 			buildingVO.step++;
-			if(buildingVO.step>baseStoneVO.earnStep){
+			if(buildingVO.step>=baseStoneVO.earnStep){
 				GameWorld.instance.removeBuilding(this); //删除这棵树
 			}else if(_skin){
-				_skin.gotoAndStop( buildingVO.step);
+				_skin.gotoAndStop( buildingVO.step+1);
 			}
 		}
 	}
