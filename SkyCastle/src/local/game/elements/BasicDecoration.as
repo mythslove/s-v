@@ -26,7 +26,7 @@ package local.game.elements
 				GameWorld.instance.addEffect(effect,screenX,screenY);
 			}else{
 				super.onClick();
-				this.showStep( buildingVO.step-1,baseBuildingVO["earnStep"]);
+				this.showStep( buildingVO.step,baseBuildingVO["earnStep"]);
 			}
 		}
 		
