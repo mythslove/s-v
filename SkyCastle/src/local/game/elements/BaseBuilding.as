@@ -15,9 +15,9 @@ package local.game.elements
 	import local.comm.GameSetting;
 	import local.game.GameWorld;
 	import local.game.cell.BuildingGridLayer;
+	import local.model.MapGridDataModel;
 	import local.model.buildings.vos.BaseBuildingVO;
 	import local.model.buildings.vos.BuildingVO;
-	import local.model.MapGridDataModel;
 	import local.utils.ResourceUtil;
 	import local.views.loading.BuildingStepLoading;
 
@@ -32,6 +32,7 @@ package local.game.elements
 		public var itemLayer:InteractivePNG ; //皮肤容器层
 		public var effectLayer:Sprite ; //特效层
 		public var offsetY:Number ;//可用偏移Y
+		public var selected:Boolean ; //当前是否选中
 		protected var _skin:MovieClip ; //皮肤
 		private var _stepLoading:BuildingStepLoading;
 		
@@ -162,6 +163,7 @@ package local.game.elements
 		/**设置是否显示被选择状态  */		
 		public function selectedStatus( flag:Boolean ):void
 		{
+			selected = flag ;
 			if(flag ){
 				TweenMax.to(itemLayer, 0, {dropShadowFilter:{color:0xffff00, alpha:1, blurX:2, blurY:2, strength:5}});
 			}else{
