@@ -1,15 +1,12 @@
 package local.game
 {
 	import bing.iso.*;
-	import bing.res.ResVO;
 	import bing.utils.ContainerUtil;
 	import bing.utils.InteractivePNG;
-	import bing.utils.SystemUtil;
 	
 	import flash.display.*;
 	import flash.events.*;
 	import flash.geom.*;
-	import flash.utils.ByteArray;
 	
 	import local.comm.*;
 	import local.enum.*;
@@ -18,8 +15,6 @@ package local.game
 	import local.model.*;
 	import local.model.buildings.MapBuildingModel;
 	import local.model.buildings.vos.*;
-	import local.model.map.vos.MapVO;
-	import local.utils.CharacterManager;
 	import local.utils.MouseManager;
 	import local.utils.ResourceUtil;
 	import local.views.effects.Cloud;
@@ -388,9 +383,7 @@ package local.game
 			}
 		}
 		
-		/**
-		 * 清除topScene 
-		 */		
+		/**清除topScene  */		
 		public function clearTopScene():void
 		{
 			ContainerUtil.removeChildren(topScene);
@@ -402,10 +395,8 @@ package local.game
 			_topBuilding = null ;
 		}
 		
-		/**
-		 * 清空世界 
-		 */		
-		public function clearWorld():void
+		/**清空世界  */		
+		protected function clearWorld():void
 		{
 			for each( var scene:IsoScene in scenes){
 				scene.clear();
@@ -413,55 +404,5 @@ package local.game
 			clearTopScene() ;
 		}
 		
-		/** 显示世界 */
-		public function initWorld():void
-		{
-			this.stop() ;
-			this.clearWorld();
-			//添加出生点
-			var heroBornPoint:HeroBornPoint = new HeroBornPoint();
-			heroBornPoint.nodeX = 55 ;
-			heroBornPoint.nodeZ = 40 ;
-			addBuildToScene(heroBornPoint,false,false);
-			heroBornPoint = new HeroBornPoint();
-			heroBornPoint.nodeX = 40 ;
-			heroBornPoint.nodeZ = 30 ;
-			addBuildToScene(heroBornPoint,false,false);
-			heroBornPoint = new HeroBornPoint();
-			heroBornPoint.nodeX = 21 ;
-			heroBornPoint.nodeZ = 17 ;
-			addBuildToScene(heroBornPoint,false,false);
-			//添加英雄
-			var avatar:Hero = new Hero();
-			avatar.nodeX = 55;
-			avatar.nodeZ = 40;
-			var scene:IsoScene = this.getBuildingScene( avatar.nodeX , avatar.nodeZ );
-			scene.addIsoObject( avatar ) ;
-			CharacterManager.instance.hero = avatar ;
-			//添加场景建筑
-			var basicBuildingRes:ResVO = ResourceUtil.instance.getResVOByResId("MAP_01_BUILDINGS");
-			var bytes:ByteArray = basicBuildingRes.resObject as ByteArray ;
-			try{
-				bytes.uncompress();
-			}catch(e:Error){
-				SystemUtil.debug("MAP_01_BUILDINGS",e.message);
-			}
-			var mapVO:MapVO = bytes.readObject() as MapVO ;
-			for each( var vo:BuildingVO in mapVO.mapItems)
-			{
-				GameWorld.instance.addBuildingByVO(vo.nodeX,vo.nodeZ,vo,false,false);
-			}
-			GameWorld.instance.buildingScene1.sortAll();
-			GameWorld.instance.buildingScene2.sortAll();
-			GameWorld.instance.buildingScene3.sortAll();
-			GameWorld.instance.groundScene1.sortAll();
-			GameWorld.instance.groundScene2.sortAll();
-			GameWorld.instance.groundScene3.sortAll();
-			GameWorld.instance.groundScene1.updateAllUI();
-			GameWorld.instance.groundScene2.updateAllUI();
-			GameWorld.instance.groundScene3.updateAllUI();
-			//开始
-			this.start();
-		}
 	}
 }
