@@ -38,11 +38,11 @@ package local.game.elements
 			{
 				case BuildingStatus.BUILDING:
 					break;
-				case BuildingStatus.BUILD_COMPLETE :
+				case BuildingStatus.FINISH :
 					break ;
-				case BuildingStatus.PRODUCTION:
+				case BuildingStatus.PRODUCT:
 					break;
-				case BuildingStatus.PRODUCT_COMPLETE :
+				case BuildingStatus.HARVEST :
 					break ;
 			}
 		}
