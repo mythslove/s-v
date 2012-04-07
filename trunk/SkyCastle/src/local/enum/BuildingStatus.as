@@ -6,29 +6,28 @@ package local.enum
 	 */	
 	public class BuildingStatus
 	{
-		/**
-		 * 没有状态 
-		 */		
+		/** 砍完*/
+		public static const CHOPED:int = -1 ;
+		
+		/** 无*/
 		public static const NONE:int = 0 ;
 		
-		/**
-		 * 修建中 
-		 */		
-		public static const BUILDING:int = 1 ;
+		/** 砍树中 */
+		public static const CHOP:int = 1 ;
 		
-		/**
-		 *  修建完成
-		 */		
-		public static const BUILD_COMPLETE:int = 2;
+		/** 修建中*/
+		public static const BUILDING:int = 2 ;
 		
-		/**
-		 * 生产或生长中 
-		 */		
-		public static const PRODUCTION:int = 3 ;
+		/** 完成 */
+		public static const FINISH:int = 3 ;
 		
-		/**
-		 * 生产或生长完成 
-		 */		
-		public static const PRODUCT_COMPLETE:int = 4 ;
+		/** 生产中*/
+		public static const PRODUCT:int = 4;
+		
+		/**可收获 */
+		public static const HARVEST:int = 5;
+		
+		/** 仓库中*/
+		public static const STORAGE:int = 6 ;
 	}
 }

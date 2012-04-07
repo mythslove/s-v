@@ -31,9 +31,9 @@ package local.game.elements
 //			super.onClick();
 			switch( buildingVO.buildingStatus )
 			{
-				case BuildingStatus.PRODUCTION:
+				case BuildingStatus.PRODUCT:
 					break;
-				case BuildingStatus.PRODUCT_COMPLETE :
+				case BuildingStatus.HARVEST :
 					break ;
 			}
 		}
