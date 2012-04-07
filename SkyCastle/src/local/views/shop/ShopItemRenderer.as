@@ -25,11 +25,10 @@ package local.views.shop
 		public var btnNormal:BaseButton;
 		public var btnBg:SimpleButton ;
 		public var txtBtn:TextField ,txtName:TextField;
-		public var txtCoin:TextField , txtWood:TextField ,txtStone:TextField  ,txtGem:TextField;
+		public var payMode:ShopItemPayMode;
 		//==========================
 		private const LABEL_DEFAULT:String = "defalut";
-		private const LABEL_BUILDING:String = "building";
-		private const LABEL_BUILDING_GEM:String = "building_gem";
+		private const LABEL_ADVANCED:String = "advanced";
 		
 		public var itemVO:ShopItemVO;
 		
@@ -57,43 +56,9 @@ package local.views.shop
 			txtName.text = vo.baseVO.name ; //显示名称
 			container.addChild( new Image(vo.baseVO.alias+"Thumb" , vo.baseVO.thumb) ); //显示缩略图
 			GameToolTip.instance.register(btnBg,stage,vo.baseVO.description); //注册ToolTip
-			var type:String = vo.baseVO.type ;
-			switch( type )
-			{
-				case ItemType.BUILDING://建筑
-					break ;
-				case ItemType.BUILDING_HOUSE: //房子
-					gotoAndStop(LABEL_BUILDING);
-					btnNormal.addEventListener(MouseEvent.CLICK , clickNormalBtnHandler,false,0,true);
-					var baseHouseVO:BaseHouseVO = vo.baseVO as BaseHouseVO ;
-					this["txtCoin"].text= vo.price+"";
-					this["txtWood"].text= baseHouseVO.buildWood+"";
-					this["txtStone"].text= baseHouseVO.buildStone+"";
-					break ;
-				case ItemType.BUILDING_FACTORY: //工厂
-					gotoAndStop(LABEL_BUILDING);
-					btnNormal.addEventListener(MouseEvent.CLICK , clickNormalBtnHandler,false,0,true);
-					var baseFactoryVO:BaseFactoryVO = vo.baseVO as BaseFactoryVO ;
-					this["txtCoin"].text= vo.price+"";
-					this["txtWood"].text= baseFactoryVO.buildWood+"";
-					this["txtStone"].text= baseFactoryVO.buildStone+"";
-					break ;
-				case ItemType.DECORATION: //装饰
-					btnNormal.addEventListener(MouseEvent.CLICK , clickNormalBtnHandler,false,0,true);
-					var baseDecVO:BaseDecorationVO = vo.baseVO as BaseDecorationVO ;
-					this["txtCoin"].text= vo.price+"";
-					break ;
-				case ItemType.DEC_TREE: //树
-				case ItemType.DEC_STONE: //石头
-				case ItemType.DEC_ROCK: //磐石
-					btnNormal.addEventListener(MouseEvent.CLICK , clickNormalBtnHandler,false,0,true);
-					break ;
-				case ItemType.DEC_ROAD: //路
-					btnNormal.addEventListener(MouseEvent.CLICK , clickNormalBtnHandler,false,0,true);
-					var baseRoadVO:BaseRoadVO = vo.baseVO as BaseRoadVO;
-					this["txtCoin"].text= vo.price+"";
-					break ;
-			}
+			
+			payMode.showPay( vo );
+			btnNormal.addEventListener(MouseEvent.CLICK , clickNormalBtnHandler,false,0,true);
 			disabledSprite();
 		}
 		
