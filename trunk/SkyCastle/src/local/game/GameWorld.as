@@ -241,30 +241,5 @@ package local.game
 			building.selectedStatus(false); //选择设置成false
 			topScene.visible = true  ;
 		}
-		
-		/**
-		 * 清除topScene 
-		 */		
-		public function clearTopScene():void
-		{
-			ContainerUtil.removeChildren(topScene);
-			topScene.visible = false  ;
-			if(_topBuilding){
-				_topBuilding.removeGrid();
-				_topBuilding.itemLayer.alpha = 1;
-			}
-			_topBuilding = null ;
-		}
-		
-		/**
-		 * 清空世界 
-		 */		
-		public function clearWorld():void
-		{
-			for each( var scene:IsoScene in scenes){
-				scene.clear();
-			}
-			clearTopScene() ;
-		}
 	}
 }

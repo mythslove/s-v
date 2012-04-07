@@ -14,10 +14,13 @@ package
 	import local.comm.GameSetting;
 	import local.comm.GlobalDispatcher;
 	import local.comm.GlobalEvent;
+	import local.game.GameWorld;
 	import local.model.ShopModel;
 	import local.model.buildings.BaseBuildingVOModel;
 	import local.model.vos.ConfigBaseVO;
 	import local.utils.ResourceUtil;
+	import local.views.CenterViewContainer;
+	import local.views.LeftBar;
 	
 	/**
 	 * 游戏入口基类 
@@ -42,7 +45,9 @@ package
 		 * 获取游戏的一些参数和变量 
 		 */		
 		protected function init():void
-		{ }
+		{
+			
+		}
 		
 		/**
 		 * 添加进度条 
@@ -90,6 +95,11 @@ package
 					SystemUtil.debug("初始资源下载完成");
 					ResourceUtil.instance.removeEventListener(ResProgressEvent.RES_LOAD_PROGRESS , queueLoadHandler);
 					ResourceUtil.instance.removeEventListener(ResLoadedEvent.QUEUE_LOADED ,queueLoadHandler);
+					
+					addChild(GameWorld.instance); //添加游戏世界
+					addChild( new LeftBar()); //居左的容器
+					addChild( CenterViewContainer.instance); //添加UI的容器
+					
 					parseConfig();
 					inited();
 					break;
@@ -105,14 +115,13 @@ package
 			try{
 				bytes.uncompress();
 			}catch(e:Error){
-				trace("config没有压缩");
+				SystemUtil.debug("config没有压缩");
 			}
 			var config:ConfigBaseVO = bytes.readObject() as ConfigBaseVO;
 			if(config){
 				//各自解析
 				BaseBuildingVOModel.instance.parseConfig( config );
 				ShopModel.instance.parseConfig( config );
-				
 				
 				GameData.config = config ;
 			}else{
@@ -136,6 +145,8 @@ package
 		{
 			stage.addEventListener(Event.RESIZE , onResizeHandler);
 			stage.addEventListener(FullScreenEvent.FULL_SCREEN , onResizeHandler);
+			
+			GameWorld.instance.init();
 		}
 		
 		/**

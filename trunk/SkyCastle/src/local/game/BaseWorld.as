@@ -2,7 +2,9 @@ package local.game
 {
 	import bing.iso.*;
 	import bing.res.ResVO;
+	import bing.utils.ContainerUtil;
 	import bing.utils.InteractivePNG;
+	import bing.utils.SystemUtil;
 	
 	import flash.display.*;
 	import flash.events.*;
@@ -59,14 +61,13 @@ package local.game
 			this.y = -1600;
 		}
 		
-		override protected function addedToStageHandler(e:Event):void
+		public function init():void
 		{
-			super.addedToStageHandler(e);
 			//显示地图网格
-			//			var gridScene:IsoScene = new IsoScene(GameSetting.GRID_SIZE);
-			//			(gridScene.addChild( new IsoGrid(GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE)) as IsoGrid).render() ;
-			//			gridScene.cacheAsBitmap=true;
-			//			this.addScene(gridScene);
+//			var gridScene:IsoScene = new IsoScene(GameSetting.GRID_SIZE);
+//			(gridScene.addChild( new IsoGrid(GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE)) as IsoGrid).render() ;
+//			gridScene.cacheAsBitmap=true;
+//			this.addScene(gridScene);
 			_mapGridData = MapGridDataModel.instance;
 			//地图区域1
 			groundScene1 = new GroundScene();
@@ -98,7 +99,7 @@ package local.game
 			//tooltip
 			_tooltip = BuildingToolTip.instance ;
 			_tooltip.hideTooltip();
-			addChild(_tooltip);
+			stage.addChild(_tooltip);
 			//添加天气
 			addWeatherEffects();
 			//配置侦听
@@ -387,9 +388,36 @@ package local.game
 			}
 		}
 		
+		/**
+		 * 清除topScene 
+		 */		
+		public function clearTopScene():void
+		{
+			ContainerUtil.removeChildren(topScene);
+			topScene.visible = false  ;
+			if(_topBuilding){
+				_topBuilding.removeGrid();
+				_topBuilding.itemLayer.alpha = 1;
+			}
+			_topBuilding = null ;
+		}
+		
+		/**
+		 * 清空世界 
+		 */		
+		public function clearWorld():void
+		{
+			for each( var scene:IsoScene in scenes){
+				scene.clear();
+			}
+			clearTopScene() ;
+		}
+		
 		/** 显示世界 */
 		public function initWorld():void
 		{
+			this.stop() ;
+			this.clearWorld();
 			//添加出生点
 			var heroBornPoint:HeroBornPoint = new HeroBornPoint();
 			heroBornPoint.nodeX = 55 ;
@@ -416,7 +444,7 @@ package local.game
 			try{
 				bytes.uncompress();
 			}catch(e:Error){
-				trace("MAP_01_BUILDINGS",e.message);
+				SystemUtil.debug("MAP_01_BUILDINGS",e.message);
 			}
 			var mapVO:MapVO = bytes.readObject() as MapVO ;
 			for each( var vo:BuildingVO in mapVO.mapItems)
