@@ -1,13 +1,15 @@
 package local.game
 {
 	import bing.iso.IsoScene;
-	import bing.utils.ContainerUtil;
+	import bing.res.ResVO;
 	import bing.utils.MathUtil;
 	import bing.utils.ObjectUtil;
+	import bing.utils.SystemUtil;
 	
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
+	import flash.utils.ByteArray;
 	
 	import local.comm.GameData;
 	import local.enum.BuildingOperation;
@@ -15,12 +17,15 @@ package local.game
 	import local.enum.PayType;
 	import local.game.elements.Building;
 	import local.game.elements.Character;
+	import local.game.elements.Hero;
 	import local.game.elements.HeroBornPoint;
 	import local.model.MapGridDataModel;
 	import local.model.PlayerModel;
 	import local.model.buildings.vos.BuildingVO;
+	import local.model.map.vos.MapVO;
 	import local.utils.CharacterManager;
 	import local.utils.CollectQueueUtil;
+	import local.utils.ResourceUtil;
 	import local.views.CenterViewContainer;
 	import local.views.effects.MapWordEffect;
 
@@ -240,6 +245,58 @@ package local.game
 			building.itemLayer.alpha = 0.5 ;
 			building.selectedStatus(false); //选择设置成false
 			topScene.visible = true  ;
+		}
+		
+		
+		/** 显示世界 */
+		public function initWorld():void
+		{
+			this.stop() ;
+			this.clearWorld();
+			//添加出生点
+			var heroBornPoint:HeroBornPoint = new HeroBornPoint();
+			heroBornPoint.nodeX = 55 ;
+			heroBornPoint.nodeZ = 40 ;
+			addBuildToScene(heroBornPoint,false,false);
+			heroBornPoint = new HeroBornPoint();
+			heroBornPoint.nodeX = 40 ;
+			heroBornPoint.nodeZ = 30 ;
+			addBuildToScene(heroBornPoint,false,false);
+			heroBornPoint = new HeroBornPoint();
+			heroBornPoint.nodeX = 21 ;
+			heroBornPoint.nodeZ = 17 ;
+			addBuildToScene(heroBornPoint,false,false);
+			//添加英雄
+			var avatar:Hero = new Hero();
+			avatar.nodeX = 55;
+			avatar.nodeZ = 40;
+			var scene:IsoScene = this.getBuildingScene( avatar.nodeX , avatar.nodeZ );
+			scene.addIsoObject( avatar ) ;
+			CharacterManager.instance.hero = avatar ;
+			//添加场景建筑
+			var basicBuildingRes:ResVO = ResourceUtil.instance.getResVOByResId( GameData.currentMapId+"_BUILDINGS");
+			var bytes:ByteArray = basicBuildingRes.resObject as ByteArray ;
+			try{
+				bytes.uncompress();
+			}catch(e:Error){
+				SystemUtil.debug(GameData.currentMapId+"_BUILDINGS没有压缩");
+			}
+			var mapVO:MapVO = bytes.readObject() as MapVO ;
+			for each( var vo:BuildingVO in mapVO.mapItems)
+			{
+				GameWorld.instance.addBuildingByVO(vo.nodeX,vo.nodeZ,vo,false,false);
+			}
+			GameWorld.instance.buildingScene1.sortAll();
+			GameWorld.instance.buildingScene2.sortAll();
+			GameWorld.instance.buildingScene3.sortAll();
+			GameWorld.instance.groundScene1.sortAll();
+			GameWorld.instance.groundScene2.sortAll();
+			GameWorld.instance.groundScene3.sortAll();
+			GameWorld.instance.groundScene1.updateAllUI();
+			GameWorld.instance.groundScene2.updateAllUI();
+			GameWorld.instance.groundScene3.updateAllUI();
+			//开始
+			this.start();
 		}
 	}
 }
