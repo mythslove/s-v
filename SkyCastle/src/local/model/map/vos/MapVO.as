@@ -9,7 +9,7 @@ package local.model.map.vos
 		public var name:String  = "sky castle";
 		
 		/** 地图数据信息文件 ********暂时没用*******/
-		public var resUrl:String  = "res/mapdata.bin";
+		public var resUrl:String  = "";
 		
 		/** 描述 */
 		public var describe:String = "default map";
