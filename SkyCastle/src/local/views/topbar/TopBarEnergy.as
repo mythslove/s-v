@@ -6,6 +6,7 @@ package local.views.topbar
 	import flash.text.TextField;
 	
 	import local.views.BaseView;
+	import local.views.CenterViewContainer;
 	import local.views.tooltip.GameToolTip;
 	
 	public class TopBarEnergy extends BaseView
@@ -36,6 +37,7 @@ package local.views.topbar
 			if(bar.scaleX>1){
 				bar.scaleX = 1 ;
 			}
+			CenterViewContainer.instance.topBar.addEnergyBar.visible = (bar.scaleX<.4);
 		}
 	}
 }
