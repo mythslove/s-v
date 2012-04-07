@@ -44,6 +44,9 @@ package local.enum
 		/** 大类：人*/
 		public static const CHACTERS:String = "character" ;
 		
+		/**  动物  */		
+		public static const ANIMAIL:String = "animal";
+		
 		/**
 		 * 获得大的类型 
 		 */		
@@ -55,6 +58,8 @@ package local.enum
 				return DECORATION ;
 			}else if(type==PLANT|| type==PLANT_LAND|| type==PLANT_CROP){
 				return PLANT ;
+			}else if(type==ANIMAIL){
+				return ANIMAIL ;
 			}
 			return CHACTERS ;
 		}

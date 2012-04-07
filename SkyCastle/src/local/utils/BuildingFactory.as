@@ -54,6 +54,9 @@ package local.utils
 				case ItemType.PLANT_CROP: //农作物
 					building = new Crop( vo );
 					break ;
+				case ItemType.ANIMAIL: //动物
+					building = new Animail(vo);
+					break ;
 				default:
 					building = new Building( vo );
 					break ;

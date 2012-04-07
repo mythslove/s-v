@@ -282,10 +282,14 @@ package local.game
 				SystemUtil.debug(GameData.currentMapId+"_BUILDINGS没有压缩");
 			}
 			var mapVO:MapVO = bytes.readObject() as MapVO ;
+			var building:Building ;
 			for each( var vo:BuildingVO in mapVO.mapItems)
 			{
-				vo.step = 0 ;
-				GameWorld.instance.addBuildingByVO(vo.nodeX,vo.nodeZ,vo,false,false);
+				vo.step = 0 ; ////////暂时使用
+				building = GameWorld.instance.addBuildingByVO(vo.nodeX,vo.nodeZ,vo,false,false);
+				if(building){
+					building.recoverStatus();
+				}
 			}
 			GameWorld.instance.buildingScene1.sortAll();
 			GameWorld.instance.buildingScene2.sortAll();
