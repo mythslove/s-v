@@ -44,7 +44,7 @@ package
 		{
 			super.inited();
 			GlobalDispatcher.instance.addEventListener(UserInfoEvent.USER_INFO_UPDATED , getMeInfoHandler );
-			PlayerModel.instance.getPlayer( "1" , GameData.currentMapId ) ;
+			PlayerModel.instance.getPlayer( GameData.me_uid , GameData.currentMapId ) ;
 		}
 		
 		/**
