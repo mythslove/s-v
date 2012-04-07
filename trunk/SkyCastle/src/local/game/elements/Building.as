@@ -126,21 +126,36 @@ package local.game.elements
 				if(nx<=GameSetting.GRID_X && nx>=0 && MapGridDataModel.instance.astarGrid.getNode(nx,nodeZ).walkable) {
 					result = character.searchToRun( nx,nodeZ);
 				}
-				else
+				if(!result)
 				{
 					nz = _isRotate?nodeZ + _xSpan:nodeZ + _zSpan;
 					if(nz<=GameSetting.GRID_Z && nz>=0 && MapGridDataModel.instance.astarGrid.getNode(nodeX,nz).walkable) {
 						result = character.searchToRun( nodeX,nz);
 					}
-					else
-					{
-						var arr:Array = getRoundAblePoint(); 
-						if(arr.length>0){
-							arr.sortOn("x", Array.DESCENDING|Array.NUMERIC );
-							result = character.searchToRun( arr[0].x/_size , arr[0].z/_size);
-						}
+				}
+				if(!result)
+				{
+					nx = nodeX-1 ;
+					if(nx<=GameSetting.GRID_X && nx>=0 && MapGridDataModel.instance.astarGrid.getNode(nx,nodeZ).walkable) {
+						result = character.searchToRun( nx,nodeZ);
 					}
 				}
+				if(!result)
+				{
+					nz = nodeZ-1 ;
+					if(nz<=GameSetting.GRID_Z && nz>=0 && MapGridDataModel.instance.astarGrid.getNode(nodeX,nz).walkable) {
+						result = character.searchToRun( nodeX,nz);
+					}
+				}
+				if(!result)
+				{
+					var arr:Array = getRoundAblePoint(); 
+					if(arr.length>0){
+						arr.sortOn("z", Array.DESCENDING|Array.NUMERIC );
+						result = character.searchToRun( arr[0].x/_size , arr[0].z/_size);
+					}
+				}
+				
 			}else{
 				result = character.searchToRun( nodeX , nodeZ );
 			}
