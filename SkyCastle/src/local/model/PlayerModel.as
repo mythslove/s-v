@@ -56,6 +56,8 @@ package local.model
 					PopUpManager.instance.removeCurrentPopup();
 					GameWorld.instance.initWorld();
 					break;
+				case "levelup":
+					break ;
 			}
 		}
 		
@@ -65,7 +67,7 @@ package local.model
 		 * */		
 		public function sendLevelUp( currentLevel:int ):void
 		{
-			
+//			_ro.getOperation("levelup").send( currentLevel);
 		}
 		
 		/**
