@@ -1,7 +1,5 @@
 package local.model.buildings.vos
 {
-	
-
 	/**
 	 * 建筑基础VO 
 	 * @author zzhanglin
