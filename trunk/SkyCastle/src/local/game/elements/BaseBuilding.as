@@ -121,7 +121,7 @@ package local.game.elements
 		}
 		
 		public function set enable( value:Boolean ):void{
-			itemLayer.mouseEnabled = value ;
+			itemLayer.enabled = value ;
 			if(value){
 				itemLayer.alpha = 1 ;
 				if(stepLoading&&stepLoading.parent){
