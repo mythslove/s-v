@@ -26,16 +26,8 @@ Learn more about Flex at http://flex.org
 <script src="history/history.js" language="javascript"></script>
 <!--  END Browser History required section -->
 
-<script src="md5.js" language="JavaScript"></script>
-
 <script language="JavaScript" type="text/javascript">
 var playerId="1";
-var mainUrl ="";
-var hash=hex_md5(playerId+hex_md5("key--$$xdfsdf-staging"));
-//var hash = hex_md5(playerId + hex_md5("key--$$xdfsdf"));
-var token = "147547335284323|2.GiGysz5VVAd8N59RgMYLPw__.3600.1296216000-100001647427200|W5umbf_pCKfyVFi2hEVa2RoDec8";
-//var resUrl = "http://s-static2.fairyvillagegame.com/v1101061729/";
-var resUrl = "";
 </script>
 
 <style>
@@ -101,7 +93,7 @@ if ( hasProductInstall && !hasRequestedVersion ) {
 			"name", "${application}",
 			"allowScriptAccess","sameDomain",
 			"allowFullscreen","true",
-			"flashVars","player_id="+playerId+"&hash="+hash+"&access_token="+token+"&res_url="+resUrl+"&mainUrl="+mainUrl,
+			"flashVars","player_id="+playerId+"",
 			"type", "application/x-shockwave-flash",
 			"pluginspage", "http://www.adobe.com/go/getflashplayer"
 	);
