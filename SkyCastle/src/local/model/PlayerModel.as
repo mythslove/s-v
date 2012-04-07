@@ -7,7 +7,10 @@ package local.model
 	import local.comm.GameRemote;
 	import local.comm.GlobalDispatcher;
 	import local.events.UserInfoEvent;
+	import local.game.GameWorld;
 	import local.model.vos.PlayerVO;
+	import local.utils.PopUpManager;
+	import local.views.CenterViewContainer;
 
 	/**
 	 * 玩家信息Model 
@@ -43,11 +46,15 @@ package local.model
 					if(player.uid==GameData.me_uid) {
 						GameData.isHome = true ;
 						me = player ;
+						//	显示和更新玩家显示信息
+						CenterViewContainer.instance.topBar.updateTopBar();
+						GlobalDispatcher.instance.dispatchEvent( new UserInfoEvent(UserInfoEvent.USER_INFO_UPDATED));
 					} else {
 						GameData.isHome = false ;
 						friend = player ;
 					}
-					GlobalDispatcher.instance.dispatchEvent( new UserInfoEvent(UserInfoEvent.USER_INFO_UPDATED));
+					PopUpManager.instance.removeCurrentPopup();
+					GameWorld.instance.initWorld();
 					break;
 			}
 		}
@@ -69,6 +76,10 @@ package local.model
 		public function getPlayer( uid:String , mapId:String ):void
 		{
 //			_ro.getOperation("getPlayer").send( uid , mapId );
+//			//添加loading
+//			PopUpManager.instance.clearAll();
+//			var loading:MapChangeLoading = new MapChangeLoading();
+//			PopUpManager.instance.addQueuePopUp( loading );
 			
 			//下面为模拟玩家数据，要测试接口的话，注释掉下面的
 			me = new PlayerVO();
@@ -84,6 +95,8 @@ package local.model
 			me.energy = 86 ;
 			me.uid = Guid.create();
 			me.name = "bingheliefeng";
+			GameWorld.instance.initWorld();
+			CenterViewContainer.instance.topBar.updateTopBar();
 			GlobalDispatcher.instance.dispatchEvent( new UserInfoEvent(UserInfoEvent.USER_INFO_UPDATED));
 		}
 		
@@ -102,8 +115,7 @@ package local.model
 		 * @param spendCash
 		 * @return 
 		 */		
-		public function checkCashEnough( spendCash:int ):Boolean
-		{
+		public function checkCashEnough( spendCash:int ):Boolean{
 			return me.cash>=spendCash ;
 		}
 		
@@ -112,8 +124,7 @@ package local.model
 		 * @param spendWood
 		 * @return 
 		 */		
-		public function checkWood( spendWood:int ):Boolean
-		{
+		public function checkWood( spendWood:int ):Boolean{
 			return me.wood>=spendWood ;
 		}
 		
@@ -122,8 +133,7 @@ package local.model
 		 * @param spendStone
 		 * @return 
 		 */		
-		public function checkStone( spendStone:int ):Boolean
-		{
+		public function checkStone( spendStone:int ):Boolean{
 			return me.stone>=spendStone ;
 		}
 	}

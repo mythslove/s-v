@@ -23,8 +23,6 @@ package  local.views.tooltip
 		public function GameToolTip()
 		{
 			super();
-			if(_instance) throw new Error("只能有一个GameToolTip实例");
-			else _instance = this ;
 			
 			mouseChildren = mouseEnabled= visible= false ;
 			cacheAsBitmap = true ;

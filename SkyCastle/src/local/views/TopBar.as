@@ -42,7 +42,7 @@ package  local.views
 			setUserInfo(user);
 		}
 		
-		public function setUserInfo( user:PlayerVO ):void
+		private function setUserInfo( user:PlayerVO ):void
 		{
 			coinBar.update( user.coin );
 			energyBar.update( [user.energy , user.maxEnergy ]  );

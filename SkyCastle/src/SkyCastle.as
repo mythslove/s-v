@@ -7,13 +7,10 @@ package
 	import local.comm.GameData;
 	import local.comm.GlobalDispatcher;
 	import local.events.UserInfoEvent;
-	import local.game.GameWorld;
 	import local.model.PlayerModel;
 	import local.model.buildings.vos.*;
 	import local.model.map.vos.MapVO;
 	import local.model.vos.*;
-	import local.views.CenterViewContainer;
-	import local.views.LeftBar;
 	
 	[SWF( width="760",height="640",backgroundColor="#ffffff")]
 	public class SkyCastle extends BaseGame
@@ -32,6 +29,7 @@ package
 		
 		override protected function init():void
 		{
+			super.init();
 			//获取参数
 			var params:Object = loaderInfo.parameters ;
 			//注册vo
@@ -82,22 +80,6 @@ package
 		{
 			GlobalDispatcher.instance.removeEventListener(UserInfoEvent.USER_INFO_UPDATED , getMeInfoHandler );
 			removeLoading();
-			initGame();
-		}
-		
-		/**
-		 * 初始化游戏 
-		 */	
-		private function initGame():void
-		{
-			addChild(GameWorld.instance); //添加游戏世界
-			addChild( new LeftBar()); //居左的容器
-			addChild( CenterViewContainer.instance); //添加UI的容器
-			
-			GameWorld.instance.initWorld();
-			
-			//显示玩家信息
-			CenterViewContainer.instance.topBar.setUserInfo( PlayerModel.instance.me);
 		}
 	}
 }

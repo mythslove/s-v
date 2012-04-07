@@ -12,9 +12,8 @@ package  local.views.tooltip
 		public function BuildingToolTip()
 		{
 			super();
-			if(_instance) throw new Error("只能实例化一个BuildingTooltip");
-			else _instance = this ;
 		}
+		
 		public static function get instance():BuildingToolTip{
 			if(!_instance) _instance = new BuildingToolTip();
 			return _instance ;
