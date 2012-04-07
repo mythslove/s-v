@@ -321,7 +321,7 @@ package local.game
 					}
 					break;
 				case MouseEvent.MOUSE_OVER:
-					if( !_topBuilding && e.target is InteractivePNG){
+					if( !_topBuilding && e.target is InteractivePNG && (e.target as InteractivePNG).enabled){
 						_mouseOverBuild = (e.target as InteractivePNG).parent as Building;
 						if(!GameData.isAdmin&&_mouseOverBuild is BasicDecoration&& MouseManager.instance.checkControl()){
 							_mouseOverBuild = null ;
