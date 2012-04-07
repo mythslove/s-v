@@ -9,7 +9,7 @@ package local.comm
 	 */	
 	public class GameRemote extends RemoteObject
 	{
-		public static var gateWay:String = "http://10.0.15.2/MyService/Apps/gateway.php" ;
+		public static var gateWay:String = "http://10.0.15.2/MyService/Apps/gateway.php?sandbox=1" ;
 		
 		public function GameRemote(servicePath:String)
 		{

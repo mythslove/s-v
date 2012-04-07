@@ -25,10 +25,11 @@ package local.views.shop
 		public var btnNormal:BaseButton;
 		public var btnBg:SimpleButton ;
 		public var txtBtn:TextField ,txtName:TextField;
-		public var txtCoin:TextField , txtWood:TextField ,txtStone:TextField ;
+		public var txtCoin:TextField , txtWood:TextField ,txtStone:TextField  ,txtGem:TextField;
 		//==========================
 		private const LABEL_DEFAULT:String = "defalut";
 		private const LABEL_BUILDING:String = "building";
+		private const LABEL_BUILDING_GEM:String = "building_gem";
 		
 		public var itemVO:ShopItemVO;
 		
