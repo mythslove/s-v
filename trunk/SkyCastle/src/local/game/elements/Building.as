@@ -172,7 +172,7 @@ package local.game.elements
 			{
 				var effect:MapWordEffect = new MapWordEffect("I can 't get here!");
 				GameWorld.instance.addEffect( effect , screenX , screenY);
-				CollectQueueUtil.instance.clear(); //不能走到建筑旁边，则清除队列
+				CollectQueueUtil.instance.clear(true); //不能走到建筑旁边，则清除队列
 			}
 		}
 		
