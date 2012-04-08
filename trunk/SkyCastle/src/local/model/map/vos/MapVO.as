@@ -16,8 +16,5 @@ package local.model.map.vos
 		
 		/** 地图上的东西 */
 		public var mapItems:Array  ;
-		
-		/** 已经砍过的基础建筑 ，key为nodeX_nodeZ，value为currentStep*/
-		public var basicItems:Object ;
 	}
 }

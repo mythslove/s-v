@@ -15,7 +15,10 @@ package local.model.vos
 		
 		public var name:String ; //名称 
 		
-		public var mapVO:MapVO ; //地图信息
+		public var buildings:Array ; //建筑
+		
+		/** 已经砍过的基础建筑 ，key为nodeX_nodeZ，value为currentStep*/
+		public var basicItems:Object ;
 		
 		private var _level:int ; //等级
 		
