@@ -25,8 +25,8 @@ package local.game.elements
 		/** 获取此建筑的标题 */
 		override public function get title():String 
 		{
-			if( buildingVO.step < baseFactoryVO.buildStep){
-				return buildingVO.baseVO.name+"("+buildingVO.step+"/"+baseFactoryVO.buildStep+")";
+			if( buildingVO.currentStep < baseFactoryVO.step){
+				return buildingVO.baseVO.name+"("+buildingVO.currentStep+"/"+baseFactoryVO.step+")";
 			}
 			return buildingVO.baseVO.name;
 		}

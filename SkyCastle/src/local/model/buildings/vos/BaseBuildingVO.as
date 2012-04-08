@@ -38,7 +38,6 @@ package local.model.buildings.vos
 		/** 修建获得的经验 */
 		public var buildEarnExp:int ;
 		
-		
 		//在哪个文件夹
 		protected var _file:String = "building";
 		

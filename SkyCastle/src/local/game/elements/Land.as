@@ -25,7 +25,7 @@ package local.game.elements
 			super.onMouseOver();
 			if(!MouseManager.instance.checkControl() )
 			{
-				//			if(baseLandVO.earnStep<buildingVO.step){
+				//			if(baseLandVO.step<buildingVO.step){
 				//				MouseManager.instance.mouseStatus = MouseStatus.BEAT_STONE ;
 				//			}else{
 				//				MouseManager.instance.mouseStatus = MouseStatus.SHOVEL_BUILDING ;
