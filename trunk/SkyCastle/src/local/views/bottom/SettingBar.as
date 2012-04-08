@@ -96,18 +96,19 @@ package local.views.bottom
 		private function zoomHandler(e:MouseEvent):void
 		{
 			e.stopPropagation();
+			var world:GameWorld = GameWorld.instance ;
 			switch( e.target)
 			{
 				case btnZoomIn:
-					if( GameWorld.instance.scaleX<1) {
-						GameWorld.instance.zoom(1);
+					if( world.scaleX<1) {
+						world.zoom(1);
 						GameToolTip.instance.register( btnZoomIn , stage , _zoomInTooltip2 );
 						GameToolTip.instance.register( btnZoomOut , stage , _zoomoutTooltip1 );
 					}
 					break ;
 				case btnZoomOut:
-					if( GameWorld.instance.scaleX==1 && stage.displayState == StageDisplayState.NORMAL) {
-						GameWorld.instance.zoom(0.6);
+					if( world.scaleX>0.9 && stage.displayState == StageDisplayState.NORMAL) {
+						world.zoom(0.6);
 						GameToolTip.instance.register( btnZoomIn , stage , _zoomInTooltip1 );
 						GameToolTip.instance.register( btnZoomOut , stage , _zoomoutTooltip2 );
 					}

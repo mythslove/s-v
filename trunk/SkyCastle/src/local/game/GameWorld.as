@@ -283,13 +283,18 @@ package local.game
 			//添加出生点
 			addBornPoints();
 			//添加英雄
-			var avatar:Hero = new Hero();
+			var hero:Hero ;
+			if(!CharacterManager.instance.hero){
+				hero = new Hero();
+				CharacterManager.instance.hero = hero ;
+			}else {
+				hero = CharacterManager.instance.hero ;
+			}
 			var position:Point = SettingCookieUtil.getHeroPoint() ;
-			avatar.nodeX = position.x ;
-			avatar.nodeZ = position.y ;
-			var scene:IsoScene = this.getBuildingScene( avatar.nodeX , avatar.nodeZ );
-			scene.addIsoObject( avatar ) ;
-			CharacterManager.instance.hero = avatar ;
+			hero.nodeX = position.x ;
+			hero.nodeZ = position.y ;
+			var scene:IsoScene = this.getBuildingScene( hero.nodeX , hero.nodeZ );
+			scene.addIsoObject( hero ) ;
 			//添加场景建筑
 			var basicBuildingRes:ResVO = ResourceUtil.instance.getResVOByResId( GameData.currentMapId+"_BUILDINGS");
 			var bytes:ByteArray = basicBuildingRes.resObject as ByteArray ;
@@ -327,9 +332,9 @@ package local.game
 				}
 			}
 			//再次确认英雄可以移动
-			if( !avatar.getWalkable( MapGridDataModel.instance.astarGrid ) ){
-				avatar.nodeX = GameData.heroBornPoint1 .nodeX ;
-				avatar.nodeZ = GameData.heroBornPoint1 .nodeZ ;
+			if( !hero.getWalkable( MapGridDataModel.instance.astarGrid ) ){
+				hero.nodeX = GameData.heroBornPoint1 .nodeX ;
+				hero.nodeZ = GameData.heroBornPoint1 .nodeZ ;
 			}
 			GameWorld.instance.buildingScene1.sortAll();
 			GameWorld.instance.buildingScene2.sortAll();
@@ -342,8 +347,8 @@ package local.game
 			GameWorld.instance.groundScene3.updateAllUI();
 			//地图的初始位置
 			//更新场景的位置，使英雄在场景中间
-			var offsetX:Number = stage.stageWidth*0.5 - (avatar.screenX+sceneLayerOffsetX)*scaleX ;
-			var offsetY:Number =  stage.stageHeight*0.5 -  (avatar.screenY+sceneLayerOffsetY)*scaleX ;
+			var offsetX:Number = stage.stageWidth*0.5 - (hero.screenX+sceneLayerOffsetX)*scaleX ;
+			var offsetY:Number =  stage.stageHeight*0.5 -  (hero.screenY+sceneLayerOffsetY)*scaleX ;
 			if(offsetX<stage.stageWidth- GameSetting.MAX_WIDTH){
 				offsetX = stage.stageWidth- GameSetting.MAX_WIDTH ;
 			}else if(offsetX>0)	{
