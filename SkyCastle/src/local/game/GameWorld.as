@@ -23,6 +23,7 @@ package local.game
 	import local.model.PlayerModel;
 	import local.model.buildings.vos.BuildingVO;
 	import local.model.map.vos.MapVO;
+	import local.model.vos.PlayerVO;
 	import local.utils.CharacterManager;
 	import local.utils.CollectQueueUtil;
 	import local.utils.ResourceUtil;
@@ -282,13 +283,29 @@ package local.game
 				SystemUtil.debug(GameData.currentMapId+"_BUILDINGS没有压缩");
 			}
 			var mapVO:MapVO = bytes.readObject() as MapVO ;
+			var player:PlayerVO = GameData.isHome ? PlayerModel.instance.me : PlayerModel.instance.friend ;
 			var building:Building ;
+			var currentStep:int ;
 			for each( var vo:BuildingVO in mapVO.mapItems)
 			{
 				vo.currentStep = 0 ; ////////暂时使用
-				building = GameWorld.instance.addBuildingByVO(vo.nodeX,vo.nodeZ,vo,false,false);
-				if(building){
-					building.recoverStatus();
+				if(player.basicItems && player.basicItems.hasOwnProperty(vo.nodeX+"_"+vo.nodeZ) )
+				{
+					vo.currentStep = player.basicItems[vo.nodeX+"_"+vo.nodeZ] ; 
+					if(vo.currentStep>=vo.baseVO["step"]){
+						continue ;
+					}
+				}
+				GameWorld.instance.addBuildingByVO(vo.nodeX,vo.nodeZ,vo,false,false);
+			}
+			if( player.buildings)
+			{
+				for each( vo in player.buildings )
+				{
+					building = GameWorld.instance.addBuildingByVO(vo.nodeX,vo.nodeZ,vo,false,false);
+					if(building){
+						building.recoverStatus();
+					}
 				}
 			}
 			GameWorld.instance.buildingScene1.sortAll();
