@@ -54,6 +54,15 @@ package local.utils
 		}
 		
 		
+		public static function saveSound( value:Boolean ):void {
+			_cookie.put( "sound" , value );
+		}
+		public static function getSound():Boolean {
+			if(_cookie.contains( "sound") ) return _cookie.get("sound");
+			return true ;
+		}
+		
+		
 		public static function saveZoom( value:Number):void {
 			_cookie.put( "zoom" , value );
 		}
