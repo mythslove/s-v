@@ -60,12 +60,18 @@ package local.game.elements
 				case BuildingOperation.ROTATE:
 					buildingVO.scale = scaleX ;
 					CharacterManager.instance.updateCharacters( this );
+					//发送数据
+//					ro.getOperation("rotate").send( buildingVO.id , buildingVO.scale );
 					break ;
 				case BuildingOperation.STASH:
+					//发送数据
+//					ro.getOperation("stash").send( buildingVO.id );
 					break ;
 				case BuildingOperation.MOVE:
 					playPlaceEffect();
 					CharacterManager.instance.updateCharacters( this );
+					//发送数据
+//					ro.getOperation("move").send( buildingVO.id , nodeX,nodeZ );
 					break ;
 				case BuildingOperation.SELL :
 					break ;

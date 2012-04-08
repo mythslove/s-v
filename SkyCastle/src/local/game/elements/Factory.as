@@ -1,5 +1,7 @@
 package local.game.elements
 {
+	import bing.amf3.ResultEvent;
+	
 	import local.enum.BuildingStatus;
 	import local.enum.MouseStatus;
 	import local.model.buildings.vos.BaseFactoryVO;
@@ -30,6 +32,17 @@ package local.game.elements
 			}
 			return buildingVO.baseVO.name;
 		}
+		
+		override protected function onResultHandler( e:ResultEvent ):void
+		{
+			trace(e.service , e.method , e.result);
+			switch( e.method)
+			{
+				case "build":
+					break ;
+			}
+		}
+		
 		
 		override public function onClick():void
 		{
