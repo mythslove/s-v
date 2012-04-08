@@ -30,7 +30,7 @@ package local.utils
 				throw new Error("重复实例化");
 			}
 			this.cdns = Vector.<String>(["../"]);
-			this.maxLoadNum = 5 ;
+			this.maxLoadNum = 6 ;
 		}
 		public static function get instance():ResourceUtil
 		{
