@@ -24,9 +24,28 @@ package local.game.elements
 		
 		override public function onClick():void
 		{
+			var level:int = PlayerModel.instance.me.level ;
+			if(parent==GameWorld.instance.buildingScene2)
+			{
+				if(level<15)
+				{
+					var effect:MapWordEffect = new MapWordEffect("Need Level 15!");
+					GameWorld.instance.addEffect(effect,screenX,screenY);
+					return ;
+				}
+			}
+			else if(parent==GameWorld.instance.buildingScene1)
+			{
+				if(level<25)
+				{
+					effect = new MapWordEffect("Need Level 25!");
+					GameWorld.instance.addEffect(effect,screenX,screenY);
+					return ;
+				}
+			}
 			//减能量
 			if(PlayerModel.instance.me.energy<1){
-				var effect:MapWordEffect = new MapWordEffect("You don't have enough Energy!");
+				effect = new MapWordEffect("You don't have enough Energy!");
 				GameWorld.instance.addEffect(effect,screenX,screenY);
 			}else{
 				super.onClick();
@@ -91,7 +110,7 @@ package local.game.elements
 				CenterViewContainer.instance.topBar.updateTopBar();
 				GameWorld.instance.addEffect(effect,screenX,screenY);
 			}else{
-				CollectQueueUtil.instance.clear();
+				CollectQueueUtil.instance.clear(true);
 				effect = new MapWordEffect("You don't have enough Energy!");
 				GameWorld.instance.addEffect(effect,screenX,screenY);
 				//能量不够，弹出购买能量的窗口

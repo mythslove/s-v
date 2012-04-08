@@ -122,9 +122,27 @@ package local.game
 			else if(!CollectQueueUtil.instance.currentBuilding) //当前执行队列里没有建筑
 			{
 				var p:Point = pixelPointToGrid(stage.mouseX,stage.mouseY); 
-				if( !CharacterManager.instance.hero.searchToRun( p.x , p.y )){
-					var effect:MapWordEffect = new MapWordEffect("I can 't get here!");
-					addEffect( effect , (stage.mouseX-x)/scaleX-sceneLayerOffsetX,(stage.mouseY-y)/scaleX-sceneLayerOffsetY);
+				var result:Boolean = true ;
+				var level:int = PlayerModel.instance.me.level ;
+				var scene:IsoScene = getBuildingScene(p.x,p.y);
+				if(scene==GameWorld.instance.buildingScene2){
+					if(level<15){
+						var effect:MapWordEffect = new MapWordEffect("Need Level 15!");
+						addEffect( effect , (stage.mouseX-x)/scaleX-sceneLayerOffsetX,(stage.mouseY-y)/scaleX-sceneLayerOffsetY);
+						result= false ;
+					}
+				}else if(scene==GameWorld.instance.buildingScene1){
+					if(level<25){
+						effect = new MapWordEffect("Need Level 25!");
+						addEffect( effect , (stage.mouseX-x)/scaleX-sceneLayerOffsetX,(stage.mouseY-y)/scaleX-sceneLayerOffsetY);
+						result= false ;
+					}
+				}
+				if(result) {
+					if( !CharacterManager.instance.hero.searchToRun( p.x , p.y )){
+						effect = new MapWordEffect("I can 't get here!");
+						addEffect( effect , (stage.mouseX-x)/scaleX-sceneLayerOffsetX,(stage.mouseY-y)/scaleX-sceneLayerOffsetY);
+					}
 				}
 			}
 		}
