@@ -1,6 +1,7 @@
 package local.game.elements
 {
 	import bing.amf3.ResultEvent;
+	import bing.utils.SystemUtil;
 	
 	import local.comm.GameData;
 	import local.enum.BuildingOperation;
@@ -9,6 +10,8 @@ package local.game.elements
 	import local.model.buildings.vos.BuildingVO;
 	import local.model.map.MapModel;
 	import local.utils.CharacterManager;
+	import local.utils.CollectQueueUtil;
+	import local.views.CenterViewContainer;
 	import local.views.effects.MapWordEffect;
 	
 	public class BasicDecoration extends Decortation
@@ -57,14 +60,44 @@ package local.game.elements
 		}
 		
 		
+		override public function execute():void
+		{
+			super.execute();
+//			ro.getOperation("chop").send(buildingVO.id , buildingVO.currentStep);
+		}
+		
 		override protected function onResultHandler(e:ResultEvent):void
 		{
+			SystemUtil.debug(e.service , e.method , e.result);
 			switch(e.method)
 			{
 				case "chop": 
 					
 					break ;
 			}
+		}
+		
+		/**
+		 * 调用execute时减一个能量
+		 * @return 
+		 */		
+		protected function executeReduceEnergy():Boolean
+		{
+			//减能量
+			var effect:MapWordEffect ;
+			if(PlayerModel.instance.me.energy>=1){
+				effect = new MapWordEffect("Energy -1");
+				PlayerModel.instance.me.energy-- ;
+				CenterViewContainer.instance.topBar.updateTopBar();
+				GameWorld.instance.addEffect(effect,screenX,screenY);
+			}else{
+				CollectQueueUtil.instance.clear();
+				effect = new MapWordEffect("You don't have enough Energy!");
+				GameWorld.instance.addEffect(effect,screenX,screenY);
+				//能量不够，弹出购买能量的窗口
+				return  false;
+			}
+			return true;
 		}
 		
 		override public function dispose():void

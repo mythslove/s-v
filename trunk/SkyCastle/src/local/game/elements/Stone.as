@@ -53,24 +53,13 @@ package local.game.elements
 		
 		override public function execute():void
 		{
-			//减能量
-			var effect:MapWordEffect ;
-			if(PlayerModel.instance.me.energy>=1){
-				effect = new MapWordEffect("Energy -1");
-				PlayerModel.instance.me.energy-- ;
-				CenterViewContainer.instance.topBar.updateTopBar();
-				GameWorld.instance.addEffect(effect,screenX,screenY);
-			}else{
-				CollectQueueUtil.instance.clear();
-				effect = new MapWordEffect("You don't have enough Energy!");
-				GameWorld.instance.addEffect(effect,screenX,screenY);
-				//能量不够，弹出购买能量的窗口
-				return ;
+			if(executeReduceEnergy())
+			{
+				super.execute();
+				CharacterManager.instance.hero.gotoAndPlay(AvatarAction.PICKAXE);
+				_timeoutId = setTimeout( showPickup , 3500 );
+				GameWorld.instance.effectScene.addChild( BuildingExecuteLoading.getInstance(screenX,screenY-itemLayer.height).setTime(3000));
 			}
-			super.execute();
-			CharacterManager.instance.hero.gotoAndPlay(AvatarAction.PICKAXE);
-			_timeoutId = setTimeout( showPickup , 3500 );
-			GameWorld.instance.effectScene.addChild( BuildingExecuteLoading.getInstance(screenX,screenY-itemLayer.height).setTime(3000));
 		}
 		
 		override public function showPickup():void
