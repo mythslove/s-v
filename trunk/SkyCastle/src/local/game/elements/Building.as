@@ -48,12 +48,14 @@ package local.game.elements
 		{
 			switch( operation )
 			{
-				case BuildingOperation.ADD:
+				case BuildingOperation.BUY:
 					playPlaceEffect();
 					CharacterManager.instance.updateCharacters( this );
 					//掉修建经验
 					var value:int = baseBuildingVO.buildEarnExp;
 					if(value>0)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_EXP , value,screenX,screenY-offsetY);
+					//发送数据
+//					ro.getOperation("buy").send( buildingVO.shopItemId , nodeX,nodeZ );
 					break ;
 				case BuildingOperation.ROTATE:
 					buildingVO.scale = scaleX ;

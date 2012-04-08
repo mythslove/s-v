@@ -53,7 +53,7 @@ package local.game
 			if(_mouseOverBuild && _mouseOverBuild is Character){
 				_mouseOverBuild.onClick();
 			}
-			else if(GameData.buildingCurrOperation==BuildingOperation.ADD) //添加
+			else if(GameData.buildingCurrOperation==BuildingOperation.BUY) //添加
 			{	
 				if( _topBuilding && _topBuilding.gridLayer && _topBuilding.gridLayer.getWalkable() )
 				{
@@ -62,7 +62,7 @@ package local.game
 						buyComplete( vo) ;
 						var addedBuilding:Building = addBuildingByVO( _topBuilding.nodeX , _topBuilding.nodeZ ,vo );
 						if(addedBuilding){
-							addedBuilding.sendOperation(BuildingOperation.ADD); //发送添加到地图上的消息到服务器
+							addedBuilding.sendOperation(BuildingOperation.BUY); //发送添加到地图上的消息到服务器
 							_topBuilding.gridLayer.updateBuildingGridLayer(_topBuilding.nodeX , _topBuilding.nodeZ , vo.baseVO.layer );
 						}
 					}

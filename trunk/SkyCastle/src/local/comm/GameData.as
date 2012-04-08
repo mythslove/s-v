@@ -24,7 +24,7 @@ package local.comm
 			}
 			_buildingCurrOperation = value;
 			switch(value){
-				case BuildingOperation.ADD:
+				case BuildingOperation.BUY:
 				case BuildingOperation.NONE:
 					MouseManager.instance.mouseStatus = MouseStatus.NONE ;
 					GameWorld.instance.clearTopScene() ;

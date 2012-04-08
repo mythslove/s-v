@@ -79,7 +79,7 @@ package local.views.shop
 			switch( e.type )
 			{
 				case  ShopEvent.SELECTED_BUILDING:
-					GameData.buildingCurrOperation = BuildingOperation.ADD ;
+					GameData.buildingCurrOperation = BuildingOperation.BUY ;
 					var building:Building = BuildingFactory.createBuildingByVO(BuildingVO.createVoByShopItem(e.selectedBuilding));
 					GameWorld.instance.addBuildingToTop( building );
 					PopUpManager.instance.removeCurrentPopup();
