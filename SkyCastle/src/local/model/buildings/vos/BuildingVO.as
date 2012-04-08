@@ -43,7 +43,8 @@ package local.model.buildings.vos
 		
 		
 		//===================================非必需
-		
+		/** 商店里的itemId*/
+		public var shopItemId:String ;
 		/** 商店里面显示的支付方法 */
 		public var payType:int ; 
 		/** 商店里面显示的价格 */
@@ -73,6 +74,7 @@ package local.model.buildings.vos
 			buildingVO.baseId = vo.itemValue ;
 			buildingVO.payType = vo.payType;
 			buildingVO.price = vo.price ;
+			buildingVO.shopItemId = vo.itemValue ;
 			return buildingVO ;
 		}
 	}

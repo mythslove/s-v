@@ -34,7 +34,7 @@ package local.game.elements
 		{
 			switch( operation )
 			{
-				case BuildingOperation.ADD:
+				case BuildingOperation.BUY:
 					CharacterManager.instance.updateCharacters( this );
 					MapModel.instance.addBuilding( buildingVO );
 					break ;

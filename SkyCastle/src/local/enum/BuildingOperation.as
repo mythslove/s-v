@@ -8,8 +8,8 @@ package local.enum
 	{
 		/** 无任何操作 */
 		public static const NONE:String = "none";
-		/** 添加新的建筑 */
-		public static const ADD:String="add";
+		/**买新的建筑 */
+		public static const BUY:String="buy";
 		/** 移动 */
 		public static const MOVE:String= "move";
 		/** 旋转 */
