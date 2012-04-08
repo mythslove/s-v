@@ -17,6 +17,7 @@ package local.game
 	import local.model.buildings.vos.*;
 	import local.utils.MouseManager;
 	import local.utils.ResourceUtil;
+	import local.utils.SettingCookieUtil;
 	import local.views.effects.Cloud;
 	import local.views.icon.PickupImage;
 	import local.views.loading.BuildingExecuteLoading;
@@ -54,6 +55,8 @@ package local.game
 			//地图的初始位置
 			this.x = -1800 ;
 			this.y = -1600;
+			//初始缩放
+			this.scaleX = this.scaleY = SettingCookieUtil.getZoom() ;
 		}
 		
 		public function init():void
@@ -121,6 +124,8 @@ package local.game
 				effectScene.getChildAt(i).scaleY = 1/scaleX;
 			}
 			BuildingExecuteLoading.instance.setScale(1/scaleX) ;
+			//保存配置
+			SettingCookieUtil.saveZoom( scaleX );
 		}
 		/**
 		 * 通过位置获得GroundScene

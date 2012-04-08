@@ -12,6 +12,7 @@ package local.game
 	import flash.utils.ByteArray;
 	
 	import local.comm.GameData;
+	import local.comm.GameSetting;
 	import local.enum.BuildingOperation;
 	import local.enum.LayerType;
 	import local.enum.PayType;
@@ -27,6 +28,7 @@ package local.game
 	import local.utils.CharacterManager;
 	import local.utils.CollectQueueUtil;
 	import local.utils.ResourceUtil;
+	import local.utils.SettingCookieUtil;
 	import local.views.CenterViewContainer;
 	import local.views.effects.MapWordEffect;
 
@@ -248,6 +250,30 @@ package local.game
 			topScene.visible = true  ;
 		}
 		
+		//添加出生点
+		private function addBornPoints():void
+		{
+			if(!GameData.heroBornPoint1){
+				GameData.heroBornPoint1 = new HeroBornPoint();
+				GameData.heroBornPoint1.nodeX = 21 ;
+				GameData.heroBornPoint1.nodeZ = 17 ;
+			}
+			addBuildToScene(GameData.heroBornPoint1,false,false);
+			
+			if(!GameData.heroBornPoint2){
+				GameData.heroBornPoint2 = new HeroBornPoint();
+				GameData.heroBornPoint2.nodeX = 40 ;
+				GameData.heroBornPoint2.nodeZ = 30 ;
+			}
+			addBuildToScene(GameData.heroBornPoint2,false,false);
+			
+			if(!GameData.heroBornPoint3){
+				GameData.heroBornPoint3 = new HeroBornPoint();
+				GameData.heroBornPoint3.nodeX = 55 ;
+				GameData.heroBornPoint3.nodeZ = 40 ;
+			}
+			addBuildToScene(GameData.heroBornPoint3,false,false);
+		}
 		
 		/** 显示世界 */
 		public function initWorld():void
@@ -255,22 +281,12 @@ package local.game
 			this.stop() ;
 			this.clearWorld();
 			//添加出生点
-			var heroBornPoint:HeroBornPoint = new HeroBornPoint();
-			heroBornPoint.nodeX = 55 ;
-			heroBornPoint.nodeZ = 40 ;
-			addBuildToScene(heroBornPoint,false,false);
-			heroBornPoint = new HeroBornPoint();
-			heroBornPoint.nodeX = 40 ;
-			heroBornPoint.nodeZ = 30 ;
-			addBuildToScene(heroBornPoint,false,false);
-			heroBornPoint = new HeroBornPoint();
-			heroBornPoint.nodeX = 21 ;
-			heroBornPoint.nodeZ = 17 ;
-			addBuildToScene(heroBornPoint,false,false);
+			addBornPoints();
 			//添加英雄
 			var avatar:Hero = new Hero();
-			avatar.nodeX = 55;
-			avatar.nodeZ = 40;
+			var position:Point = SettingCookieUtil.getHeroPoint() ;
+			avatar.nodeX = position.x ;
+			avatar.nodeZ = position.y ;
 			var scene:IsoScene = this.getBuildingScene( avatar.nodeX , avatar.nodeZ );
 			scene.addIsoObject( avatar ) ;
 			CharacterManager.instance.hero = avatar ;
@@ -310,6 +326,11 @@ package local.game
 					}
 				}
 			}
+			//再次确认英雄可以移动
+			if( !avatar.getWalkable( MapGridDataModel.instance.astarGrid ) ){
+				avatar.nodeX = GameData.heroBornPoint1 .nodeX ;
+				avatar.nodeZ = GameData.heroBornPoint1 .nodeZ ;
+			}
 			GameWorld.instance.buildingScene1.sortAll();
 			GameWorld.instance.buildingScene2.sortAll();
 			GameWorld.instance.buildingScene3.sortAll();
@@ -319,7 +340,23 @@ package local.game
 			GameWorld.instance.groundScene1.updateAllUI();
 			GameWorld.instance.groundScene2.updateAllUI();
 			GameWorld.instance.groundScene3.updateAllUI();
-			//开始
+			//地图的初始位置
+			//更新场景的位置，使英雄在场景中间
+			var offsetX:Number = stage.stageWidth*0.5 - (avatar.screenX+sceneLayerOffsetX)*scaleX ;
+			var offsetY:Number =  stage.stageHeight*0.5 -  (avatar.screenY+sceneLayerOffsetY)*scaleX ;
+			if(offsetX<stage.stageWidth- GameSetting.MAX_WIDTH){
+				offsetX = stage.stageWidth- GameSetting.MAX_WIDTH ;
+			}else if(offsetX>0)	{
+				offsetX = 0 ;
+			}
+			if(offsetY<stage.stageHeight- GameSetting.MAX_HEIGHT){
+				offsetY =stage.stageHeight- GameSetting.MAX_HEIGHT ;
+			}else if(offsetY>0)	{
+				offsetY = 0 ;
+			}
+			this.x = offsetX ;
+			this.y = offsetY;
+			//开始运行
 			this.start();
 		}
 	}
