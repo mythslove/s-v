@@ -93,7 +93,7 @@ package local.model
 			me.level = 1;
 			me.wood=200;
 			me.stone=209;
-			me.maxEnergy = 100 ;
+			me.maxEnergy = 10 ;
 			me.energy = 86 ;
 			me.uid = Guid.create();
 			me.name = "bingheliefeng";
