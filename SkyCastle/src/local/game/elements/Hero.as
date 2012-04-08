@@ -10,7 +10,12 @@ package local.game.elements
 	import local.model.buildings.vos.BuildingVO;
 	import local.utils.CollectQueueUtil;
 	import local.utils.ResourceUtil;
-	
+	import local.utils.SettingCookieUtil;
+
+	/**
+	 * 英雄 
+	 * @author zzhanglin
+	 */	
 	public class Hero extends Character
 	{
 		
@@ -68,6 +73,7 @@ package local.game.elements
 				}
 				building.execute();
 			}
+			SettingCookieUtil.saveHeroPoint( nodeX , nodeZ );
 		}
 		
 		

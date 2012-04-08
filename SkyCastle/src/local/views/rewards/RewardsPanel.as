@@ -31,10 +31,10 @@ package local.views.rewards
 			var img:Image ;
 			var count:int ;
 			var iconWidth:int = 100 ;
-			if(rewardsVO.gem>0)
+			if(rewardsVO.cash>0)
 			{
-				me.cash+=rewardsVO.gem ;
-				img = new RewardsPanelRender("pickupGem","res/pickup/pickupGem.png",rewardsVO.gem);
+				me.cash+=rewardsVO.cash ;
+				img = new RewardsPanelRender("pickupGem","res/pickup/pickupGem.png",rewardsVO.cash);
 				img.x = iconWidth*count;
 				++count ;
 				addChild(img);

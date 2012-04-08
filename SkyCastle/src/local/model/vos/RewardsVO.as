@@ -7,11 +7,11 @@ package local.model.vos
 	public class RewardsVO
 	{
 		public var coin:int;
-		public var gem:int ;
+		public var cash:int ;
 		public var exp:int ;
 		public var wood:int ;
 		public var stone:int ;
-		public var buildings:Array; //建筑的集合，商店里的buildingVO
+		public var buildings:Array; //baseId集合
 		public var pickups:Array; //pickup名字集合
 	}
 }

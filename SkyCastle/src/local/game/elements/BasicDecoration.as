@@ -63,7 +63,7 @@ package local.game.elements
 		override public function execute():void
 		{
 			super.execute();
-//			ro.getOperation("chop").send(nodeX+"_"+nodeZ,buildingVO.currentStep);
+//			ro.getOperation("chop").send(nodeX,nodeZ,buildingVO.currentStep);
 		}
 		
 		override protected function onResultHandler(e:ResultEvent):void

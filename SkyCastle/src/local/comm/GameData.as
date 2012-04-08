@@ -3,6 +3,7 @@ package local.comm
 	import local.enum.BuildingOperation;
 	import local.enum.MouseStatus;
 	import local.game.GameWorld;
+	import local.game.elements.HeroBornPoint;
 	import local.model.vos.ConfigBaseVO;
 	import local.utils.MouseManager;
 	import local.views.icon.*;
@@ -61,9 +62,12 @@ package local.comm
 		/** 是否在自己的村庄*/
 		public static var isHome:Boolean = true ;
 		
-		
-		
 		/** 当前用户的uid*/
 		public static var me_uid:String ;
+		
+		//三个传送点
+		public static var heroBornPoint1:HeroBornPoint ;
+		public static var heroBornPoint2:HeroBornPoint ;
+		public static var heroBornPoint3:HeroBornPoint ;
 	}
 }
