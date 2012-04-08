@@ -74,6 +74,7 @@ package local.utils
 					currentBuilding.enable=true ;
 				}
 				currentBuilding = null ;
+				CharacterManager.instance.hero.gotoAndPlay(AvatarAction.IDLE);
 			}
 			_queue = [] ;
 		}
