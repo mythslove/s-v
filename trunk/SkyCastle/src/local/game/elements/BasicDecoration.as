@@ -2,6 +2,7 @@ package local.game.elements
 {
 	import bing.amf3.ResultEvent;
 	
+	import local.comm.GameData;
 	import local.enum.BuildingOperation;
 	import local.game.GameWorld;
 	import local.model.PlayerModel;
@@ -32,23 +33,26 @@ package local.game.elements
 		
 		override public function sendOperation(operation:String):void
 		{
-			switch( operation )
+			if(GameData.isAdmin)
 			{
-				case BuildingOperation.BUY:
-					CharacterManager.instance.updateCharacters( this );
-					MapModel.instance.addBuilding( buildingVO );
-					break ;
-				case BuildingOperation.ROTATE:
-					buildingVO.scale = scaleX ;
-					CharacterManager.instance.updateCharacters( this );
-					break ;
-				case BuildingOperation.MOVE:
-					CharacterManager.instance.updateCharacters( this );
-					break ;
-				case BuildingOperation.STASH:
-				case BuildingOperation.SELL :
-					MapModel.instance.deleteBuilding( buildingVO );
-					break ;
+				switch( operation )
+				{
+					case BuildingOperation.BUY:
+						CharacterManager.instance.updateCharacters( this );
+						MapModel.instance.addBuilding( buildingVO );
+						break ;
+					case BuildingOperation.ROTATE:
+						buildingVO.scale = scaleX ;
+						CharacterManager.instance.updateCharacters( this );
+						break ;
+					case BuildingOperation.MOVE:
+						CharacterManager.instance.updateCharacters( this );
+						break ;
+					case BuildingOperation.STASH:
+					case BuildingOperation.SELL :
+						MapModel.instance.deleteBuilding( buildingVO );
+						break ;
+				}
 			}
 		}
 		
