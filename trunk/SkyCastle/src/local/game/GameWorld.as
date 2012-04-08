@@ -286,6 +286,7 @@ package local.game
 			var player:PlayerVO = GameData.isHome ? PlayerModel.instance.me : PlayerModel.instance.friend ;
 			var building:Building ;
 			var currentStep:int ;
+			//基础建筑
 			for each( var vo:BuildingVO in mapVO.mapItems)
 			{
 				vo.currentStep = 0 ; ////////暂时使用
@@ -298,6 +299,7 @@ package local.game
 				}
 				GameWorld.instance.addBuildingByVO(vo.nodeX,vo.nodeZ,vo,false,false);
 			}
+			//玩家修的建筑
 			if( player.buildings)
 			{
 				for each( vo in player.buildings )
