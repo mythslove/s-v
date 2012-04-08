@@ -285,7 +285,7 @@ package local.game
 			var building:Building ;
 			for each( var vo:BuildingVO in mapVO.mapItems)
 			{
-				vo.step = 0 ; ////////暂时使用
+				vo.currentStep = 0 ; ////////暂时使用
 				building = GameWorld.instance.addBuildingByVO(vo.nodeX,vo.nodeZ,vo,false,false);
 				if(building){
 					building.recoverStatus();

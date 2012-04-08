@@ -39,7 +39,7 @@ package local.game.elements
 			if(!MouseManager.instance.checkControl() )
 			{
 				MouseManager.instance.mouseStatus = MouseStatus.BEAT_STONE ;
-				this.showStep( buildingVO.step , baseStoneVO.earnStep);
+				this.showStep( buildingVO.currentStep , baseStoneVO.step);
 			}
 		}
 		
@@ -48,7 +48,7 @@ package local.game.elements
 		}
 		/** 获取此建筑的标题 */
 		override public function get title():String  {
-			return baseBuildingVO.name+": "+buildingVO.step+"/"+baseStoneVO.earnStep;
+			return baseBuildingVO.name+": "+buildingVO.currentStep+"/"+baseStoneVO.step;
 		}
 		
 		override public function execute():void
@@ -77,19 +77,19 @@ package local.game.elements
 		{
 			super.showPickup();
 			//掉pickup
-			var value:int = baseStoneVO.earnCoins[buildingVO.step] ;
+			var value:int = baseStoneVO.earnCoins[buildingVO.currentStep] ;
 			if(value>0)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_COIN , value,screenX,screenY-offsetY);
-			value = baseStoneVO.earnStones[buildingVO.step] ;
+			value = baseStoneVO.earnStones[buildingVO.currentStep] ;
 			if(value)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_STONE , value,screenX,screenY-offsetY);
-			value = baseStoneVO.earnExps[buildingVO.step] ;
+			value = baseStoneVO.earnExps[buildingVO.currentStep] ;
 			if(value>0) PickupUtil.addPickup2Wold(BasicPickup.PICKUP_EXP , value,screenX,screenY-offsetY);
 			//物品
 			//-------------------------------------
-			buildingVO.step++;
-			if(buildingVO.step>=baseStoneVO.earnStep){
+			buildingVO.currentStep++;
+			if(buildingVO.currentStep>=baseStoneVO.step){
 				GameWorld.instance.removeBuilding(this); //删除这棵树
 			}else if(_skin){
-				_skin.gotoAndStop( buildingVO.step+1);
+				_skin.gotoAndStop( buildingVO.currentStep+1);
 			}
 		}
 	}

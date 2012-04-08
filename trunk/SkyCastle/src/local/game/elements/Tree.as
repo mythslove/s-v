@@ -41,12 +41,12 @@ package local.game.elements
 			super.onMouseOver();
 			if(!MouseManager.instance.checkControl() )
 			{
-				if(baseTreeVO.earnStep==1 || baseTreeVO.earnStep>buildingVO.step){
+				if(baseTreeVO.step==1 || baseTreeVO.step>buildingVO.currentStep){
 					MouseManager.instance.mouseStatus = MouseStatus.CUT_TREES ;
 				}else{
 					MouseManager.instance.mouseStatus = MouseStatus.SHOVEL_BUILDING ;
 				}
-				this.showStep( buildingVO.step,baseTreeVO.earnStep);
+				this.showStep( buildingVO.currentStep,baseTreeVO.step);
 			}
 		}
 		
@@ -55,7 +55,7 @@ package local.game.elements
 		}
 		/** 获取此建筑的标题 */
 		override public function get title():String  {
-			return baseBuildingVO.name+": "+buildingVO.step+"/"+baseTreeVO.earnStep;
+			return baseBuildingVO.name+": "+buildingVO.currentStep+"/"+baseTreeVO.step;
 		}
 		
 		override public function execute():void
@@ -75,7 +75,7 @@ package local.game.elements
 				return ;
 			}
 			super.execute();
-			if(baseTreeVO.earnStep==1 || baseTreeVO.earnStep>buildingVO.step){
+			if(baseTreeVO.step==1 || baseTreeVO.step>buildingVO.currentStep){
 				CharacterManager.instance.hero.gotoAndPlay(AvatarAction.CHOPPING);
 			}else{
 				CharacterManager.instance.hero.gotoAndPlay(AvatarAction.DIG);
@@ -88,19 +88,19 @@ package local.game.elements
 		{
 			super.showPickup();
 			//掉pickup
-			var value:int =baseTreeVO.earnCoins[buildingVO.step] ;
+			var value:int =baseTreeVO.earnCoins[buildingVO.currentStep] ;
 			if(value>0)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_COIN , value,screenX,screenY-offsetY);
-			value = baseTreeVO.earnWoods[buildingVO.step] ;
+			value = baseTreeVO.earnWoods[buildingVO.currentStep] ;
 			if(value)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_WOOD , value,screenX,screenY-offsetY);
-			value = baseTreeVO.earnExps[buildingVO.step] ;
+			value = baseTreeVO.earnExps[buildingVO.currentStep] ;
 			if(value>0) PickupUtil.addPickup2Wold(BasicPickup.PICKUP_EXP , value,screenX,screenY-offsetY);
 			//特殊物品
 			//-------------------------------------
-			buildingVO.step++;
-			if(buildingVO.step>=baseTreeVO.earnStep){
+			buildingVO.currentStep++;
+			if(buildingVO.currentStep>=baseTreeVO.step){
 				GameWorld.instance.removeBuilding(this); //删除这棵树
 			}else if(_skin){
-				_skin.gotoAndStop( buildingVO.step+1);
+				_skin.gotoAndStop( buildingVO.currentStep+1);
 			}
 		}
 		

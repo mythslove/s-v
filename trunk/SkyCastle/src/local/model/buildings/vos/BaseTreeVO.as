@@ -20,7 +20,7 @@ package local.model.buildings.vos
 		/** 每砍一次得到的经验值 */
 		public var earnExps:Array ;
 		
-		/** 可砍的次数 */
-		public var earnStep:int ;
+		/** 步骤数 */
+		public var step:int ;
 	}
 }
