@@ -64,17 +64,18 @@ package local.utils
 		}
 		
 		/** 清除队列 */
-		public function clear():void
+		public function clear( deep:Boolean = false ):void
 		{
-			CharacterManager.instance.hero.gotoAndPlay(AvatarAction.IDLE);
 			for each( var building:Building in _queue){
 				building.enable=true ;
 			}
-			if(currentBuilding){
-				currentBuilding.enable=true ;
+			if(deep){
+				if(currentBuilding){
+					currentBuilding.enable=true ;
+				}
+				currentBuilding = null ;
 			}
 			_queue = [] ;
-			currentBuilding = null ;
 		}
 	}
 }

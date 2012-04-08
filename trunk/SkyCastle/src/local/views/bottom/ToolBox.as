@@ -7,6 +7,7 @@ package local.views.bottom
 	import flash.events.MouseEvent;
 	
 	import local.comm.GameData;
+	import local.enum.AvatarAction;
 	import local.enum.BuildingOperation;
 	import local.utils.CharacterManager;
 	import local.utils.CollectQueueUtil;
@@ -74,7 +75,9 @@ package local.views.bottom
 					break ;
 				case btnCancelTool:
 					GameData.buildingCurrOperation=BuildingOperation.NONE ;
-					CharacterManager.instance.hero.stopMove();
+					if(CharacterManager.instance.hero.currentActions==AvatarAction.WALK){
+						CharacterManager.instance.hero.stopMove();
+					}
 					CollectQueueUtil.instance.clear();
 					break ;
 				case btnShopTool:
