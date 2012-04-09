@@ -3,6 +3,7 @@ package local.game.elements
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	
+	import local.comm.GameData;
 	import local.enum.AvatarAction;
 	import local.enum.ItemType;
 	import local.game.cell.BitmapMovieClip;
@@ -73,7 +74,9 @@ package local.game.elements
 				}
 				building.execute();
 			}
-			SettingCookieUtil.saveHeroPoint( nodeX , nodeZ );
+			if(GameData.isHome){
+				SettingCookieUtil.saveHeroPoint( nodeX , nodeZ );
+			}
 		}
 		
 		

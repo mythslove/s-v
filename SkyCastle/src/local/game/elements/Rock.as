@@ -76,7 +76,6 @@ package local.game.elements
 		{
 			if( _timeoutFlag && _executeBack)
 			{
-				super.showPickup();
 				//掉pickup
 				var value:int = baseRockVO.earnCoins[buildingVO.currentStep] ;
 				if(value>0)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_COIN , value,screenX,screenY-offsetY);
@@ -97,6 +96,7 @@ package local.game.elements
 				_timeoutFlag=false ;
 				_executeBack = false ;
 				_currentRewards = null ;
+				super.showPickup();
 			}
 		}
 	}

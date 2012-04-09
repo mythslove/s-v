@@ -120,7 +120,7 @@ package local.game
 			}
 			else if(_mouseOverBuild)
 			{
-				_mouseOverBuild.onClick() ;
+				if(_mouseOverBuild.enable) _mouseOverBuild.onClick() ;
 			}
 			else if(!CollectQueueUtil.instance.currentBuilding) //当前执行队列里没有建筑
 			{
@@ -332,8 +332,8 @@ package local.game
 			}
 			//再次确认英雄可以移动
 			if( !hero.getWalkable( MapGridDataModel.instance.astarGrid ) ){
-				hero.nodeX = GameData.heroBornPoint1 .nodeX ;
-				hero.nodeZ = GameData.heroBornPoint1 .nodeZ ;
+				hero.nodeX = GameData.heroBornPoint3.nodeX ;
+				hero.nodeZ = GameData.heroBornPoint3.nodeZ ;
 			}
 			GameWorld.instance.buildingScene1.sortAll();
 			GameWorld.instance.buildingScene2.sortAll();
