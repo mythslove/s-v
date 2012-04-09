@@ -77,8 +77,10 @@ package local.views.bottom
 					GameData.buildingCurrOperation=BuildingOperation.NONE ;
 					if(CharacterManager.instance.hero.currentActions==AvatarAction.WALK){
 						CharacterManager.instance.hero.stopMove();
+						CollectQueueUtil.instance.clear(true);
+					}else{
+						CollectQueueUtil.instance.clear();
 					}
-					CollectQueueUtil.instance.clear();
 					break ;
 				case btnShopTool:
 					GameData.buildingCurrOperation=BuildingOperation.NONE ;
