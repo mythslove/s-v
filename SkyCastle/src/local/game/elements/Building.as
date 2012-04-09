@@ -203,6 +203,26 @@ package local.game.elements
 			CollectQueueUtil.instance.nextBuilding();
 		}
 		
+		/**
+		 * 返回奖励的item 
+		 */		
+		protected function showRewardsPickup():void
+		{
+			if(_currentRewards){
+				//掉pickup
+				if(_currentRewards.coin>0)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_COIN , _currentRewards.coin,screenX,screenY-offsetY);
+				if(_currentRewards.exp>0)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_EXP , _currentRewards.exp,screenX,screenY-offsetY);
+				if(_currentRewards.stone>0)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_STONE , _currentRewards.stone,screenX,screenY-offsetY);
+				if(_currentRewards.wood>0)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_WOOD , _currentRewards.wood,screenX,screenY-offsetY);
+				if(_currentRewards.pickups){
+					var len:int = _currentRewards.pickups.length ;
+					for( var i:int = 0 ; i<len ; ++i){
+						PickupUtil.addPickup2Wold( _currentRewards.pickups[i] , _currentRewards.wood,screenX,screenY-offsetY);
+					}
+				}
+			}
+		}
+		
 		/*进度条时间完成*/
 		protected function timeoutHandler():void{
 			_timeoutFlag = true ; 

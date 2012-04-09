@@ -86,10 +86,21 @@ package local.game.elements
 				value = baseTreeVO.earnExps[buildingVO.currentStep] ;
 				if(value>0) PickupUtil.addPickup2Wold(BasicPickup.PICKUP_EXP , value,screenX,screenY-offsetY);
 				//特殊物品
+				showRewardsPickup();
 				//-------------------------------------
 				buildingVO.currentStep++;
 				if(buildingVO.currentStep>=baseTreeVO.step){
 					GameWorld.instance.removeBuilding(this); //删除这棵树
+					//添加动物或怪
+					if(_currentRewards && _currentRewards.buildings){
+						for( var i:int =0 ; i<_currentRewards.buildings.length ; ++i)
+						{
+							var animailVO:BuildingVO = _currentRewards.buildings[i] as  BuildingVO;
+							if(animailVO) {
+								GameWorld.instance.addBuildingByVO( nodeX, nodeZ , animailVO );
+							}
+						}
+					}
 				}else if(_skin){
 					_skin.gotoAndStop( buildingVO.currentStep+1);
 				}
