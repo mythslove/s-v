@@ -61,23 +61,23 @@ package local.game.elements
 					var value:int = baseBuildingVO.buildEarnExp;
 					if(value>0)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_EXP , value,screenX,screenY-offsetY);
 					//发送数据
-//					ro.getOperation("buy").send( buildingVO.shopItemId , nodeX,nodeZ );
+					ro.getOperation("buy").send( buildingVO.shopItemId , nodeX,nodeZ );
 					break ;
 				case BuildingOperation.ROTATE:
 					buildingVO.scale = scaleX ;
 					CharacterManager.instance.updateCharacters( this );
 					//发送数据
-//					ro.getOperation("rotate").send( buildingVO.id , buildingVO.scale );
+					ro.getOperation("rotate").send( buildingVO.id , buildingVO.scale );
 					break ;
 				case BuildingOperation.STASH:
 					//发送数据
-//					ro.getOperation("stash").send( buildingVO.id );
+					ro.getOperation("stash").send( buildingVO.id );
 					break ;
 				case BuildingOperation.MOVE:
 					playPlaceEffect();
 					CharacterManager.instance.updateCharacters( this );
 					//发送数据
-//					ro.getOperation("move").send( buildingVO.id , nodeX,nodeZ );
+					ro.getOperation("move").send( buildingVO.id , nodeX,nodeZ );
 					break ;
 				case BuildingOperation.SELL :
 					break ;
