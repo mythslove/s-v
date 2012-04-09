@@ -57,6 +57,7 @@ package local.game
 			this.y = -1600;
 			//初始缩放
 			this.scaleX = this.scaleY = SettingCookieUtil.getZoom() ;
+			BuildingExecuteLoading.instance.setScale(1/scaleX) ;
 		}
 		
 		public function init():void
