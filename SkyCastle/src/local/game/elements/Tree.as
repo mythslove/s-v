@@ -94,6 +94,9 @@ package local.game.elements
 				}else if(_skin){
 					_skin.gotoAndStop( buildingVO.currentStep+1);
 				}
+				_timeoutFlag=false ;
+				_executeBack = false ;
+				_currentRewards = null ;
 			}
 		}
 		
