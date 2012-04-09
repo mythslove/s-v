@@ -58,7 +58,7 @@ package local.game.elements
 				super.execute();
 				CharacterManager.instance.hero.gotoAndPlay(AvatarAction.PICKAXE);
 				_timeoutId = setTimeout( showPickup , 3500 );
-				GameWorld.instance.effectScene.addChild( BuildingExecuteLoading.getInstance(screenX,screenY-itemLayer.height).setTime(3000));
+				GameWorld.instance.effectScene.addChild( BuildingExecuteLoading.getInstance(screenX,screenY-itemLayer.height).setTime(4000));
 			}
 		}
 		

@@ -310,7 +310,6 @@ package local.game
 			//基础建筑
 			for each( var vo:BuildingVO in mapVO.mapItems)
 			{
-				vo.currentStep = 0 ; ////////暂时使用
 				if(player.basicItems && player.basicItems.hasOwnProperty(vo.nodeX+"_"+vo.nodeZ) )
 				{
 					vo.currentStep = player.basicItems[vo.nodeX+"_"+vo.nodeZ] ; 
