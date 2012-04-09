@@ -115,6 +115,8 @@ package local.game
 			m.tx += stage.stageWidth>>1;
 			m.ty += stage.stageHeight>>1;
 			this.transform.matrix=m;
+			if(scaleX>.9) scaleX = scaleY = 1 ;
+			else scaleX = scaleY = .6 ;
 			//更正位置
 			modifyMapPosition();
 			//更正特效大小
