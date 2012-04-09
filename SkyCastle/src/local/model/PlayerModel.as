@@ -11,6 +11,7 @@ package local.model
 	import local.model.vos.PlayerVO;
 	import local.utils.PopUpManager;
 	import local.views.CenterViewContainer;
+	import local.views.loading.MapChangeLoading;
 
 	/**
 	 * 玩家信息Model 
@@ -33,7 +34,7 @@ package local.model
 		private var _ro:GameRemote ;
 		public function PlayerModel()
 		{
-			_ro = new GameRemote("CommService");
+			_ro = new GameRemote("PlayerService");
 			_ro.addEventListener(ResultEvent.RESULT ,  onResultHandler );
 		}
 		
@@ -77,29 +78,29 @@ package local.model
 		 */		
 		public function getPlayer( uid:String , mapId:String ):void
 		{
-//			_ro.getOperation("getPlayer").send( uid , mapId );
-//			//添加loading
-//			PopUpManager.instance.clearAll();
-//			var loading:MapChangeLoading = new MapChangeLoading();
-//			PopUpManager.instance.addQueuePopUp( loading );
+			_ro.getOperation("getPlayer").send( uid , mapId );
+			//添加loading
+			PopUpManager.instance.clearAll();
+			var loading:MapChangeLoading = new MapChangeLoading();
+			PopUpManager.instance.addQueuePopUp( loading );
 			
 			//下面为模拟玩家数据，要测试接口的话，注释掉下面的
-			me = new PlayerVO();
-			me.cash = 100;
-			me.coin = 1000 ;
-			me.minExp = 2 ;
-			me.maxExp = 100 ;
-			me.exp = 14 ;
-			me.level = 1;
-			me.wood=200;
-			me.stone=209;
-			me.maxEnergy = 10 ;
-			me.energy = 86 ;
-			me.uid = Guid.create();
-			me.name = "bingheliefeng";
-			GameWorld.instance.initWorld();
-			CenterViewContainer.instance.topBar.updateTopBar();
-			GlobalDispatcher.instance.dispatchEvent( new UserInfoEvent(UserInfoEvent.USER_INFO_UPDATED));
+//			me = new PlayerVO();
+//			me.cash = 100;
+//			me.coin = 1000 ;
+//			me.minExp = 2 ;
+//			me.maxExp = 100 ;
+//			me.exp = 14 ;
+//			me.level = 1;
+//			me.wood=200;
+//			me.stone=209;
+//			me.maxEnergy = 10 ;
+//			me.energy = 86 ;
+//			me.uid = Guid.create();
+//			me.name = "bingheliefeng";
+//			GameWorld.instance.initWorld();
+//			CenterViewContainer.instance.topBar.updateTopBar();
+//			GlobalDispatcher.instance.dispatchEvent( new UserInfoEvent(UserInfoEvent.USER_INFO_UPDATED));
 		}
 		
 		/**

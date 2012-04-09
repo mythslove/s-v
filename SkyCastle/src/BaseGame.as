@@ -99,6 +99,7 @@ package
 					addChild(GameWorld.instance); //添加游戏世界
 					addChild( new LeftBar()); //居左的容器
 					addChild( CenterViewContainer.instance); //添加UI的容器
+					addChild(_preLoading);
 					
 					parseConfig();
 					inited();
