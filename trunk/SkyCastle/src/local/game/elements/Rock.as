@@ -85,7 +85,8 @@ package local.game.elements
 				if(value>0) PickupUtil.addPickup2Wold(BasicPickup.PICKUP_EXP , value,screenX,screenY-offsetY);
 				value = baseRockVO.earnStones[buildingVO.currentStep] ;
 				if(value>0) PickupUtil.addPickup2Wold(BasicPickup.PICKUP_STONE , value,screenX,screenY-offsetY);
-				//物品
+				//特殊物品
+				showRewardsPickup();
 				//-------------------------------------
 				buildingVO.currentStep++;
 				if(buildingVO.currentStep>=baseRockVO.step){
