@@ -63,7 +63,9 @@ package local.game.elements
 		override public function execute():void
 		{
 			super.execute();
-//			ro.getOperation("chop").send(nodeX,nodeZ,buildingVO.currentStep);
+			_currentRewards = null ;
+			_executeBack = false ;
+			ro.getOperation("chop").send(nodeX,nodeZ,buildingVO.currentStep);
 		}
 		
 		override protected function onResultHandler(e:ResultEvent):void
@@ -72,7 +74,8 @@ package local.game.elements
 			switch(e.method)
 			{
 				case "chop": 
-					
+					_executeBack = true ;
+					this.showPickup();
 					break ;
 			}
 		}

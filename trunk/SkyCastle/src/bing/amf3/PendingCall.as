@@ -1,5 +1,7 @@
 package bing.amf3
 {
+	import bing.utils.SystemUtil;
+	
 	import flash.net.NetConnection;
 	import flash.net.Responder;
 	import flash.utils.clearTimeout;
@@ -75,6 +77,7 @@ package bing.amf3
 		public function send( ...param):void 
 		{
 			this.params = param ;
+			SystemUtil.debug("SEND: "+service+"."+method , param);
 			execute();
 		}
 	}

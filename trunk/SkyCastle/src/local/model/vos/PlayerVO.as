@@ -34,13 +34,13 @@ package local.model.vos
 		
 		private var _cash:int ; //钱
 		
-		public var maxExp:int ;//最大经验值
+		public var maxExp:int =100;//最大经验值
 		
 		public var minExp:int ; //最小经验值
 		
 		private var _exp:int ; //当前经验值
 		
-		public var maxEnergy:int ; //最大能量
+		public var maxEnergy:int =10; //最大能量
 		
 		private var _energy:int ; //能量
 		

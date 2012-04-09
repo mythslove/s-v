@@ -16,6 +16,7 @@ package local.game.elements
 	import local.game.GameWorld;
 	import local.model.MapGridDataModel;
 	import local.model.buildings.vos.BuildingVO;
+	import local.model.vos.RewardsVO;
 	import local.utils.CharacterManager;
 	import local.utils.CollectQueueUtil;
 	import local.utils.EffectManager;
@@ -28,6 +29,10 @@ package local.game.elements
 	public class Building extends InteractiveBuilding
 	{
 		protected var _timeoutId:int ;
+		protected var _currentRewards:RewardsVO ; //接口返回的奖励
+		protected var _executeBack:Boolean ; //接口是否返回
+		protected var _timeoutFlag:Boolean ; //进度条是否完成
+		
 		private var _ro:GameRemote ;
 		public function get ro():GameRemote{
 			if(!_ro) {
@@ -196,6 +201,12 @@ package local.game.elements
 			enable=true ;
 			itemLayer.filters=null;
 			CollectQueueUtil.instance.nextBuilding();
+		}
+		
+		/*进度条时间完成*/
+		protected function timeoutHandler():void{
+			_timeoutFlag = true ; 
+			showPickup();
 		}
 		
 		override public function dispose():void
