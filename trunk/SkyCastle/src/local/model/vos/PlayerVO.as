@@ -20,6 +20,10 @@ package local.model.vos
 		/** 已经砍过的基础建筑 ，key为nodeX_nodeZ，value为currentStep*/
 		public var basicItems:Object ;
 		
+		public var gender:int ;  //0 , 1, 2为未知
+		
+		public var platform:String ;
+		
 		private var _level:int ; //等级
 		
 		private var _wood:int ; //木材
