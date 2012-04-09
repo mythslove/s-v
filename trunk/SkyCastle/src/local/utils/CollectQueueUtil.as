@@ -29,9 +29,13 @@ package local.utils
 		 */		
 		public function addBuilding( building:Building ):void
 		{
-			_queue.push( building );
-			if(currentBuilding==null ){
-				nextBuilding();
+			if(currentBuilding!=building && !checkInQueue(building))
+			{
+				building.enable=false;
+				_queue.push( building );
+				if(currentBuilding==null ){
+					nextBuilding();
+				}
 			}
 		}
 		

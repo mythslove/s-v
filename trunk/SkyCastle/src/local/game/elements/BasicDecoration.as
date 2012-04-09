@@ -102,10 +102,5 @@ package local.game.elements
 			}
 			return true;
 		}
-		
-		override public function dispose():void
-		{
-			super.dispose();
-		}
 	}
 }
