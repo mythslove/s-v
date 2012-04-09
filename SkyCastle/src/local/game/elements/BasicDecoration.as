@@ -70,7 +70,7 @@ package local.game.elements
 		
 		override protected function onResultHandler(e:ResultEvent):void
 		{
-			SystemUtil.debug(e.service , e.method , e.result);
+			SystemUtil.debug(e.service+"."+e.method , e.result);
 			switch(e.method)
 			{
 				case "chop": 
