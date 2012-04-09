@@ -33,6 +33,7 @@ package
 			//获取参数
 			var params:Object = loaderInfo.parameters ;
 			GameData.me_uid = params["player_id"];
+			GameData.me_uid= "1";
 			//注册vo
 			registerVOs();
 		}
