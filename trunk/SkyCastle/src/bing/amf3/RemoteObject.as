@@ -51,27 +51,29 @@ package bing.amf3
 		{
 			if(e.info.code!="NetConnection.Connect.Success")
 			{
-				dispatchFaultEvent("NetConnect","connect" , String(e.info.code)  );
+				dispatchFaultEvent("NetConnect","connect" , String(e.info.code) ,"","" );
 			}
 		}
 
 		private function handleErrorEvent( event : Event ) : void 
 		{
-			dispatchFaultEvent("NetConnect","connect" , event.type+" error:" +event["text"]  );
+			dispatchFaultEvent("NetConnect","connect" , event.type+" error:" +event["text"] ,"","" );
 		}
 		
 		private function onFault( rpc:PendingCall ):void
 		{
-			dispatchFaultEvent(rpc.service,rpc.method ,rpc.fault.message );
+			dispatchFaultEvent(rpc.service,rpc.method ,rpc.fault.method+"",rpc.fault.faultDetail+"",rpc.fault.faultString+"" );
 		}
 		
-		private function dispatchFaultEvent( service:String , method:String , message:String ):void 
+		private function dispatchFaultEvent( service:String , method:String , message:String , faultDetail:String , faultString:String ):void 
 		{
 			var evt:FaultEvent = new FaultEvent( FaultEvent.FAULT );
 			evt.faultObj = new Object();
 			evt.faultObj.service = service ;
 			evt.faultObj.method = method ;
 			evt.faultObj.message =  message ;
+			evt.faultObj.faultDetail =  faultDetail ;
+			evt.faultObj.faultString =  faultString ;
 			this.dispatchEvent( evt );
 		}
 		
