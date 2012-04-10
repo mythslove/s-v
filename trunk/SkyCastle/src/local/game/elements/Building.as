@@ -89,6 +89,8 @@ package local.game.elements
 			SystemUtil.debug(e.service+"."+e.method , e.result);
 			switch( e.method)
 			{
+				case "buy":
+					break ;
 				case "build":
 					break ;
 				case "sell":
