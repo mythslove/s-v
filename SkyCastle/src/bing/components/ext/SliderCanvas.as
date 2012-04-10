@@ -81,8 +81,6 @@ package local.views.base
 		}
 		
 		private function configListeners():void {
-			addEventListener(MouseEvent.MOUSE_DOWN , onMouseEvtHandler );
-			addEventListener(MouseEvent.MOUSE_DOWN , onMouseEvtHandler,true,1000 );
 			addEventListener(MouseEvent.MOUSE_UP , onMouseEvtHandler );
 			addEventListener(MouseEvent.MOUSE_OUT , onMouseEvtHandler );
 			addEventListener(MouseEvent.MOUSE_MOVE , onMouseEvtHandler );
@@ -93,9 +91,6 @@ package local.views.base
 			e.stopPropagation();
 			switch(e.type)
 			{
-				case MouseEvent.MOUSE_DOWN :
-					startDragContainer();
-					break ;
 				case MouseEvent.MOUSE_OUT:
 					if(e.target!=this||e.currentTarget!=this){
 						break ;
@@ -311,8 +306,6 @@ package local.views.base
 		}
 		
 		private function removeListeners():void{
-			removeEventListener(MouseEvent.MOUSE_DOWN , onMouseEvtHandler,true );
-			removeEventListener(MouseEvent.MOUSE_DOWN , onMouseEvtHandler );
 			removeEventListener(MouseEvent.MOUSE_UP , onMouseEvtHandler );
 			removeEventListener(MouseEvent.MOUSE_OUT , onMouseEvtHandler );
 			removeEventListener(MouseEvent.MOUSE_MOVE , onMouseEvtHandler );
