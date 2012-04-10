@@ -2,6 +2,7 @@ package local.comm
 {
 	import bing.amf3.FaultEvent;
 	import bing.amf3.RemoteObject;
+	import bing.utils.SystemUtil;
 	
 	/**
 	 * AMF3通信基类 
@@ -25,7 +26,7 @@ package local.comm
 		
 		private function onFaultHandler( e:FaultEvent ):void
 		{
-			trace(e.faultObj );
+			SystemUtil.debug(e.faultObj );
 		}
 		
 		override public function dispose():void
