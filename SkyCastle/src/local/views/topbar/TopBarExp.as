@@ -27,18 +27,22 @@ package local.views.topbar
 		
 		public function update(obj:Object):void
 		{
-			txtValue.text = obj[0]+"/"+obj[2];
-			txtLevel.text = obj[3] ;
+			var exp:int = obj[0];
+			var maxExp:int = obj[1];
+			var level:int = obj[2] ;
+			
+			txtValue.text = exp+"/"+maxExp;
+			txtLevel.text = level+"" ;
 			if(_inited){
-				TweenLite.to( bar , 0.4 , {scaleX:  obj[0]/obj[2]});
+				TweenLite.to( bar , 0.4 , {scaleX:exp/maxExp });
 			}else{
-				bar.scaleX = obj[0]/obj[2] ;
+				bar.scaleX = exp/maxExp ;
 				_inited = true ;
 			}
 			if(bar.scaleX>1){
 				bar.scaleX = 1;
 			}
-			GameToolTip.instance.register(txtLevel , stage , "LEVEL: "+obj[3] );
+			GameToolTip.instance.register(txtLevel , stage , "LEVEL: "+level );
 		}
 	}
 }
