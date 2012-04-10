@@ -1,6 +1,7 @@
 package local.game.elements
 {
 	import bing.amf3.ResultEvent;
+	import bing.utils.SystemUtil;
 	
 	import local.enum.BuildingStatus;
 	import local.enum.MouseStatus;
@@ -35,7 +36,7 @@ package local.game.elements
 		
 		override protected function onResultHandler( e:ResultEvent ):void
 		{
-			trace(e.service , e.method , e.result);
+			SystemUtil.debug(e.service+"."+e.method , e.result);
 			switch( e.method)
 			{
 				case "build":
