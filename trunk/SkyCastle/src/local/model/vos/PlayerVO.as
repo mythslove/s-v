@@ -36,8 +36,6 @@ package local.model.vos
 		
 		public var maxExp:int =100;//最大经验值
 		
-		public var minExp:int ; //最小经验值
-		
 		private var _exp:int ; //当前经验值
 		
 		public var maxEnergy:int =10; //最大能量
