@@ -41,7 +41,7 @@ package local.game.elements
 			super.onMouseOver();
 			if(!MouseManager.instance.checkControl() )
 			{
-				if(baseTreeVO.step==1 || baseTreeVO.step>buildingVO.currentStep){
+				if(baseTreeVO.step==1 || buildingVO.currentStep+1<baseTreeVO.step){
 					MouseManager.instance.mouseStatus = MouseStatus.CUT_TREES ;
 				}else{
 					MouseManager.instance.mouseStatus = MouseStatus.SHOVEL_BUILDING ;
@@ -63,7 +63,7 @@ package local.game.elements
 			if(executeReduceEnergy())
 			{
 				super.execute();
-				if(baseTreeVO.step==1 || baseTreeVO.step>buildingVO.currentStep){
+				if(baseTreeVO.step==0 || buildingVO.currentStep+1<baseTreeVO.step){
 					CharacterManager.instance.hero.gotoAndPlay(AvatarAction.CHOPPING);
 				}else{
 					CharacterManager.instance.hero.gotoAndPlay(AvatarAction.DIG);

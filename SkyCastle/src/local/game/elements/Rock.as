@@ -38,7 +38,7 @@ package local.game.elements
 			super.onMouseOver();
 			if(!MouseManager.instance.checkControl() )
 			{
-				if( baseRockVO.step==0 || baseRockVO.step>=buildingVO.currentStep){
+				if( baseRockVO.step==0 || buildingVO.currentStep+1<baseRockVO.step){
 					MouseManager.instance.mouseStatus = MouseStatus.BEAT_STONE ;
 				}else{
 					MouseManager.instance.mouseStatus = MouseStatus.SHOVEL_BUILDING ;
@@ -61,7 +61,7 @@ package local.game.elements
 			if(executeReduceEnergy())
 			{
 				super.execute();
-				if( baseRockVO.step==0 || baseRockVO.step>=buildingVO.currentStep){
+				if( baseRockVO.step==0 || buildingVO.currentStep+1<baseRockVO.step){
 					CharacterManager.instance.hero.gotoAndPlay(AvatarAction.PICKAXE);
 				}else{
 					CharacterManager.instance.hero.gotoAndPlay(AvatarAction.DIG);

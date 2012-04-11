@@ -9,6 +9,7 @@ package local.game.elements
 	import local.model.PlayerModel;
 	import local.model.buildings.vos.BuildingVO;
 	import local.model.map.MapModel;
+	import local.model.vos.RewardsVO;
 	import local.utils.CharacterManager;
 	import local.utils.CollectQueueUtil;
 	import local.views.CenterViewContainer;
@@ -75,6 +76,7 @@ package local.game.elements
 			{
 				case "chop": 
 					_executeBack = true ;
+					_currentRewards = e.result as RewardsVO ;
 					this.showPickup();
 					break ;
 			}
