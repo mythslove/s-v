@@ -9,12 +9,12 @@ package local.enum
 	{
 		
 		/**
-		 * 大类：建筑 
+		 * 大类：建筑 ，对应的类为Architecture
 		 */		
 		public static const BUILDING:String = "building"; 
-		/** 建筑：房子*/
+		/** 建筑：房子 ，对应的类为House */
 		public static const BUILDING_HOUSE:String = "house" ;
-		/** 建筑：工厂 */
+		/** 建筑：工厂，对应的类为Factory  */
 		public static const BUILDING_FACTORY:String = "factory" ;
 		
 		
