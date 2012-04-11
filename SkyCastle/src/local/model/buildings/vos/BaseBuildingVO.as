@@ -1,7 +1,7 @@
 package local.model.buildings.vos
 {
 	/**
-	 * 建筑基础VO 
+	 * 游戏所有建筑基础VO基类 
 	 * @author zzhanglin
 	 */	
 	public class BaseBuildingVO
@@ -37,6 +37,12 @@ package local.model.buildings.vos
 		
 		/** 修建获得的经验 */
 		public var buildEarnExp:int ;
+		
+		/** 变化的繁荣度 */
+		public var rank:int ;
+		
+		/** 修建完成需要的材料 ，总共5种，一样一个*/
+		public var materials:Array ;
 		
 		//在哪个文件夹
 		protected var _file:String = "building";
