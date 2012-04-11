@@ -26,16 +26,5 @@ package local.game.elements
 			return buildingVO.baseVO.name+"(Lv"+buildingVO.level+")";
 		}
 		
-		override public function onClick():void
-		{
-//			super.onClick();
-			switch( buildingVO.buildingStatus )
-			{
-				case BuildingStatus.PRODUCT:
-					break;
-				case BuildingStatus.HARVEST :
-					break ;
-			}
-		}
 	}
 }
