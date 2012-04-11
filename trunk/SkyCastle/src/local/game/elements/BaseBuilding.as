@@ -131,6 +131,7 @@ package local.game.elements
 			}else{
 				itemLayer.alpha = .6 ;
 			}
+			stepLoading.alpha=itemLayer.alpha ;
 		}
 		
 		/**主要用于旋转建筑，1为正，-1为旋转180度 */		
