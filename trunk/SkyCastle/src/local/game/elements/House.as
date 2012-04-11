@@ -8,7 +8,7 @@ package local.game.elements
 	 * 房子 
 	 * @author zzhanglin
 	 */	
-	public class House extends Building
+	public class House extends Architecture
 	{
 		public function House(vo:BuildingVO)
 		{

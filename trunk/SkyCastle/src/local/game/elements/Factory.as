@@ -13,7 +13,7 @@ package local.game.elements
 	 * 工厂 
 	 * @author zzhanglin
 	 */	
-	public class Factory extends Building
+	public class Factory extends Architecture
 	{
 		public function Factory(vo:BuildingVO)
 		{

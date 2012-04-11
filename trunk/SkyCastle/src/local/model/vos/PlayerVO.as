@@ -20,6 +20,8 @@ package local.model.vos
 		/** 已经砍过的基础建筑 ，key为nodeX_nodeZ，value为currentStep*/
 		public var basicItems:Object ;
 		
+		public var rank:int ; //繁荣度
+		
 		public var gender:int ;  //0 , 1, 2为未知
 		
 		public var platform:String ;

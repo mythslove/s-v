@@ -24,6 +24,9 @@ package local.utils
 			var building:Building ;
 			switch( vo.baseVO.type )
 			{
+				case ItemType.BUILDING:
+					building = new Architecture(vo); //建筑
+					break ;
 				case ItemType.BUILDING_FACTORY: //工厂
 					building = new Factory( vo );
 					break ;

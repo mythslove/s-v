@@ -4,7 +4,6 @@ package local.model.vos
 	{
 		public var alias:String; 
 		
-		public var title:String ;
-		public var descript:String ;
+		public var name:String ;
 	}
 }
