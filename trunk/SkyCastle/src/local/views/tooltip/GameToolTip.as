@@ -65,13 +65,17 @@ package  local.views.tooltip
 					break;
 				case MouseEvent.MOUSE_OVER:
 					this.show(e.target as InteractiveObject);
-					this.move(e.stageX, e.stageY) ;
+					if(_hitSprite) this.move(e.stageX, e.stageY) ;
 					break;
 			}
 		}
 		
 		protected function show( hitSprite:InteractiveObject ):void
 		{
+			if(!hitSprite){
+				this.hide();
+				return ;
+			}
 			_hitSprite=hitSprite;
 			if( !_hitSprite.hasEventListener(MouseEvent.MOUSE_OUT))
 				_hitSprite.addEventListener(MouseEvent.MOUSE_OUT, this.mouseEventHandler,false,0,true);
