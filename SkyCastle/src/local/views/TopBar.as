@@ -32,23 +32,34 @@ package  local.views
 			super();
 		}
 		
-		private function userInfoUpdateHandler( e:UserInfoEvent ):void
+		public function updateCoin():void
 		{
-			var user:PlayerVO ;
-			user = PlayerModel.instance.me; 
-			setUserInfo(user);
+			coinBar.update( PlayerModel.instance.me.coin );
 		}
 		
-		private function setUserInfo( user:PlayerVO ):void
+		public function updateCash():void
 		{
-			coinBar.update( user.coin );
-			energyBar.update( [user.energy , user.maxEnergy ]  );
-			expBar.update( [user.exp , user.maxExp , user.level ] );
-			stoneBar.update( user.stone );
-			woodBar.update( user.wood );
-			gemBar.update( user.cash ) ;
-			userBar.update( user.name ) ;
-			rankBar.update( user.rank );
+			gemBar.update( PlayerModel.instance.me.cash ) ;
+		}
+		
+		public function updateEnergy():void
+		{
+			energyBar.update( [PlayerModel.instance.me.energy , PlayerModel.instance.me.maxEnergy ]  );
+		}
+		
+		public function updateExp():void
+		{
+			expBar.update( [PlayerModel.instance.me.exp , PlayerModel.instance.me.maxExp , PlayerModel.instance.me.level ] );
+		}
+		
+		public function updateWood():void
+		{
+			woodBar.update( PlayerModel.instance.me.wood );
+		}
+		
+		public function updateStone():void
+		{
+			stoneBar.update( PlayerModel.instance.me.stone );
 		}
 		
 		public function updateName():void
@@ -65,6 +76,17 @@ package  local.views
 		public function updateTopBar():void
 		{
 			setUserInfo( PlayerModel.instance.me );
+		}
+		private function setUserInfo( user:PlayerVO ):void
+		{
+			coinBar.update( user.coin );
+			energyBar.update( [user.energy , user.maxEnergy ]  );
+			expBar.update( [user.exp , user.maxExp , user.level ] );
+			stoneBar.update( user.stone );
+			woodBar.update( user.wood );
+			gemBar.update( user.cash ) ;
+			userBar.update( user.name ) ;
+			rankBar.update( user.rank );
 		}
 	}
 }

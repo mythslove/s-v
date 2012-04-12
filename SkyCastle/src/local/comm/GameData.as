@@ -60,7 +60,7 @@ package local.comm
 		public static var currentMapId:String = "MAP_01";
 		
 		/** 是否在自己的村庄*/
-		public static var isHome:Boolean = true ;
+		public static var isHome:Boolean ;
 		
 		/** 当前用户的uid*/
 		public static var me_uid:String ;
