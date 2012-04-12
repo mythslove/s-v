@@ -5,8 +5,10 @@ package local.game.elements
 	
 	import local.enum.BuildingStatus;
 	import local.enum.MouseStatus;
+	import local.model.PlayerModel;
 	import local.model.buildings.vos.BuildingVO;
 	import local.utils.MouseManager;
+	import local.views.CenterViewContainer;
 	
 	/**
 	 * 工厂，房子的等建筑的基类 
@@ -56,7 +58,8 @@ package local.game.elements
 				case "build":
 					break ;
 				case "buildComplete":
-					
+					PlayerModel.instance.me.rank+=buildingVO.baseVO.rank ;
+					CenterViewContainer.instance.topBar.updateRank();
 					break ;
 			}
 		}
