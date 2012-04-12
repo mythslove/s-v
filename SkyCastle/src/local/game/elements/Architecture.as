@@ -58,14 +58,16 @@ package local.game.elements
 			}
 		}
 		
-		override public function execute():void
+		override public function execute():Boolean
 		{
 			super.execute() ;
-			//判断材料
-			if( baseBuildingVO.materials)
+			
+			if( buildingVO.buildingStatus==BuildingStatus.BUILDING && buildingVO.currentStep+1==buildingVO.baseVO.step && baseBuildingVO.materials)
 			{
-				
+				//判断材料
+				return false ;
 			}
+			return true ;
 		}
 	}
 }

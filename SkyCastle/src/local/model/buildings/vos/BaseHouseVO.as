@@ -37,8 +37,5 @@ package local.model.buildings.vos
 		
 		/** 第一次修建时需要的石头数*/
 		public var buildStone:int ;
-		
-		/** 步骤数 */
-		public var step:int ;
 	}
 }

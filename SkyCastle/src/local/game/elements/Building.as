@@ -186,13 +186,14 @@ package local.game.elements
 		/**
 		 * 英雄移动到建筑旁边，开始执行动作 
 		 */		
-		public function execute():void
+		public function execute():Boolean
 		{
 			itemLayer.alpha=1 ;
 			TweenMax.to(itemLayer, 0, {dropShadowFilter:{color:0x00ff00, alpha:1, blurX:2, blurY:2, strength:5}});
 			if(stepLoading&&stepLoading.parent){
 				stepLoading.parent.removeChild(stepLoading);
 			}
+			return true ;
 		}
 		
 		/**

@@ -61,12 +61,13 @@ package local.game.elements
 		}
 		
 		
-		override public function execute():void
+		override public function execute():Boolean
 		{
 			super.execute();
 			_currentRewards = null ;
 			_executeBack = false ;
 			ro.getOperation("chop").send(nodeX,nodeZ,buildingVO.currentStep);
+			return true ;
 		}
 		
 		override protected function onResultHandler(e:ResultEvent):void

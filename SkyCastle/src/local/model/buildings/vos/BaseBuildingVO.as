@@ -41,6 +41,9 @@ package local.model.buildings.vos
 		/** 变化的繁荣度 */
 		public var rank:int ;
 		
+		/** 步骤数 */
+		public var step:int ;
+		
 		/** 修建完成需要的材料 ，总共5种，一样一个*/
 		public var materials:Array ;
 		
