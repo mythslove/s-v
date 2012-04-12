@@ -94,8 +94,10 @@ package local.game.elements
 				case "build":
 					break ;
 				case "sell":
+					this.dispose();
 					 break ;
 				case "stash":
+					this.dispose();
 					break ;
 				case "rotate":
 					break ;

@@ -55,6 +55,11 @@ package local.game.cell
 				&& grid.getNode(curNodeX,curNodeZ).walkable 
 				&&!gridDataModel.extraHash[curNodeX+"-"+curNodeZ])
 			{
+				if( layerType==LayerType.GROUND && MapGridDataModel.instance.basicItems.getNode(curNodeX,curNodeZ).walkable )
+				{
+					setWalkabled(false);
+					return ;
+				}
 				setWalkabled(true);
 			}else{
 				setWalkabled(false);

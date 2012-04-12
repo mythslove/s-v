@@ -30,6 +30,7 @@ package local.model
 		 */		
 		public var sceneHash:Dictionary = new Dictionary();
 		
+		
 		/**
 		 * 建筑层数据 
 		 */		
@@ -39,6 +40,11 @@ package local.model
 		 * 地面层数据 
 		 */		
 		public var groundGrid:Grid = new Grid(GameSetting.GRID_X , GameSetting.GRID_Z);
+		
+		/**
+		 * 基本建筑占用的格子 
+		 */		
+		public var basicItems:Grid  = new Grid(GameSetting.GRID_X , GameSetting.GRID_Z);
 		
 		/**
 		 * 重置Grid数据 

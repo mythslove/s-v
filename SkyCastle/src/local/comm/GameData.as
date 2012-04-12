@@ -28,7 +28,7 @@ package local.comm
 				case BuildingOperation.BUY:
 				case BuildingOperation.NONE:
 					MouseManager.instance.mouseStatus = MouseStatus.NONE ;
-					GameWorld.instance.clearTopScene() ;
+					GameWorld.instance.clearTopScene(true) ;
 					break ;
 				case BuildingOperation.MOVE:
 					MouseManager.instance.mouseStatus = MouseStatus.MOVE_BUILDING ;
