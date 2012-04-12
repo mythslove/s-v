@@ -56,7 +56,7 @@ package local.game.elements
 			return baseBuildingVO.name+": "+buildingVO.currentStep+"/"+baseRockVO.step;
 		}
 		
-		override public function execute():void
+		override public function execute():Boolean
 		{
 			if(executeReduceEnergy())
 			{
@@ -70,6 +70,7 @@ package local.game.elements
 				_timeoutId = setTimeout( timeoutHandler , 4000 );
 				GameWorld.instance.effectScene.addChild( BuildingExecuteLoading.getInstance(screenX,screenY-itemLayer.height).setTime(4000));
 			}
+			return true ;
 		}
 		
 		override public function showPickup():void

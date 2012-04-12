@@ -29,9 +29,6 @@ package local.model.buildings.vos
 		/** 收藏的石头*/
 		public var earnStone:int ;
 		
-		/** 修建需要花费的步数*/
-		public var step:int ;
-		
 		/** 第一次修建时需要的木头数 */
 		public var buildWood:int ;
 		
