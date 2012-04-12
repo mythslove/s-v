@@ -48,7 +48,7 @@ package local.views.icon
 		private function init():void
 		{
 			visible = true ;
-			TweenLite.to(this, 0.65, {x: x+(35+Math.random()*75)*MathUtil.getRandomFlag()  , ease:Linear.easeNone});
+			TweenLite.to(this, 0.65, {x: x+(45+Math.random()*75)*MathUtil.getRandomFlag()  , ease:Linear.easeNone});
 			TweenLite.to(this, 0.65, {y: y+75+Math.random()*75 , ease:Bounce.easeOut , onComplete:inOver});
 		}
 		
