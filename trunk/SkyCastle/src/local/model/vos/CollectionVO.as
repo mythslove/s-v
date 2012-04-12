@@ -10,7 +10,7 @@ package local.model.vos
 		
 		public var title:String ;  //标题名称
 		
-		public var descript:String ; //描述
+		public var describe:String ; //描述
 		
 		public var pickups:Array ; //下面的一组 ,（5个一组）
 		

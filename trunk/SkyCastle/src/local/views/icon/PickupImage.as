@@ -41,11 +41,13 @@ package local.views.icon
 			mouseChildren =false ;
 			mouseEnabled = false ;
 			this._value = value ;
+			visible = false ;
 			setTimeout( init , Math.random()*200 );
 		}
 		
 		private function init():void
 		{
+			visible = true ;
 			TweenLite.to(this, 0.65, {x: x+(35+Math.random()*75)*MathUtil.getRandomFlag()  , ease:Linear.easeNone});
 			TweenLite.to(this, 0.65, {y: y+75+Math.random()*75 , ease:Bounce.easeOut , onComplete:inOver});
 		}
