@@ -19,5 +19,6 @@ package local.model.vos
 		public var exchangeStone:int ;
 		public var exchangeXp:int ;
 		public var exchangeCoin:int ;
+		public var exchangeEnergy:int;
 	}
 }
