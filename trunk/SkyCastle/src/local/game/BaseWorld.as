@@ -200,7 +200,9 @@ package local.game
 			} else if(build.parent is GroundScene) {
 				(build.parent as GroundScene).removeBuilding( build , updateDirection );
 			}
+			MapBuildingModel.instance.removeBuilding( build );
 		}
+		
 		
 		/**
 		 * 添加一个建筑到场景上 
@@ -250,29 +252,6 @@ package local.game
 			}
 			MapBuildingModel.instance.addBuilding( result );
 			return result;
-		}
-		
-		/**
-		 * 删除建筑 
-		 * @param building
-		 */		
-		public function removeBuilding( building:Building , updateDirection:Boolean=true ):void
-		{
-			if(building.baseBuildingVO.layer==LayerType.GROUND) //添加到地面层
-			{
-				var groundScene:GroundScene = getGroundScene (building.nodeX,building.nodeZ);
-				if(groundScene) {
-					groundScene.removeBuilding(building , updateDirection );
-				}
-			}
-			else if(building.baseBuildingVO.layer==LayerType.BUILDING)//添加到建筑层
-			{
-				var buildingScene:BuildingScene = getBuildingScene(building.nodeX,building.nodeZ);
-				if(buildingScene) {
-					buildingScene.removeBuilding( building );
-				}
-			}
-			MapBuildingModel.instance.removeBuilding( building );
 		}
 		
 		/**运行 */		
@@ -395,13 +374,14 @@ package local.game
 		}
 		
 		/**清除topScene  */		
-		public function clearTopScene():void
+		public function clearTopScene( dispose:Boolean=false ):void
 		{
 			ContainerUtil.removeChildren(topScene);
 			topScene.visible = false  ;
 			if(_topBuilding){
 				_topBuilding.removeGrid();
 				_topBuilding.itemLayer.alpha = 1;
+				if(dispose) _topBuilding.dispose();
 			}
 			_topBuilding = null ;
 		}
@@ -412,7 +392,7 @@ package local.game
 			for each( var scene:IsoScene in scenes){
 				scene.clear();
 			}
-			clearTopScene() ;
+			clearTopScene(true) ;
 		}
 		
 	}

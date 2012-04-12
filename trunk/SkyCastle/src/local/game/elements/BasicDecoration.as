@@ -6,6 +6,7 @@ package local.game.elements
 	import local.comm.GameData;
 	import local.enum.BuildingOperation;
 	import local.game.GameWorld;
+	import local.model.MapGridDataModel;
 	import local.model.PlayerModel;
 	import local.model.buildings.vos.BuildingVO;
 	import local.model.map.MapModel;
@@ -106,5 +107,10 @@ package local.game.elements
 			return true;
 		}
 		
+		override public function dispose():void
+		{
+			setWalkable( true ,MapGridDataModel.instance.basicItems );
+			super.dispose();
+		}
 	}
 }

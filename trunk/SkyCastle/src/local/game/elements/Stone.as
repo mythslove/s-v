@@ -79,15 +79,16 @@ package local.game.elements
 				showRewardsPickup();
 				//-------------------------------------
 				buildingVO.currentStep++;
-				if(buildingVO.currentStep>=baseStoneVO.step){
-					GameWorld.instance.removeBuilding(this); //删除这棵树
-				}else if(_skin){
-					_skin.gotoAndStop( buildingVO.currentStep+1);
-				}
 				_timeoutFlag=false ;
 				_executeBack = false ;
 				_currentRewards = null ;
 				super.showPickup();
+				if(buildingVO.currentStep>=baseStoneVO.step){
+					GameWorld.instance.removeBuildFromScene(this) ; 
+					this.dispose();
+				}else if(_skin){
+					_skin.gotoAndStop( buildingVO.currentStep+1);
+				}
 			}
 		}
 	}

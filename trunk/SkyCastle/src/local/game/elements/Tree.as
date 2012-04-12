@@ -90,8 +90,13 @@ package local.game.elements
 				showRewardsPickup();
 				//-------------------------------------
 				buildingVO.currentStep++;
+				_timeoutFlag=false ;
+				_executeBack = false ;
+				_currentRewards = null ;
+				super.showPickup();
+				
 				if(buildingVO.currentStep>=baseTreeVO.step){
-					GameWorld.instance.removeBuilding(this); //删除这棵树
+					GameWorld.instance.removeBuildFromScene(this);
 					//添加动物或怪
 					if(_currentRewards && _currentRewards.buildings){
 						for( var i:int =0 ; i<_currentRewards.buildings.length ; ++i)
@@ -102,13 +107,10 @@ package local.game.elements
 							}
 						}
 					}
+					this.dispose();
 				}else if(_skin){
 					_skin.gotoAndStop( buildingVO.currentStep+1);
 				}
-				_timeoutFlag=false ;
-				_executeBack = false ;
-				_currentRewards = null ;
-				super.showPickup();
 			}
 		}
 		
