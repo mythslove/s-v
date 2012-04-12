@@ -12,7 +12,11 @@ package local.model.vos
 		
 		public var describe:String ; //描述
 		
+		public var collectLevel:int ; //当前收集到第几步，总共九步
+		
 		public var pickups:Array ; //下面的一组 ,（5个一组）
+		
+		public var extra:RewardsVO; //额外的奖励
 		
 		/** 收集完成后，可以兑换的东西，取其中 三种 */
 		public var exchangeWood:int ;
