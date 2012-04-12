@@ -36,11 +36,6 @@ package  local.views
 		{
 			var user:PlayerVO ;
 			user = PlayerModel.instance.me; 
-//			if(GameData.isHome) {
-//				user = VillageModel.instance.me; 
-//			}else{
-//				user = VillageModel.instance.friend;
-//			}
 			setUserInfo(user);
 		}
 		
@@ -54,6 +49,16 @@ package  local.views
 			gemBar.update( user.cash ) ;
 			userBar.update( user.name ) ;
 			rankBar.update( user.rank );
+		}
+		
+		public function updateName():void
+		{
+			userBar.update( PlayerModel.instance.me.name ) ;
+		}
+		
+		public function updateRank():void
+		{
+			rankBar.update( PlayerModel.instance.me.rank );
 		}
 		
 		/**更新topbar信息*/
