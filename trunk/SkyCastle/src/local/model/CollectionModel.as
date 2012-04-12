@@ -20,9 +20,6 @@ package local.model
 		/** 所有的收集物配置 */
 		public var allCollections:Vector.<CollectionVO> ;
 		
-		/** 玩家收集的收集物PickupVO，key为alias，value为PickupVO*/
-		public var playerCollections:Object ; 
-		
 		/**
 		 * 解析加载的配置文件 
 		 * @param config

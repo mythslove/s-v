@@ -8,7 +8,7 @@ package local.model.vos
 	{
 		public var id:int ; 
 		
-		public var type:String ;  //类型名称
+		public var title:String ;  //标题名称
 		
 		public var descript:String ; //描述
 		
