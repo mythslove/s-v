@@ -9,6 +9,7 @@ package  local.views
 	import local.views.topbar.TopBarEnergy;
 	import local.views.topbar.TopBarExp;
 	import local.views.topbar.TopBarGem;
+	import local.views.topbar.TopBarRank;
 	import local.views.topbar.TopBarStone;
 	import local.views.topbar.TopBarUserName;
 	import local.views.topbar.TopBarWood;
@@ -22,6 +23,7 @@ package  local.views
 		public var woodBar:TopBarWood;
 		public var userBar:TopBarUserName;
 		public var gemBar:TopBarGem;
+		public var rankBar:TopBarRank;
 		public var addEnergyBar:AddEnergyBar ;
 		//===========================
 		
@@ -51,6 +53,7 @@ package  local.views
 			woodBar.update( user.wood );
 			gemBar.update( user.cash ) ;
 			userBar.update( user.name ) ;
+			rankBar.update( user.rank );
 		}
 		
 		/**更新topbar信息*/
