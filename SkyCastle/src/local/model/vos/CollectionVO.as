@@ -14,7 +14,7 @@ package local.model.vos
 		
 		public var pickups:Array ; //下面的一组 ,（5个一组）
 		
-		/** 收集完成后，可以兑换的东西，木头和石头选其中一个 */
+		/** 收集完成后，可以兑换的东西，取其中 三种 */
 		public var exchangeWood:int ;
 		public var exchangeStone:int ;
 		public var exchangeXp:int ;
