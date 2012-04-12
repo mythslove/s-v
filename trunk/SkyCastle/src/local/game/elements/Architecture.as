@@ -55,6 +55,9 @@ package local.game.elements
 			{
 				case "build":
 					break ;
+				case "buildComplete":
+					
+					break ;
 			}
 		}
 		
@@ -64,10 +67,19 @@ package local.game.elements
 			
 			if( buildingVO.buildingStatus==BuildingStatus.BUILDING && buildingVO.currentStep+1==buildingVO.baseVO.step && baseBuildingVO.materials)
 			{
-				//判断材料
+				//弹出判断材料的窗口
 				return false ;
 			}
 			return true ;
+		}
+		
+		/**
+		 * 发送建造完成的消息到服务器 
+		 */		
+		public function sendBuildComplete():void
+		{
+			buildingVO.buildingStatus=BuildingStatus.NONE ;
+			ro.getOperation("buildComplete").send(buildingVO.id);
 		}
 	}
 }
