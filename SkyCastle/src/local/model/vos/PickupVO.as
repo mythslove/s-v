@@ -12,7 +12,7 @@ package local.model.vos
 		
 		public var type:String ; //ItemType中的pickup类型常量
 		
-		public var descript:String ; //描述
+		public var describe:String ; //描述
 		
 		public var num:int =1 ; //数量，用于统计
 		

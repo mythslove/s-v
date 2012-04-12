@@ -1,5 +1,6 @@
 package local.utils
 {
+	import local.comm.GameSetting;
 	import local.enum.BasicPickup;
 	import local.game.GameWorld;
 	import local.views.icon.PickupImage;
@@ -62,7 +63,7 @@ package local.utils
 					img = new PickupImage(name,value);
 					break ;
 			}
-			world.addEffect(img,x,y);
+			world.addEffect(img,x,y-GameSetting.GRID_SIZE);
 		}
 	}
 }
