@@ -63,5 +63,18 @@ package local.enum
 			}
 			return CHACTERS ;
 		}
+		
+		/**
+		 * pickup类型：材料 
+		 */		
+		public static const PICKUP_MATERIAL:String = "material";
+		/**
+		 * pickup类型：收集物 
+		 */		
+		public static const PICKUP_COLLECTION:String = "collection";
+		/**
+		 *  pickup类型：故事
+		 */	
+		public static const PICKUP_STORY:String="story";
 	}
 }
