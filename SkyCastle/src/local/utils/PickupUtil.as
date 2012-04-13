@@ -26,9 +26,13 @@ package local.utils
 			switch(name)
 			{
 				case BasicPickup.PICKUP_COIN:
-					if(value>70){
+					if(value>100){
+						img = new PickupImage(name+5,value,name);
+					}else if( value>70){
+						img = new PickupImage(name+4,value,name);
+					}else if( value>50){
 						img = new PickupImage(name+3,value,name);
-					}else if( value>30){
+					}else if( value>20){
 						img = new PickupImage(name+2,value,name);
 					}else{
 						img = new PickupImage(name+1,value,name);
