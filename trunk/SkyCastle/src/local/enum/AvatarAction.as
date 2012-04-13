@@ -31,5 +31,13 @@ package local.enum
 		public static const SHOP:String = "SHOP";
 		public static const WALK:String = "WALK"; 
 		public static const WATER:String = "WATER"; 
+		
+		/** 畏缩的，害怕的 */
+		public static const COWER:String = "COWER";
+		/** 跳 */
+		public static const RUNAWAY:String ="RUNAWAY";
+		/** 背着跳 */
+		public static const RUNAWAYBACK:String="RUNAWAY-BACK";
+		
 	}
 }
