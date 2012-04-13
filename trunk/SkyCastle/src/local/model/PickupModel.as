@@ -20,7 +20,7 @@ package local.model
 			return _instance; 
 		}
 		//=================================
-		/** 所有的pickup配置，key为alias , value为PickupVO*/
+		/** 所有的pickup配置，key为pickupId , value为PickupVO*/
 		public var pickups:Object ;
 		
 		/** 玩家已经收集到的所有的pickup */

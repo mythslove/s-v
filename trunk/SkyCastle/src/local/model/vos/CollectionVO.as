@@ -6,13 +6,11 @@ package local.model.vos
 	 */	
 	public class CollectionVO
 	{
-		public var id:int ; 
+		public var groupId:String ; 
 		
 		public var title:String ;  //标题名称
 		
 		public var describe:String ; //描述
-		
-		public var collectLevel:int ; //当前收集到第几步，总共九步
 		
 		public var pickups:Array ; //下面的一组 ,（5个一组）
 		
