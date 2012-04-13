@@ -112,7 +112,7 @@ package local.game.elements
 						}
 					}
 				}else if(_currentActions==AvatarAction.IDLE){
-					nodeX=endNodeX;
+					nodeX = endNodeX;
 					nodeZ = endNodeZ;
 					gotoAndPlay(AvatarAction.IDLE);
 					sort();
