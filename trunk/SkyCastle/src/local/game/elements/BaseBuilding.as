@@ -213,9 +213,9 @@ package local.game.elements
 				for( i = minz ;  i<=mZ ; i++) {
 					for( j = minx ; j<=mX ; j++) {
 						if( i==minz|| j==minx || i==mZ || j==mX) {
-							if(j<GameSetting.GRID_X &&  i<GameSetting.GRID_Z && j>=0 && i>=0 &&
-								MapGridDataModel.instance.astarGrid.getNode(j,i).walkable)
-								arr.push( new Vector3D( i*_size , this.y , j*_size )  );
+							if(i<GameSetting.GRID_X &&  j<GameSetting.GRID_Z && i>=0 && j>=0 &&
+								MapGridDataModel.instance.astarGrid.getNode(i,j).walkable)
+								arr.push( new Vector3D( i*_size , this.y , j*_size ) );
 						}
 					}
 				}
