@@ -43,9 +43,12 @@ package local.enum
 		
 		/** 大类：人*/
 		public static const CHACTERS:String = "character" ;
-		
 		/**  动物  */		
 		public static const ANIMAIL:String = "animal";
+		/** npc*/
+		public static const NPC:String = "npc";
+		
+		
 		
 		/**
 		 * 获得大的类型 
