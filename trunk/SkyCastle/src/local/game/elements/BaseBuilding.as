@@ -204,32 +204,28 @@ package local.game.elements
 		public function getRoundAblePoint():Array
 		{
 			var arr:Array = [];
-			var pos:Vector3D;
-			var nz:int ;
-			var nx:int ;
+			var minx:int = nodeX-1;
+			var minz:int = nodeZ-1;
+			var mX:int = nodeX+_xSpan ;
+			var mZ:int = nodeZ+_zSpan ;
+			
 			if(_isRotate) {
-				for( i = -1 ;  i<=_zSpan ; i++) {
-					for( j = -1 ; j<=_xSpan ; j++) {
-						if( i==-1|| j==-1 || i==_zSpan || j==_xSpan) {
-							pos = new Vector3D( i*_size+this.x , this.y , j*_size+this.z );
-							nx = pos.x/_size ;
-							nz = pos.z/_size ;
-							if(nx<=GameSetting.GRID_X &&  nz<=GameSetting.GRID_Z && nx>=0 && nz>=0 &&
-								MapGridDataModel.instance.astarGrid.getNode(nx,nz).walkable)
-								arr.push( pos );
+				for( i = minz ;  i<=mZ ; i++) {
+					for( j = minx ; j<=mX ; j++) {
+						if( i==minz|| j==minx || i==mZ || j==mX) {
+							if(j<GameSetting.GRID_X &&  i<GameSetting.GRID_Z && j>=0 && i>=0 &&
+								MapGridDataModel.instance.astarGrid.getNode(j,i).walkable)
+								arr.push( new Vector3D( i*_size , this.y , j*_size )  );
 						}
 					}
 				}
 			} else {
-				for( var i:int = -1 ;  i<=_xSpan ; ++i){
-					for( var j:int = -1 ; j<=_zSpan ; ++j) {
-						if( i==-1|| j==-1 || i==_xSpan || j==_zSpan) {
-							pos = new Vector3D( i*_size+this.x , this.y , j*_size+this.z );
-							nx = pos.x/_size ;
-							nz = pos.z/_size ;
-							if(nx<=GameSetting.GRID_X &&  nz<=GameSetting.GRID_Z && nx>=0 && nz>=0 &&
-								MapGridDataModel.instance.astarGrid.getNode(nx,nz).walkable)
-								arr.push( pos );
+				for( var i:int = minx ;  i<=mX ; ++i){
+					for( var j:int = minz ; j<=mZ ; ++j) {
+						if( i==minx|| j==minz || i==mX || j==mZ) {
+							if(i<GameSetting.GRID_X &&  j<GameSetting.GRID_Z && i>=0 && j>=0 &&
+								MapGridDataModel.instance.astarGrid.getNode(i,j).walkable)
+								arr.push( new Vector3D( i*_size , this.y , j*_size ) );
 						}
 					}
 				}
