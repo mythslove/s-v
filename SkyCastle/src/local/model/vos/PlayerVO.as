@@ -22,6 +22,9 @@ package local.model.vos
 		/** 已经砍过的基础建筑 ，key为nodeX_nodeZ，value为currentStep*/
 		public var basicItems:Object ;
 		
+		/** 玩家已经收集了的物品 ,key 为pickupId，value为数量*/
+		public var pickups:Object ; 
+		
 		public var gender:int ;  //0 , 1, 2为未知
 		
 		public var platform:String ;
