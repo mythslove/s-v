@@ -39,7 +39,7 @@ package local.model
 		public function getPickupById( pickupId:String ):PickupVO
 		{
 			var vo:PickupVO ;
-			if(pickups && pickups.hasOwnProperty(vo.pickupId)){
+			if(pickups && pickups.hasOwnProperty(pickupId)){
 				vo =  pickups[pickupId] as PickupVO;
 			}
 			return vo ;

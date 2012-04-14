@@ -18,19 +18,21 @@ package local.views.base
 		private var _isCenter:Boolean;
 		private var _showLoading:Boolean;
 		private var _smallLoading:LoaderSmall;
+		private var _scale:Number ;
 		
 		/**
 		 * @param resId
 		 * @param url
 		 * @param tempBmd 加载时临时显示的图像
 		 */		
-		public function Image( resId:String , url:String , isCenter:Boolean = true , showLoading:Boolean= true )
+		public function Image( resId:String , url:String , isCenter:Boolean = true , showLoading:Boolean= true , scale:Number = 1  )
 		{
 			super();
 			this._resId = resId ;
 			this._url = url ;
 			this._isCenter = isCenter; 
 			this._showLoading = showLoading ;
+			this._scale = scale ;
 		}
 		
 		override protected function added():void
@@ -52,6 +54,7 @@ package local.views.base
 				_bitmap.x = -_bitmap.width>>1;
 				_bitmap.y = - _bitmap.height>>1;
 			}
+			this.scaleX = this.scaleY = _scale ;
 			addChild(_bitmap);
 		}
 		

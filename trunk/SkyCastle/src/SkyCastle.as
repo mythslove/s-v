@@ -75,6 +75,8 @@ package
 			registerClassAlias("StorageItemVO",StorageItemVO) ;
 			registerClassAlias("ConfigBaseVO",ConfigBaseVO) ;
 			registerClassAlias("MapVO",MapVO) ;
+			registerClassAlias("PickupVO",PickupVO) ;
+			registerClassAlias("CollectionVO",CollectionVO) ;
 		}
 		
 		/*获得了玩家信息后，进入游戏*/

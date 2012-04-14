@@ -20,11 +20,11 @@ package local.model
 			return _instance; 
 		}
 		//=================================
-		/** 所有的收集物配置 , key为groupid , value为[CollectionVO]*/
+		/** 所有的收集物配置 , key为groupid , CollectionVO*/
 		public var collectionsHash:Object ;
 		
 		/** groupId数组，用于界面的遍历显示 */
-		public var collectionArray:Vector.<String> ;
+		public var collectionArray:Vector.<CollectionVO> ;
 		
 		/** 我已经 收集的 , key为groupId , value为兑换等级*/
 		public var myCollection:Object ;
@@ -51,32 +51,22 @@ package local.model
 		public function parseConfig( config:ConfigBaseVO ):void
 		{
 			collectionsHash = config.collections ;
-			collectionArray = new Vector.<String>();
+			collectionArray = new Vector.<CollectionVO>();
 			for( var key:String in collectionsHash){
-				collectionArray.push( key );
+				collectionArray.push( collectionsHash[key] );
 			}
 		}
-		
 		/**
-		 * 通过groupId获取所有的CollectionVO 
+		 * groupId的当前等级 
 		 * @param groupId
 		 * @return 
 		 */		
-		public function getCollectionsByGroundId( groupId:String ):Array
+		public function getCollLvByGrounp( groupId:String):int
 		{
-			return collectionsHash[groupId] as Array ;
-		}
-		
-		
-		/**
-		 * 通过groupid 和 兑换等级来获得CollectionVO 
-		 * @param groupId Collection组id
-		 * @param lv 兑换等级
-		 * @return  
-		 */		
-		public function getCollectionByLvAndId( groupId:String , lv:int ):CollectionVO
-		{
-			return getCollectionsByGroundId(groupId)[lv] as CollectionVO ;
+			if( myCollection && myCollection.hasOwnProperty(groupId)){
+				return myCollection[groupId] ;
+			}
+			return 0 ;
 		}
 	}
 }
