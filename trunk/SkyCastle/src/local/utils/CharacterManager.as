@@ -5,6 +5,7 @@ package local.utils
 	import local.game.elements.Building;
 	import local.game.elements.Character;
 	import local.game.elements.Hero;
+	import local.game.elements.NPC;
 
 	/**
 	 * 场景上的人管理类 
@@ -23,6 +24,9 @@ package local.utils
 		/**英雄*/
 		public var hero:Hero ;
 		
+		/**所有的npc*/
+		public var npcs:Vector.<NPC>
+		
 		/**
 		 * 更新所有的人，以免得人不能移动 
 		 * @param building
@@ -31,6 +35,11 @@ package local.utils
 		{
 			if(!building.baseBuildingVO.walkable){
 				updateCharacter(hero,building);
+				if(npcs){
+					for each( var npc:NPC in npcs){
+						updateCharacter(npc,building);
+					}
+				}
 			}
 		}
 		
