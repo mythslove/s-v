@@ -14,13 +14,10 @@ package local.model.vos
 		
 		public var pickups:Array ; //下面的一组 ,（5个一组）,pickupId数组
 		
-		public var extra:RewardsVO; //额外的奖励
+		/**额外的奖励 ,key为lv , value为RewardsVO */
+		public var extras:Object; 
 		
-		/** 收集完成后，可以兑换的东西，取其中 三种 */
-		public var exchangeWood:int ;
-		public var exchangeStone:int ;
-		public var exchangeExp:int ;
-		public var exchangeCoin:int ;
-		public var exchangeEnergy:int;
+		/** key为lv , value为RewardsVO */
+		public var exchanges:Object ;
 	}
 }

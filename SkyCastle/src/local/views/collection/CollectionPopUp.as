@@ -29,7 +29,7 @@ package local.views.collection
 		public var container:Sprite ;
 //		public var menuBar
 		//=============================
-		private var _currCollections:Vector.<String > ;
+		private var _currCollections:Vector.<CollectionVO > ;
 		private const COUNT:int = 2 ;//一页显示两个
 		private var _totalPage:int ;
 		private var _page:int ;
@@ -50,6 +50,10 @@ package local.views.collection
 			btnClose.addEventListener( MouseEvent.CLICK , closeClickHandler , false , 0 , true );
 			
 			_currCollections = CollectionModel.instance.collectionArray ;
+			_totalPage = 0 ;
+			if(_currCollections){
+				_totalPage = Math.ceil(_currCollections.length/COUNT);
+			}
 			showList(0);
 		}
 		private function inTweenOver():void{
@@ -82,7 +86,7 @@ package local.views.collection
 			var temp:int = 0 ;
 			for( var i:int = _page*COUNT ; i<len && i<_page*COUNT+COUNT ; ++i )
 			{
-				render = new CollectionItemRenderer();
+				render = new CollectionItemRenderer(_currCollections[i]);
 				render.y = temp*(render.height+20);
 				container.addChild(render);
 				temp++;

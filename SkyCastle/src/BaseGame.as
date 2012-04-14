@@ -15,6 +15,8 @@ package
 	import local.comm.GlobalDispatcher;
 	import local.comm.GlobalEvent;
 	import local.game.GameWorld;
+	import local.model.CollectionModel;
+	import local.model.PickupModel;
 	import local.model.ShopModel;
 	import local.model.buildings.BaseBuildingVOModel;
 	import local.model.vos.ConfigBaseVO;
@@ -123,6 +125,8 @@ package
 				//各自解析
 				BaseBuildingVOModel.instance.parseConfig( config );
 				ShopModel.instance.parseConfig( config );
+				PickupModel.instance.parseConfig(config);
+				CollectionModel.instance.parseConfig(config);
 				
 				GameData.config = config ;
 			}else{

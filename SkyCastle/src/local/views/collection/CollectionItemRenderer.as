@@ -3,6 +3,7 @@ package local.views.collection
 	import bing.components.button.BaseButton;
 	import bing.mvc.core.Model;
 	
+	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	
@@ -10,6 +11,7 @@ package local.views.collection
 	import local.model.PickupModel;
 	import local.model.vos.CollectionVO;
 	import local.model.vos.PickupVO;
+	import local.model.vos.RewardsVO;
 	import local.views.BaseView;
 	import local.views.base.Image;
 	import local.views.icon.GameIcons;
@@ -22,23 +24,26 @@ package local.views.collection
 	{
 		public var levelBar:CollectionLevelBar ;
 		public var txtTitle:TextField;
-//		txtName0:TextField,	img0:Sprite ,	txCount0:TextField , icon0:Spirte , txtReward0:TextField
+		public var img0:Sprite ,  img1:Sprite ,  img2:Sprite ,  img3:Sprite ,  img4:Sprite ;
+		public var icon0:Sprite ,  icon1:Sprite ,  icon2:Sprite  ;
+		public var txtName0:TextField ,  txtName1:TextField ,  txtName2:TextField ,  txtName3:TextField ,  txtName4:TextField ;
+		public var txCount0:TextField ,  txCount1:TextField ,  txCount2:TextField ,  txCount3:TextField ,  txCount4:TextField ;
+		public var txtReward0:TextField , txtReward1:TextField ,  txtReward2:TextField , txtReward3:TextField ,  txtReward4:TextField ;
 		public var btnTurnIn:BaseButton;
 		//===========================
 		private var _currCollection:CollectionVO ; //当前的CollectionVO
 		private var _groupId:String ; //collection组
 		private var _lv:int = 0 ; //兑换等级
 		
-		public function CollectionItemRenderer( groupId:String=null )
+		public function CollectionItemRenderer( vo:CollectionVO )
 		{
 			super();
-			this._groupId = groupId ;
+			this._currCollection = vo ;
 			//判断当前组已经收集到第几等级了
 			var myColl:Object = CollectionModel.instance.myCollection ;
-			if(myColl && myColl.hasOwnProperty(groupId)){
-				_lv = myColl[groupId] ;
+			if(myColl && myColl.hasOwnProperty(vo.groupId)){
+				_lv = myColl[vo.groupId] ;
 			}
-			this._currCollection = CollectionModel.instance.getCollectionByLvAndId(groupId , _lv );
 		}
 		
 		override protected function added():void
@@ -53,11 +58,12 @@ package local.views.collection
 			for( var i:int = 0 ; i <len ; ++i)
 			{
 				pickupVO = PickupModel.instance.getPickupById( _currCollection.pickups[i] );
-				img = new Image("pickup"+pickupVO.name , pickupVO.url );
+				img = new Image("pickup"+pickupVO.name , pickupVO.url , true , true , .6 );
 				this["img"+i].addChild(img);
 				this["txtName"+i].text = pickupVO.name ;
-				this["txCount"+i].text = "×"+CollectionModel.instance.myCollection[_currCollection.pickups[i]] ;
+				if(CollectionModel.instance.myCollection && CollectionModel.instance.myCollection.get)
 				count = PickupModel.instance.getMyPickupCount(pickupVO.pickupId);
+				this["txCount"+i].text = "×"+count ;
 				if(count>0 && count<= _lv){
 					canCharge= false ;
 				}
@@ -65,39 +71,44 @@ package local.views.collection
 			//显示兑换的钱
 			var iconMc:GameIcons ;
 			var temp:int = 0 ;
-			if(_currCollection.exchangeCoin>0){
+			var exchangeRewards:RewardsVO = _currCollection.exchanges[_lv+1] ;
+			if(exchangeRewards.coin>0){
 				iconMc = new GameIcons();
 				iconMc.gotoAndStop("coin");
 				this["icon"+temp].addChild(iconMc);
-				this["txtReward"+temp].text = _currCollection.exchangeCoin +" Coin";
+				this["txtReward"+temp].text = exchangeRewards.coin +" Coin";
 				++temp ;
 			}
-			if(_currCollection.exchangeEnergy>0){
+			if(exchangeRewards.energy>0){
 				iconMc = new GameIcons();
 				iconMc.gotoAndStop("energy");
 				this["icon"+temp].addChild(iconMc);
-				this["txtReward"+temp].text = _currCollection.exchangeEnergy +" Energy";
+				this["txtReward"+temp].text = exchangeRewards.energy +" Energy";
 				++temp ;
 			}
-			if(_currCollection.exchangeExp>0){
+			if(exchangeRewards.exp>0){
 				iconMc = new GameIcons();
 				iconMc.gotoAndStop("exp");
 				this["icon"+temp].addChild(iconMc);
-				this["txtReward"+temp].text = _currCollection.exchangeExp +" Exp";
+				this["txtReward"+temp].text = exchangeRewards.exp +" Exp";
 				++temp ;
 			}
-			if(_currCollection.exchangeStone>0){
+			if(exchangeRewards.stone>0){
 				iconMc = new GameIcons();
 				iconMc.gotoAndStop("stone");
-				this["icon"+temp].addChild(iconMc);
-				this["txtReward"+temp].text = _currCollection.exchangeStone +" Stone";
+				if(temp<3){	
+					this["icon"+temp].addChild(iconMc);
+					this["txtReward"+temp].text = exchangeRewards.stone +" Stone";
+				}
 				++temp ;
 			}
-			if(_currCollection.exchangeWood>0){
+			if(exchangeRewards.wood>0){
 				iconMc = new GameIcons();
 				iconMc.gotoAndStop("wood");
-				this["icon"+temp].addChild(iconMc);
-				this["txtReward"+temp].text = _currCollection.exchangeWood +" Wood";
+				if(temp<3){
+					this["icon"+temp].addChild(iconMc);
+					this["txtReward"+temp].text = exchangeRewards.wood +" Wood";
+				}
 				++temp ;
 			}
 			//兑换按钮
