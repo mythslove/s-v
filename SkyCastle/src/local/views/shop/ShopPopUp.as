@@ -48,14 +48,14 @@ package local.views.shop
 		public function ShopPopUp()
 		{
 			super();
+			x = GameSetting.SCREEN_WIDTH>>1;
+			y = GameSetting.SCREEN_HEIGHT>>1;
 			container.visible=false;
 		}
 		
 		override protected function added():void
 		{
-			x = GameSetting.SCREEN_WIDTH>>1;
-			y = GameSetting.SCREEN_HEIGHT>>1;
-			TweenLite.from(this,0.5,{x:-width , ease:Back.easeOut , onComplete:inTweenOver });
+			TweenLite.from(this,0.25,{x:-200 , ease:Back.easeOut , onComplete:inTweenOver });
 			
 			tabMenu.addEventListener(ToggleItemEvent.ITEM_SELECTED , tabMenuHandler , false , 0 , true ) ;
 			btnClose.addEventListener( MouseEvent.CLICK , closeClickHandler , false , 0 , true );
@@ -173,7 +173,7 @@ package local.views.shop
 		{
 			mouseChildren = false ;
 			container.visible=false;
-			TweenLite.to(this,0.5,{x:GameSetting.SCREEN_WIDTH+width , ease:Back.easeIn , onComplete:tweenComplete});
+			TweenLite.to(this,0.25,{x:x+200 , ease:Back.easeIn , onComplete:tweenComplete});
 		}
 		
 		private function tweenComplete():void {
