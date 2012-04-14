@@ -15,7 +15,7 @@ package local.comm
 		public function GameRemote(servicePath:String)
 		{
 			if(!gateWay){
-				gateWay = "http://10.0.15.2/MyService/Apps/gateway.php?";
+				gateWay = "http://199.68.199.132/MyService/Apps/gateway.php?";
 				gateWay+="sandbox=1" ;
 				gateWay+="&mId="+GameData.currentMapId
 				gateWay+="&uId="+GameData.me_uid ;
