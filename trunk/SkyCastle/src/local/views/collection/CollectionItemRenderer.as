@@ -64,7 +64,10 @@ package local.views.collection
 				if(CollectionModel.instance.myCollection && CollectionModel.instance.myCollection.get)
 				count = PickupModel.instance.getMyPickupCount(pickupVO.pickupId);
 				this["txCount"+i].text = "×"+count ;
-				if(count==0 || count<= _lv) canCharge= false ;
+				if(count==0 || count<= _lv) {
+					canCharge= false ;
+					img.alpha=.6;
+				}
 			}
 			//显示兑换的钱
 			var iconMc:GameIcons ;
