@@ -55,7 +55,7 @@ package local.views.shop
 		
 		override protected function added():void
 		{
-			TweenLite.from(this,0.25,{x:-200 , ease:Back.easeOut , onComplete:inTweenOver });
+			TweenLite.from(this,0.3,{x:-200 , ease:Back.easeOut , onComplete:inTweenOver });
 			
 			tabMenu.addEventListener(ToggleItemEvent.ITEM_SELECTED , tabMenuHandler , false , 0 , true ) ;
 			btnClose.addEventListener( MouseEvent.CLICK , closeClickHandler , false , 0 , true );
@@ -173,7 +173,7 @@ package local.views.shop
 		{
 			mouseChildren = false ;
 			container.visible=false;
-			TweenLite.to(this,0.25,{x:x+200 , ease:Back.easeIn , onComplete:tweenComplete});
+			TweenLite.to(this,0.3,{x:x+200 , ease:Back.easeIn , onComplete:tweenComplete});
 		}
 		
 		private function tweenComplete():void {
