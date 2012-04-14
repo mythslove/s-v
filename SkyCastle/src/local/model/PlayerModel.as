@@ -84,11 +84,29 @@ package local.model
 		 */		
 		public function getPlayer( uid:String , mapId:String ):void
 		{
-			_ro.getOperation("getPlayer").send( uid , mapId );
+//			_ro.getOperation("getPlayer").send( uid , mapId );
 			//添加loading
-			PopUpManager.instance.clearAll();
-			var loading:MapChangeLoading = new MapChangeLoading();
-			PopUpManager.instance.addQueuePopUp( loading );
+//			PopUpManager.instance.clearAll();
+//			var loading:MapChangeLoading = new MapChangeLoading();
+//			PopUpManager.instance.addQueuePopUp( loading );
+			
+			//下面为模拟玩家数据，要测试接口的话，注释掉下面的
+			GameData.isHome = true ;
+			me = new PlayerVO();
+			me.cash = 100;
+			me.coin = 1000 ;
+			me.maxExp = 100 ;
+			me.exp = 14 ;
+			me.level = 1;
+			me.wood=200;
+			me.stone=209;
+			me.maxEnergy = 100 ;
+			me.energy = 86 ;
+			me.uid = Guid.create();
+			me.name = "bingheliefeng";
+			CenterViewContainer.instance.topBar.updateTopBar();
+			GlobalDispatcher.instance.dispatchEvent( new UserInfoEvent(UserInfoEvent.USER_INFO_UPDATED));
+			GameWorld.instance.initWorld();
 		}
 		
 		/**
