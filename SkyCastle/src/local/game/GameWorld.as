@@ -23,6 +23,7 @@ package local.game
 	import local.model.MapGridDataModel;
 	import local.model.PlayerModel;
 	import local.model.buildings.vos.BuildingVO;
+	import local.model.map.MapModel;
 	import local.model.map.vos.MapVO;
 	import local.model.vos.PlayerVO;
 	import local.utils.CharacterManager;
@@ -304,6 +305,7 @@ package local.game
 				SystemUtil.debug(GameData.currentMapId+"_BUILDINGS没有压缩");
 			}
 			var mapVO:MapVO = bytes.readObject() as MapVO ;
+			MapModel.instance.mapVO = mapVO ;
 			var player:PlayerVO = GameData.isHome ? PlayerModel.instance.me : PlayerModel.instance.friend ;
 			var building:Building ;
 			var currentStep:int ;
