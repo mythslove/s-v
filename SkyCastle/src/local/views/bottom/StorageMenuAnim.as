@@ -6,6 +6,7 @@ package local.views.bottom
 	import flash.events.MouseEvent;
 	
 	import local.utils.PopUpManager;
+	import local.views.collection.CollectionPopUp;
 	import local.views.storage.StoragePopUp;
 	
 	public class StorageMenuAnim extends BingComponent
@@ -50,10 +51,12 @@ package local.views.bottom
 			switch( e.target )
 			{
 				case storageMenu.btnCollection:
+					var collectionPopup:CollectionPopUp = new CollectionPopUp();
+					PopUpManager.instance.addQueuePopUp(collectionPopup);
 					break ;
 				case storageMenu.btnStorage:
 					var storagePopup:StoragePopUp = new StoragePopUp();
-					PopUpManager.instance.addQueuePopUp(storagePopup,true);
+					PopUpManager.instance.addQueuePopUp(storagePopup);
 					break ;
 			}
 			stageClickHandler(null);

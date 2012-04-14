@@ -24,12 +24,12 @@ package local.views.collection
 	public class CollectionPopUp extends BaseView
 	{
 		public var btnClose:BaseButton;
-		public var btnPrevPage:BaseToggleButton;
-		public var btnNextPage:BaseToggleButton;
+		public var btnPrevPage:BaseButton;
+		public var btnNextPage:BaseButton;
 		public var container:Sprite ;
 //		public var menuBar
 		//=============================
-		private var _currCollections:Vector.<CollectionVO > ;
+		private var _currCollections:Vector.<String > ;
 		private const COUNT:int = 2 ;//一页显示两个
 		private var _totalPage:int ;
 		private var _page:int ;
@@ -49,7 +49,7 @@ package local.views.collection
 			btnNextPage.addEventListener(MouseEvent.CLICK , pageBtnHandler , false , 0 , true );
 			btnClose.addEventListener( MouseEvent.CLICK , closeClickHandler , false , 0 , true );
 			
-			_currCollections = CollectionModel.instance.allCollections ;
+			_currCollections = CollectionModel.instance.collectionArray ;
 			showList(0);
 		}
 		private function inTweenOver():void{
