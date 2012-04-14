@@ -390,7 +390,7 @@ package local.game
 		protected function clearWorld():void
 		{
 			for each( var scene:IsoScene in scenes){
-				scene.clear();
+				if(scene!=skyScene) scene.clear(); 
 			}
 			clearTopScene(true) ;
 		}
