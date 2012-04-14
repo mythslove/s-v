@@ -12,6 +12,8 @@ package local.model.vos
 		
 		public var describe:String ; //描述
 		
+		public var level:int ; //等级
+		
 		public var pickups:Array ; //下面的一组 ,（5个一组）,pickupId数组
 		
 		public var extra:RewardsVO; //额外的奖励
