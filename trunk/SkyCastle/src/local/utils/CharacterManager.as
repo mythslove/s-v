@@ -25,7 +25,7 @@ package local.utils
 		public var hero:Hero ;
 		
 		/**所有的npc*/
-		public var npcs:Vector.<NPC>
+		public var npcs:Vector.<NPC> ;
 		
 		/**
 		 * 更新所有的人，以免得人不能移动 
