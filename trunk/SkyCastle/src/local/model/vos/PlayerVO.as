@@ -25,7 +25,7 @@ package local.model.vos
 		/** 玩家已经收集了的pickup ,key 为pickupId，value为数量*/
 		public var pickups:Object ; 
 		
-		/** 玩家的收集统计, key为groupId , key为兑换等级*/
+		/** 玩家的收集统计, key为groupId , value为兑换等级*/
 		public var collections:Object ;
 		
 		public var gender:int ;  //0 , 1, 2为未知
