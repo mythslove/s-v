@@ -58,7 +58,7 @@ package local.views.collection
 			for( var i:int = 0 ; i <len ; ++i)
 			{
 				pickupVO = PickupModel.instance.getPickupById( _currCollection.pickups[i] );
-				img = new Image("pickup"+pickupVO.name , pickupVO.url , true , true , .8 );
+				img = new Image("pickup"+pickupVO.name , pickupVO.url );
 				this["img"+i].addChild(img);
 				this["txtName"+i].text = pickupVO.name ;
 				if(CollectionModel.instance.myCollection && CollectionModel.instance.myCollection.get)
