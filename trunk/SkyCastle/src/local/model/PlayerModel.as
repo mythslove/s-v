@@ -51,6 +51,8 @@ package local.model
 					if(player.uid==GameData.me_uid) {
 						GameData.isHome = true ;
 						me = player ;
+						// pickups
+						PickupModel.instance.playerPickups = player.pickups ;
 						//	显示和更新玩家显示信息
 						CenterViewContainer.instance.topBar.updateTopBar();
 						GlobalDispatcher.instance.dispatchEvent( new UserInfoEvent(UserInfoEvent.USER_INFO_UPDATED));
