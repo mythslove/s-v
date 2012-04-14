@@ -58,15 +58,13 @@ package local.views.collection
 			for( var i:int = 0 ; i <len ; ++i)
 			{
 				pickupVO = PickupModel.instance.getPickupById( _currCollection.pickups[i] );
-				img = new Image("pickup"+pickupVO.name , pickupVO.url , true , true , .6 );
+				img = new Image("pickup"+pickupVO.name , pickupVO.url , true , true , .8 );
 				this["img"+i].addChild(img);
 				this["txtName"+i].text = pickupVO.name ;
 				if(CollectionModel.instance.myCollection && CollectionModel.instance.myCollection.get)
 				count = PickupModel.instance.getMyPickupCount(pickupVO.pickupId);
 				this["txCount"+i].text = "×"+count ;
-				if(count>0 && count<= _lv){
-					canCharge= false ;
-				}
+				if(count==0 || count<= _lv) canCharge= false ;
 			}
 			//显示兑换的钱
 			var iconMc:GameIcons ;
