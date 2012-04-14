@@ -13,8 +13,11 @@ package local.views.icon
 	import flash.utils.setTimeout;
 	
 	import local.enum.BasicPickup;
+	import local.enum.ItemType;
 	import local.game.GameWorld;
+	import local.model.PickupModel;
 	import local.model.PlayerModel;
+	import local.model.vos.PickupVO;
 	import local.model.vos.PlayerVO;
 	import local.views.CenterViewContainer;
 	import local.views.base.Image;
@@ -33,9 +36,12 @@ package local.views.icon
 		 * @param value 值
 		 * @param type 0为不是基础pickup
 		 */		
-		public function PickupImage(name:String , value:int , type:String=null )
+		public function PickupImage(name:String , value:int =1 , type:String=null )
 		{
-			super(name, "res/pickup/"+name+".png", true);
+			var url:String = type? "res/pickup/"+name+".png" : "res/pickup/pickup"+name+".png" ;
+			var alias:String = type ? name : "pickup"+name ;
+			super(alias, url, true);
+			
 			_name = name ;
 			_type = type ;
 			mouseChildren =false ;
@@ -112,7 +118,20 @@ package local.views.icon
 			}
 			else
 			{
-				//飞到搜集箱中
+				var pickupVO:PickupVO = PickupModel.instance.getPickupById( _name );
+				if(pickupVO)
+				{
+					if( pickupVO.type==ItemType.PICKUP_COLLECTION )
+					{
+						//弹出搜集箱
+					}
+					else
+					{
+						//飞到搜集箱中
+					}
+					//添加到玩家pickup中
+					PickupModel.instance.addPickup( _name , _value );
+				}
 			}
 		}
 		

@@ -64,7 +64,7 @@ package local.utils
 					break ;
 				default:
 					//特殊的物品
-					img = new PickupImage("pickup"+name,value);
+					img = new PickupImage(name,value );
 					break ;
 			}
 			world.addEffect(img,x,y-GameSetting.GRID_SIZE);
