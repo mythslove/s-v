@@ -52,7 +52,9 @@ package local.model
 						GameData.isHome = true ;
 						me = player ;
 						// pickups
-						PickupModel.instance.playerPickups = player.pickups ;
+						PickupModel.instance.myPickups = player.pickups ;
+						//collections
+						CollectionModel.instance.myCollection = player.collections ;
 						//	显示和更新玩家显示信息
 						CenterViewContainer.instance.topBar.updateTopBar();
 						GlobalDispatcher.instance.dispatchEvent( new UserInfoEvent(UserInfoEvent.USER_INFO_UPDATED));

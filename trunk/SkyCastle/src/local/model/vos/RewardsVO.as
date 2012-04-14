@@ -11,6 +11,7 @@ package local.model.vos
 		public var exp:int ;
 		public var wood:int ;
 		public var stone:int ;
+		public var energy:int ;
 		public var buildings:Array; //baseId集合
 		public var pickups:Array; //pickup名字集合
 	}

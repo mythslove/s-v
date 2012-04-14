@@ -20,7 +20,7 @@ package local.model
 		public var pickups:Object ;
 		
 		/** 玩家已经收集到的所有的pickup, key为pickupId , value为数量 */
-		public var playerPickups:Object ;
+		public var myPickups:Object ;
 		
 		/**
 		 * 解析加载的配置文件 
@@ -45,6 +45,29 @@ package local.model
 			return vo ;
 		}
 		
+		
+		
+		
+		
+		//==================玩家的pickup方法======================
+		
+		
+		/**
+		 * 获取玩家收集的pickup数量 
+		 * @param pickupId
+		 * @return 
+		 */		
+		public function getMyPickupCount( pickupId:String):int
+		{
+			if(myPickups && myPickups.hasOwnProperty(pickupId)){
+				return myPickups[pickupId] ;
+			}else{
+				myPickups[pickupId] =1 ;
+				return 1 ;
+			}
+			return 0 ;
+		}
+		
 		/**
 		 * 添加一个pickup 
 		 * @param pickup 
@@ -52,15 +75,15 @@ package local.model
 		 */		
 		public function addPickup( pickupId:String , num:int = 1 ):void
 		{
-			if(playerPickups){
-				if( playerPickups.hasOwnProperty(pickupId ) ){
-					playerPickups[pickupId] += num ;
+			if(myPickups){
+				if( myPickups.hasOwnProperty(pickupId ) ){
+					myPickups[pickupId] += num ;
 				}else{
-					playerPickups[pickupId] = num ;
+					myPickups[pickupId] = num ;
 				}
 			}else{
-				playerPickups = new Object();
-				playerPickups[pickupId] = num ;
+				myPickups = new Object();
+				myPickups[pickupId] = num ;
 			}
 		}
 		
@@ -71,10 +94,10 @@ package local.model
 		 */		
 		public function deletePickup( pickupId:String , num:int=1 ):void
 		{
-			if( playerPickups && playerPickups.hasOwnProperty(pickupId) ){
-				playerPickups[pickupId] -= num ;
-				if( playerPickups[pickupId]<=0){
-					delete playerPickups[pickupId] ;
+			if( myPickups && myPickups.hasOwnProperty(pickupId) ){
+				myPickups[pickupId] -= num ;
+				if( myPickups[pickupId]<=0){
+					delete myPickups[pickupId] ;
 				}
 			}
 		}

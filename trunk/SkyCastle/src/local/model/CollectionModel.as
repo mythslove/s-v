@@ -6,7 +6,6 @@ package local.model
 	import local.comm.GameRemote;
 	import local.model.vos.CollectionVO;
 	import local.model.vos.ConfigBaseVO;
-	import local.model.vos.PickupVO;
 
 	/**
 	 * 所有的收集物Model 
@@ -21,11 +20,17 @@ package local.model
 			return _instance; 
 		}
 		//=================================
-		/** 所有的收集物配置 */
-		public var allCollections:Vector.<CollectionVO> ;
+		/** 所有的收集物配置 , key为groupid , value为[CollectionVO]*/
+		public var collectionsHash:Object ;
+		
+		/** groupId数组，用于界面的遍历显示 */
+		public var collectionArray:Vector.<String> ;
+		
+		/** 我已经 收集的 , key为groupId , value为兑换等级*/
+		public var myCollection:Object ;
 		
 		private var _ro:GameRemote ;
-		public function PickupModel()
+		public function CollectionModel()
 		{
 			_ro = new GameRemote("CommService");
 			_ro.addEventListener(ResultEvent.RESULT ,  onResultHandler );
@@ -45,29 +50,33 @@ package local.model
 		 */		
 		public function parseConfig( config:ConfigBaseVO ):void
 		{
-			allCollections = Vector.<CollectionVO>(config.collections) ;
+			collectionsHash = config.collections ;
+			collectionArray = new Vector.<String>();
+			for( var key:String in collectionsHash){
+				collectionArray.push( key );
+			}
 		}
 		
 		/**
-		 * 通过 pickupId来获取CollectionVO 
-		 * @param pickupId
+		 * 通过groupId获取所有的CollectionVO 
+		 * @param groupId
 		 * @return 
 		 */		
-		public function getCollectionByPickupId( pickupId:String ):CollectionVO
+		public function getCollectionsByGroundId( groupId:String ):Array
 		{
-			if(allCollections){
-				for each( var vo:CollectionVO in allCollections)
-				{
-					if(vo.pickups)
-					{
-						for each( var pvo:PickupVO in vo.pickups)
-						{
-							if(pickupId == pvo.pickupId ) return vo ;
-						}
-					}
-				}
-			}
-			return null ;
+			return collectionsHash[groupId] as Array ;
+		}
+		
+		
+		/**
+		 * 通过groupid 和 兑换等级来获得CollectionVO 
+		 * @param groupId Collection组id
+		 * @param lv 兑换等级
+		 * @return  
+		 */		
+		public function getCollectionByLvAndId( groupId:String , lv:int ):CollectionVO
+		{
+			return getCollectionsByGroundId(groupId)[lv] as CollectionVO ;
 		}
 	}
 }
