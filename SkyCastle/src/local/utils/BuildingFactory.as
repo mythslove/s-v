@@ -60,9 +60,6 @@ package local.utils
 				case ItemType.ANIMAIL: //动物
 					building = new Animail(vo);
 					break ;
-				case ItemType.NPC:
-					building = new NPC(vo); //npc
-					break ;
 				default:
 					building = new Building( vo );
 					break ;

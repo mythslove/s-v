@@ -22,18 +22,18 @@ package local.game.elements
 		
 		public function Hero()
 		{
-			var decVO:BaseCharacterVO = new BaseCharacterVO();
-			decVO.resId="Basic_AvatarMale";
-			decVO.alias="Basic_AvatarMale";
-			decVO.walkable=1 ;
-			decVO.xSpan = 1 ;
-			decVO.zSpan = 1 ;
-			decVO.layer = 2 ;
-			decVO.name="Sky Castle";
-			decVO.description = "Click to talk.";
-			decVO.type = ItemType.CHACTERS ;
+			var baseVO:BaseCharacterVO = new BaseCharacterVO();
+			baseVO.resId="Basic_AvatarMale";
+			baseVO.alias="Basic_AvatarMale";
+			baseVO.walkable=1 ;
+			baseVO.xSpan = 1 ;
+			baseVO.zSpan = 1 ;
+			baseVO.layer = 2 ;
+			baseVO.name="Sky Castle";
+			baseVO.description = "Click to talk.";
+			baseVO.type = ItemType.CHACTERS ;
 			var vo:BuildingVO = new BuildingVO();
-			vo.baseVO = decVO ;
+			vo.baseVO = baseVO ;
 			super(vo);
 		}
 		
