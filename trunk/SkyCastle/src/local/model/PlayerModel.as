@@ -1,19 +1,18 @@
 package local.model
 {
 	import bing.amf3.ResultEvent;
-	import bing.utils.Guid;
 	import bing.utils.SystemUtil;
-	
-	import flash.system.System;
 	
 	import local.comm.GameData;
 	import local.comm.GameRemote;
 	import local.comm.GlobalDispatcher;
 	import local.events.UserInfoEvent;
 	import local.game.GameWorld;
+	import local.model.vos.LevelVO;
 	import local.model.vos.PlayerVO;
 	import local.utils.PopUpManager;
 	import local.views.CenterViewContainer;
+	import local.views.levelup.LevelUpPopUp;
 	import local.views.loading.MapChangeLoading;
 
 	/**
@@ -66,17 +65,16 @@ package local.model
 					GameWorld.instance.initWorld();
 					break;
 				case "levelup":
-					if(e.result)
-					{
-						GameWorld.instance.effectScene.clear();
-						me = e.result as PlayerVO;
-						// pickups
-						PickupModel.instance.myPickups = player.pickups ;
-						//collections
-						CollectionModel.instance.myCollection = player.collections ;
+					var levelVO:LevelVO = e.result as LevelVO;
+					if(levelVO){
+						me.level = levelVO.level ;
+						me.maxEnergy = levelVO.maxEnergy ;
+						me.maxExp = levelVO.maxExp ;LevelUpPopUp
 						//	显示和更新玩家显示信息
 						CenterViewContainer.instance.topBar.updateTopBar();
-						GlobalDispatcher.instance.dispatchEvent( new UserInfoEvent(UserInfoEvent.USER_INFO_UPDATED));
+						//弹出升级面板
+						var levelPopup:LevelUpPopUp = new LevelUpPopUp( levelVO );
+						PopUpManager.instance.addQueuePopUp( levelPopup );
 					}
 					break ;
 			}

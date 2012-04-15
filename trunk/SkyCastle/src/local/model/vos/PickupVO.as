@@ -21,5 +21,9 @@ package local.model.vos
 		{
 			return "res/pickup/pickup"+alias+".png";
 		}
+		
+		public function get thumbAlias():String{
+			return "pickup"+alias ;
+		}
 	}
 }

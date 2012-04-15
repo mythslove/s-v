@@ -16,10 +16,10 @@ package local.enum
 		
 		public static const STONE:int = 2 ;
 		
-		public static const PICKUP_EXP:String = "pickupExp";
-		public static const PICKUP_WOOD:String = "pickupWood";
-		public static const PICKUP_STONE:String = "pickupStone";
-		public static const PICKUP_COIN:String = "pickupCoin";
-		public static const PICKUP_ENERGY:String = "pickupEnergy";
+		public static const PICKUP_EXP:String = "Exp";
+		public static const PICKUP_WOOD:String = "Wood";
+		public static const PICKUP_STONE:String = "Stone";
+		public static const PICKUP_COIN:String = "Coin";
+		public static const PICKUP_ENERGY:String = "Energy";
 	}
 }

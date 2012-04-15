@@ -9,14 +9,10 @@ package local.views.rewards
 		public var txtValue:TextField;
 		//=====================
 		
-		public function RewardsPanelRender(resId:String=null , url:String=null , value:int=0 ,  isCenter:Boolean=true, showLoading:Boolean=true)
+		public function RewardsPanelRender(resId:String=null , url:String=null , value:String = "" ,  isCenter:Boolean=true, showLoading:Boolean=true)
 		{
-			super(resId, url, isCenter, showLoading);
-			
-			if(txtValue && value>0)
-			{
-				txtValue.text = value+"" ;
-			}
+			super(resId, url, isCenter, showLoading); 
+			txtValue.text =value ;
 		}
 	}
 }
