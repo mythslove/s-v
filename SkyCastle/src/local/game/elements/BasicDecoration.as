@@ -43,15 +43,15 @@ package local.game.elements
 				switch( operation )
 				{
 					case BuildingOperation.BUY:
-						CharacterManager.instance.updateCharacters( this );
+						CharacterManager.instance.updateCharactersPos( this );
 						MapModel.instance.addBuilding( buildingVO );
 						break ;
 					case BuildingOperation.ROTATE:
 						buildingVO.scale = scaleX ;
-						CharacterManager.instance.updateCharacters( this );
+						CharacterManager.instance.updateCharactersPos( this );
 						break ;
 					case BuildingOperation.MOVE:
-						CharacterManager.instance.updateCharacters( this );
+						CharacterManager.instance.updateCharactersPos( this );
 						break ;
 					case BuildingOperation.STASH:
 					case BuildingOperation.SELL :

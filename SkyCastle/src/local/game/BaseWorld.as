@@ -7,6 +7,7 @@ package local.game
 	import flash.display.*;
 	import flash.events.*;
 	import flash.geom.*;
+	import flash.utils.setTimeout;
 	
 	import local.comm.*;
 	import local.enum.*;
@@ -15,6 +16,7 @@ package local.game
 	import local.model.*;
 	import local.model.buildings.MapBuildingModel;
 	import local.model.buildings.vos.*;
+	import local.utils.CharacterManager;
 	import local.utils.MouseManager;
 	import local.utils.ResourceUtil;
 	import local.utils.SettingCookieUtil;
@@ -41,6 +43,7 @@ package local.game
 		protected var _mapIsMove:Boolean=false; 
 		protected var _topBuilding:Building; 
 		protected var _mouseOverBuild:Building ;//当前鼠标在哪个建筑上面
+		protected var _addNpcTimeId:int ;
 		
 		public function BaseWorld()
 		{
@@ -263,12 +266,14 @@ package local.game
 		/**停止*/		
 		public function stop():void {
 			this.removeEventListener(Event.ENTER_FRAME , onEnterFrameHandler );
+			GameData.villageFrame = 0 ;
 		}
 		
 		/**不断地执行*/		
 		protected function onEnterFrameHandler(e:Event):void
 		{
 			update() ;
+			GameData.villageFrame++ ;
 		}
 		
 		/** 添加侦听*/
@@ -393,7 +398,13 @@ package local.game
 				if(scene!=skyScene) scene.clear(); 
 			}
 			clearTopScene(true) ;
+			CharacterManager.instance.npcs = null ;
 		}
 		
+		/** 延迟添加npc */
+		protected function delayAddNpc():void
+		{
+			_addNpcTimeId = setTimeout( CharacterManager.instance.addNpcToWorld , 3000 );
+		}
 	}
 }

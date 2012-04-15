@@ -69,5 +69,8 @@ package local.comm
 		public static var heroBornPoint1:HeroBornPoint ;
 		public static var heroBornPoint2:HeroBornPoint ;
 		public static var heroBornPoint3:HeroBornPoint ;
+		
+		/** 在一个村庄里的跑过的帧数*/
+		public static var villageFrame:uint  ;
 	}
 }
