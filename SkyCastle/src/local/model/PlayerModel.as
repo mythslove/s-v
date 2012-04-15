@@ -66,6 +66,7 @@ package local.model
 					GameWorld.instance.initWorld();
 					break;
 				case "levelup":
+					GameWorld.instance.effectScene.clear();
 					break ;
 			}
 		}
