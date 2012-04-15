@@ -43,11 +43,15 @@ package local.utils
 		 */		
 		public function addNpcToWorld():void
 		{
+			if(npcs){
+				for each( var npc:NPC in npcs){
+					npc.dispose() ;
+				}
+			}
 			npcs = null ;
 			if(GameData.isHome){
 				var len:int = _allNpcClass.length ;
 				npcs = new Vector.<NPC>(len ,true );
-				var npc:NPC ;
 				for( var i:int = 0 ; i<len-2 ; ++i){
 					npc = new 	_allNpcClass[i]() as NPC ;
 					npc.nodeX = GameData.heroBornPoint1.nodeX ;

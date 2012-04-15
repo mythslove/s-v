@@ -8,6 +8,7 @@ package local.game.elements
 	import local.game.cell.BitmapMovieClip;
 	import local.model.buildings.vos.BaseDecorationVO;
 	import local.model.buildings.vos.BuildingVO;
+	import local.utils.EffectManager;
 	import local.utils.ResourceUtil;
 
 	/**
@@ -40,7 +41,7 @@ package local.game.elements
 			//获取元件
 			_skin = ResourceUtil.instance.getInstanceByClassName( "init_effect" , buildingVO.baseVO.alias ) as MovieClip;
 			if(_skin){
-				_bmpMC = new BitmapMovieClip(_skin);
+				_bmpMC = EffectManager.instance.createBmpAnimByMC( _skin );
 				itemLayer.y = 20 ;
 				itemLayer.addChild(_bmpMC);
 				_bmpMC.play();

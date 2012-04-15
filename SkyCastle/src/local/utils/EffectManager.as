@@ -21,17 +21,32 @@ package local.utils
 		//-----------------------------------------------------------
 		private var _effectHash:Dictionary = new Dictionary();
 		
-		public function createMapEffect( mc:MovieClip ):BaseMovieClipEffect
+		/**
+		 * 创建一次性的特效。只播放一次就消失
+		 * @param mc
+		 * @return 
+		 */		
+		public function createMapEffectByMC( mc:MovieClip ):BaseMovieClipEffect
+		{
+			return new BaseMovieClipEffect(createBmpAnimByMC(mc)) ;
+		}
+		
+		/**
+		 * 创建位图动画
+		 * @param mc
+		 * @return 
+		 */		
+		public function createBmpAnimByMC( mc:MovieClip ):BitmapMovieClip
 		{
 			var effect:BitmapMovieClip ;
-			if(_effectHash[mc.name]){
-				effect = _effectHash[mc.name] as BitmapMovieClip ;
+			if(_effectHash.hasOwnProperty(mc.toString())){
+				effect = _effectHash[mc.toString()] as BitmapMovieClip ;
+				return effect.clone();
 			}else{
 				effect = new BitmapMovieClip(mc);
-				_effectHash[mc.name] = effect ;
+				_effectHash[mc.toString()] = effect ;
+				return effect ;
 			}
-			return new BaseMovieClipEffect(effect.clone()) ;
 		}
-			
 	}
 }
