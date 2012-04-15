@@ -48,7 +48,7 @@ package local.views.icon
 			mouseEnabled = false ;
 			this._value = value ;
 			visible = false ;
-			setTimeout( init , Math.random()*200 );
+			setTimeout( init , Math.random()*600 );
 		}
 		
 		private function init():void
@@ -106,12 +106,6 @@ package local.views.icon
 						color = MapWordEffect.STONE_COLOR ;
 						break ;
 				}
-				var targetPoint:Point = new Point(target.x+CenterViewContainer.instance.x,target.y+CenterViewContainer.instance.y);
-				var world:GameWorld = GameWorld.instance ;
-				targetPoint.x = (targetPoint.x-world.x)/world.scaleX-world.sceneLayerOffsetX ;
-				targetPoint.y = (targetPoint.y-world.y)/world.scaleX-world.sceneLayerOffsetY ;
-				TweenLite.to( this , 1 , {x:targetPoint.x , y:targetPoint.y , alpha:0 , onComplete:remove});
-				
 				CenterViewContainer.instance.topBar.updateTopBar();
 				var worldEffect:MapWordEffect = new MapWordEffect( temp+" +"+_value ,color );
 				GameWorld.instance.addEffect( worldEffect , x , y );
@@ -128,11 +122,19 @@ package local.views.icon
 					else
 					{
 						//飞到搜集箱中
+						target=CenterViewContainer.instance.bottomBar.toolBox.btnBagTool ;
 					}
 					//添加到玩家pickup中
 					PickupModel.instance.addPickup( _name , _value );
 				}
 			}
+			
+			var targetPoint:Point = new Point(target.x+CenterViewContainer.instance.x,target.y+CenterViewContainer.instance.y);
+			var world:GameWorld = GameWorld.instance ;
+			targetPoint.x = (targetPoint.x-world.x)/world.scaleX-world.sceneLayerOffsetX ;
+			targetPoint.y = (targetPoint.y-world.y)/world.scaleX-world.sceneLayerOffsetY ;
+			var obj:Object = {x:x + (targetPoint.x > x ? (-50) : (50)), y:y + (targetPoint.y - y) * 0.5, alpha:0.9};
+			TweenLite.to( this , 0.75 , {bezier:[obj, {x:targetPoint.x , y:targetPoint.y, alpha:0}]  , onComplete:remove});
 		}
 		
 		private function remove():void

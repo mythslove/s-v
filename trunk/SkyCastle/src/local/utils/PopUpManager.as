@@ -179,15 +179,7 @@ class PopupMask extends Sprite
 	private function addedToStageHandler(e:Event):void
 	{
 		removeEventListener(Event.ADDED_TO_STAGE , addedToStageHandler);
-		if(stage.displayState==StageDisplayState.NORMAL){
-			x = y = 0 ;
-		}else{
-			var localPoint:Point = globalToLocal( new Point());
-			this.x = localPoint.x ;
-			this.y = localPoint.y ;
-		}
-		this.width = stage.stageWidth ;
-		this.height = stage.stageHeight;
+		onResizeHandler(null);
 		GlobalDispatcher.instance.addEventListener( GlobalEvent.RESIZE , onResizeHandler );
 		addEventListener(Event.REMOVED_FROM_STAGE , removedFromStageHandler);
 	}
@@ -195,14 +187,14 @@ class PopupMask extends Sprite
 	private function onResizeHandler(e:GlobalEvent):void
 	{
 		if(stage.displayState==StageDisplayState.NORMAL){
-			x = y = 0 ;
+			x = y = -10 ;
 		}else{
 			var localPoint:Point = globalToLocal( new Point());
-			this.x = localPoint.x ;
-			this.y = localPoint.y ;
+			this.x = localPoint.x-10 ;
+			this.y = localPoint.y-10 ;
 		}
-		this.width = stage.stageWidth ;
-		this.height = stage.stageHeight;
+		this.width = stage.stageWidth+20 ;
+		this.height = stage.stageHeight+20 ;
 	}
 	
 	private function removedFromStageHandler(e:Event):void
