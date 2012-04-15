@@ -6,6 +6,7 @@ package local.utils
 	import local.game.elements.Character;
 	import local.game.elements.Hero;
 	import local.game.elements.NPC;
+	import local.game.npcs.NpcNick;
 
 	/**
 	 * 场景上的人管理类 
@@ -23,6 +24,9 @@ package local.utils
 		
 		/**英雄*/
 		public var hero:Hero ;
+		
+		/*所有的npc类名*/
+		private var _allNpcClass:Vector.<Class> = Vector.<Class>([NpcNick]);
 		
 		/**所有的npc*/
 		public var npcs:Vector.<NPC> ;
