@@ -1,5 +1,9 @@
 package
 {
+	import com.greensock.plugins.BezierPlugin;
+	import com.greensock.plugins.GlowFilterPlugin;
+	import com.greensock.plugins.TweenPlugin;
+	
 	import flash.events.Event;
 	import flash.net.registerClassAlias;
 	import flash.system.Security;
@@ -25,6 +29,7 @@ package
 			stage.scaleMode = "noScale";
 			stage.showDefaultContextMenu = false ;
 			Security.allowDomain("*");
+			TweenPlugin.activate([BezierPlugin, GlowFilterPlugin]);
 		}
 		
 		override protected function init():void
