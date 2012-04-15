@@ -27,6 +27,9 @@ package local.game.cell
 		public function get totalFrame():int{ return _mc.totalFrames; }
 		public function get currentFrame():int{return _mc.currentFrame ;}
 		
+		public function get currentLabel():String{return _mc.currentLabel ;}
+		public function get currentFrameLabel():String{return _mc.currentFrameLabel ;}
+		
 		/**
 		 * MovieClip缓存位图构造方法 
 		 * @param mc 要缓存的影片
@@ -41,9 +44,9 @@ package local.game.cell
 			this._bounds = bounds ;
 			
 			var len:int = _mc.totalFrames;
-			_bitmaps = new Vector.<BitmapData>(len,true);
-			_bounds = new Vector.<Rectangle>(len,true);
-			_mc.gotoAndPlay(1);
+			if(!_bitmaps) 	_bitmaps = new Vector.<BitmapData>(len,true);
+			if(!_bounds)	_bounds = new Vector.<Rectangle>(len,true);
+			gotoAndPlay(1);
 		}
 		
 		/** 缓存成位图*/

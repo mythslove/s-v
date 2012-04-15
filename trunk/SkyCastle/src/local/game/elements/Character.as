@@ -14,8 +14,9 @@ package local.game.elements
 	import local.game.GameWorld;
 	import local.game.cell.BitmapMovieClip;
 	import local.game.scenes.BuildingScene;
-	import local.model.buildings.vos.BuildingVO;
 	import local.model.MapGridDataModel;
+	import local.model.buildings.vos.BuildingVO;
+	import local.utils.EffectManager;
 	import local.utils.ResourceUtil;
 	
 	/**
@@ -59,7 +60,7 @@ package local.game.elements
 			//获取元件
 			_skin = ResourceUtil.instance.getInstanceByClassName( baseBuildingVO.resId , baseBuildingVO.alias ) as MovieClip;
 			if(_skin){
-				_bmpMC = new BitmapMovieClip(_skin);
+				_bmpMC = EffectManager.instance.createBmpAnimByMC( _skin );
 				itemLayer.addChild(_bmpMC);
 				this.gotoAndPlay(AvatarAction.IDLE);
 			}
@@ -213,7 +214,7 @@ package local.game.elements
 			//获取元件
 			_skin = ResourceUtil.instance.getInstanceByClassName( buildingVO.baseVO.resId , buildingVO.baseVO.alias ) as MovieClip;
 			if(_skin){
-				_bmpMC = new BitmapMovieClip(_skin);
+				_bmpMC = EffectManager.instance.createBmpAnimByMC( _skin);
 				itemLayer.addChild(_bmpMC);
 				gotoAndPlay( AvatarAction.IDLE );
 			}
@@ -225,17 +226,17 @@ package local.game.elements
 		 */		
 		public function gotoAndPlay( action:String ):void
 		{
-			if(_skin){
+			if(_bmpMC){
 				_currentActions = action ;
-				_skin.gotoAndPlay( action);
+				_bmpMC.gotoAndPlay( action);
 			}
 		}
 		
 		override public function update():void
 		{
 			if(_bmpMC){
-				if(_skin.currentFrameLabel && _skin.currentFrameLabel!=_currentActions){
-					_skin.gotoAndPlay( _currentActions);
+				if(_bmpMC.currentFrameLabel && _bmpMC.currentFrameLabel!=_currentActions){
+					_bmpMC.gotoAndPlay( _currentActions);
 				}
 				_bmpMC.update();
 				var rect:Rectangle = _bmpMC.getBound();

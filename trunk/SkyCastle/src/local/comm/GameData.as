@@ -51,7 +51,7 @@ package local.comm
 		}
 		
 		/** 是否是管理员 */
-		public static var isAdmin:Boolean;
+		public static var isAdmin:Boolean=true;
 		
 		/** 系统配置 */
 		public static var config:ConfigBaseVO ;

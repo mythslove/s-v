@@ -30,8 +30,8 @@ package local.game.elements
 			this.speed = 4;
 			this. _delayShow = delay ;
 			_actionsFuns = Vector.<Function>([
-				searchHouse,actionIdle,actionShop,actionIdle,
-				actionIdle,actionRunway,actionIdle,actionRunwayBack,searchHouse,
+				searchHouse,actionIdle,actionShop,actionIdle,actionAdmire,
+				actionIdle,actionRunway,actionIdle,actionRunwayBack,actionIdle,searchHouse
 			]);
 		}
 		

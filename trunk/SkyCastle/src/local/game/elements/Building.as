@@ -118,7 +118,7 @@ package local.game.elements
 			}
 			if(placementMC){
 				
-				var placementEffect:BaseMovieClipEffect = EffectManager.instance.createMapEffect(placementMC);
+				var placementEffect:BaseMovieClipEffect = EffectManager.instance.createMapEffectByMC(placementMC);
 				placementEffect.y = offsetY+this.screenY ;
 				placementEffect.x = this.screenX;
 				GameWorld.instance.effectScene.addChild(placementEffect);
