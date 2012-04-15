@@ -97,7 +97,7 @@ package  local.views.tooltip
 			if (txtTitle.text == "" || txtInfo.text == "") {
 				txtInfo.y = txtTitle.y;
 			} else {
-				txtInfo.y = txtTitle.y + txtTitle.textHeight+5 ;
+				txtInfo.y = txtTitle.y + txtTitle.textHeight ;
 			}
 			txtInfo.width = 300;
 			txtTitle.width = 300;
