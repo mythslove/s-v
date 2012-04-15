@@ -73,7 +73,7 @@ package
 			registerClassAlias("BuildingVO",BuildingVO) ;
 			registerClassAlias("PlayerVO",PlayerVO) ;
 			registerClassAlias("FriendVO",FriendVO) ;
-			registerClassAlias("LevelUpVO",LevelUpVO) ;
+			registerClassAlias("LevelVO",LevelVO) ;
 			registerClassAlias("RewardsVO",RewardsVO) ;
 			registerClassAlias("ShopVO",ShopVO) ;
 			registerClassAlias("ShopItemVO",ShopItemVO) ;

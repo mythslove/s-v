@@ -15,9 +15,9 @@ package local.views.collection
 	{
 		public var txtTitle:TextField;
 		public var txtLevel:TextField;
-		public var txtProgress:Sprite;
+		public var txtProgress:TextField;
 		public var btnTurnIn:BaseButton;
-//		img1:Sprite
+		public var img0:Sprite,img1:Sprite,img2:Sprite,img3:Sprite,img4:Sprite;
 		//==========================
 		
 		public function CollectionHud()

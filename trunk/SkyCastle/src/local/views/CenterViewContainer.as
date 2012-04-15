@@ -21,17 +21,8 @@ package  local.views
 		}
 		//======================================
 		
-		private var _bottomBar:BottomBar ;
-		private var _topBar:TopBar ;
-		
-		public function get bottomBar():BottomBar
-		{
-			return _bottomBar;
-		}
-		public function get topBar():TopBar
-		{
-			return _topBar;
-		}
+		public var bottomBar:BottomBar ;
+		public var topBar:TopBar ;
 		
 		public function CenterViewContainer()
 		{
@@ -41,12 +32,12 @@ package  local.views
 		
 		override protected function added():void
 		{
-			_topBar = new TopBar();
-			addChild(_topBar);
+			topBar = new TopBar();
+			addChild(topBar);
 			
-			_bottomBar = new BottomBar();
-			_bottomBar.y = stage.stageHeight;
-			addChild(_bottomBar);
+			bottomBar = new BottomBar();
+			bottomBar.y = stage.stageHeight;
+			addChild(bottomBar);
 			
 			addChild(PopUpManager.instance);
 			
@@ -61,7 +52,7 @@ package  local.views
 		{
 			x = (stage.stageWidth-GameSetting.SCREEN_WIDTH)>>1;
 			PopUpManager.instance.y = (stage.stageHeight-GameSetting.SCREEN_HEIGHT)>>1;
-			_bottomBar.y = stage.stageHeight;
+			bottomBar.y = stage.stageHeight;
 		}
 	}
 }
