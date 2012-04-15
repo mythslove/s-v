@@ -42,6 +42,7 @@ package local.game.elements
 		{
 			removeEventListener(Event.ADDED_TO_STAGE , addedToStageHandler );
 			createCharacterSkin();
+			this.gotoAndPlay(AvatarAction.ACTIVATEWONDER );
 		}
 		
 		override public function searchToRun(endNodeX:int, endNodeZ:int):Boolean
