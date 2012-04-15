@@ -41,13 +41,7 @@ package local.game.elements
 		override protected function addedToStageHandler( e:Event ):void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE , addedToStageHandler );
-			//获取元件
-			_skin = ResourceUtil.instance.getInstanceByClassName( "Basic_AvatarMale" , buildingVO.baseVO.alias ) as MovieClip;
-			if(_skin){
-				_bmpMC = new BitmapMovieClip(_skin);
-				itemLayer.addChild(_bmpMC);
-				this.gotoAndPlay(AvatarAction.IDLE);
-			}
+			createSkin();
 		}
 		
 		override public function searchToRun(endNodeX:int, endNodeZ:int):Boolean

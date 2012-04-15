@@ -53,6 +53,17 @@ package local.game.elements
 			return _roads ;
 		}
 		
+		protected function createSkin():void
+		{
+			//获取元件
+			_skin = ResourceUtil.instance.getInstanceByClassName( baseBuildingVO.resId , baseBuildingVO.alias ) as MovieClip;
+			if(_skin){
+				_bmpMC = new BitmapMovieClip(_skin);
+				itemLayer.addChild(_bmpMC);
+				this.gotoAndPlay(AvatarAction.IDLE);
+			}
+		}
+		
 		/**
 		 * 移动到一个点 
 		 * @param point
