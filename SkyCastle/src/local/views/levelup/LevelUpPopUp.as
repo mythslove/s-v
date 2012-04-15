@@ -31,6 +31,7 @@ package local.views.levelup
 			x = GameSetting.SCREEN_WIDTH>>1;
 			y = GameSetting.SCREEN_HEIGHT>>1;
 			this._levelupVO = vo ;
+			txtMsg.text = "Level up to level "+vo.level ;
 		}
 		
 		override protected function added():void
