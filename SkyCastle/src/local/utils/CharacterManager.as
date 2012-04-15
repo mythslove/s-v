@@ -54,7 +54,7 @@ package local.utils
 					npc.nodeZ = GameData.heroBornPoint1.nodeZ ;
 					npcs[i] = npc ;
 					var scene:IsoScene = GameWorld.instance.getBuildingScene( npc.nodeX , npc.nodeZ );
-					scene.addIsoObject( npc );
+					scene.addIsoObject( npc , false );
 				}
 				
 				for( i = 0 ; i<len ; ++i){
@@ -63,7 +63,7 @@ package local.utils
 					npc.nodeZ = GameData.heroBornPoint2.nodeZ ;
 					npcs[i] = npc ;
 					scene = GameWorld.instance.getBuildingScene( npc.nodeX , npc.nodeZ );
-					scene.addIsoObject( npc );
+					scene.addIsoObject( npc, false );
 				}
 				
 				for( i = 0 ; i<len ; ++i){
@@ -72,7 +72,7 @@ package local.utils
 					npc.nodeZ = GameData.heroBornPoint3.nodeZ ;
 					npcs[i] = npc ;
 					scene = GameWorld.instance.getBuildingScene( npc.nodeX , npc.nodeZ );
-					scene.addIsoObject( npc );
+					scene.addIsoObject( npc, false );
 				}
 			}
 		}

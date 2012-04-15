@@ -17,11 +17,18 @@ package local.game.elements
 	{
 		private var _currentBuilding:Building ;
 		private var _actionsFuns:Vector.<Function> ;
-		
-		public function NPC(vo:BuildingVO)
+		private var _delayShow:int ;
+		/**
+		 * npc基灯 
+		 * @param vo
+		 * @param delay 延迟显示
+		 */		
+		public function NPC(vo:BuildingVO , delay:int )
 		{
 			super(vo);
+			visible = false ;
 			this.speed = 4;
+			this. _delayShow = delay ;
 			_actionsFuns = Vector.<Function>([
 				searchHouse,actionIdle,actionShop,actionIdle,
 				actionIdle,actionRunway,actionIdle,actionRunwayBack,searchHouse,
@@ -38,7 +45,7 @@ package local.game.elements
 		override protected function resLoadedHandler(e:Event):void
 		{
 			super.resLoadedHandler(e);
-			searchHouse();
+			_timeoutId = setTimeout( searchHouse , _delayShow );
 		}
 		
 		/*自动 ，除了走动*/		
@@ -53,6 +60,7 @@ package local.game.elements
 		
 		protected function searchHouse():void
 		{
+			visible = true ;
 			var houses:Array = MapBuildingModel.instance.houses ;
 			if( houses && houses.length>0){
 				var len:int = houses.length - 1;

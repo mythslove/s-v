@@ -7,7 +7,6 @@ package local.game
 	import flash.display.*;
 	import flash.events.*;
 	import flash.geom.*;
-	import flash.utils.setTimeout;
 	
 	import local.comm.*;
 	import local.enum.*;
@@ -43,7 +42,6 @@ package local.game
 		protected var _mapIsMove:Boolean=false; 
 		protected var _topBuilding:Building; 
 		protected var _mouseOverBuild:Building ;//当前鼠标在哪个建筑上面
-		protected var _addNpcTimeId:int ;
 		
 		public function BaseWorld()
 		{
@@ -399,12 +397,6 @@ package local.game
 			}
 			clearTopScene(true) ;
 			CharacterManager.instance.npcs = null ;
-		}
-		
-		/** 延迟添加npc */
-		protected function delayAddNpc():void
-		{
-			_addNpcTimeId = setTimeout( CharacterManager.instance.addNpcToWorld , 3000 );
 		}
 	}
 }
