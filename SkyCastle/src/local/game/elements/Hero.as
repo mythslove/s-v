@@ -41,7 +41,7 @@ package local.game.elements
 		override protected function addedToStageHandler( e:Event ):void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE , addedToStageHandler );
-			createSkin();
+			createCharacterSkin();
 		}
 		
 		override public function searchToRun(endNodeX:int, endNodeZ:int):Boolean
