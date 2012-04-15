@@ -69,7 +69,7 @@ package local.game.elements
 					CharacterManager.instance.hero.gotoAndPlay(AvatarAction.DIG);
 				}
 				_timeoutFlag = false ;
-				_timeoutId = setTimeout( timeoutHandler , 4000 );
+				_timeoutId = setTimeout( timeoutHandler , 3000 );
 				GameWorld.instance.effectScene.addChild( BuildingExecuteLoading.getInstance(screenX,screenY-itemLayer.height).setTime(4000));
 			}
 			return true;
