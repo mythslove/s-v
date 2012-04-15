@@ -117,7 +117,7 @@ package local.views.rewards
 				}
 			}
 			if(_isCenter && _wid>0){
-				_container.x = (_wid- iconWidth*(count-1) )>>1 ;
+				_container.x = (_wid- iconWidth*count )*0.5 - iconWidth*0.5 ;
 			}
 		}
 		
