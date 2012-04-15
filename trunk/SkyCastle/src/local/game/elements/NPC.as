@@ -18,10 +18,10 @@ package local.game.elements
 		public function NPC(vo:BuildingVO)
 		{
 			super(vo);
+			this.speed = 4;
 			_actionsFuns = Vector.<Function>([
 				searchHouse,actionIdle,actionShop,actionIdle,
-				actionIdle,actionRunway,searchHouse,
-				actionIdle,actionRunwayBack
+				actionIdle,actionRunway,actionIdle,actionRunwayBack,searchHouse,
 			]);
 		}
 		
@@ -70,7 +70,8 @@ package local.game.elements
 			for(var i:int = nodeX-10 ; i<nodeX+10 ; ++i){
 				for(var j:int = nodeZ-10 ; j<nodeZ+10 ; ++j){
 					if(i>=0&& j>=0&&i+1<=GameSetting.GRID_X&&j+1<=GameSetting.GRID_Z ){
-						if( !(i==nodeX&&j==nodeZ) && GameWorld.instance.getBuildingScene(i,j)==parent)
+						if( !(i==nodeX&&j==nodeZ) && 
+							GameWorld.instance.getBuildingScene(i,j)==GameWorld.instance.getBuildingScene(nodeX,nodeZ))
 						{
 							pos.push( new Point(i,j));
 						}
