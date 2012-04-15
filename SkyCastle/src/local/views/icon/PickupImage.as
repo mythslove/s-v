@@ -125,7 +125,7 @@ package local.views.icon
 						target=CenterViewContainer.instance.bottomBar.toolBox.btnBagTool ;
 					}
 					//添加到玩家pickup中
-					PickupModel.instance.addPickup( _name , _value );
+					PickupModel.instance.addPickup( pickupVO.pickupId , _value );
 				}
 			}
 			

@@ -222,7 +222,7 @@ package local.game.elements
 				if(_currentRewards.pickups){
 					var len:int = _currentRewards.pickups.length ;
 					for( var i:int = 0 ; i<len ; ++i){
-						PickupUtil.addPickup2Wold( _currentRewards.pickups[i] , _currentRewards.wood,screenX,screenY-offsetY);
+						PickupUtil.addPickup2Wold( _currentRewards.pickups[i] , 1 ,screenX,screenY-offsetY);
 					}
 				}
 			}

@@ -7,7 +7,6 @@ package local.views.rewards
 	import local.model.PlayerModel;
 	import local.model.buildings.BaseBuildingVOModel;
 	import local.model.buildings.vos.BaseBuildingVO;
-	import local.model.buildings.vos.BuildingVO;
 	import local.model.vos.PickupVO;
 	import local.model.vos.PlayerVO;
 	import local.model.vos.RewardsVO;
@@ -114,6 +113,7 @@ package local.views.rewards
 					img.x = iconWidth*count;
 					++count ;
 					_container.addChild(img);
+					PickupModel.instance.addPickup( pickVO.pickupId );
 				}
 			}
 			if(_isCenter && _wid>0){
