@@ -53,6 +53,7 @@ package local.game.elements
 			return _roads ;
 		}
 		
+		/* 创建人物动画 */
 		protected function createCharacterSkin():void
 		{
 			//获取元件
