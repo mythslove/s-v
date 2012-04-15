@@ -108,7 +108,7 @@ package local.views.icon
 				}
 				CenterViewContainer.instance.topBar.updateTopBar();
 				var worldEffect:MapWordEffect = new MapWordEffect( temp+" +"+_value ,color );
-				GameWorld.instance.addEffect( worldEffect , x , y );
+				GameWorld.instance.addEffect( worldEffect , x , y-Math.random()*100 );
 			}
 			else
 			{
