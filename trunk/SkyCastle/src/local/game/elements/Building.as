@@ -56,7 +56,7 @@ package local.game.elements
 			{
 				case BuildingOperation.BUY:
 					playPlaceEffect();
-					CharacterManager.instance.updateCharacters( this );
+					CharacterManager.instance.updateCharactersPos( this );
 					//掉修建经验
 					var value:int = baseBuildingVO.buildEarnExp;
 					if(value>0)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_EXP , value,screenX,screenY-offsetY);
@@ -65,7 +65,7 @@ package local.game.elements
 					break ;
 				case BuildingOperation.ROTATE:
 					buildingVO.scale = scaleX ;
-					CharacterManager.instance.updateCharacters( this );
+					CharacterManager.instance.updateCharactersPos( this );
 					//发送数据
 					ro.getOperation("rotate").send( buildingVO.id , buildingVO.scale );
 					break ;
@@ -75,7 +75,7 @@ package local.game.elements
 					break ;
 				case BuildingOperation.MOVE:
 					playPlaceEffect();
-					CharacterManager.instance.updateCharacters( this );
+					CharacterManager.instance.updateCharactersPos( this );
 					//发送数据
 					ro.getOperation("move").send( buildingVO.id , nodeX,nodeZ );
 					break ;

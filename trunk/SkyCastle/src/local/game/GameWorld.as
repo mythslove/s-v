@@ -10,6 +10,7 @@ package local.game
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import flash.utils.ByteArray;
+	import flash.utils.clearTimeout;
 	
 	import local.comm.GameData;
 	import local.comm.GameSetting;
@@ -296,6 +297,11 @@ package local.game
 			hero.nodeZ = position.y ;
 			var scene:IsoScene = this.getBuildingScene( hero.nodeX , hero.nodeZ );
 			scene.addIsoObject( hero ) ;
+			//添加npc
+			if(_addNpcTimeId>0){
+				clearTimeout( _addNpcTimeId);
+			}
+			delayAddNpc() ;
 			//添加场景建筑
 			var basicBuildingRes:ResVO = ResourceUtil.instance.getResVOByResId( GameData.currentMapId+"_BUILDINGS");
 			var bytes:ByteArray = basicBuildingRes.resObject as ByteArray ;

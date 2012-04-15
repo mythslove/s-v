@@ -1,12 +1,19 @@
 package local.utils
 {
+	import bing.iso.IsoScene;
+	
 	import flash.geom.Vector3D;
 	
+	import local.comm.GameData;
+	import local.game.GameWorld;
 	import local.game.elements.Building;
 	import local.game.elements.Character;
 	import local.game.elements.Hero;
 	import local.game.elements.NPC;
+	import local.game.npcs.NpcAnnie;
 	import local.game.npcs.NpcNick;
+	import local.game.npcs.NpcRocky;
+	import local.game.npcs.NpcTony;
 
 	/**
 	 * 场景上的人管理类 
@@ -26,28 +33,68 @@ package local.utils
 		public var hero:Hero ;
 		
 		/*所有的npc类名*/
-		private var _allNpcClass:Vector.<Class> = Vector.<Class>([NpcNick]);
+		private var _allNpcClass:Vector.<Class> = Vector.<Class>([NpcNick,NpcTony,NpcAnnie,NpcRocky]);
 		
 		/**所有的npc*/
 		public var npcs:Vector.<NPC> ;
 		
 		/**
+		 * 添加npc到世界中 
+		 */		
+		public function addNpcToWorld():void
+		{
+			npcs = null ;
+			if(GameData.isHome){
+				var len:int = _allNpcClass.length ;
+				npcs = new Vector.<NPC>(len ,true );
+				var npc:NPC ;
+				for( var i:int = 0 ; i<len ; ++i){
+					npc = new 	_allNpcClass[i]() as NPC ;
+					npc.nodeX = GameData.heroBornPoint1.nodeX ;
+					npc.nodeZ = GameData.heroBornPoint1.nodeZ ;
+					npcs[i] = npc ;
+					var scene:IsoScene = GameWorld.instance.getBuildingScene( npc.nodeX , npc.nodeZ );
+					scene.addIsoObject( npc );
+				}
+				
+				for( i = 0 ; i<len ; ++i){
+					npc = new 	_allNpcClass[i]() as NPC ;
+					npc.nodeX = GameData.heroBornPoint2.nodeX ;
+					npc.nodeZ = GameData.heroBornPoint2.nodeZ ;
+					npcs[i] = npc ;
+					scene = GameWorld.instance.getBuildingScene( npc.nodeX , npc.nodeZ );
+					scene.addIsoObject( npc );
+				}
+				
+				for( i = 0 ; i<len ; ++i){
+					npc = new 	_allNpcClass[i]() as NPC ;
+					npc.nodeX = GameData.heroBornPoint3.nodeX ;
+					npc.nodeZ = GameData.heroBornPoint3.nodeZ ;
+					npcs[i] = npc ;
+					scene = GameWorld.instance.getBuildingScene( npc.nodeX , npc.nodeZ );
+					scene.addIsoObject( npc );
+				}
+			}
+		}
+		
+		
+		/**
 		 * 更新所有的人，以免得人不能移动 
 		 * @param building
 		 */		
-		public function updateCharacters( building:Building ):void
+		public function updateCharactersPos( building:Building ):void
 		{
 			if(!building.baseBuildingVO.walkable){
-				updateCharacter(hero,building);
+				updateCharacterPoint(hero,building);
 				if(npcs){
 					for each( var npc:NPC in npcs){
-						updateCharacter(npc,building);
+						updateCharacterPoint(npc,building);
 					}
 				}
 			}
 		}
 		
-		private function updateCharacter ( character:Character , building:Building ):void
+		private function updateCharacterPoint ( character:Character , building:Building ):void
 		{
 			var spans:Vector.<Vector3D> = building.spanPosition ;
 			for each( var vec:Vector3D in spans)
