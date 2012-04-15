@@ -25,7 +25,7 @@ package local.game.npcs
 			baseVO.type = ItemType.NPC ;
 			var vo:BuildingVO = new BuildingVO();
 			vo.baseVO = baseVO ;
-			super(vo);
+			super(vo,3000);
 		}
 	}
 }

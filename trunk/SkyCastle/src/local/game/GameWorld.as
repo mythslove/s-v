@@ -10,7 +10,6 @@ package local.game
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import flash.utils.ByteArray;
-	import flash.utils.clearTimeout;
 	
 	import local.comm.GameData;
 	import local.comm.GameSetting;
@@ -33,7 +32,6 @@ package local.game
 	import local.utils.SettingCookieUtil;
 	import local.views.CenterViewContainer;
 	import local.views.effects.MapWordEffect;
-
 
 	public class GameWorld extends BaseWorld
 	{
@@ -264,15 +262,15 @@ package local.game
 			
 			if(!GameData.heroBornPoint2){
 				GameData.heroBornPoint2 = new HeroBornPoint();
-				GameData.heroBornPoint2.nodeX = 40 ;
-				GameData.heroBornPoint2.nodeZ = 30 ;
+				GameData.heroBornPoint2.nodeX = 39 ;
+				GameData.heroBornPoint2.nodeZ = 31 ;
 			}
 			addBuildToScene(GameData.heroBornPoint2,false,false);
 			
 			if(!GameData.heroBornPoint3){
 				GameData.heroBornPoint3 = new HeroBornPoint();
-				GameData.heroBornPoint3.nodeX = 55 ;
-				GameData.heroBornPoint3.nodeZ = 40 ;
+				GameData.heroBornPoint3.nodeX = 54 ;
+				GameData.heroBornPoint3.nodeZ = 46 ;
 			}
 			addBuildToScene(GameData.heroBornPoint3,false,false);
 		}
@@ -298,10 +296,7 @@ package local.game
 			var scene:IsoScene = this.getBuildingScene( hero.nodeX , hero.nodeZ );
 			scene.addIsoObject( hero ) ;
 			//添加npc
-			if(_addNpcTimeId>0){
-				clearTimeout( _addNpcTimeId);
-			}
-			delayAddNpc() ;
+			CharacterManager.instance.addNpcToWorld();
 			//添加场景建筑
 			var basicBuildingRes:ResVO = ResourceUtil.instance.getResVOByResId( GameData.currentMapId+"_BUILDINGS");
 			var bytes:ByteArray = basicBuildingRes.resObject as ByteArray ;
