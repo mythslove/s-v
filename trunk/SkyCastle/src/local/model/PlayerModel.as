@@ -67,6 +67,14 @@ package local.model
 					break;
 				case "levelup":
 					GameWorld.instance.effectScene.clear();
+					me = e.result as PlayerVO;
+					// pickups
+					PickupModel.instance.myPickups = player.pickups ;
+					//collections
+					CollectionModel.instance.myCollection = player.collections ;
+					//	显示和更新玩家显示信息
+					CenterViewContainer.instance.topBar.updateTopBar();
+					GlobalDispatcher.instance.dispatchEvent( new UserInfoEvent(UserInfoEvent.USER_INFO_UPDATED));
 					break ;
 			}
 		}
