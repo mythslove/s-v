@@ -27,10 +27,10 @@ package local.game.elements
 		{
 			super(vo);
 			visible = false ;
-			this.speed = 4;
+			this.speed = 4 ;
 			this. _delayShow = delay ;
 			_actionsFuns = Vector.<Function>([
-				searchHouse,actionIdle,actionShop,actionIdle,actionAdmire,
+				searchHouse,actionIdle,actionShop,actionIdle,actionAdmire,actionIdle,actionCow,
 				actionIdle,actionRunway,actionIdle,actionRunwayBack,actionIdle,searchHouse
 			]);
 		}
@@ -78,7 +78,7 @@ package local.game.elements
 		private function getFreeRoad():Point{
 			var p:Point ;
 			var pos:Array =[] ;
-			var radius:int = 5 ;
+			var radius:int = 8 ;
 			for(var i:int = nodeX-radius ; i<nodeX+radius ; ++i){
 				for(var j:int = nodeZ-radius ; j<nodeZ+radius ; ++j){
 					if(i>1&& j>1&&i+1<=GameSetting.GRID_X&&j+1<=GameSetting.GRID_Z ){
@@ -121,12 +121,17 @@ package local.game.elements
 		
 		protected function actionIdle():void{
 			this.gotoAndPlay(AvatarAction.IDLE);
-			_timeoutId = setTimeout(searchHouse,10000);
+			_timeoutId = setTimeout(searchHouse,15000);
 		}
 		
 		protected function actionAdmire():void {
 			this.gotoAndPlay(AvatarAction.ADMIRE);
 			_timeoutId = setTimeout(searchHouse,5000);
+		}
+		
+		protected function actionCow():void{
+			this.gotoAndPlay(AvatarAction.COWER);
+			_timeoutId = setTimeout(searchHouse,10000);
 		}
 		
 		override public function onClick():void
