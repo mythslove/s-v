@@ -54,7 +54,7 @@ package local.views.shop
 		{
 			this.itemVO = vo ;
 			txtName.text = vo.baseVO.name ; //显示名称
-			container.addChild( new Image(vo.baseVO.alias+"Thumb" , vo.baseVO.thumb) ); //显示缩略图
+			container.addChild( new Image(vo.baseVO.thumbAlias , vo.baseVO.thumb) ); //显示缩略图
 			GameToolTip.instance.register(btnBg,stage,vo.baseVO.description); //注册ToolTip
 			
 			payMode.showPay( vo );

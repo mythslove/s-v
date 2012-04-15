@@ -66,5 +66,8 @@ package local.model.buildings.vos
 			if(!_thumb) _thumb="res/"+_file+"/"+alias+"Thumb.png";
 			return _thumb ;
 		}
+		public function get thumbAlias():String{
+			return alias+"Thumb";
+		}
 	}
 }

@@ -10,7 +10,7 @@ package local.views.levelup
 	import flash.text.TextField;
 	
 	import local.comm.GameSetting;
-	import local.model.vos.LevelUpVO;
+	import local.model.vos.LevelVO;
 	import local.model.vos.RewardsVO;
 	import local.utils.PopUpManager;
 	import local.views.BaseView;
@@ -23,24 +23,24 @@ package local.views.levelup
 		public var btnClose:BaseButton;
 		public var btnShare:BaseButton;
 		//=========================
-		private var _levelupVO:LevelUpVO;
+		private var _levelupVO:LevelVO;
 		
-		public function LevelUpPopUp( vo:LevelUpVO )
+		public function LevelUpPopUp( vo:LevelVO=null )
 		{
 			super();
+			x = GameSetting.SCREEN_WIDTH>>1;
+			y = GameSetting.SCREEN_HEIGHT>>1;
 			this._levelupVO = vo ;
 		}
 		
 		override protected function added():void
 		{
-			x = GameSetting.SCREEN_WIDTH>>1;
-			y = GameSetting.SCREEN_HEIGHT>>1;
-			var rewards:RewardsVO = _levelupVO.rewardsVO;
+			var rewards:RewardsVO = _levelupVO.rewards;
 			if(rewards){
-				var rewardsPanel:RewardsPanel = new RewardsPanel( rewards );
+				var rewardsPanel:RewardsPanel = new RewardsPanel( rewards,430 , true  );
 				container.addChild( rewardsPanel);
 			}
-			TweenLite.from(this,0.5,{x:-width , ease:Back.easeOut , onComplete:inTweenOver });
+			TweenLite.from(this,0.3,{x:x-200 , ease:Back.easeOut , onComplete:inTweenOver });
 		}
 		
 		private function inTweenOver():void
@@ -51,7 +51,7 @@ package local.views.levelup
 		
 		private function onCloseHandler( e:MouseEvent ):void
 		{
-			TweenLite.to(this,0.5,{x:GameSetting.SCREEN_WIDTH+width , ease:Back.easeIn , onComplete:tweenComplete});
+			TweenLite.to(this,0.3,{x:x+200 , ease:Back.easeIn , onComplete:tweenComplete});
 			mouseChildren=false;
 		}
 		

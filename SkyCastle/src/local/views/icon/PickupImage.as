@@ -38,8 +38,8 @@ package local.views.icon
 		 */		
 		public function PickupImage(name:String , value:int =1 , type:String=null )
 		{
-			var url:String = type? "res/pickup/"+name+".png" : "res/pickup/pickup"+name+".png" ;
-			var alias:String = type ? name : "pickup"+name ;
+			var url:String =  "res/pickup/pickup"+name+".png" ;
+			var alias:String ="pickup"+name ;
 			super(alias, url, true);
 			
 			_name = name ;
