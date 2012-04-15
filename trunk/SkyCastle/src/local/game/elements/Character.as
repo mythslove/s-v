@@ -53,7 +53,7 @@ package local.game.elements
 			return _roads ;
 		}
 		
-		protected function createSkin():void
+		protected function createCharacterSkin():void
 		{
 			//获取元件
 			_skin = ResourceUtil.instance.getInstanceByClassName( baseBuildingVO.resId , baseBuildingVO.alias ) as MovieClip;
