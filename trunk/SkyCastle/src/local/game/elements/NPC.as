@@ -79,14 +79,16 @@ package local.game.elements
 			var p:Point ;
 			var pos:Array =[] ;
 			var radius:int = 8 ;
+			var newScene:IsoScene ;
+			var currScene:IsoScene;
 			for(var i:int = nodeX-radius ; i<nodeX+radius ; ++i){
 				for(var j:int = nodeZ-radius ; j<nodeZ+radius ; ++j){
 					if(i>1&& j>1&&i+1<=GameSetting.GRID_X&&j+1<=GameSetting.GRID_Z ){
 						if( !(i==nodeX&&j==nodeZ) && MapGridDataModel.instance.astarGrid.getNode(i,j).walkable)
 						{
-							var newScene:IsoScene = GameWorld.instance.getBuildingScene(i,j) ;
-							var currScene:IsoScene = GameWorld.instance.getBuildingScene(nodeX,nodeZ) ;
-							if(newScene&&newScene==currScene)	pos.push( new Point(i,j));
+							newScene = GameWorld.instance.getBuildingScene(i,j) ;
+							currScene = GameWorld.instance.getBuildingScene(nodeX,nodeZ) ;
+							if(newScene && currScene &&newScene==currScene)	pos.push( new Point(i,j));
 						}
 					}
 				}
