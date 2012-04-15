@@ -1,5 +1,7 @@
 package local.game.elements
 {
+	import bing.iso.IsoScene;
+	
 	import flash.events.Event;
 	import flash.geom.Point;
 	import flash.utils.setTimeout;
@@ -7,6 +9,7 @@ package local.game.elements
 	import local.comm.GameSetting;
 	import local.enum.AvatarAction;
 	import local.game.GameWorld;
+	import local.model.MapGridDataModel;
 	import local.model.buildings.MapBuildingModel;
 	import local.model.buildings.vos.BuildingVO;
 	
@@ -67,13 +70,15 @@ package local.game.elements
 		private function getFreeRoad():Point{
 			var p:Point ;
 			var pos:Array =[] ;
-			for(var i:int = nodeX-10 ; i<nodeX+10 ; ++i){
-				for(var j:int = nodeZ-10 ; j<nodeZ+10 ; ++j){
-					if(i>=0&& j>=0&&i+1<=GameSetting.GRID_X&&j+1<=GameSetting.GRID_Z ){
-						if( !(i==nodeX&&j==nodeZ) && 
-							GameWorld.instance.getBuildingScene(i,j)==GameWorld.instance.getBuildingScene(nodeX,nodeZ))
+			var radius:int = 5 ;
+			for(var i:int = nodeX-radius ; i<nodeX+radius ; ++i){
+				for(var j:int = nodeZ-radius ; j<nodeZ+radius ; ++j){
+					if(i>1&& j>1&&i+1<=GameSetting.GRID_X&&j+1<=GameSetting.GRID_Z ){
+						if( !(i==nodeX&&j==nodeZ) && MapGridDataModel.instance.astarGrid.getNode(i,j).walkable)
 						{
-							pos.push( new Point(i,j));
+							var newScene:IsoScene = GameWorld.instance.getBuildingScene(i,j) ;
+							var currScene:IsoScene = GameWorld.instance.getBuildingScene(nodeX,nodeZ) ;
+							if(newScene&&newScene==currScene)	pos.push( new Point(i,j));
 						}
 					}
 				}
