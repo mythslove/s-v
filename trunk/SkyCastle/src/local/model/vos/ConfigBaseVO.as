@@ -10,6 +10,5 @@ package local.model.vos
 		public var shopVO:ShopVO; //商店
 		public var pickups:Object ; //所有的PickupVO，key为pickupId , vale为 PickupVO
 		public var collections:Object ;//所有的收集物配置 , key为groupId , value为CollectionVO
-		public var levels:Object ; //玩家等级配置key为等级, value为LevelVO
 	}
 }
