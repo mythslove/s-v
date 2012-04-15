@@ -48,7 +48,7 @@ package local.utils
 				var len:int = _allNpcClass.length ;
 				npcs = new Vector.<NPC>(len ,true );
 				var npc:NPC ;
-				for( var i:int = 0 ; i<len ; ++i){
+				for( var i:int = 0 ; i<len-2 ; ++i){
 					npc = new 	_allNpcClass[i]() as NPC ;
 					npc.nodeX = GameData.heroBornPoint1.nodeX ;
 					npc.nodeZ = GameData.heroBornPoint1.nodeZ ;
