@@ -103,7 +103,7 @@ package bing.iso
 			if(targetRect.x>itemRect.x+itemRect.width ||  targetRect.y>itemRect.y+itemRect.height || target.y>item.y){
 				return 1;
 			}else if(targetRect.x==itemRect.x+itemRect.width &&  targetRect.y==itemRect.y+itemRect.height && target.y==item.y){
-				return 0 ;
+				return target.screenY-item.screenY ;
 			}
 			return -1;
 		}
