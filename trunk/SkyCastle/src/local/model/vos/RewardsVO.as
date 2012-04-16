@@ -13,6 +13,6 @@ package local.model.vos
 		public var stone:int ;
 		public var energy:int ;
 		public var buildings:Array; //baseId集合
-		public var pickups:Array; //pickup名字集合
+		public var pickups:Array; //pickupId集合
 	}
 }
