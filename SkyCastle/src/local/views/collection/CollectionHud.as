@@ -72,24 +72,26 @@ package local.views.collection
 			txtProgress.text = lv+" of 15";
 			txtTitle.text = _cvo.title ;
 			
+			var pickupModel:PickupModel = PickupModel.instance ;
+			var collModel:CollectionModel = CollectionModel.instance ;
 			var canExcharge:Boolean = true ;
 			var len:int = _cvo.pickups.length ;
 			var pickupVO:PickupVO;
 			var img:Image ;
 			for(var i:int =0  ; i<len ; ++i){
-				pickupVO = PickupModel.instance.getPickupById(_cvo.pickups[i]);
+				pickupVO = pickupModel.getPickupById(_cvo.pickups[i]);
 				img = new Image( pickupVO.thumbAlias , pickupVO.url);
 				img.scaleX = img.scaleY = 0.5 ;
 				img.alpha = 0.4 ;
 				this["img"+i].addChild(img);
-				var count:int = PickupModel.instance.getMyPickupCount(pickupVO.pickupId) ;
+				var count:int = pickupModel.getMyPickupCount(pickupVO.pickupId) ;
 				if(count>0){
 					if(pvo.pickupId==pickupVO.pickupId){
 						img.alpha=0.2 ;
 						img.scaleX = img.scaleY = 3 ;
 						TweenLite.to( img , 0.5 , {scaleX:0.5 , scaleY:0.5, ease:Back.easeInOut , alpha:1 });
 					}
-					if(CollectionModel.instance.myCollection && CollectionModel.instance.myCollection.hasOwnProperty(_cvo.groupId)){
+					if(collModel.myCollection && collModel.myCollection.hasOwnProperty(_cvo.groupId)){
 						if(count<=CollectionModel.instance.myCollection[_cvo.groupId])
 						{
 							canExcharge = false ;
