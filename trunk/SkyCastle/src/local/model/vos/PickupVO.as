@@ -16,6 +16,10 @@ package local.model.vos
 		
 		public var describe:String ; //描述
 		
+		
+		//=====================
+		public var groupId:String ; //如果类型是collection，则存储该collectiion的groupId
+		
 		/** 图标路径 */
 		public function get url():String 
 		{
