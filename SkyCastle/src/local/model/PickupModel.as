@@ -61,9 +61,6 @@ package local.model
 		{
 			if(myPickups && myPickups.hasOwnProperty(pickupId)){
 				return myPickups[pickupId] ;
-			}else{
-				myPickups[pickupId] =1 ;
-				return 1 ;
 			}
 			return 0 ;
 		}

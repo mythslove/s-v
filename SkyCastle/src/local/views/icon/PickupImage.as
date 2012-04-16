@@ -119,6 +119,8 @@ package local.views.icon
 				var pickupVO:PickupVO = PickupModel.instance.getPickupById( _pkId );
 				if(pickupVO)
 				{
+					//添加到玩家pickup中
+					PickupModel.instance.addPickup( pickupVO.pickupId , _value );
 					if( pickupVO.type==ItemType.PICKUP_COLLECTION )
 					{
 						//弹出搜集箱
@@ -132,8 +134,6 @@ package local.views.icon
 						target=CenterViewContainer.instance.bottomBar.toolBox.btnBagTool ;
 						targetPoint = new Point(target.x+CenterViewContainer.instance.x,target.y+CenterViewContainer.instance.y);
 					}
-					//添加到玩家pickup中
-					PickupModel.instance.addPickup( pickupVO.pickupId , _value );
 				}
 			}
 			var world:GameWorld = GameWorld.instance ;

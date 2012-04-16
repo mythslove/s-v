@@ -6,6 +6,7 @@ package local.model
 	import local.comm.GameRemote;
 	import local.model.vos.CollectionVO;
 	import local.model.vos.ConfigBaseVO;
+	import local.model.vos.PickupVO;
 
 	/**
 	 * 所有的收集物Model 
@@ -52,8 +53,18 @@ package local.model
 		{
 			collectionsHash = config.collections ;
 			collectionArray = new Vector.<CollectionVO>();
+			var cvo:CollectionVO;
+			var pvo:PickupVO ;
+			var len:int ;
 			for( var key:String in collectionsHash){
-				collectionArray.push( collectionsHash[key] );
+				cvo = collectionsHash[key] ;
+				collectionArray.push( cvo );
+				len = cvo.pickups.length ;
+				for( var i:int = 0 ; i<len ;++i)
+				{
+					pvo = config.pickups[cvo.pickups[i]] ;
+					pvo.groupId = cvo.groupId;
+				}
 			}
 		}
 		/**
@@ -67,6 +78,16 @@ package local.model
 				return myCollection[groupId] ;
 			}
 			return 0 ;
+		}
+		
+		/**
+		 * 通过groupId返回CollectionVO 
+		 * @param groupId
+		 * @return 
+		 */		
+		public function getCollectionById( groupId:String ):CollectionVO
+		{
+			return collectionsHash[groupId] as CollectionVO;;
 		}
 	}
 }

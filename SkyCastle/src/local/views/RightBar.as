@@ -1,8 +1,10 @@
 package local.views
 {
 	import com.greensock.TweenLite;
+	import com.greensock.easing.Back;
 	
 	import flash.display.Sprite;
+	import flash.utils.setTimeout;
 	
 	import local.comm.GameSetting;
 	import local.comm.GlobalDispatcher;
@@ -12,15 +14,16 @@ package local.views
 
 	public class RightBar extends BaseView
 	{
-		public var collectionHud:CollectionHud ;
-		
-		
 		private static var _instance:RightBar ;
 		public static function get instance():RightBar
 		{
 			if(!_instance) _instance = new RightBar();
 			return _instance;
 		}
+		
+		//================================
+		public var collectionHud:CollectionHud ;
+		
 		public function RightBar()
 		{
 			super();
@@ -47,8 +50,9 @@ package local.views
 		
 		public function showCollectionHud( pvo:PickupVO ):void{
 			collectionHud.visible = true ;
-			collectionHud.x = GameSetting.SCREEN_WIDTH;
-			TweenLite.to(collectionHud,0.2,{x:stage.stageWidth-collectionHud.width});
+			collectionHud.show(pvo);
+			collectionHud.x = 0 ;
+			TweenLite.to(collectionHud,0.3,{x: 50-collectionHud.width, ease:Back.easeOut});
 		}
 	}
 }
