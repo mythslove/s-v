@@ -43,6 +43,7 @@ package local.views
 		}
 		
 		public function showCollectionHud():void{
+			collectionHud.visible = true ;
 			collectionHud.x = GameSetting.SCREEN_WIDTH;
 			TweenLite.to(collectionHud,0.2,{x:stage.stageWidth-collectionHud.width});
 		}
