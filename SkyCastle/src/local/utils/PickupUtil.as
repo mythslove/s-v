@@ -3,6 +3,7 @@ package local.utils
 	import local.comm.GameSetting;
 	import local.enum.BasicPickup;
 	import local.game.GameWorld;
+	import local.model.PickupModel;
 	import local.views.icon.PickupImage;
 
 	/**
@@ -27,44 +28,44 @@ package local.utils
 			{
 				case BasicPickup.PICKUP_COIN:
 					if(value>100){
-						img = new PickupImage(name+5,value,name);
+						img = new PickupImage(name+5,null,value,name);
 					}else if( value>70){
-						img = new PickupImage(name+4,value,name);
+						img = new PickupImage(name+4,null,value,name);
 					}else if( value>50){
-						img = new PickupImage(name+3,value,name);
+						img = new PickupImage(name+3,null,value,name);
 					}else if( value>20){
-						img = new PickupImage(name+2,value,name);
+						img = new PickupImage(name+2,null,value,name);
 					}else{
-						img = new PickupImage(name+1,value,name);
+						img = new PickupImage(name+1,null,value,name);
 					}
 					break ;
 				case BasicPickup.PICKUP_ENERGY:
 					if(value>2){
-						img = new PickupImage(name+2,value,name);
+						img = new PickupImage(name+2,null,value,name);
 					}else{
-						img = new PickupImage(name+1,value,name);
+						img = new PickupImage(name+1,null,value,name);
 					}
 					break ;
 				case BasicPickup.PICKUP_EXP:
 				case BasicPickup.PICKUP_WOOD:
 					if(value>100){
-						img = new PickupImage(name+3,value,name);
+						img = new PickupImage(name+3,null,value,name);
 					}else if( value>50){
-						img = new PickupImage(name+2,value,name);
+						img = new PickupImage(name+2,null,value,name);
 					}else{
-						img = new PickupImage(name+1,value,name);
+						img = new PickupImage(name+1,null,value,name);
 					}
 					break ;
 				case BasicPickup.PICKUP_STONE:
 					if(value>50){
-						img = new PickupImage(name+2,value,name);
+						img = new PickupImage(name+2,null,value,name);
 					}else{
-						img = new PickupImage(name+1,value,name);
+						img = new PickupImage(name+1,null,value,name);
 					}
 					break ;
 				default:
 					//特殊的物品
-					img = new PickupImage(name,value );
+					img = new PickupImage(PickupModel.instance.getPickupById(name).alias,name , value );
 					break ;
 			}
 			world.addEffect(img,x,y-GameSetting.GRID_SIZE);

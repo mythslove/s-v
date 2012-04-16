@@ -7,6 +7,7 @@ package local.views
 	import local.comm.GameSetting;
 	import local.comm.GlobalDispatcher;
 	import local.comm.GlobalEvent;
+	import local.model.vos.PickupVO;
 	import local.views.collection.CollectionHud;
 
 	public class RightBar extends BaseView
@@ -30,6 +31,8 @@ package local.views
 		
 		override protected function added():void
 		{
+			x = stage.stageWidth ;
+			
 			GlobalDispatcher.instance.addEventListener( GlobalEvent.RESIZE , onResizeHandler ) ;
 			collectionHud = new CollectionHud();
 			collectionHud.y = 100 ;
@@ -42,7 +45,7 @@ package local.views
 			this.x = stage.stageWidth ;
 		}
 		
-		public function showCollectionHud():void{
+		public function showCollectionHud( pvo:PickupVO ):void{
 			collectionHud.visible = true ;
 			collectionHud.x = GameSetting.SCREEN_WIDTH;
 			TweenLite.to(collectionHud,0.2,{x:stage.stageWidth-collectionHud.width});
