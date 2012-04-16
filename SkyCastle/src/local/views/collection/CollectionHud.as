@@ -92,7 +92,7 @@ package local.views.collection
 						TweenLite.to( img , 0.5 , {scaleX:0.5 , scaleY:0.5, ease:Back.easeInOut , alpha:1 });
 					}
 					if(collModel.myCollection && collModel.myCollection.hasOwnProperty(_cvo.groupId)){
-						if(count<=CollectionModel.instance.myCollection[_cvo.groupId])
+						if(count==0 || count<=CollectionModel.instance.myCollection[_cvo.groupId])
 						{
 							canExcharge = false ;
 						}
