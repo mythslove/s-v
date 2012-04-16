@@ -23,6 +23,7 @@ package
 	import local.utils.ResourceUtil;
 	import local.views.CenterViewContainer;
 	import local.views.LeftBar;
+	import local.views.RightBar;
 	
 	/**
 	 * 游戏入口基类 
@@ -100,6 +101,7 @@ package
 					
 					addChild(GameWorld.instance); //添加游戏世界
 					addChild( new LeftBar()); //居左的容器
+					addChild( new RightBar()); //居右的容器
 					addChild( CenterViewContainer.instance); //添加UI的容器
 					addChild(_preLoading);
 					
