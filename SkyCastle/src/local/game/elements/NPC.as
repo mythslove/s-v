@@ -62,7 +62,8 @@ package local.game.elements
 		{
 			visible = true ;
 			var houses:Array = MapBuildingModel.instance.houses ;
-			if( houses && houses.length>0){
+			var ran:Number = Math.random() ;
+			if( ran>.6 && houses && houses.length>0){
 				var len:int = houses.length - 1;
 				var index:int = Math.round( Math.random()*len );
 				_currentBuilding = houses[index] as Architecture ;
@@ -108,32 +109,32 @@ package local.game.elements
 		
 		protected function actionShop():void{
 			this.gotoAndPlay(AvatarAction.SHOP);
-			_timeoutId = setTimeout(searchHouse,1500);
+			_timeoutId = setTimeout(auto,1500);
 		}
 		
 		protected function actionRunway():void{
 			this.gotoAndPlay(AvatarAction.RUNAWAY);
-			_timeoutId = setTimeout(searchHouse,5000);
+			_timeoutId = setTimeout(auto,5000);
 		}
 		
 		protected function actionRunwayBack():void{
 			this.gotoAndPlay(AvatarAction.RUNAWAYBACK);
-			_timeoutId = setTimeout(searchHouse,5000);
+			_timeoutId = setTimeout(auto,5000);
 		}
 		
 		protected function actionIdle():void{
 			this.gotoAndPlay(AvatarAction.IDLE);
-			_timeoutId = setTimeout(searchHouse,15000);
+			_timeoutId = setTimeout(auto,15000);
 		}
 		
 		protected function actionAdmire():void {
 			this.gotoAndPlay(AvatarAction.ADMIRE);
-			_timeoutId = setTimeout(searchHouse,5000);
+			_timeoutId = setTimeout(auto,5000);
 		}
 		
 		protected function actionCow():void{
 			this.gotoAndPlay(AvatarAction.COWER);
-			_timeoutId = setTimeout(searchHouse,10000);
+			_timeoutId = setTimeout(auto,10000);
 		}
 		
 		override public function onClick():void
