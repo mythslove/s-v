@@ -7,6 +7,7 @@ package local.views.collection
 	import com.greensock.easing.Back;
 	
 	import flash.display.Sprite;
+	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	import flash.utils.clearTimeout;
 	import flash.utils.setTimeout;
@@ -31,10 +32,24 @@ package local.views.collection
 		public var img0:Sprite,img1:Sprite,img2:Sprite,img3:Sprite,img4:Sprite;
 		//==========================
 		private var _timeoutId:int ;
+		private var _cvo:CollectionVO ;
 		
 		public function CollectionHud()
 		{
 			super();
+		}
+		
+		override protected function added():void
+		{
+			btnTurnIn.addEventListener(MouseEvent.CLICK , onTurnInClickHandler );
+		}
+		
+		private function onTurnInClickHandler( e:MouseEvent ):void
+		{
+			e.stopPropagation();
+			if(_cvo){
+				//打开兑换窗口
+			}
 		}
 		
 		override public function set visible(value:Boolean):void
@@ -51,33 +66,43 @@ package local.views.collection
 		public function show( pvo:PickupVO ):void 
 		{
 			clear();
-			var cvo:CollectionVO = CollectionModel.instance.getCollectionById(pvo.groupId);
-			var lv:int = CollectionModel.instance.getCollLvByGrounp( cvo.groupId ) ;
+			_cvo = CollectionModel.instance.getCollectionById(pvo.groupId);
+			var lv:int = CollectionModel.instance.getCollLvByGrounp( _cvo.groupId ) ;
 			txtLevel.text =  lv+"" ;
 			txtProgress.text = lv+" of 15";
-			txtTitle.text = cvo.title ;
+			txtTitle.text = _cvo.title ;
 			
-			var len:int = cvo.pickups.length ;
+			var canExcharge:Boolean = true ;
+			var len:int = _cvo.pickups.length ;
 			var pickupVO:PickupVO;
 			var img:Image ;
 			for(var i:int =0  ; i<len ; ++i){
-				pickupVO = PickupModel.instance.getPickupById(cvo.pickups[i]);
+				pickupVO = PickupModel.instance.getPickupById(_cvo.pickups[i]);
 				img = new Image( pickupVO.thumbAlias , pickupVO.url);
 				img.scaleX = img.scaleY = 0.5 ;
 				img.alpha = 0.4 ;
 				this["img"+i].addChild(img);
-				if(PickupModel.instance.getMyPickupCount(pickupVO.pickupId)>0){
+				var count:int = PickupModel.instance.getMyPickupCount(pickupVO.pickupId) ;
+				if(count>0){
 					if(pvo.pickupId==pickupVO.pickupId){
 						img.alpha=0.2 ;
 						img.scaleX = img.scaleY = 3 ;
 						TweenLite.to( img , 0.5 , {scaleX:0.5 , scaleY:0.5, ease:Back.easeInOut , alpha:1 });
 					}
+					if(CollectionModel.instance.myCollection && CollectionModel.instance.myCollection.hasOwnProperty(_cvo.groupId)){
+						if(count<=CollectionModel.instance.myCollection[_cvo.groupId])
+						{
+							canExcharge = false ;
+						}
+					}
 				}
 			}
+			btnTurnIn.enabled = canExcharge ;
 		}
 		
 		private function clear():void
 		{
+			_cvo = null ;
 			ContainerUtil.removeChildren( img0 );
 			ContainerUtil.removeChildren( img1 );
 			ContainerUtil.removeChildren( img2 );
