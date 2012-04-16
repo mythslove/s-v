@@ -30,7 +30,7 @@ package local.game.elements
 			this.speed = 4 ;
 			this. _delayShow = delay ;
 			_actionsFuns = Vector.<Function>([
-				searchHouse,actionIdle,actionShop,actionIdle,actionAdmire,actionIdle,actionCow,
+				searchHouse,actionIdle,actionShop,actionIdle,actionAdmire,
 				actionIdle,actionRunway,actionIdle,actionRunwayBack,actionIdle,searchHouse
 			]);
 		}
@@ -109,7 +109,7 @@ package local.game.elements
 		
 		protected function actionShop():void{
 			this.gotoAndPlay(AvatarAction.SHOP);
-			_timeoutId = setTimeout(auto,1500);
+			_timeoutId = setTimeout(auto,5000);
 		}
 		
 		protected function actionRunway():void{
