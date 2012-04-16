@@ -7,7 +7,6 @@ package local.views.icon
 	import com.greensock.easing.Linear;
 	
 	import flash.display.DisplayObject;
-	import flash.events.Event;
 	import flash.geom.Point;
 	import flash.utils.clearTimeout;
 	import flash.utils.setTimeout;
@@ -20,15 +19,17 @@ package local.views.icon
 	import local.model.vos.PickupVO;
 	import local.model.vos.PlayerVO;
 	import local.views.CenterViewContainer;
+	import local.views.RightBar;
 	import local.views.base.Image;
 	import local.views.effects.MapWordEffect;
 	
 	public class PickupImage extends Image
 	{
 		private var _value:int ;
-		private var _name:String;
+		private var _pkAlias:String;
 		private var _type:String;
 		private var _timeoutId:int ;
+		private var _pkId:String ;
 		
 		/**
 		 * 构造
@@ -36,13 +37,14 @@ package local.views.icon
 		 * @param value 值
 		 * @param type 0为不是基础pickup
 		 */		
-		public function PickupImage(name:String , value:int =1 , type:String=null )
+		public function PickupImage(pickupAlias:String , pickupId:String = null , value:int =1 , type:String=null )
 		{
-			var url:String =  "res/pickup/pickup"+name+".png" ;
-			var alias:String ="pickup"+name ;
-			super(alias, url, true);
+			var url:String =  "res/pickup/pickup"+pickupAlias+".png" ;
+			var pickupAlias:String ="pickup"+pickupAlias ;
+			super(pickupAlias, url, true);
 			
-			_name = name ;
+			_pkAlias = pickupAlias ;
+			_pkId = pickupId ;
 			_type = type ;
 			mouseChildren =false ;
 			mouseEnabled = false ;
@@ -68,6 +70,7 @@ package local.views.icon
 			clearTimeout(_timeoutId);
 			_timeoutId = 0 ;
 			var target:DisplayObject ;
+			var targetPoint:Point ;
 			mouseEnabled = false ;
 			if(_type)
 			{
@@ -109,27 +112,30 @@ package local.views.icon
 				CenterViewContainer.instance.topBar.updateTopBar();
 				var worldEffect:MapWordEffect = new MapWordEffect( temp+" +"+_value ,color );
 				GameWorld.instance.addEffect( worldEffect , x , y-Math.random()*100 );
+				targetPoint = new Point(target.x+CenterViewContainer.instance.x,target.y+CenterViewContainer.instance.y);
 			}
 			else
 			{
-				var pickupVO:PickupVO = PickupModel.instance.getPickupById( _name );
+				var pickupVO:PickupVO = PickupModel.instance.getPickupById( _pkId );
 				if(pickupVO)
 				{
 					if( pickupVO.type==ItemType.PICKUP_COLLECTION )
 					{
 						//弹出搜集箱
+						target = RightBar.instance.collectionHud  ;
+						RightBar.instance.showCollectionHud( pickupVO );
+						targetPoint = new Point(target.x+RightBar.instance.x+CenterViewContainer.instance.x,target.y+CenterViewContainer.instance.y);
 					}
 					else
 					{
 						//飞到搜集箱中
 						target=CenterViewContainer.instance.bottomBar.toolBox.btnBagTool ;
+						targetPoint = new Point(target.x+CenterViewContainer.instance.x,target.y+CenterViewContainer.instance.y);
 					}
 					//添加到玩家pickup中
 					PickupModel.instance.addPickup( pickupVO.pickupId , _value );
 				}
 			}
-			
-			var targetPoint:Point = new Point(target.x+CenterViewContainer.instance.x,target.y+CenterViewContainer.instance.y);
 			var world:GameWorld = GameWorld.instance ;
 			targetPoint.x = (targetPoint.x-world.x)/world.scaleX-world.sceneLayerOffsetX ;
 			targetPoint.y = (targetPoint.y-world.y)/world.scaleX-world.sceneLayerOffsetY ;
