@@ -1,13 +1,9 @@
 package  local.views
 {
-	import com.greensock.TweenLite;
-	
 	import flash.display.Sprite;
 	
-	import local.comm.GameSetting;
 	import local.model.PlayerModel;
 	import local.model.vos.PlayerVO;
-	import local.views.collection.CollectionHud;
 	import local.views.topbar.AddEnergyBar;
 	import local.views.topbar.TopBarCoin;
 	import local.views.topbar.TopBarEnergy;
@@ -29,21 +25,10 @@ package  local.views
 		public var gemBar:TopBarGem;
 		public var rankBar:TopBarRank;
 		public var addEnergyBar:AddEnergyBar ;
-		//===========================
-		public var collectionHud:CollectionHud ;
 		
 		public function TopBar()
 		{
 			super();
-			collectionHud = new CollectionHud();
-			collectionHud.y = 100 ;
-			collectionHud.visible = false ;
-			addChild(collectionHud);
-		}
-		
-		public function showCollectionHud():void{
-			collectionHud.x = GameSetting.SCREEN_WIDTH;
-			TweenLite.to(collectionHud,0.2,{x:GameSetting.SCREEN_WIDTH-collectionHud.width});
 		}
 		
 		
