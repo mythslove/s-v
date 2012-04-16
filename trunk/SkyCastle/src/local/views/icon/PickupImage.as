@@ -132,7 +132,8 @@ package local.views.icon
 					{
 						//飞到搜集箱中
 						target=CenterViewContainer.instance.bottomBar.toolBox.btnBagTool ;
-						targetPoint = new Point(target.x+CenterViewContainer.instance.x,target.y+CenterViewContainer.instance.y);
+						var gpos:Point = target.localToGlobal(new Point(target.x , target.y));
+						targetPoint = new Point(gpos.x,gpos.y);
 					}
 				}
 			}

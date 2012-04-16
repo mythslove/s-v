@@ -86,7 +86,8 @@ package local.views.collection
 		}
 		
 		private function close():void{
-			TweenLite.to(this,0.3,{x:0, ease:Back.easeIn , onComplete:onTweenCom });
+			alpha = 1 ;
+			TweenLite.to(this,0.3,{x:0, ease:Back.easeIn , alpha:0 , onComplete:onTweenCom });
 		}
 		
 		private function onTweenCom():void{
