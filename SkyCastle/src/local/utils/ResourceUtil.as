@@ -2,13 +2,22 @@ package local.utils
 {
 	import bing.animation.AnimationBitmap;
 	import bing.iso.path.Grid;
+	import bing.res.ResLoadedEvent;
 	import bing.res.ResPool;
 	import bing.res.ResType;
+	import bing.res.ResURLLoader;
 	import bing.res.ResVO;
 	import bing.utils.SystemUtil;
 	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
+	import flash.display.Loader;
+	import flash.events.Event;
+	import flash.events.IOErrorEvent;
+	import flash.net.URLLoaderDataFormat;
+	import flash.net.URLRequest;
+	import flash.system.ApplicationDomain;
+	import flash.system.LoaderContext;
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
 	
@@ -38,6 +47,77 @@ package local.utils
 			return _instance ;
 		}
 		//==================================
+		
+		/**
+		 * 下载一个资源 
+		 * @param resVO
+		 */		
+		override protected function loadAResource( resVO:ResVO ):void
+		{
+			switch(resVO.resType)
+			{
+				case ResType.SWF:
+				case ResType.TEXT:
+				case ResType.BINARY:
+					urlLoaderARes( resVO );
+					break ;
+				default:
+					loaderARes(resVO);
+					break ;
+			}
+		}
+		override protected function urlLoaderARes(resVO:ResVO):void
+		{
+			var urlLoader:ResURLLoader = new ResURLLoader();
+			urlLoader.name = resVO.resId ;
+			if(resVO.resType==ResType.BINARY || resVO.resType==ResType.SWF){
+				urlLoader.dataFormat = URLLoaderDataFormat.BINARY;
+			}
+			urlLoader.addEventListener(Event.COMPLETE , urlLoaderHandler);
+			urlLoader.addEventListener(IOErrorEvent.IO_ERROR , ioErrorHandler );
+			urlLoader.load( new URLRequest( cdns[resVO.loadError]+resVO.url  ) );
+		}
+		
+		override protected function urlLoaderHandler(e:Event):void
+		{
+			e.stopPropagation();
+			var urlLoader:ResURLLoader = e.target as ResURLLoader ;
+			var resVO:ResVO = _resDictionary[urlLoader.name] as ResVO ;
+			if(resVO.resType==ResType.SWF){
+				urlLoader.removeEventListener(Event.COMPLETE , urlLoaderHandler);
+				urlLoader.removeEventListener(IOErrorEvent.IO_ERROR , ioErrorHandler );
+				var bytes:ByteArray = e.target.data as ByteArray;
+				var newBytes:ByteArray = new ByteArray();
+				newBytes.writeBytes(bytes,1);
+				newBytes.position =0 ;
+				var loader:Loader = new Loader();
+				loader.name = resVO.resId ;
+				loader.contentLoaderInfo.addEventListener(Event.COMPLETE , swfBytesLoadedHandler );
+				loader.loadBytes(newBytes ,new LoaderContext(false,ApplicationDomain.currentDomain));
+			}else{
+				super.urlLoaderHandler(e);
+			}
+		}
+		private function swfBytesLoadedHandler( e:Event ):void
+		{
+			var loader:Loader  = e.target.loader as Loader ;
+			loader.contentLoaderInfo.removeEventListener(Event.COMPLETE , swfBytesLoadedHandler );
+			var resVO:ResVO = _resDictionary[loader.name] as ResVO ;
+			resVO.resObject = loader ;
+			//抛出资源加载完成事件
+			var resLoadedEvent:ResLoadedEvent = new ResLoadedEvent(resVO.resId);
+			resLoadedEvent.resVO = resVO ;
+			this.dispatchEvent( resLoadedEvent );
+			_currentLoadNum--;
+			//下载下一个
+			if( _loadList.length>0 )
+			{
+				resVO = _loadList.shift() ;
+				loadAResource( resVO );
+			}
+		}
+		
+		
 		/**
 		 * 处理加载完成的资源 
 		 * @param resVO 
