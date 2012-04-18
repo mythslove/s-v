@@ -88,7 +88,8 @@ package local.utils
 				urlLoader.removeEventListener(IOErrorEvent.IO_ERROR , ioErrorHandler );
 				var bytes:ByteArray = e.target.data as ByteArray;
 				var newBytes:ByteArray = new ByteArray();
-				newBytes.writeBytes(bytes,1);
+				var key:int = bytes.readByte()==1 ? key =1 : 0 ;
+				newBytes.writeBytes(bytes,key);
 				newBytes.position =0 ;
 				var loader:Loader = new Loader();
 				loader.name = resVO.resId ;
