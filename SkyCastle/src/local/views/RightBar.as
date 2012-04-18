@@ -51,9 +51,8 @@ package local.views
 		public function showCollectionHud( pvo:PickupVO ):void{
 			collectionHud.visible = true ;
 			collectionHud.show(pvo);
-			collectionHud.x = 0 ;
 			collectionHud.alpha = 0 ;
-			TweenLite.to(collectionHud,0.3,{x: 60-collectionHud.width, alpha:1  , ease:Back.easeOut});
+			TweenLite.to(collectionHud,0.3,{x: -collectionHud.width, alpha:1  , ease:Back.easeOut});
 		}
 	}
 }
