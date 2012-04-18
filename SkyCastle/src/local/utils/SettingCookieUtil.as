@@ -19,10 +19,10 @@ package local.utils
 			_cookie.put( "heroNodeX" , nodeX );
 			_cookie.put( "heroNodeZ" , nodeZ );
 		}
-		public static function getHeroPoint():Point
+		public static function getHeroPoint( defPos:Boolean=false ):Point
 		{
 			var point:Point = new Point();
-			if(GameData.isHome && _cookie.contains( "heroNodeX") )
+			if(!defPos && GameData.isHome && _cookie.contains( "heroNodeX") )
 			{
 				point.x = int(_cookie.get("heroNodeX"));
 				point.y = int(_cookie.get("heroNodeZ"));

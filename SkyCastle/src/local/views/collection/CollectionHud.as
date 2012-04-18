@@ -33,6 +33,10 @@ package local.views.collection
 		//==========================
 		private var _timeoutId:int ;
 		private var _cvo:CollectionVO ;
+		private var _wid:int ;
+		public function get wid():int{
+			return _wid;
+		}
 		
 		public function CollectionHud()
 		{
@@ -41,6 +45,7 @@ package local.views.collection
 		
 		override protected function added():void
 		{
+			_wid = width ;
 			btnTurnIn.addEventListener(MouseEvent.CLICK , onTurnInClickHandler );
 		}
 		
@@ -81,21 +86,23 @@ package local.views.collection
 			for(var i:int =0  ; i<len ; ++i){
 				pickupVO = pickupModel.getPickupById(_cvo.pickups[i]);
 				img = new Image( pickupVO.thumbAlias , pickupVO.url);
-				img.scaleX = img.scaleY = 0.5 ;
 				img.alpha = 0.4 ;
+				img.scaleX = img.scaleY = 0.7 ;
 				this["img"+i].addChild(img);
 				var count:int = pickupModel.getMyPickupCount(pickupVO.pickupId) ;
 				if(count>0){
 					if(pvo.pickupId==pickupVO.pickupId){
 						img.alpha=0.2 ;
-						img.scaleX = img.scaleY = 3 ;
-						TweenLite.to( img , 0.5 , {scaleX:0.5 , scaleY:0.5, ease:Back.easeInOut , alpha:1 });
+						img.scaleX = img.scaleY = 2 ;
+						TweenLite.to( img , 1 , {scaleX:0.7 , scaleY:0.7 ,  ease:Back.easeInOut , alpha:1 });
 					}
 					if(collModel.myCollection && collModel.myCollection.hasOwnProperty(_cvo.groupId)){
 						if(count==0 || count<=CollectionModel.instance.myCollection[_cvo.groupId])
 						{
 							canExcharge = false ;
 						}
+					}else{
+						canExcharge = false ;
 					}
 				}
 			}

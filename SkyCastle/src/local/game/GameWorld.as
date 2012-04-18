@@ -291,10 +291,16 @@ package local.game
 				hero = CharacterManager.instance.hero ;
 			}
 			var position:Point = SettingCookieUtil.getHeroPoint() ;
-			hero.nodeX = position.x ;
-			hero.nodeZ = position.y ;
-			var scene:IsoScene = this.getBuildingScene( hero.nodeX , hero.nodeZ );
-			scene.addIsoObject( hero ) ;
+			while(true){
+				hero.nodeX = position.x ;
+				hero.nodeZ = position.y ;
+				var scene:IsoScene = this.getBuildingScene( hero.nodeX , hero.nodeZ );
+				if(scene){
+					scene.addIsoObject( hero ) ;
+					break ;
+				}
+				position = SettingCookieUtil.getHeroPoint(true) ;
+			}
 			//添加npc
 			CharacterManager.instance.addNpcToWorld();
 			//添加场景建筑

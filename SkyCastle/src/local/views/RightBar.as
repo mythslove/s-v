@@ -52,7 +52,7 @@ package local.views
 			collectionHud.visible = true ;
 			collectionHud.show(pvo);
 			collectionHud.alpha = 0 ;
-			TweenLite.to(collectionHud,0.3,{x: -collectionHud.width, alpha:1  , ease:Back.easeOut});
+			TweenLite.to(collectionHud,0.3,{x: -collectionHud.wid, alpha:1  , ease:Back.easeOut});
 		}
 	}
 }
