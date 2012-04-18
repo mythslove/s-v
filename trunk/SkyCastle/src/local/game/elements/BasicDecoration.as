@@ -79,6 +79,8 @@ package local.game.elements
 				case "chop": 
 					_executeBack = true ;
 					_currentRewards = e.result as RewardsVO ;
+					if(!_currentRewards) _currentRewards = new RewardsVO();
+					_currentRewards.pickups = ["PIK_34","PIK_40"];
 					this.showPickup();
 					break ;
 			}
