@@ -8,6 +8,7 @@ package local.model
 	import local.model.vos.ConfigBaseVO;
 	import local.model.vos.PickupVO;
 	import local.model.vos.RewardsVO;
+	import local.utils.PickupUtil;
 
 	/**
 	 * 所有的收集物Model 
@@ -115,9 +116,7 @@ package local.model
 						var lv:int = e.result.level ;
 						var cvo:CollectionVO = this.getCollectionById(groupId);
 						var exchangeRewards:RewardsVO = cvo.exchanges[lv] ;
-						if(exchangeRewards){
-							//掉到地上
-						}
+						PickupUtil.addRewards2World(exchangeRewards);
 						var extraRewards:RewardsVO = cvo.extras[lv] ;
 						if(extraRewards){
 							//弹出Collection奖励窗口
