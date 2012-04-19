@@ -71,14 +71,14 @@ package local.views.collection
 		public function show( pvo:PickupVO ):void 
 		{
 			clear();
-			_cvo = CollectionModel.instance.getCollectionById(pvo.groupId);
-			var lv:int = CollectionModel.instance.getCollLvByGrounp( _cvo.groupId ) ;
+			var collModel:CollectionModel = CollectionModel.instance ;
+			_cvo = collModel.getCollectionById(pvo.groupId);
+			var lv:int = collModel.getCollLvByGrounp( _cvo.groupId ) ;
 			txtLevel.text =  lv+"" ;
 			txtProgress.text = lv+" of 15";
 			txtTitle.text = _cvo.title ;
 			
 			var pickupModel:PickupModel = PickupModel.instance ;
-			var collModel:CollectionModel = CollectionModel.instance ;
 			var canExcharge:Boolean = true ;
 			var len:int = _cvo.pickups.length ;
 			var pickupVO:PickupVO;
@@ -89,22 +89,14 @@ package local.views.collection
 				img.alpha = 0.4 ;
 				img.scaleX = img.scaleY = 0.7 ;
 				this["img"+i].addChild(img);
-				var count:int = pickupModel.getMyPickupCount(pickupVO.pickupId) ;
-				if(count>0){
-					if(pvo.pickupId==pickupVO.pickupId){
-						img.alpha=0.2 ;
-						img.scaleX = img.scaleY = 2 ;
-						TweenLite.to( img , 1 , {scaleX:0.7 , scaleY:0.7 ,  ease:Back.easeInOut , alpha:1 });
-					}
-					if(collModel.myCollection && collModel.myCollection.hasOwnProperty(_cvo.groupId)){
-						if(count==0 || count<=CollectionModel.instance.myCollection[_cvo.groupId])
-						{
-							canExcharge = false ;
-						}
-					}else{
-						canExcharge = false ;
-					}
+				if(pvo.pickupId==pickupVO.pickupId){
+					img.alpha=0.2 ;
+					img.scaleX = img.scaleY = 2 ;
+					TweenLite.to( img , 1 , {scaleX:0.7 , scaleY:0.7 ,  ease:Back.easeInOut , alpha:1 });
 				}
+				var count:int = pickupModel.getMyPickupCount(pickupVO.pickupId) ;
+				if(count<=lv) canExcharge = false ;
+				else img.alpha = 1 ;
 			}
 			btnTurnIn.enabled = canExcharge ;
 		}
