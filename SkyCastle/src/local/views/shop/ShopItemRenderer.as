@@ -1,25 +1,24 @@
 package local.views.shop
 {
+	import bing.components.BingComponent;
 	import bing.components.button.BaseButton;
 	
 	import flash.display.DisplayObjectContainer;
 	import flash.display.InteractiveObject;
-	import flash.display.MovieClip;
 	import flash.display.SimpleButton;
 	import flash.display.Sprite;
-	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	
 	import local.comm.GlobalDispatcher;
-	import local.enum.ItemType;
 	import local.events.ShopEvent;
 	import local.model.buildings.vos.*;
 	import local.model.vos.ShopItemVO;
+	import local.utils.GameUtil;
 	import local.views.base.Image;
 	import local.views.tooltip.GameToolTip;
 	
-	public class ShopItemRenderer extends MovieClip
+	public class ShopItemRenderer extends BingComponent
 	{
 		public var container:Sprite;
 		public var btnNormal:BaseButton;
@@ -37,13 +36,7 @@ package local.views.shop
 			super();
 			stop();
 			container.mouseEnabled = container.mouseChildren=false ;
-			addEventListener(Event.ADDED_TO_STAGE , addedToStageHandler , false , 0 , true  );
-		}
-		
-		private function addedToStageHandler( e:Event ):void
-		{
-			removeEventListener(Event.ADDED_TO_STAGE , addedToStageHandler );
-			addEventListener( Event.REMOVED_FROM_STAGE , removedFromStageHandler , false , 0 , true  );
+			GameUtil.disableTextField(this);
 		}
 		
 		/**
@@ -82,9 +75,8 @@ package local.views.shop
 			}
 		}
 		
-		private function removedFromStageHandler( e:Event ):void
+		override protected function removedFromStage():void
 		{
-			removeEventListener( Event.REMOVED_FROM_STAGE , removedFromStageHandler);
 			btnNormal.removeEventListener(MouseEvent.CLICK , clickNormalBtnHandler );
 			itemVO = null ;
 			GameToolTip.instance.unRegister(btnBg);
