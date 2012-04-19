@@ -29,6 +29,7 @@ package
 			stage.scaleMode = "noScale";
 			stage.showDefaultContextMenu = false ;
 			Security.allowDomain("*");
+			GameData.APP = this ;
 			TweenPlugin.activate([BezierPlugin, GlowFilterPlugin]);
 		}
 		
