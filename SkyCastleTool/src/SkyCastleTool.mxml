@@ -138,6 +138,8 @@
 							stream.open( file,FileMode.READ); ;
 							bytes = new ByteArray();
 							stream.readBytes( bytes);
+							if(bytes.readByte()==1) continue ;
+							else bytes.position=0;
 							stream.close();
 							
 							newFile = new File( file.nativePath);
