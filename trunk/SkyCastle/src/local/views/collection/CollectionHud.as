@@ -53,7 +53,7 @@ package local.views.collection
 		{
 			e.stopPropagation();
 			if(_cvo){
-				//打开兑换窗口
+				
 			}
 		}
 		
