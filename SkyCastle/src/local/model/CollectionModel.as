@@ -7,6 +7,7 @@ package local.model
 	import local.model.vos.CollectionVO;
 	import local.model.vos.ConfigBaseVO;
 	import local.model.vos.PickupVO;
+	import local.model.vos.RewardsVO;
 
 	/**
 	 * 所有的收集物Model 
@@ -37,14 +38,6 @@ package local.model
 			_ro.addEventListener(ResultEvent.RESULT ,  onResultHandler );
 		}
 		
-		private function onResultHandler( e:ResultEvent ):void
-		{
-			SystemUtil.debug("返回数据：",e.service+"."+e.method , e.result );
-			switch( e.method )
-			{
-			}
-		}
-		
 		/**
 		 * 解析加载的配置文件 
 		 * @param config
@@ -67,6 +60,20 @@ package local.model
 				}
 			}
 		}
+		
+		/**
+		 * 通过groupId返回CollectionVO 
+		 * @param groupId
+		 * @return 
+		 */		
+		public function getCollectionById( groupId:String ):CollectionVO
+		{
+			return collectionsHash[groupId] as CollectionVO;;
+		}
+		
+		
+		
+		//===========我收集的===================
 		/**
 		 * groupId的当前等级 
 		 * @param groupId
@@ -81,13 +88,54 @@ package local.model
 		}
 		
 		/**
-		 * 通过groupId返回CollectionVO 
+		 *  添加一组collection或者升级一组collection
 		 * @param groupId
-		 * @return 
+		 * @param num
 		 */		
-		public function getCollectionById( groupId:String ):CollectionVO
+		private function addCollection( groupId:String  , num:int= 1 ):void
 		{
-			return collectionsHash[groupId] as CollectionVO;;
+			if(myCollection.hasOwnProperty(groupId)){
+				myCollection[groupId]+=num;
+			}else{
+				myCollection[groupId]=1;
+			}
 		}
+		
+		//==============================================
+		
+		private function onResultHandler( e:ResultEvent ):void
+		{
+			SystemUtil.debug("返回数据：",e.service+"."+e.method , e.result );
+			switch( e.method )
+			{
+				case "turnIn":
+					if(e.result)
+					{
+						var groupId:String  = e.result.groupId ;
+						var lv:int = e.result.level ;
+						var cvo:CollectionVO = this.getCollectionById(groupId);
+						var exchangeRewards:RewardsVO = cvo.exchanges[lv] ;
+						if(exchangeRewards){
+							//掉到地上
+						}
+						var extraRewards:RewardsVO = cvo.extras[lv] ;
+						if(extraRewards){
+							//弹出Collection奖励窗口
+						}
+					}
+					break ;
+			}
+		}
+		
+		/**
+		 *  发送turnin的消息到服务器  
+		 * @param groupId
+		 * @param lv
+		 */		
+		public function sendTurnIn( groupId:String , lv:int ):void
+		{
+			_ro.getOperation("turnIn").send(groupId , lv );
+		}
+			
 	}
 }

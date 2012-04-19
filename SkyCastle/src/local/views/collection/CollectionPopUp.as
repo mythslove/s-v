@@ -27,7 +27,6 @@ package local.views.collection
 		public var btnPrevPage:BaseButton;
 		public var btnNextPage:BaseButton;
 		public var container:Sprite ;
-//		public var menuBar
 		//=============================
 		private var _currCollections:Vector.<CollectionVO > ;
 		private const COUNT:int = 2 ;//一页显示两个
