@@ -100,6 +100,17 @@ package bing.iso
 		
 		
 		/********************************************************
+		 * stage全局坐标转成IsoWorld场景像素坐标
+		 * ********************************************************/
+		public function globalPointToWorld( px:Number , py:Number):Point
+		{
+			var xx:int = (px-x)/scaleX -sceneLayerOffsetX  ;
+			var yy:int = (py-y)/scaleY - sceneLayerOffsetY ;
+			return new Point(xx,yy);
+		}
+		
+		
+		/********************************************************
 		 * 设置背景
 		 * ********************************************************/
 		public function setBackGround( ground:DisplayObject ):void
