@@ -16,6 +16,7 @@ package local.views.collection
 	import local.model.PickupModel;
 	import local.model.vos.CollectionVO;
 	import local.model.vos.PickupVO;
+	import local.model.vos.RewardsVO;
 	import local.views.BaseView;
 	import local.views.base.Image;
 

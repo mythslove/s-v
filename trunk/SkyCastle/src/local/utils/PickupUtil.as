@@ -4,6 +4,7 @@ package local.utils
 	import local.enum.BasicPickup;
 	import local.game.GameWorld;
 	import local.model.PickupModel;
+	import local.model.vos.RewardsVO;
 	import local.views.icon.PickupImage;
 
 	/**
@@ -69,6 +70,15 @@ package local.utils
 					break ;
 			}
 			world.addEffect(img,x,y-GameSetting.GRID_SIZE);
+		}
+		
+		/**
+		 * 将奖励显示到地图上 
+		 * @param rewards
+		 */		
+		public static function addRewards2World( rewards:RewardsVO):void
+		{
+			
 		}
 	}
 }
