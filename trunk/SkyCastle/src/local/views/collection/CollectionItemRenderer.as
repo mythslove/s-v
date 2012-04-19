@@ -1,7 +1,6 @@
 package local.views.collection
 {
 	import bing.components.button.BaseButton;
-	import bing.mvc.core.Model;
 	
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
@@ -12,6 +11,7 @@ package local.views.collection
 	import local.model.vos.CollectionVO;
 	import local.model.vos.PickupVO;
 	import local.model.vos.RewardsVO;
+	import local.utils.PopUpManager;
 	import local.views.BaseView;
 	import local.views.base.Image;
 	import local.views.icon.GameIcons;
@@ -119,7 +119,8 @@ package local.views.collection
 		private function onTurnInClickHandler( e:MouseEvent ):void
 		{
 			e.stopPropagation();
-			
+			CollectionModel.instance.sendTurnIn(_currCollection.groupId , _lv+1 );
+			PopUpManager.instance.removeCurrentPopup();
 		}
 		
 		override protected function removed():void

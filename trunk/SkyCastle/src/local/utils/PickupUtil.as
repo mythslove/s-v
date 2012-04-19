@@ -1,7 +1,11 @@
 package local.utils
 {
+	import flash.geom.Point;
+	
+	import local.comm.GameData;
 	import local.comm.GameSetting;
 	import local.enum.BasicPickup;
+	import local.enum.ItemType;
 	import local.game.GameWorld;
 	import local.model.PickupModel;
 	import local.model.vos.RewardsVO;
@@ -78,7 +82,32 @@ package local.utils
 		 */		
 		public static function addRewards2World( rewards:RewardsVO):void
 		{
-			
+			if(rewards)
+			{
+				var pos:Point = GameWorld.instance.globalPointToWorld( GameData.APP.stage.stageWidth*0.5,GameData.APP.stage.stageHeight*0.5);
+				
+				if(rewards.coin>0){
+					addPickup2Wold(BasicPickup.PICKUP_COIN,rewards.coin , pos.x, pos.y);
+				}
+				if(rewards.wood>0){
+					addPickup2Wold(BasicPickup.PICKUP_WOOD,rewards.wood ,  pos.x,pos.y);
+				}
+				if(rewards.stone>0){
+					addPickup2Wold(BasicPickup.PICKUP_STONE,rewards.stone ,  pos.x,pos.y);
+				}
+				if(rewards.energy>0){
+					addPickup2Wold(BasicPickup.PICKUP_ENERGY,rewards.energy ,  pos.x,pos.y);
+				}
+				if(rewards.exp>0){
+					addPickup2Wold(BasicPickup.PICKUP_EXP,rewards.exp ,  pos.x,pos.y);
+				}
+				if(rewards.pickups){
+					var len:int = rewards.pickups.length ;
+					for( var i:int = 0 ; i<len ; ++i){
+						addPickup2Wold(rewards.pickups[i],1 ,  pos.x,pos.y);
+					}
+				}
+			}
 		}
 	}
 }
