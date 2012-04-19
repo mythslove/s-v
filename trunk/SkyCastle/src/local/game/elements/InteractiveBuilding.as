@@ -23,12 +23,15 @@ package local.game.elements
 		
 		public function onMouseOut():void
 		{
-			selectedStatus( false );
-			if(!MouseManager.instance.checkControl()){
-				MouseManager.instance.mouseStatus = MouseStatus.NONE;
-			}
-			if(itemLayer.alpha==1 && stepLoading&&stepLoading.parent){
-				stepLoading.parent.removeChild(stepLoading);
+			if(itemLayer)
+			{
+				selectedStatus( false );
+				if(!MouseManager.instance.checkControl()){
+					MouseManager.instance.mouseStatus = MouseStatus.NONE;
+				}
+				if(itemLayer.alpha==1 && stepLoading&&stepLoading.parent){
+					stepLoading.parent.removeChild(stepLoading);
+				}
 			}
 		}
 	}
