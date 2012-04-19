@@ -17,6 +17,7 @@ package local.views.collection
 	import local.model.vos.CollectionVO;
 	import local.model.vos.PickupVO;
 	import local.model.vos.RewardsVO;
+	import local.utils.PopUpManager;
 	import local.views.BaseView;
 	import local.views.base.Image;
 
@@ -38,6 +39,7 @@ package local.views.collection
 		public function get wid():int{
 			return _wid;
 		}
+		private var _lv:int ;
 		
 		public function CollectionHud()
 		{
@@ -54,7 +56,8 @@ package local.views.collection
 		{
 			e.stopPropagation();
 			if(_cvo){
-				
+				CollectionModel.instance.sendTurnIn(_cvo.groupId , _lv) ;
+				close();
 			}
 		}
 		
@@ -74,9 +77,9 @@ package local.views.collection
 			clear();
 			var collModel:CollectionModel = CollectionModel.instance ;
 			_cvo = collModel.getCollectionById(pvo.groupId);
-			var lv:int = collModel.getCollLvByGrounp( _cvo.groupId ) ;
-			txtLevel.text =  lv+"" ;
-			txtProgress.text = lv+" of 15";
+			_lv = collModel.getCollLvByGrounp( _cvo.groupId ) ;
+			txtLevel.text =  _lv+"" ;
+			txtProgress.text = _lv+" of 15";
 			txtTitle.text = _cvo.title ;
 			
 			var pickupModel:PickupModel = PickupModel.instance ;
@@ -96,7 +99,7 @@ package local.views.collection
 					TweenLite.to( img , 1 , {scaleX:0.7 , scaleY:0.7 ,  ease:Back.easeInOut , alpha:1 });
 				}
 				var count:int = pickupModel.getMyPickupCount(pickupVO.pickupId) ;
-				if(count<=lv) canExcharge = false ;
+				if(count<=_lv) canExcharge = false ;
 				else img.alpha = 1 ;
 			}
 			btnTurnIn.enabled = canExcharge ;

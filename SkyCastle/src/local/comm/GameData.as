@@ -1,5 +1,7 @@
 package local.comm
 {
+	import flash.display.Sprite;
+	
 	import local.enum.BuildingOperation;
 	import local.enum.MouseStatus;
 	import local.game.GameWorld;
@@ -11,6 +13,10 @@ package local.comm
 
 	public class GameData
 	{
+		
+		public static var APP:Sprite; //主灰
+		
+		
 		//********************************************************************		
 		private static var _buildingCurrOperation:String = BuildingOperation.NONE ;
 		/**
