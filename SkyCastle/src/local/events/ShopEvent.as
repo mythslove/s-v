@@ -3,7 +3,10 @@ package local.events
 	import flash.events.Event;
 	
 	import local.model.vos.ShopItemVO;
-	
+	/**
+	 * 商店中的事件 
+	 * @author zzhanglin
+	 */	
 	public class ShopEvent extends Event
 	{
 		/**
