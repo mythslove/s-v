@@ -8,7 +8,7 @@ package local.events
 	public class StorageEvent extends Event
 	{
 		/**
-		 * 选择了一个建筑
+		 * 获取了所有的收藏箱建筑
 		 */		
 		public static const GET_STROAGE_ITEMS:String = "getStroageItems";
 		
