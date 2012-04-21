@@ -4,7 +4,10 @@ package local.model
 	import local.enum.ItemType;
 	import local.model.vos.ConfigBaseVO;
 	import local.model.vos.ShopItemVO;
-
+	/**
+	 * 商店的Model 
+	 * @author zzhanglin
+	 */
 	public class ShopModel
 	{
 		private static var _instance:ShopModel;

@@ -39,7 +39,8 @@ package local.model.buildings.vos
 		/** 当前等级，默认为1 */
 		public var level:int =1 ;
 		
-		
+		/** 修建完成时的时间 */
+		public var buildTime:int ;
 		
 		
 		//===================================非必需
