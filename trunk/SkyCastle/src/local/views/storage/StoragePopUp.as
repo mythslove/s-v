@@ -12,12 +12,17 @@ package local.views.storage
 	import flash.utils.Dictionary;
 	
 	import local.comm.GameSetting;
+	import local.enum.ItemType;
 	import local.model.PickupModel;
 	import local.model.vos.PickupVO;
 	import local.model.vos.StorageItemVO;
 	import local.utils.PopUpManager;
 	import local.views.BaseView;
-	
+
+	/**
+	 * 收藏箱弹出窗口 
+	 * @author zzhanglin
+	 */	
 	public class StoragePopUp extends BaseView
 	{
 		public var tabMenu:StorageMainTab;
@@ -113,10 +118,12 @@ package local.views.storage
 		private function setMaterials():void
 		{
 			var pks:Object = PickupModel.instance.myPickups ;
+			var pkvo:PickupVO ;
 			_materials = [];
 			if(pks){
 				for( var key:String in pks){
-					_materials.push( key );
+					pkvo = PickupModel.instance.getPickupById(key) ;
+					if(pkvo.type==ItemType.PICKUP_MATERIAL)	 _materials.push( key );
 				}
 			}
 			_page = 0 ;
