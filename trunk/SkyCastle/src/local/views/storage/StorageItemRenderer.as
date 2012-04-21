@@ -4,9 +4,12 @@ package local.views.storage
 	import bing.components.button.BaseButton;
 	
 	import flash.display.Sprite;
+	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	
 	import local.model.PickupModel;
+	import local.model.buildings.BaseBuildingVOModel;
+	import local.model.buildings.vos.BaseBuildingVO;
 	import local.model.vos.PickupVO;
 	import local.model.vos.StorageItemVO;
 	import local.utils.GameUtil;
@@ -26,6 +29,7 @@ package local.views.storage
 		//==================================
 		private const LABEL_DEFAULT:String = "defalut";
 		private const LABEL_MATERIAL:String = "material";
+		private var _storageItemVO:StorageItemVO ;
 		
 		public function StorageItemRenderer()
 		{
@@ -41,6 +45,16 @@ package local.views.storage
 		 */		
 		public function showBuilding( vo:StorageItemVO ):void
 		{
+			this._storageItemVO = vo ;
+			var baseVO:BaseBuildingVO = BaseBuildingVOModel.instance.getBaseVOById(vo.baseId);
+			txtName.text = baseVO.name ;
+			txtCount.text = "×"+vo.num;
+			btnNormal.addEventListener(MouseEvent.CLICK , onNormalHandler );
+		}
+		
+		private function onNormalHandler( e:MouseEvent ):void
+		{
+			e.stopPropagation();
 			
 		}
 		
@@ -56,6 +70,13 @@ package local.views.storage
 			container.addChild(img);
 			txtName.text = pkvo.name ;
 			txtCount.text = PickupModel.instance.getMyPickupCount( pid )+"/50";
+		}
+		
+		override protected function removedFromStage():void
+		{
+			_storageItemVO = null ;
+			if(btnNormal.hasEventListener(MouseEvent.CLICK))
+				btnNormal.removeEventListener(MouseEvent.CLICK , onNormalHandler );
 		}
 	}
 }
