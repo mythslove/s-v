@@ -3,6 +3,7 @@ package local.views.storage
 	import bing.components.BingComponent;
 	import bing.components.button.BaseButton;
 	
+	import flash.display.InteractiveObject;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
@@ -26,6 +27,7 @@ package local.views.storage
 		public var txtBtn:TextField ;
 		public var btnNormal:BaseButton;
 		public var container:Sprite ;
+		public var btnBg:InteractiveObject ;
 		//==================================
 		private const LABEL_DEFAULT:String = "defalut";
 		private const LABEL_MATERIAL:String = "material";
