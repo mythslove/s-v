@@ -57,9 +57,6 @@ package local.game.elements
 				case BuildingOperation.BUY:
 					playPlaceEffect();
 					CharacterManager.instance.updateCharactersPos( this );
-					//掉修建经验
-					var value:int = baseBuildingVO.buildEarnExp;
-					if(value>0)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_EXP , value,screenX,screenY-offsetY);
 					//发送数据
 					ro.getOperation("buy").send( buildingVO.shopItemId , nodeX,nodeZ );
 					break ;
@@ -90,6 +87,9 @@ package local.game.elements
 			switch( e.method)
 			{
 				case "buy":
+					//掉修建经验
+					var value:int = baseBuildingVO.buildEarnExp;
+					if(value>0)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_EXP , value,screenX,screenY-offsetY);
 					break ;
 				case "build":
 					break ;
