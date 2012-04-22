@@ -90,6 +90,7 @@ package local.game.elements
 					//掉修建经验
 					var value:int = baseBuildingVO.buildEarnExp;
 					if(value>0)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_EXP , value,screenX,screenY-offsetY);
+					//返回奖励和id
 					break ;
 				case "build":
 					break ;
