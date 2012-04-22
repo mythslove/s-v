@@ -22,7 +22,7 @@ package local.views.shop
 	{
 		public var container:Sprite;
 		public var btnNormal:BaseButton;
-		public var btnBg:SimpleButton ;
+		public var btnBg:InteractiveObject ;
 		public var txtBtn:TextField ,txtName:TextField;
 		public var payMode:ShopItemPayMode;
 		//==========================
