@@ -75,7 +75,7 @@ package local.views.storage
 		override protected function removedFromStage():void
 		{
 			_storageItemVO = null ;
-			if(btnNormal.hasEventListener(MouseEvent.CLICK))
+			if(btnNormal && btnNormal.hasEventListener(MouseEvent.CLICK))
 				btnNormal.removeEventListener(MouseEvent.CLICK , onNormalHandler );
 		}
 	}
