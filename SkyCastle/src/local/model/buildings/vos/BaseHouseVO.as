@@ -1,7 +1,7 @@
 package local.model.buildings.vos
 {
 	/**
-	 * 房子的基本VO。由于房子是可以升级的，所以下面的大多数属性为数组 
+	 * 房子的基本VO。房子只能收钱和经验
 	 * @author zzhanglin
 	 */	
 	public class BaseHouseVO extends BaseBuildingVO
@@ -11,8 +11,14 @@ package local.model.buildings.vos
 			_file = "house";
 		}
 		
-		/** 最大的等级，可以升到多少级，默认为1*/
-		public var maxLevel:int ;
+		
+		
+		
+		
+		
+		
+		/** 收获需要的时间*/
+		public var earnTimes:Array ;
 		
 		/** 每一等级可收获的金币数*/
 		public var earnCoins:Array ;
@@ -20,8 +26,12 @@ package local.model.buildings.vos
 		/** 每一等级可收获的经验值*/
 		public var earnExps:Array ;
 		
-		/** 收获需要的时间*/
-		public var earnTimes:Array ;
+		
+		
+		
+		
+		/** 最大的等级，可以升到多少级，默认为1*/
+		public var maxLevel:int ;
 		
 		/** 快速升级需要的钱*/
 		public var upgradeCashs:Array;
@@ -31,6 +41,12 @@ package local.model.buildings.vos
 		
 		/** 慢速升级所需要的时间*/
 		public var upgradeTimes:Array;
+		
+		
+		
+		
+		
+		
 		
 		/** 第一次修建时需要的木头数 */
 		public var buildWood:int ;
