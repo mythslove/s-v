@@ -87,10 +87,14 @@ package local.game.elements
 			switch( e.method)
 			{
 				case "buy":
-					//掉修建经验
-					var value:int = baseBuildingVO.buildEarnExp;
-					if(value>0)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_EXP , value,screenX,screenY-offsetY);
-					//返回id和修建时间
+					if(e.result){
+						//掉修建经验
+						var value:int = baseBuildingVO.buildEarnExp;
+						if(value>0)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_EXP , value,screenX,screenY-offsetY);
+						this.buildingVO = e.result as BuildingVO;
+					}else{
+						GameWorld.instance.removeBuildFromScene(this);
+					}
 					break ;
 				case "build":
 					break ;
