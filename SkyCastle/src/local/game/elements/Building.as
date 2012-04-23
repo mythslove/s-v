@@ -8,6 +8,7 @@ package local.game.elements
 	import flash.display.MovieClip;
 	import flash.utils.clearTimeout;
 	
+	import local.comm.GameData;
 	import local.comm.GameRemote;
 	import local.comm.GameSetting;
 	import local.enum.BasicPickup;
@@ -79,6 +80,14 @@ package local.game.elements
 					break ;
 				case BuildingOperation.SELL :
 					break ;
+				case BuildingOperation.PLACE_STASH:
+					GameData.buildingCurrOperation = BuildingOperation.NONE ;
+					CharacterManager.instance.updateCharactersPos( this );
+					//发送数据
+					ro.getOperation("placeStash").send( buildingVO.storageItemId , nodeX,nodeZ );
+					//从收藏箱中删除此storageItemId
+					
+					break ;
 			}
 		}
 		
@@ -109,6 +118,8 @@ package local.game.elements
 				case "rotate":
 					break ;
 				case "move":
+					break ;
+				case "placeStash":
 					break ;
 			}
 		}

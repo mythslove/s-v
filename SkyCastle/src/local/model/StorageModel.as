@@ -41,7 +41,16 @@ package local.model
 		 */		
 		public function getStorageItems():void
 		{
-			_ro.getOperation("getStroage").send();
+			_ro.getOperation("getStorage").send();
+		}
+		
+		/**
+		 * 从收藏箱中删除一个建筑 
+		 * @param stashItemId
+		 */		
+		public function deleteBuilding( stashItemId:String , itemType:int ):void
+		{
+			
 		}
 	}
 }

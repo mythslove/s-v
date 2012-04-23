@@ -118,6 +118,18 @@ package local.game
 					_mouseOverBuild = null ;
 				}
 			}
+			else if(GameData.buildingCurrOperation==BuildingOperation.PLACE_STASH) //从收藏箱拿出来的
+			{
+				if( _topBuilding && _topBuilding.gridLayer && _topBuilding.gridLayer.getWalkable() )
+				{
+					vo = ObjectUtil.copyObj(_topBuilding.buildingVO) as BuildingVO ;
+					addedBuilding = addBuildingByVO( _topBuilding.nodeX , _topBuilding.nodeZ ,vo );
+					if(addedBuilding){
+						addedBuilding.sendOperation(BuildingOperation.PLACE_STASH); //从收藏箱拿出来的建筑放置到地图上
+						_topBuilding.gridLayer.updateBuildingGridLayer(_topBuilding.nodeX , _topBuilding.nodeZ , vo.baseVO.layer );
+					}
+				}
+			}
 			else if(_mouseOverBuild)
 			{
 				if(_mouseOverBuild.enable) _mouseOverBuild.onClick() ;
