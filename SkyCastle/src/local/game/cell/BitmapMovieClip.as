@@ -116,7 +116,6 @@ package local.game.cell
 			_bitmaps = null ;
 			_bounds = null ;
 			_mc.stop();
-			_mc = null ;
 		}
 	}
 }
