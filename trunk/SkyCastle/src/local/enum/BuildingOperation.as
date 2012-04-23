@@ -18,5 +18,7 @@ package local.enum
 		public static const STASH:String = "stash";
 		/** 卖出 */
 		public static const SELL:String = "sell";
+		/** 使用收藏箱中的建筑 */
+		public static const PLACE_STASH:String = "placeStash";
 	}
 }

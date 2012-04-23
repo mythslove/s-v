@@ -31,6 +31,7 @@ package local.comm
 			}
 			_buildingCurrOperation = value;
 			switch(value){
+				case BuildingOperation.PLACE_STASH:
 				case BuildingOperation.BUY:
 				case BuildingOperation.NONE:
 					MouseManager.instance.mouseStatus = MouseStatus.NONE ;

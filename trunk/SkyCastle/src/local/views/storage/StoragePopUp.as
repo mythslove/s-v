@@ -11,11 +11,19 @@ package local.views.storage
 	import flash.events.MouseEvent;
 	import flash.utils.Dictionary;
 	
+	import local.comm.GameData;
 	import local.comm.GameSetting;
+	import local.comm.GlobalDispatcher;
+	import local.enum.BuildingOperation;
 	import local.enum.ItemType;
+	import local.events.StorageEvent;
+	import local.game.GameWorld;
+	import local.game.elements.Building;
 	import local.model.PickupModel;
+	import local.model.buildings.vos.BuildingVO;
 	import local.model.vos.PickupVO;
 	import local.model.vos.StorageItemVO;
+	import local.utils.BuildingFactory;
 	import local.utils.PopUpManager;
 	import local.views.BaseView;
 
@@ -54,15 +62,35 @@ package local.views.storage
 		{
 			TweenLite.from(this,0.3,{x:x-200 , ease:Back.easeOut , onComplete:inTweenOver });
 			
-			tabMenu.addEventListener(ToggleItemEvent.ITEM_SELECTED , tabMenuHandler , false , 0 , true ) ;
+			
 			btnClose.addEventListener( MouseEvent.CLICK , closeClickHandler , false , 0 , true );
+			tabMenu.addEventListener(ToggleItemEvent.ITEM_SELECTED , tabMenuHandler , false , 0 , true ) ;
+			btnPrevPage.addEventListener(MouseEvent.CLICK , pageBtnHandler , false , 0 , true );
+			btnNextPage.addEventListener(MouseEvent.CLICK , pageBtnHandler , false , 0 , true );
+			GlobalDispatcher.instance.addEventListener(StorageEvent.SELECTED_BUILDING , storageEventHandler );
+			GlobalDispatcher.instance.addEventListener(StorageEvent.GET_STROAGE_ITEMS , storageEventHandler );
+			
 			if(storageCurrentTab){
 				tabMenu.selectedName = storageCurrentTab;
 			}else{
 				tabMenu.selectedName = tabMenu.btnBuilding.name;
 			}
-			btnPrevPage.addEventListener(MouseEvent.CLICK , pageBtnHandler , false , 0 , true );
-			btnNextPage.addEventListener(MouseEvent.CLICK , pageBtnHandler , false , 0 , true );
+		}
+		
+		private function storageEventHandler( e:StorageEvent ):void
+		{
+			switch( e.type )
+			{
+				case  StorageEvent.SELECTED_BUILDING:
+					GameData.buildingCurrOperation = BuildingOperation.PLACE_STASH ;
+					var building:Building = BuildingFactory.createBuildingByVO(BuildingVO.createVoByStorageItem(e.selectedBuilding));
+					GameWorld.instance.addBuildingToTop( building );
+					PopUpManager.instance.removeCurrentPopup();
+					break ;
+				case StorageEvent.GET_STROAGE_ITEMS:
+					
+					break ;
+			}
 		}
 		
 		private function inTweenOver():void{
@@ -207,8 +235,11 @@ package local.views.storage
 		override protected function removed():void
 		{
 			btnClose.removeEventListener( MouseEvent.CLICK , closeClickHandler);
+			tabMenu.removeEventListener(ToggleItemEvent.ITEM_SELECTED , tabMenuHandler ) ;
 			btnPrevPage.removeEventListener(MouseEvent.CLICK , pageBtnHandler );
 			btnNextPage.removeEventListener(MouseEvent.CLICK , pageBtnHandler );
+			GlobalDispatcher.instance.removeEventListener(StorageEvent.SELECTED_BUILDING , storageEventHandler );
+			GlobalDispatcher.instance.removeEventListener(StorageEvent.GET_STROAGE_ITEMS , storageEventHandler );
 		}
 	}
 }

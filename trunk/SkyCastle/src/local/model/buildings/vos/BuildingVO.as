@@ -2,6 +2,7 @@ package local.model.buildings.vos
 {
 	import local.model.buildings.BaseBuildingVOModel;
 	import local.model.vos.ShopItemVO;
+	import local.model.vos.StorageItemVO;
 
 	/**
 	 * 真实建筑的VO 
@@ -50,6 +51,8 @@ package local.model.buildings.vos
 		public var payType:int ; 
 		/** 商店里面显示的价格 */
 		public var price:int ;
+		/** 收藏箱中的id*/
+		public var storageItemId:String;
 		
 		protected var _baseVO:BaseBuildingVO;
 		/** 建筑的基础VO*/
@@ -76,6 +79,21 @@ package local.model.buildings.vos
 			buildingVO.payType = vo.payType;
 			buildingVO.price = vo.price ;
 			buildingVO.shopItemId = vo.itemId ;
+			return buildingVO ;
+		}
+		
+		/**
+		 * 通过收藏箱中的StorageItemVo来创建一个建筑VO
+		 * @param vo 收藏箱中的StorageItemVO
+		 * @return 
+		 */		
+		public static function createVoByStorageItem( vo:StorageItemVO ):BuildingVO
+		{
+			var buildingVO:BuildingVO = new BuildingVO();
+			buildingVO.baseId = vo.baseId ;
+			buildingVO.buildTime = vo.buildTime ;
+			buildingVO.storageItemId = vo.id ;
+			buildingVO.level = vo.level ;
 			return buildingVO ;
 		}
 	}
