@@ -251,7 +251,7 @@ package local.game
 					result = buildingScene.addBuildingByVO( dx,dz,vo,isSort);
 				}
 			}
-			MapBuildingModel.instance.addBuilding( result );
+			if(result)	MapBuildingModel.instance.addBuilding( result );
 			return result;
 		}
 		
