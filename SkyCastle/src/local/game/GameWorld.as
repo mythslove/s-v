@@ -327,7 +327,7 @@ package local.game
 					}
 				}
 				building = GameWorld.instance.addBuildingByVO(vo.nodeX,vo.nodeZ,vo,false,false);
-				building.setWalkable( false ,MapGridDataModel.instance.basicItems );
+				building.setWalkable( true ,MapGridDataModel.instance.basicItems );
 			}
 			//玩家修的建筑
 			if( player.buildings)

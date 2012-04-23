@@ -109,7 +109,7 @@ package local.game.elements
 		
 		override public function dispose():void
 		{
-			setWalkable( true ,MapGridDataModel.instance.basicItems );
+			setWalkable( false ,MapGridDataModel.instance.basicItems );
 			super.dispose();
 		}
 	}
