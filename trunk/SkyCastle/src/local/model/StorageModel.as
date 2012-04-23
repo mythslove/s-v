@@ -5,8 +5,8 @@ package local.model
 	
 	import local.comm.GameRemote;
 	import local.comm.GlobalDispatcher;
-	import local.comm.GlobalEvent;
 	import local.events.StorageEvent;
+	import local.game.elements.Building;
 	import local.model.buildings.vos.BuildingVO;
 	import local.model.vos.StorageItemVO;
 	
@@ -71,10 +71,9 @@ package local.model
 		
 		/**
 		 * 从收藏箱中删除一个建筑 
-		 * @param stashItemId
-		 * @param itemType
+		 * @param building
 		 */		
-		public function deleteBuilding( stashItemId:String , itemType:String ):void
+		public function deleteBuilding( building:Building ):void
 		{
 			
 		}
