@@ -86,8 +86,8 @@ package local.game.elements
 					CharacterManager.instance.updateCharactersPos( this );
 					//发送数据
 					ro.getOperation("placeStash").send( buildingVO.storageItemId , nodeX,nodeZ );
-					//从收藏箱中删除此storageItemId
-					StorageModel.instance.deleteBuilding( buildingVO.storageItemId , baseBuildingVO.type );
+					//从收藏箱中删除此storageItem
+					StorageModel.instance.deleteBuilding( this );
 					break ;
 			}
 		}
