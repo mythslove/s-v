@@ -4,6 +4,7 @@ package local.views.shop
 	import flash.text.TextField;
 	
 	import local.enum.ItemType;
+	import local.enum.PayType;
 	import local.model.buildings.vos.BaseDecorationVO;
 	import local.model.buildings.vos.BaseFactoryVO;
 	import local.model.buildings.vos.BaseHouseVO;
@@ -27,6 +28,17 @@ package local.views.shop
 		
 		public function showPay( shopItemVO:ShopItemVO ):void
 		{
+			var payType:int = shopItemVO.payType;
+			switch(payType) {
+				case PayType.CASH:
+					gotoAndStop(LABEL_GEM);
+					break ;
+				case PayType.COIN:
+				case PayType.FREE:
+					gotoAndStop(LABEL_COIN);
+					break ;
+			}
+			
 			var type:String = shopItemVO.baseVO.type ;
 			switch( type )
 			{
@@ -48,7 +60,11 @@ package local.views.shop
 					break ;
 				case ItemType.DECORATION: //装饰
 					var baseDecVO:BaseDecorationVO = shopItemVO.baseVO as BaseDecorationVO ;
-					this["txtCoin"].text= shopItemVO.price+"";
+					if(payType==PayType.CASH){
+						this["txtGem"].text= shopItemVO.price+"";
+					}else{
+						this["txtCoin"].text= shopItemVO.price+"";
+					}
 					break ;
 				case ItemType.DEC_TREE: //树
 				case ItemType.DEC_STONE: //石头
@@ -56,7 +72,11 @@ package local.views.shop
 					break ;
 				case ItemType.DEC_ROAD: //路
 					var baseRoadVO:BaseRoadVO = shopItemVO.baseVO as BaseRoadVO;
-					this["txtCoin"].text= shopItemVO.price+"";
+					if(payType==PayType.CASH){
+						this["txtGem"].text= shopItemVO.price+"";
+					}else{
+						this["txtCoin"].text= shopItemVO.price+"";
+					}
 					break ;
 			}
 		}
