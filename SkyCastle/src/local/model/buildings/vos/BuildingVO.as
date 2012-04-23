@@ -75,7 +75,7 @@ package local.model.buildings.vos
 			buildingVO.baseId = vo.itemValue ;
 			buildingVO.payType = vo.payType;
 			buildingVO.price = vo.price ;
-			buildingVO.shopItemId = vo.itemValue ;
+			buildingVO.shopItemId = vo.itemId ;
 			return buildingVO ;
 		}
 	}
