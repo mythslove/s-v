@@ -16,6 +16,7 @@ package local.game.elements
 	import local.enum.ItemType;
 	import local.game.GameWorld;
 	import local.model.MapGridDataModel;
+	import local.model.StorageModel;
 	import local.model.buildings.vos.BuildingVO;
 	import local.model.vos.RewardsVO;
 	import local.utils.CharacterManager;
@@ -86,7 +87,7 @@ package local.game.elements
 					//发送数据
 					ro.getOperation("placeStash").send( buildingVO.storageItemId , nodeX,nodeZ );
 					//从收藏箱中删除此storageItemId
-					
+					StorageModel.instance.deleteBuilding( buildingVO.storageItemId , baseBuildingVO.type );
 					break ;
 			}
 		}
@@ -113,6 +114,7 @@ package local.game.elements
 					this.dispose();
 					 break ;
 				case "stash":
+					StorageModel.instance.addBuildingToStash( buildingVO );
 					this.dispose();
 					break ;
 				case "rotate":
