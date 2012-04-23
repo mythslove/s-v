@@ -26,7 +26,7 @@ package local.comm
 		
 		private function onFaultHandler( e:FaultEvent ):void
 		{
-			SystemUtil.debug(e.faultObj );
+			SystemUtil.debug("接口ERROR:"+e.faultObj );
 		}
 		
 		override public function dispose():void
