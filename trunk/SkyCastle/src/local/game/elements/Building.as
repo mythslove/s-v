@@ -85,7 +85,7 @@ package local.game.elements
 		protected function onResultHandler( e:ResultEvent ):void
 		{
 			SystemUtil.debug("返回数据：",e.service+"."+e.method , e.result);
-			this.enable=false ;
+			this.enable=true ;
 			switch( e.method)
 			{
 				case "buy":
