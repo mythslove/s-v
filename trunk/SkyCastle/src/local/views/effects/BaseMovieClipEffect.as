@@ -51,7 +51,6 @@ package local.views.effects
 		{
 			removeEventListener(Event.REMOVED_FROM_STAGE , removedHander);
 			removeEventListener(Event.ENTER_FRAME , onEnterFrameHandler );
-			_bmpMC.dispose();
 			_bmpMC = null ;
 		}
 	}
