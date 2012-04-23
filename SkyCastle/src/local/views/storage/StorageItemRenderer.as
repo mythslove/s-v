@@ -36,6 +36,7 @@ package local.views.storage
 		public function StorageItemRenderer()
 		{
 			super();
+			stop();
 			container.mouseChildren=container.mouseEnabled=false; 
 			txtBtn.mouseEnabled = txtName.mouseEnabled = txtName.mouseEnabled=false ; 
 			GameUtil.disableTextField(this);
@@ -50,7 +51,8 @@ package local.views.storage
 			this._storageItemVO = vo ;
 			var baseVO:BaseBuildingVO = BaseBuildingVOModel.instance.getBaseVOById(vo.baseId);
 			txtName.text = baseVO.name ;
-			txtCount.text = "×"+vo.num;
+			var img:Image = new Image(baseVO.thumbAlias,baseVO.thumb);
+			container.addChild(img);
 			btnNormal.addEventListener(MouseEvent.CLICK , onNormalHandler );
 		}
 		

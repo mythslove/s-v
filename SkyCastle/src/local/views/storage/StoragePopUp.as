@@ -9,7 +9,6 @@ package local.views.storage
 	
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
-	import flash.utils.Dictionary;
 	
 	import local.comm.GameData;
 	import local.comm.GameSetting;
@@ -20,12 +19,14 @@ package local.views.storage
 	import local.game.GameWorld;
 	import local.game.elements.Building;
 	import local.model.PickupModel;
+	import local.model.StorageModel;
 	import local.model.buildings.vos.BuildingVO;
 	import local.model.vos.PickupVO;
 	import local.model.vos.StorageItemVO;
 	import local.utils.BuildingFactory;
 	import local.utils.PopUpManager;
 	import local.views.BaseView;
+	import local.views.loading.SkinLoading;
 
 	/**
 	 * 收藏箱弹出窗口 
@@ -48,20 +49,22 @@ package local.views.storage
 		private const COUNT:int = 8 ;//一页显示八个
 		private var _totalPage:int ;
 		private var _page:int ;
+		private var _loading:SkinLoading ;
 		
 		public function StoragePopUp()
 		{
 			super();
-			container.visible=false;
+			tabMenu.visible=false ;
 			btnNextPage.enabled=btnPrevPage.enabled=false ;
 			x = GameSetting.SCREEN_WIDTH>>1;
 			y = GameSetting.SCREEN_HEIGHT>>1;
+			_loading = new SkinLoading();
+			addChild(_loading);
 		}
 		
 		override protected function added():void
 		{
-			TweenLite.from(this,0.3,{x:x-200 , ease:Back.easeOut , onComplete:inTweenOver });
-			
+			TweenLite.from(this,0.3,{x:x-200 , ease:Back.easeOut });
 			
 			btnClose.addEventListener( MouseEvent.CLICK , closeClickHandler , false , 0 , true );
 			tabMenu.addEventListener(ToggleItemEvent.ITEM_SELECTED , tabMenuHandler , false , 0 , true ) ;
@@ -69,12 +72,7 @@ package local.views.storage
 			btnNextPage.addEventListener(MouseEvent.CLICK , pageBtnHandler , false , 0 , true );
 			GlobalDispatcher.instance.addEventListener(StorageEvent.SELECTED_BUILDING , storageEventHandler );
 			GlobalDispatcher.instance.addEventListener(StorageEvent.GET_STROAGE_ITEMS , storageEventHandler );
-			
-			if(storageCurrentTab){
-				tabMenu.selectedName = storageCurrentTab;
-			}else{
-				tabMenu.selectedName = tabMenu.btnBuilding.name;
-			}
+			StorageModel.instance.getStorageItems();
 		}
 		
 		private function storageEventHandler( e:StorageEvent ):void
@@ -88,14 +86,17 @@ package local.views.storage
 					PopUpManager.instance.removeCurrentPopup();
 					break ;
 				case StorageEvent.GET_STROAGE_ITEMS:
-					
+					removeChild(_loading);
+					tabMenu.visible=true ;
+					if(storageCurrentTab){
+						tabMenu.selectedName = storageCurrentTab;
+					}else{
+						tabMenu.selectedName = tabMenu.btnBuilding.name;
+					}
 					break ;
 			}
 		}
-		
-		private function inTweenOver():void{
-			container.visible=true;
-		}
+
 		/* 收藏箱中的页码*/
 		private function pageBtnHandler( e:MouseEvent ):void
 		{
@@ -123,8 +124,16 @@ package local.views.storage
 			switch(  e.selectedName )
 			{
 				case tabMenu.btnBuilding.name:
+					setDataProvider( StorageModel.instance.buildings);
+					showBuildingList(0);
 					break ;
 				case tabMenu.btnDecoration.name:
+					setDataProvider( StorageModel.instance.decorations);
+					showBuildingList(0);
+					break ;
+				case tabMenu.btnPlant.name:
+					setDataProvider( StorageModel.instance.plants);
+					showBuildingList(0);
 					break ;
 				case tabMenu.btnMaterial.name:
 					setMaterials();
@@ -234,6 +243,7 @@ package local.views.storage
 		
 		override protected function removed():void
 		{
+			_loading = null ;
 			btnClose.removeEventListener( MouseEvent.CLICK , closeClickHandler);
 			tabMenu.removeEventListener(ToggleItemEvent.ITEM_SELECTED , tabMenuHandler ) ;
 			btnPrevPage.removeEventListener(MouseEvent.CLICK , pageBtnHandler );
