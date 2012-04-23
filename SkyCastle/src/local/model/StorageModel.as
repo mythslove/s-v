@@ -72,8 +72,9 @@ package local.model
 		/**
 		 * 从收藏箱中删除一个建筑 
 		 * @param stashItemId
+		 * @param itemType
 		 */		
-		public function deleteBuilding( stashItemId:String , itemType:int ):void
+		public function deleteBuilding( stashItemId:String , itemType:String ):void
 		{
 			
 		}
