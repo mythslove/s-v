@@ -4,6 +4,11 @@ package local.model
 	import bing.utils.SystemUtil;
 	
 	import local.comm.GameRemote;
+	import local.comm.GlobalDispatcher;
+	import local.comm.GlobalEvent;
+	import local.events.StorageEvent;
+	import local.model.buildings.vos.BuildingVO;
+	import local.model.vos.StorageItemVO;
 	
 
 	/**
@@ -19,9 +24,16 @@ package local.model
 			return _instance; 
 		}
 		//=================================
+		private var _isInit:Boolean; //已经调用过
+		
+		public var buildings:Vector.<StorageItemVO> ;
+		
+		public var decorations:Vector.<StorageItemVO> ;
+		
+		public var plants:Vector.<StorageItemVO> ;
 		
 		private var _ro:GameRemote ;
-		public function PlayerModel()
+		public function StorageModel()
 		{
 			_ro = new GameRemote("PlayerService");
 			_ro.addEventListener(ResultEvent.RESULT ,  onResultHandler );
@@ -31,7 +43,16 @@ package local.model
 			SystemUtil.debug("返回数据：",e.service+"."+e.method , e.result );
 			switch( e.method )
 			{
-				case "getStroage":
+				case "getStorage":
+					_isInit = true ;
+					_ro.removeEventListener(ResultEvent.RESULT ,  onResultHandler );
+					_ro.dispose();
+					_ro = null ;
+					//返回的数据
+					buildings = Vector.<StorageItemVO>(e.result.buildings);
+					decorations = Vector.<StorageItemVO>(e.result.decorations);
+					plants = Vector.<StorageItemVO>(e.result.plants);
+					GlobalDispatcher.instance.dispatchEvent( new StorageEvent(StorageEvent.GET_STROAGE_ITEMS));
 					break ;
 			}
 		}
@@ -41,7 +62,11 @@ package local.model
 		 */		
 		public function getStorageItems():void
 		{
-			_ro.getOperation("getStorage").send();
+			if(_isInit){
+				GlobalDispatcher.instance.dispatchEvent( new StorageEvent(StorageEvent.GET_STROAGE_ITEMS));
+			}else{
+				_ro.getOperation("getStorage").send();
+			}
 		}
 		
 		/**
@@ -49,6 +74,15 @@ package local.model
 		 * @param stashItemId
 		 */		
 		public function deleteBuilding( stashItemId:String , itemType:int ):void
+		{
+			
+		}
+		
+		/**
+		 * 添加一个建筑到收藏箱里 
+		 * @param buildingVO
+		 */		
+		public function addBuildingToStash( buildingVO:BuildingVO):void
 		{
 			
 		}
