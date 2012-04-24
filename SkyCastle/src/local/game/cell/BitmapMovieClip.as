@@ -111,12 +111,14 @@ package local.game.cell
 		}
 		
 		/** 清除资源 */
-		public function dispose():void
+		public function dispose( isDeep:Boolean=false ):void
 		{
-			_bitmaps = null ;
-			_bounds = null ;
 			_mc.stop();
-			_mc = null ;
+			if(isDeep){
+				_bitmaps = null ;
+				_bounds = null ;
+				_mc = null ;
+			}
 		}
 	}
 }
