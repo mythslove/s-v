@@ -19,6 +19,7 @@ package local.game.elements
 	import local.model.StorageModel;
 	import local.model.buildings.vos.BuildingVO;
 	import local.model.vos.RewardsVO;
+	import local.model.vos.StorageItemVO;
 	import local.utils.CharacterManager;
 	import local.utils.CollectQueueUtil;
 	import local.utils.EffectManager;
@@ -114,8 +115,11 @@ package local.game.elements
 					this.dispose();
 					 break ;
 				case "stash":
-					StorageModel.instance.addBuildingToStash( buildingVO );
-					this.dispose();
+					if(e.result){
+						GameWorld.instance.removeBuildFromScene( this);
+						StorageModel.instance.addStorageItem( e.result as StorageItemVO );
+						this.dispose();
+					}
 					break ;
 				case "rotate":
 					break ;

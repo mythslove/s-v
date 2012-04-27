@@ -105,7 +105,6 @@ package local.game
 			else if(GameData.buildingCurrOperation==BuildingOperation.STASH) //收藏
 			{
 				if(_mouseOverBuild){
-					removeBuildFromScene( _mouseOverBuild ); //从场景上先移除
 					_mouseOverBuild.selectedStatus(false);
 					_mouseOverBuild.sendOperation(BuildingOperation.STASH); //发送收藏建筑信息到服务器
 					_mouseOverBuild = null ;

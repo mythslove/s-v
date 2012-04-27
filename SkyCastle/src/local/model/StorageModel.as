@@ -5,9 +5,10 @@ package local.model
 	
 	import local.comm.GameRemote;
 	import local.comm.GlobalDispatcher;
+	import local.enum.ItemType;
 	import local.events.StorageEvent;
 	import local.game.elements.Building;
-	import local.model.buildings.vos.BuildingVO;
+	import local.model.buildings.BaseBuildingVOModel;
 	import local.model.vos.StorageItemVO;
 	
 
@@ -80,11 +81,29 @@ package local.model
 		
 		/**
 		 * 添加一个建筑到收藏箱里 
-		 * @param buildingVO
+		 * @param item
 		 */		
-		public function addBuildingToStash( buildingVO:BuildingVO):void
+		public function addStorageItem( item:StorageItemVO ):void
 		{
-			
+			if(_isInit)
+			{
+				var type:String = ItemType.getSumType( BaseBuildingVOModel.instance.getBaseVOById(item.baseId).type ) ;
+				switch( type )
+				{
+					case ItemType.BUILDING:
+						if(!buildings) buildings = new Vector.<StorageItemVO>();
+						buildings.push( item );
+						break ;
+					case ItemType.DECORATION:
+						if(!decorations) decorations = new Vector.<StorageItemVO>();
+						decorations.push( item );
+						break ;
+					case ItemType.PLANT:
+						if(!plants) plants = new Vector.<StorageItemVO>();
+						plants.push( item );
+						break ;
+				}
+			}
 		}
 	}
 }
