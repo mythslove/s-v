@@ -7,8 +7,8 @@ package local.model
 	import local.comm.GlobalDispatcher;
 	import local.enum.ItemType;
 	import local.events.StorageEvent;
-	import local.game.elements.Building;
 	import local.model.buildings.BaseBuildingVOModel;
+	import local.model.buildings.vos.BuildingVO;
 	import local.model.vos.StorageItemVO;
 	
 
@@ -72,11 +72,33 @@ package local.model
 		
 		/**
 		 * 从收藏箱中删除一个建筑 
-		 * @param building
+		 * @param buildingVO
 		 */		
-		public function deleteBuilding( building:Building ):void
+		public function deleteBuilding( buildingVO:BuildingVO ):void
 		{
-			
+			var type:String = ItemType.getSumType( BaseBuildingVOModel.instance.getBaseVOById(buildingVO.baseVO.baseId).type ) ;
+			var storageItems:Vector.<StorageItemVO>
+			switch( type )
+			{
+				case ItemType.BUILDING:
+					storageItems = buildings ;
+					break ;
+				case ItemType.DECORATION:
+					storageItems = decorations ;
+					break ;
+				case ItemType.PLANT:
+					storageItems = plants ;
+					break ;
+			}
+			if(storageItems){
+				var len:int = storageItems.length ;
+				for(var i:int = 0 ; i<len ; ++i){
+					if(storageItems[i].id==buildingVO.storageItemId){
+						storageItems.splice( i , 1 );
+						break ;
+					}
+				}
+			}
 		}
 		
 		/**
