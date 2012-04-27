@@ -125,8 +125,8 @@ package local.game
 					addedBuilding = addBuildingByVO( _topBuilding.nodeX , _topBuilding.nodeZ ,vo );
 					if(addedBuilding){
 						addedBuilding.sendOperation(BuildingOperation.PLACE_STASH); //从收藏箱拿出来的建筑放置到地图上
-						_topBuilding.gridLayer.updateBuildingGridLayer(_topBuilding.nodeX , _topBuilding.nodeZ , vo.baseVO.layer );
 					}
+					GameData.buildingCurrOperation = BuildingOperation.NONE ;
 				}
 			}
 			else if(_mouseOverBuild)

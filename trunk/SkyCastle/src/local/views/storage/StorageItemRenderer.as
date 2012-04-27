@@ -8,6 +8,9 @@ package local.views.storage
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	
+	import local.comm.GlobalDispatcher;
+	import local.comm.GlobalEvent;
+	import local.events.StorageEvent;
 	import local.model.PickupModel;
 	import local.model.buildings.BaseBuildingVOModel;
 	import local.model.buildings.vos.BaseBuildingVO;
@@ -59,7 +62,7 @@ package local.views.storage
 		private function onNormalHandler( e:MouseEvent ):void
 		{
 			e.stopPropagation();
-			
+			GlobalDispatcher.instance.dispatchEvent( new StorageEvent(StorageEvent.SELECTED_BUILDING , this._storageItemVO  ) );
 		}
 		
 		/**
