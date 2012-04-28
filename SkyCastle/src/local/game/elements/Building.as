@@ -86,7 +86,7 @@ package local.game.elements
 					GameData.buildingCurrOperation = BuildingOperation.NONE ;
 					CharacterManager.instance.updateCharactersPos( this );
 					//发送数据
-					ro.getOperation("placeStash").send( buildingVO.storageItemId , nodeX,nodeZ );
+					ro.getOperation("placeStash").send( buildingVO.id , nodeX,nodeZ );
 					//从收藏箱中删除此storageItem
 					StorageModel.instance.deleteBuilding( buildingVO );
 					break ;
