@@ -83,6 +83,7 @@ package local.game.elements
 				case BuildingOperation.SELL :
 					break ;
 				case BuildingOperation.PLACE_STASH:
+					playPlaceEffect();
 					GameData.buildingCurrOperation = BuildingOperation.NONE ;
 					CharacterManager.instance.updateCharactersPos( this );
 					//发送数据
