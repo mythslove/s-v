@@ -93,7 +93,7 @@ package local.model
 			if(storageItems){
 				var len:int = storageItems.length ;
 				for(var i:int = 0 ; i<len ; ++i){
-					if(storageItems[i].id==buildingVO.storageItemId){
+					if(storageItems[i].id==buildingVO.id){
 						storageItems.splice( i , 1 );
 						break ;
 					}

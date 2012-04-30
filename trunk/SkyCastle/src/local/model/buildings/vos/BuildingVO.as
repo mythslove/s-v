@@ -51,8 +51,6 @@ package local.model.buildings.vos
 		public var payType:int ; 
 		/** 商店里面显示的价格 */
 		public var price:int ;
-		/** 收藏箱中的id*/
-		public var storageItemId:String;
 		
 		protected var _baseVO:BaseBuildingVO;
 		/** 建筑的基础VO*/
@@ -92,7 +90,7 @@ package local.model.buildings.vos
 			var buildingVO:BuildingVO = new BuildingVO();
 			buildingVO.baseId = vo.baseId ;
 			buildingVO.buildTime = vo.buildTime ;
-			buildingVO.storageItemId = vo.id ;
+			buildingVO.id = vo.id ;
 			buildingVO.level = vo.level ;
 			return buildingVO ;
 		}
