@@ -9,8 +9,10 @@ package local.game.elements
 	import local.model.PlayerModel;
 	import local.model.buildings.vos.BuildingVO;
 	import local.utils.MouseManager;
+	import local.utils.PopUpManager;
 	import local.views.CenterViewContainer;
 	import local.views.effects.MapWordEffect;
+	import local.views.pickup.BuildCompleteMaterialPopUp;
 	
 	/**
 	 * 工厂，房子的等建筑的基类 
@@ -83,6 +85,8 @@ package local.game.elements
 				else if(buildingVO.currentStep==buildingVO.baseVO.step && baseBuildingVO.materials)
 				{
 					//弹出判断材料的窗口
+					var buildComPopup:BuildCompleteMaterialPopUp = new BuildCompleteMaterialPopUp(this);
+					PopUpManager.instance.addPopUp( buildComPopup);
 				}
 				return false ;
 			}
