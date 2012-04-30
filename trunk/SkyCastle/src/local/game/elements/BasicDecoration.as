@@ -16,6 +16,10 @@ package local.game.elements
 	import local.views.CenterViewContainer;
 	import local.views.effects.MapWordEffect;
 	
+	/**
+	 * 场景上最基本的装饰 
+	 * @author zzhanglin
+	 */	
 	public class BasicDecoration extends Decortation
 	{
 		
@@ -65,8 +69,6 @@ package local.game.elements
 		override public function execute():Boolean
 		{
 			super.execute();
-			_currentRewards = null ;
-			_executeBack = false ;
 			ro.getOperation("chop").send(nodeX,nodeZ,buildingVO.currentStep);
 			return true ;
 		}
@@ -82,29 +84,6 @@ package local.game.elements
 					this.showPickup();
 					break ;
 			}
-		}
-		
-		/**
-		 * 调用execute时减一个能量
-		 * @return 
-		 */		
-		protected function executeReduceEnergy():Boolean
-		{
-			//减能量
-			var effect:MapWordEffect ;
-			if(PlayerModel.instance.me.energy>=1){
-				effect = new MapWordEffect("Energy -1");
-				PlayerModel.instance.me.energy-- ;
-				CenterViewContainer.instance.topBar.updateTopBar();
-				GameWorld.instance.addEffect(effect,screenX,screenY);
-			}else{
-				CollectQueueUtil.instance.clear(true);
-				effect = new MapWordEffect("You don't have enough Energy!");
-				GameWorld.instance.addEffect(effect,screenX,screenY);
-				//能量不够，弹出购买能量的窗口
-				return  false;
-			}
-			return true;
 		}
 		
 		override public function dispose():void

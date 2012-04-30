@@ -13,12 +13,20 @@ package local.game.elements
 	import flash.geom.Vector3D;
 	
 	import local.comm.GameSetting;
+	import local.enum.ItemType;
+	import local.enum.MouseStatus;
 	import local.game.GameWorld;
 	import local.game.cell.BuildingGridLayer;
 	import local.model.MapGridDataModel;
 	import local.model.buildings.vos.BaseBuildingVO;
 	import local.model.buildings.vos.BuildingVO;
+	import local.utils.EffectManager;
+	import local.utils.MouseManager;
 	import local.utils.ResourceUtil;
+	import local.views.effects.BaseMovieClipEffect;
+	import local.views.effects.BuildStatus;
+	import local.views.effects.EffectPlacementBuilding;
+	import local.views.effects.EffectPlacementDecoration;
 	import local.views.loading.BuildingStepLoading;
 
 	/**
@@ -59,6 +67,32 @@ package local.game.elements
 		public function get baseBuildingVO():BaseBuildingVO{
 			return buildingVO.baseVO ;
 		}
+		
+		//===========mouseEvent==============
+		public function onClick():void
+		{
+			//判断当前建筑的状态，如果是收获，则执行收获；如果是修建，则执行修建。
+		}
+		
+		public function onMouseOver():void
+		{
+			selectedStatus( true );
+		}
+		
+		public function onMouseOut():void
+		{
+			if(itemLayer)
+			{
+				selectedStatus( false );
+				if(!MouseManager.instance.checkControl()){
+					MouseManager.instance.mouseStatus = MouseStatus.NONE;
+				}
+				if(itemLayer.alpha==1 && stepLoading&&stepLoading.parent){
+					stepLoading.parent.removeChild(stepLoading);
+				}
+			}
+		}
+		//===========mouseEvent==============
 		
 		/** 获取此建筑的标题 */
 		public function get title():String 
@@ -232,6 +266,56 @@ package local.game.elements
 			}
 			return arr;
 		}
+		
+		
+		
+		
+		//============建筑特效＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+		/*清除建筑的特效*/
+		protected function clearEffect():void
+		{
+				
+		}
+		
+		/* 播放放置的动画*/
+		protected function playPlaceEffect():void
+		{
+			var placementMC:MovieClip;
+			var type:String = ItemType.getSumType( baseBuildingVO.type );
+			if(type==ItemType.BUILDING){
+				placementMC= new  EffectPlacementBuilding ();
+			}else if(type==ItemType.DECORATION){
+				placementMC= new  EffectPlacementDecoration ();
+			}
+			if(placementMC){
+				var placementEffect:BaseMovieClipEffect = EffectManager.instance.createMapEffectByMC(placementMC);
+				placementEffect.y = offsetY+this.screenY ;
+				placementEffect.x = this.screenX;
+				GameWorld.instance.effectScene.addChild(placementEffect);
+			}
+		}
+		/*显示建造时的动画*/
+		protected function showBuildEffect():void
+		{
+			clearEffect();
+			
+		}
+		/*显示建造的步骤*/
+		protected function showBuidStatus():void
+		{
+			var status:BuildStatus = new BuildStatus();
+			status.gotoAndStop(baseBuildingVO.xSpan+"_"+baseBuildingVO.zSpan) ;
+			effectLayer.addChildAt(status,0);
+		}
+		
+		
+		
+		
+		
+		
+		//============建筑特效＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+		
+		
 		
 		/** 释放资源 */
 		override public function dispose():void

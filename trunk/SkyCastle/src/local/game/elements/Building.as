@@ -5,7 +5,6 @@ package local.game.elements
 	
 	import com.greensock.TweenMax;
 	
-	import flash.display.MovieClip;
 	import flash.utils.clearTimeout;
 	
 	import local.comm.GameData;
@@ -13,23 +12,20 @@ package local.game.elements
 	import local.comm.GameSetting;
 	import local.enum.BasicPickup;
 	import local.enum.BuildingOperation;
-	import local.enum.ItemType;
 	import local.game.GameWorld;
 	import local.model.MapGridDataModel;
+	import local.model.PlayerModel;
 	import local.model.StorageModel;
 	import local.model.buildings.vos.BuildingVO;
 	import local.model.vos.RewardsVO;
 	import local.model.vos.StorageItemVO;
 	import local.utils.CharacterManager;
 	import local.utils.CollectQueueUtil;
-	import local.utils.EffectManager;
 	import local.utils.PickupUtil;
-	import local.views.effects.BaseMovieClipEffect;
-	import local.views.effects.EffectPlacementBuilding;
-	import local.views.effects.EffectPlacementDecoration;
+	import local.views.CenterViewContainer;
 	import local.views.effects.MapWordEffect;
 	
-	public class Building extends InteractiveBuilding
+	public class Building extends BaseBuilding
 	{
 		protected var _timeoutId:int ;
 		protected var _currentRewards:RewardsVO ; //接口返回的奖励
@@ -113,10 +109,12 @@ package local.game.elements
 				case "build":
 					break ;
 				case "sell":
+					PlayerModel.instance.me.rank-=baseBuildingVO.rank ;
 					this.dispose();
 					 break ;
 				case "stash":
 					if(e.result){
+						PlayerModel.instance.me.rank-=baseBuildingVO.rank ;
 						GameWorld.instance.removeBuildFromScene( this);
 						StorageModel.instance.addStorageItem( e.result as StorageItemVO );
 						this.dispose();
@@ -128,25 +126,6 @@ package local.game.elements
 					break ;
 				case "placeStash":
 					break ;
-			}
-		}
-		
-		/* 播放放置的动画*/
-		protected function playPlaceEffect():void
-		{
-			var placementMC:MovieClip;
-			var type:String = ItemType.getSumType( buildingVO.baseVO.type );
-			if(type==ItemType.BUILDING){
-				placementMC= new  EffectPlacementBuilding ();
-			}else if(type==ItemType.DECORATION){
-				placementMC= new  EffectPlacementDecoration ();
-			}
-			if(placementMC){
-				
-				var placementEffect:BaseMovieClipEffect = EffectManager.instance.createMapEffectByMC(placementMC);
-				placementEffect.y = offsetY+this.screenY ;
-				placementEffect.x = this.screenX;
-				GameWorld.instance.effectScene.addChild(placementEffect);
 			}
 		}
 		
@@ -220,7 +199,32 @@ package local.game.elements
 			if(stepLoading&&stepLoading.parent){
 				stepLoading.parent.removeChild(stepLoading);
 			}
+			_currentRewards = null ;
+			_executeBack = false ;
 			return true ;
+		}
+		
+		/**
+		 * 调用execute时减一个能量
+		 * @return 
+		 */		
+		protected function executeReduceEnergy( value:int = -1 ):Boolean
+		{
+			//减能量
+			var effect:MapWordEffect ;
+			if(PlayerModel.instance.me.energy>=1){
+				effect = new MapWordEffect("Energy "+value);
+				PlayerModel.instance.me.energy-=value ;
+				CenterViewContainer.instance.topBar.updateTopBar();
+				GameWorld.instance.addEffect(effect,screenX,screenY);
+			}else{
+				CollectQueueUtil.instance.clear(true);
+				effect = new MapWordEffect("You don't have enough Energy!");
+				GameWorld.instance.addEffect(effect,screenX,screenY);
+				//能量不够，弹出购买能量的窗口
+				return  false;
+			}
+			return true;
 		}
 		
 		/**
