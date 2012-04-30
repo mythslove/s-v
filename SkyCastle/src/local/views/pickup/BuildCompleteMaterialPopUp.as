@@ -64,6 +64,8 @@ package local.views.pickup
 					result = false ;
 					renderer.x = count*(renderer.width+10) ;
 					container.addChild( renderer );
+				}else{
+					renderer.gotoAndStop("default");
 				}
 				++count ;
 			}
@@ -88,6 +90,8 @@ package local.views.pickup
 				if(myCount<int(_materials[renderer.name] )){
 					costCash++;
 					result = false ;
+				}else{
+					renderer.gotoAndStop("default");
 				}
 				++count ;
 			}
