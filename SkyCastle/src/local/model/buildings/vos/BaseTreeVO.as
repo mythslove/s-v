@@ -12,12 +12,12 @@ package local.model.buildings.vos
 		}
 		
 		/** 每砍一次收获的木材数*/
-		public var earnWoods:Array ;
+		public var earnWood:int ;
 		
 		/** 每砍一次收获的金币数*/
-		public var earnCoins:Array ;
+		public var earnCoin:int ;
 		
 		/** 每砍一次得到的经验值 */
-		public var earnExps:Array ;
+		public var earnExp:int ;
 	}
 }
