@@ -12,11 +12,8 @@ package local.model.buildings.vos
 			_file = "plant";
 		}
 		
-		/** 生长的步数 */
-		public var growSteps:Array ;
-		
-		/** 每生长一步需要的时间 ，最后一个时间为收获时间*/
-		public var growTimes:Array ;
+		/** 每生长一步需要的时间*/
+		public var growTime:int ;
 		
 		/** 成熟后收获的钱*/
 		public var earnCoin:int ;

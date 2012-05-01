@@ -18,13 +18,13 @@ package local.model.buildings.vos
 		
 		
 		/** 收获需要的时间*/
-		public var earnTimes:Array ;
+		public var earnTime:int ;
 		
-		/** 每一等级可收获的金币数*/
-		public var earnCoins:Array ;
+		/**可收获的金币数*/
+		public var earnCoin:int ;
 		
-		/** 每一等级可收获的经验值*/
-		public var earnExps:Array ;
+		/** 可收获的经验值*/
+		public var earnExp:int ;
 		
 		
 		
@@ -32,17 +32,6 @@ package local.model.buildings.vos
 		
 		/** 最大的等级，可以升到多少级，默认为1*/
 		public var maxLevel:int ;
-		
-		/** 快速升级需要的钱*/
-		public var upgradeCashs:Array;
-		
-		/** 慢速升级所需要的金币数 */
-		public var upgradeCoins:Array ;
-		
-		/** 慢速升级所需要的时间*/
-		public var upgradeTimes:Array;
-		
-		
 		
 		
 		

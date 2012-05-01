@@ -69,11 +69,11 @@ package local.game.elements
 			if( _timeoutFlag && _executeBack)
 			{
 				//掉pickup
-				var value:int = baseStoneVO.earnCoins[buildingVO.currentStep] ;
+				var value:int = baseStoneVO.earnCoin;
 				if(value>0)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_COIN , value,screenX,screenY-offsetY);
-				value = baseStoneVO.earnStones[buildingVO.currentStep] ;
+				value = baseStoneVO.earnStone ;
 				if(value)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_STONE , value,screenX,screenY-offsetY);
-				value = baseStoneVO.earnExps[buildingVO.currentStep] ;
+				value = baseStoneVO.earnExp ;
 				if(value>0) PickupUtil.addPickup2Wold(BasicPickup.PICKUP_EXP , value,screenX,screenY-offsetY);
 				//特殊物品
 				showRewardsPickup();
