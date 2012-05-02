@@ -42,5 +42,8 @@ package local.model.buildings.vos
 		
 		/** 第一次修建时需要的石头数*/
 		public var buildStone:int ;
+		
+		/** 修建完成需要的材料 , 多个，key为pickupId , value为数量*/
+		public var materials:Object ;
 	}
 }

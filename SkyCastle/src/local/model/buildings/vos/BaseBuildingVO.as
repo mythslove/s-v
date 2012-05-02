@@ -44,9 +44,6 @@ package local.model.buildings.vos
 		/** 步骤数 */
 		public var step:int ;
 		
-		/** 修建完成需要的材料 , 多个，key为pickupId , value为数量*/
-		public var materials:Object ;
-		
 		//在哪个文件夹
 		protected var _file:String = "building";
 		
