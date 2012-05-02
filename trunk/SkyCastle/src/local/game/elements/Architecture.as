@@ -82,7 +82,7 @@ package local.game.elements
 				{
 					ro.getOperation("build").send(buildingVO.id , buildingVO.currentStep);
 				}
-				else if(buildingVO.currentStep==buildingVO.baseVO.step && baseBuildingVO.materials)
+				else if(buildingVO.currentStep==buildingVO.baseVO.step && baseBuildingVO.hasOwnProperty("materials"))
 				{
 					//弹出判断材料的窗口
 					var buildComPopup:BuildCompleteMaterialPopUp = new BuildCompleteMaterialPopUp(this);

@@ -39,7 +39,7 @@ package local.views.pickup
 			x = GameSetting.SCREEN_WIDTH>>1;
 			y = GameSetting.SCREEN_HEIGHT>>1;
 			container.visible=false;
-			this._materials =architechture.baseBuildingVO.materials  ;
+			this._materials =architechture.baseBuildingVO["materials"]  ;
 			this._architechture = architechture ;
 		}
 		
