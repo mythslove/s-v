@@ -12,6 +12,7 @@ package local.game.elements
 	import local.comm.GameSetting;
 	import local.enum.BasicPickup;
 	import local.enum.BuildingOperation;
+	import local.enum.BuildingStatus;
 	import local.game.GameWorld;
 	import local.model.MapGridDataModel;
 	import local.model.PlayerModel;
@@ -55,6 +56,7 @@ package local.game.elements
 			switch( operation )
 			{
 				case BuildingOperation.BUY:
+					this.buildingVO.buildingStatus=BuildingStatus.BUILDING ;
 					playPlaceEffect();
 					CharacterManager.instance.updateCharactersPos( this );
 					//发送数据
@@ -105,8 +107,6 @@ package local.game.elements
 					}else{
 						GameWorld.instance.removeBuildFromScene(this);
 					}
-					break ;
-				case "build":
 					break ;
 				case "sell":
 					PlayerModel.instance.me.rank-=baseBuildingVO.rank ;

@@ -102,8 +102,16 @@ package local.game.elements
 			super.onResultHandler(e);
 			switch( e.method)
 			{
-				case "build":
+				case "buy":
 					this.showBuildStatus() ;
+					break;
+				case "build":
+					this.clearEffect() ;
+					this.enable=false ;
+					if(e.result){
+						_executeBack = true ;
+						this.showPickup();
+					}
 					break ;
 				case "buildComplete":
 					this.clearEffect() ;
@@ -122,19 +130,32 @@ package local.game.elements
 				super.execute();
 				if( buildingVO.buildingStatus==BuildingStatus.BUILDING)
 				{
-					if(buildingVO.currentStep<buildingVO.baseVO.step)
+					if(buildingVO.currentStep+1<buildingVO.baseVO.step)
 					{
-						ro.getOperation("build").send(buildingVO.id , buildingVO.currentStep);
+						//判断石头和木头
+						var effect:MapWordEffect ;
+						if(PlayerModel.instance.me.wood<baseBuildingVO["buildWood"]){
+							effect = new MapWordEffect("You don't have enough Wood!");
+							GameWorld.instance.addEffect(effect,screenX,screenY);
+							CollectQueueUtil.instance.nextBuilding();
+							return false;
+						}else if(PlayerModel.instance.me.stone<baseBuildingVO["buildStone"]){
+							effect = new MapWordEffect("You don't have enough Stone!");
+							GameWorld.instance.addEffect(effect,screenX,screenY);
+							CollectQueueUtil.instance.nextBuilding();
+							return false;
+						}
+						ro.getOperation("build").send(buildingVO.id , buildingVO.currentStep );
 						CharacterManager.instance.hero.gotoAndPlay(AvatarAction.CONSTRUCT);
 						_timeoutFlag = false ;
 						_timeoutId = setTimeout( timeoutHandler , 3000 );
 						GameWorld.instance.effectScene.addChild( BuildingExecuteLoading.getInstance(screenX,screenY-itemLayer.height).setTime(4000));
 					}
-					else if(buildingVO.currentStep==buildingVO.baseVO.step && baseBuildingVO.hasOwnProperty("materials"))
+					else if(buildingVO.currentStep+1==buildingVO.baseVO.step && baseBuildingVO.hasOwnProperty("materials"))
 					{
 						//弹出判断材料的窗口
 						var buildComPopup:BuildCompleteMaterialPopUp = new BuildCompleteMaterialPopUp(this);
-						PopUpManager.instance.addPopUp( buildComPopup);
+						PopUpManager.instance.addQueuePopUp( buildComPopup);
 						//跳到队列的下一个执行
 						CollectQueueUtil.instance.nextBuilding(); 
 					}
