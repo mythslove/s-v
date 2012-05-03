@@ -22,15 +22,6 @@ package local.game.elements
 			return buildingVO.baseVO as BaseFactoryVO ;
 		}
 		
-		/** 获取此建筑的标题 */
-		override public function get title():String 
-		{
-			if( buildingVO.currentStep < baseFactoryVO.step){
-				return buildingVO.baseVO.name+"("+buildingVO.currentStep+"/"+baseFactoryVO.step+")";
-			}
-			return buildingVO.baseVO.name;
-		}
-		
 		/**
 		 * 掉物品 ，并接着下一个收集
 		 */		
