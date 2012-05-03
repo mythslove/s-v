@@ -2,9 +2,12 @@ package local.game.elements
 {
 	import local.enum.BasicPickup;
 	import local.enum.BuildingStatus;
+	import local.game.GameWorld;
+	import local.model.PlayerModel;
 	import local.model.buildings.vos.BaseHouseVO;
 	import local.model.buildings.vos.BuildingVO;
 	import local.utils.PickupUtil;
+	import local.views.effects.MapWordEffect;
 
 	/**
 	 * 房子 
@@ -32,7 +35,30 @@ package local.game.elements
 				//如果是修建状态，掉修建的pickup。
 				if( buildingVO.buildingStatus==BuildingStatus.BUILDING)
 				{
-					PickupUtil.addPickup2Wold(BasicPickup.PICKUP_EXP , baseBuildingVO.buildEarnExp , screenX,screenY-offsetY);
+					//减木头和石头
+					var effect:MapWordEffect ;
+					if(PlayerModel.instance.me.wood<baseBuildingVO["buildWood"]){
+						effect = new MapWordEffect("You don't have enough Wood!");
+						GameWorld.instance.addEffect(effect,screenX-120,screenY);
+						return ;
+					}else if(PlayerModel.instance.me.stone<baseBuildingVO["buildStone"]){
+						effect = new MapWordEffect("You don't have enough Stone!");
+						GameWorld.instance.addEffect(effect,screenX+120,screenY);
+						return ;
+					}
+					
+					var value:int = baseBuildingVO["buildWood"] ;
+					if(value>0) effect = new MapWordEffect("Wood -"+value);
+					PlayerModel.instance.me.wood-=value ; 
+					GameWorld.instance.addEffect(effect,screenX-120,screenY);
+					value = baseBuildingVO["buildStone"] ;
+					if(value>0) effect = new MapWordEffect("Stone -"+value);
+					PlayerModel.instance.me.stone-=value ; 
+					GameWorld.instance.addEffect(effect,screenX+120,screenY);
+					//增加经验
+					value = baseBuildingVO.buildEarnExp ;
+					PickupUtil.addPickup2Wold(BasicPickup.PICKUP_EXP ,  value , screenX,screenY-offsetY);
+					buildingVO.currentStep++;
 				}
 				else if( buildingVO.buildingStatus==BuildingStatus.HARVEST)
 				{

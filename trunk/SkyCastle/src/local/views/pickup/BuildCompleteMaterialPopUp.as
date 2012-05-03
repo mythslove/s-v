@@ -37,7 +37,7 @@ package local.views.pickup
 			super();
 			txtBtn.mouseEnabled=false ;
 			x = GameSetting.SCREEN_WIDTH>>1;
-			y = GameSetting.SCREEN_HEIGHT>>1;
+			y = -50 + GameSetting.SCREEN_HEIGHT>>1;
 			container.visible=false;
 			this._materials =architechture.baseBuildingVO["materials"]  ;
 			this._architechture = architechture ;
