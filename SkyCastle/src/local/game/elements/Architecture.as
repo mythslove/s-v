@@ -3,6 +3,7 @@ package local.game.elements
 	import bing.amf3.ResultEvent;
 	import bing.utils.SystemUtil;
 	
+	import flash.events.Event;
 	import flash.utils.setTimeout;
 	
 	import local.enum.AvatarAction;
@@ -32,11 +33,20 @@ package local.game.elements
 			super(vo);
 		}
 		
+		override public function get title():String
+		{
+			if(buildingVO.buildingStatus == BuildingStatus.BUILDING )
+			{
+				return baseBuildingVO.name+"("+buildingVO.currentStep+"/"+baseBuildingVO.step+")" ;
+			}
+			return super.title;
+		}
+		
 		override public function get  description():String
 		{
 			if(buildingVO.buildingStatus == BuildingStatus.BUILDING )
 			{
-				if(buildingVO.currentStep==baseBuildingVO.step)
+				if(buildingVO.currentStep+1==baseBuildingVO.step)
 				{
 					return "Click to build complete" ;
 				}
@@ -47,6 +57,15 @@ package local.game.elements
 				return "Click to collection" ;
 			}
 			return super.description;
+		}
+		
+		override protected function addedToStageHandler(e:Event):void
+		{
+			if(this.buildingVO.buildingStatus==BuildingStatus.BUILDING){
+				this.showBuildStatus();
+			}else{
+				super.addedToStageHandler(e);
+			}
 		}
 		
 		override public function onClick():void
@@ -91,7 +110,7 @@ package local.game.elements
 					PlayerModel.instance.me.rank+=buildingVO.baseVO.rank ;
 					CenterViewContainer.instance.topBar.updateRank();
 					this.buildingVO.buildingStatus=BuildingStatus.PRODUCT ;
-					
+					itemLayer.visible=true ;
 					break ;
 			}
 		}

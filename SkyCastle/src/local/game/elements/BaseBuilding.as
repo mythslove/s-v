@@ -117,6 +117,7 @@ package local.game.elements
 		/* 加载资源 */
 		protected function loadRes():void
 		{
+			ResourceUtil.instance.removeEventListener( buildingVO.baseVO.resId , resLoadedHandler );
 			ResourceUtil.instance.addEventListener( buildingVO.baseVO.resId , resLoadedHandler );
 			var resVO:ResVO = new ResVO( buildingVO.baseVO.resId , buildingVO.baseVO.url);
 			ResourceUtil.instance.loadRes( resVO );
@@ -305,7 +306,8 @@ package local.game.elements
 		{
 			var status:BuildStatus = new BuildStatus();
 			status.gotoAndStop(baseBuildingVO.xSpan+"_"+baseBuildingVO.zSpan) ;
-			effectLayer.addChildAt(status,0);
+			ContainerUtil.removeChildren(itemLayer);
+			itemLayer.addChildAt(status,0);
 		}
 		
 		
