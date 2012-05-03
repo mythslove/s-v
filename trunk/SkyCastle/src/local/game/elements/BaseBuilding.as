@@ -301,7 +301,7 @@ package local.game.elements
 			
 		}
 		/*显示建造的步骤*/
-		protected function showBuidStatus():void
+		protected function showBuildStatus():void
 		{
 			var status:BuildStatus = new BuildStatus();
 			status.gotoAndStop(baseBuildingVO.xSpan+"_"+baseBuildingVO.zSpan) ;
