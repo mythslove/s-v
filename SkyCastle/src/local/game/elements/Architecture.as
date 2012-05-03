@@ -32,6 +32,15 @@ package local.game.elements
 			super(vo);
 		}
 		
+		override public function get  description():String
+		{
+			if(buildingVO.buildingStatus == BuildingStatus.BUILDING )
+			{
+				return "Click to build ("+baseBuildingVO["buildWood"]+" Wood "+baseBuildingVO["buildStone"]+" Stone)" ;
+			}
+			return super.description;
+		}
+		
 		override public function onClick():void
 		{
 			//减能量
