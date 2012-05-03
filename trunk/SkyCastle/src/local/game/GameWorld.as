@@ -14,6 +14,7 @@ package local.game
 	import local.comm.GameData;
 	import local.comm.GameSetting;
 	import local.enum.BuildingOperation;
+	import local.enum.BuildingStatus;
 	import local.enum.LayerType;
 	import local.enum.PayType;
 	import local.game.elements.Building;
@@ -73,13 +74,16 @@ package local.game
 			}
 			else if(GameData.buildingCurrOperation==BuildingOperation.ROTATE) //旋转
 			{	
-				//路一层的建筑才可以旋转
-				if(_mouseOverBuild && _mouseOverBuild.buildingVO.baseVO.layer==LayerType.BUILDING){
-					if(_mouseOverBuild.getRotatable(MapGridDataModel.instance.buildingGrid)) {
-						removeBuildFromScene( _mouseOverBuild );
-						_mouseOverBuild.scaleX = ~_mouseOverBuild.scaleX+1 ;
-						addBuildToScene(_mouseOverBuild);
-						_mouseOverBuild.sendOperation(BuildingOperation.ROTATE); //发送旋转建筑消息到服务器
+				if(_mouseOverBuild && (_mouseOverBuild.buildingVO.buildingStatus==BuildingStatus.NONE||_mouseOverBuild.buildingVO.buildingStatus==BuildingStatus.FINISH ))
+				{
+					//路一层的建筑才可以旋转
+					if(_mouseOverBuild.buildingVO.baseVO.layer==LayerType.BUILDING){
+						if(_mouseOverBuild.getRotatable(MapGridDataModel.instance.buildingGrid)) {
+							removeBuildFromScene( _mouseOverBuild );
+							_mouseOverBuild.scaleX = ~_mouseOverBuild.scaleX+1 ;
+							addBuildToScene(_mouseOverBuild);
+							_mouseOverBuild.sendOperation(BuildingOperation.ROTATE); //发送旋转建筑消息到服务器
+						}
 					}
 				}
 			}
@@ -93,7 +97,7 @@ package local.game
 						clearTopScene();
 					}
 				}
-				else if(_mouseOverBuild)
+				else if(_mouseOverBuild && (_mouseOverBuild.buildingVO.buildingStatus==BuildingStatus.NONE||_mouseOverBuild.buildingVO.buildingStatus==BuildingStatus.FINISH ))
 				{
 					_cacheBuildPos.x = _mouseOverBuild.nodeX ;
 					_cacheBuildPos.y = _mouseOverBuild.nodeZ ;
@@ -104,7 +108,8 @@ package local.game
 			}
 			else if(GameData.buildingCurrOperation==BuildingOperation.STASH) //收藏
 			{
-				if(_mouseOverBuild){
+				if(_mouseOverBuild && (_mouseOverBuild.buildingVO.buildingStatus==BuildingStatus.NONE||_mouseOverBuild.buildingVO.buildingStatus==BuildingStatus.FINISH ))
+				{
 					_mouseOverBuild.selectedStatus(false);
 					_mouseOverBuild.sendOperation(BuildingOperation.STASH); //发送收藏建筑信息到服务器
 					_mouseOverBuild = null ;
@@ -112,7 +117,8 @@ package local.game
 			}
 			else if(GameData.buildingCurrOperation==BuildingOperation.SELL) //卖出
 			{
-				if(_mouseOverBuild){
+				if(_mouseOverBuild && (_mouseOverBuild.buildingVO.buildingStatus==BuildingStatus.NONE||_mouseOverBuild.buildingVO.buildingStatus==BuildingStatus.FINISH ))
+				{
 					//弹出卖出窗口
 					_mouseOverBuild = null ;
 				}
