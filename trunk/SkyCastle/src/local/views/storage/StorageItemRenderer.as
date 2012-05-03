@@ -40,6 +40,7 @@ package local.views.storage
 		{
 			super();
 			stop();
+			txtCount.text="";
 			container.mouseChildren=container.mouseEnabled=false; 
 			txtBtn.mouseEnabled = txtName.mouseEnabled = txtName.mouseEnabled=false ; 
 			GameUtil.disableTextField(this);
