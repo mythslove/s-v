@@ -36,7 +36,15 @@ package local.game.elements
 		{
 			if(buildingVO.buildingStatus == BuildingStatus.BUILDING )
 			{
+				if(buildingVO.currentStep==baseBuildingVO.step)
+				{
+					return "Click to build complete" ;
+				}
 				return "Click to build ("+baseBuildingVO["buildWood"]+" Wood "+baseBuildingVO["buildStone"]+" Stone)" ;
+			}
+			else if( buildingVO.buildingStatus==BuildingStatus.HARVEST)
+			{
+				return "Click to collection" ;
 			}
 			return super.description;
 		}
