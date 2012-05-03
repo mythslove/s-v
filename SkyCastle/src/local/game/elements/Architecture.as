@@ -3,15 +3,21 @@ package local.game.elements
 	import bing.amf3.ResultEvent;
 	import bing.utils.SystemUtil;
 	
+	import flash.utils.setTimeout;
+	
+	import local.enum.AvatarAction;
 	import local.enum.BuildingStatus;
 	import local.enum.MouseStatus;
 	import local.game.GameWorld;
 	import local.model.PlayerModel;
 	import local.model.buildings.vos.BuildingVO;
+	import local.utils.CharacterManager;
+	import local.utils.CollectQueueUtil;
 	import local.utils.MouseManager;
 	import local.utils.PopUpManager;
 	import local.views.CenterViewContainer;
 	import local.views.effects.MapWordEffect;
+	import local.views.loading.BuildingExecuteLoading;
 	import local.views.pickup.BuildCompleteMaterialPopUp;
 	
 	/**
@@ -61,7 +67,7 @@ package local.game.elements
 			switch( e.method)
 			{
 				case "build":
-					this.showBuidStatus() ;
+					this.showBuildStatus() ;
 					break ;
 				case "buildComplete":
 					this.clearEffect() ;
@@ -75,20 +81,42 @@ package local.game.elements
 		
 		override public function execute():Boolean
 		{
-			super.execute();
-			if( buildingVO.buildingStatus==BuildingStatus.BUILDING)
+			if(executeReduceEnergy())
 			{
-				if(buildingVO.currentStep<buildingVO.baseVO.step)
+				super.execute();
+				if( buildingVO.buildingStatus==BuildingStatus.BUILDING)
 				{
-					ro.getOperation("build").send(buildingVO.id , buildingVO.currentStep);
+					if(buildingVO.currentStep<buildingVO.baseVO.step)
+					{
+						ro.getOperation("build").send(buildingVO.id , buildingVO.currentStep);
+						CharacterManager.instance.hero.gotoAndPlay(AvatarAction.CONSTRUCT);
+						_timeoutFlag = false ;
+						_timeoutId = setTimeout( timeoutHandler , 3000 );
+						GameWorld.instance.effectScene.addChild( BuildingExecuteLoading.getInstance(screenX,screenY-itemLayer.height).setTime(4000));
+					}
+					else if(buildingVO.currentStep==buildingVO.baseVO.step && baseBuildingVO.hasOwnProperty("materials"))
+					{
+						//弹出判断材料的窗口
+						var buildComPopup:BuildCompleteMaterialPopUp = new BuildCompleteMaterialPopUp(this);
+						PopUpManager.instance.addPopUp( buildComPopup);
+						//跳到队列的下一个执行
+						CollectQueueUtil.instance.nextBuilding(); 
+					}
+					return false ;
 				}
-				else if(buildingVO.currentStep==buildingVO.baseVO.step && baseBuildingVO.hasOwnProperty("materials"))
+				else if( buildingVO.buildingStatus==BuildingStatus.PRODUCT)
 				{
-					//弹出判断材料的窗口
-					var buildComPopup:BuildCompleteMaterialPopUp = new BuildCompleteMaterialPopUp(this);
-					PopUpManager.instance.addPopUp( buildComPopup);
+					
 				}
-				return false ;
+				else if( buildingVO.buildingStatus==BuildingStatus.HARVEST)
+				{
+					//收获
+					ro.getOperation("earn").send(buildingVO.id );
+					CharacterManager.instance.hero.gotoAndPlay(AvatarAction.COLLECT);
+					_timeoutFlag = false ;
+					_timeoutId = setTimeout( timeoutHandler , 3000 );
+					GameWorld.instance.effectScene.addChild( BuildingExecuteLoading.getInstance(screenX,screenY-itemLayer.height).setTime(4000));
+				}
 			}
 			return true ;
 		}
