@@ -215,7 +215,7 @@ package local.game.elements
 			if(PlayerModel.instance.me.energy>=1){
 				effect = new MapWordEffect("Energy "+value);
 				PlayerModel.instance.me.energy-=value ;
-				CenterViewContainer.instance.topBar.updateTopBar();
+				CenterViewContainer.instance.topBar.updateEnergy();
 				GameWorld.instance.addEffect(effect,screenX,screenY);
 			}else{
 				CollectQueueUtil.instance.clear(true);
