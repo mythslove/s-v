@@ -65,6 +65,7 @@ package local.game.elements
 					if( buildingVO.currentStep==baseBuildingVO.step )
 					{
 						itemLayer.visible=true ;
+						this.showSkin();
 						this.startProduct(); //开始生产
 					}
 				}
