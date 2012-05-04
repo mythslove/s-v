@@ -71,7 +71,7 @@ package local.game.elements
 				if(buildingVO.currentStep<baseBuildingVO.step){
 					this.showBuildStatus();
 				}else{
-					super.addedToStageHandler(e);
+					SystemUtil.debug(baseBuildingVO.name+"的建筑状态有错");
 				}
 			}else{
 				super.addedToStageHandler(e);
