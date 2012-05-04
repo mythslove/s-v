@@ -65,17 +65,25 @@ package local.game.elements
 		//=================getter/setter=========================
 		
 		
-		
-		
-		
-		
-		
 		override protected function addedToStageHandler(e:Event):void
 		{
 			if(this.buildingVO.buildingStatus==BuildingStatus.BUILDING){
-				this.showBuildStatus();
+				if(buildingVO.currentStep<baseBuildingVO.step){
+					this.showBuildStatus();
+				}else{
+					super.addedToStageHandler(e);
+				}
 			}else{
 				super.addedToStageHandler(e);
+			}
+		}
+		
+		override public function recoverStatus():void
+		{
+			if(buildingVO.buildingStatus==BuildingStatus.PRODUCT){
+				this.createGameTimer( buildingVO.statusTime );
+			}else if( buildingVO.buildingStatus==BuildingStatus.HARVEST){
+				this.showCollectionStatus() ;
 			}
 		}
 		
@@ -124,8 +132,9 @@ package local.game.elements
 					this.enable=false ;
 					if(e.result){
 						_executeBack = true ;
-						this.buildingVO = e.result as BuildingVO;
-						this.buildingVO.buildingStatus=BuildingStatus.BUILDING ; //修建中
+						var vo:BuildingVO = e.result as BuildingVO ;
+						this.buildingVO.currentStep = vo.currentStep ;
+						this.buildingVO.buildTime = vo.buildTime ;
 						this.showPickup();
 					}
 					break ;
