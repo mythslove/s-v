@@ -62,14 +62,14 @@ package local.game.elements
 					buildingVO.currentStep++;
 					
 					//修建完成
-					if( buildingVO.buildingStatus == BuildingStatus.FINISH )
+					if( buildingVO.buildingStatus == BuildingStatus.FINISH || buildingVO.currentStep==baseBuildingVO.step )
 					{
 						//开始倒计时
 					}
 				}
 				else if( buildingVO.buildingStatus==BuildingStatus.HARVEST)
 				{
-					//如果是收获，掉收获的pickup，子类判断
+					//如果是收获，掉收获的pickup
 				}
 				//特殊物品
 				showRewardsPickup();
