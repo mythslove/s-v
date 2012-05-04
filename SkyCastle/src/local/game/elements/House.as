@@ -32,8 +32,9 @@ package local.game.elements
 		{
 			if( _timeoutFlag && _executeBack)
 			{
+				clearEffect();
 				//如果是修建状态，掉修建的pickup。
-				if( buildingVO.buildingStatus==BuildingStatus.BUILDING)
+				if( buildingVO.buildingStatus==BuildingStatus.BUILDING || buildingVO.buildingStatus == BuildingStatus.FINISH )
 				{
 					//减木头和石头
 					var effect:MapWordEffect ;
@@ -59,6 +60,12 @@ package local.game.elements
 					value = baseBuildingVO.buildEarnExp ;
 					PickupUtil.addPickup2Wold(BasicPickup.PICKUP_EXP ,  value , screenX,screenY-offsetY);
 					buildingVO.currentStep++;
+					
+					//修建完成
+					if( buildingVO.buildingStatus == BuildingStatus.FINISH )
+					{
+						//开始倒计时
+					}
 				}
 				else if( buildingVO.buildingStatus==BuildingStatus.HARVEST)
 				{
