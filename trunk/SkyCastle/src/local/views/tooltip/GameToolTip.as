@@ -25,7 +25,6 @@ package  local.views.tooltip
 			super();
 			
 			mouseChildren = mouseEnabled= visible= false ;
-			cacheAsBitmap = true ;
 		}
 		
 		public static function get instance():GameToolTip{

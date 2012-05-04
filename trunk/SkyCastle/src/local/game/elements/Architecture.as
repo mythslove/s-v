@@ -114,25 +114,33 @@ package local.game.elements
 					this.showBuildStatus() ;
 					break;
 				case "earn": //收获
+					this.enable = false ;
+					if(e.result){
+						_executeBack = true ;
+						this.showPickup();
+					}
+					break ;
 				case "build": //修建
 					this.enable=false ;
 					if(e.result){
 						_executeBack = true ;
-						this.showPickup();
 						this.buildingVO = e.result as BuildingVO;
+						this.buildingVO.buildingStatus=BuildingStatus.BUILDING ; //修建中
+						this.showPickup();
 					}
 					break ;
-				case "buildComplete":
-					this.clearEffect() ;
-					PlayerModel.instance.me.rank+=buildingVO.baseVO.rank ;
-					CenterViewContainer.instance.topBar.updateRank();
-					itemLayer.visible=true ;
-					if(baseBuildingVO.hasOwnProperty("earnTime") && int(baseBuildingVO["earnTime"]>0))
-					{
-						this.buildingVO.buildingStatus=BuildingStatus.PRODUCT ;
-						this.createGameTimer(  int(baseBuildingVO["earnTime"]) ) ;
-					}
-					break ;
+			}
+		}
+		
+		/*开始生产*/
+		protected function startProduct():void
+		{
+			PlayerModel.instance.me.rank+=buildingVO.baseVO.rank ;
+			CenterViewContainer.instance.topBar.updateRank();
+			if(baseBuildingVO.hasOwnProperty("earnTime") && int(baseBuildingVO["earnTime"]>0))
+			{
+				this.buildingVO.buildingStatus=BuildingStatus.PRODUCT ;
+				this.createGameTimer(  int(baseBuildingVO["earnTime"]) ) ;
 			}
 		}
 		

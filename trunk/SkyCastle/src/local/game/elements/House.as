@@ -34,7 +34,7 @@ package local.game.elements
 			{
 				clearEffect();
 				//如果是修建状态，掉修建的pickup。
-				if( buildingVO.buildingStatus==BuildingStatus.BUILDING || buildingVO.buildingStatus == BuildingStatus.FINISH )
+				if( buildingVO.buildingStatus==BuildingStatus.BUILDING )
 				{
 					//减木头和石头
 					var effect:MapWordEffect ;
@@ -62,9 +62,10 @@ package local.game.elements
 					buildingVO.currentStep++;
 					
 					//修建完成
-					if( buildingVO.buildingStatus == BuildingStatus.FINISH || buildingVO.currentStep==baseBuildingVO.step )
+					if( buildingVO.currentStep==baseBuildingVO.step )
 					{
-						//开始倒计时
+						itemLayer.visible=true ;
+						this.startProduct(); //开始生产
 					}
 				}
 				else if( buildingVO.buildingStatus==BuildingStatus.HARVEST)
