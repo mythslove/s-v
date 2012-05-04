@@ -32,6 +32,7 @@ package local.game.elements
 		{
 			if( _timeoutFlag && _executeBack)
 			{
+				clearEffect();
 				//如果是修建状态，掉修建的pickup。
 				if( buildingVO.buildingStatus==BuildingStatus.BUILDING)
 				{

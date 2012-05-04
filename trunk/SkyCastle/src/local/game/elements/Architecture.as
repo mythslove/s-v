@@ -111,8 +111,8 @@ package local.game.elements
 				case "buy":
 					this.showBuildStatus() ;
 					break;
-				case "build":
-					this.clearEffect() ;
+				case "earn": //收获
+				case "build": //修建
 					this.enable=false ;
 					if(e.result){
 						_executeBack = true ;
