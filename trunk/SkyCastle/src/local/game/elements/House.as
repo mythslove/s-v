@@ -49,11 +49,11 @@ package local.game.elements
 					}
 					
 					var value:int = baseBuildingVO["buildWood"] ;
-					if(value>0) effect = new MapWordEffect("Wood -"+value);
+					if(value>0) effect = new MapWordEffect("Wood -"+value,MapWordEffect.WOOD_COLOR);
 					PlayerModel.instance.me.wood-=value ; 
 					GameWorld.instance.addEffect(effect,screenX-120,screenY);
 					value = baseBuildingVO["buildStone"] ;
-					if(value>0) effect = new MapWordEffect("Stone -"+value);
+					if(value>0) effect = new MapWordEffect("Stone -"+value,MapWordEffect.STONE_COLOR);
 					PlayerModel.instance.me.stone-=value ; 
 					GameWorld.instance.addEffect(effect,screenX+120,screenY);
 					//增加经验
