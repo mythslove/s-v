@@ -126,10 +126,10 @@ package local.game.elements
 					this.clearEffect() ;
 					PlayerModel.instance.me.rank+=buildingVO.baseVO.rank ;
 					CenterViewContainer.instance.topBar.updateRank();
-					this.buildingVO.buildingStatus=BuildingStatus.PRODUCT ;
 					itemLayer.visible=true ;
 					if(baseBuildingVO.hasOwnProperty("earnTime") && int(baseBuildingVO["earnTime"]>0))
 					{
+						this.buildingVO.buildingStatus=BuildingStatus.PRODUCT ;
 						this.createGameTimer(  int(baseBuildingVO["earnTime"]) ) ;
 					}
 					break ;
