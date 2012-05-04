@@ -1,4 +1,4 @@
-package game.util
+package local.utils
 {
 	import bing.utils.DateUtil;
 	

@@ -9,11 +9,13 @@ package local.game.elements
 	import local.enum.AvatarAction;
 	import local.enum.BuildingStatus;
 	import local.enum.MouseStatus;
+	import local.events.GameTimeEvent;
 	import local.game.GameWorld;
 	import local.model.PlayerModel;
 	import local.model.buildings.vos.BuildingVO;
 	import local.utils.CharacterManager;
 	import local.utils.CollectQueueUtil;
+	import local.utils.GameTimer;
 	import local.utils.MouseManager;
 	import local.utils.PopUpManager;
 	import local.views.CenterViewContainer;
@@ -28,12 +30,12 @@ package local.game.elements
 	 */	
 	public class Architecture extends Building
 	{
+		protected var _gameTimer:GameTimer ;
+		
 		public function Architecture(vo:BuildingVO)
 		{
 			super(vo);
 		}
-		
-		
 		
 		//=================getter/setter=========================
 		override public function get title():String{
@@ -117,6 +119,7 @@ package local.game.elements
 					if(e.result){
 						_executeBack = true ;
 						this.showPickup();
+						this.buildingVO = e.result as BuildingVO;
 					}
 					break ;
 				case "buildComplete":
@@ -160,9 +163,14 @@ package local.game.elements
 					}
 					else if(buildingVO.currentStep+1==buildingVO.baseVO.step && baseBuildingVO.hasOwnProperty("materials"))
 					{
-						//弹出判断材料的窗口
-						var buildComPopup:BuildCompleteMaterialPopUp = new BuildCompleteMaterialPopUp(this);
-						PopUpManager.instance.addQueuePopUp( buildComPopup);
+						if( baseBuildingVO["materials"] ){
+							//弹出判断材料的窗口
+							var buildComPopup:BuildCompleteMaterialPopUp = new BuildCompleteMaterialPopUp(this);
+							PopUpManager.instance.addQueuePopUp( buildComPopup);
+						}else{
+							//直接发送完成
+							this.sendBuildComplete();
+						}
 						//跳到队列的下一个执行
 						CollectQueueUtil.instance.nextBuilding(); 
 					}
@@ -188,10 +196,60 @@ package local.game.elements
 		/**
 		 * 发送建造完成的消息到服务器 
 		 */		
-		public function sendBuildComplete():void
-		{
+		public function sendBuildComplete():void{
 			buildingVO.buildingStatus=BuildingStatus.NONE ;
-			ro.getOperation("buildComplete").send(buildingVO.id);
+			ro.getOperation("build").send(buildingVO.id , baseBuildingVO.step-1 );
+		}
+		
+		/*不断执行，更新*/
+		override public function update():void
+		{
+			super.update();
+			if(_gameTimer) _gameTimer.update();
+		}
+		
+		/*显示收藏状态*/
+		protected function showCollectionStatus():void
+		{
+			
+		}
+		
+		//==============计时器================================
+		/*清除计时器*/
+		protected function clearGameTimer():void
+		{
+			if(_gameTimer){
+				_gameTimer.removeEventListener( GameTimeEvent.TIME_OVER , gameTimerHandler );
+				_gameTimer = null ;
+			}
+		}
+		/*创建计时器*/
+		protected function createGameTimer( duration:int ):void
+		{
+			if(_gameTimer) clearGameTimer(); //先清除上一个计时器
+			_gameTimer = new GameTimer( duration );
+			_gameTimer.removeEventListener( GameTimeEvent.TIME_OVER , gameTimerHandler );
+		}
+		/*计时完成*/
+		protected function gameTimerHandler( e:GameTimeEvent):void
+		{
+			if( buildingVO.buildingStatus==BuildingStatus.PRODUCT)
+			{
+				clearGameTimer(); //清除计时器
+				buildingVO.buildingStatus=BuildingStatus.HARVEST ; //可收获
+				this.showCollectionStatus();//显示收获状态
+			}
+		}
+		
+		//===============计时器end==============================
+		
+		override public function dispose():void
+		{
+			super.dispose();
+			if(_gameTimer){
+				_gameTimer.removeEventListener( GameTimeEvent.TIME_OVER , gameTimerHandler );
+				_gameTimer = null ;
+			}
 		}
 	}
 }
