@@ -54,6 +54,9 @@ package local.game.elements
 		override public function get description():String{
 			return "";
 		}
+		override public function get isCanControl():Boolean{
+			return false;
+		}
 		
 		override public function update():void
 		{

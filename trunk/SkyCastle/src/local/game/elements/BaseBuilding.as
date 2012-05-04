@@ -195,6 +195,10 @@ package local.game.elements
 			super.nodeZ = value ;
 			buildingVO.nodeZ = value ;
 		}
+		/** 是否可以移动，旋转，收藏，卖*/
+		public function get isCanControl():Boolean{
+			return true ;
+		}
 		
 		/**设置是否显示被选择状态  */		
 		public function selectedStatus( flag:Boolean ):void

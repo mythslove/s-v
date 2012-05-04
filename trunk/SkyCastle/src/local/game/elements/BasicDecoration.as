@@ -28,6 +28,10 @@ package local.game.elements
 			super(vo);
 		}
 		
+		override public function get isCanControl():Boolean{
+			return false ;
+		}
+		
 		override public function onClick():void
 		{
 			//减能量
