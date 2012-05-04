@@ -33,21 +33,19 @@ package local.game.elements
 			super(vo);
 		}
 		
-		override public function get title():String
-		{
-			if(buildingVO.buildingStatus == BuildingStatus.BUILDING )
-			{
+		
+		
+		//=================getter/setter=========================
+		override public function get title():String{
+			if(buildingVO.buildingStatus == BuildingStatus.BUILDING ){
 				return baseBuildingVO.name+"("+buildingVO.currentStep+"/"+baseBuildingVO.step+")" ;
 			}
 			return super.title;
 		}
-		
-		override public function get  description():String
-		{
+		override public function get  description():String{
 			if(buildingVO.buildingStatus == BuildingStatus.BUILDING )
 			{
-				if(buildingVO.currentStep+1==baseBuildingVO.step)
-				{
+				if(buildingVO.currentStep+1==baseBuildingVO.step){
 					return "Click to build complete" ;
 				}
 				return "Click to build ("+baseBuildingVO["buildWood"]+" Wood "+baseBuildingVO["buildStone"]+" Stone)" ;
@@ -58,6 +56,17 @@ package local.game.elements
 			}
 			return super.description;
 		}
+		override public function get isCanControl():Boolean{
+			if(buildingVO.buildingStatus == BuildingStatus.BUILDING ||  buildingVO.buildingStatus==BuildingStatus.HARVEST) return false ;
+			return true;
+		}
+		//=================getter/setter=========================
+		
+		
+		
+		
+		
+		
 		
 		override protected function addedToStageHandler(e:Event):void
 		{
@@ -83,16 +92,13 @@ package local.game.elements
 		override public function onMouseOver():void
 		{
 			super.onMouseOver();
-			if(!MouseManager.instance.checkControl() )
+			if(buildingVO.buildingStatus == BuildingStatus.BUILDING )
 			{
-				if(buildingVO.buildingStatus == BuildingStatus.BUILDING )
-				{
-					MouseManager.instance.mouseStatus = MouseStatus.BUILD_BUILDING ;
-				}
-				else if( buildingVO.buildingStatus==BuildingStatus.HARVEST)
-				{
-					MouseManager.instance.mouseStatus = MouseStatus.EARN_COIN ;
-				}
+				MouseManager.instance.mouseStatus = MouseStatus.BUILD_BUILDING ;
+			}
+			else if( buildingVO.buildingStatus==BuildingStatus.HARVEST)
+			{
+				MouseManager.instance.mouseStatus = MouseStatus.EARN_COIN ;
 			}
 		}
 		
