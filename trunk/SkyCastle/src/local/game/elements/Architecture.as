@@ -128,6 +128,10 @@ package local.game.elements
 					CenterViewContainer.instance.topBar.updateRank();
 					this.buildingVO.buildingStatus=BuildingStatus.PRODUCT ;
 					itemLayer.visible=true ;
+					if(baseBuildingVO.hasOwnProperty("earnTime") && int(baseBuildingVO["earnTime"]>0))
+					{
+						this.createGameTimer(  int(baseBuildingVO["earnTime"]) ) ;
+					}
 					break ;
 			}
 		}
