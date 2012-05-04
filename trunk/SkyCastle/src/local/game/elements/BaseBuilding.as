@@ -110,12 +110,12 @@ package local.game.elements
 		protected function addedToStageHandler( e:Event ):void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE , addedToStageHandler );
-			//加载资源
-			loadRes();
+			//显示建筑图片
+			showSkin();
 		}
 		
-		/* 加载资源 */
-		protected function loadRes():void
+		/* 显示建筑 */
+		protected function showSkin():void
 		{
 			ResourceUtil.instance.removeEventListener( buildingVO.baseVO.resId , resLoadedHandler );
 			ResourceUtil.instance.addEventListener( buildingVO.baseVO.resId , resLoadedHandler );
@@ -277,13 +277,12 @@ package local.game.elements
 		
 		//============建筑特效＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 		/*清除建筑的特效*/
-		protected function clearEffect():void
-		{
-				
+		protected function clearEffect():void{
+			ContainerUtil.removeChildren(effectLayer);
 		}
 		
 		/* 播放放置的动画*/
-		protected function playPlaceEffect():void
+		protected function showPlaceEffect():void
 		{
 			var placementMC:MovieClip;
 			var type:String = ItemType.getSumType( baseBuildingVO.type );
@@ -305,7 +304,7 @@ package local.game.elements
 			clearEffect();
 			
 		}
-		/*显示建造的步骤*/
+		/*显示建造的步骤状态图片*/
 		protected function showBuildStatus():void
 		{
 			var status:BuildStatus = new BuildStatus();
@@ -313,7 +312,6 @@ package local.game.elements
 			ContainerUtil.removeChildren(itemLayer);
 			itemLayer.addChildAt(status,0);
 		}
-		
 		
 		
 		

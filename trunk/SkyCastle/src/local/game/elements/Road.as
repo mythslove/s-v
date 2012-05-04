@@ -49,7 +49,7 @@ package local.game.elements
 			if(_skin){
 				_skin.gotoAndStop(_currentLabel);
 			}else{
-				super.loadRes();
+				super.showSkin();
 			}
 		}
 	}
