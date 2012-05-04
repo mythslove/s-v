@@ -39,7 +39,7 @@ package local.game.elements
 		override protected function addedToStageHandler( e:Event ):void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE , addedToStageHandler );
-			loadRes(); //加载资源
+			showSkin(); //加载资源
 		}
 		/*资源下载完成*/
 		override protected function resLoadedHandler(e:Event):void

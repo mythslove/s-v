@@ -153,6 +153,7 @@ package local.game.elements
 						}
 						ro.getOperation("build").send(buildingVO.id , buildingVO.currentStep );
 						CharacterManager.instance.hero.gotoAndPlay(AvatarAction.CONSTRUCT);
+						this.showBuildEffect() ;
 						_timeoutFlag = false ;
 						_timeoutId = setTimeout( timeoutHandler , 3000 );
 						GameWorld.instance.effectScene.addChild( BuildingExecuteLoading.getInstance(screenX,screenY-itemLayer.height).setTime(4000));

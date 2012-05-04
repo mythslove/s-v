@@ -57,7 +57,7 @@ package local.game.elements
 			{
 				case BuildingOperation.BUY:
 					this.buildingVO.buildingStatus=BuildingStatus.BUILDING ;
-					playPlaceEffect();
+					showPlaceEffect();
 					CharacterManager.instance.updateCharactersPos( this );
 					//发送数据
 					ro.getOperation("buy").send( buildingVO.shopItemId , nodeX,nodeZ );
@@ -73,7 +73,7 @@ package local.game.elements
 					ro.getOperation("stash").send( buildingVO.id );
 					break ;
 				case BuildingOperation.MOVE:
-					playPlaceEffect();
+					showPlaceEffect();
 					CharacterManager.instance.updateCharactersPos( this );
 					//发送数据
 					ro.getOperation("move").send( buildingVO.id , nodeX,nodeZ );
@@ -81,7 +81,7 @@ package local.game.elements
 				case BuildingOperation.SELL :
 					break ;
 				case BuildingOperation.PLACE_STASH:
-					playPlaceEffect();
+					showPlaceEffect();
 					GameData.buildingCurrOperation = BuildingOperation.NONE ;
 					CharacterManager.instance.updateCharactersPos( this );
 					//发送数据
