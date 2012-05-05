@@ -7,6 +7,7 @@ package local.game.elements
 	import local.model.buildings.vos.BaseHouseVO;
 	import local.model.buildings.vos.BuildingVO;
 	import local.utils.PickupUtil;
+	import local.views.CenterViewContainer;
 	import local.views.effects.MapWordEffect;
 
 	/**
@@ -67,9 +68,12 @@ package local.game.elements
 				else if( buildingVO.buildingStatus==BuildingStatus.PRODUCT)
 				{
 					if(!_gameTimer){ //最后一次修建完成
+						PlayerModel.instance.me.rank+=buildingVO.baseVO.rank ;
+						CenterViewContainer.instance.topBar.updateRank();
 						itemLayer.visible=true ;
 						this.showSkin();
 						this.startProduct(); //开始生产
+						//显示建造完成的动画
 					}
 				}
 				//特殊物品
