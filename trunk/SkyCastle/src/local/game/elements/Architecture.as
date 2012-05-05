@@ -47,7 +47,7 @@ package local.game.elements
 		override public function get  description():String{
 			if(buildingVO.buildingStatus == BuildingStatus.BUILDING )
 			{
-				if(buildingVO.currentStep+1==baseBuildingVO.step){
+				if(buildingVO.currentStep==baseBuildingVO.step){
 					return "Click to build complete" ;
 				}
 				return "Click to build (cost "+baseBuildingVO["buildWood"]+" Wood "+baseBuildingVO["buildStone"]+" Stone)" ;
@@ -68,11 +68,7 @@ package local.game.elements
 		override protected function addedToStageHandler(e:Event):void
 		{
 			if(this.buildingVO.buildingStatus==BuildingStatus.BUILDING){
-				if(buildingVO.currentStep<baseBuildingVO.step){
-					this.showBuildStatus();
-				}else{
-					SystemUtil.debug(baseBuildingVO.name+"的建筑状态有错");
-				}
+				this.showBuildStatus();
 			}else{
 				super.addedToStageHandler(e);
 			}
@@ -126,6 +122,8 @@ package local.game.elements
 					if(e.result){
 						_executeBack = true ;
 						this.showPickup();
+					}else{
+						CollectQueueUtil.instance.nextBuilding();
 					}
 					break ;
 				case "build": //修建
@@ -136,6 +134,8 @@ package local.game.elements
 						this.buildingVO.currentStep = vo.currentStep ;
 						this.buildingVO.buildTime = vo.buildTime ;
 						this.showPickup();
+					}else{
+						CollectQueueUtil.instance.nextBuilding();
 					}
 					break ;
 			}
@@ -160,7 +160,7 @@ package local.game.elements
 				super.execute();
 				if( buildingVO.buildingStatus==BuildingStatus.BUILDING)
 				{
-					if(buildingVO.currentStep+1<buildingVO.baseVO.step)
+					if(buildingVO.currentStep<buildingVO.baseVO.step)
 					{
 						//判断石头和木头
 						var effect:MapWordEffect ;
@@ -182,7 +182,7 @@ package local.game.elements
 						_timeoutId = setTimeout( timeoutHandler , 3000 );
 						GameWorld.instance.effectScene.addChild( BuildingExecuteLoading.getInstance(screenX,screenY-itemLayer.height).setTime(4000));
 					}
-					else if(buildingVO.currentStep+1==buildingVO.baseVO.step && baseBuildingVO.hasOwnProperty("materials"))
+					else if(buildingVO.currentStep==buildingVO.baseVO.step && baseBuildingVO.hasOwnProperty("materials"))
 					{
 						if( baseBuildingVO["materials"] ){
 							//弹出判断材料的窗口
@@ -219,7 +219,7 @@ package local.game.elements
 		 */		
 		public function sendBuildComplete():void{
 			buildingVO.buildingStatus=BuildingStatus.NONE ;
-			ro.getOperation("build").send(buildingVO.id , baseBuildingVO.step-1 );
+			ro.getOperation("build").send(buildingVO.id , baseBuildingVO.step );
 		}
 		
 		/*不断执行，更新*/
