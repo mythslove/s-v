@@ -120,6 +120,7 @@ package local.game.elements
 						_executeBack = true ;
 						this.showPickup();
 					}else{
+						this.selectedStatus(false);
 						CollectQueueUtil.instance.nextBuilding();
 					}
 					break ;
@@ -130,6 +131,7 @@ package local.game.elements
 						this.buildingVO = e.result as BuildingVO ;
 						this.showPickup();
 					}else{
+						this.selectedStatus(false);
 						CollectQueueUtil.instance.nextBuilding();
 					}
 					break ;
