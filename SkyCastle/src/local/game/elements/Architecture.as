@@ -18,7 +18,9 @@ package local.game.elements
 	import local.utils.MouseManager;
 	import local.utils.PopUpManager;
 	import local.views.effects.MapWordEffect;
+	import local.views.loading.BaseStepLoading;
 	import local.views.loading.BuildingExecuteLoading;
+	import local.views.loading.BuildingProductLoading;
 	import local.views.pickup.BuildCompleteMaterialPopUp;
 	
 	/**
@@ -60,6 +62,7 @@ package local.game.elements
 			if(buildingVO.buildingStatus == BuildingStatus.BUILDING ||  buildingVO.buildingStatus==BuildingStatus.HARVEST) return false ;
 			return true;
 		}
+		
 		//=================getter/setter=========================
 		
 		
@@ -80,6 +83,14 @@ package local.game.elements
 				this.showCollectionStatus() ;
 			}
 		}
+		
+		/** 步数loading */
+		override public function get stepLoading():BaseStepLoading
+		{
+			if(!_stepLoading) _stepLoading=new BuildingProductLoading();
+			return _stepLoading;
+		}
+		
 		
 		override public function onClick():void
 		{
@@ -126,6 +137,8 @@ package local.game.elements
 				MouseManager.instance.mouseStatus = MouseStatus.BUILD_BUILDING ;
 			}else if( buildingVO.buildingStatus==BuildingStatus.HARVEST){
 				MouseManager.instance.mouseStatus = MouseStatus.EARN_COIN ;
+			}else if( buildingVO.buildingStatus==BuildingStatus.PRODUCT){
+				this.showStep(1,3);
 			}
 		}
 		
