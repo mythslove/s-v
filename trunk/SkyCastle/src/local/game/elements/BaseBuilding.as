@@ -133,6 +133,7 @@ package local.game.elements
 			if(_skin){
 				_skin.gotoAndStop( buildingVO.currentStep+1 );
 				itemLayer.addChild(_skin);
+				itemLayer.drawBitmapHitArea();
 			}
 		}
 		
@@ -307,10 +308,10 @@ package local.game.elements
 		/*显示建造的步骤状态图片*/
 		protected function showBuildStatus():void
 		{
-			var status:BuildStatus = new BuildStatus();
-			status.gotoAndStop(baseBuildingVO.xSpan+"_"+baseBuildingVO.zSpan) ;
 			ContainerUtil.removeChildren(itemLayer);
-			itemLayer.addChildAt(status,0);
+			_skin = new BuildStatus();
+			_skin.gotoAndStop(baseBuildingVO.xSpan+"_"+baseBuildingVO.zSpan) ;
+			itemLayer.addChild(_skin);
 		}
 		
 		
