@@ -121,6 +121,7 @@ package local.game.elements
 							}
 						}
 					}
+					break ;
 				case BuildingStatus.PRODUCT:
 					characterMoveTo( CharacterManager.instance.hero );
 					break ;
@@ -204,8 +205,8 @@ package local.game.elements
 						CharacterManager.instance.hero.gotoAndPlay(AvatarAction.CONSTRUCT);
 						this.showBuildEffect() ;
 						_timeoutFlag = false ;
-						_timeoutId = setTimeout( timeoutHandler , 3000 );
-						GameWorld.instance.effectScene.addChild( BuildingExecuteLoading.getInstance(screenX,screenY-itemLayer.height).setTime(4000));
+						_timeoutId = setTimeout( timeoutHandler , 3500 );
+						GameWorld.instance.effectScene.addChild( BuildingExecuteLoading.getInstance(screenX,screenY-itemLayer.height).setTime(4100));
 					}
 					return false ;
 				}
