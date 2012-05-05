@@ -208,12 +208,12 @@ package local.game.elements
 		 * 调用execute时减一个能量
 		 * @return 
 		 */		
-		protected function executeReduceEnergy( value:int = -1 ):Boolean
+		protected function executeReduceEnergy( value:int = 1 ):Boolean
 		{
 			//减能量
 			var effect:MapWordEffect ;
 			if(PlayerModel.instance.me.energy>=1){
-				effect = new MapWordEffect("Energy "+value);
+				effect = new MapWordEffect("Energy -"+value);
 				PlayerModel.instance.me.energy-=value ;
 				CenterViewContainer.instance.topBar.updateEnergy();
 				GameWorld.instance.addEffect(effect,screenX,screenY);

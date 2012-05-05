@@ -1,7 +1,6 @@
 package local.game.elements
 {
 	import bing.amf3.ResultEvent;
-	import bing.utils.SystemUtil;
 	
 	import flash.events.Event;
 	import flash.utils.setTimeout;
@@ -89,9 +88,25 @@ package local.game.elements
 			if(PlayerModel.instance.me.energy<1){
 				var effect:MapWordEffect = new MapWordEffect("You don't have enough Energy!");
 				GameWorld.instance.addEffect(effect,screenX,screenY);
-			}else{
+			}
+			else if(buildingVO.currentStep<buildingVO.baseVO.step)
+			{
 				super.onClick();
-				this.showStep( buildingVO.currentStep,baseBuildingVO["step"]);
+			}
+			else if(buildingVO.currentStep==buildingVO.baseVO.step)
+			{
+				if(baseBuildingVO.hasOwnProperty("materials"))
+				{
+					_timeoutFlag = true ;
+					if( baseBuildingVO["materials"] ){
+						//弹出判断材料的窗口
+						var buildComPopup:BuildCompleteMaterialPopUp = new BuildCompleteMaterialPopUp(this);
+						PopUpManager.instance.addQueuePopUp( buildComPopup);
+					}else{
+						//直接发送完成
+						this.sendBuildComplete();
+					}
+				}
 			}
 		}
 		
@@ -118,9 +133,6 @@ package local.game.elements
 					if(e.result){
 						_executeBack = true ;
 						this.showPickup();
-					}else{
-						this.selectedStatus(false);
-						CollectQueueUtil.instance.nextBuilding();
 					}
 					break ;
 				case "build": //修建
@@ -129,9 +141,6 @@ package local.game.elements
 						_executeBack = true ;
 						this.buildingVO = e.result as BuildingVO ;
 						this.showPickup();
-					}else{
-						this.selectedStatus(false);
-						CollectQueueUtil.instance.nextBuilding();
 					}
 					break ;
 			}
@@ -140,8 +149,6 @@ package local.game.elements
 		/*开始生产*/
 		protected function startProduct():void
 		{
-			PlayerModel.instance.me.rank+=buildingVO.baseVO.rank ;
-			CenterViewContainer.instance.topBar.updateRank();
 			if(baseBuildingVO.hasOwnProperty("earnTime") && int(baseBuildingVO["earnTime"]>0))
 			{
 				this.buildingVO.buildingStatus=BuildingStatus.PRODUCT ;
@@ -178,19 +185,6 @@ package local.game.elements
 						_timeoutId = setTimeout( timeoutHandler , 3000 );
 						GameWorld.instance.effectScene.addChild( BuildingExecuteLoading.getInstance(screenX,screenY-itemLayer.height).setTime(4000));
 					}
-					else if(buildingVO.currentStep==buildingVO.baseVO.step && baseBuildingVO.hasOwnProperty("materials"))
-					{
-						if( baseBuildingVO["materials"] ){
-							//弹出判断材料的窗口
-							var buildComPopup:BuildCompleteMaterialPopUp = new BuildCompleteMaterialPopUp(this);
-							PopUpManager.instance.addQueuePopUp( buildComPopup);
-						}else{
-							//直接发送完成
-							this.sendBuildComplete();
-						}
-						//跳到队列的下一个执行
-						CollectQueueUtil.instance.nextBuilding(); 
-					}
 					return false ;
 				}
 				else if( buildingVO.buildingStatus==BuildingStatus.PRODUCT)
@@ -214,7 +208,6 @@ package local.game.elements
 		 * 发送建造完成的消息到服务器 
 		 */		
 		public function sendBuildComplete():void{
-			buildingVO.buildingStatus=BuildingStatus.NONE ;
 			ro.getOperation("build").send(buildingVO.id , baseBuildingVO.step );
 		}
 		
