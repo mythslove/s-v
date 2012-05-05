@@ -17,7 +17,6 @@ package local.game.elements
 	import local.utils.GameTimer;
 	import local.utils.MouseManager;
 	import local.utils.PopUpManager;
-	import local.views.CenterViewContainer;
 	import local.views.effects.MapWordEffect;
 	import local.views.loading.BuildingExecuteLoading;
 	import local.views.pickup.BuildCompleteMaterialPopUp;
@@ -88,25 +87,35 @@ package local.game.elements
 			if(PlayerModel.instance.me.energy<1){
 				var effect:MapWordEffect = new MapWordEffect("You don't have enough Energy!");
 				GameWorld.instance.addEffect(effect,screenX,screenY);
+				return ;
 			}
-			else if(buildingVO.currentStep<buildingVO.baseVO.step)
+			switch( buildingVO.buildingStatus)
 			{
-				super.onClick();
-			}
-			else if(buildingVO.currentStep==buildingVO.baseVO.step)
-			{
-				if(baseBuildingVO.hasOwnProperty("materials"))
-				{
-					_timeoutFlag = true ;
-					if( baseBuildingVO["materials"] ){
-						//弹出判断材料的窗口
-						var buildComPopup:BuildCompleteMaterialPopUp = new BuildCompleteMaterialPopUp(this);
-						PopUpManager.instance.addQueuePopUp( buildComPopup);
-					}else{
-						//直接发送完成
-						this.sendBuildComplete();
+				case BuildingStatus.BUILDING:
+					if(buildingVO.currentStep<buildingVO.baseVO.step){
+						super.onClick();
 					}
-				}
+					else if(buildingVO.currentStep==buildingVO.baseVO.step)
+					{
+						if(baseBuildingVO.hasOwnProperty("materials"))
+						{
+							_timeoutFlag = true ;
+							if( baseBuildingVO["materials"] ){
+								//弹出判断材料的窗口
+								var buildComPopup:BuildCompleteMaterialPopUp = new BuildCompleteMaterialPopUp(this);
+								PopUpManager.instance.addQueuePopUp( buildComPopup);
+							}else{
+								//直接发送完成
+								this.sendBuildComplete();
+							}
+						}
+					}
+				case BuildingStatus.PRODUCT:
+					characterMoveTo( CharacterManager.instance.hero );
+					break ;
+				case BuildingStatus.HARVEST:
+					super.onClick();
+					break ;
 			}
 		}
 		
