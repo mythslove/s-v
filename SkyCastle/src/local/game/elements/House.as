@@ -66,9 +66,11 @@ package local.game.elements
 				}
 				else if( buildingVO.buildingStatus==BuildingStatus.PRODUCT)
 				{
-					itemLayer.visible=true ;
-					this.showSkin();
-					this.startProduct(); //开始生产
+					if(!_gameTimer){ //最后一次修建完成
+						itemLayer.visible=true ;
+						this.showSkin();
+						this.startProduct(); //开始生产
+					}
 				}
 				//特殊物品
 				showRewardsPickup();
