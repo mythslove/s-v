@@ -98,12 +98,9 @@ package local.game.elements
 		override public function onMouseOver():void
 		{
 			super.onMouseOver();
-			if(buildingVO.buildingStatus == BuildingStatus.BUILDING )
-			{
+			if(buildingVO.buildingStatus == BuildingStatus.BUILDING ){
 				MouseManager.instance.mouseStatus = MouseStatus.BUILD_BUILDING ;
-			}
-			else if( buildingVO.buildingStatus==BuildingStatus.HARVEST)
-			{
+			}else if( buildingVO.buildingStatus==BuildingStatus.HARVEST){
 				MouseManager.instance.mouseStatus = MouseStatus.EARN_COIN ;
 			}
 		}
@@ -130,9 +127,7 @@ package local.game.elements
 					this.enable=false ;
 					if(e.result){
 						_executeBack = true ;
-						var vo:BuildingVO = e.result as BuildingVO ;
-						this.buildingVO.currentStep = vo.currentStep ;
-						this.buildingVO.buildTime = vo.buildTime ;
+						this.buildingVO = e.result as BuildingVO ;
 						this.showPickup();
 					}else{
 						CollectQueueUtil.instance.nextBuilding();
