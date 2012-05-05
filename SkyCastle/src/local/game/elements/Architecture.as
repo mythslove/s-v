@@ -107,7 +107,6 @@ package local.game.elements
 		
 		override protected function onResultHandler( e:ResultEvent ):void
 		{
-			SystemUtil.debug(e.service+"."+e.method , e.result);
 			super.onResultHandler(e);
 			switch( e.method)
 			{
