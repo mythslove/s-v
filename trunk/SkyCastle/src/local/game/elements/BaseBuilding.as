@@ -27,6 +27,7 @@ package local.game.elements
 	import local.views.effects.BuildStatus;
 	import local.views.effects.EffectPlacementBuilding;
 	import local.views.effects.EffectPlacementDecoration;
+	import local.views.loading.BaseStepLoading;
 	import local.views.loading.BuildingStepLoading;
 
 	/**
@@ -42,7 +43,7 @@ package local.game.elements
 		public var offsetY:Number ;//可用偏移Y
 		public var selected:Boolean ; //当前是否选中
 		protected var _skin:MovieClip ; //皮肤
-		private var _stepLoading:BuildingStepLoading;
+		protected var _stepLoading:BaseStepLoading;
 		
 		public function BaseBuilding( vo :BuildingVO )
 		{
@@ -147,7 +148,7 @@ package local.game.elements
 		}
 		
 		/** 步数loading */
-		public function get stepLoading():BuildingStepLoading
+		public function get stepLoading():BaseStepLoading
 		{
 			if(!_stepLoading) _stepLoading=new BuildingStepLoading();
 			return _stepLoading;

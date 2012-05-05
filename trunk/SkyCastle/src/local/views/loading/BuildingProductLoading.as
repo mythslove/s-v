@@ -2,16 +2,17 @@ package local.views.loading
 {
 	import flash.display.Sprite;
 	import flash.text.TextField;
-	
+
 	/**
-	 * 显示步数的进度条 
+	 * 生产的进度条
 	 * @author zzhanglin
 	 */	
-	public class BuildingStepLoading extends BaseStepLoading
+	public class BuildingProductLoading extends BaseStepLoading
 	{
 		override public function setValue(current:int , sum:int ):void
 		{
-			bar.scaleX = current/sum ;
+			super.setValue(current,sum);
+			txtProgress.text = "used "+current+"/"+sum ;
 		}
 	}
 }
