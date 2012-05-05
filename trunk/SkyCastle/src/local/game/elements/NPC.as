@@ -8,6 +8,7 @@ package local.game.elements
 	
 	import local.comm.GameSetting;
 	import local.enum.AvatarAction;
+	import local.enum.BuildingStatus;
 	import local.game.GameWorld;
 	import local.model.MapGridDataModel;
 	import local.model.buildings.MapBuildingModel;
@@ -67,7 +68,10 @@ package local.game.elements
 				var len:int = houses.length - 1;
 				var index:int = Math.round( Math.random()*len );
 				_currentBuilding = houses[index] as Architecture ;
-				_currentBuilding.characterMoveTo( this );
+				if(_currentBuilding.buildingVO.buildingStatus!=BuildingStatus.BUILDING){
+					_currentBuilding.characterMoveTo( this );
+				}
+					
 			}else{
 				var p:Point = getFreeRoad();
 				if( !p || !this.searchToRun(p.x , p.y)){
