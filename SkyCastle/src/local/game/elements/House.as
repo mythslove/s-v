@@ -59,19 +59,16 @@ package local.game.elements
 					//增加经验
 					value = baseBuildingVO.buildEarnExp ;
 					PickupUtil.addPickup2Wold(BasicPickup.PICKUP_EXP ,  value , screenX,screenY-offsetY);
-					buildingVO.currentStep++;
-					
-					//修建完成
-					if( buildingVO.currentStep==baseBuildingVO.step )
-					{
-						itemLayer.visible=true ;
-						this.showSkin();
-						this.startProduct(); //开始生产
-					}
 				}
 				else if( buildingVO.buildingStatus==BuildingStatus.HARVEST)
 				{
 					//如果是收获，掉收获的pickup
+				}
+				else if( buildingVO.buildingStatus==BuildingStatus.PRODUCT)
+				{
+					itemLayer.visible=true ;
+					this.showSkin();
+					this.startProduct(); //开始生产
 				}
 				//特殊物品
 				showRewardsPickup();
