@@ -135,6 +135,7 @@ package local.game.elements
 				_skin.gotoAndStop( buildingVO.currentStep+1 );
 				itemLayer.addChild(_skin);
 				itemLayer.drawBitmapHitArea();
+				offsetY = _skin.getBounds(_skin).y-GameSetting.GRID_SIZE ;
 			}
 		}
 		
@@ -143,7 +144,7 @@ package local.game.elements
 		{
 			stepLoading.scaleX = stepLoading.scaleY = 1/GameWorld.instance.scaleX ;
 			effectLayer.addChild(stepLoading);
-			stepLoading.y = -itemLayer.height;
+			stepLoading.y = offsetY ;
 			stepLoading.setValue(value ,sum);
 		}
 		
@@ -313,6 +314,7 @@ package local.game.elements
 			_skin = new BuildStatus();
 			_skin.gotoAndStop(baseBuildingVO.xSpan+"_"+baseBuildingVO.zSpan) ;
 			itemLayer.addChild(_skin);
+			itemLayer.drawBitmapHitArea();
 		}
 		
 		
