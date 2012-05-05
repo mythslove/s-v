@@ -68,7 +68,8 @@ package local.game.elements
 				var len:int = houses.length - 1;
 				var index:int = Math.round( Math.random()*len );
 				_currentBuilding = houses[index] as Architecture ;
-				if(_currentBuilding.buildingVO.buildingStatus!=BuildingStatus.BUILDING){
+				if(_currentBuilding.buildingVO.buildingStatus!=BuildingStatus.BUILDING && 
+					Point.distance(new Point(_currentBuilding.screenX,_currentBuilding.screenX),new Point(screenX,screenY))<200){
 					_currentBuilding.characterMoveTo( this );
 				}
 					
