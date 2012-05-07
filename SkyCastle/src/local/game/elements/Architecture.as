@@ -2,6 +2,7 @@ package local.game.elements
 {
 	import bing.amf3.ResultEvent;
 	
+	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.utils.setTimeout;
 	
@@ -31,6 +32,7 @@ package local.game.elements
 	public class Architecture extends Building
 	{
 		protected var _gameTimer:GameTimer ;
+		protected var _buildingFlag:Sprite; //建筑的状态标志，如可以收获，损坏
 		private var _gameTimerTick:int ;
 		
 		public function Architecture(vo:BuildingVO)
@@ -154,6 +156,7 @@ package local.game.elements
 					if(e.result){
 						_executeBack = true ;
 						this.showPickup();
+						if(_buildingFlag && contains(_buildingFlag)) removeChild(_buildingFlag);
 					}
 					break ;
 				case "build": //修建
@@ -246,10 +249,13 @@ package local.game.elements
 			}
 		}
 		
-		/*显示收藏状态*/
-		protected function showCollectionStatus():void
-		{
-			
+		/*显示收获状态*/
+		protected function showCollectionStatus():void{
+			if(!_buildingFlag) {
+				_buildingFlag = new Sprite();
+				_buildingFlag.y = -offsetY ;
+			}
+			addChild( _buildingFlag );
 		}
 		
 		//==============计时器================================
@@ -285,6 +291,7 @@ package local.game.elements
 		{
 			super.dispose();
 			if(_gameTimer) clearGameTimer();
+			_buildingFlag = null ;
 		}
 	}
 }
