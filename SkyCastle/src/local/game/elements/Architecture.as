@@ -276,10 +276,7 @@ package local.game.elements
 		override public function dispose():void
 		{
 			super.dispose();
-			if(_gameTimer){
-				_gameTimer.removeEventListener( GameTimeEvent.TIME_OVER , gameTimerHandler );
-				_gameTimer = null ;
-			}
+			if(_gameTimer) clearGameTimer();
 		}
 	}
 }
