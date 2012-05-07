@@ -84,7 +84,20 @@ package local.game.elements
 				}
 				else if( buildingVO.buildingStatus==BuildingStatus.PRODUCT)
 				{
-					if(!_gameTimer){ //最后一次修建完成
+					if(_gameTimer)
+					{
+						//提前收获
+						value = ( (baseHouseVO.earnTime-_gameTimer.duration)/baseHouseVO.earnTime*baseHouseVO.earnCoin)>>0 ;
+						if(value>0) PickupUtil.addPickup2Wold(BasicPickup.PICKUP_COIN ,  value , screenX,screenY-offsetY);
+						value =  ( (baseHouseVO.earnTime-_gameTimer.duration)/baseHouseVO.earnTime*baseHouseVO.earnExp)>>0 ;
+						if(value>0) PickupUtil.addPickup2Wold(BasicPickup.PICKUP_EXP ,  value , screenX,screenY-offsetY);
+						//重新生产
+						buildingVO.buildingStatus=BuildingStatus.PRODUCT ;
+						createGameTimer( baseHouseVO.earnTime );
+					}
+					else(_gameTimer)
+					{
+						//最后一次修建完成
 						PlayerModel.instance.me.rank+=buildingVO.baseVO.rank ;
 						CenterViewContainer.instance.topBar.updateRank();
 						itemLayer.visible=true ;
