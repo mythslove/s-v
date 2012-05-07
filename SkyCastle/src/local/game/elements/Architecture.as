@@ -18,6 +18,7 @@ package local.game.elements
 	import local.utils.GameTimer;
 	import local.utils.MouseManager;
 	import local.utils.PopUpManager;
+	import local.views.effects.BuildingCollectionFlag;
 	import local.views.effects.MapWordEffect;
 	import local.views.loading.BaseStepLoading;
 	import local.views.loading.BuildingExecuteLoading;
@@ -138,8 +139,6 @@ package local.game.elements
 			super.onMouseOver();
 			if(buildingVO.buildingStatus == BuildingStatus.BUILDING ){
 				MouseManager.instance.mouseStatus = MouseStatus.BUILD_BUILDING ;
-			}else if( buildingVO.buildingStatus==BuildingStatus.HARVEST){
-				MouseManager.instance.mouseStatus = MouseStatus.EARN_COIN ;
 			}
 		}
 		
@@ -252,8 +251,8 @@ package local.game.elements
 		/*显示收获状态*/
 		protected function showCollectionStatus():void{
 			if(!_buildingFlag) {
-				_buildingFlag = new Sprite();
-				_buildingFlag.y = -offsetY ;
+				_buildingFlag = new BuildingCollectionFlag();
+				_buildingFlag.y = offsetY ;
 			}
 			addChild( _buildingFlag );
 		}
