@@ -39,21 +39,21 @@ package local.game.elements
 				{
 					//减木头和石头
 					var effect:MapWordEffect ;
-					if(PlayerModel.instance.me.wood<baseBuildingVO["buildWood"]){
+					if(PlayerModel.instance.me.wood<baseFactoryVO.buildWood ){
 						effect = new MapWordEffect("You don't have enough Wood!");
 						GameWorld.instance.addEffect(effect,screenX-120,screenY);
 						return ;
-					}else if(PlayerModel.instance.me.stone<baseBuildingVO["buildStone"]){
+					}else if(PlayerModel.instance.me.stone<baseFactoryVO.buildStone){
 						effect = new MapWordEffect("You don't have enough Stone!");
 						GameWorld.instance.addEffect(effect,screenX+120,screenY);
 						return ;
 					}
 					
-					var value:int = baseBuildingVO["buildWood"] ;
+					var value:int =baseFactoryVO.buildWood ;
 					if(value>0) effect = new MapWordEffect("Wood -"+value,MapWordEffect.WOOD_COLOR);
 					PlayerModel.instance.me.wood-=value ; 
 					GameWorld.instance.addEffect(effect,screenX-120 , screenY);
-					value = baseBuildingVO["buildStone"] ;
+					value = baseFactoryVO.buildStone ;
 					if(value>0) effect = new MapWordEffect("Stone -"+value,MapWordEffect.STONE_COLOR);
 					PlayerModel.instance.me.stone-=value ; 
 					GameWorld.instance.addEffect(effect , screenX+120 , screenY);
@@ -64,6 +64,17 @@ package local.game.elements
 				else if( buildingVO.buildingStatus==BuildingStatus.HARVEST)
 				{
 					//如果是收获，掉收获的pickup
+					value = baseFactoryVO.earnCoin ;
+					if(value>0) PickupUtil.addPickup2Wold(BasicPickup.PICKUP_COIN ,  value , screenX,screenY-offsetY);
+					value = baseFactoryVO.earnExp ;
+					if(value>0) PickupUtil.addPickup2Wold(BasicPickup.PICKUP_EXP ,  value , screenX,screenY-offsetY);
+					value = baseFactoryVO.earnStone ;
+					if(value>0) PickupUtil.addPickup2Wold(BasicPickup.PICKUP_STONE ,  value , screenX,screenY-offsetY);
+					value = baseFactoryVO.earnWood ;
+					if(value>0) PickupUtil.addPickup2Wold(BasicPickup.PICKUP_WOOD ,  value , screenX,screenY-offsetY);
+					//重新生产
+					buildingVO.buildingStatus=BuildingStatus.PRODUCT ;
+					createGameTimer( baseFactoryVO.earnTime );
 				}
 				else if( buildingVO.buildingStatus==BuildingStatus.PRODUCT)
 				{
