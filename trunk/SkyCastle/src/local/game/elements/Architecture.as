@@ -91,7 +91,6 @@ package local.game.elements
 			return _stepLoading;
 		}
 		
-		
 		override public function onClick():void
 		{
 			//减能量
@@ -138,8 +137,6 @@ package local.game.elements
 				MouseManager.instance.mouseStatus = MouseStatus.BUILD_BUILDING ;
 			}else if( buildingVO.buildingStatus==BuildingStatus.HARVEST){
 				MouseManager.instance.mouseStatus = MouseStatus.EARN_COIN ;
-			}else if( buildingVO.buildingStatus==BuildingStatus.PRODUCT){
-				this.showStep(1,3);
 			}
 		}
 		
