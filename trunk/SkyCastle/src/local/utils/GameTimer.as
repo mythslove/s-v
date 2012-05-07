@@ -53,5 +53,10 @@ package local.utils
 		{
 			return DateUtil.formatTimeToString(_duration);
 		}
+		
+		public function get duration():int
+		{
+			return _duration ;
+		}
 	}
 }
