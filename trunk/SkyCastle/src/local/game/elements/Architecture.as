@@ -97,12 +97,6 @@ package local.game.elements
 		
 		override public function onClick():void
 		{
-			//减能量
-			if(PlayerModel.instance.me.energy<1){
-				var effect:MapWordEffect = new MapWordEffect("You don't have enough Energy!");
-				GameWorld.instance.addEffect(effect,screenX,screenY);
-				return ;
-			}
 			switch( buildingVO.buildingStatus)
 			{
 				case BuildingStatus.BUILDING:
@@ -124,9 +118,6 @@ package local.game.elements
 							}
 						}
 					}
-					break ;
-				case BuildingStatus.PRODUCT:
-					characterMoveTo( CharacterManager.instance.hero );
 					break ;
 				case BuildingStatus.HARVEST:
 					super.onClick();
@@ -209,10 +200,6 @@ package local.game.elements
 						GameWorld.instance.effectScene.addChild( BuildingExecuteLoading.getInstance(screenX,screenY-itemLayer.height).setTime(4100));
 					}
 					return false ;
-				}
-				else if( buildingVO.buildingStatus==BuildingStatus.PRODUCT)
-				{
-					
 				}
 				else if( buildingVO.buildingStatus==BuildingStatus.HARVEST)
 				{
