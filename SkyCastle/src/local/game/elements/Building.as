@@ -3,8 +3,6 @@ package local.game.elements
 	import bing.amf3.ResultEvent;
 	import bing.utils.SystemUtil;
 	
-	import com.greensock.TweenMax;
-	
 	import flash.utils.clearTimeout;
 	
 	import local.comm.GameData;
@@ -195,7 +193,6 @@ package local.game.elements
 		public function execute():Boolean
 		{
 			itemLayer.alpha=1 ;
-			TweenMax.to(itemLayer, 0, {dropShadowFilter:{color:0x00ff00, alpha:1, blurX:2, blurY:2, strength:5}});
 			if(stepLoading&&stepLoading.parent){
 				stepLoading.parent.removeChild(stepLoading);
 			}
