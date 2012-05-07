@@ -28,16 +28,6 @@ package local.model
 		public function get factoryArray():Vector.<ShopItemVO> {
 			return _factoryArray ;
 		}
-		private var _cropArray:Vector.<ShopItemVO> ;
-		/** 商店中所有的农作物 */
-		public function get cropArray():Vector.<ShopItemVO> {
-			return _cropArray ;
-		}
-		private var _landArray:Vector.<ShopItemVO> ;
-		/** 商店中所有的土地 */
-		public function get landArray():Vector.<ShopItemVO> {
-			return _landArray ;
-		}
 		private var _plantArray:Vector.<ShopItemVO> ;
 		/** 商店中所有的植物 */
 		public function get plantArray():Vector.<ShopItemVO> {
@@ -111,17 +101,8 @@ package local.model
 				_buildingArray = new Vector.<ShopItemVO>();
 			}
 			_buildingArray = _buildingArray.concat(_houseArray).concat(_factoryArray);
-			//植物
-			_cropArray = Vector.<ShopItemVO>( config.shopVO.crops );
-			//土地
-			_landArray = Vector.<ShopItemVO>( config.shopVO.lands );
 			//农作物
-			if(config.shopVO.plants){
-				_plantArray = Vector.<ShopItemVO>( config.shopVO.plants );
-			}else{
-				_plantArray = new Vector.<ShopItemVO>();
-			}
-			_plantArray = _plantArray.concat(_cropArray).concat( _landArray ) ;
+			_plantArray = Vector.<ShopItemVO>( config.shopVO.plants );
 			//路
 			_roadArray = Vector.<ShopItemVO>( config.shopVO.roads);
 			//树
@@ -179,11 +160,8 @@ package local.model
 				case ItemType.BUILDING_FACTORY:
 					arr =  _factoryArray ;
 					break ;
-				case ItemType.PLANT_CROP:
-					arr = _cropArray ;
-					break ;
-				case ItemType.PLANT_LAND:
-					arr = _landArray;
+				case ItemType.PLANT:
+					arr = _plantArray ;
 					break ;
 			}
 			return arr ;

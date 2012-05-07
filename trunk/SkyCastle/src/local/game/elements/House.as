@@ -41,7 +41,7 @@ package local.game.elements
 		override public function onClick():void
 		{
 			super.onClick();
-			if(BuildingStatus==BuildingStatus.PRODUCT)
+			if(buildingVO.buildingStatus==BuildingStatus.PRODUCT)
 			{
 				var value:int = ( (baseHouseVO.earnTime-_gameTimer.duration)/baseHouseVO.earnTime*baseHouseVO.earnCoin)>>0 ;
 				if(value>0){

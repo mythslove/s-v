@@ -51,12 +51,6 @@ package local.utils
 				case ItemType.PLANT: //种植类
 					building = new Plant( vo );
 					break ;
-				case ItemType.PLANT_LAND: //地
-					building = new Land( vo );
-					break ;
-				case ItemType.PLANT_CROP: //农作物
-					building = new Crop( vo );
-					break ;
 				case ItemType.ANIMAIL: //动物
 					building = new Animail(vo);
 					break ;
