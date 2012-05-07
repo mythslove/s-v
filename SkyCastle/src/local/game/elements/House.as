@@ -48,7 +48,6 @@ package local.game.elements
 					enable = false ;
 					CollectQueueUtil.instance.addBuilding( this ); //添加到处理队列中
 				}
-				break ;
 			}
 		}
 		
