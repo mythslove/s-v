@@ -26,6 +26,16 @@ package local.game.elements
 			return buildingVO.baseVO as BaseHouseVO ;
 		}
 		
+		override public function onMouseOver():void
+		{
+			super.onMouseOver();
+			if( buildingVO.buildingStatus==BuildingStatus.PRODUCT && _gameTimer)
+			{
+				var value:int = (_gameTimer.duration/baseHouseVO.earnTime*baseHouseVO.earnCoin)>>0 ;
+				this.showStep( value , baseHouseVO.earnCoin );
+			}
+		}
+		
 		/**
 		 * 掉物品 ，并接着下一个收集
 		 */		
