@@ -31,6 +31,7 @@ package local.game.elements
 	public class Architecture extends Building
 	{
 		protected var _gameTimer:GameTimer ;
+		private var _gameTimerTick:int ;
 		
 		public function Architecture(vo:BuildingVO)
 		{
@@ -235,7 +236,14 @@ package local.game.elements
 		override public function update():void
 		{
 			super.update();
-			if(_gameTimer) _gameTimer.update();
+			if(_gameTimer) 
+			{
+				++_gameTimerTick ;
+				if(_gameTimerTick>=60){
+					_gameTimer.update();
+					_gameTimerTick = 0 ;
+				}
+			}
 		}
 		
 		/*显示收藏状态*/
