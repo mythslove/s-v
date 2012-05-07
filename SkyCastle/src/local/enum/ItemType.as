@@ -35,10 +35,6 @@ package local.enum
 		 * 大类：种植 
 		 */		
 		public static const PLANT:String = "plant";
-		/** 种植：土地 */
-		public static const PLANT_LAND:String = "land" ;
-		/** 种植：农作物*/
-		public static const PLANT_CROP:String = "crop" ;
 		
 		
 		/** 大类：人*/
@@ -59,7 +55,7 @@ package local.enum
 				return BUILDING;
 			}else if( type==DECORATION || type==DEC_ROAD){ // || type==DEC_TREE|| type==DEC_STONE || type==DEC_ROCK 
 				return DECORATION ;
-			}else if(type==PLANT|| type==PLANT_LAND|| type==PLANT_CROP){
+			}else if(type==PLANT){
 				return PLANT ;
 			}else if(type==ANIMAIL){
 				return ANIMAIL ;

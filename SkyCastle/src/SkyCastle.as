@@ -62,11 +62,9 @@ package
 			registerClassAlias("BaseBuildingVO",BaseBuildingVO) ;
 			registerClassAlias("BaseCharacterVO",BaseCharacterVO) ;
 			registerClassAlias("BasePlantVO",BasePlantVO) ;
-			registerClassAlias("BaseCropVO",BaseCropVO) ;
 			registerClassAlias("BaseDecorationVO",BaseDecorationVO) ;
 			registerClassAlias("BaseFactoryVO",BaseFactoryVO) ;
 			registerClassAlias("BaseHouseVO",BaseHouseVO) ;
-			registerClassAlias("BaseLandVO",BaseLandVO) ;
 			registerClassAlias("BaseRoadVO",BaseRoadVO) ;
 			registerClassAlias("BaseStoneVO",BaseStoneVO) ;
 			registerClassAlias("BaseRockVO",BaseRockVO) ;

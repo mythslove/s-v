@@ -2,9 +2,6 @@ package local.model.buildings
 {
 	import local.enum.ItemType;
 	import local.game.elements.Building;
-	import local.game.elements.Plant;
-	import local.model.buildings.vos.BaseBuildingVO;
-	import local.model.buildings.vos.BuildingVO;
 
 	/**
 	 * 地图上的所有建筑 
@@ -32,12 +29,9 @@ package local.model.buildings
 		/** 路 */
 		public var roads:Array = [];
 		
-		/** 土地 */
-		public var lands:Array = [] ;
-		
 		/** 农作物 */
-		public var crops:Array = [] ;
-			
+		public var plants:Array = [] ;
+		
 		/** 所有的树*/
 		public var trees:Array = [];
 		
@@ -90,10 +84,8 @@ package local.model.buildings
 				case ItemType.DEC_ROAD :
 					arr = roads ;
 					break ;
-				case ItemType.PLANT_LAND :
-					break ;
-				case ItemType.PLANT_CROP :
-					arr = crops ;
+				case ItemType.PLANT :
+					arr = plants;
 					break ;
 				case ItemType.DEC_TREE:
 					arr= trees;
