@@ -6,6 +6,7 @@ package local.game.elements
 	import local.model.PlayerModel;
 	import local.model.buildings.vos.BaseHouseVO;
 	import local.model.buildings.vos.BuildingVO;
+	import local.utils.CollectQueueUtil;
 	import local.utils.PickupUtil;
 	import local.views.CenterViewContainer;
 	import local.views.effects.MapWordEffect;
@@ -35,6 +36,22 @@ package local.game.elements
 				this.showStep( value , baseHouseVO.earnCoin );
 			}
 		}
+		
+		
+		override public function onClick():void
+		{
+			super.onClick();
+			if(BuildingStatus==BuildingStatus.PRODUCT)
+			{
+				var value:int = ( (baseHouseVO.earnTime-_gameTimer.duration)/baseHouseVO.earnTime*baseHouseVO.earnCoin)>>0 ;
+				if(value>0){
+					enable = false ;
+					CollectQueueUtil.instance.addBuilding( this ); //添加到处理队列中
+				}
+				break ;
+			}
+		}
+		
 		
 		/**
 		 * 掉物品 ，并接着下一个收集
