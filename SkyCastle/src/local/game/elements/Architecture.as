@@ -155,7 +155,7 @@ package local.game.elements
 					if(e.result){
 						_executeBack = true ;
 						this.showPickup();
-						if(_buildingFlag && contains(_buildingFlag)) removeChild(_buildingFlag);
+						if(_buildingFlag && _buildingFlag.parent) removeChild(_buildingFlag);
 					}
 					break ;
 				case "build": //修建
