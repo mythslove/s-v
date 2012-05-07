@@ -272,7 +272,7 @@ package local.game.elements
 		{
 			if(_gameTimer) clearGameTimer(); //先清除上一个计时器
 			_gameTimer = new GameTimer( duration );
-			_gameTimer.removeEventListener( GameTimeEvent.TIME_OVER , gameTimerHandler );
+			_gameTimer.addEventListener( GameTimeEvent.TIME_OVER , gameTimerHandler );
 		}
 		/*计时完成*/
 		protected function gameTimerHandler( e:GameTimeEvent):void
