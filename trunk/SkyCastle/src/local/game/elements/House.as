@@ -31,7 +31,7 @@ package local.game.elements
 			super.onMouseOver();
 			if( buildingVO.buildingStatus==BuildingStatus.PRODUCT && _gameTimer)
 			{
-				var value:int = (_gameTimer.duration/baseHouseVO.earnTime*baseHouseVO.earnCoin)>>0 ;
+				var value:int = ( (baseHouseVO.earnTime-_gameTimer.duration)/baseHouseVO.earnTime*baseHouseVO.earnCoin)>>0 ;
 				this.showStep( value , baseHouseVO.earnCoin );
 			}
 		}
