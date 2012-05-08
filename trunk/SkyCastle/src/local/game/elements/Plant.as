@@ -3,6 +3,7 @@ package local.game.elements
 	import bing.amf3.ResultEvent;
 	
 	import flash.display.Sprite;
+	import flash.events.Event;
 	import flash.utils.setTimeout;
 	
 	import local.enum.AvatarAction;
@@ -47,6 +48,14 @@ package local.game.elements
 				this.createGameTimer( buildingVO.statusTime );
 			}else if( buildingVO.buildingStatus==BuildingStatus.HARVEST){
 				this.showCollectionStatus() ;
+			}
+		}
+		
+		override protected function resLoadedHandler(e:Event):void
+		{
+			super.resLoadedHandler(e);
+			if( buildingVO.buildingStatus==BuildingStatus.HARVEST && _skin ){
+				_skin.gotoAndStop(2);
 			}
 		}
 		
@@ -102,6 +111,7 @@ package local.game.elements
 //				_buildingFlag = new BuildingCollectionFlag();
 //				_buildingFlag.y = offsetY ;
 //			}
+//			if(_skin) _skin.gotoAndStop(2);
 //			addChild( _buildingFlag );
 		}
 		
