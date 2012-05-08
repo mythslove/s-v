@@ -1,6 +1,7 @@
 package local.game.elements
 {
 	import bing.amf3.ResultEvent;
+	import bing.utils.DateUtil;
 	
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -40,6 +41,11 @@ package local.game.elements
 		override public function get isCanControl():Boolean{
 			if(buildingVO.buildingStatus==BuildingStatus.HARVEST) return false ;
 			return true;
+		}
+		override public function get description():String
+		{
+			if(buildingVO.buildingStatus==BuildingStatus.HARVEST) return "Click to collect this item." ;
+			else if(_gameTimer) return "Product: "+ Math.floor(_gameTimer.duration/60) +"min" ;
 		}
 		//=================getter/setter=========================
 		override public function recoverStatus():void
