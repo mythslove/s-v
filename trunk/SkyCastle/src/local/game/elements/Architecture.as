@@ -141,7 +141,7 @@ package local.game.elements
 				case "buy":
 					this.showBuildStatus() ;
 					break;
-				case "earn": //收获
+				case "collect": //收获
 					this.enable = false ;
 					if(e.result){
 						_executeBack = true ;
@@ -204,7 +204,7 @@ package local.game.elements
 				else if( buildingVO.buildingStatus==BuildingStatus.HARVEST)
 				{
 					//收获
-					ro.getOperation("earn").send(buildingVO.id );
+					ro.getOperation("collect").send(buildingVO.id );
 					CharacterManager.instance.hero.gotoAndPlay(AvatarAction.COLLECT);
 					_timeoutFlag = false ;
 					_timeoutId = setTimeout( timeoutHandler , 3000 );
