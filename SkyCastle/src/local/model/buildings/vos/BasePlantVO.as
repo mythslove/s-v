@@ -10,5 +10,10 @@ package local.model.buildings.vos
 			super();
 			_file = "plant";
 		}
+		/**收获需要的时间*/
+		public var earnTime:int ;
+		
+		/** 可以收获的金币数*/
+		public var earnCoin:int ;
 	}
 }
