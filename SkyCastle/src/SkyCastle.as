@@ -81,6 +81,8 @@ package
 			registerClassAlias("MapVO",MapVO) ;
 			registerClassAlias("PickupVO",PickupVO) ;
 			registerClassAlias("CollectionVO",CollectionVO) ;
+			registerClassAlias("QuestVO",QuestVO) ;
+			registerClassAlias("QuestItemVO",QuestItemVO) ;
 		}
 		
 		/*获得了玩家信息后，进入游戏*/
