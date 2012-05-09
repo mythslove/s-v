@@ -100,7 +100,7 @@ package local.game.elements
 					if(e.result){
 						//掉修建经验
 						var value:int = baseBuildingVO.buildEarnExp;
-						if(value>0)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_EXP , value,screenX,screenY-offsetY);
+						if(value>0)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_EXP , value,screenX,screenY+offsetY*0.5);
 						this.buildingVO = e.result as BuildingVO;
 					}else{
 						GameWorld.instance.removeBuildFromScene(this);
@@ -241,14 +241,14 @@ package local.game.elements
 		{
 			if(_currentRewards){
 				//掉pickup
-				if(_currentRewards.coin>0)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_COIN , _currentRewards.coin,screenX,screenY-offsetY);
-				if(_currentRewards.exp>0)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_EXP , _currentRewards.exp,screenX,screenY-offsetY);
-				if(_currentRewards.stone>0)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_STONE , _currentRewards.stone,screenX,screenY-offsetY);
-				if(_currentRewards.wood>0)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_WOOD , _currentRewards.wood,screenX,screenY-offsetY);
+				if(_currentRewards.coin>0)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_COIN , _currentRewards.coin,screenX,screenY+offsetY*0.5);
+				if(_currentRewards.exp>0)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_EXP , _currentRewards.exp,screenX,screenY+offsetY*0.5);
+				if(_currentRewards.stone>0)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_STONE , _currentRewards.stone,screenX,screenY+offsetY*0.5);
+				if(_currentRewards.wood>0)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_WOOD , _currentRewards.wood,screenX,screenY+offsetY*0.5);
 				if(_currentRewards.pickups){
 					var len:int = _currentRewards.pickups.length ;
 					for( var i:int = 0 ; i<len ; ++i){
-						PickupUtil.addPickup2Wold( _currentRewards.pickups[i] , 1 ,screenX,screenY-offsetY);
+						PickupUtil.addPickup2Wold( _currentRewards.pickups[i] , 1 ,screenX,screenY+offsetY*0.5);
 					}
 				}
 			}

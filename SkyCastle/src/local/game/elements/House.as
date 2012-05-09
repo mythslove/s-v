@@ -85,15 +85,15 @@ package local.game.elements
 					GameWorld.instance.addEffect(effect,screenX+120,screenY);
 					//增加经验
 					value = baseBuildingVO.buildEarnExp ;
-					PickupUtil.addPickup2Wold(BasicPickup.PICKUP_EXP ,  value , screenX,screenY-offsetY);
+					PickupUtil.addPickup2Wold(BasicPickup.PICKUP_EXP ,  value , screenX,screenY+offsetY*0.5);
 				}
 				else if( buildingVO.buildingStatus==BuildingStatus.HARVEST)
 				{
 					//如果是收获，掉收获的pickup
 					value = baseHouseVO.earnCoin ;
-					if(value>0) PickupUtil.addPickup2Wold(BasicPickup.PICKUP_COIN ,  value , screenX,screenY-offsetY);
+					if(value>0) PickupUtil.addPickup2Wold(BasicPickup.PICKUP_COIN ,  value , screenX,screenY+offsetY*0.5);
 					value = baseHouseVO.earnExp ;
-					if(value>0) PickupUtil.addPickup2Wold(BasicPickup.PICKUP_EXP ,  value , screenX,screenY-offsetY);
+					if(value>0) PickupUtil.addPickup2Wold(BasicPickup.PICKUP_EXP ,  value , screenX,screenY+offsetY*0.5);
 					//重新生产
 					buildingVO.buildingStatus=BuildingStatus.PRODUCT ;
 					createGameTimer( baseHouseVO.earnTime );
@@ -104,9 +104,9 @@ package local.game.elements
 					{
 						//提前收获
 						value = ( (baseHouseVO.earnTime-_gameTimer.duration)/baseHouseVO.earnTime*baseHouseVO.earnCoin)>>0 ;
-						if(value>0) PickupUtil.addPickup2Wold(BasicPickup.PICKUP_COIN ,  value , screenX,screenY-offsetY);
+						if(value>0) PickupUtil.addPickup2Wold(BasicPickup.PICKUP_COIN ,  value , screenX,screenY+offsetY*0.5);
 						value =  ( (baseHouseVO.earnTime-_gameTimer.duration)/baseHouseVO.earnTime*baseHouseVO.earnExp)>>0 ;
-						if(value>0) PickupUtil.addPickup2Wold(BasicPickup.PICKUP_EXP ,  value , screenX,screenY-offsetY);
+						if(value>0) PickupUtil.addPickup2Wold(BasicPickup.PICKUP_EXP ,  value , screenX,screenY+offsetY*0.5);
 						//重新生产
 						buildingVO.buildingStatus=BuildingStatus.PRODUCT ;
 						createGameTimer( baseHouseVO.earnTime );
