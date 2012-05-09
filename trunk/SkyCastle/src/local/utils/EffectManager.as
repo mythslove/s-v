@@ -3,7 +3,7 @@ package local.utils
 	import flash.display.MovieClip;
 	import flash.utils.Dictionary;
 	
-	import local.game.cell.BitmapMovieClip;
+	import local.views.effects.BitmapMovieClip;
 	import local.views.effects.BaseMovieClipEffect;
 
 	/**

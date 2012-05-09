@@ -1,4 +1,4 @@
-package local.game.cell
+package local.views.effects
 {
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;

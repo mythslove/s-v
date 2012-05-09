@@ -5,7 +5,7 @@ package local.game.elements
 	import flash.geom.Rectangle;
 	
 	import local.enum.ItemType;
-	import local.game.cell.BitmapMovieClip;
+	import local.views.effects.BitmapMovieClip;
 	import local.model.buildings.vos.BaseDecorationVO;
 	import local.model.buildings.vos.BuildingVO;
 	import local.utils.EffectManager;
