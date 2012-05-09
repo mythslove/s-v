@@ -29,6 +29,7 @@ package local.views.effects
 			removeEventListener(Event.ADDED_TO_STAGE , addedHandler );
 			addEventListener(Event.REMOVED_FROM_STAGE , removedHander , false , 0 , true );
 			addEventListener(Event.ENTER_FRAME , onEnterFrameHandler );
+			onEnterFrameHandler(null);
 		}
 		
 		private function onEnterFrameHandler( e:Event):void

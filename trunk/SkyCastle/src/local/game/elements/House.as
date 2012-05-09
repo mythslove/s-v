@@ -81,7 +81,7 @@ package local.game.elements
 		 */		
 		public function showBuildingEffect():void
 		{
-			if(_skin){
+			if(_skin && effectLayer.numChildren==0){
 				var effectMC:MovieClip = ResourceUtil.instance.getInstanceByClassName(baseBuildingVO.resId,baseBuildingVO.alias+"_Effect") as MovieClip;
 				if(effectMC && effectMC.totalFrames>1){
 					var effect:BaseMovieClipEffect  = EffectManager.instance.createMapEffectByMC(effectMC,3);
