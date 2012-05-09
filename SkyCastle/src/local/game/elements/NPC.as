@@ -31,7 +31,7 @@ package local.game.elements
 			this.speed = 4 ;
 			this. _delayShow = delay ;
 			_actionsFuns = Vector.<Function>([
-				searchHouse,actionIdle,actionShop,actionIdle,actionAdmire,searchHouse,
+				searchHouse,actionIdle,actionShop,actionIdle,searchHouse,
 				actionIdle,actionRunway,searchHouse,actionIdle,actionRunwayBack
 			]);
 		}
@@ -64,12 +64,11 @@ package local.game.elements
 			visible = true ;
 			var houses:Array = MapBuildingModel.instance.houses ;
 			var ran:Number = Math.random() ;
-			if( ran>.5 && houses && houses.length>0){
-				var len:int = houses.length - 1;
-				var index:int = Math.round( Math.random()*len );
+			if( ran>=.5 && houses && houses.length>0){
+				var index:int = (Math.random()*houses.length )>>0 ;
 				_currentBuilding = houses[index] as Architecture ;
 				if(_currentBuilding.buildingVO.buildingStatus!=BuildingStatus.BUILDING && 
-					Point.distance(new Point(_currentBuilding.screenX,_currentBuilding.screenX),new Point(screenX,screenY))<400){
+					Point.distance(new Point(_currentBuilding.screenX,_currentBuilding.screenX),new Point(screenX,screenY))<500){
 					_currentBuilding.characterMoveTo( this );
 				}
 				else
@@ -78,6 +77,7 @@ package local.game.elements
 					if( !p || !this.searchToRun(p.x , p.y)){
 						this.actionIdle();
 					}
+					_currentBuilding = null ;
 				}
 					
 			}else{
