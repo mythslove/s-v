@@ -56,8 +56,8 @@ package local.views.icon
 		private function init():void
 		{
 			visible = true ;
-			TweenLite.to(this, 0.65, {x: x+(60+Math.random()*75)*MathUtil.getRandomFlag()  , ease:Linear.easeNone});
-			TweenLite.to(this, 0.65, {y: y+100+Math.random()*70 , ease:Bounce.easeOut , onComplete:inOver});
+			TweenLite.to(this, 0.75, {x: x+(75+Math.random()*60)*MathUtil.getRandomFlag()  , ease:Linear.easeNone});
+			TweenLite.to(this, 0.75, {y: y+75+Math.random()*60 , ease:Bounce.easeOut , onComplete:inOver});
 		}
 		
 		private function inOver():void {
@@ -141,7 +141,7 @@ package local.views.icon
 			targetPoint.x = (targetPoint.x-world.x)/world.scaleX-world.sceneLayerOffsetX ;
 			targetPoint.y = (targetPoint.y-world.y)/world.scaleX-world.sceneLayerOffsetY ;
 			var obj:Object = {x:x + (targetPoint.x > x ? (-50) : (50)), y:y + (targetPoint.y - y) * 0.5, alpha:0.9};
-			TweenLite.to( this , 0.75 , {bezier:[obj, {x:targetPoint.x , y:targetPoint.y, alpha:0}]  , onComplete:remove});
+			TweenLite.to( this , 1 , {bezier:[obj, {x:targetPoint.x , y:targetPoint.y, alpha:0}]  , onComplete:remove});
 		}
 		
 		private function remove():void
