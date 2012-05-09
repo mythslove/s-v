@@ -59,19 +59,19 @@ package local.game.elements
 					GameWorld.instance.addEffect(effect , screenX+120 , screenY);
 					//增加经验
 					value = baseBuildingVO.buildEarnExp ;
-					PickupUtil.addPickup2Wold(BasicPickup.PICKUP_EXP ,  value , screenX,screenY-offsetY);
+					PickupUtil.addPickup2Wold(BasicPickup.PICKUP_EXP ,  value , screenX,screenY+offsetY*0.5);
 				}
 				else if( buildingVO.buildingStatus==BuildingStatus.HARVEST)
 				{
 					//如果是收获，掉收获的pickup
 					value = baseFactoryVO.earnCoin ;
-					if(value>0) PickupUtil.addPickup2Wold(BasicPickup.PICKUP_COIN ,  value , screenX,screenY-offsetY);
+					if(value>0) PickupUtil.addPickup2Wold(BasicPickup.PICKUP_COIN ,  value , screenX,screenY+offsetY*0.5);
 					value = baseFactoryVO.earnExp ;
-					if(value>0) PickupUtil.addPickup2Wold(BasicPickup.PICKUP_EXP ,  value , screenX,screenY-offsetY);
+					if(value>0) PickupUtil.addPickup2Wold(BasicPickup.PICKUP_EXP ,  value , screenX,screenY+offsetY*0.5);
 					value = baseFactoryVO.earnStone ;
-					if(value>0) PickupUtil.addPickup2Wold(BasicPickup.PICKUP_STONE ,  value , screenX,screenY-offsetY);
+					if(value>0) PickupUtil.addPickup2Wold(BasicPickup.PICKUP_STONE ,  value , screenX,screenY+offsetY*0.5);
 					value = baseFactoryVO.earnWood ;
-					if(value>0) PickupUtil.addPickup2Wold(BasicPickup.PICKUP_WOOD ,  value , screenX,screenY-offsetY);
+					if(value>0) PickupUtil.addPickup2Wold(BasicPickup.PICKUP_WOOD ,  value , screenX,screenY+offsetY*0.5);
 					//重新生产
 					buildingVO.buildingStatus=BuildingStatus.PRODUCT ;
 					createGameTimer( baseFactoryVO.earnTime );

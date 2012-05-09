@@ -79,13 +79,13 @@ package local.game.elements
 			{
 				//掉pickup
 				var value:int = baseRockVO.earnCoin ;
-				if(value>0)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_COIN , value,screenX,screenY-offsetY);
+				if(value>0)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_COIN , value,screenX,screenY+offsetY*0.5);
 				value = baseRockVO.earnWood ;
-				if(value)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_WOOD , value,screenX,screenY-offsetY);
+				if(value)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_WOOD , value,screenX,screenY+offsetY*0.5);
 				value = baseRockVO.earnExp ;
-				if(value>0) PickupUtil.addPickup2Wold(BasicPickup.PICKUP_EXP , value,screenX,screenY-offsetY);
+				if(value>0) PickupUtil.addPickup2Wold(BasicPickup.PICKUP_EXP , value,screenX,screenY+offsetY*0.5);
 				value = baseRockVO.earnStone ;
-				if(value>0) PickupUtil.addPickup2Wold(BasicPickup.PICKUP_STONE , value,screenX,screenY-offsetY);
+				if(value>0) PickupUtil.addPickup2Wold(BasicPickup.PICKUP_STONE , value,screenX,screenY+offsetY*0.5);
 				//特殊物品
 				showRewardsPickup();
 				//-------------------------------------

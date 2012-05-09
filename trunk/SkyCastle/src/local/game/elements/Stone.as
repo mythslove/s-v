@@ -70,11 +70,11 @@ package local.game.elements
 			{
 				//掉pickup
 				var value:int = baseStoneVO.earnCoin;
-				if(value>0)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_COIN , value,screenX,screenY-offsetY);
+				if(value>0)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_COIN , value,screenX,screenY+offsetY*0.5);
 				value = baseStoneVO.earnStone ;
-				if(value)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_STONE , value,screenX,screenY-offsetY);
+				if(value)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_STONE , value,screenX,screenY+offsetY*0.5);
 				value = baseStoneVO.earnExp ;
-				if(value>0) PickupUtil.addPickup2Wold(BasicPickup.PICKUP_EXP , value,screenX,screenY-offsetY);
+				if(value>0) PickupUtil.addPickup2Wold(BasicPickup.PICKUP_EXP , value,screenX,screenY+offsetY*0.5);
 				//特殊物品
 				showRewardsPickup();
 				//-------------------------------------

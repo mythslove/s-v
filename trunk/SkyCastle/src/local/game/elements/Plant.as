@@ -168,7 +168,7 @@ package local.game.elements
 			{
 				clearEffect();
 				var value:int = basePlantVO.earnCoin ;
-				if(value>0) PickupUtil.addPickup2Wold(BasicPickup.PICKUP_COIN ,  value , screenX,screenY-offsetY);
+				if(value>0) PickupUtil.addPickup2Wold(BasicPickup.PICKUP_COIN ,  value , screenX,screenY+offsetY*0.5);
 				//特殊物品
 				showRewardsPickup();
 				//==========================

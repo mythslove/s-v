@@ -73,7 +73,7 @@ package local.utils
 					img = new PickupImage(PickupModel.instance.getPickupById(name).alias,name , value );
 					break ;
 			}
-			world.addEffect(img,x,y-GameSetting.GRID_SIZE);
+			world.addEffect(img,x,y);
 		}
 		
 		/**
