@@ -84,7 +84,7 @@ package local.game.elements
 			if(_skin && effectLayer.numChildren==0){
 				var effectMC:MovieClip = ResourceUtil.instance.getInstanceByClassName(baseBuildingVO.resId,baseBuildingVO.alias+"_Effect") as MovieClip;
 				if(effectMC && effectMC.totalFrames>1){
-					var effect:BaseMovieClipEffect  = EffectManager.instance.createMapEffectByMC(effectMC,3);
+					var effect:BaseMovieClipEffect  = EffectManager.instance.createMapEffectByMC(effectMC,4);
 					effectLayer.addChild(effect);
 				}
 			}

@@ -64,7 +64,7 @@ package local.game.elements
 			visible = true ;
 			var houses:Array = MapBuildingModel.instance.houses ;
 			var ran:Number = Math.random() ;
-			if( ran>=.5 && houses && houses.length>0){
+			if( ran>=.6 && houses && houses.length>0){
 				var index:int = (Math.random()*houses.length )>>0 ;
 				_currentBuilding = houses[index] as Architecture ;
 				if(_currentBuilding.buildingVO.buildingStatus!=BuildingStatus.BUILDING && 
