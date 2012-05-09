@@ -68,7 +68,7 @@ package local.game.elements
 				var index:int = (Math.random()*houses.length )>>0 ;
 				_currentBuilding = houses[index] as Architecture ;
 				if(_currentBuilding.buildingVO.buildingStatus!=BuildingStatus.BUILDING && 
-					Point.distance(new Point(_currentBuilding.screenX,_currentBuilding.screenX),new Point(screenX,screenY))<500){
+					Point.distance(new Point(_currentBuilding.screenX,_currentBuilding.screenY),new Point(screenX,screenY))<500){
 					_currentBuilding.characterMoveTo( this );
 				}
 				else
@@ -116,7 +116,7 @@ package local.game.elements
 		
 		override protected function arrived():void{
 			actionAdmire();
-			if(_currentBuilding is House){
+			if(_currentBuilding && _currentBuilding is House){
 				(_currentBuilding as House).showBuildingEffect() ;
 			}
 			_currentBuilding = null ;
