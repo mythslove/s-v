@@ -46,6 +46,7 @@ package local.game.elements
 		{
 			if(buildingVO.buildingStatus==BuildingStatus.HARVEST) return "Click to collect this item." ;
 			else if(_gameTimer) return "Product: "+ Math.floor(_gameTimer.duration/60) +"min" ;
+			return "";
 		}
 		//=================getter/setter=========================
 		override public function recoverStatus():void
