@@ -116,6 +116,9 @@ package local.game.elements
 		
 		override protected function arrived():void{
 			actionAdmire();
+			if(_currentBuilding is House){
+				(_currentBuilding as House).showBuildingEffect() ;
+			}
 			_currentBuilding = null ;
 		}
 		

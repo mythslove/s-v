@@ -238,10 +238,12 @@ package local.game.elements
 				if(_bmpMC.currentFrameLabel && _bmpMC.currentFrameLabel!=_currentActions){
 					_bmpMC.gotoAndPlay( _currentActions);
 				}
-				_bmpMC.update();
-				var rect:Rectangle = _bmpMC.getBound();
-				_bmpMC.x = rect.x ;
-				_bmpMC.y = rect.y ;
+				if(_bmpMC.update())
+				{
+					var rect:Rectangle = _bmpMC.getBound();
+					_bmpMC.x = rect.x ;
+					_bmpMC.y = rect.y ;
+				}
 			}
 			if( roads && nextPoint ){
 				move();
