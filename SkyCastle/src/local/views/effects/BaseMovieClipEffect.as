@@ -37,9 +37,8 @@ package local.views.effects
 					parent.removeChild(this);
 				}
 			}
-			else
+			else if(_bmpMC.play())
 			{
-				_bmpMC.play();
 				var rect:Rectangle = _bmpMC.getBound();
 				_bmpMC.x = rect.x ;
 				_bmpMC.y = rect.y ;
