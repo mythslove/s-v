@@ -16,6 +16,7 @@ package local.game.elements
 	import local.utils.PickupUtil;
 	import local.utils.ResourceUtil;
 	import local.views.CenterViewContainer;
+	import local.views.effects.BaseMovieClipEffect;
 	import local.views.effects.BitmapMovieClip;
 	import local.views.effects.MapWordEffect;
 
@@ -25,7 +26,6 @@ package local.game.elements
 	 */	
 	public class House extends Architecture
 	{
-		private var _effect:BitmapMovieClip ;
 		private var _anim:BitmapMovieClip ;
 		
 		public function House(vo:BuildingVO)
@@ -70,10 +70,9 @@ package local.game.elements
 			if(animMC && animMC.totalFrames>1){
 				_anim =  EffectManager.instance.createBmpAnimByMC(animMC) ;
 				itemLayer.addChild(_anim);
-				_anim.play();
 				offsetY = _skin.getBounds(_skin).y-GameSetting.GRID_SIZE ;
 				var tempY:int = animMC.getBounds(animMC).y;
-				offsetY = offsetY<tempY? tempY:offsetY ;
+				offsetY = offsetY>tempY? tempY:offsetY ;
 			}
 		}
 		
@@ -82,12 +81,11 @@ package local.game.elements
 		 */		
 		public function showBuildingEffect():void
 		{
-			if(!_effect){
+			if(_skin){
 				var effectMC:MovieClip = ResourceUtil.instance.getInstanceByClassName(baseBuildingVO.resId,baseBuildingVO.alias+"_Effect") as MovieClip;
 				if(effectMC && effectMC.totalFrames>1){
-					_effect = EffectManager.instance.createBmpAnimByMC( effectMC );
-					effectLayer.addChild(_effect);
-					_effect.play();
+					var effect:BaseMovieClipEffect  = EffectManager.instance.createMapEffectByMC(effectMC);
+					effectLayer.addChild(effect);
 				}
 			}
 		}
@@ -98,9 +96,9 @@ package local.game.elements
 		override protected function clearEffect():void
 		{
 			super.clearEffect();
-			if(_effect){
-				_effect.dispose();
-				_effect = null ;
+			if(_anim){
+				_anim.dispose();
+				_anim = null ;
 			}
 		}
 		
@@ -110,13 +108,8 @@ package local.game.elements
 		override public function update():void
 		{
 			super.update();
-			if(_effect && _effect.update() ){
-				var rect:Rectangle = _effect.getBound();
-				_effect.x = rect.x ;
-				_effect.y = rect.y;
-			}
 			if(_anim && _anim.update() ){
-				rect = _anim.getBound();
+				var rect:Rectangle = _anim.getBound();
 				_anim.x = rect.x ;
 				_anim.y = rect.y;
 			}
@@ -209,10 +202,6 @@ package local.game.elements
 			if(_anim){
 				_anim.dispose();
 				_anim = null ;
-			}
-			if(_effect){
-				_effect.dispose();
-				_effect = null ;
 			}
 		}
 	}
