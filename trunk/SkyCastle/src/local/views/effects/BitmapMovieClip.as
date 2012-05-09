@@ -84,13 +84,13 @@ package local.views.effects
 			update();
 		}
 		
-		public function play():void
+		public function play():Boolean
 		{
 			_mc.play();
-			update();
+			return update();
 		}
 		
-		public function update():void
+		public function update():Boolean
 		{
 			var temp:int = _mc.currentFrame-1 ;
 			if(!_bitmaps[temp]){
@@ -99,7 +99,9 @@ package local.views.effects
 			if(bitmapData!=_bitmaps[temp]){
 				bitmapData = _bitmaps[temp];
 				_bound =  _bounds[temp];
+				return true ;
 			}
+			return false ;
 		}
 		
 		/**复制 */	

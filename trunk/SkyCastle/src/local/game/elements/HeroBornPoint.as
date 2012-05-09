@@ -60,8 +60,7 @@ package local.game.elements
 		
 		override public function update():void
 		{
-			if(_bmpMC){
-				_bmpMC.update();
+			if(_bmpMC && _bmpMC.update() ){
 				var rect:Rectangle = _bmpMC.getBound();
 				_bmpMC.x = rect.x ;
 				_bmpMC.y = rect.y;

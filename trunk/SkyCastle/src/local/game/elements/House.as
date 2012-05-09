@@ -1,16 +1,22 @@
 package local.game.elements
 {
+	import flash.display.MovieClip;
+	import flash.events.Event;
+	import flash.geom.Rectangle;
+	
+	import local.comm.GameSetting;
 	import local.enum.BasicPickup;
 	import local.enum.BuildingStatus;
 	import local.game.GameWorld;
-	import local.views.effects.BitmapMovieClip;
 	import local.model.PlayerModel;
 	import local.model.buildings.vos.BaseHouseVO;
 	import local.model.buildings.vos.BuildingVO;
 	import local.utils.CollectQueueUtil;
+	import local.utils.EffectManager;
 	import local.utils.PickupUtil;
+	import local.utils.ResourceUtil;
 	import local.views.CenterViewContainer;
-	import local.views.effects.BaseMovieClipEffect;
+	import local.views.effects.BitmapMovieClip;
 	import local.views.effects.MapWordEffect;
 
 	/**
@@ -19,8 +25,8 @@ package local.game.elements
 	 */	
 	public class House extends Architecture
 	{
-		
 		private var _effect:BitmapMovieClip ;
+		private var _anim:BitmapMovieClip ;
 		
 		public function House(vo:BuildingVO)
 		{
@@ -53,6 +59,66 @@ package local.game.elements
 					enable = false ;
 					CollectQueueUtil.instance.addBuilding( this ); //添加到处理队列中
 				}
+			}
+		}
+		
+		override protected function resLoadedHandler( e:Event ):void
+		{
+			super.resLoadedHandler(e);
+			//自身动画
+			var animMC:MovieClip = ResourceUtil.instance.getInstanceByClassName(baseBuildingVO.resId,baseBuildingVO.alias+"_Anim") as MovieClip;
+			if(animMC && animMC.totalFrames>1){
+				_anim =  EffectManager.instance.createBmpAnimByMC(animMC) ;
+				itemLayer.addChild(_anim);
+				_anim.play();
+				offsetY = _skin.getBounds(_skin).y-GameSetting.GRID_SIZE ;
+				var tempY:int = animMC.getBounds(animMC).y;
+				offsetY = offsetY<tempY? tempY:offsetY ;
+			}
+		}
+		
+		/**
+		 * npc走到房子旁边时播放的动画 
+		 */		
+		public function showBuildingEffect():void
+		{
+			if(!_effect){
+				var effectMC:MovieClip = ResourceUtil.instance.getInstanceByClassName(baseBuildingVO.resId,baseBuildingVO.alias+"_Effect") as MovieClip;
+				if(effectMC && effectMC.totalFrames>1){
+					_effect = EffectManager.instance.createBmpAnimByMC( effectMC );
+					effectLayer.addChild(_effect);
+					_effect.play();
+				}
+			}
+		}
+		
+		/**
+		 * 清除特效 
+		 */		
+		override protected function clearEffect():void
+		{
+			super.clearEffect();
+			if(_effect){
+				_effect.dispose();
+				_effect = null ;
+			}
+		}
+		
+		/**
+		 * 每帧执行 ， 播放动画 
+		 */		
+		override public function update():void
+		{
+			super.update();
+			if(_effect && _effect.update() ){
+				var rect:Rectangle = _effect.getBound();
+				_effect.x = rect.x ;
+				_effect.y = rect.y;
+			}
+			if(_anim && _anim.update() ){
+				rect = _anim.getBound();
+				_anim.x = rect.x ;
+				_anim.y = rect.y;
 			}
 		}
 		
@@ -140,6 +206,10 @@ package local.game.elements
 		override public function dispose():void
 		{
 			super.dispose();
+			if(_anim){
+				_anim.dispose();
+				_anim = null ;
+			}
 			if(_effect){
 				_effect.dispose();
 				_effect = null ;

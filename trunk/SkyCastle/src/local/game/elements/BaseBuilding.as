@@ -41,6 +41,7 @@ package local.game.elements
 		public var itemLayer:InteractivePNG ; //皮肤容器层
 		public var effectLayer:Sprite ; //特效层
 		public var offsetY:Number ;//可用偏移Y
+		public var fixedOffsetY:Number ; //固定的偏移值
 		public var selected:Boolean ; //当前是否选中
 		protected var _skin:MovieClip ; //皮肤
 		protected var _stepLoading:BaseStepLoading;
@@ -50,7 +51,8 @@ package local.game.elements
 			super(GameSetting.GRID_SIZE , vo.baseVO.xSpan , vo.baseVO.zSpan );
 			this.buildingVO = vo ;
 			mouseEnabled = false ;
-			offsetY = Math.floor((buildingVO.baseVO.xSpan+buildingVO.baseVO.zSpan)*0.5-1)*GameSetting.GRID_SIZE ;
+			fixedOffsetY = Math.floor((buildingVO.baseVO.xSpan+buildingVO.baseVO.zSpan)*0.5-1)*GameSetting.GRID_SIZE ;
+			offsetY = fixedOffsetY ;
 			
 			itemLayer = new InteractivePNG(); //添加皮肤容器层
 			itemLayer.mouseChildren = false ;
@@ -216,9 +218,7 @@ package local.game.elements
 		
 		/**还原原来的状态  */		
 		public function recoverStatus():void
-		{
-			
-		}
+		{ }
 		
 		/**添加网格*/		
 		public function drawGrid():void
@@ -296,7 +296,7 @@ package local.game.elements
 			}
 			if(placementMC){
 				var placementEffect:BaseMovieClipEffect = EffectManager.instance.createMapEffectByMC(placementMC);
-				placementEffect.y = offsetY+this.screenY ;
+				placementEffect.y = fixedOffsetY+this.screenY ;
 				placementEffect.x = this.screenX;
 				GameWorld.instance.effectScene.addChild(placementEffect);
 			}
