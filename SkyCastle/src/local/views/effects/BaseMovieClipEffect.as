@@ -6,17 +6,20 @@ package local.views.effects
 	
 	
 	/**
-	 * 基本的特效缓存类 ，只播放一次就消失
+	 * 基本的特效缓存类 ，只播放一次就消失，如果设置了次数，则根据次数来判断
 	 * @author zzhanglin
 	 */	
 	public class BaseMovieClipEffect extends Sprite
 	{
 		private var _bmpMC:BitmapMovieClip;
+		private var _loopTime:int ;
+		private var _currentLoop:int ;
 		
-		public function BaseMovieClipEffect(bmpMC:BitmapMovieClip=null)
+		public function BaseMovieClipEffect(bmpMC:BitmapMovieClip=null , loopTime:int = 1 )
 		{
 			super();
 			_bmpMC = bmpMC;
+			_loopTime = loopTime ;
 			addChild(_bmpMC);
 			addEventListener(Event.ADDED_TO_STAGE , addedHandler , false , 0 , true );
 		}
@@ -31,15 +34,28 @@ package local.views.effects
 		private function onEnterFrameHandler( e:Event):void
 		{
 			if(_bmpMC.currentFrame==_bmpMC.totalFrame){
-				_bmpMC.stop();
-				removeEventListener(Event.ENTER_FRAME , onEnterFrameHandler );
-				if(parent){
-					parent.removeChild(this);
+				++_currentLoop ;
+				if(_loopTime==_currentLoop)
+				{
+					_bmpMC.stop();
+					removeEventListener(Event.ENTER_FRAME , onEnterFrameHandler );
+					if(parent){
+						parent.removeChild(this);
+					}
 				}
+				else
+				{
+					_bmpMC.play();
+					var rect:Rectangle = _bmpMC.getBound();
+					_bmpMC.x = rect.x ;
+					_bmpMC.y = rect.y ;
+				}
+				
 			}
-			else if(_bmpMC.play())
+			else 
 			{
-				var rect:Rectangle = _bmpMC.getBound();
+				_bmpMC.play();
+				rect = _bmpMC.getBound();
 				_bmpMC.x = rect.x ;
 				_bmpMC.y = rect.y ;
 			}
