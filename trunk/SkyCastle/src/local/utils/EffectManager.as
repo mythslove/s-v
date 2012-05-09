@@ -24,11 +24,12 @@ package local.utils
 		/**
 		 * 创建一次性的特效。只播放一次就消失
 		 * @param mc
+		 * @param loopTime 播放次数
 		 * @return 
 		 */		
-		public function createMapEffectByMC( mc:MovieClip ):BaseMovieClipEffect
+		public function createMapEffectByMC( mc:MovieClip , loopTime:int = 1  ):BaseMovieClipEffect
 		{
-			return new BaseMovieClipEffect(createBmpAnimByMC(mc)) ;
+			return new BaseMovieClipEffect(createBmpAnimByMC(mc),loopTime) ;
 		}
 		
 		/**
