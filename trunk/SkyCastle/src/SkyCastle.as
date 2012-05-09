@@ -28,7 +28,6 @@ package
 			super();
 			stage.align="TL";
 			stage.scaleMode = "noScale";
-			stage.quality=StageQuality.MEDIUM ;
 			stage.showDefaultContextMenu = false ;
 			Security.allowDomain("*");
 			GameData.APP = this ;
