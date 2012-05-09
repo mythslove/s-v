@@ -114,10 +114,15 @@ package local.game.elements
 			return null ;
 		}
 		
-		override protected function arrived():void{
-			actionAdmire();
+		override protected function arrived():void
+		{
 			if(_currentBuilding && _currentBuilding is House){
 				(_currentBuilding as House).showBuildingEffect() ;
+				actionAdmire();
+			}
+			else
+			{
+				auto();
 			}
 			_currentBuilding = null ;
 		}
