@@ -4,7 +4,6 @@ package local.views.effects
 	import flash.events.Event;
 	import flash.geom.Rectangle;
 	
-	import local.game.cell.BitmapMovieClip;
 	
 	/**
 	 * 基本的特效缓存类 ，只播放一次就消失

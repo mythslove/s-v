@@ -3,12 +3,14 @@ package local.game.elements
 	import local.enum.BasicPickup;
 	import local.enum.BuildingStatus;
 	import local.game.GameWorld;
+	import local.views.effects.BitmapMovieClip;
 	import local.model.PlayerModel;
 	import local.model.buildings.vos.BaseHouseVO;
 	import local.model.buildings.vos.BuildingVO;
 	import local.utils.CollectQueueUtil;
 	import local.utils.PickupUtil;
 	import local.views.CenterViewContainer;
+	import local.views.effects.BaseMovieClipEffect;
 	import local.views.effects.MapWordEffect;
 
 	/**
@@ -17,6 +19,9 @@ package local.game.elements
 	 */	
 	public class House extends Architecture
 	{
+		
+		private var _effect:BitmapMovieClip ;
+		
 		public function House(vo:BuildingVO)
 		{
 			super(vo);
@@ -129,6 +134,15 @@ package local.game.elements
 				_executeBack = false ;
 				_currentRewards = null ;
 				super.showPickup();
+			}
+		}
+		
+		override public function dispose():void
+		{
+			super.dispose();
+			if(_effect){
+				_effect.dispose();
+				_effect = null ;
 			}
 		}
 	}

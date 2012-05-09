@@ -6,7 +6,7 @@ package local.game.elements
 	import local.comm.GameData;
 	import local.enum.AvatarAction;
 	import local.enum.ItemType;
-	import local.game.cell.BitmapMovieClip;
+	import local.views.effects.BitmapMovieClip;
 	import local.model.buildings.vos.BaseCharacterVO;
 	import local.model.buildings.vos.BuildingVO;
 	import local.utils.CollectQueueUtil;
