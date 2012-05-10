@@ -7,7 +7,6 @@ package local.model.vos
 		public var info:String ;
 		public var icon:String ;
 		public var completeMsg:String ;
-		public var npcHead:String ;
 		
 		public var isAccept:Boolean;
 		public var isComplete:Boolean;
