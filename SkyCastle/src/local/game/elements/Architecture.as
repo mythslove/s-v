@@ -2,10 +2,13 @@ package local.game.elements
 {
 	import bing.amf3.ResultEvent;
 	
+	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.geom.Rectangle;
 	import flash.utils.setTimeout;
 	
+	import local.comm.GameSetting;
 	import local.enum.AvatarAction;
 	import local.enum.BuildingStatus;
 	import local.enum.MouseStatus;
@@ -15,9 +18,12 @@ package local.game.elements
 	import local.model.buildings.vos.BuildingVO;
 	import local.utils.CharacterManager;
 	import local.utils.CollectQueueUtil;
+	import local.utils.EffectManager;
 	import local.utils.GameTimer;
 	import local.utils.MouseManager;
 	import local.utils.PopUpManager;
+	import local.utils.ResourceUtil;
+	import local.views.effects.BitmapMovieClip;
 	import local.views.effects.BuildingCollectionFlag;
 	import local.views.effects.MapWordEffect;
 	import local.views.loading.BaseStepLoading;
@@ -34,6 +40,7 @@ package local.game.elements
 	{
 		protected var _gameTimer:GameTimer ;
 		protected var _buildingFlag:Sprite; //建筑的状态标志，如可以收获，损坏
+		protected var _anim:BitmapMovieClip ;
 		private var _gameTimerTick:int ;
 		
 		public function Architecture(vo:BuildingVO)
@@ -170,6 +177,36 @@ package local.game.elements
 			}
 		}
 		
+		override protected function resLoadedHandler( e:Event ):void
+		{
+			super.resLoadedHandler(e);
+			//自身动画
+			var animMC:MovieClip = ResourceUtil.instance.getInstanceByClassName(baseBuildingVO.resId,baseBuildingVO.alias+"_Anim") as MovieClip;
+			if(animMC && animMC.totalFrames>1){
+				_anim =  EffectManager.instance.createBmpAnimByMC(animMC) ;
+				itemLayer.addChild(_anim);
+				offsetY = _skin.getBounds(_skin).y-GameSetting.GRID_SIZE ;
+				var tempY:int = animMC.getBounds(animMC).y;
+				offsetY = offsetY>tempY? tempY:offsetY ;
+			}
+		}
+		
+		/**
+		 * 清除特效 
+		 */		
+		override protected function clearEffect():void
+		{
+			super.clearEffect();
+			if(_anim){
+				_anim.dispose();
+				_anim = null ;
+			}
+		}
+		
+		
+		
+		
+		
 		override public function execute():Boolean
 		{
 			if(executeReduceEnergy())
@@ -225,6 +262,11 @@ package local.game.elements
 		override public function update():void
 		{
 			super.update();
+			if(_anim && _anim.update() ){
+				var rect:Rectangle = _anim.getBound();
+				_anim.x = rect.x ;
+				_anim.y = rect.y;
+			}
 			if(_gameTimer) 
 			{
 				++_gameTimerTick ;
@@ -278,6 +320,10 @@ package local.game.elements
 			super.dispose();
 			if(_gameTimer) clearGameTimer();
 			_buildingFlag = null ;
+			if(_anim){
+				_anim.dispose();
+				_anim = null ;
+			}
 		}
 	}
 }

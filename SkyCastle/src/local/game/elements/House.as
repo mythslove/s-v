@@ -1,10 +1,7 @@
 package local.game.elements
 {
 	import flash.display.MovieClip;
-	import flash.events.Event;
-	import flash.geom.Rectangle;
 	
-	import local.comm.GameSetting;
 	import local.enum.BasicPickup;
 	import local.enum.BuildingStatus;
 	import local.game.GameWorld;
@@ -17,7 +14,6 @@ package local.game.elements
 	import local.utils.ResourceUtil;
 	import local.views.CenterViewContainer;
 	import local.views.effects.BaseMovieClipEffect;
-	import local.views.effects.BitmapMovieClip;
 	import local.views.effects.MapWordEffect;
 
 	/**
@@ -26,8 +22,6 @@ package local.game.elements
 	 */	
 	public class House extends Architecture
 	{
-		private var _anim:BitmapMovieClip ;
-		
 		public function House(vo:BuildingVO)
 		{
 			super(vo);
@@ -62,20 +56,6 @@ package local.game.elements
 			}
 		}
 		
-		override protected function resLoadedHandler( e:Event ):void
-		{
-			super.resLoadedHandler(e);
-			//自身动画
-			var animMC:MovieClip = ResourceUtil.instance.getInstanceByClassName(baseBuildingVO.resId,baseBuildingVO.alias+"_Anim") as MovieClip;
-			if(animMC && animMC.totalFrames>1){
-				_anim =  EffectManager.instance.createBmpAnimByMC(animMC) ;
-				itemLayer.addChild(_anim);
-				offsetY = _skin.getBounds(_skin).y-GameSetting.GRID_SIZE ;
-				var tempY:int = animMC.getBounds(animMC).y;
-				offsetY = offsetY>tempY? tempY:offsetY ;
-			}
-		}
-		
 		/**
 		 * npc走到房子旁边时播放的动画 
 		 */		
@@ -87,31 +67,6 @@ package local.game.elements
 					var effect:BaseMovieClipEffect  = EffectManager.instance.createMapEffectByMC(effectMC,4);
 					effectLayer.addChild(effect);
 				}
-			}
-		}
-		
-		/**
-		 * 清除特效 
-		 */		
-		override protected function clearEffect():void
-		{
-			super.clearEffect();
-			if(_anim){
-				_anim.dispose();
-				_anim = null ;
-			}
-		}
-		
-		/**
-		 * 每帧执行 ， 播放动画 
-		 */		
-		override public function update():void
-		{
-			super.update();
-			if(_anim && _anim.update() ){
-				var rect:Rectangle = _anim.getBound();
-				_anim.x = rect.x ;
-				_anim.y = rect.y;
 			}
 		}
 		
@@ -196,13 +151,6 @@ package local.game.elements
 			}
 		}
 		
-		override public function dispose():void
-		{
-			super.dispose();
-			if(_anim){
-				_anim.dispose();
-				_anim = null ;
-			}
-		}
+		
 	}
 }
