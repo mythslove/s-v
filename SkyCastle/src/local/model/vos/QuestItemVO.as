@@ -7,7 +7,7 @@ package local.model.vos
 		public var sum:int ;
 		public var title:String ;
 		public var skipCash:int ;
-		public var isSkiped:Boolean ;
+		public var isSkipped:Boolean ;
 		public var icon:String ;
 		
 		public var questType:String ;
