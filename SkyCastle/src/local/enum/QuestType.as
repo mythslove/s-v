@@ -81,16 +81,19 @@ package local.enum
 		 * 照相 
 		 */		
 		public static const PHOTO:int = 17 ;
-		
+		/**
+		 * 喜欢 
+		 */		
+		public static const LIKE:int =  18 ;
 		
 		
 		/**
 		 * 用gem的金额
 		 */		
-		public static const CASH_PUCHASE:int =18 ;
+		public static const CASH_PUCHASE:int =19 ;
 		/**
 		 * 用gem的次数 
 		 */		
-		public static const CASH_PUCHASE_NUM:int =19 ;
+		public static const CASH_PUCHASE_NUM:int =20 ;
 	}
 }
