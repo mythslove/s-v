@@ -317,9 +317,17 @@ package local.game.elements
 			itemLayer.drawBitmapHitArea();
 		}
 		
+		/*显示收藏时的特效*/
+		protected function showStashEffect():void
+		{
+			
+		}
 		
-		
-		
+		/*显示建筑完成时的特效*/
+		protected function showBuildCompleteEffect():void
+		{
+			
+		}
 		
 		//============建筑特效＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 		
