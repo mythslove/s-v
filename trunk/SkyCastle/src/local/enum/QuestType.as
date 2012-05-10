@@ -34,7 +34,6 @@ package local.enum
 		 * 拥有某种STONE_TREE_ROCK的数量 , sonType为ItemType中的小类型(tree,stone,rock)
 		 */		
 		public static var OWN_STONE_TREE_ROCK:int = 7;
-		
 		/**
 		 * 收集了某种STONE_TREE_ROCK的数量 , sonType为ItemType中的小类型(tree,stone,rock)
 		 */		
