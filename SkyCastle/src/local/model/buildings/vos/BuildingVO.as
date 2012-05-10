@@ -56,6 +56,9 @@ package local.model.buildings.vos
 		public var price:int ;
 		//=========================================
 		
+		
+		
+		
 		protected var _baseVO:BaseBuildingVO;
 		/** 建筑的基础VO*/
 		public function get baseVO():BaseBuildingVO
@@ -68,6 +71,18 @@ package local.model.buildings.vos
 		public function set baseVO( value:BaseBuildingVO ):void{
 			this._baseVO = value ;
 		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		/**
 		 * 通过商店中的shopItemVO来创建一个建筑VO 
