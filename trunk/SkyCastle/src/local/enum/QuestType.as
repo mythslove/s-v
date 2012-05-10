@@ -77,18 +77,20 @@ package local.enum
 		 * 村庄的Rank达到多少值 
 		 */		
 		public static const RANK:int = 16  ;
-		
-		
+		/**
+		 * 照相 
+		 */		
+		public static const PHOTO:int = 17 ;
 		
 		
 		
 		/**
 		 * 用gem的金额
 		 */		
-		public static const CASH_PUCHASE:int =17 ;
+		public static const CASH_PUCHASE:int =18 ;
 		/**
 		 * 用gem的次数 
 		 */		
-		public static const CASH_PUCHASE_NUM:int =18 ;
+		public static const CASH_PUCHASE_NUM:int =19 ;
 	}
 }
