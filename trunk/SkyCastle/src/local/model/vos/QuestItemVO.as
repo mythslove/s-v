@@ -12,5 +12,15 @@ package local.model.vos
 		
 		public var questType:String ;
 		public var sonType:String ;
+		
+		/**
+		 * 这个item是否完成 
+		 * @return 
+		 */		
+		public function get isComplete():Boolean
+		{
+			if(isSkipped || current>=sum ) return true;
+			return false ;
+		}
 	}
 }

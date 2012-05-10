@@ -43,6 +43,9 @@ package local.model.buildings.vos
 		/** 修建完成时的时间 */
 		public var buildTime:int ;
 		
+		/** 已经skip掉的pickup，当修建完成后，將此设置为空*/
+		public var skippedPickups:Array ;
+		
 		
 		//===================================非必需
 		/** 商店里的itemId*/
@@ -51,6 +54,7 @@ package local.model.buildings.vos
 		public var payType:int ; 
 		/** 商店里面显示的价格 */
 		public var price:int ;
+		//=========================================
 		
 		protected var _baseVO:BaseBuildingVO;
 		/** 建筑的基础VO*/
