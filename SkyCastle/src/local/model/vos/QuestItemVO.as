@@ -12,6 +12,5 @@ package local.model.vos
 		
 		public var questType:String ;
 		public var sonType:String ;
-		public var other:String ;
 	}
 }
