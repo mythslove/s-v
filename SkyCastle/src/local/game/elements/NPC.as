@@ -32,7 +32,7 @@ package local.game.elements
 			this. _delayShow = delay ;
 			_actionsFuns = Vector.<Function>([
 				searchHouse,actionIdle,actionShop,actionIdle,searchHouse,
-				actionIdle,actionRunway,searchHouse,actionIdle,actionRunwayBack
+				actionIdle,actionAdmire,searchHouse,actionIdle,actionRunwayBack
 			]);
 		}
 		
@@ -118,7 +118,7 @@ package local.game.elements
 		{
 			if(_currentBuilding && _currentBuilding is House){
 				(_currentBuilding as House).showBuildingEffect() ;
-				actionAdmire();
+				actionRunway();
 			}
 			else
 			{
