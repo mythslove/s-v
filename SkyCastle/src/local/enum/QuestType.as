@@ -6,6 +6,9 @@ package local.enum
 	 */	
 	public class QuestType
 	{
-		
+		/**
+		 * 修建建筑数量， 
+		 */
+		public static const BUILD_NUM:int  =1;
 	}
 }
