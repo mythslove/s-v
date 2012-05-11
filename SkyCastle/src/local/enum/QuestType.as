@@ -70,6 +70,10 @@ package local.enum
 		 */		
 		public static const ADD_FRIEND:String = "addfriend"; 
 		/**
+		 *有多少好友 
+		 */		
+		public static const OWN_FRIEND:String = "ownfriend";
+		/**
 		 * 分享游戏 
 		 */		
 		public static const SHARE:String = "share" ;
