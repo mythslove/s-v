@@ -24,7 +24,6 @@ package local.game.elements
 	import local.utils.MouseManager;
 	import local.utils.ResourceUtil;
 	import local.views.effects.BaseMovieClipEffect;
-	import local.views.effects.BitmapMovieClip;
 	import local.views.effects.BuildCompleteEffect;
 	import local.views.effects.BuildEffect;
 	import local.views.effects.BuildStatus;
@@ -311,7 +310,8 @@ package local.game.elements
 			clearEffect();
 			var buildEffectMC:MovieClip = new BuildEffect();
 			if(buildEffectMC){
-				var buildEffectEffect:BitmapMovieClip = EffectManager.instance.createBmpAnimByMC(buildEffectMC);
+				var buildEffectEffect:BaseMovieClipEffect = EffectManager.instance.createMapEffectByMC(buildEffectMC);
+				buildEffectEffect.y = fixedOffsetY ;
 				effectLayer.addChild(buildEffectEffect);
 			}
 		}
@@ -345,6 +345,7 @@ package local.game.elements
 			var buildComMC:MovieClip = new BuildCompleteEffect();
 			if(buildComMC){
 				var removeEffectEffect:BaseMovieClipEffect = EffectManager.instance.createMapEffectByMC(buildComMC);
+				removeEffectEffect.y = fixedOffsetY ;
 				effectLayer.addChild(buildComMC);
 			}
 		}
