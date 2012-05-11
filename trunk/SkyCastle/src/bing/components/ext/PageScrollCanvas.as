@@ -1,7 +1,6 @@
-package local.views.base
+package bing.components.ext
 {
 	import bing.components.interfaces.IUIAnimation;
-	import bing.components.utils.UIAniManager;
 	import bing.utils.ContainerUtil;
 	
 	import flash.display.MovieClip;
@@ -16,7 +15,11 @@ package local.views.base
 	import local.views.BaseView;
 	
 	[Event(name="move",type="flash.events.Event")]
-	public class SliderCanvas extends BaseView implements IUIAnimation
+	/**
+	 * 分页显示，并且可以拖动的容器 
+	 * @author zhouzhanglin
+	 */	
+	public class PageScrollCanvas extends BaseView implements IUIAnimation
 	{
 		public static const MOVE:String = "move";
 		public static const SLIDER_TYPE_H:String = "sliderTypeH";
@@ -41,7 +44,7 @@ package local.views.base
 		private var _dragTime:int ;
 		private var _lockDrag:Boolean = false ;
 		
-		public function SliderCanvas( )
+		public function PageScrollCanvas( )
 		{
 			super();
 		}
@@ -54,6 +57,16 @@ package local.views.base
 		public function set lockDrag(value:Boolean):void
 		{
 			_lockDrag = value;
+		}
+		
+		public function get offsetX():Number
+		{
+			return _container.x ;
+		}
+		
+		public function get offsetY():Number
+		{
+			return _container.y ;
 		}
 
 		public function init(wid:Number=100 , het:Number=100 , slideType:String= SLIDER_TYPE_NONE):void
@@ -82,6 +95,7 @@ package local.views.base
 		
 		private function configListeners():void {
 			addEventListener(MouseEvent.MOUSE_UP , onMouseEvtHandler );
+			addEventListener(MouseEvent.ROLL_OUT , onMouseEvtHandler );
 			addEventListener(MouseEvent.MOUSE_OUT , onMouseEvtHandler );
 			addEventListener(MouseEvent.MOUSE_MOVE , onMouseEvtHandler );
 		}
@@ -95,6 +109,7 @@ package local.views.base
 					if(e.target!=this||e.currentTarget!=this){
 						break ;
 					}
+				case MouseEvent.ROLL_OUT :
 				case MouseEvent.MOUSE_UP:
 					_container.stopDrag();
 					_isDrag = false ;
@@ -307,6 +322,7 @@ package local.views.base
 		
 		private function removeListeners():void{
 			removeEventListener(MouseEvent.MOUSE_UP , onMouseEvtHandler );
+			removeEventListener(MouseEvent.ROLL_OUT , onMouseEvtHandler );
 			removeEventListener(MouseEvent.MOUSE_OUT , onMouseEvtHandler );
 			removeEventListener(MouseEvent.MOUSE_MOVE , onMouseEvtHandler );
 		}
@@ -316,6 +332,7 @@ package local.views.base
 			ContainerUtil.removeChildren(_container);
 			_container = null ;
 			_mask = null;
+			_containerPoint = null ;
 			_containerPoint = null ;
 			removeListeners();
 		}
