@@ -41,6 +41,7 @@ package bing.components.ext
 		private var _lockDrag:Boolean = false ;
 		private var _offsetX:int , _offsetY:int ;
 		private var _dragTime:Number ;
+		private var _mouseIsDown:Boolean ;
 		
 		public function ScrollCanvas( )
 		{
@@ -110,21 +111,31 @@ package bing.components.ext
 					if(e.target!=this||e.currentTarget!=this){
 						break ;
 					}
-				case MouseEvent.ROLL_OUT :
+				case MouseEvent.ROLL_OUT:
 				case MouseEvent.MOUSE_UP:
-					mouseChildren=true ;
-					if(MathUtil.distance(_mouseDownPos.x,_mouseDownPos.y,e.stageX,e.stageY)<20) break ;
-					
-					var timeCha:Number = getTimer()-_dragTime;
-					var temp:Number = 1/(timeCha*0.005) ;
-					if(_sliderType==SLIDER_TYPE_H){
-						if(timeCha<400) _endX+= temp*_offsetX ;
-					}else if(_sliderType==SLIDER_TYPE_V){
-						if(timeCha<400) _endY+= temp*_offsetY;
-					}else if(timeCha<400) {
-						_endX+= temp*_offsetX;
-						_endY+= temp*_offsetY;
+					if(_mouseIsDown){
+						var timeCha:Number = getTimer()-_dragTime;
+						var temp:Number = 1/(timeCha*0.005) ;
+						if(_sliderType==SLIDER_TYPE_H)
+						{
+							if(timeCha<400 && MathUtil.distance(_mouseDownPos.x,0,e.stageX,0)>20 )  	_endX+= temp*_offsetX ;
+							else _endX = _container.x ;
+						}
+						else if(_sliderType==SLIDER_TYPE_V)
+						{
+							if(timeCha<400  && MathUtil.distance(_mouseDownPos.y,0,e.stageY,0)>20 )  	_endY+= temp*_offsetY;
+							else _endY = _container.y ;
+						}
+						else if(timeCha<400  && MathUtil.distance(_mouseDownPos.x,_mouseDownPos.y,e.stageX,e.stageY)>20 ) 
+						{
+							_endX+= temp*_offsetX;
+							_endY+= temp*_offsetY;
+						}else{
+							_endX = _container.x ;
+							_endY = _container.y ;
+						}
 					}
+					
 					if(_endX>0 || _container.width<_wid) _endX=0 ;
 					else if(_endX<-_container.width*scaleX+_wid){
 						_endX = -_container.width*scaleX+_wid ;
@@ -133,8 +144,11 @@ package bing.components.ext
 					else if(_endY<-_container.height*scaleY+_het){
 						_endY = -_container.height*scaleY+_het ;
 					}
+					mouseChildren=true ;
+					_mouseIsDown = false ;
 					break ;
 				case MouseEvent.MOUSE_DOWN:
+					_mouseIsDown = true ;
 					_mouseDownPos.x = e.stageX ;
 					_mouseDownPos.y = e.stageY ;
 					_containerPos.x = _container.x ;
@@ -259,7 +273,7 @@ package bing.components.ext
 			_container = null ;
 			_mask = null;
 			_mouseDownPos= null;
-			 _containerPos= null;
+			_containerPos= null;
 			removeListeners();
 		}
 	}
