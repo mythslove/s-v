@@ -3,6 +3,7 @@ package bing.components.ext
 	import bing.components.interfaces.IUIAnimation;
 	import bing.components.utils.UIAniManager;
 	import bing.utils.ContainerUtil;
+	import bing.utils.MathUtil;
 	
 	import flash.display.MovieClip;
 	import flash.display.Shape;
@@ -111,6 +112,9 @@ package bing.components.ext
 					}
 				case MouseEvent.ROLL_OUT :
 				case MouseEvent.MOUSE_UP:
+					
+					if(MathUtil.distance(_mouseDownPos.x,_mouseDownPos.y,e.stageX,e.stageY)<20) break ;
+					
 					var timeCha:Number = getTimer()-_dragTime;
 					var temp:Number = 1/(timeCha*0.005) ;
 					if(_sliderType==SLIDER_TYPE_H){
