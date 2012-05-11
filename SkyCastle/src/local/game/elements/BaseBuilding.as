@@ -24,9 +24,12 @@ package local.game.elements
 	import local.utils.MouseManager;
 	import local.utils.ResourceUtil;
 	import local.views.effects.BaseMovieClipEffect;
+	import local.views.effects.BuildCompleteEffect;
+	import local.views.effects.BuildEffect;
 	import local.views.effects.BuildStatus;
 	import local.views.effects.EffectPlacementBuilding;
 	import local.views.effects.EffectPlacementDecoration;
+	import local.views.effects.RemoveBuildEffect;
 	import local.views.loading.BaseStepLoading;
 	import local.views.loading.BuildingStepLoading;
 
@@ -305,7 +308,11 @@ package local.game.elements
 		protected function showBuildEffect():void
 		{
 			clearEffect();
-			
+			var buildEffectMC:MovieClip = new BuildEffect();
+			if(buildEffectMC){
+				var buildEffectEffect:BaseMovieClipEffect = EffectManager.instance.createBmpAnimByMC(buildEffectMC);
+				effectLayer.addChild(buildEffectEffect);
+			}
 		}
 		/*显示建造的步骤状态图片*/
 		protected function showBuildStatus():void
@@ -320,13 +327,25 @@ package local.game.elements
 		/*显示收藏时的特效*/
 		protected function showStashEffect():void
 		{
-			
+			clearEffect();
+			var removeEffectMC:MovieClip = new RemoveBuildEffect() ;
+			if(removeEffectMC){
+				var removeEffectEffect:BaseMovieClipEffect = EffectManager.instance.createMapEffectByMC(removeEffectEffect);
+				removeEffectEffect.y = fixedOffsetY+this.screenY ;
+				removeEffectEffect.x = this.screenX;
+				GameWorld.instance.effectScene.addChild(removeEffectEffect);
+			}
 		}
 		
 		/*显示建筑完成时的特效*/
 		protected function showBuildCompleteEffect():void
 		{
-			
+			clearEffect();
+			var buildComMC:MovieClip = new BuildCompleteEffect();
+			if(buildComMC){
+				var removeEffectEffect:BaseMovieClipEffect = EffectManager.instance.createMapEffectByMC(buildComMC);
+				effectLayer.addChild(buildComMC);
+			}
 		}
 		
 		//============建筑特效＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
