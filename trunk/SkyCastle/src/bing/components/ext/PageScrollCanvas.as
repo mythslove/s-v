@@ -1,6 +1,7 @@
 package bing.components.ext
 {
 	import bing.components.interfaces.IUIAnimation;
+	import bing.components.utils.UIAniManager;
 	import bing.utils.ContainerUtil;
 	
 	import flash.display.MovieClip;
