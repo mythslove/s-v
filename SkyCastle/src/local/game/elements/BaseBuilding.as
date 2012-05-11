@@ -24,6 +24,7 @@ package local.game.elements
 	import local.utils.MouseManager;
 	import local.utils.ResourceUtil;
 	import local.views.effects.BaseMovieClipEffect;
+	import local.views.effects.BitmapMovieClip;
 	import local.views.effects.BuildCompleteEffect;
 	import local.views.effects.BuildEffect;
 	import local.views.effects.BuildStatus;
@@ -310,7 +311,7 @@ package local.game.elements
 			clearEffect();
 			var buildEffectMC:MovieClip = new BuildEffect();
 			if(buildEffectMC){
-				var buildEffectEffect:BaseMovieClipEffect = EffectManager.instance.createBmpAnimByMC(buildEffectMC);
+				var buildEffectEffect:BitmapMovieClip = EffectManager.instance.createBmpAnimByMC(buildEffectMC);
 				effectLayer.addChild(buildEffectEffect);
 			}
 		}
@@ -330,7 +331,7 @@ package local.game.elements
 			clearEffect();
 			var removeEffectMC:MovieClip = new RemoveBuildEffect() ;
 			if(removeEffectMC){
-				var removeEffectEffect:BaseMovieClipEffect = EffectManager.instance.createMapEffectByMC(removeEffectEffect);
+				var removeEffectEffect:BaseMovieClipEffect = EffectManager.instance.createMapEffectByMC(removeEffectMC);
 				removeEffectEffect.y = fixedOffsetY+this.screenY ;
 				removeEffectEffect.x = this.screenX;
 				GameWorld.instance.effectScene.addChild(removeEffectEffect);

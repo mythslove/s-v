@@ -108,6 +108,7 @@ package local.game.elements
 					break ;
 				case "sell":
 					PlayerModel.instance.me.rank-=baseBuildingVO.rank ;
+					this.showStashEffect();
 					this.dispose();
 					 break ;
 				case "stash":
@@ -115,6 +116,7 @@ package local.game.elements
 						PlayerModel.instance.me.rank-=baseBuildingVO.rank ;
 						GameWorld.instance.removeBuildFromScene( this);
 						StorageModel.instance.addStorageItem( e.result as StorageItemVO );
+						this.showStashEffect();
 						this.dispose();
 					}
 					break ;
