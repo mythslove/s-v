@@ -1,6 +1,7 @@
 package local.game
 {
 	import bing.iso.IsoScene;
+	import bing.iso.path.Node;
 	import bing.res.ResVO;
 	import bing.utils.ObjectUtil;
 	import bing.utils.SystemUtil;
@@ -50,6 +51,7 @@ package local.game
 		override protected function onClick(e:MouseEvent):void 
 		{
 			if(_mouseOverBuild is HeroBornPoint){
+				CharacterManager.instance.hero.searchToRun(_mouseOverBuild.nodeX,_mouseOverBuild.nodeZ);
 				return ;
 			}
 			if(_mouseOverBuild && _mouseOverBuild is Character){
