@@ -346,7 +346,7 @@ package local.game.elements
 			if(buildComMC){
 				var removeEffectEffect:BaseMovieClipEffect = EffectManager.instance.createMapEffectByMC(buildComMC);
 				removeEffectEffect.y = fixedOffsetY ;
-				effectLayer.addChild(buildComMC);
+				effectLayer.addChild(removeEffectEffect);
 			}
 		}
 		
