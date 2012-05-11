@@ -85,6 +85,7 @@ package local.game.elements
 						this.showSkin();
 						this.startProduct(); //开始生产
 						//显示建造完成的动画
+						this.showBuildCompleteEffect();
 					}
 				}
 				//特殊物品
