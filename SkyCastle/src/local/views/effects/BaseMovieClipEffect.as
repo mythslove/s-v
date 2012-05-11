@@ -36,7 +36,7 @@ package local.views.effects
 		{
 			if(_bmpMC.currentFrame==_bmpMC.totalFrame){
 				++_currentLoop ;
-				if(_loopTime==_currentLoop)
+				if(_loopTime>0 && _loopTime==_currentLoop)
 				{
 					_bmpMC.stop();
 					removeEventListener(Event.ENTER_FRAME , onEnterFrameHandler );
