@@ -12,6 +12,7 @@ package bing.components.ext
 	import flash.geom.Point;
 	import flash.utils.getTimer;
 	
+	import local.comm.GameData;
 	import local.views.BaseView;
 	
 	/**
@@ -118,15 +119,15 @@ package bing.components.ext
 						var temp:Number = 1/(timeCha*0.005) ;
 						if(_sliderType==SLIDER_TYPE_H)
 						{
-							if(timeCha<400 && MathUtil.distance(_mouseDownPos.x,0,e.stageX,0)>20 )  	_endX+= temp*_offsetX ;
+							if(timeCha<600 && MathUtil.distance(_containerPos.x,0,_container.x,0)>10 )  	_endX+= temp*_offsetX ;
 							else _endX = _container.x ;
 						}
 						else if(_sliderType==SLIDER_TYPE_V)
 						{
-							if(timeCha<400  && MathUtil.distance(_mouseDownPos.y,0,e.stageY,0)>20 )  	_endY+= temp*_offsetY;
+							if(timeCha<600  && MathUtil.distance(_containerPos.y,0,_container.y,0)>10 )  	_endY+= temp*_offsetY;
 							else _endY = _container.y ;
 						}
-						else if(timeCha<400  && MathUtil.distance(_mouseDownPos.x,_mouseDownPos.y,e.stageX,e.stageY)>20 ) 
+						else if(timeCha<600  && MathUtil.distance(_containerPos.x,_containerPos.y,_container.x,_container.y)>10 ) 
 						{
 							_endX+= temp*_offsetX;
 							_endY+= temp*_offsetY;
