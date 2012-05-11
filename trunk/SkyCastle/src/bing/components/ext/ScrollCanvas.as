@@ -112,7 +112,7 @@ package bing.components.ext
 					}
 				case MouseEvent.ROLL_OUT :
 				case MouseEvent.MOUSE_UP:
-					
+					mouseChildren=true ;
 					if(MathUtil.distance(_mouseDownPos.x,_mouseDownPos.y,e.stageX,e.stageY)<20) break ;
 					
 					var timeCha:Number = getTimer()-_dragTime;
@@ -133,7 +133,6 @@ package bing.components.ext
 					else if(_endY<-_container.height*scaleY+_het){
 						_endY = -_container.height*scaleY+_het ;
 					}
-					mouseChildren=true ;
 					break ;
 				case MouseEvent.MOUSE_DOWN:
 					_mouseDownPos.x = e.stageX ;
