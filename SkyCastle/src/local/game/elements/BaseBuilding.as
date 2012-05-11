@@ -310,7 +310,7 @@ package local.game.elements
 			clearEffect();
 			var buildEffectMC:MovieClip = new BuildEffect();
 			if(buildEffectMC){
-				var buildEffectEffect:BaseMovieClipEffect = EffectManager.instance.createMapEffectByMC(buildEffectMC);
+				var buildEffectEffect:BaseMovieClipEffect = EffectManager.instance.createMapEffectByMC(buildEffectMC,0);
 				buildEffectEffect.y = fixedOffsetY ;
 				effectLayer.addChild(buildEffectEffect);
 			}
