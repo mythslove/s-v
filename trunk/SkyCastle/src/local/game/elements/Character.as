@@ -71,7 +71,7 @@ package local.game.elements
 		 * @param point
 		 * @return 是否到达该点
 		 */		
-		public function moveToPoint( point:Node):Boolean 
+		protected function moveToPoint( point:Node):Boolean 
 		{
 			var distance:Number = MathUtil.distance(x,z,point.x,point.y );
 			if(distance < speed){
