@@ -61,6 +61,8 @@ package local.views.effects
 			//保存图片
 			matrix.identity();
 			matrix.translate(-rect.x,-rect.y);
+			if(rect.width==0) rect.width =1 ;
+			if(rect.height==0) rect.height =1 ;
 			bmd = new BitmapData(rect.width,rect.height,true,0xffffff);
 			bmd.draw( _mc,matrix);
 			_bitmaps[index] = bmd ;
