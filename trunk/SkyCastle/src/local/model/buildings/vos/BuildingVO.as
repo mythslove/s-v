@@ -75,10 +75,11 @@ package local.model.buildings.vos
 		
 		
 		
-		
-		
-		
-		
+		public function addSkipMaterial( pkId:String )void
+		{
+			if(!skippedPickups) skippedPickups = [];
+			skippedPickups.push( pkId) ;
+		}
 		
 		
 		

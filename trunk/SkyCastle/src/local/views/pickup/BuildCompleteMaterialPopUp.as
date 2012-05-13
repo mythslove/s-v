@@ -30,7 +30,13 @@ package local.views.pickup
 		public var result:Boolean=true ; //是否能全部通过
 		public var costCash:int; //最后要花多少钱
 		private var _materials:Object;
+		public function get materials():Object{
+			return _materials ;
+		}
 		private var _architechture:Architecture ;
+		public function get architechture():Architecture{
+			return _architechture ;
+		}
 		
 		public function BuildCompleteMaterialPopUp( architechture:Architecture )
 		{
@@ -60,7 +66,7 @@ package local.views.pickup
 				renderer.name = key ;
 				renderer.txtCount.text = myCount+"/"+_materials[key] ;
 				if(myCount<int(_materials[key] )){
-					costCash++;
+					costCash+=myCount;
 					result = false ;
 					renderer.x = count*(renderer.width+10) ;
 					container.addChild( renderer );
@@ -88,7 +94,7 @@ package local.views.pickup
 				myCount = PickupModel.instance.getMyPickupCount(renderer.name);
 				renderer.txtCount.text = myCount+"/"+_materials[renderer.name] ;
 				if(myCount<int(_materials[renderer.name] )){
-					costCash++;
+					costCash+=myCount;
 					result = false ;
 				}else{
 					renderer.gotoAndStop("default");
