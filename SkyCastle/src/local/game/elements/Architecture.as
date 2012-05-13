@@ -164,6 +164,14 @@ package local.game.elements
 						this.showPickup();
 					}
 					break ;
+				case "placeStash":
+					//开始生产
+					if(baseBuildingVO.hasOwnProperty("earnTime") && int(baseBuildingVO["earnTime"])>0 )
+					{
+						buildingVO.buildingStatus=BuildingStatus.PRODUCT ;
+						createGameTimer( int(baseBuildingVO["earnTime"]) );
+					}
+					break ;
 			}
 		}
 		
