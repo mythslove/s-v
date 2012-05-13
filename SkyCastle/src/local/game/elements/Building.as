@@ -139,6 +139,7 @@ package local.game.elements
 							coin = shopItemVO.price ;
 						}
 						coin=coin>>1 ;
+						PlayerModel.instance.me.coin+=coin ;
 						GameWorld.instance.removeBuildFromScene(this);
 						this.showStashEffect();
 						dispose();
