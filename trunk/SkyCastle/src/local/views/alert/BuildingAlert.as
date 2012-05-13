@@ -34,7 +34,7 @@ package local.views.alert
 		public static function show(baseId:String ,  info:String ,  yesFun:Function = null , noFun:Function = null  ):void
 		{
 			var alert:BuildingAlert = new BuildingAlert( baseId ,info ,  yesFun, noFun);
-			PopUpManager.instance.addPopUp( alert , true , true , 0.2 );
+			PopUpManager.instance.addPopUp( alert , true , true , 0.4 );
 		}
 	}
 }
