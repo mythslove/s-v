@@ -22,7 +22,7 @@ package local.views.alert
 		public static function show(coin:String , baseId:String ,  info:String ,  yesFun:Function = null , noFun:Function = null  ):void
 		{
 			var alert:SellBuildingAlert = new SellBuildingAlert(coin,baseId ,info ,  yesFun, noFun);
-			PopUpManager.instance.addPopUp( alert , true , true , 0.7 );
+			PopUpManager.instance.addPopUp( alert , true , true , 0.2 );
 		}
 	}
 }

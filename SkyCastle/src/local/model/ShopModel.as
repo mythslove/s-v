@@ -164,8 +164,11 @@ package local.model
 			var arr:Vector.<ShopItemVO> ;
 			switch(type)
 			{
+				case ItemType.BUILDING:
+					arr = _buildingArray ;
+					break ;
 				case ItemType.BUILDING_HOUSE:
-					arr = houseArray ;
+					arr = _houseArray ;
 					break ;
 				case ItemType.BUILDING_FACTORY:
 					arr =  _factoryArray ;
@@ -175,6 +178,9 @@ package local.model
 					break ;
 				case ItemType.DECORATION:
 					arr = _decorationArray ;
+					break ;
+				case ItemType.DEC_ROAD:
+					arr = _roadArray ;
 					break ;
 			}
 			return arr ;

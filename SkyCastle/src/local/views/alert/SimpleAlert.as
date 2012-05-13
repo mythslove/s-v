@@ -2,6 +2,9 @@ package local.views.alert
 {
 	import bing.components.button.BaseButton;
 	
+	import com.greensock.TweenLite;
+	import com.greensock.easing.Back;
+	
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
@@ -37,6 +40,7 @@ package local.views.alert
 		
 		override protected function added():void
 		{
+			TweenLite.from( this ,0.2 , { scaleX:0 , scaleY:0 , ease:Back.easeOut } );
 			btnYes.addEventListener(MouseEvent.CLICK , onClickHandler );
 			btnNo.addEventListener(MouseEvent.CLICK , onClickHandler );
 		}
@@ -53,6 +57,12 @@ package local.views.alert
 					if(_noFun!=null)  _noFun();
 					break ;
 			}
+			
+			TweenLite.to( this , 0.2 ,  { scaleX:0 , scaleY:0 ,ease:Back.easeIn , onComplete:onTweenCom } );
+			mouseChildren = false; 
+		}
+		
+		private function onTweenCom():void{
 			PopUpManager.instance.removePopUp( this );
 		}
 		
@@ -67,7 +77,7 @@ package local.views.alert
 		public static function show( info:String ,  yesFun:Function = null , noFun:Function = null  ):void
 		{
 			var alert:SimpleAlert = new SimpleAlert(info ,  yesFun, noFun);
-			PopUpManager.instance.addPopUp( alert , true , true , 0.1 );
+			PopUpManager.instance.addPopUp( alert , true , true , 0.2 );
 		}
 	}
 }
