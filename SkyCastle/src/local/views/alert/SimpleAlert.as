@@ -40,7 +40,7 @@ package local.views.alert
 		
 		override protected function added():void
 		{
-			TweenLite.from( this ,0.2 , { scaleX:0 , scaleY:0 , ease:Back.easeOut } );
+			TweenLite.from( this ,0.2 , { alpha:.1 , scaleX:0 , scaleY:0 , ease:Back.easeOut } );
 			btnYes.addEventListener(MouseEvent.CLICK , onClickHandler );
 			btnNo.addEventListener(MouseEvent.CLICK , onClickHandler );
 		}
@@ -58,7 +58,7 @@ package local.views.alert
 					break ;
 			}
 			
-			TweenLite.to( this , 0.2 ,  { scaleX:0 , scaleY:0 ,ease:Back.easeIn , onComplete:onTweenCom } );
+			TweenLite.to( this , 0.2 ,  {alpha:0.2 , scaleX:0 , scaleY:0 ,ease:Back.easeIn , onComplete:onTweenCom } );
 			mouseChildren = false; 
 		}
 		
