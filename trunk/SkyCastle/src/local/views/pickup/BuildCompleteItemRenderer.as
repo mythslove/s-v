@@ -63,7 +63,7 @@ package local.views.pickup
 		{
 			var obj:DisplayObjectContainer = this.parent ;
 			while(obj){
-				if( obj is BuildCompleteMaterialPopUp) return obj ;
+				if( obj is BuildCompleteMaterialPopUp) return obj as BuildCompleteMaterialPopUp;
 				obj = obj.parent ;
 			}
 			return null ;
