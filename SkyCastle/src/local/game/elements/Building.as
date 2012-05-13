@@ -128,6 +128,15 @@ package local.game.elements
 						GameWorld.instance.removeBuildFromScene(this);
 					}
 					break ;
+				case "stash":
+					if(e.result){
+						PlayerModel.instance.me.rank-=baseBuildingVO.rank ;
+						StorageModel.instance.addStorageItem( e.result as StorageItemVO );
+						GameWorld.instance.removeBuildFromScene(this);
+						this.showStashEffect();
+						dispose();
+					}
+					break ;
 				case "sell":
 					if(e.result){
 						PlayerModel.instance.me.rank-=baseBuildingVO.rank ;
@@ -144,11 +153,6 @@ package local.game.elements
 						this.showStashEffect();
 						dispose();
 					}
-				case "stash":
-					if(e.result){
-						StorageModel.instance.addStorageItem( e.result as StorageItemVO );
-					}
-					break ;
 				case "rotate":
 					break ;
 				case "move":
