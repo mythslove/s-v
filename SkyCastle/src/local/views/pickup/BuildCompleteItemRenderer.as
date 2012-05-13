@@ -1,5 +1,6 @@
 package local.views.pickup
 {
+	import bing.amf3.ResultEvent;
 	import bing.components.BingComponent;
 	import bing.components.button.BaseButton;
 	
@@ -8,6 +9,8 @@ package local.views.pickup
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	
+	import local.comm.GameRemote;
+	import local.model.PickupModel;
 	import local.model.PlayerModel;
 	import local.views.alert.CostCashAlert;
 
@@ -40,24 +43,39 @@ package local.views.pickup
 		{
 			e.stopPropagation();
 			var arr:Array=txtCount.text.split("/");
-			if(PlayerModel.instance.me.cash<int(arr[0]))
+			var cash:int = int(arr[1]) -  int(arr[0]) ;
+			if(PlayerModel.instance.me.cash<cash)
 			{
 				//弹出cash商店
 			}else{
-				CostCashAlert.show("Are you sure to purchase this item for gems?" , arr[0] , skip );
+				
+				CostCashAlert.show("Are you sure to purchase this item for gems?" , cash , skip );
 			}
 		}
 		
 		private function skip():void
 		{
+			btnSkip.enabled = false ;
 			var arr:Array=txtCount.text.split("/");
-			PlayerModel.instance.me.cash -= int(arr[0]);
+			var cash:int = int(arr[1]) -  int(arr[0]) ;
+			var ro:GameRemote = new GameRemote("CommService");
+			ro.addEventListener(ResultEvent.RESULT , onResultHandler , false , 0 , true );
+			ro.getOperation( "buildSkip").send( this.name ,cash );
+		}
+		
+		private function onResultHandler( e:ResultEvent ):void
+		{
+			e.target.removeEventListener(ResultEvent.RESULT , onResultHandler );
+			var arr:Array=txtCount.text.split("/");
+			var cash:int = int(arr[1]) -  int(arr[0]) ;
+			PlayerModel.instance.me.cash -= cash;
+			PickupModel.instance.addPickup( name , cash ); //直接添加material
 			var parentPopup:BuildCompleteMaterialPopUp=materialPopup;
 			if(parentPopup){
-				parentPopup.architechture.buildingVO.addSkipMaterial(this.name) ;
 				parentPopup.refresh();
 			}
 		}
+			
 		
 		private function get materialPopup():BuildCompleteMaterialPopUp
 		{
