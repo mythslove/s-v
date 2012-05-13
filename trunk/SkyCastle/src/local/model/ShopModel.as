@@ -125,19 +125,29 @@ package local.model
 			_allShopItemArray = buildingArray.concat( decorationArray).concat(plantArray);
 		}
 		
-		
-		public function getBuildingShopItemByBaseId( itemId:String , type:int ):ShopItemVO
+		/**
+		 * 通过建筑的基础id和类型来获得ShopItemVO 
+		 * @param itemId
+		 * @param type
+		 * @return 
+		 */		
+		public function getBuildingShopItemByBaseId( baseId:String , type:String ):ShopItemVO
 		{
 			var arr :Vector.<ShopItemVO>= getArrayByType(type);
 			for each( var vo:ShopItemVO in arr)
 			{
-				if(vo.itemId==itemId){
+				if(vo.itemValue==baseId){
 					return vo ;
 				}
 			}
 			return null ;
 		}
 		
+		/**
+		 * 从所有的商品中通过shopItemId获取ShopItemVO 
+		 * @param itemId
+		 * @return 
+		 */		
 		public function getShopItemByItemId( itemId:String ):ShopItemVO
 		{
 			for each( var vo:ShopItemVO in _allShopItemArray)
@@ -149,7 +159,7 @@ package local.model
 			return null ;
 		}
 		
-		private function getArrayByType( type:int ):Vector.<ShopItemVO>
+		private function getArrayByType( type:String ):Vector.<ShopItemVO>
 		{
 			var arr:Vector.<ShopItemVO> ;
 			switch(type)
@@ -162,6 +172,9 @@ package local.model
 					break ;
 				case ItemType.PLANT:
 					arr = _plantArray ;
+					break ;
+				case ItemType.DECORATION:
+					arr = _decorationArray ;
 					break ;
 			}
 			return arr ;
