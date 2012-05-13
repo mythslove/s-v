@@ -43,10 +43,6 @@ package local.model.buildings.vos
 		/** 修建完成时的时间 */
 		public var buildTime:int ;
 		
-		/** 已经skip掉的pickup，当修建完成后，將此设置为空*/
-		public var skippedPickups:Array ;
-		
-		
 		//===================================非必需
 		/** 商店里的itemId*/
 		public var shopItemId:String ;
@@ -71,17 +67,6 @@ package local.model.buildings.vos
 		public function set baseVO( value:BaseBuildingVO ):void{
 			this._baseVO = value ;
 		}
-		
-		
-		
-		
-		public function addSkipMaterial( pkId:String ):void
-		{
-			if(!skippedPickups) skippedPickups = [];
-			skippedPickups.push( pkId) ;
-		}
-		
-		
 		
 		
 		
