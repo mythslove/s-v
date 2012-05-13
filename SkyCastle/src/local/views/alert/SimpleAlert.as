@@ -77,7 +77,7 @@ package local.views.alert
 		public static function show( info:String ,  yesFun:Function = null , noFun:Function = null  ):void
 		{
 			var alert:SimpleAlert = new SimpleAlert(info ,  yesFun, noFun);
-			PopUpManager.instance.addPopUp( alert , true , true , 0.2 );
+			PopUpManager.instance.addPopUp( alert , true , true , 0.4 );
 		}
 	}
 }
