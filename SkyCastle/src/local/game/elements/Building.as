@@ -11,17 +11,22 @@ package local.game.elements
 	import local.enum.BasicPickup;
 	import local.enum.BuildingOperation;
 	import local.enum.BuildingStatus;
+	import local.enum.PayType;
 	import local.game.GameWorld;
 	import local.model.MapGridDataModel;
 	import local.model.PlayerModel;
+	import local.model.ShopModel;
 	import local.model.StorageModel;
 	import local.model.buildings.vos.BuildingVO;
 	import local.model.vos.RewardsVO;
+	import local.model.vos.ShopItemVO;
 	import local.model.vos.StorageItemVO;
 	import local.utils.CharacterManager;
 	import local.utils.CollectQueueUtil;
+	import local.utils.GameUtil;
 	import local.utils.PickupUtil;
 	import local.views.CenterViewContainer;
+	import local.views.alert.SellBuildingAlert;
 	import local.views.effects.MapWordEffect;
 	
 	public class Building extends BaseBuilding
@@ -77,6 +82,23 @@ package local.game.elements
 					ro.getOperation("move").send( buildingVO.id , nodeX,nodeZ );
 					break ;
 				case BuildingOperation.SELL :
+					this.enable=true ;
+					var shopItemVO:ShopItemVO = ShopModel.instance.getBuildingShopItemByBaseId( baseBuildingVO.baseId, baseBuildingVO.type);
+					if(shopItemVO){
+						var coin:int ;
+						if(shopItemVO.payType==PayType.CASH){
+							coin = GameUtil.cashToCoin(shopItemVO.price)>>1 ;
+						}else{
+							coin = shopItemVO.price ;
+						}
+						coin=coin>>1 ;
+						SellBuildingAlert.show( coin+"" , baseBuildingVO.baseId, "Are you sure to sell it?",
+							function():void{
+								enable = false ;
+								ro.getOperation("sell").send(buildingVO.id);
+							}
+						);
+					}
 					break ;
 				case BuildingOperation.PLACE_STASH:
 					showPlaceEffect();
@@ -107,17 +129,23 @@ package local.game.elements
 					}
 					break ;
 				case "sell":
-					PlayerModel.instance.me.rank-=baseBuildingVO.rank ;
-					this.showStashEffect();
-					this.dispose();
-					 break ;
-				case "stash":
 					if(e.result){
 						PlayerModel.instance.me.rank-=baseBuildingVO.rank ;
-						GameWorld.instance.removeBuildFromScene( this);
-						StorageModel.instance.addStorageItem( e.result as StorageItemVO );
+						var shopItemVO:ShopItemVO = ShopModel.instance.getBuildingShopItemByBaseId( baseBuildingVO.baseId, baseBuildingVO.type);
+						var coin:int ;
+						if(shopItemVO.payType==PayType.CASH){
+							coin = GameUtil.cashToCoin(shopItemVO.price) ;
+						}else{
+							coin = shopItemVO.price ;
+						}
+						coin=coin>>1 ;
+						GameWorld.instance.removeBuildFromScene(this);
 						this.showStashEffect();
-						this.dispose();
+						dispose();
+					}
+				case "stash":
+					if(e.result){
+						StorageModel.instance.addStorageItem( e.result as StorageItemVO );
 					}
 					break ;
 				case "rotate":

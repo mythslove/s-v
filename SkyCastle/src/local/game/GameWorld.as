@@ -103,19 +103,13 @@ package local.game
 					_mouseOverBuild = null ;
 				}
 			}
-			else if(GameData.buildingCurrOperation==BuildingOperation.STASH) //收藏
+			else if(GameData.buildingCurrOperation==BuildingOperation.STASH || GameData.buildingCurrOperation==BuildingOperation.SELL ) 
 			{
+				//收藏和卖
 				if(_mouseOverBuild)
 				{
 					_mouseOverBuild.selectedStatus(false);
-					_mouseOverBuild.sendOperation(BuildingOperation.STASH); //发送收藏建筑信息到服务器
-					_mouseOverBuild = null ;
-				}
-			}
-			else if(GameData.buildingCurrOperation==BuildingOperation.SELL) //卖出
-			{
-				if(_mouseOverBuild){
-					//弹出卖出窗口
+					_mouseOverBuild.sendOperation(GameData.buildingCurrOperation); //发送收藏建筑信息到服务器
 					_mouseOverBuild = null ;
 				}
 			}

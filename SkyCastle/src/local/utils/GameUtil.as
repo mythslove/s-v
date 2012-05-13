@@ -21,5 +21,16 @@ package local.utils
 				}
 			}
 		}
+		
+		/**
+		 * cash转coin 
+		 * @param cash
+		 * @return 
+		 * 
+		 */		
+		public static function cashToCoin( cash:int ):int
+		{
+			return cash*100 ;
+		}
 	}
 }
