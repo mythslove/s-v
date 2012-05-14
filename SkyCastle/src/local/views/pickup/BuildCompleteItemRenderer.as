@@ -48,7 +48,7 @@ package local.views.pickup
 			{
 				//弹出cash商店
 			}else{
-				CostCashAlert.show("Are you sure to purchase this item for gems?" , cash+"" , skip );
+				CostCashAlert.show("Are you sure to purchase this item using Gem?" , cash+"" , skip );
 			}
 		}
 		
