@@ -130,7 +130,7 @@ package local.game.elements
 						buildingVO.buildingStatus=BuildingStatus.PRODUCT ;
 						createGameTimer( baseHouseVO.earnTime );
 					}
-					else(_gameTimer)
+					else
 					{
 						//最后一次修建完成
 						PlayerModel.instance.me.rank+=buildingVO.baseVO.rank ;
