@@ -27,6 +27,7 @@ package bing.components.ext
 		public static const SLIDER_TYPE_BOTH:String = "sliderTypeBoth";
 		public static const SLIDER_TYPE_NONE:String = "sliderTypeNone";
 		//===========================================
+		public var maxSpeed:int = 40 ;
 		public var slideSpeed:Number=0.4;
 		public var row:int = 5, col:Number=5 ;
 		public var rowGap:int = 5, colGap:Number=15 ;
@@ -106,6 +107,8 @@ package bing.components.ext
 		private function onMouseEvtHandler( e:MouseEvent ):void
 		{
 			e.stopPropagation();
+			if(_lockDrag) return ;
+			
 			switch(e.type)
 			{
 				case MouseEvent.MOUSE_OUT:
@@ -116,18 +119,18 @@ package bing.components.ext
 				case MouseEvent.MOUSE_UP:
 					if(_mouseIsDown){
 						var timeCha:Number = getTimer()-_dragTime;
-						var temp:Number = 1/(timeCha*0.005) ;
+						var temp:Number = 1/(timeCha*0.002) ;
 						if(_sliderType==SLIDER_TYPE_H)
 						{
-							if(timeCha<600 && MathUtil.distance(_containerPos.x,0,_container.x,0)>10 )  	_endX+= temp*_offsetX ;
+							if(timeCha<500 && MathUtil.distance(_containerPos.x,0,_container.x,0)>10 )  	_endX+= temp*_offsetX ;
 							else _endX = _container.x ;
 						}
 						else if(_sliderType==SLIDER_TYPE_V)
 						{
-							if(timeCha<600  && MathUtil.distance(_containerPos.y,0,_container.y,0)>10 )  	_endY+= temp*_offsetY;
+							if(timeCha<500  && MathUtil.distance(_containerPos.y,0,_container.y,0)>10 )  	_endY+= temp*_offsetY;
 							else _endY = _container.y ;
 						}
-						else if(timeCha<600  && MathUtil.distance(_containerPos.x,_containerPos.y,_container.x,_container.y)>10 ) 
+						else if(timeCha<500  && MathUtil.distance(_containerPos.x,_containerPos.y,_container.x,_container.y)>10 ) 
 						{
 							_endX+= temp*_offsetX;
 							_endY+= temp*_offsetY;
@@ -159,6 +162,16 @@ package bing.components.ext
 					_dragTime = getTimer();
 					break ;
 				case MouseEvent.MOUSE_MOVE:
+					if(!_mouseIsDown){
+						_mouseIsDown = true ;
+						_mouseDownPos.x = e.stageX ;
+						_mouseDownPos.y = e.stageY ;
+						_containerPos.x = _container.x ;
+						_containerPos.y = _container.y ;
+						_endX = _container.x ;
+						_endY = _container.y ;
+						_dragTime = getTimer();
+					}
 					if(e.buttonDown){
 						mouseChildren=false;
 						_offsetX = e.stageX-_mouseDownPos.x ;
@@ -249,14 +262,16 @@ package bing.components.ext
 		public function update():void
 		{
 			if(_container){
-				var speedX:Number = (_endX-_container.x)*slideSpeed ;
-				if( speedX>40 ) speedX=40  ;
-				else if(speedX <-40) speedX= -40  ;
+				var speedX:int = (_endX-_container.x)*slideSpeed ;
+				if( speedX>maxSpeed ) speedX=maxSpeed  ;
+				else if(speedX <-maxSpeed) speedX= -maxSpeed  ;
 				_container.x+=  speedX ;
-				var speedY:Number = (_endY-_container.y)*slideSpeed ;
-				if(speedY>40 ) speedY=40  ;
-				else if(speedY <-40) speedY= -40  ;
+				
+				var speedY:int = (_endY-_container.y)*slideSpeed ;
+				if(speedY>maxSpeed ) speedY=maxSpeed  ;
+				else if(speedY <-maxSpeed) speedY= -maxSpeed  ;
 				_container.y+=  speedY ;
+				
 			}
 		}
 		
@@ -274,7 +289,7 @@ package bing.components.ext
 			_container = null ;
 			_mask = null;
 			_mouseDownPos= null;
-			_containerPos= null;
+			 _containerPos= null;
 			removeListeners();
 		}
 	}
