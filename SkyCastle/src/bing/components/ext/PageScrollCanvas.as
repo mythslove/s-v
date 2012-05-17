@@ -17,7 +17,7 @@ package bing.components.ext
 	
 	[Event(name="move",type="flash.events.Event")]
 	/**
-	 * 分页显示，并且可以拖动的容器 
+	 * 滚动一次大致翻一页
 	 * @author zhouzhanglin
 	 */	
 	public class PageScrollCanvas extends BaseView implements IUIAnimation
