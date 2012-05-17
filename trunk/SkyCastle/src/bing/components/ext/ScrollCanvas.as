@@ -162,17 +162,17 @@ package bing.components.ext
 					_dragTime = getTimer();
 					break ;
 				case MouseEvent.MOUSE_MOVE:
-					if(!_mouseIsDown){
-						_mouseIsDown = true ;
-						_mouseDownPos.x = e.stageX ;
-						_mouseDownPos.y = e.stageY ;
-						_containerPos.x = _container.x ;
-						_containerPos.y = _container.y ;
-						_endX = _container.x ;
-						_endY = _container.y ;
-						_dragTime = getTimer();
-					}
 					if(e.buttonDown){
+						if(!_mouseIsDown){
+							_mouseIsDown = true ;
+							_mouseDownPos.x = e.stageX ;
+							_mouseDownPos.y = e.stageY ;
+							_containerPos.x = _container.x ;
+							_containerPos.y = _container.y ;
+							_endX = _container.x ;
+							_endY = _container.y ;
+							_dragTime = getTimer();
+						}
 						mouseChildren=false;
 						_offsetX = e.stageX-_mouseDownPos.x ;
 						_offsetY = e.stageY-_mouseDownPos.y ;
