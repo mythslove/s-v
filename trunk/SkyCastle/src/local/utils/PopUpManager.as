@@ -27,7 +27,7 @@ package local.utils
 		 * @param modal 是否是模式窗口
 		 * @maskAlpha  遮挡的颜色
 		 */		
-		public function addQueuePopUp( mc:DisplayObject ,  modal:Boolean=true , priority:int = 0 , maskAlpha:Number=0 ):void
+		public function addQueuePopUp( mc:DisplayObject ,  modal:Boolean=true , priority:int = 0 , maskAlpha:Number=0.5 ):void
 		{
 			if(!mc || this.contains(mc)) return ;
 			
