@@ -10,6 +10,7 @@ package local.views.quest
 		public function QuestProgressRenderer()
 		{
 			super();
+			stop();
 		}
 	}
 }
