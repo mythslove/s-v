@@ -19,7 +19,7 @@ package local.model.vos
 		 */		
 		public function get isComplete():Boolean
 		{
-			if(isSkipped || current>=sum ) return true;
+			if( (skipCash>0 && isSkipped) || current>=sum ) return true;
 			return false ;
 		}
 	}
