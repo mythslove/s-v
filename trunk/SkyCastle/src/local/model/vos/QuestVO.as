@@ -15,6 +15,10 @@ package local.model.vos
 		public var items:Array ; //所有的QuestItemVO 
 		public var rewardsVO:RewardsVO; //完成任务后的奖励
 		
+		/**
+		 * 判断整个任务是否完成 
+		 * @return 
+		 */		
 		public function checkComple():Boolean
 		{
 			if(isComplete) return true ;
