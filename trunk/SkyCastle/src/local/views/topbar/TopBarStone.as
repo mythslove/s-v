@@ -3,7 +3,7 @@ package local.views.topbar
 	import flash.display.Sprite;
 	import flash.text.TextField;
 	
-	import local.views.BaseView;
+	import local.views.base.BaseView;
 	import local.views.tooltip.GameToolTip;
 	
 	public class TopBarStone extends BaseView

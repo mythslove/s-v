@@ -3,7 +3,7 @@ package local.views.alert
 	import flash.text.TextField;
 	
 	import local.utils.PopUpManager;
-	import local.views.BaseView;
+	import local.views.base.BaseView;
 
 	/**
 	 * 花cash时的提示框 

@@ -11,7 +11,7 @@ package local.views.alert
 	
 	import local.comm.GameSetting;
 	import local.utils.PopUpManager;
-	import local.views.BaseView;
+	import local.views.base.BaseView;
 
 	/**
 	 * 简单的确认窗口 

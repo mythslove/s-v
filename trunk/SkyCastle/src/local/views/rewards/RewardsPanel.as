@@ -10,7 +10,7 @@ package local.views.rewards
 	import local.model.vos.PickupVO;
 	import local.model.vos.PlayerVO;
 	import local.model.vos.RewardsVO;
-	import local.views.BaseView;
+	import local.views.base.BaseView;
 	import local.views.base.Image;
 
 	/**

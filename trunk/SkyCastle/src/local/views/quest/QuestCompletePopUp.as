@@ -1,6 +1,6 @@
 package local.views.quest
 {
-	import local.views.BaseView;
+	import local.views.base.BaseView;
 	/**
 	 * 任务完成弹出窗口 
 	 * @author zzhanglin

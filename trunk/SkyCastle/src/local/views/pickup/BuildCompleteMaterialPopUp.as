@@ -14,7 +14,7 @@ package local.views.pickup
 	import local.model.PickupModel;
 	import local.model.vos.PickupVO;
 	import local.utils.PopUpManager;
-	import local.views.BaseView;
+	import local.views.base.BaseView;
 
 	/**
 	 * 建筑完成时需要的材料窗口 

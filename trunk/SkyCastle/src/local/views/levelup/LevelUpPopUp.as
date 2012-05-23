@@ -13,7 +13,7 @@ package local.views.levelup
 	import local.model.vos.LevelVO;
 	import local.model.vos.RewardsVO;
 	import local.utils.PopUpManager;
-	import local.views.BaseView;
+	import local.views.base.BaseView;
 	import local.views.rewards.RewardsPanel;
 	
 	public class LevelUpPopUp extends BaseView

@@ -7,7 +7,6 @@ package local.views.base
 	import flash.events.Event;
 	
 	import local.utils.ResourceUtil;
-	import local.views.BaseView;
 	import local.views.loading.LoaderSmall;
 	
 	public class Image extends BaseView

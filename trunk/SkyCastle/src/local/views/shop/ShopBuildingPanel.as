@@ -8,7 +8,7 @@ package local.views.shop
 	
 	import local.model.buildings.vos.BuildingVO;
 	import local.model.vos.ShopItemVO;
-	import local.views.BaseView;
+	import local.views.base.BaseView;
 
 	/**
 	 * 商店中的建筑面板

@@ -12,7 +12,7 @@ package local.views.quest
 	
 	import local.comm.GameSetting;
 	import local.utils.PopUpManager;
-	import local.views.BaseView;
+	import local.views.base.BaseView;
 
 	/**
 	 * 任务进度信息窗口 
