@@ -6,7 +6,7 @@ package local.model.vos
 		public var current:int ; //当前多少个
 		public var sum:int=1 ; //总共需要多少个
 		public var title:String ; //标题
-		public var skipCash:int ; //跳过这个任务需要的钱
+		public var skipCash:int ; //跳过这个任务需要的钱，如果为0，则不判断这个
 		public var isSkipped:Boolean ; //是否跳过
 		public var icon:String ; //icon名称
 		
