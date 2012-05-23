@@ -25,7 +25,7 @@ package local.views.storage
 	import local.model.vos.StorageItemVO;
 	import local.utils.BuildingFactory;
 	import local.utils.PopUpManager;
-	import local.views.BaseView;
+	import local.views.base.BaseView;
 	import local.views.loading.SkinLoading;
 
 	/**

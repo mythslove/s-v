@@ -22,7 +22,7 @@ package local.views.shop
 	import local.model.buildings.vos.BuildingVO;
 	import local.utils.BuildingFactory;
 	import local.utils.PopUpManager;
-	import local.views.BaseView;
+	import local.views.base.BaseView;
 	import local.views.shop.subtab.ShopSubBuildingTabBar;
 	import local.views.shop.subtab.ShopSubDecorationTabBar;
 

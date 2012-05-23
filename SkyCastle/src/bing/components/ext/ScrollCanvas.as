@@ -1,5 +1,6 @@
 package bing.components.ext
 {
+	import bing.components.BingComponent;
 	import bing.components.interfaces.IUIAnimation;
 	import bing.components.utils.UIAniManager;
 	import bing.utils.ContainerUtil;
@@ -12,14 +13,11 @@ package bing.components.ext
 	import flash.geom.Point;
 	import flash.utils.getTimer;
 	
-	import local.comm.GameData;
-	import local.views.BaseView;
-	
 	/**
 	 * 自由滚动的容器 
 	 * @author zhouzhanglin
 	 */	
-	public class ScrollCanvas  extends BaseView implements IUIAnimation
+	public class ScrollCanvas  extends BingComponent implements IUIAnimation
 	{
 		public static const MOVE:String = "move";
 		public static const SLIDER_TYPE_H:String = "sliderTypeH";

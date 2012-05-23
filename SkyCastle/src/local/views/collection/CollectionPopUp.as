@@ -15,7 +15,7 @@ package local.views.collection
 	import local.model.CollectionModel;
 	import local.model.vos.CollectionVO;
 	import local.utils.PopUpManager;
-	import local.views.BaseView;
+	import local.views.base.BaseView;
 
 	/**
 	 * 所有收集的弹出窗口 

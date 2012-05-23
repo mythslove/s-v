@@ -1,4 +1,4 @@
-package local.views
+package local.views.base
 {
 	import flash.display.Sprite;
 	import flash.events.Event;

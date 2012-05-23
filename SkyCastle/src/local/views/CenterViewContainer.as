@@ -6,6 +6,7 @@ package  local.views
 	import local.comm.GlobalDispatcher;
 	import local.comm.GlobalEvent;
 	import local.utils.PopUpManager;
+	import local.views.base.BaseView;
 	
 	/**
 	 * 始终居中的视图的容器 

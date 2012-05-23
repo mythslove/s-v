@@ -5,7 +5,7 @@ package local.views.topbar
 	import flash.text.TextField;
 	
 	import local.model.vos.PlayerVO;
-	import local.views.BaseView;
+	import local.views.base.BaseView;
 	import local.views.tooltip.GameToolTip;
 	
 	public class TopBarGem extends BaseView

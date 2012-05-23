@@ -11,6 +11,7 @@ package local.views
 	import local.comm.GlobalEvent;
 	import local.model.vos.PickupVO;
 	import local.views.collection.CollectionHud;
+	import local.views.base.BaseView;
 
 	public class RightBar extends BaseView
 	{

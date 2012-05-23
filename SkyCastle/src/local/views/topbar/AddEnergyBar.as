@@ -5,7 +5,7 @@ package local.views.topbar
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	
-	import local.views.BaseView;
+	import local.views.base.BaseView;
 	import local.views.tooltip.GameToolTip;
 
 	/**

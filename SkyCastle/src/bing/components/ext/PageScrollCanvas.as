@@ -1,5 +1,6 @@
 package bing.components.ext
 {
+	import bing.components.BingComponent;
 	import bing.components.interfaces.IUIAnimation;
 	import bing.components.utils.UIAniManager;
 	import bing.utils.ContainerUtil;
@@ -13,14 +14,12 @@ package bing.components.ext
 	import flash.geom.Rectangle;
 	import flash.utils.getTimer;
 	
-	import local.views.BaseView;
-	
 	[Event(name="move",type="flash.events.Event")]
 	/**
 	 * 滚动一次大致翻一页
 	 * @author zhouzhanglin
 	 */	
-	public class PageScrollCanvas extends BaseView implements IUIAnimation
+	public class PageScrollCanvas extends BingComponent implements IUIAnimation
 	{
 		public static const MOVE:String = "move";
 		public static const SLIDER_TYPE_H:String = "sliderTypeH";

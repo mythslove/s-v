@@ -12,7 +12,7 @@ package local.views.collection
 	import local.model.vos.PickupVO;
 	import local.model.vos.RewardsVO;
 	import local.utils.PopUpManager;
-	import local.views.BaseView;
+	import local.views.base.BaseView;
 	import local.views.base.Image;
 	import local.views.icon.GameIcons;
 
