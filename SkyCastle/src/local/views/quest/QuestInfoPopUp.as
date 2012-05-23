@@ -11,6 +11,7 @@ package local.views.quest
 	import flash.text.TextField;
 	
 	import local.comm.GameSetting;
+	import local.model.vos.QuestVO;
 	import local.utils.PopUpManager;
 	import local.views.base.BaseView;
 
@@ -28,12 +29,14 @@ package local.views.quest
 		public var listBg:Sprite ;//任务列表的背景
 		private var container:Sprite ; //任务进度容器
 		//=============================
+		public var questVO:QuestVO ;
 		
-		public function QuestInfoPopUp()
+		public function QuestInfoPopUp( vo:QuestVO )
 		{
 			super();
 			x = GameSetting.SCREEN_WIDTH>>1;
 			y = GameSetting.SCREEN_HEIGHT>>1;
+			this.questVO = vo ;
 		}
 		
 		override protected function added():void
