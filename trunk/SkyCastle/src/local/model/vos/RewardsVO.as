@@ -12,7 +12,7 @@ package local.model.vos
 		public var wood:int ;
 		public var stone:int ;
 		public var energy:int ;
-		public var buildings:Array; //baseId集合
-		public var pickups:Array; //pickupId集合
+		public var buildings:Object ; //key-value，key为buildingBaseId , value 为数量
+		public var pickups:Object; //key-value，key为pid , value为数量
 	}
 }

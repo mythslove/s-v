@@ -9,9 +9,11 @@ package local.views.quest
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	
+	import local.comm.GameSetting;
 	import local.model.vos.QuestVO;
 	import local.utils.PopUpManager;
 	import local.views.base.BaseView;
+	import local.views.rewards.RewardsPanel;
 
 	/**
 	 * 任务完成弹出窗口 
@@ -19,7 +21,6 @@ package local.views.quest
 	 */	
 	public class QuestCompletePopUp extends BaseView
 	{
-		public var rewardsBg:Sprite;
 		public var infoBg:Sprite ;
 		public var txtTitle:TextField;
 		public var txtCompleteInfo:TextField;
@@ -32,8 +33,9 @@ package local.views.quest
 		public function QuestCompletePopUp( vo:QuestVO )
 		{
 			super();
+			x = GameSetting.SCREEN_WIDTH>>1;
+			y = GameSetting.SCREEN_HEIGHT>>1;
 			this.questVO = vo ;
-			rewardsBg.mouseChildren = rewardsBg.mouseEnabled = false  ;
 			infoBg.mouseChildren = infoBg.mouseEnabled = false  ;
 			container.mouseChildren = container.mouseEnabled = false  ;
 			txtTitle.mouseEnabled = txtCompleteInfo.mouseEnabled = false ;
@@ -44,6 +46,16 @@ package local.views.quest
 			TweenLite.from(this,0.3,{x:-200 , ease:Back.easeOut });
 			btnClose.addEventListener(MouseEvent.CLICK , onCloseHandler );
 			btnOk.addEventListener(MouseEvent.CLICK , onCloseHandler );
+			//显示详细
+			txtTitle.text = questVO.title+"" ;
+			txtCompleteInfo.text = questVO.completeMsg+"" ;
+			txtCompleteInfo.y = infoBg.y + ( infoBg.height-infoBg.height)>>1 ;
+			//奖励
+			if(questVO.rewardsVO){
+				var rewads:RewardsPanel = new RewardsPanel(questVO.rewardsVO , 500);
+				container.addChild( rewads );
+				questVO.isReceive = true ;
+			}
 		}
 		
 		

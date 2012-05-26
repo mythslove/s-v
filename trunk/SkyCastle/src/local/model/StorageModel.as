@@ -71,6 +71,14 @@ package local.model
 		}
 		
 		/**
+		 * 刷新收藏箱 
+		 */		
+		public function refreshStorage():void
+		{
+			_isInit  = false; 
+		}
+		
+		/**
 		 * 从收藏箱中删除一个建筑 
 		 * @param buildingVO
 		 */		
