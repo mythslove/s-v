@@ -16,7 +16,6 @@ package bing.components
 		public function BingComponent()
 		{
 			super();
-			mouseEnabled = false; 
 			addEventListener(Event.ADDED_TO_STAGE, addedToStageHandler,false,0,true);
 		}
 
