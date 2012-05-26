@@ -10,6 +10,7 @@ package local.views.quest
 	import flash.text.TextField;
 	
 	import local.comm.GameSetting;
+	import local.model.QuestModel;
 	import local.model.vos.QuestVO;
 	import local.utils.PopUpManager;
 	import local.views.base.BaseView;
@@ -82,6 +83,7 @@ package local.views.quest
 			questVO = null ;
 			btnClose.removeEventListener(MouseEvent.CLICK , onCloseHandler );
 			btnOk.removeEventListener(MouseEvent.CLICK , onCloseHandler );
+			QuestModel.instance.getQuests() ; //重新获取quests
 		}
 	}
 }

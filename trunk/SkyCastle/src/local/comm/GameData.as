@@ -67,7 +67,16 @@ package local.comm
 		public static var currentMapId:String = "MAP_01";
 		
 		/** 是否在自己的村庄*/
-		public static var isHome:Boolean ;
+		public static var _isHome:Boolean ;
+		public static function get isHome():Boolean
+		{
+			return _isHome ;
+		}
+		public static function set isHome( value:Boolean):void
+		{
+			_isHome = value ;
+			
+		}
 		
 		/** 当前用户的uid*/
 		public static var me_uid:String ;
