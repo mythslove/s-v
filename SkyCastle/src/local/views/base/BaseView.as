@@ -8,6 +8,7 @@ package local.views.base
 		public function BaseView()
 		{
 			super();
+			mouseEnabled = false; 
 			addEventListener(Event.ADDED_TO_STAGE , addedToStageHandler  );
 		}
 		
