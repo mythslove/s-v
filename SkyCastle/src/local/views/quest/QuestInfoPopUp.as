@@ -15,7 +15,6 @@ package local.views.quest
 	import local.model.vos.QuestVO;
 	import local.utils.PopUpManager;
 	import local.views.base.BaseView;
-	import local.views.base.Image;
 
 	/**
 	 * 任务进度信息窗口 
@@ -114,6 +113,7 @@ package local.views.quest
 				_ro.removeEventListener(ResultEvent.RESULT , onResultHandler );
 				_ro = null ;
 			}
+			questVO = null ;
 			btnClose.removeEventListener(MouseEvent.CLICK , onCloseHandler );
 			btnOk.removeEventListener(MouseEvent.CLICK , onCloseHandler );
 		}
