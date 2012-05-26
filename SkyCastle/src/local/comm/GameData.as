@@ -8,6 +8,7 @@ package local.comm
 	import local.game.elements.HeroBornPoint;
 	import local.model.vos.ConfigBaseVO;
 	import local.utils.MouseManager;
+	import local.views.LeftBar;
 	import local.views.icon.*;
 	
 
@@ -75,7 +76,14 @@ package local.comm
 		public static function set isHome( value:Boolean):void
 		{
 			_isHome = value ;
-			
+			if(_isHome)
+			{
+				LeftBar.instance.visible = true ;
+			}
+			else
+			{
+				LeftBar.instance.visible = false ;
+			}
 		}
 		
 		/** 当前用户的uid*/
