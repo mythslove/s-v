@@ -6,7 +6,6 @@ package local.views.quest
 	import com.greensock.TweenLite;
 	import com.greensock.easing.Back;
 	
-	import flash.display.SimpleButton;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
@@ -16,7 +15,7 @@ package local.views.quest
 	import local.model.vos.QuestVO;
 	import local.utils.PopUpManager;
 	import local.views.base.BaseView;
-	import local.views.loading.LoaderSmall;
+	import local.views.base.Image;
 
 	/**
 	 * 任务进度信息窗口 
@@ -33,7 +32,6 @@ package local.views.quest
 		private var container:Sprite ; //任务进度容器
 		//=============================
 		public var questVO:QuestVO ;
-		private var _loading:LoaderSmall ;
 		private var _ro:GameRemote;
 		public function get ro():GameRemote
 		{
@@ -57,8 +55,6 @@ package local.views.quest
 				init();
 			}else {
 				visible = false ;
-				_loading = new LoaderSmall();
-				addChild(_loading);
 				ro.getOperation("accept").send(questVO.qid);
 			}
 		}
@@ -67,22 +63,39 @@ package local.views.quest
 		{
 			TweenLite.from(this,0.3,{x:-200 , ease:Back.easeOut });
 			btnClose.addEventListener(MouseEvent.CLICK , onCloseHandler );
+			btnOk.addEventListener(MouseEvent.CLICK , onCloseHandler );
+			//显示详细
+			txtTitle.text = questVO.title ;
+			txtDec.text = questVO.info ;
+			txtDec.y = desBg.y +(desBg.height-txtDec.height)>>1 ;
+			var proPanel:QuestProgressPanel = new QuestProgressPanel(questVO) ;
+			container.addChild(proPanel);
 		}
 		
 		private function onResultHandler( e:ResultEvent ):void
 		{
-			if(_loading){
-				_loading.stop();
-				removeChild(_loading);
-				_loading = null ;
-			}
 			switch( e.method)
 			{
 				case "accept":
-					
+					visible = true ;
+					questVO = e.result as QuestVO ; //返回新的QuestVO
+					init();
 					break ;
 			}
 		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		//============关闭窗口==============================
 		
 		private function onCloseHandler( e:MouseEvent ):void
 		{
@@ -101,11 +114,8 @@ package local.views.quest
 				_ro.removeEventListener(ResultEvent.RESULT , onResultHandler );
 				_ro = null ;
 			}
-			if(_loading){
-				_loading.stop();
-				removeChild(_loading);
-				_loading = null ;
-			}
+			btnClose.removeEventListener(MouseEvent.CLICK , onCloseHandler );
+			btnOk.removeEventListener(MouseEvent.CLICK , onCloseHandler );
 		}
 	}
 }
