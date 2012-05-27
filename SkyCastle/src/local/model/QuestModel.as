@@ -93,16 +93,30 @@ package local.model
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
 		//=====================计算和统计quest中的数据===========================
 		
+		public function updateItems( questType:String , sonType:String = "" , num:int = 1  ):void
+		{
+			if(currentQuests==null) return  ;
+			//循环数组，判断是否有接受了该类任务，并且没有完成，则在此任务的相应类型数量上加1
+			var len:int = currentQuests.length;
+			var vo:QuestVO = null  ;
+			for( var i:int = 0 ; i<len ; i++ ){
+				if(currentQuests[i] is QuestVO ){
+					vo = currentQuests[i] as QuestVO;
+					if( vo.isAccept && !vo.isReceived && !vo.isComplete &&vo.updateCount(questType , sonType , num ) ){
+						
+						//判断是否有完成的uest
+//						checkCompleteQuest();
+						
+					}
+				}
+			}
+		}
 		
+		public function updateTypeCount( questType:String , sonType:String = "" , num:int = 1 ):void
+		{
+			
+		}
 	}
 }

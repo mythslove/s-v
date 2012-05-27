@@ -1,5 +1,7 @@
 package local.model.vos
 {
+	import local.enum.QuestType;
+
 	public class QuestItemVO
 	{
 		public var itemId:int ; //id
@@ -11,7 +13,7 @@ package local.model.vos
 		public var icon:String ; //icon名称
 		
 		public var questType:String ; //任务的类型
-		public var sonType:String ; //了类型
+		public var sonType:String ; //子类型
 		
 		/**
 		 * 这个item是否完成 
@@ -21,6 +23,18 @@ package local.model.vos
 		{
 			if( (skipCash>0 && isSkipped) || current>=sum ) return true;
 			return false ;
+		}
+		
+		
+		/**
+		 * 初始化数据
+		 */		
+		public function init( acceptTime:int ):void
+		{
+			if ( current>0 )
+			{
+				return ;
+			}
 		}
 	}
 }
