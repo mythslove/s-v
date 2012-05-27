@@ -7,10 +7,12 @@ package local.model.vos
 		public var info:String ; //描述
 		public var icon:String ; //icon名称
 		public var completeMsg:String ; //任务完成后的描述
+		public var shareMsg:String ; //分享的信息
+		public var shareTitle:String ; //分享的标题
 		
 		public var isAccept:Boolean; //是否接受任务
 		public var isComplete:Boolean; //是否完成任务
-		public var isReceive:Boolean ; //是否收到礼物
+		public var isReceived:Boolean ; //是否收到礼物
 		public var acceptTime:Number ; //接受任务的时间
 		public var items:Array ; //所有的QuestItemVO 
 		public var rewardsVO:RewardsVO; //完成任务后的奖励
@@ -28,6 +30,46 @@ package local.model.vos
 				}
 			}
 			return false ;
+		}
+		
+		
+		
+		public function updateCount( mainType:String , sonType:String="" , num:int = 1 ):Boolean
+		{
+			var isUpDate:Boolean = false ;
+			if (items)
+			{
+				for each( var itemVO:QuestItemVO in items)
+				{
+					if( itemVO.questType== mainType)
+					{
+						if ( sonType )
+						{
+							if ( itemVO.sonType &&  itemVO.sonType==sonType){
+								itemVO.current+=num;
+								isUpDate = true ;
+							}
+						}
+						else 
+						{
+							itemVO.current =num;
+							isUpDate = true ;
+						}	
+					}
+				}
+			}
+			return isUpDate;
+		}
+		
+		
+		public function updateBuildingCount( mainType:String , sonType:String , num:int  , buildTime:Number ):Boolean
+		{
+			
+		}
+		
+		public function updateBuildingTypeCount( mainType:String , sonType:String ):Boolean
+		{
+			
 		}
 	}
 }

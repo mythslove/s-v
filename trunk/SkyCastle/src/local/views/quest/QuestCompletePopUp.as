@@ -55,7 +55,7 @@ package local.views.quest
 			if(questVO.rewardsVO){
 				var rewads:RewardsPanel = new RewardsPanel(questVO.rewardsVO , 500);
 				container.addChild( rewads );
-				questVO.isReceive = true ;
+				questVO.isReceived = true ;
 			}
 		}
 		
