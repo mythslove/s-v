@@ -186,7 +186,9 @@ package local.model
 		{
 			if( itemType == "stone" ) return me.stone ;
 			else if( itemType=="wood") return me.wood ;
-			return 0 ;
+			else if( itemType=="coin" ) return me.coin;
+			else if( itemType=="rank") return me.rank ;
+ 			return 0 ;
 		}
 	}
 }

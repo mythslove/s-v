@@ -23,16 +23,9 @@ package local.enum
 		 */		
 		public static const COLLECT_NUM:String = "collectnum" ;
 		/**
-		 * 拥有某种stone/wood的数量 , sonType为ItemType中的小类型(stone,wood)
+		 * 拥有某种stone/wood/coin/rank的数量 , sonType为stone/wood/coin/rank字符串
 		 */		
-		public static var OWN_STONE_WOOD:String = "ownsw";
-		/**
-		 * 收集了某种stone/wood的数量 , sonType为ItemType中的小类型(stone,wood)
-		 */		
-		public static var GET_STONE_WOOD:String = "getsw";
-		
-		
-		
+		public static var OWN_SWCR:String = "ownswcr";
 		/**
 		 * 收集pickup的数量，sonType为pkId 
 		 */		
