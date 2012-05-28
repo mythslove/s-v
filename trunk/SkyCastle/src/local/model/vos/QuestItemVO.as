@@ -42,6 +42,11 @@ package local.model.vos
 						current = MapBuildingModel.instance.getCountByBaseId( sonType );
 					}
 					break ;
+				case QuestType.PLAYER_SWCR:
+					if(sonType){
+						current = PlayerModel.instance.getMySWCR( sonType );
+					}
+					break;
 			}
 		}
 	}
