@@ -2,6 +2,7 @@ package local.model.buildings
 {
 	import local.enum.ItemType;
 	import local.game.elements.Building;
+	import local.model.buildings.vos.BaseBuildingVO;
 
 	/**
 	 * 地图上的所有建筑 
@@ -95,20 +96,20 @@ package local.model.buildings
 		}
 		
 		//============统计地图上的建筑========================
-//		/**
-//		 * 统计建筑的数量，且baseId相同 
-//		 * @param baseId
-//		 * @return 
-//		 */	
-//		public function getCountByBaseId( baseId:String ):int
-//		{
-//			var baseVO:BaseBuildingVO = BaseBuildingVOModel.instance.getBaseVOById(baseId );
-//			var buildings:Array = getArrayByType(baseVO.type);
-//			var count:int ;
-//			for each(var build:Building in buildings){
-//				if(build.baseBuildingVO.baseId==baseId) ++count ;
-//			}
-//			return count ;
-//		}
+		/**
+		 * 统计建筑的数量，且baseId相同 
+		 * @param baseId
+		 * @return 
+		 */	
+		public function getCountByBaseId( baseId:String ):int
+		{
+			var baseVO:BaseBuildingVO = BaseBuildingVOModel.instance.getBaseVOById(baseId );
+			var buildings:Array = getArrayByType(baseVO.type);
+			var count:int ;
+			for each(var build:Building in buildings){
+				if(build.baseBuildingVO.baseId==baseId) ++count ;
+			}
+			return count ;
+		}
 	}
 }
