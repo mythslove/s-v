@@ -39,6 +39,7 @@ package local.views.quest
 				_ro = new GameRemote("");
 				_ro.addEventListener(ResultEvent.RESULT , onResultHandler );
 			}
+			return _ro ;
 		}
 		
 		public function QuestInfoPopUp( vo:QuestVO )
