@@ -1,7 +1,6 @@
 package local.game.elements
 {
 	import bing.amf3.ResultEvent;
-	import bing.utils.DateUtil;
 	
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -10,8 +9,10 @@ package local.game.elements
 	import local.enum.AvatarAction;
 	import local.enum.BasicPickup;
 	import local.enum.BuildingStatus;
+	import local.enum.QuestType;
 	import local.events.GameTimeEvent;
 	import local.game.GameWorld;
+	import local.model.QuestModel;
 	import local.model.buildings.vos.BasePlantVO;
 	import local.model.buildings.vos.BuildingVO;
 	import local.utils.CharacterManager;
@@ -98,7 +99,8 @@ package local.game.elements
 					if(e.result){
 						_executeBack = true ;
 						this.showPickup();
-						if(_buildingFlag && _buildingFlag.parent) removeChild(_buildingFlag);
+						if(_buildingFlag && _buildingFlag.parent) 
+							removeChild(_buildingFlag);
 					}
 					break ;
 			}
@@ -176,6 +178,9 @@ package local.game.elements
 				_executeBack = false ;
 				_currentRewards = null ;
 				super.showPickup();
+				
+				//统计 quest
+				QuestModel.instance.updateQuests( QuestType.COLLECT_NUM );
 				
 				//从世界中删除
 				GameWorld.instance.removeBuildFromScene(this);

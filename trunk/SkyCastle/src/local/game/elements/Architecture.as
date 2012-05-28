@@ -12,11 +12,9 @@ package local.game.elements
 	import local.enum.AvatarAction;
 	import local.enum.BuildingStatus;
 	import local.enum.MouseStatus;
-	import local.enum.QuestType;
 	import local.events.GameTimeEvent;
 	import local.game.GameWorld;
 	import local.model.PlayerModel;
-	import local.model.QuestModel;
 	import local.model.buildings.vos.BuildingVO;
 	import local.utils.CharacterManager;
 	import local.utils.CollectQueueUtil;
@@ -157,8 +155,6 @@ package local.game.elements
 						this.showPickup();
 						if(_buildingFlag && _buildingFlag.parent) 
 							removeChild(_buildingFlag);
-						//统计 
-						QuestModel.instance.updateQuests( QuestType.COLLECT_NUM );
 					}
 					break ;
 				case "build": //修建
