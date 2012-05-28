@@ -1,5 +1,6 @@
 package local.model
 {
+	import local.enum.QuestType;
 	import local.model.vos.ConfigBaseVO;
 	import local.model.vos.PickupVO;
 
@@ -82,6 +83,8 @@ package local.model
 				myPickups = new Object();
 				myPickups[pickupId] = num ;
 			}
+			//统计 quest
+			QuestModel.instance.updateQuests( QuestType.COLLECT_NUM_PICKUP , pickupId , num );
 		}
 		
 		/**
