@@ -5,9 +5,11 @@ package local.game.elements
 	
 	import local.comm.GameData;
 	import local.enum.BuildingOperation;
+	import local.enum.QuestType;
 	import local.game.GameWorld;
 	import local.model.MapGridDataModel;
 	import local.model.PlayerModel;
+	import local.model.QuestModel;
 	import local.model.buildings.vos.BuildingVO;
 	import local.model.map.MapModel;
 	import local.model.vos.RewardsVO;
@@ -86,6 +88,8 @@ package local.game.elements
 					_executeBack = true ;
 					_currentRewards = e.result as RewardsVO ;
 					this.showPickup();
+					//统计quest
+					QuestModel.instance.updateQuests( QuestType.CHOP , baseBuildingVO.type ) ;
 					break ;
 			}
 		}
