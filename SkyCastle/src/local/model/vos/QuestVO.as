@@ -21,7 +21,7 @@ package local.model.vos
 		 * 判断整个任务是否完成 
 		 * @return 
 		 */		
-		public function checkComple():Boolean
+		public function checkComplete():Boolean
 		{
 			if(isComplete) return true ;
 			if(items){
@@ -32,15 +32,22 @@ package local.model.vos
 			return false ;
 		}
 		
-		
-		public function updateCount( mainType:String , sonType:String="" , num:int = 1 ):Boolean
+		/**
+		 * 统计 
+		 * @param mainType 主类型
+		 * @param sonType 子类型
+		 * @param num 变化数量
+		 * @param time 时间限制
+		 * @return 
+		 */		
+		public function updateCount( mainType:String , sonType:String="" , num:int = 1 , time:Number=NaN ):Boolean
 		{
 			var isUpDate:Boolean = false ;
-			if (items)
+			for each( var itemVO:QuestItemVO in items)
 			{
-				for each( var itemVO:QuestItemVO in items)
+				if( itemVO.questType== mainType)
 				{
-					if( itemVO.questType== mainType)
+					if( !time || acceptTime>=time)
 					{
 						if ( sonType )
 						{
@@ -51,7 +58,7 @@ package local.model.vos
 						}
 						else 
 						{
-							itemVO.current =num;
+							itemVO.current+=num;
 							isUpDate = true ;
 						}	
 					}
@@ -60,30 +67,6 @@ package local.model.vos
 			return isUpDate;
 		}
 		
-		/**
-		 *  统计建筑方面的任务，主要是有建筑时间的限制
-		 * @param mainType
-		 * @param sonType
-		 * @param num
-		 * @param time 时间限制
-		 * @return 
-		 */		
-		public function updateBuildingCount( mainType:String , sonType:String , time:Number , num:int = 1 ):Boolean
-		{
-			if( this.acceptTime>=time)
-				return updateCount( mainType , sonType ,num ) ;
-			return false ;
-		}
 		
-		/**
-		 * 统计建筑类型的数量 
-		 * @param mainType
-		 * @param sonType
-		 * @return 
-		 */		
-		public function updateBuildingTypeCount( mainType:String , sonType:String ):Boolean
-		{
-			
-		}
 	}
 }

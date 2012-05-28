@@ -11,17 +11,9 @@ package local.enum
 		 */
 		public static const BUILD_NUM:String  ="buildNum";
 		/**
-		 * 修建某种类型建筑的数量,sonType为建筑的type 
-		 */		
-		public static const BUILD_NUM_TYPE:String = "buildnumtype" ;
-		/**
 		 * 拥有建筑的数量，sonType为建筑的baseId 
 		 */		
 		public static const OWN_NUM:String = "ownnum" ;
-		/**
-		 * 拥有某有类型的建筑数量， sonType为建筑的type
-		 */		
-		public static const OWN_NUM_TYPE:String = "ownnumtype";
 		/**
 		 * 砍树，石头.. sonType为ItemType中的小类型(tree,stone,rock)
 		 */		
