@@ -84,8 +84,8 @@ package local.model
 				myPickups[pickupId] = num ;
 			}
 			//统计 quest
-			QuestModel.instance.updateQuests( QuestType.COLLECT_NUM_PICKUP , pickupId , num );
-			QuestModel.instance.updateQuests( QuestType.OWN_NUM_PICKUP , pickupId );
+			QuestModel.instance.updateQuests( QuestType.COLLECT_PICKUP , pickupId , num );
+			QuestModel.instance.updateQuests( QuestType.OWN_PICKUP , pickupId );
 		}
 		
 		/**
@@ -102,7 +102,7 @@ package local.model
 				}
 			}
 			//统计quests
-			QuestModel.instance.updateQuests( QuestType.OWN_NUM_PICKUP , pickupId );
+			QuestModel.instance.updateQuests( QuestType.OWN_PICKUP , pickupId );
 		}
 	}
 }

@@ -180,7 +180,7 @@ package local.game.elements
 				super.showPickup();
 				
 				//统计 quest
-				QuestModel.instance.updateQuests( QuestType.COLLECT_NUM );
+				QuestModel.instance.updateQuests( QuestType.COLLECT_BUILDING );
 				
 				//从世界中删除
 				GameWorld.instance.removeBuildFromScene(this);

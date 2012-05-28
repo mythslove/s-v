@@ -13,47 +13,45 @@ package local.enum
 		/**
 		 * 拥有建筑的数量，sonType为建筑的baseId 
 		 */		
-		public static const OWN_NUM:String = "ownnum" ;
+		public static const OWN_BUILDING:String = "ownbuilding" ;
 		/**
 		 * 砍树，石头.. sonType为ItemType中的小类型(tree,stone,rock)
 		 */		
 		public static const CHOP:String = "chop"  ;
 		/**
-		 * 收获的次数 
+		 * 收获建筑的次数
 		 */		
-		public static const COLLECT_NUM:String = "collectnum" ;
+		public static const COLLECT_BUILDING:String = "collectbuilding" ;
+		
+		
 		/**
 		 * 收集pickup的数量，sonType为pkId 
 		 */		
-		public static const COLLECT_NUM_PICKUP:String = "collectnumpickup" ;
+		public static const COLLECT_PICKUP:String = "collectpk" ;
 		/**
 		 * 拥有某种pickup的数量，sonType为pkId 
 		 */		
-		public static const OWN_NUM_PICKUP:String = "ownnumpickup" ;
+		public static const OWN_PICKUP:String = "ownpk" ;
 		
 		
 		
 		
 		/**
-		 * 发送礼物给好友 
+		 * 发送礼物给好友
 		 */		
 		public static const SEND_GIFT:String = "sendgift" ;
 		/**
-		 * 拜访好友 
+		 * 拜访好友
 		 */		
 		public static const INVITE:String = "invite" ;
 		/**
-		 * 帮助好友 
+		 * 帮助好友的
 		 */		
 		public static const HELP_FRIEND:String = "helpfriend" ;
 		/**
-		 * 添加好友 
+		 * 添加好友
 		 */		
 		public static const ADD_FRIEND:String = "addfriend"; 
-		/**
-		 *有多少好友 
-		 */		
-		public static const OWN_FRIEND:String = "ownfriend";
 		/**
 		 * 分享游戏 
 		 */		
@@ -66,15 +64,9 @@ package local.enum
 		 * 喜欢 
 		 */		
 		public static const LIKE:String =  "like" ;
-		
-		
 		/**
-		 * 用gem的金额
-		 */		
-		public static const CASH_PURCHASE:String = "cashpurchase" ;
-		/**
-		 * 用gem的次数 
-		 */		
-		public static const CASH_PURCHASE_NUM:String ="cashpurchasenum" ;
+		 *  兑换collection 
+		 */
+		public static const TURN_IN:String = "turnIn";
 	}
 }

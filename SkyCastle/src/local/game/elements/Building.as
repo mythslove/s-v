@@ -132,7 +132,7 @@ package local.game.elements
 						{
 							//任务统计
 							QuestModel.instance.updateQuests( QuestType.BUILD_NUM , baseBuildingVO.baseId ,1 , buildingVO.buildTime );
-							QuestModel.instance.updateQuests( QuestType.OWN_NUM , baseBuildingVO.baseId );
+							QuestModel.instance.updateQuests( QuestType.OWN_BUILDING , baseBuildingVO.baseId );
 						}
 					}else{
 						GameWorld.instance.removeBuildFromScene(this);
@@ -145,7 +145,7 @@ package local.game.elements
 						GameWorld.instance.removeBuildFromScene(this);
 						this.showStashEffect();
 						//任务统计
-						QuestModel.instance.updateQuests( QuestType.OWN_NUM , baseBuildingVO.baseId );
+						QuestModel.instance.updateQuests( QuestType.OWN_BUILDING , baseBuildingVO.baseId );
 						//清理
 						dispose();
 					}
@@ -165,7 +165,7 @@ package local.game.elements
 						GameWorld.instance.removeBuildFromScene(this);
 						this.showStashEffect();
 						//任务统计
-						QuestModel.instance.updateQuests( QuestType.OWN_NUM , baseBuildingVO.baseId );
+						QuestModel.instance.updateQuests( QuestType.OWN_BUILDING , baseBuildingVO.baseId );
 						//清理
 						dispose();
 					}
