@@ -95,7 +95,13 @@ package local.model
 		
 		//=====================计算和统计quest中的数据===========================
 		
-		public function updateItems( questType:String , sonType:String = "" , num:int = 1  ):void
+		/**
+		 * 统计任务项 
+		 * @param questType
+		 * @param sonType
+		 * @param num
+		 */		
+		public function updateQuestItems( questType:String , sonType:String = "" , num:int = 1  ):void
 		{
 			if(currentQuests==null) return  ;
 			//循环数组，判断是否有接受了该类任务，并且没有完成，则在此任务的相应类型数量上加1
@@ -114,7 +120,7 @@ package local.model
 			}
 		}
 		
-		public function updateTypeCount( questType:String , sonType:String = "" , num:int = 1 ):void
+		public function updateBuildingType( questType:String , sonType:String = "" ):void
 		{
 			
 		}

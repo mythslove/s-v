@@ -33,7 +33,6 @@ package local.model.vos
 		}
 		
 		
-		
 		public function updateCount( mainType:String , sonType:String="" , num:int = 1 ):Boolean
 		{
 			var isUpDate:Boolean = false ;
@@ -61,12 +60,27 @@ package local.model.vos
 			return isUpDate;
 		}
 		
-		
-		public function updateBuildingCount( mainType:String , sonType:String , num:int  , buildTime:Number ):Boolean
+		/**
+		 *  统计建筑方面的任务，主要是有建筑时间的限制
+		 * @param mainType
+		 * @param sonType
+		 * @param num
+		 * @param time 时间限制
+		 * @return 
+		 */		
+		public function updateBuildingCount( mainType:String , sonType:String , time:Number , num:int = 1 ):Boolean
 		{
-			
+			if( this.acceptTime>=time)
+				return updateCount( mainType , sonType ,num ) ;
+			return false ;
 		}
 		
+		/**
+		 * 统计建筑类型的数量 
+		 * @param mainType
+		 * @param sonType
+		 * @return 
+		 */		
 		public function updateBuildingTypeCount( mainType:String , sonType:String ):Boolean
 		{
 			

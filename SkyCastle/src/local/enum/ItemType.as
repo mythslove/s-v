@@ -22,14 +22,15 @@ package local.enum
 		 * 大类：装饰 
 		 */		
 		public static const DECORATION:String = "decoration";
+		/** 装饰：路，草坪，水渠 */
+		public static const DEC_ROAD:String = "road" ;
+		
 		/** 装饰：树，树藤*/
 		public static const DEC_TREE:String = "tree" ;
 		/** 装饰：石头 */
 		public static const DEC_STONE:String = "stone" ;
 		/** 装饰：磐石，岩石 */
 		public static const DEC_ROCK:String = "rock" ;
-		/** 装饰：路，草坪，水渠 */
-		public static const DEC_ROAD:String = "road" ;
 		
 		/**
 		 * 大类：种植 
