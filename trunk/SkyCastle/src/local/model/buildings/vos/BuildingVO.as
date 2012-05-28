@@ -41,7 +41,7 @@ package local.model.buildings.vos
 		public var level:int =1 ;
 		
 		/** 修建完成时的时间 */
-		public var buildTime:int ;
+		public var buildTime:Number ;
 		
 		//===================================非必需
 		/** 商店里的itemId*/
