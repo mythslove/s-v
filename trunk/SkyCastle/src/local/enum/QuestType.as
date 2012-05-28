@@ -22,8 +22,10 @@ package local.enum
 		 * 收获建筑的次数
 		 */		
 		public static const COLLECT_BUILDING:String = "collectbuilding" ;
-		
-		
+		/**
+		 * 统计玩家的一些属性 , sonType为：stone,wood,coin,rank这些字符串
+		 */		
+		public static const PLAYER_SWCR:String = "playerswcr";
 		/**
 		 * 收集pickup的数量，sonType为pkId 
 		 */		
@@ -32,8 +34,6 @@ package local.enum
 		 * 拥有某种pickup的数量，sonType为pkId 
 		 */		
 		public static const OWN_PICKUP:String = "ownpk" ;
-		
-		
 		
 		
 		/**
