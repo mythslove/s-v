@@ -23,13 +23,13 @@ package local.enum
 		 */		
 		public static const COLLECT_NUM:String = "collectnum" ;
 		/**
-		 * 拥有某种STONE_TREE_ROCK的数量 , sonType为ItemType中的小类型(tree,stone,rock)
+		 * 拥有某种stone/wood的数量 , sonType为ItemType中的小类型(stone,wood)
 		 */		
-		public static var OWN_STONE_TREE_ROCK:String = "ownstr";
+		public static var OWN_STONE_WOOD:String = "ownsw";
 		/**
-		 * 收集了某种STONE_TREE_ROCK的数量 , sonType为ItemType中的小类型(tree,stone,rock)
+		 * 收集了某种stone/wood的数量 , sonType为ItemType中的小类型(stone,wood)
 		 */		
-		public static var GET_STONE_TREE_ROCK:String = "getstr";
+		public static var GET_STONE_WOOD:String = "getsw";
 		
 		
 		

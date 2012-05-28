@@ -32,7 +32,7 @@ package local.utils
 			if(!mc || this.contains(mc)) return ;
 			
 			_popupList.push({window:mc , modal:modal , priority:priority,maskAlpha:maskAlpha });
-			sortByPriority();
+			if(priority!=0) sortByPriority();
 			popupNextWindow();
 		}
 		/**

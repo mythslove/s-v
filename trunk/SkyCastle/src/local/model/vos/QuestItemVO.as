@@ -1,6 +1,8 @@
 package local.model.vos
 {
 	import local.enum.QuestType;
+	import local.model.PlayerModel;
+	import local.model.buildings.MapBuildingModel;
 
 	public class QuestItemVO
 	{
@@ -31,9 +33,20 @@ package local.model.vos
 		 */		
 		public function init( acceptTime:int ):void
 		{
-			if ( current>0 )
+			if ( current>0 ) return ;
+			
+			switch( questType)
 			{
-				return ;
+				case QuestType.OWN_NUM:
+					if(sonType){
+						current = MapBuildingModel.instance.getCountByBaseId( sonType );
+					}
+					break ;
+				case QuestType.OWN_STONE_WOOD :
+					if(sonType){
+						current = PlayerModel.instance.getMyCount( sonType );
+					}
+					break ;
 			}
 		}
 	}

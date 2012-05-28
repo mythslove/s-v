@@ -12,6 +12,7 @@ package local.views.quest
 	
 	import local.comm.GameRemote;
 	import local.comm.GameSetting;
+	import local.model.QuestModel;
 	import local.model.vos.QuestVO;
 	import local.utils.PopUpManager;
 	import local.views.base.BaseView;
@@ -78,7 +79,9 @@ package local.views.quest
 				case "accept":
 					visible = true ;
 					questVO = e.result as QuestVO ; //返回新的QuestVO
-					init();
+					questVO.init(); //初始化任务
+					QuestModel.instance.checkCompleteQuest() ; //判断是没有已经完成了的quest
+					init(); //显示界面
 					break ;
 			}
 		}

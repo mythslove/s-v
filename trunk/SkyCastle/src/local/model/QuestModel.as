@@ -117,8 +117,8 @@ package local.model
 			}
 		}
 		
-		/*判断是否有完成了的任务*/
-		private function checkCompleteQuest():void
+		/**判断是否有完成了的任务*/
+		public function checkCompleteQuest():void
 		{
 			for each( var vo:QuestVO in currentQuests)
 			{
