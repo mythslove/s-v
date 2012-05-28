@@ -2,6 +2,7 @@ package local.model
 {
 	import bing.amf3.ResultEvent;
 	
+	import flash.external.ExternalInterface;
 	import flash.utils.Dictionary;
 	
 	import local.comm.GameRemote;
@@ -22,6 +23,17 @@ package local.model
 		{
 			if(!_instance) _instance = new QuestModel();
 			return _instance; 
+		}
+		/**
+		 * 构造函数 
+		 * 注册外部调用的方法
+		 */		
+		public function QuestModel()
+		{
+			ExternalInterface.addCallback( "like" , like );
+			ExternalInterface.addCallback( "share" , share );
+			ExternalInterface.addCallback( "addFriend" , addFriend );
+			ExternalInterface.addCallback( "sendGift" , sendGift );
 		}
 		//=================================
 		
@@ -130,6 +142,27 @@ package local.model
 					PopUpManager.instance.addQueuePopUp( questComPop );
 				}
 			}
+		}
+		
+		
+		
+		public function like(value:int=1):void
+		{
+			
+		}
+		
+		public function sendGift( value:int=1 ):void
+		{
+			
+		}
+		
+		public function addFriend( value:int =1 ):void
+		{
+			
+		}
+		
+		public function share( value:int =1 ):void
+		{
 			
 		}
 	}

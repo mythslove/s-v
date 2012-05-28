@@ -4,6 +4,7 @@ package local.model
 	import bing.utils.SystemUtil;
 	
 	import local.comm.GameRemote;
+	import local.enum.QuestType;
 	import local.model.vos.CollectionVO;
 	import local.model.vos.ConfigBaseVO;
 	import local.model.vos.PickupVO;
@@ -121,6 +122,8 @@ package local.model
 						if(extraRewards){
 							//弹出Collection奖励窗口
 						}
+						//任务统计
+						QuestModel.instance.updateQuests( QuestType.TURN_IN );
 					}
 					break ;
 			}
