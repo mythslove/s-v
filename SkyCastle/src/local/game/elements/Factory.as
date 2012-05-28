@@ -2,8 +2,10 @@ package local.game.elements
 {
 	import local.enum.BasicPickup;
 	import local.enum.BuildingStatus;
+	import local.enum.QuestType;
 	import local.game.GameWorld;
 	import local.model.PlayerModel;
+	import local.model.QuestModel;
 	import local.model.buildings.vos.BaseFactoryVO;
 	import local.model.buildings.vos.BuildingVO;
 	import local.utils.PickupUtil;
@@ -86,6 +88,9 @@ package local.game.elements
 						this.startProduct(); //开始生产
 						//显示建造完成的动画
 						this.showBuildCompleteEffect();
+						//任务统计
+						QuestModel.instance.updateQuests( QuestType.BUILD_NUM , baseBuildingVO.baseId ,1 , buildingVO.buildTime );
+						QuestModel.instance.updateQuests( QuestType.OWN_NUM , baseBuildingVO.baseId );
 					}
 				}
 				//特殊物品

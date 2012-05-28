@@ -11,10 +11,13 @@ package local.game.elements
 	import local.enum.BasicPickup;
 	import local.enum.BuildingOperation;
 	import local.enum.BuildingStatus;
+	import local.enum.ItemType;
 	import local.enum.PayType;
+	import local.enum.QuestType;
 	import local.game.GameWorld;
 	import local.model.MapGridDataModel;
 	import local.model.PlayerModel;
+	import local.model.QuestModel;
 	import local.model.ShopModel;
 	import local.model.StorageModel;
 	import local.model.buildings.vos.BuildingVO;
@@ -28,6 +31,7 @@ package local.game.elements
 	import local.views.CenterViewContainer;
 	import local.views.alert.SellBuildingAlert;
 	import local.views.effects.MapWordEffect;
+	import local.views.tooltip.BuildingToolTip;
 	
 	public class Building extends BaseBuilding
 	{
@@ -124,6 +128,12 @@ package local.game.elements
 						var value:int = baseBuildingVO.buildEarnExp;
 						if(value>0)PickupUtil.addPickup2Wold(BasicPickup.PICKUP_EXP , value,screenX,screenY+offsetY*0.5);
 						this.buildingVO = e.result as BuildingVO;
+						if(baseBuildingVO.type!=ItemType.BUILDING_HOUSE && baseBuildingVO.type!=ItemType.BUILDING_FACTORY)
+						{
+							//任务统计
+							QuestModel.instance.updateQuests( QuestType.BUILD_NUM , baseBuildingVO.baseId ,1 , buildingVO.buildTime );
+							QuestModel.instance.updateQuests( QuestType.OWN_NUM , baseBuildingVO.baseId );
+						}
 					}else{
 						GameWorld.instance.removeBuildFromScene(this);
 					}
@@ -134,6 +144,9 @@ package local.game.elements
 						StorageModel.instance.addStorageItem( e.result as StorageItemVO );
 						GameWorld.instance.removeBuildFromScene(this);
 						this.showStashEffect();
+						//任务统计
+						QuestModel.instance.updateQuests( QuestType.OWN_NUM , baseBuildingVO.baseId );
+						//清理
 						dispose();
 					}
 					break ;
@@ -151,8 +164,12 @@ package local.game.elements
 						PlayerModel.instance.me.coin+=coin ;
 						GameWorld.instance.removeBuildFromScene(this);
 						this.showStashEffect();
+						//任务统计
+						QuestModel.instance.updateQuests( QuestType.OWN_NUM , baseBuildingVO.baseId );
+						//清理
 						dispose();
 					}
+					break ;
 				case "rotate":
 					break ;
 				case "move":

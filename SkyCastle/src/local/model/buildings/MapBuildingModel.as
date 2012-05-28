@@ -1,5 +1,6 @@
 package local.model.buildings
 {
+	import local.enum.BuildingStatus;
 	import local.enum.ItemType;
 	import local.game.elements.Building;
 	import local.model.buildings.vos.BaseBuildingVO;
@@ -107,7 +108,7 @@ package local.model.buildings
 			var buildings:Array = getArrayByType(baseVO.type);
 			var count:int ;
 			for each(var build:Building in buildings){
-				if(build.baseBuildingVO.baseId==baseId) ++count ;
+				if(build.baseBuildingVO.baseId==baseId && build.buildingVO.buildingStatus!=BuildingStatus.BUILDING ) ++count ;
 			}
 			return count ;
 		}
