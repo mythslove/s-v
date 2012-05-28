@@ -119,7 +119,7 @@ package local.game.elements
 					buildingVO.buildingStatus=BuildingStatus.PRODUCT ;
 					createGameTimer( baseHouseVO.earnTime );
 					//统计 quest
-					QuestModel.instance.updateQuests( QuestType.COLLECT_NUM );
+					QuestModel.instance.updateQuests( QuestType.COLLECT_BUILDING );
 				}
 				else if( buildingVO.buildingStatus==BuildingStatus.PRODUCT)
 				{
@@ -134,7 +134,7 @@ package local.game.elements
 						buildingVO.buildingStatus=BuildingStatus.PRODUCT ;
 						createGameTimer( baseHouseVO.earnTime );
 						//统计 quest
-						QuestModel.instance.updateQuests( QuestType.COLLECT_NUM );
+						QuestModel.instance.updateQuests( QuestType.COLLECT_BUILDING );
 					}
 					else
 					{
@@ -148,7 +148,7 @@ package local.game.elements
 						this.showBuildCompleteEffect();
 						//任务统计
 						QuestModel.instance.updateQuests( QuestType.BUILD_NUM , baseBuildingVO.baseId ,1 , buildingVO.buildTime );
-						QuestModel.instance.updateQuests( QuestType.OWN_NUM , baseBuildingVO.baseId );
+						QuestModel.instance.updateQuests( QuestType.OWN_BUILDING , baseBuildingVO.baseId );
 					}
 				}
 				//特殊物品

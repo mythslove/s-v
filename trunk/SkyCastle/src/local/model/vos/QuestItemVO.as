@@ -37,7 +37,7 @@ package local.model.vos
 			
 			switch( questType)
 			{
-				case QuestType.OWN_NUM:
+				case QuestType.OWN_BUILDING:
 					if(sonType){
 						current = MapBuildingModel.instance.getCountByBaseId( sonType );
 					}

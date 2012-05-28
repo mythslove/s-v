@@ -58,7 +58,7 @@ package local.model.vos
 			var flag:Boolean ;
 			switch(mainType)
 			{
-				case QuestType.OWN_NUM:
+				case QuestType.OWN_BUILDING:
 					flag = calculateBuildingType( mainType , sonType ); //统计建筑的类型数量，主要用于拥有多少
 					break;
 				default:
@@ -116,7 +116,7 @@ package local.model.vos
 			{
 				if( itemVO.questType== mainType)
 				{
-					if( mainType==QuestType.OWN_NUM)
+					if( mainType==QuestType.OWN_BUILDING)
 					{
 						itemVO.current = MapBuildingModel.instance.getCountByBaseId( sonType );
 						isUpdate=true;
