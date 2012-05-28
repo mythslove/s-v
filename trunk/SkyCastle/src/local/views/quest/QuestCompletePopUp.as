@@ -13,6 +13,7 @@ package local.views.quest
 	import local.model.QuestModel;
 	import local.model.vos.QuestVO;
 	import local.utils.PopUpManager;
+	import local.views.LeftBar;
 	import local.views.base.BaseView;
 	import local.views.rewards.RewardsPanel;
 
@@ -80,6 +81,7 @@ package local.views.quest
 		
 		override protected function removed():void
 		{
+			LeftBar.instance.removeQuestItemRenderer( questVO.qid); //任务icon列表刷新
 			questVO = null ;
 			btnClose.removeEventListener(MouseEvent.CLICK , onCloseHandler );
 			btnOk.removeEventListener(MouseEvent.CLICK , onCloseHandler );
