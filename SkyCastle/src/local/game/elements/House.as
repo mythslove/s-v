@@ -118,6 +118,8 @@ package local.game.elements
 					//重新生产
 					buildingVO.buildingStatus=BuildingStatus.PRODUCT ;
 					createGameTimer( baseHouseVO.earnTime );
+					//统计 quest
+					QuestModel.instance.updateQuests( QuestType.COLLECT_NUM );
 				}
 				else if( buildingVO.buildingStatus==BuildingStatus.PRODUCT)
 				{
@@ -131,6 +133,8 @@ package local.game.elements
 						//重新生产
 						buildingVO.buildingStatus=BuildingStatus.PRODUCT ;
 						createGameTimer( baseHouseVO.earnTime );
+						//统计 quest
+						QuestModel.instance.updateQuests( QuestType.COLLECT_NUM );
 					}
 					else
 					{
