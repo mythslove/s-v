@@ -1,6 +1,7 @@
 package local.model.vos
 {
 	import local.enum.QuestType;
+	import local.model.PlayerModel;
 	import local.model.buildings.MapBuildingModel;
 
 	public class QuestVO
@@ -110,7 +111,7 @@ package local.model.vos
 		 */		
 		private function calculateBuildingType(mainType:String , sonType:String ):Boolean
 		{
-			var isUpdate:Boolean = false ;
+			var isUpdate:Boolean ;
 			for each( var itemVO:QuestItemVO in items)
 			{
 				if( itemVO.questType== mainType)
