@@ -1,5 +1,8 @@
 package local.model.vos
 {
+	import local.enum.QuestType;
+	import local.model.buildings.MapBuildingModel;
+
 	public class QuestVO
 	{
 		public var qid:int ; //任务的id
@@ -33,6 +36,30 @@ package local.model.vos
 		}
 		
 		/**
+		 * 统计更新所有的quest 
+		 * @param mainType
+		 * @param sonType
+		 * @param num
+		 * @param time
+		 * @return 
+		 * 
+		 */		
+		public function update(mainType:String , sonType:String="" , num:int = 1 , time:Number=NaN):Boolean
+		{
+			var flag:Boolean ;
+			switch(mainType)
+			{
+				case QuestType.OWN_NUM:
+					flag = calculateBuildingType( mainType , sonType ); //统计建筑的类型数量，主要用于拥有多少
+					break;
+				default:
+					flag = updateCount( mainType , sonType , num , time ); //叠加
+					break ;
+			}
+			return flag ;
+		}
+		
+		/**
 		 * 统计 
 		 * @param mainType 主类型
 		 * @param sonType 子类型
@@ -40,9 +67,9 @@ package local.model.vos
 		 * @param time 时间限制
 		 * @return 
 		 */		
-		public function updateCount( mainType:String , sonType:String="" , num:int = 1 , time:Number=NaN ):Boolean
+		private function updateCount( mainType:String , sonType:String="" , num:int = 1 , time:Number=NaN ):Boolean
 		{
-			var isUpDate:Boolean = false ;
+			var isUpdate:Boolean = false ;
 			for each( var itemVO:QuestItemVO in items)
 			{
 				if( itemVO.questType== mainType)
@@ -53,20 +80,41 @@ package local.model.vos
 						{
 							if ( itemVO.sonType &&  itemVO.sonType==sonType){
 								itemVO.current+=num;
-								isUpDate = true ;
+								isUpdate = true ;
 							}
 						}
 						else 
 						{
-							itemVO.current+=num;
-							isUpDate = true ;
+							itemVO.current += num;
+							isUpdate = true ;
 						}	
 					}
 				}
 			}
-			return isUpDate;
+			return isUpdate;
 		}
 		
-		
+		/**
+		 * 统计建筑类型，主要用于拥有多少
+		 * @param mainType
+		 * @param sonType 此处为建筑的baseId
+		 * @return 
+		 */		
+		private function calculateBuildingType(mainType:String , sonType:String ):Boolean
+		{
+			var isUpdate:Boolean = false ;
+			for each( var itemVO:QuestItemVO in items)
+			{
+				if( itemVO.questType== mainType)
+				{
+					if( mainType==QuestType.OWN_NUM)
+					{
+						itemVO.current = MapBuildingModel.instance.getCountByBaseId( sonType );
+						isUpdate=true;
+					}
+				}
+			}
+			return isUpdate;
+		}
 	}
 }

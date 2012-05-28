@@ -108,13 +108,29 @@ package local.model
 			{
 				for each( var vo:QuestVO in currentQuests)
 				{
-					if( vo.isAccept && !vo.isReceived && !vo.isComplete && vo.updateCount(questType , sonType , num , time ) )
+					if( vo.isAccept && !vo.isReceived && !vo.isComplete && vo.update(questType , sonType , num , time ) )
 					{
 						//判断是否有完成的quest
-						//	checkCompleteQuest();
+						checkCompleteQuest() ;
 					}
 				}
 			}
+		}
+		
+		/*判断是否有完成了的任务*/
+		private function checkCompleteQuest():void
+		{
+			for each( var vo:QuestVO in currentQuests)
+			{
+				if(vo.isAccept && !vo.isReceived && !vo.isComplete && vo.checkComplete()  ){
+					vo.isComplete=true;
+					//抛出quest完成事件 
+					var evt:QuestEvent = new QuestEvent(QuestEvent.QUEST_COMPLETE);
+					evt.questVO = vo ;
+					GlobalDispatcher.instance.dispatchEvent( evt );
+				}
+			}
+			
 		}
 	}
 }
