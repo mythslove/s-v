@@ -32,7 +32,7 @@ package local.model.buildings.vos
 		/** 占据的网格数*/
 		public var zSpan:int ;
 		
-		/** 建筑的类型 */
+		/** 建筑的类型，为ItemType中的常量 */
 		public var type:String ;
 		
 		/** 修建获得的经验 */
