@@ -2,7 +2,6 @@ package local.model.buildings
 {
 	import local.enum.ItemType;
 	import local.game.elements.Building;
-	import local.model.buildings.vos.BaseBuildingVO;
 
 	/**
 	 * 地图上的所有建筑 
@@ -32,6 +31,9 @@ package local.model.buildings
 		
 		/** 农作物 */
 		public var plants:Array = [] ;
+		
+		/** 基础数据：树*/
+		public var trees:Array=[];
 		
 		/**
 		 * 添加一个建筑到地图数据中 
@@ -85,32 +87,28 @@ package local.model.buildings
 				case ItemType.PLANT :
 					arr = plants;
 					break ;
+				case ItemType.DEC_TREE:
+					arr = trees;
+					break ;
 			}
 			return arr ;
 		}
 		
 		//============统计地图上的建筑========================
-		/**
-		 * 根据建筑的itemType统计建筑的数量 
-		 * @param itemType
-		 * @return 
-		 */		
-		public function getCountByItemType( itemType:String ):int
-		{
-			var buildings:Array = getArrayByType( itemType);
-			if(buildings) return buildings.length ;
-			return 0 ;
-		}
-		
-		public function getCountByBaseId( baseId:String ):int
-		{
-			var baseVO:BaseBuildingVO = BaseBuildingVOModel.instance.getBaseVOById(baseId );
-			var buildings:Array = getArrayByType(baseVO.type);
-			var count:int ;
-			for each(var build:Building in buildings){
-				if(build.baseBuildingVO.baseId==baseId) ++count ;
-			}
-			return count ;
-		}
+//		/**
+//		 * 统计建筑的数量，且baseId相同 
+//		 * @param baseId
+//		 * @return 
+//		 */	
+//		public function getCountByBaseId( baseId:String ):int
+//		{
+//			var baseVO:BaseBuildingVO = BaseBuildingVOModel.instance.getBaseVOById(baseId );
+//			var buildings:Array = getArrayByType(baseVO.type);
+//			var count:int ;
+//			for each(var build:Building in buildings){
+//				if(build.baseBuildingVO.baseId==baseId) ++count ;
+//			}
+//			return count ;
+//		}
 	}
 }

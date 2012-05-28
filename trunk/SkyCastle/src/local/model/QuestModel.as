@@ -100,29 +100,21 @@ package local.model
 		 * @param questType
 		 * @param sonType
 		 * @param num
+		 * @param time 时间限制
 		 */		
-		public function updateQuestItems( questType:String , sonType:String = "" , num:int = 1  ):void
+		public function updateQuests( questType:String , sonType:String = "" , num:int = 1 , time:Number= NaN  ):void
 		{
-			if(currentQuests==null) return  ;
-			//循环数组，判断是否有接受了该类任务，并且没有完成，则在此任务的相应类型数量上加1
-			var len:int = currentQuests.length;
-			var vo:QuestVO = null  ;
-			for( var i:int = 0 ; i<len ; i++ ){
-				if(currentQuests[i] is QuestVO ){
-					vo = currentQuests[i] as QuestVO;
-					if( vo.isAccept && !vo.isReceived && !vo.isComplete &&vo.updateCount(questType , sonType , num ) ){
-						
-						//判断是否有完成的uest
-//						checkCompleteQuest();
-						
+			if(currentQuests)
+			{
+				for each( var vo:QuestVO in currentQuests)
+				{
+					if( vo.isAccept && !vo.isReceived && !vo.isComplete && vo.updateCount(questType , sonType , num , time ) )
+					{
+						//判断是否有完成的quest
+						//	checkCompleteQuest();
 					}
 				}
 			}
-		}
-		
-		public function updateBuildingType( questType:String , sonType:String = "" ):void
-		{
-			
 		}
 	}
 }
