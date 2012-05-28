@@ -7,6 +7,7 @@ package local.model
 	
 	import local.comm.GameRemote;
 	import local.comm.GlobalDispatcher;
+	import local.enum.QuestType;
 	import local.events.QuestEvent;
 	import local.model.vos.QuestVO;
 	import local.utils.PopUpManager;
@@ -148,22 +149,22 @@ package local.model
 		
 		public function like(value:int=1):void
 		{
-			
+			updateQuests( QuestType.LIKE ) ;
 		}
 		
 		public function sendGift( value:int=1 ):void
 		{
-			
+			updateQuests( QuestType.SEND_GIFT ) ;
 		}
 		
 		public function addFriend( value:int =1 ):void
 		{
-			
+			updateQuests( QuestType.ADD_FRIEND ) ;
 		}
 		
 		public function share( value:int =1 ):void
 		{
-			
+			updateQuests( QuestType.SHARE ) ;
 		}
 	}
 }
