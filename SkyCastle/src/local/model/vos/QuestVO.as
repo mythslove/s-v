@@ -21,16 +21,24 @@ package local.model.vos
 		public var rewardsVO:RewardsVO; //完成任务后的奖励
 		
 		/**
+		 * 初始化任务 
+		 */		
+		public function init():void
+		{
+			for each( var itemVO:QuestItemVO in items){
+				itemVO.init(acceptTime);
+			}
+		}
+		
+		/**
 		 * 判断整个任务是否完成 
 		 * @return 
 		 */		
 		public function checkComplete():Boolean
 		{
 			if(isComplete) return true ;
-			if(items){
-				for each( var itemVO:QuestItemVO in items){
-					if(!itemVO.isComplete) return false ;
-				}
+			for each( var itemVO:QuestItemVO in items){
+				if(!itemVO.isComplete) return false ;
 			}
 			return false ;
 		}

@@ -157,5 +157,36 @@ package local.model
 		public function checkStone( spendStone:int ):Boolean{
 			return me.stone>=spendStone ;
 		}
+		
+		
+		
+		
+		
+		
+		//================quest统计======================
+		
+		/**
+		 * 玩家收集了的pickup数量 
+		 * @param pId pickup的id
+		 * @return 
+		 */		
+		public function getMyPickupCount( pId:String ):int
+		{
+			if(me.pickups && me.pickups.hasOwnProperty(pId)){
+				return int( me.pickups[pId]);
+			}
+			return 0;
+		}
+		
+		/**
+		 * 获得玩家的stone,wood的数量 
+		 * @param itemType
+		 */		
+		public function getMyCount( itemType:String ):int
+		{
+			if( itemType == "stone" ) return me.stone ;
+			else if( itemType=="wood") return me.wood ;
+			return 0 ;
+		}
 	}
 }
