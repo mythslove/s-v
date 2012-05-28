@@ -177,5 +177,19 @@ package local.model
 			}
 			return 0;
 		}
+		
+		/**
+		 * 统计玩家的stone,wood,coin,rank
+		 * @param type:stone,wood,coin,rank
+		 * @return 当前数量
+		 */		
+		public function getMySWCR( type:String ):int 
+		{
+			if( type=="stone" ) return me.stone;
+			else if( type=="wood") return me.wood;
+			else if( type=="coin" ) return me.coin;
+			else if( type=="rank" ) return me.rank;
+			return 0 ;
+		}
 	}
 }

@@ -58,8 +58,9 @@ package local.model.vos
 			var flag:Boolean ;
 			switch(mainType)
 			{
+				case QuestType.PLAYER_SWCR : //玩家属性信息统计
 				case QuestType.OWN_BUILDING:
-					flag = calculateBuildingType( mainType , sonType ); //统计建筑的类型数量，主要用于拥有多少
+					flag = setCount( mainType , sonType ); //直接赋值的
 					break;
 				default:
 					flag = updateCount( mainType , sonType , num , time ); //叠加
@@ -104,12 +105,12 @@ package local.model.vos
 		}
 		
 		/**
-		 * 统计建筑类型，主要用于拥有多少
+		 * 直接赋值的
 		 * @param mainType
-		 * @param sonType 此处为建筑的baseId
+		 * @param sonType
 		 * @return 
 		 */		
-		private function calculateBuildingType(mainType:String , sonType:String ):Boolean
+		private function setCount(mainType:String , sonType:String ):Boolean
 		{
 			var isUpdate:Boolean ;
 			for each( var itemVO:QuestItemVO in items)
@@ -121,6 +122,12 @@ package local.model.vos
 						itemVO.current = MapBuildingModel.instance.getCountByBaseId( sonType );
 						isUpdate=true;
 					}
+					else if( mainType == QuestType.PLAYER_SWCR)
+					{
+						itemVO.current = PlayerModel.instance.getMySWCR( sonType );
+						isUpdate = true ;
+					}
+						
 				}
 			}
 			return isUpdate;
