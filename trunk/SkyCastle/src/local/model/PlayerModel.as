@@ -177,18 +177,5 @@ package local.model
 			}
 			return 0;
 		}
-		
-		/**
-		 * 获得玩家的stone,wood的数量 
-		 * @param itemType
-		 */		
-		public function getMyCount( itemType:String ):int
-		{
-			if( itemType == "stone" ) return me.stone ;
-			else if( itemType=="wood") return me.wood ;
-			else if( itemType=="coin" ) return me.coin;
-			else if( itemType=="rank") return me.rank ;
- 			return 0 ;
-		}
 	}
 }

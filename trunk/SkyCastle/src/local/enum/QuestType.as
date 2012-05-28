@@ -23,10 +23,6 @@ package local.enum
 		 */		
 		public static const COLLECT_NUM:String = "collectnum" ;
 		/**
-		 * 拥有某种stone/wood/coin/rank的数量 , sonType为stone/wood/coin/rank字符串
-		 */		
-		public static var OWN_SWCR:String = "ownswcr";
-		/**
 		 * 收集pickup的数量，sonType为pkId 
 		 */		
 		public static const COLLECT_NUM_PICKUP:String = "collectnumpickup" ;
@@ -62,10 +58,6 @@ package local.enum
 		 * 分享游戏 
 		 */		
 		public static const SHARE:String = "share" ;
-		/**
-		 * 村庄的Rank达到多少值 
-		 */		
-		public static const RANK:String = "rank"  ;
 		/**
 		 * 照相 
 		 */		
