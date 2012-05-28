@@ -8,6 +8,8 @@ package local.model
 	import local.comm.GlobalDispatcher;
 	import local.events.QuestEvent;
 	import local.model.vos.QuestVO;
+	import local.utils.PopUpManager;
+	import local.views.quest.QuestCompletePopUp;
 
 	/**
 	 * 任务数据 
@@ -124,10 +126,8 @@ package local.model
 			{
 				if(vo.isAccept && !vo.isReceived && !vo.isComplete && vo.checkComplete()  ){
 					vo.isComplete=true;
-					//抛出quest完成事件 
-					var evt:QuestEvent = new QuestEvent(QuestEvent.QUEST_COMPLETE);
-					evt.questVO = vo ;
-					GlobalDispatcher.instance.dispatchEvent( evt );
+					var questComPop:QuestCompletePopUp = new QuestCompletePopUp( vo );
+					PopUpManager.instance.addQueuePopUp( questComPop );
 				}
 			}
 			

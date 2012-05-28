@@ -1,5 +1,6 @@
 package  local.views
 {
+	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	
 	import local.comm.GlobalDispatcher;
@@ -7,6 +8,7 @@ package  local.views
 	import local.events.QuestEvent;
 	import local.model.QuestModel;
 	import local.model.vos.QuestVO;
+	import local.views.quest.QuestBarItemRenderer;
 	
 	public class LeftBar extends Sprite
 	{
@@ -55,7 +57,30 @@ package  local.views
 		/*显示任务列表*/
 		private function showQuests( quests:Vector.<QuestVO> ):void
 		{
-			
+			if(quests)
+			{
+				var render:QuestBarItemRenderer ;
+				for each( var vo:QuestVO in quests){
+					render = new QuestBarItemRenderer(vo);
+					render.y = (render.height +10)*_questContainer.numChildren  ;
+					_questContainer.addChild(render);
+				}
+			}
+		}
+		
+		/**移除已经完成了的quest的icon*/
+		public function removeQuestItemRenderer( qid:int ):void
+		{
+			var obj:DisplayObject = _questContainer.getChildByName( qid+"" );
+			if(obj && _questContainer.contains(obj))
+			{
+				_questContainer.removeChild( obj ) ;
+			}
+			for( var i:int = 0 ; i<_questContainer.numChildren ; ++i)
+			{
+				obj = _questContainer.getChildAt(i);
+				obj.y = (obj.height+10)*i ;
+			}
 		}
 	}
 }
