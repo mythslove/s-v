@@ -41,7 +41,7 @@ package local.game.scenes
 					if(len>0){
 						len = (Math.random()*len)>>0 ;
 						var tree:Tree = trees[len] as Tree ;
-						if(tree.enable ) tree.shake() ;
+						if(tree.enable && tree.buildingVO.currentStep==0 ) tree.shake() ;
 					}
 				}
 				_treeShakeTime = 0 ;
