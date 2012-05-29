@@ -2,6 +2,10 @@ package local.utils
 {
 	import flash.display.DisplayObjectContainer;
 	import flash.text.TextField;
+	
+	import local.enum.QuestType;
+	import local.model.QuestModel;
+
 	/**
 	 * 游戏中用到的一些工具 类 
 	 * @author zzhanglin
@@ -31,6 +35,18 @@ package local.utils
 		public static function cashToCoin( cash:int ):int
 		{
 			return cash*100 ;
+		}
+		
+		/**
+		 * 分享 
+		 * @param title
+		 * @param info
+		 * @param icon
+		 */		
+		public static function share( title:String , info:String , icon:String ):void
+		{
+			
+			QuestModel.instance.updateQuests( QuestType.SHARE);
 		}
 	}
 }
