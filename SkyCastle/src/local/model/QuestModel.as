@@ -1,6 +1,7 @@
 package local.model
 {
 	import bing.amf3.ResultEvent;
+	import bing.utils.SystemUtil;
 	
 	import flash.external.ExternalInterface;
 	import flash.utils.Dictionary;
@@ -32,7 +33,6 @@ package local.model
 		public function QuestModel()
 		{
 			ExternalInterface.addCallback( "like" , like );
-			ExternalInterface.addCallback( "share" , share );
 			ExternalInterface.addCallback( "addFriend" , addFriend );
 			ExternalInterface.addCallback( "sendGift" , sendGift );
 		}
@@ -72,6 +72,7 @@ package local.model
 		
 		private function onResultHandler( e:ResultEvent ):void
 		{
+			SystemUtil.debug("返回数据：",e.service+"."+e.method , e.result );
 			switch(e.method)
 			{
 				case "getQuestList":
@@ -160,11 +161,6 @@ package local.model
 		public function addFriend( value:int =1 ):void
 		{
 			updateQuests( QuestType.ADD_FRIEND ) ;
-		}
-		
-		public function share( value:int =1 ):void
-		{
-			updateQuests( QuestType.SHARE ) ;
 		}
 	}
 }

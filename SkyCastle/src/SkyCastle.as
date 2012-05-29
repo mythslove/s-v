@@ -84,6 +84,7 @@ package
 			registerClassAlias("CollectionVO",CollectionVO) ;
 			registerClassAlias("QuestVO",QuestVO) ;
 			registerClassAlias("QuestItemVO",QuestItemVO) ;
+			registerClassAlias("PageVO",PageVO) ;
 		}
 		
 		/*获得了玩家信息后，进入游戏*/
