@@ -32,7 +32,7 @@ package local.game.scenes
 			super.update();
 			//树摇动
 			++_treeShakeTime;
-			if(_treeShakeTime>24)
+			if(_treeShakeTime>48)
 			{
 				var trees:Array = MapBuildingModel.instance.trees ;
 				if(trees)
