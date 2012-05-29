@@ -191,9 +191,7 @@ package local.game.elements
 		/**
 		 * 到达目的地了
 		 * */
-		protected function arrived():void{
-			
-		}
+		protected function arrived():void{ }
 		
 		/**
 		 * 停止移动 
