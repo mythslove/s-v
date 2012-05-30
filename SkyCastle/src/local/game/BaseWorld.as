@@ -397,6 +397,7 @@ package local.game
 			}
 			clearTopScene(true) ;
 			CharacterManager.instance.npcs = null ;
+			GameData.buildingCurrOperation = BuildingOperation.NONE ;
 		}
 	}
 }
