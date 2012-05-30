@@ -6,7 +6,7 @@ package local.model.vos
 	 */	
 	public class FriendVO
 	{
-		public var friendId:int;
+		public var friendId:String;
 		public var fbid:String ;
 		public var name:String;
 		public var level:int;
