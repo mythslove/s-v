@@ -26,7 +26,7 @@ package local.model
 		public var friends:PageVO ;
 		
 		private var _ro:GameRemote ;
-		public function PlayerModel()
+		public function FriendModel()
 		{
 			_ro = new GameRemote("PlayerService");
 			_ro.addEventListener(ResultEvent.RESULT ,  onResultHandler );

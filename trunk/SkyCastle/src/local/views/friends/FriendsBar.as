@@ -29,6 +29,7 @@ package local.views.friends
 		
 		override protected function added():void
 		{
+			btnPrevPage.enabled = btnNextPage.enabled = btnLastPage.enabled = btnFirstPage.enabled = false ;
 			FriendModel.instance.getFriends( 0 , 6 ) ;
 			GlobalDispatcher.instance.addEventListener( FriendEvent.GET_FRIENDS , onGetFriendsHandler );
 			btnPrevPage.addEventListener(MouseEvent.CLICK , onClickHandler );
@@ -51,20 +52,41 @@ package local.views.friends
 					(this["f"+i] as FriendsItemRenderer).show( null );	
 				}
 			}
+			if(friends){
+				btnPrevPage.enabled = btnNextPage.enabled = btnLastPage.enabled = btnFirstPage.enabled = true ;
+				if( FriendModel.instance.friends)
+				{
+					if(!FriendModel.instance.friends.hasPrevPage()){
+						btnPrevPage.enabled  = btnFirstPage.enabled = false ;
+					}
+					if(!FriendModel.instance.friends.hasNextPage()){
+						btnNextPage.enabled  = btnLastPage.enabled = false ;
+					}
+				}
+			}else{
+				btnPrevPage.enabled = btnNextPage.enabled = btnLastPage.enabled = btnFirstPage.enabled = false ;
+			}
 		}
 		
 		private function onClickHandler( e:MouseEvent ):void
 		{
 			e.stopPropagation();
+			if( !FriendModel.instance.friends ) return ;
+			
+			btnPrevPage.enabled = btnNextPage.enabled = btnLastPage.enabled = btnFirstPage.enabled = false ;
 			switch( e.target)
 			{
 				case btnFirstPage:
+					FriendModel.instance.getFriends( 0 , 6 ) ;
 					break ;
 				case btnLastPage:
+					FriendModel.instance.getFriends( FriendModel.instance.friends.totalPages-1 , 6 ) ;
 					break ;
 				case btnPrevPage:
+					FriendModel.instance.getFriends( FriendModel.instance.friends.currentPage-- , 6 ) ;
 					break ;
 				case btnNextPage:
+					FriendModel.instance.getFriends( FriendModel.instance.friends.currentPage++ , 6 ) ;
 					break ;
 			}
 		}

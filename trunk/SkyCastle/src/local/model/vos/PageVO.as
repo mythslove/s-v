@@ -12,12 +12,12 @@ package local.model.vos
 		public var totalItems:int;				//总条目数
 		public var data:Array;					//页面数据
 		
-		public function hasBackward():Boolean
+		public function hasPrevPage():Boolean
 		{
 			return currentPage > 1 ? true : false;
 		}
 		
-		public function hasForward():Boolean
+		public function hasNextPage():Boolean
 		{
 			return currentPage < totalPages ? true : false;
 		}
