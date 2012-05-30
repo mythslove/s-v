@@ -200,21 +200,6 @@ package local.game.elements
 			}
 		}
 		
-		/**
-		 * 清除特效 
-		 */		
-		override protected function clearEffect():void
-		{
-			super.clearEffect();
-			if(_anim){
-				_anim.dispose();
-				_anim = null ;
-			}
-		}
-		
-		
-		
-		
 		
 		override public function execute():Boolean
 		{
@@ -270,7 +255,6 @@ package local.game.elements
 		/*不断执行，更新*/
 		override public function update():void
 		{
-			super.update();
 			if(_anim && _anim.update() ){
 				var rect:Rectangle = _anim.getBound();
 				_anim.x = rect.x ;
