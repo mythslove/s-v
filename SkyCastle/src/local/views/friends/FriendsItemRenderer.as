@@ -11,7 +11,6 @@ package local.views.friends
 		public function FriendsItemRenderer()
 		{
 			super();
-			mouseChildren = false ;
 			stop();
 		}
 		
