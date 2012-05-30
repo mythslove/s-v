@@ -17,7 +17,7 @@ package
 	import local.model.map.vos.MapVO;
 	import local.model.vos.*;
 	
-	[SWF( width="760",height="640",backgroundColor="#ffffff")]
+	[SWF( width="760",height="640",backgroundColor="#ffffff",frameRate="30")]
 	public class SkyCastle extends BaseGame
 	{
 		/**
