@@ -3,6 +3,8 @@ package local.views.friends
 	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
 	
+	import local.comm.GameData;
+	import local.model.PlayerModel;
 	import local.model.vos.FriendVO;
 	
 	public class FriendsItemRenderer extends MovieClip
@@ -13,6 +15,7 @@ package local.views.friends
 		{
 			super();
 			buttonMode = true ;
+			mouseChildren = false ;
 			stop();
 		}
 		
@@ -37,6 +40,7 @@ package local.views.friends
 			else
 			{
 				//拜访好友
+				PlayerModel.instance.getPlayer( _friendVO.friendId , GameData.currentMapId );
 			}
 		}
 	}
