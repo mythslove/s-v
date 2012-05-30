@@ -260,15 +260,22 @@ package bing.components.ext
 		public function update():void
 		{
 			if(_container){
-				var speedX:int = (_endX-_container.x)*slideSpeed ;
-				if( speedX>maxSpeed ) speedX=maxSpeed  ;
-				else if(speedX <-maxSpeed) speedX= -maxSpeed  ;
-				_container.x+=  speedX ;
-				
-				var speedY:int = (_endY-_container.y)*slideSpeed ;
-				if(speedY>maxSpeed ) speedY=maxSpeed  ;
-				else if(speedY <-maxSpeed) speedY= -maxSpeed  ;
-				_container.y+=  speedY ;
+				if(_sliderType!=SLIDER_TYPE_V)
+				{
+					var speedX:int = (_endX-_container.x)*slideSpeed ;
+					if(!_mouseIsDown && _endX<0 && _endX+_container.width>_wid ) speedX*=0.1 ;
+					if( speedX>maxSpeed ) speedX=maxSpeed  ;
+					else if(speedX <-maxSpeed) speedX= -maxSpeed  ;
+					_container.x+=  speedX ;
+				}
+				else if(_sliderType!=SLIDER_TYPE_H)
+				{
+					var speedY:int = (_endY-_container.y)*slideSpeed ;
+					if(!_mouseIsDown && _endY<0 && _endY+_container.height>_het ) speedY*=0.1 ;
+					if(speedY>maxSpeed ) speedY=maxSpeed  ;
+					else if(speedY <-maxSpeed) speedY= -maxSpeed  ;
+					_container.y+=  speedY ;
+				}
 				
 			}
 		}
