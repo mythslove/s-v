@@ -70,7 +70,7 @@ package local.model
 					if(levelVO){
 						me.level = levelVO.level ;
 						me.maxEnergy = levelVO.maxEnergy ;
-						me.maxExp = levelVO.maxExp ;LevelUpPopUp
+						me.maxExp = levelVO.maxExp ;
 						//	显示和更新玩家显示信息
 						CenterViewContainer.instance.topBar.updateTopBar();
 						//弹出升级面板
