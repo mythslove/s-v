@@ -11,6 +11,7 @@ package local.model
 	import local.model.vos.LevelVO;
 	import local.model.vos.PlayerVO;
 	import local.utils.PopUpManager;
+	import local.views.BottomBar;
 	import local.views.CenterViewContainer;
 	import local.views.levelup.LevelUpPopUp;
 	import local.views.loading.MapChangeLoading;
@@ -97,6 +98,9 @@ package local.model
 		public function getPlayer( uid:String , mapId:String ):void
 		{
 			_ro.getOperation("getPlayer").send( uid , mapId );
+			//改变bottom状态
+			CenterViewContainer.instance.bottomBar.toolBox.changeState(  uid==GameData.me_uid );
+			
 			//添加loading
 			PopUpManager.instance.clearAll();
 			var loading:MapChangeLoading = new MapChangeLoading();

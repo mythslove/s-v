@@ -9,6 +9,7 @@ package local.views.bottom
 	import local.comm.GameData;
 	import local.enum.AvatarAction;
 	import local.enum.BuildingOperation;
+	import local.model.PlayerModel;
 	import local.utils.CharacterManager;
 	import local.utils.CollectQueueUtil;
 	import local.utils.PopUpManager;
@@ -50,10 +51,25 @@ package local.views.bottom
 			GameToolTip.instance.register(btnCancelTool,stage,_btnCancelToolTooltip);
 			GameToolTip.instance.register(btnShopTool,stage,_btnShopToolTooltip);
 			GameToolTip.instance.register(btnBagTool,stage,_btnBagToolTooltip);
-			
-			btnReturnHome.visible = false ;
+		}
+		
+		/**
+		 * 改变显示状态 
+		 * @param isHome
+		 */		
+		public function changeState( isHome:Boolean):void
+		{
 			toolsMenuAnim.visible = false ;
 			storageMenuAnim.visible=false;
+			if( isHome){
+				btnReturnHome.visible = false ;
+				btnBagTool.visible = true ;
+				btnShopTool.visible = true ;
+			}else{
+				btnReturnHome.visible = true ;
+				btnBagTool.visible = false ;
+				btnShopTool.visible = false ;
+			}
 		}
 		
 		private function configListeners():void
@@ -94,6 +110,9 @@ package local.views.bottom
 					}else{
 						GameData.buildingCurrOperation=BuildingOperation.NONE ;
 					}
+					break ;
+				case btnReturnHome:
+					PlayerModel.instance.getPlayer( GameData.me_uid , GameData.currentMapId );
 					break ;
 			}
 		}
