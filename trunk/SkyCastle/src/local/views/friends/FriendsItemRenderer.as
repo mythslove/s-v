@@ -1,15 +1,25 @@
 package local.views.friends
 {
+	import bing.utils.ContainerUtil;
+	
 	import flash.display.MovieClip;
+	import flash.display.Sprite;
 	import flash.events.MouseEvent;
+	import flash.text.TextField;
 	
 	import local.comm.GameData;
 	import local.model.PlayerModel;
 	import local.model.vos.FriendVO;
+	import local.views.base.AutoImage;
 	import local.views.tooltip.GameToolTip;
 	
 	public class FriendsItemRenderer extends MovieClip
 	{
+		public var txtName:TextField ;
+		public var txtLv:TextField;
+		public var container:Sprite;
+		//=========================
+		
 		private var _friendVO:FriendVO ;
 		
 		public function FriendsItemRenderer()
@@ -22,12 +32,21 @@ package local.views.friends
 		
 		public function show( vo:FriendVO ):void
 		{
+			if(container) {
+				ContainerUtil.removeChildren( container );
+			}
 			_friendVO = vo ;
 			gotoAndStop(1);
 			if( _friendVO)
 			{
 				gotoAndStop(2);
 				GameToolTip.instance.register( this , stage , "Invite Friend" );
+				if(_friendVO.image){
+					var img:AutoImage = new AutoImage( _friendVO.image , true , true , 50,50);
+					container.addChild(img);
+				}
+				txtName.text = _friendVO.name ;
+				txtLv.text = _friendVO.level+""; 
 			}
 			else
 			{
