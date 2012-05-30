@@ -39,11 +39,11 @@ package local.model
 			{
 				case "getFriends":
 					friends = e.result as PageVO ;
+					var evt:FriendEvent = new FriendEvent( FriendEvent.GET_FRIENDS );
 					if(friends.data){
-						var evt:FriendEvent = new FriendEvent( FriendEvent.GET_FRIENDS );
 						evt.friends = Vector.<FriendVO>(friends.data);
-						GlobalDispatcher.instance.dispatchEvent( evt );
 					}
+					GlobalDispatcher.instance.dispatchEvent( evt );
 					break ;
 			}
 		}
