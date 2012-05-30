@@ -1,6 +1,7 @@
 package local.views.friends
 {
 	import flash.display.MovieClip;
+	import flash.events.MouseEvent;
 	
 	import local.model.vos.FriendVO;
 	
@@ -11,6 +12,7 @@ package local.views.friends
 		public function FriendsItemRenderer()
 		{
 			super();
+			buttonMode = true ;
 			stop();
 		}
 		
@@ -21,6 +23,20 @@ package local.views.friends
 			if( _friendVO)
 			{
 				gotoAndStop(2);
+			}
+			addEventListener(MouseEvent.CLICK , onClickHandler );
+		}
+		
+		private function onClickHandler( e:MouseEvent ):void
+		{
+			e.stopPropagation();
+			if(currentFrame==1)
+			{
+				//添加好友
+			}
+			else
+			{
+				//拜访好友
 			}
 		}
 	}
