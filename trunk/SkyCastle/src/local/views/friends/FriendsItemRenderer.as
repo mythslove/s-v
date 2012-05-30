@@ -6,6 +6,7 @@ package local.views.friends
 	import local.comm.GameData;
 	import local.model.PlayerModel;
 	import local.model.vos.FriendVO;
+	import local.views.tooltip.GameToolTip;
 	
 	public class FriendsItemRenderer extends MovieClip
 	{
@@ -26,6 +27,11 @@ package local.views.friends
 			if( _friendVO)
 			{
 				gotoAndStop(2);
+				GameToolTip.instance.register( this , stage , "Invite Friend" );
+			}
+			else
+			{
+				GameToolTip.instance.register( this , stage , "Click to add friends!" );
 			}
 			addEventListener(MouseEvent.CLICK , onClickHandler );
 		}

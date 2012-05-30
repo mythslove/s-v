@@ -19,7 +19,7 @@ package local.views.friends
 	{
 		public var btnPrevPage:BaseButton,btnNextPage:BaseButton,btnLastPage:BaseButton,btnFirstPage:BaseButton;
 		public var f0:FriendsItemRenderer ,f1:FriendsItemRenderer ,f2:FriendsItemRenderer ;
-		public var f3:FriendsItemRenderer,f4:FriendsItemRenderer , f5:FriendsItemRenderer ;
+		public var f3:FriendsItemRenderer,f4:FriendsItemRenderer , f5:FriendsItemRenderer, f6:FriendsItemRenderer ;
 		//========================================================
 		
 		public function FriendsBar()
@@ -30,7 +30,7 @@ package local.views.friends
 		override protected function added():void
 		{
 			btnPrevPage.enabled = btnNextPage.enabled = btnLastPage.enabled = btnFirstPage.enabled = false ;
-			FriendModel.instance.getFriends( 0 , 6 ) ;
+			FriendModel.instance.getFriends( 0 , 7 ) ;
 			GlobalDispatcher.instance.addEventListener( FriendEvent.GET_FRIENDS , onGetFriendsHandler );
 			btnPrevPage.addEventListener(MouseEvent.CLICK , onClickHandler );
 			btnNextPage.addEventListener(MouseEvent.CLICK , onClickHandler );
@@ -41,11 +41,11 @@ package local.views.friends
 		private function onGetFriendsHandler ( e:FriendEvent ):void
 		{
 			var friends:Vector.<FriendVO> = e.friends ;
-			for( var i:int = 0 ; i<6 ; ++i)
+			for( var i:int = 0 ; i<7 ; ++i)
 			{
 				if(friends && friends.length<=i+1)
 				{
-					(this["f"+i] as FriendsItemRenderer).show( friends[i] );		
+					(this["f"+i] as FriendsItemRenderer).show( friends[i] );
 				}
 				else
 				{
@@ -77,16 +77,16 @@ package local.views.friends
 			switch( e.target)
 			{
 				case btnFirstPage:
-					FriendModel.instance.getFriends( 0 , 6 ) ;
+					FriendModel.instance.getFriends( 0 , 7 ) ;
 					break ;
 				case btnLastPage:
-					FriendModel.instance.getFriends( FriendModel.instance.friends.totalPages-1 , 6 ) ;
+					FriendModel.instance.getFriends( FriendModel.instance.friends.totalPages-1 , 7 ) ;
 					break ;
 				case btnPrevPage:
-					FriendModel.instance.getFriends( FriendModel.instance.friends.currentPage-- , 6 ) ;
+					FriendModel.instance.getFriends( FriendModel.instance.friends.currentPage-- , 7 ) ;
 					break ;
 				case btnNextPage:
-					FriendModel.instance.getFriends( FriendModel.instance.friends.currentPage++ , 6 ) ;
+					FriendModel.instance.getFriends( FriendModel.instance.friends.currentPage++ , 7 ) ;
 					break ;
 			}
 		}
