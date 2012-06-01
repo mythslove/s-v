@@ -23,6 +23,7 @@ package local.game.elements
 	import local.utils.EffectManager;
 	import local.utils.MouseManager;
 	import local.utils.ResourceUtil;
+	import local.utils.SoundManager;
 	import local.views.effects.BaseMovieClipEffect;
 	import local.views.effects.BuildCompleteEffect;
 	import local.views.effects.BuildEffect;
@@ -328,6 +329,7 @@ package local.game.elements
 		/*显示收藏时的特效*/
 		protected function showStashEffect():void
 		{
+			SoundManager.instance.playSoundRemoveBuild();
 			clearEffect();
 			var removeEffectMC:MovieClip = new RemoveBuildEffect() ;
 			if(removeEffectMC){

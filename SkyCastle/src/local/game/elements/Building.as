@@ -144,7 +144,6 @@ package local.game.elements
 					break ;
 				case "stash":
 					if(e.result){
-						SoundManager.instance.playSoundRemoveBuild();
 						PlayerModel.instance.me.rank-=baseBuildingVO.rank ;
 						StorageModel.instance.addStorageItem( e.result as StorageItemVO );
 						GameWorld.instance.removeBuildFromScene(this);
@@ -157,7 +156,6 @@ package local.game.elements
 					break ;
 				case "sell":
 					if(e.result){
-						SoundManager.instance.playSoundRemoveBuild();
 						PlayerModel.instance.me.rank-=baseBuildingVO.rank ;
 						var shopItemVO:ShopItemVO = ShopModel.instance.getBuildingShopItemByBaseId( baseBuildingVO.baseId, baseBuildingVO.type);
 						var coin:int ;
