@@ -13,6 +13,7 @@ package local.views.bottom
 	import local.utils.CharacterManager;
 	import local.utils.CollectQueueUtil;
 	import local.utils.PopUpManager;
+	import local.utils.SoundManager;
 	import local.views.shop.ShopPopUp;
 	import local.views.tooltip.GameToolTip;
 	
@@ -79,6 +80,7 @@ package local.views.bottom
 		private function onClickHandler(e:MouseEvent ):void
 		{
 			e.stopPropagation();
+			SoundManager.instance.playSoundClick();
 			switch( e.target )
 			{
 				case btnMultiTool:

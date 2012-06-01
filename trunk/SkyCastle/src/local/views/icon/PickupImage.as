@@ -57,6 +57,7 @@ package local.views.icon
 		private function init():void
 		{
 			visible = true ;
+			SoundManager.instance.playSoundLootdrop();
 			TweenLite.to(this, 0.75, {x: x+(75+Math.random()*60)*MathUtil.getRandomFlag()  , ease:Linear.easeNone});
 			TweenLite.to(this, 0.75, {y: y+75+Math.random()*60 , ease:Bounce.easeOut , onComplete:inOver});
 		}

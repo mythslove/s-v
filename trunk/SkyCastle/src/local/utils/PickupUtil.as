@@ -74,7 +74,6 @@ package local.utils
 					break ;
 			}
 			world.addEffect(img,x,y);
-			SoundManager.instance.playSoundLootdrop();
 		}
 		
 		/**

@@ -4,6 +4,7 @@ package local.views.bottom
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
+	import local.utils.SoundManager;
 	import local.views.tooltip.GameToolTip;
 	
 	public class SettingBarAnim extends MovieClip
@@ -54,6 +55,7 @@ package local.views.bottom
 		private function settingBarClickHandler( e:MouseEvent):void
 		{
 			e.stopPropagation();
+			SoundManager.instance.playSoundClick();
 			switch( e.target )
 			{
 				case settingBar.btnDisplay:
