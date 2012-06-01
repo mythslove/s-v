@@ -49,7 +49,11 @@ package
 		 */		
 		protected function init():void
 		{
-			
+			if( stage.loaderInfo.url.indexOf("http")==0 ){
+				ResourceUtil.instance.isRemote = true ;
+			}else{
+				ResourceUtil.instance.isRemote = false ;
+			}
 		}
 		
 		/**

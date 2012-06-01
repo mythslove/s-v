@@ -30,6 +30,8 @@ package bing.res
 		protected static var _instance:ResPool; 
 		protected var _resDictionary:Dictionary ;
 		protected var _loadList:Vector.<ResVO> ;
+		protected var _context:LoaderContext ;
+		public var isRemote:Boolean =true ; //是否为远程加载 
 		public var cdns:Vector.<String>;
 		public var maxLoadNum:int = 4 ;//最大的下载数
 		protected var _currentLoadNum:int = 0 ;
@@ -54,6 +56,7 @@ package bing.res
 			_loadList = new Vector.<ResVO>();
 			cdns=new Vector.<String>() ;
 			_currentLoadNum = 0 ;
+			_context = new LoaderContext(false , ApplicationDomain.currentDomain);
 		}
 		
 		/**
@@ -122,16 +125,17 @@ package bing.res
 		}
 		protected function loaderARes(resVO:ResVO):void
 		{
-			var context:LoaderContext = new LoaderContext(false , ApplicationDomain.currentDomain);
 			var loader:Loader = new Loader();
 			loader.name = resVO.resId ;
 			loader.contentLoaderInfo.addEventListener(Event.COMPLETE , loaderHandler);
 			loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR , ioErrorHandler );
 			var url:String = cdns[resVO.loadError]+resVO.url ;
-			if(url.indexOf("http")==0 || url.indexOf("www.")==0 ){
-				context.securityDomain = SecurityDomain.currentDomain;
+			if(isRemote){
+				_context.securityDomain = SecurityDomain.currentDomain;
+				loader.load( new URLRequest(url) ,_context);
+			}else{
+				loader.load( new URLRequest(url) );
 			}
-			loader.load( new URLRequest(url) ,context);
 			_currentLoadNum++;
 		}
 		protected function urlLoaderARes(resVO:ResVO):void
