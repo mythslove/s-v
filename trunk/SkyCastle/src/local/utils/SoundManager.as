@@ -222,10 +222,11 @@ package local.utils
 		public function playSoundLootdrop():void
 		{
 			if(soundFlag){
-				if(!_soundLootdrop){
-					_soundLootdrop = ResourceUtil.instance.getInstanceByClassName( RES_ID , "local.sounds.SoundLootdrop" ) as Sound;
+				_soundLootdrop = ResourceUtil.instance.getInstanceByClassName( RES_ID , "local.sounds.SoundLootdrop" ) as Sound;
+				if(_soundLootdrop) {
+					_soundLootdrop.play();
+					_soundLootdrop = null ;
 				}
-				if(_soundLootdrop) _soundLootdrop.play();
 			}
 		}
 		public function playSoundPayCash():void
