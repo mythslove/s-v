@@ -6,16 +6,12 @@ package local.game.elements
 	import local.enum.BasicPickup;
 	import local.enum.MouseStatus;
 	import local.game.GameWorld;
-	import local.model.PlayerModel;
 	import local.model.buildings.vos.BaseRockVO;
 	import local.model.buildings.vos.BuildingVO;
 	import local.utils.CharacterManager;
-	import local.utils.CollectQueueUtil;
 	import local.utils.MouseManager;
 	import local.utils.PickupUtil;
 	import local.utils.SoundManager;
-	import local.views.CenterViewContainer;
-	import local.views.effects.MapWordEffect;
 	import local.views.loading.BuildingExecuteLoading;
 
 	/**
@@ -67,7 +63,7 @@ package local.game.elements
 				}else{
 					CharacterManager.instance.hero.gotoAndPlay(AvatarAction.DIG);
 				}
-				SoundManager.instance.playSoundChopRock ;
+				SoundManager.instance.playSoundChopRock() ;
 				_timeoutFlag = false ;
 				_timeoutId = setTimeout( timeoutHandler , 3000 );
 				GameWorld.instance.effectScene.addChild( BuildingExecuteLoading.getInstance(screenX,screenY-itemLayer.height).setTime(4000));

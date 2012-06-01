@@ -23,6 +23,7 @@ package local.game.elements
 	import local.utils.MouseManager;
 	import local.utils.PopUpManager;
 	import local.utils.ResourceUtil;
+	import local.utils.SoundManager;
 	import local.views.effects.BitmapMovieClip;
 	import local.views.effects.BuildingCollectionFlag;
 	import local.views.effects.MapWordEffect;
@@ -225,6 +226,7 @@ package local.game.elements
 						}
 						ro.getOperation("build").send(buildingVO.id , buildingVO.currentStep );
 						CharacterManager.instance.hero.gotoAndPlay(AvatarAction.CONSTRUCT);
+						SoundManager.instance.playSoundBuild();
 						this.showBuildEffect() ;
 						_timeoutFlag = false ;
 						_timeoutId = setTimeout( timeoutHandler , 3500 );
@@ -237,6 +239,7 @@ package local.game.elements
 					//收获
 					ro.getOperation("collect").send(buildingVO.id );
 					CharacterManager.instance.hero.gotoAndPlay(AvatarAction.COLLECT);
+					SoundManager.instance.playSoundCollect();
 					_timeoutFlag = false ;
 					_timeoutId = setTimeout( timeoutHandler , 3000 );
 					GameWorld.instance.effectScene.addChild( BuildingExecuteLoading.getInstance(screenX,screenY-itemLayer.height).setTime(4000));

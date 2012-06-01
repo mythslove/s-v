@@ -15,7 +15,8 @@ package local.utils
 		SoundBuild,SoundChopRock,SoundChopStone,SoundChopWood,SoundFinishBuilding
 		SoundGreatWork,SoundHitMonster,SoundLevelup,SoundNewQuest,SoundPickupCoin
 		SoundPickupEnergy,SoundPickupStone,SoundPickupWood,SoundPickupXp,SoundPopupShow,
-		SoundSpecialClick,SoundBulidDown,SoundRemoveBuild,SoundClick,SoundLootdrop
+		SoundSpecialClick,SoundBulidDown,SoundRemoveBuild,SoundClick,SoundLootdrop,SoundPayCash
+		soundCollect ,
 		*/
 		public var musicFlag:Boolean = true ;
 		public var soundFlag:Boolean = true ;
@@ -25,6 +26,7 @@ package local.utils
 		private var _soundGreatWork:Sound, _soundHitMonster:Sound, _soundLevelup:Sound, _soundNewQuest:Sound, _soundPickupCoin:Sound ;
 		private var _soundPickupEnergy:Sound, _soundPickupStone:Sound, _soundPickupWood:Sound, _soundPickupXp:Sound, _soundPopupShow:Sound;
 		private var _soundSpecialClick:Sound, _soundBulidDown:Sound, _soundRemoveBuild:Sound,_soundLootdrop:Sound , _soundClick:Sound;
+		private var _soundPayCash:Sound , _soundCollect:Sound ;
 		
 		public function stopMusic():void
 		{
@@ -211,5 +213,24 @@ package local.utils
 				if(_soundLootdrop) _soundLootdrop.play();
 			}
 		}
+		public function playSoundPayCash():void
+		{
+			if(soundFlag){
+				if(!_soundPayCash){
+					_soundPayCash = ResourceUtil.instance.getInstanceByClassName( RES_ID , "local.sounds.SoundPayCash" ) as Sound;
+				}
+				if(_soundPayCash) _soundPayCash.play();
+			}
+		}
+		public function playSoundCollect():void
+		{
+			if(soundFlag){
+				if(!_soundCollect){
+					_soundCollect = ResourceUtil.instance.getInstanceByClassName( RES_ID , "local.sounds.SoundCollect" ) as Sound;
+				}
+				if(_soundCollect) _soundCollect.play();
+			}
+		}
+		
 	}
 }

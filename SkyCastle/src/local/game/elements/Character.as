@@ -63,6 +63,10 @@ package local.game.elements
 				_bmpMC = EffectManager.instance.createBmpAnimByMC( _skin );
 				itemLayer.addChild(_bmpMC);
 				this.gotoAndPlay(AvatarAction.IDLE);
+				//设置偏移值
+				var rect:Rectangle = _bmpMC.getBound();
+				_bmpMC.x = rect.x ;
+				_bmpMC.y = rect.y ;
 			}
 		}
 		

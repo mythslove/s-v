@@ -14,6 +14,7 @@ package local.game.elements
 	import local.utils.EffectManager;
 	import local.utils.PickupUtil;
 	import local.utils.ResourceUtil;
+	import local.utils.SoundManager;
 	import local.views.CenterViewContainer;
 	import local.views.effects.BaseMovieClipEffect;
 	import local.views.effects.MapWordEffect;
@@ -149,6 +150,7 @@ package local.game.elements
 						//任务统计
 						QuestModel.instance.updateQuests( QuestType.BUILD_NUM , baseBuildingVO.baseId ,1 , buildingVO.buildTime );
 						QuestModel.instance.updateQuests( QuestType.OWN_BUILDING , baseBuildingVO.baseId );
+						SoundManager.instance.playSoundFinishBuilding();
 					}
 				}
 				//特殊物品
