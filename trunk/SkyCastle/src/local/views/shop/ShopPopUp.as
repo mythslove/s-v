@@ -176,8 +176,7 @@ package local.views.shop
 			mouseChildren = false ;
 			container.visible=false;
 			TweenLite.to(this,0.3,{x:x+200 , ease:Back.easeIn , onComplete:tweenComplete});
-			SoundManager.instance.playSoundLootdrop() ;
-//			SoundManager.instance.playSoundPopupShow();
+			SoundManager.instance.playSoundClick();
 		}
 		
 		private function tweenComplete():void {
