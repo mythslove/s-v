@@ -29,7 +29,7 @@ package local.comm
 		
 		private function onFaultHandler( e:FaultEvent ):void
 		{
-			SystemUtil.debug("接口ERROR:"+e.faultObj );
+			SystemUtil.debug("接口ERROR:"+e.faultObj.faultDetail , e.faultObj.faultString );
 			
 //			this.removeEventListener( FaultEvent.FAULT , onFaultHandler );
 //			var alert:BugAlert=new BugAlert();
