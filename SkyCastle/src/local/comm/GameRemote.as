@@ -4,6 +4,9 @@ package local.comm
 	import bing.amf3.RemoteObject;
 	import bing.utils.SystemUtil;
 	
+	import local.utils.PopUpManager;
+	import local.views.alert.BugAlert;
+	
 	/**
 	 * AMF3通信基类 
 	 * @author zzhanglin
@@ -27,6 +30,10 @@ package local.comm
 		private function onFaultHandler( e:FaultEvent ):void
 		{
 			SystemUtil.debug("接口ERROR:"+e.faultObj );
+			
+			this.removeEventListener( FaultEvent.FAULT , onFaultHandler );
+			var alert:BugAlert=new BugAlert();
+			PopUpManager.instance.addPopUp( alert);
 		}
 		
 		override public function dispose():void
