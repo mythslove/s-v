@@ -102,6 +102,7 @@ package local.views.storage
 		private function pageBtnHandler( e:MouseEvent ):void
 		{
 			e.stopPropagation();
+			SoundManager.instance.playSoundClick();
 			switch( e.target)
 			{
 				case btnPrevPage:

@@ -8,6 +8,7 @@ package local.views.shop
 	
 	import local.model.buildings.vos.BuildingVO;
 	import local.model.vos.ShopItemVO;
+	import local.utils.SoundManager;
 	import local.views.base.BaseView;
 
 	/**
@@ -37,6 +38,7 @@ package local.views.shop
 		private function pageBtnHandler( e:MouseEvent ):void
 		{
 			e.stopPropagation();
+			SoundManager.instance.playSoundClick();
 			switch( e.target)
 			{
 				case btnPrevPage:
