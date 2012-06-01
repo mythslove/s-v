@@ -325,7 +325,7 @@ package local.game
 							_tooltip.updatePosition(e.stageX,e.stageY);
 						}
 					}else if(e.target is PickupImage){
-						(e.target as PickupImage).fly();
+						(e.target as PickupImage).fly( true );
 					}
 					break;
 				case MouseEvent.MOUSE_UP:

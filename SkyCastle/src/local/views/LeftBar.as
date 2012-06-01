@@ -8,6 +8,7 @@ package  local.views
 	import local.events.QuestEvent;
 	import local.model.QuestModel;
 	import local.model.vos.QuestVO;
+	import local.utils.SoundManager;
 	import local.views.quest.QuestBarItemRenderer;
 	
 	public class LeftBar extends Sprite
@@ -65,6 +66,7 @@ package  local.views
 					render.y = (render.height +10)*_questContainer.numChildren  ;
 					_questContainer.addChild(render);
 				}
+				if(quests.length>0) SoundManager.instance.playSoundNewQuest();
 			}
 		}
 		

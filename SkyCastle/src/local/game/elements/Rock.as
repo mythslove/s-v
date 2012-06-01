@@ -13,6 +13,7 @@ package local.game.elements
 	import local.utils.CollectQueueUtil;
 	import local.utils.MouseManager;
 	import local.utils.PickupUtil;
+	import local.utils.SoundManager;
 	import local.views.CenterViewContainer;
 	import local.views.effects.MapWordEffect;
 	import local.views.loading.BuildingExecuteLoading;
@@ -66,6 +67,7 @@ package local.game.elements
 				}else{
 					CharacterManager.instance.hero.gotoAndPlay(AvatarAction.DIG);
 				}
+				SoundManager.instance.playSoundChopRock ;
 				_timeoutFlag = false ;
 				_timeoutId = setTimeout( timeoutHandler , 3000 );
 				GameWorld.instance.effectScene.addChild( BuildingExecuteLoading.getInstance(screenX,screenY-itemLayer.height).setTime(4000));

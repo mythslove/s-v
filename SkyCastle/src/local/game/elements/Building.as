@@ -28,6 +28,7 @@ package local.game.elements
 	import local.utils.CollectQueueUtil;
 	import local.utils.GameUtil;
 	import local.utils.PickupUtil;
+	import local.utils.SoundManager;
 	import local.views.CenterViewContainer;
 	import local.views.alert.SellBuildingAlert;
 	import local.views.effects.MapWordEffect;
@@ -68,6 +69,7 @@ package local.game.elements
 					CharacterManager.instance.updateCharactersPos( this );
 					//发送数据
 					ro.getOperation("buy").send( buildingVO.shopItemId , nodeX,nodeZ );
+					SoundManager.instance.playSoundBulidDown();
 					break ;
 				case BuildingOperation.ROTATE:
 					buildingVO.scale = scaleX ;
@@ -84,6 +86,7 @@ package local.game.elements
 					CharacterManager.instance.updateCharactersPos( this );
 					//发送数据
 					ro.getOperation("move").send( buildingVO.id , nodeX,nodeZ );
+					SoundManager.instance.playSoundBulidDown();
 					break ;
 				case BuildingOperation.SELL :
 					this.enable=true ;
@@ -112,6 +115,7 @@ package local.game.elements
 					ro.getOperation("placeStash").send( buildingVO.id , nodeX,nodeZ );
 					//从收藏箱中删除此storageItem
 					StorageModel.instance.deleteBuilding( buildingVO );
+					SoundManager.instance.playSoundBulidDown();
 					break ;
 			}
 		}
@@ -140,6 +144,7 @@ package local.game.elements
 					break ;
 				case "stash":
 					if(e.result){
+						SoundManager.instance.playSoundRemoveBuild();
 						PlayerModel.instance.me.rank-=baseBuildingVO.rank ;
 						StorageModel.instance.addStorageItem( e.result as StorageItemVO );
 						GameWorld.instance.removeBuildFromScene(this);
@@ -152,6 +157,7 @@ package local.game.elements
 					break ;
 				case "sell":
 					if(e.result){
+						SoundManager.instance.playSoundRemoveBuild();
 						PlayerModel.instance.me.rank-=baseBuildingVO.rank ;
 						var shopItemVO:ShopItemVO = ShopModel.instance.getBuildingShopItemByBaseId( baseBuildingVO.baseId, baseBuildingVO.type);
 						var coin:int ;

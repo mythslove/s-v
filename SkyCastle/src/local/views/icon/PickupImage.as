@@ -18,6 +18,7 @@ package local.views.icon
 	import local.model.PlayerModel;
 	import local.model.vos.PickupVO;
 	import local.model.vos.PlayerVO;
+	import local.utils.SoundManager;
 	import local.views.CenterViewContainer;
 	import local.views.RightBar;
 	import local.views.base.Image;
@@ -65,7 +66,10 @@ package local.views.icon
 			_timeoutId = setTimeout( fly , 3000+Math.random()*2000 );
 		}
 		
-		public function fly():void
+		/**
+		 * @param mouseTrigger 是否是鼠标触发的
+		 */		
+		public function fly( mouseTrigger:Boolean=false ):void
 		{
 			clearTimeout(_timeoutId);
 			_timeoutId = 0 ;
@@ -84,29 +88,34 @@ package local.views.icon
 						me.coin+=_value ;
 						target = CenterViewContainer.instance.topBar.coinBar ;
 						color = MapWordEffect.WHITE ;
+						if(mouseTrigger) SoundManager.instance.playSoundPickupCoin();
 						break ;
 					case BasicPickup.PICKUP_ENERGY:
 						temp="Energy";
 						me.energy+=_value ;
 						target = CenterViewContainer.instance.topBar.energyBar ;
 						color = MapWordEffect.ENERGY_COLOR ;
+						if(mouseTrigger) SoundManager.instance.playSoundPickupEnergy();
 						break ;
 					case BasicPickup.PICKUP_EXP:
 						temp="Exp";
 						me.exp+=_value ;
 						target = CenterViewContainer.instance.topBar.expBar ;
+						if(mouseTrigger) SoundManager.instance.playSoundPickupXp();
 						break ;
 					case BasicPickup.PICKUP_WOOD:
 						temp="Wood";
 						me.wood+=_value ;
 						target = CenterViewContainer.instance.topBar.woodBar ;
 						color = MapWordEffect.WOOD_COLOR ;
+						if(mouseTrigger) SoundManager.instance.playSoundPickupWood();
 						break ;
 					case BasicPickup.PICKUP_STONE:
 						temp="Stone";
 						me.stone+=_value ;
 						target = CenterViewContainer.instance.topBar.stoneBar ;
 						color = MapWordEffect.STONE_COLOR ;
+						if(mouseTrigger) SoundManager.instance.playSoundPickupStone();
 						break ;
 				}
 				CenterViewContainer.instance.topBar.updateTopBar();
