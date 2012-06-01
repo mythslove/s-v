@@ -12,6 +12,7 @@ package local.model
 	import local.events.QuestEvent;
 	import local.model.vos.QuestVO;
 	import local.utils.PopUpManager;
+	import local.utils.SoundManager;
 	import local.views.quest.QuestCompletePopUp;
 
 	/**
@@ -140,6 +141,7 @@ package local.model
 			{
 				if(vo.isAccept && !vo.isReceived && !vo.isComplete && vo.checkComplete()  ){
 					vo.isComplete=true;
+					SoundManager.instance.playSoundGreatWork();
 					var questComPop:QuestCompletePopUp = new QuestCompletePopUp( vo );
 					PopUpManager.instance.addQueuePopUp( questComPop );
 				}
