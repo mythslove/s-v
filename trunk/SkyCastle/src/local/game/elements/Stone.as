@@ -86,6 +86,7 @@ package local.game.elements
 				_currentRewards = null ;
 				super.showPickup();
 				if(buildingVO.currentStep>=baseStoneVO.step){
+					showStashEffect();
 					GameWorld.instance.removeBuildFromScene(this) ; 
 					this.dispose();
 				}else if(_skin){

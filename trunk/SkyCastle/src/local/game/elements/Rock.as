@@ -94,6 +94,7 @@ package local.game.elements
 				super.showPickup();
 				
 				if(buildingVO.currentStep>=baseRockVO.step){
+					showStashEffect();
 					GameWorld.instance.removeBuildFromScene(this); 
 					this.dispose();
 				}else if(_skin){

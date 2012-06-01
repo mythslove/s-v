@@ -2,6 +2,7 @@ package local.utils
 {
 	import flash.media.Sound;
 	import flash.media.SoundChannel;
+	import flash.utils.setTimeout;
 
 	public class SoundManager
 	{
@@ -19,7 +20,7 @@ package local.utils
 		SoundGreatWork,SoundHitMonster,SoundLevelup,SoundNewQuest,SoundPickupCoin
 		SoundPickupEnergy,SoundPickupStone,SoundPickupWood,SoundPickupXp,SoundPopupShow,
 		SoundSpecialClick,SoundBulidDown,SoundRemoveBuild,SoundClick,SoundLootdrop,SoundPayCash
-		SoundCollect , SoundBackground
+		SoundCollect , MusicBackground, MusicThunder, MusicWind
 		*/
 		public var musicFlag:Boolean = true ;
 		public var soundFlag:Boolean = true ;
@@ -29,24 +30,56 @@ package local.utils
 		private var _soundGreatWork:Sound, _soundHitMonster:Sound, _soundLevelup:Sound, _soundNewQuest:Sound, _soundPickupCoin:Sound ;
 		private var _soundPickupEnergy:Sound, _soundPickupStone:Sound, _soundPickupWood:Sound, _soundPickupXp:Sound, _soundPopupShow:Sound;
 		private var _soundSpecialClick:Sound, _soundBulidDown:Sound, _soundRemoveBuild:Sound,_soundLootdrop:Sound , _soundClick:Sound;
-		private var _soundPayCash:Sound , _soundCollect:Sound , _soundBackground:Sound ;
-		private var _bgChannel:SoundChannel ;
+		private var _soundPayCash:Sound , _soundCollect:Sound , _musicBackground:Sound ,_musicWind:Sound ,_musicThunder:Sound ;
+		private var _bgChannel:SoundChannel ,_windChannel:SoundChannel , _thunderChannel:SoundChannel ;
 		
 		public function stopMusic():void
 		{
 			if(_bgChannel) _bgChannel.stop() ;
 			_bgChannel = null ;
+			if(_windChannel) _windChannel.stop() ;
+			_windChannel = null ;
+			if(_thunderChannel) _thunderChannel.stop() ;
+			_thunderChannel = null ;
 		}
 		
-		public function playSoundBackground():void
+		public function playMusicBackground():void
 		{
 			if(musicFlag){
-				if(!_soundBackground){
-					_soundBackground = ResourceUtil.instance.getInstanceByClassName( RES_ID , "local.sounds.SoundBackground" ) as Sound;
+				if(!_musicBackground){
+					_musicBackground = ResourceUtil.instance.getInstanceByClassName( RES_ID , "local.sounds.MusicBackground" ) as Sound;
 				}
-				if(_soundBackground && !_bgChannel) _bgChannel = _soundBackground.play(0,int.MAX_VALUE);
+				if(_musicBackground && !_bgChannel) _bgChannel = _musicBackground.play(0,int.MAX_VALUE);
+				setTimeout( playMusicWind , 3000*60 );
+				setTimeout( playMusicThunder , 2000*60 );
 			}
 		}
+		public function playMusicWind():void
+		{
+			if(musicFlag){
+				if(!_musicWind){
+					_musicWind = ResourceUtil.instance.getInstanceByClassName( RES_ID , "local.sounds.MusicWind" ) as Sound;
+				}
+				if(_musicWind ) {
+					_bgChannel = _musicWind.play();
+					setTimeout( playMusicWind , 3000*60 );
+				}
+			}
+		}
+		public function playMusicThunder():void
+		{
+			if(musicFlag){
+				if(!_musicThunder){
+					_musicThunder = ResourceUtil.instance.getInstanceByClassName( RES_ID , "local.sounds.MusicThunder" ) as Sound;
+				}
+				if(_musicThunder){
+					_bgChannel = _musicThunder.play();
+					setTimeout( playMusicThunder , 2000*60 );
+				}
+			}
+		}
+		
+		
 		
 		public function playSoundBuild():void
 		{

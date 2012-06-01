@@ -98,6 +98,7 @@ package local.game.elements
 				super.showPickup();
 				
 				if(buildingVO.currentStep>=baseTreeVO.step){
+					showStashEffect();
 					GameWorld.instance.removeBuildFromScene(this);
 					//添加动物或怪
 					if(_currentRewards && _currentRewards.buildings){

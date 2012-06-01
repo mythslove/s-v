@@ -93,7 +93,7 @@ package
 		{
 			GlobalDispatcher.instance.removeEventListener(UserInfoEvent.USER_INFO_UPDATED , getMeInfoHandler );
 			removeLoading();
-			SoundManager.instance.playSoundBackground();
+			SoundManager.instance.playMusicBackground();
 		}
 	}
 }

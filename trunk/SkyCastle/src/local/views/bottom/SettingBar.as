@@ -134,7 +134,7 @@ package local.views.bottom
 				case btnMusic:
 					SoundManager.instance.musicFlag = !btnMusic.selected; 
 					if(SoundManager.instance.musicFlag){
-						SoundManager.instance.playSoundBackground();
+						SoundManager.instance.playMusicBackground();
 					}else{
 						SoundManager.instance.stopMusic();
 					}
