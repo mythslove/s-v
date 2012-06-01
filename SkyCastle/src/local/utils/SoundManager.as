@@ -15,7 +15,7 @@ package local.utils
 		SoundBuild,SoundChopRock,SoundChopStone,SoundChopWood,SoundFinishBuilding
 		SoundGreatWork,SoundHitMonster,SoundLevelup,SoundNewQuest,SoundPickupCoin
 		SoundPickupEnergy,SoundPickupStone,SoundPickupWood,SoundPickupXp,SoundPopupShow,
-		SoundSpecialClick,SoundBulidDown,SoundRemoveBuild,SoundClickButton
+		SoundSpecialClick,SoundBulidDown,SoundRemoveBuild
 		*/
 		public var musicFlag:Boolean = true ;
 		public var soundFlag:Boolean = true ;
@@ -24,7 +24,7 @@ package local.utils
 		private var _soundBuild:Sound, _soundChopRock:Sound, _soundChopStone:Sound, _soundChopWood:Sound, _soundFinishBuilding:Sound ;
 		private var _soundGreatWork:Sound, _soundHitMonster:Sound, _soundLevelup:Sound, _soundNewQuest:Sound, _soundPickupCoin:Sound ;
 		private var _soundPickupEnergy:Sound, _soundPickupStone:Sound, _soundPickupWood:Sound, _soundPickupXp:Sound, _soundPopupShow:Sound;
-		private var _soundSpecialClick:Sound, _soundBulidDown:Sound, _soundRemoveBuild:Sound, _soundClickButton:Sound;
+		private var _soundSpecialClick:Sound, _soundBulidDown:Sound, _soundRemoveBuild:Sound;
 		
 		public function stopMusic():void
 		{
@@ -191,15 +191,6 @@ package local.utils
 					_soundRemoveBuild = ResourceUtil.instance.getInstanceByClassName( RES_ID , "local.sounds.SoundRemoveBuild" ) as Sound;
 				}
 				if(_soundRemoveBuild) _soundRemoveBuild.play();
-			}
-		}
-		public function playSoundClickButton():void
-		{
-			if(soundFlag){
-				if(!_soundClickButton){
-					_soundClickButton = ResourceUtil.instance.getInstanceByClassName( RES_ID , "local.sounds.SoundClickButton" ) as Sound;
-				}
-				if(_soundClickButton) _soundClickButton.play();
 			}
 		}
 	}

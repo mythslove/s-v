@@ -15,6 +15,7 @@ package local.views.collection
 	import local.model.CollectionModel;
 	import local.model.vos.CollectionVO;
 	import local.utils.PopUpManager;
+	import local.utils.SoundManager;
 	import local.views.base.BaseView;
 
 	/**
@@ -44,6 +45,7 @@ package local.views.collection
 		override protected function added():void
 		{
 			TweenLite.from(this,0.3,{x:x-200 , ease:Back.easeOut , onComplete:inTweenOver });
+			SoundManager.instance.playSoundPopupShow();
 			btnPrevPage.addEventListener(MouseEvent.CLICK , pageBtnHandler , false , 0 , true );
 			btnNextPage.addEventListener(MouseEvent.CLICK , pageBtnHandler , false , 0 , true );
 			btnClose.addEventListener( MouseEvent.CLICK , closeClickHandler , false , 0 , true );
@@ -113,6 +115,7 @@ package local.views.collection
 			mouseChildren = false ;
 			container.visible=false;
 			TweenLite.to(this,0.3,{x:x+200 , ease:Back.easeIn , onComplete:tweenComplete});
+			SoundManager.instance.playSoundPopupShow();
 		}
 		
 		private function tweenComplete():void {
