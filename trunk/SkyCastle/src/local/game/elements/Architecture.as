@@ -201,6 +201,7 @@ package local.game.elements
 			}
 			if(buildingVO.buildingStatus==BuildingStatus.HARVEST && _buildingFlag){
 				_buildingFlag.y = offsetY ;
+				_buildingFlag.visible = true ;
 			}
 		}
 		
@@ -283,6 +284,9 @@ package local.game.elements
 			}
 			_buildingFlag.y = offsetY ;
 			addChild( _buildingFlag );
+			if(itemLayer.numChildren==0){
+				_buildingFlag.visible=false;
+			}
 		}
 		
 		//==============计时器================================

@@ -38,7 +38,7 @@ package local.utils
 			if(_instance){
 				throw new Error("重复实例化");
 			}
-			//http://www.developbbs.com/sc/res/ 远程
+			//http://www.developbbs.com/res/sc/ 远程
 			this.cdns = Vector.<String>(["../"]); 
 			this.maxLoadNum = 6 ;
 		}
