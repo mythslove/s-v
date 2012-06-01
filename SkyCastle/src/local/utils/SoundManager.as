@@ -1,13 +1,16 @@
 package local.utils
 {
 	import flash.media.Sound;
+	import flash.media.SoundChannel;
 
 	public class SoundManager
 	{
 		private static var _instance:SoundManager ;
 		public static function get instance():SoundManager
 		{
-			if(!_instance) _instance = new SoundManager();
+			if(!_instance){
+				_instance = new SoundManager();
+			}
 			return _instance ;
 		}
 		//================================
@@ -16,7 +19,7 @@ package local.utils
 		SoundGreatWork,SoundHitMonster,SoundLevelup,SoundNewQuest,SoundPickupCoin
 		SoundPickupEnergy,SoundPickupStone,SoundPickupWood,SoundPickupXp,SoundPopupShow,
 		SoundSpecialClick,SoundBulidDown,SoundRemoveBuild,SoundClick,SoundLootdrop,SoundPayCash
-		soundCollect ,
+		SoundCollect , SoundBackground
 		*/
 		public var musicFlag:Boolean = true ;
 		public var soundFlag:Boolean = true ;
@@ -26,11 +29,23 @@ package local.utils
 		private var _soundGreatWork:Sound, _soundHitMonster:Sound, _soundLevelup:Sound, _soundNewQuest:Sound, _soundPickupCoin:Sound ;
 		private var _soundPickupEnergy:Sound, _soundPickupStone:Sound, _soundPickupWood:Sound, _soundPickupXp:Sound, _soundPopupShow:Sound;
 		private var _soundSpecialClick:Sound, _soundBulidDown:Sound, _soundRemoveBuild:Sound,_soundLootdrop:Sound , _soundClick:Sound;
-		private var _soundPayCash:Sound , _soundCollect:Sound ;
+		private var _soundPayCash:Sound , _soundCollect:Sound , _soundBackground:Sound ;
+		private var _bgChannel:SoundChannel ;
 		
 		public function stopMusic():void
 		{
-			
+			if(_bgChannel) _bgChannel.stop() ;
+			_bgChannel = null ;
+		}
+		
+		public function playSoundBackground():void
+		{
+			if(musicFlag){
+				if(!_soundBackground){
+					_soundBackground = ResourceUtil.instance.getInstanceByClassName( RES_ID , "local.sounds.SoundBackground" ) as Sound;
+				}
+				if(_soundBackground && !_bgChannel) _bgChannel = _soundBackground.play(0,int.MAX_VALUE);
+			}
 		}
 		
 		public function playSoundBuild():void

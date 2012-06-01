@@ -31,9 +31,9 @@ package local.comm
 		{
 			SystemUtil.debug("接口ERROR:"+e.faultObj );
 			
-			this.removeEventListener( FaultEvent.FAULT , onFaultHandler );
-			var alert:BugAlert=new BugAlert();
-			PopUpManager.instance.addPopUp( alert);
+//			this.removeEventListener( FaultEvent.FAULT , onFaultHandler );
+//			var alert:BugAlert=new BugAlert();
+//			PopUpManager.instance.addPopUp( alert);
 		}
 		
 		override public function dispose():void
