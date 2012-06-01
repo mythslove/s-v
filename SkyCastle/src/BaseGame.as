@@ -76,6 +76,7 @@ package
 			res.push( new ResVO("init_effect","res/skin/Effect.swf") );
 			res.push( new ResVO("init_Popup","res/skin/Popup.swf") );
 			res.push( new ResVO("init_ui","res/skin/ui.swf"));
+			res.push( new ResVO("init_SoundsCore","res/skin/SoundsCore.swf") );
 			res.push( new ResVO("Basic_AvatarMale","res/character/Basic_AvatarMale.swf") );
 			ResourceUtil.instance.addEventListener(ResProgressEvent.RES_LOAD_PROGRESS , queueLoadHandler);
 			ResourceUtil.instance.addEventListener(ResLoadedEvent.QUEUE_LOADED ,queueLoadHandler);
