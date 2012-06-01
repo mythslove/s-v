@@ -13,6 +13,7 @@ package local.views.levelup
 	import local.model.vos.LevelVO;
 	import local.model.vos.RewardsVO;
 	import local.utils.PopUpManager;
+	import local.utils.SoundManager;
 	import local.views.base.BaseView;
 	import local.views.rewards.RewardsPanel;
 	
@@ -42,6 +43,7 @@ package local.views.levelup
 				container.addChild( rewardsPanel);
 			}
 			TweenLite.from(this,0.3,{x:x-200 , ease:Back.easeOut , onComplete:inTweenOver });
+			SoundManager.instance.playSoundPopupShow();
 		}
 		
 		private function inTweenOver():void

@@ -14,6 +14,7 @@ package local.views.pickup
 	import local.model.PickupModel;
 	import local.model.vos.PickupVO;
 	import local.utils.PopUpManager;
+	import local.utils.SoundManager;
 	import local.views.base.BaseView;
 
 	/**
@@ -52,6 +53,7 @@ package local.views.pickup
 		override protected function added():void
 		{
 			TweenLite.from(this,0.3,{x:-200 , ease:Back.easeOut , onComplete:inTweenOver });
+			SoundManager.instance.playSoundPopupShow();
 			btnClose.addEventListener(MouseEvent.CLICK , onBtnClickHandler );
 			btn.addEventListener(MouseEvent.CLICK , onBtnClickHandler );
 			//内容
