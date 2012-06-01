@@ -56,7 +56,7 @@ package local.views.levelup
 		private function onCloseHandler( e:MouseEvent ):void
 		{
 			TweenLite.to(this,0.3,{x:x+200 , ease:Back.easeIn , onComplete:tweenComplete});
-			SoundManager.instance.playSoundPopupShow();
+			SoundManager.instance.playSoundClick();
 			mouseChildren=false;
 		}
 		
