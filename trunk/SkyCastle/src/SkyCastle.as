@@ -16,6 +16,7 @@ package
 	import local.model.buildings.vos.*;
 	import local.model.map.vos.MapVO;
 	import local.model.vos.*;
+	import local.utils.SoundManager;
 	
 	[SWF( width="760",height="640",backgroundColor="#ffffff",frameRate="30")]
 	public class SkyCastle extends BaseGame
@@ -92,6 +93,7 @@ package
 		{
 			GlobalDispatcher.instance.removeEventListener(UserInfoEvent.USER_INFO_UPDATED , getMeInfoHandler );
 			removeLoading();
+			SoundManager.instance.playSoundBackground();
 		}
 	}
 }
