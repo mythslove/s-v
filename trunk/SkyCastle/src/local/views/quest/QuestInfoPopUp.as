@@ -15,6 +15,7 @@ package local.views.quest
 	import local.model.QuestModel;
 	import local.model.vos.QuestVO;
 	import local.utils.PopUpManager;
+	import local.utils.SoundManager;
 	import local.views.base.BaseView;
 
 	/**
@@ -63,6 +64,7 @@ package local.views.quest
 		private function init():void
 		{
 			TweenLite.from(this,0.3,{x:-200 , ease:Back.easeOut });
+			SoundManager.instance.playSoundPopupShow();
 			btnClose.addEventListener(MouseEvent.CLICK , onCloseHandler );
 			btnOk.addEventListener(MouseEvent.CLICK , onCloseHandler );
 			//显示详细

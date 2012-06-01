@@ -25,6 +25,7 @@ package local.views.storage
 	import local.model.vos.StorageItemVO;
 	import local.utils.BuildingFactory;
 	import local.utils.PopUpManager;
+	import local.utils.SoundManager;
 	import local.views.base.BaseView;
 	import local.views.loading.SkinLoading;
 
@@ -65,7 +66,7 @@ package local.views.storage
 		override protected function added():void
 		{
 			TweenLite.from(this,0.3,{x:x-200 , ease:Back.easeOut });
-			
+			SoundManager.instance.playSoundPopupShow();
 			btnClose.addEventListener( MouseEvent.CLICK , closeClickHandler , false , 0 , true );
 			tabMenu.addEventListener(ToggleItemEvent.ITEM_SELECTED , tabMenuHandler , false , 0 , true ) ;
 			btnPrevPage.addEventListener(MouseEvent.CLICK , pageBtnHandler , false , 0 , true );

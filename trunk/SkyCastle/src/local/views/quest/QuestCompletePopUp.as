@@ -13,6 +13,7 @@ package local.views.quest
 	import local.model.QuestModel;
 	import local.model.vos.QuestVO;
 	import local.utils.PopUpManager;
+	import local.utils.SoundManager;
 	import local.views.LeftBar;
 	import local.views.base.BaseView;
 	import local.views.rewards.RewardsPanel;
@@ -46,6 +47,7 @@ package local.views.quest
 		override protected function added():void
 		{
 			TweenLite.from(this,0.3,{x:-200 , ease:Back.easeOut });
+			SoundManager.instance.playSoundPopupShow();
 			btnClose.addEventListener(MouseEvent.CLICK , onCloseHandler );
 			btnOk.addEventListener(MouseEvent.CLICK , onCloseHandler );
 			//显示详细

@@ -22,6 +22,7 @@ package local.views.shop
 	import local.model.buildings.vos.BuildingVO;
 	import local.utils.BuildingFactory;
 	import local.utils.PopUpManager;
+	import local.utils.SoundManager;
 	import local.views.base.BaseView;
 	import local.views.shop.subtab.ShopSubBuildingTabBar;
 	import local.views.shop.subtab.ShopSubDecorationTabBar;
@@ -56,6 +57,7 @@ package local.views.shop
 		override protected function added():void
 		{
 			TweenLite.from(this,0.3,{x:-200 , ease:Back.easeOut , onComplete:inTweenOver });
+			SoundManager.instance.playSoundPopupShow();
 			
 			tabMenu.addEventListener(ToggleItemEvent.ITEM_SELECTED , tabMenuHandler , false , 0 , true ) ;
 			btnClose.addEventListener( MouseEvent.CLICK , closeClickHandler , false , 0 , true );
