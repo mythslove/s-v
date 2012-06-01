@@ -199,6 +199,9 @@ package local.game.elements
 				var tempY:int = animMC.getBounds(animMC).y;
 				offsetY = offsetY>tempY? tempY:offsetY ;
 			}
+			if(buildingVO.buildingStatus==BuildingStatus.HARVEST && _buildingFlag){
+				_buildingFlag.y = offsetY ;
+			}
 		}
 		
 		
@@ -277,8 +280,8 @@ package local.game.elements
 		protected function showCollectionStatus():void{
 			if(!_buildingFlag) {
 				_buildingFlag = new BuildingCollectionFlag();
-				_buildingFlag.y = offsetY ;
 			}
+			_buildingFlag.y = offsetY ;
 			addChild( _buildingFlag );
 		}
 		

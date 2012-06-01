@@ -38,7 +38,7 @@ package local.utils
 			if(_instance){
 				throw new Error("重复实例化");
 			}
-			this.cdns = Vector.<String>(["../"]);
+			this.cdns = Vector.<String>(["../"]); //http://www.developbbs.com/res/sc/
 			this.maxLoadNum = 6 ;
 		}
 		public static function get instance():ResourceUtil
