@@ -62,7 +62,7 @@ package local.utils
 				}
 				if(_musicWind ) {
 					_bgChannel = _musicWind.play();
-					setTimeout( playMusicWind , 3000*60 );
+					setTimeout( playMusicWind , 2400*60 );
 				}
 			}
 		}
@@ -74,7 +74,7 @@ package local.utils
 				}
 				if(_musicThunder){
 					_bgChannel = _musicThunder.play();
-					setTimeout( playMusicThunder , 2000*60 );
+					setTimeout( playMusicThunder , 1200*60 );
 				}
 			}
 		}
