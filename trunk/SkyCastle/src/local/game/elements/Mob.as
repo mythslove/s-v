@@ -2,12 +2,12 @@ package local.game.elements
 {
 	import local.model.buildings.vos.BuildingVO;
 	/**
-	 * 动物 
+	 * 怪
 	 * @author zzhanglin
 	 */	
-	public class Animail extends Building
+	public class Mob extends Building
 	{
-		public function Animail(vo:BuildingVO)
+		public function Mob(vo:BuildingVO)
 		{
 			super(vo);
 		}
