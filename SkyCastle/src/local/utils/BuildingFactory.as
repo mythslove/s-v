@@ -52,7 +52,7 @@ package local.utils
 					building = new Plant( vo );
 					break ;
 				case ItemType.ANIMAIL: //动物
-					building = new Animail(vo);
+					building = new Mob(vo);
 					break ;
 				default:
 					building = new Building( vo );
