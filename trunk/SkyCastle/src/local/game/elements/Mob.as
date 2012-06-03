@@ -5,19 +5,13 @@ package local.game.elements
 	 * 怪
 	 * @author zzhanglin
 	 */	
-	public class Mob extends Building
+	public class Mob extends Character
 	{
 		public function Mob(vo:BuildingVO)
 		{
 			super(vo);
 		}
 		
-		/**
-		 * 攻击此动物 
-		 */		
-		public function attack():void
-		{
-			
-		}
+	
 	}
 }

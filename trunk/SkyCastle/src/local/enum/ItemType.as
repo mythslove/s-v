@@ -58,8 +58,8 @@ package local.enum
 				return DECORATION ;
 			}else if(type==PLANT){
 				return PLANT ;
-			}else if(type==ANIMAIL){
-				return ANIMAIL ;
+			}else if(type==MOB){
+				return MOB ;
 			}
 			return CHACTERS ;
 		}
