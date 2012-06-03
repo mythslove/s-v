@@ -40,8 +40,8 @@ package local.enum
 		
 		/** 大类：人*/
 		public static const CHACTERS:String = "character" ;
-		/**  动物  */		
-		public static const ANIMAIL:String = "animal";
+		/** 怪  */		
+		public static const MOB:String = "mob";
 		/** npc*/
 		public static const NPC:String = "npc";
 		
