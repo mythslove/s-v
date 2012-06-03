@@ -12,6 +12,6 @@ package local.game.elements
 			super(vo);
 		}
 		
-	
+		
 	}
 }
