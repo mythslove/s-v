@@ -51,7 +51,7 @@ package local.utils
 				case ItemType.PLANT: //种植类
 					building = new Plant( vo );
 					break ;
-				case ItemType.ANIMAIL: //动物
+				case ItemType.MOB: //怪
 					building = new Mob(vo);
 					break ;
 				default:
