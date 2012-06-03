@@ -6,6 +6,13 @@ package  local.comm
 	 */	
 	public class GameSetting
 	{
+		
+		/*
+		#1F101F 深色 
+		#412A04 木头
+		*/
+		
+		
 		//屏幕固定大小 
 		public static const SCREEN_WIDTH:int =760;
 		public static const SCREEN_HEIGHT:int = 640;
