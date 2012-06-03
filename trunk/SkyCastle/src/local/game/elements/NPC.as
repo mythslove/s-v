@@ -1,16 +1,11 @@
 package local.game.elements
 {
-	import bing.iso.IsoScene;
-	
 	import flash.events.Event;
 	import flash.geom.Point;
 	import flash.utils.setTimeout;
 	
-	import local.comm.GameSetting;
 	import local.enum.AvatarAction;
 	import local.enum.BuildingStatus;
-	import local.game.GameWorld;
-	import local.model.MapGridDataModel;
 	import local.model.buildings.MapBuildingModel;
 	import local.model.buildings.vos.BuildingVO;
 	
@@ -86,32 +81,6 @@ package local.game.elements
 					this.actionIdle();
 				}
 			}
-		}
-		/*返回一个可以走动的点*/
-		private function getFreeRoad():Point{
-			var p:Point ;
-			var pos:Array =[] ;
-			var radius:int = 8 ;
-			var newScene:IsoScene ;
-			var currScene:IsoScene;
-			for(var i:int = nodeX-radius ; i<nodeX+radius ; ++i){
-				for(var j:int = nodeZ-radius ; j<nodeZ+radius ; ++j){
-					if(i>1&& j>1&&i+1<=GameSetting.GRID_X&&j+1<=GameSetting.GRID_Z ){
-						if( !(i==nodeX&&j==nodeZ) && MapGridDataModel.instance.astarGrid.getNode(i,j).walkable)
-						{
-							newScene = GameWorld.instance.getBuildingScene(i,j) ;
-							currScene = GameWorld.instance.getBuildingScene(nodeX,nodeZ) ;
-							if(newScene && currScene &&newScene==currScene)	pos.push( new Point(i,j));
-						}
-					}
-				}
-			}
-			if(pos.length>0){
-				var len:int = pos.length-1 ;
-				var index:int = Math.round(Math.random()*len);
-				return pos[index] ;
-			}
-			return null ;
 		}
 		
 		override protected function arrived():void

@@ -1,5 +1,6 @@
 package local.game.elements
 {
+	import bing.iso.IsoScene;
 	import bing.iso.path.AStar;
 	import bing.iso.path.Node;
 	import bing.utils.ContainerUtil;
@@ -7,17 +8,18 @@ package local.game.elements
 	
 	import flash.display.MovieClip;
 	import flash.events.Event;
+	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	
 	import local.comm.GameSetting;
 	import local.enum.AvatarAction;
 	import local.game.GameWorld;
-	import local.views.effects.BitmapMovieClip;
 	import local.game.scenes.BuildingScene;
 	import local.model.MapGridDataModel;
 	import local.model.buildings.vos.BuildingVO;
 	import local.utils.EffectManager;
 	import local.utils.ResourceUtil;
+	import local.views.effects.BitmapMovieClip;
 	
 	/**
 	 * 地图上的人 
@@ -251,6 +253,35 @@ package local.game.elements
 				move();
 			}
 		}
+		
+		
+		/*返回一个可以走动的点*/
+		protected function getFreeRoad():Point{
+			var p:Point ;
+			var pos:Array =[] ;
+			var radius:int = 8 ;
+			var newScene:IsoScene ;
+			var currScene:IsoScene;
+			for(var i:int = nodeX-radius ; i<nodeX+radius ; ++i){
+				for(var j:int = nodeZ-radius ; j<nodeZ+radius ; ++j){
+					if(i>1&& j>1&&i+1<=GameSetting.GRID_X&&j+1<=GameSetting.GRID_Z ){
+						if( !(i==nodeX&&j==nodeZ) && MapGridDataModel.instance.astarGrid.getNode(i,j).walkable)
+						{
+							newScene = GameWorld.instance.getBuildingScene(i,j) ;
+							currScene = GameWorld.instance.getBuildingScene(nodeX,nodeZ) ;
+							if(newScene && currScene &&newScene==currScene)	pos.push( new Point(i,j));
+						}
+					}
+				}
+			}
+			if(pos.length>0){
+				var len:int = pos.length-1 ;
+				var index:int = Math.round(Math.random()*len);
+				return pos[index] ;
+			}
+			return null ;
+		}
+		
 		
 		override public function dispose():void
 		{
