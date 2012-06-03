@@ -62,7 +62,7 @@ package local.views.collection
 				this["img"+i].addChild(img);
 				this["txtName"+i].text = pickupVO.name ;
 				count = PickupModel.instance.getMyPickupCount(pickupVO.pickupId);
-				this["txCount"+i].text = "×"+count ;
+				this["txCount"+i].text = "X"+count ;
 				if(count==0 || count<= _lv) {
 					img.alpha = .5 ;
 					canCharge= false ;
