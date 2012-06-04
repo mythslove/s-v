@@ -121,6 +121,7 @@ package local.views.storage
 		/* 主分类菜单按钮单击*/
 		private function tabMenuHandler( e:ToggleItemEvent):void 
 		{
+			SoundManager.instance.playSoundClick();
 			storageCurrentTab=e.selectedName;
 			ContainerUtil.removeChildren( container );
 			switch(  e.selectedName )

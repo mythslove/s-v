@@ -47,7 +47,7 @@ package local.views.quest
 		override protected function added():void
 		{
 			TweenLite.from(this,0.3,{x:-200 , ease:Back.easeOut });
-			SoundManager.instance.playSoundPopupShow();
+			SoundManager.instance.playSoundSpecialPopShow();
 			btnClose.addEventListener(MouseEvent.CLICK , onCloseHandler );
 			btnOk.addEventListener(MouseEvent.CLICK , onCloseHandler );
 			//显示详细

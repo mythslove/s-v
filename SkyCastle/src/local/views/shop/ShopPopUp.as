@@ -92,6 +92,7 @@ package local.views.shop
 		/* 主分类菜单按钮单击*/
 		private function tabMenuHandler( e:ToggleItemEvent):void 
 		{
+			SoundManager.instance.playSoundClick();
 			shopCurrentTab=e.selectedName;
 			//先清除子菜单 和 子元素面板
 			if(_subTabBar){
@@ -126,6 +127,7 @@ package local.views.shop
 		/* 子分类菜单按钮单击*/
 		private function subTabMenuHandler( e:ToggleItemEvent ):void
 		{
+			SoundManager.instance.playSoundClick();
 			shopCurrentSubTab = e.selectedName ;
 			if(tabMenu.selectedName==tabMenu.btnBuilding.name)
 			{
