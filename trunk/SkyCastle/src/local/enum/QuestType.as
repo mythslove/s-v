@@ -15,7 +15,7 @@ package local.enum
 		 */		
 		public static const OWN_BUILDING:String = "ownbuilding" ;
 		/**
-		 * 砍树，石头.. sonType为ItemType中的小类型(tree,stone,rock)
+		 * 砍树，石头,sonType为建筑的baseId 
 		 */		
 		public static const CHOP:String = "chop"  ;
 		/**
