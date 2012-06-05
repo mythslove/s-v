@@ -28,7 +28,7 @@ package local.game.elements
 		/** 获取此建筑的标题 */
 		override public function get title():String 
 		{
-			return buildingVO.baseVO.name+":Rank "+baseBuildingVO.rank;
+			return buildingVO.baseVO.name+"(Rank "+baseBuildingVO.rank+")";
 		}
 		
 		override protected function onResultHandler(e:ResultEvent):void
