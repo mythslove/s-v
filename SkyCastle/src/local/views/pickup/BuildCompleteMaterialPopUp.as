@@ -70,7 +70,7 @@ package local.views.pickup
 				if(myCount<int(_materials[key] )){
 					costCash+=myCount;
 					result = false ;
-					renderer.x = count*(renderer.width+10) ;
+					renderer.x = count*(renderer.width+4) ;
 					container.addChild( renderer );
 				}else{
 					renderer.gotoAndStop("default");
