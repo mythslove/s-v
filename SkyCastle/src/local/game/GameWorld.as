@@ -246,6 +246,7 @@ package local.game
 			building.itemLayer.alpha = 0.5 ;
 			building.selectedStatus(false); //选择设置成false
 			topScene.visible = true  ;
+			updateTopBuild();
 		}
 		
 		//添加出生点
