@@ -1,7 +1,6 @@
 package local.game
 {
 	import bing.iso.IsoScene;
-	import bing.iso.path.Node;
 	import bing.res.ResVO;
 	import bing.utils.ObjectUtil;
 	import bing.utils.SystemUtil;
@@ -197,35 +196,27 @@ package local.game
 		
 		private function buyComplete(vo:BuildingVO):void
 		{
-			var effect:Sprite ;
+			var info:String ;
 			if(vo.baseVO.hasOwnProperty("buildStone") && int(vo.baseVO["buildStone"])>0 ){
 				PlayerModel.instance.me.stone-=int(vo.baseVO["buildStone"]);
-				effect = new MapWordEffect("Stone -"+int(vo.baseVO["buildStone"]));
-				if(effect && _topBuilding){
-					addEffect( effect,_topBuilding.screenX -200 ,_topBuilding.screenY );
-				}
+				info = "Stone -"+int(vo.baseVO["buildStone"]) ;
 			}
 			if(vo.baseVO.hasOwnProperty("buildWood")&&int(vo.baseVO["buildWood"])>0 ){
 				PlayerModel.instance.me.stone-=int(vo.baseVO["buildWood"]);
-				effect = new MapWordEffect("Wood -"+int(vo.baseVO["buildWood"]));
-				if(effect && _topBuilding){
-					addEffect( effect,_topBuilding.screenX  ,_topBuilding.screenY  );
-				}
+				info += "      "+"Wood -"+int(vo.baseVO["buildWood"]) ;
 			}
 			if(vo.price!=0){
 				if( vo.payType==PayType.COIN){
 					PlayerModel.instance.me.coin-=vo.price ;
-					effect = new MapWordEffect("Coin -"+vo.price);
-					if(effect && _topBuilding){
-						addEffect( effect,_topBuilding.screenX +200  ,_topBuilding.screenY  );
-					}
+					info += "      "+"Coin -"+vo.price ;
 				} else if( vo.payType==PayType.CASH) {
 					PlayerModel.instance.me.cash-=vo.price;
-					effect = new MapWordEffect("Cash -"+vo.price);
-					if(effect && _topBuilding){
-						addEffect( effect,_topBuilding.screenX +200  ,_topBuilding.screenY  );
-					}
+					info += "      "+"Cash -"+vo.price ;
 				}
+			}
+			if( info && _topBuilding){
+				var effect:Sprite = new MapWordEffect(info);
+				addEffect( effect,_topBuilding.screenX  ,_topBuilding.screenY  );
 			}
 			CenterViewContainer.instance.topBar.updateTopBar();
 		}
