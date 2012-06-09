@@ -16,7 +16,6 @@ package  local.views
 		public function BottomBar()
 		{
 			super();
-			mouseEnabled=false;
 		}
 	}
 }
