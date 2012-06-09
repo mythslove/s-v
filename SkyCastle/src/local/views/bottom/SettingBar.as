@@ -83,11 +83,9 @@ package local.views.bottom
 				stage.displayState = StageDisplayState.FULL_SCREEN ;
 				GameWorld.instance.zoom(1);
 				GameToolTip.instance.register( btnFullScreen , stage , _fullScreenTooltip2 );
-				stage.quality = StageQuality.MEDIUM  ;
 			}else{
 				stage.displayState = StageDisplayState.NORMAL ;
 				GameToolTip.instance.register( btnFullScreen , stage , _fullScreenTooltip1 );
-				stage.quality = StageQuality.HIGH  ;
 			}
 		}
 		
