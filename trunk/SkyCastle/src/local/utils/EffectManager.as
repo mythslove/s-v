@@ -24,7 +24,7 @@ package local.utils
 		/**
 		 * 创建一次性的特效。只播放一次就消失
 		 * @param mc
-		 * @param loopTime 播放次数
+	 	 * @param loopTime 循环次数，0为无限
 		 * @return 
 		 */		
 		public function createMapEffectByMC( mc:MovieClip , loopTime:int = 1  ):BaseMovieClipEffect
