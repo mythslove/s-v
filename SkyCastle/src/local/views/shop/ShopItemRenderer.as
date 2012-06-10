@@ -11,6 +11,7 @@ package local.views.shop
 	import flash.text.TextField;
 	
 	import local.comm.GlobalDispatcher;
+	import local.enum.PayType;
 	import local.events.ShopEvent;
 	import local.model.buildings.vos.*;
 	import local.model.vos.ShopItemVO;
@@ -46,6 +47,10 @@ package local.views.shop
 		public function showBuilding( vo:ShopItemVO ):void
 		{
 			this.itemVO = vo ;
+			if(vo.payType==PayType.CASH)
+			{
+				this.gotoAndStop("advanced");
+			}
 			txtName.text = vo.baseVO.name ; //显示名称
 			container.addChild( new Image(vo.baseVO.thumbAlias , vo.baseVO.thumb) ); //显示缩略图
 			GameToolTip.instance.register(btnBg,stage,vo.baseVO.description); //注册ToolTip

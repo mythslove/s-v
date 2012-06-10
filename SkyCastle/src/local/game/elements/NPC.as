@@ -14,6 +14,8 @@ package local.game.elements
 		private var _currentBuilding:Building ;
 		private var _actionsFuns:Vector.<Function> ;
 		private var _delayShow:int ;
+		private var _isToHouse:Boolean ; //是否走到了房子边
+		
 		/**
 		 * npc基灯 
 		 * @param vo
@@ -26,8 +28,8 @@ package local.game.elements
 			this.speed = 4 ;
 			this. _delayShow = delay ;
 			_actionsFuns = Vector.<Function>([
-				searchHouse,actionIdle,actionShop,actionIdle,searchHouse,
-				actionIdle,actionAdmire,searchHouse,actionIdle,actionRunwayBack
+				freeWay,actionIdle,actionShop,actionIdle,searchHouse,freeWay,
+				actionIdle,actionAdmire,freeWay,searchHouse,freeWay,actionIdle,actionRunwayBack,freeWay
 			]);
 		}
 		
@@ -59,7 +61,7 @@ package local.game.elements
 			visible = true ;
 			var houses:Array = MapBuildingModel.instance.houses ;
 			var ran:Number = Math.random() ;
-			if( ran>=.6 && houses && houses.length>0){
+			if(!_isToHouse && ran>=.6 && houses && houses.length>0){
 				var index:int = (Math.random()*houses.length )>>0 ;
 				_currentBuilding = houses[index] as Architecture ;
 				if(_currentBuilding.parent==parent  && _currentBuilding.buildingVO.buildingStatus!=BuildingStatus.BUILDING && 
@@ -68,32 +70,37 @@ package local.game.elements
 				}
 				else
 				{
-					var p:Point = getFreeRoad();
-					if( !p || !this.searchToRun(p.x , p.y)){
-						this.actionIdle();
-					}
+					freeWay();
 					_currentBuilding = null ;
 				}
 					
 			}else{
-				p = getFreeRoad();
-				if( !p || !this.searchToRun(p.x , p.y)){
-					this.actionIdle();
-				}
+				freeWay();
 			}
 		}
 		
 		override protected function arrived():void
 		{
-			if(_currentBuilding && _currentBuilding is House){
+			if(_currentBuilding && _currentBuilding is House)
+			{
+				_isToHouse = true ;
 				(_currentBuilding as House).showBuildingEffect() ;
 				actionRunway();
 			}
 			else
 			{
+				_isToHouse = false ;
 				auto();
 			}
 			_currentBuilding = null ;
+		}
+		
+		protected function freeWay():void
+		{
+			var p:Point = getFreeRoad();
+			if( !p || !this.searchToRun(p.x , p.y)){
+				this.actionIdle();
+			}
 		}
 		
 		protected function actionShop():void{
@@ -103,7 +110,7 @@ package local.game.elements
 		
 		protected function actionRunway():void{
 			this.gotoAndPlay(AvatarAction.RUNAWAY);
-			_timeoutId = setTimeout(auto,5000);
+			_timeoutId = setTimeout(searchHouse,5000);
 		}
 		
 		protected function actionRunwayBack():void{
@@ -113,7 +120,7 @@ package local.game.elements
 		
 		protected function actionIdle():void{
 			this.gotoAndPlay(AvatarAction.IDLE);
-			_timeoutId = setTimeout(auto,15000);
+			_timeoutId = setTimeout(auto,8000);
 		}
 		
 		protected function actionAdmire():void {
