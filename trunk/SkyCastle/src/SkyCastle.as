@@ -8,6 +8,7 @@ package
 	import flash.events.Event;
 	import flash.net.registerClassAlias;
 	import flash.system.Security;
+	import flash.utils.setTimeout;
 	
 	import local.comm.GameData;
 	import local.comm.GlobalDispatcher;
@@ -93,7 +94,7 @@ package
 		{
 			GlobalDispatcher.instance.removeEventListener(UserInfoEvent.USER_INFO_UPDATED , getMeInfoHandler );
 			removeLoading();
-			SoundManager.instance.playMusicBackground();
+			setTimeout( SoundManager.instance.playMusicBackground , 1000 );
 		}
 	}
 }

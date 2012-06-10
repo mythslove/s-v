@@ -17,6 +17,7 @@ package local.views.shop
 		//===========================
 		public static const LABEL_COIN:String = "coin";
 		public static const LABEL_COIN_WOOD_STONE:String = "coin_wood_stone";
+		public static const LABEL_GEM_WOOD_STONE:String = "gem_wood_stone";
 		public static const LABEL_GEM:String = "gem";
 		
 		public function ShopItemPayMode()
@@ -45,24 +46,36 @@ package local.views.shop
 				case ItemType.BUILDING://建筑
 					break ;
 				case ItemType.BUILDING_HOUSE: //房子
-					gotoAndStop(LABEL_COIN_WOOD_STONE);
 					var baseHouseVO:BaseHouseVO = shopItemVO.baseVO as BaseHouseVO ;
-					this["txtCoin"].text= shopItemVO.price+"";
+					if(payType==PayType.CASH){
+						gotoAndStop(LABEL_GEM_WOOD_STONE);
+						this["txtGem"].text= shopItemVO.price+"";
+					}else{
+						gotoAndStop(LABEL_COIN_WOOD_STONE);
+						this["txtCoin"].text= shopItemVO.price+"";
+					}
 					this["txtWood"].text= baseHouseVO.buildWood+"";
 					this["txtStone"].text= baseHouseVO.buildStone+"";
 					break ;
 				case ItemType.BUILDING_FACTORY: //工厂
-					gotoAndStop(LABEL_COIN_WOOD_STONE);
 					var baseFactoryVO:BaseFactoryVO = shopItemVO.baseVO as BaseFactoryVO ;
-					this["txtCoin"].text= shopItemVO.price+"";
+					if(payType==PayType.CASH){
+						gotoAndStop(LABEL_GEM_WOOD_STONE);
+						this["txtGem"].text= shopItemVO.price+"";
+					}else{
+						gotoAndStop(LABEL_COIN_WOOD_STONE);
+						this["txtCoin"].text= shopItemVO.price+"";
+					}
 					this["txtWood"].text= baseFactoryVO.buildWood+"";
 					this["txtStone"].text= baseFactoryVO.buildStone+"";
 					break ;
 				case ItemType.DECORATION: //装饰
 					var baseDecVO:BaseDecorationVO = shopItemVO.baseVO as BaseDecorationVO ;
 					if(payType==PayType.CASH){
+						gotoAndStop(LABEL_GEM);
 						this["txtGem"].text= shopItemVO.price+"";
 					}else{
+						gotoAndStop(LABEL_COIN);
 						this["txtCoin"].text= shopItemVO.price+"";
 					}
 					break ;
@@ -73,8 +86,10 @@ package local.views.shop
 				case ItemType.DEC_ROAD: //路
 					var baseRoadVO:BaseRoadVO = shopItemVO.baseVO as BaseRoadVO;
 					if(payType==PayType.CASH){
+						gotoAndStop(LABEL_GEM);
 						this["txtGem"].text= shopItemVO.price+"";
 					}else{
+						gotoAndStop(LABEL_COIN);
 						this["txtCoin"].text= shopItemVO.price+"";
 					}
 					break ;
