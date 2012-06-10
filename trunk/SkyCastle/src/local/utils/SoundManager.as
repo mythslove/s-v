@@ -2,6 +2,7 @@ package local.utils
 {
 	import flash.media.Sound;
 	import flash.media.SoundChannel;
+	import flash.utils.clearTimeout;
 	import flash.utils.setTimeout;
 
 	public class SoundManager
@@ -33,48 +34,58 @@ package local.utils
 		private var _soundPayCash:Sound , _soundCollect:Sound , _musicBackground:Sound ,_musicWind:Sound ,_musicThunder:Sound ;
 		private var _bgChannel:SoundChannel ,_windChannel:SoundChannel , _thunderChannel:SoundChannel, _soundSpecialPopShow:Sound ;
 		
+		private var _windTimeId:int ;
+		private var _thunderTimeId:int ;
+		
 		public function stopMusic():void
 		{
+			clearTimeout(_windTimeId);
+			clearTimeout(_thunderTimeId);
 			if(_bgChannel) _bgChannel.stop() ;
 			_bgChannel = null ;
 			if(_windChannel) _windChannel.stop() ;
 			_windChannel = null ;
 			if(_thunderChannel) _thunderChannel.stop() ;
 			_thunderChannel = null ;
+			musicFlag = false ;
 		}
 		
 		public function playMusicBackground():void
 		{
+			clearTimeout(_windTimeId);
+			clearTimeout(_thunderTimeId);
 			if(musicFlag){
 				if(!_musicBackground){
 					_musicBackground = ResourceUtil.instance.getInstanceByClassName( RES_ID , "local.sounds.MusicBackground" ) as Sound;
 				}
 				if(_musicBackground && !_bgChannel) _bgChannel = _musicBackground.play(0,int.MAX_VALUE);
-				setTimeout( playMusicWind , 3000*60 );
-				setTimeout( playMusicThunder , 2000*60 );
+				_windTimeId = setTimeout( playMusicWind , 3000*60 );
+				_thunderTimeId = setTimeout( playMusicThunder , 2000*60 );
 			}
 		}
 		public function playMusicWind():void
 		{
+			clearTimeout(_windTimeId);
 			if(musicFlag){
 				if(!_musicWind){
 					_musicWind = ResourceUtil.instance.getInstanceByClassName( RES_ID , "local.sounds.MusicWind" ) as Sound;
 				}
 				if(_musicWind ) {
 					_bgChannel = _musicWind.play();
-					setTimeout( playMusicWind , 2400*60 );
+					_windTimeId = setTimeout( playMusicWind , 3000*60 );
 				}
 			}
 		}
 		public function playMusicThunder():void
 		{
+			clearTimeout(_thunderTimeId);
 			if(musicFlag){
 				if(!_musicThunder){
 					_musicThunder = ResourceUtil.instance.getInstanceByClassName( RES_ID , "local.sounds.MusicThunder" ) as Sound;
 				}
 				if(_musicThunder){
 					_bgChannel = _musicThunder.play();
-					setTimeout( playMusicThunder , 1200*60 );
+					_thunderTimeId = setTimeout( playMusicThunder , 2000*60 );
 				}
 			}
 		}
