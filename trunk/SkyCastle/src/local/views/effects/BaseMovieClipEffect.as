@@ -7,6 +7,8 @@ package local.views.effects
 	
 	/**
 	 * 基本的特效缓存类 ，只播放一次就消失，如果设置了次数，则根据次数来判断
+	 * @param bmpMC
+	 * @param loopTime 循环次数，0为无限
 	 * @author zzhanglin
 	 */	
 	public class BaseMovieClipEffect extends Sprite
