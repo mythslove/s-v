@@ -107,6 +107,7 @@ package local.model
 			PopUpManager.instance.addQueuePopUp( loading );
 			
 //			//下面为模拟玩家数据，要测试接口的话，注释掉下面的
+//			PopUpManager.instance.clearAll();
 //			GameData.isHome = true ;
 //			me = new PlayerVO();
 //			me.cash = 100;
