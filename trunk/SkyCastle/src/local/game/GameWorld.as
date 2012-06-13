@@ -304,29 +304,36 @@ package local.game
 			CharacterManager.instance.addNpcToWorld();
 			//添加场景建筑
 			var basicBuildingRes:ResVO = ResourceUtil.instance.getResVOByResId( GameData.currentMapId+"_BUILDINGS");
-			var bytes:ByteArray = basicBuildingRes.resObject as ByteArray ;
-			try{
-				bytes.uncompress();
-			}catch(e:Error){
-				SystemUtil.debug(GameData.currentMapId+"_BUILDINGS没有压缩");
+			var mapVO:MapVO ;
+			if(basicBuildingRes)
+			{
+				var bytes:ByteArray = basicBuildingRes.resObject as ByteArray ;
+				try{
+					bytes.uncompress();
+				}catch(e:Error){
+					SystemUtil.debug(GameData.currentMapId+"_BUILDINGS没有压缩");
+				}
+				mapVO = bytes.readObject() as MapVO ;
+				MapModel.instance.mapVO = mapVO ;
 			}
-			var mapVO:MapVO = bytes.readObject() as MapVO ;
-			MapModel.instance.mapVO = mapVO ;
 			var player:PlayerVO = GameData.isHome ? PlayerModel.instance.me : PlayerModel.instance.friend ;
 			var building:Building ;
 			var currentStep:int ;
 			//基础建筑
-			for each( var vo:BuildingVO in mapVO.mapItems)
+			if(mapVO && mapVO.mapItems)
 			{
-				if(player.basicItems && player.basicItems.hasOwnProperty(vo.nodeX+"_"+vo.nodeZ) )
+				for each( var vo:BuildingVO in mapVO.mapItems)
 				{
-					vo.currentStep = player.basicItems[vo.nodeX+"_"+vo.nodeZ] ; 
-					if(vo.currentStep>=vo.baseVO["step"]){
-						continue ;
+					if(player.basicItems && player.basicItems.hasOwnProperty(vo.nodeX+"_"+vo.nodeZ) )
+					{
+						vo.currentStep = player.basicItems[vo.nodeX+"_"+vo.nodeZ] ; 
+						if(vo.currentStep>=vo.baseVO["step"]){
+							continue ;
+						}
 					}
+					building = GameWorld.instance.addBuildingByVO(vo.nodeX,vo.nodeZ,vo,false,false);
+					building.setWalkable( true ,MapGridDataModel.instance.basicItems );
 				}
-				building = GameWorld.instance.addBuildingByVO(vo.nodeX,vo.nodeZ,vo,false,false);
-				building.setWalkable( true ,MapGridDataModel.instance.basicItems );
 			}
 			//玩家修的建筑
 			if( player.buildings)
