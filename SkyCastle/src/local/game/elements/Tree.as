@@ -128,7 +128,7 @@ package local.game.elements
 		
 		override public function update():void
 		{
-			if(_shakeFlag && _skin )
+			if( visible && _shakeFlag && _skin )
 			{
 				if(_skin.x>=0){
 					_skin.x  = -2 ;

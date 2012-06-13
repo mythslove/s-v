@@ -238,7 +238,7 @@ package local.game.elements
 		
 		override public function update():void
 		{
-			if(_bmpMC){
+			if( visible && _bmpMC){
 				if(_bmpMC.currentFrameLabel && _bmpMC.currentFrameLabel!=_currentActions){
 					_bmpMC.gotoAndPlay( _currentActions);
 				}

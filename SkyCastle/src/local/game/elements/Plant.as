@@ -128,7 +128,6 @@ package local.game.elements
 		/*不断执行，更新*/
 		override public function update():void
 		{
-			super.update();
 			if(_gameTimer) 
 			{
 				++_gameTimerTick ;
