@@ -302,6 +302,7 @@ package local.game
 					if(e.buttonDown)	{
 						_mapIsMove = true ;
 						_tooltip.hideTooltip();
+						updateBuildingsVisible();
 					}else if(_topBuilding) {
 						updateTopBuild();
 					}else if(_tooltip.visible && e.target is InteractivePNG){
@@ -347,6 +348,7 @@ package local.game
 		/** 窗口大小变化*/		
 		protected function onResizeHandler( e:GlobalEvent ):void {
 			modifyMapPosition();
+			updateBuildingsVisible();
 		}
 		
 		/**纠正地图位置，防止出界*/		
@@ -359,6 +361,24 @@ package local.game
 			if(y>0) y=0 ;
 			else if(y<-GameSetting.MAX_HEIGHT*scaleX+stage.stageHeight){
 				y = -GameSetting.MAX_HEIGHT*scaleX+stage.stageHeight ;
+			}
+		}
+		
+		/*更新所有的建筑，不在可见范围内的不显示*/
+		protected function updateBuildingsVisible():void
+		{
+			var baseBuilding:BaseBuilding ;
+			for each(var scene:IsoScene in this.scenes )
+			{
+				if( scene==topScene ) continue ;
+				for each( var obj:IsoObject in scene.children)
+				{
+					baseBuilding = obj as BaseBuilding ;
+					if(baseBuilding)
+					{
+						baseBuilding.visible = baseBuilding.isInSign() ;
+					}
+				}
 			}
 		}
 		
