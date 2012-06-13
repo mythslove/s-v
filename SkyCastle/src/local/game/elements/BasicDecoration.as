@@ -66,6 +66,7 @@ package local.game.elements
 					case BuildingOperation.STASH:
 					case BuildingOperation.SELL :
 						MapModel.instance.deleteBuilding( buildingVO );
+						GameWorld.instance.removeBuildFromScene(this);
 						break ;
 				}
 			}
