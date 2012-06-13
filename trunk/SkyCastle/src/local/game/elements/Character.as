@@ -238,11 +238,11 @@ package local.game.elements
 		
 		override public function update():void
 		{
-			if( visible && _bmpMC){
+			if(_bmpMC){
 				if(_bmpMC.currentFrameLabel && _bmpMC.currentFrameLabel!=_currentActions){
 					_bmpMC.gotoAndPlay( _currentActions);
 				}
-				if(_bmpMC.update())
+				if( visible && _bmpMC.update())
 				{
 					var rect:Rectangle = _bmpMC.getBound();
 					_bmpMC.x = rect.x ;
