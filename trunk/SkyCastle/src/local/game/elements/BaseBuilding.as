@@ -1,6 +1,7 @@
 package local.game.elements
 {
 	import bing.iso.IsoObject;
+	import bing.iso.IsoWorld;
 	import bing.res.ResVO;
 	import bing.utils.ContainerUtil;
 	import bing.utils.InteractivePNG;
@@ -279,7 +280,20 @@ package local.game.elements
 			return arr;
 		}
 		
-		
+		/**
+		 * 是否在屏幕的可见区域 
+		 * @return 
+		 */		
+		public function isInSign():Boolean
+		{
+			var world:IsoWorld =GameWorld.instance;
+			var px:Number = (world.sceneLayerOffsetX+screenX )*world.scaleX +world.x;
+			var py:Number = (world.sceneLayerOffsetY+screenY)*world.scaleY+world.y ;
+			if(stage && px>-100 && px<stage.stageWidth+100 && py>-100 && py<stage.stageHeight+100){
+				return true ;
+			}
+			return false ;
+		}
 		
 		
 		//============建筑特效＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝

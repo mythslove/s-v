@@ -270,7 +270,7 @@ package local.game.elements
 			if(_gameTimer) 
 			{
 				++_gameTimerTick ;
-				if(_gameTimerTick>=24){
+				if(_gameTimerTick>=12){
 					_gameTimer.update();
 					_gameTimerTick = 0 ;
 				}
