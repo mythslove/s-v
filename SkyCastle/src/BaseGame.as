@@ -82,6 +82,13 @@ package
 			res.push( new ResVO("init_ui","res/skin/ui.swf"));
 			res.push( new ResVO("init_SoundsCore","res/skin/SoundsCore.swf") );
 			res.push( new ResVO("Basic_AvatarMale","res/character/Basic_AvatarMale.swf") );
+			res.push( new ResVO("Basic_Bamboo","res/tree/Basic_Bamboo.swf") );
+			res.push( new ResVO("Basic_ruin","res/tree/Basic_ruin.swf") );
+			res.push( new ResVO("Basic_PineTree","res/tree/Basic_PineTree.swf") );
+			res.push( new ResVO("Basic_Rock","res/rock/Basic_Rock.swf") );
+			res.push( new ResVO("Basic_Vine","res/rock/Basic_Vine.swf") );
+			res.push( new ResVO("Basic_Stone","res/stone/Basic_Stone.swf") );
+			
 			ResourceUtil.instance.addEventListener(ResProgressEvent.RES_LOAD_PROGRESS , queueLoadHandler);
 			ResourceUtil.instance.addEventListener(ResLoadedEvent.QUEUE_LOADED ,queueLoadHandler);
 			ResourceUtil.instance.queueLoad( res , 5 );
