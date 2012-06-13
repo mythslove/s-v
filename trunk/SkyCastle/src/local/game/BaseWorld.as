@@ -130,6 +130,7 @@ package local.game
 			BuildingExecuteLoading.instance.setScale(1/scaleX) ;
 			//保存配置
 			SettingCookieUtil.saveZoom( scaleX );
+			updateBuildingsVisible();
 		}
 		/**
 		 * 通过位置获得GroundScene
