@@ -28,6 +28,7 @@ package local.views.collection
 		public var txtLevel:TextField;
 		public var txtProgress:TextField;
 		public var img0:Sprite,img1:Sprite,img2:Sprite,img3:Sprite,img4:Sprite;
+		public var count0:TextField,count1:TextField,count2:TextField,count3:TextField,count4:TextField ;
 		//==========================
 		private var _timeoutId:int ;
 		private var _cvo:CollectionVO ;
@@ -40,6 +41,7 @@ package local.views.collection
 		public function CollectionHud()
 		{
 			super();
+			mouseChildren = mouseEnabled = false ;
 		}
 		
 		override protected function added():void
@@ -87,6 +89,7 @@ package local.views.collection
 				img = new Image( pickupVO.thumbAlias , pickupVO.url);
 				img.scaleX = img.scaleY = 0.7 ;
 				this["img"+i].addChild(img);
+				this["count"+i].text = "×"+pickupModel.getMyPickupCount( pickupVO.pickupId );
 				if(pvo.pickupId==pickupVO.pickupId){
 					img.alpha=0.2 ;
 					img.scaleX = img.scaleY = 2 ;
