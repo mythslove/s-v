@@ -55,7 +55,7 @@ package local.model
 		 */		
 		public function getFriends( page:int , num:int ):void
 		{
-			_ro.getOperation("getFriends").send( page , num );
+//			_ro.getOperation("getFriends").send( page , num );
 		}
 	}
 }
