@@ -59,7 +59,7 @@ package local.comm
 		}
 		
 		/** 是否是管理员 */
-		public static var isAdmin:Boolean;
+		public static var isAdmin:Boolean = true ;
 		
 		/** 系统配置 */
 		public static var config:ConfigBaseVO ;
@@ -93,8 +93,5 @@ package local.comm
 		public static var heroBornPoint1:HeroBornPoint ;
 		public static var heroBornPoint2:HeroBornPoint ;
 		public static var heroBornPoint3:HeroBornPoint ;
-		
-		/** 在一个村庄里的跑过的帧数*/
-		public static var villageFrame:uint  ;
 	}
 }

@@ -264,14 +264,12 @@ package local.game
 		/**停止*/		
 		public function stop():void {
 			this.removeEventListener(Event.ENTER_FRAME , onEnterFrameHandler );
-			GameData.villageFrame = 0 ;
 		}
 		
 		/**不断地执行*/		
 		protected function onEnterFrameHandler(e:Event):void
 		{
 			update() ;
-			GameData.villageFrame++ ;
 		}
 		
 		/** 添加侦听*/
