@@ -68,7 +68,7 @@ package local.model
 		 */		
 		public function getQuests():void
 		{
-			ro.getOperation("getQuestList").send() ;
+//			ro.getOperation("getQuestList").send() ;
 		}
 		
 		private function onResultHandler( e:ResultEvent ):void
