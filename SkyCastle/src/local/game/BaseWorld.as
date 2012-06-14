@@ -42,7 +42,6 @@ package local.game
 		protected var _mapIsMove:Boolean=false; 
 		protected var _topBuilding:Building; 
 		protected var _mouseOverBuild:Building ;//当前鼠标在哪个建筑上面
-		private var _updateVisibleTime:int ;
 		
 		public function BaseWorld()
 		{
@@ -131,7 +130,6 @@ package local.game
 			BuildingExecuteLoading.instance.setScale(1/scaleX) ;
 			//保存配置
 			SettingCookieUtil.saveZoom( scaleX );
-			updateBuildingsVisible();
 		}
 		/**
 		 * 通过位置获得GroundScene
@@ -304,11 +302,6 @@ package local.game
 					if(e.buttonDown)	{
 						_mapIsMove = true ;
 						_tooltip.hideTooltip();
-						++_updateVisibleTime ;
-						if( _updateVisibleTime>4 ){
-							_updateVisibleTime = 0 ;
-							updateBuildingsVisible();
-						}
 					}else if(_topBuilding) {
 						updateTopBuild();
 					}else if(_tooltip.visible && e.target is InteractivePNG){
@@ -334,12 +327,10 @@ package local.game
 					}
 					break;
 				case MouseEvent.MOUSE_UP:
-					if(_mapIsMove) updateBuildingsVisible() ;
-					else onClick(e);  
+					if(!_mapIsMove) onClick(e);  
 				case MouseEvent.ROLL_OUT:
-					if(_mapIsMove) updateBuildingsVisible() ;
-					_mapIsMove = false ;
 					this.stopDrag();
+					_mapIsMove = false ;
 				case MouseEvent.MOUSE_OUT:
 					_tooltip.hideTooltip();
 					if(e.type!=MouseEvent.MOUSE_UP && _mouseOverBuild){
@@ -356,7 +347,6 @@ package local.game
 		/** 窗口大小变化*/		
 		protected function onResizeHandler( e:GlobalEvent ):void {
 			modifyMapPosition();
-			updateBuildingsVisible();
 		}
 		
 		/**纠正地图位置，防止出界*/		
@@ -369,24 +359,6 @@ package local.game
 			if(y>0) y=0 ;
 			else if(y<-GameSetting.MAX_HEIGHT*scaleX+stage.stageHeight){
 				y = -GameSetting.MAX_HEIGHT*scaleX+stage.stageHeight ;
-			}
-		}
-		
-		/*更新所有的建筑，不在可见范围内的不显示*/
-		protected function updateBuildingsVisible():void
-		{
-			var baseBuilding:BaseBuilding ;
-			for each(var scene:IsoScene in this.scenes )
-			{
-				if( scene==topScene ) continue ;
-				for each( var obj:IsoObject in scene.children)
-				{
-					baseBuilding = obj as BaseBuilding ;
-					if(baseBuilding)
-					{
-						baseBuilding.visible = baseBuilding.isInSign() ;
-					}
-				}
 			}
 		}
 		

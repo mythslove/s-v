@@ -242,7 +242,7 @@ package local.game.elements
 				if(_bmpMC.currentFrameLabel && _bmpMC.currentFrameLabel!=_currentActions){
 					_bmpMC.gotoAndPlay( _currentActions);
 				}
-				if( visible && _bmpMC.update())
+				if(_bmpMC.update())
 				{
 					var rect:Rectangle = _bmpMC.getBound();
 					_bmpMC.x = rect.x ;
