@@ -262,20 +262,17 @@ package local.game.elements
 		/*不断执行，更新*/
 		override public function update():void
 		{
-			if(visible)
+			if(_anim && _anim.update() ){
+				var rect:Rectangle = _anim.getBound();
+				_anim.x = rect.x ;
+				_anim.y = rect.y;
+			}
+			if(_gameTimer) 
 			{
-				if(_anim && _anim.update() ){
-					var rect:Rectangle = _anim.getBound();
-					_anim.x = rect.x ;
-					_anim.y = rect.y;
-				}
-				if(_gameTimer) 
-				{
-					++_gameTimerTick ;
-					if(_gameTimerTick>=12){
-						_gameTimer.update();
-						_gameTimerTick = 0 ;
-					}
+				++_gameTimerTick ;
+				if(_gameTimerTick>=12){
+					_gameTimer.update();
+					_gameTimerTick = 0 ;
 				}
 			}
 		}
