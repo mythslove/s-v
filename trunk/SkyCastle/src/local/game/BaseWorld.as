@@ -42,6 +42,7 @@ package local.game
 		protected var _mapIsMove:Boolean=false; 
 		protected var _topBuilding:Building; 
 		protected var _mouseOverBuild:Building ;//当前鼠标在哪个建筑上面
+		private var _updateVisibleTime:int ;
 		
 		public function BaseWorld()
 		{
@@ -303,7 +304,11 @@ package local.game
 					if(e.buttonDown)	{
 						_mapIsMove = true ;
 						_tooltip.hideTooltip();
-						updateBuildingsVisible();
+						++_updateVisibleTime ;
+						if( _updateVisibleTime>4 ){
+							_updateVisibleTime = 0 ;
+							updateBuildingsVisible();
+						}
 					}else if(_topBuilding) {
 						updateTopBuild();
 					}else if(_tooltip.visible && e.target is InteractivePNG){
@@ -329,9 +334,11 @@ package local.game
 					}
 					break;
 				case MouseEvent.MOUSE_UP:
-					if(!_mapIsMove) onClick(e);
-					_mapIsMove = false ;
+					if(_mapIsMove) updateBuildingsVisible() ;
+					else onClick(e);  
 				case MouseEvent.ROLL_OUT:
+					if(_mapIsMove) updateBuildingsVisible() ;
+					_mapIsMove = false ;
 					this.stopDrag();
 				case MouseEvent.MOUSE_OUT:
 					_tooltip.hideTooltip();
