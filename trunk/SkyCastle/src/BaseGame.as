@@ -83,6 +83,7 @@ package
 			res.push( new ResVO("init_SoundsCore","res/skin/SoundsCore.swf") );
 			res.push( new ResVO("Basic_AvatarMale","res/character/Basic_AvatarMale.swf") );
 			res.push( new ResVO("Basic_Bamboo","res/tree/Basic_Bamboo.swf") );
+			res.push( new ResVO("Basic_Grass","res/tree/Basic_Grass.swf") );
 			res.push( new ResVO("Basic_ruin","res/tree/Basic_ruin.swf") );
 			res.push( new ResVO("Basic_PineTree","res/tree/Basic_PineTree.swf") );
 			res.push( new ResVO("Basic_Rock","res/rock/Basic_Rock.swf") );
