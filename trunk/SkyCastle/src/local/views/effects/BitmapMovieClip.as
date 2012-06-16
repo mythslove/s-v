@@ -98,7 +98,7 @@ package local.views.effects
 			if(!_bitmaps[temp]){
 				cacheAsBitmaps(temp);
 			}
-			if(bitmapData!=_bitmaps[temp]){
+			if( bitmapData!=_bitmaps[temp] ){
 				bitmapData = _bitmaps[temp];
 				_bound =  _bounds[temp];
 				return true ;
