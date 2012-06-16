@@ -43,8 +43,10 @@ package local.game.elements
 			if(_skin){
 				_bmpMC = EffectManager.instance.createBmpAnimByMC( _skin );
 				itemLayer.y = 20 ;
-				itemLayer.addChild(_bmpMC);
 				_bmpMC.play();
+				_bmpMC.x=_bmpMC.getBound().x;
+				_bmpMC.y=_bmpMC.getBound().y;
+				itemLayer.addChild(_bmpMC);
 			}
 		}
 		
