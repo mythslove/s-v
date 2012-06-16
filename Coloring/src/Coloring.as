@@ -5,7 +5,6 @@ package
 	import flash.display.StageOrientation;
 	import flash.display.StageScaleMode;
 	import flash.events.StageOrientationEvent;
-	import flash.geom.Orientation3D;
 	
 	public class Coloring extends Sprite
 	{
