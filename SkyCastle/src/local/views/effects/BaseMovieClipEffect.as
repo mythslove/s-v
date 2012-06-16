@@ -4,6 +4,8 @@ package local.views.effects
 	import flash.events.Event;
 	import flash.geom.Rectangle;
 	
+	import local.views.base.BaseView;
+	
 	
 	/**
 	 * 基本的特效缓存类 ，只播放一次就消失，如果设置了次数，则根据次数来判断
@@ -11,7 +13,7 @@ package local.views.effects
 	 * @param loopTime 循环次数，0为无限
 	 * @author zzhanglin
 	 */	
-	public class BaseMovieClipEffect extends Sprite
+	public class BaseMovieClipEffect extends BaseView
 	{
 		private var _bmpMC:BitmapMovieClip;
 		private var _loopTime:int ;
@@ -23,13 +25,10 @@ package local.views.effects
 			_bmpMC = bmpMC;
 			_loopTime = loopTime ;
 			addChild(_bmpMC);
-			addEventListener(Event.ADDED_TO_STAGE , addedHandler , false , 0 , true );
 		}
 		
-		private function addedHandler( e:Event ):void
+		override protected function added():void
 		{
-			removeEventListener(Event.ADDED_TO_STAGE , addedHandler );
-			addEventListener(Event.REMOVED_FROM_STAGE , removedHander , false , 0 , true );
 			addEventListener(Event.ENTER_FRAME , onEnterFrameHandler );
 			onEnterFrameHandler(null);
 		}
@@ -64,9 +63,8 @@ package local.views.effects
 			}
 		}
 		
-		private function removedHander( e:Event ):void
+		override protected function removed():void
 		{
-			removeEventListener(Event.REMOVED_FROM_STAGE , removedHander);
 			removeEventListener(Event.ENTER_FRAME , onEnterFrameHandler );
 			_bmpMC.dispose();
 			_bmpMC = null ;
