@@ -9,8 +9,8 @@ package app.core
 	
 	public class GameScene extends BaseView
 	{
-		private var _pens:Sprite ;
-		private var _selectedPen:ColorPen ;
+		private var _pens:Sprite ; //笔的容器
+		private var _selectedPen:ColorPen ; //当前选择的笔
 		
 		public function GameScene()
 		{
