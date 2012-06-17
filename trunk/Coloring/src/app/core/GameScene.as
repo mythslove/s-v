@@ -54,6 +54,8 @@ package app.core
 				pen.y=i*60 ;
 				_pens.addChild( pen);
 			}
+			_selectedPen = _pens.getChildAt(0) as ColorPen;
+			_selectedPen.selected( true );
 		}
 	}
 }
