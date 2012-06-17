@@ -1,6 +1,7 @@
 package
 {
 	import app.comm.Setting;
+	import app.core.GameScene;
 	
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
@@ -33,8 +34,8 @@ package
 				}
 				stage.frameRate = 24 ;
 			}
-			
 			stage.addEventListener(StageOrientationEvent.ORIENTATION_CHANGING , onOrientaionChange);
+			addChild( new GameScene());
 		}
 		
 		private function onOrientaionChange( e:StageOrientationEvent):void
