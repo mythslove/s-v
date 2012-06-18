@@ -2,6 +2,7 @@ package
 {
 	import app.comm.Setting;
 	import app.core.GameScene;
+	import app.util.PopUpManager;
 	
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
@@ -37,6 +38,7 @@ package
 			stage.addEventListener(StageOrientationEvent.ORIENTATION_CHANGING , onOrientaionChange);
 			
 			addChild( new GameScene(null,null));
+			addChild(PopUpManager.instance);
 		}
 		
 		private function onOrientaionChange( e:StageOrientationEvent):void

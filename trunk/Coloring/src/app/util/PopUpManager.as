@@ -90,6 +90,9 @@ package app.util
 					parent.setChildIndex( this , parent.numChildren-1); 
 				}
 			}
+			if(parent){
+				this.parent.setChildIndex( this , parent.numChildren-1);
+			}
 		}
 		/** 根据优先级来排序 */
 		private function sortByPriority():void
@@ -123,6 +126,9 @@ package app.util
 					mask.alpha = maskAlpha ;
 					addChildAt( mask,0);
 				}
+			}
+			if(parent){
+				this.parent.setChildIndex( this , parent.numChildren-1);
 			}
 		}
 		/**
