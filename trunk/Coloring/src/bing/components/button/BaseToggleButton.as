@@ -73,15 +73,17 @@
 			{
 				case MouseEvent.MOUSE_UP:
 				case MouseEvent.MOUSE_OUT :
-					if(this.enabled){
-						this.gotoAndStop( temp+"up");
-					}
+					this.gotoAndStop( temp+"up");
 					break;
 				case MouseEvent.MOUSE_DOWN :
-					this.gotoAndStop( temp+"down");
+					if(enabled){
+						this.gotoAndStop( temp+"down");
+					}
 					break;
 				case MouseEvent.CLICK:
-					this.selected=!selected ;
+					if(enabled){
+						this.selected=!selected ;
+					}
 					break ;
 			}
 		}

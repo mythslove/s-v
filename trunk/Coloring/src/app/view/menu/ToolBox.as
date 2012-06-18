@@ -20,7 +20,7 @@ package app.view.menu
 		
 		public function show():void
 		{
-			TweenLite.to(this,0.5,{y:-this.height+80 , ease:Back.easeOut , onComplete:showTweenOver });
+			TweenLite.to(this,0.5,{y:-this.height, ease:Back.easeOut , onComplete:showTweenOver });
 			mouseChildren = false ;
 		}
 		

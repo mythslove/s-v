@@ -30,6 +30,7 @@ package app.view.menu
 		
 		private function itemSelectedHandler( e:ToggleItemEvent):void
 		{
+			e.stopPropagation() ;
 			switch( e.selectedName )
 			{
 				case toolBox.brushButton.name:
