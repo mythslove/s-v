@@ -52,7 +52,7 @@ package app.core
 			_pens.row = len ;
 			_pens.col=1;
 			_pens.rowGap = 60 ;
-			_pens.x=-60 ;
+			_pens.x=-50 ;
 			addChild(_pens);
 			_pens.init(154 , Setting.SCREEN_HET , ScrollCanvas.SLIDER_TYPE_V , false) ;
 			
