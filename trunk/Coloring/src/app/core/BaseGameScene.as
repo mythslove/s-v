@@ -54,7 +54,7 @@ package app.core
 			_pens.rowGap = 60 ;
 			_pens.x=-50 ;
 			addChild(_pens);
-			_pens.init(154 , Setting.SCREEN_HET , ScrollCanvas.SLIDER_TYPE_V , false) ;
+			_pens.init(160 , Setting.SCREEN_HET , ScrollCanvas.SLIDER_TYPE_V , false) ;
 			
 			var renders:Array = [] ;
 			var pen:ColorPen ;
