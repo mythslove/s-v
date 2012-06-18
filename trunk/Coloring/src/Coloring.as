@@ -43,7 +43,7 @@ package
 		
 		private function onOrientaionChange( e:StageOrientationEvent):void
 		{
-			if(e.beforeOrientation==StageOrientation.UPSIDE_DOWN || e.beforeOrientation==StageOrientation.DEFAULT)
+			if(e.afterOrientation == StageOrientation.DEFAULT || e.afterOrientation == StageOrientation.UPSIDE_DOWN)
 			{
 				e.preventDefault() ;
 			}
