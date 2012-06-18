@@ -46,6 +46,8 @@ package app.core
 			_container = new Sprite();
 			_container.mouseChildren = false ;
 			addChild(_container);
+			createPens();
+			
 			if(_picName){
 				var loader:Loader = new Loader();
 				loader.name="pic" ;
@@ -59,10 +61,8 @@ package app.core
 				_loading = new SmallLoading();
 				_loading.x = Setting.SCREEN_WID>>1 ;
 				_loading.y = Setting.SCREEN_HET>>1 ;
-				PopUpManager.instance.addPopUp( _loading );
+				PopUpManager.instance.addPopUp( _loading , false );
 			}
-			createPens();
-			_pens.addEventListener(MouseEvent.CLICK , onPenClickHandler );
 		}
 		
 		private function loadedHandler( e:Event ):void
@@ -80,8 +80,8 @@ package app.core
 				//初始化
 				_container.addChild(_picBmp);
 				_container.addChild( _lineBmp );
-				_picBmp.bitmapData = new BitmapData(_lineBmp.width,_lineBmp.height);
-				_picTempBmd = new BitmapData(_lineBmp.width,_lineBmp.height);
+				_picBmp.bitmapData = new BitmapData(Setting.SCREEN_WID,Setting.SCREEN_HET);
+				_picTempBmd = new BitmapData(Setting.SCREEN_WID,Setting.SCREEN_HET);
 			}
 		}
 		
@@ -104,9 +104,9 @@ package app.core
 			_pens.row = len ;
 			_pens.col=1;
 			_pens.rowGap = 60 ;
-			_pens.x=-50 ;
+			_pens.x=-60 ;
 			addChild(_pens);
-			_pens.init(160 , Setting.SCREEN_HET , ScrollCanvas.SLIDER_TYPE_V , false) ;
+			_pens.init(155 , Setting.SCREEN_HET , ScrollCanvas.SLIDER_TYPE_V , false) ;
 			
 			var renders:Array = [] ;
 			var pen:ColorPen ;
@@ -119,6 +119,8 @@ package app.core
 			_pens.renders = renders ;
 			_selectedPen = renders[0] as ColorPen;
 			_selectedPen.selected( true );
+			_pens.cacheAsBitmap = true ;
+			_pens.addEventListener(MouseEvent.CLICK , onPenClickHandler );
 		}
 		
 		override protected function removedFromStage():void

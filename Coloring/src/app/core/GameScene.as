@@ -63,7 +63,7 @@ package app.core
 		private function update(e:Event):void
 		{
 			++_tick;
-			if(_tick>=2)
+			if(_tick>=1)
 			{
 				_picTempBmd.draw(_canvas) ;
 				_ltPoint.x = _maskCurrRect.x ;
@@ -87,7 +87,7 @@ package app.core
 			//直接填充图，用的时候要把update事件取消
 			//_pic.bitmapData.threshold( _maskBmd , _maskCurrRect, new Point(_maskCurrRect.x,_maskCurrRect.y) , "==" , _maskColor , _penColor );
 			
-			_canvas.graphics.lineStyle(20,_selectedPen.color,1,true);
+			_canvas.graphics.lineStyle(30,_selectedPen.color,1,true);
 			_canvas.graphics.moveTo(stage.mouseX , stage.mouseY);
 		}
 	}
