@@ -37,7 +37,7 @@ package
 			}
 			stage.addEventListener(StageOrientationEvent.ORIENTATION_CHANGING , onOrientaionChange);
 			
-			addChild( new GameScene(null,null));
+			addChild( new GameScene("AnimalPack"));
 			addChild(PopUpManager.instance);
 		}
 		
