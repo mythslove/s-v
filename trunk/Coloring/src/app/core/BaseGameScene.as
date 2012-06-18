@@ -1,8 +1,11 @@
 package app.core
 {
 	import app.comm.Data;
+	import app.comm.Setting;
 	import app.core.base.BaseView;
 	import app.core.pen.ColorPen;
+	
+	import bing.components.ext.ScrollCanvas;
 	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
@@ -11,7 +14,7 @@ package app.core
 	
 	public class BaseGameScene extends BaseView
 	{
-		protected var _pens:Sprite ; //笔的容器
+		protected var _pens:ScrollCanvas ; //笔的容器
 		protected var _selectedPen:ColorPen ; //当前选择的笔
 		protected var _picMaskBmd:BitmapData ;
 		protected var _picBmp:Bitmap ;
@@ -43,20 +46,27 @@ package app.core
 		
 		protected function createPens():void
 		{
-			_pens = new Sprite();
-			_pens.x=-60 ;
-			addChild(_pens);
 			var colors:Vector.<uint> = Data.penColors ;
 			var len:int = colors.length ;
+			_pens = new ScrollCanvas();
+			_pens.row = len ;
+			_pens.col=1;
+			_pens.rowGap = 60 ;
+			_pens.x=-60 ;
+			addChild(_pens);
+			_pens.init(154 , Setting.SCREEN_HET , ScrollCanvas.SLIDER_TYPE_V , false) ;
+			
+			var renders:Array = [] ;
 			var pen:ColorPen ;
 			for( var i:int = 0 ; i<len ; ++i)
 			{
 				pen = new ColorPen( colors[i]);
 				pen.y=i*60 ;
-				_pens.addChild( pen);
+				renders.push( pen);
 			}
-			_selectedPen = _pens.getChildAt(0) as ColorPen;
+			_selectedPen = renders[0] as ColorPen;
 			_selectedPen.selected( true );
+			_pens.renders = renders ;
 		}
 		
 		override protected function removedFromStage():void
