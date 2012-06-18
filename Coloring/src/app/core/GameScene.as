@@ -1,5 +1,8 @@
 package app.core
 {
+	import app.comm.Data;
+	import app.comm.EditorStatus;
+	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Matrix;
@@ -25,6 +28,7 @@ package app.core
 		override protected function addedToStage():void
 		{
 			super.addedToStage() ;
+			Data.editorStatus = EditorStatus.BUCHKET ;
 			_container.addEventListener( MouseEvent.MOUSE_DOWN , onMouseHandler );
 		}
 		
@@ -37,7 +41,9 @@ package app.core
 					initDraw();
 					stage.addEventListener(MouseEvent.MOUSE_MOVE , onMouseHandler);
 					stage.addEventListener(MouseEvent.MOUSE_UP, onMouseHandler);
-					stage.addEventListener(Event.ENTER_FRAME , update );
+					if(Data.editorStatus!=EditorStatus.BUCHKET){
+						stage.addEventListener(Event.ENTER_FRAME , update );
+					}
 					break ;
 				case MouseEvent.MOUSE_MOVE:
 					if(e.buttonDown && _maskColor !=0xFF )
@@ -51,6 +57,7 @@ package app.core
 					_picTempBmd = _picBmp.bitmapData.clone();
 					_ltPoint.x = 0 ;
 					_ltPoint.y = 0 ;
+					_maskColor = 0xFF ;
 					_canvas.graphics.clear() ;
 					_isMove = false ;
 					stage.removeEventListener(MouseEvent.MOUSE_MOVE , onMouseHandler);
@@ -85,8 +92,9 @@ package app.core
 			}
 			
 			//直接填充图，用的时候要把update事件取消
-			//_pic.bitmapData.threshold( _maskBmd , _maskCurrRect, new Point(_maskCurrRect.x,_maskCurrRect.y) , "==" , _maskColor , _penColor );
-			
+			if(Data.editorStatus==EditorStatus.BUCHKET){
+				_picBmp.bitmapData.threshold( _lineMaskBmd , _maskCurrRect, new Point(_maskCurrRect.x,_maskCurrRect.y) , "==" , _maskColor , _selectedPen.color );
+			}
 			_canvas.graphics.lineStyle(30,_selectedPen.color,1,true);
 			_canvas.graphics.moveTo(stage.mouseX , stage.mouseY);
 		}

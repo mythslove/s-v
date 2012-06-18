@@ -4,10 +4,15 @@ package
 	import app.core.GameScene;
 	import app.util.PopUpManager;
 	
+	import bing.res.ResLoadedEvent;
+	import bing.res.ResPool;
+	import bing.res.ResVO;
+	
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
 	import flash.display.StageOrientation;
 	import flash.display.StageScaleMode;
+	import flash.events.Event;
 	import flash.events.StageOrientationEvent;
 	import flash.system.Capabilities;
 	
@@ -37,8 +42,8 @@ package
 			}
 			stage.addEventListener(StageOrientationEvent.ORIENTATION_CHANGING , onOrientaionChange);
 			
-			addChild( new GameScene("AnimalPack"));
 			addChild(PopUpManager.instance);
+			initLoad();
 		}
 		
 		private function onOrientaionChange( e:StageOrientationEvent):void
@@ -48,5 +53,27 @@ package
 				e.preventDefault() ;
 			}
 		}
+		
+		
+		/** 加载资源和皮肤*/
+		private function initLoad():void
+		{
+			var res:Vector.<ResVO> = new Vector.<ResVO>();
+			res.push( new ResVO("skin","res/skin/960_640/Skin_960_640.swf"));
+			ResPool.instance.isRemote = false ;
+			ResPool.instance.addEventListener(ResLoadedEvent.QUEUE_LOADED ,queueLoadHandler);
+			ResPool.instance.queueLoad( res , 5 );
+		}
+		
+		/**
+		 * 序列下载资源完成 
+		 * @param e
+		 */		
+		protected function queueLoadHandler( e:Event):void
+		{
+			ResPool.instance.removeEventListener(ResLoadedEvent.QUEUE_LOADED ,queueLoadHandler);
+			addChild( new GameScene("AnimalPack"));
+		}
+		
 	}
 }
