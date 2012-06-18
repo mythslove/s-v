@@ -13,7 +13,7 @@ package app.core
 		
 		override protected function addedToStage():void
 		{
-			
+			super.addedToStage() ;
 		}
 		
 	}

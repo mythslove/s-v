@@ -2,13 +2,16 @@ package app.core.pen
 {
 	import app.comm.Resource;
 	import app.core.base.BaseView;
+	import app.util.ResourceUtil;
 	
 	import flash.display.Bitmap;
+	import flash.geom.ColorTransform;
 	import flash.utils.getDefinitionByName;
 	
 	public class ColorPen extends BaseView
 	{
 		private var _penBmp:Bitmap ;
+		private var _penMaskBmp:Bitmap;
 		public var color:uint ;
 		
 		public function ColorPen( color:uint )
@@ -20,8 +23,14 @@ package app.core.pen
 		
 		override protected function addedToStage():void
 		{
-			_penBmp= Resource.getPenBmp( color );
+			_penBmp= new Bitmap(ResourceUtil.instance.pen) ;
+			var colorTf:ColorTransform = _penBmp.transform.colorTransform ;
+			colorTf.color = color ;
+			_penBmp.transform.colorTransform = colorTf ;
 			addChild(_penBmp);
+			
+			_penMaskBmp = new Bitmap(ResourceUtil.instance.penMask) ;
+			addChild(_penMaskBmp);
 		}
 		
 		public function selected( value:Boolean ):void
@@ -32,8 +41,8 @@ package app.core.pen
 		
 		override protected function removedFromStage():void
 		{
-			_penBmp.bitmapData.dispose() ;
 			_penBmp = null ;
+			_penMaskBmp = null ;
 		}
 	}
 }

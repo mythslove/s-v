@@ -6,7 +6,6 @@ package bing.components.ext
 	import bing.utils.ContainerUtil;
 	import bing.utils.MathUtil;
 	
-	import flash.display.MovieClip;
 	import flash.display.Shape;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
@@ -221,7 +220,7 @@ package bing.components.ext
 		
 		protected function showRenderByH():void
 		{
-			var render:MovieClip ;
+			var render:Sprite ;
 			var len:int  = _renders.length ;
 			_tempRow  = 0 ; //当前行
 			_tempCol = 0 ;//当前列
@@ -240,7 +239,7 @@ package bing.components.ext
 		
 		protected function showRenderByV():void
 		{
-			var render:MovieClip ;
+			var render:Sprite ;
 			var len:int  = _renders.length ;
 			_tempRow  = 0 ; //当前行
 			_tempCol = 0 ;//当前列
