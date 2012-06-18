@@ -54,7 +54,7 @@ package bing.res
 		{
 			_resDictionary = new Dictionary(true);
 			_loadList = new Vector.<ResVO>();
-			cdns=new Vector.<String>() ;
+			cdns= Vector.<String>([""]) ;
 			_currentLoadNum = 0 ;
 			_context = new LoaderContext(false , ApplicationDomain.currentDomain);
 		}

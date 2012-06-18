@@ -6,6 +6,7 @@ package app.core
 	import app.core.pen.ColorPen;
 	import app.util.PopUpManager;
 	import app.view.SmallLoading;
+	import app.view.menu.GameMenu;
 	
 	import bing.components.ext.ScrollCanvas;
 	
@@ -32,6 +33,7 @@ package app.core
 		protected var _loading:SmallLoading ;
 		protected var _container:Sprite; 
 		protected var _picName:String ;
+		protected var _gameMenu:GameMenu ;
 		private var _loadedCount:int ;
 		
 		public function BaseGameScene( picName:String  )
@@ -47,7 +49,7 @@ package app.core
 			_container.mouseChildren = false ;
 			addChild(_container);
 			createPens();
-			
+			createMenus();
 			if(_picName){
 				var loader:Loader = new Loader();
 				loader.name="pic" ;
@@ -123,6 +125,14 @@ package app.core
 			_pens.addEventListener(MouseEvent.CLICK , onPenClickHandler );
 		}
 		
+		protected function createMenus():void
+		{
+			_gameMenu = new GameMenu();
+			_gameMenu.x = Setting.SCREEN_WID-5 ;
+			_gameMenu.y = Setting.SCREEN_HET-5 ;
+			addChild(_gameMenu);
+		}
+		
 		override protected function removedFromStage():void
 		{
 			_pens.removeEventListener(MouseEvent.CLICK , onPenClickHandler );
@@ -132,6 +142,7 @@ package app.core
 			_lineBmp = null ;
 			_pens = null ;
 			_selectedPen = null ;
+			_gameMenu = null ;
 		}
 	}
 }

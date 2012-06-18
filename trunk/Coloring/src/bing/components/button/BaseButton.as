@@ -19,12 +19,11 @@
 		
 		override protected function addedToStage():void
 		{
-			this.buttonMode = true ;
 			this.mouseChildren = false;
-			this.addEventListener(MouseEvent.MOUSE_OVER , mouseEventHandler , false , 1000 , true );
-			this.addEventListener(MouseEvent.MOUSE_UP , mouseEventHandler , false , 1000 , true );
-			this.addEventListener(MouseEvent.MOUSE_DOWN , mouseEventHandler , false , 1000 , true );
-			this.addEventListener(MouseEvent.MOUSE_OUT , mouseEventHandler , false , 1000 , true );
+//			this.addEventListener(MouseEvent.MOUSE_OVER , mouseEventHandler , false , 0 , true );
+			this.addEventListener(MouseEvent.MOUSE_UP , mouseEventHandler , false , 0 , true );
+			this.addEventListener(MouseEvent.MOUSE_DOWN , mouseEventHandler , false , 0 , true );
+			this.addEventListener(MouseEvent.MOUSE_OUT , mouseEventHandler , false , 0 , true );
 		}
 
 		override public function set enabled(value:Boolean):void
@@ -40,6 +39,7 @@
 
 		protected function mouseEventHandler(event:MouseEvent):void
 		{
+			if(event.target !=event.currentTarget ) return ;
 			switch ( event.type )
 			{
 				case MouseEvent.MOUSE_OUT:
@@ -88,7 +88,7 @@
 		override protected function removedFromStage():void
 		{
 			super.removedFromStage();
-			this.removeEventListener(MouseEvent.MOUSE_OVER , mouseEventHandler );
+//			this.removeEventListener(MouseEvent.MOUSE_OVER , mouseEventHandler );
 			this.removeEventListener(MouseEvent.MOUSE_UP , mouseEventHandler);
 			this.removeEventListener(MouseEvent.MOUSE_DOWN , mouseEventHandler );
 			this.removeEventListener(MouseEvent.MOUSE_OUT , mouseEventHandler);
