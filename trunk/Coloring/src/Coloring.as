@@ -25,19 +25,18 @@ package
 			stage.align = StageAlign.TOP_LEFT;
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 			stage.quality = StageQuality.LOW;
-			
 			//界面大小
 			if(Capabilities.screenResolutionX>=1024){
 				Setting.SCREEN_WID = 1024 ;
 				Setting.SCREEN_HET = 768 ;
-				if(Capabilities.screenResolutionX==2048){
+				if(Capabilities.screenResolutionX>1024){
 //					this.scaleX = this.scaleY = 2 ;
 				}
 				stage.frameRate = 30 ;
 			}else if(Capabilities.screenResolutionX<=960){
 				Setting.SCREEN_WID = 960 ;
 				Setting.SCREEN_HET = 640 ;
-				if(Capabilities.screenResolutionX==480){
+				if(Capabilities.screenResolutionX<960){
 					this.scaleX = this.scaleY = 0.5 ;
 				}
 				stage.frameRate = 24 ;
