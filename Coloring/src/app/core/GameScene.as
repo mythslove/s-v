@@ -111,7 +111,7 @@ package app.core
 			}else if( Data.editorStatus==EditorStatus.CLEAR){
 				_picBmp.bitmapData.threshold( _lineMaskBmd , _maskCurrRect, _ltPoint , "==" , _maskColor , 0xFF );
 			}
-			_canvas.graphics.lineStyle(30,_selectedPen.color,1);
+			_canvas.graphics.lineStyle(25,_selectedPen.color,1);
 			_canvas.graphics.moveTo(mouseX , mouseY);
 		}
 	}
