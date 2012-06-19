@@ -9,6 +9,8 @@ package app.view.menu
 	{
 		public var brushButton:MenuBrushButton ;
 		public var buchketButton:MenuPaintBuchketButton ;
+		public var sEraserButton:SmallEraserButton;
+		public var bEraserButton:BigEraserButton ;
 		//=============================
 		public var status:String = "hide";
 		
