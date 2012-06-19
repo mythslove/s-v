@@ -1,5 +1,7 @@
 package app.comm
 {
+	import app.core.GameScene;
+
 	public class Data
 	{
 		/**
@@ -17,5 +19,8 @@ package app.comm
 		
 		/** 默认编辑状态 */
 		public static var editorStatus:String = "buchket" ;
+		
+		/**  游戏场景 */
+		public static var gameScene:GameScene ;
 	}
 }

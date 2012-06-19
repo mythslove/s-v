@@ -11,6 +11,7 @@ package
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
 	import flash.display.StageOrientation;
+	import flash.display.StageQuality;
 	import flash.display.StageScaleMode;
 	import flash.events.Event;
 	import flash.events.StageOrientationEvent;
@@ -23,6 +24,7 @@ package
 			super();
 			stage.align = StageAlign.TOP_LEFT;
 			stage.scaleMode = StageScaleMode.NO_SCALE;
+			stage.quality = StageQuality.LOW;
 			
 			//界面大小
 			if(Capabilities.screenResolutionX>=1024){

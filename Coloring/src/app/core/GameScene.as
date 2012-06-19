@@ -3,6 +3,7 @@ package app.core
 	import app.comm.Data;
 	import app.comm.EditorStatus;
 	
+	import flash.display.BlendMode;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Matrix;
@@ -20,9 +21,13 @@ package app.core
 		private var _mat:Matrix ;
 		private var _maskColor:uint = 0xFF ;
 		
+		public var blend:String = BlendMode.NORMAL ;
+		
+		
 		public function GameScene( picName:String )
 		{
 			super(picName);
+			Data.gameScene = this ;
 		}
 		
 		override protected function addedToStage():void
@@ -41,7 +46,7 @@ package app.core
 					initDraw();
 					stage.addEventListener(MouseEvent.MOUSE_MOVE , onMouseHandler);
 					stage.addEventListener(MouseEvent.MOUSE_UP, onMouseHandler);
-					if(Data.editorStatus!=EditorStatus.BUCHKET){
+					if(Data.editorStatus==EditorStatus.BRUSH || Data.editorStatus==EditorStatus.ERASER ){
 						stage.addEventListener(Event.ENTER_FRAME , update );
 					}
 					break ;
@@ -72,11 +77,16 @@ package app.core
 			++_tick;
 			if(_tick>=1)
 			{
-				_picTempBmd.draw(_canvas) ;
+				_picTempBmd.draw(_canvas,null,null,blend,_maskCurrRect) ;
 				_ltPoint.x = _maskCurrRect.x ;
 				_ltPoint.y = _maskCurrRect.y ;
-				_picTempBmd.threshold( _lineMaskBmd,_maskCurrRect , _ltPoint ,"!=",_maskColor , 0xFF );
-				_picBmp.bitmapData.copyPixels( _picTempBmd,_maskCurrRect,_ltPoint,null,null,true);
+				if(blend==BlendMode.NORMAL){
+						_picTempBmd.threshold( _lineMaskBmd,_maskCurrRect , _ltPoint ,"!=",_maskColor , 0xFF );
+						_picBmp.bitmapData.copyPixels( _picTempBmd,_maskCurrRect,_ltPoint,null,null,true);
+				}else{
+					_picTempBmd.threshold( _lineMaskBmd,_maskCurrRect , _ltPoint ,"==",_selectedPen.color , 0xFF );
+					_picBmp.bitmapData = _picTempBmd ;
+				}
 				_tick = 0;
 			}
 		}
@@ -94,6 +104,8 @@ package app.core
 			//直接填充图，用的时候要把update事件取消
 			if(Data.editorStatus==EditorStatus.BUCHKET){
 				_picBmp.bitmapData.threshold( _lineMaskBmd , _maskCurrRect, new Point(_maskCurrRect.x,_maskCurrRect.y) , "==" , _maskColor , _selectedPen.color );
+			}else if( Data.editorStatus==EditorStatus.CLEAR){
+				_picBmp.bitmapData.threshold( _lineMaskBmd , _maskCurrRect, new Point(_maskCurrRect.x,_maskCurrRect.y) , "==" , _maskColor , 0xFF );
 			}
 			_canvas.graphics.lineStyle(30,_selectedPen.color,1,true);
 			_canvas.graphics.moveTo(stage.mouseX , stage.mouseY);

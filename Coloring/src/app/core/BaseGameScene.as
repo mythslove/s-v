@@ -29,6 +29,9 @@ package app.core
 		protected var _lineBmp:Bitmap ; //只有线条的图片
 		protected var _lineMaskBmd:BitmapData ; //颜色分区图片
 		protected var _canvas:Shape = new Shape()  ; //矢量画板
+		public function get canvas():Shape{
+			return _canvas ;
+		}
 		
 		protected var _loading:SmallLoading ;
 		protected var _container:Sprite; 
