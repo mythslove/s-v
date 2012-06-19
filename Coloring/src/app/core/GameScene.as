@@ -4,6 +4,7 @@ package app.core
 	import app.comm.EditorStatus;
 	
 	import flash.display.BlendMode;
+	import flash.display.Shape;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Matrix;
@@ -79,7 +80,15 @@ package app.core
 			{
 				_picTempBmd.draw(_canvas,null,null,null,_maskCurrRect) ;
 				_picTempBmd.threshold( _lineMaskBmd,_maskCurrRect , _ltPoint ,"!=",_maskColor,0xFF );
-				_picBmp.bitmapData.draw(_picTempBmd,null,null,blend,_maskCurrRect) ;
+				if(blend==BlendMode.NORMAL){
+					_picBmp.bitmapData.copyPixels( _picTempBmd , _maskCurrRect , _ltPoint , null ,null , true );
+				}else{
+					var shape:Shape = new Shape();
+					shape.graphics.beginBitmapFill( _picTempBmd, null ,false);
+					shape.graphics.drawRect(_ltPoint.x,_ltPoint.y,_maskCurrRect.width ,_maskCurrRect.height);
+					shape.graphics.endFill();
+					_picBmp.bitmapData.draw(shape,null,null,blend,_maskCurrRect) ;
+				}
 				_tick = 0;
 			}
 		}
