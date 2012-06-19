@@ -59,7 +59,7 @@ package app.core
 					break ;
 				default:
 					//重置
-					_picTempBmd = _picBmp.bitmapData.clone();
+					_picTempBmd.fillRect( _picTempBmd.rect , 0xff );
 					_ltPoint.x = 0 ;
 					_ltPoint.y = 0 ;
 					_maskColor = 0xFF ;
@@ -77,16 +77,9 @@ package app.core
 			++_tick;
 			if(_tick>=1)
 			{
-				_picTempBmd.draw(_canvas,null,null,blend,_maskCurrRect) ;
-				_ltPoint.x = _maskCurrRect.x ;
-				_ltPoint.y = _maskCurrRect.y ;
-				if(blend==BlendMode.NORMAL){
-					_picTempBmd.threshold( _lineMaskBmd,_maskCurrRect , _ltPoint ,"!=",_maskColor , 0xFF );
-					_picBmp.bitmapData.copyPixels( _picTempBmd,_maskCurrRect,_ltPoint,null,null,true);
-				}else{
-					_picTempBmd.threshold( _lineMaskBmd,_maskCurrRect , _ltPoint ,"==",_selectedPen.color , 0xFF );
-					_picBmp.bitmapData = _picTempBmd ;
-				}
+				_picTempBmd.draw(_canvas,null,null,null,_maskCurrRect) ;
+				_picTempBmd.threshold( _lineMaskBmd,_maskCurrRect , _ltPoint ,"!=",_maskColor,0xFF );
+				_picBmp.bitmapData.draw(_picTempBmd,null,null,blend,_maskCurrRect) ;
 				_tick = 0;
 			}
 		}
@@ -100,14 +93,16 @@ package app.core
 				_maskCurrRect = _lineMaskBmd.getColorBoundsRect(_maskColor,_maskColor);
 				_maskRectHash[_maskColor] = _maskCurrRect ;
 			}
+			_ltPoint.x = _maskCurrRect.x ;
+			_ltPoint.y = _maskCurrRect.y ;
 			
 			//直接填充图，用的时候要把update事件取消
 			if(Data.editorStatus==EditorStatus.BUCHKET){
-				_picBmp.bitmapData.threshold( _lineMaskBmd , _maskCurrRect, new Point(_maskCurrRect.x,_maskCurrRect.y) , "==" , _maskColor , _selectedPen.color );
+				_picBmp.bitmapData.threshold( _lineMaskBmd , _maskCurrRect, _ltPoint , "==" , _maskColor , _selectedPen.color );
 			}else if( Data.editorStatus==EditorStatus.CLEAR){
-				_picBmp.bitmapData.threshold( _lineMaskBmd , _maskCurrRect, new Point(_maskCurrRect.x,_maskCurrRect.y) , "==" , _maskColor , 0xFF );
+				_picBmp.bitmapData.threshold( _lineMaskBmd , _maskCurrRect, _ltPoint , "==" , _maskColor , 0xFF );
 			}
-			_canvas.graphics.lineStyle(30,_selectedPen.color,1,true);
+			_canvas.graphics.lineStyle(30,_selectedPen.color,1);
 			_canvas.graphics.moveTo(stage.mouseX , stage.mouseY);
 		}
 	}

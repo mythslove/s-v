@@ -48,12 +48,12 @@ package app.view.menu
 				case toolBox.sEraserButton.name:
 					Data.editorStatus = EditorStatus.ERASER ;
 					Data.gameScene.blend = BlendMode.ERASE ;
-//					Data.gameScene.canvas.visible = false ;
+					Data.gameScene.canvas.visible = false ;
 					break ;
 				case toolBox.bEraserButton.name:
 					Data.editorStatus = EditorStatus.CLEAR ;
 					Data.gameScene.blend = BlendMode.ERASE ;
-//					Data.gameScene.canvas.visible = false ;
+					Data.gameScene.canvas.visible = false ;
 					break ;
 			}
 		}
