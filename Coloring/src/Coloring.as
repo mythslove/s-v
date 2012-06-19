@@ -31,7 +31,7 @@ package
 				Setting.SCREEN_WID = 1024 ;
 				Setting.SCREEN_HET = 768 ;
 				if(Capabilities.screenResolutionX==2048){
-					this.scaleX = this.scaleY = 2 ;
+//					this.scaleX = this.scaleY = 2 ;
 				}
 				stage.frameRate = 30 ;
 			}else if(Capabilities.screenResolutionX<=960){
