@@ -26,21 +26,26 @@ package
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 			stage.quality = StageQuality.LOW;
 			//界面大小
-			if(Capabilities.screenResolutionX>=1024){
-				Setting.SCREEN_WID = 1024 ;
-				Setting.SCREEN_HET = 768 ;
-				if(Capabilities.screenResolutionX>1024){
-//					this.scaleX = this.scaleY = 2 ;
+			if (Capabilities.screenResolutionY <=960)
+			{
+				if(Capabilities.screenResolutionY<960){
+					this.scaleX = 0.5;
+					this.scaleY = 0.5;
 				}
-				stage.frameRate = 30 ;
-			}else if(Capabilities.screenResolutionX<=960){
 				Setting.SCREEN_WID = 960 ;
 				Setting.SCREEN_HET = 640 ;
-				if(Capabilities.screenResolutionX<960){
-					this.scaleX = this.scaleY = 0.5 ;
-				}
-				stage.frameRate = 24 ;
 			}
+			else 
+			{
+				if(Capabilities.screenResolutionY==2048){
+					this.scaleX = 2;
+					this.scaleY = 2;
+				}
+				Setting.SCREEN_WID = 1024 ;
+				Setting.SCREEN_HET = 768 ;
+				stage.frameRate = 30 ;
+			}
+			
 			stage.addEventListener(StageOrientationEvent.ORIENTATION_CHANGING , onOrientaionChange);
 			
 			addChild(PopUpManager.instance);
