@@ -54,7 +54,7 @@ package app.core
 				case MouseEvent.MOUSE_MOVE:
 					if(e.buttonDown && _maskColor !=0xFF )
 					{
-						_canvas.graphics.lineTo(stage.mouseX , stage.mouseY);
+						_canvas.graphics.lineTo(mouseX , mouseY);
 						_isMove = true ;
 					}
 					break ;
@@ -95,7 +95,7 @@ package app.core
 		
 		private function initDraw():void
 		{
-			_maskColor = _lineMaskBmd.getPixel32(stage.mouseX,stage.mouseY);
+			_maskColor = _lineMaskBmd.getPixel32(mouseX,mouseY);
 			if(_maskRectHash.hasOwnProperty(_maskColor)){
 				_maskCurrRect = _maskRectHash[_maskColor];
 			}else{
@@ -112,7 +112,7 @@ package app.core
 				_picBmp.bitmapData.threshold( _lineMaskBmd , _maskCurrRect, _ltPoint , "==" , _maskColor , 0xFF );
 			}
 			_canvas.graphics.lineStyle(30,_selectedPen.color,1);
-			_canvas.graphics.moveTo(stage.mouseX , stage.mouseY);
+			_canvas.graphics.moveTo(mouseX , mouseY);
 		}
 	}
 }
