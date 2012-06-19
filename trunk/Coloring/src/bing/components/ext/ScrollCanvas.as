@@ -150,8 +150,8 @@ package bing.components.ext
 					break ;
 				case MouseEvent.MOUSE_DOWN:
 					_mouseIsDown = true ;
-					_mouseDownPos.x = e.stageX ;
-					_mouseDownPos.y = e.stageY ;
+					_mouseDownPos.x = mouseX ;
+					_mouseDownPos.y = mouseY ;
 					_containerPos.x = _container.x ;
 					_containerPos.y = _container.y ;
 					_endX = _container.x ;
@@ -162,8 +162,8 @@ package bing.components.ext
 					if(e.buttonDown){
 						if(!_mouseIsDown){
 							_mouseIsDown = true ;
-							_mouseDownPos.x = e.stageX ;
-							_mouseDownPos.y = e.stageY ;
+							_mouseDownPos.x = mouseX ;
+							_mouseDownPos.y = mouseY ;
 							_containerPos.x = _container.x ;
 							_containerPos.y = _container.y ;
 							_endX = _container.x ;
@@ -171,8 +171,8 @@ package bing.components.ext
 							_dragTime = getTimer();
 						}
 						mouseChildren=false;
-						_offsetX = e.stageX-_mouseDownPos.x ;
-						_offsetY = e.stageY-_mouseDownPos.y ;
+						_offsetX = mouseX-_mouseDownPos.x ;
+						_offsetY = mouseY-_mouseDownPos.y ;
 						_endX = _containerPos.x + _offsetX ;
 						_endY = _containerPos.y + _offsetY ;
 						ModifyEnd();
