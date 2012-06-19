@@ -25,7 +25,6 @@
 			this.mouseChildren = false;
 			this.addEventListener(MouseEvent.MOUSE_OUT , mouseEventHandler , false, 1000 , true );
 			this.addEventListener(MouseEvent.MOUSE_UP , mouseEventHandler , false, 1000 , true );
-			this.addEventListener(MouseEvent.CLICK , mouseEventHandler , false, 1000 , true );
 			this.addEventListener(MouseEvent.MOUSE_DOWN , mouseEventHandler , false, 1000 , true );
 		}
 
@@ -78,11 +77,6 @@
 					if(enabled){
 						this.gotoAndStop( temp+"down");
 					}
-					break;
-				case MouseEvent.CLICK:
-					if(enabled){
-						this.selected=!selected ;
-					}
 					break ;
 			}
 		}
@@ -112,7 +106,6 @@
 			this.removeEventListener(MouseEvent.MOUSE_UP , mouseEventHandler);
 			this.removeEventListener(MouseEvent.MOUSE_DOWN , mouseEventHandler );
 			this.removeEventListener(MouseEvent.MOUSE_OUT , mouseEventHandler);
-			this.removeEventListener(MouseEvent.CLICK , mouseEventHandler );
 		}
 	}
 

@@ -56,8 +56,8 @@ package bing.components.button
 				if(obj is BaseToggleButton)
 				{
 					btn = obj as BaseToggleButton ;
-					if(!btn.hasEventListener(MouseEvent.CLICK)){
-						btn.addEventListener(MouseEvent.CLICK , btnClickHandler , false ,0 , true );
+					if(!btn.hasEventListener(MouseEvent.MOUSE_DOWN)){
+						btn.addEventListener(MouseEvent.MOUSE_DOWN , btnDownHandler );
 					}
 					_toggleButtons.push( btn );
 				}
@@ -65,7 +65,7 @@ package bing.components.button
 			selectedName =  _selectedName ;
 		}
 		
-		private function btnClickHandler( event:MouseEvent):void 
+		private function btnDownHandler( event:MouseEvent):void 
 		{
 			btn = event.target as BaseToggleButton ;
 			if(btn){
@@ -92,9 +92,7 @@ package bing.components.button
 				if(obj is BaseToggleButton)
 				{
 					btn = obj as BaseToggleButton ;
-					if(!btn.hasEventListener(MouseEvent.CLICK)){
-						btn.removeEventListener(MouseEvent.CLICK , btnClickHandler );
-					}
+					btn.removeEventListener(MouseEvent.MOUSE_DOWN , btnDownHandler );
 				}
 			}
 		}
