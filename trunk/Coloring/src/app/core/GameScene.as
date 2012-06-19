@@ -81,8 +81,8 @@ package app.core
 				_ltPoint.x = _maskCurrRect.x ;
 				_ltPoint.y = _maskCurrRect.y ;
 				if(blend==BlendMode.NORMAL){
-						_picTempBmd.threshold( _lineMaskBmd,_maskCurrRect , _ltPoint ,"!=",_maskColor , 0xFF );
-						_picBmp.bitmapData.copyPixels( _picTempBmd,_maskCurrRect,_ltPoint,null,null,true);
+					_picTempBmd.threshold( _lineMaskBmd,_maskCurrRect , _ltPoint ,"!=",_maskColor , 0xFF );
+					_picBmp.bitmapData.copyPixels( _picTempBmd,_maskCurrRect,_ltPoint,null,null,true);
 				}else{
 					_picTempBmd.threshold( _lineMaskBmd,_maskCurrRect , _ltPoint ,"==",_selectedPen.color , 0xFF );
 					_picBmp.bitmapData = _picTempBmd ;
