@@ -23,6 +23,7 @@
 		{
 			this.stop();
 			this.mouseChildren = false;
+			this.addEventListener(MouseEvent.ROLL_OUT , mouseEventHandler , false, 1000 , true );
 			this.addEventListener(MouseEvent.MOUSE_OUT , mouseEventHandler , false, 1000 , true );
 			this.addEventListener(MouseEvent.MOUSE_UP , mouseEventHandler , false, 1000 , true );
 			this.addEventListener(MouseEvent.CLICK , mouseEventHandler , false, 1000 , true );
@@ -71,6 +72,7 @@
 			var temp:String = this.selected ? "selected-":"";
 			switch (event.type)
 			{
+				case MouseEvent.ROLL_OUT :
 				case MouseEvent.MOUSE_UP:
 				case MouseEvent.MOUSE_OUT :
 					this.gotoAndStop( temp+"up");
@@ -111,6 +113,7 @@
 		{
 			super.removedFromStage();
 			this.removeEventListener(MouseEvent.MOUSE_UP , mouseEventHandler);
+			this.removeEventListener(MouseEvent.ROLL_OUT , mouseEventHandler);
 			this.removeEventListener(MouseEvent.MOUSE_DOWN , mouseEventHandler );
 			this.removeEventListener(MouseEvent.MOUSE_OUT , mouseEventHandler);
 			this.removeEventListener(MouseEvent.CLICK , mouseEventHandler );
