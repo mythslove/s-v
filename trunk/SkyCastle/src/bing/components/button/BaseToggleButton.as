@@ -19,15 +19,15 @@
 		public function BaseToggleButton()
 		{
 			this.stop();
-		}
-		
-		override protected function addedToStage():void
-		{
 			var len:int = currentLabels.length ;
 			for( var i:int =0  ; i<len ; ++i){
 				_frameDic [(currentLabels[i] as FrameLabel).name] = true ;
 			}
 			
+		}
+		
+		override protected function addedToStage():void
+		{
 			this.buttonMode=true;
 			this.mouseChildren = false;
 			this.addEventListener(MouseEvent.MOUSE_OVER , mouseEventHandler , false, 1000 , true );
@@ -116,7 +116,6 @@
 			this.removeEventListener(MouseEvent.MOUSE_DOWN , mouseEventHandler );
 			this.removeEventListener(MouseEvent.MOUSE_OUT , mouseEventHandler);
 			this.removeEventListener(MouseEvent.CLICK , mouseEventHandler);
-			_frameDic = null ;
 		}
 	}
 
