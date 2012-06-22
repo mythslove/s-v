@@ -4,6 +4,7 @@
 	
 	import flash.display.FrameLabel;
 	import flash.events.MouseEvent;
+	import flash.utils.Dictionary;
 
 	/**
 	 *标签包括
@@ -11,10 +12,15 @@
 	 */	
 	public class BaseButton extends BingComponent
 	{
+		private var _frameDic:Dictionary = new Dictionary(true);
 		
 		public function BaseButton()
 		{
 			this.stop();
+			var len:int = currentLabels.length ;
+			for( var i:int =0  ; i<len ; ++i){
+				_frameDic [(currentLabels[i] as FrameLabel).name] = true ;
+			}
 		}
 		
 		override protected function addedToStage():void
@@ -69,19 +75,8 @@
 		
 		override public function gotoAndStop(frame:Object, scene:String=null):void
 		{
-			if(this.currentLabels){
-				const LEN:int = this.currentLabels.length ;
-				var bool:Boolean=false ;
-				for( var i:int =0  ; i<LEN ; i++){
-					if(frame is String  && (this.currentLabels[i] as FrameLabel).name==frame.toString()  )
-					{
-						bool = true ;
-						break ;
-					}
-				}
-				if(bool){
-					super.gotoAndStop(frame,scene);
-				}
+			if( _frameDic[frame.toString()]){
+				super.gotoAndStop(frame,scene);
 			}
 		}
 		
