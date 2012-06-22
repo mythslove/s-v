@@ -11,8 +11,10 @@ package local.views.shop
 	import flash.text.TextField;
 	
 	import local.comm.GlobalDispatcher;
+	import local.enum.ItemType;
 	import local.enum.PayType;
 	import local.events.ShopEvent;
+	import local.model.buildings.MapBuildingModel;
 	import local.model.buildings.vos.*;
 	import local.model.vos.ShopItemVO;
 	import local.utils.GameUtil;
@@ -24,7 +26,7 @@ package local.views.shop
 		public var container:Sprite;
 		public var btnNormal:BaseButton;
 		public var btnBg:InteractiveObject ;
-		public var txtBtn:TextField ,txtName:TextField;
+		public var txtBtn:TextField ,txtName:TextField,txtInfo:TextField ,txtOwned:TextField ;
 		public var payMode:ShopItemPayMode;
 		//==========================
 		private const LABEL_DEFAULT:String = "defalut";
@@ -38,6 +40,8 @@ package local.views.shop
 			stop();
 			container.mouseEnabled = container.mouseChildren=false ;
 			GameUtil.disableTextField(this);
+			txtOwned.visible = false ;
+			txtInfo.visible = false ;
 		}
 		
 		/**
@@ -54,6 +58,15 @@ package local.views.shop
 			txtName.text = vo.baseVO.name ; //显示名称
 			container.addChild( new Image(vo.baseVO.thumbAlias , vo.baseVO.thumb) ); //显示缩略图
 			GameToolTip.instance.register(btnBg,stage,vo.baseVO.description); //注册ToolTip
+			
+			if(vo.itemType==ItemType.BUILDING){
+				//特殊建筑，判断玩家是不是已经拥有此建筑
+				if(MapBuildingModel.instance.getCountByBaseId( vo.itemValue)>0){
+					txtOwned.visible = true ;
+					btnNormal.enabled = false ;
+					container.alpha = 0.5 ;
+				}
+			}
 			
 			payMode.showPay( vo );
 			btnNormal.addEventListener(MouseEvent.CLICK , clickNormalBtnHandler,false,0,true);
