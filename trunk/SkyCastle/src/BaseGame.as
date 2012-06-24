@@ -81,7 +81,7 @@ package
 			res.push( new ResVO("init_Popup","res/skin/Popup.swf") );
 			res.push( new ResVO("init_ui","res/skin/ui.swf"));
 			res.push( new ResVO("init_SoundsCore","res/skin/SoundsCore.swf") );
-			res.push( new ResVO("Basic_AvatarMale","res/character/Basic_AvatarMale.swf") );
+			res.push( new ResVO("Basic_Avatar","res/character/Basic_AvatarFemale.swf") );
 			res.push( new ResVO("Basic_Bamboo","res/tree/Basic_Bamboo.swf") );
 			res.push( new ResVO("Basic_Grass","res/tree/Basic_Grass.swf") );
 			res.push( new ResVO("Basic_ruin","res/tree/Basic_ruin.swf") );
