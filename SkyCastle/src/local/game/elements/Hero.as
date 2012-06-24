@@ -23,7 +23,7 @@ package local.game.elements
 		public function Hero()
 		{
 			var baseVO:BaseCharacterVO = new BaseCharacterVO();
-			baseVO.resId="Basic_AvatarMale";
+			baseVO.resId="Basic_Avatar";
 			baseVO.alias="Basic_AvatarMale";
 			baseVO.walkable=1 ;
 			baseVO.xSpan = 1 ;
