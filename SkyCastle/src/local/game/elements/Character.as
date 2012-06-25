@@ -233,6 +233,9 @@ package local.game.elements
 			if(_bmpMC){
 				_currentActions = action ;
 				_bmpMC.gotoAndPlay( action);
+				var rect:Rectangle = _bmpMC.getBound();
+				_bmpMC.x = rect.x ;
+				_bmpMC.y = rect.y ;
 			}
 		}
 		
@@ -241,10 +244,13 @@ package local.game.elements
 			if(_bmpMC){
 				if(_bmpMC.currentFrameLabel && _bmpMC.currentFrameLabel!=_currentActions){
 					_bmpMC.gotoAndPlay( _currentActions);
+					var rect:Rectangle = _bmpMC.getBound();
+					_bmpMC.x = rect.x ;
+					_bmpMC.y = rect.y ;
 				}
 				if(_bmpMC.update())
 				{
-					var rect:Rectangle = _bmpMC.getBound();
+					rect = _bmpMC.getBound();
 					_bmpMC.x = rect.x ;
 					_bmpMC.y = rect.y ;
 				}
