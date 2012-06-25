@@ -1,5 +1,6 @@
 package bing.iso
 {
+	import flash.display.Graphics;
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
 	
@@ -46,6 +47,35 @@ package bing.iso
 			var col:Number = Math.floor(xpos / size );
 			var row:Number = Math.floor( zpos / size);
 			return new Point(col,row) ;
-		} 
+		}
+		
+		/**
+		 * 画多边形 ，需要自己 调用graphic.beginFill 和 endFill
+		 * @param size 格子的大小
+		 * @param xPan X轴格子数
+		 * @param zSpan Z轴格子数
+		 */		
+		public static function drawRhombus( graphics:Graphics , size:int , xSpan:int , zSpan:int ):void
+		{
+			graphics.moveTo( 0,0);
+			
+			var p:Vector3D = new Vector3D();
+			var screenPos:Point =new Point();
+			
+			p.x = xSpan; p.z=0;
+			screenPos = IsoUtils.isoToScreen(p);
+			graphics.lineTo( screenPos.x*size , screenPos.y*size);
+			
+			p.x = xSpan; p.z=zSpan;
+			screenPos = IsoUtils.isoToScreen(p);
+			graphics.lineTo( screenPos.x*size ,screenPos.y*size);
+			
+			p.x = 0; p.z=zSpan;
+			screenPos = IsoUtils.isoToScreen(p);
+			graphics.lineTo( screenPos.x*size ,screenPos.y*size);
+			
+			graphics.lineTo( 0,0);
+			
+		}
 	}
 }
