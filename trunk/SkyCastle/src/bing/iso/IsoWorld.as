@@ -14,8 +14,6 @@ package bing.iso
 		protected var _gridX:int ;
 		protected var _gridZ:int ;
 		protected var _size:int ;
-		protected var _w :Number ;
-		protected var _h:Number;
 		
 		protected var _backGround:DisplayObject ;
 		protected var _scenesLayer:Sprite = new Sprite();
@@ -27,14 +25,12 @@ package bing.iso
 			return _scenes ;
 		}
 		
-		public function IsoWorld(width:Number, height:Number ,  gridX:int , gridZ:int ,size:int )
+		public function IsoWorld(gridX:int , gridZ:int ,size:int )
 		{
 			super();
 			this._gridX = gridX ;
 			this._gridZ = gridZ ;
 			this._size = size ;
-			this._w  = width ;
-			this._h = height ;
 			addEventListener(Event.ADDED_TO_STAGE , addedToStageHandler );
 		}
 		
