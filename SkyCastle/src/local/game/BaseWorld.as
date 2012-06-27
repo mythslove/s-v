@@ -45,7 +45,7 @@ package local.game
 		
 		public function BaseWorld()
 		{
-			super(GameSetting.MAX_WIDTH, GameSetting.MAX_HEIGHT , GameSetting.GRID_X, GameSetting.GRID_Z, GameSetting.GRID_SIZE);
+			super(GameSetting.GRID_X, GameSetting.GRID_Z, GameSetting.GRID_SIZE);
 			//设置背景图片
 			var bg:Bitmap = new Bitmap( ResourceUtil.instance.getInstanceByClassName(GameData.currentMapId+"_BACKGROUND",GameData.currentMapId+"_BACKGROUND") as BitmapData );
 			this.setBackGround(bg);
