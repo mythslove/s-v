@@ -2,14 +2,17 @@ package local.game.elements
 {
 	import flash.events.Event;
 	import flash.geom.Point;
-	import flash.utils.clearTimeout;
 	import flash.utils.setTimeout;
 	
-	import local.comm.GameData;
 	import local.enum.AvatarAction;
-	import local.enum.BuildingOperation;
+	import local.enum.MouseStatus;
+	import local.game.GameWorld;
+	import local.model.buildings.vos.BaseMobVO;
 	import local.model.buildings.vos.BuildingVO;
-	import local.utils.CollectQueueUtil;
+	import local.utils.CharacterManager;
+	import local.utils.MouseManager;
+	import local.utils.SoundManager;
+	import local.views.loading.BuildingExecuteLoading;
 
 	/**
 	 * 怪(ATTACK,DAMAGE,IDLE,WALK,DEFEAT)
@@ -21,6 +24,11 @@ package local.game.elements
 		{
 			super(vo);
 			this.speed = 4 ;
+		}
+		
+		/** 获取此建筑的基础VO */
+		public function get baseMobVO():BaseMobVO{
+			return buildingVO.baseVO as BaseMobVO ;
 		}
 		
 		/** 攻击 */
@@ -39,6 +47,16 @@ package local.game.elements
 		public function defeat():void
 		{
 			gotoAndPlay( AvatarAction.DEFEAT );
+		}
+		
+		
+		override public function set enable( value:Boolean ):void{
+			itemLayer.enabled = value ;
+			if(value){
+				itemLayer.alpha = 1 ;
+			}else{
+				itemLayer.alpha = .6 ;
+			}
 		}
 		
 		override protected function createCharacterSkin():void
@@ -67,24 +85,28 @@ package local.game.elements
 			}
 		}
 		
-		/**
-		 * 发送操作到服务器
-		 */		
-		override public function onClick():void
+		override public function onMouseOver():void
 		{
-			if( GameData.buildingCurrOperation==BuildingOperation.NONE && CollectQueueUtil.instance.isNull() )
-			{
-				this.enable=false ;
-				
-			}
+			super.onMouseOver();
+			MouseManager.instance.mouseStatus = MouseStatus.SHOVEL_BUILDING ;
 		}
 		
-		
-		
-		
-		
-		
-		
+		override public function execute():Boolean
+		{
+			if(executeReduceEnergy())
+			{
+				itemLayer.alpha=1 ;
+				_currentRewards = null ;
+				_executeBack = false ;
+				ro.getOperation("attack").send( buildingVO.id );
+				CharacterManager.instance.hero.gotoAndPlay(AvatarAction.HIT);
+				SoundManager.instance.playSoundHitMonster() ;
+				_timeoutFlag = false ;
+				_timeoutId = setTimeout( timeoutHandler , 2000 );
+				GameWorld.instance.effectScene.addChild( BuildingExecuteLoading.getInstance(screenX,screenY-itemLayer.height).setTime(3000));
+			}
+			return true;
+		}
 		
 		override public function dispose():void
 		{
