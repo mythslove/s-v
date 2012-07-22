@@ -84,7 +84,6 @@ package local.game.elements
 				if(buildingVO.currentStep>=baseStoneVO.step){
 					showStashEffect();
 					GameWorld.instance.removeBuildFromScene(this) ; 
-					
 					//添加怪
 					if(_currentRewards && _currentRewards.mob ) addMob();
 					

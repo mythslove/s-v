@@ -10,12 +10,11 @@ package local.game.elements
 	import local.model.MapGridDataModel;
 	import local.model.PlayerModel;
 	import local.model.QuestModel;
+	import local.model.buildings.BaseBuildingVOModel;
 	import local.model.buildings.vos.BuildingVO;
 	import local.model.map.MapModel;
 	import local.model.vos.RewardsVO;
 	import local.utils.CharacterManager;
-	import local.utils.CollectQueueUtil;
-	import local.views.CenterViewContainer;
 	import local.views.effects.MapWordEffect;
 	
 	/**
@@ -98,7 +97,10 @@ package local.game.elements
 		/*添加怪*/
 		protected function addMob():void
 		{
-			
+			var vo:BuildingVO = new BuildingVO();
+			vo.id = _currentRewards.mob.id ;
+			vo.baseVO = BaseBuildingVOModel.instance.getBaseVOById( _currentRewards.mob.baseId );
+			GameWorld.instance.addBuildingByVO(  _currentRewards.mob.x,_currentRewards.mob.y,vo);
 		}
 		
 		override public function dispose():void

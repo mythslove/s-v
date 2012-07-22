@@ -98,6 +98,7 @@ package local.game.elements
 					GameWorld.instance.removeBuildFromScene(this); 
 					//添加怪
 					if(_currentRewards && _currentRewards.mob )  addMob();
+					
 					this.dispose();
 				}else if(_skin){
 					_skin.gotoAndStop( buildingVO.currentStep+1);
