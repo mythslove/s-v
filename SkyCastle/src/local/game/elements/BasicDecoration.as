@@ -98,9 +98,9 @@ package local.game.elements
 		protected function addMob():void
 		{
 			var vo:BuildingVO = new BuildingVO();
-			vo.id = _currentRewards.mob.id ;
+			vo.id = int(_currentRewards.mob.id) ;
 			vo.baseVO = BaseBuildingVOModel.instance.getBaseVOById( _currentRewards.mob.baseId );
-			GameWorld.instance.addBuildingByVO(  _currentRewards.mob.x,_currentRewards.mob.y,vo);
+			GameWorld.instance.addBuildingByVO(nodeX,nodeZ,vo);
 		}
 		
 		override public function dispose():void

@@ -14,6 +14,6 @@ package local.model.vos
 		public var energy:int ;
 		public var buildings:Object ; //key-value，key为buildingBaseId , value 为数量
 		public var pickups:Object; //key-value，key为pid , value为数量
-		public var mob:Object  ; //返回的怪 {id:"", baseId:"", x:"",y:""}
+		public var mob:Object  ; //返回的怪 {id:"", baseId:""}
 	}
 }
