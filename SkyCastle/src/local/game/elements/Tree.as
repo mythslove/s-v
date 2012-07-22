@@ -7,6 +7,7 @@ package local.game.elements
 	import local.enum.MouseStatus;
 	import local.game.GameWorld;
 	import local.model.PlayerModel;
+	import local.model.StorageModel;
 	import local.model.buildings.vos.BaseTreeVO;
 	import local.model.buildings.vos.BuildingVO;
 	import local.utils.CharacterManager;
@@ -100,16 +101,8 @@ package local.game.elements
 				if(buildingVO.currentStep>=baseTreeVO.step){
 					showStashEffect();
 					GameWorld.instance.removeBuildFromScene(this);
-					//添加动物或怪
-					if(_currentRewards && _currentRewards.buildings){
-						for( var i:int =0 ; i<_currentRewards.buildings.length ; ++i)
-						{
-							var animailVO:BuildingVO = _currentRewards.buildings[i] as  BuildingVO;
-							if(animailVO) {
-								GameWorld.instance.addBuildingByVO( nodeX, nodeZ , animailVO );
-							}
-						}
-					}
+					//添加怪
+					if(_currentRewards && _currentRewards.mob ) addMob();
 					this.dispose();
 				}else if(_skin){
 					_skin.gotoAndStop( buildingVO.currentStep+1);

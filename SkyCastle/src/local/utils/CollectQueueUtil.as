@@ -82,5 +82,14 @@ package local.utils
 			}
 			_queue = [] ;
 		}
+		
+		/**
+		 * 判断队列中是否为空 
+		 * @return 
+		 */		
+		public function isNull():Boolean
+		{
+			return _queue.length==0 && currentBuilding==null ;
+		}
 	}
 }

@@ -39,5 +39,13 @@ package local.enum
 		/** 背着跳 */
 		public static const RUNAWAYBACK:String="RUNAWAY-BACK";
 		
+	
+		/** mob攻击*/
+		public static const ATTACK:String = "attack";
+		/** mob被打*/
+		public static const DAMAGE:String = "demage";
+		/** mob被打败*/
+		public static const DEFEAT:String = "defeat";
+		
 	}
 }

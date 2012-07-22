@@ -17,7 +17,7 @@ package local.game.elements
 		private var _isToHouse:Boolean ; //是否走到了房子边
 		
 		/**
-		 * npc基灯 
+		 * npc基类
 		 * @param vo
 		 * @param delay 延迟显示
 		 */		
