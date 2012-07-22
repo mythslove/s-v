@@ -96,6 +96,8 @@ package local.game.elements
 				if(buildingVO.currentStep>=baseRockVO.step){
 					showStashEffect();
 					GameWorld.instance.removeBuildFromScene(this); 
+					//添加怪
+					if(_currentRewards && _currentRewards.mob )  addMob();
 					this.dispose();
 				}else if(_skin){
 					_skin.gotoAndStop( buildingVO.currentStep+1);

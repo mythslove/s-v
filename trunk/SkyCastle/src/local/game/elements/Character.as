@@ -261,11 +261,10 @@ package local.game.elements
 		}
 		
 		
-		/*返回一个可以走动的点*/
-		protected function getFreeRoad():Point{
+		/*返回一个可以走动的点 , radius为半径*/
+		protected function getFreeRoad( radius:int = 8 ):Point{
 			var p:Point ;
 			var pos:Array =[] ;
-			var radius:int = 8 ;
 			var newScene:IsoScene ;
 			var currScene:IsoScene;
 			for(var i:int = nodeX-radius ; i<nodeX+radius ; ++i){

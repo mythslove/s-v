@@ -1,16 +1,14 @@
 package local.game.elements
 {
-	import flash.display.MovieClip;
 	import flash.events.Event;
 	
 	import local.comm.GameData;
 	import local.enum.AvatarAction;
 	import local.enum.ItemType;
-	import local.views.effects.BitmapMovieClip;
+	import local.model.PlayerModel;
 	import local.model.buildings.vos.BaseCharacterVO;
 	import local.model.buildings.vos.BuildingVO;
 	import local.utils.CollectQueueUtil;
-	import local.utils.ResourceUtil;
 	import local.utils.SettingCookieUtil;
 
 	/**
@@ -30,7 +28,7 @@ package local.game.elements
 			baseVO.zSpan = 1 ;
 			baseVO.layer = 2 ;
 			baseVO.name="Sky Castle";
-			baseVO.description = "Click to talk.";
+			baseVO.description = "Hello ! I am "+PlayerModel.instance.me.name+" .";
 			baseVO.type = ItemType.CHACTERS ;
 			var vo:BuildingVO = new BuildingVO();
 			vo.baseVO = baseVO ;

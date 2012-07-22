@@ -2,7 +2,9 @@ package local.views.effects
 {
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
+	import flash.display.FrameLabel;
 	import flash.display.MovieClip;
+	import flash.events.Event;
 	import flash.geom.Matrix;
 	import flash.geom.Rectangle;
 	import flash.utils.getDefinitionByName;
@@ -43,10 +45,34 @@ package local.views.effects
 			this._bitmaps = bitmaps ;
 			this._bounds = bounds ;
 			
+			addEvt();
+			
 			var len:int = _mc.totalFrames;
 			if(!_bitmaps) 	_bitmaps = new Vector.<BitmapData>(len,true);
 			if(!_bounds)	_bounds = new Vector.<Rectangle>(len,true);
 			gotoAndPlay(1);
+		}
+		
+		
+		private function addEvt():void
+		{
+			var frames:Array = _mc.currentLabels ;
+			var len:int = frames.length ;
+			var fl:FrameLabel ;
+			for( var i:int = 1 ; i<len; ++i){
+				fl = frames[i]  as FrameLabel ;
+				_mc.addFrameScript( animationCompleteEvt , fl.frame-1 );
+			}
+			_mc.addFrameScript( animationCompleteEvt ,_mc.totalFrames-1 ); //最后一帧
+			_mc.addEventListener(Event.COMPLETE , mcAnimationComHandler , false , 0 , true );
+		}
+		
+		private function animationCompleteEvt():void{
+			dispatchEvent( new Event(Event.COMPLETE));
+		}
+		
+		private function mcAnimationComHandler(e:Event):void{
+			this.dispatchEvent( e );
 		}
 		
 		/** 缓存成位图*/
@@ -118,6 +144,7 @@ package local.views.effects
 		public function dispose( isDeep:Boolean=false ):void
 		{
 			_mc.stop();
+			_mc.removeEventListener(Event.COMPLETE , mcAnimationComHandler );
 			if(isDeep){
 				_bitmaps = null ;
 				_bounds = null ;

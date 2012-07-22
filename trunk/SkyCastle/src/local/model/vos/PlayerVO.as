@@ -4,7 +4,6 @@ package local.model.vos
 	import local.enum.QuestType;
 	import local.model.PlayerModel;
 	import local.model.QuestModel;
-	import local.model.map.vos.MapVO;
 	import local.views.CenterViewContainer;
 	
 	/**

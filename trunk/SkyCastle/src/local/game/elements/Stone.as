@@ -6,16 +6,12 @@ package local.game.elements
 	import local.enum.BasicPickup;
 	import local.enum.MouseStatus;
 	import local.game.GameWorld;
-	import local.model.PlayerModel;
 	import local.model.buildings.vos.BaseStoneVO;
 	import local.model.buildings.vos.BuildingVO;
 	import local.utils.CharacterManager;
-	import local.utils.CollectQueueUtil;
 	import local.utils.MouseManager;
 	import local.utils.PickupUtil;
 	import local.utils.SoundManager;
-	import local.views.CenterViewContainer;
-	import local.views.effects.MapWordEffect;
 	import local.views.loading.BuildingExecuteLoading;
 
 	/**
@@ -88,6 +84,10 @@ package local.game.elements
 				if(buildingVO.currentStep>=baseStoneVO.step){
 					showStashEffect();
 					GameWorld.instance.removeBuildFromScene(this) ; 
+					
+					//添加怪
+					if(_currentRewards && _currentRewards.mob ) addMob();
+					
 					this.dispose();
 				}else if(_skin){
 					_skin.gotoAndStop( buildingVO.currentStep+1);

@@ -95,6 +95,12 @@ package local.game.elements
 			}
 		}
 		
+		/*添加怪*/
+		protected function addMob():void
+		{
+			
+		}
+		
 		override public function dispose():void
 		{
 			setWalkable( false ,MapGridDataModel.instance.basicItems );
