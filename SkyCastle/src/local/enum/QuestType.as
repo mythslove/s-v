@@ -67,6 +67,10 @@ package local.enum
 		/**
 		 *  兑换collection 
 		 */
-		public static const TURN_IN:String = "turnIn";
+		public static const TURN_IN:String = "turnin";
+		/**
+		 * 战胜怪 
+		 */		
+		public static const DEFEAT_MOB:String = "defeatmob";
 	}
 }

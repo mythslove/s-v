@@ -1,5 +1,8 @@
 package local.game.elements
 {
+	import bing.amf3.ResultEvent;
+	import bing.utils.SystemUtil;
+	
 	import flash.events.Event;
 	import flash.geom.Point;
 	import flash.utils.setTimeout;
@@ -7,8 +10,10 @@ package local.game.elements
 	import local.enum.AvatarAction;
 	import local.enum.MouseStatus;
 	import local.game.GameWorld;
+	import local.model.MapGridDataModel;
 	import local.model.buildings.vos.BaseMobVO;
 	import local.model.buildings.vos.BuildingVO;
+	import local.model.vos.RewardsVO;
 	import local.utils.CharacterManager;
 	import local.utils.MouseManager;
 	import local.utils.SoundManager;
@@ -20,6 +25,8 @@ package local.game.elements
 	 */	
 	public class Mob extends Character
 	{
+		private var canMove:Boolean ;
+		
 		public function Mob(vo:BuildingVO)
 		{
 			super(vo);
@@ -76,11 +83,16 @@ package local.game.elements
 			else if( _bmpMC.currentLabel==AvatarAction.DAMAGE.toUpperCase() || _bmpMC.currentLabel==AvatarAction.ATTACK.toUpperCase() )
 			{
 				gotoAndPlay(AvatarAction.IDLE);
-				if(Math.random()>0.8){
-					var p:Point = getFreeRoad(6);
-					if( !p || !this.searchToRun(p.x , p.y)){
-						gotoAndPlay( AvatarAction.IDLE );
-					}
+			}
+		}
+		
+		override public function onClick():void
+		{
+			if( !nextPoint &&_currentActions==AvatarAction.IDLE){
+				if(roads){
+					if(roads.length==0) super.onClick() ;
+				}else{
+					super.onClick() ;
 				}
 			}
 		}
@@ -91,6 +103,11 @@ package local.game.elements
 			MouseManager.instance.mouseStatus = MouseStatus.SHOVEL_BUILDING ;
 		}
 		
+		override public function move():void
+		{
+			if(canMove) super.move() ;
+		}
+		
 		override public function execute():Boolean
 		{
 			if(executeReduceEnergy())
@@ -98,7 +115,18 @@ package local.game.elements
 				itemLayer.alpha=1 ;
 				_currentRewards = null ;
 				_executeBack = false ;
-				ro.getOperation("attack").send( buildingVO.id );
+				
+				var endPoint:Point = new Point(nodeX, nodeZ) ;
+				if(Math.random()>0.8){
+					var p:Point = getFreeRoad(4);
+					if( !p || !this.searchToRun(p.x , p.y)){
+						endPoint = p ;
+						MapGridDataModel.instance.buildingGrid.setWalkable( p.x,p.y,false);
+						canMove = false ;
+					}
+				}
+				
+				ro.getOperation("attackMob").send( buildingVO.id , endPoint.x , endPoint.y );
 				CharacterManager.instance.hero.gotoAndPlay(AvatarAction.HIT);
 				SoundManager.instance.playSoundHitMonster() ;
 				_timeoutFlag = false ;
@@ -107,6 +135,38 @@ package local.game.elements
 			}
 			return true;
 		}
+		
+		override protected function onResultHandler(e:ResultEvent):void
+		{
+			SystemUtil.debug("返回数据：",e.service+"."+e.method , e.result);
+			switch(e.method)
+			{
+				case "attackMob": 
+					_executeBack = true ;
+					_currentRewards = e.result as RewardsVO ;
+					this.showPickup();
+					//统计quest ,战胜怪
+					//QuestModel.instance.updateQuests( QuestType.DEFEAT_MOB  ) ;
+					break ;
+			}
+		}
+		
+		override public function showPickup():void
+		{
+			if( _timeoutFlag && _executeBack)
+			{
+				//特殊物品
+				showRewardsPickup();
+				//-------------------------------------
+				_timeoutFlag=false ;
+				_executeBack = false ;
+				_currentRewards = null ;
+				super.showPickup();
+				
+				canMove = true ;
+			}
+		}
+		
 		
 		override public function dispose():void
 		{
