@@ -64,6 +64,7 @@ package
 		{
 			registerClassAlias("BaseBuildingVO",BaseBuildingVO) ;
 			registerClassAlias("BaseCharacterVO",BaseCharacterVO) ;
+			registerClassAlias("BaseMobVO",BaseMobVO) ;
 			registerClassAlias("BasePlantVO",BasePlantVO) ;
 			registerClassAlias("BaseDecorationVO",BaseDecorationVO) ;
 			registerClassAlias("BaseFactoryVO",BaseFactoryVO) ;
