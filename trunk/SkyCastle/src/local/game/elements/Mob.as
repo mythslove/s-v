@@ -9,8 +9,10 @@ package local.game.elements
 	
 	import local.enum.AvatarAction;
 	import local.enum.MouseStatus;
+	import local.enum.QuestType;
 	import local.game.GameWorld;
 	import local.model.MapGridDataModel;
+	import local.model.QuestModel;
 	import local.model.buildings.vos.BaseMobVO;
 	import local.model.buildings.vos.BuildingVO;
 	import local.model.vos.RewardsVO;
@@ -41,18 +43,21 @@ package local.game.elements
 		/** 攻击 */
 		public function attack():void
 		{
+			_bmpMC.loopTime = 1 ;
 			gotoAndPlay( AvatarAction.ATTACK );
 		}
 		
 		/** 被打 */
 		public function damage():void
 		{
+			_bmpMC.loopTime = 2 ;
 			gotoAndPlay( AvatarAction.DAMAGE );
 		}
 		
 		/** 死亡，被战胜 */
 		public function defeat():void
 		{
+			_bmpMC.loopTime = 1 ;
 			gotoAndPlay( AvatarAction.DEFEAT );
 		}
 		
@@ -144,9 +149,12 @@ package local.game.elements
 				case "attackMob": 
 					_executeBack = true ;
 					_currentRewards = e.result as RewardsVO ;
-					this.showPickup();
-					//统计quest ,战胜怪
-					//QuestModel.instance.updateQuests( QuestType.DEFEAT_MOB  ) ;
+					if(_currentRewards){
+						//打死了怪
+						this.showPickup();
+						//统计quest ,战胜怪
+						QuestModel.instance.updateQuests( QuestType.DEFEAT_MOB  ) ;
+					}
 					break ;
 			}
 		}
