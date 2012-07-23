@@ -20,6 +20,9 @@ package local.views.effects
 		protected var _bounds:Vector.<Rectangle>; 
 		protected var _mc:MovieClip;
 		
+		public var loopTime:int =1 ; //循环次数，在此次数上才抛出事件
+		private var _loopTime:int ;
+		
 		protected var _bound:Rectangle =new Rectangle() ;
 		public function getBound():Rectangle
 		{
@@ -72,7 +75,12 @@ package local.views.effects
 		}
 		
 		private function mcAnimationComHandler(e:Event):void{
-			this.dispatchEvent( e );
+			++_loopTime;
+			if(_loopTime>=loopTime)
+			{
+				this.dispatchEvent( e );
+				_loopTime = 0 ;
+			}
 		}
 		
 		/** 缓存成位图*/
