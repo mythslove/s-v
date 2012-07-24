@@ -122,7 +122,7 @@ package local.game.elements
 				_executeBack = false ;
 				
 				var endPoint:Point = new Point(nodeX, nodeZ) ;
-				if(Math.random()>0.8){
+				if(Math.random()>0.9){
 					var p:Point = getFreeRoad(4);
 					if( !p || !this.searchToRun(p.x , p.y)){
 						endPoint = p ;
