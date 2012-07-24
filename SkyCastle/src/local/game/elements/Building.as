@@ -96,9 +96,8 @@ package local.game.elements
 						if(shopItemVO.payType==PayType.CASH){
 							coin = GameUtil.cashToCoin(shopItemVO.price)>>1 ;
 						}else{
-							coin = shopItemVO.price ;
+							coin = shopItemVO.price>>1 ;
 						}
-						coin=coin>>1 ;
 						SellBuildingAlert.show( coin+"" , baseBuildingVO.baseId, "Are you sure to sell it?",
 							function():void{
 								enable = false ;
