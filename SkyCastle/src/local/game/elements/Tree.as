@@ -95,19 +95,20 @@ package local.game.elements
 				buildingVO.currentStep++;
 				_timeoutFlag=false ;
 				_executeBack = false ;
-				_currentRewards = null ;
 				super.showPickup();
 				
 				if(buildingVO.currentStep>=baseTreeVO.step){
 					showStashEffect();
 					GameWorld.instance.removeBuildFromScene(this);
 					//添加怪
+					if(_currentRewards) _currentRewards.mob={id:"1", baseId:"BLD_041"};
 					if(_currentRewards && _currentRewards.mob ) addMob();
 					
 					this.dispose();
 				}else if(_skin){
 					_skin.gotoAndStop( buildingVO.currentStep+1);
 				}
+				_currentRewards = null ;
 			}
 		}
 		
