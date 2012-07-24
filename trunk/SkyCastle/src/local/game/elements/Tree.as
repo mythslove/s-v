@@ -101,7 +101,6 @@ package local.game.elements
 					showStashEffect();
 					GameWorld.instance.removeBuildFromScene(this);
 					//添加怪
-					if(_currentRewards) _currentRewards.mob={id:"1", baseId:"BLD_041"};
 					if(_currentRewards && _currentRewards.mob ) addMob();
 					
 					this.dispose();
