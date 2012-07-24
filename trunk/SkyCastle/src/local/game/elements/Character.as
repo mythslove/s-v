@@ -270,7 +270,8 @@ package local.game.elements
 			for(var i:int = nodeX-radius ; i<nodeX+radius ; ++i){
 				for(var j:int = nodeZ-radius ; j<nodeZ+radius ; ++j){
 					if(i>1&& j>1&&i+1<=GameSetting.GRID_X&&j+1<=GameSetting.GRID_Z ){
-						if( !(i==nodeX&&j==nodeZ) && MapGridDataModel.instance.astarGrid.getNode(i,j).walkable)
+						if( !(i==nodeX&&j==nodeZ) && MapGridDataModel.instance.astarGrid.getNode(i,j).walkable 
+							&& MapGridDataModel.instance.buildingGrid.getNode(i,j).walkable )
 						{
 							newScene = GameWorld.instance.getBuildingScene(i,j) ;
 							currScene = GameWorld.instance.getBuildingScene(nodeX,nodeZ) ;
