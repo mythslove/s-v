@@ -5,6 +5,7 @@ package local.model.buildings.vos
 		public function BaseMobVO()
 		{
 			super();
+			walkable = false ;
 		}
 	}
 }
