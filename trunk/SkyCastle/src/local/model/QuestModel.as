@@ -102,6 +102,20 @@ package local.model
 						currentQuests = Vector.<QuestVO>( e.result );
 					}
 					break ;
+				case "complete":
+					//返回一个flag:boolean表示是否成功 , 一个qid
+					vo = getQuestById( e.result.qid );
+					if(e.result.flag)
+					{
+						SoundManager.instance.playSoundGreatWork();
+						var questComPop:QuestCompletePopUp = new QuestCompletePopUp( vo );
+						PopUpManager.instance.addQueuePopUp( questComPop );
+					}
+					else
+					{
+						vo.isComplete = false ;
+					}
+					break ;
 			}
 					
 		}
@@ -141,9 +155,7 @@ package local.model
 			{
 				if(vo.isAccept && !vo.isReceived && !vo.isComplete && vo.checkComplete()  ){
 					vo.isComplete=true;
-					SoundManager.instance.playSoundGreatWork();
-					var questComPop:QuestCompletePopUp = new QuestCompletePopUp( vo );
-					PopUpManager.instance.addQueuePopUp( questComPop );
+					ro.getOperation("complete").send( vo.qid );
 				}
 			}
 		}
