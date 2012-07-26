@@ -163,7 +163,7 @@ package local.game.elements
 					if(_currentRewards){
 						//打死了怪
 						this.showPickup();
-						itemLayer.enabled = false ;
+						itemLayer.mouseEnabled = false ;
 					}
 					break ;
 			}
