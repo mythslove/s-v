@@ -47,7 +47,7 @@ package local.game.elements
 		override protected function resLoadedHandler(e:Event):void
 		{
 			super.resLoadedHandler(e);
-			defeat() ;
+			attack() ;
 		}
 		
 		/** 获取此建筑的基础VO */
