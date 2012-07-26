@@ -2,6 +2,7 @@ package local.game.elements
 {
 	import flash.events.Event;
 	import flash.geom.Point;
+	import flash.utils.clearTimeout;
 	import flash.utils.setTimeout;
 	
 	import local.enum.AvatarAction;
@@ -28,7 +29,7 @@ package local.game.elements
 			this.speed = 4 ;
 			this. _delayShow = delay ;
 			_actionsFuns = Vector.<Function>([
-				freeWay,actionIdle,actionShop,actionIdle,searchHouse,freeWay,
+				freeWay,actionIdle,actionShop,actionIdle,searchHouse,freeWay,actionRunwayBack,
 				actionIdle,actionAdmire,freeWay,searchHouse,freeWay,actionIdle,actionRunwayBack,freeWay
 			]);
 		}
@@ -105,31 +106,37 @@ package local.game.elements
 		
 		protected function actionShop():void{
 			this.gotoAndPlay(AvatarAction.SHOP);
+			clearTimeout(_timeoutId);
 			_timeoutId = setTimeout(auto,5000);
 		}
 		
 		protected function actionRunway():void{
 			this.gotoAndPlay(AvatarAction.RUNAWAY);
+			clearTimeout(_timeoutId);
 			_timeoutId = setTimeout(searchHouse,5000);
 		}
 		
 		protected function actionRunwayBack():void{
 			this.gotoAndPlay(AvatarAction.RUNAWAYBACK);
+			clearTimeout(_timeoutId);
 			_timeoutId = setTimeout(auto,5000);
 		}
 		
 		protected function actionIdle():void{
 			this.gotoAndPlay(AvatarAction.IDLE);
+			clearTimeout(_timeoutId);
 			_timeoutId = setTimeout(auto,8000);
 		}
 		
 		protected function actionAdmire():void {
 			this.gotoAndPlay(AvatarAction.ADMIRE);
+			clearTimeout(_timeoutId);
 			_timeoutId = setTimeout(auto,5000);
 		}
 		
-		protected function actionCow():void{
+		public function actionCow():void{
 			this.gotoAndPlay(AvatarAction.COWER);
+			clearTimeout(_timeoutId);
 			_timeoutId = setTimeout(auto,10000);
 		}
 		
