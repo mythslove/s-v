@@ -71,7 +71,7 @@ package local.views.effects
 				fl = frames[i]  as FrameLabel ;
 				_mc.addFrameScript(  fl.frame-2 , animationCompleteEvt );
 			}
-			_mc.addFrameScript( animationCompleteEvt ,_mc.totalFrames-1 ); //最后一帧
+			_mc.addFrameScript( animationCompleteEvt ,_mc.totalFrames-2 ); //最后一帧
 		}
 		
 		private function animationCompleteEvt():void{
