@@ -11,7 +11,6 @@ package local.game.elements
 	import local.enum.MouseStatus;
 	import local.enum.QuestType;
 	import local.game.GameWorld;
-	import local.game.scenes.BuildingScene;
 	import local.model.MapGridDataModel;
 	import local.model.QuestModel;
 	import local.model.buildings.vos.BaseMobVO;
@@ -21,7 +20,6 @@ package local.game.elements
 	import local.utils.CollectQueueUtil;
 	import local.utils.MouseManager;
 	import local.utils.SoundManager;
-	import local.views.loading.BuildingExecuteLoading;
 
 	/**
 	 * 怪(ATTACK,DAMAGE,IDLE,WALK,DEFEAT)
@@ -72,16 +70,7 @@ package local.game.elements
 		public function defeat():void
 		{
 			gotoAndPlay( AvatarAction.DEFEAT );
-		}
-		
-		
-		override public function set enable( value:Boolean ):void{
-			itemLayer.enabled = value ;
-			if(value){
-				itemLayer.alpha = 1 ;
-			}else{
-				itemLayer.alpha = .6 ;
-			}
+			itemLayer.enabled = false ;
 		}
 		
 		override protected function createCharacterSkin():void
@@ -101,6 +90,7 @@ package local.game.elements
 				GameWorld.instance.removeBuildFromScene( this , false );
 				//清理
 				dispose();
+				return ;
 			}
 			else if( _bmpMC.currentLabel==AvatarAction.DAMAGE || _bmpMC.currentLabel==AvatarAction.ATTACK )
 			{
@@ -164,7 +154,7 @@ package local.game.elements
 				SoundManager.instance.playSoundHitMonster() ;
 				_timeoutFlag = false ;
 				_timeoutId = setTimeout( timeoutHandler , 2000 );
-				GameWorld.instance.effectScene.addChild( BuildingExecuteLoading.getInstance(screenX,screenY-itemLayer.height).setTime(3000));
+//				GameWorld.instance.effectScene.addChild( BuildingExecuteLoading.getInstance(screenX,screenY-itemLayer.height).setTime(3000));
 			}
 			return true;
 		}

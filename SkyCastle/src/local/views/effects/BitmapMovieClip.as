@@ -69,7 +69,7 @@ package local.views.effects
 			var fl:FrameLabel ;
 			for( var i:int = 1 ; i<len; ++i){
 				fl = frames[i]  as FrameLabel ;
-				_mc.addFrameScript(  fl.frame-1 , animationCompleteEvt );
+				_mc.addFrameScript(  fl.frame-2 , animationCompleteEvt );
 			}
 			_mc.addFrameScript( animationCompleteEvt ,_mc.totalFrames-1 ); //最后一帧
 		}
@@ -81,6 +81,7 @@ package local.views.effects
 				this.dispatchEvent( new Event(Event.COMPLETE));
 				_tempLoopTime = 0 ;
 			}
+			gotoAndPlay(currentLabel);
 		}
 		
 		/** 缓存成位图*/
@@ -111,6 +112,7 @@ package local.views.effects
 		public function gotoAndPlay( frame:Object ):void
 		{
 			_tempLoopTime = 0 ; 
+			_loopTime = 1 ;
 			_mc.gotoAndPlay(frame);
 			update();
 		}
@@ -118,6 +120,7 @@ package local.views.effects
 		public function stop():void
 		{
 			_tempLoopTime = 0 ; 
+			_loopTime = 1 ;
 			_mc.stop();
 			update();
 		}
@@ -125,6 +128,7 @@ package local.views.effects
 		public function play():Boolean
 		{
 			_tempLoopTime = 0 ; 
+			_loopTime = 1 ;
 			_mc.play();
 			return update();
 		}
