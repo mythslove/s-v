@@ -59,6 +59,7 @@ package local.game.elements
 		public function actionAttack():void
 		{
 			gotoAndPlay( AvatarAction.ATTACK );
+			CharacterManager.instance.charactersCow();
 		}
 		
 		/** 被打 */
