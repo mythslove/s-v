@@ -101,7 +101,6 @@ package local.game.elements
 			vo.id = int(_currentRewards.mob.id) ;
 			vo.baseVO = BaseBuildingVOModel.instance.getBaseVOById( _currentRewards.mob.baseId );
 			GameWorld.instance.addBuildingByVO(nodeX,nodeZ,vo);
-			CharacterManager.instance.characterCow();
 		}
 		
 		override public function dispose():void
