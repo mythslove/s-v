@@ -1,12 +1,14 @@
 package local.game.elements
 {
 	import bing.amf3.ResultEvent;
+	import bing.iso.path.AStar;
 	import bing.utils.SystemUtil;
 	
 	import flash.events.Event;
 	import flash.geom.Point;
 	import flash.utils.setTimeout;
 	
+	import local.comm.GameSetting;
 	import local.enum.AvatarAction;
 	import local.enum.MouseStatus;
 	import local.enum.QuestType;
@@ -158,6 +160,34 @@ package local.game.elements
 				_timeoutId = setTimeout( timeoutHandler , 2000 );
 			}
 			return true;
+		}
+		
+		/**
+		 * 寻路移动 
+		 * @param endNodeX
+		 * @param endNodeZ
+		 * @return true表示有路径，false为没有路
+		 */		
+		override public function searchToRun( endNodeX:int , endNodeZ:int):Boolean
+		{
+			if(endNodeX<0 || endNodeZ<0||endNodeX+1>GameSetting.GRID_X||endNodeZ+1>GameSetting.GRID_Z ) return false;
+			if(MapGridDataModel.instance.astarGrid.getNode(endNodeX,endNodeZ).walkable )
+			{
+				var astar:AStar = new AStar();
+				MapGridDataModel.instance.astarGrid.setStartNode( nodeX,nodeZ );
+				MapGridDataModel.instance.astarGrid.setEndNode( endNodeX,endNodeZ );
+				if(astar.findPath(MapGridDataModel.instance.astarGrid )) 
+				{
+					var roadsArray:Array = astar.path;
+					if(roadsArray && roadsArray.length>0){
+						roads = roadsArray ;
+						roadIndex = 0 ;
+						nextPoint = this.getNextPoint();
+						return true;
+					}
+				}
+			}
+			return false;
 		}
 		
 		override protected function onResultHandler(e:ResultEvent):void
