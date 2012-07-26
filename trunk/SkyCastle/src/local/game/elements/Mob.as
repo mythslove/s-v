@@ -27,7 +27,7 @@ package local.game.elements
 	 */	
 	public class Mob extends Character
 	{
-		private var canMove:Boolean ;
+		private var _canMove:Boolean ;
 		
 		public function Mob(vo:BuildingVO)
 		{
@@ -63,8 +63,8 @@ package local.game.elements
 		/** 被打 */
 		public function damage():void
 		{
-			_bmpMC.loopTime =2 ;
 			gotoAndPlay( AvatarAction.DAMAGE );
+			_bmpMC.loopTime =2 ;
 		}
 		
 		/** 死亡，被战胜 */
@@ -91,6 +91,8 @@ package local.game.elements
 				GameWorld.instance.removeBuildFromScene( this , false );
 				//清理
 				dispose();
+				//统计quest ,战胜怪
+				QuestModel.instance.updateQuests( QuestType.DEFEAT_MOB  ) ;
 				return ;
 			}
 			else if( _bmpMC.currentLabel==AvatarAction.DAMAGE || _bmpMC.currentLabel==AvatarAction.ATTACK )
@@ -98,7 +100,7 @@ package local.game.elements
 				gotoAndPlay(AvatarAction.IDLE);
 				if(!enable) enable = true ;
 			}
-			canMove = true ;
+			_canMove = true ;
 		}
 		
 		override public function onClick():void
@@ -120,7 +122,7 @@ package local.game.elements
 		
 		override public function move():void
 		{
-			if(canMove) super.move() ;
+			if(_canMove) super.move() ;
 		}
 		
 		override public function execute():Boolean
@@ -128,25 +130,24 @@ package local.game.elements
 			if(executeReduceEnergy())
 			{
 				itemLayer.alpha=1 ;
-				if(Math.random()>0.5){
-					defeat();
+				if(Math.random()>0.7){
+					attack(); //没打中
 					CollectQueueUtil.instance.nextBuilding();
 					return false;
 				}else{
 					damage();
 				}
 				
-				
 				_currentRewards = null ;
 				_executeBack = false ;
 				
 				var endPoint:Point = new Point(nodeX, nodeZ) ;
-				if(Math.random()>0.9){
+				if(Math.random()>0.8){ //跑动
 					var p:Point = getFreeRoad(4);
 					if( !p || !this.searchToRun(p.x , p.y)){
 						endPoint = p ;
 						MapGridDataModel.instance.buildingGrid.setWalkable( p.x,p.y,false);
-						canMove = false ;
+						_canMove = false ;
 					}
 				}
 				
@@ -155,7 +156,6 @@ package local.game.elements
 				SoundManager.instance.playSoundHitMonster() ;
 				_timeoutFlag = false ;
 				_timeoutId = setTimeout( timeoutHandler , 2000 );
-//				GameWorld.instance.effectScene.addChild( BuildingExecuteLoading.getInstance(screenX,screenY-itemLayer.height).setTime(3000));
 			}
 			return true;
 		}
@@ -171,8 +171,8 @@ package local.game.elements
 					if(_currentRewards){
 						//打死了怪
 						this.showPickup();
-						//统计quest ,战胜怪
-						QuestModel.instance.updateQuests( QuestType.DEFEAT_MOB  ) ;
+						//被打败的动画
+						this.defeat();
 					}
 					break ;
 			}
