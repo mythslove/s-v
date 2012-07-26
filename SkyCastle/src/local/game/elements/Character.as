@@ -130,7 +130,7 @@ package local.game.elements
 							return true;
 						}
 					}
-				}else if(_currentActions==AvatarAction.IDLE){
+				}else if(_currentActions==AvatarAction.IDLE && this is Hero){
 					nodeX = endNodeX;
 					nodeZ = endNodeZ;
 					gotoAndPlay(AvatarAction.IDLE);
