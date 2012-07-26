@@ -37,6 +37,9 @@ package local.model.buildings
 		/** 基础数据：树*/
 		public var trees:Array=[];
 		
+		/** 地图上所有的怪*/
+		public var mobs:Array=[];
+		
 		/**
 		 * 添加一个建筑到地图数据中 
 		 * @param vo
@@ -91,6 +94,9 @@ package local.model.buildings
 					break ;
 				case ItemType.DEC_TREE:
 					arr = trees;
+					break ;
+				case ItemType.MOB:
+					arr = mobs ;
 					break ;
 			}
 			return arr ;
