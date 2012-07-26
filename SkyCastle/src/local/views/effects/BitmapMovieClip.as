@@ -75,7 +75,7 @@ package local.views.effects
 		}
 		
 		private function animationCompleteEvt():void{
-			gotoAndPlay(currentLabel);
+			_mc.gotoAndPlay(currentLabel);
 			++_tempLoopTime;
 			if(_tempLoopTime>=loopTime)
 			{
