@@ -51,12 +51,12 @@ package local.utils
 			npcs = null ;
 			if(GameData.isHome){
 				var len:int = _allNpcClass.length ;
-				npcs = new Vector.<NPC>(len ,true );
+				npcs = new Vector.<NPC>();
 				for( var i:int = 0 ; i<len-2 ; ++i){
 					npc = new 	_allNpcClass[i]() as NPC ;
 					npc.nodeX = GameData.heroBornPoint1.nodeX ;
 					npc.nodeZ = GameData.heroBornPoint1.nodeZ ;
-					npcs[i] = npc ;
+					npcs.push(npc);
 					var scene:IsoScene = GameWorld.instance.getBuildingScene( npc.nodeX , npc.nodeZ );
 					scene.addIsoObject( npc , false );
 				}
@@ -65,7 +65,7 @@ package local.utils
 					npc = new 	_allNpcClass[i]() as NPC ;
 					npc.nodeX = GameData.heroBornPoint2.nodeX ;
 					npc.nodeZ = GameData.heroBornPoint2.nodeZ ;
-					npcs[i] = npc ;
+					npcs.push(npc);
 					scene = GameWorld.instance.getBuildingScene( npc.nodeX , npc.nodeZ );
 					scene.addIsoObject( npc, false );
 				}
@@ -74,7 +74,7 @@ package local.utils
 					npc = new 	_allNpcClass[i]() as NPC ;
 					npc.nodeX = GameData.heroBornPoint3.nodeX ;
 					npc.nodeZ = GameData.heroBornPoint3.nodeZ ;
-					npcs[i] = npc ;
+					npcs.push(npc);
 					scene = GameWorld.instance.getBuildingScene( npc.nodeX , npc.nodeZ );
 					scene.addIsoObject( npc, false );
 				}
