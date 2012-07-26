@@ -118,6 +118,7 @@ package local.game.elements
 				}else{
 					super.onClick() ;
 				}
+				_canMove = true ;
 			}
 		}
 		
@@ -136,12 +137,14 @@ package local.game.elements
 				_executeBack = false ;
 				
 				var endPoint:Point = new Point(nodeX, nodeZ) ;
-				if(Math.random()>0.7){ //跑动
+				if(Math.random()>0.2){ //跑动
 					var p:Point = getFreeRoad(4);
 					if( p && this.searchToRun(p.x , p.y)){
 						endPoint = p ;
-						MapGridDataModel.instance.buildingGrid.setWalkable( p.x,p.y,false);
 						_canMove = false ;
+						//将终点设置成false
+						MapGridDataModel.instance.astarGrid.setWalkable( endPoint.x , endPoint.y , false );
+						MapGridDataModel.instance.buildingGrid.setWalkable( endPoint.x , endPoint.y , false );
 					}
 				}
 				
@@ -150,6 +153,7 @@ package local.game.elements
 				if(!_canMove) this.actionAttack();
 				else this.actionDamage();
 				SoundManager.instance.playSoundHitMonster() ;
+				setTimeout( 	SoundManager.instance.playSoundHitMonster , 1100 );
 				_timeoutFlag = false ;
 				_timeoutId = setTimeout( timeoutHandler , 2000 );
 			}
