@@ -163,7 +163,7 @@ package local.game.elements
 		}
 		
 		public function get enable():Boolean{
-			return itemLayer.mouseEnabled ;
+			return itemLayer.enabled ;
 		}
 		
 		public function set enable( value:Boolean ):void{
