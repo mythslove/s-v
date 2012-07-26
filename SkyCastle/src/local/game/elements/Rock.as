@@ -55,7 +55,7 @@ package local.game.elements
 		
 		override public function execute():Boolean
 		{
-			if(executeReduceEnergy())
+			if(checkEnergyAndMob())
 			{
 				super.execute();
 				if( baseRockVO.step==0 || buildingVO.currentStep+1<baseRockVO.step){

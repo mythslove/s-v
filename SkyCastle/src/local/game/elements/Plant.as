@@ -140,7 +140,7 @@ package local.game.elements
 		
 		override public function execute():Boolean
 		{
-			if(executeReduceEnergy())
+			if(checkEnergyAndMob())
 			{
 				super.execute();
 				if( buildingVO.buildingStatus==BuildingStatus.HARVEST)
