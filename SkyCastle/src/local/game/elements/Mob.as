@@ -17,10 +17,8 @@ package local.game.elements
 	import local.model.buildings.vos.BuildingVO;
 	import local.model.vos.RewardsVO;
 	import local.utils.CharacterManager;
-	import local.utils.CollectQueueUtil;
 	import local.utils.MouseManager;
 	import local.utils.SoundManager;
-	import local.views.effects.MapWordEffect;
 
 	/**
 	 * 怪(ATTACK,DAMAGE,IDLE,WALK,DEFEAT)
@@ -28,6 +26,8 @@ package local.game.elements
 	 */	
 	public class Mob extends Character
 	{
+		private var _canMove:Boolean ; 
+		
 		public function Mob(vo:BuildingVO)
 		{
 			super(vo);
@@ -46,6 +46,11 @@ package local.game.elements
 		{
 			super.resLoadedHandler(e);
 			actionAttack() ;
+		}
+		
+		override public function move():void
+		{
+			if(_canMove) super.move();
 		}
 		
 		/** 获取此建筑的基础VO */
@@ -99,6 +104,9 @@ package local.game.elements
 			{
 				gotoAndPlay(AvatarAction.IDLE);
 				if(!enable) enable = true ;
+				if(_bmpMC.currentLabel==AvatarAction.ATTACK){
+					_canMove = true ;
+				}
 			}
 		}
 		
@@ -128,23 +136,19 @@ package local.game.elements
 				_executeBack = false ;
 				
 				var endPoint:Point = new Point(nodeX, nodeZ) ;
-				if(Math.random()>0.5){ //跑动
+				if(Math.random()>0.7){ //跑动
 					var p:Point = getFreeRoad(4);
-					if( !p || !this.searchToRun(p.x , p.y)){
+					if( p && this.searchToRun(p.x , p.y)){
 						endPoint = p ;
 						MapGridDataModel.instance.buildingGrid.setWalkable( p.x,p.y,false);
-						//没打中
-						actionAttack(); 
-						var effect:MapWordEffect = new MapWordEffect("Miss!",MapWordEffect.YELLOW);
-						GameWorld.instance.addEffect( effect , screenX , screenY-100 );
-						CollectQueueUtil.instance.nextBuilding();
-						return false;
+						_canMove = false ;
 					}
 				}
 				
 				ro.getOperation("attackMob").send( buildingVO.id , endPoint.x , endPoint.y );
 				CharacterManager.instance.hero.gotoAndPlay(AvatarAction.HIT);
-				this.actionDamage();
+				if(!_canMove) this.actionAttack();
+				else this.actionDamage();
 				SoundManager.instance.playSoundHitMonster() ;
 				_timeoutFlag = false ;
 				_timeoutId = setTimeout( timeoutHandler , 2000 );
