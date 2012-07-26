@@ -47,7 +47,7 @@ package local.game.elements
 		override protected function resLoadedHandler(e:Event):void
 		{
 			super.resLoadedHandler(e);
-			attack() ;
+			actionAttack() ;
 		}
 		
 		/** 获取此建筑的基础VO */
@@ -56,20 +56,20 @@ package local.game.elements
 		}
 		
 		/** 怪物攻击人 */
-		public function attack():void
+		public function actionAttack():void
 		{
 			gotoAndPlay( AvatarAction.ATTACK );
 		}
 		
 		/** 被打 */
-		public function damage():void
+		public function actionDamage():void
 		{
 			gotoAndPlay( AvatarAction.DAMAGE );
 			_bmpMC.loopTime = 4 ;
 		}
 		
 		/** 死亡，被战胜 */
-		public function defeat():void
+		public function actionDefeat():void
 		{
 			gotoAndPlay( AvatarAction.DEFEAT );
 		}
@@ -130,8 +130,8 @@ package local.game.elements
 			if(executeReduceEnergy())
 			{
 				itemLayer.alpha=1 ;
-				if(Math.random()>0.7){
-					attack(); //没打中
+				if(Math.random()>0.85){
+					actionAttack(); //没打中
 					var effect:MapWordEffect = new MapWordEffect("Miss!",MapWordEffect.YELLOW);
 					GameWorld.instance.addEffect( effect , screenX , screenY-100 );
 					CollectQueueUtil.instance.nextBuilding();
@@ -142,7 +142,7 @@ package local.game.elements
 				_executeBack = false ;
 				
 				var endPoint:Point = new Point(nodeX, nodeZ) ;
-				if(Math.random()>0.8){ //跑动
+				if(Math.random()>0.5){ //跑动
 					var p:Point = getFreeRoad(4);
 					if( !p || !this.searchToRun(p.x , p.y)){
 						endPoint = p ;
@@ -153,10 +153,10 @@ package local.game.elements
 				
 				ro.getOperation("attackMob").send( buildingVO.id , endPoint.x , endPoint.y );
 				CharacterManager.instance.hero.gotoAndPlay(AvatarAction.HIT);
-				this.damage();
+				this.actionDamage();
 				SoundManager.instance.playSoundHitMonster() ;
 				_timeoutFlag = false ;
-				_timeoutId = setTimeout( timeoutHandler , 2000 );
+				_timeoutId = setTimeout( timeoutHandler , 1000 );
 			}
 			return true;
 		}
@@ -184,7 +184,7 @@ package local.game.elements
 			{
 				if(_currentRewards){
 					//被打败的动画
-					this.defeat();
+					this.actionDefeat();
 				}
 				//特殊物品
 				showRewardsPickup();
