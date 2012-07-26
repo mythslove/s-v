@@ -58,8 +58,8 @@ package local.views.icon
 		{
 			visible = true ;
 			SoundManager.instance.playSoundLootdrop();
-			TweenLite.to(this, 0.5, {x: x+(75+Math.random()*60)*MathUtil.getRandomFlag()  , ease:Linear.easeNone});
-			TweenLite.to(this, 0.5, {y: y+85+Math.random()*60 , ease:Bounce.easeOut , onComplete:inOver});
+			TweenLite.to(this, 0.75, {x: x+(75+Math.random()*60)*MathUtil.getRandomFlag()  , ease:Linear.easeNone});
+			TweenLite.to(this, 0.75, {y: y+85+Math.random()*60 , ease:Bounce.easeOut , onComplete:inOver});
 		}
 		
 		private function inOver():void {
