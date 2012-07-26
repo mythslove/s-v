@@ -79,7 +79,6 @@ package local.game.elements
 				buildingVO.currentStep++;
 				_timeoutFlag=false ;
 				_executeBack = false ;
-				_currentRewards = null ;
 				super.showPickup();
 				if(buildingVO.currentStep>=baseStoneVO.step){
 					showStashEffect();
@@ -91,6 +90,7 @@ package local.game.elements
 				}else if(_skin){
 					_skin.gotoAndStop( buildingVO.currentStep+1);
 				}
+				_currentRewards = null ;
 			}
 		}
 	}
