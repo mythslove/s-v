@@ -71,16 +71,15 @@ package local.views.effects
 				fl = frames[i]  as FrameLabel ;
 				_mc.addFrameScript(  fl.frame-2 , animationCompleteEvt );
 			}
-			_mc.addFrameScript( animationCompleteEvt ,_mc.totalFrames-2 ); //最后一帧
+			_mc.addFrameScript( _mc.totalFrames-2 ,animationCompleteEvt); //最后一帧
 		}
 		
 		private function animationCompleteEvt():void{
-			_mc.gotoAndPlay(currentLabel);
+			_mc.gotoAndPlay(_mc.currentLabel);
 			++_tempLoopTime;
-			if(_tempLoopTime>=loopTime)
+			if(_tempLoopTime==loopTime)
 			{
 				this.dispatchEvent( new Event(Event.COMPLETE));
-				_tempLoopTime = 0 ;
 			}
 		}
 		
@@ -105,14 +104,14 @@ package local.views.effects
 		
 		public function gotoAndStop( frame:Object ):void
 		{
+			_tempLoopTime = 0 ; 
 			_mc.gotoAndStop(frame);
 			update();
 		}
 		
-		public function gotoAndPlay( frame:Object ):void
+		public function gotoAndPlay( frame:Object  , loopTime:int =  1 ):void
 		{
-			_tempLoopTime = 0 ; 
-			_loopTime = 1 ;
+			this.loopTime = loopTime;
 			_mc.gotoAndPlay(frame);
 			update();
 		}
