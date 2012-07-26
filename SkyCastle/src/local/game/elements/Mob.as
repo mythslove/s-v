@@ -20,6 +20,7 @@ package local.game.elements
 	import local.utils.CollectQueueUtil;
 	import local.utils.MouseManager;
 	import local.utils.SoundManager;
+	import local.views.effects.MapWordEffect;
 
 	/**
 	 * 怪(ATTACK,DAMAGE,IDLE,WALK,DEFEAT)
@@ -64,14 +65,13 @@ package local.game.elements
 		public function damage():void
 		{
 			gotoAndPlay( AvatarAction.DAMAGE );
-			_bmpMC.loopTime =2 ;
+			_bmpMC.loopTime = 4 ;
 		}
 		
 		/** 死亡，被战胜 */
 		public function defeat():void
 		{
 			gotoAndPlay( AvatarAction.DEFEAT );
-			itemLayer.enabled = false ;
 		}
 		
 		override protected function createCharacterSkin():void
@@ -132,6 +132,8 @@ package local.game.elements
 				itemLayer.alpha=1 ;
 				if(Math.random()>0.7){
 					attack(); //没打中
+					var effect:MapWordEffect = new MapWordEffect("Miss!",MapWordEffect.YELLOW);
+					GameWorld.instance.addEffect( effect , screenX , screenY-50 );
 					CollectQueueUtil.instance.nextBuilding();
 					return false;
 				}else{
@@ -171,8 +173,7 @@ package local.game.elements
 					if(_currentRewards){
 						//打死了怪
 						this.showPickup();
-						//被打败的动画
-						this.defeat();
+						itemLayer.enabled = false ;
 					}
 					break ;
 			}
@@ -189,6 +190,8 @@ package local.game.elements
 				_executeBack = false ;
 				_currentRewards = null ;
 				super.showPickup();
+				//被打败的动画
+				this.defeat();
 			}
 		}
 		
