@@ -156,7 +156,7 @@ package local.game.elements
 				this.actionDamage();
 				SoundManager.instance.playSoundHitMonster() ;
 				_timeoutFlag = false ;
-				_timeoutId = setTimeout( timeoutHandler , 1000 );
+				_timeoutId = setTimeout( timeoutHandler , 2000 );
 			}
 			return true;
 		}

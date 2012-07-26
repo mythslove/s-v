@@ -122,7 +122,7 @@ package local.utils
 		 */		
 		public function characterCow():void
 		{
-			if(hero.currentActions==AvatarAction.IDLE){
+			if(CollectQueueUtil.instance.isNull()){
 				hero.actionCow();
 			}
 			if(npcs){
