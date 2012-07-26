@@ -63,6 +63,7 @@ package local.game.elements
 		/** 被打 */
 		public function damage():void
 		{
+			_bmpMC.loopTime =2 ;
 			gotoAndPlay( AvatarAction.DAMAGE );
 		}
 		

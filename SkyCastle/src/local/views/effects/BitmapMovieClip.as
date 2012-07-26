@@ -75,13 +75,13 @@ package local.views.effects
 		}
 		
 		private function animationCompleteEvt():void{
+			gotoAndPlay(currentLabel);
 			++_tempLoopTime;
 			if(_tempLoopTime>=loopTime)
 			{
 				this.dispatchEvent( new Event(Event.COMPLETE));
 				_tempLoopTime = 0 ;
 			}
-			gotoAndPlay(currentLabel);
 		}
 		
 		/** 缓存成位图*/
