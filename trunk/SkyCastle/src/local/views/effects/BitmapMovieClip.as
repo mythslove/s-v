@@ -69,21 +69,16 @@ package local.views.effects
 			var fl:FrameLabel ;
 			for( var i:int = 1 ; i<len; ++i){
 				fl = frames[i]  as FrameLabel ;
-				_mc.addFrameScript( animationCompleteEvt , fl.frame-1 );
+				_mc.addFrameScript(  fl.frame-1 , animationCompleteEvt );
 			}
 			_mc.addFrameScript( animationCompleteEvt ,_mc.totalFrames-1 ); //最后一帧
-			_mc.addEventListener(Event.COMPLETE , mcAnimationComHandler , false , 0 , true );
 		}
 		
 		private function animationCompleteEvt():void{
-			dispatchEvent( new Event(Event.COMPLETE));
-		}
-		
-		private function mcAnimationComHandler(e:Event):void{
 			++_tempLoopTime;
 			if(_tempLoopTime>=loopTime)
 			{
-				this.dispatchEvent( e );
+				this.dispatchEvent( new Event(Event.COMPLETE));
 				_tempLoopTime = 0 ;
 			}
 		}
@@ -115,18 +110,21 @@ package local.views.effects
 		
 		public function gotoAndPlay( frame:Object ):void
 		{
+			_tempLoopTime = 0 ; 
 			_mc.gotoAndPlay(frame);
 			update();
 		}
 		
 		public function stop():void
 		{
+			_tempLoopTime = 0 ; 
 			_mc.stop();
 			update();
 		}
 		
 		public function play():Boolean
 		{
+			_tempLoopTime = 0 ; 
 			_mc.play();
 			return update();
 		}
@@ -157,7 +155,6 @@ package local.views.effects
 		public function dispose( isDeep:Boolean=false ):void
 		{
 			_mc.stop();
-			_mc.removeEventListener(Event.COMPLETE , mcAnimationComHandler );
 			if(isDeep){
 				_bitmaps = null ;
 				_bounds = null ;

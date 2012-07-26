@@ -41,11 +41,11 @@ package local.enum
 		
 	
 		/** mob攻击*/
-		public static const ATTACK:String = "attack";
+		public static const ATTACK:String = "ATTACK";
 		/** mob被打*/
-		public static const DAMAGE:String = "demage";
+		public static const DAMAGE:String = "DAMAGE";
 		/** mob被打败*/
-		public static const DEFEAT:String = "defeat";
+		public static const DEFEAT:String = "DEFEAT";
 		
 	}
 }

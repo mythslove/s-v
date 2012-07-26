@@ -215,13 +215,7 @@ package local.game.elements
 		{
 			ResourceUtil.instance.removeEventListener( buildingVO.baseVO.resId , resLoadedHandler );
 			ContainerUtil.removeChildren(itemLayer);
-			//获取元件
-			_skin = ResourceUtil.instance.getInstanceByClassName( buildingVO.baseVO.resId , buildingVO.baseVO.alias ) as MovieClip;
-			if(_skin){
-				_bmpMC = EffectManager.instance.createBmpAnimByMC( _skin);
-				itemLayer.addChild(_bmpMC);
-				gotoAndPlay( AvatarAction.IDLE );
-			}
+			createCharacterSkin();
 		}
 		
 		/**

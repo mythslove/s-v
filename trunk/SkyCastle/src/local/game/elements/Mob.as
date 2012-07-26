@@ -11,12 +11,14 @@ package local.game.elements
 	import local.enum.MouseStatus;
 	import local.enum.QuestType;
 	import local.game.GameWorld;
+	import local.game.scenes.BuildingScene;
 	import local.model.MapGridDataModel;
 	import local.model.QuestModel;
 	import local.model.buildings.vos.BaseMobVO;
 	import local.model.buildings.vos.BuildingVO;
 	import local.model.vos.RewardsVO;
 	import local.utils.CharacterManager;
+	import local.utils.CollectQueueUtil;
 	import local.utils.MouseManager;
 	import local.utils.SoundManager;
 	import local.views.loading.BuildingExecuteLoading;
@@ -32,7 +34,21 @@ package local.game.elements
 		public function Mob(vo:BuildingVO)
 		{
 			super(vo);
+			baseMobVO.walkable  = 0 ;
 			this.speed = 4 ;
+		}
+		
+		/* 添加到舞台上*/
+		override protected function addedToStageHandler( e:Event ):void
+		{
+			removeEventListener(Event.ADDED_TO_STAGE , addedToStageHandler );
+			showSkin(); //加载资源
+		}
+		/*资源下载完成*/
+		override protected function resLoadedHandler(e:Event):void
+		{
+			super.resLoadedHandler(e);
+			attack() ;
 		}
 		
 		/** 获取此建筑的基础VO */
@@ -40,24 +56,21 @@ package local.game.elements
 			return buildingVO.baseVO as BaseMobVO ;
 		}
 		
-		/** 攻击 */
+		/** 怪物攻击人 */
 		public function attack():void
 		{
-			_bmpMC.loopTime = 1 ;
 			gotoAndPlay( AvatarAction.ATTACK );
 		}
 		
 		/** 被打 */
 		public function damage():void
 		{
-			_bmpMC.loopTime = 2 ;
 			gotoAndPlay( AvatarAction.DAMAGE );
 		}
 		
 		/** 死亡，被战胜 */
 		public function defeat():void
 		{
-			_bmpMC.loopTime = 1 ;
 			gotoAndPlay( AvatarAction.DEFEAT );
 		}
 		
@@ -81,13 +94,18 @@ package local.game.elements
 		
 		private function animComHandler( e:Event ):void
 		{
-			if( _bmpMC.currentLabel==AvatarAction.DEFEAT.toUpperCase())
+			if( _bmpMC.currentLabel==AvatarAction.DEFEAT)
 			{
 				//死亡，从场景中移除
+				_bmpMC.stop();
+				GameWorld.instance.removeBuildFromScene( true , false );
+				//清理
+				dispose();
 			}
-			else if( _bmpMC.currentLabel==AvatarAction.DAMAGE.toUpperCase() || _bmpMC.currentLabel==AvatarAction.ATTACK.toUpperCase() )
+			else if( _bmpMC.currentLabel==AvatarAction.DAMAGE || _bmpMC.currentLabel==AvatarAction.ATTACK )
 			{
 				gotoAndPlay(AvatarAction.IDLE);
+				if(!enable) enable = true ;
 			}
 		}
 		
@@ -118,6 +136,15 @@ package local.game.elements
 			if(executeReduceEnergy())
 			{
 				itemLayer.alpha=1 ;
+				if(Math.random()>0.5){
+					defeat();
+					CollectQueueUtil.instance.nextBuilding();
+					return false;
+				}else{
+					damage();
+				}
+				
+				
 				_currentRewards = null ;
 				_executeBack = false ;
 				
