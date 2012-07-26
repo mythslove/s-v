@@ -20,7 +20,7 @@ package local.utils
 		SoundGreatWork,SoundHitMonster,SoundLevelup,SoundNewQuest,SoundPickupCoin
 		SoundPickupEnergy,SoundPickupStone,SoundPickupWood,SoundPickupXp,SoundPopupShow,
 		SoundSpecialClick,SoundBulidDown,SoundRemoveBuild,SoundClick,SoundLootdrop,SoundPayCash
-		SoundCollect , MusicBackground,SoundSpecialPopShow
+		SoundCollect , MusicBackground,SoundSpecialPopShow , SoundMonsterRoar
 		*/
 		public var musicFlag:Boolean = true ;
 		public var soundFlag:Boolean = true ;
@@ -31,7 +31,7 @@ package local.utils
 		private var _soundPickupEnergy:Sound, _soundPickupStone:Sound, _soundPickupWood:Sound, _soundPickupXp:Sound, _soundPopupShow:Sound;
 		private var _soundSpecialClick:Sound, _soundBulidDown:Sound, _soundRemoveBuild:Sound,_soundLootdrop:Sound , _soundClick:Sound;
 		private var _soundPayCash:Sound , _soundCollect:Sound , _musicBackground:Sound, _soundSpecialPopShow:Sound ;
-		private var _bgChannel:SoundChannel  ;
+		private var _bgChannel:SoundChannel , _soundMonsterRoar:Sound ;
 		
 		
 		public function stopMusic():void
@@ -118,6 +118,18 @@ package local.utils
 				if(_soundHitMonster) _soundHitMonster.play();
 			}
 		}
+		
+		public function playSoundMonsterRoar():void
+		{
+			if(soundFlag){
+				if(!_soundMonsterRoar){
+					_soundMonsterRoar = ResourceUtil.instance.getInstanceByClassName( RES_ID , "local.sounds.SoundMonsterRoar" ) as Sound;
+				}
+				if(_soundMonsterRoar) _soundMonsterRoar.play();
+			}
+		}
+		
+		
 		public function playSoundLevelup():void
 		{
 			if(soundFlag){

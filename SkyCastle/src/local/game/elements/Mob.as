@@ -43,12 +43,6 @@ package local.game.elements
 			removeEventListener(Event.ADDED_TO_STAGE , addedToStageHandler );
 			showSkin(); //加载资源
 		}
-		/*资源下载完成*/
-		override protected function resLoadedHandler(e:Event):void
-		{
-			super.resLoadedHandler(e);
-			actionAttack() ;
-		}
 		
 		override public function move():void
 		{
@@ -66,6 +60,7 @@ package local.game.elements
 			gotoAndPlay( AvatarAction.ATTACK );
 			_bmpMC.loopTime = 2 ;
 			CharacterManager.instance.charactersCow();
+			SoundManager.instance.playSoundMonsterRoar();
 		}
 		
 		/** 被打 */
