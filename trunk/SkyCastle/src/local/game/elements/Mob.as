@@ -98,7 +98,7 @@ package local.game.elements
 			{
 				//死亡，从场景中移除
 				_bmpMC.stop();
-				GameWorld.instance.removeBuildFromScene( true , false );
+				GameWorld.instance.removeBuildFromScene( this , false );
 				//清理
 				dispose();
 			}
@@ -107,6 +107,7 @@ package local.game.elements
 				gotoAndPlay(AvatarAction.IDLE);
 				if(!enable) enable = true ;
 			}
+			canMove = true ;
 		}
 		
 		override public function onClick():void
@@ -197,8 +198,6 @@ package local.game.elements
 				_executeBack = false ;
 				_currentRewards = null ;
 				super.showPickup();
-				
-				canMove = true ;
 			}
 		}
 		
