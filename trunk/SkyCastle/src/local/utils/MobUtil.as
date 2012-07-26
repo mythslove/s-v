@@ -8,7 +8,7 @@ package local.utils
 
 	public class MobUtil
 	{
-		public static const RADIU:int = 250 ;
+		public static const RADIU:int = 300 ;
 		
 		/**
 		 * 判断建筑是否在怪的攻击范围内 ，如果在攻击范围内，则
