@@ -29,6 +29,7 @@ package local.game.elements
 	public class Mob extends Character
 	{
 		private var _canMove:Boolean ; 
+		private var _endPoint:Point ;
 		
 		public function Mob(vo:BuildingVO)
 		{
@@ -133,19 +134,19 @@ package local.game.elements
 				_currentRewards = null ;
 				_executeBack = false ;
 				
-				var endPoint:Point = new Point(nodeX, nodeZ) ;
+				_endPoint = new Point(nodeX, nodeZ) ;
 				if(Math.random()>0.5){ //跑动
 					var p:Point = getFreeRoad(4);
 					if( p && this.searchToRun(p.x , p.y)){
-						endPoint = p ;
+						_endPoint = p ;
 						_canMove = false ;
 						//将终点设置成false
-						MapGridDataModel.instance.astarGrid.setWalkable( endPoint.x , endPoint.y , false );
-						MapGridDataModel.instance.buildingGrid.setWalkable( endPoint.x , endPoint.y , false );
+						MapGridDataModel.instance.astarGrid.setWalkable( _endPoint.x , _endPoint.y , false );
+						MapGridDataModel.instance.buildingGrid.setWalkable( _endPoint.x , _endPoint.y , false );
 					}
 				}
 				
-				ro.getOperation("attackMob").send( buildingVO.id , endPoint.x , endPoint.y );
+				ro.getOperation("attackMob").send( buildingVO.id , _endPoint.x , _endPoint.y );
 				CharacterManager.instance.hero.gotoAndPlay(AvatarAction.HIT);
 				if(!_canMove) this.actionAttack();
 				else this.actionDamage();
@@ -192,6 +193,9 @@ package local.game.elements
 			{
 				case "attackMob": 
 					_executeBack = true ;
+					//将当前设置成true
+					MapGridDataModel.instance.astarGrid.setWalkable( nodeX , nodeZ , true );
+					MapGridDataModel.instance.buildingGrid.setWalkable( nodeX ,nodeZ , true );
 					_currentRewards = e.result as RewardsVO ;
 					if(_currentRewards){
 						//打死了怪
@@ -227,6 +231,12 @@ package local.game.elements
 		{
 			if( _bmpMC ) _bmpMC.removeEventListener(Event.COMPLETE , animComHandler );
 			super.dispose();
+			if(_endPoint){
+				//将终点设置成true
+				MapGridDataModel.instance.astarGrid.setWalkable( _endPoint.x , _endPoint.y , true );
+				MapGridDataModel.instance.buildingGrid.setWalkable( _endPoint.x , _endPoint.y , true );
+				_endPoint = null ;
+			}
 		}
 	}
 }
