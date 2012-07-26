@@ -95,12 +95,6 @@ package local.game.elements
 			fun();
 		}
 		
-		public function actionCow():void{
-			this.gotoAndPlay(AvatarAction.COWER);
-			clearTimeout(_timeoutId);
-			_timeoutId = setTimeout(actionIdle,5000);
-		}
-		
 		protected function actionShop():void{
 			this.gotoAndPlay(AvatarAction.SHOP);
 			clearTimeout(_timeoutId);

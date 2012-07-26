@@ -27,12 +27,12 @@ package local.game.elements
 	import local.utils.CharacterManager;
 	import local.utils.CollectQueueUtil;
 	import local.utils.GameUtil;
+	import local.utils.MobUtil;
 	import local.utils.PickupUtil;
 	import local.utils.SoundManager;
 	import local.views.CenterViewContainer;
 	import local.views.alert.SellBuildingAlert;
 	import local.views.effects.MapWordEffect;
-	import local.views.tooltip.BuildingToolTip;
 	
 	public class Building extends BaseBuilding
 	{
@@ -257,11 +257,12 @@ package local.game.elements
 		}
 		
 		/**
-		 * 调用execute时减一个能量
+		 * 判断能量和mob范围，每执行一次，减一个能量
 		 * @return 
 		 */		
-		protected function executeReduceEnergy( value:int = 1 ):Boolean
+		protected function checkEnergyAndMob( value:int = 1 ):Boolean
 		{
+			if(baseBuildingVO.type!=ItemType.MOB &&  !MobUtil.checkMobZoneAndAction(this) ) return false ;
 			//减能量
 			var effect:MapWordEffect ;
 			if(PlayerModel.instance.me.energy>=1){

@@ -28,8 +28,6 @@ package local.game.elements
 	 */	
 	public class Mob extends Character
 	{
-		private var _canMove:Boolean ;
-		
 		public function Mob(vo:BuildingVO)
 		{
 			super(vo);
@@ -59,6 +57,7 @@ package local.game.elements
 		public function actionAttack():void
 		{
 			gotoAndPlay( AvatarAction.ATTACK );
+			_bmpMC.loopTime = 2 ;
 			CharacterManager.instance.charactersCow();
 		}
 		
@@ -101,7 +100,6 @@ package local.game.elements
 				gotoAndPlay(AvatarAction.IDLE);
 				if(!enable) enable = true ;
 			}
-			_canMove = true ;
 		}
 		
 		override public function onClick():void
@@ -121,24 +119,11 @@ package local.game.elements
 			MouseManager.instance.mouseStatus = MouseStatus.SHOVEL_BUILDING ;
 		}
 		
-		override public function move():void
-		{
-			if(_canMove) super.move() ;
-		}
-		
 		override public function execute():Boolean
 		{
-			if(executeReduceEnergy())
+			if(checkEnergyAndMob())
 			{
 				itemLayer.alpha=1 ;
-				if(Math.random()>0.85){
-					actionAttack(); //没打中
-					var effect:MapWordEffect = new MapWordEffect("Miss!",MapWordEffect.YELLOW);
-					GameWorld.instance.addEffect( effect , screenX , screenY-100 );
-					CollectQueueUtil.instance.nextBuilding();
-					return false;
-				}
-				
 				_currentRewards = null ;
 				_executeBack = false ;
 				
@@ -148,7 +133,12 @@ package local.game.elements
 					if( !p || !this.searchToRun(p.x , p.y)){
 						endPoint = p ;
 						MapGridDataModel.instance.buildingGrid.setWalkable( p.x,p.y,false);
-						_canMove = false ;
+						//没打中
+						actionAttack(); 
+						var effect:MapWordEffect = new MapWordEffect("Miss!",MapWordEffect.YELLOW);
+						GameWorld.instance.addEffect( effect , screenX , screenY-100 );
+						CollectQueueUtil.instance.nextBuilding();
+						return false;
 					}
 				}
 				

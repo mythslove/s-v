@@ -6,17 +6,12 @@ package local.game.elements
 	import local.enum.BasicPickup;
 	import local.enum.MouseStatus;
 	import local.game.GameWorld;
-	import local.model.PlayerModel;
-	import local.model.StorageModel;
 	import local.model.buildings.vos.BaseTreeVO;
 	import local.model.buildings.vos.BuildingVO;
 	import local.utils.CharacterManager;
-	import local.utils.CollectQueueUtil;
 	import local.utils.MouseManager;
 	import local.utils.PickupUtil;
 	import local.utils.SoundManager;
-	import local.views.CenterViewContainer;
-	import local.views.effects.MapWordEffect;
 	import local.views.loading.BuildingExecuteLoading;
 
 	/**
@@ -62,7 +57,7 @@ package local.game.elements
 		
 		override public function execute():Boolean
 		{
-			if(executeReduceEnergy())
+			if(checkEnergyAndMob())
 			{
 				super.execute();
 				if(baseTreeVO.step==0 || buildingVO.currentStep+1<baseTreeVO.step){

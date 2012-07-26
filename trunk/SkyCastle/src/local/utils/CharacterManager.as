@@ -5,7 +5,6 @@ package local.utils
 	import flash.geom.Vector3D;
 	
 	import local.comm.GameData;
-	import local.enum.AvatarAction;
 	import local.game.GameWorld;
 	import local.game.elements.Building;
 	import local.game.elements.Character;
@@ -120,11 +119,8 @@ package local.utils
 		/**
 		 *怪物出现时， 吓坏所有的人物 
 		 */		
-		public function characterCow():void
+		public function charactersCow():void
 		{
-			if(CollectQueueUtil.instance.isNull()){
-				hero.actionCow();
-			}
 			if(npcs){
 				for each( var npc:NPC in npcs){
 					npc.actionCow();

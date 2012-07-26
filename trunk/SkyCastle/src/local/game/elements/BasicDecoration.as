@@ -15,6 +15,7 @@ package local.game.elements
 	import local.model.map.MapModel;
 	import local.model.vos.RewardsVO;
 	import local.utils.CharacterManager;
+	import local.utils.MobUtil;
 	import local.views.effects.MapWordEffect;
 	
 	/**

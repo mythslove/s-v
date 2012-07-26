@@ -50,7 +50,7 @@ package local.game.elements
 		
 		override public function execute():Boolean
 		{
-			if(executeReduceEnergy())
+			if(checkEnergyAndMob())
 			{
 				super.execute();
 				CharacterManager.instance.hero.gotoAndPlay(AvatarAction.PICKAXE);
