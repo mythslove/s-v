@@ -326,6 +326,9 @@ package local.game.elements
 				_ro.dispose();
 				_ro = null ;
 			}
+			if(CollectQueueUtil.instance.currentBuilding==this){
+				CollectQueueUtil.instance.nextBuilding();
+			}
 		}
 	}
 }
