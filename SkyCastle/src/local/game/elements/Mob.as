@@ -47,7 +47,7 @@ package local.game.elements
 		override protected function resLoadedHandler(e:Event):void
 		{
 			super.resLoadedHandler(e);
-			attack() ;
+			defeat() ;
 		}
 		
 		/** 获取此建筑的基础VO */
@@ -133,11 +133,9 @@ package local.game.elements
 				if(Math.random()>0.7){
 					attack(); //没打中
 					var effect:MapWordEffect = new MapWordEffect("Miss!",MapWordEffect.YELLOW);
-					GameWorld.instance.addEffect( effect , screenX , screenY-50 );
+					GameWorld.instance.addEffect( effect , screenX , screenY-100 );
 					CollectQueueUtil.instance.nextBuilding();
 					return false;
-				}else{
-					damage();
 				}
 				
 				_currentRewards = null ;
@@ -155,6 +153,7 @@ package local.game.elements
 				
 				ro.getOperation("attackMob").send( buildingVO.id , endPoint.x , endPoint.y );
 				CharacterManager.instance.hero.gotoAndPlay(AvatarAction.HIT);
+				this.damage();
 				SoundManager.instance.playSoundHitMonster() ;
 				_timeoutFlag = false ;
 				_timeoutId = setTimeout( timeoutHandler , 2000 );
@@ -183,6 +182,10 @@ package local.game.elements
 		{
 			if( _timeoutFlag && _executeBack)
 			{
+				if(_currentRewards){
+					//被打败的动画
+					this.defeat();
+				}
 				//特殊物品
 				showRewardsPickup();
 				//-------------------------------------
@@ -190,8 +193,6 @@ package local.game.elements
 				_executeBack = false ;
 				_currentRewards = null ;
 				super.showPickup();
-				//被打败的动画
-				this.defeat();
 			}
 		}
 		
