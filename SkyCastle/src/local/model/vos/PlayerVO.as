@@ -64,7 +64,7 @@ package local.model.vos
 			if(GameData.isHome){
 				CenterViewContainer.instance.topBar.updateRank() ;
 				//任务统计
-				QuestModel.instance.updateQuests( QuestType.PLAYER_SWCR , "rank" , value );
+				QuestModel.instance.updateQuests( QuestType.PLAYER_PROPERTY , "rank" , value );
 			}
 		}
 		
@@ -123,7 +123,7 @@ package local.model.vos
 			if(GameData.isHome){
 				CenterViewContainer.instance.topBar.updateCoin();
 				//任务统计
-				QuestModel.instance.updateQuests( QuestType.PLAYER_SWCR , "coin" , value );
+				QuestModel.instance.updateQuests( QuestType.PLAYER_PROPERTY , "coin" , value );
 			}
 		}
 		
@@ -139,7 +139,7 @@ package local.model.vos
 			if(GameData.isHome){
 				CenterViewContainer.instance.topBar.updateStone();
 				//任务统计
-				QuestModel.instance.updateQuests( QuestType.PLAYER_SWCR , "stone" , value );
+				QuestModel.instance.updateQuests( QuestType.PLAYER_PROPERTY , "stone" , value );
 			}
 		}
 		
@@ -154,7 +154,7 @@ package local.model.vos
 			if(GameData.isHome){
 				CenterViewContainer.instance.topBar.updateWood();
 				//任务统计
-				QuestModel.instance.updateQuests( QuestType.PLAYER_SWCR , "wood" , value );
+				QuestModel.instance.updateQuests( QuestType.PLAYER_PROPERTY , "wood" , value );
 			}
 		}
 		

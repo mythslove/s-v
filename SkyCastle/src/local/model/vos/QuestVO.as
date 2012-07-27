@@ -58,7 +58,7 @@ package local.model.vos
 			var flag:Boolean ;
 			switch(mainType)
 			{
-				case QuestType.PLAYER_SWCR : //玩家属性信息统计
+				case QuestType.PLAYER_PROPERTY : //玩家属性信息统计
 				case QuestType.OWN_BUILDING:
 					flag = setCount( mainType , sonType ); //直接赋值的
 					break;
@@ -122,7 +122,7 @@ package local.model.vos
 						itemVO.current = MapBuildingModel.instance.getCountByBaseId( sonType );
 						isUpdate=true;
 					}
-					else if( mainType == QuestType.PLAYER_SWCR)
+					else if( mainType == QuestType.PLAYER_PROPERTY)
 					{
 						itemVO.current = PlayerModel.instance.getMySWCR( sonType );
 						isUpdate = true ;
