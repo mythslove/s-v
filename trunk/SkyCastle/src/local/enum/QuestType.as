@@ -23,11 +23,11 @@ package local.enum
 		 */		
 		public static const COLLECT_BUILDING:String = "collectbuilding" ;
 		/**
-		 * 统计玩家的一些属性 , sonType为：stone,wood,coin,rank这些字符串
+		 * 统计玩家的一些属性 , sonType为：stone,wood,coin,rank,gem这些字符串
 		 */		
-		public static const PLAYER_SWCR:String = "playerswcr";
+		public static const PLAYER_PROPERTY:String = "playerproperty";
 		/**
-		 * 收集pickup的数量，sonType为pkId 
+		 * 收集pickup的数量，sonType为pkId ，不填写sonType时为所有的pickup
 		 */		
 		public static const COLLECT_PICKUP:String = "collectpk" ;
 		/**
@@ -65,11 +65,11 @@ package local.enum
 		 */		
 		public static const LIKE:String =  "like" ;
 		/**
-		 *  兑换collection 
+		 *  兑换collection 的次数 , sonType为groupId , 不填写sonType的话为所有兑换
 		 */
 		public static const TURN_IN:String = "turnin";
 		/**
-		 * 战胜怪 
+		 * 战胜怪 的数量
 		 */		
 		public static const DEFEAT_MOB:String = "defeatmob";
 	}
