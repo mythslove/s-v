@@ -30,12 +30,11 @@ package local.game.elements
 	{
 		private var _canMove:Boolean ; 
 		private var _endPoint:Point ;
+		private var _flag:Boolean ;
 		
 		public function Mob(vo:BuildingVO)
 		{
 			super(vo);
-			baseMobVO.walkable  = 0 ;
-			this.speed = 4 ;
 		}
 		
 		/* 添加到舞台上*/
@@ -44,6 +43,21 @@ package local.game.elements
 			removeEventListener(Event.ADDED_TO_STAGE , addedToStageHandler );
 			showSkin(); //加载资源
 		}
+		/*资源下载完成*/
+		override protected function resLoadedHandler(e:Event):void
+		{
+			super.resLoadedHandler(e);
+			if(_flag) actionAttack() ;
+		}
+		
+		/** 怪刚出生时吓一次 */
+		public function liveAttack():void
+		{
+			if(_bmpMC) actionAttack() ;
+			else _flag =  true ;
+		}
+			
+				
 		
 		override public function move():void
 		{

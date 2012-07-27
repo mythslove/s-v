@@ -101,7 +101,8 @@ package local.game.elements
 			var vo:BuildingVO = new BuildingVO();
 			vo.id = int(_currentRewards.mob.id) ;
 			vo.baseVO = BaseBuildingVOModel.instance.getBaseVOById( _currentRewards.mob.baseId );
-			GameWorld.instance.addBuildingByVO(nodeX,nodeZ,vo);
+			var mob:Mob = GameWorld.instance.addBuildingByVO(nodeX,nodeZ,vo) as Mob;
+			if( mob ) mob.liveAttack();
 		}
 		
 		override public function dispose():void
