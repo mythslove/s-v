@@ -70,7 +70,7 @@ package local.model.vos
 		}
 		
 		/**
-		 * 统计 
+		 * 统计 ，用于数值叠加的任务类型
 		 * @param mainType 主类型
 		 * @param sonType 子类型
 		 * @param num 变化数量
@@ -79,12 +79,12 @@ package local.model.vos
 		 */		
 		private function updateCount( mainType:String , sonType:String="" , num:int = 1 , time:Number=NaN ):Boolean
 		{
-			var isUpdate:Boolean = false ;
+			var isUpdate:Boolean ;
 			for each( var itemVO:QuestItemVO in items)
 			{
 				if( itemVO.questType== mainType)
 				{
-					if( !time || acceptTime>=time)
+					if( !time || acceptTime>=time) //如果没有时间限制，或者接受任务的时候大于建筑的建造时间
 					{
 						if ( sonType )
 						{
@@ -105,10 +105,10 @@ package local.model.vos
 		}
 		
 		/**
-		 * 直接赋值的
+		 * 用于直接赋值的任务
 		 * @param mainType
 		 * @param sonType
-		 * @return 
+		 * @return 任务结果有否有变化
 		 */		
 		private function setCount(mainType:String , sonType:String ):Boolean
 		{
@@ -117,17 +117,17 @@ package local.model.vos
 			{
 				if( itemVO.questType== mainType)
 				{
-					if( mainType==QuestType.OWN_BUILDING)
+					switch(mainType)
 					{
-						itemVO.current = MapBuildingModel.instance.getCountByBaseId( sonType );
-						isUpdate=true;
+						case QuestType.OWN_BUILDING:
+							itemVO.current = MapBuildingModel.instance.getCountByBaseId( sonType );
+							isUpdate=true;
+							break ;
+						case QuestType.PLAYER_PROPERTY:
+							itemVO.current = PlayerModel.instance.getProperty( sonType );
+							isUpdate = true ;
+							break ;
 					}
-					else if( mainType == QuestType.PLAYER_PROPERTY)
-					{
-						itemVO.current = PlayerModel.instance.getMySWCR( sonType );
-						isUpdate = true ;
-					}
-						
 				}
 			}
 			return isUpdate;

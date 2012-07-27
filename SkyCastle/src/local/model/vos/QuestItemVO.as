@@ -44,7 +44,7 @@ package local.model.vos
 					break ;
 				case QuestType.PLAYER_PROPERTY:
 					if(sonType){
-						current = PlayerModel.instance.getMySWCR( sonType );
+						current = PlayerModel.instance.getProperty( sonType );
 					}
 					break;
 			}
