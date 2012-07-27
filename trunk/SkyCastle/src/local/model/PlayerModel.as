@@ -184,11 +184,11 @@ package local.model
 		}
 		
 		/**
-		 * 统计玩家的stone,wood,coin,rank
-		 * @param type:stone,wood,coin,rank
+		 * 统计玩家的stone,wood,coin,rank等的值
+		 * @param type:stone,wood,coin,rank等
 		 * @return 当前数量
-		 */		
-		public function getMySWCR( type:String ):int 
+		 */	
+		public function getProperty( type:String ):int 
 		{
 			if( type=="stone" ) return me.stone;
 			else if( type=="wood") return me.wood;

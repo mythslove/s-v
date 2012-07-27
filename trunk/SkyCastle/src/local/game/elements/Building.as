@@ -178,6 +178,8 @@ package local.game.elements
 				case "move":
 					break ;
 				case "placeStash":
+					//任务统计
+					QuestModel.instance.updateQuests( QuestType.OWN_BUILDING , baseBuildingVO.baseId );
 					break ;
 			}
 		}

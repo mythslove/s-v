@@ -114,7 +114,8 @@ package local.model.buildings
 			var buildings:Array = getArrayByType(baseVO.type);
 			var count:int ;
 			for each(var build:Building in buildings){
-				if(build.baseBuildingVO.baseId==baseId && build.buildingVO.buildingStatus!=BuildingStatus.BUILDING ) ++count ;
+				if(build.baseBuildingVO.baseId==baseId && build.buildingVO.buildingStatus!=BuildingStatus.BUILDING ) 
+					++count ;
 			}
 			return count ;
 		}
