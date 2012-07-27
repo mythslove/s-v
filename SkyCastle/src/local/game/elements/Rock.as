@@ -50,7 +50,7 @@ package local.game.elements
 		}
 		/** 获取此建筑的标题 */
 		override public function get title():String  {
-			return baseBuildingVO.name+": "+buildingVO.currentStep+"/"+baseRockVO.step;
+			return baseBuildingVO.name+"  ("+buildingVO.currentStep+"/"+baseRockVO.step+")";
 		}
 		
 		override public function execute():Boolean
