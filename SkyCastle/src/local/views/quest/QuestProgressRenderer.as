@@ -10,6 +10,7 @@ package local.views.quest
 	
 	import local.comm.GameRemote;
 	import local.model.PlayerModel;
+	import local.model.QuestModel;
 	import local.model.vos.QuestItemVO;
 	import local.utils.GameUtil;
 	import local.views.alert.CostCashAlert;
@@ -75,6 +76,7 @@ package local.views.quest
 			PlayerModel.instance.me.cash -= itemVO.skipCash ;
 			this.gotoAndStop(2);
 			itemVO.isSkipped = true ;
+			QuestModel.instance.checkCompleteQuest();
 		}
 		
 		override protected function removedFromStage():void
