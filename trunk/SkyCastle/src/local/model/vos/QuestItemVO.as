@@ -2,6 +2,7 @@ package local.model.vos
 {
 	import local.enum.QuestType;
 	import local.model.PlayerModel;
+	import local.model.buildings.BaseBuildingVOModel;
 	import local.model.buildings.MapBuildingModel;
 
 	public class QuestItemVO
@@ -9,7 +10,7 @@ package local.model.vos
 		public var itemId:int ; //id
 		public var current:int ; //当前多少个
 		public var sum:int=1 ; //总共需要多少个
-		public var title:String ; //标题
+		private var _title:String ; //标题
 		public var skipCash:int ; //跳过这个任务需要的钱，如果为0，则不判断这个
 		public var isSkipped:Boolean ; //是否跳过
 		public var icon:String ; //icon名称
@@ -17,6 +18,19 @@ package local.model.vos
 		public var questType:String ; //任务的类型
 		public var sonType:String ; //子类型
 		
+		public function get title():String
+		{
+			if(sonType && _title.indexOf("<name>")>-1 ){
+				return _title.replace("<name>",BaseBuildingVOModel.instance.getBaseVOById(sonType).name) ;
+			}
+			return _title;
+		}
+
+		public function set title(value:String):void
+		{
+			_title = value;
+		}
+
 		/**
 		 * 这个item是否完成 
 		 * @return 
