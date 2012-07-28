@@ -1,9 +1,12 @@
 package local.model
 {
 	import bing.amf3.ResultEvent;
+	import bing.res.ResVO;
 	import bing.utils.SystemUtil;
 	
+	import flash.events.Event;
 	import flash.external.ExternalInterface;
+	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
 	
 	import local.comm.GameRemote;
@@ -12,6 +15,7 @@ package local.model
 	import local.events.QuestEvent;
 	import local.model.vos.QuestVO;
 	import local.utils.PopUpManager;
+	import local.utils.ResourceUtil;
 	import local.utils.SoundManager;
 	import local.views.quest.QuestCompletePopUp;
 
@@ -38,16 +42,19 @@ package local.model
 			ExternalInterface.addCallback( "sendGift" , sendGift );
 		}
 		//=================================
-		
+		/** 所有的任务 */
+		public var allQuests:Object ; 
 		/** 完成了的任务列表 */
-		public var completeQuests:Vector.<QuestVO> ; 
-		
+		public var completedQuests:Vector.<QuestVO> ; 
+		/** 当前激活了的任务 */
 		public var currentQuests:Vector.<QuestVO> ;
+		
+		
 		private var _ro:GameRemote ;
 		public function get ro():GameRemote
 		{
 			if(!_ro){
-				_ro = new GameRemote("questservice");
+				_ro = new GameRemote("QuestService");
 				_ro.addEventListener(ResultEvent.RESULT , onResultHandler ); 
 			}
 			return _ro ;
@@ -71,7 +78,7 @@ package local.model
 		 */		
 		public function getQuests():void
 		{
-//			ro.getOperation("getQuestList").send() ;
+			ro.getOperation("getQuestList").send() ;
 		}
 		
 		private function onResultHandler( e:ResultEvent ):void
@@ -112,7 +119,7 @@ package local.model
 					{
 						SoundManager.instance.playSoundGreatWork();
 						var questComPop:QuestCompletePopUp = new QuestCompletePopUp( vo );
-						PopUpManager.instance.addQueuePopUp( questComPop );
+						PopUpManager.instance.addQueuePopUp( questComPop , true , 100 );
 					}
 					else
 					{
@@ -120,11 +127,62 @@ package local.model
 					}
 					break ;
 				case "getCompleteQuest":
-					
+					completedQuests = new Vector.<QuestVO>();
+					if(e.result){
+						var temp:Array = e.result as Array ;
+						if(temp){
+							len = temp.length ;
+							for( i = 0 ; i<len ; ++i ){
+								completedQuests.push( allQuests[temp[i]] );
+							}
+						}
+					}
+					GlobalDispatcher.instance.dispatchEvent( new QuestEvent(QuestEvent.GET_COMPLETED_QUESTS));
 					break ;
 			}
 					
 		}
+		
+		
+		public function loadQuestConfig():void
+		{
+			if(allQuests) {
+				GlobalDispatcher.instance.dispatchEvent( new QuestEvent( QuestEvent.LOADED_QUEST_CONFIG ));
+			}
+			else
+			{
+				ResourceUtil.instance.addEventListener("quest_Config" , questConfigLoadedHandler );
+				ResourceUtil.instance.loadRes( new ResVO("quest_Config","res/quests.bin"));
+			}
+		}
+		
+		/**
+		 * 返回已经完成了的任务列表 
+		 */		
+		public function getCompletedQuest():void
+		{
+			if( completedQuests ) 
+				GlobalDispatcher.instance.dispatchEvent( new QuestEvent(QuestEvent.GET_COMPLETED_QUESTS));
+			else 
+				ro.getOperation("getCompleteQuest").send();
+		}
+		
+		private function questConfigLoadedHandler( e:Event ):void
+		{
+			ResourceUtil.instance.removeEventListener("quest_Config" , questConfigLoadedHandler );
+			var resVO:ResVO = ResourceUtil.instance.getResVOByResId("quest_Config");
+			var bytes:ByteArray = ResourceUtil.instance.getResVOByResId("quest_Config").resObject as ByteArray ;
+			try{
+				bytes.uncompress();
+			}catch(e:Error){
+				SystemUtil.debug("quest config 没有压缩");
+			}
+			var obj:Object = bytes.readObject() ;
+			allQuests = obj.quest ;
+			GlobalDispatcher.instance.dispatchEvent( new QuestEvent( QuestEvent.LOADED_QUEST_CONFIG ));
+			ResourceUtil.instance.deleteRes( "quest_Config" );
+		}
+		
 		
 		
 		
@@ -164,14 +222,6 @@ package local.model
 					ro.getOperation("completeQuest").send( vo.qid );
 				}
 			}
-		}
-		
-		/**
-		 * 返回已经完成了的任务列表 
-		 */		
-		public function getCompleteQuest():void
-		{
-			ro.getOperation("getCompleteQuest").send();
 		}
 		
 		

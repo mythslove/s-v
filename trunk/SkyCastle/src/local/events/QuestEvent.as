@@ -9,8 +9,15 @@ package local.events
 	 */	
 	public class QuestEvent extends Event
 	{
-		/** 获取到了任务列表 */
+		/** 获取到了当前的任务列表 */
 		public static const GET_QUEST_LIST:String = "getQuestList";
+		
+		/** 加载任务配置 */
+		public static const LOADED_QUEST_CONFIG:String = "loadedQuestConfig";
+		
+		/** 获取到了完成的任务列表 */
+		public static const GET_COMPLETED_QUESTS:String = "getCompletedQuesta";
+		
 		public var newQuests:Vector.<QuestVO> ;//新的quests
 		
 		public function QuestEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false)

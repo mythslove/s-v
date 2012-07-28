@@ -29,6 +29,7 @@ package local.views.quest
 		public var txtCompleteInfo:TextField;
 		public var btnClose:BaseButton ; //关闭按钮
 		public var btnOk:BaseButton;
+		public var btnShare:BaseButton ;
 		public var container:Sprite ; //奖励面板的容器
 		//======================================
 		public var questVO:QuestVO ;
