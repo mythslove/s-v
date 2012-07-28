@@ -28,14 +28,17 @@ package local.enum
 		public static const COLLECT_BUILDING:String = "collectbuilding" ;
 		/**
 		 * 统计玩家的一些属性 , sonType为：stone,wood,coin,rank,gem这些字符串
+		 * eg. 玩家的stone达到400
 		 */		
 		public static const PLAYER_PROPERTY:String = "playerproperty";
 		/**
 		 * 收集pickup的数量，sonType为pkId ，不填写sonType时为所有的pickup
+		 * eg. 获得3个叫Well的pickup 
 		 */		
 		public static const COLLECT_PICKUP:String = "collectpk" ;
 		/**
 		 * 拥有某种pickup的数量，sonType为pkId 
+		 * eg. 拥有3个叫Well的pickup 
 		 */		
 		public static const OWN_PICKUP:String = "ownpk" ;
 		
