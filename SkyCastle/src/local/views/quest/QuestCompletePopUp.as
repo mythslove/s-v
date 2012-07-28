@@ -86,6 +86,7 @@ package local.views.quest
 		override protected function removed():void
 		{
 			LeftBar.instance.removeQuestItemRenderer( questVO.qid); //任务icon列表刷新
+			QuestModel.instance.addCompletedQuest( questVO );
 			questVO = null ;
 			btnClose.removeEventListener(MouseEvent.CLICK , onCloseHandler );
 			btnOk.removeEventListener(MouseEvent.CLICK , onCloseHandler );

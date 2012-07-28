@@ -71,7 +71,7 @@ package  local.views
 		}
 		
 		/**移除已经完成了的quest的icon*/
-		public function removeQuestItemRenderer( qid:int ):void
+		public function removeQuestItemRenderer( qid:String ):void
 		{
 			var obj:DisplayObject = _questContainer.getChildByName( qid+"" );
 			if(obj && _questContainer.contains(obj))

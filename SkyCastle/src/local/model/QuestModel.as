@@ -60,7 +60,7 @@ package local.model
 			return _ro ;
 		}
 		
-		public function getQuestById( qid:int ):QuestVO
+		public function getQuestById( qid:String ):QuestVO
 		{
 			if(currentQuests){
 				var len:int = currentQuests.length ;
@@ -78,7 +78,7 @@ package local.model
 		 */		
 		public function getQuests():void
 		{
-			ro.getOperation("getQuestList").send() ;
+//			ro.getOperation("getQuestList").send() ;
 		}
 		
 		private function onResultHandler( e:ResultEvent ):void
@@ -120,6 +120,10 @@ package local.model
 						SoundManager.instance.playSoundGreatWork();
 						var questComPop:QuestCompletePopUp = new QuestCompletePopUp( vo );
 						PopUpManager.instance.addQueuePopUp( questComPop , true , 100 );
+						//抛出有任务完成的事件
+						var qevt:QuestEvent = new QuestEvent( QuestEvent.QUEST_COMPLETED) ;
+						qevt.completedQuestId = e.result.qid ;
+						GlobalDispatcher.instance.dispatchEvent( qevt );
 					}
 					else
 					{
@@ -183,8 +187,14 @@ package local.model
 			ResourceUtil.instance.deleteRes( "quest_Config" );
 		}
 		
-		
-		
+		/**
+		 * 添加完成了的任务 
+		 * @param vo
+		 */		
+		public function addCompletedQuest( vo:QuestVO ):void
+		{
+			if(completedQuests) completedQuests.push(vo);
+		}
 		
 		
 		

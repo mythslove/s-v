@@ -6,10 +6,10 @@ package local.model.vos
 
 	public class QuestVO
 	{
-		public var qid:int ; //任务的id
+		public var qid:String ; //任务的id
 		public var title:String ; //标题
 		public var info:String ; //描述
-		public var icon:String ; //icon名称
+		public var icon:String ; //icon名称 , resId为"quest"+_vo.icon
 		public var completeMsg:String ; //任务完成后的描述
 		public var requestId:String ;
 		public var requireRank:int ; //rank要求，未到rank时，不能接受

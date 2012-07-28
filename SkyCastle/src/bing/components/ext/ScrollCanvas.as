@@ -25,8 +25,8 @@ package bing.components.ext
 		public static const SLIDER_TYPE_BOTH:String = "sliderTypeBoth";
 		public static const SLIDER_TYPE_NONE:String = "sliderTypeNone";
 		//===========================================
-		public var maxSpeed:int = 40 ;
-		public var slideSpeed:Number=0.4;
+		public var maxSpeed:int = 60 ;
+		public var slideSpeed:Number=0.5;
 		public var row:int = 5, col:Number=5 ;
 		public var rowGap:int = 5, colGap:Number=15 ;
 		private var _sliderType:String ;
