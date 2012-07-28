@@ -37,7 +37,7 @@ package local.views.quest
 		public function get ro():GameRemote
 		{
 			if(!_ro){
-				_ro = new GameRemote("");
+				_ro = new GameRemote("questservice");
 				_ro.addEventListener(ResultEvent.RESULT , onResultHandler );
 			}
 			return _ro ;
@@ -57,7 +57,7 @@ package local.views.quest
 				init();
 			}else {
 				visible = false ;
-				ro.getOperation("accept").send(questVO.qid);
+				ro.getOperation("acceptQuest").send(questVO.qid);
 			}
 		}
 		
@@ -79,7 +79,7 @@ package local.views.quest
 		{
 			switch( e.method)
 			{
-				case "accept":
+				case "questservice":
 					visible = true ;
 					questVO = e.result as QuestVO ; //返回新的QuestVO
 					questVO.init(); //初始化任务

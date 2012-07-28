@@ -39,12 +39,15 @@ package local.model
 		}
 		//=================================
 		
+		/** 完成了的任务列表 */
+		public var completeQuests:Vector.<QuestVO> ; 
+		
 		public var currentQuests:Vector.<QuestVO> ;
 		private var _ro:GameRemote ;
 		public function get ro():GameRemote
 		{
 			if(!_ro){
-				_ro = new GameRemote("commonserver");
+				_ro = new GameRemote("questservice");
 				_ro.addEventListener(ResultEvent.RESULT , onResultHandler ); 
 			}
 			return _ro ;
@@ -102,7 +105,7 @@ package local.model
 						currentQuests = Vector.<QuestVO>( e.result );
 					}
 					break ;
-				case "complete":
+				case "completeQuest":
 					//返回一个flag:boolean表示是否成功 , 一个qid
 					vo = getQuestById( e.result.qid );
 					if(e.result.flag)
@@ -115,6 +118,9 @@ package local.model
 					{
 						vo.isComplete = false ;
 					}
+					break ;
+				case "getCompleteQuest":
+					
 					break ;
 			}
 					
@@ -155,11 +161,18 @@ package local.model
 			{
 				if(vo.isAccept && !vo.isReceived && !vo.isComplete && vo.checkComplete()  ){
 					vo.isComplete=true;
-					ro.getOperation("complete").send( vo.qid );
+					ro.getOperation("completeQuest").send( vo.qid );
 				}
 			}
 		}
 		
+		/**
+		 * 返回已经完成了的任务列表 
+		 */		
+		public function getCompleteQuest():void
+		{
+			ro.getOperation("getCompleteQuest").send();
+		}
 		
 		
 		public function like(value:int=1):void
