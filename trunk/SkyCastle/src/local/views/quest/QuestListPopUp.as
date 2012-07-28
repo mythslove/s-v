@@ -2,10 +2,12 @@ package local.views.quest
 {
 	import bing.components.button.BaseButton;
 	import bing.components.events.ToggleItemEvent;
+	import bing.utils.ContainerUtil;
 	
 	import com.greensock.TweenLite;
 	import com.greensock.easing.Back;
 	
+	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
@@ -26,6 +28,7 @@ package local.views.quest
 	{
 		public var tabMenu:QuestListTabMenu ;
 		public var btnClose:BaseButton ;
+		public var container:Sprite ;
 		//==============================
 		private var _loading:SkinLoading ;
 		
@@ -44,6 +47,8 @@ package local.views.quest
 			tabMenu.addEventListener(ToggleItemEvent.ITEM_SELECTED , tabMenuHandler , false , 0 , true ) ;
 			GlobalDispatcher.instance.addEventListener( QuestEvent.GET_COMPLETED_QUESTS , globalEvtHandler );
 			GlobalDispatcher.instance.addEventListener( QuestEvent.LOADED_QUEST_CONFIG , globalEvtHandler );
+			//显示已经激活的任务列表
+			tabMenu.selectedName = tabMenu.btnActive.name;
 		}
 		
 		private function globalEvtHandler( e:Event ):void
@@ -56,7 +61,7 @@ package local.views.quest
 				case QuestEvent.GET_COMPLETED_QUESTS :
 					removeChild(_loading);
 					mouseChildren = false ;
-//					showCompletedQuests();
+					showCompletedQuests();
 					break ;
 			}
 		}
@@ -68,7 +73,7 @@ package local.views.quest
 			switch(  e.selectedName )
 			{
 				case tabMenu.btnActive.name:
-//					showActiveQuests() ;
+					showActiveQuests() ;
 					break ;
 				case tabMenu.btnCompleted.name:
 					_loading = new SkinLoading();
@@ -81,8 +86,26 @@ package local.views.quest
 		
 		//============显示列表=======================
 		
-		
-		
+		//显示已经完成了的任务列表
+		private function showCompletedQuests():void
+		{
+			ContainerUtil.removeChildren(container);
+			if( QuestModel.instance.completedQuests && QuestModel.instance.completedQuests.length>0 ){
+				
+				var panel:QuestListPanel = new QuestListPanel(QuestModel.instance.completedQuests,"completed" );
+				container.addChild(panel);
+			}
+		}
+		//显示已经激活的任务列表，也就是当前的任务列表
+		private function showActiveQuests():void
+		{
+			ContainerUtil.removeChildren(container);
+			if( QuestModel.instance.currentQuests && QuestModel.instance.currentQuests.length>0 ){
+				
+				var panel:QuestListPanel = new QuestListPanel(QuestModel.instance.currentQuests,"active" );
+				container.addChild(panel);
+			}
+		}
 		
 		//==============释放=======================
 		private function closeClickHandler( e:MouseEvent ):void
@@ -100,6 +123,8 @@ package local.views.quest
 			_loading = null ;
 			btnClose.removeEventListener( MouseEvent.CLICK , closeClickHandler);
 			tabMenu.removeEventListener(ToggleItemEvent.ITEM_SELECTED , tabMenuHandler ) ;
+			GlobalDispatcher.instance.removeEventListener( QuestEvent.GET_COMPLETED_QUESTS , globalEvtHandler );
+			GlobalDispatcher.instance.removeEventListener( QuestEvent.LOADED_QUEST_CONFIG , globalEvtHandler );
 		}
 	}
 }
