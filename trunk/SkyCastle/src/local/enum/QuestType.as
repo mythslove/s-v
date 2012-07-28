@@ -8,18 +8,22 @@ package local.enum
 	{
 		/**
 		 * 修建建筑数量， sonType为建筑baseId
+		 * eg.修建3个BigHouse
 		 */
 		public static const BUILD_NUM:String  ="buildNum";
 		/**
 		 * 拥有建筑的数量，sonType为建筑的baseId 
+		 * eg.拥有3个BigHouse
 		 */		
 		public static const OWN_BUILDING:String = "ownbuilding" ;
 		/**
 		 * 砍树，石头,sonType为建筑的baseId 
+		 * eg.  砍3棵Pine Tree 3 
 		 */		
 		public static const CHOP:String = "chop"  ;
 		/**
 		 * 收获建筑的次数
+		 * eg. 收获3次
 		 */		
 		public static const COLLECT_BUILDING:String = "collectbuilding" ;
 		/**
