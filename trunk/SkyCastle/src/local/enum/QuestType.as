@@ -10,7 +10,7 @@ package local.enum
 		 * 修建建筑数量， sonType为建筑baseId
 		 * eg.修建3个BigHouse
 		 */
-		public static const BUILD_NUM:String  ="buildNum";
+		public static const BUILD_NUM:String  ="buildnum";
 		/**
 		 * 拥有建筑的数量，sonType为建筑的baseId 
 		 * eg.拥有3个BigHouse
