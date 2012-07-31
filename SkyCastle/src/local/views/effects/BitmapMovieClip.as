@@ -34,6 +34,13 @@ package local.views.effects
 			return _bound;
 		}
 		
+		
+		private var _isPlaying:Boolean = true ;
+		/** 是否在播放状态 */
+		public function get isPlay():Boolean{
+			return _isPlaying;
+		}
+		
 		public function get totalFrame():int{ return _mc.totalFrames; }
 		public function get currentFrame():int{return _mc.currentFrame ;}
 		
@@ -107,6 +114,7 @@ package local.views.effects
 			_tempLoopTime = 0 ; 
 			_mc.gotoAndStop(frame);
 			update();
+			_isPlaying = false ;
 		}
 		
 		public function gotoAndPlay( frame:Object  , loopTime:int =  1 ):void
@@ -114,6 +122,7 @@ package local.views.effects
 			this.loopTime = loopTime;
 			_mc.gotoAndPlay(frame);
 			update();
+			_isPlaying = true ;
 		}
 		
 		public function stop():void
@@ -122,6 +131,7 @@ package local.views.effects
 			_loopTime = 1 ;
 			_mc.stop();
 			update();
+			_isPlaying = false ;
 		}
 		
 		public function play():Boolean
@@ -129,11 +139,14 @@ package local.views.effects
 			_tempLoopTime = 0 ; 
 			_loopTime = 1 ;
 			_mc.play();
+			_isPlaying = true ;
 			return update();
 		}
 		
 		public function update():Boolean
 		{
+			if(!_isPlaying) return false ;
+			
 			var temp:int = _mc.currentFrame-1 ;
 			if(!_bitmaps[temp]){
 				cacheAsBitmaps(temp);
