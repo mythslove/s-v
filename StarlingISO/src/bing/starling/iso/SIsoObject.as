@@ -7,9 +7,9 @@ package bing.starling.iso
 	import flash.geom.Rectangle;
 	import flash.geom.Vector3D;
 	
-	import starling.display.Sprite;
+	import starling.display.DisplayObjectContainer;
 	
-	public class SIsoObject extends Sprite
+	public class SIsoObject extends DisplayObjectContainer
 	{
 		public var isSort:Boolean = false ;
 		protected var _position3D:Vector3D; //像素坐标
@@ -53,6 +53,8 @@ package bing.starling.iso
 		public function rotateX( value:Boolean ):void
 		{
 			this._isRotate = value ;
+			if(value) scaleX = -1 ;
+			else scaleX = 1 ;
 			this.updateSpanPosition() ;
 		}
 		
@@ -81,7 +83,7 @@ package bing.starling.iso
 				{
 					for( j = 0 ; j<_xSpan ; j++)
 					{
-						pos = new Vector3D( i*_size+this.x , this.y , j*_size+this.z );
+						pos = new Vector3D( i*_size+_position3D.x , _position3D.y , j*_size+_position3D.z );
 						_spanPosition.push( pos );
 					}
 				}
@@ -92,7 +94,7 @@ package bing.starling.iso
 				{
 					for( var j:int = 0 ; j<_zSpan ; j++)
 					{
-						pos = new Vector3D( i*_size+this.x , this.y , j*_size+this.z );
+						pos = new Vector3D( i*_size+_position3D.x , _position3D.y , j*_size+_position3D.z );
 						_spanPosition.push( pos );
 					}
 				}
@@ -135,9 +137,9 @@ package bing.starling.iso
 			updateScreenPosition();
 			updateSpanPosition();
 		}
-		override public function get x():Number
+		public function getX():Number
 		{
-			return _position3D.x;
+			return _position3D.x ;
 		}
 		
 		/**
@@ -146,10 +148,6 @@ package bing.starling.iso
 		override public function set y(value:Number):void
 		{
 			_position3D.y = value;
-		}
-		override public function get y():Number
-		{
-			return _position3D.y;
 		}
 		
 		/**
@@ -160,10 +158,6 @@ package bing.starling.iso
 			_position3D.z = value;
 			updateScreenPosition();
 			updateSpanPosition();
-		}
-		public function get z():Number
-		{
-			return _position3D.z;
 		}
 		
 		/**
@@ -244,8 +238,8 @@ package bing.starling.iso
 		 */
 		public function get rect():Rectangle
 		{
-			_boundRect.x = x ;
-			_boundRect.y = z ;
+			_boundRect.x = _position3D.x ;
+			_boundRect.y = _position3D.z ;
 			if(this._isRotate){
 				_boundRect.width = size*(_zSpan-1)  ;
 				_boundRect.height = size*(_xSpan-1)  ;
@@ -277,12 +271,12 @@ package bing.starling.iso
 		
 		public function get nodeX():int 
 		{
-			return  this.x/_size  ;
+			return  _position3D.x/_size  ;
 		}
 		
 		public function get nodeZ():int
 		{
-			return  this.z/_size  ;
+			return  _position3D.z/_size  ;
 		}
 		/**
 		 * flash坐标系的X 
