@@ -7,6 +7,7 @@ package local
 	
 	import flash.geom.Matrix;
 	import flash.geom.Point;
+	import flash.geom.Vector3D;
 	
 	import starling.display.*;
 	import starling.events.Event;
@@ -51,26 +52,22 @@ package local
 			this.addScene(buildingScene);
 			
 			//添加一个建筑
-			var house:SIsoObject = new SIsoObject(_size , 2 , 1 );
-			var img:Image = new Image( Assets.createTextureByName("house1") );
-			img.x = -59 ;
-			img.y = -54 ;
-			house.addChild(img);
-			buildingScene.addIsoObject( house,false );
-			house.z = 100 ;
-			trace( house.screenX , house.screenY  );
-
-//			house = new SIsoObject(_size , 2 , 1 );
-//			house.y = 100 ;
-//			img = new Image( Assets.createTextureByName("house1") );
-//			img.x = -59 ;
-//			img.y = -54 ;
-//			house.addChild(img);
-//			buildingScene.addIsoObject( house,false );
-			
-			
-			
-			
+			for( var i:int = 0 ; i<13 ; ++i )
+			{
+				for( var j:int =0 ; j<13 ; ++j )
+				{
+					var house:SIsoObject = new SIsoObject(_size , 2 , 1 );
+					house.nodeX = i*2 ;
+					house.nodeZ = j*2 ;
+					house.rotateX(i%2==0);
+					var img:Image = new Image( Assets.createTextureByName("house1") );
+					img.x = -59 ;
+					img.y = -54 ;
+					house.addChild(img);
+					buildingScene.addIsoObject( house,false );
+				}
+			}
+			buildingScene.sortAll();
 			
 			addEventListener(Event.ENTER_FRAME , onEnterFrameHandler );
 		}
