@@ -7,8 +7,12 @@ package local
 
 	public class Assets
 	{
-		[Embed(source="../assets/starling_round.png")]
-		private static const starling_round:Class ;
+		[Embed(source="../assets/house1.png")]
+		private static const house1:Class ;
+		[Embed(source="../assets/bgFill1.jpg")]
+		private static const bgFill1:Class ;
+		[Embed(source="../assets/bgTree.png")]
+		private static const bgTree:Class ;
 		
 		
 		private static var _textureDic:Dictionary = new Dictionary() ;

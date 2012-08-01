@@ -2,8 +2,6 @@ package bing.starling.iso
 {
 	import flash.geom.Point;
 	
-	import starling.display.DisplayObject;
-	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.Event;
 	
@@ -13,7 +11,7 @@ package bing.starling.iso
 		protected var _gridZ:int ;
 		protected var _size:int ;
 		
-		protected var _backGround:DisplayObject ;
+		protected var _backGround:Sprite ;
 		protected var _scenesLayer:Sprite = new Sprite();
 		protected var _scenes:Vector.<SIsoScene> = new Vector.<SIsoScene>();
 		
@@ -107,7 +105,7 @@ package bing.starling.iso
 		/********************************************************
 		 * 设置背景
 		 * ********************************************************/
-		public function setBackGround( ground:Image ):void
+		public function setBackGround( ground:Sprite ):void
 		{
 			if(_backGround && this.contains( _backGround) ){
 				this.removeChild( _backGround );
@@ -131,7 +129,7 @@ package bing.starling.iso
 		/********************************************************
 		 * 遍历所有IsoScene，并调用它的dispose方法
 		 * ********************************************************/
-		public function dispose():void
+		public function sdispose():void
 		{
 			for each(var scene:SIsoScene in _scenes){
 				scene.dispose();
