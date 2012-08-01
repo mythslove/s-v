@@ -1,5 +1,6 @@
 package bing.starling.iso
 {
+	
 	import bing.starling.iso.path.SGrid;
 	
 	import flash.geom.Point;
@@ -29,6 +30,7 @@ package bing.starling.iso
 		 * @param size 格子大小
 		 * @param xSpan X坐标上跨多少行
 		 * @param zSpan Z坐标上跨多少行
+		 * 
 		 */		
 		public function SIsoObject(size:Number , xSpan:int = 1, zSpan:int =1 )
 		{

@@ -1,7 +1,10 @@
 package
 {
+	import bing.starling.iso.SIsoUtils;
+	
 	import flash.display.Sprite;
 	import flash.display.StageQuality;
+	import flash.geom.Vector3D;
 	
 	import local.MainGame;
 	

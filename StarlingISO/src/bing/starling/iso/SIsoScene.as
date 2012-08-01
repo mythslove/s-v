@@ -127,9 +127,9 @@ package bing.starling.iso
 		/********************************************************
 		 * 清除数据，以后不会这个scene时使用。
 		 * ********************************************************/
-		override public function dispose():void
+		override public function sdispose():void
 		{
-			super.dispose();
+			super.sdispose();
 			for each( var obj:SIsoObject in _sprites){
 				obj = null ;
 			}
