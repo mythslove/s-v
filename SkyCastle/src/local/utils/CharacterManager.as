@@ -12,7 +12,7 @@ package local.utils
 	import local.game.elements.NPC;
 	import local.game.npcs.NpcAnnie;
 	import local.game.npcs.NpcNick;
-	import local.game.npcs.NpcRocky;
+	import local.game.npcs.NpcDave;
 	import local.game.npcs.NpcTony;
 
 	/**
@@ -33,7 +33,7 @@ package local.utils
 		public var hero:Hero ;
 		
 		/*所有的npc类名*/
-		private var _allNpcClass:Vector.<Class> = Vector.<Class>([NpcNick,NpcTony,NpcAnnie,NpcRocky]);
+		private var _allNpcClass:Vector.<Class> = Vector.<Class>([NpcNick,NpcTony,NpcAnnie,NpcDave]);
 		
 		/**所有的npc*/
 		public var npcs:Vector.<NPC> ;
