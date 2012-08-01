@@ -39,7 +39,7 @@ package bing.starling.iso
 					p.z = i*size ;
 					var isoPoint:Point = SIsoUtils.isoToScreen( p);
 					img = new Image(texture) ;
-					img.pivotX = size;
+					img.pivotX = size ;
 					img.x = isoPoint.x; 
 					img.y = isoPoint.y ;
 					addChild(img);

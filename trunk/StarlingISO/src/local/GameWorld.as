@@ -5,6 +5,7 @@ package local
 	import bing.starling.iso.SIsoScene;
 	import bing.starling.iso.SIsoWorld;
 	
+	import flash.geom.Matrix;
 	import flash.geom.Point;
 	
 	import starling.display.*;
@@ -21,6 +22,7 @@ package local
 		protected var _endY:int;
 		protected var _mouseDownPos:Point = new Point();
 		protected var _worldPos:Point = new Point();
+		private var _initFingerDis:Number ;
 		
 		public function GameWorld()
 		{
@@ -54,7 +56,20 @@ package local
 			img.x = -59 ;
 			img.y = -54 ;
 			house.addChild(img);
-			buildingScene.addIsoObject( house );
+			buildingScene.addIsoObject( house,false );
+			trace( house.screenX , house.screenY  );
+
+//			house = new SIsoObject(_size , 2 , 1 );
+//			house.y = 100 ;
+//			img = new Image( Assets.createTextureByName("house1") );
+//			img.x = -59 ;
+//			img.y = -54 ;
+//			house.addChild(img);
+//			buildingScene.addIsoObject( house,false );
+			
+			
+			
+			
 			
 			addEventListener(Event.ENTER_FRAME , onEnterFrameHandler );
 		}
@@ -106,9 +121,39 @@ package local
 				}
 				
 			}
-			else if(e.touches.length>1)
+			else if(e.getTouches(stage, TouchPhase.MOVED ).length>1)
 			{
 				//放大缩小
+				var touches:Vector.<Touch> = e.getTouches(stage, TouchPhase.MOVED );
+				var touchA:Touch = touches[0];
+				var touchB:Touch = touches[1];
+				
+				var currentPosA:Point  = touchA.getLocation(stage);
+				var previousPosA:Point = touchA.getPreviousLocation(stage);
+				var currentPosB:Point  = touchB.getLocation(stage);
+				var previousPosB:Point = touchB.getPreviousLocation(stage);
+				
+				var currentVector:Point  = currentPosA.subtract(currentPosB);
+				var previousVector:Point = previousPosA.subtract(previousPosB);
+				
+				// scale
+				var sizeDiff:Number = currentVector.length / previousVector.length;
+				if(scaleX*sizeDiff>0.6 && scaleX*sizeDiff<2) {
+					_endX = x;
+					_endY = y ;
+					scaleX *= sizeDiff;
+					scaleY *= sizeDiff;
+					if(x>0) x=0 ;
+					else if(x<-GameSetting.MAP_WIDTH*scaleX+GameSetting.SCREEN_WIDTH){
+						x = -GameSetting.MAP_WIDTH*scaleX+GameSetting.SCREEN_WIDTH ;
+					}
+					if(y>0) y=0 ;
+					else if(y<-GameSetting.MAP_HEIGHT*scaleX+GameSetting.SCREEN_HEIGHT){
+						y = -GameSetting.MAP_HEIGHT*scaleX+GameSetting.SCREEN_HEIGHT ;
+					}
+					_mouseDownPos.x = _endX = x;
+					_mouseDownPos.y = _endY = y ;
+				}
 			}
 		}
 		
@@ -146,6 +191,31 @@ package local
 			
 			this.setBackGround( bg );
 			bg.flatten();
+		}
+	
+		
+		private function changeWorldScale( value:Number , px:Number , py:Number ):void
+		{
+			if(scaleX*value>0.7 && scaleX*value<2) {
+				_endX = x;
+				_endY = y ;
+				var m:Matrix = this.transformationMatrix ;
+				m.tx -= px;
+				m.ty -= py;
+				m.scale(value, value);
+				m.tx += px;
+				m.ty += py;
+				if(x>0) x=0 ;
+				else if(x<-GameSetting.MAP_WIDTH*scaleX+GameSetting.SCREEN_WIDTH){
+					x = -GameSetting.MAP_WIDTH*scaleX+GameSetting.SCREEN_WIDTH ;
+				}
+				if(y>0) y=0 ;
+				else if(y<-GameSetting.MAP_HEIGHT*scaleX+GameSetting.SCREEN_HEIGHT){
+					y = -GameSetting.MAP_HEIGHT*scaleX+GameSetting.SCREEN_HEIGHT ;
+				}
+				_mouseDownPos.x = _endX = x;
+				_mouseDownPos.y = _endY = y ;
+			}
 		}
 	}
 }

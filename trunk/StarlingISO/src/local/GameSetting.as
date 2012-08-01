@@ -14,8 +14,8 @@ package local
 		/** 网格大小 */		
 		public static const GRID_SIZE:int = 50 ;
 		
-		public static const GRID_X:int = 20 ;
-		public static const GRID_Z:int = 20 ;
+		public static const GRID_X:int = 26 ;
+		public static const GRID_Z:int = 26 ;
 		
 	}
 }
