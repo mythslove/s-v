@@ -5,9 +5,7 @@ package local
 	import bing.starling.iso.SIsoScene;
 	import bing.starling.iso.SIsoWorld;
 	
-	import flash.geom.Matrix;
 	import flash.geom.Point;
-	import flash.geom.Vector3D;
 	
 	import starling.display.*;
 	import starling.events.Event;
@@ -92,8 +90,8 @@ package local
 		{
 			if(e.touches.length==1)
 			{
-				var touch:Touch = e.getTouch(stage); 
-				var pos:Point = touch.getLocation(stage); 
+				var touch:Touch = e.getTouch(this); 
+				var pos:Point = touch.getLocation(this); 
 				if(touch.phase==TouchPhase.BEGAN)
 				{
 					_mouseDownPos.x = pos.x ;
@@ -119,17 +117,17 @@ package local
 				}
 				
 			}
-			else if(e.getTouches(stage, TouchPhase.MOVED ).length>1)
+			else if(e.getTouches(this , TouchPhase.MOVED ).length>1)
 			{
 				//放大缩小
-				var touches:Vector.<Touch> = e.getTouches(stage, TouchPhase.MOVED );
+				var touches:Vector.<Touch> = e.getTouches(this, TouchPhase.MOVED );
 				var touchA:Touch = touches[0];
 				var touchB:Touch = touches[1];
 				
-				var currentPosA:Point  = touchA.getLocation(stage);
-				var previousPosA:Point = touchA.getPreviousLocation(stage);
-				var currentPosB:Point  = touchB.getLocation(stage);
-				var previousPosB:Point = touchB.getPreviousLocation(stage);
+				var currentPosA:Point  = touchA.getLocation(this);
+				var previousPosA:Point = touchA.getPreviousLocation(this);
+				var currentPosB:Point  = touchB.getLocation(this);
+				var previousPosB:Point = touchB.getPreviousLocation(this);
 				
 				var currentVector:Point  = currentPosA.subtract(currentPosB);
 				var previousVector:Point = previousPosA.subtract(previousPosB);
@@ -141,6 +139,8 @@ package local
 					_endY = y ;
 					scaleX *= sizeDiff;
 					scaleY *= sizeDiff;
+					x = _endX ;
+					y = _endY ;
 					if(x>0) x=0 ;
 					else if(x<-GameSetting.MAP_WIDTH*scaleX+GameSetting.SCREEN_WIDTH){
 						x = -GameSetting.MAP_WIDTH*scaleX+GameSetting.SCREEN_WIDTH ;
@@ -149,8 +149,6 @@ package local
 					else if(y<-GameSetting.MAP_HEIGHT*scaleX+GameSetting.SCREEN_HEIGHT){
 						y = -GameSetting.MAP_HEIGHT*scaleX+GameSetting.SCREEN_HEIGHT ;
 					}
-					_mouseDownPos.x = _endX = x;
-					_mouseDownPos.y = _endY = y ;
 				}
 			}
 		}
@@ -190,30 +188,6 @@ package local
 			this.setBackGround( bg );
 			bg.flatten();
 		}
-	
 		
-		private function changeWorldScale( value:Number , px:Number , py:Number ):void
-		{
-			if(scaleX*value>0.7 && scaleX*value<2) {
-				_endX = x;
-				_endY = y ;
-				var m:Matrix = this.transformationMatrix ;
-				m.tx -= px;
-				m.ty -= py;
-				m.scale(value, value);
-				m.tx += px;
-				m.ty += py;
-				if(x>0) x=0 ;
-				else if(x<-GameSetting.MAP_WIDTH*scaleX+GameSetting.SCREEN_WIDTH){
-					x = -GameSetting.MAP_WIDTH*scaleX+GameSetting.SCREEN_WIDTH ;
-				}
-				if(y>0) y=0 ;
-				else if(y<-GameSetting.MAP_HEIGHT*scaleX+GameSetting.SCREEN_HEIGHT){
-					y = -GameSetting.MAP_HEIGHT*scaleX+GameSetting.SCREEN_HEIGHT ;
-				}
-				_mouseDownPos.x = _endX = x;
-				_mouseDownPos.y = _endY = y ;
-			}
-		}
 	}
 }
