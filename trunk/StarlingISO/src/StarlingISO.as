@@ -6,7 +6,7 @@ package
 	
 	import starling.core.Starling;
 	
-	[SWF(width="960",height="640",frameRate="60",backgroundColor=0)]
+	[SWF(width="760",height="640",frameRate="60",backgroundColor=0)]
 	public class StarlingISO extends Sprite
 	{
 		private var _starling:Starling ;
@@ -15,9 +15,9 @@ package
 		{
 			stage.align = "TL";
 			stage.scaleMode = "noScale";
-			Starling.handleLostContext = false;
 			
 			_starling = new Starling( Game , stage );
+			_starling.enableErrorChecking = true ;
 			_starling.start();
 		}
 	}
