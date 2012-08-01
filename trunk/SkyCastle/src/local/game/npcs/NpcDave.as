@@ -9,18 +9,18 @@ package local.game.npcs
 	 * npc之 Rocky 
 	 * @author zzhanglin
 	 */	
-	public class NpcRocky extends NPC
+	public class NpcDave extends NPC
 	{
-		public function NpcRocky()
+		public function NpcDave()
 		{
 			var baseVO:BaseCharacterVO = new BaseCharacterVO();
-			baseVO.resId="NPC_Rocky";
-			baseVO.alias="Rocky";
+			baseVO.resId="NPC_Dave";
+			baseVO.alias="Dave";
 			baseVO.walkable=1 ;
 			baseVO.xSpan = 1 ;
 			baseVO.zSpan = 1 ;
 			baseVO.layer = 2 ;
-			baseVO.name="Rocky";
+			baseVO.name="Dave";
 			baseVO.description = "Click to talk.";
 			baseVO.type = ItemType.NPC ;
 			var vo:BuildingVO = new BuildingVO();
