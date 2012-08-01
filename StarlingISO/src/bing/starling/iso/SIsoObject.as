@@ -129,38 +129,6 @@ package bing.starling.iso
 		}
 		
 		/**
-		 * Sets / gets the x position in 3D space.
-		 */
-		override public function set x(value:Number):void
-		{
-			_position3D.x = value;
-			updateScreenPosition();
-			updateSpanPosition();
-		}
-		public function getX():Number
-		{
-			return _position3D.x ;
-		}
-		
-		/**
-		 * Sets / gets the y position in 3D space.
-		 */
-		override public function set y(value:Number):void
-		{
-			_position3D.y = value;
-		}
-		
-		/**
-		 * Sets / gets the z position in 3D space.
-		 */
-		public function set z(value:Number):void
-		{
-			_position3D.z = value;
-			updateScreenPosition();
-			updateSpanPosition();
-		}
-		
-		/**
 		 * Sets / gets the position in 3D space as a Vecter3D.
 		 */
 		public function set position(value:Vector3D):void
@@ -169,6 +137,7 @@ package bing.starling.iso
 			updateScreenPosition();
 			updateSpanPosition();
 		}
+		/** 获取iso坐标 */
 		public function get position():Vector3D
 		{
 			return _position3D;
@@ -256,7 +225,8 @@ package bing.starling.iso
 		public function set nodeX( value:int ):void
 		{
 			_nodeX = value ;
-			this.x = value*_size ;
+			_position3D.x = value*_size ;
+			position = _position3D ;
 		}
 		
 		/**
@@ -266,7 +236,8 @@ package bing.starling.iso
 		public function set nodeZ( value:int ):void
 		{
 			_nodeZ = value ;
-			this.z = value*_size ;
+			_position3D.z = value*_size ;
+			position = _position3D ;
 		}
 		
 		public function get nodeX():int 
