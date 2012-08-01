@@ -119,7 +119,7 @@ package bing.starling.iso
 		/**
 		 * String representation of this object.
 		 */
-		override public function toString():String
+		public function toString():String
 		{
 			return "[IsoObject (x:" + _position3D.x + ", y:" + _position3D.y + ", z:" + _position3D.z + ") ]";
 		}
@@ -153,13 +153,13 @@ package bing.starling.iso
 		/**
 		 * Sets / gets the z position in 3D space.
 		 */
-		override public function set z(value:Number):void
+		public function set z(value:Number):void
 		{
 			_position3D.z = value;
 			updateScreenPosition();
 			updateSpanPosition();
 		}
-		override public function get z():Number
+		public function get z():Number
 		{
 			return _position3D.z;
 		}
@@ -309,7 +309,7 @@ package bing.starling.iso
 		/**
 		 * 消除资源 
 		 */		
-		public function dispose():void
+		public function sdispose():void
 		{
 			_boundRect = null ;
 			_spanPosition = null ;

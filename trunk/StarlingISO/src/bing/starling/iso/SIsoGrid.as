@@ -2,59 +2,50 @@ package bing.starling.iso
 {
 	import flash.display.BitmapData;
 	import flash.display.Shape;
-	import flash.geom.Matrix;
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
 	
 	import starling.display.Image;
+	import starling.display.Sprite;
 	import starling.textures.Texture;
 	
-	public class SIsoGrid extends Image
+	public class SIsoGrid extends Sprite
 	{
-		protected var _gridX:int ;
-		protected var _gridZ:int ;
-		protected var _size:int ;
-		
 		public function SIsoGrid( gridX:int , gridZ:int ,size:int )
 		{
-			super( createTexture() );
-			this._gridX = gridX ;
-			this._gridZ = gridZ ;
-			this._size = size ;
-			this.x = this.y = 100 ;
+			createTexture( gridX , gridZ ,size);
 		}
 		
-		private function createTexture():Texture 
+		private function createTexture(gridX:int , gridZ:int ,size:int ):void 
 		{
 			var shape:Shape = new Shape();
-			shape.graphics.lineStyle( 1 , 0xcccccc );
-			var p:Vector3D =new Vector3D();
-			for( var i:int =0  ; i<=_gridX ; i++ )
-			{
-				p.x = i*_size ;
-				p.z = 0 ;
-				var isoPoint:Point = SIsoUtils.isoToScreen( p);
-				shape.graphics.moveTo( isoPoint.x, isoPoint.y);
-				
-				p.z = _gridZ*_size ;
-				isoPoint = SIsoUtils.isoToScreen( p);
-				shape.graphics.lineTo(  isoPoint.x, isoPoint.y);
-			}
-			for ( i = 0 ; i<=_gridZ ; i++)
-			{
-				p.z = i*_size ;
-				p.x = 0 ;
-				isoPoint = SIsoUtils.isoToScreen( p);
-				shape.graphics.moveTo( isoPoint.x, isoPoint.y);
-				
-				p.x = _gridX*_size ;
-				isoPoint = SIsoUtils.isoToScreen( p);
-				shape.graphics.lineTo(  isoPoint.x, isoPoint.y);
-			}
-
-			var bmd:BitmapData = new BitmapData( shape.width , shape.height , true , 0xffffff );
+			var color:uint = 0xFFFFFF ;
+			shape.graphics.lineStyle(1,color);
+			shape.graphics.moveTo( size , 0 );
+			shape.graphics.lineTo( 2*size , size/2 );
+			shape.graphics.lineTo( size , size );
+			shape.graphics.lineTo( 0 , size/2 );
+			shape.graphics.lineTo( size , 0);
+			
+			var bmd:BitmapData = new BitmapData(size*2 , size , true , 0xffffff );
 			bmd.draw( shape );
-			return  Texture.fromBitmapData(bmd,false) ;
+			var texture:Texture = Texture.fromBitmapData(bmd,false) ;
+			
+			var img:Image ;
+			var p:Vector3D =new Vector3D();
+			for( var i:int = 0 ; i<gridX ; i++){
+				for( var j:int = 0 ; j<gridZ ; j++){
+					p.x = j*size ;
+					p.z = i*size ;
+					var isoPoint:Point = SIsoUtils.isoToScreen( p);
+					img = new Image(texture) ;
+					img.pivotX = size;
+					img.x = isoPoint.x; 
+					img.y = isoPoint.y ;
+					addChild(img);
+				}
+			}
+			this.flatten() ;
 		}
 	}
 }
