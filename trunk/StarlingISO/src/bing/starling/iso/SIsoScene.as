@@ -95,9 +95,9 @@ package bing.starling.iso
 		{
 			var targetRect:Rectangle = target.rect ;
 			var itemRect:Rectangle = item.rect ;
-			if(targetRect.x>itemRect.x+itemRect.width ||  targetRect.y>itemRect.y+itemRect.height || target.y>item.y){
+			if(targetRect.x>itemRect.x+itemRect.width ||  targetRect.y>itemRect.y+itemRect.height || target.position.y >item.position.y ){
 				return 1;
-			}else if(targetRect.x==itemRect.x+itemRect.width &&  targetRect.y==itemRect.y+itemRect.height && target.y==item.y){
+			}else if(targetRect.x==itemRect.x+itemRect.width &&  targetRect.y==itemRect.y+itemRect.height && target.position.y == item.position.y){
 				return item.screenY-target.screenY ;
 			}
 			return -1;
