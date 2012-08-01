@@ -57,6 +57,7 @@ package local
 			img.y = -54 ;
 			house.addChild(img);
 			buildingScene.addIsoObject( house,false );
+			house.z = 100 ;
 			trace( house.screenX , house.screenY  );
 
 //			house = new SIsoObject(_size , 2 , 1 );
