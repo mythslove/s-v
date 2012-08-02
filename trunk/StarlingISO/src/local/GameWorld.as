@@ -53,20 +53,30 @@ package local
 			buildingScene = new SIsoScene( _size ,_gridX,_gridZ );
 			this.addScene(buildingScene);
 			
-			//添加一个建筑
+			//添加筑
+			var house:SIsoObject ;
+			var bird:Birds ;
 			for( var i:int = 0 ; i<13 ; ++i )
 			{
 				for( var j:int =0 ; j<13 ; ++j )
 				{
-					var house:SIsoObject = new SIsoObject(_size , 2 , 1 );
-					house.nodeX = i*2 ;
-					house.nodeZ = j*2 ;
-					house.rotateX(i%2==0);
-					var img:Image = new Image( Assets.createTextureByName("house1") );
-					img.x = -59 ;
-					img.y = -54 ;
-					house.addChild(img);
-					buildingScene.addIsoObject( house,false );
+					if(i%2==0){
+						house = new SIsoObject(_size , 2 , 1 );
+						house.nodeX = i*2 ;
+						house.nodeZ = j*2 ;
+						var img:Image = new Image( Assets.createTextureByName("house1") );
+						img.x = -59 ;
+						img.y = -54 ;
+						house.addChild(img);
+						buildingScene.addIsoObject( house,false );
+					}
+					else
+					{
+						bird = new Birds(_size , 1 , 1 );
+						bird.nodeX = i*2 ;
+						bird.nodeZ = j*2 ;
+						buildingScene.addIsoObject( bird,false );
+					}
 				}
 			}
 			buildingScene.sortAll();
