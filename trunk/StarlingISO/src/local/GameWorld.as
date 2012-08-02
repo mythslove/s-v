@@ -88,10 +88,10 @@ package local
 		{
 			update();
 			if(x!=_endX){
-				x += ( _endX-x)*0.35 ;
+				x += ( _endX-x)*0.36 ;
 			}
 			if(y!=_endY){
-				y += (_endY-y)*0.35 ;
+				y += (_endY-y)*0.36 ;
 			}
 		}
 		
