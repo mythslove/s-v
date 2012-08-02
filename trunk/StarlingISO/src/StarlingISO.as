@@ -23,8 +23,8 @@ package
 			Starling.handleLostContext = true; // not necessary on iOS. Saves a lot of memory!
 			
 			_starling = new Starling( MainGame , stage );
-			_starling.antiAliasing = 0 ;
-			_starling.enableErrorChecking = true ;
+			_starling.antiAliasing = 1 ;
+			_starling.enableErrorChecking = false ;
 			_starling.start();
 		}
 	}
