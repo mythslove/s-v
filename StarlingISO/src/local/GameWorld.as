@@ -54,9 +54,9 @@ package local
 			this.addScene(buildingScene);
 			
 			//添加一个建筑
-			for( var i:int = 0 ; i<1 ; ++i )
+			for( var i:int = 0 ; i<13 ; ++i )
 			{
-				for( var j:int =0 ; j<1 ; ++j )
+				for( var j:int =0 ; j<13 ; ++j )
 				{
 					var house:SIsoObject = new SIsoObject(_size , 2 , 1 );
 					house.nodeX = i*2 ;
