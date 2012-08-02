@@ -25,6 +25,7 @@ package local
 		protected var _mouseDownPos:Point = new Point();
 		protected var _worldPos:Point = new Point();
 		private var _zoomM:Matrix = new Matrix();
+		private var _moveId:int ;
 		
 		public function GameWorld()
 		{
@@ -53,9 +54,9 @@ package local
 			this.addScene(buildingScene);
 			
 			//添加一个建筑
-			for( var i:int = 0 ; i<13 ; ++i )
+			for( var i:int = 0 ; i<1 ; ++i )
 			{
-				for( var j:int =0 ; j<13 ; ++j )
+				for( var j:int =0 ; j<1 ; ++j )
 				{
 					var house:SIsoObject = new SIsoObject(_size , 2 , 1 );
 					house.nodeX = i*2 ;
@@ -109,8 +110,9 @@ package local
 					_mouseDownPos.y = pos.y ;
 					_worldPos.x = x ;
 					_worldPos.y = y ;
+					_moveId = touch.id ;
 				}
-				else if( touch.phase==TouchPhase.MOVED)
+				else if(_moveId == touch.id && touch.phase==TouchPhase.MOVED)
 				{
 					var offsetX:int =  _worldPos.x + pos.x-_mouseDownPos.x ;
 					var offsetY:int = _worldPos.y + pos.y-_mouseDownPos.y ;
@@ -134,17 +136,22 @@ package local
 				var touchA:Touch = touches[0];
 				var touchB:Touch = touches[1];
 				
-				var currentPosA:Point  = touchA.getLocation(stage);
-				var previousPosA:Point = touchA.getPreviousLocation(stage);
-				var currentPosB:Point  = touchB.getLocation(stage);
-				var previousPosB:Point = touchB.getPreviousLocation(stage);
+				var currentPosA:Point  = new Point( touchA.globalX,touchA.globalY );
+				var previousPosA:Point = new Point( touchA.previousGlobalX , touchA.previousGlobalY );
+				var currentPosB:Point  = new Point( touchB.globalX,touchB.globalY );
+				var previousPosB:Point = new Point( touchB.previousGlobalX , touchB.previousGlobalY );
 				
 				var currentVector:Point  = currentPosA.subtract(currentPosB);
 				var previousVector:Point = previousPosA.subtract(previousPosB);
 				
 				// scale
 				var sizeDiff:Number = currentVector.length / previousVector.length;
-				changeWorldScale( sizeDiff , (currentPosA.x-currentPosB.x) >>1 , (currentPosA.y-currentPosB.y) >>1 );
+				changeWorldScale( sizeDiff , currentPosA.x+ (currentPosA.x-currentPosB.x) >>1 , currentPosA.x +(currentPosA.y-currentPosB.y) >>1 );
+			}
+			else
+			{
+				_endX = x ;
+				_endY = y ;
 			}
 		}
 		
@@ -174,8 +181,8 @@ package local
 				else if(y<-GameSetting.MAP_HEIGHT*scaleX+GameSetting.SCREEN_HEIGHT){
 					y = -GameSetting.MAP_HEIGHT*scaleX+GameSetting.SCREEN_HEIGHT ;
 				}
-				_endX = x;
-				_endY = y ;
+				_mouseDownPos.x  = _endX = x;
+				_mouseDownPos.x  = _endY = y ;
 			}
 		}
 		
