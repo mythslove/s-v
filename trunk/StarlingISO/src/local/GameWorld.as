@@ -160,8 +160,8 @@ package local
 			}
 			else
 			{
-				_endX = x ;
-				_endY = y ;
+				_mouseDownPos.x = _endX = x ;
+				_mouseDownPos.y = _endY = y ;
 			}
 		}
 		
