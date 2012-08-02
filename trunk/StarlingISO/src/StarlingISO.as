@@ -20,7 +20,7 @@ package
 			stage.align = "TL";
 			stage.scaleMode = "noScale";
 			Starling.multitouchEnabled = true;  // useful on mobile devices
-			Starling.handleLostContext = false; // not necessary on iOS. Saves a lot of memory!
+			Starling.handleLostContext = true; // not necessary on iOS. Saves a lot of memory!
 			
 			_starling = new Starling( MainGame , stage );
 			_starling.antiAliasing = 0 ;
