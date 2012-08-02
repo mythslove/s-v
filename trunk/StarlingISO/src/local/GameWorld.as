@@ -5,8 +5,11 @@ package local
 	import bing.starling.iso.SIsoScene;
 	import bing.starling.iso.SIsoWorld;
 	
+	import flash.events.MouseEvent;
+	import flash.geom.Matrix;
 	import flash.geom.Point;
 	
+	import starling.core.Starling;
 	import starling.display.*;
 	import starling.events.Event;
 	import starling.events.Touch;
@@ -21,7 +24,7 @@ package local
 		protected var _endY:int;
 		protected var _mouseDownPos:Point = new Point();
 		protected var _worldPos:Point = new Point();
-		private var _initFingerDis:Number ;
+		private var _zoomM:Matrix = new Matrix();
 		
 		public function GameWorld()
 		{
@@ -74,16 +77,24 @@ package local
 		{
 			update();
 			if(x!=_endX){
-				x += ( _endX-x)*0.36 ;
+				x += ( _endX-x)*0.35 ;
 			}
 			if(y!=_endY){
-				y += (_endY-y)*0.36 ;
+				y += (_endY-y)*0.35 ;
 			}
 		}
 		
 		private function addMouseConfig():void
 		{
 			this.addEventListener(TouchEvent.TOUCH, onTouchedHandler); 
+			Starling.current.nativeStage.addEventListener(MouseEvent.MOUSE_WHEEL , onMouseWheel );
+		}
+		
+		private function onMouseWheel( e:MouseEvent ):void
+		{
+			e.stopPropagation();
+			var value:Number = e.delta>0?1.1:0.95 ;
+			changeWorldScale(value,e.stageX , e.stageY);
 		}
 		
 		private function onTouchedHandler( e:TouchEvent ):void
@@ -115,7 +126,6 @@ package local
 					_endX = offsetX;
 					_endY = offsetY ;
 				}
-				
 			}
 			else if(e.getTouches(stage , TouchPhase.MOVED ).length>1)
 			{
@@ -140,13 +150,21 @@ package local
 		
 		private function changeWorldScale( value:Number , px:Number , py:Number ):void
 		{
-			if(scaleX*value>0.7 && scaleX*value<2) {
-				x-=px ;
-				y-=py ;
-				scaleX*=value;
-				scaleY*=value;
-				x+=px ;
-				y+=py ;
+			if(scaleX*value>0.7 && scaleX*value<2 ) {
+				
+				_zoomM.identity() ;
+				_zoomM.scale(scaleX,scaleY);
+				_zoomM.translate( x , y );
+				_zoomM.tx -= px;
+				_zoomM.ty -= py;
+				_zoomM.scale(value, value);
+				_zoomM.tx += px;
+				_zoomM.ty += py;
+				
+				this.scaleX = _zoomM.a ;
+				this.scaleY = _zoomM.d ;
+				this.x = _zoomM.tx ;
+				this.y = _zoomM.ty ;
 				
 				if(x>0) x=0 ;
 				else if(x<-GameSetting.MAP_WIDTH*scaleX+GameSetting.SCREEN_WIDTH){
@@ -156,8 +174,8 @@ package local
 				else if(y<-GameSetting.MAP_HEIGHT*scaleX+GameSetting.SCREEN_HEIGHT){
 					y = -GameSetting.MAP_HEIGHT*scaleX+GameSetting.SCREEN_HEIGHT ;
 				}
-				_mouseDownPos.x = _endX = x;
-				_mouseDownPos.y = _endY = y ;
+				_endX = x;
+				_endY = y ;
 			}
 		}
 		
