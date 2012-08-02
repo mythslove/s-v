@@ -137,6 +137,13 @@ package bing.starling.iso
 			updateScreenPosition();
 			updateSpanPosition();
 		}
+		public function setPositionXYZ( px:Number , py:Number , pz:Number ):void
+		{
+			_position3D.x = px ;
+			_position3D.y = py ;
+			_position3D.z = pz ;
+			position = _position3D ;
+		}
 		/** 获取iso坐标 */
 		public function get position():Vector3D
 		{
