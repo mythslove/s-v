@@ -122,8 +122,8 @@ package local
 					_touchFinger1.y = pos.y ;
 					_mouseDownPos.x = pos.x ;
 					_mouseDownPos.y = pos.y ;
-					_worldPos.x = x ;
-					_worldPos.y = y ;
+					_endX = _worldPos.x = x ;
+					_endY = _worldPos.y = y ;
 					_moveId = touch.id ;
 				}
 				else if(_moveId == touch.id && touch.phase==TouchPhase.MOVED)
@@ -200,9 +200,9 @@ package local
 				else if(y<-GameSetting.MAP_HEIGHT*scaleX+GameSetting.SCREEN_HEIGHT){
 					y = -GameSetting.MAP_HEIGHT*scaleX+GameSetting.SCREEN_HEIGHT ;
 				}
-				_mouseDownPos.x  = _endX = x;
-				_mouseDownPos.x  = _endY = y ;
 			}
+			_mouseDownPos.x  = _endX = x;
+			_mouseDownPos.y  = _endY = y ;
 		}
 		
 		
