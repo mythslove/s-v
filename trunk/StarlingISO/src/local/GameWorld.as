@@ -26,6 +26,8 @@ package local
 		protected var _worldPos:Point = new Point();
 		private var _zoomM:Matrix = new Matrix();
 		private var _moveId:int ;
+		private var _touchFinger1:Point = new Point();
+		private var _middle:Point = new Point();
 		
 		public function GameWorld()
 		{
@@ -116,6 +118,8 @@ package local
 				var pos:Point = touch.getLocation(stage); 
 				if(touch.phase==TouchPhase.BEGAN)
 				{
+					_touchFinger1.x = pos.x ;
+					_touchFinger1.y = pos.y ;
 					_mouseDownPos.x = pos.x ;
 					_mouseDownPos.y = pos.y ;
 					_worldPos.x = x ;
@@ -139,10 +143,10 @@ package local
 					_endY = offsetY ;
 				}
 			}
-			else if(e.getTouches(stage , TouchPhase.MOVED ).length>1)
+			else if(e.touches.length==2)
 			{
 				//放大缩小
-				var touches:Vector.<Touch> = e.getTouches(stage, TouchPhase.MOVED );
+				var touches:Vector.<Touch> = e.getTouches(stage);
 				var touchA:Touch = touches[0];
 				var touchB:Touch = touches[1];
 				
@@ -151,12 +155,17 @@ package local
 				var currentPosB:Point  = new Point( touchB.globalX,touchB.globalY );
 				var previousPosB:Point = new Point( touchB.previousGlobalX , touchB.previousGlobalY );
 				
+				if(touchB.phase==TouchPhase.BEGAN){
+					_middle.x = _touchFinger1.x+(previousPosB.x-_touchFinger1.x)*0.5 ;
+					_middle.y = _touchFinger1.y+(previousPosB.y-_touchFinger1.y)*0.5 ;
+				}
+				
 				var currentVector:Point  = currentPosA.subtract(currentPosB);
 				var previousVector:Point = previousPosA.subtract(previousPosB);
 				
 				// scale
 				var sizeDiff:Number = currentVector.length / previousVector.length;
-				changeWorldScale( sizeDiff , currentPosA.x+ (currentPosA.x-currentPosB.x) >>1 , currentPosA.x +(currentPosA.y-currentPosB.y) >>1 );
+				changeWorldScale( sizeDiff , _middle.x , _middle.y );
 			}
 			else
 			{
