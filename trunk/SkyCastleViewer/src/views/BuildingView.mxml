@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
-		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:s="library://ns.adobe.com/flex/spark"
 		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%">
 	<fx:Declarations>
 		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
@@ -24,10 +24,10 @@
 			private var file:File ;
 			private var swfDecoder:SWFDecoder ; 
 			private var classListCollection:ArrayCollection ; //链接名列表
-			private var actionListCollection:ArrayCollection ; //动作列表
-			private var bmpMC:BitmapMovieClip ;
+			private var animBmpMC:BitmapMovieClip ;
+			private var effectBmpMC:BitmapMovieClip ;
 			
-			private function addedToStageHandler():void{
+			private function init():void{
 				uiContainer.graphics.lineStyle(2);
 				uiContainer.graphics.moveTo(-50,0);
 				uiContainer.graphics.lineTo(50,0);
@@ -64,40 +64,58 @@
 					//破解swf
 					swfDecoder = new SWFDecoder(bytes);
 					var arr:Array = swfDecoder.getTags(SymbolClassTag)[0].symbolClasses ;
+					arr.sort();
 					classListCollection = new ArrayCollection( arr );
+					show();
 				}
 			}
 			
-			protected function classList_changeHandler(event:IndexChangeEvent):void
+			protected function show():void
 			{
 				dispose(false);
+				if(classListCollection.length==0) return ;
 				
-				var role:MovieClip = ResourceUtil.instance.getInstanceByClassName( file.name,classListCollection[0]) as MovieClip;
-				if(role){
-					var actions:Array = [];
-					for( var i:int = 0 ; i<role.currentLabels.length ; ++i){
-						actions.push ( (role.currentLabels[i] as FrameLabel).name );
-					}
-					bmpMC = new BitmapMovieClip( role );
-					uiContainer.addChild( bmpMC );
-					bmpMC.visible=false;
+				var clsName:String=  classListCollection[0] ;
+				var mc:MovieClip = ResourceUtil.instance.getInstanceByClassName( file.name,clsName) as MovieClip;
+				if(mc) 
+					uiContainer.addChild( mc );
+				mc = ResourceUtil.instance.getInstanceByClassName( file.name,clsName+"_Anim") as MovieClip; //默认动画
+				if(mc){
+					animBmpMC = new BitmapMovieClip( mc );
+					uiContainer.addChild( animBmpMC );
+					animBmpMC.visible=false;
+				}	
+				mc = ResourceUtil.instance.getInstanceByClassName( file.name,clsName+"_Effect") as MovieClip; //特效
+				if(mc){
+					effectBmpMC = new BitmapMovieClip( mc );
+					uiContainer.addChild( effectBmpMC );
+					effectBmpMC.visible=false;
 				}
 			}
 			
 			private function updateHandler( e:Event ):void
 			{
-				if(bmpMC && bmpMC.update()){
-					bmpMC.x = bmpMC.getBound().x ;
-					bmpMC.y = bmpMC.getBound().y ;
-					bmpMC.visible=true;
+				if(animBmpMC && animBmpMC.update()){
+					animBmpMC.x = animBmpMC.getBound().x ;
+					animBmpMC.y = animBmpMC.getBound().y ;
+					animBmpMC.visible=true;
+				}
+				if(effectBmpMC && effectBmpMC.update()){
+					effectBmpMC.x = effectBmpMC.getBound().x ;
+					effectBmpMC.y = effectBmpMC.getBound().y ;
+					effectBmpMC.visible=true;
 				}
 			}
 			
 			private function dispose( flag:Boolean= true ):void
 			{
-				if(bmpMC) {
-					bmpMC.dispose(true);
-					bmpMC = null ;
+				if(animBmpMC) {
+					animBmpMC.dispose(true);
+					animBmpMC = null ;
+				}
+				if(effectBmpMC) {
+					effectBmpMC.dispose(true);
+					effectBmpMC = null ;
 				}
 				ContainerUtil.removeChildren( uiContainer );
 				if(file && flag){
@@ -107,8 +125,8 @@
 		]]>
 	</fx:Script>
 	
-	<s:BorderContainer width="80%" height="100%" backgroundColor="#E0E8E0" mouseChildren="false"
+	<s:BorderContainer width="100%" height="100%" backgroundColor="#E0E8E0" mouseChildren="false"
 					   nativeDragEnter="cavBuilding_nativeDragEnterHandler(event)" nativeDragDrop="cavBuilding_nativeDragDropHandler(event)">
-		<mx:UIComponent id="uiContainer" horizontalCenter="0" verticalCenter="0"/>
+		<mx:UIComponent id="uiContainer" horizontalCenter="0" verticalCenter="0" creationComplete="init()"/>
 	</s:BorderContainer>
 </s:Group>
