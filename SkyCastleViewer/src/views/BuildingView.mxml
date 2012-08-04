@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%">
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import bing.res.ResVO;
+			import bing.utils.ContainerUtil;
+			
+			import ghostcat.fileformat.swf.SWFDecoder;
+			import ghostcat.fileformat.swf.tag.SymbolClassTag;
+			
+			import local.ele.BitmapMovieClip;
+			import local.utils.ResourceUtil;
+			
+			import mx.collections.ArrayCollection;
+			
+			import spark.events.IndexChangeEvent;
+			
+			private var file:File ;
+			private var swfDecoder:SWFDecoder ; 
+			private var classListCollection:ArrayCollection ; //链接名列表
+			private var actionListCollection:ArrayCollection ; //动作列表
+			private var bmpMC:BitmapMovieClip ;
+			
+			private function addedToStageHandler():void{
+				uiContainer.graphics.lineStyle(2);
+				uiContainer.graphics.moveTo(-50,0);
+				uiContainer.graphics.lineTo(50,0);
+				uiContainer.graphics.moveTo(0,-25);
+				uiContainer.graphics.lineTo(0,25);
+				this.addEventListener(Event.ENTER_FRAME , updateHandler );
+			}
+			
+			
+			//---------------直接拖放------------------------------------
+			protected function cavBuilding_nativeDragEnterHandler(event:NativeDragEvent):void
+			{
+				NativeDragManager.dropAction = NativeDragActions.COPY ; 
+				NativeDragManager.acceptDragDrop(event.target as InteractiveObject) ;
+			}
+			
+			protected function cavBuilding_nativeDragDropHandler(event:NativeDragEvent):void
+			{
+				dispose();
+				file =  event.clipboard.getData( event.clipboard.formats[0])[0] as File;
+				if(file.extension.toLowerCase()=="swf"){
+					ResourceUtil.instance.addEventListener( file.name , loadedHandler );
+					ResourceUtil.instance.loadRes( new ResVO(file.name,file.url) );
+				}
+			}
+			
+			private function loadedHandler( e:Event ):void
+			{
+				e.stopPropagation() ;
+				var resVO:ResVO = ResourceUtil.instance.getResVOByResId( file.name );
+				if(resVO){
+					var bytes:ByteArray = resVO.userData as ByteArray ;
+					bytes.position = 0 ;
+					//破解swf
+					swfDecoder = new SWFDecoder(bytes);
+					var arr:Array = swfDecoder.getTags(SymbolClassTag)[0].symbolClasses ;
+					classListCollection = new ArrayCollection( arr );
+				}
+			}
+			
+			protected function classList_changeHandler(event:IndexChangeEvent):void
+			{
+				dispose(false);
+				
+				var role:MovieClip = ResourceUtil.instance.getInstanceByClassName( file.name,classListCollection[0]) as MovieClip;
+				if(role){
+					var actions:Array = [];
+					for( var i:int = 0 ; i<role.currentLabels.length ; ++i){
+						actions.push ( (role.currentLabels[i] as FrameLabel).name );
+					}
+					bmpMC = new BitmapMovieClip( role );
+					uiContainer.addChild( bmpMC );
+					bmpMC.visible=false;
+				}
+			}
+			
+			private function updateHandler( e:Event ):void
+			{
+				if(bmpMC && bmpMC.update()){
+					bmpMC.x = bmpMC.getBound().x ;
+					bmpMC.y = bmpMC.getBound().y ;
+					bmpMC.visible=true;
+				}
+			}
+			
+			private function dispose( flag:Boolean= true ):void
+			{
+				if(bmpMC) {
+					bmpMC.dispose(true);
+					bmpMC = null ;
+				}
+				ContainerUtil.removeChildren( uiContainer );
+				if(file && flag){
+					ResourceUtil.instance.deleteRes( file.name );
+				}
+			}
+		]]>
+	</fx:Script>
+	
+	<s:BorderContainer width="80%" height="100%" backgroundColor="#E0E8E0" mouseChildren="false"
+					   nativeDragEnter="cavBuilding_nativeDragEnterHandler(event)" nativeDragDrop="cavBuilding_nativeDragDropHandler(event)">
+		<mx:UIComponent id="uiContainer" horizontalCenter="0" verticalCenter="0"/>
+	</s:BorderContainer>
+</s:Group>

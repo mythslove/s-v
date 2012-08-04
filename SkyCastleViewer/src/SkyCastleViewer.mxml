@@ -14,6 +14,9 @@
 		<s:NavigatorContent width="100%" height="100%" label="人物及特效查看">
 			<views:AnimationView />
 		</s:NavigatorContent>
+		<s:NavigatorContent width="100%" height="100%" label="建筑查看">
+			<views:BuildingView />
+		</s:NavigatorContent>
 	</mx:TabNavigator>
 	
 	
