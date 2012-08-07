@@ -1,7 +1,6 @@
 package local
 {
 	import bing.starling.iso.SIsoWorld;
-	import bing.starling.utils.Stats;
 	
 	import starling.display.*;
 	import starling.events.Event;
@@ -20,8 +19,6 @@ package local
 			removeEventListener(Event.ADDED_TO_STAGE , addedHandler );
 			var world:GameWorld = new GameWorld();
 			addChild( world );
-			
-			addChild( new Stats());
 		}
 	}
 }
