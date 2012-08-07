@@ -129,6 +129,7 @@ package local.views.icon
 				var pickupVO:PickupVO = PickupModel.instance.getPickupById( _pkId );
 				if(pickupVO)
 				{
+					if(mouseTrigger) SoundManager.instance.playSoundPickupOther();
 					//添加到玩家pickup中
 					PickupModel.instance.addPickup( pickupVO.pickupId , _value );
 					if( pickupVO.type==ItemType.PICKUP_COLLECTION )
