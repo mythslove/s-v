@@ -72,7 +72,7 @@ package bing.starling.iso
 		}
 		
 		/**        对一个iso对象进行深度排序           */
-		protected function sortIsoObject( obj:SIsoObject ):void
+		public function sortIsoObject( obj:SIsoObject ):void
 		{
 			var index:int = getChildIndex(obj);
 			//排序

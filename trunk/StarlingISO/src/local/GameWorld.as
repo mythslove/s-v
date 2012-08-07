@@ -88,7 +88,6 @@ package local
 		
 		private function onEnterFrameHandler( e:Event ):void
 		{
-			update();
 			if(x!=_endX){
 				x += ( _endX-x)*0.36 ;
 			}
