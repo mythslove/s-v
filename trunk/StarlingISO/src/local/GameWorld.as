@@ -64,6 +64,7 @@ package local
 						house.nodeX = i*2 ;
 						house.nodeZ = j*2 ;
 						var img:Image = new Image( Assets.createTextureByName("house1") );
+						img.touchable = false ;
 						img.x = -59 ;
 						img.y = -54 ;
 						house.addChild(img);
