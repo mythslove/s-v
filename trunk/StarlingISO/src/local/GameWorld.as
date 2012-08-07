@@ -22,10 +22,7 @@ package local
 		public var buildingScene:SIsoScene ;
 		protected var _endX:int ;
 		protected var _endY:int;
-		protected var _mouseDownPos:Point = new Point();
-		protected var _worldPos:Point = new Point();
 		private var _zoomM:Matrix = new Matrix();
-		private var _moveId:int ;
 		private var _touchFinger1:Point = new Point();
 		private var _middle:Point = new Point();
 		
@@ -88,6 +85,7 @@ package local
 		
 		private function onEnterFrameHandler( e:Event ):void
 		{
+			super.update();
 			if(x!=_endX){
 				x += ( _endX-x)*0.36 ;
 			}
@@ -119,16 +117,13 @@ package local
 				{
 					_touchFinger1.x = pos.x ;
 					_touchFinger1.y = pos.y ;
-					_mouseDownPos.x = pos.x ;
-					_mouseDownPos.y = pos.y ;
-					_endX = _worldPos.x = x ;
-					_endY = _worldPos.y = y ;
-					_moveId = touch.id ;
+					_endX = x ;
+					_endY = y ;
 				}
-				else if(_moveId == touch.id && touch.phase==TouchPhase.MOVED)
+				else if( touch.phase==TouchPhase.MOVED)
 				{
-					var offsetX:int =  _worldPos.x + pos.x-_mouseDownPos.x ;
-					var offsetY:int = _worldPos.y + pos.y-_mouseDownPos.y ;
+					var offsetX:int =  _endX+touch.globalX-touch.previousGlobalX ;
+					var offsetY:int =  _endY+touch.globalY-touch.previousGlobalY ;
 					
 					if(offsetX>0) offsetX=0 ;
 					else if(offsetX<-GameSetting.MAP_WIDTH*scaleX+GameSetting.SCREEN_WIDTH){
@@ -168,8 +163,8 @@ package local
 			}
 			else
 			{
-				_mouseDownPos.x = _endX = x ;
-				_mouseDownPos.y = _endY = y ;
+				_endX = x ;
+				_endY = y ;
 			}
 		}
 		
@@ -200,8 +195,8 @@ package local
 					y = -GameSetting.MAP_HEIGHT*scaleX+GameSetting.SCREEN_HEIGHT ;
 				}
 			}
-			_mouseDownPos.x  = _endX = x;
-			_mouseDownPos.y  = _endY = y ;
+			_endX = x;
+			 _endY = y ;
 		}
 		
 		
