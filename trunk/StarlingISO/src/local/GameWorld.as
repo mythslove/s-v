@@ -208,6 +208,7 @@ package local
 			var bgTexture:Texture = Assets.createTextureByName("bgFill1");
 			bgTexture.repeat = true ;
 			var img:Image = new Image(bgTexture);
+			img.blendMode = BlendMode.NONE ;
 			var factor:Number = GameSetting.MAP_WIDTH/GameSetting.MAP_HEIGHT ;
 			var tile:int = GameSetting.MAP_WIDTH/256 ;
 			var horizontally:int = tile ;
