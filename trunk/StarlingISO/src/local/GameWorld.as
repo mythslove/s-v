@@ -41,6 +41,7 @@ package local
 		
 		private function addedHandler( e:Event ):void
 		{
+			removeEventListener(Event.ADDED_TO_STAGE , addedHandler );
 			addMouseConfig();
 			addBg();
 			
