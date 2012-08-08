@@ -32,6 +32,7 @@ package local
 			var bmp:Bitmap = new Assets[name]() as Bitmap ;
 			var texture:Texture = Texture.fromBitmap( bmp );
 			_textureDic[name] = texture ;
+			bmp.bitmapData.dispose();
 			return texture;
 		}
 		
@@ -42,6 +43,7 @@ package local
 			var bmp:Bitmap = new Assets[name]() as Bitmap ;
 			var atals:TextureAtlas = new TextureAtlas( Texture.fromBitmap( bmp,false ) , XML( new AtlasXml() ) );
 			_textureDic[name] = atals ;
+			bmp.bitmapData.dispose();
 			return atals;
 		}
 	}
