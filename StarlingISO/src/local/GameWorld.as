@@ -89,10 +89,10 @@ package local
 		{
 			super.update();
 			if(x!=_endX){
-				x += ( _endX-x)*0.38 ;
+				x += ( _endX-x)*0.4 ;
 			}
 			if(y!=_endY){
-				y += (_endY-y)*0.38 ;
+				y += (_endY-y)*0.4 ;
 			}
 		}
 		
