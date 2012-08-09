@@ -8,14 +8,14 @@ package local
 		
 		
 		//地图大小
-		public static const MAP_WIDTH:int = 3600;
-		public static const MAP_HEIGHT:int = 2000;
+		public static const MAP_WIDTH:int = 5400;
+		public static const MAP_HEIGHT:int = 3000;
 		
 		/** 网格大小 */		
 		public static const GRID_SIZE:int = 50 ;
 		
-		public static const GRID_X:int = 30 ;
-		public static const GRID_Z:int = 30 ;
+		public static const GRID_X:int = 50 ;
+		public static const GRID_Z:int = 50 ;
 		
 	}
 }
