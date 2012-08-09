@@ -20,7 +20,6 @@ package local
 	public class GameWorld extends SIsoWorld
 	{
 		public var buildingScene:SIsoScene ;
-		public var birdScene:SIsoScene ;
 		protected var _endX:int ;
 		protected var _endY:int;
 		private var _zoomM:Matrix = new Matrix();
@@ -53,24 +52,46 @@ package local
 			
 			buildingScene = new SIsoScene( _size ,_gridX,_gridZ );
 			this.addScene(buildingScene);
-			birdScene = new SIsoScene( _size ,_gridX,_gridZ );
-			this.addScene(birdScene);
 			
 			//添加筑
 			var house:SIsoObject ;
 			var bird:Birds ;
-			for( var i:int = 0 ; i<13 ; ++i )
+			var houses:Array = ["house1","house2","house3","tree1","tree2","house1"]
+			for( var i:int = 0 ; i<15 ; ++i )
 			{
-				for( var j:int =0 ; j<13 ; ++j )
+				for( var j:int =0 ; j<15 ; ++j )
 				{
-					if(i%2==0){
+					if(Math.random()>0.2){
 						house = new SIsoObject(_size , 2 , 1 );
 						house.nodeX = i*2 ;
 						house.nodeZ = j*2 ;
-						var img:Image = new Image( Assets.createTextureByName("house1") );
+						var temp:int = (Math.random()*houses.length)>>0 ;
+						var img:Image = new Image( Assets.createTextureAtlas("Atlas").getTexture(houses[temp]) );
 						img.touchable = false ;
-						img.x = -59 ;
-						img.y = -54 ;
+						switch(temp)
+						{
+							case 0:
+							case 5:
+								img.x = -59 ;
+								img.y = -54 ;
+								break;
+							case 1:
+								img.x = -76 ;
+								img.y = -70 ;
+								break;
+							case 2:
+								img.x = -63 ;
+								img.y = -42 ;
+								break;
+							case 3:
+								img.x = -42 ;
+								img.y = -30 ;
+								break;
+							case 4 :
+								img.x = -20 ;
+								img.y = -25 ;
+								break;
+						}
 						house.addChild(img);
 						buildingScene.addIsoObject( house,false );
 					}
@@ -79,7 +100,7 @@ package local
 						bird = new Birds(_size , 1 , 1 );
 						bird.nodeX = i*2 ;
 						bird.nodeZ = j*2 ;
-						birdScene.addIsoObject( bird,false );
+						buildingScene.addIsoObject( bird,false );
 					}
 				}
 			}
