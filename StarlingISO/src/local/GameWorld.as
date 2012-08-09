@@ -57,9 +57,9 @@ package local
 			var house:SIsoObject ;
 			var bird:Birds ;
 			var houses:Array = ["house1","house2","house3","tree1","tree2","house1"]
-			for( var i:int = 0 ; i<15 ; ++i )
+			for( var i:int = 0 ; i<25 ; ++i )
 			{
-				for( var j:int =0 ; j<15 ; ++j )
+				for( var j:int =0 ; j<25 ; ++j )
 				{
 					if(Math.random()>0.2){
 						house = new SIsoObject(_size , 2 , 1 );
