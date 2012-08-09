@@ -20,11 +20,11 @@ package local
 		private function addedHandler ( e:Event ):void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE , addedHandler );
-			_mc = new MovieClip( Assets.createTexxtureAtlas("Atlas").getTextures("flight_") );
+			_mc = new MovieClip( Assets.createTextureAtlas("Atlas").getTextures("GhostHouse") );
 			_mc.touchable = false ;
 			addChild(_mc);
-			_mc.x = -120 ;
-			_mc.y = -140 ;
+			_mc.x = -90 ;
+			_mc.y = -67 ;
 			Starling.juggler.add(_mc);
 		}
 	}

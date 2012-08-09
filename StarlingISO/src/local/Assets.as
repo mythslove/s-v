@@ -8,8 +8,6 @@ package local
 
 	public class Assets
 	{
-		[Embed(source="../assets/house1.png")]
-		private static const house1:Class ;
 		[Embed(source="../assets/bgFill1.jpg")]
 		private static const bgFill1:Class ;
 		[Embed(source="../assets/bgTree.png")]
@@ -36,7 +34,7 @@ package local
 			return texture;
 		}
 		
-		public static function createTexxtureAtlas( name:String ):TextureAtlas
+		public static function createTextureAtlas( name:String ):TextureAtlas
 		{
 			if( _textureDic[name] ) return _textureDic[name] as TextureAtlas ;
 			
