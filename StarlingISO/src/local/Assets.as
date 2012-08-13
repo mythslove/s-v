@@ -28,7 +28,7 @@ package local
 			if( _textureDic[name] ) return _textureDic[name] as Texture ;
 			
 			var bmp:Bitmap = new Assets[name]() as Bitmap ;
-			var texture:Texture = Texture.fromBitmap( bmp );
+			var texture:Texture = Texture.fromBitmap( bmp , false );
 			_textureDic[name] = texture ;
 			bmp.bitmapData.dispose();
 			return texture;
