@@ -1,0 +1,1 @@
+bin\adt -package -target ipa-test-interpreter -storetype pkcs12 -keystore moki.p12 -storepass moki -provisioning-profile moki.mobileprovision "Fairy Village.ipa" FairyVillage-app.xml FairyVillage.swf res
