@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Panel xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="210" height="100" fontSize="13" title="层管理(显示或隐藏)">
+	<s:layout>
+		<s:BasicLayout/>
+	</s:layout>
+
+	<fx:Script>
+		<![CDATA[
+			import bing.map.data.Comm;
+
+			/**
+			 * 点击显示和隐藏地表按钮
+			 **/
+			protected function onGround(event:MouseEvent):void
+			{
+				Comm.mainApp.bgContainer.visible = !Comm.mainApp.bgContainer.visible;
+			}
+			
+			/**
+			 * 点击显示和隐藏建筑的按钮
+			 **/
+			protected function onBuild(event:MouseEvent):void
+			{
+				Comm.mainApp.buildContainer.visible=!Comm.mainApp.buildContainer.visible;
+			}
+			
+			/** 显示和隐藏网格  */
+			protected function onGrid(event:MouseEvent):void
+			{
+				Comm.mainApp.gridContainer.visible = !Comm.mainApp.gridContainer.visible;
+			}
+
+			/** 显示和隐藏遮罩  */
+			protected function onMask(event:MouseEvent):void
+			{
+				Comm.mainApp.maskContainer.visible = !Comm.mainApp.maskContainer.visible;
+			}
+
+			/** 显示和隐藏碰撞块  */
+			protected function onImpact(event:MouseEvent):void
+			{
+				Comm.mainApp.impactContainer.visible = !Comm.mainApp.impactContainer.visible;
+			}
+
+			/** 显示和隐藏NPC  */
+			protected function onNpc(event:MouseEvent):void
+			{
+				Comm.mainApp.npcContainer.visible=!Comm.mainApp.npcContainer.visible;
+			}
+
+		]]>
+	</fx:Script>
+
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<s:Button x="5" y="0" label="网格" width="60" height="30" click="onGrid(event)" toolTip="隐藏和显示网格"/>
+	<s:Button x="5" y="35" label="建筑" width="60" height="30" toolTip="隐藏和显示建筑" click="onBuild(event)"/>
+	<s:Button x="73" y="35" label="阻挡" width="60" height="30"  toolTip="隐藏和显示阻挡" click="onImpact(event)"/>
+	<s:Button x="142" y="1" label="遮罩" width="60" height="30" toolTip="隐藏和显示遮罩" click="onMask(event)"/>
+	<s:Button x="74" y="0" label="地面" width="60" height="30" click="onGround(event)" toolTip="隐藏和显示地面背景"/>
+	<s:Button x="142" y="35" label="NPC" width="60" height="30" toolTip="隐藏和显示NPC" click="onNpc(event)"/>
+</s:Panel>

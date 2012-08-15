@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" width="136" height="500" title="NPC" fontSize="13" close="titlewindow1_closeHandler(event)" backgroundColor="#002E33" backgroundAlpha="0.8" width.State2="196" title.State2="NPC设置">
+	<s:layout>
+		<s:BasicLayout/>
+	</s:layout>
+	<s:states>
+		<s:State name="State1"/>
+		<s:State name="State2"/>
+	</s:states>
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import bing.map.AddType;
+			import bing.map.data.Comm;
+			import bing.map.data.MapData;
+			import bing.map.data.ResourceData;
+			import bing.map.model.Npc;
+			
+			import mx.controls.Alert;
+			import mx.core.UIComponent;
+			import mx.events.CloseEvent;
+			
+			
+			private var _urlLoader:URLLoader = null;
+			private var _loader:Loader = null; 
+			private var _npcXML:XML = null;
+			private var _selectedNpc:Npc = null ;
+			
+			
+			/** 当前选择的npc  */
+			public function get selectedNpc():Npc
+			{
+				return _selectedNpc;
+			}
+			/**
+			 * 设置npc的选择
+			 */
+			public function set selectedNpc(value:Npc):void
+			{
+				_selectedNpc = value;
+				this.npcId_txt.text = selectedNpc.npcId+"" ;
+				this.type_txt.text = selectedNpc.npcPanel  ;
+				this.name_txt.text = selectedNpc.npcName ;
+			}
+			
+			
+
+			/** 加载NPC的XML  */
+			private function loadXML():void{
+				_urlLoader = new URLLoader(new URLRequest("config/npc.xml"));
+				_urlLoader.addEventListener(Event.COMPLETE , loadedXML);
+			}
+			/** XML文件加载完成   */
+			private function loadedXML(e:Event):void{
+				if(e.target.data!=null){
+					_npcXML=XML( e.target.data );
+					ResourceData.npcConfig = _npcXML ;
+					if(_npcXML.img.length()>0){
+						loadImg( 0 );//递归加载图片
+					}
+				}
+			}
+			
+			/** 递归加载图片  */
+			private function loadImg(index:int ):void{
+				var img:* = _npcXML.img[index];
+				_loader = new Loader();
+				_loader.load( new URLRequest ( img.@src )) ;
+				_loader.contentLoaderInfo.addEventListener(Event.COMPLETE , loadedPic );
+				/** 加载完成建筑图片  */
+				function loadedPic(e:Event) :void{
+					var ui:UIComponent = new UIComponent();
+					ui.id = img.@id ;
+					//只取其中一张小人图
+					var temp:BitmapData = (_loader.content as Bitmap).bitmapData;
+					var bmd:BitmapData = new BitmapData( temp.width / parseInt (img.@frame) , temp.height);
+					bmd.copyPixels(temp,bmd.rect,new Point);
+					var bmp:Bitmap = new Bitmap(bmd);
+					//===================
+					ui.addChild( bmp );
+					ui.height=100 ;
+					ui.width=90;
+					ui.buttonMode = true ;
+					ui.addEventListener(MouseEvent.CLICK,clickPic);//添加点击侦听事件
+					npcList.addElement(ui) ; 
+					if(index+1<_npcXML.img.length()){
+						index++;
+						loadImg(index);
+					}
+					
+					MapData.npcDic[ui.id]=bmd ;
+				}
+			}
+			
+			/** 点击NPC小图片  */
+			private function clickPic(e:MouseEvent):void {
+				//设置添加类型
+				Comm.currentAddType = AddType.NPC;
+				//清空dragUI
+				Comm.mainApp.clearDrag();
+				var pic:Bitmap = new Bitmap( (e.target.getChildAt(0) as Bitmap).bitmapData );
+				pic.name = e.target.id ;
+				Comm.mainApp.dragUI.addChild(pic);
+			}
+			/** 隐藏此面板  */
+			protected function titlewindow1_closeHandler(event:CloseEvent):void
+			{
+				this.visible = false;
+			}
+
+			/** 设置npc的一些属性  */
+			protected function npcSet_btn_clickHandler(event:MouseEvent):void
+			{
+				try{
+					selectedNpc.npcId = parseInt (this.npcId_txt.text) ;
+				}catch(e:Error){
+					Alert.show("应该为数字！","提示");
+				}
+				selectedNpc.npcPanel = this.type_txt.text ;
+				selectedNpc.npcName = this.name_txt.text ;
+				this.currentState="State1" ;
+			}
+
+			
+		]]>
+	</fx:Script>
+	
+	<s:controlBarContent>
+	</s:controlBarContent>
+	<mx:Tile x="10" y="10" width="114" height="431" id="npcList" creationComplete="loadXML()" horizontalGap="1" includeIn="State1"/>
+	<s:Label x="10" y="53" text="NPCID:" includeIn="State2"/>
+	<s:Label x="10" y="98" text="名称:" includeIn="State2"/>
+	<s:Label x="10" y="145" text="类型:" includeIn="State2"/>
+	<s:Button x="41" y="184" label="设置/返回" width="111" height="30" toolTip="设置此npc的信息" includeIn="State2" id="npcSet_btn" click="npcSet_btn_clickHandler(event)"/>
+	<s:TextInput x="55" y="48" width="129" toolTip="此地图上NPC的ID" includeIn="State2" id="npcId_txt"/>
+	<mx:TextInput x="55" y="94" width="129" toolTip="NPC的名称" includeIn="State2" id="name_txt"/>
+	<mx:TextInput x="55" y="140" width="129" toolTip="用于在点击后打开什么面板" includeIn="State2" id="type_txt"/>
+	<s:Label includeIn="State2" x="14" y="10" text="标签" color="#FD5AD9" id="npcId"/>
+</s:TitleWindow>

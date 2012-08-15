@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		  xmlns:s="library://ns.adobe.com/flex/spark" 
+		  xmlns:mx="library://ns.adobe.com/flex/mx" layout="absolute" 
+		  width="360" height="310" title="新建" fontSize="13" fontFamily="中易黑体" fontWeight="normal"  backgroundColor="#002E33">
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import bing.map.data.Comm;
+			import bing.map.data.MapData;
+			import bing.map.utils.ImageUtils;
+			import bing.map.utils.NumberUtils;
+			
+			import mx.managers.PopUpManager;
+			import mx.utils.StringUtil;
+			
+			private var _bgFile:File = null ; //背景文件 
+			private var _loader:Loader = null; //背景图片
+			
+			/** 点击确定  */
+			protected function ok(event:MouseEvent):void
+			{
+				//获得填写的内容
+				var cellWidth:String =StringUtil.trim( this.tileWidth_txt.text );
+				var cellHeight:String = StringUtil.trim(this.tileHeight_txt .text);
+				var mapName:String = StringUtil.trim( mapName_txt.text);
+				if(mapName==""){
+					this.error_txt.text = "请填写地图名称";
+					return;
+				}
+				//判断是否为数字
+				if(!NumberUtils.checkNumber(cellWidth)){
+					this.error_txt.text = "请填写正确菱形单元格的宽度";
+					return;
+				}
+				if(!NumberUtils.checkNumber(cellHeight)){
+					this.error_txt.text = "请填写正确菱形单元格的高度";
+					return;
+				}
+				if(StringUtil.trim(this.bg_txt.text)==""){
+					this.error_txt.text = "请选择背景图片";
+					return;
+				}
+				MapData.mapName = mapName;
+				MapData.tileWidth =parseInt(cellWidth);
+				MapData.tileHeight = parseInt(cellHeight );
+				//横竖方向上的菱形数量
+				MapData.xNum =Math.floor( MapData.bg.width / MapData.tileWidth );
+				MapData.yNum =Math.floor( MapData.bg.height / MapData.tileHeight );
+				//地图的长和宽
+				MapData.mapWidth = MapData.xNum*MapData.tileWidth;
+				MapData.mapHeight = MapData.yNum*MapData.tileHeight;
+				//抛出完成事件
+				this.dispatchEvent(new Event(Event.COMPLETE));
+				PopUpManager.removePopUp(this);
+				
+				initData();
+			}
+			/** 浏览背景图片  */
+			protected function openPic(event:MouseEvent):void
+			{
+				this.ok_btn.enabled = false;
+				_bgFile = new File();
+				_bgFile.browseForOpen("选择背景图片",ImageUtils.getTypes());
+				_bgFile.addEventListener(Event.SELECT,selectedBg);
+			}
+			/** 选择了背景图片  */
+			private function selectedBg(e:Event):void{
+				this.bg_txt.text = _bgFile.name;
+				MapData.bgPath = _bgFile.nativePath ;
+				_loader = new Loader();
+				_loader.load(new URLRequest(_bgFile.nativePath));//加载背景图片
+				_loader.contentLoaderInfo.addEventListener(Event.COMPLETE, loadedBgPic);
+			}
+			/** 加载完成背景图片  */
+			private function loadedBgPic(e:Event):void{
+				this.ok_btn.enabled = true ;
+				MapData.bg = _loader.content as Bitmap;
+			}
+			/** 点击取消按钮  */
+			protected function cancel(event:MouseEvent):void
+			{
+				//抛出完成事件
+				this.dispatchEvent(new Event(Event.COMPLETE));
+				PopUpManager.removePopUp(this);
+			}
+			  /** 初始化数据,碰撞块和遮罩块  */
+			private function initData():void{
+				MapData.initMapData() ;
+				Comm.mainApp.impactLayer.initImpactLayer();
+				Comm.mainApp.maskLayer.initMaskLayer();
+			}
+		]]>
+	</fx:Script>
+	<s:Label x="40" y="26" text="地图名：" height="14"/>
+	<s:Label x="40" y="71" text="菱形宽：" height="14"/>
+	<s:Label x="40" y="113" text="菱形高：" height="14"/>
+	<s:Label x="27" y="155" text="背景图片：" height="14"/>
+	<s:Button x="258" y="152" label="浏览..." width="76" id="open_btn" height="22" click="openPic(event)"/>
+	<s:TextInput x="101" y="151" width="148" enabled="false" id="bg_txt"/>
+	<s:TextInput x="101" y="109" id="tileHeight_txt" text="30"/>
+	<s:TextInput x="101" y="66" id="tileWidth_txt" text="60"/>
+	<mx:TextInput x="101" y="22" width="148" id="mapName_txt" text="未命名"/>
+	<s:Label x="29" y="184" width="293" color="#890000" id="error_txt" height="22" fontSize="13"/>
+	<s:Button x="78" y="214" label="确定" width="78" height="31" id="ok_btn" click="ok(event)"/>
+	<s:Button x="195" y="214" label="取消" width="78" height="31" id="cancel_btn" click="cancel(event)"/>
+</mx:Panel>

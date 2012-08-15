@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Panel xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="148" height="100" title="鼠标信息" 
+		 fontSize="13" fontFamily="中易宋体">
+	<s:layout>
+		<s:BasicLayout/>
+	</s:layout>
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.events.CloseEvent;
+			import mx.managers.PopUpManager;
+			
+			[Bindable]
+			public var _px:String="0";
+			[Bindable]
+			public var _py:String="0";
+			[Bindable]
+			public var _ix:String="0";
+			[Bindable]
+			public var _iy:String="0";
+			
+			
+			//填充内容信息
+			public function createContent(obj:Object):void{
+				_px = obj.px + "";
+				_py = obj.py + "";
+				_ix = obj.ix + "";
+				_iy = obj.iy + "";
+			}
+		]]>
+	</fx:Script>
+	
+	<s:Label x="9" y="15" text="像素坐标：" color="#CCCCCC"/>
+	<s:Label x="9" y="41" text="地图坐标：" color="#CCCCCC"/>
+	
+	<s:Label x="77.5" y="15" color="#CCCCCC" text="{_px} , {_py}"/>
+	<s:Label x="77.5" y="42" color="#CCCCCC" text="{_ix} , {_iy}"/>
+	
+</s:Panel>

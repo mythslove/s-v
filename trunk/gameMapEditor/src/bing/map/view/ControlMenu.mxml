@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Panel xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="260" height="100" fontSize="13" title="操作" >
+	<s:layout>
+		<s:BasicLayout/>
+	</s:layout>
+
+	<fx:Script>
+		<![CDATA[
+			import bing.map.AddType;
+			import bing.map.data.Comm;
+			import bing.map.data.MapData;
+			import bing.map.model.Circle;
+			import bing.map.model.Rhombus;
+			
+			private var _loader:Loader = null;
+			
+			/** 添加碰撞块  */
+			protected function addImpact(event:MouseEvent):void
+			{
+				//将当前类型设置为添加碰撞
+				Comm.currentAddType = AddType.IMPACT ;
+				//清空dragUI
+				Comm.mainApp.clearDrag();
+				//创建菱形
+				var rhombus:Rhombus = new Rhombus(0x000000,0x000000);
+				Comm.mainApp.dragUI.addChild(rhombus);
+			}
+			/** 添加遮罩块  */
+			protected function addMask(event:MouseEvent):void
+			{
+				//将当前类型设置为添加碰撞
+				Comm.currentAddType = AddType.MASK ;
+				//清空dragUI
+				Comm.mainApp.clearDrag();
+				//创建菱形
+				var rhombus:Rhombus = new Rhombus(0xff0000,0xff0000);
+				rhombus.alpha=.7;
+				Comm.mainApp.dragUI.addChild(rhombus);
+			}
+
+			/** 显示和隐藏NPC面板  */
+			protected function onNpcPanel(event:MouseEvent):void
+			{
+				Comm.mainApp.npcPanel.visible=!Comm.mainApp.npcPanel.visible;
+			}
+
+			/** 显示和隐藏建筑面板  */
+			protected function onBuildPanel(event:MouseEvent):void
+			{
+				Comm.mainApp.buildPanel.visible=!Comm.mainApp.buildPanel.visible;
+			}
+
+			/** NPc的一些基本设置  */
+			protected function npcSet_clickHandler(event:MouseEvent):void
+			{
+				Comm.currentAddType = AddType.SETNPC ;
+				//清空dragUI
+				Comm.mainApp.clearDrag();
+			}
+
+			/** 显示和隐藏传输区面板 */
+			protected function transportBtn_clickHandler(event:MouseEvent):void
+			{
+				Comm.mainApp.transPanel.visible=!Comm.mainApp.transPanel.visible;
+			}
+
+		]]>
+	</fx:Script>
+
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<s:Button x="5" y="1" label="碰撞块" width="80" height="30" toolTip="添加碰撞块" click="addImpact(event)"/>
+	<s:Button x="89" y="1" label="遮罩块" width="81" height="30" toolTip="添加遮罩块" click="addMask(event)"/>
+	<s:Button x="5" y="35" label="建筑面板" width="80" height="30" toolTip="显示或隐藏建筑面板" click="onBuildPanel(event)"/>
+	<s:Button x="89" y="35" label="NPC面板" width="80" height="30" toolTip="显示或隐藏NPC面板" click="onNpcPanel(event)"/>
+	<s:Button x="174" y="35" label="NPC设置" width="80" height="30" toolTip="NPC属性的简单设置" id="npcSet" click="npcSet_clickHandler(event)"/>
+	<s:Button x="174" y="1" label="传送面板" width="80" height="30" toolTip="NPC属性的简单设置" id="transportBtn" click="transportBtn_clickHandler(event)"/>
+</s:Panel>

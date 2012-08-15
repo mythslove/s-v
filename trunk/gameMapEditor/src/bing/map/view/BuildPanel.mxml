@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" width="200" height="500" title="建筑面板" close="close(event)" backgroundColor="#002E33" backgroundAlpha="0.8">
+	<s:layout>
+		<s:BasicLayout/>
+	</s:layout>
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import bing.map.AddType;
+			import bing.map.data.Comm;
+			import bing.map.data.ResourceData;
+			
+			import mx.collections.ArrayCollection;
+			import mx.core.UIComponent;
+			import mx.events.CloseEvent;
+			
+			import spark.events.IndexChangeEvent;
+			
+			private var _urlLoader:URLLoader = null;
+			private var _buildXML:XML = null ;//建筑的XML
+			private var _loader : Loader = null ;//图片加载器
+			[Bindable]
+			private var _typeCollection:ArrayCollection = null ; //类型集合
+			
+			/** 加载XML  */
+			private function loadXML():void{
+				_urlLoader = new URLLoader(new URLRequest("config/build.xml"));
+				_urlLoader.addEventListener(Event.COMPLETE , loadedXML);
+			}
+			
+			/** 成功加载完建筑的XML  */
+			private function loadedXML(e:Event):void{
+				if(e.target.data!=null){
+					_typeCollection = new ArrayCollection();
+					_buildXML  = XML(e.target.data);
+					ResourceData.buildConfig = _buildXML ;
+					for( var i:int = 0 ; i < _buildXML.type.length() ; i++ ){
+						var types:* = _buildXML.type[i] ;
+						_typeCollection.addItem( { "label":types.@name,"id": types.@id } );
+					}
+				}
+			}
+			
+			/** 选择类型改变时，填充详细信息  */
+			protected function selectedType(event:IndexChangeEvent):void
+			{
+				//获得选择的类型ID
+				var typeId:String = typeList_ddl.selectedItem.id ; 
+				//通过此ID，获得此类型的所有建筑图片
+				var xml:* = _buildXML.type.(@id==typeId) ;
+				if( xml==null || xml.img.length() ==0 ){
+					return ;
+				}
+				loadBuildPic( 0 , xml ) ;//递归加载图片
+			}
+			
+			/** 递归加载图片  */
+			private function loadBuildPic( index:int , xml:* ):void{
+				_loader = new Loader();
+				_loader.load( new URLRequest ( xml.img[index].@src )) ;
+				_loader.contentLoaderInfo.addEventListener(Event.COMPLETE , loadedPic );
+				/** 加载完成建筑图片  */
+				function loadedPic(e:Event) :void{
+					var ui:UIComponent = new UIComponent();
+					ui.id = xml.img[index].@id ;
+					var bmp:Bitmap = _loader.content as Bitmap;
+					bmp.width = bmp.height = 70 ;
+					ui.width=ui.height=70;
+					ui.addChild( bmp );
+					ui.buttonMode = true ;
+					ui.addEventListener(MouseEvent.CLICK,clickPic);//添加点击侦听事件
+					buildList.addElement(ui) ; 
+					if(index+1<xml.img.length()){
+						index++;
+						loadBuildPic(index,xml);
+					}
+				}
+			}
+			/** 点击建筑小图片  */
+			private function clickPic(e:MouseEvent):void {
+				//设置添加类型
+				Comm.currentAddType = AddType.BUILDER;
+				//清空dragUI
+				Comm.mainApp.clearDrag();
+				var pic:Bitmap = new Bitmap( (e.target.getChildAt(0) as Bitmap).bitmapData );
+				pic.name = e.target.id ;
+				Comm.mainApp.dragUI.addChild(pic);
+			}
+			 
+			/** 显示和隐藏此面板  */
+			protected function close(event:CloseEvent):void
+			{
+				this.visible=false;
+			}
+
+		]]>
+	</fx:Script>
+	
+	
+	<s:controlBarContent>
+	</s:controlBarContent>
+	<s:DropDownList x="57" y="10" width="131" id="typeList_ddl" creationComplete="loadXML()" dataProvider="{_typeCollection}" change="selectedType(event)"/>
+	<s:Label x="10" y="13" text="类型："/>
+	<mx:Tile x="10" y="44" width="178" height="321" horizontalGap="2"  id="buildList" />
+</s:TitleWindow>

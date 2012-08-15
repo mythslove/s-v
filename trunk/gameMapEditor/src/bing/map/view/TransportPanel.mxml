@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" width="250" height="492"
+			   close="close(event)" backgroundColor="#002E33" backgroundAlpha="0.8" title="传输区">
+	<s:layout>
+		<s:BasicLayout/>
+	</s:layout>
+
+	<fx:Script>
+		<![CDATA[
+			import bing.map.AddType;
+			import bing.map.data.Comm;
+			import bing.map.model.Circle;
+			import bing.map.model.Transport;
+			
+			import mx.events.CloseEvent;
+			
+			//当前选中的传输对象
+			private var _trans:Transport = null ;
+			
+			/** 点击确定配置  */
+			protected function ok_clickHandler(event:MouseEvent):void
+			{
+				if( _trans!= null ){
+					if(this.nextMapId.text!=""){
+						_trans.nextMapId = parseInt(this.nextMapId.text) ;
+						_trans.nextMapLoc = this.nextMapPoint.text ;
+					}
+				}
+			}
+
+			/** 设置和删除传输区  */
+			protected function transportBtn_clickHandler(event:MouseEvent):void
+			{
+				Comm.currentAddType = AddType.TRANSPORT ;
+				//清空dragUI
+				Comm.mainApp.clearDrag();
+				//创建圆圈
+				var cirlce:Circle = new Circle(0x00FFFF, 0x00FF00);
+				cirlce.alpha=.5;
+				Comm.mainApp.dragUI.addChild(cirlce);
+			}
+			
+			/** 显示此点的配置  */
+			public function showSet(trans:Transport ):void {
+				_trans = trans ;
+				this.pos.text = trans.tempLoc ;
+				this.show.selected = trans.isShow ;
+				this.noshow.selected = !trans.isShow ;
+				//显示方向
+				this.setRedirect(trans.direction).selected = true ;
+				this.nextMapId.text = trans.nextMapId+"" ;
+				this.nextMapPoint.text = trans.nextMapLoc;
+			}
+			
+			/** 显示和隐藏此面板  */
+			protected function close(event:CloseEvent):void
+			{
+				this.visible=false;
+			}
+
+			/** 点击不显示传输点的radio  */
+			protected function noshow_clickHandler(event:MouseEvent):void
+			{
+				if (Comm.currentAddType == AddType.TRANSPORT && _trans!=null ){
+					_trans.isShow = false ;
+				}
+			}
+
+			/** 点击显示传输点的radio  */
+			protected function show_clickHandler(event:MouseEvent):void
+			{
+				if (Comm.currentAddType == AddType.TRANSPORT && _trans!=null  ){
+					_trans.isShow = true ;
+				}
+			}
+
+			/** 点击方向  */
+			protected function point_clickHandler(event:MouseEvent):void
+			{
+				switch (event.target.id){
+					case "rdo_n":
+						_trans.direction = 1 ;//北
+						break ;
+					case "rdo_s":
+						_trans.direction = 4 ;//南
+						break ;
+					case "rdo_w":
+						_trans.direction = 3 ;//西
+						break ;
+					case "rdo_e":
+						_trans.direction = 2 ;//东
+						break ;
+					case "rdo_ne":
+						_trans.direction = 5; //东北
+						break ;
+					case "rdo_sw":
+						_trans.direction = 8; //西南
+						break ;
+					case "rdo_nw":
+						_trans.direction = 6; //西北
+						break ;
+					case "rdo_se":
+						_trans.direction = 7;  // 东南
+						break ;
+				}
+			}
+			
+			/** 设置方向  */
+			private function setRedirect(direction:int):RadioButton {
+				var rdo:RadioButton = null ;
+				switch (direction){
+					case 1:
+						rdo = this.rdo_n  ;//北
+						break ;
+					case 4:
+						rdo = this.rdo_s  ;//南
+						break ;
+					case 3:
+						rdo = this.rdo_w ; //西
+						break ;
+					case 2:
+						rdo = this.rdo_e ; //东
+						break ;
+					case 5:
+						rdo = this.rdo_ne ;  //东北
+						break ;
+					case 8:
+						rdo = this.rdo_sw ;  //西南
+						break ;
+					case 6:
+						rdo = this.rdo_nw ;  //西北
+						break ;
+					case 7:
+						rdo = this.rdo_se ;  // 东南
+						break ;
+				}
+				return rdo;
+			}
+
+		]]>
+	</fx:Script>
+
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<s:Button x="59" y="10" label="添加/删除传输区" width="143" height="38" id="transportBtn" click="transportBtn_clickHandler(event)"/>
+	<s:Label x="20" y="74" text="位置：&#xd;" chromeColor="#FFFFFF" backgroundColor="#FFFFFF" color="#FE7F7F" backgroundAlpha="0.0"/>
+	<s:RadioButton x="67" y="101" label="不显示" selected="true" id="noshow"  groupName="rdo" click="noshow_clickHandler(event)"/>
+	<s:RadioButton x="133" y="101" label="显示"  id="show" groupName="rdo" click="show_clickHandler(event)"/>
+	<s:TextInput x="62" y="69" width="124" id="pos" enabled="false"/>
+	<mx:HRule x="14.65" y="311.4" width="223"/>
+	<s:RadioButton x="121.8" y="162.8" id="rdo_n" click="point_clickHandler(event)" groupName="direction"/>
+	<s:RadioButton x="122.2" y="251" id="rdo_s" click="point_clickHandler(event)" groupName="direction"/>
+	<s:RadioButton x="160.35" y="237.6" selected="true" id="rdo_se" click="point_clickHandler(event)" groupName="direction"/>
+	<s:RadioButton x="164.15" y="172.2" id="rdo_ne" click="point_clickHandler(event)" groupName="direction"/>
+	<s:RadioButton x="81.15" y="172.2" id="rdo_nw" click="point_clickHandler(event)" groupName="direction"/>
+	<s:RadioButton x="81.35" y="239.2" id="rdo_sw" click="point_clickHandler(event)" groupName="direction"/>
+	<s:RadioButton x="63" y="206.4" id="rdo_w" click="point_clickHandler(event)" groupName="direction"/>
+	<s:RadioButton x="180.4" y="206.8" id="rdo_e" click="point_clickHandler(event)" groupName="direction"/>
+	<s:Label x="118" y="141" text="北N"/>
+	<s:Label x="118" y="141" text="北N"/>
+	<s:Label x="200.65" y="208.65" text="东E"/>
+	<s:Label x="31.650002" y="208.65" text="西W"/>
+	<s:Label x="118" y="276" text="南S"/>
+	<s:Label x="178" y="256" text="东南SE"/>
+	<s:Label x="35" y="159" text="西北NW"/>
+	<s:Label x="34" y="256" text="西南SW"/>
+	<s:Label x="179" y="157" text="东北NE"/>
+	<s:Label x="33" y="336" text="出生地图ID : " chromeColor="#FFFFFF" backgroundColor="#FFFFFF" color="#FE7F7F" backgroundAlpha="0.0"/>
+	<s:Label x="22" y="365" text="出生坐标(x-y) : " chromeColor="#FFFFFF" backgroundColor="#FFFFFF" color="#FE7F7F" backgroundAlpha="0.0"/>
+	<s:Button x="89" y="408" label="确定" height="31" width="78" id="ok" click="ok_clickHandler(event)"/>
+	<s:TextInput x="114" y="331" width="95" id="nextMapId"/>
+	<mx:TextInput x="114" y="361" width="95" id="nextMapPoint"/>
+	<s:Label x="23" y="128" text="朝向：" chromeColor="#FFFFFF" backgroundColor="#FFFFFF" color="#FE7F7F" backgroundAlpha="0.0"/>
+</s:TitleWindow>
