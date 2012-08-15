@@ -12,7 +12,8 @@ package  bing.iso.path
 		public var h:Number;
 		public var walkable:Boolean = false;
 		public var parent:Node;
-		public var costMultiplier:Number = 1.0;
+		public var links:Array;
+		public var version:int = 1; 
 		
 		public function Node(x:int, y:int)
 		{

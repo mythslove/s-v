@@ -4,180 +4,128 @@ package bing.iso.path
 
 	public class AStar
 	{
-		private var _open:Array;
-		private var _closed:Array;
+		private var _open:BinaryHeap;
 		private var _grid:Grid;
 		private var _endNode:Node;
 		private var _startNode:Node;
 		private var _path:Array;
-//		private var _heuristic:Function = manhattan;
-//		private var _heuristic:Function = euclidian;
-		private var _heuristic:Function = diagonal;
+		public var heuristic:Function;
 		private var _straightCost:Number = 1.0;
 		private var _diagCost:Number = Math.SQRT2;
-		private var _canDiagonal:Boolean ;
+		private var nowversion:int = 1;
 		
-		/**
-		 * @param grid
-		 * @param canDiagonal 是否可以进行对角线寻路 
-		 * @return 
-		 */		
-		public function findPath(grid:Grid , canDiagonal:Boolean=true ):Boolean
-		{
-			_grid = grid;
-			_canDiagonal = canDiagonal ;
-			_open = new Array();
-			_closed = new Array();
+		public function AStar(grid:Grid){
+			this._grid = grid;
+			heuristic = euclidian2;
 			
-			_startNode = _grid.startNode;
+		}
+		
+		private function justMin(x:Object, y:Object):Boolean {
+			return x.f < y.f;
+		}
+		
+		public function findPath():Boolean {
 			_endNode = _grid.endNode;
-			
+			nowversion++;
+			_startNode = _grid.startNode;
+			_open = new BinaryHeap(justMin);
 			_startNode.g = 0;
-			_startNode.h = _heuristic(_startNode);
-			_startNode.f = _startNode.g + _startNode.h;
-			
 			return search();
 		}
 		
-		private function search():Boolean
-		{
+		public function search():Boolean {
 			var node:Node = _startNode;
-			var time:int = getTimer();
-			while(node != _endNode)
-			{
-				var startX:int = Math.max(0, node.x - 1);
-				var endX:int = Math.min(_grid.numCols - 1, node.x + 1);
-				var startY:int = Math.max(0, node.y - 1);
-				var endY:int = Math.min(_grid.numRows - 1, node.y + 1);
-				
-				for(var i:int = startX; i <= endX; ++i)
-				{
-					for(var j:int = startY; j <= endY; ++j)
-					{
-						if(getTimer()-time>120) return false ;
-						
-						var test:Node = _grid.getNode(i, j);
-						
-						if(!_canDiagonal && test.x!=node.x && test.y != node.y ) continue ;
-						
-						if(test == node || 
-						   !test.walkable ||
-						   !_grid.getNode(node.x, test.y).walkable ||
-						   !_grid.getNode(test.x, node.y).walkable)
-						{
-							continue;
-						}
-						
-						var cost:Number = _straightCost;
-						if(!((node.x == test.x) || (node.y == test.y)))
-						{
-							cost = _diagCost;
-						}
-						var g:Number = node.g + cost * test.costMultiplier;
-						var h:Number = _heuristic(test);
-						var f:Number = g + h;
-						if(isOpen(test) || isClosed(test))
-						{
-							if(test.f > f)
-							{
-								test.f = f;
-								test.g = g;
-								test.h = h;
-								test.parent = node;
-							}
-						}
-						else
-						{
+			node.version = nowversion;
+			while (node != _endNode){
+				var len:int = node.links.length;
+				for (var i:int = 0; i < len; i++){
+					var test:Node = node.links[i].node;
+					var cost:Number = node.links[i].cost;
+					var g:Number = node.g + cost;
+					var h:Number = heuristic(test);
+					var f:Number = g + h;
+					if (test.version == nowversion){
+						if (test.f > f){
 							test.f = f;
 							test.g = g;
 							test.h = h;
 							test.parent = node;
-							_open.push(test);
 						}
+					} else {
+						test.f = f;
+						test.g = g;
+						test.h = h;
+						test.parent = node;
+						_open.ins(test);
+						test.version = nowversion;
 					}
+					
 				}
-				_closed.push(node);
-				if(_open.length == 0)
-				{
-					return false ;
+				if (_open.a.length == 1){
+					return false;
 				}
-				_open.sortOn("f", Array.NUMERIC);
-				node = _open.shift() as Node;
+				node = _open.pop() as Node;
 			}
 			buildPath();
 			return true;
 		}
 		
-		private function buildPath():void
-		{
-			_path = new Array();
+		private function buildPath():void {
+			_path = [];
 			var node:Node = _endNode;
 			_path.push(node);
-			while(node != _startNode)
-			{
+			while (node != _startNode){
 				node = node.parent;
 				_path.unshift(node);
 			}
 		}
 		
-		public function get path():Array
-		{
+		public function get path():Array {
 			return _path;
 		}
 		
-		private function isOpen(node:Node):Boolean
-		{
-			for(var i:int = 0; i < _open.length; i++)
-			{
-				if(_open[i] == node)
-				{
-					return true;
-				}
-			}
-			return false;
+		public function manhattan(node:Node):Number {
+			return Math.abs(node.x - _endNode.x) + Math.abs(node.y - _endNode.y);
 		}
 		
-		private function isClosed(node:Node):Boolean
-		{
-			for(var i:int = 0; i < _closed.length; i++)
-			{
-				if(_closed[i] == node)
-				{
-					return true;
-				}
-			}
-			return false;
+		public function manhattan2(node:Node):Number {
+			var dx:Number = Math.abs(node.x - _endNode.x);
+			var dy:Number = Math.abs(node.y - _endNode.y);
+			return dx + dy + Math.abs(dx - dy) / 1000;
 		}
 		
-		private function manhattan(node:Node):Number
-		{
-			return Math.abs(node.x - _endNode.x) * _straightCost + Math.abs(node.y + _endNode.y) * _straightCost;
-		}
-		
-		private function euclidian(node:Node):Number
-		{
+		public function euclidian(node:Node):Number {
 			var dx:Number = node.x - _endNode.x;
 			var dy:Number = node.y - _endNode.y;
-			return Math.sqrt(dx * dx + dy * dy) * _straightCost;
+			return Math.sqrt(dx * dx + dy * dy);
 		}
 		
-		private function diagonal(node:Node):Number
-		{
+		private const TwoOneTwoZero:Number = 2 * Math.cos(Math.PI / 3);
+		
+		public function chineseCheckersEuclidian2(node:Node):Number {
+			var y:int = node.y / TwoOneTwoZero;
+			var x:int = node.x + node.y / 2;
+			var dx:Number = x - _endNode.x - _endNode.y / 2;
+			var dy:Number = y - _endNode.y / TwoOneTwoZero;
+			return sqrt(dx * dx + dy * dy);
+		}
+		
+		private function sqrt(x:Number):Number {
+			return Math.sqrt(x);
+		}
+		
+		public function euclidian2(node:Node):Number {
+			var dx:Number = node.x - _endNode.x;
+			var dy:Number = node.y - _endNode.y;
+			return dx * dx + dy * dy;
+		}
+		
+		public function diagonal(node:Node):Number {
 			var dx:Number = Math.abs(node.x - _endNode.x);
 			var dy:Number = Math.abs(node.y - _endNode.y);
 			var diag:Number = Math.min(dx, dy);
 			var straight:Number = dx + dy;
 			return _diagCost * diag + _straightCost * (straight - 2 * diag);
-		}
-		
-		private function nonDiagonal(node:Node):Number
-		{
-			return node.x+node.y; 
-		}
-		
-		public function get visited():Array
-		{
-			return _closed.concat(_open);
 		}
 	}
 }
