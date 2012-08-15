@@ -91,7 +91,7 @@ package bing.iso.path
 		public function manhattan2(node:Node):Number {
 			var dx:Number = Math.abs(node.x - _endNode.x);
 			var dy:Number = Math.abs(node.y - _endNode.y);
-			return dx + dy + Math.abs(dx - dy) / 1000;
+			return dx + dy + Math.abs(dx - dy) *0.001 ;
 		}
 		
 		public function euclidian(node:Node):Number {
