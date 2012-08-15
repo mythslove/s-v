@@ -119,8 +119,8 @@ package  bing.iso.path
 			var startY:int = Math.max(0, node.y - 1);
 			var endY:int = Math.min(numRows - 1, node.y + 1);
 			node.links = [];
-			for (var i:int = startX; i <= endX; i++){
-				for (var j:int = startY; j <= endY; j++){
+			for (var i:int = startX; i <= endX; ++i){
+				for (var j:int = startY; j <= endY; ++j){
 					var test:Node = getNode(i, j);
 					if (test == node || !test.walkable){
 						continue;
