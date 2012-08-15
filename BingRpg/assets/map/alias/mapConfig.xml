@@ -1,0 +1,29 @@
+<config>
+  <map>
+     <mapName>方寸山</mapName>
+    <alias>alias</alias>
+    <tileWidth>60</tileWidth>
+    <tileHeight>30</tileHeight>
+    <segmentation>true</segmentation>
+    <segW>300</segW>
+    <segH>300</segH>
+    <rowCount>80</rowCount>
+    <colCount>51</colCount>
+    <mapWidth>3060</mapWidth>
+    <mapHeight>2400</mapHeight>
+    <scale>6</scale>
+  </map>
+  <npc>
+    <npcVO name="神兵1" type="1" faceId="102"  px="1068" py="714" scaleX="1" endTx="2016" endTy="723" speed="2" direction="2"  mouseEnable="true"/>
+	<npcVO name="神兵2" type="1" faceId="101"  px="1515" py="1200" scaleX="1" endTx="1973" endTy="1571" speed="2" direction="2" mouseEnable="false"/>
+	<npcVO name="神兵3" type="1" faceId="101"  px="1892" py="1345" scaleX="1" endTx="1973" endTy="1571" speed="2" direction="2" mouseEnable="true"/>
+	<npcVO name="神兵4" type="1" faceId="101"  px="2301" py="1168" scaleX="1" endTx="2119" endTy="483" speed="2" direction="2" mouseEnable="true"/>
+	<npcVO name="神兵5" type="1" faceId="102"  px="2119" py="483" scaleX="1" endTx="2684" endTy="1540" speed="2" direction="2" mouseEnable="true"/>
+	<npcVO name="神兵6" type="1" faceId="101"  px="1560" py="630" scaleX="1" endTx="1763" endTy="368" speed="2" direction="2" mouseEnable="true"/>
+	<npcVO name="神兵7" type="1" faceId="101"  px="1551" py="723" scaleX="1" endTx="1008" endTy="1064" speed="2" direction="2" mouseEnable="true"/>
+	<npcVO name="神兵8" type="1" faceId="102"  px="1886" py="1689" scaleX="1" endTx="2075" endTy="2121" speed="2" direction="2" mouseEnable="true"/>
+	<npcVO name="神兵9" type="1" faceId="101"  px="1103" py="1608" scaleX="1" endTx="738" endTy="1176" speed="2" direction="2" mouseEnable="true"/>
+	<npcVO name="神兵10" type="1" faceId="101" px="1008" py="1064" scaleX="1" endTx="1103" endTy="1608" speed="2" direction="2" mouseEnable="true"/>
+	<npcVO name="神兵11" type="1" faceId="101" px="1973" py="1571" scaleX="1" endTx="1886" endTy="1689" speed="2" direction="2" mouseEnable="true"/>
+  </npc>
+</config>

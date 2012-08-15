@@ -1,0 +1,86 @@
+﻿<config>
+	<!-- 所有的地图 -->
+	<maps>
+		<defaultMap>1</defaultMap>
+		<searchRoadType>2</searchRoadType>
+		<mapVO id="1" url="map/alias/" />
+	</maps>
+	<!-- 所有的序列动画 -->
+	<aniBaseVO>
+		<!-- 角色动作, actionVO的actionName后面的数字代表方向 -->
+		<vo name="role1_stand1" url="role/role1/stand/role1_stand1.swf" priority="2" frameRate="3" totalFrame="9" offsetX="45" offsetY="105">
+			<actionVO actionName="stand1" frameNum="8"/>
+		</vo>
+		<vo name="role1_stand2" url="role/role1/stand/role1_stand2.swf" priority="2" frameRate="3" totalFrame="9" offsetX="45" offsetY="105">
+			<actionVO actionName="stand2" frameNum="8"/>
+		</vo>
+		<vo name="role1_stand3" url="role/role1/stand/role1_stand3.swf" priority="2" frameRate="3" totalFrame="9" offsetX="45" offsetY="105">
+			<actionVO actionName="stand3" frameNum="8"/>
+		</vo>
+		<vo name="role1_stand4" url="role/role1/stand/role1_stand4.swf" priority="2" frameRate="3" totalFrame="9" offsetX="45" offsetY="105">
+			<actionVO actionName="stand4" frameNum="8"/>
+		</vo>
+		<vo name="role1_stand5" url="role/role1/stand/role1_stand5.swf" priority="2" frameRate="3" totalFrame="9" offsetX="45" offsetY="105">
+			<actionVO actionName="stand5" frameNum="8"/>
+		</vo>
+		<vo name="role1_run1" url="role/role1/run/role1_run1.swf" priority="3" frameRate="2" totalFrame="8" offsetX="35" offsetY="100">
+			<actionVO actionName="run1" frameNum="8"/>
+		</vo>
+		<vo name="role1_run2" url="role/role1/run/role1_run2.swf" priority="3" frameRate="2" totalFrame="8" offsetX="35" offsetY="100">
+			<actionVO actionName="run2" frameNum="8"/>
+		</vo>
+		<vo name="role1_run3" url="role/role1/run/role1_run3.swf" priority="3" frameRate="2" totalFrame="8" offsetX="35" offsetY="100">
+			<actionVO actionName="run3" frameNum="8"/>
+		</vo>
+		<vo name="role1_run4" url="role/role1/run/role1_run4.swf" priority="3" frameRate="2" totalFrame="8" offsetX="35" offsetY="100">
+			<actionVO actionName="run4" frameNum="8"/>
+		</vo>
+		<vo name="role1_run5" url="role/role1/run/role1_run5.swf" priority="3" frameRate="2" totalFrame="8" offsetX="35" offsetY="100">
+			<actionVO actionName="run5" frameNum="8"/>
+		</vo>
+		<vo name="role1_magic2" url="role/role1/magic/role1_magic2.swf" priority="3" frameRate="3" totalFrame="19" offsetX="63" offsetY="98">
+			<actionVO actionName="magic2" frameNum="19"/>
+		</vo>
+		<vo name="role1_magic4" url="role/role1/magic/role1_magic4.swf" priority="3" frameRate="3" totalFrame="19" offsetX="63" offsetY="98">
+			<actionVO actionName="magic4" frameNum="19"/>
+		</vo>
+		<!--npc动作 -->
+		<vo name="npc1_run2" url="npc/npc1/run/npc1_run2.swf" frameRate="3" totalFrame="8" offsetX="72" offsetY="85">
+			<actionVO actionName="run2" frameNum="8"/>
+		</vo>
+		<vo name="npc1_run4" url="npc/npc1/run/npc1_run4.swf" frameRate="3" totalFrame="8" offsetX="72" offsetY="85">
+			<actionVO actionName="run4" frameNum="8"/>
+		</vo>
+		
+		<vo name="npc2_stand2" url="npc/npc2/stand/npc2_stand2.swf" frameRate="3" totalFrame="9" offsetX="27" offsetY="97">
+			<actionVO actionName="stand2" frameNum="9"/>
+		</vo>
+		<vo name="npc2_stand4" url="npc/npc2/stand/npc2_stand4.swf" frameRate="3" totalFrame="9" offsetX="27" offsetY="97">
+			<actionVO actionName="stand4" frameNum="9"/>
+		</vo>
+		<vo name="npc2_run2" url="npc/npc2/run/npc2_run2.swf" frameRate="3" totalFrame="5" offsetX="74" offsetY="74">
+			<actionVO actionName="run2" frameNum="5"/>
+		</vo>
+		<vo name="npc2_run4" url="npc/npc2/run/npc2_run4.swf" frameRate="3" totalFrame="5" offsetX="74" offsetY="74">
+			<actionVO actionName="run4" frameNum="5"/>
+		</vo>
+		<!--怪的动作 -->
+		
+		<!--特效动作 -->
+		<vo name="magic1" url="magic/magic1.swf" frameRate="5" totalFrame="10" offsetX="125" offsetY="155">
+			<actionVO actionName="simpleMagic" frameNum="10"/>
+		</vo>
+	</aniBaseVO>
+	
+	
+	<items>
+		<itemVO faceId="1" magicAttackAniName="role1_magic"  standAniName="role1_stand" totalDirection="1,2,3,4,5" runAniName="role1_run"/>
+		
+		<!-- npc , type为表示npc的职责-->
+		<npcVO faceId="101" totalDirection="2,4" runAniName="npc1_run"  simpleAttackAniName="temp"/>
+		<npcVO faceId="102" totalDirection="2,4" runAniName="npc2_run" standAniName="npc2_stand" />
+		
+		<!-- 特效 -->
+		<magicVO faceId="1001"  magicAniName="magic1" />
+	</items>
+</config>
