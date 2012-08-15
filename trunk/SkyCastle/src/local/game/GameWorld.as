@@ -31,6 +31,7 @@ package local.game
 	import local.utils.SettingCookieUtil;
 	import local.views.CenterViewContainer;
 	import local.views.effects.MapWordEffect;
+	import local.views.effects.MouseClickEffect;
 
 	public class GameWorld extends BaseWorld
 	{
@@ -42,6 +43,7 @@ package local.game
 		//------------------------------------------------------------
 		//用于缓存移动的建筑的上次位置
 		private var _cacheBuildPos:Point = new Point();
+		private var _mouseClickEffect:MouseClickEffect  ;
 		
 		/**
 		 * 点击地图 
@@ -131,11 +133,21 @@ package local.game
 			else if(!CollectQueueUtil.instance.currentBuilding) //当前执行队列里没有建筑
 			{
 				var p:Point = pixelPointToGrid(stage.mouseX,stage.mouseY); 
-				if( !CharacterManager.instance.hero.searchToRun( p.x , p.y )){
+				if(CharacterManager.instance.hero.searchToRun( p.x , p.y )){
+					playMouseClickEffect((stage.mouseX-x)/scaleX-sceneLayerOffsetX,(stage.mouseY-y)/scaleX-sceneLayerOffsetY );
+				}
+				else
+				{
 					var effect:MapWordEffect = new MapWordEffect("I can 't get here!");
 					addEffect( effect , (stage.mouseX-x)/scaleX-sceneLayerOffsetX,(stage.mouseY-y)/scaleX-sceneLayerOffsetY);
 				}
 			}
+		}
+		
+		private function playMouseClickEffect( px:Number , py:Number ):void
+		{
+			_mouseClickEffect = new MouseClickEffect();
+			addEffect( _mouseClickEffect ,px , py );
 		}
 		
 		/** 判断金钱是否足够，并提示*/	
