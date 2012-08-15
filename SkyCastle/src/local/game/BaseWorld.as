@@ -3,6 +3,7 @@ package local.game
 	import bing.iso.*;
 	import bing.utils.ContainerUtil;
 	import bing.utils.InteractivePNG;
+	import bing.utils.MathUtil;
 	
 	import flash.display.*;
 	import flash.events.*;
@@ -42,6 +43,7 @@ package local.game
 		protected var _mapIsMove:Boolean=false; 
 		protected var _topBuilding:Building; 
 		protected var _mouseOverBuild:Building ;//当前鼠标在哪个建筑上面
+		private var _mouseLoc:Point = new Point(); //鼠标位置
 		
 		public function BaseWorld()
 		{
@@ -297,6 +299,8 @@ package local.game
 					rect.width =GameSetting.MAX_WIDTH*scaleX-stage.stageWidth ;
 					rect.height = GameSetting.MAX_HEIGHT*scaleX-stage.stageHeight ;
 					this.startDrag( false  , rect );
+					_mouseLoc.x = e.stageX ;
+					_mouseLoc.y = e.stageY ;
 					break;
 				case MouseEvent.MOUSE_MOVE:
 					if(e.buttonDown)	{
@@ -327,7 +331,7 @@ package local.game
 					}
 					break;
 				case MouseEvent.MOUSE_UP:
-					if(!_mapIsMove) onClick(e);  
+					if(!_mapIsMove || MathUtil.distance(e.stageX,e.stageY,_mouseLoc.x,_mouseLoc.y)<10 ) onClick(e);  
 				case MouseEvent.ROLL_OUT:
 					this.stopDrag();
 					_mapIsMove = false ;
