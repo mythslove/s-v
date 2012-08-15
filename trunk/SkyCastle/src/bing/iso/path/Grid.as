@@ -11,6 +11,11 @@ package  bing.iso.path
 		private var _numCols:int;
 		private var _numRows:int;
 		
+		private var _type:int;
+		
+		private var _straightCost:Number = 1.0;
+		private var _diagCost:Number = Math.SQRT2;
+		
 		/**
 		 * Constructor.
 		 */
@@ -18,11 +23,11 @@ package  bing.iso.path
 		{
 			_numCols = numCols;
 			_numRows = numRows;
-			_nodes = new Array();
+			_nodes = [];
 			
 			for(var i:int = 0; i < _numCols; i++)
 			{
-				_nodes[i] = new Array();
+				_nodes[i] = [] ;
 				for(var j:int = 0; j < _numRows; j++)
 				{
 					_nodes[i][j] = new Node(i, j);
@@ -102,6 +107,53 @@ package  bing.iso.path
 			return vec ;
 		}
 		
+		
+		/**
+		 *
+		 * @param	node
+		 * @param	type	0八方向 1四方向 2跳棋
+		 */
+		private function initNodeLink(node:Node, type:int):void {
+			var startX:int = Math.max(0, node.x - 1);
+			var endX:int = Math.min(numCols - 1, node.x + 1);
+			var startY:int = Math.max(0, node.y - 1);
+			var endY:int = Math.min(numRows - 1, node.y + 1);
+			node.links = [];
+			for (var i:int = startX; i <= endX; i++){
+				for (var j:int = startY; j <= endY; j++){
+					var test:Node = getNode(i, j);
+					if (test == node || !test.walkable){
+						continue;
+					}
+					if (type != 2 && i != node.x && j != node.y){
+						var test2:Node = getNode(node.x, j);
+						if (!test2.walkable){
+							continue;
+						}
+						test2 = getNode(i, node.y);
+						if (!test2.walkable){
+							continue;
+						}
+					}
+					var cost:Number = _straightCost;
+					if (!((node.x == test.x) || (node.y == test.y))){
+						if (type == 1){
+							continue;
+						}
+						if (type == 2 && (node.x - test.x) * (node.y - test.y) == 1){
+							continue;
+						}
+						if (type == 2){
+							cost = _straightCost;
+						} else {
+							cost = _diagCost;
+						}
+					}
+					node.links.push(new Link(test, cost));
+				}
+			}
+		}
+		
 		/**
 		 * 判断是否在区域内 
 		 * @param x
@@ -134,11 +186,28 @@ package  bing.iso.path
 			_nodes[x][y].walkable = value;
 		}
 		
+		/**
+		 *
+		 * @param	type	0四方向 1八方向 2跳棋
+		 */
+		public function calculateLinks(type:int = 0):void {
+			this._type = type;
+			for (var i:int = 0; i < _numCols; ++i ){
+				for (var j:int = 0; j < _numRows; ++j){
+					initNodeLink(_nodes[i][j], type);
+				}
+			}
+		}
+		
 		
 		
 		////////////////////////////////////////
 		// getters / setters
 		////////////////////////////////////////
+		
+		public function getType():int {
+			return _type;
+		}
 		
 		/**
 		 * Returns the end node.

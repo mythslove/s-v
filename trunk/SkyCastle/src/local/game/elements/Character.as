@@ -27,6 +27,8 @@ package local.game.elements
 	 */	
 	public class Character extends Building
 	{
+		public static var astar:AStar = new AStar(MapGridDataModel.instance.astarGrid );
+		
 		protected var _bmpMC:BitmapMovieClip;
 		protected var _currentActions:String ;
 		protected var _roads:Array ; //路
@@ -117,10 +119,10 @@ package local.game.elements
 			{
 				if(MapGridDataModel.instance.astarGrid.getNode(nodeX,nodeZ).walkable)
 				{
-					var astar:AStar = new AStar();
 					MapGridDataModel.instance.astarGrid.setStartNode( nodeX,nodeZ );
 					MapGridDataModel.instance.astarGrid.setEndNode( endNodeX,endNodeZ );
-					if(astar.findPath(MapGridDataModel.instance.astarGrid )) 
+					MapGridDataModel.instance.astarGrid.calculateLinks();
+					if(astar.findPath()) 
 					{
 						var roadsArray:Array = astar.path;
 						if(roadsArray && roadsArray.length>0){

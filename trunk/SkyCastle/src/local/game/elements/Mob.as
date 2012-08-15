@@ -183,12 +183,12 @@ package local.game.elements
 			if(endNodeX<0 || endNodeZ<0||endNodeX+1>GameSetting.GRID_X||endNodeZ+1>GameSetting.GRID_Z ) return false;
 			if(MapGridDataModel.instance.astarGrid.getNode(endNodeX,endNodeZ).walkable )
 			{
-				var astar:AStar = new AStar();
 				MapGridDataModel.instance.astarGrid.setStartNode( nodeX,nodeZ );
 				MapGridDataModel.instance.astarGrid.setEndNode( endNodeX,endNodeZ );
-				if(astar.findPath(MapGridDataModel.instance.astarGrid )) 
+				MapGridDataModel.instance.astarGrid.calculateLinks();
+				if(Character.astar.search()) 
 				{
-					var roadsArray:Array = astar.path;
+					var roadsArray:Array = Character.astar.path;
 					if(roadsArray && roadsArray.length>0){
 						roads = roadsArray ;
 						roadIndex = 0 ;
