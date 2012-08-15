@@ -38,7 +38,7 @@ package bing.iso.path
 			node.version = nowversion;
 			while (node != _endNode){
 				var len:int = node.links.length;
-				for (var i:int = 0; i < len; i++){
+				for (var i:int = 0; i < len; ++i){
 					var test:Node = node.links[i].node;
 					var cost:Number = node.links[i].cost;
 					var g:Number = node.g + cost;
