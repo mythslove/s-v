@@ -104,8 +104,8 @@ package bing.iso.path
 		
 		public function chineseCheckersEuclidian2(node:Node):Number {
 			var y:int = node.y / TwoOneTwoZero;
-			var x:int = node.x + node.y / 2;
-			var dx:Number = x - _endNode.x - _endNode.y / 2;
+			var x:int = node.x + node.y >>1 ;
+			var dx:Number = x - _endNode.x - _endNode.y >>1 ;
 			var dy:Number = y - _endNode.y / TwoOneTwoZero;
 			return sqrt(dx * dx + dy * dy);
 		}
