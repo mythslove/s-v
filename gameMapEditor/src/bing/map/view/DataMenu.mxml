@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Panel xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="268" height="100" fontSize="13" title="地图数据">
+	<s:layout>
+		<s:BasicLayout/>
+	</s:layout>
+
+	<fx:Script>
+		<![CDATA[
+			import bing.map.data.Comm;
+			import bing.map.utils.DataImport;
+			import bing.map.utils.DataSave;
+			
+			import mx.controls.Alert;
+			import mx.events.CloseEvent;
+			//数据保存类
+			private var dataSave:DataSave = null ;
+			///数据导入
+			private var dataImport:DataImport = null ;
+			
+			/** 临时保存地图数据  */
+			protected function tempSaveMap(event:MouseEvent):void
+			{
+				Alert.show("是否当地表分块保存","提示",3, Comm.mainApp ,closeThis);
+				function closeThis(event:CloseEvent):void {
+					if(event.detail == Alert.YES){
+						dataSave = new DataSave( true );
+					}else {
+						dataSave = new DataSave( false );
+					}
+					dataSave.addEventListener(Event.COMPLETE , saved);
+				}
+			}
+			
+			/** 临时保存数据成功  */
+			private function saved( e:Event ):void {
+				dataSave.removeEventListener(Event.COMPLETE , saved);
+				Alert.show("地图数据保存成功!","提示");
+			}
+			
+			/** 导入地图  */
+			protected function importMap(event:MouseEvent):void
+			{
+				dataImport = new DataImport();
+				dataImport.addEventListener(Event.COMPLETE , importMapCom);
+			}
+			
+			/** 导入地图数据完成  */
+			private function importMapCom(e:Event):void {
+				dataImport.removeEventListener(Event.COMPLETE , importMapCom);
+				Comm.mainApp.refresh();
+			}
+			
+			/** 新建立地图  */
+			protected function newMap(event:MouseEvent):void
+			{
+				
+			}
+
+		]]>
+	</fx:Script>
+
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<s:Button x="5" y="6" label="导  入" width="80" height="56" toolTip="导入地图数据" click="importMap(event)" fontSize="14"/>
+	<s:Button x="92" y="6" label="保  存" width="80" height="56" toolTip="保存地图数据" click="tempSaveMap(event)" fontSize="15"/>
+	<s:Button x="179" y="6" label="新  建" width="80" height="56" toolTip="新建地图" click="newMap(event)" fontSize="15"/>
+</s:Panel>

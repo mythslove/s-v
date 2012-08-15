@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					   xmlns:s="library://ns.adobe.com/flex/spark" 
+					   xmlns:mx="library://ns.adobe.com/flex/mx"
+					   creationComplete="newMap()" width="1200" height="700" showStatusBar="false" xmlns:view="bing.map.view.*" backgroundColor="#000000">
+	<fx:Style source="gameMapEditor.css"/>
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import bing.map.AddType;
+			import bing.map.data.*;
+			import bing.map.layer.*;
+			import bing.map.utils.MapUtils;
+			import bing.map.view.BuildPanel;
+			import bing.map.view.NewMap;
+			import bing.map.view.NpcPanel;
+			import bing.map.view.TransportPanel;
+			
+			import mx.core.UIComponent;
+			import mx.events.ScrollEvent;
+			import mx.managers.PopUpManager;
+			
+			private var _newMapPanel:NewMap = null ;//新地图
+			private var _buildPanel:BuildPanel = null;//建筑面板
+			private var _npcPanel:NpcPanel = null ; //npc面板
+			private var _transPanel:TransportPanel = null ;//传输区面板
+			private var _buildLayer:BuildLayer = null ;//建筑控制层
+			private var _transportLayer:TransportLayer = null ;//传输区控制层
+			private var _impactLayer:ImpactLayer=null;//碰撞块控制层
+			private var _maskLayer:MaskLayer = null ;//遮罩块
+			private var _npcLayer:NPCLayer = null; //npc控制层
+			private var _gridLayer:GridLayer = null ;//网格层
+			private var _timer:int = 0; //记时器
+			//=========变量end==================
+			//=========getter 开始================
+
+			public function get transPanel():TransportPanel
+			{
+				return _transPanel;
+			}
+
+			public function get transportLayer():TransportLayer
+			{
+				return _transportLayer;
+			}
+
+			public function get npcLayer():NPCLayer
+			{
+				return _npcLayer;
+			}
+
+			public function get maskLayer():MaskLayer
+			{
+				return _maskLayer;
+			}
+
+			public function get impactLayer():ImpactLayer
+			{
+				return _impactLayer;
+			}
+
+			public function get buildLayer():BuildLayer
+			{
+				return _buildLayer;
+			}
+
+			public function get buildPanel():BuildPanel
+			{
+				return _buildPanel;
+			}
+
+			public function get npcPanel():NpcPanel
+			{
+				return _npcPanel;
+			}
+
+			//============getter end=============
+			/** 新建地图  */
+			private function newMap():void{
+				_newMapPanel = new NewMap();//新地图
+				PopUpManager.addPopUp(_newMapPanel,this,true);
+				PopUpManager.centerPopUp(_newMapPanel);
+				_newMapPanel.addEventListener(Event.COMPLETE , handleNewMap);
+				
+				Comm.mainApp = this;
+			}
+			/** 地图选择完成 */
+			private function handleNewMap(e:Event):void{
+				_newMapPanel.removeEventListener(Event.COMPLETE , handleNewMap);
+				initMapEditor();//初始化
+			}
+			/** 初始化界面和数据  */
+			private function initMapEditor():void{
+				configListener();//添加侦听
+				drawGrid() ;//画网格
+				addBgPic() ; //添加地表图片
+				initPanel();//初始化面板
+				initVars();//初始化变量
+			}
+			/** 初始化变量  */
+			private function initVars():void{
+				if(_buildLayer==null){
+					_buildLayer = new BuildLayer(); //建筑层控制类
+				}
+				if(_impactLayer ==null){
+					_impactLayer = new ImpactLayer();//碰撞块控制类
+				}
+				if( _maskLayer==null){
+					_maskLayer = new MaskLayer();//遮罩块控制类
+				}
+				if(_npcLayer ==null){
+					_npcLayer= new NPCLayer();//npc控制类
+				}
+				if(_transportLayer==null){
+					_transportLayer = new TransportLayer(); //传输层控制类
+				}
+			}
+			/** 初始化面板  */
+			private function initPanel():void{
+				if(_buildPanel==null){
+					_buildPanel = new BuildPanel(); //建筑面板
+					_buildPanel.x=7;
+					_buildPanel.y=120;
+					PopUpManager.addPopUp(_buildPanel,this);
+				}
+				if(_npcPanel==null){
+					_npcPanel = new NpcPanel(); //NPC面板
+					_npcPanel.x = this.width-_npcPanel.width-20;
+					_npcPanel.y=120;
+					PopUpManager.addPopUp(_npcPanel,this);
+				}
+				if(_transPanel ==null){
+					_transPanel = new  TransportPanel(); //传输区面板
+					_transPanel.x = 250 ;
+					_transPanel.y = 120 ;
+					PopUpManager.addPopUp(_transPanel,this);
+				}
+				
+			}
+			/** 画网格  */
+			private function drawGrid():void{
+				while(gridContainer.numChildren>0){
+					gridContainer.removeChildAt(0);
+				}
+				//画网格
+				_gridLayer = new GridLayer();
+				_gridLayer.drawGrid(MapData.mapWidth,MapData.mapHeight,MapData.tileWidth,MapData.tileHeight);
+				mapContainer.verticalScrollPosition = 0;
+				mapContainer.horizontalScrollPosition = 0;
+				//添加网格
+				gridContainer.addChild(_gridLayer);
+			}
+			/** 添加地表图片  */
+			private function addBgPic():void{
+				if(MapData.bg!=null){
+					bgContainer.addChild(MapData.bg);
+				}
+			}
+			/** 清空drag  */
+			public function clearDrag():void{
+				if(dragUI.numChildren>0){
+					dragUI.removeChildAt(0);
+				}
+			}
+			/**
+			 * 侦听mouse在地图容器上移动的事件
+			 * */
+			private function configListener():void{
+				this.mapContainer.addEventListener(MouseEvent.MOUSE_MOVE,onMouseMove);
+				this.mapContainer.addEventListener(MouseEvent.MOUSE_MOVE,onMouseMove,true);
+				this.mapContainer.addEventListener(MouseEvent.MOUSE_OVER,onMouseOver);
+				this.mapContainer.addEventListener(MouseEvent.MOUSE_OUT,onMouseOut);
+				this.mapContainer.addEventListener(MouseEvent.CLICK,onMouseClick); 
+				this.mapContainer.addEventListener(MouseEvent.RIGHT_MOUSE_DOWN,onRightClick); 
+			}
+			/**
+			 * mouse move，显示mouse的信息
+			 * */
+			private function onMouseMove(e:MouseEvent):void{
+				var cellPoint:Point = MapUtils.getCellPoint(mapContainer.mouseX+ MapUtils.mapXScroll+MapData.tileWidth/2, mapContainer.mouseY+ MapUtils.mapYScroll+MapData.tileHeight/2);
+				//显示鼠标信息panel
+				var parObj:Object = new Object();
+				parObj.px = mapContainer.mouseX + MapUtils.mapXScroll+MapData.tileWidth/2;
+				parObj.py = mapContainer.mouseY +MapUtils.mapYScroll+MapData.tileHeight/2 ;
+				parObj.ix = cellPoint.x;
+				parObj.iy = cellPoint.y;
+				mouseInfo.createContent(parObj);
+				//dragUI的位置设置为合适的点的位置
+				if(Comm.currentAddType==AddType.IMPACT||Comm.currentAddType==AddType.MASK){
+					if( parseInt(  mouseInfo._iy ) %2!=0){
+						this.dragUI.x =  parseInt( mouseInfo._ix  ) * MapData.tileWidth;
+						this.dragUI.y = parseInt(  mouseInfo._iy )  * MapData.tileHeight/2-MapData.tileHeight/2;
+					}else{
+						this.dragUI.x = parseInt( mouseInfo._ix )  * MapData.tileWidth-MapData.tileWidth/2;
+						this.dragUI.y =  parseInt(  mouseInfo._iy )  * MapData.tileHeight/2-MapData.tileHeight/2;
+					}
+				}else{
+					var pixel:Point = MapUtils.getPixelPoint(cellPoint.x,cellPoint.y);//根据地图坐标获得像素坐标
+					this.dragUI.x =pixel.x-MapData.tileWidth/2;
+					this.dragUI.y = pixel.y-MapData.tileHeight/2;
+				}
+				if(e!=null&&e.buttonDown&&getTimer()-_timer>=5){
+					this.onMouseClick(e);
+					_timer = getTimer();
+				}
+			}
+			/**
+			 * 当滚动滑动条时，网格不移动
+			 * */
+			private function onScroll(e:ScrollEvent):void{
+				if(mapContainer.verticalScrollPosition<0){
+					mapContainer.verticalScrollPosition=0;
+				}
+				MapUtils.mapXScroll = mapContainer.horizontalScrollPosition ;
+				MapUtils.mapYScroll = mapContainer.verticalScrollPosition ;
+				onMouseMove(null);
+			}
+			/** 显示dragUI  */
+			private function onMouseOver(e:MouseEvent):void{
+				dragUI.visible = true;
+			}
+			/** 隐藏dragUI  */
+			private function onMouseOut(e:MouseEvent):void{
+				dragUI.visible = false;
+			}
+			/**添加对mapContainer的mouse.Click点击事件的侦听*/
+			private function onMouseClick(e:MouseEvent):void{
+				var _x:int = parseInt (Comm.mainApp.mouseInfo._ix);
+				var _y:int = parseInt (Comm.mainApp.mouseInfo._iy);
+				//不能超出边界添加
+				if(_x>MapData.xNum || _y>MapData.yNum*2-1 ){
+					return ;
+				}
+				
+				//防止在滚动条上点击时，也添加图片
+				if(mapContainer.mouseX>mapContainer.width-20||mapContainer.mouseY>mapContainer.height-20){
+					return;
+				}
+				if(e.ctrlKey){ //删除
+					switch(Comm.currentAddType){
+						case AddType.BUILDER:
+							_buildLayer.deleteBuilderOnMap(e); //删除建筑
+							break;
+						case AddType.NPC: 
+							_npcLayer.deleteNpcOnMap(e); //删除npc
+							break;
+						case AddType.IMPACT:
+							_impactLayer.deleteImpactOnMap() ;//删除碰撞块
+							break;
+						case AddType.TRANSPORT:
+							_transportLayer.deleteTransOnMap() ;//添加传输区
+							break;
+						case AddType.MASK:
+							_maskLayer.deleteMaskOnMap() ;//删除遮罩块
+							break;
+					}
+				}else{ //添加
+					switch(Comm.currentAddType){
+						case AddType.BUILDER:
+							_buildLayer.addBuilderOnMap(); //添加建筑
+							break;
+						case AddType.NPC: 
+							_npcLayer.addNpcOnMap(); //添加npc
+							break;
+						case AddType.IMPACT:
+							_impactLayer.addImpactOnMap() ;//添加碰撞块
+							break;
+						case AddType.MASK:
+							_maskLayer.addMaskOnMap() ;//添加遮罩块
+							break;
+						case AddType.TRANSPORT:
+							_transportLayer.addTransOnMap() ;//添加传输区
+							break;
+						case AddType.SETNPC:
+							_npcLayer.setNpcInfo(); //设置npc的一些信息
+							break ;
+						default://添加其他	
+							break;
+					}
+				}
+			}
+			/** 点击右键  */
+			private function onRightClick(e:MouseEvent):void{
+				e.stopPropagation();
+				Comm.currentAddType = AddType.NONE;
+				this.clearDrag();
+			}
+			/** 显示和隐藏菜单栏 , 扩展工作区  */
+			protected function hideBar(event:MouseEvent):void
+			{
+				if(tool.height>0){
+					tool.height=0;
+					tool.visible=false;
+					hide_btn.label="↓";
+				}else{
+					tool.height=100;
+					hide_btn.label="↑";
+					tool.visible=true;
+				}
+			}
+			
+			/** 重新显示舞台上的内容  */
+			public function refresh():void{
+				initMapEditor();
+				//先清空，再刷新
+				this._buildLayer.clearShow();
+				this._npcLayer.clearShow();
+				this._impactLayer.clearShow();
+				this._maskLayer.clearShow();
+				this._transportLayer.clearShow() ;
+				
+				this._buildLayer.refresh();
+				this._npcLayer.refresh();
+				this._impactLayer.refresh();
+				this._maskLayer.refresh();
+				this._transportLayer.refresh() ;
+				
+				drawGrid() ;
+				this._gridLayer.refresh();
+			}
+		]]>
+	</fx:Script>
+	
+	<s:VGroup x="0" y="0" width="100%" height="100%" paddingBottom="0" gap="1">
+		<s:BorderContainer  width="100%" height="100" id="tool" backgroundColor="#002e33" borderVisible="false" >
+			<s:layout>
+				<s:HorizontalLayout/>
+			</s:layout>
+			<view:LayerMenu backgroundColor="#002e33">
+			</view:LayerMenu>
+			<view:ControlMenu backgroundColor="#002e33">
+			</view:ControlMenu>
+			<view:MapMouseInfoPanel x="708"  y="0" id="mouseInfo"  backgroundColor="#002e33"/>
+			<view:DataMenu backgroundColor="#002e33">
+			</view:DataMenu>
+		</s:BorderContainer>
+		<s:BorderContainer  width="100%" height="15" backgroundColor="#000000" borderVisible="false">
+			<s:Button id="hide_btn" height="15"  width="30"   label="↑" color="#00111A" fontSize="12" fontWeight="bold" 
+					  fontFamily="Georgia" toolTip="显示和隐藏菜单栏" horizontalCenter="0" chromeColor="0xffffff" click="hideBar(event)"/>
+		</s:BorderContainer>
+		<s:Group id="outContainer"  width="100%" height="100%" clipAndEnableScrolling="true">
+			<mx:Canvas id="mapContainer"   backgroundColor="0x00111A" clipContent="true" 
+					   width="100%" height="100%" scroll="onScroll(event)">
+				<mx:UIComponent  id="bgContainer"  width="{MapData.mapWidth}" height="{MapData.mapHeight}"/>
+				<mx:UIComponent  id="locationContainer"/>
+				<mx:UIComponent  id="buildContainer"  />
+				<mx:UIComponent  id="transportContainer"  />
+				<mx:UIComponent  id="npcContainer"/>
+				<mx:UIComponent  id="impactContainer"/>
+				<mx:UIComponent  id="maskContainer" />
+				<mx:UIComponent  id="gridContainer" alpha=".7"/>
+				<mx:UIComponent id="dragUI" alpha="0.7" depth="100"/>
+			</mx:Canvas>
+		</s:Group>
+	</s:VGroup>
+</s:WindowedApplication>

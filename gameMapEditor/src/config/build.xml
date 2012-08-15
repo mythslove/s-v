@@ -1,0 +1,6 @@
+﻿<build>
+	<type id="1" name="房子">
+		<img src="res/build/1_1.png" id="1_1"/>
+		<img src="res/build/1_2.png" id="1_2"/>
+	</type>
+</build>

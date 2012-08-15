@@ -1,0 +1,10 @@
+﻿<npc>
+	<img id="1" src="res/npc/1.png"  frame="6"/>
+	<img id="2" src="res/npc/2.png"  frame="6"/>
+	<img id="3" src="res/npc/3.png"  frame="6"/>
+	<img id="4" src="res/npc/4.png"  frame="6"/>
+	<img id="5" src="res/npc/5.png"  frame="6"/>
+	<img id="6" src="res/npc/6.png"  frame="6"/>
+	<img id="7" src="res/npc/7.png"  frame="6"/>
+	<img id="8" src="res/npc/8.png"  frame="6"/>
+</npc>
