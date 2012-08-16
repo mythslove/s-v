@@ -93,5 +93,10 @@ package local.comm
 		public static var heroBornPoint1:HeroBornPoint ;
 		public static var heroBornPoint2:HeroBornPoint ;
 		public static var heroBornPoint3:HeroBornPoint ;
+		
+		
+		//后两个地图
+		public static const LV2:int = 15 ;
+		public static const LV3:int = 30 ;
 	}
 }

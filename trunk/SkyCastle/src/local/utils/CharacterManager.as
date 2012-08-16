@@ -11,9 +11,10 @@ package local.utils
 	import local.game.elements.Hero;
 	import local.game.elements.NPC;
 	import local.game.npcs.NpcAnnie;
-	import local.game.npcs.NpcNick;
 	import local.game.npcs.NpcDave;
+	import local.game.npcs.NpcNick;
 	import local.game.npcs.NpcTony;
+	import local.model.PlayerModel;
 
 	/**
 	 * 场景上的人管理类 
@@ -52,22 +53,28 @@ package local.utils
 			if(GameData.isHome){
 				var len:int = _allNpcClass.length ;
 				npcs = new Vector.<NPC>();
-				for( var i:int = 0 ; i<len-2 ; ++i){
-					npc = new 	_allNpcClass[i]() as NPC ;
-					npc.nodeX = GameData.heroBornPoint1.nodeX ;
-					npc.nodeZ = GameData.heroBornPoint1.nodeZ ;
-					npcs.push(npc);
-					var scene:IsoScene = GameWorld.instance.getBuildingScene( npc.nodeX , npc.nodeZ );
-					scene.addIsoObject( npc , false );
+				if( PlayerModel.instance.me.level>GameData.LV3 )
+				{
+					for( var i:int = 0 ; i<len-2 ; ++i){
+						npc = new 	_allNpcClass[i]() as NPC ;
+						npc.nodeX = GameData.heroBornPoint1.nodeX ;
+						npc.nodeZ = GameData.heroBornPoint1.nodeZ ;
+						npcs.push(npc);
+						var scene:IsoScene = GameWorld.instance.getBuildingScene( npc.nodeX , npc.nodeZ );
+						scene.addIsoObject( npc , false );
+					}
 				}
 				
-				for( i = 0 ; i<len ; ++i){
-					npc = new 	_allNpcClass[i]() as NPC ;
-					npc.nodeX = GameData.heroBornPoint2.nodeX ;
-					npc.nodeZ = GameData.heroBornPoint2.nodeZ ;
-					npcs.push(npc);
-					scene = GameWorld.instance.getBuildingScene( npc.nodeX , npc.nodeZ );
-					scene.addIsoObject( npc, false );
+				if( PlayerModel.instance.me.level>GameData.LV2 )
+				{
+					for( i = 0 ; i<len ; ++i){
+						npc = new 	_allNpcClass[i]() as NPC ;
+						npc.nodeX = GameData.heroBornPoint2.nodeX ;
+						npc.nodeZ = GameData.heroBornPoint2.nodeZ ;
+						npcs.push(npc);
+						scene = GameWorld.instance.getBuildingScene( npc.nodeX , npc.nodeZ );
+						scene.addIsoObject( npc, false );
+					}
 				}
 				
 				for( i = 0 ; i<len ; ++i){

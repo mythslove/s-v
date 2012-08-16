@@ -1,7 +1,6 @@
 package local.game.elements
 {
 	import bing.amf3.ResultEvent;
-	import bing.iso.path.AStar;
 	import bing.utils.SystemUtil;
 	
 	import flash.events.Event;
@@ -185,7 +184,6 @@ package local.game.elements
 			{
 				MapGridDataModel.instance.astarGrid.setStartNode( nodeX,nodeZ );
 				MapGridDataModel.instance.astarGrid.setEndNode( endNodeX,endNodeZ );
-				MapGridDataModel.instance.astarGrid.calculateLinks();
 				if(Character.astar.findPath()) 
 				{
 					var roadsArray:Array = Character.astar.path;
