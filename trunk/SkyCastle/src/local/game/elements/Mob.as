@@ -186,7 +186,7 @@ package local.game.elements
 				MapGridDataModel.instance.astarGrid.setStartNode( nodeX,nodeZ );
 				MapGridDataModel.instance.astarGrid.setEndNode( endNodeX,endNodeZ );
 				MapGridDataModel.instance.astarGrid.calculateLinks();
-				if(Character.astar.search()) 
+				if(Character.astar.findPath()) 
 				{
 					var roadsArray:Array = Character.astar.path;
 					if(roadsArray && roadsArray.length>0){

@@ -25,15 +25,15 @@ package bing.iso.path
 		}
 		
 		public function findPath():Boolean {
+			++nowversion;
 			_endNode = _grid.endNode;
-			nowversion++;
 			_startNode = _grid.startNode;
 			_open = new BinaryHeap(justMin);
 			_startNode.g = 0;
 			return search();
 		}
 		
-		public function search():Boolean {
+		private function search():Boolean {
 			var node:Node = _startNode;
 			node.version = nowversion;
 			while (node != _endNode){
