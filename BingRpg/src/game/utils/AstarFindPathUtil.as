@@ -329,8 +329,7 @@
 	
 		private function initMap():void{
 			var len:int =_yNum*2-1 ;
-			if(_map!=null){
-			
+			if(!_map){
 				for( yy = 0 ; yy<len ; ++yy ){
 					for( xx = 0 ; xx<_xNum ; ++xx ){
 						_map[yy][xx].init() ;
@@ -338,7 +337,6 @@
 				}
 			}else{
 				_map = [];
-				
 				for(var yy:int = 0 ; yy<len ; ++yy ){
 					_map[yy] = [];
 					for(var xx:int = 0 ; xx<_xNum ; ++xx ){
