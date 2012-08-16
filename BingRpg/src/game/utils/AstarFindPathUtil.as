@@ -60,7 +60,7 @@
 
 		public function searchPath(startPoint:Point , endPoint:Point  ):Array{
 			++_nowversion;
-			initData() ;
+			_openList = new BinaryHeap(justMinFun) ;
 			//计算终点（处理当用户 点击的地方不是碰撞块的时候）
 			var tempEndPoint:Point = checkEndPoint(startPoint,endPoint);
 			if(tempEndPoint==null){//没有终点的话
@@ -87,7 +87,7 @@
 				}
 				
 			
-				var aroundNodes:Array = getAroundsNode(currentNode.x, currentNode.y);
+				var aroundNodes:Array = currentNode.links;
 				var len:int = aroundNodes.length ;
 				var node:Node ;
 				var g:int , h:int ,f:int ;
@@ -120,13 +120,6 @@
 			}
 			return null;
 		}
-		
-
-		private function initData():void{
-			_openList = new BinaryHeap(justMinFun) ;
-			initMap();
-		}
-		
 	
 		private function checkEndPoint(startPoint:Point , endPoint:Point):Point{
 			if(_impactArray[endPoint.y+"-"+endPoint.x]==false){
@@ -216,12 +209,8 @@
 		{
 			var aroundNodes:Array = [];
 			
-			var checkX:int;
-			var checkY:int;
-	
-		
-			checkX = x-1
-			checkY = y;
+			var checkX:int = x-1;
+			var checkY:int = y;
 			if (isWalkable(checkX, checkY) && ! _map[checkY][checkX].isInClose)
 			{
 				aroundNodes.push( _map[checkY][checkX]);
@@ -328,23 +317,21 @@
 		
 	
 		private function initMap():void{
+			_map = [];
 			var len:int =_yNum*2-1 ;
-			if(_map){
-				for( yy = 0 ; yy<len ; ++yy ){
-					for( xx = 0 ; xx<_xNum ; ++xx ){
-						_map[yy][xx].init() ;
-					}
+			for(var yy:int = 0 ; yy<len ; ++yy ){
+				_map[yy] = [];
+				for(var xx:int = 0 ; xx<_xNum ; ++xx ){	
+					_map[yy][xx] = new Node(xx,yy);
 				}
-			}else{
-				_map = [];
-				for(var yy:int = 0 ; yy<len ; ++yy ){
-					_map[yy] = [];
-					for(var xx:int = 0 ; xx<_xNum ; ++xx ){
-						_map[yy][xx] = new Node(xx,yy);
-					}
+			}
+			for( yy = 0 ; yy<len ; ++yy ){
+				for( xx = 0 ; xx<_xNum ; ++xx ){
+					_map[yy][xx].links = getAroundsNode(xx,yy);
 				}
 			}
 		}
+		
 		
 	}
 }
@@ -358,20 +345,13 @@ class Node{
 	public var parentNode:Node = null; 
 	public var isInClose:Boolean = false ;
 	public var version:int ;
+	public var links:Array ;
 
 	public function Node( px:int , py:int ){
 		x=px;
 		y=py;
 	}
 	
-
-	public function init():void{
-		parentNode = null ;
-		isInClose = false ;
-		F=0;
-		H=0;
-		G=0;
-	}
 }
 
 
