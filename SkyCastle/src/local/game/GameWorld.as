@@ -388,6 +388,9 @@ package local.game
 			}
 			this.x = offsetX ;
 			this.y = offsetY;
+			
+			//初始化start
+			MapGridDataModel.instance.astarGrid.calculateLinks();
 			//开始运行
 			this.start();
 		}

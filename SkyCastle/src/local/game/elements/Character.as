@@ -35,6 +35,7 @@ package local.game.elements
 		protected var _roads:Array ; //路
 		public var speed:Number = 6 ;
 		public var nextPoint:Node ; //下一个坐标
+		public var bornPoint:Point ; // 默认出生点位置
 		protected var roadIndex:int =0 ;
 		private var _firstMove:Boolean;
 		
@@ -123,8 +124,11 @@ package local.game.elements
 					var t:Number = getTimer();
 					MapGridDataModel.instance.astarGrid.setStartNode( nodeX,nodeZ );
 					MapGridDataModel.instance.astarGrid.setEndNode( endNodeX,endNodeZ );
-					MapGridDataModel.instance.astarGrid.calculateLinks();
-					if(astar.findPath()) 
+					var result:Boolean ;
+					if( this is Hero) {
+						MapGridDataModel.instance.astarGrid.calculateLinks();
+					}
+					if( astar.findPath() ) 
 					{
 						var roadsArray:Array = astar.path;
 						if(roadsArray && roadsArray.length>0){
