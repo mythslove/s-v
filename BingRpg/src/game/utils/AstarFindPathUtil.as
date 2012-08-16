@@ -25,10 +25,14 @@
 		private var _yNum:int = 0; 
 		private var _map:Array = null ;
 		private var _impactArray:Array = null ;
-		private var _openList:Array = null ;
-		private var _closeList:Array = null ;
-		private var _isFinded:Boolean = false ;
+		private var _openList:BinaryHeap = null ;
+		private var _nowversion:int ;
 		private static var _instance:AstarFindPathUtil = null;
+		
+		private var justMinFun:Function = function(x:Object, y:Object):Boolean {
+			return x.F < y.F   ;
+		};
+		
 		/**
 		 *
 		 * @param tileWidth
@@ -55,6 +59,7 @@
 		
 
 		public function searchPath(startPoint:Point , endPoint:Point  ):Array{
+			++_nowversion;
 			initData() ;
 			//计算终点（处理当用户 点击的地方不是碰撞块的时候）
 			var tempEndPoint:Point = checkEndPoint(startPoint,endPoint);
@@ -62,77 +67,63 @@
 				return null;
 			}
 			var currentNode:Node = _map[startPoint.y][startPoint.x]; 
+			currentNode.version = _nowversion;
 			var endNode:Node = _map[endPoint.y][endPoint.x]; 
 			if(currentNode==null || endNode ==null ){
 				return null ;
 			}
-			_openList.push(currentNode); 
-			while(_openList.length>0){
-				
-				currentNode = _openList.shift();
-			
-				currentNode.isInOpen = false;
+			_openList.insert(currentNode); 
+			while(_openList.length>1 )
+			{
+				currentNode = _openList.pop() as Node ;
 				currentNode.isInClose = true;
-				_closeList.push(currentNode);	
 			
 				//当前节点==目标节点
 				if(currentNode.x==tempEndPoint.x && currentNode.y==tempEndPoint.y){
-					_isFinded = true;	//能达到终点，找到路径
-					break;
+					return createPath(startPoint.x, startPoint.y,tempEndPoint.x , tempEndPoint.y );
 				}
-	
 				if(currentNode.x==endPoint.x && currentNode.y==endPoint.y){
-					_isFinded = true ;
-					break;
+					return createPath(startPoint.x, startPoint.y,endPoint.x , endPoint.y ); 
 				}
 				
 			
 				var aroundNodes:Array = getAroundsNode(currentNode.x, currentNode.y);
 				var len:int = aroundNodes.length ;
 				var node:Node ;
-				var g:int , h:int ;
+				var g:int , h:int ,f:int ;
 				for ( var i:int = 0 ; i< len ; ++i)
 				{
 					node = aroundNodes[i] ;
 					g = this.getGValue(currentNode, node);
 					h = this.getHValue( node,endNode);
-					
-					if (node.isInOpen)	
+					f = g+h ;
+					if (node.version == _nowversion )	
 					{
-						if (g < node.G)
+						if ( node.F > f) 
 						{
 							node.G = g;
 							node.H = h;
-							node.F = g + h;
+							node.F = f;
 							node.parentNode = currentNode;
-							findAndSort(node);
 						}
 					}
 					else
 					{
 						node.G = g;
 						node.H = h;
-						node.F = g + h;
+						node.F =f;
 						node.parentNode = currentNode;
-						insertAndSort(node);
+						_openList.insert(node);
+						node.version = _nowversion ;
 					}
 				}
 			}
-			if (this._isFinded)	
-			{
-				var path:Array = createPath(startPoint.x, startPoint.y);
-				this.release(); 
-				return path;
-			}else{
-				this.release();
-				return null;
-			}
+			return null;
 		}
 		
 
 		private function initData():void{
-			_openList = [];
-			_closeList = [];
+			_openList = new BinaryHeap(justMinFun) ;
 			initMap();
 		}
 		
@@ -206,59 +197,18 @@
 		}
 		
 	
-		private function createPath(xStart:int, yStart:int):Array
+		private function createPath(xStart:int, yStart:int , endX:int , endY:int ):Array
 		{
+			var startNode:Node = _map[yStart][xStart] as Node ;
+			var endNode:Node = _map[endY][endX] as Node ;
 			var path:Array = [] ;
-			var node:Node = _closeList.pop();
-			while (node.x != xStart || node.y != yStart)
-			{
-				path.unshift(IsoMapHelp.getPixelPoint( _cellWidth , _cellHeight ,  node.x, node.y ) ); 
-				node = node.parentNode ;
+			var node:Node = endNode ;
+			path.push(IsoMapHelp.getPixelPoint( _cellWidth , _cellHeight ,  node.x, node.y ) );
+			while (node != startNode){
+				node = node.parentNode;
+				path.unshift(IsoMapHelp.getPixelPoint( _cellWidth , _cellHeight ,  node.x, node.y ) );
 			}
-			path.unshift(IsoMapHelp.getPixelPoint( _cellWidth , _cellHeight ,  node.x, node.y ) );
 			return path;
-		}
-		
-	
-		private function findAndSort(node:Node):void
-		{
-			var listLength:int =  _openList.length;
-			
-			if (listLength < 1) return;
-			for (var i:int=0; i<listLength; ++i )
-			{
-				if (node.F <=  _openList[i].F)
-				{
-					this._openList.splice(i, 0, node); 
-				}
-				if (node.x == _openList[i].x && node.y == _openList[i].y)
-				{
-					this._openList.splice(i, 1); 
-				}
-			}
-		}
-		
-
-		private function insertAndSort(node:Node):void
-		{
-			node.isInOpen= true;
-			var len:int =  _openList.length ;
-			if (len == 0)
-			{
-				this._openList.push(node);
-				
-			} else{
-				for (var i:int=0; i<len ; ++i)
-				{
-					if (node.F <=  _openList[i].F) 
-					{
-						this._openList.splice(i, 0, node);
-						return;
-					}
-				}
-				this._openList.push(node) ;
-			}
-			
 		}
 		
 
@@ -367,11 +317,9 @@
 	
 		private function isWalkable(x:int, y:int):Boolean
 		{
-			
 			if(x<0||y<0||x>=_xNum ||y>=_yNum*2-1){
 				return false;
 			}
-		
 			if(_impactArray[y+"-"+x]==true){
 				return false;
 			}
@@ -384,7 +332,6 @@
 			if(_map!=null){
 			
 				for( yy = 0 ; yy<len ; ++yy ){
-					
 					for( xx = 0 ; xx<_xNum ; ++xx ){
 						_map[yy][xx].init() ;
 					}
@@ -394,34 +341,13 @@
 				
 				for(var yy:int = 0 ; yy<len ; ++yy ){
 					_map[yy] = [];
-				
 					for(var xx:int = 0 ; xx<_xNum ; ++xx ){
 						_map[yy][xx] = new Node(xx,yy);
 					}
 				}
 			}
 		}
-
-		public function release():void
-		{
-			var len:int =  _closeList.length ;
-			for(var i:int = 0 ; i<len ; ++i ){
-				_closeList[i] .release() ;
-				_closeList[i] = null ;
-			}
-			_closeList.length = 0 ;
-			_closeList = null;
-			
-			len =  _openList.length ;
-			for(i = 0 ; i<len ; ++i ){
-				_openList[i] .release() ;
-				_openList[i] = null ;
-			}
-			_openList.length = 0 ;
-			_openList = null;
-			
-			_isFinded = false;
-		}
+		
 	}
 }
 //=========================
@@ -432,8 +358,8 @@ class Node{
 	public var x:int = 0;
 	public var y:int = 0;
 	public var parentNode:Node = null; 
-	public var isInOpen:Boolean = false;
 	public var isInClose:Boolean = false ;
+	public var version:int ;
 
 	public function Node( px:int , py:int ){
 		x=px;
@@ -443,14 +369,77 @@ class Node{
 
 	public function init():void{
 		parentNode = null ;
-		isInOpen = false ;
 		isInClose = false ;
 		F=0;
 		H=0;
 		G=0;
 	}
+}
+
+
+
+
+
+
+
+
+
+class BinaryHeap
+{
+	public var a:Array = [];
+	public var justMinFun:Function = function(x:Object, y:Object):Boolean {
+		return x < y  ;
+	};
 	
-	public function release():void {
-		parentNode = null ;
+	public function BinaryHeap( justMinFun:Function=null ){
+		a.push(-1);
+		if( justMinFun!=null ){
+			this.justMinFun = justMinFun ;
+		}
+	}
+	
+	public function get length():int{
+		return a.length;
+	}
+	
+	public function insert(value:Object):void {
+		var p:int = a.length;
+		a[p] = value;
+		var pp:int = p >> 1;
+		while (p > 1 && justMinFun(a[p], a[pp])){
+			var temp:Object = a[p];
+			a[p] = a[pp];
+			a[pp] = temp;
+			p = pp;
+			pp = p >> 1;
+		}
+	}
+	
+	public function pop():Object {
+		var min:Object = a[1];
+		a[1] = a[a.length - 1];
+		a.pop();
+		var p:int = 1;
+		var l:int = a.length;
+		var sp1:int = p << 1;
+		var sp2:int = sp1 + 1;
+		while (sp1 < l){
+			if (sp2 < l){
+				var minp:int = justMinFun(a[sp2], a[sp1]) ? sp2 : sp1;
+			} else {
+				minp = sp1;
+			}
+			if (justMinFun(a[minp], a[p])){
+				var temp:Object = a[p];
+				a[p] = a[minp];
+				a[minp] = temp;
+				p = minp;
+				sp1 = p << 1;
+				sp2 = sp1 + 1;
+			} else {
+				break;
+			}
+		}
+		return min;
 	}
 }
