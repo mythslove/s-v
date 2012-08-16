@@ -33,7 +33,7 @@ package bing.iso.path
 			return search();
 		}
 		
-		private function search():Boolean {
+		public function search():Boolean {
 			var node:Node = _startNode;
 			node.version = nowversion;
 			while (node != _endNode){
