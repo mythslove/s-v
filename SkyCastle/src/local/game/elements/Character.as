@@ -10,6 +10,7 @@ package local.game.elements
 	import flash.events.Event;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
+	import flash.utils.getTimer;
 	
 	import local.comm.GameSetting;
 	import local.enum.AvatarAction;
@@ -119,6 +120,7 @@ package local.game.elements
 			{
 				if(MapGridDataModel.instance.astarGrid.getNode(nodeX,nodeZ).walkable)
 				{
+					var t:Number = getTimer();
 					MapGridDataModel.instance.astarGrid.setStartNode( nodeX,nodeZ );
 					MapGridDataModel.instance.astarGrid.setEndNode( endNodeX,endNodeZ );
 					MapGridDataModel.instance.astarGrid.calculateLinks();
