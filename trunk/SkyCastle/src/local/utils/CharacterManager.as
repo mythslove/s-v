@@ -53,7 +53,7 @@ package local.utils
 			if(GameData.isHome){
 				var len:int = _allNpcClass.length ;
 				npcs = new Vector.<NPC>();
-				if( PlayerModel.instance.me.level>GameData.LV3 )
+				if( PlayerModel.instance.currentPlayer.level>GameData.LV3 )
 				{
 					for( var i:int = 0 ; i<len-2 ; ++i){
 						npc = new 	_allNpcClass[i]() as NPC ;
@@ -65,7 +65,7 @@ package local.utils
 					}
 				}
 				
-				if( PlayerModel.instance.me.level>GameData.LV2 )
+				if( PlayerModel.instance.currentPlayer.level>GameData.LV2 )
 				{
 					for( i = 0 ; i<len ; ++i){
 						npc = new 	_allNpcClass[i]() as NPC ;

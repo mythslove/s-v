@@ -328,7 +328,7 @@ package local.game
 				mapVO = bytes.readObject() as MapVO ;
 				MapModel.instance.mapVO = mapVO ;
 			}
-			var player:PlayerVO = GameData.isHome ? PlayerModel.instance.me : PlayerModel.instance.friend ;
+			var player:PlayerVO = GameData.isHome ? PlayerModel.instance.me : PlayerModel.instance.currentPlayer ;
 			var building:Building ;
 			var currentStep:int ;
 			//基础建筑
