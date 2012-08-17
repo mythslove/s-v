@@ -1,21 +1,3 @@
-//////////////////////////////////////////////////////////////////////////////////////
-//
-//  Copyright 2012 Freshplanet (http://freshplanet.com | opensource@freshplanet.com)
-//  
-//  Licensed under the Apache License, Version 2.0 (the "License");
-//  you may not use this file except in compliance with the License.
-//  You may obtain a copy of the License at
-//  
-//    http://www.apache.org/licenses/LICENSE-2.0
-//  
-//  Unless required by applicable law or agreed to in writing, software
-//  distributed under the License is distributed on an "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  See the License for the specific language governing permissions and
-//  limitations under the License.
-//  
-//////////////////////////////////////////////////////////////////////////////////////
-
 package bing.components.ext
 {
 	import flash.display.DisplayObject;
@@ -32,12 +14,6 @@ package bing.components.ext
 	
 	public class ScrollControllerV extends EventDispatcher
 	{
-		// --------------------------------------------------------------------------------------//
-		//																						 //
-		// 									   CONSTANTS										 //
-		// 																						 //
-		// --------------------------------------------------------------------------------------//
-		
 		/**
 		 * Event dispatched every time the scroll position changes.
 		 * Read <code>scrollPosition</code> to know the current scroll position.
@@ -132,6 +108,7 @@ package bing.components.ext
 				_container.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
 				_container.removeEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
 				_container.removeEventListener(MouseEvent.MOUSE_UP, onMouseUp);
+				_container.removeEventListener(MouseEvent.ROLL_OUT, onMouseUp );
 				_container.removeEventListener(Event.ENTER_FRAME, onEnterFrame);
 			}
 			
@@ -313,7 +290,7 @@ package bing.components.ext
 		// Config rectangles
 		private var _contentRect : Rectangle;
 		private var _containerViewport : Rectangle;
-		 
+		
 		// Scroll bar
 		private var _scrollBar : Shape;
 		private var _scrollBarFadeOutTimer : Timer;
@@ -710,6 +687,7 @@ package bing.components.ext
 			_container.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove );
 			_container.addEventListener(MouseEvent.MOUSE_OUT, onMouseOut );
 			_container.addEventListener(MouseEvent.MOUSE_UP, onMouseUp );
+			_container.addEventListener(MouseEvent.ROLL_OUT, onMouseUp );
 			_container.addEventListener(Event.ENTER_FRAME, onEnterFrame );
 			
 			// DEBUG INFO
@@ -725,6 +703,7 @@ package bing.components.ext
 			_container.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
 			_container.removeEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
 			_container.removeEventListener(MouseEvent.MOUSE_UP, onMouseUp);
+			_container.removeEventListener(MouseEvent.ROLL_OUT, onMouseUp );
 			
 			// If we get a mouse down and a mouse up between two frames, we need to either stop the scrolling,
 			// either update the speed.
@@ -773,7 +752,7 @@ package bing.components.ext
 				trace('xx onMouseMove - currentFingerPosition = ' + _currentFingerPosition);
 			}
 		}
-				
+		
 		private function onEnterFrame( event : Event ) : void
 		{
 			// DEBUG INFO
@@ -818,7 +797,7 @@ package bing.components.ext
 				trace('-- onExitFrame');
 			}
 		}
-				
+		
 		private function onScrollBarFadeOutTimerComplete( event : TimerEvent ) : void
 		{
 			if(_scrollBar)
