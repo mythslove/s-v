@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 width="280" height="139">
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import tool.comm.GlobalDispatcher;
+			import tool.events.BuildingSettingEvent;
+			import tool.local.vos.BitmapAnimResVO;
+			
+			private var _vo:BitmapAnimResVO ;
+			
+			public function showBitmap( vo:BitmapAnimResVO ):void
+			{
+				this._vo  = vo ;
+				if(vo){
+					txtPivotX.text = vo.offsetX+"";
+					txtPivotY.text = vo.offsetY+"";
+					txtRow.text = vo.row+"";
+					txtCol.text = vo.col+"";
+					txtFrames.text = vo.frame+"";
+					txtRate.text = vo.rate+"";
+					cbkAnim.selected = vo.isAnim ;
+				}
+				else
+				{
+					txtPivotX.text = "";
+					txtPivotY.text = "";
+					txtRow.text = "";
+					txtCol.text = "";
+					txtFrames.text = "";
+					txtRate.text = "";
+					cbkAnim.selected = false ;
+				}
+			}
+			
+			
+			protected function cbkAnim_clickHandler(event:MouseEvent):void
+			{
+				if(_vo){
+					_vo.isAnim = cbkAnim.selected ;
+					if(_vo.isAnim)
+					{
+						if(int(txtRate.text)<1) txtRate.text = "1" ;
+						if(int(txtFrames.text)<1) txtFrames.text = "1" ;
+						if(int(txtRow.text)<1) txtRow.text = "1" ;
+						if(int(txtCol.text)<1) txtCol.text = "1" ;
+					}
+					else
+					{
+						txtRate.text = "0" ;
+						txtFrames.text = "0" ;
+						txtRow.text = "0" ;
+						txtCol.text = "0" ;
+					}
+					_vo.row = int(txtRow.text) ;
+					_vo.col = int(txtCol.text) ;
+					_vo.frame = int(txtFrames.text) ;
+					_vo.rate = int(txtRate.text) ;
+				}
+			}
+			
+			protected function ok_clickHandler(event:MouseEvent):void
+			{
+				if(_vo){
+					cbkAnim_clickHandler( null ) ;
+					var evt:BuildingSettingEvent = new BuildingSettingEvent( BuildingSettingEvent.CHANGE) ;
+					evt.vo = _vo ;
+					GlobalDispatcher.instance.dispatchEvent( evt );
+				}
+			}
+			
+		]]>
+	</fx:Script>
+	<s:Label x="10" y="20" text="offsetX"/>
+	<s:Label x="143" y="20" text="offsetY"/>
+	<s:TextInput id="txtPivotX" x="53" y="15" width="69" prompt="图片偏移值" textAlign="center"/>
+	<s:TextInput id="txtPivotY" x="184" y="15" width="69" prompt="图片偏移值" textAlign="center"/>
+	<s:Label x="10" y="50" text="row"/>
+	<s:Label x="10" y="80" text="rate"/>
+	<s:Label x="143" y="80" text="frames"/>
+	<s:TextInput id="txtRate" x="53" y="75" width="69" prompt="播放速度" textAlign="center"/>
+	<s:TextInput id="txtFrames" x="184" y="75" width="69" prompt="帧数" textAlign="center"/>
+	<s:Label x="143" y="50" text="col"/>
+	<s:TextInput id="txtRow" x="53" y="45" width="69" prompt="行数" textAlign="center"/>
+	<s:TextInput id="txtCol" x="184" y="45" width="69" prompt="列数" textAlign="center"/>
+	<s:CheckBox id="cbkAnim" x="10" y="111" label="启用动画" click="cbkAnim_clickHandler(event)"/>
+	<s:Button x="183" y="108" label="确定" click="ok_clickHandler(event)"/>
+</s:Group>
