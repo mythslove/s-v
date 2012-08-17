@@ -32,7 +32,7 @@ package local.model
 		
 		public var me:PlayerVO ; //当前玩家的信息
 		
-		public var friend:PlayerVO ; //去好友玩家的信息
+		public var currentPlayer:PlayerVO ; //当前在哪个玩家村庄，当在自己村庄时 currentPlayer = me ;
 		
 		private var _ro:GameRemote ;
 		public function PlayerModel()
@@ -60,8 +60,8 @@ package local.model
 						GlobalDispatcher.instance.dispatchEvent( new UserInfoEvent(UserInfoEvent.USER_INFO_UPDATED));
 					} else {
 						GameData.isHome = false ;
-						friend = player ;
 					}
+					currentPlayer = player ;
 					PopUpManager.instance.removeCurrentPopup();
 					GameWorld.instance.initWorld();
 					break;

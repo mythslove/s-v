@@ -29,7 +29,7 @@ package local.utils
 			}
 			else
 			{
-				var level:int = GameData.isHome? PlayerModel.instance.me.level : PlayerModel.instance.friend.level ;
+				var level:int = GameData.isHome? PlayerModel.instance.me.level : PlayerModel.instance.currentPlayer.level ;
 				if(level>25){
 					point.x = GameData.heroBornPoint1.nodeX ;
 					point.y = GameData.heroBornPoint1.nodeZ ;
