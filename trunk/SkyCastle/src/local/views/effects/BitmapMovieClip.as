@@ -48,10 +48,10 @@ package local.views.effects
 		public function get currentFrameLabel():String{return _mc.currentFrameLabel ;}
 		
 		
-		private var _rate:int = 3 ;
+		private var _rate:int = 2 ;
 		public function get rate():int{ return _rate ; }
 		public function set rate(value:int):void{ _rate = _tempRate = value }
-		private var _tempRate:int=3 ;
+		private var _tempRate:int=2 ;
 		
 		
 		/**
