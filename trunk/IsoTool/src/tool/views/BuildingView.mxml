@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
+				   xmlns:s="library://ns.adobe.com/flex/spark"
+				   xmlns:mx="library://ns.adobe.com/flex/mx"
+				   xmlns:views="tool.views.*" creationComplete="init();"
+				   width="100%" height="100%">
+	<s:layout>
+		<s:HorizontalLayout/>
+	</s:layout>
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import bing.iso.IsoUtils;
+			import bing.utils.ContainerUtil;
+			
+			import com.greensock.TweenMax;
+			
+			import tool.comm.GlobalDispatcher;
+			import tool.comm.Setting;
+			import tool.events.BuildingSettingEvent;
+			import tool.local.vos.BitmapAnimResVO;
+			import tool.utils.BuildingFileUtil;
+			import tool.views.components.AnimObject;
+			import tool.views.components.RoadsLayerObject;
+			
+			private var _loader:Loader;
+			
+			/* 初始化 */
+			private function init():void
+			{
+				GlobalDispatcher.instance.addEventListener ( BuildingSettingEvent.CHANGE , globalEvtHandler );
+				GlobalDispatcher.instance.addEventListener ( BuildingSettingEvent.DELETE , globalEvtHandler );
+				addEventListener(Event.ENTER_FRAME , update );
+				
+				addEventListener(MouseEvent.MOUSE_OVER, onMouseHandler );
+				addEventListener(MouseEvent.MOUSE_DOWN , onMouseHandler );
+				addEventListener(MouseEvent.MOUSE_UP , onMouseHandler );
+				addEventListener(MouseEvent.MOUSE_OUT , onMouseHandler );
+				
+				drawZone();
+			}
+			
+			/*画区域  */
+			private function drawZone():void
+			{
+				var xPan:int = int(txtGridX.text) ;
+				var zPan:int = int(txtGridZ.text) ;
+				container.graphics.clear();
+				
+				container.graphics.beginFill(0);
+				container.graphics.moveTo( 0,0);
+				
+				var p:Vector3D = new Vector3D();
+				var screenPos:Point =new Point();
+				
+				p.x = xPan; p.z=0;
+				screenPos = IsoUtils.isoToScreen(p);
+				container.graphics.lineTo( screenPos.x*Setting.SIZE , screenPos.y*Setting.SIZE);
+				
+				p.x = xPan; p.z=zPan;
+				screenPos = IsoUtils.isoToScreen(p);
+				container.graphics.lineTo( screenPos.x*Setting.SIZE ,screenPos.y*Setting.SIZE);
+				
+				p.x = 0; p.z=zPan;
+				screenPos = IsoUtils.isoToScreen(p);
+				container.graphics.lineTo( screenPos.x*Setting.SIZE ,screenPos.y*Setting.SIZE);
+				
+				container.graphics.lineTo( 0,0);
+				
+				container.graphics.endFill();
+			}
+			
+			/*鼠标移动图片  */
+			private function onMouseHandler( e:MouseEvent ):void
+			{
+				if(e.target is AnimObject && !(e.target is RoadsLayerObject ) )
+				{
+					var obj:AnimObject = e.target as AnimObject ;
+					switch( e.type)
+					{
+						case MouseEvent.MOUSE_OVER:
+							TweenMax.to(obj, 0, {glowFilter:{color:0xffcc00, alpha:1, blurX:3, blurY:3, strength:5}});
+							break ;	
+						case MouseEvent.MOUSE_DOWN:
+							animView.showBitmap( obj.vo );
+							obj.startDrag(false);
+							break ;
+						default:
+							obj.filters=null;
+							obj.stopDrag() ;
+							obj.vo.offsetX = obj.x ;
+							obj.vo.offsetY = obj.y ;
+							animView.txtPivotX.text =  obj.x+"";
+							animView.txtPivotY.text =  obj.y+"";
+							break ;
+					}
+				}
+			}
+			
+			//直接拖放
+			protected function container_nativeDragEnterHandler(event:NativeDragEvent):void
+			{
+				NativeDragManager.dropAction = NativeDragActions.COPY ; 
+				NativeDragManager.acceptDragDrop(event.target as InteractiveObject);
+			}
+			
+			protected function container_nativeDragDropHandler(event:NativeDragEvent):void
+			{
+				var file:File =  event.clipboard.getData( event.clipboard.formats[0])[0] as File;
+				readFile(file);
+			}
+			private function readFile(file:File):void
+			{
+				var ext:String= file.extension.toLowerCase() ;
+				if(ext=="res"){
+					ContainerUtil.removeChildren( container );
+					BuildingFileUtil.readBuilding( file , container );
+					txtGridX.text = BuildingFileUtil.gridX+"";
+					txtGridZ.text = BuildingFileUtil.gridZ+"";
+					lblName.text = file.name;
+					drawZone();
+					for( var i:int = 0 ; i <container.numChildren ; ++i){
+						if( container.getChildAt(i) is RoadsLayerObject){
+							roadsView.showBitmap( (container.getChildAt(i) as RoadsLayerObject).vo );
+							break ;
+						}
+					}
+					return ;
+				}
+				else if(ext !="png") return ;
+				
+				if(_loader){
+					_loader.contentLoaderInfo.removeEventListener( Event.COMPLETE , loadedHandler );
+					_loader.unloadAndStop();
+				}
+				_loader = new Loader();
+				_loader.contentLoaderInfo.addEventListener( Event.COMPLETE , loadedHandler );
+				_loader.load( new URLRequest(file.url));
+			}
+			
+			private function loadedHandler( e:Event ):void
+			{
+				_loader.contentLoaderInfo.removeEventListener( Event.COMPLETE , loadedHandler );
+				
+				var vo:BitmapAnimResVO = new BitmapAnimResVO();
+				vo.bmds = Vector.<BitmapData>( [ (_loader.content as Bitmap).bitmapData]) ;
+				vo.png = vo.bmds[0].clone() ;
+				
+				var animObj:AnimObject = new AnimObject();
+				container.addChild( animObj );
+				animObj.setAnimResVO( vo );
+				animView.showBitmap( vo );
+			}
+			
+			/*接收和处理全局事件   */
+			private function globalEvtHandler( e:BuildingSettingEvent ):void
+			{
+				var obj:AnimObject ;
+				for( var i:int = 0 ; i < container.numChildren ; ++i)
+				{
+					obj = container.getChildAt(i) as AnimObject ;
+					if( obj && obj.vo==e.vo )
+					{
+						break ;
+					}
+				}
+				switch(e.type)
+				{
+					case BuildingSettingEvent.CHANGE:
+						obj.setAnimResVO( e.vo ) ;
+						break ;
+					case BuildingSettingEvent.DELETE:
+						container.removeChild( obj );
+						if(obj is RoadsLayerObject){
+							roadsView.showBitmap( null );
+						}else{
+							animView.showBitmap( null );
+						}
+						break ;
+				}
+			}
+			
+			/*处理动画  */
+			private function update( e:Event ):void
+			{
+				var obj:AnimObject ;
+				for( var i:int = 0 ; i < container.numChildren ; ++i)
+				{
+					obj = container.getChildAt(i) as AnimObject ;
+					if( obj && obj.vo.isAnim )
+					{
+						obj.update() ;
+					}
+				}
+			}
+			
+			/* 设置建筑占用格子数  */
+			protected function gridBtn_clickHandler(event:MouseEvent):void
+			{
+				var gridX:int = int(txtGridX.text) ;
+				var gridZ:int = int(txtGridZ.text) ;
+				if(gridX<1) {
+					gridX = 1 ;
+					txtGridX.text = gridX +"" ;
+				}
+				if(gridZ<1) {
+					gridZ = 1 ;
+					txtGridZ.text = gridZ +"" ;
+				}
+				drawZone() ;
+			}
+	
+			/*清空，重置  */
+			protected function clear_clickHandler(event:MouseEvent):void
+			{
+				lblName.text = "";
+				ContainerUtil.removeChildren( container );
+				animView.showBitmap( null );
+			}
+			
+			/*显示demo  */
+			private function demo_clickHandler(event:MouseEvent):void
+			{
+				var file:File = new File( File.applicationDirectory.nativePath+"/asserts/Tall Building.res");
+				if(file.exists){
+					this.readFile( file);
+				}
+			}
+		]]>
+	</fx:Script>
+	<s:BorderContainer width="100%" height="100%" backgroundColor="#333333" borderColor="#000000"
+					   nativeDragEnter="container_nativeDragEnterHandler(event)" nativeDragDrop="container_nativeDragDropHandler(event)">
+
+		<s:Image mouseChildren="false" mouseEnabled="false" horizontalCenter="2" source="@Embed(source='../resource/cor.png')" verticalCenter="10"/>
+		<mx:UIComponent id="container" horizontalCenter="0" verticalCenter="-50"/>
+		
+	</s:BorderContainer>
+	<s:BorderContainer width="280" height="100%" backgroundColor="#E7E7E7" borderColor="#F7F7F7">
+		<s:Label id="lblName" x="6" y="10" text="新文件"/>
+		<mx:HRule y="35" width="96%" horizontalCenter="0"/>
+		<mx:HRule y="134" width="96%" horizontalCenter="0"/>
+		<mx:HRule y="297" width="96%" horizontalCenter="0"/>
+		<views:BuildingAnimView id="animView" y="145" left="5" right="5">
+		</views:BuildingAnimView>
+		<s:Button right="10" bottom="18" width="169" height="60" label="保存文件" 
+				  click="BuildingFileUtil.saveBuilding(container,int(txtGridX.text),int(txtGridZ.text))"/>
+		<s:Label x="10" y="76" text="gridX"/>
+		<s:Label x="127" y="76" text="gridZ"/>
+		<s:TextInput id="txtGridX" x="46" y="69" width="55" text="2" textAlign="center"/>
+		<s:TextInput id="txtGridZ" x="164" y="69" width="55" text="2" textAlign="center"/>
+		<s:Label x="10" y="45" fontSize="14" fontWeight="bold" text="建筑占用格子"/>
+		<s:Button y="99" right="10" width="93" height="27" label="设置"
+				  click="gridBtn_clickHandler(event)"/>
+		<s:Button left="10" bottom="10" width="70" height="30" label="重置"
+				  click="clear_clickHandler(event)"/>
+		<s:Button left="10" bottom="52" width="70" height="30" label="Demo"
+				  click="demo_clickHandler(event)"/>
+		<views:BuildingRoadsView id="roadsView" y="308" left="5" right="5">
+		</views:BuildingRoadsView>
+	</s:BorderContainer>
+</s:Group>

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 xmlns:views="tool.views.*"
+		 width="100%" height="100%" creationComplete="init()">
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import bing.iso.Rhombus;
+			import bing.utils.ContainerUtil;
+			
+			import mx.core.FlexGlobals;
+			import mx.managers.PopUpManager;
+			
+			import tool.comm.GlobalDispatcher;
+			import tool.comm.Setting;
+			import tool.events.MapEvent;
+			import tool.local.map.GameWorld;
+			import tool.local.vos.MapVO;
+			import tool.utils.MapFileUtil;
+			
+			public var world:GameWorld;
+			public var mapVO:MapVO ;
+			private var _loader:Loader ;
+			
+			private function init():void
+			{
+				GlobalDispatcher.instance.addEventListener( MapEvent.NEWMAP , globalHandler );
+				GlobalDispatcher.instance.addEventListener( MapEvent.MAPEVENT_CHANGE , globalHandler );
+				GlobalDispatcher.instance.addEventListener( MapEvent.MAP_OFFSET_CHANGE , globalHandler );
+			}
+			
+			private function globalHandler( e:MapEvent ):void
+			{
+				switch( e.type)
+				{
+					case MapEvent.NEWMAP:
+						mapVO = e.mapVO ;
+						mapVO.update() ;
+						updateIsoWorld();
+						infoView.showMapInfo( mapVO);
+						lblName.text="新项目";
+						break ;
+					case MapEvent.MAPEVENT_CHANGE:
+						mapVO = e.mapVO ;
+						mapVO.update() ;
+						updateIsoWorld();
+						break ;
+					case MapEvent.MAP_OFFSET_CHANGE:
+						mapVO = e.mapVO ;
+						world.panTo( mapVO.offsetX , mapVO.offsetY );
+						break ;
+				}
+			}
+			
+			private function updateIsoWorld():void
+			{
+				if(world) world.dispose();
+				ContainerUtil.removeChildren(container);
+				world = new GameWorld(mapVO );
+				container.addChild( world );
+				world.showImpact();
+			}
+			
+			//直接拖放
+			protected function container_nativeDragEnterHandler(event:NativeDragEvent):void
+			{
+				NativeDragManager.dropAction = NativeDragActions.COPY ; 
+				NativeDragManager.acceptDragDrop(event.target as InteractiveObject);
+			}
+			
+			protected function container_nativeDragDropHandler(event:NativeDragEvent):void
+			{
+				var file:File =  event.clipboard.getData( event.clipboard.formats[0])[0] as File;
+				readFile(file);
+			}
+			private function readFile(file:File):void
+			{
+				var ext:String= file.extension.toLowerCase() ;
+				if(ext=="map"){
+					//地图数据
+					mapVO = MapFileUtil.readMapFile( file );
+					updateIsoWorld();
+					infoView.showMapInfo( mapVO);
+					lblName.text = file.name ;
+				}
+				else if(ext=="jpg" || ext=="png")
+				{
+					//背景
+					if(mapVO){
+						_loader = new Loader();
+						_loader.contentLoaderInfo.addEventListener(Event.COMPLETE , loadedBgHandler );
+						_loader.load( new URLRequest(file.url));
+					}
+				}
+			}
+			
+			private function loadedBgHandler ( e:Event ):void
+			{
+				_loader.contentLoaderInfo.removeEventListener(Event.COMPLETE , loadedBgHandler );
+				var bg:Bitmap = _loader.content as Bitmap ;
+				mapVO.bg = bg.bitmapData ;
+				world.setBackGround( bg );
+			}
+			
+			/*设置当前模式为添加碰撞  */
+			protected function btnAddImpact_clickHandler(event:MouseEvent):void
+			{
+				if(!mapVO) return ;
+				ContainerUtil.removeChildren(world.mouseContainer);
+				world.mouseContainer.addChild( new Rhombus(Setting.SIZE,0xffcc00));
+				Setting.isAddImpact = true ;
+			}
+			
+			/*保存地图数据  */
+			private function saveMap():void
+			{
+				if(mapVO && mapVO.gridData && mapVO.xSpan>1 && mapVO.zSpan>1 ){
+					MapFileUtil.saveMap( mapVO );
+				}
+			}
+		]]>
+	</fx:Script>
+	<s:layout>
+		<s:HorizontalLayout/>
+	</s:layout>
+	<s:BorderContainer id="my" width="100%" height="100%" backgroundColor="#333333" borderColor="#000000" creationComplete="my.contentGroup.clipAndEnableScrolling=true"
+					   nativeDragEnter="container_nativeDragEnterHandler(event)" nativeDragDrop="container_nativeDragDropHandler(event)">
+		<mx:UIComponent id="container" />
+	</s:BorderContainer>
+	<s:BorderContainer width="280" height="100%" backgroundColor="#E7E7E7" borderColor="#F7F7F7">
+		<s:Label id="lblName" x="10" y="10" text="新地图"/>
+		<mx:HRule y="30" width="96%" horizontalCenter="0"/>
+		<s:Button right="10" bottom="10" width="143" height="70" label="保存地图" click="saveMap()"/>
+		<s:Button left="10" bottom="10" width="82" height="31" label="新建" 
+				  click="PopUpManager.centerPopUp(PopUpManager.createPopUp(FlexGlobals.topLevelApplication as DisplayObject,NewMapPopUp,true))"/>
+		<views:MapInfoView id="infoView" y="40" horizontalCenter="0">
+		</views:MapInfoView>
+		<s:Button id="btnAddImpact" left="10" bottom="50" width="82" height="31" label="碰撞模式"
+				  click="btnAddImpact_clickHandler(event)"/>
+		<s:TextArea x="6" y="328" width="264" height="87" editable="false"
+					text="1.按住Alt键移动地图&#xd;2.在添加碰撞模式时，按住Ctrl键为删除碰撞&#xd;3.查看地图时将map文件拖到场景上，再拖放背景图片到场景上&#xd;4.点右键取消碰撞模式"/>
+	</s:BorderContainer>
+</s:Group>
