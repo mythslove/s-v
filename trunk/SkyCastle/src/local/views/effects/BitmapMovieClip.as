@@ -50,7 +50,7 @@ package local.views.effects
 		
 		private var _rate:int = 2 ;
 		public function get rate():int{ return _rate ; }
-		public function set rate(value:int):void{ _rate = _tempRate = value }
+		public function set rate(value:int):void{ _rate = _tempRate = value; }
 		private var _tempRate:int=2 ;
 		
 		
