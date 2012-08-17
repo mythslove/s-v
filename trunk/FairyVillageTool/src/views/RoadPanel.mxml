@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark"  creationComplete="init();"
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%">
+	<s:layout>
+		<s:HorizontalLayout/>
+	</s:layout>
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import game.GameWorld;
+			import game.ResourceUtil;
+			import game.Road;
+			
+			private var _gameWorld:GameWorld;
+			private var _roadAlias:String ;
+			
+			private function init():void
+			{
+				_gameWorld = new GameWorld();
+				container.addChild( _gameWorld );
+			}
+			
+			//直接拖放
+			protected function container_nativeDragEnterHandler(event:NativeDragEvent):void
+			{
+				NativeDragManager.dropAction = NativeDragActions.COPY ; 
+				NativeDragManager.acceptDragDrop(event.target as InteractiveObject);
+			}
+			
+			protected function container_nativeDragDropHandler(event:NativeDragEvent):void
+			{
+				_gameWorld.roadScene.clearBuildings() ;
+				ResourceUtil.instance.clearPool();
+				var file:File =  event.clipboard.getData( event.clipboard.formats[0])[0] as File;
+				if(file.extension.toLowerCase()!="png") return ;
+				var url:String = file.url.substring(0, file.url.lastIndexOf("/")+1 );
+				var alias:String = file.name ;
+				if(file.name.indexOf(".")>-1){
+					alias = file.name.substring( 0,file.name.lastIndexOf(".") );
+				}
+				if(alias.indexOf("_")>-1){
+					alias = alias.substring( 0,alias.indexOf("_") );
+				}
+				if(url && alias){
+					_gameWorld.showRoad( url , alias );
+				}
+			}
+		]]>
+	</fx:Script>
+	<s:BorderContainer width="100%" height="100%" backgroundColor="#49842D" borderColor="#BABABA"  mouseChildren="false"
+					   nativeDragEnter="container_nativeDragEnterHandler(event)" nativeDragDrop="container_nativeDragDropHandler(event)">
+		<mx:UIComponent id="container" />
+	</s:BorderContainer>
+</s:Group>
