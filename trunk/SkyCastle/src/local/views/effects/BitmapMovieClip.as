@@ -47,6 +47,13 @@ package local.views.effects
 		public function get currentLabel():String{return _mc.currentLabel ;}
 		public function get currentFrameLabel():String{return _mc.currentFrameLabel ;}
 		
+		
+		private var _rate:int = 3 ;
+		public function get rate():int{ return _rate ; }
+		public function set rate(value:int):void{ _rate = _tempRate = value }
+		private var _tempRate:int=3 ;
+		
+		
 		/**
 		 * MovieClip缓存位图构造方法 
 		 * @param mc 要缓存的影片
@@ -146,15 +153,19 @@ package local.views.effects
 		public function update():Boolean
 		{
 			if(!_isPlaying) return false ;
-			
-			var temp:int = _mc.currentFrame-1 ;
-			if(!_bitmaps[temp]){
-				cacheAsBitmaps(temp);
-			}
-			if( bitmapData!=_bitmaps[temp] ){
-				bitmapData = _bitmaps[temp];
-				_bound =  _bounds[temp];
-				return true ;
+			++_tempRate;
+			if(_tempRate>=_rate) 
+			{
+				_tempRate=0 ;
+				var temp:int = _mc.currentFrame-1 ;
+				if(!_bitmaps[temp]){
+					cacheAsBitmaps(temp);
+				}
+				if( bitmapData!=_bitmaps[temp] ){
+					bitmapData = _bitmaps[temp];
+					_bound =  _bounds[temp];
+					return true ;
+				}
 			}
 			return false ;
 		}
