@@ -137,7 +137,7 @@ package local.game.elements
 			clearTimeout(_timeoutId);
 			if(action==AvatarAction.IDLE){
 				clearTimeout(_idleTimeId);
-				_idleTimeId = setTimeout(autoAction , 10000 );
+				_idleTimeId = setTimeout(autoAction , 15000 );
 			}else if(_idleTimeId>0){
 				clearTimeout(_idleTimeId);
 			}
