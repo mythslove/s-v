@@ -1,13 +1,13 @@
 package bing.starling.iso
 {
-	import bing.starling.iso.path.SGrid;
+	import bing.iso.path.Grid;
 	
 	import flash.geom.Rectangle;
 
 	public class SIsoScene extends SIsoObject
 	{
 		protected var _sprites:Vector.<SIsoObject> = new Vector.<SIsoObject>();
-		protected var _gridData:SGrid;
+		protected var _gridData:Grid;
 		
 		public function SIsoScene( size:int, xSpan:int = 1, zSpan:int =1 )
 		{
@@ -110,15 +110,15 @@ package bing.starling.iso
 		 * ********************************************************/
 		public function createGridData( gridX:int , gridZ:int ):void
 		{
-			_gridData = new SGrid( gridX , gridZ ) ;
+			_gridData = new Grid( gridX , gridZ ) ;
 		}
 		/**      返回网格数据      */
-		public function get gridData():SGrid
+		public function get gridData():Grid
 		{
 			return _gridData ;
 		}
 		/**  设置网格数据，有时需要共用一个网格数据源 */
-		public function set gridData( gird:SGrid ):void
+		public function set gridData( gird:Grid ):void
 		{
 			this._gridData = gird ;
 		}
