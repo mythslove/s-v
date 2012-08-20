@@ -8,7 +8,7 @@ package bing.map.layer
 	import flash.geom.Point;
 
 	/**
-	 * 碰撞层设置 
+	 * 遮罩层设置 
 	 * @author zhouzhanglin
 	 */	
 	public class MaskLayer
