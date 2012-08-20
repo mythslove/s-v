@@ -22,7 +22,7 @@ package
 	
 	/**
 	 * http://199.68.199.132/phpmyadmin/index.php  root	3bear#lcx@
-	 *  
+	 *   http://199.68.199.132/MyService/Apps/gateway.php?serviceName=ConfigService&methodName=configBase&uId=1&mId=MAP_01&sandbox=1&respType=file&gzip=n
 	 */	
 	[SWF( width="760",height="640",backgroundColor="#ffffff",frameRate="30")]
 	public class SkyCastle extends BaseGame
