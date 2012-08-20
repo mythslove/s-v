@@ -42,6 +42,11 @@ package bing.starling.iso
 			updateScreenPosition();
 		}
 		
+		/**
+		 * 重置设置占用的网格大小 
+		 * @param xSpan
+		 * @param zSpan
+		 */		
 		public function setSpan( xSpan:int , zSpan:int ):void
 		{
 			_xSpan = xSpan ;
