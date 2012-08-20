@@ -1,9 +1,9 @@
-package bing.starling.iso.path
+package  bing.iso.path
 {
 	/**
 	 * Represents a specific node evaluated as part of a pathfinding algorithm.
 	 */
-	public class SNode
+	public class Node
 	{
 		public var x:int;
 		public var y:int;
@@ -11,18 +11,19 @@ package bing.starling.iso.path
 		public var g:Number;
 		public var h:Number;
 		public var walkable:Boolean = false;
-		public var parent:SNode;
-		public var costMultiplier:Number = 1.0;
+		public var parent:Node;
+		public var links:Array;
+		public var version:int = 1; 
 		
-		public function SNode(x:int, y:int)
+		public function Node(x:int, y:int)
 		{
 			this.x = x;
 			this.y = y;
 		}
 		
-		public function clone():SNode
+		public function clone():Node
 		{
-			var node:SNode = new SNode(x,y);
+			var node:Node = new Node(x,y);
 			return node;
 		}
 	}

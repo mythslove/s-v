@@ -1,7 +1,7 @@
 package bing.starling.iso
 {
 	
-	import bing.starling.iso.path.SGrid;
+	import bing.iso.path.Grid;
 	
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
@@ -162,7 +162,7 @@ package bing.starling.iso
 		/**
 		 * Indicates whether the space occupied by this object can be occupied by another object.
 		 */
-		public function setWalkable(value:Boolean , grid:SGrid ):void
+		public function setWalkable(value:Boolean , grid:Grid ):void
 		{
 			updateSpanPosition();
 			var points:Vector.<Vector3D> = this.spanPosition ;
@@ -171,7 +171,7 @@ package bing.starling.iso
 				grid.setWalkable( Math.floor(point.x/_size) , Math.floor(point.z/_size) , value );
 			}
 		}
-		public function getWalkable( grid:SGrid ):Boolean
+		public function getWalkable( grid:Grid ):Boolean
 		{
 			var points:Vector.<Vector3D> = this.spanPosition ;
 			var flag:Boolean ;
@@ -188,7 +188,7 @@ package bing.starling.iso
 			return true ;
 		}
 		
-		public function getRotatable( grid:SGrid  ):Boolean
+		public function getRotatable( grid:Grid  ):Boolean
 		{
 			if(this._xSpan==this._zSpan) return true;
 			
