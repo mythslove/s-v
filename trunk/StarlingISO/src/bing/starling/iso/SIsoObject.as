@@ -42,6 +42,14 @@ package bing.starling.iso
 			updateScreenPosition();
 		}
 		
+		public function setSpan( xSpan:int , zSpan:int ):void
+		{
+			_xSpan = xSpan ;
+			_zSpan = zSpan ;
+			_position3D = new Vector3D();
+			updateScreenPosition();
+		}
+		
 		public function sort():void
 		{
 			this.isSort = true ;
