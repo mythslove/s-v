@@ -19,6 +19,11 @@ package
 	import local.model.vos.*;
 	import local.utils.SoundManager;
 	
+	
+	/**
+	 * http://199.68.199.132/phpmyadmin/index.php  root	3bear#lcx@
+	 *  
+	 */	
 	[SWF( width="760",height="640",backgroundColor="#ffffff",frameRate="30")]
 	public class SkyCastle extends BaseGame
 	{
