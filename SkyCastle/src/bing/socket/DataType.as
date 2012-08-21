@@ -21,5 +21,6 @@ package bing.socket
 		public static const DATA_TYPE_USHORT_ARRAY :int = 17 ;
 		public static const DATA_TYPE_DOUBLE_ARRAY :int = 18 ;
 		public static const DATA_TYPE_UTFSTRING_ARRAY :int = 19 ;
+		public static const DATA_TYPE_BYTES :int = 20 ;
 	}
 }

@@ -39,7 +39,7 @@ package bing.socket
 		
 		function writeUTFArray( name:String , value:Array ):void ;
 		
-		
+		function writeBytes( name:String , value:ByteArray ):void ;
 		
 		
 		

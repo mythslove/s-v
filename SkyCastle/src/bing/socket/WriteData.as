@@ -272,6 +272,21 @@ package bing.socket
 			++ _count ;
 		}
 		
+		/**
+		 * <p>写一个二进制数据</p>
+		 * <p>格式: name+type ( 名字+数据类型+数组长度(ushort类型)+数据)</p>
+		 * @param name
+		 * @param value 不能为null 
+		 */	
+		public function writeUTFArray(name:String, value:ByteArray):void
+		{
+			_bytes.writeUTF( name );
+			_bytes.writeByte( DataType.DATA_TYPE_BYTES );
+			var len:int = value.length ;
+			_bytes.writeBytes( value );
+			++ _count ;
+		}
+		
 		
 		
 		/**

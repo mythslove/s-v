@@ -75,6 +75,9 @@ package bing.socket
 					case DataType.DATA_TYPE_UTFSTRING_ARRAY :
 						_data[name] = this.$readUTFArray( bytes ) ;
 						break ;
+					case DataType.DATA_TYPE_BYTES :
+						_data[name] = this.$readBytes( bytes ) ;
+						break ;
 				}
 			}
 			
@@ -282,6 +285,20 @@ package bing.socket
 				arr.push( bytes.readUTF() );
 			}
 			return arr ;
+		}
+		
+		
+		public function readBytes( name:String ):ByteArray 
+		{
+			return _data[name];
+		}
+		private function $readBytes( bytes:ByteArray ):ByteArray
+		{
+			var temp:ByteArray = new ByteArray();
+			var len:uint = bytes.readUnsignedShort() ;
+			bytes.readBytes( temp , bytes.position , len ) ;
+			temp.position = 0 ;
+			return  temp ;
 		}
 	}
 }
