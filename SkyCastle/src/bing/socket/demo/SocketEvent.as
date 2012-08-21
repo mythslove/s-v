@@ -4,7 +4,7 @@ package bing.socket.demo
 	
 	import flash.events.Event;
 	
-	public class GameSocketEvent extends Event
+	public class SocketEvent extends Event
 	{
 		/**
 		 * 登录事件 
@@ -19,7 +19,7 @@ package bing.socket.demo
 		public var sonType:int ;
 		public var data:SocketObject;
 		
-		public function GameSocketEvent( type:String , sonType:int , body:SocketObject )
+		public function SocketEvent( type:String , sonType:int , body:SocketObject )
 		{
 			super(type, false, false);
 			this.sonType = sonType ;

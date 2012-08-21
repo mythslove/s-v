@@ -54,14 +54,14 @@ package bing.socket.demo
 			//读取body
 			var body:SocketObject = new SocketObject( bytes , false );
 			//发送事件 
-			var evt:GameSocketEvent ;
+			var evt:SocketEvent ;
 			switch( mainType)
 			{
 				case SocketLoginType.LOGIN:
-					evt = new GameSocketEvent( GameSocketEvent.LOGIN , sonType , body );
+					evt = new SocketEvent( SocketEvent.LOGIN , sonType , body );
 					break ;
 				case SocketRoomType.ROOM:
-					evt = new GameSocketEvent( GameSocketEvent.ROOM , sonType , body );
+					evt = new SocketEvent( SocketEvent.ROOM , sonType , body );
 					break ;
 			}
 			if(evt) dispatchEvent( evt );
