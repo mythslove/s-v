@@ -4,6 +4,8 @@ package bing.socket
 
 	public interface IWriteData
 	{
+		function writeBytes( name:String , value:ByteArray ):void ;
+		
 		function writeInt( name:String , value:int ):void ;
 		
 		function writeUInt( name:String , value:uint ):void ;
@@ -38,8 +40,6 @@ package bing.socket
 		function writeDoubleArray( name:String , value:Array ):void ;
 		
 		function writeUTFArray( name:String , value:Array ):void ;
-		
-		function writeBytes( name:String , value:ByteArray ):void ;
 		
 		
 		

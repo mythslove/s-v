@@ -16,6 +16,9 @@ package bing.socket
 				var type:int = bytes.readUnsignedByte() ;
 				switch( type )
 				{
+					case DataType.DATA_TYPE_BYTES :
+						_data[name] = this.$readBytes( bytes ) ;
+						break ;
 					case DataType.DATA_TYPE_BOOL:
 						_data[name] = ( bytes.readByte()==1 ) ;
 						break ;
@@ -75,9 +78,6 @@ package bing.socket
 					case DataType.DATA_TYPE_UTFSTRING_ARRAY :
 						_data[name] = this.$readUTFArray( bytes ) ;
 						break ;
-					case DataType.DATA_TYPE_BYTES :
-						_data[name] = this.$readBytes( bytes ) ;
-						break ;
 				}
 			}
 			
@@ -101,71 +101,35 @@ package bing.socket
 		 * @param name
 		 * @param value 不能为null , 可以为[]空数组
 		 */	
-		public function readInt(name:String):int
-		{
-			return _data[name];
+		public function readInt(name:String):int { return _data[name]; }
+		public function readUInt(name:String):uint { return _data[name]; }
+		public function readShort(name:String):Number { return _data[name]; }
+		public function readUShort(name:String):Number { return _data[name]; }
+		public function readDouble(name:String):Number { return _data[name]; }
+		public function readNull(name:String):Object { return _data[name]; }
+		public function readBoolean(name:String):Boolean { return _data[name]; }
+		public function readByte(name:String):int { return _data[name]; }
+		public function readUByte(name:String):int { return _data[name]; }
+		public function readUTF(name:String):String { return _data[name]; }
+		
+		
+		
+		
+		
+		
+		
+		
+		public function readBytes( name:String ):ByteArray  { return _data[name]; }
+		private function $readBytes( bytes:ByteArray ):ByteArray {
+			var temp:ByteArray = new ByteArray();
+			var len:uint = bytes.readUnsignedShort() ;
+			bytes.readBytes( temp , bytes.position , len ) ;
+			temp.position = 0 ;
+			return  temp ;
 		}
 		
-		public function readUInt(name:String):uint
-		{
-			return _data[name];
-		}
-		
-		public function readShort(name:String):Number
-		{
-			return _data[name];
-		}
-		
-		public function readUShort(name:String):Number
-		{
-			return _data[name];
-		}
-		
-		public function readDouble(name:String):Number
-		{
-			return _data[name];
-		}
-		
-		public function readNull(name:String):Object
-		{
-			return _data[name];
-		}
-		
-		public function readBoolean(name:String):Boolean
-		{
-			return _data[name];
-		}
-		
-		public function readByte(name:String):int
-		{
-			return _data[name];
-		}
-		
-		public function readUByte(name:String):int
-		{
-			return _data[name];
-		}
-		
-		public function readUTF(name:String):String
-		{
-			return _data[name];
-		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		public function readIntArray(name:String):Array
-		{
-			return _data[name];
-		}
-		private function $readIntArray( bytes:ByteArray ):Array
-		{
+		public function readIntArray(name:String):Array { return _data[name]; }
+		private function $readIntArray( bytes:ByteArray ):Array {
 			var arr:Array = [] ;
 			var len:uint = bytes.readUnsignedShort() ;
 			for( var i:int = 0 ; i<len ; ++i ){
@@ -174,12 +138,8 @@ package bing.socket
 			return arr ;
 		}
 		
-		public function readUIntArray(name:String):Array
-		{
-			return _data[name];
-		}
-		private function $readUIntArray( bytes:ByteArray ):Array
-		{
+		public function readUIntArray(name:String):Array { return _data[name]; }
+		private function $readUIntArray( bytes:ByteArray ):Array {
 			var arr:Array = [] ;
 			var len:uint = bytes.readUnsignedShort() ;
 			for( var i:int = 0 ; i<len ; ++i ){
@@ -188,12 +148,8 @@ package bing.socket
 			return arr ;
 		}
 		
-		public function readShortArray(name:String):Array
-		{
-			return _data[name];
-		}
-		private function $readShortArray( bytes:ByteArray ):Array
-		{
+		public function readShortArray(name:String):Array { return _data[name]; }
+		private function $readShortArray( bytes:ByteArray ):Array {
 			var arr:Array = [] ;
 			var len:uint = bytes.readUnsignedShort() ;
 			for( var i:int = 0 ; i<len ; ++i ){
@@ -202,12 +158,8 @@ package bing.socket
 			return arr ;
 		}
 		
-		public function readUShortArray(name:String):Array
-		{
-			return _data[name];
-		}
-		private function $readUShortArray( bytes:ByteArray ):Array
-		{
+		public function readUShortArray(name:String):Array { return _data[name]; }
+		private function $readUShortArray( bytes:ByteArray ):Array {
 			var arr:Array = [] ;
 			var len:uint = bytes.readUnsignedShort() ;
 			for( var i:int = 0 ; i<len ; ++i ){
@@ -216,12 +168,8 @@ package bing.socket
 			return arr ;
 		}
 		
-		public function readByteArray(name:String):Array
-		{
-			return _data[name];
-		}
-		private function $readByteArray( bytes:ByteArray ):Array
-		{
+		public function readByteArray(name:String):Array { return _data[name]; }
+		private function $readByteArray( bytes:ByteArray ):Array {
 			var arr:Array = [] ;
 			var len:uint = bytes.readUnsignedShort() ;
 			for( var i:int = 0 ; i<len ; ++i ){
@@ -230,12 +178,8 @@ package bing.socket
 			return arr ;
 		}
 		
-		public function readUByteArray(name:String):Array
-		{
-			return _data[name];
-		}
-		private function $readUByteArray( bytes:ByteArray ):Array
-		{
+		public function readUByteArray(name:String):Array { return _data[name]; }
+		private function $readUByteArray( bytes:ByteArray ):Array {
 			var arr:Array = [] ;
 			var len:uint = bytes.readUnsignedShort() ;
 			for( var i:int = 0 ; i<len ; ++i ){
@@ -244,12 +188,8 @@ package bing.socket
 			return arr ;
 		}
 		
-		public function readBoolArray(name:String):Array
-		{
-			return _data[name];
-		}
-		private function $readBoolArray( bytes:ByteArray ):Array
-		{
+		public function readBoolArray(name:String):Array{ return _data[name]; }
+		private function $readBoolArray( bytes:ByteArray ):Array {
 			var arr:Array = [] ;
 			var len:uint = bytes.readUnsignedShort() ;
 			for( var i:int = 0 ; i<len ; ++i ){
@@ -259,12 +199,8 @@ package bing.socket
 			return arr ;
 		}
 		
-		public function readDoubleArray(name:String):Array
-		{
-			return _data[name];
-		}
-		private function $readDoubleArray( bytes:ByteArray ):Array
-		{
+		public function readDoubleArray(name:String):Array { return _data[name]; }
+		private function $readDoubleArray( bytes:ByteArray ):Array {
 			var arr:Array = [] ;
 			var len:uint = bytes.readUnsignedShort() ;
 			for( var i:int = 0 ; i<len ; ++i ){
@@ -273,12 +209,8 @@ package bing.socket
 			return arr ;
 		}
 		
-		public function readUTFArray(name:String):Array
-		{
-			return _data[name];
-		}
-		private function $readUTFArray( bytes:ByteArray ):Array
-		{
+		public function readUTFArray(name:String):Array { return _data[name]; }
+		private function $readUTFArray( bytes:ByteArray ):Array {
 			var arr:Array = [] ;
 			var len:uint = bytes.readUnsignedShort() ;
 			for( var i:int = 0 ; i<len ; ++i ){
@@ -287,18 +219,5 @@ package bing.socket
 			return arr ;
 		}
 		
-		
-		public function readBytes( name:String ):ByteArray 
-		{
-			return _data[name];
-		}
-		private function $readBytes( bytes:ByteArray ):ByteArray
-		{
-			var temp:ByteArray = new ByteArray();
-			var len:uint = bytes.readUnsignedShort() ;
-			bytes.readBytes( temp , bytes.position , len ) ;
-			temp.position = 0 ;
-			return  temp ;
-		}
 	}
 }
