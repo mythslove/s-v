@@ -39,8 +39,12 @@ package local.views.base
 				addChild(_smallLoading);
 			}
 			//加载图片资源
-			ResourceUtil.instance.addEventListener( _resId , loadedHandler );
-			ResourceUtil.instance.loadRes( new ResVO(_resId , _url));
+			if(ResourceUtil.instance.checkResLoaded(_resId)){
+				loadedHandler(null);
+			}else{
+				ResourceUtil.instance.addEventListener( _resId , loadedHandler );
+				ResourceUtil.instance.loadRes( new ResVO(_resId , _url));
+			}
 		}
 		
 		private function loadedHandler(e:Event):void

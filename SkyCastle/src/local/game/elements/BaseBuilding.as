@@ -125,10 +125,14 @@ package local.game.elements
 		/* 显示建筑 */
 		protected function showSkin():void
 		{
-			ResourceUtil.instance.removeEventListener( buildingVO.baseVO.resId , resLoadedHandler );
-			ResourceUtil.instance.addEventListener( buildingVO.baseVO.resId , resLoadedHandler );
-			var resVO:ResVO = new ResVO( buildingVO.baseVO.resId , buildingVO.baseVO.url);
-			ResourceUtil.instance.loadRes( resVO );
+			if(ResourceUtil.instance.checkResLoaded(buildingVO.baseVO.resId)) {
+				resLoadedHandler(null);
+			} else {
+				ResourceUtil.instance.removeEventListener( buildingVO.baseVO.resId , resLoadedHandler );
+				ResourceUtil.instance.addEventListener( buildingVO.baseVO.resId , resLoadedHandler );
+				var resVO:ResVO = new ResVO( buildingVO.baseVO.resId , buildingVO.baseVO.url);
+				ResourceUtil.instance.loadRes( resVO );
+			}
 		}
 		
 		/* 加载资源完成*/
