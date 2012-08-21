@@ -8,9 +8,8 @@ package  bing.socket
 	import flash.utils.ByteArray;
 	
 	/**
-	 * 游戏socket基类 
+	 * socket处理类，作为基类用 
 	 * @author zhouzhanglin
-	 * @date 2010/9/5
 	 */	
 	public class BaseSocket extends EventDispatcher
 	{
@@ -123,9 +122,31 @@ package  bing.socket
 			}
 		}
 		
+		/**
+		 *  子类重写
+		 * @param bytes
+		 */		
 		protected function readData( bytes:ByteArray ):void
 		{
+			//例子:
 			
+//			//读取head
+//			var mainType:int = bytes.readUnsignedByte() ;
+//			var sonType:int = bytes.readUnsignedByte() ;
+//			//读取body
+//			var body:SocketObject = new SocketObject( bytes , false );
+//			//发送事件 
+//			var evt:GameSocketEvent ;
+//			switch( mainType)
+//			{
+//				case SocketLoginType.LOGIN:
+//					evt = new SocketEvent( GameSocketEvent.LOGIN , sonType , body );
+//					break ;
+//				case SocketRoomType.ROOM:
+//					evt = new SocketEvent( GameSocketEvent.ROOM , sonType , body );
+//					break ;
+//			}
+//			if(evt) dispatchEvent( evt );
 		}
 
 		protected function send( bytes:ByteArray):void{
