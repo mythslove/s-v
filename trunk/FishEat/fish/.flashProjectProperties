@@ -1,0 +1,24 @@
+﻿<projectDescription>
+	<id>1238637846607</id>
+	<name>fish</name>
+	<asVersion>0</asVersion>
+	<boundTemplate>file:///C|/Users/zhouzhanglin/AppData/Local/Adobe/Flash CS4/en/Configuration/Project/templates/boundClass_as3.as</boundTemplate>
+	<classTemplate>file:///C|/Users/zhouzhanglin/AppData/Local/Adobe/Flash CS4/en/Configuration/Project/templates/standardClass_as3.as</classTemplate>
+	<classPath>.</classPath>
+	<defaultApp/>
+	<rootURI>C:\Users\zhouzhanglin\Desktop\fish</rootURI>
+	<flexSDK/>
+	<sources editable="false"/>
+	<libraries editable="false"/>
+	<externalLibraries editable="false"/>
+	<compileList editable="false">
+		<uri label="fish.fla">file:///C|/Users/zhouzhanglin/Desktop/fish/fish.fla</uri>
+	</compileList>
+	<recentFiles editable="false">
+		<uri label="OnEnterFrameBeacon.as">file:///C|/Users/zhouzhanglin/Desktop/fish/mx/transitions/OnEnterFrameBeacon.as</uri>
+		<uri label="BroadcasterMX.as">file:///C|/Users/zhouzhanglin/Desktop/fish/mx/transitions/BroadcasterMX.as</uri>
+		<uri label="Tween.as">file:///C|/Users/zhouzhanglin/Desktop/fish/mx/transitions/Tween.as</uri>
+		<uri label="Bounce.as">file:///C|/Users/zhouzhanglin/Desktop/fish/mx/transitions/easing/Bounce.as</uri>
+	</recentFiles>
+	<locations editable="false"/>
+</projectDescription>
