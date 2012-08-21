@@ -61,6 +61,11 @@ package bing.socket
 			_writer.writeInt( name , value );
 		}
 		
+		public function writeUInt(name:String, value:uint):void
+		{
+			_writer.writeUInt( name , value );
+		}
+		
 		public function writeShort(name:String, value:int):void
 		{
 			_writer.writeShort( name , value );
@@ -94,6 +99,11 @@ package bing.socket
 		public function writeIntArray(name:String, value:Array):void
 		{
 			_writer.writeIntArray( name , value );
+		}
+		
+		public function writeUIntArray(name:String, value:Array):void
+		{
+			_writer.writeUIntArray( name , value );
 		}
 		
 		public function writeShortArray(name:String, value:Array):void

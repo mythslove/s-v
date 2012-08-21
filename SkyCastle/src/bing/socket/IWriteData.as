@@ -6,6 +6,8 @@ package bing.socket
 	{
 		function writeInt( name:String , value:int ):void ;
 		
+		function writeUInt( name:String , value:uint ):void ;
+		
 		function writeShort( name:String , value:int ):void ;
 		
 		function writeDouble( name:String , value:Number ):void ;
@@ -24,6 +26,8 @@ package bing.socket
 		
 		
 		function writeIntArray( name:String , value:Array ):void ;
+		
+		function writeUIntArray( name:String , value:Array ):void ;
 
 		function writeShortArray( name:String , value:Array ):void ;
 		
