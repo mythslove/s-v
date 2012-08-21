@@ -18,9 +18,6 @@ package game.net
 				case MsgType.ROOM: //房间
 					socketEvent = new SocketEvent(SocketEvent.ROOM);
 					break;
-				case MsgType.GAME: //游戏
-					socketEvent = new SocketEvent(SocketEvent.GAME);
-					break ;
 			}
 			
 			if(socketEvent!=null){
