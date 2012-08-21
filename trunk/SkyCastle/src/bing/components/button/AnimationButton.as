@@ -40,7 +40,9 @@ package bing.components.button
 			{
 				case MouseEvent.ROLL_OUT:
 				case MouseEvent.MOUSE_OUT:
-					this.gotoAndPlay(_lblHash["out"]);
+					if(this.enabled) {
+						this.gotoAndPlay(_lblHash["out"]);
+					}
 					break ;
 				case MouseEvent.MOUSE_UP :
 					if(this.enabled) {
@@ -48,10 +50,14 @@ package bing.components.button
 					}
 					break;
 				case MouseEvent.MOUSE_OVER :
-					this.gotoAndPlay(_lblHash["over"]);
+					if(this.enabled) {
+						this.gotoAndPlay(_lblHash["over"]);
+					}
 					break;
 				case MouseEvent.MOUSE_DOWN :
-					this.gotoAndPlay(_lblHash["down"]);
+					if(this.enabled) {
+						this.gotoAndPlay(_lblHash["down"]);
+					}
 					break;
 			}
 		}
