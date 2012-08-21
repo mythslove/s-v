@@ -97,6 +97,7 @@
 				_selectedMC = _mcListArray.source[index];
 				_mc = new (_loader.contentLoaderInfo.applicationDomain.getDefinition(_selectedMC) as Class)() as MovieClip ;
 				if(_mc){
+					txtFrames.text = _mc.totalFrames +"" ;
 					container.addChild(_mc);
 				}
 			}
@@ -128,13 +129,16 @@
 			}
 			private function onEnterFrameHandler( e:Event ):void
 			{
-				var rect:Rectangle = _mc.getBounds(_mc.parent);
-				if(maxW<rect.width) maxW = rect.width; 
-				if(maxH<rect.height) maxH = rect.height; 
+				var rect:Rectangle = _mc.getBounds(_mc);
+				if(maxW<rect.right) maxW = rect.right  ; 
+				if(maxH<rect.bottom) maxH = rect.bottom ; 
+				
 				if(minX>rect.x) minX = rect.x; 
 				if(minY>rect.y) minY = rect.y; 
 				temp++;
 				if(temp==_exportFrames*2){
+					maxW-=minX;
+					maxH-=minY ;
 					temp = 0 ;
 					_mc.gotoAndPlay(1);
 					_mc.removeEventListener(Event.ENTER_FRAME , onEnterFrameHandler);
@@ -150,7 +154,7 @@
 				var stream:FileStream = new FileStream();
 				try{
 					var name:String= temp<10?"00"+temp :  ( temp<100?"0"+temp:temp+"")
-					var file:File = new File(_exportFile.nativePath+"/"+_selectedMC+name+".png");
+					var file:File = new File(_exportFile.nativePath+"/"+_selectedMC+"_"+name+".png");
 					stream.open( file , FileMode.WRITE);
 					var pngEncoder:PNGEncoder = new PNGEncoder();
 					var bytes:ByteArray = pngEncoder.encode( bmd );
