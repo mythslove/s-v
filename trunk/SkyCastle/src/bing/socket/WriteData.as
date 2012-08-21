@@ -28,6 +28,20 @@ package bing.socket
 		}
 		
 		/**
+		 * <p>写一个uint类型的数据</p>
+		 * <p>格式: name+type+value ( 名字+数据类型+数据)</p>
+		 * @param name
+		 * @param value
+		 */		
+		public function writeUInt( name:String , value:uint ):void
+		{
+			_bytes.writeUTF( name );
+			_bytes.writeByte( DataType.DATA_TYPE_UINT );
+			_bytes.writeUnsignedInt( value );
+			++ _count ;
+		}
+		
+		/**
 		 * <p>写一个short类型的数据</p>
 		 * <p>格式: name+type+value ( 名字+数据类型+数据)</p>
 		 * @param name
@@ -139,6 +153,25 @@ package bing.socket
 			for( var i:int = 0 ; i<len ; ++i )
 			{
 				_bytes.writeInt( value[i] );
+			}
+			++ _count ;
+		}
+		
+		/**
+		 * <p>写一个全是Uint类型的数组</p>
+		 * <p>格式: name+type ( 名字+数据类型+数组长度(ushort类型)+数据)</p>
+		 * @param name
+		 * @param value 不能为null , 可以为[]空数组
+		 */	
+		public function writeUIntArray( name:String , value:Array ):void
+		{
+			_bytes.writeUTF( name );
+			_bytes.writeByte( DataType.DATA_TYPE_UINT_ARRAY );
+			var len:int = value.length ;
+			_bytes.writeShort( len );
+			for( var i:int = 0 ; i<len ; ++i )
+			{
+				_bytes.writeUnsignedInt( value[i] );
 			}
 			++ _count ;
 		}
