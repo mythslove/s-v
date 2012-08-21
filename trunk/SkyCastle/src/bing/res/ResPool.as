@@ -29,7 +29,7 @@ package bing.res
 	{
 		protected static var _instance:ResPool; 
 		protected var _resDictionary:Dictionary ;
-		protected var _loadList:Vector.<ResVO> ;
+		protected var _loadList:Array ;
 		protected var _context:LoaderContext ;
 		public var isRemote:Boolean =true ; //是否为远程加载 
 		public var cdns:Vector.<String>;
@@ -53,7 +53,7 @@ package bing.res
 		protected function init():void
 		{
 			_resDictionary = new Dictionary(true);
-			_loadList = new Vector.<ResVO>();
+			_loadList = [];
 			cdns=new Vector.<String>() ;
 			_currentLoadNum = 0 ;
 			_context = new LoaderContext(false , ApplicationDomain.currentDomain);
@@ -351,7 +351,7 @@ package bing.res
 		protected function resObjectLoadedHandler(e:Event):void
 		{
 			_queueLoaded ++;
-			var evtLoadedEvt:ResLoadedEvent
+			var evtLoadedEvt:ResLoadedEvent ;
 			if(e){
 				evtLoadedEvt = (e as ResLoadedEvent);
 				this.removeEventListener( evtLoadedEvt.resVO.resId , resObjectLoadedHandler );
@@ -386,7 +386,7 @@ package bing.res
 				resVO.dispose();
 			}
 			_resDictionary = new Dictionary();
-			_loadList = new Vector.<ResVO>();
+			_loadList = [];
 			_currentLoadNum = 0 ;
 		}
 	}
