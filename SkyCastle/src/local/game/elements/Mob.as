@@ -209,11 +209,10 @@ package local.game.elements
 					MapGridDataModel.instance.astarGrid.setWalkable( nodeX , nodeZ , true );
 					MapGridDataModel.instance.buildingGrid.setWalkable( nodeX ,nodeZ , true );
 					_currentRewards = e.result as RewardsVO ;
-					if(_currentRewards){
-						//打死了怪
-						this.showPickup();
+					if(_currentRewards){ 	//打死了怪
 						itemLayer.enabled = false ;
 					}
+					this.showPickup();
 					break ;
 			}
 		}
@@ -234,6 +233,7 @@ package local.game.elements
 				_timeoutFlag=false ;
 				_executeBack = false ;
 				_currentRewards = null ;
+				_timeoutId = 0 ;
 				super.showPickup();
 			}
 		}
