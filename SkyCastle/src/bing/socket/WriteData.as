@@ -25,6 +25,7 @@ package bing.socket
 			_bytes.writeUTF( name );
 			_bytes.writeByte( DataType.DATA_TYPE_BYTES );
 			var len:int = value.length ;
+			_bytes.writeShort( len ); 
 			_bytes.writeBytes( value );
 			++ _count ;
 		}
