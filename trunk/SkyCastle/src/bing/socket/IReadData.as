@@ -4,6 +4,8 @@ package bing.socket
 
 	public interface IReadData
 	{
+		function readBytes( name:String ):ByteArray ;
+		
 		function readInt( name:String ):int ;
 		function readUInt( name:String ):uint ;
 		
@@ -40,8 +42,6 @@ package bing.socket
 		function readDoubleArray( name:String ):Array ;
 		
 		function readUTFArray( name:String ):Array ;
-		
-		function readBytes( name:String ):ByteArray ;
 		
 		
 		
