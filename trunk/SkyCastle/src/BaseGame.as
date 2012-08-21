@@ -72,7 +72,7 @@ package
 		 */		
 		protected function initLoad():void
 		{
-			var res:Vector.<ResVO> = new Vector.<ResVO>();
+			var res:Array = [] ;
 			res.push( new ResVO("init_config","res/config.bin"));
 			res.push( new ResVO(GameData.currentMapId+"_DATA","res/map/"+GameData.currentMapId+"_DATA.bin") ); 
 			res.push( new ResVO(GameData.currentMapId+"_BUILDINGS","res/map/"+GameData.currentMapId+"_BUILDINGS.bin") ); 
@@ -91,8 +91,8 @@ package
 			res.push( new ResVO("Basic_Stone","res/stone/Basic_Stone.swf") );
 			
 			ResourceUtil.instance.addEventListener(ResProgressEvent.RES_LOAD_PROGRESS , queueLoadHandler);
-			ResourceUtil.instance.addEventListener(ResLoadedEvent.QUEUE_LOADED ,queueLoadHandler);
-			ResourceUtil.instance.queueLoad( res , 5 );
+			ResourceUtil.instance.addEventListener("initUI" ,queueLoadHandler);
+			ResourceUtil.instance.queueLoad( "initUI" , res , 5 );
 		}
 		
 		/**
@@ -107,10 +107,10 @@ package
 					var evt:ResProgressEvent = e as ResProgressEvent;
 					_preLoading.loaderBar.gotoAndStop( (evt.loaded/evt.total*100 )>>0 );
 					break;
-				case ResLoadedEvent.QUEUE_LOADED:
+				case "initUI":
 					SystemUtil.debug("初始资源下载完成");
 					ResourceUtil.instance.removeEventListener(ResProgressEvent.RES_LOAD_PROGRESS , queueLoadHandler);
-					ResourceUtil.instance.removeEventListener(ResLoadedEvent.QUEUE_LOADED ,queueLoadHandler);
+					ResourceUtil.instance.removeEventListener("initUI" ,queueLoadHandler);
 					
 					addChild(GameWorld.instance); //添加游戏世界
 					addChild( new LeftBar()); //居左的容器

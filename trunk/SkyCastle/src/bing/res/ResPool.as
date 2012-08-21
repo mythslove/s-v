@@ -41,6 +41,7 @@ package bing.res
 			if(_instance){
 				throw new Error("重复实例化");
 			}
+			_instance = this ;
 			init();
 		}
 		
@@ -241,15 +242,12 @@ package bing.res
 				else
 				{
 					this.dispatchEvent( e );
-					if(resVO.isQueue){ //如果是序列加载，并且加载失败，则跳过此资源
-						resObjectLoadedHandler(null);
-					}
 				}
 			}
 		}
 		
 		/**
-		 * 判断资源是否下载完成  
+		 * 判断资源是否在下载或者 已经下载完成  
 		 * @param resId 资源唯一标识 
 		 * @return 
 		 */		
@@ -269,6 +267,21 @@ package bing.res
 			return false;
 		}
 		
+		/**
+		 * 判断资源是否下载完成 
+		 * @param resId
+		 * @return 
+		 */		
+		public function checkResLoaded( resId:String ):Boolean
+		{
+			if(_resDictionary[resId]) {
+				var resVO:ResVO = _resDictionary[resId] as ResVO;
+				if( resVO && resVO.resObject) {
+					return true;
+				}
+			}
+			return false;
+		}
 		
 		/**
 		 *  删除资源
@@ -314,65 +327,18 @@ package bing.res
 			return obj ;
 		}
 		
-		
-		//======================================================
-		//=========加载多个资源====================================
-		//======================================================
-		
-		protected  var _resArray:Vector.<ResVO>;
-		protected var _queueHash :Dictionary ;
-		protected var _queueLoaded:int ;
-		protected var _total:int ;
-		
+
 		/**
 		 * 加载多个 
+		 * @param name 序列加载的名称
 		 * @param resArray [{name:"nam" , url:"role/aa.swf" , baseURL:baseURL}]
 		 * @param maxNum 最多一次能开几个加载进程
 		 */		
-		public function queueLoad( resArray:Vector.<ResVO>, maxNum:int =2 ):void
+		public function queueLoad( name:String , resArray:Array, maxNum:int =2 ):void
 		{
-			_resArray = resArray ;
-			_queueHash = new Dictionary(true) ;
-			_total= resArray.length ;
-			_queueLoaded = 0;
-			for( var i:int=0 ; i<maxNum && i<_total ; ++i){
-				startQueueLoad();
-			}
+			new QueueLoader( name , resArray , maxNum  );
 		}
 		
-		protected function startQueueLoad():void
-		{
-			var content:ResVO = _resArray.shift();
-			content.isQueue = true ;
-			this._queueHash[content.resId] = content;
-			this.addEventListener( content.resId , resObjectLoadedHandler );
-			this.loadRes( content );
-		}
-		protected function resObjectLoadedHandler(e:Event):void
-		{
-			_queueLoaded ++;
-			var evtLoadedEvt:ResLoadedEvent ;
-			if(e){
-				evtLoadedEvt = (e as ResLoadedEvent);
-				this.removeEventListener( evtLoadedEvt.resVO.resId , resObjectLoadedHandler );
-			}
-			//加载进度
-			var evt:ResProgressEvent = new ResProgressEvent(ResProgressEvent.RES_LOAD_PROGRESS);
-			evt.total = _total ;
-			evt.loaded = _queueLoaded ;
-			if(evtLoadedEvt){
-				evt.name = evtLoadedEvt.resVO.resId ;
-			}
-			this.dispatchEvent( evt );
-			//判断是否还要加载
-			if(_resArray.length>0){
-				startQueueLoad();
-			}else if(_queueLoaded==_total){
-				_resArray = null ;
-				_queueHash = null ;
-				this.dispatchEvent(new ResLoadedEvent(ResLoadedEvent.QUEUE_LOADED));
-			}
-		}
 		
 		//==================dispose==================
 		
@@ -388,6 +354,89 @@ package bing.res
 			_resDictionary = new Dictionary();
 			_loadList = [];
 			_currentLoadNum = 0 ;
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+//=================================
+//==========序列加载=================
+
+import bing.res.ResLoadedEvent;
+import bing.res.ResPool;
+import bing.res.ResProgressEvent;
+import bing.res.ResVO;
+
+import flash.events.Event;
+import flash.utils.Dictionary;
+
+
+class QueueLoader
+{
+	public var name:String ;
+	protected  var _resArray:Array;
+	protected var _queueHash :Dictionary ;
+	protected var _queueLoaded:int ;
+	protected var _total:int ;
+	
+	/**
+	 * 加载多个 
+	 * @param resArray [{name:"nam" , url:"role/aa.swf" , baseURL:baseURL}]
+	 * @param maxNum 最多一次能开几个加载进程
+	 */		
+	public function QueueLoader( name:String , resArray:Array, maxNum:int =2 )
+	{
+		this.name = name ;
+		_resArray = resArray ;
+		_queueHash = new Dictionary(true) ;
+		_total= resArray.length ;
+		_queueLoaded = 0;
+		for( var i:int=0 ; i<maxNum && i<_total ; ++i){
+			startQueueLoad();
+		}
+	}
+	
+	protected function startQueueLoad():void
+	{
+		var content:ResVO = _resArray.shift();
+		content.isQueue = true ;
+		this._queueHash[content.resId] = content;
+		ResPool.instance.addEventListener( content.resId , resObjectLoadedHandler );
+		ResPool.instance.loadRes( content );
+	}
+	protected function resObjectLoadedHandler(e:Event):void
+	{
+		_queueLoaded ++;
+		var evtLoadedEvt:ResLoadedEvent ;
+		if(e){
+			evtLoadedEvt = (e as ResLoadedEvent);
+			ResPool.instance.removeEventListener( evtLoadedEvt.resVO.resId , resObjectLoadedHandler );
+		}
+		//加载进度
+		var evt:ResProgressEvent = new ResProgressEvent(ResProgressEvent.RES_LOAD_PROGRESS);
+		evt.total = _total ;
+		evt.loaded = _queueLoaded ;
+		if(evtLoadedEvt){
+			evt.name = evtLoadedEvt.resVO.resId ;
+		}
+		ResPool.instance.dispatchEvent( evt );
+		//判断是否还要加载
+		if(_resArray.length>0){
+			startQueueLoad();
+		}else if(_queueLoaded==_total){
+			_resArray = null ;
+			_queueHash = null ;
+			ResPool.instance.dispatchEvent( new ResLoadedEvent( name ) );
+			
+			_queueHash = null ;
+			_resArray = null ;
 		}
 	}
 }
