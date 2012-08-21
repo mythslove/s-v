@@ -88,6 +88,7 @@ package bing.utils
 				switch(type)
 				{
 					case "int":
+					case "uint":
 					case "String":
 						SystemUtil.debug("Property:\t"+prop+"("+type+")\t"+obj[prop] );
 						break;
