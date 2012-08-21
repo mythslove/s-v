@@ -131,6 +131,11 @@ package bing.socket
 			_writer.writeUTFArray( name , value );
 		}
 		
+		public function writeBytes(name:String, value:ByteArray):void
+		{
+			_writer.writeBytes( name , value );
+		}
+		
 		public function build():ByteArray
 		{
 			return _writer.build() ;

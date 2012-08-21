@@ -1,5 +1,7 @@
 package bing.socket
 {
+	import flash.utils.ByteArray;
+
 	public interface IReadData
 	{
 		function readInt( name:String ):int ;
@@ -39,6 +41,7 @@ package bing.socket
 		
 		function readUTFArray( name:String ):Array ;
 		
+		function readBytes( name:String ):ByteArray ;
 		
 		
 		
