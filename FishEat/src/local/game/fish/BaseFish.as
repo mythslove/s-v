@@ -3,7 +3,6 @@ package local.game.fish
 	import local.utils.AssetsManager;
 	
 	import starling.display.MovieClip;
-	import starling.textures.Texture;
 	
 	public class BaseFish extends MovieClip
 	{
@@ -13,6 +12,8 @@ package local.game.fish
 		public function BaseFish( name:String )
 		{
 			super(AssetsManager.createTextureAtlas("fishTexture").getTextures(name) , 12 );
+			pivotX = texture.width>>1  ;
+			pivotY = texture.height>>1  ;
 			touchable = false ;
 		}
 		
