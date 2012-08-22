@@ -10,10 +10,10 @@ package local.utils
 	{
 		
 		
-		[Embed(source="../assets/bgTexture.xml", mimeType="application/octet-stream")]
-		private static const bgTextureXML:Class;
-		[Embed(source="../assets/bgTexture.png")]
-		private static const bgTexture:Class;
+		[Embed(source="../assets/ui.xml", mimeType="application/octet-stream")]
+		private static const uiTextureXML:Class;
+		[Embed(source="../assets/ui.png")]
+		private static const uiTexture:Class;
 		
 		[Embed(source="../assets/fishTexture.xml", mimeType="application/octet-stream")]
 		private static const fishTextureXML:Class;

@@ -13,7 +13,7 @@ package local.game
 	
 	public class Game extends Sprite
 	{
-		private var _hero:Hero ;
+		private var _hero:Hero1 ;
 		private var _biteFishs:Vector.<BaseFish> ;
 		private var _heroLoc:Point = new Point(450,300);
 		
@@ -26,7 +26,7 @@ package local.game
 		
 		private function addedHandler( e:Event ):void
 		{
-			_hero = new Hero();
+			_hero = new Hero1();
 			_hero.x=1000 ;
 			_hero.y=100 ;
 			addChild(_hero);
@@ -59,13 +59,15 @@ package local.game
 			for( var i:int = 0 ; i<num ; ++i )
 			{
 				if(i<4){
-					fish = new BiteFish4();
+					fish = new Fish1();
 				}else if(i<6){
-					fish = new BiteFish3();
+					fish = new Fish2();
 				}else if(i<7){
-					fish = new BiteFish1();
+					fish = new Fish3();
+				}else if(i<8){
+					fish = new Fish4();
 				}else if(i<num){
-					fish = new BiteFish2();
+					fish = new Fish5();
 				}
 				_biteFishs[i] = fish  ;
 			}

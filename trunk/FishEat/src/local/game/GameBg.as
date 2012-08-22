@@ -38,37 +38,37 @@ package local.game
 			addChild(quad);
 			
 			//后地
-			var ground:Image = new Image( AssetsManager.createTextureAtlas("bgTexture").getTexture("Bg2") ) ;
+			var ground:Image = new Image( AssetsManager.createTextureAtlas("uiTexture").getTexture("Bg2") ) ;
 			ground.x = -400 ;
 			ground.y = 400;
 			addChild(ground);
 			
 			//船
-			ground = new Image( AssetsManager.createTextureAtlas("bgTexture").getTexture("Ship") ) ;
+			ground = new Image( AssetsManager.createTextureAtlas("uiTexture").getTexture("Ship") ) ;
 			ground.rotation = deg2rad(-10) ;
 			ground.x = 300 ;
 			ground.y = 200;
 			addChild(ground);
 			
 			//箱子
-			ground = new Image( AssetsManager.createTextureAtlas("bgTexture").getTexture("Box") ) ;
+			ground = new Image( AssetsManager.createTextureAtlas("uiTexture").getTexture("Box") ) ;
 			ground.x = 650 ;
 			ground.y = 330;
 			addChild(ground);
 			
 			
 			//水草
-			var grass:MovieClip = new MovieClip( AssetsManager.createTextureAtlas("bgTexture").getTextures("Grass1_") ) ;
+			var grass:MovieClip = new MovieClip( AssetsManager.createTextureAtlas("uiTexture").getTextures("Grass1_") ) ;
 			grass.x = 200 ;
 			grass.y = 335;
 			addChild(grass);
 			Starling.juggler.add( grass );
-			grass = new MovieClip( AssetsManager.createTextureAtlas("bgTexture").getTextures("Grass2_") ) ;
+			grass = new MovieClip( AssetsManager.createTextureAtlas("uiTexture").getTextures("Grass2_") ) ;
 			grass.x = 540 ;
 			grass.y = 360;
 			addChild(grass);
 			Starling.juggler.add( grass );
-			grass = new MovieClip( AssetsManager.createTextureAtlas("bgTexture").getTextures("Grass1_") ) ;
+			grass = new MovieClip( AssetsManager.createTextureAtlas("uiTexture").getTextures("Grass1_") ) ;
 			grass.x = 840 ;
 			grass.y = 400 ;
 			addChild(grass);
@@ -76,15 +76,20 @@ package local.game
 			
 			
 			//前地
-			ground = new Image( AssetsManager.createTextureAtlas("bgTexture").getTexture("Bg1") ) ;
+			ground = new Image( AssetsManager.createTextureAtlas("uiTexture").getTexture("Bg1") ) ;
 			ground.scaleX = ground.scaleY = 1.5 ;
 			ground.x = -100 ;
 			ground.y = 460;
 			addChild(ground);
 			
 			//波纹
-			addChild(new Wave());
+			var wave:Wave = new Wave();
+			wave.y = 300 ;
+			addChild(wave);
 			
+			wave = new Wave();
+			wave.scaleX = wave.scaleY=2 ;
+			addChild(wave);
 		}
 	}
 }
@@ -104,14 +109,12 @@ class Wave extends Sprite
 	public function Wave()
 	{
 		_waves = new Vector.<Image>(2,true);
-		 var wave:Image = new Image(AssetsManager.createTextureAtlas("bgTexture").getTexture("Wave") ) ;
-		wave.y = 200 ;
+		 var wave:Image = new Image(AssetsManager.createTextureAtlas("uiTexture").getTexture("Wave_000") ) ;
 		addChild(wave);
 		_waves[0] = wave ;
 		
-		wave = new Image(AssetsManager.createTextureAtlas("bgTexture").getTexture("Wave") ) ;
+		wave = new Image(AssetsManager.createTextureAtlas("uiTexture").getTexture("Wave_000") ) ;
 		wave.x = wave.texture.width  ;
-		wave.y = 200 ;
 		addChild(wave);
 		_waves[1] = wave ;
 		
@@ -124,7 +127,7 @@ class Wave extends Sprite
 		{
 			img.x+=3;
 			if(img.x>img.texture.width){
-				img.x=-img.texture.width  ;
+				img.x=-img.texture.width+3  ;
 			}
 		}
 	}
