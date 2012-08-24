@@ -47,6 +47,7 @@ package local
 			addBg();
 			
 			var gridScene:SIsoScene = new SIsoScene(GameSetting.GRID_SIZE);
+			gridScene.touchable=false;
 			//区域
 			var rho:Rhombus = new Rhombus( GameSetting.GRID_X*GameSetting.GRID_SIZE*2 ,GameSetting.GRID_X*GameSetting.GRID_SIZE , 0x66ff00 );
 			rho.alpha=0.2 ;
