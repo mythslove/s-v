@@ -1,4 +1,4 @@
-package bing.starling.iso
+package bing.starling.component
 {
 	import starling.display.Quad;
 	import starling.utils.VertexData;
@@ -7,9 +7,9 @@ package bing.starling.iso
 	 * 画菱形 
 	 * @author zhouzhanglin
 	 */	
-	public class SIsoRhombus extends Quad
+	public class Rhombus extends Quad
 	{
-		public function SIsoRhombus(width:Number, height:Number, color:uint=16777215,premultipliedAlpha:Boolean=true)
+		public function Rhombus(width:Number, height:Number, color:uint=16777215,premultipliedAlpha:Boolean=true)
 		{
 			super(width, height, color, premultipliedAlpha );
 			mVertexData = new VertexData(4, premultipliedAlpha);
