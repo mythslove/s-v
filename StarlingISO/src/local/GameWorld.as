@@ -2,7 +2,7 @@ package local
 {
 	import bing.starling.iso.SIsoGrid;
 	import bing.starling.iso.SIsoObject;
-	import bing.starling.iso.SIsoRhombus;
+	import bing.starling.component.Rhombus;
 	import bing.starling.iso.SIsoScene;
 	import bing.starling.iso.SIsoWorld;
 	
@@ -48,7 +48,7 @@ package local
 			
 			var gridScene:SIsoScene = new SIsoScene(GameSetting.GRID_SIZE);
 			//区域
-			var rho:SIsoRhombus = new SIsoRhombus( GameSetting.GRID_X*GameSetting.GRID_SIZE*2 ,GameSetting.GRID_X*GameSetting.GRID_SIZE , 0x66ff00 );
+			var rho:Rhombus = new Rhombus( GameSetting.GRID_X*GameSetting.GRID_SIZE*2 ,GameSetting.GRID_X*GameSetting.GRID_SIZE , 0x66ff00 );
 			rho.alpha=0.2 ;
 			gridScene.addChild(rho);
 			var grid:SIsoGrid = new SIsoGrid(_gridX,_gridZ,_size);
