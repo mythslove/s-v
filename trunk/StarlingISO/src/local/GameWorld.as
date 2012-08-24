@@ -53,7 +53,7 @@ package local
 			rho.alpha=0.2 ;
 			gridScene.addChild(rho);
 			var grid:SIsoGrid = new SIsoGrid(_gridX,_gridZ,_size);
-			grid.alpha=0.1;
+			grid.alpha=0.2;
 			gridScene.addChild(grid ) ;
 			gridScene.flatten();
 			this.addScene(gridScene);
@@ -204,7 +204,7 @@ package local
 		
 		private function changeWorldScale( value:Number , px:Number , py:Number ):void
 		{
-			if(scaleX*value>0.5 && scaleX*value<2 ) {
+			if(scaleX*value>0.6 && scaleX*value<2 ) {
 				
 				_zoomM.identity() ;
 				_zoomM.scale(scaleX,scaleY);
