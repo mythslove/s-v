@@ -9,10 +9,10 @@ package bing.starling.component
 	 */	
 	public class Rhombus extends Quad
 	{
-		public function Rhombus(width:Number, height:Number, color:uint=16777215,premultipliedAlpha:Boolean=true)
+		public function Rhombus(width:Number, height:Number, color:uint=16777215)
 		{
-			super(width, height, color, premultipliedAlpha );
-			mVertexData = new VertexData(4, premultipliedAlpha);
+			super(width, height, color, true );
+			mVertexData = new VertexData(4, true);
 			mVertexData.setPosition(0, 0.0, 0.0);
 			mVertexData.setPosition(1, width>>1 , height>>1 );
 			mVertexData.setPosition(2, -width>>1 , height>>1 ); 
