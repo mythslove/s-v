@@ -7,9 +7,9 @@ package bing.starling.iso
 	import flash.geom.Rectangle;
 	import flash.geom.Vector3D;
 	
-	import starling.display.DisplayObjectContainer;
+	import starling.display.Sprite;
 	
-	public class SIsoObject extends DisplayObjectContainer
+	public class SIsoObject extends Sprite
 	{
 		public var isSort:Boolean = false ;
 		protected var _position3D:Vector3D; //像素坐标

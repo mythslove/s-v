@@ -54,6 +54,7 @@ package local
 			var grid:SIsoGrid = new SIsoGrid(_gridX,_gridZ,_size);
 			grid.alpha=0.1;
 			gridScene.addChild(grid ) ;
+			gridScene.flatten();
 			this.addScene(gridScene);
 			
 			buildingScene = new SIsoScene( _size ,_gridX,_gridZ );
