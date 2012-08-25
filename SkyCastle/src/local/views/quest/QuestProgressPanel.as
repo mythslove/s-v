@@ -25,7 +25,7 @@ package local.views.quest
 		
 		override protected function added():void
 		{
-			var items:Array = questVO.items ;
+			var items:Array = questVO.tasks ;
 			if(items)
 			{
 				var len:int = items.length ;

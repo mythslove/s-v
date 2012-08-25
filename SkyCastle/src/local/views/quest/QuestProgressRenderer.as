@@ -11,7 +11,7 @@ package local.views.quest
 	import local.comm.GameRemote;
 	import local.model.PlayerModel;
 	import local.model.QuestModel;
-	import local.model.vos.QuestItemVO;
+	import local.model.vos.QuestTaskVO;
 	import local.utils.GameUtil;
 	import local.views.alert.CostCashAlert;
 	import local.views.base.Image;
@@ -28,9 +28,9 @@ package local.views.quest
 		public var txtSkip:TextField ; //跳过此任务需要的cash
 		public var btnSkip:BaseButton ; //跳过此任务的按钮
 		//================================
-		public var itemVO:QuestItemVO ;
+		public var itemVO:QuestTaskVO ;
 		
-		public function QuestProgressRenderer( itemVO:QuestItemVO)
+		public function QuestProgressRenderer( itemVO:QuestTaskVO)
 		{
 			super();
 			stop();
@@ -66,7 +66,7 @@ package local.views.quest
 			}else{
 				var ro:GameRemote = new GameRemote("CommService");
 				ro.addEventListener(ResultEvent.RESULT , onResultHandler , false , 0 , true );
-				ro.getOperation( "skipQuestItem").send( itemVO.itemId );
+				ro.getOperation( "skipQuestItem").send( itemVO.taskId );
 				btnSkip.enabled = false ;
 			}
 		}

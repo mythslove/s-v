@@ -4,9 +4,9 @@ package local.model.vos
 	import local.model.PlayerModel;
 	import local.model.buildings.MapBuildingModel;
 
-	public class QuestItemVO
+	public class QuestTaskVO
 	{
-		public var itemId:int ; //id
+		public var taskId:int ; //id
 		public var current:int ; //当前多少个
 		public var sum:int=1 ; //总共需要多少个
 		public var title:String ; //标题
