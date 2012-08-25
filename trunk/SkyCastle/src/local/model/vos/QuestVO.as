@@ -18,7 +18,7 @@ package local.model.vos
 		public var isComplete:Boolean; //是否完成任务
 		public var isReceived:Boolean ; //是否收到礼物
 		public var acceptTime:Number ; //接受任务的时间
-		public var items:Array ; //所有的QuestItemVO 
+		public var tasks:Array ; //所有的QuestItemVO 
 		public var rewardsVO:RewardsVO; //完成任务后的奖励
 		
 		/**
@@ -26,7 +26,7 @@ package local.model.vos
 		 */		
 		public function init():void
 		{
-			for each( var itemVO:QuestItemVO in items){
+			for each( var itemVO:QuestTaskVO in tasks){
 				itemVO.init(acceptTime);
 			}
 		}
@@ -38,7 +38,7 @@ package local.model.vos
 		public function checkComplete():Boolean
 		{
 			if(isComplete) return true ;
-			for each( var itemVO:QuestItemVO in items){
+			for each( var itemVO:QuestTaskVO in tasks){
 				if(!itemVO.isComplete) return false ;
 			}
 			return false ;
@@ -80,7 +80,7 @@ package local.model.vos
 		private function updateCount( mainType:String , sonType:String="" , num:int = 1 , time:Number=NaN ):Boolean
 		{
 			var isUpdate:Boolean ;
-			for each( var itemVO:QuestItemVO in items)
+			for each( var itemVO:QuestTaskVO in tasks)
 			{
 				if( itemVO.questType== mainType)
 				{
@@ -113,7 +113,7 @@ package local.model.vos
 		private function setCount(mainType:String , sonType:String ):Boolean
 		{
 			var isUpdate:Boolean ;
-			for each( var itemVO:QuestItemVO in items)
+			for each( var itemVO:QuestTaskVO in tasks)
 			{
 				if( itemVO.questType== mainType)
 				{
