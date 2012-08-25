@@ -91,7 +91,7 @@ package
 			registerClassAlias("PickupVO",PickupVO) ;
 			registerClassAlias("CollectionVO",CollectionVO) ;
 			registerClassAlias("QuestVO",QuestVO) ;
-			registerClassAlias("QuestItemVO",QuestItemVO) ;
+			registerClassAlias("QuestTaskVO",QuestTaskVO) ;
 			registerClassAlias("PageVO",PageVO) ;
 		}
 		
