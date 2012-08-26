@@ -102,6 +102,9 @@ package local.views.quest
 		{
 			e.stopPropagation() ;
 			//打开任务列表窗口
+			var questList:QuestListPopUp = new QuestListPopUp();
+			PopUpManager.instance.addQueuePopUp( questList);
+			PopUpManager.instance.removeCurrentPopup();
 		}
 		
 		private function onResultHandler( e:ResultEvent ):void
