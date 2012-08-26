@@ -28,7 +28,6 @@ package local.views.quest
 		public var txtTitle:TextField;
 		public var txtCompleteInfo:TextField;
 		public var btnClose:BaseButton ; //关闭按钮
-		public var btnOk:BaseButton;
 		public var btnShare:BaseButton ;
 		public var container:Sprite ; //奖励面板的容器
 		//======================================
@@ -50,7 +49,6 @@ package local.views.quest
 			TweenLite.from(this,0.3,{x:-200 , ease:Back.easeOut });
 			SoundManager.instance.playSoundSpecialPopShow();
 			btnClose.addEventListener(MouseEvent.CLICK , onCloseHandler );
-			btnOk.addEventListener(MouseEvent.CLICK , onCloseHandler );
 			//显示详细
 			txtTitle.text = questVO.title+"" ;
 			txtCompleteInfo.text = questVO.completeMsg+"" ;
@@ -89,7 +87,6 @@ package local.views.quest
 			QuestModel.instance.addCompletedQuest( questVO );
 			questVO = null ;
 			btnClose.removeEventListener(MouseEvent.CLICK , onCloseHandler );
-			btnOk.removeEventListener(MouseEvent.CLICK , onCloseHandler );
 			QuestModel.instance.getQuests() ; //重新获取quests
 		}
 	}
