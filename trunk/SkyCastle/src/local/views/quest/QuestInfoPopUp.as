@@ -42,7 +42,7 @@ package local.views.quest
 		public function get ro():GameRemote
 		{
 			if(!_ro){
-				_ro = new GameRemote("CommService");
+				_ro = new GameRemote("QuestService");
 				_ro.addEventListener(ResultEvent.RESULT , onResultHandler );
 			}
 			return _ro ;
@@ -63,7 +63,7 @@ package local.views.quest
 			TweenLite.from(this,0.3,{x:-200 , ease:Back.easeOut });
 			SoundManager.instance.playSoundSpecialPopShow();
 			btnClose.addEventListener(MouseEvent.CLICK , onCloseHandler );
-			btnOk.addEventListener(MouseEvent.CLICK , onCloseHandler );
+			btnOk.addEventListener(MouseEvent.CLICK , onBtnOkHandler );
 			//显示详细
 			txtTitle.text = questVO.title ;
 			txtDes.text = questVO.describe ;
@@ -112,13 +112,20 @@ package local.views.quest
 			switch( e.method)
 			{
 				case "acceptQuest":
-					mouseChildren = true ;
-					btnOk.enabled = true ;
-					txtButton.text = "OK";
-					txtRequireRank.visible = false ;
-					questVO = e.result as QuestVO ; //返回新的QuestVO
-					questVO.init(); //初始化任务
-					QuestModel.instance.checkCompleteQuest() ; //判断是没有已经完成了的quest
+					if(e.result)
+					{
+						mouseChildren = true ;
+						btnOk.enabled = true ;
+						txtButton.text = "OK";
+						txtRequireRank.visible = false ;
+						questVO = e.result as QuestVO ; //返回新的QuestVO
+						questVO.init(); //初始化任务
+						QuestModel.instance.checkCompleteQuest() ; //判断是没有已经完成了的quest
+					}
+					else
+					{
+						onCloseHandler(null);
+					}
 					break ;
 			}
 		}
@@ -138,7 +145,7 @@ package local.views.quest
 		
 		private function onCloseHandler( e:MouseEvent ):void
 		{
-			e.stopPropagation();
+			if(e) e.stopPropagation();
 			mouseChildren = false ;
 			TweenLite.to(this,0.3,{x:x+200 , ease:Back.easeIn , onComplete:tweenComplete});
 			SoundManager.instance.playSoundClick();

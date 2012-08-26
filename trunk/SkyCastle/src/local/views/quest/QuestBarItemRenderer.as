@@ -27,13 +27,14 @@ package local.views.quest
 		
 		override protected function added():void
 		{
-			if(!questVO.isAccept){
-				_newFlag = new QuestBarNewFlag();
-				addChild(_newFlag);
-			}
 			GameToolTip.instance.register( this , stage , "QUEST:"+questVO.title );
 			var thumb:Image = new Image( "quest"+questVO.icon , "res/quest/"+questVO.icon );
 			addChild(thumb);
+			if(!questVO.isAccept){
+				_newFlag = new QuestBarNewFlag();
+				_newFlag.x = 20 ;
+				addChild(_newFlag);
+			}
 			addEventListener(MouseEvent.CLICK , onClickHandler );
 		}
 		

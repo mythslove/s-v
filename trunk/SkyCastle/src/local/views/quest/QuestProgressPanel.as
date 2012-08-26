@@ -33,7 +33,7 @@ package local.views.quest
 				for( var i:int = 0 ; i<len ; ++i)
 				{
 					render = new QuestProgressRenderer(items[i]);
-					render.y = render.height*i + 10 ;
+					render.y = render.height*i + 15 ;
 					addChild(render);
 					if(!_canSkip){
 						render.btnSkip.enabled=false ;
