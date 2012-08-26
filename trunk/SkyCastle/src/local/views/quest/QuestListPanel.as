@@ -8,6 +8,7 @@ package local.views.quest
 	import flash.text.TextField;
 	
 	import local.model.vos.QuestVO;
+	import local.utils.GameUtil;
 	import local.views.base.BaseView;
 	
 	/**
@@ -34,6 +35,9 @@ package local.views.quest
 		public function QuestListPanel( quests:Vector.<QuestVO> , type:String  )
 		{
 			super();
+			txtTitle.text="";
+			txtDes.text="";
+			GameUtil.disableTextField(this);
 			_quests = quests ;
 			_type = type ;
 		}
@@ -51,8 +55,8 @@ package local.views.quest
 				renderers.push( new QuestListIconRenderer(_quests[i]));
 			}
 			_canvas.renders = renderers ;
-			(renderers[0] as QuestListIconRenderer).setSeleted( true );
-			
+			currentSeleted = renderers[0] as QuestListIconRenderer ;
+			showItem();
 			_canvas.addEventListener(MouseEvent.CLICK , onClickHandler , false , 0 ,true);
 		}
 		
@@ -64,8 +68,14 @@ package local.views.quest
 					currentSeleted.setSeleted(false);
 				}
 				currentSeleted = e.target as QuestListIconRenderer ;
+				showItem();
+			}
+		}
+		
+		private function showItem():void
+		{
+			if(currentSeleted){
 				currentSeleted.setSeleted(true);
-				
 				txtTitle.text = currentSeleted.questVO.title ;
 				txtDes.text = currentSeleted.questVO.describe ;
 				
@@ -75,6 +85,7 @@ package local.views.quest
 				container.addChild( progressPanel );
 			}
 		}
+				
 		
 		override protected function removed():void
 		{

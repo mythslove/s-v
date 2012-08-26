@@ -10,6 +10,7 @@ package local.views.quest
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.text.TextField;
 	
 	import local.comm.GameSetting;
 	import local.comm.GlobalDispatcher;
@@ -29,12 +30,14 @@ package local.views.quest
 		public var tabMenu:QuestListTabMenu ;
 		public var btnClose:BaseButton ;
 		public var container:Sprite ;
+		public var txtTip:TextField ;
 		//==============================
 		private var _loading:SkinLoading ;
 		
 		public function QuestListPopUp()
 		{
 			super();
+			txtTip.mouseEnabled = txtTip.visible = false ;
 			x = GameSetting.SCREEN_WIDTH>>1;
 			y = GameSetting.SCREEN_HEIGHT>>1;
 		}
@@ -60,7 +63,7 @@ package local.views.quest
 					break ;
 				case QuestEvent.GET_COMPLETED_QUESTS :
 					removeChild(_loading);
-					mouseChildren = false ;
+					mouseChildren = true ;
 					showCompletedQuests();
 					break ;
 			}
@@ -70,6 +73,7 @@ package local.views.quest
 		private function tabMenuHandler( e:ToggleItemEvent):void 
 		{
 			SoundManager.instance.playSoundClick();
+			ContainerUtil.removeChildren(container);
 			switch(  e.selectedName )
 			{
 				case tabMenu.btnActive.name:
@@ -89,21 +93,29 @@ package local.views.quest
 		//显示已经完成了的任务列表
 		private function showCompletedQuests():void
 		{
-			ContainerUtil.removeChildren(container);
 			if( QuestModel.instance.completedQuests && QuestModel.instance.completedQuests.length>0 ){
 				
 				var panel:QuestListPanel = new QuestListPanel(QuestModel.instance.completedQuests,"completed" );
 				container.addChild(panel);
+				txtTip.visible = false ; 
+			}
+			else
+			{
+				txtTip.visible = true ; 
 			}
 		}
 		//显示已经激活的任务列表，也就是当前的任务列表
 		private function showActiveQuests():void
 		{
-			ContainerUtil.removeChildren(container);
 			if( QuestModel.instance.currentQuests && QuestModel.instance.currentQuests.length>0 ){
 				
 				var panel:QuestListPanel = new QuestListPanel(QuestModel.instance.currentQuests,"active" );
 				container.addChild(panel);
+				txtTip.visible = false ; 
+			}
+			else
+			{
+				txtTip.visible = true ; 
 			}
 		}
 		
