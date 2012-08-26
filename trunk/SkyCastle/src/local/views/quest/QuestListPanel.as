@@ -67,7 +67,7 @@ package local.views.quest
 				currentSeleted.setSeleted(true);
 				
 				txtTitle.text = currentSeleted.questVO.title ;
-				txtDes.text = currentSeleted.questVO.info ;
+				txtDes.text = currentSeleted.questVO.describe ;
 				
 				ContainerUtil.removeChildren(container);
 				var canSkip:Boolean = _type=="active"? false : true ;

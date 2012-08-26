@@ -6,6 +6,7 @@ package local.views.quest
 	import local.utils.PopUpManager;
 	import local.views.base.BaseView;
 	import local.views.base.Image;
+	import local.views.tooltip.GameToolTip;
 
 	/**
 	 * 主窗口界面上的任务icon 
@@ -19,6 +20,7 @@ package local.views.quest
 		public function QuestBarItemRenderer( vo:QuestVO )
 		{
 			super();
+			buttonMode = true ;
 			mouseChildren = false ;
 			this.questVO = vo ;
 		}
@@ -29,6 +31,7 @@ package local.views.quest
 				_newFlag = new QuestBarNewFlag();
 				addChild(_newFlag);
 			}
+			GameToolTip.instance.register( this , stage , "QUEST:"+questVO.title );
 			var thumb:Image = new Image( "quest"+questVO.icon , "res/quest/"+questVO.icon );
 			addChild(thumb);
 			addEventListener(MouseEvent.CLICK , onClickHandler );
@@ -48,6 +51,7 @@ package local.views.quest
 		
 		override protected function removed():void
 		{
+			GameToolTip.instance.unRegister( this );
 			if(_newFlag){
 				_newFlag.stop();
 				removeChild(_newFlag);

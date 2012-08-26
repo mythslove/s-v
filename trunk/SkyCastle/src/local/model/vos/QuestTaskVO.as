@@ -7,7 +7,7 @@ package local.model.vos
 	public class QuestTaskVO
 	{
 		public var taskId:int ; //id
-//		public var questId:String ; 
+		public var questId:String ; 
 		public var current:int ; //当前多少个
 		public var sum:int=1 ; //总共需要多少个
 		public var title:String ; //标题
