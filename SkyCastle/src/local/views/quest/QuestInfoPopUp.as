@@ -27,7 +27,7 @@ package local.views.quest
 	public class QuestInfoPopUp extends BaseView
 	{
 		public var txtTitle:TextField; //标题
-		public var txtDec:TextField; //描述
+		public var txtDes:TextField; //描述
 		public var txtRequireRank:TextField ; //要求的rank值
 		public var txtButton:TextField ; //按钮上面的文字
 		public var desBg:Sprite;//描述的背景
@@ -35,7 +35,7 @@ package local.views.quest
 		public var btnOk:BaseButton;
 		public var btnAllQuests:BaseButton ; //查看所有的任务按钮 
 		public var listBg:Sprite ;//任务列表的背景
-		private var container:Sprite ; //任务进度容器
+		public var container:Sprite ; //任务进度容器
 		//=============================
 		public var questVO:QuestVO ;
 		private var _ro:GameRemote;
@@ -66,8 +66,8 @@ package local.views.quest
 			btnOk.addEventListener(MouseEvent.CLICK , onCloseHandler );
 			//显示详细
 			txtTitle.text = questVO.title ;
-			txtDec.text = questVO.info ;
-			txtDec.y = desBg.y +(desBg.height-txtDec.height)>>1 ;
+			txtDes.text = questVO.describe ;
+			txtDes.y += (desBg.height-txtDes.textHeight)>>1 ;
 			var proPanel:QuestProgressPanel = new QuestProgressPanel(questVO) ;
 			container.addChild(proPanel);
 			txtRequireRank.text = "Require Rank "+questVO.requireRank+" !" ;

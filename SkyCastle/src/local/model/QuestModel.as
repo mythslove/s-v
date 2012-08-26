@@ -78,7 +78,7 @@ package local.model
 		 */		
 		public function getQuests():void
 		{
-//			ro.getOperation("getQuestList").send() ;
+			ro.getOperation("getQuestList").send() ;
 		}
 		
 		private function onResultHandler( e:ResultEvent ):void
@@ -105,11 +105,11 @@ package local.model
 								result.push( vo ) ;
 							}
 						}
+						//当前的所有quests
+						currentQuests = Vector.<QuestVO>( e.result );
 						var evt:QuestEvent = new QuestEvent(QuestEvent.GET_QUEST_LIST) ;
 						evt.newQuests = currentQuests ;
 						GlobalDispatcher.instance.dispatchEvent( evt );
-						//当前的所有quests
-						currentQuests = Vector.<QuestVO>( e.result );
 					}
 					break ;
 				case "completeQuest":

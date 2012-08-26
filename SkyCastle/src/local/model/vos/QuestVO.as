@@ -8,11 +8,11 @@ package local.model.vos
 	{
 		public var qid:String ; //任务的id
 		public var title:String ; //标题
-		public var info:String ; //描述
+		public var describe:String ; //描述
 		public var icon:String ; //icon名称 , resId为"quest"+_vo.icon
 		public var completeMsg:String ; //任务完成后的描述
 		public var requestId:String ;
-		public var requireRank:int ; //rank要求，未到rank时，不能接受
+		public var requireRank:int ; //要求的Rank才能接受此任务
 		
 		public var isAccept:Boolean; //是否接受任务
 		public var isComplete:Boolean; //是否完成任务

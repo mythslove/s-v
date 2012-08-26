@@ -2,9 +2,10 @@ package  local.views
 {
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
+	import flash.events.Event;
+	import flash.utils.setTimeout;
 	
 	import local.comm.GlobalDispatcher;
-	import local.comm.GlobalEvent;
 	import local.events.QuestEvent;
 	import local.model.QuestModel;
 	import local.model.vos.QuestVO;
@@ -36,15 +37,15 @@ package  local.views
 		{
 			_questModel = QuestModel.instance ;
 			_questContainer = new Sprite();
-			_questContainer.y = 100 ;
+			_questContainer.y = 150 ;
 			_questContainer.x = 50 ;
 			addChild( _questContainer );
 			
 			GlobalDispatcher.instance.addEventListener( QuestEvent.GET_QUEST_LIST , globalEvtHandler );
-			QuestModel.instance.getQuests() ; //获取quests
+			setTimeout( QuestModel.instance.getQuests , 2000 ) ; //获取quests
 		}
 		
-		private function globalEvtHandler( e:GlobalEvent ):void
+		private function globalEvtHandler( e:Event ):void
 		{
 			switch( e.type)
 			{
