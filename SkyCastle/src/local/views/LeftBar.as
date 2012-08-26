@@ -1,5 +1,7 @@
 package  local.views
 {
+	import com.greensock.TweenLite;
+	
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -68,6 +70,8 @@ package  local.views
 					_questContainer.addChild(render);
 				}
 				if(quests.length>0) SoundManager.instance.playSoundNewQuest();
+				
+				TweenLite.from( _questContainer , 0.5 , {x:-100 } );
 			}
 		}
 		

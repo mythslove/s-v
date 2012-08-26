@@ -28,24 +28,24 @@ package local.views.quest
 		public var txtSkip:TextField ; //跳过此任务需要的cash
 		public var btnSkip:BaseButton ; //跳过此任务的按钮
 		//================================
-		public var taskVO:QuestTaskVO ;
+		public var itemVO:QuestTaskVO ;
 		
 		public function QuestProgressRenderer( itemVO:QuestTaskVO)
 		{
 			super();
 			stop();
 			mouseEnabled = false ;
-			this.taskVO = itemVO ;
+			this.itemVO = itemVO ;
 		}
 		
 		override protected function addedToStage():void
 		{
-			txtDes.text = taskVO.title ;
-			txtCount.text = taskVO.current+"/"+taskVO.sum ;
-			txtSkip.text = taskVO.skipCash+"";
-			var thumb:Image = new Image( "questItem"+taskVO.icon , "res/quest/"+taskVO.icon) ;
+			txtDes.text = itemVO.title ;
+			txtCount.text = itemVO.current+"/"+itemVO.sum ;
+			txtSkip.text = itemVO.skipCash+"";
+			var thumb:Image = new Image( "questItem"+itemVO.icon , "res/quest/"+itemVO.icon) ;
 			img.addChild( thumb );
-			if(taskVO.isSkipped){
+			if(itemVO.isSkipped){
 				gotoAndStop(2);
 			}else{
 				btnSkip.addEventListener(MouseEvent.CLICK , onSkipHandler , false , 0 , true );
@@ -56,33 +56,33 @@ package local.views.quest
 		private function onSkipHandler( e:MouseEvent ):void
 		{
 			e.stopPropagation();
-			CostCashAlert.show("Are you sure to skip this item using Gem?" , taskVO.skipCash+"" , skipped );
+			CostCashAlert.show("Are you sure to skip this item using Gem?" , itemVO.skipCash+"" , skipped );
 		}
 		
 		private function skipped():void
 		{
-			if(PlayerModel.instance.me.cash<taskVO.skipCash){
+			if(PlayerModel.instance.me.cash<itemVO.skipCash){
 				//弹出cash商店
 			}else{
 				var ro:GameRemote = new GameRemote("CommService");
 				ro.addEventListener(ResultEvent.RESULT , onResultHandler , false , 0 , true );
-				ro.getOperation( "skipQuestItem").send( taskVO.taskId );
+				ro.getOperation( "skipQuestItem").send( itemVO.taskId );
 				btnSkip.enabled = false ;
 			}
 		}
 		
 		private function onResultHandler( e:ResultEvent ):void
 		{
-			PlayerModel.instance.me.cash -= taskVO.skipCash ;
+			PlayerModel.instance.me.cash -= itemVO.skipCash ;
 			this.gotoAndStop(2);
-			taskVO.isSkipped = true ;
+			itemVO.isSkipped = true ;
 			QuestModel.instance.checkCompleteQuest();
 		}
 		
 		override protected function removedFromStage():void
 		{
 			stop();
-			taskVO = null ;
+			itemVO = null ;
 			if(btnSkip) btnSkip.removeEventListener(MouseEvent.CLICK , onSkipHandler);
 		}
 	}
