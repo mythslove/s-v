@@ -64,7 +64,7 @@ package  local.views
 				var render:QuestBarItemRenderer ;
 				for each( var vo:QuestVO in quests){
 					render = new QuestBarItemRenderer(vo);
-					render.y = (render.height +10)*_questContainer.numChildren  ;
+					render.y = 70*_questContainer.numChildren  ;
 					_questContainer.addChild(render);
 				}
 				if(quests.length>0) SoundManager.instance.playSoundNewQuest();

@@ -24,6 +24,7 @@ package local.views.quest
 		public function QuestListIconRenderer( vo:QuestVO )
 		{
 			super();
+			stop();
 			mouseChildren = false; 
 			questVO = vo ;
 		}
