@@ -10,6 +10,8 @@ package local.views.quest
 		public function QuestBarNewFlag()
 		{
 			super();
+			mouseChildren = false ;
+			mouseEnabled = false ;
 		}
 	}
 }
