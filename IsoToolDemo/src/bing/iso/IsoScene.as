@@ -59,7 +59,7 @@ package bing.iso
 			for each(var obj:IsoObject in _sprites ) {
 				obj.update();
 				if(obj.isSort)	{
-					setChildIndex( obj,0 );
+//					setChildIndex( obj,0 );
 					sortIsoObject(obj);
 				}
 			}
@@ -70,7 +70,7 @@ package bing.iso
 		{
 			for each(var obj:IsoObject in _sprites )
 			{
-				setChildIndex( obj,0 );
+//				setChildIndex( obj,0 );
 				sortIsoObject(obj);
 				obj.isSort = false ;
 			}
