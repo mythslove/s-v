@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Panel xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark" creationComplete="init();"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 width="456" height="288" title="新建地图">
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			import mx.managers.PopUpManager;
+			
+			import tool.comm.GlobalDispatcher;
+			import tool.events.MapEvent;
+			import tool.local.vos.MapVO;
+			
+			private var _file:File ;
+			private var _mapVO:MapVO ;
+			private var _loader:Loader ;
+			
+			private function init():void
+			{
+				_mapVO = new MapVO();
+				_file = new File();
+				_file.addEventListener(Event.SELECT , onSelectFile );
+			}
+			
+			protected function btnOk_clickHandler(event:MouseEvent):void
+			{
+				if(txtBg.text=="") {
+					Alert.show("请选择背景图片");
+					return ;
+				}
+				if(txtXSpan.text=="" ){
+					Alert.show("请填写地图X轴占用格子数");
+					return ;
+				}
+				if(txtZSpan.text=="" ){
+					Alert.show("请填写地图Z轴占用格子数");
+					return ;
+				}
+				_mapVO.xSpan = int(txtXSpan.text);
+				_mapVO.zSpan = int(txtZSpan.text);
+				
+				var evt:MapEvent = new MapEvent(MapEvent.NEWMAP);
+				evt.mapVO = _mapVO ;
+				GlobalDispatcher.instance.dispatchEvent( evt );
+				PopUpManager.removePopUp(this);
+			}
+			
+			protected function btnOpen_clickHandler(event:MouseEvent):void
+			{
+				_file.browseForOpen("选择图片",[ new FileFilter("*.jpg,*.png","*.jpg;*.png")] );
+			}
+			
+			private function onSelectFile( e:Event):void
+			{
+				mouseChildren = false; 
+				_loader = new Loader();
+				_loader.contentLoaderInfo.addEventListener(Event.COMPLETE , loadedHandler );
+				_loader.load( new URLRequest(_file.url) );
+				txtBg.text = _file.name ;
+			}
+			
+			private function loadedHandler( e:Event ):void
+			{
+				_loader.contentLoaderInfo.removeEventListener(Event.COMPLETE , loadedHandler );
+				_mapVO.bg = (_loader.content as Bitmap).bitmapData ;
+				mouseChildren = true ;
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<s:Label x="50" y="28" text="背景图片"/>
+	<s:TextInput id="txtBg" x="106" y="23" width="278" enabled="false"/>
+	<s:Button id="btnOpen" x="343" y="58" label="浏览" click="btnOpen_clickHandler(event)"/>
+	<s:Label x="30" y="128" text="xSpan"/>
+	<s:Label x="250" y="129" text="zSpan"/>
+	<s:TextInput id="txtXSpan" x="74" y="123" prompt="X轴占用格子"/>
+	<s:TextInput id="txtZSpan" x="294" y="123" prompt="Z轴占用格子"/>
+	<s:Button id="btnNo" x="99" y="202" width="91" height="31" label="取消" click="PopUpManager.removePopUp(this);"/>
+	<s:Button id="btnOk" x="257" y="202" width="91" height="31" label="确定"
+			  click="btnOk_clickHandler(event)"/>
+</s:Panel>
