@@ -21,6 +21,7 @@ package local.game.cell
 		{
 			super();
 			mouseChildren = false ;
+			this._threshold = 10 ;
 			this._bavos = bavos ;
 			init();
 		}
