@@ -60,6 +60,7 @@ package bing.iso
 				obj.update();
 				if(obj.isSort)	{
 					sortIsoObject(obj);
+					obj.isSort = false ;
 				}
 			}
 		}
@@ -89,7 +90,6 @@ package bing.iso
 					break ;
 				}
 			}
-			obj.isSort = false ;
 		}
 		
 		/**        排序算法           */
