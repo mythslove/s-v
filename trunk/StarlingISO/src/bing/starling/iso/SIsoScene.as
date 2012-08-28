@@ -54,7 +54,6 @@ package bing.starling.iso
 			for each(var obj:SIsoObject in _sprites ) {
 				obj.update();
 				if(obj.isSort)	{
-					setChildIndex( obj,0 );
 					sortIsoObject(obj);
 				}
 			}
@@ -65,7 +64,6 @@ package bing.starling.iso
 		{
 			for each(var obj:SIsoObject in _sprites )
 			{
-				setChildIndex( obj,0 );
 				sortIsoObject(obj);
 				obj.isSort = false ;
 			}
@@ -74,11 +72,10 @@ package bing.starling.iso
 		/**        对一个iso对象进行深度排序           */
 		public function sortIsoObject( obj:SIsoObject ):void
 		{
-			var index:int = getChildIndex(obj);
+			setChildIndex( obj,0 );
 			//排序
-			var len:int = this.numChildren ;
 			var target:SIsoObject ;
-			for(var i:int = len-1 ; i>index ; --i)
+			for(var i:int = numChildren-1 ; i>0 ; --i)
 			{
 				target= this.getChildAt(i) as SIsoObject ;
 				if(target && target!=obj && this.sortCompare(target,obj)<0)
