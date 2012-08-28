@@ -55,6 +55,7 @@ package bing.starling.iso
 				obj.update();
 				if(obj.isSort)	{
 					sortIsoObject(obj);
+					obj.isSort = false ;
 				}
 			}
 		}
@@ -84,7 +85,6 @@ package bing.starling.iso
 					break ;
 				}
 			}
-			obj.isSort = false ;
 		}
 		
 		/**        排序算法           */
