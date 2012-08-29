@@ -19,6 +19,8 @@ package bing.iso
 		protected var _spanPosition:Vector.<Vector3D> ; //占用了哪几个格子
 		protected var _isRotate:Boolean=false ; //是否旋转
 		protected var _boundRect:Rectangle = new Rectangle();
+		public function get xSpan():int{ return _xSpan ; }
+		public function get zSpan():int{ return _zSpan ; }
 		
 		// a more accurate version of 1.2247...
 		public static const Y_CORRECT:Number = Math.cos(-Math.PI / 6) * Math.SQRT2;
