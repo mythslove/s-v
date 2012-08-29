@@ -6,6 +6,8 @@ package local.game
 	import bing.iso.IsoUtils;
 	import bing.iso.IsoWorld;
 	
+	import com.greensock.TweenLite;
+	
 	import flash.display.BitmapData;
 	import flash.display.DisplayObject;
 	import flash.display.Shape;
@@ -242,19 +244,9 @@ package local.game
 					_isMove = true ;
 					mouseChildren = false; 
 					if(e.buttonDown && !_isGesture ){
-						var offsetX:int =  _worldPos.x + GameData.app.mouseX-_mouseDownPos.x ;
-						var offsetY:int = _worldPos.y + GameData.app.mouseY-_mouseDownPos.y ;
-						
-						if(offsetX>0) offsetX=0 ;
-						else if(offsetX<-GameSetting.MAP_WIDTH*scaleX+GameSetting.SCREEN_WIDTH){
-							offsetX = -GameSetting.MAP_WIDTH*scaleX+GameSetting.SCREEN_WIDTH ;
-						}
-						if(offsetY>0) offsetY=0 ;
-						else if(offsetY<-GameSetting.MAP_HEIGHT*scaleY+GameSetting.SCREEN_HEIGHT){
-							offsetY = -GameSetting.MAP_HEIGHT*scaleY+GameSetting.SCREEN_HEIGHT ;
-						}
-						_endX = offsetX;
-						_endY = offsetY ;
+						_endX =  _worldPos.x + GameData.app.mouseX-_mouseDownPos.x ;
+						_endY = _worldPos.y + GameData.app.mouseY-_mouseDownPos.y ;
+						modifyEndPosition();
 					}
 					break ;
 				case MouseEvent.MOUSE_UP:
@@ -265,6 +257,10 @@ package local.game
 							}
 							currentSelected = e.target.parent as BaseBuilding ;
 							currentSelected.flash(true);
+							//移动到中间
+							_endX =  GameSetting.SCREEN_WIDTH*0.5 - (sceneLayerOffsetX+currentSelected.screenX)*scaleX ;
+							_endY = GameSetting.SCREEN_HEIGHT*0.5 -(currentSelected.screenY +sceneLayerOffsetY)*scaleY ;
+							modifyEndPosition();
 						}
 					}
 				default :
@@ -273,6 +269,17 @@ package local.game
 					removeEventListener(MouseEvent.MOUSE_MOVE , onMouseEvtHandler); 
 					removeEventListener(MouseEvent.MOUSE_UP , onMouseEvtHandler );
 					break ;
+			}
+		}
+		
+		private function modifyEndPosition():void{
+			if(_endX>0) _endX=0 ;
+			else if(_endX<-GameSetting.MAP_WIDTH*scaleX+GameSetting.SCREEN_WIDTH){
+				_endX = -GameSetting.MAP_WIDTH*scaleX+GameSetting.SCREEN_WIDTH ;
+			}
+			if(_endY>0) _endY=0 ;
+			else if(_endY<-GameSetting.MAP_HEIGHT*scaleY+GameSetting.SCREEN_HEIGHT){
+				_endY = -GameSetting.MAP_HEIGHT*scaleY+GameSetting.SCREEN_HEIGHT ;
 			}
 		}
 		
