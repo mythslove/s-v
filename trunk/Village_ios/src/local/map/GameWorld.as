@@ -5,6 +5,7 @@ package local.map
 	import flash.geom.Point;
 	
 	import local.enum.BuildingType;
+	import local.map.item.Car;
 	import local.map.item.Character;
 	import local.map.item.Road;
 	import local.util.EmbedsManager;
@@ -112,14 +113,24 @@ package local.map
 					}
 				}
 			}
+			
+			
 			for( i = 0 ; i<roads.length ; ++i)
 			{
-				if(Math.random()>0.8){
+				if(Math.random()>0.6){
 					road = roads[i];
 					var fairy:Character = new Character( EmbedsManager.instance.getAnimResVOByName("Fairy")[0] );
 					fairy.nodeX  = road.nodeX;
 					fairy.nodeZ = road.nodeZ;
 					buildingScene.addIsoObject( fairy , false ) ;
+					fairy.init();
+				}else if(Math.random()>0.6){
+					road = roads[i];
+					var car:Car = new Car( EmbedsManager.instance.getAnimResVOByName("Truck")[0] );
+					car.nodeX  = road.nodeX;
+					car.nodeZ = road.nodeZ;
+					buildingScene.addIsoObject( car , false ) ;
+					car.init();
 				}
 			}
 			
