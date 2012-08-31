@@ -7,38 +7,23 @@ package bing.animation
 	 */	
 	public class ActionVO
 	{
-		private var _actionName:String = ""; //动作的名称
-		private var _frameNum:int = 0; //动作的帧数
+		public var actionName:String = ""; //动作的名称
+		public var frameNum:int = 0; //动作的帧数
+		public var startFrame:int ; //开始帧 
+		public var endFrame:int ; //结束帧
 		/**
 		 * 构造函数：动作模型 
 		 * @param actionName 动作的名称
 		 * @param frameNum 此动作的帧数 
+		 * @param startFrame 开始帧 
+		 * @param endFrame 结束帧
 		 */		
-		public function ActionVO( actionName:String , frameNum:int )
+		public function ActionVO( actionName:String , frameNum:int , startFrame:int=0 , endFrame:int=0 )
 		{
-			this._actionName = actionName; 
-			this._frameNum = frameNum ;
-		}
-		
-		
-		public function get frameNum():int
-		{
-			return _frameNum;
-		}
-
-		public function set frameNum(value:int):void
-		{
-			_frameNum = value;
-		}
-
-		public function get actionName():String
-		{
-			return _actionName;
-		}
-
-		public function set actionName(value:String):void
-		{
-			_actionName = value;
+			this.actionName = actionName; 
+			this.frameNum = frameNum ;
+			this.startFrame = startFrame; 
+			this.endFrame = endFrame ;
 		}
 
 	}
