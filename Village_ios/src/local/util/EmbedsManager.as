@@ -26,6 +26,8 @@ package local.util
 		
 		[ Embed(source="../resource/character/Fairy.bd", mimeType="application/octet-stream") ]
 		public static const Fairy:Class ;
+		[ Embed(source="../resource/character/Truck.bd", mimeType="application/octet-stream") ]
+		public static const Truck:Class ;
 		
 		
 		public function getAnimResVOByName( name:String ):Vector.<BitmapAnimResVO>

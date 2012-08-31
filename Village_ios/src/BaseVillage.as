@@ -21,20 +21,20 @@ package
 			stage.align = StageAlign.TOP_LEFT;
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 			stage.color = 0 ;
-			if (Capabilities.screenResolutionY <=960)
-			{
-				if(Capabilities.screenResolutionY<960){
-					this.scaleX = 0.5;
-					this.scaleY = 0.5;
-				}
+//			if (Capabilities.screenResolutionY <=960)
+//			{
+//				if(Capabilities.screenResolutionY<960){
+//					this.scaleX = 0.5;
+//					this.scaleY = 0.5;
+//				}
 				GameSetting.SCREEN_WIDTH = 960;
 				GameSetting.SCREEN_HEIGHT = 640;
-			}
-			else if(Capabilities.screenResolutionY <=1136)
-			{
-				GameSetting.SCREEN_WIDTH = 1136;
-				GameSetting.SCREEN_HEIGHT = 640 ;
-			}
+//			}
+//			else if(Capabilities.screenResolutionY <=1136)
+//			{
+//				GameSetting.SCREEN_WIDTH = 1136;
+//				GameSetting.SCREEN_HEIGHT = 640 ;
+//			}
 //			else 
 //			{
 //				if(Capabilities.screenResolutionY==2048){

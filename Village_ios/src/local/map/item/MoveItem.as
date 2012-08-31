@@ -1,7 +1,10 @@
 package local.map.item
 {
+	import bing.iso.IsoUtils;
+	
 	import flash.display.Sprite;
 	import flash.geom.Point;
+	import flash.geom.Vector3D;
 	
 	import local.comm.GameSetting;
 	import local.map.cell.MoveItemAnimObject;
@@ -15,11 +18,21 @@ package local.map.item
 	 */	
 	public class MoveItem extends BaseMapObject
 	{
+		public static const CHARACTER_ROADS:Vector.<Point>= Vector.<Point>(
+			[ new Point(0,5) , new Point(45,25) , new Point(0,45) , new Point(-45,25) ]
+		);
+		public static const CAR_ROADS:Vector.<Point>= Vector.<Point>(
+			[ new Point(0,20) , new Point(30,25) , new Point(0,30) , new Point(-30,25) ]
+		);
+		
 		protected var _speed:Number = .3 ;
 		protected var _nextPoint:Point;
 		protected var _animObject:MoveItemAnimObject ;
 		protected var _itemLayer:Sprite ;
 		protected var _firstMove:Boolean;
+		protected var _rightDirection:Boolean =true ; //是否是顺时针方向转
+		protected var _roads:Vector.<Point> ;
+		protected var _roadIndex:int ;
 		
 		public function MoveItem( vo:BitmapAnimResVO )
 		{
@@ -35,6 +48,9 @@ package local.map.item
 			_itemLayer.addChild(_animObject);
 		}
 		
+		/** 在位置设置后调用 */
+		public function init():void{}
+		
 		override public function update():void
 		{
 			super.update() ;
@@ -48,26 +64,22 @@ package local.map.item
 		
 		protected function findNextRoad():void
 		{
-			var road:Road = findRandomRoad() ;
-			if(road){
-				_nextPoint = new Point( road.x ,road.z );
+			getNextPoint() ;
+			if(_nextPoint){
 				_firstMove = true ;
-				var forward:int = GameUtil.getDirection4(  road.screenX,road.screenY , screenX,screenY );
+				var forward:int = GameUtil.getDirection4(  _nextPoint.x ,_nextPoint.y , screenX,screenY );
 				_animObject.forward = forward ;
 			}
 		}
 		
 		protected function moveToPoint():void
 		{
-			var distance:Number = Point.distance(_nextPoint , new Point(x,z)) ;
+			var distance:Number = Point.distance( _nextPoint , new Point(screenX,screenY) ) ;
 			if(distance < _speed){
-				x = _nextPoint.x;
-				z = _nextPoint.y ;
 				_nextPoint = null; 
 			} else {
 				var moveNum:Number = distance/_speed ;
-				this.x +=  (_nextPoint.x - x)/moveNum ;
-				this.z +=  (_nextPoint.y - z)/moveNum ;
+				this.setScreenPosition( screenX+(_nextPoint.x - screenX)/moveNum , screenY+(_nextPoint.y - screenY)/moveNum );
 				if(_firstMove){
 					sort();
 					_firstMove = false ;
@@ -75,69 +87,94 @@ package local.map.item
 			}
 		}
 		
-		/* 随机方向的路*/
-		protected function findRandomRoad():Road
+		/*下一个点*/
+		protected function getNextPoint():void
 		{
-			var roadArray:Array=[];
+			var currNode:Point = IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE , screenX , screenY );
 			var road:Road ;
-			if(_animObject.forward==1)
+			if(_roadIndex==0)
 			{
-				road = MapGridDataModel.instance.getBuildingByData(nodeX*GameSetting.GRID_SIZE,(nodeZ-1)*GameSetting.GRID_SIZE) as Road;
-				if(road) roadArray.push( road );
-				road = MapGridDataModel.instance.getBuildingByData((nodeX-1)*GameSetting.GRID_SIZE,nodeZ*GameSetting.GRID_SIZE) as Road;
-				if(road) roadArray.push( road );
-				road = MapGridDataModel.instance.getBuildingByData((nodeX+1)*GameSetting.GRID_SIZE,nodeZ*GameSetting.GRID_SIZE) as Road;
-				if(road) roadArray.push( road );
-				if(roadArray.length==0){
-					road = MapGridDataModel.instance.getBuildingByData(nodeX*GameSetting.GRID_SIZE,(nodeZ+1)*GameSetting.GRID_SIZE) as Road;
-					if(road) roadArray.push( road );
+				if(_rightDirection){
+					if(_animObject.forward==4){
+						road = MapGridDataModel.instance.getBuildingByData( (currNode.x-1)*GameSetting.GRID_SIZE, currNode.y*GameSetting.GRID_SIZE) as Road;
+						if(road) _roadIndex = 1 ; 
+					}
+					if(!road) _roadIndex = 3 ;
+				} 
+				else 
+				{
+					if(_animObject.forward==1){
+						road = MapGridDataModel.instance.getBuildingByData(currNode.x*GameSetting.GRID_SIZE,(currNode.y-1)*GameSetting.GRID_SIZE) as Road;
+						if(road) _roadIndex = 3 ;
+					}
+					if(!road) _roadIndex = 1 ;
 				}
 			}
-			else if(_animObject.forward==2)
+			else if(_roadIndex==1)
 			{
-				road = MapGridDataModel.instance.getBuildingByData((nodeX+1)*GameSetting.GRID_SIZE,nodeZ*GameSetting.GRID_SIZE) as Road;
-				if(road) roadArray.push( road );
-				road = MapGridDataModel.instance.getBuildingByData(nodeX*GameSetting.GRID_SIZE,(nodeZ-1)*GameSetting.GRID_SIZE) as Road;
-				if(road) roadArray.push( road );
-				road = MapGridDataModel.instance.getBuildingByData(nodeX*GameSetting.GRID_SIZE,(nodeZ+1)*GameSetting.GRID_SIZE) as Road;
-				if(road) roadArray.push( road );
-				if(roadArray.length==0){
-					road = MapGridDataModel.instance.getBuildingByData((nodeX-1)*GameSetting.GRID_SIZE,nodeZ*GameSetting.GRID_SIZE) as Road;
-					if(road) roadArray.push( road );
+				if(_rightDirection){
+					if(_animObject.forward==1){
+						road = MapGridDataModel.instance.getBuildingByData( currNode.x*GameSetting.GRID_SIZE, (currNode.y-1) *GameSetting.GRID_SIZE) as Road;
+						if(road) _roadIndex = 2 ;
+					}
+					if(!road)  _roadIndex = 0 ;
+				}
+				else
+				{
+					if(_animObject.forward==2){
+						road = MapGridDataModel.instance.getBuildingByData( (currNode.x+1)*GameSetting.GRID_SIZE,currNode.y*GameSetting.GRID_SIZE) as Road;
+						if(road) _roadIndex = 0 ;
+					}
+					if(!road) _roadIndex = 2 ;
 				}
 			}
-			else if(_animObject.forward==3)
+			else if(_roadIndex==2)
 			{
-				road = MapGridDataModel.instance.getBuildingByData(nodeX*GameSetting.GRID_SIZE,(nodeZ+1)*GameSetting.GRID_SIZE) as Road;
-				if(road) roadArray.push( road );
-				road = MapGridDataModel.instance.getBuildingByData((nodeX+1)*GameSetting.GRID_SIZE,nodeZ*GameSetting.GRID_SIZE) as Road;
-				if(road) roadArray.push( road );
-				road = MapGridDataModel.instance.getBuildingByData((nodeX-1)*GameSetting.GRID_SIZE,nodeZ*GameSetting.GRID_SIZE) as Road;
-				if(road) roadArray.push( road );
-				if(roadArray.length==0){
-					road = MapGridDataModel.instance.getBuildingByData(nodeX*GameSetting.GRID_SIZE,(nodeZ-1)*GameSetting.GRID_SIZE) as Road;
-					if(road) roadArray.push( road );
+				if(_rightDirection)
+				{
+					if(_animObject.forward==2){
+						road = MapGridDataModel.instance.getBuildingByData( (currNode.x+1)*GameSetting.GRID_SIZE, currNode.y*GameSetting.GRID_SIZE) as Road;
+						if(road) _roadIndex = 3 ;
+					}
+					if(!road)	_roadIndex = 1;
+				}
+				else
+				{
+					if(_animObject.forward==3){
+						road = MapGridDataModel.instance.getBuildingByData( currNode.x*GameSetting.GRID_SIZE, (currNode.y+1)*GameSetting.GRID_SIZE) as Road;
+						if(road) _roadIndex = 1 ;
+					}
+					if(!road) _roadIndex = 3 ;
 				}
 			}
 			else
 			{
-				road = MapGridDataModel.instance.getBuildingByData((nodeX-1)*GameSetting.GRID_SIZE,nodeZ*GameSetting.GRID_SIZE) as Road;
-				if(road) roadArray.push( road );
-				road = MapGridDataModel.instance.getBuildingByData(nodeX*GameSetting.GRID_SIZE,(nodeZ+1)*GameSetting.GRID_SIZE) as Road;
-				if(road) roadArray.push( road );
-				road = MapGridDataModel.instance.getBuildingByData(nodeX*GameSetting.GRID_SIZE,(nodeZ-1)*GameSetting.GRID_SIZE) as Road;
-				if(road) roadArray.push( road );
-				if(roadArray.length==0){
-					road = MapGridDataModel.instance.getBuildingByData((nodeX+1)*GameSetting.GRID_SIZE,nodeZ*GameSetting.GRID_SIZE) as Road;
-					if(road) roadArray.push( road );
+				if(_rightDirection){
+					if(_animObject.forward==3){
+						road = MapGridDataModel.instance.getBuildingByData( currNode.x*GameSetting.GRID_SIZE,(currNode.y+1)*GameSetting.GRID_SIZE) as Road;
+						if(road)_roadIndex = 0 ;
+					}
+					if(!road) _roadIndex = 2 ;
+				}
+				else
+				{
+					if(_animObject.forward==4){
+						road = MapGridDataModel.instance.getBuildingByData( (currNode.x-1)*GameSetting.GRID_SIZE,currNode.y*GameSetting.GRID_SIZE) as Road;
+						if(road)	_roadIndex = 2;
+					}
+					if(!road)_roadIndex =0 ;
 				}
 			}
-			if(roadArray.length>0)
-			{
-				var index:int=Math.round( (roadArray.length-1)*Math.random() );
-				return roadArray[index] ;
+			
+			if(road){
+				_nextPoint = new Point();
+				_nextPoint.x = road.screenX + _roads[_roadIndex].x  ;
+				_nextPoint.y = road.screenY + _roads[_roadIndex].y  ;
+			}else{
+				_nextPoint = IsoUtils.isoToScreen( new Vector3D(currNode.x*GameSetting.GRID_SIZE , 0 , currNode.y*GameSetting.GRID_SIZE));
+				_nextPoint.x += _roads[_roadIndex].x  ;
+				_nextPoint.y += _roads[_roadIndex].y  ;
 			}
-			return null ;
 		}
 		
 		override public function dispose():void
