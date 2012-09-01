@@ -50,6 +50,11 @@ package  local.map
 		override protected function addedToStageHandler(e:Event):void
 		{
 			super.addedToStageHandler(e);
+			
+			graphics.beginFill(0);
+			graphics.drawRect(0,0,GameSetting.MAP_WIDTH , GameSetting.MAP_HEIGHT);
+			graphics.endFill();
+			
 			//显示地图网格
 			var gridScene:IsoScene = new IsoScene(GameSetting.GRID_SIZE);
 			(gridScene.addChild( new IsoGrid(GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE)) as IsoGrid).render() ;
@@ -139,7 +144,7 @@ package  local.map
 								
 								// scale
 								var sizeDiff:Number = currentVector.length / previousVector.length;
-								sizeDiff = sizeDiff>1 ? 1+(1-sizeDiff)*.5 : 1-(1-sizeDiff)*.5 ;
+								sizeDiff = sizeDiff>1 ? 1+(sizeDiff-1)*.25 : 1-(1-sizeDiff)*.25 ;
 								changeWorldScale( sizeDiff , _middle.x , _middle.y );
 								
 								_isGesture = true ;
