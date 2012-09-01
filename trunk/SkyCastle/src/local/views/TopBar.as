@@ -9,9 +9,8 @@ package  local.views
 	import local.views.topbar.TopBarEnergy;
 	import local.views.topbar.TopBarExp;
 	import local.views.topbar.TopBarGem;
-	import local.views.topbar.TopBarRank;
 	import local.views.topbar.TopBarStone;
-	import local.views.topbar.TopBarUserName;
+	import local.views.topbar.TopBarVillage;
 	import local.views.topbar.TopBarWood;
 	
 	public class TopBar extends Sprite
@@ -21,9 +20,8 @@ package  local.views
 		public var expBar:TopBarExp;
 		public var stoneBar:TopBarStone;
 		public var woodBar:TopBarWood;
-		public var userBar:TopBarUserName;
+		public var userBar:TopBarVillage;
 		public var gemBar:TopBarGem;
-		public var rankBar:TopBarRank;
 		public var addEnergyBar:AddEnergyBar ;
 		
 		public function TopBar()
@@ -64,12 +62,12 @@ package  local.views
 		
 		public function updateName():void
 		{
-			userBar.update( PlayerModel.instance.me.name ) ;
+			userBar.updateName( PlayerModel.instance.me.name ) ;
 		}
 		
 		public function updateRank():void
 		{
-			rankBar.update( PlayerModel.instance.me.rank );
+			userBar.updateRank( PlayerModel.instance.me.rank );
 		}
 		
 		/**更新topbar信息*/
@@ -85,8 +83,8 @@ package  local.views
 			stoneBar.update( user.stone );
 			woodBar.update( user.wood );
 			gemBar.update( user.cash ) ;
-			userBar.update( user.name ) ;
-			rankBar.update( user.rank );
+			userBar.updateName( user.name ) ;
+			userBar.updateRank( user.rank );
 		}
 	}
 }
