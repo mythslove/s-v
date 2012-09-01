@@ -36,6 +36,7 @@ package  local.map
 		private var _touchCount:int ;
 		private var _touchFinger1:Point = new Point();
 		private var _middle:Point = new Point();
+		private var _moveSpeed:Number = 0.36 ;
 		
 		public function BaseWorld()
 		{
@@ -168,10 +169,10 @@ package  local.map
 		{
 			update();
 			if(x!=_endX){
-				x += ( _endX-x)*0.36 ;
+				x += ( _endX-x)*_moveSpeed ;
 			}
 			if(y!=_endY){
-				y += (_endY-y)*0.36 ;
+				y += (_endY-y)*_moveSpeed ;
 			}
 		}
 		
@@ -193,6 +194,7 @@ package  local.map
 			switch( e.type )
 			{
 				case MouseEvent.MOUSE_DOWN:
+					_moveSpeed = 0.36 ;
 					_mouseDownPos.x = root.mouseX ;
 					_mouseDownPos.y = root.mouseY ;
 					_worldPos.x = x ;
@@ -225,6 +227,7 @@ package  local.map
 							_endX =  GameSetting.SCREEN_WIDTH*0.5 - (sceneLayerOffsetX+currentSelected.screenX)*scaleX ;
 							_endY = GameSetting.SCREEN_HEIGHT*0.5 -(currentSelected.screenY +sceneLayerOffsetY+GameSetting.GRID_SIZE*2)*scaleY ;
 							modifyEndPosition();
+							_moveSpeed = 0.15 ;
 						}
 					}
 				default :
