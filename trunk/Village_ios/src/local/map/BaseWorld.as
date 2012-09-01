@@ -10,6 +10,7 @@ package  local.map
 	import local.comm.*;
 	import local.map.item.*;
 	import local.map.scene.*;
+	import local.util.EmbedsManager;
 	import local.vo.*;
 	
 	public class BaseWorld extends IsoWorld
@@ -51,9 +52,7 @@ package  local.map
 		{
 			super.addedToStageHandler(e);
 			
-			graphics.beginFill(0);
-			graphics.drawRect(0,0,GameSetting.MAP_WIDTH , GameSetting.MAP_HEIGHT);
-			graphics.endFill();
+			this.setBackGround( new Bitmap( EmbedsManager.instance.getBitmapDataByName("MapBg")) );
 			
 			//显示地图网格
 			var gridScene:IsoScene = new IsoScene(GameSetting.GRID_SIZE);
@@ -247,8 +246,6 @@ package  local.map
 		private function changeWorldScale( value:Number , px:Number , py:Number ):void
 		{
 			if(scaleX*value>0.8 && scaleX*value<2) {
-				_endX = x;
-				_endY = y ;
 				var m:Matrix = this.transform.matrix;
 				m.tx -= px;
 				m.ty -= py;
@@ -256,11 +253,13 @@ package  local.map
 				m.tx += px;
 				m.ty += py;
 				this.transform.matrix = m;
-				modifyEndPosition();
 				_mouseDownPos.x = _endX = x;
 				_mouseDownPos.y = _endY = y ;
+				modifyEndPosition();
+				x = _endX ;
+				y = _endY ;
 			}
-			_endX = x ;
+			_endX = x;
 			_endY = y ;
 		}
 		
