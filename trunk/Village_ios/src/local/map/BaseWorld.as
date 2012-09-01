@@ -139,6 +139,7 @@ package  local.map
 								
 								// scale
 								var sizeDiff:Number = currentVector.length / previousVector.length;
+								sizeDiff = sizeDiff>1 ? 1+(1-sizeDiff)*.5 : 1-(1-sizeDiff)*.5 ;
 								changeWorldScale( sizeDiff , _middle.x , _middle.y );
 								
 								_isGesture = true ;
