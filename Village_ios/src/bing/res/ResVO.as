@@ -43,6 +43,10 @@ package bing.res
 					(resObject as Bitmap).bitmapData.dispose();
 				}
 			}
+			else if(resObject is BitmapData)
+			{
+				(resObject as BitmapData).dispose();
+			}
 			else if( resObject is Vector.<BitmapData>)
 			{
 				var bmds:Vector.<BitmapData> = resObject as Vector.<BitmapData>;

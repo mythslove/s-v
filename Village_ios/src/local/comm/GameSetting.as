@@ -8,8 +8,8 @@ package local.comm
 		
 		
 		//地图大小
-		public static const MAP_WIDTH:int = 3600;
-		public static const MAP_HEIGHT:int = 2000;
+		public static const MAP_WIDTH:int = 3072;
+		public static const MAP_HEIGHT:int = 3072;
 		
 		/** 网格大小 */		
 		public static const GRID_SIZE:int = 50 ;
