@@ -44,8 +44,8 @@ package bing.iso
 			var xpos:Number = py + px * .5;
 			var zpos:Number = py - px * .5;
 			
-			var col:Number = Math.floor(xpos / size );
-			var row:Number = Math.floor( zpos / size);
+			var col:Number = (xpos / size )>>0 ;
+			var row:Number = ( zpos / size)>>0 ;
 			return new Point(col,row) ;
 		}
 		
