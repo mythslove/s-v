@@ -30,34 +30,23 @@ package local.views.effects
 		override protected function added():void
 		{
 			addEventListener(Event.ENTER_FRAME , onEnterFrameHandler );
-			onEnterFrameHandler(null);
+			_bmpMC.addEventListener(Event.COMPLETE , onAnimComplete);
+			_bmpMC.gotoAndPlay(1,_loopTime);
+		}
+		
+		private function onAnimComplete( e:Event ):void
+		{
+			_bmpMC.stop();
+			removeEventListener(Event.ENTER_FRAME , onEnterFrameHandler );
+			if(parent){
+				parent.removeChild(this);
+			}
 		}
 		
 		private function onEnterFrameHandler( e:Event):void
 		{
-			if(_bmpMC.currentFrame==_bmpMC.totalFrame){
-				++_currentLoop ;
-				if(_loopTime>0 && _loopTime==_currentLoop)
-				{
-					_bmpMC.stop();
-					removeEventListener(Event.ENTER_FRAME , onEnterFrameHandler );
-					if(parent){
-						parent.removeChild(this);
-					}
-				}
-				else
-				{
-					_bmpMC.play();
-					var rect:Rectangle = _bmpMC.getBound();
-					_bmpMC.x = rect.x ;
-					_bmpMC.y = rect.y ;
-				}
-				
-			}
-			else 
-			{
-				_bmpMC.play();
-				rect = _bmpMC.getBound();
+			if(_bmpMC.update()){
+				var rect:Rectangle = _bmpMC.getBound();
 				_bmpMC.x = rect.x ;
 				_bmpMC.y = rect.y ;
 			}
@@ -66,6 +55,7 @@ package local.views.effects
 		override protected function removed():void
 		{
 			removeEventListener(Event.ENTER_FRAME , onEnterFrameHandler );
+			_bmpMC.removeEventListener(Event.COMPLETE , onAnimComplete);
 			_bmpMC.dispose();
 			_bmpMC = null ;
 		}
