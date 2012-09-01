@@ -108,7 +108,7 @@ package local.map
 			{
 				if(obj is Road){
 					road = obj as Road ;
-					if(road ){
+					if(road && road.direction!="" && road.direction!="_M" ){
 						roads.push( road );
 					}
 				}

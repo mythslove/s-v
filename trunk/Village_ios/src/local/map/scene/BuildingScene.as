@@ -1,5 +1,6 @@
 package local.map.scene
 {
+	import bing.iso.IsoObject;
 	import bing.iso.IsoScene;
 	
 	import local.comm.GameSetting;
@@ -100,19 +101,12 @@ package local.map.scene
 			}
 		}
 		
-//		override public function sortAll():void
-//		{
-//			this.children.sort( groundObjectSort );
-//			const LEN:int = this.numChildren;
-//			for( var i:int = LEN-1 ; i>=0  ; --i){
-//				setChildIndex( children[i] , i );
-//			}
-//		}
-//		
-//		private function groundObjectSort( obj1:IsoObject , obj2:IsoObject ):int  
-//		{
-//			return obj1.screenY-obj2.screenY;
-//		}
+		
+		/**        排序算法           */
+		override protected function sortCompare( target:IsoObject , item:IsoObject ):int
+		{
+			return target.screenY-item.screenY ;
+		}
 		
 	}
 }
