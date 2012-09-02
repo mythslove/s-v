@@ -36,7 +36,6 @@ package bing.starling.iso
 		 */		
 		public function SIsoObject(size:Number , xSpan:int = 1, zSpan:int =1 )
 		{
-			this.touchable = false ;
 			_size = size;
 			_xSpan = xSpan ;
 			_zSpan = zSpan ;
