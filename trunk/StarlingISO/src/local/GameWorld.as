@@ -1,8 +1,8 @@
 package local
 {
+	import bing.starling.component.Rhombus;
 	import bing.starling.iso.SIsoGrid;
 	import bing.starling.iso.SIsoObject;
-	import bing.starling.component.Rhombus;
 	import bing.starling.iso.SIsoScene;
 	import bing.starling.iso.SIsoWorld;
 	
@@ -26,6 +26,7 @@ package local
 		private var _zoomM:Matrix = new Matrix();
 		private var _touchFinger1:Point = new Point();
 		private var _middle:Point = new Point();
+		private var _isMove:Boolean ;
 		
 		public function GameWorld()
 		{
@@ -75,7 +76,6 @@ package local
 						house.nodeZ = j*2 ;
 						var temp:int = (Math.random()*houses.length)>>0 ;
 						var img:Image = new Image( Assets.createTextureAtlas("Atlas").getTexture(houses[temp]) );
-						img.touchable = false ;
 						switch(temp)
 						{
 							case 0:
@@ -169,6 +169,15 @@ package local
 					}
 					_endX = offsetX;
 					_endY = offsetY ;
+					_isMove = true ;
+				}
+				if( touch.phase == TouchPhase.ENDED)
+				{
+					if(!_isMove && touch.target.parent is SIsoObject){
+						var obj:SIsoObject = touch.target.parent as SIsoObject ;
+						obj.alpha = 0.5 ;
+					}
+					_isMove = false ;
 				}
 			}
 			else if(e.touches.length==2)
@@ -194,11 +203,13 @@ package local
 				// scale
 				var sizeDiff:Number = currentVector.length / previousVector.length;
 				changeWorldScale( sizeDiff , _middle.x , _middle.y );
+				_isMove = false ;
 			}
 			else
 			{
 				_endX = x ;
 				_endY = y ;
+				_isMove = false ;
 			}
 		}
 		
