@@ -44,38 +44,9 @@ package bing.starling.iso
 			var xpos:Number = py + px * .5;
 			var zpos:Number = py - px * .5;
 			
-			var col:Number = Math.floor(xpos / size );
-			var row:Number = Math.floor( zpos / size);
+			var col:Number = (xpos / size )>>0 ;
+			var row:Number = ( zpos / size)>>0 ;
 			return new Point(col,row) ;
-		}
-		
-		/**
-		 * 画多边形 ，需要自己 调用graphic.beginFill 和 endFill
-		 * @param size 格子的大小
-		 * @param xPan X轴格子数
-		 * @param zSpan Z轴格子数
-		 */		
-		public static function drawRhombus( graphics:Graphics , size:int , xSpan:int , zSpan:int ):void
-		{
-			graphics.moveTo( 0,0);
-			
-			var p:Vector3D = new Vector3D();
-			var screenPos:Point =new Point();
-			
-			p.x = xSpan; p.z=0;
-			screenPos = SIsoUtils.isoToScreen(p);
-			graphics.lineTo( screenPos.x*size , screenPos.y*size);
-			
-			p.x = xSpan; p.z=zSpan;
-			screenPos = SIsoUtils.isoToScreen(p);
-			graphics.lineTo( screenPos.x*size ,screenPos.y*size);
-			
-			p.x = 0; p.z=zSpan;
-			screenPos = SIsoUtils.isoToScreen(p);
-			graphics.lineTo( screenPos.x*size ,screenPos.y*size);
-			
-			graphics.lineTo( 0,0);
-			
 		}
 	}
 }
