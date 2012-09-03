@@ -35,12 +35,12 @@ package local.map
 		override protected function initMap():void
 		{
 			var baseVO:BaseBuildingVO = new BaseBuildingVO();
-			baseVO.name = "Maple Leaves Road";
+			baseVO.name = "Default Road";
 			baseVO.type = BuildingType.DECO ;
 			baseVO.subClass = BuildingType.DECO_ROAD ;
 			var roadVO:BuildingVO = new BuildingVO();
 			roadVO.baseVO = baseVO ;
-			roadVO.name = "Maple Leaves Road";
+			roadVO.name = "Default Road";
 			
 			var road:Road ;
 			for( var i:int = 0 ; i<3; ++i){
