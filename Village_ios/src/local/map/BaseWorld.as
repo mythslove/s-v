@@ -43,7 +43,7 @@ package  local.map
 		{
 			super( GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE);
 			
-			this.panTo(GameSetting.MAP_WIDTH>>1 , -250);
+			this.panTo(GameSetting.MAP_WIDTH>>1 , -300);
 			this.x = (GameSetting.SCREEN_WIDTH-GameSetting.MAP_WIDTH*scaleX)>>1 ;
 			y=-850;
 			_endX = x ;
