@@ -7,6 +7,7 @@ package local.model
 	
 	import local.comm.GameSetting;
 	import local.map.item.BaseBuilding;
+	import local.map.item.BaseMapObject;
 
 	public class MapGridDataModel
 	{
@@ -28,7 +29,7 @@ package local.model
 		private var _grid2Building:HashMap = new HashMap();
 		
 		
-		public function addBuildingGridData( building:BaseBuilding ):void
+		public function addBuildingGridData( building:BaseMapObject ):void
 		{
 			var points:Vector.<Vector3D> = building.spanPosition ;
 			for each( var point:Vector3D in points)
@@ -38,7 +39,7 @@ package local.model
 			}
 		}
 		
-		public function removeBuildingGridData( building:BaseBuilding ):void
+		public function removeBuildingGridData( building:BaseMapObject ):void
 		{
 			var points:Vector.<Vector3D> = building.spanPosition ;
 			for each( var point:Vector3D in points)
