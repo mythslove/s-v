@@ -30,7 +30,7 @@ package local.map.item
 			[ new Point(0,5) , new Point(45,25) , new Point(0,45) , new Point(-45,25) ]
 		);
 		public static const CAR_ROADS:Vector.<Point>= Vector.<Point>(
-			[  new Point(0,20) , new Point(30,25) , new Point(0,30) , new Point(-30,25) ]
+			[  new Point(0,13) , new Point(20,25) , new Point(0,37) , new Point(-20,25) ]
 		);
 		
 		protected var _speed:Number = .3 ;
@@ -183,6 +183,7 @@ package local.map.item
 				}
 			}
 			
+			_firstMove = true ;
 			_nextPoint = new Point();
 			if(road){
 				_nextPoint.x = road.screenX + _roads[_roadIndex].x  ;
@@ -191,8 +192,6 @@ package local.map.item
 				_nextPoint.x = xpos - zpos +_roads[_roadIndex].x ;
 				_nextPoint.y = (xpos+ zpos) * .5 + _roads[_roadIndex].y;
 			}
-			trace(_nextPoint);
-			_firstMove = true ;
 		}
 		
 		override public function dispose():void
