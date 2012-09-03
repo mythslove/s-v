@@ -43,9 +43,9 @@ package  local.map
 		{
 			super( GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE);
 			
-			this.panTo(GameSetting.MAP_WIDTH>>1 , 600);
+			this.panTo(GameSetting.MAP_WIDTH>>1 , -250);
 			this.x = (GameSetting.SCREEN_WIDTH-GameSetting.MAP_WIDTH*scaleX)>>1 ;
-			y=-400;
+			y=-850;
 			_endX = x ;
 			_endY = y ;
 			addBackground();
@@ -57,13 +57,11 @@ package  local.map
 			var offset:Number ;
 			
 			var map:Shape = new Shape();
-			map.graphics.beginFill(0x006600  );
-			map.graphics.drawRect(0,0,GameSetting.MAP_WIDTH , GameSetting.MAP_HEIGHT);
-			map.graphics.endFill();
-			this.setBackGround( map );
-			return ;
-			
-			
+//			map.graphics.beginFill(0x006600  );
+//			map.graphics.drawRect(0,0,GameSetting.MAP_WIDTH , GameSetting.MAP_HEIGHT);
+//			map.graphics.endFill();
+//			this.setBackGround( map );
+//			return ;
 			
 			var bmd:BitmapData = EmbedsManager.instance.getBitmapByName("MapBlock").bitmapData;
 			map.graphics.beginBitmapFill( bmd , mat , true  );
@@ -146,9 +144,6 @@ package  local.map
 			map.graphics.drawRect( 3500  , 1500 , bmd.width , bmd.height );
 			map.graphics.endFill();
 			
-			mat.identity() ;
-			map.cacheAsBitmapMatrix = mat ;
-			map.cacheAsBitmap = true ;
 			this.setBackGround( map );
 		}
 		

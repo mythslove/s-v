@@ -8,7 +8,9 @@ package local.map
 	import flash.geom.Vector3D;
 	
 	import local.comm.GameData;
+	import local.comm.GameSetting;
 	import local.enum.BuildingType;
+	import local.map.item.BasicBuilding;
 	import local.map.item.Car;
 	import local.map.item.Character;
 	import local.map.item.Road;
@@ -44,8 +46,8 @@ package local.map
 			for( var i:int = 0 ; i<3; ++i){
 				for ( var j:int = 0 ; j<3;++j){
 					road = new Road(roadVO);
-					road.nodeX = i ;
-					road.nodeZ =  j ;
+					road.nodeX = 6*4+i ;
+					road.nodeZ =  6*4+j ;
 					roadScene.addRoad( road , false , false );
 				}
 			}
@@ -53,50 +55,50 @@ package local.map
 			
 			for( i = 4 ; i<6; ++i){
 				road = new Road(roadVO);
-				road.nodeX = i ;
-				road.nodeZ = 0 ;
+				road.nodeX = 6*4+i ;
+				road.nodeZ = 6*4+0 ;
 				roadScene.addRoad( road , false , false );
 			}
 			//
 			road = new Road(roadVO);
-			road.nodeX = 1 ;
-			road.nodeZ = 3 ;
+			road.nodeX = 6*4+1 ;
+			road.nodeZ = 6*4+3 ;
 			roadScene.addRoad( road, false , false  );
 			road = new Road(roadVO);
-			road.nodeX = 5 ;
-			road.nodeZ = 3 ;
+			road.nodeX = 6*4+5 ;
+			road.nodeZ = 6*4+3 ;
 			roadScene.addRoad( road, false , false  );
 			road = new Road(roadVO);
-			road.nodeX = 6 ;
-			road.nodeZ = 2 ;
+			road.nodeX = 6*4+6 ;
+			road.nodeZ = 6*4+2 ;
 			roadScene.addRoad( road, false , false  );
 			road = new Road(roadVO);
-			road.nodeX = 6 ;
-			road.nodeZ = 3 ;
+			road.nodeX = 6*4+6 ;
+			road.nodeZ = 6*4+3 ;
 			roadScene.addRoad( road , false , false );
 			road = new Road(roadVO);
-			road.nodeX = 7 ;
-			road.nodeZ = 3 ;
+			road.nodeX = 6*4+7 ;
+			road.nodeZ = 6*4+3 ;
 			roadScene.addRoad( road , false , false );
 			road = new Road(roadVO);
-			road.nodeX = 8 ;
-			road.nodeZ = 3 ;
+			road.nodeX = 6*4+8 ;
+			road.nodeZ = 6*4+3 ;
 			roadScene.addRoad( road , false , false );
 			road = new Road(roadVO);
-			road.nodeX = 7 ;
-			road.nodeZ = 4 ;
+			road.nodeX = 6*4+7 ;
+			road.nodeZ = 6*4+4 ;
 			roadScene.addRoad( road, false , false  );
 			road = new Road(roadVO);
-			road.nodeX = 7 ;
-			road.nodeZ = 4 ;
+			road.nodeX = 6*4+7 ;
+			road.nodeZ = 6*4+4 ;
 			roadScene.addRoad( road, false , false  );
 			//
 			var temp:Road; 
 			for( i = 1 ; i<4; ++i){
 				for ( j =4 ; j<7;++j){
 					road = new Road(roadVO);
-					road.nodeX = i ;
-					road.nodeZ =  j ;
+					road.nodeX = 6*4+i ;
+					road.nodeZ =  6*4+j ;
 					if(i==2&&j==5){
 						temp = road ;
 					}
@@ -107,8 +109,8 @@ package local.map
 			//
 			roadScene.addRoad( road, false , false  );
 			road = new Road(roadVO);
-			road.nodeX = 7 ;
-			road.nodeZ = 7 ;
+			road.nodeX = 6*4+7 ;
+			road.nodeZ = 6*4+7 ;
 			roadScene.addRoad( road , false , false  );
 			
 			var roads:Array =[];
@@ -154,6 +156,7 @@ package local.map
 		{
 			var i:int , j:int ;
 			var gameGridData:Grid = MapGridDataModel.instance.gameGridData ;
+			
 			//添加地图区域
 			var maxX:int ,maxZ:int ;
 			for each( var landVO:LandVO in LandModel.instance.lands) {
@@ -169,6 +172,20 @@ package local.map
 				}
 			}
 			
+			//随机添加树，石头
+			var basicBuild:BasicBuilding ;
+			for( i = 0 ; i<GameSetting.GRID_X ; ++i){
+				for( j = 0 ; j<GameSetting.GRID_Z ; ++j){
+					if( !gameGridData.getNode(i,j).walkable && Math.random()>0.95 ){
+						var index:int = (Math.random()*8+1 )>>0 ;
+						basicBuild = new BasicBuilding( EmbedsManager.instance.getAnimResVOByName("Basic_Tree"+index)) ;
+						basicBuild.nodeX = i ;
+						basicBuild.nodeZ = j ;
+						buildingScene.addBasicBuilding( basicBuild , false  );
+					}
+				}
+			}
+			buildingScene.sortAll();
 		}
 		
 		/** 画这个土地区域*/
@@ -178,7 +195,7 @@ package local.map
 			p.setTo(0,0,0);
 			var screenPos:Point = GameData.commPoint ;
 			screenPos.setTo(0,0);
-			roadScene.graphics.beginFill(0x008400 , 1 );
+			roadScene.graphics.beginFill( 0x97B425 , 1 );
 			p.x = landVO.nodeX; p.z=landVO.nodeZ;
 			screenPos = IsoUtils.isoToScreen(p);
 			var px:int = screenPos.x*_size*4 ;
