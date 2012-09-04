@@ -20,6 +20,5 @@ package local.map.item
 			_roadIndex = (Math.random()*4 ) >>1 ;
 			setScreenPosition( _roads[_roadIndex].x+screenX ,_roads[_roadIndex].y+screenY );
 		}
-	
 	}
 }

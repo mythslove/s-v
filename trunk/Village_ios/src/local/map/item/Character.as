@@ -1,8 +1,5 @@
 package local.map.item
 {
-	import flash.geom.Point;
-	
-	import local.comm.GameData;
 	import local.vo.BitmapAnimResVO;
 	
 	/**

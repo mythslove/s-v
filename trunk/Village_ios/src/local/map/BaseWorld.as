@@ -45,7 +45,7 @@ package  local.map
 			super( GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE);
 			
 			this.x =-50 + (GameSetting.SCREEN_WIDTH-GameSetting.MAP_WIDTH*scaleX)>>1 ;
-			y=-850;
+			y=-1200;
 			_endX = x ;
 			_endY = y ;
 			addBackground();
@@ -201,29 +201,18 @@ package  local.map
 			
 			//随机添加树，石头
 			var basicBuild:BasicBuilding ;
-			var basicVO1:BaseBuildingVO = new BaseBuildingVO();
-			basicVO1.name = "Basic_Tree1"; basicVO1.type = BuildingType.BASIC ;
-			basicVO1.xSpan = 2 ;  basicVO1.zSpan = 2 ; 
-			var basicVO2:BaseBuildingVO = new BaseBuildingVO();
-			basicVO2.name = "Basic_Tree2"; basicVO2.type = BuildingType.BASIC ;
-			basicVO2.xSpan = 2 ;  basicVO2.zSpan = 2 ;
-			var basicVO3:BaseBuildingVO = new BaseBuildingVO();
-			basicVO3.name = "Basic_Tree3"; basicVO3.type = BuildingType.BASIC ;
-			basicVO3.xSpan = 2 ;  basicVO3.zSpan = 2 ; 
-			var basicVO4:BaseBuildingVO = new BaseBuildingVO();
-			basicVO4.name = "Basic_Tree4"; basicVO4.type = BuildingType.BASIC ;
-			basicVO4.xSpan = 2 ;  basicVO4.zSpan = 2 ; 
-			var basicVO5:BaseBuildingVO = new BaseBuildingVO();
-			basicVO5.name = "Basic_Tree5"; basicVO5.type = BuildingType.BASIC ;
-			basicVO5.xSpan = 2 ;  basicVO5.zSpan = 2 ; 
-			var basicVO6:BaseBuildingVO = new BaseBuildingVO();
-			basicVO6.name = "Basic_Tree6"; basicVO6.type = BuildingType.BASIC ;
-			basicVO6.xSpan = 2 ;  basicVO6.zSpan = 2 ; 
-			var basicVO7:BaseBuildingVO = new BaseBuildingVO();
-			basicVO7.name = "Basic_Tree7"; basicVO7.type = BuildingType.BASIC ;
-			var basicVO8:BaseBuildingVO = new BaseBuildingVO();
-			basicVO8.name = "Basic_Tree8"; basicVO8.type = BuildingType.BASIC ;
-			var basicVOs:Vector.<BaseBuildingVO> = Vector.<BaseBuildingVO>([basicVO1,basicVO2,basicVO3,basicVO4,basicVO5,basicVO6,basicVO7,basicVO8]);
+			var basicVO:BaseBuildingVO ;
+			var basicVOs:Vector.<BaseBuildingVO> = new Vector.<BaseBuildingVO>( 8 , true );
+			for( i = 0 ; i<8 ; ++i ) {
+				basicVO = new BaseBuildingVO();
+				basicVO.name = "Basic_Tree"+( i+1 ) ; 
+				basicVO.type = BuildingType.BASIC ;
+				if(i<6) {
+					basicVO.xSpan = 2 ;  
+					basicVO.zSpan = 2 ; 
+				}
+				basicVOs[i] = basicVO ;
+			}
 			
 			var bvo:BuildingVO ;
 			for( i = 0 ; i<GameSetting.GRID_X ; i+=2  ){
