@@ -26,7 +26,6 @@ package  local.map
 		protected var _worldPos:Point = new Point(); //鼠标点击时场景的世界位置
 		
 		public var currentSelected:BaseBuilding ; //当前选中的建筑
-		private var _mouseBuilding:BaseBuilding; //按下时点击到的建筑
 		
 		/**===============用于地图移动和缩放=========================*/
 		protected var _isMove:Boolean ; //当前是否在移动地图
@@ -38,7 +37,7 @@ package  local.map
 		private var _touchCount:int ; //手指触摸数量
 		private var _touchFinger1:Point = new Point(); //第一个点击的手指
 		private var _middle:Point = new Point(); //缩放时的中间点位置
-		private var _moveSpeed:Number = 0.36 ; //移动的速度
+		protected var _moveSpeed:Number = 0.36 ; //移动的速度
 		/**====================================================*/
 		
 		public function BaseWorld()
@@ -255,7 +254,6 @@ package  local.map
 		/** 添加侦听 */
 		protected function configListeners():void
 		{
-			this.addEventListener(MouseEvent.MOUSE_DOWN , onMouseEvtHandler); 
 			if(Multitouch.supportsGestureEvents){
 				Multitouch.inputMode = MultitouchInputMode.TOUCH_POINT ;
 				this.addEventListener(TouchEvent.TOUCH_BEGIN , onTouchHandler ) ;
@@ -347,8 +345,8 @@ package  local.map
 			if(y!=_endY) y += (_endY-y)*_moveSpeed ;
 		}
 		
-		/* 修正地图位置，防止地图溢出边缘 */
-		private function modifyEndPosition():void{
+		/** 修正地图位置，防止地图溢出边缘 */
+		protected function modifyEndPosition():void{
 			if(_endX>0) _endX=0 ;
 			else if(_endX<-GameSetting.MAP_WIDTH*scaleX+GameSetting.SCREEN_WIDTH){
 				_endX = -GameSetting.MAP_WIDTH*scaleX+GameSetting.SCREEN_WIDTH ;
@@ -356,62 +354,6 @@ package  local.map
 			if(_endY>0) _endY=0 ;
 			else if(_endY<-GameSetting.MAP_HEIGHT*scaleY+GameSetting.SCREEN_HEIGHT){
 				_endY = -GameSetting.MAP_HEIGHT*scaleY+GameSetting.SCREEN_HEIGHT ;
-			}
-		}
-		
-		protected function onMouseEvtHandler( e:MouseEvent ):void
-		{
-			e.stopPropagation();
-			switch( e.type )
-			{
-				case MouseEvent.MOUSE_DOWN:
-					_isGesture = false ;
-					_isMove = false ;
-					_moveSpeed = 0.36 ;
-					_mouseDownPos.x = root.mouseX ;
-					_mouseDownPos.y = root.mouseY ;
-					_worldPos.x = x ;
-					_worldPos.y = y ;
-					if(e.target.parent is BaseBuilding){
-						_mouseBuilding = e.target.parent as BaseBuilding ;
-					}
-					addEventListener(MouseEvent.MOUSE_MOVE , onMouseEvtHandler); 
-					addEventListener(MouseEvent.MOUSE_UP , onMouseEvtHandler );
-					break ;
-				case MouseEvent.MOUSE_MOVE:
-					_isMove = true ;
-					mouseChildren = false; 
-					if(e.buttonDown && !_isGesture ){
-						_endX =  _worldPos.x + root.mouseX-_mouseDownPos.x ;
-						_endY = _worldPos.y + root.mouseY-_mouseDownPos.y ;
-						modifyEndPosition();
-					}
-					break ;
-				case MouseEvent.MOUSE_UP:
-					if(!_isGesture && !_isMove){
-						if(e.target.parent is BaseBuilding && e.target.parent!=currentSelected && e.target.parent==_mouseBuilding)
-						{
-							if(currentSelected) currentSelected.flash(false);
-							currentSelected = e.target.parent as BaseBuilding ;
-							currentSelected.flash(true);
-							//移动到中间
-							_endX =  GameSetting.SCREEN_WIDTH*0.5 - (sceneLayerOffsetX+currentSelected.screenX)*scaleX ;
-							_endY = GameSetting.SCREEN_HEIGHT*0.5 -(currentSelected.screenY +sceneLayerOffsetY+GameSetting.GRID_SIZE*2)*scaleY ;
-							modifyEndPosition();
-							_moveSpeed = 0.15 ;
-						}
-						else if(currentSelected) 
-						{
-							currentSelected.flash(false);
-							currentSelected = null ;
-						}
-					}
-				default :
-					mouseChildren = true ;
-					_isMove = false ;
-					removeEventListener(MouseEvent.MOUSE_MOVE , onMouseEvtHandler); 
-					removeEventListener(MouseEvent.MOUSE_UP , onMouseEvtHandler );
-					break ;
 			}
 		}
 		
