@@ -215,8 +215,7 @@ package  local.map
 					}
 					break;
 				case TouchEvent.TOUCH_MOVE :
-					if(_touchCount>=2)
-					{
+					if(_touchCount>=2){
 						var touch:Touch;
 						for(var i:int=0;i<2;++i){
 							touch = _touches[i] as Touch ;
@@ -245,10 +244,13 @@ package  local.map
 								_isGesture = true ;
 							}
 						}
+					}else{
+						_isGesture = false ;
 					}
 					break ;
 				case TouchEvent.TOUCH_END:
 					--_touchCount ;
+					if(_touchCount<2) _isGesture = false ;
 					break ;
 			}
 		}
