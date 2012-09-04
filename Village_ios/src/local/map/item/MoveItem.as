@@ -1,11 +1,9 @@
 package local.map.item
 {
-	import bing.iso.IsoUtils;
-	
 	import flash.display.Sprite;
 	import flash.geom.Point;
-	import flash.geom.Vector3D;
 	
+	import local.comm.GameData;
 	import local.comm.GameSetting;
 	import local.enum.BuildingType;
 	import local.map.cell.MoveItemAnimObject;
@@ -34,7 +32,7 @@ package local.map.item
 			[  new Point(0,15) , new Point(20,25) , new Point(0,35) , new Point(-20,25) ]
 		);
 		
-		protected var _speed:Number = .3 ;
+		protected var _speed:Number = 0.4 ;
 		protected var _nextPoint:Point;
 		protected var _animObject:MoveItemAnimObject ;
 		protected var _itemLayer:Sprite ;
@@ -85,7 +83,9 @@ package local.map.item
 		/** 移动到一个点 */
 		protected function moveToPoint():void
 		{
-			var distance:Number = Point.distance( _nextPoint , new Point(screenX,screenY) ) ;
+			GameData.commPoint.x = screenX ;
+			GameData.commPoint.y = screenY ;
+			var distance:Number = Point.distance( _nextPoint , GameData.commPoint ) ;
 			if(distance < _speed){
 				_nextPoint = null; 
 				sort();

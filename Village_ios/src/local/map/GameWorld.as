@@ -126,17 +126,19 @@ package local.map
 				}
 			}
 			
-			
+			var carNum:int ;
+			var characNum:int ;
 			for( i = 0 ; i<roads.length ; ++i)
 			{
-				if(Math.random()>0.6){
+				if(Math.random()>0.6 && characNum<10 ){
 					road = roads[i];
 					var fairy:Character = new Character( EmbedsManager.instance.getAnimResVOByName("Fairy")[0] );
 					fairy.nodeX  = road.nodeX;
 					fairy.nodeZ = road.nodeZ;
 					buildingScene.addIsoObject( fairy , false ) ;
 					fairy.init();
-				}else if(Math.random()>0.6){
+					++ characNum ;
+				}else if(Math.random()>0.6 && carNum<3){
 					road = roads[i];
 					if(road.direction!=""){
 						var car:Car = new Car( EmbedsManager.instance.getAnimResVOByName("Truck")[0] );
@@ -144,6 +146,7 @@ package local.map
 						car.nodeZ = road.nodeZ;
 						buildingScene.addIsoObject( car , false ) ;
 						car.init();
+						++carNum;
 					}
 				}
 			}
