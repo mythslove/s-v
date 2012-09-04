@@ -139,6 +139,11 @@ package  local.map
 			map.graphics.drawRect( 2760 ,300 , bmd.width , bmd.height );
 			map.graphics.endFill(); 
 			
+			mat.identity(); mat.translate( 700 ,-50 );
+			map.graphics.beginBitmapFill( bmd , mat , false  );
+			map.graphics.drawRect( 700 ,-50 , bmd.width , bmd.height );
+			map.graphics.endFill(); 
+			
 			//=====================
 			bmd = EmbedsManager.instance.getBitmapByName("SmallHeightMap").bitmapData;
 			mat.identity(); mat.translate( 0  ,1000 );
