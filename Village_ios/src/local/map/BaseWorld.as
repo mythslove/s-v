@@ -244,13 +244,10 @@ package  local.map
 								_isGesture = true ;
 							}
 						}
-					}else{
-						_isGesture = false ;
 					}
 					break ;
 				case TouchEvent.TOUCH_END:
 					--_touchCount ;
-					if(_touchCount<2) _isGesture = false ;
 					break ;
 			}
 		}
@@ -289,12 +286,13 @@ package  local.map
 			switch( e.type )
 			{
 				case MouseEvent.MOUSE_DOWN:
+					_isGesture = false ;
+					_isMove = false ;
 					_moveSpeed = 0.36 ;
 					_mouseDownPos.x = root.mouseX ;
 					_mouseDownPos.y = root.mouseY ;
 					_worldPos.x = x ;
 					_worldPos.y = y ;
-					_isGesture = false ;
 					if(e.target.parent is BaseBuilding){
 						_mouseBuilding = e.target.parent as BaseBuilding ;
 					}
@@ -312,10 +310,9 @@ package  local.map
 					break ;
 				case MouseEvent.MOUSE_UP:
 					if(!_isGesture && !_isMove){
-						if(e.target.parent is BaseBuilding && e.target.parent!=currentSelected && e.target.parent==_mouseBuilding){
-							if(currentSelected) {
-								currentSelected.flash(false);
-							}
+						if(e.target.parent is BaseBuilding && e.target.parent!=currentSelected && e.target.parent==_mouseBuilding)
+						{
+							if(currentSelected) currentSelected.flash(false);
 							currentSelected = e.target.parent as BaseBuilding ;
 							currentSelected.flash(true);
 							//移动到中间
@@ -323,6 +320,10 @@ package  local.map
 							_endY = GameSetting.SCREEN_HEIGHT*0.5 -(currentSelected.screenY +sceneLayerOffsetY+GameSetting.GRID_SIZE*2)*scaleY ;
 							modifyEndPosition();
 							_moveSpeed = 0.15 ;
+						}
+						else if(currentSelected) 
+						{
+							currentSelected.flash(false);
 						}
 					}
 				default :
