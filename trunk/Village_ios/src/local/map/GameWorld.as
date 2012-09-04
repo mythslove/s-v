@@ -205,8 +205,8 @@ package local.map
 		{
 			var size:int = _size*4 ;
 			var grid:Grid = MapGridDataModel.instance.landGridData;
+			roadScene.graphics.lineStyle(2 ,0x97B425 );
 			for each(var landVO:LandVO in LandModel.instance.lands) {
-				roadScene.graphics.lineStyle(2 ,0x97B425 );
 				var p:Vector3D = GameData.commVec ;
 				p.setTo(0,0,0);
 				var screenPos:Point = GameData.commPoint ;
