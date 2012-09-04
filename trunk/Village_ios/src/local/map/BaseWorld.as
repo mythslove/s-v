@@ -134,6 +134,12 @@ package  local.map
 			map.graphics.endFill();
 			offset+=bmd.height ;
 			
+			bmd = EmbedsManager.instance.getBitmapByName("Water1").bitmapData;
+			mat.identity(); mat.translate( 2800 ,400 );
+			map.graphics.beginBitmapFill( bmd , mat , false  );
+			map.graphics.drawRect( 2800 ,400 , bmd.width , bmd.height );
+			map.graphics.endFill(); 
+			
 			//=====================
 			bmd = EmbedsManager.instance.getBitmapByName("SmallHeightMap").bitmapData;
 			mat.identity(); mat.translate( 0  ,1000 );
