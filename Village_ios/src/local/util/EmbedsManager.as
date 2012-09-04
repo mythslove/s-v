@@ -44,8 +44,10 @@ package local.util
 		public static const HeightMap2:Class ;
 		[ Embed(source="../resource/map/rightheight1.png") ]
 		public static const RightHeight1:Class ;
-		[ Embed(source="../resource/map/smallheightmap1.png.png") ]
+		[ Embed(source="../resource/map/smallheightmap1.png") ]
 		public static const SmallHeightMap:Class ;
+		[ Embed(source="../resource/map/water1.png") ]
+		public static const Water1:Class ;
 		[ Embed(source="../resource/map/mapBlock.png") ]
 		public static const MapBlock:Class ;
 		
