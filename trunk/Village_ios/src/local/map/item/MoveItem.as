@@ -88,13 +88,14 @@ package local.map.item
 			var distance:Number = Point.distance( _nextPoint , new Point(screenX,screenY) ) ;
 			if(distance < _speed){
 				_nextPoint = null; 
-				if(_firstMove){
-					sort();
-					_firstMove = false ;
-				}
+				sort();
 			} else {
 				var moveNum:Number = distance/_speed ;
 				this.setScreenPosition( screenX+(_nextPoint.x - screenX)/moveNum , screenY+(_nextPoint.y - screenY)/moveNum );
+			}
+			if(_firstMove){
+				sort();
+				_firstMove = false ;
 			}
 		}
 		
