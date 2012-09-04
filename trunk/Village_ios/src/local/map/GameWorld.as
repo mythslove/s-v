@@ -165,7 +165,7 @@ package local.map
 			//添加地图区域
 			var maxX:int ,maxZ:int ;
 			for each( var landVO:LandVO in LandModel.instance.lands) {
-//				drawLandZone(landVO);
+				drawMapZoneByFill(landVO);
 				MapGridDataModel.instance.landGridData.setWalkable( landVO.nodeX , landVO.nodeZ , true );
 				//将GameGridData的数据设置为可行
 				maxX = landVO.nodeX*4+4 ;
@@ -176,7 +176,7 @@ package local.map
 					}
 				}
 			}
-			drawMapZoneByLine();
+//			drawMapZoneByLine();
 			
 			//随机添加树，石头
 			var basicBuild:BasicBuilding ;
