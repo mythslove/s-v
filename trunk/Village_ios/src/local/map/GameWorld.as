@@ -165,7 +165,7 @@ package local.map
 			//添加地图区域
 			var maxX:int ,maxZ:int ;
 			for each( var landVO:LandVO in LandModel.instance.lands) {
-				drawLandZone(landVO);
+//				drawLandZone(landVO);
 				MapGridDataModel.instance.landGridData.setWalkable( landVO.nodeX , landVO.nodeZ , true );
 				//将GameGridData的数据设置为可行
 				maxX = landVO.nodeX*4+4 ;
@@ -176,6 +176,7 @@ package local.map
 					}
 				}
 			}
+			drawMapZoneByLine();
 			
 			//随机添加树，石头
 			var basicBuild:BasicBuilding ;
@@ -199,8 +200,59 @@ package local.map
 			buildingScene.sortAll();
 		}
 		
-		/** 画这个土地区域*/
-		public function drawLandZone( landVO:LandVO ):void
+		/** 用线画这个地图的区域*/
+		private function drawMapZoneByLine():void
+		{
+			var size:int = _size*4 ;
+			var grid:Grid = MapGridDataModel.instance.landGridData;
+			for each(var landVO:LandVO in LandModel.instance.lands) {
+				roadScene.graphics.lineStyle(2 ,0x97B425 );
+				var p:Vector3D = GameData.commVec ;
+				p.setTo(0,0,0);
+				var screenPos:Point = GameData.commPoint ;
+				screenPos.setTo(0,0);
+				//第一个点
+				p.x = landVO.nodeX; p.z=landVO.nodeZ;
+				screenPos = IsoUtils.isoToScreen(p);
+				var px:int = screenPos.x*size ; 
+				var py:int = screenPos.y*size ;
+				roadScene.graphics.moveTo(  px , py );
+				//第二个点
+				p.x = landVO.nodeX+1; p.z=landVO.nodeZ ;
+				screenPos = IsoUtils.isoToScreen(p);
+				p.x =  screenPos.x*size ; p.z = screenPos.y*size ;
+				if( landVO.nodeZ-1>=0 && !grid.getNode(landVO.nodeX,landVO.nodeZ-1).walkable ) {
+					roadScene.graphics.lineTo( p.x , p.z );
+				}
+				roadScene.graphics.moveTo(  p.x , p.z );
+				//第三个点
+				p.x = landVO.nodeX+1 ; p.z=landVO.nodeZ+1;
+				screenPos = IsoUtils.isoToScreen(p);
+				p.x =  screenPos.x*size ; p.z = screenPos.y*size ;
+				if( landVO.nodeX+1<GameSetting.GRID_X/4 && !grid.getNode(landVO.nodeX+1,landVO.nodeZ).walkable ) {
+					roadScene.graphics.lineTo( p.x , p.z );
+				}
+				roadScene.graphics.moveTo(  p.x , p.z );
+				//第四个点
+				p.x = landVO.nodeX ; p.z=landVO.nodeZ+1;
+				screenPos = IsoUtils.isoToScreen(p);
+				p.x =  screenPos.x*size ; p.z = screenPos.y*size ;
+				if( landVO.nodeZ+1<GameSetting.GRID_Z/4 && !grid.getNode(landVO.nodeX,landVO.nodeZ+1).walkable ) {
+					roadScene.graphics.lineTo( p.x , p.z );
+				}
+				roadScene.graphics.moveTo(  p.x , p.z );
+				//原点
+				p.x = landVO.nodeX ; p.z=landVO.nodeZ;
+				screenPos = IsoUtils.isoToScreen(p);
+				px = screenPos.x*size ;  py = screenPos.y*size ;
+				if( landVO.nodeX-1>=0 && !grid.getNode(landVO.nodeX-1 , landVO.nodeZ).walkable ) {
+					roadScene.graphics.lineTo( px , py );
+				}
+			}
+		}
+		
+		/** 用填充色画这个土地区域*/
+		public function drawMapZoneByFill( landVO:LandVO ):void
 		{
 			var p:Vector3D = GameData.commVec ;
 			p.setTo(0,0,0);
