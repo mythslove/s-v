@@ -2,9 +2,11 @@ package local.map
 {
 	import bing.iso.IsoObject;
 	
-	import flash.geom.Point;
+	import flash.events.MouseEvent;
 	
+	import local.comm.GameSetting;
 	import local.enum.BuildingType;
+	import local.map.item.BaseBuilding;
 	import local.map.item.Building;
 	import local.map.item.Car;
 	import local.map.item.Character;
@@ -21,7 +23,7 @@ package local.map
 			return _instance ;
 		}
 		//-----------------------------------------------------------------
-		private var _mouseMovePoint:Point=new Point();
+		private var _mouseBuilding:BaseBuilding; //按下时点击到的建筑
 		
 		/** 显示所有的建筑 */
 		public function showBuildings():void
@@ -159,6 +161,71 @@ package local.map
 			buildingScene.sortAll();
 			
 			run() ;
+		}
+		
+		
+		override protected function configListeners():void
+		{
+			super.configListeners() ;
+			this.addEventListener(MouseEvent.MOUSE_DOWN , onMouseEvtHandler); 
+		}
+		
+		protected function onMouseEvtHandler( e:MouseEvent ):void
+		{
+			e.stopPropagation();
+			switch( e.type )
+			{
+				case MouseEvent.MOUSE_DOWN:
+					_isGesture = false ;
+					_isMove = false ;
+					_moveSpeed = 0.36 ;
+					_mouseDownPos.x = root.mouseX ;
+					_mouseDownPos.y = root.mouseY ;
+					_worldPos.x = x ;
+					_worldPos.y = y ;
+					if(e.target.parent is BaseBuilding){
+						_mouseBuilding = e.target.parent as BaseBuilding ;
+					}
+					addEventListener(MouseEvent.MOUSE_MOVE , onMouseEvtHandler); 
+					addEventListener(MouseEvent.MOUSE_UP , onMouseEvtHandler );
+					break ;
+				case MouseEvent.MOUSE_MOVE:
+					_isMove = true ;
+					mouseChildren = false; 
+					if(e.buttonDown && !_isGesture ){
+						_endX =  _worldPos.x + root.mouseX-_mouseDownPos.x ;
+						_endY = _worldPos.y + root.mouseY-_mouseDownPos.y ;
+						modifyEndPosition();
+					}
+					break ;
+				case MouseEvent.MOUSE_UP:
+					if(!_isGesture && !_isMove){
+						if(e.target.parent is BaseBuilding && e.target.parent==_mouseBuilding)
+						{
+							if(e.target.parent!=currentSelected  ){
+								if(currentSelected) currentSelected.flash(false);
+								currentSelected = e.target.parent as BaseBuilding ;
+								currentSelected.flash(true);
+								//移动到中间
+								_endX =  GameSetting.SCREEN_WIDTH*0.5 - (sceneLayerOffsetX+currentSelected.screenX)*scaleX ;
+								_endY = GameSetting.SCREEN_HEIGHT*0.5 -(currentSelected.screenY +sceneLayerOffsetY+GameSetting.GRID_SIZE*2)*scaleY ;
+								modifyEndPosition();
+								_moveSpeed = 0.15 ;
+							}
+						}
+						else if(currentSelected) 
+						{
+							currentSelected.flash(false);
+							currentSelected = null ;
+						}
+					}
+				default :
+					mouseChildren = true ;
+					_isMove = false ;
+					removeEventListener(MouseEvent.MOUSE_MOVE , onMouseEvtHandler); 
+					removeEventListener(MouseEvent.MOUSE_UP , onMouseEvtHandler );
+					break ;
+			}
 		}
 		
 	}
