@@ -180,18 +180,49 @@ package local.map
 			
 			//随机添加树，石头
 			var basicBuild:BasicBuilding ;
-			for( i = 0 ; i<GameSetting.GRID_X ; i+=2 ){
-				for( j = 0 ; j<GameSetting.GRID_Z ; j+=2 ){
-					if( !gameGridData.getNode(i,j).walkable && Math.random()>0.8 ){
+			var basicVO1:BaseBuildingVO = new BaseBuildingVO();
+			basicVO1.name = "Basic_Tree1";
+			basicVO1.xSpan = 2 ;  basicVO1.zSpan = 2 ; 
+			var basicVO2:BaseBuildingVO = new BaseBuildingVO();
+			basicVO2.name = "Basic_Tree2";
+			basicVO2.xSpan = 2 ;  basicVO2.zSpan = 2 ;
+			var basicVO3:BaseBuildingVO = new BaseBuildingVO();
+			basicVO3.name = "Basic_Tree3";
+			basicVO3.xSpan = 2 ;  basicVO3.zSpan = 2 ; 
+			var basicVO4:BaseBuildingVO = new BaseBuildingVO();
+			basicVO4.name = "Basic_Tree4";
+			basicVO4.xSpan = 2 ;  basicVO4.zSpan = 2 ; 
+			var basicVO5:BaseBuildingVO = new BaseBuildingVO();
+			basicVO5.name = "Basic_Tree5";
+			basicVO5.xSpan = 2 ;  basicVO5.zSpan = 2 ; 
+			var basicVO6:BaseBuildingVO = new BaseBuildingVO();
+			basicVO6.name = "Basic_Tree6";
+			basicVO6.xSpan = 2 ;  basicVO6.zSpan = 2 ; 
+			var basicVO7:BaseBuildingVO = new BaseBuildingVO();
+			basicVO7.name = "Basic_Tree7";
+			var basicVO8:BaseBuildingVO = new BaseBuildingVO();
+			basicVO8.name = "Basic_Tree8";
+			var basicVOs:Vector.<BaseBuildingVO> = Vector.<BaseBuildingVO>([basicVO1,basicVO2,basicVO3,basicVO4,basicVO5,basicVO6,basicVO7,basicVO8]);
+			
+			var bvo:BuildingVO ;
+			for( i = 0 ; i<GameSetting.GRID_X ; i+=2  ){
+				for( j = 0 ; j<GameSetting.GRID_Z ;  j+=2){
+					if( !gameGridData.getNode(i,j).walkable && Math.random()>0.85 ){
 						maxX = i*_size - j*_size +sceneLayerOffsetX;
 						maxZ =   (i*_size + j*_size) * .5 + sceneLayerOffsetY ;
 						if(maxX>0 && maxZ>0 && maxX<GameSetting.MAP_WIDTH && maxZ<GameSetting.MAP_HEIGHT-200 )
 						{
-							var index:int = (Math.random()*9+1 )>>0 ;
-							basicBuild = new BasicBuilding( "Basic_Tree"+index , 2 ,2 ) ;
+							var index:int = (Math.random()*8+1 )>>0 ;
+							bvo = new BuildingVO();
+							bvo.baseVO = basicVOs[0] ;
+							bvo.name = basicVOs[0].name ;
+							bvo.nodeX = i ;
+							bvo.nodeZ = j ;
+							basicBuild = new BasicBuilding(bvo ) ;
+							basicBuild.mouseChildren =  false ;
 							basicBuild.nodeX = i ;
 							basicBuild.nodeZ = j ;
-							buildingScene.addBasicBuilding( basicBuild , false  );
+							buildingScene.addBuilding( basicBuild , false  );
 						}
 					}
 				}
