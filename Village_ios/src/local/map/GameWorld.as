@@ -113,6 +113,8 @@ package local.map
 			road.nodeZ = 6*4+7 ;
 			roadScene.addRoad( road , false , false  );
 			
+			roadScene.updateAllUI();
+			
 			var roads:Array =[];
 			for each( var obj:IsoObject in roadScene.children)
 			{
@@ -136,15 +138,15 @@ package local.map
 					fairy.init();
 				}else if(Math.random()>0.6){
 					road = roads[i];
-					var car:Car = new Car( EmbedsManager.instance.getAnimResVOByName("Truck")[0] );
-					car.nodeX  = road.nodeX;
-					car.nodeZ = road.nodeZ;
-					buildingScene.addIsoObject( car , false ) ;
-					car.init();
+					if(road.direction!=""){
+						var car:Car = new Car( EmbedsManager.instance.getAnimResVOByName("Truck")[0] );
+						car.nodeX  = road.nodeX;
+						car.nodeZ = road.nodeZ;
+						buildingScene.addIsoObject( car , false ) ;
+						car.init();
+					}
 				}
 			}
-			
-			roadScene.updateAllUI();
 			buildingScene.sortAll();
 			
 			run() ;
