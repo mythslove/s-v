@@ -40,8 +40,8 @@ package local.map
 			for( var i:int = 0 ; i<3; ++i){
 				for ( var j:int = 0 ; j<3;++j){
 					road = new Road(roadVO);
-					road.nodeX = 6*4+i ;
-					road.nodeZ =  6*4+j ;
+					road.nodeX = 8*4+i ;
+					road.nodeZ =  8*4+j ;
 					roadScene.addRoad( road , false , false );
 				}
 			}
@@ -49,50 +49,50 @@ package local.map
 			
 			for( i = 4 ; i<6; ++i){
 				road = new Road(roadVO);
-				road.nodeX = 6*4+i ;
-				road.nodeZ = 6*4+0 ;
+				road.nodeX = 8*4+i ;
+				road.nodeZ = 8*4+0 ;
 				roadScene.addRoad( road , false , false );
 			}
 			//
 			road = new Road(roadVO);
-			road.nodeX = 6*4+1 ;
-			road.nodeZ = 6*4+3 ;
+			road.nodeX = 8*4+1 ;
+			road.nodeZ = 8*4+3 ;
 			roadScene.addRoad( road, false , false  );
 			road = new Road(roadVO);
-			road.nodeX = 6*4+5 ;
-			road.nodeZ = 6*4+3 ;
+			road.nodeX = 8*4+5 ;
+			road.nodeZ = 8*4+3 ;
 			roadScene.addRoad( road, false , false  );
 			road = new Road(roadVO);
-			road.nodeX = 6*4+6 ;
-			road.nodeZ = 6*4+2 ;
+			road.nodeX = 8*4+6 ;
+			road.nodeZ = 8*4+2 ;
 			roadScene.addRoad( road, false , false  );
 			road = new Road(roadVO);
-			road.nodeX = 6*4+6 ;
-			road.nodeZ = 6*4+3 ;
+			road.nodeX = 8*4+6 ;
+			road.nodeZ = 8*4+3 ;
 			roadScene.addRoad( road , false , false );
 			road = new Road(roadVO);
-			road.nodeX = 6*4+7 ;
-			road.nodeZ = 6*4+3 ;
+			road.nodeX = 8*4+7 ;
+			road.nodeZ = 8*4+3 ;
 			roadScene.addRoad( road , false , false );
 			road = new Road(roadVO);
-			road.nodeX = 6*4+8 ;
-			road.nodeZ = 6*4+3 ;
+			road.nodeX = 8*4+8 ;
+			road.nodeZ = 8*4+3 ;
 			roadScene.addRoad( road , false , false );
 			road = new Road(roadVO);
-			road.nodeX = 6*4+7 ;
-			road.nodeZ = 6*4+4 ;
+			road.nodeX = 8*4+7 ;
+			road.nodeZ = 8*4+4 ;
 			roadScene.addRoad( road, false , false  );
 			road = new Road(roadVO);
-			road.nodeX = 6*4+7 ;
-			road.nodeZ = 6*4+4 ;
+			road.nodeX = 8*4+7 ;
+			road.nodeZ = 8*4+4 ;
 			roadScene.addRoad( road, false , false  );
 			//
 			var temp:Road; 
 			for( i = 1 ; i<4; ++i){
 				for ( j =4 ; j<7;++j){
 					road = new Road(roadVO);
-					road.nodeX = 6*4+i ;
-					road.nodeZ =  6*4+j ;
+					road.nodeX = 8*4+i ;
+					road.nodeZ =  8*4+j ;
 					if(i==2&&j==5){
 						temp = road ;
 					}
@@ -103,8 +103,8 @@ package local.map
 			//
 			roadScene.addRoad( road, false , false  );
 			road = new Road(roadVO);
-			road.nodeX = 6*4+7 ;
-			road.nodeZ = 6*4+7 ;
+			road.nodeX = 8*4+7 ;
+			road.nodeZ = 8*4+7 ;
 			roadScene.addRoad( road , false , false  );
 			
 			roadScene.updateAllUI();
@@ -153,8 +153,8 @@ package local.map
 			var bvo:BuildingVO = new BuildingVO();
 			bvo.name = "Home1";
 			bvo.baseVO = baseVO ;
-			bvo.nodeX = 6*4 + 2  ;
-			bvo.nodeZ = 8*4 ;
+			bvo.nodeX = 9*4   ;
+			bvo.nodeZ = 9*4 ;
 			var building:Building=new Building( bvo);
 			buildingScene.addBuilding( building, false);
 			

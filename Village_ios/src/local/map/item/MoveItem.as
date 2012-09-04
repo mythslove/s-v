@@ -2,6 +2,7 @@ package local.map.item
 {
 	import flash.display.Sprite;
 	import flash.geom.Point;
+	import flash.geom.Rectangle;
 	
 	import local.comm.GameData;
 	import local.comm.GameSetting;
@@ -194,6 +195,13 @@ package local.map.item
 				_nextPoint.x = xpos - zpos +_roads[_roadIndex].x ;
 				_nextPoint.y = (xpos+ zpos) * .5 + _roads[_roadIndex].y;
 			}
+		}
+		
+		override public function get rect():Rectangle
+		{
+			_boundRect.x = x ;
+			_boundRect.y = z ;
+			return _boundRect ;
 		}
 		
 		override public function dispose():void

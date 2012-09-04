@@ -5,6 +5,7 @@ package local.map.scene
 	
 	import local.comm.GameSetting;
 	import local.map.item.BaseBuilding;
+	import local.map.item.MoveItem;
 	import local.model.MapGridDataModel;
 	
 	/**
@@ -98,13 +99,6 @@ package local.map.scene
 					build.recoverStatus();
 				}
 			}
-		}
-		
-		
-		/**        排序算法           */
-		override protected function sortCompare( target:IsoObject , item:IsoObject ):int
-		{
-			return target.screenY-item.screenY ;
 		}
 		
 	}
