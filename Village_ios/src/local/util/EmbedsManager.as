@@ -50,25 +50,6 @@ package local.util
 		public static const MapBlock:Class ;
 		
 		
-		
-		[ Embed(source="../resource/basic/Basic_Tree1.bd", mimeType="application/octet-stream") ]
-		public static const Basic_Tree1:Class ;
-		[ Embed(source="../resource/basic/Basic_Tree2.bd", mimeType="application/octet-stream") ]
-		public static const Basic_Tree2:Class ;
-		[ Embed(source="../resource/basic/Basic_Tree3.bd", mimeType="application/octet-stream") ]
-		public static const Basic_Tree3:Class ;
-		[ Embed(source="../resource/basic/Basic_Tree4.bd", mimeType="application/octet-stream") ]
-		public static const Basic_Tree4:Class ;
-		[ Embed(source="../resource/basic/Basic_Tree5.bd", mimeType="application/octet-stream") ]
-		public static const Basic_Tree5:Class ;
-		[ Embed(source="../resource/basic/Basic_Tree6.bd", mimeType="application/octet-stream") ]
-		public static const Basic_Tree6:Class ;
-		[ Embed(source="../resource/basic/Basic_Tree7.bd", mimeType="application/octet-stream") ]
-		public static const Basic_Tree7:Class ;
-		[ Embed(source="../resource/basic/Basic_Tree8.bd", mimeType="application/octet-stream") ]
-		public static const Basic_Tree8:Class ;
-		
-		
 		/**
 		 * 获得嵌入的动画文件  
 		 * @param name

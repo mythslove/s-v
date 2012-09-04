@@ -180,16 +180,15 @@ package local.map
 			
 			//随机添加树，石头
 			var basicBuild:BasicBuilding ;
-			for( i = 0 ; i<GameSetting.GRID_X ; ++i){
-				for( j = 0 ; j<GameSetting.GRID_Z ; ++j){
-					if( !gameGridData.getNode(i,j).walkable && Math.random()>0.92 ){
-						
+			for( i = 0 ; i<GameSetting.GRID_X ; i+=2 ){
+				for( j = 0 ; j<GameSetting.GRID_Z ; j+=2 ){
+					if( !gameGridData.getNode(i,j).walkable && Math.random()>0.8 ){
 						maxX = i*_size - j*_size +sceneLayerOffsetX;
 						maxZ =   (i*_size + j*_size) * .5 + sceneLayerOffsetY ;
 						if(maxX>0 && maxZ>0 && maxX<GameSetting.MAP_WIDTH && maxZ<GameSetting.MAP_HEIGHT-200 )
 						{
-							var index:int = (Math.random()*8+1 )>>0 ;
-							basicBuild = new BasicBuilding( EmbedsManager.instance.getAnimResVOByName("Basic_Tree"+index)) ;
+							var index:int = (Math.random()*9+1 )>>0 ;
+							basicBuild = new BasicBuilding( "Basic_Tree"+index , 2 ,2 ) ;
 							basicBuild.nodeX = i ;
 							basicBuild.nodeZ = j ;
 							buildingScene.addBasicBuilding( basicBuild , false  );
