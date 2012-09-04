@@ -1,5 +1,8 @@
 package local.map.item
 {
+	import flash.geom.Point;
+	
+	import local.comm.GameData;
 	import local.vo.BitmapAnimResVO;
 	
 	/**
@@ -21,6 +24,22 @@ package local.map.item
 			}
 			_roadIndex = (Math.random()*4 ) >>1 ;
 			setScreenPosition( _roads[_roadIndex].x+screenX ,_roads[_roadIndex].y+screenY );
+		}
+		
+		
+		/** 移动到一个点 */
+		override protected function moveToPoint():void
+		{
+			GameData.commPoint.x = screenX ;
+			GameData.commPoint.y = screenY ;
+			var distance:Number = Point.distance( _nextPoint , GameData.commPoint ) ;
+			if(distance < _speed){
+				_nextPoint = null; 
+			} else {
+				var moveNum:Number = distance/_speed ;
+				this.setScreenPosition( screenX+(_nextPoint.x - screenX)/moveNum , screenY+(_nextPoint.y - screenY)/moveNum );
+			}
+			sort();
 		}
 		
 		override protected function getNextPoint():void
