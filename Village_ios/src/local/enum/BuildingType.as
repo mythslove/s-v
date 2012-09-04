@@ -6,6 +6,9 @@ package local.enum
 	 */	
 	public class BuildingType
 	{
+		public static const BASIC:String = "basic";
+		
+		
 		public static const HOME:String = "home";
 		
 		

@@ -1,25 +1,17 @@
 package local.map
 {
 	import bing.iso.IsoObject;
-	import bing.iso.IsoUtils;
-	import bing.iso.path.Grid;
 	
 	import flash.geom.Point;
-	import flash.geom.Vector3D;
 	
-	import local.comm.GameData;
-	import local.comm.GameSetting;
 	import local.enum.BuildingType;
-	import local.map.item.BasicBuilding;
+	import local.map.item.Building;
 	import local.map.item.Car;
 	import local.map.item.Character;
 	import local.map.item.Road;
-	import local.model.LandModel;
-	import local.model.MapGridDataModel;
 	import local.util.EmbedsManager;
 	import local.vo.BaseBuildingVO;
 	import local.vo.BuildingVO;
-	import local.vo.LandVO;
 
 	public class GameWorld extends BaseWorld
 	{
@@ -31,8 +23,8 @@ package local.map
 		//-----------------------------------------------------------------
 		private var _mouseMovePoint:Point=new Point();
 		
-		/** 初始化地图 */
-		override protected function initMap():void
+		/** 显示所有的建筑 */
+		public function showBuildings():void
 		{
 			var baseVO:BaseBuildingVO = new BaseBuildingVO();
 			baseVO.name = "Default Road";
@@ -150,165 +142,24 @@ package local.map
 					}
 				}
 			}
+			
+			//添加home1
+			baseVO = new BaseBuildingVO();
+			baseVO.name="Home1";
+			baseVO.type=BuildingType.HOME ;
+			baseVO.xSpan = baseVO.zSpan = 2 ;
+			var bvo:BuildingVO = new BuildingVO();
+			bvo.name = "Home1";
+			bvo.baseVO = baseVO ;
+			bvo.nodeX = 6*4 + 2  ;
+			bvo.nodeZ = 8*4 ;
+			var building:Building=new Building( bvo);
+			buildingScene.addBuilding( building, false);
+			
 			buildingScene.sortAll();
 			
 			run() ;
 		}
 		
-		
-		/** 显示所有的建筑 */
-		public function showBuildings():void
-		{
-			var i:int , j:int ;
-			var gameGridData:Grid = MapGridDataModel.instance.gameGridData ;
-			
-			//添加地图区域
-			var maxX:int ,maxZ:int ;
-			for each( var landVO:LandVO in LandModel.instance.lands) {
-				drawMapZoneByFill(landVO);
-				MapGridDataModel.instance.landGridData.setWalkable( landVO.nodeX , landVO.nodeZ , true );
-				//将GameGridData的数据设置为可行
-				maxX = landVO.nodeX*4+4 ;
-				maxZ = landVO.nodeZ*4+4 ;
-				for( i = landVO.nodeX*4 ; i<maxX ; ++i){
-					for( j = landVO.nodeZ*4 ; j<maxZ ; ++j){
-						gameGridData.setWalkable( i , j , true ) ;
-					}
-				}
-			}
-//			drawMapZoneByLine();
-			
-			//随机添加树，石头
-			var basicBuild:BasicBuilding ;
-			var basicVO1:BaseBuildingVO = new BaseBuildingVO();
-			basicVO1.name = "Basic_Tree1";
-			basicVO1.xSpan = 2 ;  basicVO1.zSpan = 2 ; 
-			var basicVO2:BaseBuildingVO = new BaseBuildingVO();
-			basicVO2.name = "Basic_Tree2";
-			basicVO2.xSpan = 2 ;  basicVO2.zSpan = 2 ;
-			var basicVO3:BaseBuildingVO = new BaseBuildingVO();
-			basicVO3.name = "Basic_Tree3";
-			basicVO3.xSpan = 2 ;  basicVO3.zSpan = 2 ; 
-			var basicVO4:BaseBuildingVO = new BaseBuildingVO();
-			basicVO4.name = "Basic_Tree4";
-			basicVO4.xSpan = 2 ;  basicVO4.zSpan = 2 ; 
-			var basicVO5:BaseBuildingVO = new BaseBuildingVO();
-			basicVO5.name = "Basic_Tree5";
-			basicVO5.xSpan = 2 ;  basicVO5.zSpan = 2 ; 
-			var basicVO6:BaseBuildingVO = new BaseBuildingVO();
-			basicVO6.name = "Basic_Tree6";
-			basicVO6.xSpan = 2 ;  basicVO6.zSpan = 2 ; 
-			var basicVO7:BaseBuildingVO = new BaseBuildingVO();
-			basicVO7.name = "Basic_Tree7";
-			var basicVO8:BaseBuildingVO = new BaseBuildingVO();
-			basicVO8.name = "Basic_Tree8";
-			var basicVOs:Vector.<BaseBuildingVO> = Vector.<BaseBuildingVO>([basicVO1,basicVO2,basicVO3,basicVO4,basicVO5,basicVO6,basicVO7,basicVO8]);
-			
-			var bvo:BuildingVO ;
-			for( i = 0 ; i<GameSetting.GRID_X ; i+=2  ){
-				for( j = 0 ; j<GameSetting.GRID_Z ;  j+=2){
-					if( !gameGridData.getNode(i,j).walkable && Math.random()>0.85 ){
-						maxX = i*_size - j*_size +sceneLayerOffsetX;
-						maxZ =   (i*_size + j*_size) * .5 + sceneLayerOffsetY ;
-						if(maxX>0 && maxZ>0 && maxX<GameSetting.MAP_WIDTH && maxZ<GameSetting.MAP_HEIGHT-200 )
-						{
-							var index:int = (Math.random()*8+1 )>>0 ;
-							bvo = new BuildingVO();
-							bvo.baseVO = basicVOs[0] ;
-							bvo.name = basicVOs[0].name ;
-							bvo.nodeX = i ;
-							bvo.nodeZ = j ;
-							basicBuild = new BasicBuilding(bvo ) ;
-							basicBuild.mouseChildren =  false ;
-							basicBuild.nodeX = i ;
-							basicBuild.nodeZ = j ;
-							buildingScene.addBuilding( basicBuild , false  );
-						}
-					}
-				}
-			}
-			buildingScene.sortAll();
-		}
-		
-		/** 用线画这个地图的区域*/
-		private function drawMapZoneByLine():void
-		{
-			var size:int = _size*4 ;
-			var grid:Grid = MapGridDataModel.instance.landGridData;
-			roadScene.graphics.lineStyle(2 ,0x97B425 );
-			for each(var landVO:LandVO in LandModel.instance.lands) {
-				var p:Vector3D = GameData.commVec ;
-				p.setTo(0,0,0);
-				var screenPos:Point = GameData.commPoint ;
-				screenPos.setTo(0,0);
-				//第一个点
-				p.x = landVO.nodeX; p.z=landVO.nodeZ;
-				screenPos = IsoUtils.isoToScreen(p);
-				var px:int = screenPos.x*size ; 
-				var py:int = screenPos.y*size ;
-				roadScene.graphics.moveTo(  px , py );
-				//第二个点
-				p.x = landVO.nodeX+1; p.z=landVO.nodeZ ;
-				screenPos = IsoUtils.isoToScreen(p);
-				p.x =  screenPos.x*size ; p.z = screenPos.y*size ;
-				if( landVO.nodeZ-1>=0 && !grid.getNode(landVO.nodeX,landVO.nodeZ-1).walkable ) {
-					roadScene.graphics.lineTo( p.x , p.z );
-				}
-				roadScene.graphics.moveTo(  p.x , p.z );
-				//第三个点
-				p.x = landVO.nodeX+1 ; p.z=landVO.nodeZ+1;
-				screenPos = IsoUtils.isoToScreen(p);
-				p.x =  screenPos.x*size ; p.z = screenPos.y*size ;
-				if( landVO.nodeX+1<GameSetting.GRID_X/4 && !grid.getNode(landVO.nodeX+1,landVO.nodeZ).walkable ) {
-					roadScene.graphics.lineTo( p.x , p.z );
-				}
-				roadScene.graphics.moveTo(  p.x , p.z );
-				//第四个点
-				p.x = landVO.nodeX ; p.z=landVO.nodeZ+1;
-				screenPos = IsoUtils.isoToScreen(p);
-				p.x =  screenPos.x*size ; p.z = screenPos.y*size ;
-				if( landVO.nodeZ+1<GameSetting.GRID_Z/4 && !grid.getNode(landVO.nodeX,landVO.nodeZ+1).walkable ) {
-					roadScene.graphics.lineTo( p.x , p.z );
-				}
-				roadScene.graphics.moveTo(  p.x , p.z );
-				//原点
-				p.x = landVO.nodeX ; p.z=landVO.nodeZ;
-				screenPos = IsoUtils.isoToScreen(p);
-				px = screenPos.x*size ;  py = screenPos.y*size ;
-				if( landVO.nodeX-1>=0 && !grid.getNode(landVO.nodeX-1 , landVO.nodeZ).walkable ) {
-					roadScene.graphics.lineTo( px , py );
-				}
-			}
-		}
-		
-		/** 用填充色画这个土地区域*/
-		public function drawMapZoneByFill( landVO:LandVO ):void
-		{
-			var p:Vector3D = GameData.commVec ;
-			p.setTo(0,0,0);
-			var screenPos:Point = GameData.commPoint ;
-			screenPos.setTo(0,0);
-			roadScene.graphics.beginFill( 0x97B425 , 1 );
-			p.x = landVO.nodeX; p.z=landVO.nodeZ;
-			screenPos = IsoUtils.isoToScreen(p);
-			var px:int = screenPos.x*_size*4 ;
-			var py:int = screenPos.y*_size*4 ;
-			roadScene.graphics.moveTo(  px , py );
-			
-			p.x = landVO.nodeX+1; p.z=landVO.nodeZ;
-			screenPos = IsoUtils.isoToScreen(p);
-			roadScene.graphics.lineTo( screenPos.x*_size*4 , screenPos.y*_size*4);
-			
-			p.x = landVO.nodeX+1; p.z=landVO.nodeZ+1;
-			screenPos = IsoUtils.isoToScreen(p);
-			roadScene.graphics.lineTo( screenPos.x*_size*4 ,screenPos.y*_size*4);
-			
-			p.x = landVO.nodeX; p.z=landVO.nodeZ+1;
-			screenPos = IsoUtils.isoToScreen(p);
-			roadScene.graphics.lineTo( screenPos.x*_size*4 ,screenPos.y*_size*4);
-			
-			roadScene.graphics.lineTo( px , py );
-			roadScene.graphics.endFill();
-		}
 	}
 }
