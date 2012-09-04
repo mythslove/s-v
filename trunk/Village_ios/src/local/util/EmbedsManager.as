@@ -25,6 +25,12 @@ package local.util
 		
 		private var _resHash:Dictionary = new Dictionary();
 		
+		
+		[ Embed(source="../resource/map/mapData.map", mimeType="application/octet-stream") ]
+		public static const MapData:Class ;
+		
+		
+		
 		[ Embed(source="../resource/character/Fairy.bd", mimeType="application/octet-stream") ]
 		public static const Fairy:Class ;
 		[ Embed(source="../resource/character/Truck.bd", mimeType="application/octet-stream") ]

@@ -4,10 +4,12 @@ package local.model
 	import bing.iso.path.Grid;
 	
 	import flash.geom.Vector3D;
+	import flash.utils.ByteArray;
 	
 	import local.comm.GameSetting;
 	import local.map.item.BaseBuilding;
 	import local.map.item.BaseMapObject;
+	import local.util.EmbedsManager;
 
 	public class MapGridDataModel
 	{
@@ -19,11 +21,49 @@ package local.model
 		}
 		//=======================================
 		
+		/** 地图数据 ，哪些区域不能修东西*/
+		public var mapGridData:Grid ;
+		public var mapPanX:int ;
+		public var mapPanY:int ;
 		
-		public var landGridData:Grid = new Grid(GameSetting.GRID_X/4 , GameSetting.GRID_Z/4 );
+		public function MapGridDataModel()
+		{
+			//地图数据
+			var mapDataBytes:ByteArray = new EmbedsManager.MapData() as ByteArray ;
+			mapPanX = mapDataBytes.readShort() ;  
+			mapPanY = mapDataBytes.readShort() ;
+			var maxX:int = mapDataBytes.readUnsignedByte() ;
+			var maxZ:int = mapDataBytes.readUnsignedByte() ;
+			GameSetting.GRID_X = maxX*4 ;
+			GameSetting.GRID_Z = maxZ*4 ;
+			mapGridData = new Grid(GameSetting.GRID_X , GameSetting.GRID_Z ) ;
+			
+			var flag:Boolean ;
+			var p:int , k:int ;
+			for(var i:int = 0 ; i<maxX ; ++i)
+			{
+				for(var j:int = 0 ; j<maxZ ; ++j)
+				{
+					flag = mapDataBytes.readBoolean() ;
+					for( p = 0 ; p<4 ; ++p){
+						for( k = 0 ; k<4 ; ++k){
+							mapGridData.setWalkable(i*4+p , j*4+k , flag );
+						}
+					}
+				}
+			}
+			
+			landGridData = new Grid(GameSetting.GRID_X/4 , GameSetting.GRID_Z/4 ) ;
+			gameGridData = new Grid( GameSetting.GRID_X , GameSetting.GRID_Z ) ;
+		}
+		
+		
+		
+		/** 玩家土地数据，表示玩家拥有哪几块地 */
+		public var landGridData:Grid ;
 		
 		/** 游戏的数据 */
-		public var gameGridData:Grid = new Grid( GameSetting.GRID_X , GameSetting.GRID_Z ) ;
+		public var gameGridData:Grid  ;
 		
 		/**格子位置对建筑数据映射，当点击某个格子时，能知道当前点击了哪个建筑 */		
 		private var _grid2Building:HashMap = new HashMap();
