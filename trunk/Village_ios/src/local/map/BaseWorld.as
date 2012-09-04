@@ -57,11 +57,11 @@ package  local.map
 			var offset:Number ;
 			
 			var map:Shape = new Shape();
-			//			map.graphics.beginFill(0x006600  );
-			//			map.graphics.drawRect(0,0,GameSetting.MAP_WIDTH , GameSetting.MAP_HEIGHT);
-			//			map.graphics.endFill();
-			//			this.setBackGround( map );
-			//			return ;
+//			map.graphics.beginFill(0x006600  );
+//			map.graphics.drawRect(0,0,GameSetting.MAP_WIDTH , GameSetting.MAP_HEIGHT);
+//			map.graphics.endFill();
+//			this.setBackGround( map );
+//			return ;
 			
 			var bmd:BitmapData = EmbedsManager.instance.getBitmapByName("MapBlock").bitmapData;
 			map.graphics.beginBitmapFill( bmd , mat , true  );
@@ -138,11 +138,6 @@ package  local.map
 			map.graphics.drawRect( 2760 ,300 , bmd.width , bmd.height );
 			map.graphics.endFill(); 
 			
-			mat.identity(); mat.translate( 700 ,-50 );
-			map.graphics.beginBitmapFill( bmd , mat , false  );
-			map.graphics.drawRect( 700 ,-50 , bmd.width , bmd.height );
-			map.graphics.endFill(); 
-			
 			//=====================
 			bmd = EmbedsManager.instance.getBitmapByName("SmallHeightMap").bitmapData;
 			mat.identity(); mat.translate( 0  ,1000 );
@@ -163,10 +158,10 @@ package  local.map
 			super.addedToStageHandler(e);
 			
 			//显示地图网格
-			//			var gridScene:IsoScene = new IsoScene(GameSetting.GRID_SIZE);
-			//			(gridScene.addChild( new IsoGrid(GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE)) as IsoGrid).render() ;
-			//			gridScene.cacheAsBitmap=true;
-			//			this.addScene(gridScene);
+//			var gridScene:IsoScene = new IsoScene(GameSetting.GRID_SIZE);
+//			(gridScene.addChild( new IsoGrid(GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE)) as IsoGrid).render() ;
+//			gridScene.cacheAsBitmap=true;
+//			this.addScene(gridScene);
 			//添加iso场景
 			roadScene = new RoadScene();
 			roadScene.mouseChildren = false ;
@@ -329,13 +324,8 @@ package  local.map
 			}
 		}
 		
-		public function run():void{
-			addEventListener(Event.ENTER_FRAME , onEnterFrameHandler );
-		}
-		public function stopRun():void{
-			removeEventListener(Event.ENTER_FRAME , onEnterFrameHandler );
-		}
-		
+		public function run():void{ addEventListener(Event.ENTER_FRAME , onEnterFrameHandler ); }
+		public function stopRun():void{ removeEventListener(Event.ENTER_FRAME , onEnterFrameHandler ); }
 		override public function update():void { buildingScene.update() ; }
 		
 		private function onEnterFrameHandler(e:Event):void
