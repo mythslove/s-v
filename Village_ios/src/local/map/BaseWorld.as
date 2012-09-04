@@ -45,7 +45,6 @@ package  local.map
 		{
 			super( GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE);
 			
-			this.panTo(GameSetting.MAP_WIDTH>>1 , -300);
 			this.x = (GameSetting.SCREEN_WIDTH-GameSetting.MAP_WIDTH*scaleX)>>1 ;
 			y=-850;
 			_endX = x ;
@@ -135,9 +134,9 @@ package  local.map
 			offset+=bmd.height ;
 			
 			bmd = EmbedsManager.instance.getBitmapByName("Water1").bitmapData;
-			mat.identity(); mat.translate( 2800 ,400 );
+			mat.identity(); mat.translate( 2760 ,300 );
 			map.graphics.beginBitmapFill( bmd , mat , false  );
-			map.graphics.drawRect( 2800 ,400 , bmd.width , bmd.height );
+			map.graphics.drawRect( 2760 ,300 , bmd.width , bmd.height );
 			map.graphics.endFill(); 
 			
 			//=====================
@@ -181,8 +180,12 @@ package  local.map
 		{
 			var i:int , j:int ;
 			var gameGridData:Grid = MapGridDataModel.instance.gameGridData ;
-			//添加地图区域
 			var maxX:int ,maxZ:int ;
+			
+			//地图数据
+		    this.panTo( MapGridDataModel.instance.mapPanX , MapGridDataModel.instance.mapPanY );
+			
+			//添加地图区域
 			for each( var landVO:LandVO in LandModel.instance.lands) {
 				drawMapZoneByFill(landVO);
 				MapGridDataModel.instance.landGridData.setWalkable( landVO.nodeX , landVO.nodeZ , true );
@@ -226,23 +229,19 @@ package  local.map
 			var bvo:BuildingVO ;
 			for( i = 0 ; i<GameSetting.GRID_X ; i+=2  ){
 				for( j = 0 ; j<GameSetting.GRID_Z ;  j+=2){
-					if( !gameGridData.getNode(i,j).walkable && Math.random()>0.85 ){
-						maxX = i*_size - j*_size +sceneLayerOffsetX;
-						maxZ =   (i*_size + j*_size) * .5 + sceneLayerOffsetY ;
-						if(maxX>0 && maxZ>0 && maxX<GameSetting.MAP_WIDTH && maxZ<GameSetting.MAP_HEIGHT-200 )
-						{
-							var index:int = (Math.random()*8+1 )>>0 ;
-							bvo = new BuildingVO();
-							bvo.baseVO = basicVOs[0] ;
-							bvo.name = basicVOs[0].name ;
-							bvo.nodeX = i ;
-							bvo.nodeZ = j ;
-							basicBuild = new BasicBuilding(bvo ) ;
-							basicBuild.mouseChildren =  false ;
-							basicBuild.nodeX = i ;
-							basicBuild.nodeZ = j ;
-							buildingScene.addBuilding( basicBuild , false  );
-						}
+					if( !gameGridData.getNode(i,j).walkable && MapGridDataModel.instance.mapGridData.getNode(i,j).walkable 
+						&& Math.random()>0.8 ){
+						var index:int = (Math.random()*8 )>>0 ;
+						bvo = new BuildingVO();
+						bvo.baseVO = basicVOs[index] ;
+						bvo.name = basicVOs[index].name ;
+						bvo.nodeX = i ;
+						bvo.nodeZ = j ;
+						basicBuild = new BasicBuilding(bvo ) ;
+						basicBuild.mouseChildren =  false ;
+						basicBuild.nodeX = i ;
+						basicBuild.nodeZ = j ;
+						buildingScene.addBuilding( basicBuild , false  );
 					}
 				}
 			}

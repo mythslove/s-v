@@ -8,7 +8,6 @@ package local.map.item
 	 */	
 	public class BasicBuilding extends BaseBuilding
 	{
-		
 		public function BasicBuilding( buildingVO:BuildingVO )
 		{
 			super(buildingVO);

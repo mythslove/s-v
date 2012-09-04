@@ -1,6 +1,6 @@
 package local.util
 {
-	import flash.geom.Point;
+	
 
 	public class GameUtil
 	{
