@@ -58,11 +58,11 @@ package  local.map
 			var offset:Number ;
 			
 			var map:Shape = new Shape();
-//			map.graphics.beginFill(0x006600  );
-//			map.graphics.drawRect(0,0,GameSetting.MAP_WIDTH , GameSetting.MAP_HEIGHT);
-//			map.graphics.endFill();
-//			this.setBackGround( map );
-//			return ;
+			//			map.graphics.beginFill(0x006600  );
+			//			map.graphics.drawRect(0,0,GameSetting.MAP_WIDTH , GameSetting.MAP_HEIGHT);
+			//			map.graphics.endFill();
+			//			this.setBackGround( map );
+			//			return ;
 			
 			var bmd:BitmapData = EmbedsManager.instance.getBitmapByName("MapBlock").bitmapData;
 			map.graphics.beginBitmapFill( bmd , mat , true  );
@@ -164,10 +164,10 @@ package  local.map
 			super.addedToStageHandler(e);
 			
 			//显示地图网格
-//			var gridScene:IsoScene = new IsoScene(GameSetting.GRID_SIZE);
-//			(gridScene.addChild( new IsoGrid(GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE)) as IsoGrid).render() ;
-//			gridScene.cacheAsBitmap=true;
-//			this.addScene(gridScene);
+			//			var gridScene:IsoScene = new IsoScene(GameSetting.GRID_SIZE);
+			//			(gridScene.addChild( new IsoGrid(GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE)) as IsoGrid).render() ;
+			//			gridScene.cacheAsBitmap=true;
+			//			this.addScene(gridScene);
 			//添加iso场景
 			roadScene = new RoadScene();
 			roadScene.mouseChildren = false ;
@@ -188,7 +188,7 @@ package  local.map
 			var maxX:int ,maxZ:int ;
 			
 			//地图数据
-		    this.panTo( MapGridDataModel.instance.mapPanX , MapGridDataModel.instance.mapPanY );
+			this.panTo( MapGridDataModel.instance.mapPanX , MapGridDataModel.instance.mapPanY );
 			
 			//添加地图区域
 			for each( var landVO:LandVO in LandModel.instance.lands) {
@@ -251,7 +251,7 @@ package  local.map
 				}
 			}
 		}
-	
+		
 		/** 添加侦听 */
 		protected function configListeners():void
 		{
@@ -358,7 +358,7 @@ package  local.map
 				_endY = -GameSetting.MAP_HEIGHT*scaleY+GameSetting.SCREEN_HEIGHT ;
 			}
 		}
-
+		
 		protected function onMouseEvtHandler( e:MouseEvent ):void
 		{
 			e.stopPropagation();
