@@ -23,7 +23,6 @@ package local.map.item
 		public function Road( buildingVO:BuildingVO )
 		{
 			super(buildingVO);
-			name = buildingVO.name ;
 		}
 		
 		override public function showUI():void

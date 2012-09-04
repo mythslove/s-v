@@ -5,7 +5,6 @@ package local.map.scene
 	
 	import local.comm.GameSetting;
 	import local.map.item.BaseBuilding;
-	import local.map.item.BasicBuilding;
 	import local.model.MapGridDataModel;
 	
 	/**
@@ -36,7 +35,6 @@ package local.map.scene
 			return building;
 		}
 		
-		
 		/**
 		 * 移除建筑 
 		 * @param building
@@ -45,30 +43,6 @@ package local.map.scene
 		{
 			this.removeIsoObject( building );
 			building.setWalkable( true , this.gridData );
-			MapGridDataModel.instance.removeBuildingGridData(building);
-		}
-		
-		/**
-		 * 添加基础建筑，树 
-		 * @param building
-		 * @param isSort是否进行深度排序
-		 * @return 
-		 */		
-		public function addBasicBuilding( building:BasicBuilding , isSort:Boolean=true ):BasicBuilding
-		{
-			this.addIsoObject( building,isSort );
-			MapGridDataModel.instance.addBuildingGridData(building);
-			return building;
-		}
-		
-		
-		/**
-		 * 移除基础建筑，树 
-		 * @param building
-		 */		
-		public function removeBasicBuilding( building:BasicBuilding):void
-		{
-			this.removeIsoObject( building );
 			MapGridDataModel.instance.removeBuildingGridData(building);
 		}
 		

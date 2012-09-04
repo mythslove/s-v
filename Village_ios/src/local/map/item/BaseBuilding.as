@@ -16,6 +16,7 @@ package local.map.item
 		public function BaseBuilding(buildingVO:BuildingVO )
 		{
 			super(GameSetting.GRID_SIZE,buildingVO.baseVO.xSpan , buildingVO.baseVO.zSpan);
+			name = buildingVO.name ;
 			this.mouseEnabled = false ;
 			this.buildingVO = buildingVO ;
 		}
