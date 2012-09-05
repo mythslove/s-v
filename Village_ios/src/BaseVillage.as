@@ -71,6 +71,7 @@ package
 			registerClassAlias( "PlayerVO" , PlayerVO );
 			registerClassAlias( "LandVO" , LandVO );
 			registerClassAlias( "LevelVO" , LevelVO );
+			registerClassAlias( "StorageBuildingVO" , StorageBuildingVO );
 		}
 	}
 }
