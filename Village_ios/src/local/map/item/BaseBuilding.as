@@ -58,8 +58,8 @@ package local.map.item
 		
 		public function flash( value:Boolean):void
 		{
-			if(buildingObject) buildingObject.flash( value );
-			if(roadObject) roadObject.flash( value );
+			if(buildingObject) 
+				buildingObject.flash( value );
 		}
 		
 		override public function dispose():void
