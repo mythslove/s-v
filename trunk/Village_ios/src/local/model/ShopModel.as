@@ -18,10 +18,25 @@ package local.model
 		}
 		//=================================
 		
-		/** 所有的建筑 数据，key为name , value 为BaseBuildingVO */
+		/** 商店里所有的建筑 数据，key为name , value 为BaseBuildingVO */
 		public var allBuildingHash:Dictionary ;
 		
-		/** 基础建筑 */
+		/** 商店里基础建筑 */
 		public var basics:Vector.<BaseBuildingVO> ;
+		
+		/** 商店里的装饰品 */
+		public var decors:Vector.<BaseBuildingVO> ;
+		
+		/** 商店里的商业建筑 */
+		public var business:Vector.<BaseBuildingVO> ;
+		
+		/** 商店里的工厂建筑 */
+		public var insdusty:Vector.<BaseBuildingVO> ;
+		
+		/** 商店里的奇迹建筑 */
+		public var wonders:Vector.<BaseBuildingVO> ;
+		
+		/** 商店里的交流中心建筑 */
+		public var community:Vector.<BaseBuildingVO> ;
 	}
 }
