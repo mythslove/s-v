@@ -21,6 +21,7 @@ package  local.map
 	{
 		public var roadScene:RoadScene ; //道路，水层
 		public var buildingScene:BuildingScene; //建筑层
+		private var _extTreeScene:IsoScene ; //额外的建筑层
 		
 		protected var _mouseDownPos:Point = new Point(); //鼠标点击的位置
 		protected var _worldPos:Point = new Point(); //鼠标点击时场景的世界位置
@@ -166,8 +167,11 @@ package  local.map
 			roadScene = new RoadScene();
 			roadScene.mouseChildren = false ;
 			buildingScene = new BuildingScene();
+			_extTreeScene = new IsoScene(0);
+			_extTreeScene.mouseEnabled = _extTreeScene.mouseChildren = false ;
 			addScene( roadScene );
 			addScene(buildingScene);
+			addScene(_extTreeScene);
 			//设置背景
 			initMap();
 			//添加侦听
@@ -227,12 +231,25 @@ package  local.map
 						bvo.nodeZ = j ;
 						basicBuild = new BasicBuilding(bvo ) ;
 						basicBuild.mouseChildren =  false ;
-						basicBuild.nodeX = i ;
-						basicBuild.nodeZ = j ;
 						buildingScene.addBuilding( basicBuild , false  );
 					}
 				}
 			}
+			
+			//外围的树
+//			var pxArr:Array = [100,300,500,700,900,1600,2000 , 50,150 ,140 ,50 ];
+//			var pyArr:Array = [100,300,60  ,200,150,200,100 , 500 , 800 ,1100,1500];
+//			var len:int = pxArr.length ;
+//			for( i= 0;  i<len ; ++i ){
+//				index = (Math.random()*8 )>>0 ;
+//				bvo = new BuildingVO();
+//				bvo.baseVO = basicVOs[index] ;
+//				bvo.name = basicVOs[index].name ;
+//				basicBuild = new BasicBuilding(bvo ) ;
+//				basicBuild.mouseEnabled = basicBuild.mouseChildren =  false ;
+//				basicBuild.setScreenPosition( pxArr[i]-sceneLayerOffsetX , pyArr[i]-sceneLayerOffsetY );
+//				_extTreeScene.addChild( basicBuild);
+//			}
 		}
 		
 		/** 添加侦听 */

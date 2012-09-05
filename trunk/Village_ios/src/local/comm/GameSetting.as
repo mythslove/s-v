@@ -15,7 +15,7 @@ package local.comm
 		public static const GRID_SIZE:int = 50 ;
 		
 		/** 地图大小*/
-		public static var GRID_X:int = 70 ;
-		public static var GRID_Z:int = 70 ;
+		public static var GRID_X:int = 68 ;
+		public static var GRID_Z:int = 68 ;
 	}
 }
