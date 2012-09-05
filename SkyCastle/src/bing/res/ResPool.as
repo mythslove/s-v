@@ -327,7 +327,7 @@ package bing.res
 			return obj ;
 		}
 		
-
+		
 		/**
 		 * 加载多个 
 		 * @param name 序列加载的名称
@@ -423,6 +423,7 @@ class QueueLoader
 		var evt:ResProgressEvent = new ResProgressEvent(ResProgressEvent.RES_LOAD_PROGRESS);
 		evt.total = _total ;
 		evt.loaded = _queueLoaded ;
+		evt.queueName = name ;
 		if(evtLoadedEvt){
 			evt.name = evtLoadedEvt.resVO.resId ;
 		}
