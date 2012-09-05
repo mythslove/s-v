@@ -29,12 +29,12 @@ package local.map
 		public function showBuildings():void
 		{
 			var baseVO:BaseBuildingVO = new BaseBuildingVO();
-			baseVO.name = "Default Road";
+			baseVO.name = "Road";
 			baseVO.type = BuildingType.DECO ;
 			baseVO.subClass = BuildingType.DECO_ROAD ;
 			var roadVO:BuildingVO = new BuildingVO();
 			roadVO.baseVO = baseVO ;
-			roadVO.name = "Default Road";
+			roadVO.name = "Road";
 			
 			var road:Road ;
 			for( var i:int = 0 ; i<3; ++i){
@@ -154,9 +154,19 @@ package local.map
 			bvo.name = "Home1";
 			bvo.baseVO = baseVO ;
 			bvo.nodeX = 9*4   ;
-			bvo.nodeZ = 9*4 ;
+			bvo.nodeZ = 8*4+1 ;
 			var building:Building=new Building( bvo);
 			buildingScene.addBuilding( building, false);
+			
+			bvo = new BuildingVO();
+			bvo.name = "Home1";
+			bvo.baseVO = baseVO ;
+			bvo.nodeX = 9*4   ;
+			bvo.nodeZ = 10*4-2 ;
+			building=new Building( bvo);
+			buildingScene.addBuilding( building, false);
+			
+			
 			
 			buildingScene.sortAll();
 			
