@@ -1,8 +1,5 @@
 package local.map.item
 {
-	import bing.res.ResLoadedEvent;
-	import bing.res.ResVO;
-	
 	import local.comm.GameSetting;
 	import local.map.cell.BuildingObject;
 	import local.map.cell.RoadObject;
@@ -34,22 +31,6 @@ package local.map.item
 		}
 		
 		override public function showUI():void
-		{
-			if(ResourceUtil.instance.checkResLoaded(name)){
-				changeUI();
-			}else{
-				ResourceUtil.instance.addEventListener( name , resLoadedHandler );
-				ResourceUtil.instance.loadRes( new ResVO(name,  buildingVO.baseVO.type+"/"+name+".bd"));
-			}
-		}
-		
-		private function resLoadedHandler( e:ResLoadedEvent):void
-		{
-			ResourceUtil.instance.removeEventListener( name , resLoadedHandler );
-			changeUI();
-		}
-		
-		private function changeUI():void
 		{
 			var barvo:Vector.<BitmapAnimResVO> = ResourceUtil.instance.getResVOByResId( name ).resObject as  Vector.<BitmapAnimResVO> ;
 			buildingObject = new BuildingObject(barvo);

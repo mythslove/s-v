@@ -12,7 +12,9 @@ package local.map.item
 		override public function update():void
 		{
 			super.update();
-			if(buildingObject) buildingObject.update() ;
+			if(buildingObject) {
+				buildingObject.update() ;
+			}
 		}
 	}
 }

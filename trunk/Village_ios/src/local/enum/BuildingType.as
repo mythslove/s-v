@@ -23,7 +23,6 @@ package local.enum
 		public static const DECORATION:String = "decoration";
 		public static const DECORATION_ROAD:String = "road"
 		public static const DECORATION_WATER:String = "water";
-		public static const DECORATION_DECOS:String = "decos";
 			
 			
 		public static const INDUSTRY:String = "industry";

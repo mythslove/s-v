@@ -423,6 +423,7 @@ class QueueLoader
 		var evt:ResProgressEvent = new ResProgressEvent(ResProgressEvent.RES_LOAD_PROGRESS);
 		evt.total = _total ;
 		evt.loaded = _queueLoaded ;
+		evt.queueName = name ;
 		if(evtLoadedEvt){
 			evt.name = evtLoadedEvt.resVO.resId ;
 		}

@@ -1,8 +1,5 @@
 package local.map.item
 {
-	import bing.res.ResLoadedEvent;
-	import bing.res.ResVO;
-	
 	import local.map.cell.RoadObject;
 	import local.map.interfaces.IRoad;
 	import local.util.ResourceUtil;
@@ -28,31 +25,13 @@ package local.map.item
 		override public function showUI():void
 		{
 			if(roadObject){
-				roadObject.show( _direction );
+				roadObject.show( this._direction);
+			} else {
+				var roadResVO:RoadResVO = ResourceUtil.instance.getResVOByResId( name ).resObject as RoadResVO ;
+				roadObject = new RoadObject( name , roadResVO );
+				addChildAt(roadObject,0);
+				roadObject.show( this._direction);
 			}
-			else
-			{
-				if(ResourceUtil.instance.checkResLoaded(name)){
-					changeUI();
-				}else{
-					ResourceUtil.instance.addEventListener( name , resLoadedHandler );
-					ResourceUtil.instance.loadRes( new ResVO(name, "decoration/"+name+".rd"));
-				}
-			}
-		}
-		
-		private function resLoadedHandler( e:ResLoadedEvent ):void
-		{
-			ResourceUtil.instance.removeEventListener( name , resLoadedHandler );
-			changeUI();
-		}
-		
-		private function changeUI():void
-		{
-			var roadResVO:RoadResVO = ResourceUtil.instance.getResVOByResId( name ).resObject as RoadResVO ;
-			roadObject = new RoadObject( name , roadResVO );
-			addChildAt(roadObject,0);
-			roadObject.show( this._direction);
 		}
 		
 		public function updateUI( direction:String ):void
