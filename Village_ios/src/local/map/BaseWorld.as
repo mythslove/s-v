@@ -21,7 +21,6 @@ package  local.map
 	{
 		public var roadScene:RoadScene ; //道路，水层
 		public var buildingScene:BuildingScene; //建筑层
-		private var _extTreeScene:IsoScene ; //额外的建筑层
 		
 		protected var _mouseDownPos:Point = new Point(); //鼠标点击的位置
 		protected var _worldPos:Point = new Point(); //鼠标点击时场景的世界位置
@@ -167,11 +166,8 @@ package  local.map
 			roadScene = new RoadScene();
 			roadScene.mouseChildren = false ;
 			buildingScene = new BuildingScene();
-			_extTreeScene = new IsoScene(0);
-			_extTreeScene.mouseEnabled = _extTreeScene.mouseChildren = false ;
 			addScene( roadScene );
 			addScene(buildingScene);
-			addScene(_extTreeScene);
 			//设置背景
 			initMap();
 			//添加侦听
