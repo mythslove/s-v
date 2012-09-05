@@ -38,5 +38,21 @@ package bing.utils
 			var pattern:RegExp = /\s*$/;
 			return char.replace(pattern, "");
 		}
+		
+		/**
+		 * StringUtil.stringFormat( "我是{0}adaf{1},哈", "一名","!") 
+		 * @param str
+		 * @param param
+		 * @return 
+		 */		
+		public static function stringFormat( str:String , ...param ):String{
+			var reg:RegExp = /\{(\d)\}/ ;
+			var i:int ;
+			while(str.search(reg)>-1 ){
+				str = str.replace( reg , param[i] );
+				++ i ;
+			}
+			return str;
+		}
 	}
 }

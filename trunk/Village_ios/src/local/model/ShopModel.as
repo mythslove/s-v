@@ -2,6 +2,7 @@ package local.model
 {
 	import flash.utils.Dictionary;
 	
+	import local.view.shop.ShopItemRenderer;
 	import local.vo.BaseBuildingVO;
 
 	/**
@@ -38,5 +39,21 @@ package local.model
 		
 		/** 商店里的交流中心建筑 */
 		public var community:Vector.<BaseBuildingVO> ;
+		
+		
+		
+		
+		
+		
+		public var decorsRenderers:Vector.<ShopItemRenderer> ;
+		
+		public var businessRenderers:Vector.<ShopItemRenderer> ;
+		
+		public var insdustyRenderers:Vector.<ShopItemRenderer> ;
+		
+		public var wondersRenderers:Vector.<ShopItemRenderer> ;
+		
+		public var communityRenderers:Vector.<ShopItemRenderer> ;
+		
 	}
 }
