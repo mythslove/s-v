@@ -17,5 +17,8 @@ package local.comm
 		/** 地图大小*/
 		public static var GRID_X:int = 68 ;
 		public static var GRID_Z:int = 68 ;
+		
+		/** 地图的最大缩放值 */
+		public static var minZoom:Number=0.8 ;
 	}
 }
