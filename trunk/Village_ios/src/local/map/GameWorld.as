@@ -108,6 +108,7 @@ package local.map
 			roadScene.addRoad( road , false , false  );
 			
 			roadScene.updateAllUI();
+			roadScene.sortAll() ;
 			
 			var roads:Array =[];
 			for each( var obj:IsoObject in roadScene.children)
