@@ -26,7 +26,6 @@ package local.map.item
 	{
 		public static const CHARACTER_ROADS:Vector.<Point>= Vector.<Point>(
 			[ new Point(0,5) , new Point(45,25) , new Point(0,45) , new Point(-45,25) ]
-//			[ new Point(0,2) , new Point(48,25) , new Point(0,48) , new Point(-48,25) ]
 		);
 		public static const CAR_ROADS:Vector.<Point>= Vector.<Point>(
 			[  new Point(0,15) , new Point(20,25) , new Point(0,35) , new Point(-20,25) ]
