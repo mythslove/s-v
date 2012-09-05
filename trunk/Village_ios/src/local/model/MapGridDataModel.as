@@ -103,7 +103,7 @@ package local.model
 		 *  返回目标建筑旁边的所有建筑
 		 * @param building 目标建筑
 		 * @param type (BuildingType常量)只返回相应类型的建筑，如果为null，则返回所有
-		 * @param subType 子类型
+		 * @param subType 子类型，要用这个必须写上面的type
 		 * @return 
 		 */		
 		public function getRoundBuildings( building:BaseBuilding , type:String=null , subType:String = null ):Array 
@@ -128,6 +128,8 @@ package local.model
 							if(type && type==baseBuilding.buildingVO.baseVO.type)
 							{
 								if(subType && subType==baseBuilding.buildingVO.baseVO.subClass){
+									arr.push( baseBuilding );
+								}else{
 									arr.push( baseBuilding );
 								}
 							}
