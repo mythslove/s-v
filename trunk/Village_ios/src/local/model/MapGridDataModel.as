@@ -21,7 +21,7 @@ package local.model
 		}
 		//=======================================
 		
-		/** 地图数据 ，哪些区域不能修东西*/
+		/** 地图数据 ，哪些区域不能修东西 , 4*4的地块*/
 		public var mapGridData:Grid ;
 		public var mapPanX:int ;
 		public var mapPanY:int ;
@@ -103,9 +103,10 @@ package local.model
 		 *  返回目标建筑旁边的所有建筑
 		 * @param building 目标建筑
 		 * @param type (BuildingType常量)只返回相应类型的建筑，如果为null，则返回所有
+		 * @param subType 子类型
 		 * @return 
 		 */		
-		public function getRoundBuildings( building:BaseBuilding , type:String=null ):Array 
+		public function getRoundBuildings( building:BaseBuilding , type:String=null , subType:String = null ):Array 
 		{
 			var xSpan:int = building.xSpan+building.nodeX ;
 			var zSpan:int= building.zSpan+building.nodeZ ;
@@ -126,7 +127,9 @@ package local.model
 							baseBuilding = _grid2Building.getValue(i*GameSetting.GRID_SIZE+"-"+j*GameSetting.GRID_SIZE) as BaseBuilding;
 							if(type && type==baseBuilding.buildingVO.baseVO.type)
 							{
-								arr.push( baseBuilding );
+								if(subType && subType==baseBuilding.buildingVO.baseVO.subClass){
+									arr.push( baseBuilding );
+								}
 							}
 							else
 							{
