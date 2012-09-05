@@ -109,7 +109,7 @@ package bing.iso
 		{
 			super.x = x ;
 			super.y= y ;
-			_position3D.x= x ;
+			_position3D.x = x ;
 			_position3D.z = y ;
 		}
 		

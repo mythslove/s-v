@@ -26,8 +26,8 @@ package local.map.item
 	public class MoveItem extends BaseMapObject
 	{
 		public static const CHARACTER_ROADS:Vector.<Point>= Vector.<Point>(
-//			[ new Point(0,5) , new Point(45,25) , new Point(0,45) , new Point(-45,25) ]
-			[ new Point(0,2) , new Point(48,25) , new Point(0,48) , new Point(-48,25) ]
+			[ new Point(0,5) , new Point(45,25) , new Point(0,45) , new Point(-45,25) ]
+//			[ new Point(0,2) , new Point(48,25) , new Point(0,48) , new Point(-48,25) ]
 		);
 		public static const CAR_ROADS:Vector.<Point>= Vector.<Point>(
 			[  new Point(0,15) , new Point(20,25) , new Point(0,35) , new Point(-20,25) ]
@@ -46,6 +46,7 @@ package local.map.item
 		public function MoveItem( vo:BitmapAnimResVO )
 		{
 			super(GameSetting.GRID_SIZE);
+			_xSpan = _zSpan = 0 ;
 			mouseChildren = mouseEnabled=false;
 			
 			_itemLayer = new Sprite();
@@ -93,10 +94,10 @@ package local.map.item
 			} else {
 				var moveNum:Number = distance/_speed ;
 				this.setScreenPosition( screenX+(_nextPoint.x - screenX)/moveNum , screenY+(_nextPoint.y - screenY)/moveNum );
-			}
-			if(_firstMove){
-				sort();
-				_firstMove = false ;
+				if(_firstMove){
+					sort();
+					_firstMove = false ;
+				}
 			}
 		}
 		
@@ -199,8 +200,10 @@ package local.map.item
 		
 		override public function get rect():Rectangle
 		{
-			_boundRect.x = x ;
-			_boundRect.y = z ;
+			_boundRect.x = screenX ;
+			_boundRect.y = screenY ;
+			_boundRect.width = 0 ;
+			_boundRect.height = 0 ;
 			return _boundRect ;
 		}
 		

@@ -101,5 +101,18 @@ package local.map.scene
 			}
 		}
 		
+		/**        排序算法           */
+		override protected function sortCompare( target:IsoObject , item:IsoObject ):int
+		{
+			var centerX:Number=target.screenX+target.xSpan*_size  - item.screenX-item.xSpan*_size  ;
+			var centerY:Number=target.screenY+target.xSpan*_size*0.5  - item.screenY - item.xSpan*_size*0.5  ;
+			if(centerY>0){
+				return 1;
+			}
+			if(centerY<0){
+				return -1;
+			}
+			return centerX ;
+		}
 	}
 }
