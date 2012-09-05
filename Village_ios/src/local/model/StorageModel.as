@@ -53,7 +53,7 @@ package local.model
 		public function addBuildingVOToStorage( buildingVO:BuildingVO ):void
 		{
 			var arr:Vector.<StorageBuildingVO> ;
-			switch( buildingVO.baseVO.type )
+			switch( buildingVO.baseVO.type  )
 			{
 				case BuildingType.DECO:
 					if(!decors) decors = new Vector.<StorageBuildingVO>();
@@ -139,7 +139,7 @@ package local.model
 		private function getStorageVO( name :String , arr:Vector.<StorageBuildingVO> ):StorageBuildingVO
 		{
 			for each( var vo:StorageBuildingVO in arr){
-				if( vo.name==name) return vo ;
+				if( vo.name ==name ) return vo ;
 			}
 			return null ;
 		}

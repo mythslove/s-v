@@ -46,7 +46,7 @@ package local.model
 		
 		public function addBuildingVO( vo:BuildingVO ):void
 		{
-			switch( vo.baseVO.type )
+			switch( vo.baseVO.type  )
 			{
 				case BuildingType.BASIC:
 					if(!basicTrees) basicTrees = new Vector.<BuildingVO>();

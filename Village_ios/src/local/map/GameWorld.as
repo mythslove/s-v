@@ -30,8 +30,8 @@ package local.map
 		{
 			var baseVO:BaseBuildingVO = new BaseBuildingVO();
 			baseVO.name = "Road";
-			baseVO.type = BuildingType.DECO ;
-			baseVO.subClass = BuildingType.DECO_ROAD ;
+			baseVO.type = BuildingType.DECORATION ;
+			baseVO.subClass = BuildingType.DECORATION_ROAD ;
 			var roadVO:BuildingVO = new BuildingVO();
 			roadVO.baseVO = baseVO ;
 			roadVO.name = "Road";
