@@ -16,6 +16,12 @@ package local.map.cell
 	 */	
 	public class BuildingBottomGrid extends Sprite
 	{
+		public static var rhombus:Vector.<BuildingGridRhombus> = Vector.<BuildingGridRhombus>([
+			new BuildingGridRhombus(),new BuildingGridRhombus(),new BuildingGridRhombus(),new BuildingGridRhombus(),new BuildingGridRhombus(),
+			new BuildingGridRhombus(),new BuildingGridRhombus(),new BuildingGridRhombus(),new BuildingGridRhombus()
+		]);
+		
+		
 		private var _building:BaseBuilding ;
 		
 		public function BuildingBottomGrid( building:BaseBuilding )
@@ -35,9 +41,12 @@ package local.map.cell
 			var bottom:BuildingGridRhombus ;
 			var screenPos:Point  ;
 			var p:Vector3D ;
+			var i:int ;
 			for each( var point:Vector3D in points)
 			{
-				bottom = new BuildingGridRhombus( (point.x-_building.x)/GameSetting.GRID_SIZE , (point.z-_building.z)/GameSetting.GRID_SIZE );
+				bottom = rhombus[i] ;
+				bottom.nodeX = (point.x-_building.x)/GameSetting.GRID_SIZE ;
+				bottom.nodeZ = (point.z-_building.z)/GameSetting.GRID_SIZE ;
 				p = point.clone();
 				p.x -=_building.x;
 				p.z -=_building.z ;
@@ -46,6 +55,7 @@ package local.map.cell
 				bottom.y = screenPos.y ;
 				this.addChild( bottom );
 				bottom.updateBuildingGridRhombus( _building.nodeX , _building.nodeZ );
+				++i ;
 			}
 		}
 		
