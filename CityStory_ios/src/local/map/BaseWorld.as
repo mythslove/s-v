@@ -240,6 +240,7 @@ package  local.map
 				this.addEventListener(TouchEvent.TOUCH_BEGIN , onTouchHandler ) ;
 				this.addEventListener(TouchEvent.TOUCH_MOVE , onTouchHandler ) ;
 				this.addEventListener(TouchEvent.TOUCH_END , onTouchHandler ) ;
+				this.addEventListener(TouchEvent.TOUCH_END , onTouchHandler , false,0,true ) ;
 			}else{
 				this.addEventListener(MouseEvent.MOUSE_WHEEL , onMouseWheelHandler);
 			}
@@ -274,6 +275,7 @@ package  local.map
 					break;
 				case TouchEvent.TOUCH_MOVE :
 					if(_touchCount>=2){
+						_isGesture = true ;
 						var touch:Touch;
 						for(var i:int=0;i<2;++i){
 							touch = _touches[i] as Touch ;
@@ -299,13 +301,13 @@ package  local.map
 								sizeDiff = sizeDiff>1 ? 1+(sizeDiff-1)*.25 : 1-(1-sizeDiff)*.25 ;
 								changeWorldScale( sizeDiff , _middle.x , _middle.y );
 								
-								_isGesture = true ;
 							}
 						}
 					}
 					break ;
 				case TouchEvent.TOUCH_END:
 					--_touchCount ;
+					if(_touchCount<0) _touchCount = 0 ;
 					break ;
 			}
 		}
