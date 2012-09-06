@@ -21,6 +21,8 @@ package  local.map
 	{
 		public var roadScene:RoadScene ; //道路，水层
 		public var buildingScene:BuildingScene; //建筑层
+		public var iconScene:IsoScene ; //显示icon层
+		public var topScene:IsoScene ; //最上层,显示移动的建筑，以及显示一些特效动画
 		
 		protected var _mouseDownPos:Point = new Point(); //鼠标点击的位置
 		protected var _worldPos:Point = new Point(); //鼠标点击时场景的世界位置
@@ -166,8 +168,15 @@ package  local.map
 			roadScene = new RoadScene();
 			roadScene.mouseChildren = false ;
 			buildingScene = new BuildingScene();
+			iconScene = new IsoScene(0);
+			iconScene.mouseEnabled = iconScene.mouseChildren = false ;
+			topScene = new IsoScene(0);
+			topScene.mouseEnabled = false ;
+			topScene.visible = false ;
 			addScene( roadScene );
 			addScene(buildingScene);
+			addScene(iconScene);
+			addScene(topScene);
 			//设置背景
 			initMap();
 			//添加侦听
