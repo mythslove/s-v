@@ -1,5 +1,7 @@
 package local.map.item
 {
+	import flash.display.Bitmap;
+	
 	import local.comm.GameSetting;
 	import local.map.cell.BuildingObject;
 	import local.map.cell.RoadObject;
@@ -10,10 +12,11 @@ package local.map.item
 
 	public class BaseBuilding extends BaseMapObject
 	{
+		public var gameTimer:GameTimer;
 		public var buildingObject:BuildingObject ;
 		public var roadObject:RoadObject ;
 		public var buildingVO:BuildingVO ;
-		public var gameTimer:GameTimer;
+		public var statusIcon:Bitmap ; //显示当前状态的icon
 		
 		public function BaseBuilding(buildingVO:BuildingVO )
 		{
@@ -30,11 +33,28 @@ package local.map.item
 			
 		}
 		
+		override public function update():void
+		{
+			if(buildingObject) {
+				buildingObject.update() ;
+			}
+			if(gameTimer){
+				gameTimer.update() ;
+			}
+			if(statusIcon.bitmapData){
+//				statusIcon.y+=Math.sin(5)
+			}
+		}
+		
 		override public function showUI():void
 		{
 			var barvo:Vector.<BitmapAnimResVO> = ResourceUtil.instance.getResVOByResId( name ).resObject as  Vector.<BitmapAnimResVO> ;
 			buildingObject = new BuildingObject(barvo);
 			addChildAt(buildingObject,0);
+			
+			statusIcon = new Bitmap();
+			statusIcon.y = buildingVO.baseVO.span*_size-buildingObject.height - _size ;
+			addChild(statusIcon);
 		}
 		
 		public function flash( value:Boolean):void

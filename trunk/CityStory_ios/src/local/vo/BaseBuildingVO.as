@@ -9,6 +9,7 @@ package local.vo
 		public var span:int = 1 ; //占用的格子数
 		public var type:String = BuildingType.HOME ; //主类型
 		public var subClass:String ; //子类型
+		public var buildClick:int ; //修建时的点击次数
 		
 		/**
 		 * 返回资源url 
