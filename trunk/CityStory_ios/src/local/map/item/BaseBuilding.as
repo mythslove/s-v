@@ -3,6 +3,7 @@ package local.map.item
 	import flash.display.Bitmap;
 	
 	import local.comm.GameSetting;
+	import local.map.cell.BuildingBottomGrid;
 	import local.map.cell.BuildingObject;
 	import local.map.cell.RoadObject;
 	import local.util.GameTimer;
@@ -16,6 +17,7 @@ package local.map.item
 		public var buildingObject:BuildingObject ;
 		public var roadObject:RoadObject ;
 		public var buildingVO:BuildingVO ;
+		public var bottom:BuildingBottomGrid ;
 		public var statusIcon:Bitmap ; //显示当前状态的icon
 		
 		public function BaseBuilding(buildingVO:BuildingVO )
@@ -56,8 +58,47 @@ package local.map.item
 		
 		public function flash( value:Boolean):void
 		{
-			if(buildingObject) 
+			if(buildingObject) {
 				buildingObject.flash( value );
+				if(value) drawBottomGrid();
+				else removeBottomGrid();
+			}
+		}
+		
+		/**添加底座*/		
+		public function drawBottomGrid():void
+		{
+			if(!bottom){
+				bottom = new BuildingBottomGrid(this);
+				addChildAt(bottom,0);
+				bottom.drawGrid();
+				if(buildingObject){
+					buildingObject.y -= GameSetting.GRID_SIZE*0.25 ;
+					buildingObject.alpha = 0.5 ;
+				}else if( roadObject){
+					roadObject.y -= GameSetting.GRID_SIZE*0.25 ;
+					roadObject.alpha = 0.5 ;
+				}
+			}
+		}
+		
+		/** 移除底座*/
+		public function removeBottomGrid():void
+		{
+			if(bottom) {
+				bottom.dispose();
+				if(bottom.parent){
+					bottom.parent.removeChild(bottom);
+				}
+				bottom = null ;
+				if(buildingObject){
+					buildingObject.y += GameSetting.GRID_SIZE*0.25 ;
+					buildingObject.alpha = 1 ;
+				}else if( roadObject){
+					roadObject.y += GameSetting.GRID_SIZE*0.25 ;
+					roadObject.alpha = 1 ;
+				}
+			}
 		}
 		
 		override public function dispose():void
