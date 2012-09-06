@@ -209,6 +209,7 @@ package local.map
 					}
 					break ;
 				case MouseEvent.MOUSE_UP:
+					_touchCount = 0 ;
 					if(!_isGesture && !_isMove){
 						if(e.target.parent is BaseBuilding && e.target.parent==_mouseBuilding)
 						{

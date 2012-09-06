@@ -34,7 +34,7 @@ package  local.map
 		protected var _endY:int; //地图最终的位置Y坐标，用于地图缓移动
 		
 		private var _touches:Vector.<Touch> = Vector.<Touch>([ new Touch(0,0,0) , new Touch(0,0,0) ]) ; //两个手指的触摸对象
-		private var _touchCount:int ; //手指触摸数量
+		protected var _touchCount:int ; //手指触摸数量
 		private var _touchFinger1:Point = new Point(); //第一个点击的手指
 		private var _middle:Point = new Point(); //缩放时的中间点位置
 		protected var _moveSpeed:Number = 0.36 ; //移动的速度
@@ -230,21 +230,6 @@ package  local.map
 					}
 				}
 			}
-			
-			//外围的树
-//			var pxArr:Array = [100,300,500,700,900,1600,2000 , 50,150 ,140 ,50 ];
-//			var pyArr:Array = [100,300,60  ,200,150,200,100 , 500 , 800 ,1100,1500];
-//			var len:int = pxArr.length ;
-//			for( i= 0;  i<len ; ++i ){
-//				index = (Math.random()*8 )>>0 ;
-//				bvo = new BuildingVO();
-//				bvo.baseVO = basicVOs[index] ;
-//				bvo.name = basicVOs[index].name ;
-//				basicBuild = new BasicBuilding(bvo ) ;
-//				basicBuild.mouseEnabled = basicBuild.mouseChildren =  false ;
-//				basicBuild.setScreenPosition( pxArr[i]-sceneLayerOffsetX , pyArr[i]-sceneLayerOffsetY );
-//				_extTreeScene.addChild( basicBuild);
-//			}
 		}
 		
 		/** 添加侦听 */
@@ -255,7 +240,6 @@ package  local.map
 				this.addEventListener(TouchEvent.TOUCH_BEGIN , onTouchHandler ) ;
 				this.addEventListener(TouchEvent.TOUCH_MOVE , onTouchHandler ) ;
 				this.addEventListener(TouchEvent.TOUCH_END , onTouchHandler ) ;
-				this.addEventListener(TouchEvent.TOUCH_ROLL_OUT , onTouchHandler ) ;
 			}else{
 				this.addEventListener(MouseEvent.MOUSE_WHEEL , onMouseWheelHandler);
 			}
@@ -320,7 +304,6 @@ package  local.map
 						}
 					}
 					break ;
-				case TouchEvent.TOUCH_OUT:
 				case TouchEvent.TOUCH_END:
 					--_touchCount ;
 					break ;
