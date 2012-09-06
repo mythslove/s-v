@@ -78,9 +78,8 @@ package local.map.cell
 		 */		
 		public function getWalkable():Boolean
 		{
-			const LEN:int = this.numChildren-1 ;
 			var bottom:BuildingGridRhombus ;
-			for( var i:int =0  ; i<LEN ; ++i  )
+			for( var i:int =0  ; i<numChildren ; ++i  )
 			{
 				bottom = getChildAt(i) as BuildingGridRhombus;
 				if(bottom.walkable==false) return false;
