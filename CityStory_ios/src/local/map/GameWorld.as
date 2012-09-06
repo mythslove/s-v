@@ -129,7 +129,7 @@ package local.map
 					var fairy:MoveItem = MoveItemPool.instance.getCharacter() ;
 					fairy.nodeX  = road.nodeX;
 					fairy.nodeZ = road.nodeZ;
-					buildingScene.addIsoObject( fairy , false ) ;
+					buildingScene.addMoveItem( fairy , false ) ;
 					fairy.init();
 					++ characNum ;
 				}else if(Math.random()>0.6 && carNum<3){
@@ -138,7 +138,7 @@ package local.map
 						var car:MoveItem = MoveItemPool.instance.getCar() ;
 						car.nodeX  = road.nodeX;
 						car.nodeZ = road.nodeZ;
-						buildingScene.addIsoObject( car , false ) ;
+						buildingScene.addMoveItem( car , false ) ;
 						car.init();
 						++carNum;
 					}

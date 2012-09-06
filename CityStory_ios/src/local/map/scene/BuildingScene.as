@@ -14,11 +14,24 @@ package local.map.scene
 	 */	
 	public class BuildingScene extends IsoScene
 	{
+		public var moveItems:Array = []; //可移动的对象
+		
 		public function BuildingScene()
 		{
 			super(GameSetting.GRID_SIZE , GameSetting.GRID_X , GameSetting.GRID_Z );
 			mouseEnabled = false ;
 			this.gridData = MapGridDataModel.instance.gameGridData ;
+		}
+		
+		/**
+		 * 添加可移动和车和人到场景上 
+		 * @param item
+		 * @param isSort
+		 */		
+		public function addMoveItem( item:MoveItem , isSort:Boolean ):void
+		{
+			moveItems.push( item );
+			addIsoObject( item , isSort );
 		}
 		
 		
