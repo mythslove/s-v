@@ -70,14 +70,6 @@ package local.map.item
 			}
 		}
 		
-		/**
-		 * 旋转
-		 */		
-		public function rotate():void
-		{
-			scaleX = ~scaleX+1 ;
-		}
-		
 		override public function set scaleX(value:Number):void
 		{
 			var flag:Boolean = value==1?false:true;
