@@ -16,7 +16,6 @@ package local.map.cell
 	 */	
 	public class BuildingBottomGrid extends Sprite
 	{
-		public var walkable:Boolean ;
 		private var _building:BaseBuilding ;
 		
 		public function BuildingBottomGrid( building:BaseBuilding )
