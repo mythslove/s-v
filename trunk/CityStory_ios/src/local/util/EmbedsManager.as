@@ -30,8 +30,10 @@ package local.util
 		
 		[ Embed(source="../resource/character/Fairy.bd", mimeType="application/octet-stream") ]
 		public static const Fairy:Class ;
-		[ Embed(source="../resource/character/Truck.bd", mimeType="application/octet-stream") ]
-		public static const Truck:Class ;
+		[ Embed(source="../resource/character/Red Car.bd", mimeType="application/octet-stream") ]
+		public static const RedCar:Class ;
+		[ Embed(source="../resource/character/Yellow Car.bd", mimeType="application/octet-stream") ]
+		public static const YellowCar:Class ;
 		
 		[ Embed(source="../resource/map/bottomsea1.png") ]
 		public static const Bottomsea1:Class ;

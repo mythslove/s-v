@@ -136,7 +136,12 @@ package local.map
 				}else if(Math.random()>0.6 && carNum<3){
 					road = roads[i];
 					if(road.direction!=""){
-						var car:Car = new Car( EmbedsManager.instance.getAnimResVOByName("Truck")[0] );
+						
+						if(Math.random()>0.5){
+							var car:Car = new Car( EmbedsManager.instance.getAnimResVOByName("RedCar")[0] );
+						}else{
+							car = new Car( EmbedsManager.instance.getAnimResVOByName("YellowCar")[0] );
+						}
 						car.nodeX  = road.nodeX;
 						car.nodeZ = road.nodeZ;
 						buildingScene.addIsoObject( car , false ) ;

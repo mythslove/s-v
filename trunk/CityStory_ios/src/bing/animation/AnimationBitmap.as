@@ -272,7 +272,7 @@ package bing.animation
 		
 		public function get totalFrame():int
 		{
-			return 0;
+			return _totalFrame;
 		}
 		
 		public function get animationBmd():BitmapData
