@@ -70,14 +70,28 @@ package local.map.item
 				GameWorld.instance.topScene.addIsoObject( this );
 				GameWorld.instance.buildingScene.mouseChildren = false ;
 				GameWorld.instance.roadScene.mouseChildren = false ;
-				GameWorld.instance.iconScene.visible = false ;
-				GameWorld.instance.topScene.visible = true ;
 				this.drawBottomGrid();
-				
 			}else{
 				flash(true);
 			}
 		}
+		
+		/**
+		 * 从topScene添加到场景上 
+		 */		
+		public function addToSceneFromTopScene():void
+		{
+			GameWorld.instance.topScene.removeIsoObject( this );
+			if(this is Road){
+				GameWorld.instance.roadScene.addRoad( this as Road );
+			}else{
+				GameWorld.instance.buildingScene.addBuilding( this );
+			}
+			GameWorld.instance.buildingScene.mouseChildren = true ;
+			GameWorld.instance.roadScene.mouseChildren = true ;
+			this.removeBottomGrid();
+		}
+				
 		
 		/**
 		 * 闪烁 
