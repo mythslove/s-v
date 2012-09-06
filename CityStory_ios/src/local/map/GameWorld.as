@@ -220,7 +220,17 @@ package local.map
 					}
 					break ;
 				case MouseEvent.MOUSE_UP:
-					if(!_isGesture && !_isMove){
+					if(_mouseBuilding && _mouseBuilding.parent == topScene)
+					{
+						if(_mouseBuilding.bottom.getWalkable()){
+							//添加到场景上
+							_mouseBuilding.addToSceneFromTopScene();
+							_mouseBuilding = null ;
+							currentSelected = null ;
+						}
+					}
+					else if(!_isGesture && !_isMove)
+					{
 						if(e.target.parent is BaseBuilding && e.target.parent==_mouseBuilding)
 						{
 							if(e.target.parent!=currentSelected  ){
