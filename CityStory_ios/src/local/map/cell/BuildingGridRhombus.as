@@ -17,11 +17,9 @@ package local.map.cell
 		public var nodeZ:int ;
 		public var walkable:Boolean = true ;
 		
-		public function BuildingGridRhombus(nodeX:int , nodeZ:int)
+		public function BuildingGridRhombus()
 		{
 			super();
-			this.nodeX = nodeX;
-			this.nodeZ = nodeZ ;
 		}
 		
 		/**
