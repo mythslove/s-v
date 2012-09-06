@@ -23,11 +23,11 @@ package local.map.item
 		public function BaseBuilding(buildingVO:BuildingVO )
 		{
 			super(GameSetting.GRID_SIZE,buildingVO.baseVO.span , buildingVO.baseVO.span);
+			this.mouseEnabled = false ;
+			this.buildingVO = buildingVO ;
 			name = buildingVO.name ;
 			nodeX = buildingVO.nodeX ;
 			nodeZ = buildingVO.nodeZ ;
-			this.mouseEnabled = false ;
-			this.buildingVO = buildingVO ;
 		}
 		
 		public function recoverStatus():void
@@ -50,12 +50,17 @@ package local.map.item
 			var barvo:Vector.<BitmapAnimResVO> = ResourceUtil.instance.getResVOByResId( name ).resObject as  Vector.<BitmapAnimResVO> ;
 			buildingObject = new BuildingObject(barvo);
 			addChildAt(buildingObject,0);
+			this.scaleX = buildingVO.rotation ;
 			
 //			statusIcon = new Bitmap();
 //			statusIcon.y = buildingVO.baseVO.span*_size-buildingObject.height - _size ;
 //			addChild(statusIcon);
 		}
 		
+		/**
+		 * 闪烁 
+		 * @param value
+		 */		
 		public function flash( value:Boolean):void
 		{
 			if(buildingObject) {
@@ -63,6 +68,27 @@ package local.map.item
 				if(value) drawBottomGrid();
 				else removeBottomGrid();
 			}
+		}
+		
+		/**
+		 * 旋转
+		 */		
+		public function rotate():void
+		{
+			scaleX = ~scaleX+1 ;
+		}
+		
+		override public function set scaleX(value:Number):void
+		{
+			var flag:Boolean = value==1?false:true;
+			this.rotateX( flag );
+			buildingObject.scaleX = value ;
+			this.buildingVO.rotation = value ;
+		}
+		
+		override public function get scaleX():Number
+		{
+			return buildingObject.scaleX ;
 		}
 		
 		/**添加底座*/		
