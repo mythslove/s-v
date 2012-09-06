@@ -49,9 +49,9 @@ package local.map.item
 			buildingObject = new BuildingObject(barvo);
 			addChildAt(buildingObject,0);
 			
-			statusIcon = new Bitmap();
-			statusIcon.y = buildingVO.baseVO.span*_size-buildingObject.height - _size ;
-			addChild(statusIcon);
+//			statusIcon = new Bitmap();
+//			statusIcon.y = buildingVO.baseVO.span*_size-buildingObject.height - _size ;
+//			addChild(statusIcon);
 		}
 		
 		public function flash( value:Boolean):void
