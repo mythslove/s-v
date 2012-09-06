@@ -1,6 +1,7 @@
 package local.map.cell
 {
 	import bing.iso.IsoUtils;
+	import bing.utils.ContainerUtil;
 	
 	import flash.display.Sprite;
 	import flash.geom.Point;
@@ -30,6 +31,7 @@ package local.map.cell
 		 */		
 		public function drawGrid():void
 		{
+			ContainerUtil.removeChildren(this);
 			var points:Vector.<Vector3D> = _building.spanPosition ;
 			var bottom:BuildingGridRhombus ;
 			var screenPos:Point  ;
