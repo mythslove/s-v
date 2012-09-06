@@ -8,10 +8,9 @@ package local.map
 	import local.enum.BuildingType;
 	import local.map.item.BaseBuilding;
 	import local.map.item.Building;
-	import local.map.item.Car;
-	import local.map.item.Character;
+	import local.map.item.MoveItem;
 	import local.map.item.Road;
-	import local.util.EmbedsManager;
+	import local.util.MoveItemPool;
 	import local.vo.BaseBuildingVO;
 	import local.vo.BuildingVO;
 
@@ -127,7 +126,7 @@ package local.map
 			{
 				if(Math.random()>0.6 && characNum<10 ){
 					road = roads[i];
-					var fairy:Character = new Character( EmbedsManager.instance.getAnimResVOByName("Fairy")[0] );
+					var fairy:MoveItem = MoveItemPool.instance.getCharacter() ;
 					fairy.nodeX  = road.nodeX;
 					fairy.nodeZ = road.nodeZ;
 					buildingScene.addIsoObject( fairy , false ) ;
@@ -136,12 +135,7 @@ package local.map
 				}else if(Math.random()>0.6 && carNum<3){
 					road = roads[i];
 					if(road.direction!=""){
-						
-						if(Math.random()>0.5){
-							var car:Car = new Car( EmbedsManager.instance.getAnimResVOByName("RedCar")[0] );
-						}else{
-							car = new Car( EmbedsManager.instance.getAnimResVOByName("YellowCar")[0] );
-						}
+						var car:MoveItem = MoveItemPool.instance.getCar() ;
 						car.nodeX  = road.nodeX;
 						car.nodeZ = road.nodeZ;
 						buildingScene.addIsoObject( car , false ) ;

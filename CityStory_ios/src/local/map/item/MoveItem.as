@@ -31,7 +31,7 @@ package local.map.item
 			[  new Point(0,15) , new Point(20,25) , new Point(0,35) , new Point(-20,25) ]
 		);
 		
-		protected var _speed:Number = 0.4 ;
+		protected var _speed:Number = 0.3 ;
 		protected var _nextPoint:Point;
 		protected var _animObject:MoveItemAnimObject ;
 		protected var _itemLayer:Sprite ;
