@@ -41,9 +41,6 @@ package local.map.item
 			if(gameTimer){
 				gameTimer.update() ;
 			}
-			if(statusIcon.bitmapData){
-//				statusIcon.y+=Math.sin(5)
-			}
 		}
 		
 		override public function showUI():void
