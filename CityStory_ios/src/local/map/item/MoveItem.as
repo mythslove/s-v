@@ -50,7 +50,8 @@ package local.map.item
 			_itemLayer = new Sprite();
 			addChild(_itemLayer);
 			
-			_animObject = new MoveItemAnimObject( vo );
+			var actionNun:int = (this is Car) ? 1 : 4 ; 
+			_animObject = new MoveItemAnimObject( vo, actionNun );
 			_animObject.x = vo.offsetX ;
 			_animObject.y = vo.offsetY ;
 			_itemLayer.addChild(_animObject);

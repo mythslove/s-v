@@ -12,9 +12,11 @@ package local.map.cell
 	public class MoveItemAnimObject extends BaseAnimObject
 	{
 		public var forward:int =1 ;
+		private var _actionNum:int ;
 		
-		public function MoveItemAnimObject(vo:BitmapAnimResVO)
+		public function MoveItemAnimObject(vo:BitmapAnimResVO , actionNum:int )
 		{
+			_actionNum = actionNum ;
 			super(vo);
 		}
 		
@@ -24,8 +26,8 @@ package local.map.cell
 			x = _vo.offsetX ;
 			y = _vo.offsetY ;
 			var actions:Vector.<ActionVO> = Vector.<ActionVO>([
-					new ActionVO("walk1", 4 ),
-					new ActionVO("walk2", 4 )
+					new ActionVO("walk1", _actionNum ),
+					new ActionVO("walk2", _actionNum )
 			]);
 			_anim = new AnimationBitmap(  _vo.bmds , actions, _vo.rate ) ;
 		}
