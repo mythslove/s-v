@@ -8,13 +8,5 @@ package local.map.item
 		{
 			super(buildingVO);
 		}
-		
-		override public function update():void
-		{
-			super.update();
-			if(buildingObject) {
-				buildingObject.update() ;
-			}
-		}
 	}
 }
