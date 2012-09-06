@@ -255,6 +255,7 @@ package  local.map
 				this.addEventListener(TouchEvent.TOUCH_BEGIN , onTouchHandler ) ;
 				this.addEventListener(TouchEvent.TOUCH_MOVE , onTouchHandler ) ;
 				this.addEventListener(TouchEvent.TOUCH_END , onTouchHandler ) ;
+				this.addEventListener(TouchEvent.TOUCH_ROLL_OUT , onTouchHandler ) ;
 			}else{
 				this.addEventListener(MouseEvent.MOUSE_WHEEL , onMouseWheelHandler);
 			}
@@ -319,6 +320,7 @@ package  local.map
 						}
 					}
 					break ;
+				case TouchEvent.TOUCH_OUT:
 				case TouchEvent.TOUCH_END:
 					--_touchCount ;
 					break ;
