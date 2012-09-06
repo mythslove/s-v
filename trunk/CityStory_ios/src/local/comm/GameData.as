@@ -19,5 +19,10 @@ package  local.comm
 		 * 公用 的Vector3D 
 		 */	
 		public static var commVec:Vector3D = new Vector3D();
+		
+		/**
+		 *  是否为地图编辑状态
+		 */		
+		public static var villageEditor:Boolean = true ;
 	}
 }

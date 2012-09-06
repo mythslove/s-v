@@ -3,7 +3,9 @@ package local.map
 	import bing.iso.IsoObject;
 	
 	import flash.events.MouseEvent;
+	import flash.geom.Point;
 	
+	import local.comm.GameData;
 	import local.comm.GameSetting;
 	import local.enum.BuildingType;
 	import local.map.item.BaseBuilding;
@@ -195,6 +197,8 @@ package local.map
 					_worldPos.y = y ;
 					if(e.target.parent is BaseBuilding){
 						_mouseBuilding = e.target.parent as BaseBuilding ;
+					}else{
+						_mouseBuilding = null ;
 					}
 					addEventListener(MouseEvent.MOUSE_MOVE , onMouseEvtHandler); 
 					addEventListener(MouseEvent.MOUSE_UP , onMouseEvtHandler );
@@ -202,10 +206,17 @@ package local.map
 				case MouseEvent.MOUSE_MOVE:
 					_isMove = true ;
 					mouseChildren = false; 
-					if(e.buttonDown && !_isGesture ){
-						_endX =  _worldPos.x + root.mouseX-_mouseDownPos.x ;
-						_endY = _worldPos.y + root.mouseY-_mouseDownPos.y ;
-						modifyEndPosition();
+					if(e.buttonDown && !_isGesture )
+					{
+						if( GameData.villageEditor && _mouseBuilding && _mouseBuilding.parent == topScene)  {
+							//如果是编译状态，则移动建筑
+							moveTopBuilding();
+						}else {
+							//如果不是编译状态，则移动地图
+							_endX =  _worldPos.x + root.mouseX-_mouseDownPos.x ;
+							_endY = _worldPos.y + root.mouseY-_mouseDownPos.y ;
+							modifyEndPosition();
+						}
 					}
 					break ;
 				case MouseEvent.MOUSE_UP:
@@ -215,7 +226,7 @@ package local.map
 							if(e.target.parent!=currentSelected  ){
 								if(currentSelected) currentSelected.flash(false);
 								currentSelected = e.target.parent as BaseBuilding ;
-								currentSelected.flash(true);
+								currentSelected.onClick();
 								//移动到中间
 								_endX =  GameSetting.SCREEN_WIDTH*0.5 - (sceneLayerOffsetX+currentSelected.screenX)*scaleX ;
 								_endY = GameSetting.SCREEN_HEIGHT*0.5 -(currentSelected.screenY +sceneLayerOffsetY+GameSetting.GRID_SIZE*2)*scaleY ;
@@ -238,5 +249,16 @@ package local.map
 			}
 		}
 		
+		private function moveTopBuilding():void
+		{
+			var span:int = _mouseBuilding.buildingVO.baseVO.span ;
+			var offsetY:Number = (span-1)*_size ;
+			var p:Point = pixelPointToGrid(stage.mouseX,stage.mouseY , 0 ,offsetY); 
+			if(_mouseBuilding.nodeX!=p.x || _mouseBuilding.nodeZ!=p.y) {
+				_mouseBuilding.nodeX = p.x ;
+				_mouseBuilding.nodeZ= p.y ;
+				_mouseBuilding.bottom.updateBuildingGridLayer();
+			}
+		}
 	}
 }

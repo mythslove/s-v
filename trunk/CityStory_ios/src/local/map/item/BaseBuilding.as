@@ -2,7 +2,9 @@ package local.map.item
 {
 	import flash.display.Bitmap;
 	
+	import local.comm.GameData;
 	import local.comm.GameSetting;
+	import local.map.GameWorld;
 	import local.map.cell.BuildingBottomGrid;
 	import local.map.cell.BuildingObject;
 	import local.map.cell.RoadObject;
@@ -40,7 +42,7 @@ package local.map.item
 			if(buildingObject) {
 				buildingObject.update() ;
 			}
-			if(gameTimer){
+			if(!GameData.villageEditor && gameTimer){
 				gameTimer.update() ;
 			}
 		}
@@ -57,6 +59,26 @@ package local.map.item
 //			addChild(statusIcon);
 		}
 		
+		public function onClick():void
+		{
+			if(GameData.villageEditor){
+				if(this is Road){
+					GameWorld.instance.roadScene.removeRoad( this as Road );
+				}else{
+					GameWorld.instance.buildingScene.removeBuilding( this );
+				}
+				GameWorld.instance.topScene.addIsoObject( this );
+				GameWorld.instance.buildingScene.mouseChildren = false ;
+				GameWorld.instance.roadScene.mouseChildren = false ;
+				GameWorld.instance.iconScene.visible = false ;
+				GameWorld.instance.topScene.visible = true ;
+				this.drawBottomGrid();
+				
+			}else{
+				flash(true);
+			}
+		}
+		
 		/**
 		 * 闪烁 
 		 * @param value
@@ -65,8 +87,6 @@ package local.map.item
 		{
 			if(buildingObject) {
 				buildingObject.flash( value );
-				if(value) drawBottomGrid();
-				else removeBottomGrid();
 			}
 		}
 		
@@ -91,11 +111,11 @@ package local.map.item
 				addChildAt(bottom,0);
 				bottom.drawGrid();
 				if(buildingObject){
-					buildingObject.y -= GameSetting.GRID_SIZE*0.25 ;
-					buildingObject.alpha = 0.5 ;
+					buildingObject.y -= GameSetting.GRID_SIZE*0.3 ;
+					buildingObject.alpha = 0.6 ;
 				}else if( roadObject){
-					roadObject.y -= GameSetting.GRID_SIZE*0.25 ;
-					roadObject.alpha = 0.5 ;
+					roadObject.y -= GameSetting.GRID_SIZE*0.3 ;
+					roadObject.alpha = 0.6 ;
 				}
 			}
 		}
@@ -110,10 +130,10 @@ package local.map.item
 				}
 				bottom = null ;
 				if(buildingObject){
-					buildingObject.y += GameSetting.GRID_SIZE*0.25 ;
+					buildingObject.y += GameSetting.GRID_SIZE*0.3 ;
 					buildingObject.alpha = 1 ;
 				}else if( roadObject){
-					roadObject.y += GameSetting.GRID_SIZE*0.25 ;
+					roadObject.y += GameSetting.GRID_SIZE*0.3 ;
 					roadObject.alpha = 1 ;
 				}
 			}

@@ -166,7 +166,7 @@ package  local.map
 //			this.addScene(gridScene);
 			//添加iso场景
 			roadScene = new RoadScene();
-			roadScene.mouseChildren = false ;
+			roadScene.mouseChildren = true ; 
 			buildingScene = new BuildingScene();
 			iconScene = new IsoScene(0);
 			iconScene.mouseEnabled = iconScene.mouseChildren = false ;
