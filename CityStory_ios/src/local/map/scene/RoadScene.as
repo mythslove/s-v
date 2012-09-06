@@ -13,7 +13,6 @@ package local.map.scene
 		public function RoadScene()
 		{
 			super( GameSetting.GRID_SIZE , GameSetting.GRID_X , GameSetting.GRID_Z );
-			mouseEnabled = false ;
 			this.gridData = MapGridDataModel.instance.gameGridData ;
 		}
 		
