@@ -81,6 +81,7 @@ package local.map.cell
 		
 		public function dispose():void
 		{
+			ContainerUtil.removeChildren(this);
 			_building = null ;
 		}
 	}
