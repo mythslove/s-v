@@ -25,16 +25,20 @@ package local.util
 		
 		private var _resHash:Dictionary = new Dictionary();
 		
-		[ Embed(source="../resource/map/mapData.map", mimeType="application/octet-stream") ]
-		public static const MapData:Class ;
 		
+		//================地图上行走的人和车=================================
 		[ Embed(source="../resource/character/Fairy.bd", mimeType="application/octet-stream") ]
 		public static const Fairy:Class ;
 		[ Embed(source="../resource/character/Red Car.bd", mimeType="application/octet-stream") ]
 		public static const RedCar:Class ;
 		[ Embed(source="../resource/character/Yellow Car.bd", mimeType="application/octet-stream") ]
 		public static const YellowCar:Class ;
+		//=======================================
 		
+		
+		//=========地图资源，地图数据和图片======================
+		[ Embed(source="../resource/map/mapData.map", mimeType="application/octet-stream") ]
+		public static const MapData:Class ; //地图数据
 		[ Embed(source="../resource/map/bottomsea1.png") ]
 		public static const Bottomsea1:Class ;
 		[ Embed(source="../resource/map/bottomsea2.png") ]
@@ -55,6 +59,13 @@ package local.util
 		public static const Water1:Class ;
 		[ Embed(source="../resource/map/mapBlock.png") ]
 		public static const MapBlock:Class ;
+		//=======================================
+		
+		
+		[Embed(source="../resource/comm/BuildingBottomGridRed.png")]
+		public static const BuildingBottomGridRed:Class; //建筑的底座
+		[Embed(source="../resource/comm/BuildingBottomGridGreen.png")]
+		public static const BuildingBottomGridGreen:Class;//建筑的底座
 		
 		
 		/**
