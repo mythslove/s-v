@@ -17,8 +17,8 @@ package local.map.cell
 	public class BuildingBottomGrid extends Sprite
 	{
 		public static var rhombus:Vector.<BuildingGridRhombus> = Vector.<BuildingGridRhombus>([
-			new BuildingGridRhombus(),new BuildingGridRhombus(),new BuildingGridRhombus(),new BuildingGridRhombus(),new BuildingGridRhombus(),
-			new BuildingGridRhombus(),new BuildingGridRhombus(),new BuildingGridRhombus(),new BuildingGridRhombus()
+			new BuildingGridRhombus(),new BuildingGridRhombus(),new BuildingGridRhombus(),
+			new BuildingGridRhombus(),new BuildingGridRhombus(), new BuildingGridRhombus()
 		]);
 		
 		
