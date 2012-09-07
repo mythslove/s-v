@@ -122,7 +122,7 @@ package local.map
 			for each( var obj:IsoObject in roadScene.children)
 			{
 				if(obj is Road){
-					road = BuildingFactory.createBuildingByVO( roadVO ) as Road ;
+					road = obj as Road ;
 					if(road && road.direction!="" && road.direction!="_M" ){
 						roads.push( road );
 					}
@@ -181,8 +181,8 @@ package local.map
 			
 			run() ;
 			
-//			GameData.villageMode=VillageMode.EXPAND ;
-//			setTimeout( showExpandState , 2000 );
+			GameData.villageMode=VillageMode.EXPAND ;
+			setTimeout( showExpandState , 2000 );
 		}
 		
 		

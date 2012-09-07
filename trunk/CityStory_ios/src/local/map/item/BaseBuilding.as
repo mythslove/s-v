@@ -4,6 +4,7 @@ package local.map.item
 	
 	import local.comm.GameData;
 	import local.comm.GameSetting;
+	import local.enum.VillageMode;
 	import local.map.GameWorld;
 	import local.map.cell.BuildingBottomGrid;
 	import local.map.cell.BuildingObject;
@@ -60,7 +61,7 @@ package local.map.item
 		public function onClick():void
 		{
 			var world:GameWorld = GameWorld.instance ;
-			if(GameData.villageMode){
+			if(GameData.villageMode==VillageMode.EDIT){
 				if(this is Road){
 					world.roadScene.removeRoad( this as Road );
 				}else{
