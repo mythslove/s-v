@@ -13,12 +13,10 @@ package local.map
 	import local.enum.BuildingType;
 	import local.enum.VillageMode;
 	import local.map.item.BaseBuilding;
-	import local.map.item.MoveItem;
 	import local.map.item.Road;
 	import local.map.land.ExpandLandButton;
 	import local.model.LandModel;
 	import local.util.BuildingFactory;
-	import local.util.MoveItemPool;
 	import local.vo.BaseBuildingVO;
 	import local.vo.BuildingVO;
 
@@ -117,41 +115,7 @@ package local.map
 			roadScene.updateAllUI();
 			roadScene.sortAll() ;
 			
-			var roads:Array =[];
-			for each( var obj:IsoObject in roadScene.children)
-			{
-				if(obj is Road){
-					road = obj as Road ;
-					if(road && road.direction!="" && road.direction!="_M" ){
-						roads.push( road );
-					}
-				}
-			}
-			
-			var carNum:int ;
-			var characNum:int ;
-			for( i = 0 ; i<roads.length ; ++i)
-			{
-				if(Math.random()>0.6 && characNum<10 ){
-					road = roads[i];
-					var fairy:MoveItem = MoveItemPool.instance.getCharacter() ;
-					fairy.nodeX  = road.nodeX;
-					fairy.nodeZ = road.nodeZ;
-					buildingScene.addMoveItem( fairy , false ) ;
-					fairy.init();
-					++ characNum ;
-				}else if(Math.random()>0.6 && carNum<3){
-					road = roads[i];
-					if(road.direction!=""){
-						var car:MoveItem = MoveItemPool.instance.getCar() ;
-						car.nodeX  = road.nodeX;
-						car.nodeZ = road.nodeZ;
-						buildingScene.addMoveItem( car , false ) ;
-						car.init();
-						++carNum;
-					}
-				}
-			}
+		
 			
 			//添加home1
 			baseVO = new BaseBuildingVO();
