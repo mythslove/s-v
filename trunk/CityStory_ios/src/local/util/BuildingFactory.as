@@ -23,6 +23,15 @@ package local.util
 				case BuildingType.BASIC:
 					building = new BasicBuilding(buildingVO);
 					break ;
+				case BuildingType.DECORATION:
+					if(buildingVO.baseVO.subClass==BuildingType.DECORATION_ROAD || 
+						buildingVO.baseVO.subClass==BuildingType.DECORATION_WATER)
+					{
+						building = new Road(buildingVO);
+					}else{
+						building = new BaseBuilding(buildingVO);
+					}
+					break ;
 				case BuildingType.BUSINESS:
 					building = new Business(buildingVO);
 					break ;
@@ -41,7 +50,7 @@ package local.util
 				case BuildingType.EXPAND_BUILDING:
 					building = new ExpandLandBuilding(buildingVO);
 					break ;
-				default
+				default:
 					building = new Building(buildingVO);
 					break ;
 			}
