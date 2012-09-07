@@ -241,7 +241,7 @@ package local.map
 								currentSelected.onClick();
 								//移动到中间
 								_endX =  GameSetting.SCREEN_WIDTH*0.5 - (sceneLayerOffsetX+currentSelected.screenX)*scaleX ;
-								_endY = GameSetting.SCREEN_HEIGHT*0.5 -(currentSelected.screenY +sceneLayerOffsetY+GameSetting.GRID_SIZE*2)*scaleY ;
+								_endY = GameSetting.SCREEN_HEIGHT*0.5 - (sceneLayerOffsetY+currentSelected.screenY+currentSelected.buildingVO.baseVO.span*_size)*scaleY ;
 								modifyEndPosition();
 								_moveSpeed = 0.15 ;
 							}
