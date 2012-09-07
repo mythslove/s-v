@@ -110,12 +110,12 @@ package local.map.item
 			_currNode.setTo( col , row );
 			xpos = _currNode.x*_size ;
 			zpos = _currNode.y*_size ;
-			
+			var ran:Number = 0.3 ;
 			var road:Road ;
 			if(_roadIndex==0)
 			{
 				if(_rightDirection){
-					if(_animObject.forward==4 || Math.random()>0.8 ){
+					if(_animObject.forward==4 || Math.random()>ran ){
 						road = MapGridDataModel.instance.getBuildingByData( (_currNode.x-1)*_size, zpos , BuildingType.DECORATION_ROAD ) as Road;
 						if(road) _roadIndex = 1 ; 
 					}
@@ -123,7 +123,7 @@ package local.map.item
 				} 
 				else 
 				{
-					if(_animObject.forward==1|| Math.random()>0.8 ){
+					if(_animObject.forward==1|| Math.random()>ran ){
 						road = MapGridDataModel.instance.getBuildingByData(xpos,(_currNode.y-1)*_size , BuildingType.DECORATION_ROAD) as Road;
 						if(road) _roadIndex = 3 ;
 					}
@@ -133,7 +133,7 @@ package local.map.item
 			else if(_roadIndex==1)
 			{
 				if(_rightDirection){
-					if(_animObject.forward==1|| Math.random()>0.8 ){
+					if(_animObject.forward==1|| Math.random()>ran ){
 						road = MapGridDataModel.instance.getBuildingByData( xpos, (_currNode.y-1) *_size , BuildingType.DECORATION_ROAD) as Road;
 						if(road) _roadIndex = 2 ;
 					}
@@ -141,7 +141,7 @@ package local.map.item
 				}
 				else
 				{
-					if(_animObject.forward==2|| Math.random()>0.8 ){
+					if(_animObject.forward==2|| Math.random()>ran ){
 						road = MapGridDataModel.instance.getBuildingByData( (_currNode.x+1)*_size,zpos , BuildingType.DECORATION_ROAD) as Road;
 						if(road) _roadIndex = 0 ;
 					}
@@ -152,7 +152,7 @@ package local.map.item
 			{
 				if(_rightDirection)
 				{
-					if(_animObject.forward==2|| Math.random()>0.8 ){
+					if(_animObject.forward==2|| Math.random()>ran ){
 						road = MapGridDataModel.instance.getBuildingByData( (_currNode.x+1)*_size, zpos , BuildingType.DECORATION_ROAD) as Road;
 						if(road) _roadIndex = 3 ;
 					}
@@ -160,7 +160,7 @@ package local.map.item
 				}
 				else
 				{
-					if(_animObject.forward==3|| Math.random()>0.8 ){
+					if(_animObject.forward==3|| Math.random()>ran ){
 						road = MapGridDataModel.instance.getBuildingByData( xpos, (_currNode.y+1)*_size , BuildingType.DECORATION_ROAD ) as Road;
 						if(road) _roadIndex = 1 ;
 					}
@@ -170,7 +170,7 @@ package local.map.item
 			else
 			{
 				if(_rightDirection){
-					if(_animObject.forward==3|| Math.random()>0.8 ){
+					if(_animObject.forward==3|| Math.random()>ran ){
 						road = MapGridDataModel.instance.getBuildingByData(xpos,(_currNode.y+1)*_size , BuildingType.DECORATION_ROAD) as Road;
 						if(road)_roadIndex = 0 ;
 					}
@@ -178,7 +178,7 @@ package local.map.item
 				}
 				else
 				{
-					if(_animObject.forward==4|| Math.random()>0.8 ){
+					if(_animObject.forward==4|| Math.random()>ran ){
 						road = MapGridDataModel.instance.getBuildingByData( (_currNode.x-1)*_size,zpos , BuildingType.DECORATION_ROAD) as Road;
 						if(road)	_roadIndex = 2;
 					}
