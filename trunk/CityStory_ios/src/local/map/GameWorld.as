@@ -269,7 +269,7 @@ package local.map
 		{
 			var span:int = _mouseBuilding.buildingVO.baseVO.span ;
 			var offsetY:Number = (span-1)*_size ;
-			var p:Point = pixelPointToGrid(stage.mouseX,stage.mouseY , 0 ,offsetY); 
+			var p:Point = pixelPointToGrid(root.mouseX,root.mouseY , 0 ,offsetY); 
 			if(_mouseBuilding.nodeX!=p.x || _mouseBuilding.nodeZ!=p.y) {
 				_mouseBuilding.nodeX = p.x ;
 				_mouseBuilding.nodeZ= p.y ;
