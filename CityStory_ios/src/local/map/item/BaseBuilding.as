@@ -42,7 +42,7 @@ package local.map.item
 			if(buildingObject) {
 				buildingObject.update() ;
 			}
-			if(!GameData.villageEditor && gameTimer){
+			if(!GameData.villageMode && gameTimer){
 				gameTimer.update() ;
 			}
 		}
@@ -61,15 +61,15 @@ package local.map.item
 		
 		public function onClick():void
 		{
-			if(GameData.villageEditor){
+			var world:GameWorld = GameWorld.instance ;
+			if(GameData.villageMode){
 				if(this is Road){
-					GameWorld.instance.roadScene.removeRoad( this as Road );
+					world.roadScene.removeRoad( this as Road );
 				}else{
-					GameWorld.instance.buildingScene.removeBuilding( this );
+					world.buildingScene.removeBuilding( this );
 				}
-				GameWorld.instance.topScene.addIsoObject( this );
-				GameWorld.instance.buildingScene.mouseChildren = false ;
-				GameWorld.instance.roadScene.mouseChildren = false ;
+				world.topScene.addIsoObject( this );
+				world.roadScene.mouseChildren = world.buildingScene.mouseChildren = false ;
 				this.drawBottomGrid();
 			}else{
 				flash(true);
@@ -81,14 +81,14 @@ package local.map.item
 		 */		
 		public function addToSceneFromTopScene():void
 		{
-			GameWorld.instance.topScene.removeIsoObject( this );
+			var world:GameWorld = GameWorld.instance ;
+			world.topScene.removeIsoObject( this );
 			if(this is Road){
-				GameWorld.instance.roadScene.addRoad( this as Road );
+				world.roadScene.addRoad( this as Road );
 			}else{
-				GameWorld.instance.buildingScene.addBuilding( this );
+				world.buildingScene.addBuilding( this );
 			}
-			GameWorld.instance.buildingScene.mouseChildren = true ;
-			GameWorld.instance.roadScene.mouseChildren = true ;
+			world.roadScene.mouseChildren = world.buildingScene.mouseChildren = true ;
 			this.removeBottomGrid();
 		}
 				
