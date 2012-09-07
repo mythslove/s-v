@@ -68,6 +68,10 @@ package local.util
 		public static const BuildingBottomGridGreen:Class;//建筑的底座
 		
 		
+		[Embed(source="../resource/comm/ExpandLandButton.png")]
+		public static const ExpandLandButton:Class;//扩地的图标
+		
+		
 		/**
 		 * 获得嵌入的动画文件  
 		 * @param name

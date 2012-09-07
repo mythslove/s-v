@@ -1,5 +1,9 @@
 package local.model
 {
+	import bing.iso.path.Grid;
+	
+	import flash.utils.Dictionary;
+	
 	import local.vo.LandVO;
 
 	/**
@@ -34,6 +38,53 @@ package local.model
 					if(count>6) return ;
 				}
 			}
+		}
+		
+		/**
+		 *  返回 可以扩地的块 
+		 * @return  Dictionary key为nodeX-nodeZ value为1
+		 */		
+		public function getCanExpandLand():Dictionary
+		{
+			var mapGrid:Grid = MapGridDataModel.instance.mapGridData ; //不能修的地方
+			var landGrid:Grid = MapGridDataModel.instance.landGridData ; //已经拥有的地块
+			var dic:Dictionary = new Dictionary();
+			var nodeX:int , nodeZ:int ;
+			for each( var vo:LandVO in lands){
+				nodeX = vo.nodeX-1;
+				nodeZ = vo.nodeZ ;
+				if(!dic[nodeX+"-"+nodeZ] &&
+					!mapGrid.getNode(nodeX,nodeZ).walkable && !landGrid.getNode(nodeX,nodeZ).walkable)
+				{
+					dic[nodeX+"-"+nodeZ] = 1 ;
+				}
+				
+				nodeX = vo.nodeX+1;
+				nodeZ = vo.nodeZ ;
+				if(!dic[nodeX+"-"+nodeZ] &&
+					!mapGrid.getNode(nodeX,nodeZ).walkable && !landGrid.getNode(nodeX,nodeZ).walkable)
+				{
+					dic[nodeX+"-"+nodeZ] = 1 ;
+				}
+				
+				nodeX = vo.nodeX;
+				nodeZ = vo.nodeZ+1 ;
+				if(!dic[nodeX+"-"+nodeZ] &&
+					!mapGrid.getNode(nodeX,nodeZ).walkable && !landGrid.getNode(nodeX,nodeZ).walkable)
+				{
+					dic[nodeX+"-"+nodeZ] = 1 ;
+				}
+				
+				nodeX = vo.nodeX;
+				nodeZ = vo.nodeZ-1 ;
+				if(!dic[nodeX+"-"+nodeZ] &&
+					!mapGrid.getNode(nodeX,nodeZ).walkable && !landGrid.getNode(nodeX,nodeZ).walkable)
+				{
+					dic[nodeX+"-"+nodeZ] = 1 ;
+				}
+				
+			}
+			return dic ;
 		}
 	}
 }
