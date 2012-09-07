@@ -17,7 +17,9 @@ package local.vo
 		private var _baseVO:BaseBuildingVO;
 		public function get baseVO():BaseBuildingVO
 		{
-			if(!_baseVO) { _baseVO = ShopModel.instance.allBuildingHash["name"] ; }
+			if(!_baseVO) { 
+				_baseVO = ShopModel.instance.allBuildingHash["name"] ;
+			}
 			return _baseVO;
 		}
 		public function set baseVO( value:BaseBuildingVO ):void{
