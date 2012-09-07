@@ -37,7 +37,7 @@ package  local.comm
 				case VillageMode.NORMAL :
 					world.buildingScene.mouseChildren = true ;
 					world.buildingScene.alpha=1;
-					world.runUpdate = false ;
+					world.runUpdate = true ;
 					world.roadScene.mouseChildren = false ;
 					world.topScene.visible = false ;
 					world.iconScene.visible = true ;

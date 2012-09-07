@@ -18,6 +18,7 @@ package local.map
 	import local.map.item.Road;
 	import local.map.land.ExpandLandButton;
 	import local.model.LandModel;
+	import local.util.BuildingFactory;
 	import local.util.MoveItemPool;
 	import local.vo.BaseBuildingVO;
 	import local.vo.BuildingVO;
@@ -46,7 +47,7 @@ package local.map
 			var road:Road ;
 			for( var i:int = 0 ; i<3; ++i){
 				for ( var j:int = 0 ; j<3;++j){
-					road = new Road(roadVO);
+					road = BuildingFactory.createBuildingByVO( roadVO ) as Road ;
 					road.nodeX = 8*4+i ;
 					road.nodeZ =  8*4+j ;
 					roadScene.addRoad( road , false , false );
@@ -55,41 +56,41 @@ package local.map
 			
 			
 			for( i = 4 ; i<6; ++i){
-				road = new Road(roadVO);
+				road = BuildingFactory.createBuildingByVO( roadVO ) as Road ;
 				road.nodeX = 8*4+i ;
 				road.nodeZ = 8*4+0 ;
 				roadScene.addRoad( road , false , false );
 			}
 			//
-			road = new Road(roadVO);
+			road = BuildingFactory.createBuildingByVO( roadVO ) as Road ;
 			road.nodeX = 8*4+1 ;
 			road.nodeZ = 8*4+3 ;
 			roadScene.addRoad( road, false , false  );
-			road = new Road(roadVO);
+			road = BuildingFactory.createBuildingByVO( roadVO ) as Road ;
 			road.nodeX = 8*4+5 ;
 			road.nodeZ = 8*4+3 ;
 			roadScene.addRoad( road, false , false  );
-			road = new Road(roadVO);
+			road = BuildingFactory.createBuildingByVO( roadVO ) as Road ;
 			road.nodeX = 8*4+6 ;
 			road.nodeZ = 8*4+2 ;
 			roadScene.addRoad( road, false , false  );
-			road = new Road(roadVO);
+			road = BuildingFactory.createBuildingByVO( roadVO ) as Road ;
 			road.nodeX = 8*4+6 ;
 			road.nodeZ = 8*4+3 ;
 			roadScene.addRoad( road , false , false );
-			road = new Road(roadVO);
+			road = BuildingFactory.createBuildingByVO( roadVO ) as Road ;
 			road.nodeX = 8*4+7 ;
 			road.nodeZ = 8*4+3 ;
 			roadScene.addRoad( road , false , false );
-			road = new Road(roadVO);
+			road = BuildingFactory.createBuildingByVO( roadVO ) as Road ;
 			road.nodeX = 8*4+8 ;
 			road.nodeZ = 8*4+3 ;
 			roadScene.addRoad( road , false , false );
-			road = new Road(roadVO);
+			road = BuildingFactory.createBuildingByVO( roadVO ) as Road ;
 			road.nodeX = 8*4+7 ;
 			road.nodeZ = 8*4+4 ;
 			roadScene.addRoad( road, false , false  );
-			road = new Road(roadVO);
+			road = BuildingFactory.createBuildingByVO( roadVO ) as Road ;
 			road.nodeX = 8*4+7 ;
 			road.nodeZ = 8*4+4 ;
 			roadScene.addRoad( road, false , false  );
@@ -97,7 +98,7 @@ package local.map
 			var temp:Road; 
 			for( i = 1 ; i<4; ++i){
 				for ( j =4 ; j<7;++j){
-					road = new Road(roadVO);
+					road = BuildingFactory.createBuildingByVO( roadVO ) as Road ;
 					road.nodeX = 8*4+i ;
 					road.nodeZ =  8*4+j ;
 					if(i==2&&j==5){
@@ -109,7 +110,7 @@ package local.map
 			roadScene.removeRoad(temp);
 			//
 			roadScene.addRoad( road, false , false  );
-			road = new Road(roadVO);
+			road =BuildingFactory.createBuildingByVO( roadVO ) as Road ;
 			road.nodeX = 8*4+7 ;
 			road.nodeZ = 8*4+7 ;
 			roadScene.addRoad( road , false , false  );
@@ -121,7 +122,7 @@ package local.map
 			for each( var obj:IsoObject in roadScene.children)
 			{
 				if(obj is Road){
-					road = obj as Road ;
+					road = BuildingFactory.createBuildingByVO( roadVO ) as Road ;
 					if(road && road.direction!="" && road.direction!="_M" ){
 						roads.push( road );
 					}
@@ -163,7 +164,7 @@ package local.map
 			bvo.baseVO = baseVO ;
 			bvo.nodeX = 9*4   ;
 			bvo.nodeZ = 8*4+1 ;
-			var building:BaseBuilding=new BaseBuilding( bvo);
+			var building:BaseBuilding= BuildingFactory.createBuildingByVO( bvo ) ;
 			buildingScene.addBuilding( building, false);
 			
 			bvo = new BuildingVO();
@@ -171,7 +172,7 @@ package local.map
 			bvo.baseVO = baseVO ;
 			bvo.nodeX = 9*4   ;
 			bvo.nodeZ = 10*4-2 ;
-			building=new BaseBuilding( bvo);
+			building= BuildingFactory.createBuildingByVO( bvo ) ;
 			buildingScene.addBuilding( building, false);
 			
 			
@@ -180,8 +181,8 @@ package local.map
 			
 			run() ;
 			
-			GameData.villageMode=VillageMode.EXPAND ;
-			setTimeout( showExpandState , 2000 );
+//			GameData.villageMode=VillageMode.EXPAND ;
+//			setTimeout( showExpandState , 2000 );
 		}
 		
 		
