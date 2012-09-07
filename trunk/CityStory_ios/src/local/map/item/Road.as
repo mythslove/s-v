@@ -7,7 +7,7 @@ package local.map.item
 	import local.vo.RoadResVO;
 
 	/**
-	 * 游戏中的水和路 
+	 * 游戏中的水和路 或其他地上的装饰块
 	 * @author zhouzhanglin
 	 */	
 	public class Road extends BaseBuilding implements IRoad 
