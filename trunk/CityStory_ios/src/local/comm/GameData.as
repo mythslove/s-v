@@ -70,6 +70,10 @@ package  local.comm
 					world.showExpandState();
 					break ;
 			}
+			if(world.currentSelected){
+				world.currentSelected.flash(false);
+				world.currentSelected = null ;
+			}
 		}
 	}
 }
