@@ -64,7 +64,14 @@ package local.model
 		{
 			if( config)
 			{
-				var baseVO:BaseBuildingVO ;
+				//手动写一个扩地时的建筑
+				var baseVO:BaseBuildingVO  = new BaseBuildingVO() ;
+				baseVO.name = "ExpandLandBuilding";
+				baseVO.span = 4;
+				baseVO.type = BuildingType.EXPAND_BUILDING ;
+				allBuildingHash[baseVO.name] = baseVO ;
+				
+				
 				var len:int = config.item.length();
 				var item:* ;
 				for( var i:int = 0 ; i<len ; ++i )

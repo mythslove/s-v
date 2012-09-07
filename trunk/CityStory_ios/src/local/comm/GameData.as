@@ -36,6 +36,7 @@ package  local.comm
 			switch(value){
 				case VillageMode.NORMAL :
 					world.buildingScene.mouseChildren = true ;
+					world.buildingScene.alpha=1;
 					world.runUpdate = false ;
 					world.roadScene.mouseChildren = false ;
 					world.topScene.visible = false ;
@@ -57,6 +58,7 @@ package  local.comm
 					break ;
 				case VillageMode.EXPAND :
 					world.buildingScene.mouseChildren = false ;
+					world.buildingScene.alpha=0.6;
 					world.runUpdate = false ;
 					world.roadScene.mouseChildren = false ;
 					world.topScene.visible = true ;

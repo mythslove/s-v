@@ -1,6 +1,7 @@
 package local.vo
 {
 	import local.enum.BuildingStatus;
+	import local.model.ShopModel;
 
 	public class BuildingVO
 	{
@@ -16,7 +17,7 @@ package local.vo
 		private var _baseVO:BaseBuildingVO;
 		public function get baseVO():BaseBuildingVO
 		{
-			if(!_baseVO) {}
+			if(!_baseVO) { _baseVO = ShopModel.instance.allBuildingHash["name"] ; }
 			return _baseVO;
 		}
 		public function set baseVO( value:BaseBuildingVO ):void{

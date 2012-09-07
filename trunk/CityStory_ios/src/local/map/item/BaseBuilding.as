@@ -33,9 +33,7 @@ package local.map.item
 		}
 		
 		public function recoverStatus():void
-		{
-			
-		}
+		{ }
 		
 		override public function update():void
 		{
