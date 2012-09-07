@@ -144,6 +144,8 @@ package local.map
 			
 			GameData.villageMode=VillageMode.NORMAL ;
 			run() ;
+			
+			GameData.villageMode = VillageMode.EDIT ;
 		}
 		
 		
@@ -201,7 +203,7 @@ package local.map
 					}
 					else if(!_isGesture && !_isMove)
 					{
-						if(e.target.parent is BaseBuilding && e.target.parent==_mouseBuilding)
+						if(e.target.parent==_mouseBuilding)
 						{
 							if(e.target.parent!=currentSelected  ){
 								if(currentSelected) currentSelected.flash(false);
@@ -243,7 +245,7 @@ package local.map
 		{
 			var span:int = _mouseBuilding.buildingVO.baseVO.span ;
 			var offsetY:Number = (span-1)*_size ;
-			var p:Point = pixelPointToGrid(root.mouseX,root.mouseY , 0 ,offsetY); 
+			var p:Point = pixelPointToGrid(root.mouseX,root.mouseY , 0 ,offsetY , _size ); 
 			if(_mouseBuilding.nodeX!=p.x || _mouseBuilding.nodeZ!=p.y) {
 				_mouseBuilding.nodeX = p.x ;
 				_mouseBuilding.nodeZ= p.y ;
