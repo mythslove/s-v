@@ -7,7 +7,6 @@ package local.map
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import flash.utils.Dictionary;
-	import flash.utils.setTimeout;
 	
 	import local.comm.GameData;
 	import local.comm.GameSetting;
@@ -179,10 +178,8 @@ package local.map
 			
 			buildingScene.sortAll();
 			
+			GameData.villageMode=VillageMode.NORMAL ;
 			run() ;
-			
-			GameData.villageMode=VillageMode.EXPAND ;
-			setTimeout( showExpandState , 2000 );
 		}
 		
 		

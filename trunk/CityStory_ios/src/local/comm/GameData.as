@@ -37,6 +37,7 @@ package  local.comm
 				case VillageMode.NORMAL :
 					world.buildingScene.mouseChildren = true ;
 					world.buildingScene.alpha=1;
+					world.buildingScene.addMoveItems();
 					world.runUpdate = true ;
 					world.roadScene.mouseChildren = false ;
 					world.topScene.visible = false ;
@@ -44,6 +45,7 @@ package  local.comm
 					break ;
 				case VillageMode.EDIT :
 					world.buildingScene.mouseChildren = true ;
+					world.buildingScene.removeMoveItems();
 					world.runUpdate = false ;
 					world.roadScene.mouseChildren = true ;
 					world.topScene.visible = true ;
@@ -51,6 +53,7 @@ package  local.comm
 					break ;
 				case VillageMode.ADD_BUILDING :
 					world.buildingScene.mouseChildren = false ;
+					world.buildingScene.removeMoveItems();
 					world.runUpdate = false ;
 					world.roadScene.mouseChildren = false ;
 					world.topScene.visible = true ;
@@ -58,6 +61,7 @@ package  local.comm
 					break ;
 				case VillageMode.EXPAND :
 					world.buildingScene.mouseChildren = false ;
+					world.buildingScene.removeMoveItems();
 					world.buildingScene.alpha=0.6;
 					world.runUpdate = false ;
 					world.roadScene.mouseChildren = false ;
