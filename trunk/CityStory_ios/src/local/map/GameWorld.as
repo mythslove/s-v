@@ -7,6 +7,7 @@ package local.map
 	
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
+	import flash.utils.Dictionary;
 	import flash.utils.setTimeout;
 	
 	import local.comm.GameData;
@@ -17,7 +18,8 @@ package local.map
 	import local.map.item.Building;
 	import local.map.item.MoveItem;
 	import local.map.item.Road;
-	import local.map.land.ExpandLandBuilding;
+	import local.map.land.ExpandLandButton;
+	import local.model.LandModel;
 	import local.util.MoveItemPool;
 	import local.vo.BaseBuildingVO;
 	import local.vo.BuildingVO;
@@ -264,7 +266,7 @@ package local.map
 						else if(GameData.villageMode==VillageMode.EXPAND)
 						{
 							//用点击区域来判断
-							clickExpandButton( IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE*4,root.mouseX , root.mouseY) );
+							clickExpandButton( pixelPointToGrid(root.mouseX , root.mouseY,0,0,_size*4 ) );
 						}
 					}
 					
@@ -295,6 +297,7 @@ package local.map
 			for each( var obj:IsoObject in topScene.children){
 				if( obj.nodeX==nodePoint.x && obj.nodeZ == nodePoint.y ){
 					//可以扩展，弹出扩地提示
+					trace("expand");
 					break ;
 				}
 			}
@@ -303,6 +306,20 @@ package local.map
 		/** 显示扩地状态 */
 		public function showExpandState():void
 		{
+			topScene.clear();
+			var lands:Dictionary = LandModel.instance.getCanExpandLand();
+			var arr:Array ;
+			var expandLandBtn:ExpandLandButton ;
+			for( var key:String in lands)
+			{
+				arr = key.split("-");
+				expandLandBtn = new ExpandLandButton();
+				expandLandBtn.nodeX = int( arr[0] ) ;
+				expandLandBtn.nodeZ = int (arr[1] ) ;
+				topScene.addIsoObject( expandLandBtn , false );
+			}
+			topScene.sortAll() ;
+			
 			var obj:Object = {scale:scaleX};
 			TweenLite.to( obj , 1 , {scale:GameSetting.minZoom , onUpdate:function():void{
 				changeWorldScale( obj.scale , GameSetting.SCREEN_WIDTH*0.5 , GameSetting.SCREEN_HEIGHT*0.5 ) ;
