@@ -263,21 +263,21 @@ package  local.map
 				case TouchEvent.TOUCH_BEGIN:
 					++_touchCount ;
 					if(_touchCount==1){
-						_touchFinger1.x = e.stageX ;
-						_touchFinger1.y = e.stageY ;
-						_touches[0].stageX = e.stageX ;
-						_touches[0].stageY = e.stageY ;
-						_touches[0].prevX = e.stageX ;
-						_touches[0].prevY = e.stageY ;
+						_touchFinger1.x = e.localX ;
+						_touchFinger1.y = e.localY ;
+						_touches[0].currentX = e.localX ;
+						_touches[0].currentY = e.localY ;
+						_touches[0].prevX = e.localX ;
+						_touches[0].prevY = e.localY ;
 						_touches[0].id = e.touchPointID ;
 					}
 					else if(_touchCount==2){
-						_middle.x = _touchFinger1.x+(e.stageX-_touchFinger1.x)*0.5 ;
-						_middle.y = _touchFinger1.y+(e.stageY-_touchFinger1.y)*0.5 ;
-						_touches[1].stageX = e.stageX ;
-						_touches[1].stageY = e.stageY ;
-						_touches[1].prevX = e.stageX ;
-						_touches[1].prevY = e.stageY ;
+						_middle.x = _touchFinger1.x+(e.localX-_touchFinger1.x)*0.5 ;
+						_middle.y = _touchFinger1.y+(e.localY-_touchFinger1.y)*0.5 ;
+						_touches[1].currentX = e.localX ;
+						_touches[1].currentY = e.localY ;
+						_touches[1].prevX = e.localX ;
+						_touches[1].prevY = e.localY ;
 						_touches[1].id = e.touchPointID ;
 					}
 					break;
@@ -288,17 +288,17 @@ package  local.map
 						for(var i:int=0;i<2;++i){
 							touch = _touches[i] as Touch ;
 							if(touch.id==e.touchPointID){
-								touch.prevX = touch.stageX ;
-								touch.prevY = touch.stageY;
-								touch.stageX = e.stageX ;
-								touch.stageY = e.stageY ;
+								touch.prevX = touch.currentX ;
+								touch.prevY = touch.currentY;
+								touch.currentX = e.localX ;
+								touch.currentY = e.localY ;
 								//放大缩小
 								var touchA:Touch = _touches[0];
 								var touchB:Touch = _touches[1];
 								
-								var currentPosA:Point  = new Point( touchA.stageX , touchA.stageY  );
+								var currentPosA:Point  = new Point( touchA.currentX , touchA.currentY  );
 								var previousPosA:Point = new Point( touchA.prevX , touchA.prevY );
-								var currentPosB:Point  = new Point( touchB.stageX,touchB.stageY );
+								var currentPosB:Point  = new Point( touchB.currentX,touchB.currentY );
 								var previousPosB:Point = new Point( touchB.prevX , touchB.prevY );
 								
 								var currentVector:Point  = currentPosA.subtract(currentPosB);
@@ -468,16 +468,16 @@ package  local.map
 class Touch
 {
 	public var id:int ;
-	public var stageX:Number ;
-	public var stageY:Number ;
+	public var currentX:Number ;
+	public var currentY:Number ;
 	
 	public var prevX:Number ;
 	public var prevY:Number ;
 	
-	public function Touch( id:int , stageX:Number , stageY:Number )
+	public function Touch( id:int , currentX:Number , currentY:Number )
 	{
 		this.id = id ;
-		this.stageX = stageX ;
-		this.stageY = stageY ;
+		this.currentX = currentX ;
+		this.currentY = currentY ;
 	}
 }
