@@ -11,6 +11,7 @@ package local.vo
 		public var nodeX:int;					//X网格坐标
 		public var nodeZ:int;					//z网格坐标
 		public var rotation:int = 1 ; //方向
+		public var buildClick:int ; //当前修建点击了的次数
 		
 		private var _baseVO:BaseBuildingVO;
 		public function get baseVO():BaseBuildingVO
