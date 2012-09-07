@@ -100,48 +100,64 @@ package local.model
 		}
 		
 		/**
-		 *  返回目标建筑旁边的所有建筑
-		 * @param building 目标建筑
-		 * @param type (BuildingType常量)只返回相应类型的建筑，如果为null，则返回所有
-		 * @param subType 子类型，要用这个必须写上面的type
-		 * @return 
+		 * 判断建筑周围是否有相应的建筑 
+		 * @param building
+		 * @param type
+		 * @param subType
+		 * @return  找到的话返回true , 否则返回false
 		 */		
-		public function getRoundBuildings( building:BaseBuilding , type:String=null , subType:String = null ):Array 
+		public function checkAroundBuilding( building:BaseBuilding , type:String , subType:String = null ):Boolean
 		{
-			var xSpan:int = building.xSpan+building.nodeX ;
-			var zSpan:int= building.zSpan+building.nodeZ ;
-			var ii:int = building.nodeX-1 ;
-			var jj:int = building.nodeZ-1 ;
-			
-			var nx:int ;
-			var nz:int ;
-			var arr:Array=[];
-			var baseBuilding:BaseBuilding ;
-			
-			for( var i:int =ii ; i< xSpan ; ++i ){
-				for( var j:int = jj ; j<zSpan; ++j){
-					if( i==ii|| j==jj || i==xSpan || j==zSpan) 
-					{
-						if(_grid2Building.containsKey(i*GameSetting.GRID_SIZE+"-"+j*GameSetting.GRID_SIZE))
-						{
-							baseBuilding = _grid2Building.getValue(i*GameSetting.GRID_SIZE+"-"+j*GameSetting.GRID_SIZE) as BaseBuilding;
-							if(type && type==baseBuilding.buildingVO.baseVO.type)
-							{
-								if(subType && subType==baseBuilding.buildingVO.baseVO.subClass){
-									arr.push( baseBuilding );
-								}else{
-									arr.push( baseBuilding );
-								}
-							}
-							else
-							{
-								arr.push( baseBuilding );
-							}
-						}
+			var temp:BaseBuilding ;
+			//左上 , 
+			 var i:int = building.nodeZ ; var j:int = i+building.buildingVO.baseVO.span ;
+			for( i ; i<j ; ++i){
+				temp = _grid2Building.getValue( (building.nodeX-1)*GameSetting.GRID_SIZE+"-"+i*GameSetting.GRID_SIZE ) as BaseBuilding;
+				if( temp && temp.buildingVO.baseVO.type==type){
+					if(subType){
+						if(subType == temp.buildingVO.baseVO.subClass)	return true;
+					}else{
+						return true;
 					}
 				}
 			}
-			return arr ;
+			//左下
+			i = building.nodeX ; j=i+building.buildingVO.baseVO.span ;
+			for( i ; i<j ; ++i){
+				temp = _grid2Building.getValue( i*GameSetting.GRID_SIZE+"-"+ (building.nodeZ+building.buildingVO.baseVO.span)*GameSetting.GRID_SIZE ) as BaseBuilding;
+				if( temp && temp.buildingVO.baseVO.type==type){
+					if(subType){
+						if(subType == temp.buildingVO.baseVO.subClass)	return true;
+					}else{
+						return true;
+					}
+				}
+			}
+			//右上
+			i = building.nodeX ; j=i+building.buildingVO.baseVO.span ;
+			for( i ; i<j ; ++i){
+				temp = _grid2Building.getValue( i*GameSetting.GRID_SIZE+"-"+ (building.nodeZ-1)*GameSetting.GRID_SIZE ) as BaseBuilding;
+				if( temp && temp.buildingVO.baseVO.type==type){
+					if(subType){
+						if(subType == temp.buildingVO.baseVO.subClass)	return true;
+					}else{
+						return true;
+					}
+				}
+			}
+			//右下
+			i = building.nodeZ ; j = i+building.buildingVO.baseVO.span ;
+			for( i ; i<j ; ++i){
+				temp = _grid2Building.getValue( (building.nodeX+building.buildingVO.baseVO.span)*GameSetting.GRID_SIZE+"-"+i*GameSetting.GRID_SIZE ) as BaseBuilding;
+				if( temp && temp.buildingVO.baseVO.type==type){
+					if(subType){
+						if(subType == temp.buildingVO.baseVO.subClass)	return true;
+					}else{
+						return true;
+					}
+				}
+			}
+			return false;
 		}
 		
 		public function clearBuildingGridData():void
