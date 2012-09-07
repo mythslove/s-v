@@ -10,16 +10,17 @@ package local.vo
 		public var type:String = BuildingType.HOME ; //主类型
 		public var subClass:String ; //子类型
 		
+		public var buildComp:String ; //修建时需要的 Compoent名称
 		public var requirePop:int ; //购买时需要的人口要求
 		public var requireLv:int ; //购买需要玩家的等级要求
 		public var priceCoin:int ;//购买需要的金币
-		public var priceCash:int ; //购买需要的钱
+		public var priceCash:int ; //购买需要的钱/gem
 		
 		public var click:int ; //修建或砍树时的点击次数
 		public var clickExp:int; //修建或砍树时点击可以获得的经验
 		
 		public var goodsCost:int ; //生产需要的goods数量
-		public var earnCoin; //可以收获的钱
+		public var earnCoin:int ; //可以收获的钱
 		public var earnExp:int ;//可以收获的经验
 		public var time:int ; //生产时间 
 		
