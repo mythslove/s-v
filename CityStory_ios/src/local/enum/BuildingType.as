@@ -7,6 +7,7 @@ package local.enum
 	public class BuildingType
 	{
 		public static const BASIC:String = "basic" ;
+		public static const EXPAND_BUILDING:String = "expandBuilding";
 		
 		
 		public static const HOME:String = "home" ;
