@@ -32,30 +32,35 @@ package  local.comm
 		public static function set villageMode( value:String):void
 		{
 			_villageMode = value ;
+			var world:GameWorld = GameWorld.instance ;
 			switch(value){
 				case VillageMode.NORMAL :
-					GameWorld.instance.buildingScene.mouseChildren = true ;
-					GameWorld.instance.roadScene.mouseChildren = false ;
-					GameWorld.instance.topScene.visible = false ;
-					GameWorld.instance.iconScene.visible = true ;
+					world.buildingScene.mouseChildren = true ;
+					world.runUpdate = false ;
+					world.roadScene.mouseChildren = false ;
+					world.topScene.visible = false ;
+					world.iconScene.visible = true ;
 					break ;
 				case VillageMode.EDIT :
-					GameWorld.instance.buildingScene.mouseChildren = true ;
-					GameWorld.instance.roadScene.mouseChildren = true ;
-					GameWorld.instance.topScene.visible = true ;
-					GameWorld.instance.iconScene.visible = false ;
+					world.buildingScene.mouseChildren = true ;
+					world.runUpdate = false ;
+					world.roadScene.mouseChildren = true ;
+					world.topScene.visible = true ;
+					world.iconScene.visible = false ;
 					break ;
 				case VillageMode.ADD_BUILDING :
-					GameWorld.instance.buildingScene.mouseChildren = false ;
-					GameWorld.instance.roadScene.mouseChildren = false ;
-					GameWorld.instance.topScene.visible = true ;
-					GameWorld.instance.iconScene.visible = false ;
+					world.buildingScene.mouseChildren = false ;
+					world.runUpdate = false ;
+					world.roadScene.mouseChildren = false ;
+					world.topScene.visible = true ;
+					world.iconScene.visible = false ;
 					break ;
 				case VillageMode.EXPAND :
-					GameWorld.instance.buildingScene.mouseChildren = false ;
-					GameWorld.instance.roadScene.mouseChildren = false ;
-					GameWorld.instance.topScene.visible = true ;
-					GameWorld.instance.iconScene.visible = false ;
+					world.buildingScene.mouseChildren = false ;
+					world.runUpdate = false ;
+					world.roadScene.mouseChildren = false ;
+					world.topScene.visible = true ;
+					world.iconScene.visible = false ;
 					break ;
 			}
 		}

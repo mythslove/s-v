@@ -40,6 +40,7 @@ package  local.map
 		private var _touchFinger1:Point = new Point(); //第一个点击的手指
 		private var _middle:Point = new Point(); //缩放时的中间点位置
 		protected var _moveSpeed:Number = 0.36 ; //移动的速度
+		public var runUpdate:Boolean = true ; //是否运行建筑 的update
 		/**====================================================*/
 		
 		public function BaseWorld()
@@ -326,7 +327,7 @@ package  local.map
 		
 		private function onEnterFrameHandler(e:Event):void
 		{
-			update();
+			if(runUpdate)	update();
 			if(x!=_endX) x += ( _endX-x)*_moveSpeed ; //缓动地图
 			if(y!=_endY) y += (_endY-y)*_moveSpeed ;
 		}
@@ -351,8 +352,8 @@ package  local.map
 			changeWorldScale(value,root.mouseX,root.mouseY);
 		}
 		
-		/*修改地图的缩放值和地图的位置*/
-		private function changeWorldScale( value:Number , px:Number , py:Number ):void
+		/**修改地图的缩放值和地图的位置*/
+		protected function changeWorldScale( value:Number , px:Number , py:Number ):void
 		{
 			if(scaleX*value>GameSetting.minZoom && scaleX*value<2) {
 				var m:Matrix = this.transform.matrix;
