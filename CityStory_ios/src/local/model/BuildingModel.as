@@ -52,7 +52,7 @@ package local.model
 					if(!basicTrees) basicTrees = new Vector.<BuildingVO>();
 					basicTrees.push( vo );
 					break ;
-				case BuildingType.DECO:
+				case BuildingType.DECORATION:
 					if(!decorations) decorations = new Vector.<BuildingVO>();
 					decorations.push( vo );
 					break ;
@@ -92,7 +92,7 @@ package local.model
 				case BuildingType.BASIC:
 					arr = basicTrees ;
 					break ;
-				case BuildingType.DECO:
+				case BuildingType.DECORATION:
 					arr = decorations ;
 					break ;
 				case BuildingType.BUSINESS:
