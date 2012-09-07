@@ -1,9 +1,13 @@
 package local.map
 {
 	import bing.iso.IsoObject;
+	import bing.iso.IsoUtils;
+	
+	import com.greensock.TweenLite;
 	
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
+	import flash.utils.setTimeout;
 	
 	import local.comm.GameData;
 	import local.comm.GameSetting;
@@ -13,6 +17,7 @@ package local.map
 	import local.map.item.Building;
 	import local.map.item.MoveItem;
 	import local.map.item.Road;
+	import local.map.land.ExpandLandBuilding;
 	import local.util.MoveItemPool;
 	import local.vo.BaseBuildingVO;
 	import local.vo.BuildingVO;
@@ -175,7 +180,8 @@ package local.map
 			
 			run() ;
 			
-			GameData.villageMode=VillageMode.EDIT ;
+			GameData.villageMode=VillageMode.EXPAND ;
+			setTimeout( showExpandState , 2000 );
 		}
 		
 		
@@ -255,7 +261,13 @@ package local.map
 							currentSelected.flash(false);
 							currentSelected = null ;
 						}
+						else if(GameData.villageMode==VillageMode.EXPAND)
+						{
+							//用点击区域来判断
+							clickExpandButton( IsoUtils.screenToIsoGrid( GameSetting.GRID_SIZE*4,root.mouseX , root.mouseY) );
+						}
 					}
+					
 				default :
 					mouseChildren = true ;
 					_isMove = false ;
@@ -275,6 +287,26 @@ package local.map
 				_mouseBuilding.nodeZ= p.y ;
 				_mouseBuilding.bottom.updateBuildingGridLayer();
 			}
+		}
+		
+		private function clickExpandButton( nodePoint:Point ):void
+		{
+			//判断此区域是否可以扩展
+			for each( var obj:IsoObject in topScene.children){
+				if( obj.nodeX==nodePoint.x && obj.nodeZ == nodePoint.y ){
+					//可以扩展，弹出扩地提示
+					break ;
+				}
+			}
+		}
+		
+		/** 显示扩地状态 */
+		public function showExpandState():void
+		{
+			var obj:Object = {scale:scaleX};
+			TweenLite.to( obj , 1 , {scale:GameSetting.minZoom , onUpdate:function():void{
+				changeWorldScale( obj.scale , GameSetting.SCREEN_WIDTH*0.5 , GameSetting.SCREEN_HEIGHT*0.5 ) ;
+			}});
 		}
 	}
 }
