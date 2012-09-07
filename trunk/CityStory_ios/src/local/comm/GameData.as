@@ -67,6 +67,7 @@ package  local.comm
 					world.roadScene.mouseChildren = false ;
 					world.topScene.visible = true ;
 					world.iconScene.visible = false ;
+					world.showExpandState();
 					break ;
 			}
 		}

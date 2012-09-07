@@ -4,9 +4,13 @@ package local.map.scene
 	import bing.iso.IsoScene;
 	
 	import local.comm.GameSetting;
+	import local.enum.BuildingType;
+	import local.map.GameWorld;
 	import local.map.item.BaseBuilding;
 	import local.map.item.MoveItem;
+	import local.map.item.Road;
 	import local.model.MapGridDataModel;
+	import local.util.MoveItemPool;
 	
 	/**
 	 * 建筑层 
@@ -117,13 +121,53 @@ package local.map.scene
 		/** 添加场景上走路的人 */
 		public function addMoveItems():void
 		{
+			var roads:Array =[];
+			var road:Road ;
+			for each( var obj:IsoObject in GameWorld.instance.roadScene.children)
+			{
+				if( ( obj as BaseBuilding).buildingVO.baseVO.subClass==BuildingType.DECORATION_ROAD ){
+					road = obj as Road ;
+					if(road && road.direction!="" && road.direction!="_M" ){
+						roads.push( road );
+					}
+				}
+			}
 			
+			var carNum:int ;
+			var characNum:int ;
+			for(var i:int = 0 ; i<roads.length ; ++i)
+			{
+				if(Math.random()>0.6 && characNum<10 ){ //不超过10个人
+					road = roads[i];
+					var fairy:MoveItem = MoveItemPool.instance.getCharacter() ;
+					fairy.nodeX  = road.nodeX;
+					fairy.nodeZ = road.nodeZ;
+					addMoveItem( fairy , false ) ;
+					fairy.init();
+					++ characNum ;
+				}else if(Math.random()>0.6 && carNum<5){ //不超过5辆车
+					road = roads[i];
+					if(road.direction!=""){
+						var car:MoveItem = MoveItemPool.instance.getCar() ;
+						car.nodeX  = road.nodeX;
+						car.nodeZ = road.nodeZ;
+						addMoveItem( car , false ) ;
+						car.init();
+						++carNum;
+					}
+				}
+			}
 		}
 		
 		/** 移除场景上走路的人 */
 		public function removeMoveItems():void
 		{
-			
+			var len:int = moveItems.length ;
+			for( var i:int = 0 ; i <len ; ++i ){
+				this.removeIsoObject( moveItems[i] );
+				MoveItemPool.instance.addMoveItemToPool( moveItems[i] );
+			}
+			moveItems = [] ;
 		}
 		
 		
