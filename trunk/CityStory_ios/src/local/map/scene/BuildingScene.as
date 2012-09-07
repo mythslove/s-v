@@ -114,6 +114,19 @@ package local.map.scene
 			}
 		}
 		
+		/** 添加场景上走路的人 */
+		public function addMoveItems():void
+		{
+			
+		}
+		
+		/** 移除场景上走路的人 */
+		public function removeModeItems():void
+		{
+			
+		}
+		
+		
 		/**        排序算法           */
 		override protected function sortCompare( target:IsoObject , item:IsoObject ):int
 		{

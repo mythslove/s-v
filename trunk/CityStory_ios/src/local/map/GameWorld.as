@@ -8,6 +8,7 @@ package local.map
 	import local.comm.GameData;
 	import local.comm.GameSetting;
 	import local.enum.BuildingType;
+	import local.enum.VillageMode;
 	import local.map.item.BaseBuilding;
 	import local.map.item.Building;
 	import local.map.item.MoveItem;
@@ -173,6 +174,8 @@ package local.map
 			buildingScene.sortAll();
 			
 			run() ;
+			
+			GameData.villageMode=VillageMode.EDIT ;
 		}
 		
 		
@@ -208,7 +211,7 @@ package local.map
 					mouseChildren = false; 
 					if(e.buttonDown && !_isGesture )
 					{
-						if( GameData.villageEditor && _mouseBuilding && _mouseBuilding.parent == topScene)  {
+						if( GameData.villageMode==VillageMode.EDIT && _mouseBuilding && _mouseBuilding.parent == topScene)  {
 							//如果是编译状态，则移动建筑
 							moveTopBuilding();
 						}else {
@@ -222,8 +225,7 @@ package local.map
 				case MouseEvent.MOUSE_UP:
 					if(_mouseBuilding && _mouseBuilding.parent == topScene)
 					{
-						if(_mouseBuilding.bottom.getWalkable()){
-							//添加到场景上
+						if(GameData.villageMode == VillageMode.EDIT && _mouseBuilding.bottom.getWalkable()){
 							_mouseBuilding.addToSceneFromTopScene();
 							_mouseBuilding = null ;
 							currentSelected = null ;
