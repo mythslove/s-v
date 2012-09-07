@@ -248,6 +248,10 @@ package local.map
 						}
 						else if(currentSelected) 
 						{
+							if( currentSelected.parent==topScene && GameData.villageMode == VillageMode.EDIT && currentSelected.bottom.getWalkable()){
+								currentSelected.addToSceneFromTopScene();
+								_mouseBuilding=null;
+							}
 							currentSelected.flash(false);
 							currentSelected = null ;
 						}
