@@ -121,7 +121,7 @@ package local.map.scene
 		}
 		
 		/** 移除场景上走路的人 */
-		public function removeModeItems():void
+		public function removeMoveItems():void
 		{
 			
 		}
