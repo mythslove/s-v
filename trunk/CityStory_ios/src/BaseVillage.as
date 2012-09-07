@@ -89,7 +89,9 @@ package
 				var baseVO:BaseBuildingVO ;
 				for ( var name:String in allBuildingHash){
 					baseVO =  allBuildingHash[name] as BaseBuildingVO ;
-					resVOs.push( new ResVO(name , baseVO.url ) ) ;
+					if(baseVO.url){
+						resVOs.push( new ResVO(name , baseVO.url ) ) ;
+					}
 				}
 			}
 			ResourceUtil.instance.addEventListener(ResProgressEvent.RES_LOAD_PROGRESS , gameInitResHandler );

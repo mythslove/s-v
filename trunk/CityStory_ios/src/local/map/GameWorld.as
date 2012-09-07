@@ -1,7 +1,6 @@
 package local.map
 {
 	import bing.iso.IsoObject;
-	import bing.iso.IsoUtils;
 	
 	import com.greensock.TweenLite;
 	
@@ -15,7 +14,6 @@ package local.map
 	import local.enum.BuildingType;
 	import local.enum.VillageMode;
 	import local.map.item.BaseBuilding;
-	import local.map.item.Building;
 	import local.map.item.MoveItem;
 	import local.map.item.Road;
 	import local.map.land.ExpandLandButton;
@@ -165,7 +163,7 @@ package local.map
 			bvo.baseVO = baseVO ;
 			bvo.nodeX = 9*4   ;
 			bvo.nodeZ = 8*4+1 ;
-			var building:Building=new Building( bvo);
+			var building:BaseBuilding=new BaseBuilding( bvo);
 			buildingScene.addBuilding( building, false);
 			
 			bvo = new BuildingVO();
@@ -173,7 +171,7 @@ package local.map
 			bvo.baseVO = baseVO ;
 			bvo.nodeX = 9*4   ;
 			bvo.nodeZ = 10*4-2 ;
-			building=new Building( bvo);
+			building=new BaseBuilding( bvo);
 			buildingScene.addBuilding( building, false);
 			
 			
