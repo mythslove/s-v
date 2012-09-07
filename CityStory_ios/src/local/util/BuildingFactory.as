@@ -25,7 +25,7 @@ package local.util
 					break ;
 				case BuildingType.DECORATION:
 					if(buildingVO.baseVO.subClass==BuildingType.DECORATION_ROAD || 
-						buildingVO.baseVO.subClass==BuildingType.DECORATION_WATER)
+						buildingVO.baseVO.subClass==BuildingType.DECORATION_GROUND)
 					{
 						building = new Road(buildingVO);
 					}else{

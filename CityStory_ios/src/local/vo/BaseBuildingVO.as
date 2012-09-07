@@ -9,7 +9,24 @@ package local.vo
 		public var span:int = 1 ; //占用的格子数
 		public var type:String = BuildingType.HOME ; //主类型
 		public var subClass:String ; //子类型
-		public var buildClick:int ; //修建时的点击次数
+		
+		public var requirePop:int ; //购买时需要的人口要求
+		public var requireLv:int ; //购买需要玩家的等级要求
+		public var priceCoin:int ;//购买需要的金币
+		public var priceCash:int ; //购买需要的钱
+		
+		public var click:int ; //修建或砍树时的点击次数
+		public var clickExp:int; //修建或砍树时点击可以获得的经验
+		
+		public var goodsCost:int ; //生产需要的goods数量
+		public var earnCoin; //可以收获的钱
+		public var earnExp:int ;//可以收获的经验
+		public var time:int ; //生产时间 
+		
+		public var addCap:int ;//可以增加多少人口数量
+		public var addPop:int ; //可以增加多少人口
+		
+		public var products:Vector.<ProductVO> ; //可以生产的商品，主要用于industry
 		
 		/**
 		 * 返回资源url 
@@ -31,7 +48,7 @@ package local.vo
 					return "business/"+name+".bd" ;
 					break ;
 				case BuildingType.DECORATION :
-					if( subClass==BuildingType.DECORATION_ROAD || subClass==BuildingType.DECORATION_WATER ){
+					if( subClass==BuildingType.DECORATION_ROAD || subClass==BuildingType.DECORATION_GROUND ){
 						return "decoration/"+name+".rd" ;
 					}
 					return "decoration/"+name+".bd" ;
