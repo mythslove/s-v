@@ -1,11 +1,12 @@
 package local.util
 {
+	import local.map.cell.TimeAnimObject;
 	import local.map.item.Car;
 	import local.map.item.Character;
 	import local.map.item.MoveItem;
 
 	/**
-	 * 车和人的对象池 
+	 * 对象池 
 	 * @author zhouzhanglin
 	 */	
 	public class ObjectPool
@@ -63,10 +64,29 @@ package local.util
 		}
 		
 		/**
+		 * 获得特效 
+		 * @param resId
+		 * @return 
+		 */		
+		public function getTimeAnim( resId:String ):TimeAnimObject
+		{
+			var len:int = _objects.length ;
+			for( var i:int ; i<len ; ++i )
+			{
+				if(_objects[i] is TimeAnimObject ){
+					var item:TimeAnimObject = _objects.splice( i , 1 )[0] as TimeAnimObject ;
+					return  item ;
+				}
+			}
+			item = new TimeAnimObject( EmbedsManager.instance.getAnimResVOByName(resId)[0] );
+			return item ;
+		}
+		
+		/**
 		 * 将对象还原到对象池 
 		 * @param item
 		 */		
-		public function addMoveItemToPool( item:MoveItem ):void
+		public function addObjectToPool( item:Object ):void
 		{
 			_objects.push( item );
 		}

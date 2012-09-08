@@ -1,12 +1,11 @@
 package local.map.cell
 {
-	import bing.animation.ActionVO;
-	import bing.animation.AnimationBitmap;
 	import bing.animation.AnimationEvent;
 	
 	import flash.events.Event;
 	
-	import local.vos.BitmapAnimResVO;
+	import local.util.ObjectPool;
+	import local.vo.BitmapAnimResVO;
 	
 	/**
 	 * 有次数限制的动画 
@@ -14,28 +13,29 @@ package local.map.cell
 	 */	
 	public class TimeAnimObject extends BaseAnimObject
 	{
-		private var _time:int ;
-		private var _autoDispose:Boolean ;
+		public var time:int  =1 ; //默认运行一次
 		
 		/**
 		 * 有次数限制的动画 
 		 * @param vo 
-		 * @param time 次数
-		 * @param autoDispose 是否自己清除
 		 */		
-		public function TimeAnimObject(vo:BitmapAnimResVO , time:int=1 , autoDispose:Boolean=true )
+		public function TimeAnimObject(vo:BitmapAnimResVO  )
 		{
 			super(vo);
-			_autoDispose = autoDispose ;
-			_time = time ;
 		}
 		
 		override protected function init():void
 		{
 			super.init();
-			if(_anim && _time>0){
-				_anim.addEventListener(AnimationEvent.ANIMATION_COMPLETE , animCompleteHandler );
-				_anim.cycleTime = _time ;
+			_anim.addEventListener(AnimationEvent.ANIMATION_COMPLETE , animCompleteHandler );
+			addEventListener(Event.ADDED_TO_STAGE , addedHandler );
+		}
+		
+		private function addedHandler():void
+		{
+			if(_anim && time>0){
+				_anim.cycleTime = time ;
+				_anim.start();
 			}
 			addEventListener(Event.ENTER_FRAME , onEnterFrame );
 		}
@@ -47,12 +47,11 @@ package local.map.cell
 		
 		private function animCompleteHandler( e:AnimationEvent ):void
 		{
-			_anim.removeEventListener(AnimationEvent.ANIMATION_COMPLETE , animCompleteHandler );
-			if(_autoDispose){
-				if(parent) parent.removeChild(this);
-				this.dispose();
-			}
 			removeEventListener(Event.ENTER_FRAME , onEnterFrame );
+			if(parent) {
+				parent.removeChild(this);
+			}
+			ObjectPool.instance.addObjectToPool( this );
 		}
 		
 	}
