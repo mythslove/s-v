@@ -10,7 +10,7 @@ package local.map.scene
 	import local.map.item.MoveItem;
 	import local.map.item.Road;
 	import local.model.MapGridDataModel;
-	import local.util.MoveItemPool;
+	import local.util.ObjectPool;
 	
 	/**
 	 * 建筑层 
@@ -139,7 +139,7 @@ package local.map.scene
 			{
 				if(Math.random()>0.6 && characNum<10 ){ //不超过10个人
 					road = roads[i];
-					var fairy:MoveItem = MoveItemPool.instance.getCharacter() ;
+					var fairy:MoveItem = ObjectPool.instance.getCharacter() ;
 					fairy.nodeX  = road.nodeX;
 					fairy.nodeZ = road.nodeZ;
 					addMoveItem( fairy , false ) ;
@@ -148,7 +148,7 @@ package local.map.scene
 				}else if(Math.random()>0.6 && carNum<5){ //不超过5辆车
 					road = roads[i];
 					if(road.direction!=""){
-						var car:MoveItem = MoveItemPool.instance.getCar() ;
+						var car:MoveItem = ObjectPool.instance.getCar() ;
 						car.nodeX  = road.nodeX;
 						car.nodeZ = road.nodeZ;
 						addMoveItem( car , false ) ;
@@ -165,7 +165,7 @@ package local.map.scene
 			var len:int = moveItems.length ;
 			for( var i:int = 0 ; i <len ; ++i ){
 				this.removeIsoObject( moveItems[i] );
-				MoveItemPool.instance.addMoveItemToPool( moveItems[i] );
+				ObjectPool.instance.addMoveItemToPool( moveItems[i] );
 			}
 			moveItems = [] ;
 		}
