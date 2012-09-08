@@ -165,7 +165,7 @@ package local.map.scene
 			var len:int = moveItems.length ;
 			for( var i:int = 0 ; i <len ; ++i ){
 				this.removeIsoObject( moveItems[i] );
-				ObjectPool.instance.addMoveItemToPool( moveItems[i] );
+				ObjectPool.instance.addObjectToPool( moveItems[i] );
 			}
 			moveItems = [] ;
 		}
