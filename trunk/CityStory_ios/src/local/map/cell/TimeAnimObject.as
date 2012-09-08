@@ -31,7 +31,7 @@ package local.map.cell
 			addEventListener(Event.ADDED_TO_STAGE , addedHandler );
 		}
 		
-		private function addedHandler():void
+		private function addedHandler( e:Event ):void
 		{
 			if(_anim && time>0){
 				_anim.cycleTime = time ;
