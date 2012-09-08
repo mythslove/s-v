@@ -4,6 +4,13 @@ package local.view.topbar
 	
 	public class TopBar extends BaseView
 	{
+		public var cashBar:CashBar ;
+		public var coinBar:CoinBar;
+		public var energyBar:EnergyBar;
+		public var goodsBar:GoodsBar;
+		public var lvBar:LevelBar;
+		//============================
+		
 		public function TopBar()
 		{
 			super();
