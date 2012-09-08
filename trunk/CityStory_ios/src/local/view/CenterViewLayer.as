@@ -34,6 +34,7 @@ package local.view
 			
 			topBar = new TopBar();
 			addChild(topBar);
+			topBar.x = (GameSetting.SCREEN_WIDTH-topBar.width)>>1 ;
 			
 			addChild(PopUpManager.instance);
 		}
