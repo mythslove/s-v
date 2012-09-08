@@ -8,12 +8,12 @@ package local.util
 	 * 车和人的对象池 
 	 * @author zhouzhanglin
 	 */	
-	public class MoveItemPool
+	public class ObjectPool
 	{
-		private static var _instance:MoveItemPool;
-		public static function get instance():MoveItemPool
+		private static var _instance:ObjectPool;
+		public static function get instance():ObjectPool
 		{
-			if(!_instance) _instance = new MoveItemPool();
+			if(!_instance) _instance = new ObjectPool();
 			return _instance; 
 		}
 		//=================================
