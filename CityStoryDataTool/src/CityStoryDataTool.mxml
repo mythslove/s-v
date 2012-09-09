@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" minWidth="400" minHeight="400"
+					   xmlns:s="library://ns.adobe.com/flex/spark" width="400" height="400" showStatusBar="false"
+					   xmlns:mx="library://ns.adobe.com/flex/mx" creationComplete="init()">
+	
+	<fx:Script>
+		<![CDATA[
+			import flash.net.registerClassAlias;
+			
+			import mx.controls.Alert;
+			
+			private var allBuildingHash:Dictionary ;
+			
+			private var file:File ;
+			
+			private function init():void
+			{
+				registerClassAlias("BaseBuildingVO" , BaseBuildingVO ) ;
+				registerClassAlias("ProductVO" , ProductVO ) ;
+			}
+					
+			
+			
+			private function selectBBV():void
+			{
+				file = new File();
+				file.addEventListener(Event.SELECT , onSelectedBBVFile );
+				file.browseForOpen("选择文件XML" , [ new FileFilter("XML文件","*.xml;*.XML")] );
+			}
+			
+			private function onSelectedBBVFile(e:Event ):void
+			{
+				file.removeEventListener(Event.SELECT , onSelectedBBVFile );
+				txtBBV.text = file.name ;
+				
+				var stream:FileStream = new FileStream();
+				stream.open( file,FileMode.READ );
+				var bytes:ByteArray = new ByteArray();
+				stream.readBytes( bytes);
+				bytes.position =0  ;
+				var config:XML = XML( bytes.toString());
+				allBuildingHash = new Dictionary();
+				if( config)
+				{
+					var len:int = config.item.length();
+					var item:* ;
+					for( var i:int = 0 ; i<len ; ++i )
+					{
+						var baseVO:BaseBuildingVO = new BaseBuildingVO();
+						item = config.item[i];
+						if(item.children().length()>0)
+						{
+							parseBaseProduct( item.children() , baseVO );
+						}
+						var attNamesList:XMLList = item.@*;
+						for (var j:int = 0; j < attNamesList.length(); j++)
+						{ 
+							var key:String = attNamesList[j].name() ;
+							if( baseVO.hasOwnProperty(key)){
+								switch(typeof  baseVO[key])
+								{
+									case "string":
+										baseVO[key] = String( attNamesList[j] );
+										break ;
+									case "int":
+										baseVO[key] = String( attNamesList[j] );
+										break ;
+									case "number":
+										baseVO[key] = Number( attNamesList[j] );
+										break;
+								}
+								
+							}
+						} 
+						allBuildingHash[baseVO.name] = baseVO ;
+					}
+				}
+				else
+				{
+					trace("没有Shop数据");
+				}
+			}
+			
+			private function parseBaseProduct( products:* , baseVO:BaseBuildingVO ):void
+			{
+				var len:int = products.length();
+				var item:* ;
+				baseVO.products  = new Vector.<ProductVO>( len , true);
+				for( var i:int = 0 ; i<len ; ++i )
+				{
+					var pvo:ProductVO = new ProductVO();
+					baseVO.products[i] = pvo ;
+					item = products[i];
+					var attNamesList:XMLList = item.@*;
+					for (var j:int = 0; j < attNamesList.length(); j++)
+					{ 
+						var key:String = String( attNamesList[j].name()) ;
+						if( pvo.hasOwnProperty(key)){
+							switch(typeof  pvo[key])
+							{
+								case "string":
+									pvo[key] = String( attNamesList[j] );
+									break ;
+								case "int":
+									pvo[key] = String( attNamesList[j] );
+									break ;
+								case "number":
+									pvo[key] = Number( attNamesList[j] );
+									break;
+							}
+							
+						}
+					} 
+				}
+			}
+					
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			protected function export_clickHandler(event:MouseEvent):void
+			{
+				file = new File();
+				file.addEventListener(Event.SELECT , onSelectedSaveFile);
+				file.browseForSave("保存");
+			}
+			private function onSelectedSaveFile( e:Event ):void
+			{
+				file.removeEventListener(Event.SELECT , onSelectedSaveFile);
+				var stream:FileStream = new FileStream();
+				stream.open( file , FileMode.WRITE );
+				stream.writeObject( allBuildingHash );
+				stream.close();
+				Alert.show("导出成功！");
+			}
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<s:Label x="19" y="23" text="BaseBuildingVO"/>
+	<s:TextInput id="txtBBV" x="19" y="52" width="288" enabled="false"/>
+	<s:Button x="316" y="352" width="74" height="38" label="生成" click="export_clickHandler(event)"/>
+	<s:Button x="320" y="52" label="选择" click="selectBBV()"/>
+</s:WindowedApplication>
