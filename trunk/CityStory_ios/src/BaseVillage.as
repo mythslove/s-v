@@ -1,11 +1,13 @@
 package
 {
+	import bing.res.ResLoadedEvent;
 	import bing.res.ResProgressEvent;
 	import bing.res.ResVO;
 	
 	import flash.display.*;
 	import flash.events.Event;
 	import flash.net.registerClassAlias;
+	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
 	
 	import local.comm.GameSetting;
@@ -55,24 +57,17 @@ package
 		
 		private function loadConfig():void
 		{
-			var resVOs:Array = [] ;
-			resVOs.push( new ResVO("BaseBuilding" , "config/BaseBuilding_"+GameSetting.local+".xml")  ) ;
-			ResourceUtil.instance.addEventListener("config" , gameConfigHandler );
-			ResourceUtil.instance.queueLoad( "config" , resVOs , 10 );
+			ResourceUtil.instance.addEventListener("GameConfig" , gameConfigHandler );
+			ResourceUtil.instance.loadRes( new ResVO("GameConfig" , "config/config_"+GameSetting.local+".bin") );
 		}
 		
-		private function gameConfigHandler( e:Event ):void
+		private function gameConfigHandler( e:ResLoadedEvent ):void
 		{
-			if(e.type=="config")
-			{
-				XML.ignoreComments = true ;
-				XML.ignoreWhitespace = true ;
-				ResourceUtil.instance.removeEventListener("config" , gameConfigHandler );
-				ShopModel.instance.parseConfig(  XML( ResourceUtil.instance.getResVOByResId("BaseBuilding").resObject.toString() ) ) ;
-				
-				ResourceUtil.instance.deleteRes( "BaseBuilding");
-				loadRes();
-			}
+			ResourceUtil.instance.removeEventListener("GameConfig" , gameConfigHandler );
+			var bytes:ByteArray = e.resVO.resObject as ByteArray;
+			ShopModel.instance.parseConfig(  bytes.readObject() as Dictionary ) ;
+			ResourceUtil.instance.deleteRes( "GameConfig");
+			loadRes();
 		}
 				
 		

@@ -55,7 +55,7 @@ package local.model
 			var arr:Vector.<StorageBuildingVO> ;
 			switch( buildingVO.baseVO.type  )
 			{
-				case BuildingType.DECO:
+				case BuildingType.DECORATION:
 					if(!decors) decors = new Vector.<StorageBuildingVO>();
 					arr = decors ;
 					break ;
@@ -102,7 +102,7 @@ package local.model
 			var arr:Vector.<StorageBuildingVO> ;
 			switch( type )
 			{
-				case BuildingType.DECO:
+				case BuildingType.DECORATION:
 					arr = decors ;
 					break ;
 				case BuildingType.BUSINESS:
