@@ -7,10 +7,10 @@ package local.vo
 		public var name:String="" ;
 		public var title:String ="";//默认和name相同，用于不同语言包时
 		public var span:int = 1 ; //占用的格子数
-		public var type:String = BuildingType.HOME ; //主类型
-		public var subClass:String ; //子类型
+		public var type:String = "home" ; //主类型
+		public var subClass:String="" ; //子类型
 		
-		public var buildComp:String ; //修建时需要的 Compoent名称
+		public var buildComp:String ="" ; //修建时需要的 Compoent名称
 		public var requirePop:int ; //购买时需要的人口要求
 		public var requireLv:int ; //购买需要玩家的等级要求
 		public var priceCoin:int ;//购买需要的金币

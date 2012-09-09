@@ -21,7 +21,7 @@ package local.model
 		//=================================
 		
 		/** 商店里所有的建筑 数据，key为name , value 为BaseBuildingVO */
-		public var allBuildingHash:Dictionary =new Dictionary() ;
+		public var allBuildingHash:Dictionary ;
 		
 		/** 商店里基础建筑 */
 		public var basics:Vector.<BaseBuildingVO> = new Vector.<BaseBuildingVO>() ;
@@ -60,31 +60,21 @@ package local.model
 		
 		
 		
-		public function parseConfig( config:XML ):void
+		public function parseConfig( config:Dictionary ):void
 		{
 			if( config)
 			{
+				allBuildingHash = config ;
 				//手动写一个扩地时的建筑
 				var baseVO:BaseBuildingVO  = new BaseBuildingVO() ;
 				baseVO.name = "ExpandLandBuilding";
 				baseVO.span = 4;
 				baseVO.type = BuildingType.EXPAND_BUILDING ;
 				allBuildingHash[baseVO.name] = baseVO ;
-				
-				
-				var len:int = config.item.length();
-				var item:* ;
-				for( var i:int = 0 ; i<len ; ++i )
+				//遍历所有的建筑数据
+				for ( var key:String in allBuildingHash)
 				{
 					baseVO = new BaseBuildingVO();
-					item = config.item[i];
-					if( item.@name.length() ) baseVO.name = String( item.@name );
-					if( item.@title.length() ) baseVO.title = String( item.@title );
-					if( item.@span.length() ) baseVO.span = int( item.@span );
-					if( item.@subClass.length() ) baseVO.subClass = String( item.@subClass );
-					if( item.@type.length() ) baseVO.type = String( item.@type );
-					allBuildingHash[baseVO.name] = baseVO ;
-					//===================
 					switch( baseVO.type)
 					{
 						case BuildingType.BASIC :
