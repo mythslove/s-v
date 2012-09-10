@@ -3,6 +3,7 @@ package local.view.control
 	import bing.utils.ContainerUtil;
 	
 	import flash.display.MovieClip;
+	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
 	import local.view.base.BaseView;
@@ -31,17 +32,11 @@ package local.view.control
 				_selected.gotoAndStop("up");
 			}
 			_selected = value ;
-			_selected.mouseEnabled = value ;
-			if(value{
-				_selected.gotoAndStop("up");
-			}else{
-				_selected.gotoAndStop("selected-up");
-			}
+			_selected.mouseEnabled = false ;
+			_selected.gotoAndStop("selected-up");
 		}
 		
-		private var _toggleEvt:ToggleBarEvent ;
-		
-		public function ToggleBar( space:int = 5 , layout:String = Layout.HORIZON)
+		public function ToggleBar( space:int = 5 , layout:String = "horizon" )
 		{
 			super();
 			mouseEnabled = false ;
@@ -58,6 +53,7 @@ package local.view.control
 			{
 				btn = value[i];
 				btn.stop();
+				btn.gotoAndStop("up");
 				btn.mouseChildren = false ;
 				if(layout==Layout.HORIZON){
 					btn.x = (btn.width+space)*i ;
@@ -89,12 +85,10 @@ package local.view.control
 						break ;
 					case MouseEvent.CLICK :
 						selected = btn ;
-						if(!_toggleEvt){
-							_toggleEvt = new ToggleBarEvent(ToggleBarEvent.TOGGLE_CHANGE);
-						}
-						_toggleEvt.selectedButton=btn;
-						_toggleEvt.selectedName = btn.toString() ;
-						this.dispatchEvent( _toggleEvt );
+						var toggleEvt:ToggleBarEvent = new ToggleBarEvent(ToggleBarEvent.TOGGLE_CHANGE);
+						toggleEvt.selectedButton=btn;
+						toggleEvt.selectedName = btn.name ;
+						this.dispatchEvent( toggleEvt );
 						break ;
 					default:
 						btn.gotoAndStop("up");
@@ -109,6 +103,7 @@ package local.view.control
 			removeEventListener(MouseEvent.MOUSE_UP , onMouseHandler);
 			removeEventListener(MouseEvent.RELEASE_OUTSIDE , onMouseHandler);
 			removeEventListener(MouseEvent.CLICK , onMouseHandler );
+			addEventListener(Event.ADDED_TO_STAGE, addedToStageHandler,false,0,true);
 		}
 	}
 }
