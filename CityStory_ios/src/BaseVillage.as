@@ -41,6 +41,7 @@ package
 //			{
 //				GameSetting.SCREEN_WIDTH = 1136;
 //				GameSetting.SCREEN_HEIGHT = 640 ;
+//				GameSetting.device = "ipad";
 //			}
 //			else 
 //			{
@@ -51,6 +52,7 @@ package
 //				GameSetting.SCREEN_WIDTH = 1024;
 //				GameSetting.SCREEN_HEIGHT = 768;
 //				GameSetting.minZoom = 0.5 ;
+//				GameSetting.device = "ipad";
 //			}
 
 			registerVO();
