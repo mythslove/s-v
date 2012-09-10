@@ -1,5 +1,7 @@
 package local.model
 {
+	import flash.utils.Dictionary;
+	
 	import local.vo.PlayerVO;
 
 	public class PlayerModel
@@ -11,6 +13,9 @@ package local.model
 			return _instance;
 		}
 		//=======================================
+		
+		/** key为等级，value为LevelVO*/
+		public var levels:Dictionary  ;
 		
 		public var me:PlayerVO ;
 		
