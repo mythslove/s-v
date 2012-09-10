@@ -9,6 +9,7 @@
 			
 			private var allBuildingHash:Dictionary ;
 			private var expands:Vector.<ExpandVO> ;
+			private var levelHash:Dictionary ;
 			
 			private var file:File ;
 			
@@ -17,6 +18,7 @@
 				registerClassAlias("BaseBuildingVO" , BaseBuildingVO ) ;
 				registerClassAlias("ProductVO" , ProductVO ) ;
 				registerClassAlias("ExpandVO" , ExpandVO ) ;
+				registerClassAlias("LevelVO" , LevelVO ) ;
 			}
 			
 			private function selectBBV():void
@@ -121,7 +123,7 @@
 				file.browseForOpen("选择扩地配置文件" , [ new FileFilter("扩地配置文件(XML)","*.xml;*.XML")] );
 			}
 			private function onSelectedExpandFile(e:Event):void{
-				file.removeEventListener(Event.SELECT , onSelectedBBVFile );
+				file.removeEventListener(Event.SELECT , onSelectedExpandFile );
 				txtExpand.text = file.name ;
 				expands = new Vector.<ExpandVO>();
 				
@@ -172,6 +174,58 @@
 			
 			
 			
+			private function selectLevel():void{
+				file = new File();
+				file.addEventListener(Event.SELECT , onSelectedLevelFile );
+				file.browseForOpen("选择升级配置文件" , [ new FileFilter("升级配置文件(XML)","*.xml;*.XML")] );
+			}
+			private function onSelectedLevelFile(e:Event):void{
+				file.removeEventListener(Event.SELECT , onSelectedLevelFile );
+				txtLevel.text = file.name ;
+				levelHash =new Dictionary();
+				
+				var stream:FileStream = new FileStream();
+				stream.open( file,FileMode.READ );
+				var bytes:ByteArray = new ByteArray();
+				stream.readBytes( bytes);
+				bytes.position =0  ;
+				var config:XML = XML( bytes.toString());
+				if( config)
+				{
+					var len:int = config.item.length();
+					var item:* ;
+					for( var i:int = 0 ; i<len ; ++i )
+					{
+						var level:LevelVO = new LevelVO();
+						item = config.item[i];
+						var attNamesList:XMLList = item.@*;
+						for (var j:int = 0; j < attNamesList.length(); j++)
+						{ 
+							var key:String = attNamesList[j].name() ;
+							if( level.hasOwnProperty(key)){
+								switch(typeof  level[key])
+								{
+									case "string":
+										level[key] = String( attNamesList[j] );
+										break ;
+									case "int":
+										level[key] = String( attNamesList[j] );
+										break ;
+									case "number":
+										level[key] = Number( attNamesList[j] );
+										break;
+								}
+								
+							}
+						} 
+						levelHash[level.level] = level ;
+					}
+				}
+				else
+				{
+					trace("没有玩家升级数据");
+				}
+			}
 			
 			
 			
@@ -204,6 +258,7 @@
 				stream.open( file , FileMode.WRITE );
 				stream.writeObject( allBuildingHash );
 				stream.writeObject( expands );
+				stream.writeObject( levelHash );
 				stream.close();
 				Alert.show("导出成功！");
 			}
@@ -215,9 +270,12 @@
 	</fx:Declarations>
 	<s:Label x="19" y="23" text="基础建筑配置"/>
 	<s:Label x="20" y="86" text="扩地配置"/>
+	<s:Label x="20" y="146" text="玩家升级配置"/>
 	<s:TextInput id="txtBBV" x="19" y="42" width="288" enabled="false"/>
 	<s:Button x="316" y="352" width="74" height="38" label="生成" click="export_clickHandler(event)"/>
 	<s:Button x="320" y="42" label="选择" click="selectBBV()"/>
 	<s:TextInput id="txtExpand" x="19" y="104" width="288" enabled="false"/>
+	<s:TextInput id="txtLevel" x="19" y="164" width="288" enabled="false"/>
 	<s:Button x="320" y="104" label="选择" click="selectExpand()"/>
+	<s:Button x="320" y="164" label="选择" click="selectLevel()"/>
 </s:WindowedApplication>
