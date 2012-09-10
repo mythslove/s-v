@@ -1,16 +1,19 @@
-package local.util
+package local.model
 {
 	import local.enum.BuildingType;
-	import local.model.BuildingModel;
+	import local.vo.QuestVO;
 
-	public class QuestUtil
+	public class QuestModel
 	{
-		private static var _instance:QuestUtil ;
-		public static function get instance():QuestUtil {
-			if(!_instance) _instance = new QuestUtil();
-			return _instance;
+		private static var _instance:QuestModel;
+		public static function get instance():QuestModel
+		{
+			if(!_instance) _instance = new QuestModel();
+			return _instance; 
 		}
-		//=======================================
+		//=================================
+		
+		public var currentQuests:Vector.<QuestVO> ;
 		
 		/**
 		 * 返回地图上的建筑数量 
@@ -56,7 +59,47 @@ package local.util
 			}
 			return value;
 		}
-	
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		/**
+		 * 统计任务项 
+		 * @param questType
+		 * @param sonType
+		 * @param num
+		 * @param time 时间限制
+		 */		
+		public function updateQuests( questType:String , sonType:String = "" , num:int = 1 , time:Number= NaN  ):void
+		{
+			if(currentQuests)
+			{
+				for each( var vo:QuestVO in currentQuests)
+				{
+					if( vo.isAccept && !vo.isComplete && vo.update(questType , sonType , num , time ) )
+					{
+						//判断是否有完成的quest
+						checkCompleteQuest() ;
+					}
+				}
+			}
+		}
+		
+		/**判断是否有完成了的任务*/
+		public function checkCompleteQuest():void
+		{
+			for each( var vo:QuestVO in currentQuests)
+			{
+				if(vo.isAccept  && !vo.isComplete && vo.checkComplete()  ){
+					vo.isComplete=true;
+					
+				}
+			}
+		}
 	}
 }

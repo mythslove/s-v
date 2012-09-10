@@ -1,7 +1,7 @@
 package local.vo
 {
 	import local.enum.QuestType;
-	import local.util.QuestUtil;
+	import local.model.QuestModel;
 
 	public class QuestTaskVO
 	{
@@ -37,7 +37,7 @@ package local.vo
 			{
 				case QuestType.OWN_BUILDING:
 					if(sonType){
-						current = QuestUtil.instance.getCountByName( sonType );
+						current = QuestModel.instance.getCountByName( sonType );
 					}
 					break ;
 			}
