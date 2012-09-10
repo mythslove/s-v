@@ -21,7 +21,9 @@ package local.comm
 		/** 地图的最大缩放值 */
 		public static var minZoom:Number=0.8 ;
 		
-		/** 本地位置 */
+		/** 本地语言 */
 		public static var local:String = "en";
+		
+		public static var device:String =  "iphone";
 	}
 }
