@@ -93,6 +93,8 @@ package
 					}
 				}
 			}
+			resVOs.push( new ResVO("ui_bar","swf/bar.swf"));
+			resVOs.push( new ResVO("ui_popup","swf/popup.swf"));
 			ResourceUtil.instance.addEventListener(ResProgressEvent.RES_LOAD_PROGRESS , gameInitResHandler );
 			ResourceUtil.instance.addEventListener("gameInitRes" , gameInitResHandler );
 			ResourceUtil.instance.queueLoad( "gameInitRes" , resVOs , 10 );

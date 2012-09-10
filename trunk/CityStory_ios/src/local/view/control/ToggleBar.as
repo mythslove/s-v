@@ -72,6 +72,7 @@ package local.view.control
 		{
 			addEventListener(MouseEvent.MOUSE_DOWN , onMouseHandler , false , 0  , true );
 			addEventListener(MouseEvent.MOUSE_UP , onMouseHandler , false , 0  , true );
+			addEventListener(MouseEvent.RELEASE_OUTSIDE,onMouseHandler , false , 0 , true );
 			addEventListener(MouseEvent.CLICK , onMouseHandler , false , 0  , true );
 		}
 		
@@ -106,6 +107,7 @@ package local.view.control
 		{
 			removeEventListener(MouseEvent.MOUSE_DOWN , onMouseHandler );
 			removeEventListener(MouseEvent.MOUSE_UP , onMouseHandler);
+			removeEventListener(MouseEvent.RELEASE_OUTSIDE , onMouseHandler);
 			removeEventListener(MouseEvent.CLICK , onMouseHandler );
 		}
 	}

@@ -7,8 +7,9 @@ package local.view.control
 	public class Button extends MovieClipView
 	{
 		protected var _enabled:Boolean = true ;
-		public function get enabled():Boolean {return _enabled;}
-		public function set enabled(value:Boolean):void {
+		override public function get enabled():Boolean {return _enabled;}
+		override public function set enabled(value:Boolean):void {
+			super.enabled = value ;
 			_enabled = value;
 			if(!value){
 				this.gotoAndStop("disabled");
@@ -29,8 +30,7 @@ package local.view.control
 		{
 			addEventListener(MouseEvent.MOUSE_DOWN , onMouseHandler , false , 0 , true );
 			addEventListener(MouseEvent.MOUSE_UP , onMouseHandler , false , 0 , true );
-//			addEventListener(MouseEvent.MOUSE_OUT , onMouseHandler , false , 0 , true );
-//			addEventListener(MouseEvent.ROLL_OUT , onMouseHandler , false , 0 , true );
+			addEventListener(MouseEvent.RELEASE_OUTSIDE,onMouseHandler , false , 0 , true );
 		}
 		
 		protected function onMouseHandler( e:MouseEvent ):void
@@ -51,8 +51,7 @@ package local.view.control
 		{
 			removeEventListener(MouseEvent.MOUSE_DOWN , onMouseHandler);
 			removeEventListener(MouseEvent.MOUSE_UP , onMouseHandler);
-//			removeEventListener(MouseEvent.MOUSE_OUT , onMouseHandler);
-//			removeEventListener(MouseEvent.ROLL_OUT , onMouseHandler );
+			removeEventListener(MouseEvent.RELEASE_OUTSIDE , onMouseHandler );
 		}
 	}
 }
