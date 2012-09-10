@@ -248,8 +248,7 @@ package  local.map
 				Multitouch.inputMode = MultitouchInputMode.TOUCH_POINT ;
 				this.addEventListener(TouchEvent.TOUCH_BEGIN , onTouchHandler ) ;
 				this.addEventListener(TouchEvent.TOUCH_MOVE , onTouchHandler ) ;
-				this.addEventListener(TouchEvent.TOUCH_END , onTouchHandler ) ;
-				this.addEventListener(TouchEvent.TOUCH_END , onTouchHandler , false,0,true ) ;
+				stage.addEventListener(TouchEvent.TOUCH_END , onTouchHandler ) ;
 			}else{
 				this.addEventListener(MouseEvent.MOUSE_WHEEL , onMouseWheelHandler);
 			}
