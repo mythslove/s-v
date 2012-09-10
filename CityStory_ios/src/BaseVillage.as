@@ -131,6 +131,8 @@ package
 			registerClassAlias( "LandVO" , LandVO );
 			registerClassAlias( "LevelVO" , LevelVO );
 			registerClassAlias( "StorageBuildingVO" , StorageBuildingVO );
+			registerClassAlias( "ExpandVO" , ExpandVO );
+			registerClassAlias( "ProductVO" , ProductVO );
 		}
 	}
 }
