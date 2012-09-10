@@ -30,10 +30,8 @@ package local.view.shop
 		public function set label(value:String):void
 		{
 			_label = value;
-			if(label){
-				name = label ;
-				this._label = label ;
-				this.txtLabel.text = label ;
+			if(_label){
+				this.txtLabel.text = _label ;
 			}
 		}
 
