@@ -16,7 +16,6 @@ package  local.view.base
 		
 		private function addedToStageHandler(event:Event):void 
 		{
-			removeEventListener(Event.ADDED_TO_STAGE, addedToStageHandler);
 			addEventListener(Event.REMOVED_FROM_STAGE , removedFromStageHandler,false,0,true);
 			addedToStage();
 		}

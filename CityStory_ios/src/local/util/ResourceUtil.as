@@ -33,6 +33,7 @@ package local.util
 			}
 			this.cdns = Vector.<String>(["res/"]); 
 			this.maxLoadNum = 8 ;
+			this.isRemote = false ;
 		}
 		public static function get instance():ResourceUtil
 		{
