@@ -49,7 +49,7 @@ package local.view.bottombar
 					marketBtn.visible = false ;
 					break ;
 				case marketBtn:
-					PopUpManager.instance.addQueuePopUp( ShopOverViewPopUp.instance );
+					PopUpManager.instance.addQueuePopUp( ShopOverViewPopUp.instance , true , 0 , 0 );
 					break ;
 			}
 		}
