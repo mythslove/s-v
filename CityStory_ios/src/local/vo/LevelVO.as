@@ -18,7 +18,6 @@ package local.vo
 			if( rewards){
 				var urlVar:URLVariables = new URLVariables();
 				urlVar.decode( rewards);
-				
 				return urlVar ;
 			}
 			return null ;
