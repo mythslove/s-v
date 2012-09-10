@@ -69,27 +69,42 @@ package local.view.control
 		
 		override protected function addedToStage():void
 		{
+			addEventListener(MouseEvent.MOUSE_DOWN , onMouseHandler , false , 0  , true );
+			addEventListener(MouseEvent.MOUSE_UP , onMouseHandler , false , 0  , true );
 			addEventListener(MouseEvent.CLICK , onMouseHandler , false , 0  , true );
 		}
 		
 		private function onMouseHandler( e:MouseEvent ):void
 		{
 			e.stopPropagation();
-			if(e.target is Button)
+			if(e.target is MovieClip)
 			{
-				var btn:Button = e.target as Button ;
-				selected = btn ;
-				if(!_toggleEvt){
-					_toggleEvt = new ToggleBarEvent(ToggleBarEvent.TOGGLE_CHANGE);
+				var btn:MovieClip = e.target as MovieClip ;
+				switch( e.type )
+				{
+					case MouseEvent.MOUSE_DOWN:
+						btn.gotoAndStop("down");
+						break ;
+					case MouseEvent.CLICK :
+						selected = btn ;
+						if(!_toggleEvt){
+							_toggleEvt = new ToggleBarEvent(ToggleBarEvent.TOGGLE_CHANGE);
+						}
+						_toggleEvt.selectedButton=btn;
+						_toggleEvt.selectedName = btn.toString() ;
+						this.dispatchEvent( _toggleEvt );
+						break ;
+					default:
+						btn.gotoAndStop("up");
+						break ;
 				}
-				_toggleEvt.selectedButton=btn;
-				_toggleEvt.selectedName = btn.toString() ;
-				this.dispatchEvent( _toggleEvt );
 			}
 		}
 		
 		override protected function removedFromStage():void
 		{
+			removeEventListener(MouseEvent.MOUSE_DOWN , onMouseHandler );
+			removeEventListener(MouseEvent.MOUSE_UP , onMouseHandler);
 			removeEventListener(MouseEvent.CLICK , onMouseHandler );
 		}
 	}
