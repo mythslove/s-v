@@ -1,8 +1,11 @@
 package local.view.shop
 {
+	import bing.utils.ContainerUtil;
+	
 	import com.greensock.TweenLite;
 	import com.greensock.easing.Back;
 	
+	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
@@ -13,24 +16,22 @@ package local.view.shop
 	import local.view.base.BaseView;
 	import local.view.btn.PopUpCloseButton;
 	
-	public class ShopOverViewPopUp extends BaseView
+	public class ShopPopUp extends BaseView
 	{
-		private static var _instance:ShopOverViewPopUp;
-		public static function get instance():ShopOverViewPopUp{
-			if(!_instance) _instance = new ShopOverViewPopUp();
+		private static var _instance:ShopPopUp;
+		public static function get instance():ShopPopUp{
+			if(!_instance) _instance = new ShopPopUp();
 			return _instance ;
 		}
 		//=====================================
 		public var btnClose:PopUpCloseButton ;
-		public var btnHomes:ShopTabButton ;
-		public var btnBusiness:ShopTabButton ;
-		public var btnDecor:ShopTabButton ;
+		public var container:Sprite;
 		//=====================================
 		
-		public function ShopOverViewPopUp(){
+		public function ShopPopUp()
+		{
 			super();
-			
-			addEventListener(MouseEvent.CLICK , onMouseHandler );
+			btnClose.addEventListener(MouseEvent.CLICK , onMouseHandler );
 		}
 		
 		override protected function addedToStage():void
@@ -49,10 +50,20 @@ package local.view.shop
 				case btnClose:
 					close();
 					break ;
-				case btnHomes:
-					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , false );
-					ShopPopUp.instance.show(BuildingType.HOME);
-					PopUpManager.instance.removeCurrentPopup() ;
+			}
+		}
+		
+		/**
+		 * 显示 
+		 * @param type BuildingType
+		 */		
+		public function show( type:String ):void
+		{
+			ContainerUtil.removeChildren( container );
+			switch( type )
+			{
+				case BuildingType.HOME:
+					container.addChild(HomePanel.instance) ;
 					break ;
 			}
 		}
@@ -61,12 +72,10 @@ package local.view.shop
 			mouseChildren=false;
 			TweenLite.to( this , 0.2 , { x:x+200 , ease: Back.easeIn , onComplete:onTweenCom});
 		}
-		
 		private function onTweenCom():void{
 			GameWorld.instance.run();
 			PopUpManager.instance.removeCurrentPopup() ;
 		}
-		
 		override protected function removedFromStage():void{
 			addEventListener(Event.ADDED_TO_STAGE,addedToStageHandler , false , 0 , true );
 		}
