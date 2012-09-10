@@ -12,6 +12,7 @@ package
 	
 	import local.comm.GameSetting;
 	import local.model.LandModel;
+	import local.model.PlayerModel;
 	import local.model.ShopModel;
 	import local.util.ResourceUtil;
 	import local.vo.*;
@@ -68,6 +69,7 @@ package
 			var bytes:ByteArray = e.resVO.resObject as ByteArray;
 			ShopModel.instance.parseConfig(  bytes.readObject() as Dictionary ) ;
 			LandModel.instance.expands = bytes.readObject() as Vector.<ExpandVO>;
+			PlayerModel.instance.levels =  bytes.readObject() as Dictionary ;
 			ResourceUtil.instance.deleteRes( "GameConfig");
 			loadRes();
 		}
