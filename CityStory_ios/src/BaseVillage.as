@@ -106,7 +106,7 @@ package
 			{
 				case ResProgressEvent.RES_LOAD_PROGRESS:
 					if((e as ResProgressEvent ).queueName=="gameInitRes"){
-						trace(  (e as ResProgressEvent ).loaded / (e as ResProgressEvent ).total *100 +"%"  );
+						trace( Math.ceil( (e as ResProgressEvent ).loaded / (e as ResProgressEvent ).total *100 )+"%"  );
 					}
 					break ;
 				case "gameInitRes":
