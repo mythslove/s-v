@@ -24,7 +24,7 @@ package local.vo
 		public var earnExp:int ;//可以收获的经验
 		public var time:int ; //生产时间 
 		
-		public var addCap:int ;//可以增加多少人口数量
+		public var addCap:int ;//可以增加多少人口容量
 		public var addPop:int ; //可以增加多少人口
 		
 		public var products:Vector.<ProductVO> ; //可以生产的商品，主要用于industry
