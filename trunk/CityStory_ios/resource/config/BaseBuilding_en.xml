@@ -9,4 +9,5 @@
 	<item name="Basic_Tree8" span="2" type="basic" click="2"/>
 	<item name="Road" title="Road" type="decoration" subClass="road"/>
 	<item name="Home1"  span="2" title="Home1" type="home"  click="3"/>
+	<item name="Home2"  span="2" title="Home2" type="home"  click="3"/>
 </baseBuilding>
