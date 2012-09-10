@@ -2,6 +2,7 @@ package local.view.shop
 {
 	import flash.display.MovieClip;
 	import flash.text.TextField;
+	import flash.text.TextFormat;
 	
 	public class ShopTabButton extends MovieClip
 	{
@@ -9,12 +10,18 @@ package local.view.shop
 		//=====================
 		
 		private var _label:String ;
+		private var _tf:TextFormat ;
 		
 		public function ShopTabButton( label:String = null )
 		{
 			super();
 			mouseChildren = false ;
 			stop();
+			
+			_tf = txtLabel.defaultTextFormat ;
+			_tf.bold = true ;
+			txtLabel.defaultTextFormat = _tf ;
+			
 			if(label){
 				name = label ;
 				this._label = label ;
@@ -38,6 +45,7 @@ package local.view.shop
 		override public function gotoAndStop(frame:Object, scene:String=null):void{
 			super.gotoAndStop(frame,scene);
 			if( txtLabel.text!=_label){
+				txtLabel.defaultTextFormat = _tf ;
 				txtLabel.text = _label ;
 			}
 		}
