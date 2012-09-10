@@ -1,7 +1,7 @@
 package local.vo
 {
 	import local.enum.QuestType;
-	import local.model.PlayerModel;
+	import local.util.QuestUtil;
 
 	public class QuestTaskVO
 	{
@@ -33,19 +33,14 @@ package local.vo
 		{
 			if ( current>0 ) return ;
 			
-//			switch( questType)
-//			{
-//				case QuestType.OWN_BUILDING:
-//					if(sonType){
-//						current = MapBuildingModel.instance.getCountByBaseId( sonType );
-//					}
-//					break ;
-//				case QuestType.PLAYER_PROPERTY:
-//					if(sonType){
-//						current = PlayerModel.instance.getProperty( sonType );
-//					}
-//					break;
-//			}
+			switch( questType)
+			{
+				case QuestType.OWN_BUILDING:
+					if(sonType){
+						current = QuestUtil.instance.getCountByName( sonType );
+					}
+					break ;
+			}
 		}
 	}
 }
