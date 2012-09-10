@@ -4,6 +4,7 @@ package local.model
 	
 	import flash.utils.Dictionary;
 	
+	import local.vo.ExpandVO;
 	import local.vo.LandVO;
 
 	/**
@@ -20,9 +21,13 @@ package local.model
 		}
 		//=======================================
 		
+		/** 所有的的地块的配置  */
+		public var expands:Vector.<ExpandVO> ;
+		
+		/** 当前玩家拥有的地钱 */
 		public var lands:Vector.<LandVO> ;
 		
-		//如果当前没有Land，则初始化四块地
+		/**如果当前没有Land，则初始化四块地**/
 		public function initLands():void
 		{
 			lands = new Vector.<LandVO>(7,true);

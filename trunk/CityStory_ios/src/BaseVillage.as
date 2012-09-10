@@ -11,6 +11,7 @@ package
 	import flash.utils.Dictionary;
 	
 	import local.comm.GameSetting;
+	import local.model.LandModel;
 	import local.model.ShopModel;
 	import local.util.ResourceUtil;
 	import local.vo.*;
@@ -66,6 +67,7 @@ package
 			ResourceUtil.instance.removeEventListener("GameConfig" , gameConfigHandler );
 			var bytes:ByteArray = e.resVO.resObject as ByteArray;
 			ShopModel.instance.parseConfig(  bytes.readObject() as Dictionary ) ;
+			LandModel.instance.expands = bytes.readObject() as Vector.<ExpandVO>;
 			ResourceUtil.instance.deleteRes( "GameConfig");
 			loadRes();
 		}
