@@ -11,6 +11,7 @@ package local.view.base
 		public function MovieClipView()
 		{
 			super();
+			stop();
 			addEventListener(Event.ADDED_TO_STAGE, addedToStageHandler,false,0,true);
 		}
 		
