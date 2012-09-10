@@ -57,6 +57,7 @@ package local.view.control
 			for( var i:int = 0 ; i <len ; ++i )
 			{
 				btn = value[i];
+				btn.stop();
 				btn.mouseChildren = false ;
 				if(layout==Layout.HORIZON){
 					btn.x = (btn.width+space)*i ;

@@ -144,6 +144,7 @@ package local.map
 			
 			GameData.villageMode=VillageMode.NORMAL ;
 			run() ;
+//			GameData.villageMode=VillageMode.EDIT ;
 		}
 		
 		
