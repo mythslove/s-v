@@ -30,6 +30,10 @@ package local.view.shop
 		public function ShopOverViewPopUp(){
 			super();
 			
+			btnHomes.label="Homes";
+			btnBusiness.label="Business";
+			btnDecor.label="Decor";
+			
 			addEventListener(MouseEvent.CLICK , onMouseHandler );
 		}
 		
