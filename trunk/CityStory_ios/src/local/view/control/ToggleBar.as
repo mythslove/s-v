@@ -2,15 +2,20 @@ package local.view.control
 {
 	import bing.utils.ContainerUtil;
 	
+	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
 	
 	import local.view.base.BaseView;
+
 	/**
 	 * 选择改变 
 	 */	
 	[Event(name="toggleChange", type="local.view.control.ToggleBarEvent")]
 	
-	
+	/**
+	 * 里面的按钮有三帧, up , down , selected-up 
+	 * @author zhouzhanglin
+	 */	
 	public class ToggleBar extends BaseView
 	{
 		/** 间距*/
@@ -18,14 +23,20 @@ package local.view.control
 		/** 排列方式 */
 		public var layout:String ;
 		
-		private var _selected:Button ;
-		public function get selected():Boolean{ return _selected ; }
-		public function set selected( value:Boolean):void {
+		private var _selected:MovieClip ;
+		public function get selected():MovieClip{ return _selected ; }
+		public function set selected( value:MovieClip):void {
 			if(_selected){
-				_selected.enabled = true ;
+				_selected.mouseEnabled = true ;
+				_selected.gotoAndStop("up");
 			}
 			_selected = value ;
-			_selected.enabled = value ;
+			_selected.mouseEnabled = value ;
+			if(value{
+				_selected.gotoAndStop("up");
+			}else{
+				_selected.gotoAndStop("selected-up");
+			}
 		}
 		
 		private var _toggleEvt:ToggleBarEvent ;
@@ -38,14 +49,15 @@ package local.view.control
 			this.layout = layout ;
 		}
 		
-		public function set buttons( value:Vector.<Button> ):void
+		public function set buttons( value:Vector.<MovieClip> ):void
 		{
 			ContainerUtil.removeChildren(this);
 			var len:int = value.length ;
-			var btn:Button ;
+			var btn:MovieClip ;
 			for( var i:int = 0 ; i <len ; ++i )
 			{
 				btn = value[i];
+				btn.mouseChildren = false ;
 				if(layout==Layout.HORIZON){
 					btn.x = (btn.width+space)*i ;
 				}else if(layout==Layout.VERTICAL){
