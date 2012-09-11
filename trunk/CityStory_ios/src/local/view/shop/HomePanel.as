@@ -5,6 +5,7 @@ package local.view.shop
 	
 	import local.view.control.ToggleBar;
 	import local.view.control.ToggleBarEvent;
+	import local.view.btn.TabMenuButton;
 	
 	public class HomePanel extends Sprite
 	{
@@ -32,7 +33,7 @@ package local.view.shop
 			
 			mainTypeBar = new ToggleBar();
 			var mcs:Vector.<MovieClip>= Vector.<MovieClip>([
-				new ShopTabButton("ALL") ,new ShopTabButton("RESIDENCE"),new ShopTabButton("CONDOS") ,new ShopTabButton("MANSIONS") 
+				new TabMenuButton("ALL") ,new TabMenuButton("RESIDENCE"),new TabMenuButton("CONDOS") ,new TabMenuButton("MANSIONS") 
 			]);
 			mainTypeBar.buttons = mcs ;
 			addChild(mainTypeBar);
