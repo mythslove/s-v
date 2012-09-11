@@ -22,5 +22,11 @@ package  local.view.base
 		protected function removedFromStageHandler( e:Event ):void
 		{
 		}
+		
+		protected function dispose():void
+		{
+			removeEventListener(Event.ADDED_TO_STAGE, addedToStageHandler);
+			removeEventListener(Event.REMOVED_FROM_STAGE , removedFromStageHandler);
+		}
 	}
 }
