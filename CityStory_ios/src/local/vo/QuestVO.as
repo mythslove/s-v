@@ -4,17 +4,20 @@ package local.vo
 
 	public class QuestVO
 	{
-		public var qid:String ; //任务的id
-		public var title:String ; //标题
-		public var info:String ; //描述
-		public var icon:String ; //icon名称 
-		public var completeMsg:String ; //任务完成后的描述
+		public var qid:String  ; //任务的id
+		public var title:String ="" ; //标题
+		public var info:String =""  ; //描述
+		public var icon:String =""  ; //icon名称 
+		public var completeMsg:String ="" ; //任务完成后的描述
 		
 		public var received:Boolean ;//是否已经拿过奖励了
 		public var isComplete:Boolean; //是否完成任务
 		public var acceptTime:Number ; //接受任务的时间
 		public var tasks:Array ; //所有的QuestTaskVO 
-		public var rewards:String; //完成任务后的奖励
+		public var rewards:String ="" ; //完成任务后的奖励 , URLVariable 类型, eg :  cash=3&coin=10&exp=20&Ticket=3
+		
+		public var restrictLevel:int =0; //要求玩家的等级
+		public var restrictQuest:Array ; //前置quest的id
 		
 		private var _isAccept:Boolean  ; //是否接受任务
 		/** 是否接受了这个quest */
@@ -34,17 +37,6 @@ package local.vo
 				}
 			}
 		}
-		
-		//=======获得此quest的条件===========
-		
-		public var restrictLevel:int =0; //要求玩家的等级
-		
-		public var restrictQuest:Array ; //前置quest的id
-		
-		
-		
-		
-		
 		
 		/**
 		 * 返回完成了的QuestTaskVO数量 
