@@ -1,7 +1,8 @@
 package local.vo
 {
 	import local.enum.QuestType;
-	import local.model.QuestModel;
+	import local.model.BuildingModel;
+	import local.model.ShopModel;
 
 	public class QuestTaskVO
 	{
@@ -42,12 +43,18 @@ package local.vo
 		public function init( acceptTime:int ):void
 		{
 			if ( current>0 ) return ;
-			
+			var model:BuildingModel = BuildingModel.instance ;
 			switch( questType)
 			{
 				case QuestType.OWN_BUILDING:
 					if(sonType){
-						current = QuestModel.instance.getCountByName( sonType );
+						var baseVO:BaseBuildingVO = ShopModel.instance.allBuildingHash[sonType] as BaseBuildingVO ;
+						current = model.getCountByName( baseVO.type , baseVO.name ) ;
+					}
+					break ;
+				case QuestType.OWN_TYPE:
+					if(sonType){
+						current = model.getCountByType( sonType ) ;
 					}
 					break ;
 			}

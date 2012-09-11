@@ -45,14 +45,10 @@ package local.util
 						switch( questType)
 						{
 							case QuestType.OWN_BUILDING:
-								for each( var bvo:BuildingVO in arr)
-									if(bvo.name==sonType && bvo.status!=BuildingStatus.BUILDING ) 
-										++num;
+								num = BuildingModel.instance.getCountByName( questType , sonType ) ;
 								break ;
 							case QuestType.OWN_TYPE:
-								for each( bvo in arr)
-									if(bvo.status!=BuildingStatus.BUILDING ) 
-										++num;
+								num = BuildingModel.instance.getCountByType questType ) ;
 								break ;
 						}
 						if( updateSetCount( vo , questType , sonType , num ) ){

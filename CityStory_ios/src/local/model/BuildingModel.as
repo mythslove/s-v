@@ -1,5 +1,6 @@
 package local.model
 {
+	import local.enum.BuildingStatus;
 	import local.enum.BuildingType;
 	import local.map.item.BaseBuilding;
 	import local.vo.BuildingVO;
@@ -153,6 +154,59 @@ package local.model
 					break ;
 			}
 			return arr ;
+		}
+		
+		
+		
+		
+		/**
+		 * 返回数量 
+		 * @param type 建筑的类型
+		 * @param excludeBuilding 是否排除正在修建的建筑
+		 * @return 
+		 */		
+		public function getCountByType( type:String , excludeBuilding:Boolean=true ):int
+		{
+			var arr:Vector.<BuildingVO> = getArrByType( type );
+			if(arr){
+				if(excludeBuilding){
+					var count:int ;
+					for each( var vo:BuildingVO in arr){
+						if( vo.status!=BuildingStatus.BUILDING){
+							++count ;
+						}
+					}
+					return count ;
+				}
+				else
+				{
+					return arr.length ;
+				}
+			}
+			return 0;
+		}
+		
+		/**
+		 * 通过名字和类型来获得类型 
+		 * @param type
+		 * @param name
+		 * @param excludeBuilding
+		 * @return 
+		 */		
+		public function getCountByName( type:String , name:String , excludeBuilding:Boolean=true ):int
+		{
+			var count:int;
+			var arr:Vector.<BuildingVO> = getArrByType( type );
+			if(arr){
+				for each( var vo:BuildingVO in arr){
+					if( name==vo.name){
+						if( !excludeBuilding  ||  vo.status!=BuildingStatus.BUILDING ){
+							++count ;
+						}
+					}
+				}
+			}
+			return count;
 		}
 	}
 }
