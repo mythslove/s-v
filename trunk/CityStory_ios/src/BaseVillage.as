@@ -141,6 +141,7 @@ package
 			registerClassAlias( "StorageBuildingVO" , StorageBuildingVO );
 			registerClassAlias( "ExpandVO" , ExpandVO );
 			registerClassAlias( "ProductVO" , ProductVO );
+			registerClassAlias( "ComponentVO" , ComponentVO );
 		}
 	}
 }
