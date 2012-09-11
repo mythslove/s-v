@@ -1,10 +1,10 @@
-package local.view.shop
+package local.view.btn
 {
 	import flash.display.MovieClip;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	
-	public class ShopTabButton extends MovieClip
+	public class TabMenuButton extends MovieClip
 	{
 		public var txtLabel:TextField ;
 		//=====================
@@ -12,7 +12,7 @@ package local.view.shop
 		private var _label:String ;
 		private var _tf:TextFormat ;
 		
-		public function ShopTabButton( label:String = null )
+		public function TabMenuButton( label:String = null )
 		{
 			super();
 			mouseChildren = false ;

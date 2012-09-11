@@ -12,6 +12,7 @@ package local.view.shop
 	import local.util.PopUpManager;
 	import local.view.base.BaseView;
 	import local.view.btn.PopUpCloseButton;
+	import local.view.btn.TabMenuButton;
 	
 	public class ShopOverViewPopUp extends BaseView
 	{
@@ -22,9 +23,9 @@ package local.view.shop
 		}
 		//=====================================
 		public var btnClose:PopUpCloseButton ;
-		public var btnHomes:ShopTabButton ;
-		public var btnBusiness:ShopTabButton ;
-		public var btnDecor:ShopTabButton ;
+		public var btnHomes:TabMenuButton ;
+		public var btnBusiness:TabMenuButton ;
+		public var btnDecor:TabMenuButton ;
 		//=====================================
 		
 		public function ShopOverViewPopUp(){
