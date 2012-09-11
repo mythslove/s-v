@@ -13,21 +13,15 @@ package local.view.base
 			super();
 			stop();
 			addEventListener(Event.ADDED_TO_STAGE, addedToStageHandler,false,0,true);
+			addEventListener(Event.REMOVED_FROM_STAGE , removedFromStageHandler,false,0,true);
 		}
 		
-		protected function addedToStageHandler(event:Event):void 
+		protected function addedToStageHandler(e:Event):void 
 		{
-			removeEventListener(Event.ADDED_TO_STAGE, addedToStageHandler);
-			addEventListener(Event.REMOVED_FROM_STAGE , removedFromStageHandler,false,0,true);
-			addedToStage();
 		}
-		protected function addedToStage():void { }
 		
 		protected function removedFromStageHandler( e:Event ):void
 		{
-			removeEventListener(Event.REMOVED_FROM_STAGE , removedFromStageHandler);
-			removedFromStage();
 		}
-		protected function removedFromStage():void { }
 	}
 }

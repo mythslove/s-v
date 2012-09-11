@@ -64,7 +64,7 @@ package local.view.control
 			}
 		}
 		
-		override protected function addedToStage():void
+		override protected function addedToStageHandler(e:Event):void
 		{
 			addEventListener(MouseEvent.MOUSE_DOWN , onMouseHandler , false , 0  , true );
 			addEventListener(MouseEvent.MOUSE_UP , onMouseHandler , false , 0  , true );
@@ -97,13 +97,12 @@ package local.view.control
 			}
 		}
 		
-		override protected function removedFromStage():void
+		override protected function removedFromStageHandler( e:Event ):void
 		{
 			removeEventListener(MouseEvent.MOUSE_DOWN , onMouseHandler );
 			removeEventListener(MouseEvent.MOUSE_UP , onMouseHandler);
 			removeEventListener(MouseEvent.RELEASE_OUTSIDE , onMouseHandler);
 			removeEventListener(MouseEvent.CLICK , onMouseHandler );
-			addEventListener(Event.ADDED_TO_STAGE, addedToStageHandler,false,0,true);
 		}
 	}
 }

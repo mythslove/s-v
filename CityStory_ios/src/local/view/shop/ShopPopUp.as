@@ -34,7 +34,7 @@ package local.view.shop
 			btnClose.addEventListener(MouseEvent.CLICK , onMouseHandler );
 		}
 		
-		override protected function addedToStage():void
+		override protected function addedToStageHandler( e:Event ):void
 		{
 			mouseChildren=true;
 			GameWorld.instance.stopRun();
@@ -75,9 +75,6 @@ package local.view.shop
 		private function onTweenCom():void{
 			GameWorld.instance.run();
 			PopUpManager.instance.removeCurrentPopup() ;
-		}
-		override protected function removedFromStage():void{
-			addEventListener(Event.ADDED_TO_STAGE,addedToStageHandler , false , 0 , true );
 		}
 	}
 }
