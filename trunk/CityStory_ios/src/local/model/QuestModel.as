@@ -1,8 +1,15 @@
 package local.model
 {
+	import flash.utils.Dictionary;
+	
 	import local.enum.BuildingType;
+	import local.vo.PlayerVO;
 	import local.vo.QuestVO;
 
+	/**
+	 * 任务的数据 
+	 * @author zhouzhanglin
+	 */	
 	public class QuestModel
 	{
 		private static var _instance:QuestModel;
@@ -13,7 +20,87 @@ package local.model
 		}
 		//=================================
 		
-		public var currentQuests:Vector.<QuestVO> ;
+		private const MAX_COUNT:int = 8 ; //最多读取前8个quests
+		
+		/** quest的hash，key为qid，value为questVO*/
+		private var _questHash:Dictionary ;
+		
+		/** 所有的quest */
+		public var allQuestArray:Vector.<QuestVO> ; 
+		
+		/** 当前的quests */
+		public var currentQuests:Vector.<QuestVO>=new Vector.<QuestVO>() ;
+		
+		/** 完成了的quests ，key为qid，value为questVO*/
+		public var completedQuests:Dictionary = new Dictionary() ;
+		
+		
+		
+		
+		/**
+		 * 获得当前最新的quests
+		 * @return 
+		 */		
+		public function getCurrentQuests():Vector.<QuestVO>
+		{
+			var vo:QuestVO;
+			for(var i:int = 0 ; i<currentQuests.length ; ++i){
+				if(currentQuests[i].received){
+					currentQuests.splice(i,1);
+					i--;
+				}
+			}
+			var len:int = allQuestArray.length ;
+			for ( i = 0 ; i<len && currentQuests.length<MAX_COUNT ; ++i ) {
+				vo = allQuestArray[i] ;
+				if( checkCondition(vo) ){
+					currentQuests.push( vo );
+				}
+			}
+			return currentQuests;
+		}
+		
+		/*判断是否可以接受这个quest*/
+		private function checkCondition( vo:QuestVO ):Boolean
+		{
+			for each( var qvo:QuestVO in currentQuests){
+				if(qvo.qid==vo.qid){
+					return false ;
+				}
+			}
+			if(!completedQuests[vo.qid]) //任务没有完成
+			{
+				var me:PlayerVO = PlayerModel.instance.me ;
+				if(me.level>=vo.restrictLevel) //玩家等级符合
+				{
+					if(vo.restrictQuest) { //判断前置quest是否完成
+						var len:int = vo.restrictQuest.length;
+						for(var i:int = 0 ; i<len ; ++i){
+							if(!completedQuests[ vo.restrictQuest[i] ]){
+								return false ;
+							}
+						}
+						return true ;
+					}
+					return true ;
+				}
+			}
+			return false ;
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		/**
 		 * 返回地图上的建筑数量 
@@ -62,44 +149,5 @@ package local.model
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		/**
-		 * 统计任务项 
-		 * @param questType
-		 * @param sonType
-		 * @param num
-		 * @param time 时间限制
-		 */		
-		public function updateQuests( questType:String , sonType:String = "" , num:int = 1 , time:Number= NaN  ):void
-		{
-			if(currentQuests)
-			{
-				for each( var vo:QuestVO in currentQuests)
-				{
-					if( vo.isAccept && !vo.isComplete && vo.update(questType , sonType , num , time ) )
-					{
-						//判断是否有完成的quest
-						checkCompleteQuest() ;
-					}
-				}
-			}
-		}
-		
-		/**判断是否有完成了的任务*/
-		public function checkCompleteQuest():void
-		{
-			for each( var vo:QuestVO in currentQuests)
-			{
-				if(vo.isAccept  && !vo.isComplete && vo.checkComplete()  ){
-					vo.isComplete=true;
-					
-				}
-			}
-		}
 	}
 }

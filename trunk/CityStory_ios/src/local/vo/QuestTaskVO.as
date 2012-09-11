@@ -6,14 +6,24 @@ package local.vo
 	public class QuestTaskVO
 	{
 		public var questId:String ; 
-		public var current:int ; //当前多少个
 		public var sum:int=1 ; //总共需要多少个
-		public var title:String ; //标题
+		public var title:String ="" ; //标题
+		public var info:String ="" ;
 		public var skipCash:int ; //跳过这个任务需要的钱，如果为0，则不判断这个
 		public var isSkipped:Boolean ; //是否跳过
 		
-		public var questType:String ; //任务的类型
-		public var sonType:String ; //子类型
+		public var questType:String="" ; //任务的类型
+		public var sonType:String="" ; //子类型
+		
+		private var _current:int ; //当前多少个
+		
+		/** 当前数量*/
+		public function get current():int {
+			if ( _current<0) _current = 0;
+			return _current;
+		}
+		public function set current(value:int):void { _current = value; }
+		
 		
 		/**
 		 * 这个item是否完成 
@@ -42,5 +52,6 @@ package local.vo
 					break ;
 			}
 		}
+		
 	}
 }
