@@ -121,5 +121,38 @@ package local.model
 				}
 			}
 		}
+		
+		
+		/**
+		 * 通过类型获得数组 
+		 * @param buildingType
+		 * @return 
+		 */		
+		public function getArrByType( buildingType:String ):Vector.<BuildingVO>
+		{
+			var arr:Vector.<BuildingVO> ;
+			switch( buildingType)
+			{
+				case BuildingType.HOME:
+					arr = homes ;
+					break ;
+				case BuildingType.BUSINESS:
+					arr = homes ;
+					break ;
+				case BuildingType.WONDERS:
+					arr = homes ;
+					break ;
+				case BuildingType.INDUSTRY:
+					arr = homes ;
+					break ;
+				case BuildingType.DECORATION:
+					arr = homes ;
+					break ;
+				case BuildingType.COMMUNITY:
+					arr = homes ;
+					break ;
+			}
+			return arr ;
+		}
 	}
 }

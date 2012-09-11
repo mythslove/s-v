@@ -1,8 +1,12 @@
 package local.util
 {
 	import local.comm.GlobalDispatcher;
+	import local.enum.BuildingStatus;
+	import local.enum.QuestType;
 	import local.event.QuestEvent;
+	import local.model.BuildingModel;
 	import local.model.QuestModel;
+	import local.vo.BuildingVO;
 	import local.vo.QuestTaskVO;
 	import local.vo.QuestVO;
 
@@ -20,23 +24,62 @@ package local.util
 		}
 		//=================================
 		
-		
-		
-		
+		/**
+		 * 处理OwnBuilding和OwnType这两种任务 
+		 * @param questType
+		 * @param sonType
+		 */		
+		public function handleOwn( questType:String , sonType:String ):void
+		{
+			var isUpdate:Boolean ;
+			var currentQuests:Vector.<QuestVO> = QuestModel.instance.currentQuests ;
+			//循环数组，判断是否有接受了该类任务，并且没有完成，则在此任务的相应类型数量上减1
+			var arr:Vector.<BuildingVO> = BuildingModel.instance.getArrByType( sonType );
+			var num:int ;
+			if(arr){
+				for each( var vo:QuestVO in currentQuests)
+				{
+					if( vo.isAccept && !vo.isComplete )
+					{
+						num = 0 ;
+						switch( questType)
+						{
+							case QuestType.OWN_BUILDING:
+								for each( var bvo:BuildingVO in arr)
+									if(bvo.name==sonType && bvo.status!=BuildingStatus.BUILDING ) 
+										++num;
+								break ;
+							case QuestType.OWN_TYPE:
+								for each( bvo in arr)
+									if(bvo.status!=BuildingStatus.BUILDING ) 
+										++num;
+								break ;
+						}
+						if( updateSetCount( vo , questType , sonType , num ) ){
+							isUpdate = true ;
+						}
+					}
+				}
+			}
+			
+			if(isUpdate) checkAllQuests();
+		}
 		
 		
 		
 		public function handleAddCount( questType:String , sonType:String = "" , num:int = 1 ):void
 		{
+			var isUpdate:Boolean ;
 			var currentQuests:Vector.<QuestVO> = QuestModel.instance.currentQuests ;
 			//循环数组，判断是否有接受了该类任务，并且没有完成，则在此任务的相应类型数量上减1
 			for each( var vo:QuestVO in currentQuests)
 			{
-				if( vo.isAccept && !vo.received && !vo.isComplete &&updateAddCount( vo , questType , sonType , num) )
+				if( vo.isAccept && !vo.isComplete && updateAddCount( vo , questType , sonType , num) )
 				{
-					checkAllQuests(); //判断是否有完成的quest
+					isUpdate = true ;
 				}
 			}
+			if(isUpdate) checkAllQuests();
 		}
 		
 		/**
@@ -47,7 +90,7 @@ package local.util
 			var currentQuests:Vector.<QuestVO> = QuestModel.instance.currentQuests ;
 			for each( var vo:QuestVO in currentQuests )
 			{
-				if( vo.isAccept && !vo.isComplete && !vo.received && checkComplete(vo) ){
+				if( vo.isAccept && !vo.isComplete && checkComplete(vo) ){
 					vo.isComplete = true ;
 					//抛出quest完成事件 
 					var evt:QuestEvent = new QuestEvent(QuestEvent.QUEST_COMPLETE);
@@ -72,6 +115,7 @@ package local.util
 		
 		
 		//============下面是判断一个QuestVO=========================
+		
 		
 		/**
 		 * 判断是否完成此quest所有的tasks
@@ -148,12 +192,14 @@ package local.util
 				{
 					if ( sonType ){
 						if ( !task.sonType || task.sonType == sonType ){
+							if(task.current!=num)  
+								isUpdate = true ;
 							task.current = num;
-							isUpdate = true ;
 						}
 					}else {
+						if(task.current!=num)  
+							isUpdate = true ;
 						task.current =num;
-						isUpdate = true ;
 					}
 				}
 			}
