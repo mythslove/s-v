@@ -55,7 +55,6 @@ package local.util
 					GlobalDispatcher.instance.dispatchEvent( evt );
 				}
 			}
-			
 		}
 		
 		
@@ -72,7 +71,7 @@ package local.util
 		
 		
 		
-		
+		//============下面是判断一个QuestVO=========================
 		
 		/**
 		 * 判断是否完成此quest所有的tasks

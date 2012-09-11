@@ -306,9 +306,8 @@ package  local.map
 								
 								// scale
 								var sizeDiff:Number = currentVector.length / previousVector.length;
-								sizeDiff = sizeDiff>1 ? 1+(sizeDiff-1)*.25 : 1-(1-sizeDiff)*.25 ;
+								sizeDiff = sizeDiff>1 ? 1+(sizeDiff-1)*.15 : 1-(1-sizeDiff)*.15 ;
 								changeWorldScale( sizeDiff , _middle.x , _middle.y );
-								
 							}
 						}
 					}
@@ -354,7 +353,7 @@ package  local.map
 		/**修改地图的缩放值和地图的位置*/
 		protected function changeWorldScale( value:Number , px:Number , py:Number ):void
 		{
-			if(scaleX*value>GameSetting.minZoom && scaleX*value<2) {
+			if(scaleX*value>GameSetting.minZoom && scaleX*value<2.5) {
 				var m:Matrix = this.transform.matrix;
 				m.tx -= px;
 				m.ty -= py;
