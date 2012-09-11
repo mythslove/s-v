@@ -10,6 +10,7 @@
 			private var allBuildingHash:Dictionary ;
 			private var expands:Vector.<ExpandVO> ;
 			private var levelHash:Dictionary ;
+			private var compHash:Dictionary ;
 			
 			private var file:File ;
 			
@@ -230,10 +231,59 @@
 			
 			
 			
-			
-			
-			
-			
+			private function selectComp():void
+			{
+				file = new File();
+				file.addEventListener(Event.SELECT , onSelectedCompFile );
+				file.browseForOpen("选择Component配置文件" , [ new FileFilter("Component配置文件(XML)","*.xml;*.XML")] );
+			}
+			private function onSelectedCompFile(e:Event):void{
+				file.removeEventListener(Event.SELECT , onSelectedCompFile );
+				txtComp.text = file.name ;
+				compHash =new Dictionary();
+				
+				var stream:FileStream = new FileStream();
+				stream.open( file,FileMode.READ );
+				var bytes:ByteArray = new ByteArray();
+				stream.readBytes( bytes);
+				bytes.position =0  ;
+				var config:XML = XML( bytes.toString());
+				if( config)
+				{
+					var len:int = config.item.length();
+					var item:* ;
+					for( var i:int = 0 ; i<len ; ++i )
+					{
+						var compVO:ComponentVO = new ComponentVO();
+						item = config.item[i];
+						var attNamesList:XMLList = item.@*;
+						for (var j:int = 0; j < attNamesList.length(); j++)
+						{ 
+							var key:String = attNamesList[j].name() ;
+							if( compVO.hasOwnProperty(key)){
+								switch(typeof  compVO[key])
+								{
+									case "string":
+										compVO[key] = String( attNamesList[j] );
+										break ;
+									case "int":
+										compVO[key] = String( attNamesList[j] );
+										break ;
+									case "number":
+										compVO[key] = Number( attNamesList[j] );
+										break;
+								}
+								
+							}
+						} 
+						compHash[compVO.name] = compVO ;
+					}
+				}
+				else
+				{
+					trace("没有玩家升级数据");
+				}
+			}
 			
 			
 			
@@ -260,6 +310,7 @@
 				stream.writeObject( allBuildingHash );
 				stream.writeObject( expands );
 				stream.writeObject( levelHash );
+				stream.writeObject( compHash );
 				stream.close();
 				Alert.show("导出成功！");
 			}
@@ -279,4 +330,7 @@
 	<s:TextInput id="txtLevel" x="19" y="164" width="288" enabled="false"/>
 	<s:Button x="320" y="104" label="选择" click="selectExpand()"/>
 	<s:Button x="320" y="164" label="选择" click="selectLevel()"/>
+	<s:Label x="20" y="206" text="Component配置"/>
+	<s:TextInput id="txtComp" x="19" y="224" width="288" enabled="false"/>
+	<s:Button x="320" y="224" label="选择" click="selectComp()"/>
 </s:WindowedApplication>
