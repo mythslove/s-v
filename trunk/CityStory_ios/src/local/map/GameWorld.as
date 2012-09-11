@@ -139,6 +139,23 @@ package local.map
 			buildingScene.addBuilding( building, false);
 			
 			
+			bvo = new BuildingVO();
+			bvo.name = "Yellow Victorian House";
+			bvo.baseVO = baseVO ;
+			bvo.nodeX = 8*4   ;
+			bvo.nodeZ = 10*4-2 ;
+			building= BuildingFactory.createBuildingByVO( bvo ) ;
+			buildingScene.addBuilding( building, false);
+			
+			bvo = new BuildingVO();
+			bvo.name = "My House";
+			bvo.baseVO = baseVO ;
+			bvo.nodeX = 9*4   ;
+			bvo.nodeZ = 9*4+1 ;
+			building= BuildingFactory.createBuildingByVO( bvo ) ;
+			buildingScene.addBuilding( building, false);
+			
+			
 			
 			buildingScene.sortAll();
 			
