@@ -1,5 +1,7 @@
 package local.vo
 {
+	import flash.net.URLVariables;
+	
 	import local.enum.BuildingType;
 
 	public class BaseBuildingVO
@@ -22,6 +24,7 @@ package local.vo
 		public var goodsCost:int ; //生产需要的goods数量
 		public var earnCoin:int ; //可以收获的钱
 		public var earnExp:int ;//可以收获的经验
+		public var earnComps:String = "";//会掉落的Componet , 格式 Ticket=3&TicketRate=0.2
 		public var time:int ; //生产时间 
 		
 		public var addCap:int ;//可以增加多少人口容量
@@ -62,6 +65,20 @@ package local.vo
 					break ;
 			}
 			return null;
+		}
+		
+		private var _buildCompoents:URLVariables ;
+		/** 修建时需要的components */
+		public function get buildCompoents():URLVariables {
+			if(!_buildCompoents) _buildCompoents = new URLVariables( buildComps);
+			return _buildCompoents ;
+		}
+		
+		private var _earnCompoents:URLVariables ;
+		/** 掉落的components */
+		public function get earnCompoents():URLVariables {
+			if(!_earnCompoents) _earnCompoents = new URLVariables( buildComps);
+			return _earnCompoents ;
 		}
 	}
 }
