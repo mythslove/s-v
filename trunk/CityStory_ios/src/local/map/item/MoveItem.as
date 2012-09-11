@@ -28,7 +28,7 @@ package local.map.item
 			[ new Point(0,5) , new Point(45,25) , new Point(0,45) , new Point(-45,25) ]
 		);
 		public static const CAR_ROADS:Vector.<Point>= Vector.<Point>(
-			[  new Point(0,15) , new Point(20,25) , new Point(0,35) , new Point(-20,25) ]
+			[  new Point(0,15) , new Point(23,25) , new Point(0,35) , new Point(-23,25) ]
 		);
 		
 		protected var _speed:Number = 0.3 ;

@@ -10,7 +10,7 @@ package local.vo
 		public var type:String = "home" ; //主类型
 		public var subClass:String="" ; //子类型
 		
-		public var buildComp:String ="" ; //修建时需要的 Compoent名称
+		public var buildComps:String ="" ; //修建时需要的 Compoents , URLVariable 格式, eg: Ticket=3&Flowers=6
 		public var requirePop:int ; //购买时需要的人口要求
 		public var requireLv:int ; //购买需要玩家的等级要求
 		public var priceCoin:int ;//购买需要的金币
