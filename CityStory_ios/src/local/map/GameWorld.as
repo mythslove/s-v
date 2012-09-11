@@ -119,11 +119,11 @@ package local.map
 			
 			//添加home1
 			baseVO = new BaseBuildingVO();
-			baseVO.name="Home1";
-			baseVO.type=BuildingType.HOME ;
+			baseVO.name="Apple Shop";
+			baseVO.type=BuildingType.BUSINESS ;
 			baseVO.span = 2 ;
 			var bvo:BuildingVO = new BuildingVO();
-			bvo.name = "Home1";
+			bvo.name = "Apple Shop";
 			bvo.baseVO = baseVO ;
 			bvo.nodeX = 9*4   ;
 			bvo.nodeZ = 8*4+1 ;
@@ -131,7 +131,7 @@ package local.map
 			buildingScene.addBuilding( building, false);
 			
 			bvo = new BuildingVO();
-			bvo.name = "Home2";
+			bvo.name = "Red Victorian House";
 			bvo.baseVO = baseVO ;
 			bvo.nodeX = 9*4   ;
 			bvo.nodeZ = 10*4-2 ;

@@ -18,18 +18,18 @@ package local.enum
 		public static const BUILD:String = "build";
 		
 		/**
-		 * 普通收获的次数 
+		 * 普通收获的次数 , sonType可以为BuildingType，如果没有，则为全部
 		 */		
-		public static const COLLECT_COIN:String = "collectcoin";
-		
-		/**
-		 * 收获goods的次数 
-		 */		
-		public static const COLLECT_GOODS:String = "collectgoods";
+		public static const COLLECT:String = "collect";
 		
 		/**
 		 * 砍树的数量 
 		 */		
 		public static const CHOP:String = "chop";
+		
+		/**
+		 * 放置建筑 , sonType为 name
+		 */		
+		public static const PLACE:String = "place";
 	}
 }
