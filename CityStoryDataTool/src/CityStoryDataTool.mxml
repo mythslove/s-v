@@ -19,6 +19,7 @@
 				registerClassAlias("ProductVO" , ProductVO ) ;
 				registerClassAlias("ExpandVO" , ExpandVO ) ;
 				registerClassAlias("LevelVO" , LevelVO ) ;
+				registerClassAlias("ComponentVO" , ComponentVO ) ;
 			}
 			
 			private function selectBBV():void
