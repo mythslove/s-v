@@ -1,5 +1,7 @@
 package local.view
 {
+	import flash.events.Event;
+	
 	import local.comm.GameSetting;
 	import local.util.PopUpManager;
 	import local.view.base.BaseView;
@@ -26,7 +28,7 @@ package local.view
 			mouseEnabled = false ;	
 		}
 		
-		override protected function addedToStage():void
+		override protected function addedToStageHandler(e:Event):void
 		{
 			bottomBar = new BottomBar();
 			bottomBar.y=GameSetting.SCREEN_HEIGHT;

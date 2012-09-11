@@ -1,5 +1,6 @@
 package local.view.control
 {
+	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
 	import local.view.base.MovieClipView;
@@ -26,7 +27,7 @@ package local.view.control
 			mouseChildren = false ;
 		}
 
-		override protected function addedToStage():void
+		override protected function addedToStageHandler( e:Event ):void
 		{
 			addEventListener(MouseEvent.MOUSE_DOWN , onMouseHandler , false , 0 , true );
 			addEventListener(MouseEvent.MOUSE_UP , onMouseHandler , false , 0 , true );
@@ -47,7 +48,7 @@ package local.view.control
 			}
 		}
 		
-		override protected function removedFromStage():void
+		override protected function removedFromStageHandler(e:Event):void
 		{
 			removeEventListener(MouseEvent.MOUSE_DOWN , onMouseHandler);
 			removeEventListener(MouseEvent.MOUSE_UP , onMouseHandler);

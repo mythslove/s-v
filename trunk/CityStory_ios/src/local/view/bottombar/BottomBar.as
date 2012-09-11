@@ -1,5 +1,6 @@
 package local.view.bottombar
 {
+	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
 	import local.comm.GameData;
@@ -21,7 +22,7 @@ package local.view.bottombar
 			mouseEnabled = false ;
 		}
 		
-		override protected function addedToStage():void
+		override protected function addedToStageHandler( e:Event ):void
 		{
 			editorBtn = new EditorButton();
 			editorBtn.x = GameSetting.SCREEN_WIDTH-200 ;
