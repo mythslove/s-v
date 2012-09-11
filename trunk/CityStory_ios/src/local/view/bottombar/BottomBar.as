@@ -24,6 +24,7 @@ package local.view.bottombar
 		
 		override protected function addedToStageHandler( e:Event ):void
 		{
+			super.addedToStageHandler(e);
 			editorBtn = new EditorButton();
 			editorBtn.x = GameSetting.SCREEN_WIDTH-200 ;
 			editorBtn.y = - 80 ;

@@ -29,6 +29,7 @@ package local.view.control
 
 		override protected function addedToStageHandler( e:Event ):void
 		{
+			super.addedToStageHandler(e);
 			addEventListener(MouseEvent.MOUSE_DOWN , onMouseHandler , false , 0 , true );
 			addEventListener(MouseEvent.MOUSE_UP , onMouseHandler , false , 0 , true );
 			addEventListener(MouseEvent.RELEASE_OUTSIDE,onMouseHandler , false , 0 , true );
@@ -50,6 +51,7 @@ package local.view.control
 		
 		override protected function removedFromStageHandler(e:Event):void
 		{
+			super.removedFromStageHandler(e);
 			removeEventListener(MouseEvent.MOUSE_DOWN , onMouseHandler);
 			removeEventListener(MouseEvent.MOUSE_UP , onMouseHandler);
 			removeEventListener(MouseEvent.RELEASE_OUTSIDE , onMouseHandler );

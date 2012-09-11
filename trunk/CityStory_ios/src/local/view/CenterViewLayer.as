@@ -30,6 +30,7 @@ package local.view
 		
 		override protected function addedToStageHandler(e:Event):void
 		{
+			super.addedToStageHandler(e);
 			bottomBar = new BottomBar();
 			bottomBar.y=GameSetting.SCREEN_HEIGHT;
 			addChild(bottomBar);
