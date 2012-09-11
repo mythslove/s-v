@@ -36,6 +36,7 @@ package local.view.shop
 		
 		override protected function addedToStageHandler( e:Event ):void
 		{
+			super.addedToStageHandler(e);
 			mouseChildren=true;
 			GameWorld.instance.stopRun();
 			x = GameSetting.SCREEN_WIDTH>>1 ;
