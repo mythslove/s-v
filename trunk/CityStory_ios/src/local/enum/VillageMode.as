@@ -26,5 +26,10 @@ package local.enum
 		 * 扩地 
 		 */		
 		public static const EXPAND:String = "expand";
+		
+		/**
+		 * 在别人的村庄
+		 */		
+		public static const VISIT:String= "visit";
 	}
 }
