@@ -6,7 +6,6 @@ package local.vo
 
 	public class QuestTaskVO
 	{
-		public var questId:String ; 
 		public var sum:int=1 ; //总共需要多少个
 		public var title:String ="" ; //标题
 		public var info:String ="" ;

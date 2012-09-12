@@ -4,7 +4,7 @@ package local.vo
 
 	public class QuestVO
 	{
-		public var qid:String  ; //任务的id
+		public var qid:String=""  ; //任务的id
 		public var title:String ="" ; //标题
 		public var info:String =""  ; //描述
 		public var icon:String =""  ; //icon名称 
@@ -17,7 +17,19 @@ package local.vo
 		public var rewards:String ="" ; //完成任务后的奖励 , URLVariable 类型, eg :  cash=3&coin=10&exp=20&Ticket=3
 		
 		public var restrictLevel:int =0; //要求玩家的等级
-		public var restrictQuest:String ; //前置quest的id
+		public var restrictQuest:String ="" ; //前置quest的id
+		
+		private var _restrictQuestArray:Array ;
+		/** 前置任务id数组*/
+		public function get restrictQuestArray():Array{
+			if(!_restrictQuestArray) {
+				_restrictQuestArray = restrictQuest.split(",");
+			}
+			return _restrictQuestArray ;
+		}
+		
+		
+		
 		
 		private var _isAccept:Boolean  ; //是否接受任务
 		/** 是否接受了这个quest */

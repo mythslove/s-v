@@ -73,9 +73,10 @@ package local.model
 				if(me.level>=vo.restrictLevel) //玩家等级符合
 				{
 					if(vo.restrictQuest) { //判断前置quest是否完成
-						var len:int = vo.restrictQuest.length;
+						var restrictQuestArray:Array = vo.restrictQuestArray ;
+						var len:int = vo.restrictQuestArray.length;
 						for(var i:int = 0 ; i<len ; ++i){
-							if(!completedQuests[ vo.restrictQuest[i] ]){
+							if(!completedQuests[ restrictQuestArray[i] ]){
 								return false ;
 							}
 						}
