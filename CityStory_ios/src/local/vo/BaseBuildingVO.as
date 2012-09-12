@@ -19,7 +19,7 @@ package local.vo
 		public var priceCash:int ; //购买需要的钱/gem
 		
 		public var click:int ; //修建或砍树时的点击次数
-		public var clickExp:int; //修建或砍树时点击可以获得的经验
+		public var clickExp:int = 1 ; //修建或砍树时点击可以获得的经验
 		
 		public var goodsCost:int ; //生产需要的goods数量
 		public var earnCoin:int ; //可以收获的钱

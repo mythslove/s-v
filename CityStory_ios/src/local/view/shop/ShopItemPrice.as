@@ -1,7 +1,7 @@
 package local.view.shop
 {
 	import flash.display.MovieClip;
-	import flash.display.Sprite;
+	import flash.text.TextField;
 	
 	/**
 	 * 价钱标签 
@@ -9,7 +9,7 @@ package local.view.shop
 	 */	
 	public class ShopItemPrice extends MovieClip
 	{
-		public var txtPrice:Sprite;
+		public var txtPrice:TextField ;
 		
 		public function ShopItemPrice()
 		{

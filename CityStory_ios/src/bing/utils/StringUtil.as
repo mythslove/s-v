@@ -54,5 +54,33 @@ package bing.utils
 			}
 			return str;
 		}
+		
+		/**
+		 * 将数字转化成字符串 
+		 * @param value
+		 * @return 
+		 * 
+		 */		
+		public static function moneyFormat( value:int ):String
+		{
+			var str:String = value +"";
+			var len:int= str.length ;
+			var result:String="" ;
+			var temp:int = len%3 ;
+			var count:int ;
+			for( var i:int = 0 ; i<len ; ++i){
+				result = result.concat(str.charAt(i));
+				if(i>=temp){
+					++count ;
+					if(count>2 && i<len-1){
+						result = result.concat(",");
+						count =0 ;
+					}
+				}else if(len>3 && i+1==temp){
+					result = result.concat(",");
+				}
+			}
+			return result ;
+		}
 	}
 }

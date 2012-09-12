@@ -7,7 +7,6 @@ package
 	import local.event.VillageEvent;
 	import local.map.GameWorld;
 	import local.model.PlayerModel;
-	import local.util.PopUpManager;
 	import local.util.VillageUtil;
 	import local.view.CenterViewLayer;
 	import local.vo.PlayerVO;
