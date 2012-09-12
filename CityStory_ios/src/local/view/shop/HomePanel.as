@@ -44,9 +44,10 @@ package local.view.shop
 		private function init():void
 		{
 			container = new Sprite();
-			container.y = 100 ;
+			container.x = 5 ;
+			container.y = 130 ;
 			container.graphics.beginFill(0,0);
-			container.graphics.drawRect(0,0,830,320);
+			container.graphics.drawRect(0,0,830,360);
 			container.graphics.endFill();
 			addChild(container);
 			
@@ -57,6 +58,7 @@ package local.view.shop
 			mainTypeBar.buttons = mcs ;
 			addChild(mainTypeBar);
 			mainTypeBar.x = 10 ;
+			mainTypeBar.y= 10 ;
 			mainTypeBar.addEventListener(ToggleBarEvent.TOGGLE_CHANGE , toggleChangeHandler);
 			mainTypeBar.selected = mcs[0];
 			
@@ -101,7 +103,7 @@ package local.view.shop
 					}
 				}
 			}
-			_scroll.addScrollControll( _scrollContainer , container , new Rectangle(0,0,830,330));
+			_scroll.addScrollControll( _scrollContainer , container , new Rectangle(0,0,830,360));
 			container.addChild(_scrollContainer);
 		}
 		
