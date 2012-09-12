@@ -6,6 +6,8 @@ package local.view.shop
 	import flash.text.TextFormat;
 	
 	import local.enum.BuildingType;
+	import local.util.GameUtil;
+	import local.view.base.BuildingThumb;
 	import local.view.base.MovieClipView;
 	import local.vo.BaseBuildingVO;
 	
@@ -33,6 +35,9 @@ package local.view.shop
 			{
 				case BuildingType.HOME:
 					gotoAndStop("homes");
+					//人口
+					GameUtil.boldTextField( txtPop ,  "Pop: +" + baseVO.addPop ) ;
+					GameUtil.boldTextField( txtCoin ,  "+"+baseVO.earnCoin+" / "+ GameUtil.getTimeString( baseVO.time ) ) ;
 					break ;
 				case BuildingType.DECORATION:
 					gotoAndStop("decors");
@@ -50,22 +55,28 @@ package local.view.shop
 					gotoAndStop("business");
 					break ;
 			}
-			
-			var tf:TextFormat ;
-			this.txtTitle.text = baseVO.title ;
+			//图片
+			var img:BuildingThumb = new BuildingThumb( baseVO.name , 200,150);
+			imgContainer.addChild( img );
+			//标题
+			GameUtil.boldTextField( txtTitle , baseVO.title );
 			while(txtTitle.textWidth>txtTitle.width){
-				tf =txtTitle.defaultTextFormat ;
+				var tf:TextFormat =txtTitle.defaultTextFormat ;
 				tf.size = int(tf.size)-2 ;
+				txtTitle.defaultTextFormat = tf ;
 				this.txtTitle.text = baseVO.title ;
 			}
+			txtTitle.y = ( 40 - txtTitle.textHeight)>>1 ;
+			//价格
 			if(baseVO.priceCoin>0){
 				price.gotoAndStop("coin");
-				
+				GameUtil.boldTextField( price.txtPrice ,  GameUtil.moneyFormat( baseVO.priceCoin ) );
 			}else{
 				price.gotoAndStop("cash");
-				
+				GameUtil.boldTextField( price.txtPrice ,  GameUtil.moneyFormat( baseVO.priceCash ) );
 			}
-			
+			price.txtPrice.width = price.txtPrice.textWidth+10;
+			price.x=(width-price.width)>>1 ;
 		}
 		
 		override protected function addedToStageHandler(e:Event):void

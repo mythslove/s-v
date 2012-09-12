@@ -34,6 +34,11 @@ package local.view.control
 			_selected = value ;
 			_selected.mouseEnabled = false ;
 			_selected.gotoAndStop("selected-up");
+			
+			var toggleEvt:ToggleBarEvent = new ToggleBarEvent(ToggleBarEvent.TOGGLE_CHANGE);
+			toggleEvt.selectedButton=_selected;
+			toggleEvt.selectedName = _selected.name ;
+			this.dispatchEvent( toggleEvt );
 		}
 		
 		public function ToggleBar( space:int = 5 , layout:String = "horizon" )

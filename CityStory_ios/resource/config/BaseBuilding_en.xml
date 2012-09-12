@@ -9,7 +9,7 @@
 	<item name="Basic_Tree8" span="1" type="basic" click="2"/>
 	<item name="Road" title="Road" type="decoration" subClass="road"/>
 	<item name="Apple Shop"  span="2" title="Apple Shop" type="business"  click="3"/>
-	<item name="My House"  title="My House" type="home"  click="3" priceCoin="3" addPop="10" requireLv="1"/>
-	<item name="Red Victorian House"  title="Red Victorian House" type="home"  click="3" priceCash="2" addPop="10" requireLv="2"/>
-	<item name="Yellow Victorian House"  title="Yellow Victorian House" type="home"  click="3" priceCoin="6" addPop="12" requireLv="3"/>
+	<item name="My House"  title="My House" type="home"  click="3" priceCoin="3" addPop="10" requireLv="1" time="120" earnCoin="100"/>
+	<item name="Red Victorian House"  title="Red Victorian House" type="home"  click="3" priceCash="2" addPop="10" requireLv="2" time="40" earnCoin="500"/>
+	<item name="Yellow Victorian House"  title="Yellow Victorian House" type="home"  click="3" priceCoin="6" addPop="12" requireLv="3" time="18000" earnCoin="150"/>
 </baseBuilding>

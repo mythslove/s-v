@@ -72,7 +72,7 @@ package
 			ResourceUtil.instance.removeEventListener("GameConfig" , gameConfigHandler );
 			var bytes:ByteArray = e.resVO.resObject as ByteArray;
 			
-			ShopModel.instance.parseConfig(  bytes.readObject() as Dictionary ) ;
+			ShopModel.instance.allBuildingHash = bytes.readObject() as Dictionary ;
 			LandModel.instance.expands = bytes.readObject() as Vector.<ExpandVO>;
 			PlayerModel.instance.levels =  bytes.readObject() as Dictionary ;
 			CompsModel.instance.allCompsHash = bytes.readObject() as Dictionary ;
@@ -128,7 +128,7 @@ package
 		/** 资源加载完成后 , 初始化游戏界面和游戏 */
 		protected function initGame():void
 		{
-			
+			ShopModel.instance.initShopDataAndRender();
 		}
 		
 		
