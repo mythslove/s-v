@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" minWidth="400" minHeight="400"
-					   xmlns:s="library://ns.adobe.com/flex/spark" width="400" height="400" showStatusBar="false"
+					   xmlns:s="library://ns.adobe.com/flex/spark" width="400" height="500" showStatusBar="false"
 					   xmlns:mx="library://ns.adobe.com/flex/mx" creationComplete="init()">
 	
 	<fx:Script>
@@ -11,6 +11,7 @@
 			private var expands:Vector.<ExpandVO> ;
 			private var levelHash:Dictionary ;
 			private var compHash:Dictionary ;
+			private var quests:Vector.<QuestVO> ;
 			
 			private var file:File ;
 			
@@ -21,6 +22,8 @@
 				registerClassAlias("ExpandVO" , ExpandVO ) ;
 				registerClassAlias("LevelVO" , LevelVO ) ;
 				registerClassAlias("ComponentVO" , ComponentVO ) ;
+				registerClassAlias("QuestVO" , QuestVO ) ;
+				registerClassAlias("QuestTaskVO" , QuestTaskVO ) ;
 			}
 			
 			private function selectBBV():void
@@ -299,6 +302,7 @@
 			{
 				file.removeEventListener(Event.SELECT , onSelectedQuestFile );
 				txtQuest.text = file.name ;
+				quests = new Vector.<QuestVO>();
 				
 				var stream:FileStream = new FileStream();
 				stream.open( file,FileMode.READ );
@@ -312,37 +316,72 @@
 					var item:* ;
 					for( var i:int = 0 ; i<len ; ++i )
 					{
-						var compVO:ComponentVO = new ComponentVO();
+						var questVO:QuestVO = new QuestVO();
 						item = config.item[i];
+						if(item.children().length()>0)
+						{
+							parseTasks( item.children() , questVO );
+						}
 						var attNamesList:XMLList = item.@*;
 						for (var j:int = 0; j < attNamesList.length(); j++)
 						{ 
 							var key:String = attNamesList[j].name() ;
-							if( compVO.hasOwnProperty(key)){
-								switch(typeof  compVO[key])
+							if( questVO.hasOwnProperty(key)){
+								switch(typeof  questVO[key])
 								{
 									case "string":
-										compVO[key] = String( attNamesList[j] );
+										questVO[key] = String( attNamesList[j] );
 										break ;
 									case "int":
-										compVO[key] = String( attNamesList[j] );
+										questVO[key] = String( attNamesList[j] );
 										break ;
 									case "number":
-										compVO[key] = Number( attNamesList[j] );
+										questVO[key] = Number( attNamesList[j] );
 										break;
 								}
 								
 							}
 						} 
-//						compHash[compVO.name] = compVO ;
+						quests.push( questVO);
 					}
 				}
 				else
 				{
-					trace("没有玩家升级数据");
+					trace("没有任务数据");
 				}
 			}
-			
+			private function parseTasks(tasks:* , questVO:QuestVO ):void
+			{
+				var len:int = tasks.length();
+				var item:* ;
+				questVO.tasks  = new Vector.<QuestTaskVO>( len , true);
+				for( var i:int = 0 ; i<len ; ++i )
+				{
+					var taskVO:QuestTaskVO = new QuestTaskVO();
+					questVO.tasks[i] = taskVO ;
+					item = tasks[i];
+					var attNamesList:XMLList = item.@*;
+					for (var j:int = 0; j < attNamesList.length(); j++)
+					{ 
+						var key:String = String( attNamesList[j].name()) ;
+						if( taskVO.hasOwnProperty(key)){
+							switch(typeof  taskVO[key])
+							{
+								case "string":
+									taskVO[key] = String( attNamesList[j] );
+									break ;
+								case "int":
+									taskVO[key] = String( attNamesList[j] );
+									break ;
+								case "number":
+									taskVO[key] = Number( attNamesList[j] );
+									break;
+							}
+							
+						}
+					} 
+				}
+			}
 			
 			
 			
@@ -373,6 +412,7 @@
 				stream.writeObject( expands );
 				stream.writeObject( levelHash );
 				stream.writeObject( compHash );
+				stream.writeObject( quests );
 				stream.close();
 				Alert.show("导出成功！");
 			}
@@ -386,7 +426,7 @@
 	<s:Label x="20" y="86" text="扩地配置"/>
 	<s:Label x="20" y="146" text="玩家升级配置"/>
 	<s:TextInput id="txtBBV" x="19" y="42" width="288" enabled="false"/>
-	<s:Button x="316" y="352" width="74" height="38" label="生成" click="export_clickHandler(event)"/>
+	<s:Button x="316" y="452" width="74" height="38" label="生成" click="export_clickHandler(event)"/>
 	<s:Button x="320" y="42" label="选择" click="selectBBV()"/>
 	<s:TextInput id="txtExpand" x="19" y="104" width="288" enabled="false"/>
 	<s:TextInput id="txtLevel" x="19" y="164" width="288" enabled="false"/>
