@@ -60,7 +60,7 @@ package local.vo
 			if(tasks){
 				var len :int = tasks.length;
 				for( var i:int = 0 ;  i<len ; ++i ) {
-					if( (items[i] as QuestTaskVO).isComplete) {
+					if( (tasks[i] as QuestTaskVO).isComplete) {
 						++count;
 					}
 				}

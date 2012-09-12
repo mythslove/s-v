@@ -21,9 +21,6 @@ package local.model
 		
 		private const MAX_COUNT:int = 8 ; //最多读取前8个quests
 		
-		/** quest的hash，key为qid，value为questVO*/
-		private var _questHash:Dictionary ;
-		
 		/** 所有的quest */
 		public var allQuestArray:Vector.<QuestVO> ; 
 		
@@ -32,9 +29,6 @@ package local.model
 		
 		/** 完成了的quests ，key为qid，value为questVO*/
 		public var completedQuests:Dictionary = new Dictionary() ;
-		
-		
-		
 		
 		/**
 		 * 获得当前最新的quests
