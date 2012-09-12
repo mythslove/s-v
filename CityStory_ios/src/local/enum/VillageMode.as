@@ -18,9 +18,13 @@ package local.enum
 		public static const EDIT:String = "edit";
 		
 		/**
-		 * 添加新建筑状态 
+		 * 添加商店中的建筑
 		 */		
-		public static const ADD_BUILDING:String = "addBuilding";
+		public static const BUILDING_SHOP:String = "buildingShop";
+		/**
+		 * 添加收藏箱中的建筑
+		 */		
+		public static const BUILDING_STORAGE:String = "buildingStorage";
 		
 		/**
 		 * 扩地 

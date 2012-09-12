@@ -58,6 +58,7 @@ package local.view.shop
 			//图片
 			var img:BuildingThumb = new BuildingThumb( baseVO.name , 200,150);
 			imgContainer.addChild( img );
+			if(baseVO.span==1) img.setScale(1.5) ; 
 			//标题
 			GameUtil.boldTextField( txtTitle , baseVO.title );
 			while(txtTitle.textWidth>txtTitle.width){

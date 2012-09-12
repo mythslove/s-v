@@ -47,8 +47,6 @@ package local.view.bottombar
 			{
 				case editorBtn:
 					GameData.villageMode = VillageMode.EDIT ;
-					editorBtn.visible = false ;
-					marketBtn.visible = false ;
 					break ;
 				case marketBtn:
 					PopUpManager.instance.addQueuePopUp( ShopOverViewPopUp.instance , true , 0 , 0 );
