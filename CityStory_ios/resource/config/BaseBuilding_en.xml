@@ -5,8 +5,8 @@
 	<item name="Basic_Tree4" span="2" type="basic" click="3"/>
 	<item name="Basic_Tree5" span="2" type="basic" click="3"/>
 	<item name="Basic_Tree6" span="2" type="basic" click="3"/>
-	<item name="Basic_Tree7" span="2" type="basic" click="2"/>
-	<item name="Basic_Tree8" span="2" type="basic" click="2"/>
+	<item name="Basic_Tree7" span="1" type="basic" click="2"/>
+	<item name="Basic_Tree8" span="1" type="basic" click="2"/>
 	<item name="Road" title="Road" type="decoration" subClass="road"/>
 	<item name="Apple Shop"  span="2" title="Apple Shop" type="business"  click="3"/>
 	<item name="My House"  title="My House" type="home"  click="3"/>
