@@ -27,7 +27,7 @@ package local.view.base
 		}
 		
 		
-		protected function dispose():void
+		public function dispose():void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, addedToStageHandler);
 			removeEventListener(Event.REMOVED_FROM_STAGE , removedFromStageHandler);

@@ -90,7 +90,23 @@ package local.map.item
 			world.roadScene.mouseChildren = world.buildingScene.mouseChildren = true ;
 			this.removeBottomGrid();
 		}
-				
+		
+		/**
+		 * 从收藏箱中添加到游戏世界中 
+		 */		
+		public function storageToWorld():void
+		{
+			addToSceneFromTopScene();
+		}
+		
+		/**
+		 * 从商店中添加到世界中
+		 */		
+		public function shopToWorld():void
+		{
+			//减钱
+			addToSceneFromTopScene();
+		}
 		
 		/**
 		 * 闪烁 
