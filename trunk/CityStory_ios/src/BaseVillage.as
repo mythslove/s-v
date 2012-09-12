@@ -142,6 +142,8 @@ package
 			registerClassAlias( "ExpandVO" , ExpandVO );
 			registerClassAlias( "ProductVO" , ProductVO );
 			registerClassAlias( "ComponentVO" , ComponentVO );
+			registerClassAlias( "QuestVO" , QuestVO );
+			registerClassAlias( "QuestTaskVO" , QuestTaskVO );
 		}
 	}
 }
