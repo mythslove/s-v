@@ -74,8 +74,12 @@ package local.view.shop
 			TweenLite.to( this , 0.2 , { x:x+200 , ease: Back.easeIn , onComplete:onTweenCom});
 		}
 		private function onTweenCom():void{
-			GameWorld.instance.run();
 			PopUpManager.instance.removeCurrentPopup() ;
+		}
+		
+		override protected function removedFromStageHandler(e:Event):void{
+			super.removedFromStageHandler(e);
+			GameWorld.instance.run();
 		}
 	}
 }

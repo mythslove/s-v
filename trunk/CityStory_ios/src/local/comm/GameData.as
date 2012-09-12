@@ -5,6 +5,7 @@ package  local.comm
 	
 	import local.enum.VillageMode;
 	import local.map.GameWorld;
+	import local.view.CenterViewLayer;
 
 	public class GameData
 	{
@@ -31,7 +32,9 @@ package  local.comm
 		}
 		public static function set villageMode( value:String):void
 		{
+			if(_villageMode==value) return ;
 			_villageMode = value ;
+			CenterViewLayer.instance.changeStatus( value );
 			var world:GameWorld = GameWorld.instance ;
 			switch(value){
 				case VillageMode.NORMAL :
@@ -51,7 +54,8 @@ package  local.comm
 					world.topScene.visible = true ;
 					world.iconScene.visible = false ;
 					break ;
-				case VillageMode.ADD_BUILDING :
+				case VillageMode.BUILDING_STORAGE :
+				case VillageMode.BUILDING_SHOP :
 					world.buildingScene.mouseChildren = false ;
 					world.buildingScene.removeMoveItems();
 					world.runUpdate = false ;

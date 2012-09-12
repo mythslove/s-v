@@ -4,10 +4,17 @@ package local.view.shop
 	
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
+	import flash.events.MouseEvent;
 	import flash.geom.Rectangle;
 	
+	import local.comm.GameData;
 	import local.enum.BuildingType;
+	import local.enum.VillageMode;
+	import local.map.GameWorld;
+	import local.map.item.BaseBuilding;
 	import local.model.ShopModel;
+	import local.util.BuildingFactory;
+	import local.util.PopUpManager;
 	import local.view.btn.TabMenuButton;
 	import local.view.control.ScrollControllerH;
 	import local.view.control.ToggleBar;
@@ -38,11 +45,10 @@ package local.view.shop
 		{
 			container = new Sprite();
 			container.y = 100 ;
+			container.graphics.beginFill(0,0);
+			container.graphics.drawRect(0,0,830,320);
+			container.graphics.endFill();
 			addChild(container);
-			
-			_scrollContainer.graphics.beginFill(0,0);
-			_scrollContainer.graphics.drawRect(0,0,830,320);
-			_scrollContainer.graphics.endFill();
 			
 			mainTypeBar = new ToggleBar();
 			var mcs:Vector.<MovieClip>= Vector.<MovieClip>([
@@ -53,6 +59,8 @@ package local.view.shop
 			mainTypeBar.x = 10 ;
 			mainTypeBar.addEventListener(ToggleBarEvent.TOGGLE_CHANGE , toggleChangeHandler);
 			mainTypeBar.selected = mcs[0];
+			
+			_scrollContainer.addEventListener(MouseEvent.CLICK , onItemHandler );
 		}
 		
 		private function toggleChangeHandler( e:ToggleBarEvent ):void
@@ -93,9 +101,23 @@ package local.view.shop
 					}
 				}
 			}
-			_scroll.addScrollControll( _scrollContainer , container , new Rectangle(0,0,830,320));
+			_scroll.addScrollControll( _scrollContainer , container , new Rectangle(0,0,830,330));
 			container.addChild(_scrollContainer);
 		}
 		
+		
+		private function onItemHandler( e:MouseEvent ):void
+		{
+			e.stopPropagation();
+			if(e.target is ShopItemRenderer)
+			{
+				var render:ShopItemRenderer = e.target as ShopItemRenderer ;
+				var building:BaseBuilding = BuildingFactory.createBuildingByBaseVO( render.baseVO );
+				
+				GameWorld.instance.addBuildingToTopScene( building);
+				GameData.villageMode=VillageMode.BUILDING_SHOP ;
+				PopUpManager.instance.removeCurrentPopup();
+			}
+		}
 	}
 }

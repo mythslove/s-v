@@ -69,8 +69,11 @@ package local.view.shop
 		}
 		
 		private function onTweenCom():void{
-			GameWorld.instance.run();
 			PopUpManager.instance.removeCurrentPopup() ;
+		}
+		override protected function removedFromStageHandler(e:Event):void{
+			super.removedFromStageHandler(e);
+			GameWorld.instance.run();
 		}
 	}
 }

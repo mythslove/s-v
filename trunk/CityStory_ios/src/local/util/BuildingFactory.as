@@ -2,6 +2,7 @@ package local.util
 {
 	import local.enum.BuildingType;
 	import local.map.item.*;
+	import local.vo.BaseBuildingVO;
 	import local.vo.BuildingVO;
 
 	/**
@@ -11,7 +12,7 @@ package local.util
 	public class BuildingFactory
 	{
 		/**
-		 * 创建建筑 
+		 * 通过BuildingVO创建建筑 
 		 * @param buildingVO
 		 * @return 
 		 */		
@@ -55,6 +56,19 @@ package local.util
 					break ;
 			}
 			return building ;
+		}
+		
+		/**
+		 * 通过BaseBuildingVO 创建建筑 
+		 * @param baseVO
+		 * @return 
+		 */		
+		public static function createBuildingByBaseVO( baseVO:BaseBuildingVO ):BaseBuilding
+		{
+			var bvo:BuildingVO = new BuildingVO();
+			bvo.name = baseVO.name ;
+			bvo.baseVO = baseVO;
+			return createBuildingByVO( bvo );
 		}
 	}
 }

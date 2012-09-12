@@ -39,5 +39,12 @@ package local.view.base
 				this.y=roadResVO.offsetYs[name];
 			}
 		}
+		
+		public function setScale( value:Number):void
+		{
+			scaleX = scaleY = value ;
+			x*=value;
+			y*=value;
+		}
 	}
 }

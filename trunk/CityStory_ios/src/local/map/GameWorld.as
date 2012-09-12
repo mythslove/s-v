@@ -166,6 +166,23 @@ package local.map
 //			GameData.villageMode=VillageMode.EDIT ;
 		}
 		
+		/**
+		 * 添加建筑到移动的的层上面，主要是从商店和收藏箱中的建筑 
+		 * @param building
+		 */		
+		public function addBuildingToTopScene( building:BaseBuilding ):void
+		{
+			//放在当前屏幕中间
+			var offsetY:Number = building.buildingVO.baseVO.span*0.5*_size;
+			var p:Point = pixelPointToGrid( GameSetting.SCREEN_WIDTH*0.5 , GameSetting.SCREEN_HEIGHT*0.5,0,  offsetY , _size );
+			building.nodeX = p.x ;
+			building.nodeZ = p.y ;
+			
+			topScene.clear();
+			topScene.addIsoObject( building , false );
+			building.drawBottomGrid();
+			building.bottom.updateBuildingGridLayer();
+		}
 		
 		override protected function configListeners():void
 		{
@@ -199,7 +216,7 @@ package local.map
 					mouseChildren = false; 
 					if(e.buttonDown && !_isGesture )
 					{
-						if( GameData.villageMode==VillageMode.EDIT && _mouseBuilding && _mouseBuilding.parent == topScene)  {
+						if( _mouseBuilding && _mouseBuilding.parent == topScene)  {
 							//如果是编译状态，则移动建筑
 							moveTopBuilding();
 						}else {

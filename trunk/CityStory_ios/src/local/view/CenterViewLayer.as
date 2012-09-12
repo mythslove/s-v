@@ -3,6 +3,7 @@ package local.view
 	import flash.events.Event;
 	
 	import local.comm.GameSetting;
+	import local.enum.VillageMode;
 	import local.util.PopUpManager;
 	import local.view.base.BaseView;
 	import local.view.bottombar.BottomBar;
@@ -40,6 +41,26 @@ package local.view
 			topBar.x = (GameSetting.SCREEN_WIDTH-topBar.width)>>1 ;
 			
 			addChild(PopUpManager.instance);
+		}
+		
+		/**
+		 * 改变UI的状态， mode为VillageMode中的常量
+		 * @param mode
+		 */		
+		public function changeStatus ( mode:String ):void
+		{
+			switch(mode)
+			{
+				case VillageMode.NORMAL :
+					break ;
+				case VillageMode.EDIT :
+					break ;
+				case VillageMode.BUILDING_STORAGE :
+				case VillageMode.BUILDING_SHOP :
+					break ;
+				case VillageMode.EXPAND :
+					break ;
+			}
 		}
 	}
 }
