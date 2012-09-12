@@ -17,6 +17,7 @@ package local.map
 	import local.map.land.ExpandLandButton;
 	import local.model.LandModel;
 	import local.util.BuildingFactory;
+	import local.view.building.MoveBuildingButtons;
 	import local.vo.BaseBuildingVO;
 	import local.vo.BuildingVO;
 
@@ -182,6 +183,8 @@ package local.map
 			topScene.addIsoObject( building , false );
 			building.drawBottomGrid();
 			building.bottom.updateBuildingGridLayer();
+			
+			building.addChild( MoveBuildingButtons.instance );
 		}
 		
 		override protected function configListeners():void
@@ -285,6 +288,20 @@ package local.map
 				_mouseBuilding.nodeX = p.x ;
 				_mouseBuilding.nodeZ= p.y ;
 				_mouseBuilding.bottom.updateBuildingGridLayer();
+				
+				if(GameData.villageMode==VillageMode.BUILDING_SHOP ||GameData.villageMode==VillageMode.BUILDING_STORAGE )
+				{
+					var moveBtns:MoveBuildingButtons  = MoveBuildingButtons.instance ;
+					if(_mouseBuilding.bottom.getWalkable()){
+						if( !moveBtns.okBtn.enabled){
+							moveBtns.okBtn.enabled = true  ;
+						}
+					}else{
+						if( moveBtns.okBtn.enabled){
+							moveBtns.okBtn.enabled = false ;
+						}
+					}
+				}
 			}
 		}
 		

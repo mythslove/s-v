@@ -10,11 +10,13 @@ package  local.map
 	
 	import local.comm.*;
 	import local.enum.BuildingType;
+	import local.enum.VillageMode;
 	import local.map.item.*;
 	import local.map.scene.*;
 	import local.model.LandModel;
 	import local.model.MapGridDataModel;
 	import local.util.EmbedsManager;
+	import local.view.building.MoveBuildingButtons;
 	import local.vo.*;
 	
 	public class BaseWorld extends IsoWorld
@@ -366,9 +368,19 @@ package  local.map
 				modifyEndPosition();
 				x = _endX ;
 				y = _endY ;
+				
+				changeIconSize();
 			}
 			_endX = x;
 			_endY = y ;
+		}
+		
+		protected function changeIconSize():void
+		{
+			if(MoveBuildingButtons.instance.parent)
+			{
+				MoveBuildingButtons.instance.scaleY =MoveBuildingButtons.instance.scaleX = 1/scaleX ;
+			}
 		}
 		
 		
