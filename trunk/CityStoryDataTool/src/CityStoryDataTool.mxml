@@ -65,13 +65,13 @@
 								switch(typeof  baseVO[key])
 								{
 									case "string":
-										baseVO[key] = String( attNamesList[j] );
+										baseVO[key] = String( attNamesList[j] ).replace( /&amp;/g ,"&") ;
 										break ;
 									case "int":
-										baseVO[key] = String( attNamesList[j] );
+										baseVO[key] = String( attNamesList[j] ) ;
 										break ;
 									case "number":
-										baseVO[key] = Number( attNamesList[j] );
+										baseVO[key] = Number( attNamesList[j] ) ;
 										break;
 								}
 								
@@ -104,13 +104,13 @@
 							switch(typeof  pvo[key])
 							{
 								case "string":
-									pvo[key] = String( attNamesList[j] );
+									pvo[key] = String( attNamesList[j] ).replace( /&amp;/g ,"&") ;
 									break ;
 								case "int":
-									pvo[key] = String( attNamesList[j] );
+									pvo[key] = String( attNamesList[j] ) ;
 									break ;
 								case "number":
-									pvo[key] = Number( attNamesList[j] );
+									pvo[key] = Number( attNamesList[j] ) ;
 									break;
 							}
 							
@@ -154,10 +154,10 @@
 								switch(typeof  expandVO[key])
 								{
 									case "string":
-										expandVO[key] = String( attNamesList[j] );
+										expandVO[key] = String( attNamesList[j] ).replace( /&amp;/g ,"&") ;
 										break ;
 									case "int":
-										expandVO[key] = String( attNamesList[j] );
+										expandVO[key] = String( attNamesList[j] ) ;
 										break ;
 									case "number":
 										expandVO[key] = Number( attNamesList[j] );
@@ -211,13 +211,13 @@
 								switch(typeof  level[key])
 								{
 									case "string":
-										level[key] = String( attNamesList[j] );
+										level[key] = String( attNamesList[j] ).replace( /&amp;/g ,"&") ;
 										break ;
 									case "int":
-										level[key] = String( attNamesList[j] );
+										level[key] = String( attNamesList[j] ) ;
 										break ;
 									case "number":
-										level[key] = Number( attNamesList[j] );
+										level[key] = Number( attNamesList[j] ) ;
 										break;
 								}
 								
@@ -267,13 +267,13 @@
 								switch(typeof  compVO[key])
 								{
 									case "string":
-										compVO[key] = String( attNamesList[j] );
+										compVO[key] = String( attNamesList[j] ).replace( /&amp;/g ,"&") ;
 										break ;
 									case "int":
 										compVO[key] = String( attNamesList[j] );
 										break ;
 									case "number":
-										compVO[key] = Number( attNamesList[j] );
+										compVO[key] = Number( attNamesList[j] ) ;
 										break;
 								}
 								
@@ -330,13 +330,13 @@
 								switch(typeof  questVO[key])
 								{
 									case "string":
-										questVO[key] = String( attNamesList[j] );
+										questVO[key] = String( attNamesList[j] ).replace( /&amp;/g ,"&") ;
 										break ;
 									case "int":
-										questVO[key] = String( attNamesList[j] );
+										questVO[key] = String( attNamesList[j] ) ;
 										break ;
 									case "number":
-										questVO[key] = Number( attNamesList[j] );
+										questVO[key] = Number( attNamesList[j] ) ;
 										break;
 								}
 								
@@ -368,7 +368,7 @@
 							switch(typeof  taskVO[key])
 							{
 								case "string":
-									taskVO[key] = String( attNamesList[j] );
+									taskVO[key] = String( attNamesList[j] ).replace( /&amp;/g ,"&");
 									break ;
 								case "int":
 									taskVO[key] = String( attNamesList[j] );
