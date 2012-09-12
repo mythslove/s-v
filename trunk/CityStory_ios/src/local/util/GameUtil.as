@@ -1,5 +1,7 @@
 package local.util
 {
+	import flash.text.TextField;
+	import flash.text.TextFormat;
 	
 
 	public class GameUtil
@@ -29,6 +31,62 @@ package local.util
 				return 2 ;
 			}
 			
+		}
+		
+		
+		
+		
+		/**
+		 * 将数字转化成字符串 
+		 * @param value
+		 * @return 
+		 * 
+		 */		
+		public static function moneyFormat( value:int ):String
+		{
+			var str:String = value +"";
+			var len:int= str.length ;
+			var result:String="" ;
+			var temp:int = len%3 ;
+			var count:int ;
+			for( var i:int = 0 ; i<len ; ++i){
+				result = result.concat(str.charAt(i));
+				if(i>=temp){
+					++count ;
+					if(count>2 && i<len-1){
+						result = result.concat(",");
+						count =0 ;
+					}
+				}else if(len>3 && i+1==temp){
+					result = result.concat(",");
+				}
+			}
+			return result ;
+		}
+		
+		
+		/**
+		 * 转成相应的表示 ，如15Hours .30Mins
+		 * @param time 以秒为单位。
+		 * @return 
+		 */		
+		public static function getTimeString( time:int ):String{
+			if(time>24*3600) return Math.floor(time/3600/24)+" Day"
+			if( time>3600) return Math.floor(time/3600)+ " Hours" ;
+			if( time>60) return Math.floor(time/60)+ " Mins" ;
+			return time + " Secs" ;
+		}
+		
+		/**
+		 * 加粗显示字符串
+		 * @param tf
+		 * @param txt
+		 */		
+		public static function boldTextField( tf:TextField , txt:String ):void{
+			var tfort:TextFormat = tf.defaultTextFormat;
+			tfort.bold = true;
+			tf.defaultTextFormat = tfort ;
+			tf.text = txt ;
 		}
 	}
 }

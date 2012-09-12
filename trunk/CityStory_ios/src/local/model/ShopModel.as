@@ -59,57 +59,51 @@ package local.model
 		public var communityRenderers:Vector.<ShopItemRenderer> = new Vector.<ShopItemRenderer>() ;
 		
 		
-		
-		public function parseConfig( config:Dictionary ):void
+		/**
+		 * 初始化商店数据和ShopItemRender 
+		 */		
+		public function initShopDataAndRender():void
 		{
-			if( config)
+			//手动写一个扩地时的建筑
+			var baseVO:BaseBuildingVO  = new BaseBuildingVO() ;
+			baseVO.name = "ExpandLandBuilding";
+			baseVO.span = 4;
+			baseVO.type = BuildingType.EXPAND_BUILDING ;
+			allBuildingHash[baseVO.name] = baseVO ;
+			//遍历所有的建筑数据
+			for ( var key:String in allBuildingHash)
 			{
-				allBuildingHash = config ;
-				//手动写一个扩地时的建筑
-				var baseVO:BaseBuildingVO  = new BaseBuildingVO() ;
-				baseVO.name = "ExpandLandBuilding";
-				baseVO.span = 4;
-				baseVO.type = BuildingType.EXPAND_BUILDING ;
-				allBuildingHash[baseVO.name] = baseVO ;
-				//遍历所有的建筑数据
-				for ( var key:String in allBuildingHash)
+				baseVO = allBuildingHash[key] as BaseBuildingVO;
+				switch( baseVO.type)
 				{
-					baseVO = new BaseBuildingVO();
-					switch( baseVO.type)
-					{
-						case BuildingType.BASIC :
-							basics.push( baseVO );
-							break ;
-						case BuildingType.HOME :
-							homes.push( baseVO );
-							homesRenderers.push( new ShopItemRenderer(baseVO) );
-							break ;
-						case BuildingType.DECORATION :
-							decors.push( baseVO );
-							decorsRenderers.push( new ShopItemRenderer(baseVO) );
-							break ;
-						case BuildingType.INDUSTRY :
-							industry.push( baseVO );
-							industryRenderers.push( new ShopItemRenderer(baseVO) );
-							break ;
-						case BuildingType.WONDERS :
-							wonders.push( baseVO );
-							wondersRenderers.push( new ShopItemRenderer(baseVO) );
-							break ;
-						case BuildingType.COMMUNITY :
-							community.push( baseVO );
-							communityRenderers.push( new ShopItemRenderer(baseVO) );
-							break ;
-						case BuildingType.BUSINESS :
-							business.push( baseVO );
-							businessRenderers.push( new ShopItemRenderer(baseVO) );
-							break ;
-					}
+					case BuildingType.BASIC :
+						basics.push( baseVO );
+						break ;
+					case BuildingType.HOME :
+						homes.push( baseVO );
+						homesRenderers.push( new ShopItemRenderer(baseVO) );
+						break ;
+					case BuildingType.DECORATION :
+						decors.push( baseVO );
+						decorsRenderers.push( new ShopItemRenderer(baseVO) );
+						break ;
+					case BuildingType.INDUSTRY :
+						industry.push( baseVO );
+						industryRenderers.push( new ShopItemRenderer(baseVO) );
+						break ;
+					case BuildingType.WONDERS :
+						wonders.push( baseVO );
+						wondersRenderers.push( new ShopItemRenderer(baseVO) );
+						break ;
+					case BuildingType.COMMUNITY :
+						community.push( baseVO );
+						communityRenderers.push( new ShopItemRenderer(baseVO) );
+						break ;
+					case BuildingType.BUSINESS :
+						business.push( baseVO );
+						businessRenderers.push( new ShopItemRenderer(baseVO) );
+						break ;
 				}
-			}
-			else
-			{
-				trace("没有Shop数据");
 			}
 		}
 	}

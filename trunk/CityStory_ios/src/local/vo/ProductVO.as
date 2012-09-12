@@ -11,5 +11,6 @@ package local.vo
 		public var time:int ; //要生产时间
 		public var coinCost:int ; //要消耗的coin
 		public var earnGoods:int ; //可以收获的 商品数量
+		public var earnExp:int ;
 	}
 }
