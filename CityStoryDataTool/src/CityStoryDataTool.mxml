@@ -47,12 +47,12 @@
 				allBuildingHash = new Dictionary();
 				if( config)
 				{
-					var len:int = config.item.length();
+					var len:int = config.children().length();
 					var item:* ;
 					for( var i:int = 0 ; i<len ; ++i )
 					{
 						var baseVO:BaseBuildingVO = new BaseBuildingVO();
-						item = config.item[i];
+						item = config.children()[i];
 						if(item.children().length()>0)
 						{
 							parseBaseProduct( item.children() , baseVO );
@@ -140,12 +140,12 @@
 				var config:XML = XML( bytes.toString());
 				if( config)
 				{
-					var len:int = config.item.length();
+					var len:int = config.children().length();
 					var item:* ;
 					for( var i:int = 0 ; i<len ; ++i )
 					{
 						var expandVO:ExpandVO = new ExpandVO();
-						item = config.item[i];
+						item = config.children()[i];
 						var attNamesList:XMLList = item.@*;
 						for (var j:int = 0; j < attNamesList.length(); j++)
 						{ 
@@ -197,12 +197,12 @@
 				var config:XML = XML( bytes.toString());
 				if( config)
 				{
-					var len:int = config.item.length();
+					var len:int = config.children().length();
 					var item:* ;
 					for( var i:int = 0 ; i<len ; ++i )
 					{
 						var level:LevelVO = new LevelVO();
-						item = config.item[i];
+						item = config.children()[i];
 						var attNamesList:XMLList = item.@*;
 						for (var j:int = 0; j < attNamesList.length(); j++)
 						{ 
@@ -253,12 +253,12 @@
 				var config:XML = XML( bytes.toString());
 				if( config)
 				{
-					var len:int = config.item.length();
+					var len:int = config.children().length();
 					var item:* ;
 					for( var i:int = 0 ; i<len ; ++i )
 					{
 						var compVO:ComponentVO = new ComponentVO();
-						item = config.item[i];
+						item = config.children()[i];
 						var attNamesList:XMLList = item.@*;
 						for (var j:int = 0; j < attNamesList.length(); j++)
 						{ 
@@ -312,12 +312,12 @@
 				var config:XML = XML( bytes.toString());
 				if( config)
 				{
-					var len:int = config.item.length();
+					var len:int = config.children.length();
 					var item:* ;
 					for( var i:int = 0 ; i<len ; ++i )
 					{
 						var questVO:QuestVO = new QuestVO();
-						item = config.item[i];
+						item = config.children()[i];
 						if(item.children().length()>0)
 						{
 							parseTasks( item.children() , questVO );
