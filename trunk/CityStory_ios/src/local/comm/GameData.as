@@ -32,7 +32,6 @@ package  local.comm
 		}
 		public static function set villageMode( value:String):void
 		{
-			if(_villageMode==value) return ;
 			_villageMode = value ;
 			CenterViewLayer.instance.changeStatus( value );
 			var world:GameWorld = GameWorld.instance ;
