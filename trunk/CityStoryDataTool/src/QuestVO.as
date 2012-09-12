@@ -2,7 +2,6 @@ package
 {
 	public class QuestVO
 	{
-		public var qid:String  ; //任务的id
 		public var title:String ="" ; //标题
 		public var info:String =""  ; //描述
 		public var icon:String =""  ; //icon名称 
