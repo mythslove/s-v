@@ -146,6 +146,19 @@ package bing.starling.iso
 			_sprites = new Vector.<SIsoObject>();
 		}
 		
+		/**
+		 * 清空场景和释放子对象 
+		 */		
+		public function clearAndDisposeChild():void
+		{
+			for each( var obj:SIsoObject in _sprites){
+				obj.dispose();
+				obj = null ;
+			}
+			removeAll();
+			_sprites = new Vector.<SIsoObject>();
+		}
+		
 		//仅仅清除场景上的对象
 		private function removeAll():void
 		{
