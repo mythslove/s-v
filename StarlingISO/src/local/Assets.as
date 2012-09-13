@@ -1,6 +1,8 @@
 package local
 {
 	import flash.display.Bitmap;
+	import flash.display.BitmapData;
+	import flash.geom.Point;
 	import flash.utils.Dictionary;
 	
 	import starling.textures.Texture;
@@ -20,8 +22,9 @@ package local
 		[Embed(source="../assets/atlas.png")]
 		public static const Atlas:Class;
 		
-		
 		private static var _textureDic:Dictionary = new Dictionary() ;
+		private static var _bmdDic:Dictionary = new Dictionary();
+		private static var _frameDic:Dictionary = new Dictionary();
 		
 		public static function createTextureByName( name:String ):Texture
 		{
@@ -39,10 +42,34 @@ package local
 			if( _textureDic[name] ) return _textureDic[name] as TextureAtlas ;
 			
 			var bmp:Bitmap = new Assets[name]() as Bitmap ;
-			var atals:TextureAtlas = new TextureAtlas( Texture.fromBitmap( bmp,false ) , XML( new AtlasXml() ) );
+			_bmdDic[name] = bmp.bitmapData; 
+			var xml:XML = XML( new AtlasXml() )  ;
+			parseXML( xml ) ;
+			var atals:TextureAtlas = new TextureAtlas( Texture.fromBitmap( bmp,false ) , xml );
 			_textureDic[name] = atals ;
-			bmp.bitmapData.dispose();
+//			bmp.bitmapData.dispose();
 			return atals;
+		}
+		
+		public static function getBmd( name:String ):BitmapData
+		{
+			return _bmdDic[name] as BitmapData;
+		}
+		
+		public static function getBmpPoint( name:String ):Point
+		{
+			return _frameDic[name] as Point;
+		}
+			
+		private static function parseXML( xml:XML ):void
+		{
+			var children:* = xml.children();
+			var len:int = children.length();
+			var item:* ;
+			for( var i:int = 0 ; i<len ; ++i ){
+				item = children[i] ;
+				_frameDic[ String(item.@name) ] = new Point( int(item.@x) , int(item.@y) );
+			}
 		}
 	}
 }

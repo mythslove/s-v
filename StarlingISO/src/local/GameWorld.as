@@ -1,5 +1,6 @@
 package local
 {
+	import bing.starling.component.PixelsImage;
 	import bing.starling.component.Rhombus;
 	import bing.starling.iso.SIsoGrid;
 	import bing.starling.iso.SIsoObject;
@@ -66,16 +67,17 @@ package local
 			var house:SIsoObject ;
 			var bird:Birds ;
 			var houses:Array = ["house1","house2","house3","tree1","tree2","house1"]
-			for( var i:int = 0 ; i<25 ; ++i )
+			for( var i:int = 0 ; i<10 ; ++i )
 			{
-				for( var j:int =0 ; j<25 ; ++j )
+				for( var j:int =0 ; j<10 ; ++j )
 				{
 					if(Math.random()>0.2){
 						house = new SIsoObject(_size , 2 , 1 );
 						house.nodeX = i*2 ;
 						house.nodeZ = j*2 ;
 						var temp:int = (Math.random()*houses.length)>>0 ;
-						var img:Image = new Image( Assets.createTextureAtlas("Atlas").getTexture(houses[temp]) );
+						var img:Image = new PixelsImage( Assets.createTextureAtlas("Atlas").getTexture(houses[temp]) ,
+							Assets.getBmd("Atlas") , Assets.getBmpPoint(houses[temp]));
 						switch(temp)
 						{
 							case 0:
@@ -173,7 +175,7 @@ package local
 				}
 				if( touch.phase == TouchPhase.ENDED)
 				{
-					if(!_isMove && touch.target.parent is SIsoObject){
+					if(!_isMove && touch.target is PixelsImage && touch.target.parent is SIsoObject){
 						var obj:SIsoObject = touch.target.parent as SIsoObject ;
 						obj.alpha = 0.5 ;
 					}
