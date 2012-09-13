@@ -58,7 +58,11 @@ package local.map.item
 		}
 		
 		/** 在位置设置后调用 */
-		public function init():void{}
+		public function init():void{
+			_roadIndex = 0 ;
+			_firstMove = false ;
+			_nextPoint = null ;
+		}
 		
 		override public function update():void
 		{

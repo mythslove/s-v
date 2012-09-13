@@ -16,6 +16,7 @@ package local.map.item
 		
 		override public function init():void
 		{
+			super.init();
 			if(Math.random()>0.5){
 				_rightDirection = false ;
 			}
