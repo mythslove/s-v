@@ -106,9 +106,9 @@ package local.view.control
 			{
 				_container.removeEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
 				_container.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
-				_container.removeEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
+//				_container.removeEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
 				_container.removeEventListener(MouseEvent.MOUSE_UP, onMouseUp);
-				_container.removeEventListener(MouseEvent.ROLL_OUT, onMouseUp);
+				_container.removeEventListener(MouseEvent.RELEASE_OUTSIDE, onMouseUp);
 				_container.removeEventListener(Event.ENTER_FRAME, onEnterFrame);
 			}
 			
@@ -687,9 +687,9 @@ package local.view.control
 			
 			// Start listening to touch and frame events
 			_container.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove );
-			_container.addEventListener(MouseEvent.MOUSE_OUT, onMouseOut );
+//			_container.addEventListener(MouseEvent.MOUSE_OUT, onMouseOut );
 			_container.addEventListener(MouseEvent.MOUSE_UP, onMouseUp );
-			_container.addEventListener(MouseEvent.ROLL_OUT, onMouseUp );
+			_container.addEventListener(MouseEvent.RELEASE_OUTSIDE, onMouseUp );
 			_container.addEventListener(Event.ENTER_FRAME, onEnterFrame );
 			
 			// DEBUG INFO
@@ -704,9 +704,9 @@ package local.view.control
 			_container.mouseChildren = true  ;
 			// Stop listening to touch events
 			_container.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
-			_container.removeEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
+//			_container.removeEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
 			_container.removeEventListener(MouseEvent.MOUSE_UP, onMouseUp);
-			_container.removeEventListener(MouseEvent.ROLL_OUT, onMouseUp );
+			_container.removeEventListener(MouseEvent.RELEASE_OUTSIDE, onMouseUp );
 			
 			// If we get a mouse down and a mouse up between two frames, we need to either stop the scrolling,
 			// either update the speed.
