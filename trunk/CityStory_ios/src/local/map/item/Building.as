@@ -29,7 +29,23 @@ package local.map.item
 		override public function addToSceneFromTopScene():void
 		{
 			super.addToSceneFromTopScene();
-			trace("周围是否有路："+MapGridDataModel.instance.checkAroundBuilding(this,BuildingType.DECORATION,BuildingType.DECORATION_ROAD));
+			//是否在路边
+			var flag:Boolean = MapGridDataModel.instance.checkAroundBuilding(this,BuildingType.DECORATION,BuildingType.DECORATION_ROAD) ;
+			if(flag){
+				if( buildingVO.status==BuildingStatus.NO_ROAD ){
+					startProduct();
+				}
+			}else if( buildingVO.status==BuildingStatus.PRODUCTION ){
+				clearGameTimer();
+				buildingVO.status=BuildingStatus.NO_ROAD ;
+				showBuildingFlagIcon();
+			}
+			//修正图标位置
+			if(statusIcon && statusIcon.parent ){
+				statusIcon.x = screenX-statusIcon.width*0.5;
+				statusIcon.y = screenY+buildingVO.baseVO.span*_size-buildingObject.height - _size ;
+				GameWorld.instance.sortIcons();
+			}
 		}
 		
 		/*创建计时器, @param duration时间，单位为秒*/
@@ -67,6 +83,15 @@ package local.map.item
 			super.showUI();
 			showBuildingFlagIcon();
 		} 
+		
+		/**
+		 * 开始生产 
+		 */		
+		protected function startProduct():void
+		{
+			//判断是否可以生产，Business的goods够不够，Industry的Product有没有
+			removeBuildingFlagIcon();
+		}
 		
 		/**
 		 * 显示建筑当前的标识 
