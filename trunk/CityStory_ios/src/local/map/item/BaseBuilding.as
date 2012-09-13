@@ -1,7 +1,5 @@
 package local.map.item
 {
-	import flash.display.Bitmap;
-	
 	import local.comm.GameData;
 	import local.comm.GameSetting;
 	import local.enum.VillageMode;
@@ -23,7 +21,6 @@ package local.map.item
 		public var roadObject:RoadObject ;
 		public var buildingVO:BuildingVO ;
 		public var bottom:BuildingBottomGrid ;
-		public var statusIcon:Bitmap ; //显示当前状态的icon
 		
 		public function BaseBuilding(buildingVO:BuildingVO )
 		{
@@ -54,10 +51,6 @@ package local.map.item
 			buildingObject = new BuildingObject(barvo);
 			addChildAt(buildingObject,0);
 			this.scaleX = buildingVO.rotation ;
-			
-//			statusIcon = new Bitmap();
-//			statusIcon.y = buildingVO.baseVO.span*_size-buildingObject.height - _size ;
-//			addChild(statusIcon);
 		}
 		
 		public function onClick():void
