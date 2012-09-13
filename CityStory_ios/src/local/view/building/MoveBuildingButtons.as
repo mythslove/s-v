@@ -53,6 +53,7 @@ package local.view.building
 		
 		private function onClickHandler( e:MouseEvent ):void
 		{
+			e.stopPropagation();
 			var building:BaseBuilding = GameWorld.instance.topScene.getChildAt(0) as BaseBuilding ;
 			switch( e.target)
 			{

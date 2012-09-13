@@ -16,6 +16,7 @@ package  local.map
 	import local.model.LandModel;
 	import local.model.MapGridDataModel;
 	import local.util.EmbedsManager;
+	import local.view.building.EditorBuildingButtons;
 	import local.view.building.MoveBuildingButtons;
 	import local.vo.*;
 	
@@ -383,6 +384,10 @@ package  local.map
 			if(MoveBuildingButtons.instance.parent)
 			{
 				MoveBuildingButtons.instance.scaleY =MoveBuildingButtons.instance.scaleX = 1/scaleX ;
+			}
+			else if(EditorBuildingButtons.instance.parent)
+			{
+				EditorBuildingButtons.instance.scaleY =EditorBuildingButtons.instance.scaleX = 1/scaleX ;
 			}
 		}
 		
