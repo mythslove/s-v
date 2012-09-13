@@ -3,24 +3,16 @@ package local.view.shop
 	import bing.utils.ContainerUtil;
 	
 	import flash.display.MovieClip;
-	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.geom.Rectangle;
 	
-	import local.comm.GameData;
 	import local.enum.BuildingType;
-	import local.enum.VillageMode;
-	import local.map.GameWorld;
-	import local.map.item.BaseBuilding;
 	import local.model.ShopModel;
-	import local.util.BuildingFactory;
-	import local.util.PopUpManager;
 	import local.view.btn.TabMenuButton;
-	import local.view.control.ScrollControllerH;
 	import local.view.control.ToggleBar;
 	import local.view.control.ToggleBarEvent;
 	
-	public class HomePanel extends Sprite
+	public class HomePanel extends ShopPanel
 	{
 		private static var _instance:HomePanel;
 		public static function get instance():HomePanel{
@@ -28,12 +20,12 @@ package local.view.shop
 			return _instance ;
 		}
 		//=====================================
+		public static const TAB_ALL:String = "ALL";
+		public static const  TAB_RESIDENCE:String = "RESIDENCE";
+		public static const  TAB_CONDOS:String = "CONDOS";
+		public static const  TAB_MANSIONS:String = "MANSIONS";
 		
 		public var mainTypeBar:ToggleBar;
-		public var container:Sprite ;
-		
-		private var _scroll:ScrollControllerH = new ScrollControllerH() ;
-		private var _scrollContainer:Sprite = new Sprite() ;
 		
 		public function HomePanel()
 		{
@@ -43,17 +35,9 @@ package local.view.shop
 		
 		private function init():void
 		{
-			container = new Sprite();
-			container.x = 5 ;
-			container.y = 130 ;
-			container.graphics.beginFill(0,0);
-			container.graphics.drawRect(0,0,830,360);
-			container.graphics.endFill();
-			addChild(container);
-			
 			mainTypeBar = new ToggleBar();
 			var mcs:Vector.<MovieClip>= Vector.<MovieClip>([
-				new TabMenuButton("ALL") ,new TabMenuButton("RESIDENCE"),new TabMenuButton("CONDOS") ,new TabMenuButton("MANSIONS") 
+				new TabMenuButton(TAB_ALL) ,new TabMenuButton(TAB_RESIDENCE),new TabMenuButton(TAB_CONDOS) ,new TabMenuButton(TAB_MANSIONS) 
 			]);
 			mainTypeBar.buttons = mcs ;
 			addChild(mainTypeBar);
@@ -61,8 +45,6 @@ package local.view.shop
 			mainTypeBar.y= 10 ;
 			mainTypeBar.addEventListener(ToggleBarEvent.TOGGLE_CHANGE , toggleChangeHandler);
 			mainTypeBar.selected = mcs[0];
-			
-			_scrollContainer.addEventListener(MouseEvent.CLICK , onItemHandler );
 		}
 		
 		private function toggleChangeHandler( e:ToggleBarEvent ):void
@@ -76,26 +58,26 @@ package local.view.shop
 			var render:ShopItemRenderer ;
 			for( var i:int = 0 ; i <len ; ++i ) {
 				render = homeRenders[i] ;
-				if(e.selectedName=="ALL"){
+				if(e.selectedName==TAB_ALL){
 					render.x = (render.width+cop)*count ;
 					_scrollContainer.addChild( render );
 					++count ;
 				}
-				else if(e.selectedName=="RESIDENCE"){
+				else if(e.selectedName==TAB_RESIDENCE){
 					if( render.baseVO.subClass==BuildingType.HOME_RESIDENCE){
 						render.x = (render.width+cop)*count ;
 						_scrollContainer.addChild( render );
 						++count ;
 					}
 				}
-				else if(e.selectedName=="CONDOS"){
+				else if(e.selectedName==TAB_CONDOS){
 					if( render.baseVO.subClass==BuildingType.HOME_CONDOS){
 						render.x = (render.width+cop)*count ;
 						_scrollContainer.addChild( render );
 						++count ;
 					}
 				}
-				else if(e.selectedName=="MANSIONS"){
+				else if(e.selectedName==TAB_MANSIONS){
 					if( render.baseVO.subClass==BuildingType.HOME_MANSIONS){
 						render.x = (render.width+cop)*count ;
 						_scrollContainer.addChild( render );
@@ -108,17 +90,13 @@ package local.view.shop
 		}
 		
 		
-		private function onItemHandler( e:MouseEvent ):void
+		override protected function onItemHandler( e:MouseEvent ):void
 		{
-			e.stopPropagation();
+			super.onItemHandler(e);
 			if(e.target is ShopItemRenderer)
 			{
 				var render:ShopItemRenderer = e.target as ShopItemRenderer ;
-				var building:BaseBuilding = BuildingFactory.createBuildingByBaseVO( render.baseVO );
-				
-				GameWorld.instance.addBuildingToTopScene( building);
-				GameData.villageMode=VillageMode.BUILDING_SHOP ;
-				PopUpManager.instance.removeCurrentPopup();
+				addItemToWorld( render );
 			}
 		}
 	}

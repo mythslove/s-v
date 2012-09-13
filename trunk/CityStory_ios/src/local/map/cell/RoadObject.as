@@ -20,7 +20,7 @@ package local.map.cell
 			addChild(_roadBmp);
 		}
 		
-		public function show( direction:String=""):void
+		public function show( direction:String ):void
 		{
 			super._bitmapForHitDetection = _roadBmp ;
 			_roadBmp.bitmapData = _roadResVO.bmds[name+direction] ;
