@@ -185,6 +185,7 @@ package local.map
 			building.bottom.updateBuildingGridLayer();
 			
 			building.addChild( MoveBuildingButtons.instance );
+			MoveBuildingButtons.instance .scaleX = MoveBuildingButtons.instance.scaleY = 1/scaleX ;
 		}
 		
 		override protected function configListeners():void
