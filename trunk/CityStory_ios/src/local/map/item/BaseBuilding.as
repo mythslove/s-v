@@ -112,6 +112,17 @@ package local.map.item
 			StorageModel.instance.addBuildingToStorage( this );
 			GameWorld.instance.topScene.removeIsoObject( this );
 			GameWorld.instance.roadScene.mouseChildren = GameWorld.instance.buildingScene.mouseChildren = true ;
+			this.dispose();
+		}
+		
+		/**
+		 * 售出 
+		 */		
+		public function sell():void
+		{
+			GameWorld.instance.topScene.removeIsoObject( this );
+			GameWorld.instance.roadScene.mouseChildren = GameWorld.instance.buildingScene.mouseChildren = true ;
+			this.dispose();
 		}
 		
 		/**
