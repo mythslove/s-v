@@ -12,7 +12,7 @@ package local.view.btn
 		private var _label:String ;
 		private var _tf:TextFormat ;
 		
-		public function TabMenuButton( label:String = null )
+		public function TabMenuButton( label:String = null , name:String = null )
 		{
 			super();
 			mouseChildren = false ;
@@ -23,7 +23,11 @@ package local.view.btn
 			txtLabel.defaultTextFormat = _tf ;
 			
 			if(label){
-				name = label ;
+				if(name){
+					this.name = name ;
+				}else{
+					this.name = label ;
+				}
 				this._label = label ;
 				this.txtLabel.text = label ;
 			}

@@ -65,6 +65,11 @@ package local.view.shop
 					ShopPopUp.instance.show(BuildingType.DECORATION);
 					PopUpManager.instance.removeCurrentPopup() ;
 					break ;
+				case btnBusiness:
+					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , false );
+					ShopPopUp.instance.show(BuildingType.BUSINESS);
+					PopUpManager.instance.removeCurrentPopup() ;
+					break ;
 			}
 		}
 		

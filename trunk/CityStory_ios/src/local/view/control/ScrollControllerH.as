@@ -113,6 +113,7 @@ package local.view.control
 			}
 			
 			scrollBarFadeOutTimer.removeEventListener(TimerEvent.TIMER_COMPLETE, onScrollBarFadeOutTimerComplete);
+			_scrollBarFadeOutTimer = null ;
 			
 			if (_scrollBar && _container && _container.contains(_scrollBar))
 				_container.removeChild(_scrollBar);
@@ -334,6 +335,7 @@ package local.view.control
 			_scrollBar = new Shape();
 			_scrollBar.cacheAsBitmap = true;
 			updateScrollBar();
+			_scrollBar.visible = false ;
 		}
 		
 		/** Redraw the scroll bar with a new height (can't use scaling because of the rounded corners) */

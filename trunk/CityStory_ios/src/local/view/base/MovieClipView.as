@@ -26,7 +26,6 @@ package local.view.base
 			addEventListener(Event.ADDED_TO_STAGE, addedToStageHandler,false,0,true);
 		}
 		
-		
 		public function dispose():void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, addedToStageHandler);

@@ -4,30 +4,32 @@ package local.view.shop
 	
 	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
-	import flash.geom.Rectangle;
 	
 	import local.enum.BuildingType;
 	import local.model.ShopModel;
 	import local.view.btn.TabMenuButton;
 	import local.view.control.ToggleBar;
 	import local.view.control.ToggleBarEvent;
-	
-	public class HomePanel extends ShopPanel
+
+	public class BusinessPanel extends ShopPanel
 	{
-		private static var _instance:HomePanel;
-		public static function get instance():HomePanel{
-			if(!_instance) _instance = new HomePanel();
+		private static var _instance:BusinessPanel;
+		public static function get instance():BusinessPanel{
+			if(!_instance) _instance = new BusinessPanel();
 			return _instance ;
 		}
 		//=====================================
 		public static const TAB_ALL:String = "ALL";
-		public static const  TAB_RESIDENCE:String = "RESIDENCE";
-		public static const  TAB_CONDOS:String = "CONDOS";
-		public static const  TAB_MANSIONS:String = "MANSIONS";
+		public static const  TAB_SHOPS:String = "SHOPS";
+		public static const  TAB_RESTAURANTS:String = "RESTAURANTS";
+		public static const  TAB_SERVICES:String = "SERVICES";
+		public static const  TAB_OFFICES:String = "OFFICES";
+		
+		
 		
 		public var mainTypeBar:ToggleBar;
 		
-		public function HomePanel()
+		public function BusinessPanel()
 		{
 			super();
 			init();
@@ -37,7 +39,8 @@ package local.view.shop
 		{
 			mainTypeBar = new ToggleBar();
 			var mcs:Vector.<MovieClip>= Vector.<MovieClip>([
-				new TabMenuButton(TAB_ALL) ,new TabMenuButton(TAB_RESIDENCE),new TabMenuButton(TAB_CONDOS) ,new TabMenuButton(TAB_MANSIONS) 
+				new TabMenuButton(TAB_ALL) ,new TabMenuButton(TAB_SHOPS),new TabMenuButton(TAB_RESTAURANTS) ,
+				new TabMenuButton(TAB_SERVICES) , new TabMenuButton(TAB_OFFICES) 
 			]);
 			mainTypeBar.buttons = mcs ;
 			addChild(mainTypeBar);
@@ -52,7 +55,7 @@ package local.view.shop
 			ContainerUtil.removeChildren(_content);
 			_scroll.removeScrollControll();
 			
-			var itemRenders:Vector.<ShopItemRenderer> = ShopModel.instance.homesRenderers ;
+			var itemRenders:Vector.<ShopItemRenderer> = ShopModel.instance.businessRenderers ;
 			if(!itemRenders) return ;
 			var len:int =itemRenders.length ,  count:int , cop:int=5 ;
 			var render:ShopItemRenderer ;
@@ -63,29 +66,36 @@ package local.view.shop
 					_content.addChild( render );
 					++count ;
 				}
-				else if(e.selectedName==TAB_RESIDENCE){
-					if( render.baseVO.subClass==BuildingType.HOME_RESIDENCE){
+				else if(e.selectedName==TAB_SHOPS){
+					if( render.baseVO.subClass==BuildingType.BUSINESS_SHOPS){
 						render.x = (render.width+cop)*count ;
 						_content.addChild( render );
 						++count ;
 					}
 				}
-				else if(e.selectedName==TAB_CONDOS){
-					if( render.baseVO.subClass==BuildingType.HOME_CONDOS){
+				else if(e.selectedName==TAB_RESTAURANTS){
+					if( render.baseVO.subClass==BuildingType.BUSINESS_RESTAURANTS){
 						render.x = (render.width+cop)*count ;
 						_content.addChild( render );
 						++count ;
 					}
 				}
-				else if(e.selectedName==TAB_MANSIONS){
-					if( render.baseVO.subClass==BuildingType.HOME_MANSIONS){
+				else if(e.selectedName==TAB_SERVICES){
+					if( render.baseVO.subClass==BuildingType.BUSINESS_SERVICES){
+						render.x = (render.width+cop)*count ;
+						_content.addChild( render );
+						++count ;
+					}
+				}
+				else if(e.selectedName==TAB_OFFICES){
+					if( render.baseVO.subClass==BuildingType.BUSINESS_OFFICES){
 						render.x = (render.width+cop)*count ;
 						_content.addChild( render );
 						++count ;
 					}
 				}
 			}
-			_scroll.addScrollControll( _content , container , null , new Rectangle(0,0,_content.width,_content.height));
+			_scroll.addScrollControll( _content , container );
 			container.addChild(_content);
 		}
 		

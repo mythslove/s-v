@@ -16,7 +16,7 @@ package local.view.shop
 		public var price:ShopItemPrice ;
 		public var txtTitle:TextField ;
 		public var imgContainer:Sprite;
-		public var txtPop:TextField ;
+		public var txtPopGoods:TextField ; //显示人口和商品数据
 		public var txtCoin:TextField ;
 		//===========================
 		public var baseVO:BaseBuildingVO ;
@@ -35,9 +35,8 @@ package local.view.shop
 			{
 				case BuildingType.HOME:
 					gotoAndStop("homes");
-					//人口
-					GameUtil.boldTextField( txtPop ,  "Pop: +" + baseVO.addPop ) ;
-					GameUtil.boldTextField( txtCoin ,  "+"+baseVO.earnCoin+" / "+ GameUtil.getTimeString( baseVO.time ) ) ;
+					GameUtil.boldTextField( txtPopGoods ,  "Pop: +" + baseVO.addPop ) ;
+					GameUtil.boldTextField( txtCoin ,  "+"+ GameUtil.moneyFormat(baseVO.earnCoin)+" / "+ GameUtil.getTimeString( baseVO.time ) ) ;
 					break ;
 				case BuildingType.DECORATION:
 					gotoAndStop("decors");
@@ -53,6 +52,8 @@ package local.view.shop
 					break ;
 				case BuildingType.BUSINESS:
 					gotoAndStop("business");
+					GameUtil.boldTextField( txtPopGoods ,  "-" + baseVO.goodsCost ) ;
+					GameUtil.boldTextField( txtCoin ,  "+"+ GameUtil.moneyFormat(baseVO.earnCoin)+" / "+ GameUtil.getTimeString( baseVO.time ) ) ;
 					break ;
 			}
 			//图片
