@@ -157,9 +157,9 @@ package local.map
 			
 			
 			
-			buildingScene.sortAll();
-			
 			GameData.villageMode=VillageMode.NORMAL ;
+			buildingScene.sortAll();
+			sortIcons();
 			run() ;
 //			GameData.villageMode=VillageMode.EDIT ;
 		}

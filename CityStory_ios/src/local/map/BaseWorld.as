@@ -473,6 +473,20 @@ package  local.map
 			roadScene.graphics.endFill();
 		}
 		
+		/**
+		 * 对建筑上面的icon标志进行深度排序 
+		 */		
+		public function sortIcons():void
+		{
+			var arr:Array = [];
+			for( var i:int = 0 ; i<iconScene.numChildren ; ++i){
+				arr.push( iconScene.getChildAt(i));
+			}
+			arr.sortOn("y",Array.DESCENDING) ;
+			for( i = arr.length-1 ; i>=0 ; --i){
+				iconScene.setChildIndex( arr[i] ,i );
+			}
+		}
 	}
 }
 
