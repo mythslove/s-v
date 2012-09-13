@@ -25,13 +25,14 @@ package  local.comm
 		public static var commVec:Vector3D = new Vector3D();
 		
 		
-		private static var _villageMode:String = VillageMode.NORMAL  ;
+		private static var _villageMode:String   ;
 		/**村庄的状态，VillageMode常量 */		
 		public static function get villageMode():String {
 			return _villageMode ;
 		}
 		public static function set villageMode( value:String):void
 		{
+			if(_villageMode==value) return ;
 			_villageMode = value ;
 			CenterViewLayer.instance.changeStatus( value );
 			var world:GameWorld = GameWorld.instance ;
