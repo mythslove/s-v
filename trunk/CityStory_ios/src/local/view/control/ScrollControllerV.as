@@ -675,6 +675,7 @@ package local.view.control
 		
 		private function onMouseDown( event : MouseEvent ) : void
 		{
+			_container.mouseChildren = true  ;
 			// The user starts touching the screen
 			_touchingScreen = true;
 			_timeOfLastMouseDown = getTimer();
@@ -699,6 +700,7 @@ package local.view.control
 		
 		private function onMouseUp( event : MouseEvent ) : void
 		{
+			_container.mouseChildren = true  ;
 			// Stop listening to touch events
 			_container.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
 			_container.removeEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
@@ -740,6 +742,7 @@ package local.view.control
 		
 		private function onMouseMove( event : MouseEvent) : void
 		{
+			_container.mouseChildren = false  ;
 			// Indicate we received a touch and it hasn't been processed yet
 			_pendingTouch = true;
 			
@@ -789,7 +792,7 @@ package local.view.control
 			}
 			
 			// If we are moving, we don't transmit mouse events to children
-			_container.mouseChildren = (speed == 0);
+//			_container.mouseChildren = (speed == 0);
 			
 			// DEBUG INFO
 			if (DEBUG)
