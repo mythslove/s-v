@@ -72,6 +72,17 @@ package local.util
 		public static const ExpandLandButton:Class;//扩地的图标
 		
 		
+		[Embed(source="../resource/comm/CollectCoinFlag.png")]
+		public static const CollectCoinFlag:Class; //收藏金币时的标志
+		[Embed(source="../resource/comm/CollectGoodsFlag.png")]
+		public static const CollectGoodsFlag:Class; //收获商品时的标志
+		[Embed(source="../resource/comm/AddGoodsFlag.png")]
+		public static const AddGoodsFlag:Class; //需要商品时的标志
+		[Embed(source="../resource/comm/NeedRoadsFlag.png")]
+		public static const NeedRoadsFlag:Class; //建筑没在路边时的标志
+		
+		
+		
 		/**
 		 * 获得嵌入的动画文件  
 		 * @param name

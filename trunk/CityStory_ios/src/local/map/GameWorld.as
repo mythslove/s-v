@@ -176,7 +176,7 @@ package local.map
 			building.nodeX = p.x ;
 			building.nodeZ = p.y ;
 			
-			topScene.clear();
+			topScene.clearAndDisposeChild();
 			topScene.addIsoObject( building , false );
 			building.drawBottomGrid();
 			building.bottom.updateBuildingGridLayer();

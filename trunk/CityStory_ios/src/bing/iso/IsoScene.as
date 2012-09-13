@@ -150,5 +150,18 @@ package bing.iso
 			ContainerUtil.removeChildren( this );
 			_sprites = new Vector.<IsoObject>();
 		}
+		
+		/**
+		 * 清空场景并且，释放对象
+		 */		
+		public function clearAndDisposeChild():void
+		{
+			for each( var obj:IsoObject in _sprites){
+				obj.dispose();
+				obj = null ;
+			}
+			ContainerUtil.removeChildren( this );
+			_sprites = new Vector.<IsoObject>();
+		}
 	}
 }
