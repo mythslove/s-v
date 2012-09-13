@@ -1,15 +1,8 @@
 package local.view.shop
 {
 	import flash.events.MouseEvent;
-	import flash.geom.Rectangle;
 	
-	import local.comm.GameData;
-	import local.enum.VillageMode;
-	import local.map.GameWorld;
-	import local.map.item.BaseBuilding;
 	import local.model.ShopModel;
-	import local.util.BuildingFactory;
-	import local.util.PopUpManager;
 	
 	public class DecorationPanel extends ShopPanel
 	{
@@ -28,18 +21,18 @@ package local.view.shop
 		
 		private function init():void
 		{
-			var decorsRenderers:Vector.<ShopItemRenderer> = ShopModel.instance.decorsRenderers ;
-			if(!decorsRenderers) return ;
-			var len:int =decorsRenderers.length , cop:int=5 ;
+			var itemRenders:Vector.<ShopItemRenderer> = ShopModel.instance.decorsRenderers ;
+			if(!itemRenders) return ;
+			var len:int =itemRenders.length , cop:int=5 ;
 			var render:ShopItemRenderer ;
 			for( var i:int=0 ; i<len ; ++i )
 			{
-				render = decorsRenderers[i] ;
+				render = itemRenders[i] ;
 				render.x = (render.width+cop)*i ;
-				_scrollContainer.addChild( render );
+				_content.addChild( render );
 			}
-			_scroll.addScrollControll( _scrollContainer , container , new Rectangle(0,0,container.width,container.height));
-			container.addChild(_scrollContainer);
+			_scroll.addScrollControll( _content , container);
+			container.addChild(_content);
 		}
 		
 		

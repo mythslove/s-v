@@ -17,10 +17,10 @@ package local.enum
 		
 		
 		public static const BUSINESS:String = "business";
-		public static const SHOPS:String = "shops";
-		public static const RESTAURANTS:String = "restaurants";
-		public static const SERVICES:String=  "services";
-		public static const OFFICES:String = "offices";
+		public static const BUSINESS_SHOPS:String = "shops";
+		public static const BUSINESS_RESTAURANTS:String = "restaurants";
+		public static const BUSINESS_SERVICES:String=  "services";
+		public static const BUSINESS_OFFICES:String = "offices";
 		
 		
 		public static const DECORATION:String = "decoration";

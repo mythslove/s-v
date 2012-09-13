@@ -15,7 +15,7 @@ package local.view.shop
 	{
 		public var container:Sprite ;
 		protected var _scroll:ScrollControllerH = new ScrollControllerH() ;
-		protected var _scrollContainer:Sprite = new Sprite() ;
+		protected var _content:Sprite = new Sprite() ;
 		
 		public function ShopPanel()
 		{
@@ -24,11 +24,11 @@ package local.view.shop
 			container.x = 5 ;
 			container.y = 130 ;
 			container.graphics.beginFill(0,0);
-			container.graphics.drawRect(0,0,830,360);
+			container.graphics.drawRect(0,0,825,370);
 			container.graphics.endFill();
 			addChild(container);
 			
-			_scrollContainer.addEventListener(MouseEvent.CLICK , onItemHandler );
+			_content.addEventListener(MouseEvent.CLICK , onItemHandler );
 		}
 		
 		protected function onItemHandler( e:MouseEvent):void
