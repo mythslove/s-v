@@ -10,8 +10,6 @@ package local.view.building
 	import local.map.GameWorld;
 	import local.map.item.BaseBuilding;
 	import local.view.base.BaseView;
-	import local.view.btn.BuildingCancelButton;
-	import local.view.btn.BuildingOKButton;
 	
 	/**
 	 * 建筑移动时，上面的确定和取消按钮 

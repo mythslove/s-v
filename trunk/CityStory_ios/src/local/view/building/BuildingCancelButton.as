@@ -1,4 +1,4 @@
-package local.view.btn
+package local.view.building
 {
 	import local.view.control.Button;
 	
