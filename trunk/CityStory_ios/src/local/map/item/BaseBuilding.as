@@ -9,8 +9,10 @@ package local.map.item
 	import local.map.cell.BuildingBottomGrid;
 	import local.map.cell.BuildingObject;
 	import local.map.cell.RoadObject;
+	import local.model.StorageModel;
 	import local.util.GameTimer;
 	import local.util.ResourceUtil;
+	import local.view.building.EditorBuildingButtons;
 	import local.vo.BitmapAnimResVO;
 	import local.vo.BuildingVO;
 
@@ -70,6 +72,7 @@ package local.map.item
 				world.topScene.addIsoObject( this );
 				world.roadScene.mouseChildren = world.buildingScene.mouseChildren = false ;
 				this.drawBottomGrid();
+				addChild( EditorBuildingButtons.instance );
 			}else{
 				flash(true);
 			}
@@ -106,6 +109,16 @@ package local.map.item
 		{
 			//减钱
 			addToSceneFromTopScene();
+		}
+		
+		/**
+		 * 收到收藏箱 
+		 */		
+		public function stash():void
+		{
+			StorageModel.instance.addBuildingToStorage( this );
+			GameWorld.instance.topScene.removeIsoObject( this );
+			GameWorld.instance.roadScene.mouseChildren = GameWorld.instance.buildingScene.mouseChildren = true ;
 		}
 		
 		/**

@@ -17,6 +17,7 @@ package local.map
 	import local.map.land.ExpandLandButton;
 	import local.model.LandModel;
 	import local.util.BuildingFactory;
+	import local.view.building.EditorBuildingButtons;
 	import local.view.building.MoveBuildingButtons;
 	import local.vo.BaseBuildingVO;
 	import local.vo.BuildingVO;
@@ -222,6 +223,9 @@ package local.map
 						if( _mouseBuilding && _mouseBuilding.parent == topScene)  {
 							//如果是编译状态，则移动建筑
 							moveTopBuilding();
+							if(EditorBuildingButtons.instance.parent){
+								EditorBuildingButtons.instance.parent.removeChild( EditorBuildingButtons.instance );
+							}
 						}else {
 							//如果不是编译状态，则移动地图
 							_endX =  _worldPos.x + root.mouseX-_mouseDownPos.x ;
@@ -233,10 +237,18 @@ package local.map
 				case MouseEvent.MOUSE_UP:
 					if(_mouseBuilding && _mouseBuilding.parent == topScene)
 					{
-						if(GameData.villageMode == VillageMode.EDIT && _mouseBuilding.bottom.getWalkable()){
-							_mouseBuilding.addToSceneFromTopScene();
-							_mouseBuilding = null ;
-							currentSelected = null ;
+						if(GameData.villageMode == VillageMode.EDIT )
+						{
+							if(_mouseBuilding.bottom.getWalkable()){
+								_mouseBuilding.addToSceneFromTopScene();
+								_mouseBuilding = null ;
+								currentSelected = null ;
+								if(EditorBuildingButtons.instance.parent){
+									EditorBuildingButtons.instance.parent.removeChild( EditorBuildingButtons.instance );
+								}
+							}else{
+								_mouseBuilding.addChild( EditorBuildingButtons.instance );
+							}
 						}
 					}
 					else if(!_isGesture && !_isMove)
@@ -259,6 +271,9 @@ package local.map
 							if( currentSelected.parent==topScene && GameData.villageMode == VillageMode.EDIT && currentSelected.bottom.getWalkable()){
 								currentSelected.addToSceneFromTopScene();
 								_mouseBuilding=null;
+								if(EditorBuildingButtons.instance.parent){
+									EditorBuildingButtons.instance.parent.removeChild( EditorBuildingButtons.instance );
+								}
 							}
 							currentSelected.flash(false);
 							currentSelected = null ;

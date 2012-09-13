@@ -20,7 +20,7 @@ package local.model
 		//=================================
 		
 		/** 收藏箱里房子 */
-		public var homes:Vector.<BuildingVO>;
+		public var homes:Vector.<StorageBuildingVO>;
 		
 		/** 收藏箱里的装饰品 */
 		public var decors:Vector.<StorageBuildingVO> ;
@@ -80,7 +80,7 @@ package local.model
 					arr = industry ;
 					break ;
 			}
-			var vo:StorageBuildingVO = getStorageVO( buildingVO.name );
+			var vo:StorageBuildingVO = getStorageVO( buildingVO.name  , arr );
 			if(vo) {
 				vo.num++;
 			}else{
