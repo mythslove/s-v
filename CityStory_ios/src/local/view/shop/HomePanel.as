@@ -85,7 +85,7 @@ package local.view.shop
 					}
 				}
 			}
-			_scroll.addScrollControll( _content , container , null , new Rectangle(0,0,_content.width,_content.height));
+			_scroll.addScrollControll( _content , container );
 			container.addChild(_content);
 		}
 		
