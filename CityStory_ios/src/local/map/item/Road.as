@@ -12,7 +12,7 @@ package local.map.item
 	 */	
 	public class Road extends BaseBuilding implements IRoad 
 	{
-		private var _direction:String ;
+		private var _direction:String="";
 		public function get direction():String{
 			return _direction;
 		}

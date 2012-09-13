@@ -89,10 +89,6 @@ package local.map
 			road.nodeX = 8*4+7 ;
 			road.nodeZ = 8*4+4 ;
 			roadScene.addRoad( road, false , false  );
-			road = BuildingFactory.createBuildingByVO( roadVO ) as Road ;
-			road.nodeX = 8*4+7 ;
-			road.nodeZ = 8*4+4 ;
-			roadScene.addRoad( road, false , false  );
 			//
 			var temp:Road; 
 			for( i = 1 ; i<4; ++i){

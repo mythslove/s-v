@@ -66,6 +66,9 @@ package local.view.shop
 				case BuildingType.HOME:
 					container.addChild(HomePanel.instance) ;
 					break ;
+				case BuildingType.DECORATION:
+					container.addChild(DecorationPanel.instance) ;
+					break ;
 			}
 		}
 		
