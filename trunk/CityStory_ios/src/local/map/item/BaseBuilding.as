@@ -2,6 +2,8 @@ package local.map.item
 {
 	import local.comm.GameData;
 	import local.comm.GameSetting;
+	import local.enum.BuildingStatus;
+	import local.enum.BuildingType;
 	import local.enum.VillageMode;
 	import local.map.GameWorld;
 	import local.map.cell.BuildingBottomGrid;
@@ -102,6 +104,11 @@ package local.map.item
 		{
 			//减钱
 			addToSceneFromTopScene();
+			if(buildingVO.baseVO.type!=BuildingType.DECORATION)
+			{
+				//显示修建状态
+				buildingVO.status=BuildingStatus.BUILDING ;
+			}
 		}
 		
 		/**
