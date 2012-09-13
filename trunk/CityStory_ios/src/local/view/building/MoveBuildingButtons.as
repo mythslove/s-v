@@ -47,7 +47,8 @@ package local.view.building
 		{
 			super.addedToStageHandler(e);
 			scaleX = scaleY = 0 ;
-			TweenLite.to( this , 0.25 , { scaleX:1 , scaleY:1 } );
+			var value:Number = 1/GameWorld.instance.scaleX ;
+			TweenLite.to( this , 0.25 , { scaleX:value , scaleY:value } );
 		}
 		
 		private function onClickHandler( e:MouseEvent ):void
