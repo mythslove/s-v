@@ -15,7 +15,7 @@ package local.vo
 		public var buildClick:int ; //当前修建点击了的次数
 		
 		public var direction:String = "";//用于路和水
-		
+		public var haveGoods:Boolean ; //是否补了goods，用于那些需要goods才能生产的建筑
 		public var product:ProductVO ; //要生产的东西，主要用于Industry
 		
 		private var _baseVO:BaseBuildingVO;

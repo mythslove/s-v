@@ -66,6 +66,8 @@ package local.map.cell
 		
 		public function flash( value:Boolean ):void
 		{
+			if( _tinyBmp.visible==value) return ;
+			
 			_tinyBmp.visible=value ;
 			if(value){
 				_tinyBmp.alpha=0.5;

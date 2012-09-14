@@ -163,13 +163,13 @@ package local.map
 							if(e.target.parent!=currentSelected  ){
 								if(currentSelected) currentSelected.flash(false);
 								currentSelected = e.target.parent as BaseBuilding ;
-								currentSelected.onClick();
 								//移动到中间
 								_endX =  GameSetting.SCREEN_WIDTH*0.5 - (sceneLayerOffsetX+currentSelected.screenX)*scaleX ;
 								_endY = GameSetting.SCREEN_HEIGHT*0.5 - (sceneLayerOffsetY+currentSelected.screenY+currentSelected.buildingVO.baseVO.span*_size)*scaleY ;
 								modifyEndPosition();
 								_moveSpeed = 0.15 ;
 							}
+							currentSelected.onClick();
 						}
 						else if(currentSelected) 
 						{

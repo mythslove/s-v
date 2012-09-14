@@ -12,7 +12,5 @@ package local.map.item
 		{
 			super(buildingVO);
 		}
-		
-		
 	}
 }

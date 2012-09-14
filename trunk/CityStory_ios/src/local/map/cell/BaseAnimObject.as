@@ -42,7 +42,7 @@ package local.map.cell
 		
 		public function dispose():void
 		{
-			_anim.dispose() ;
+			if(_anim) _anim.dispose() ;
 			_anim = null ;
 			_vo = null ;
 			bitmapData =null ;
