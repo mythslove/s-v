@@ -20,6 +20,9 @@ package local.model
 		}
 		//=================================
 		
+		/** 基础的一些树石头 */
+		public var basicBuildings:Vector.<BaseBuildingVO> = new Vector.<BaseBuildingVO>();
+		
 		/** 所有的建筑BaseBuildingVO */
 		public var baseBuildings:Vector.<BaseBuildingVO> ;
 		
@@ -55,6 +58,9 @@ package local.model
 			{
 				switch( baseVO.type)
 				{
+					case BuildingType.BASIC:
+						basicBuildings.push( baseVO );
+						break ;
 					case BuildingType.HOME :
 						homesRenderers.push( new ShopItemRenderer(baseVO) );
 						break ;
@@ -76,5 +82,6 @@ package local.model
 				}
 			}
 		}
+
 	}
 }
