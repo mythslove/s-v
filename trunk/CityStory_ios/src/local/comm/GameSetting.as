@@ -25,5 +25,8 @@ package local.comm
 		public static var local:String = "en";
 		
 		public static var device:String =  "iphone";
+		
+		/*facebookId*/
+		public static var fdId:String = "village";
 	}
 }

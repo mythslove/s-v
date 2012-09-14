@@ -33,5 +33,11 @@ package local.model
 		{
 			
 		}
+		
+		
+		public function createPlayer():void
+		{
+			
+		}
 	}
 }

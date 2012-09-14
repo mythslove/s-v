@@ -145,7 +145,7 @@ package local.map.scene
 					addMoveItem( fairy , false ) ;
 					fairy.init();
 					++ characNum ;
-				}else if(Math.random()>0.6 && carNum<5){ //不超过5辆车
+				}else if(Math.random()>0.4 && carNum<5){ //不超过5辆车
 					road = roads[i];
 					if(road.direction!=""){
 						var car:MoveItem = ObjectPool.instance.getCar() ;

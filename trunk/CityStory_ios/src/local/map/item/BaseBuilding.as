@@ -9,6 +9,7 @@ package local.map.item
 	import local.map.cell.BuildingBottomGrid;
 	import local.map.cell.BuildingObject;
 	import local.map.cell.RoadObject;
+	import local.model.BuildingModel;
 	import local.model.StorageModel;
 	import local.util.GameTimer;
 	import local.util.ResourceUtil;
@@ -95,6 +96,10 @@ package local.map.item
 		public function storageToWorld():void
 		{
 			addToSceneFromTopScene();
+			
+			//添加到地图数据中，并且从收藏箱数据中删除
+			BuildingModel.instance.addBuildingVO( buildingVO );
+			StorageModel.instance.deleteStorageVO( buildingVO.name , buildingVO.baseVO.type );
 		}
 		
 		/**
@@ -109,6 +114,8 @@ package local.map.item
 				//显示修建状态
 				buildingVO.status=BuildingStatus.BUILDING ;
 			}
+			//添加到地图数据中
+			BuildingModel.instance.addBuildingVO( buildingVO );
 		}
 		
 		/**
@@ -116,9 +123,12 @@ package local.map.item
 		 */		
 		public function stash():void
 		{
-			StorageModel.instance.addBuildingToStorage( this );
 			GameWorld.instance.topScene.removeIsoObject( this );
 			GameWorld.instance.roadScene.mouseChildren = GameWorld.instance.buildingScene.mouseChildren = true ;
+			
+			//添加到收藏箱中，并且从地图数据中移除
+			BuildingModel.instance.removeBuildingVO( buildingVO );
+			StorageModel.instance.addBuildingVOToStorage(buildingVO);
 			this.dispose();
 		}
 		
@@ -129,6 +139,13 @@ package local.map.item
 		{
 			GameWorld.instance.topScene.removeIsoObject( this );
 			GameWorld.instance.roadScene.mouseChildren = GameWorld.instance.buildingScene.mouseChildren = true ;
+			
+			//如果是收藏箱中的数据，则从收藏箱中移除。如果是地图上的数据，则从地图数据中移除
+			if( GameData.villageMode==VillageMode.BUILDING_STORAGE){
+				StorageModel.instance.deleteStorageVO( buildingVO.name , buildingVO.baseVO.type );
+			}else{
+				BuildingModel.instance.removeBuildingVO( buildingVO );
+			}
 			this.dispose();
 		}
 		
@@ -190,6 +207,15 @@ package local.map.item
 					roadObject.alpha = 1 ;
 				}
 			}
+		}
+		
+		override public function set nodeX(value:int):void{
+			super.nodeX = value ;
+			buildingVO.nodeX = value ;
+		}
+		override public function set nodeZ(value:int):void{
+			super.nodeZ = value ;
+			buildingVO.nodeZ = value ;
 		}
 		
 		override public function dispose():void
