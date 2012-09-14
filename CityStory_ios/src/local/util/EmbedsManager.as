@@ -85,6 +85,23 @@ package local.util
 		
 		
 		
+		//========建筑修建时的状态图标====================
+		[Embed(source="../resource/effect/BuildStatus_1_0.bd", mimeType="application/octet-stream") ]
+		public static const BuildStatus_1_0:Class; 
+		[Embed(source="../resource/effect/BuildStatus_1_1.bd", mimeType="application/octet-stream") ]
+		public static const BuildStatus_1_1:Class; 
+		[Embed(source="../resource/effect/BuildStatus_2_0.bd", mimeType="application/octet-stream") ]
+		public static const BuildStatus_2_0:Class; 
+		[Embed(source="../resource/effect/BuildStatus_2_1.bd", mimeType="application/octet-stream") ]
+		public static const BuildStatus_2_1:Class; 
+		[Embed(source="../resource/effect/BuildStatus_3_0.bd", mimeType="application/octet-stream") ]
+		public static const BuildStatus_3_0:Class; 
+		[Embed(source="../resource/effect/BuildStatus_3_1.bd", mimeType="application/octet-stream") ]
+		public static const BuildStatus_3_1:Class; 
+		
+		
+		
+		
 		/**
 		 * 获得嵌入的动画文件  
 		 * @param name

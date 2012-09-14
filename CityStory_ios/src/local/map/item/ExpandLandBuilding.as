@@ -27,8 +27,8 @@ package local.map.item
 		
 		override public function showUI():void
 		{
-			buildingObject = new BuildingObject(EmbedsManager.instance.getAnimResVOByName("ExpandLandBuilding"));
-			addChildAt(buildingObject,0);
+			_buildingObject = new BuildingObject(EmbedsManager.instance.getAnimResVOByName("ExpandLandBuilding"));
+			addChildAt(_buildingObject,0);
 		}
 		
 		override public function flash( value:Boolean):void

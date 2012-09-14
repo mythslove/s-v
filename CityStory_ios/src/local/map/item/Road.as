@@ -25,13 +25,13 @@ package local.map.item
 		
 		override public function showUI():void
 		{
-			if(roadObject){
-				roadObject.show( this._direction);
+			if(_roadObject){
+				_roadObject.show( this._direction);
 			} else {
 				var roadResVO:RoadResVO = ResourceUtil.instance.getResVOByResId( name ).resObject as RoadResVO ;
-				roadObject = new RoadObject( name , roadResVO );
-				addChildAt(roadObject,0);
-				roadObject.show( this._direction);
+				_roadObject = new RoadObject( name , roadResVO );
+				addChildAt(_roadObject,0);
+				_roadObject.show( this._direction);
 			}
 		}
 		
