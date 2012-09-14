@@ -136,6 +136,9 @@ package local.map.item
 		/*显示建筑当前的标识 */		
 		protected function showBuildingFlagIcon():void
 		{
+			if( this is ExpandLandBuilding ||  this is BasicBuilding ){
+				return ;
+			}
 			switch( buildingVO.status )
 			{
 				case BuildingStatus.BUILDING:
