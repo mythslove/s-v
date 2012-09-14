@@ -44,7 +44,6 @@ package local.map.item
 			if(statusIcon && statusIcon.parent ){
 				statusIcon.x = screenX-statusIcon.width*0.5;
 				statusIcon.y = screenY+buildingVO.baseVO.span*_size-buildingObject.height - _size ;
-				GameWorld.instance.sortIcons();
 			}
 		}
 		

@@ -15,11 +15,11 @@ package local.map
 	import local.map.item.BaseBuilding;
 	import local.map.item.Road;
 	import local.map.land.ExpandLandButton;
+	import local.model.BuildingModel;
 	import local.model.LandModel;
 	import local.util.BuildingFactory;
 	import local.view.building.EditorBuildingButtons;
 	import local.view.building.MoveBuildingButtons;
-	import local.vo.BaseBuildingVO;
 	import local.vo.BuildingVO;
 
 	public class GameWorld extends BaseWorld
@@ -32,136 +32,46 @@ package local.map
 		//-----------------------------------------------------------------
 		private var _mouseBuilding:BaseBuilding; //按下时点击到的建筑
 		
-		/** 显示所有的建筑 */
+		/** 
+		 * 显示所有的建筑 
+		 */
 		public function showBuildings():void
 		{
-			var baseVO:BaseBuildingVO = new BaseBuildingVO();
-			baseVO.name = "Road";
-			baseVO.type = BuildingType.DECORATION ;
-			baseVO.subClass = BuildingType.DECORATION_ROAD ;
-			var roadVO:BuildingVO = new BuildingVO();
-			roadVO.baseVO = baseVO ;
-			roadVO.name = "Road";
-			
-			var road:Road ;
-			for( var i:int = 0 ; i<3; ++i){
-				for ( var j:int = 0 ; j<3;++j){
-					road = BuildingFactory.createBuildingByVO( roadVO ) as Road ;
-					road.nodeX = 8*4+i ;
-					road.nodeZ =  8*4+j ;
-					roadScene.addRoad( road , false , false );
-				}
+			if( GameData.villageMode==VillageMode.VISIT) //显示好友村庄
+			{
+				
 			}
-			
-			
-			for( i = 4 ; i<6; ++i){
-				road = BuildingFactory.createBuildingByVO( roadVO ) as Road ;
-				road.nodeX = 8*4+i ;
-				road.nodeZ = 8*4+0 ;
-				roadScene.addRoad( road , false , false );
+			else //显示自己的村庄
+			{
+				var myModel:BuildingModel = BuildingModel.instance ;
+				tempShowBuilding(myModel.basicTrees);
+				tempShowBuilding(myModel.business);
+				tempShowBuilding(myModel.industry);
+				tempShowBuilding(myModel.community);
+				tempShowBuilding(myModel.decorations);
+				tempShowBuilding(myModel.homes);
 			}
-			//
-			road = BuildingFactory.createBuildingByVO( roadVO ) as Road ;
-			road.nodeX = 8*4+1 ;
-			road.nodeZ = 8*4+3 ;
-			roadScene.addRoad( road, false , false  );
-			road = BuildingFactory.createBuildingByVO( roadVO ) as Road ;
-			road.nodeX = 8*4+5 ;
-			road.nodeZ = 8*4+3 ;
-			roadScene.addRoad( road, false , false  );
-			road = BuildingFactory.createBuildingByVO( roadVO ) as Road ;
-			road.nodeX = 8*4+6 ;
-			road.nodeZ = 8*4+2 ;
-			roadScene.addRoad( road, false , false  );
-			road = BuildingFactory.createBuildingByVO( roadVO ) as Road ;
-			road.nodeX = 8*4+6 ;
-			road.nodeZ = 8*4+3 ;
-			roadScene.addRoad( road , false , false );
-			road = BuildingFactory.createBuildingByVO( roadVO ) as Road ;
-			road.nodeX = 8*4+7 ;
-			road.nodeZ = 8*4+3 ;
-			roadScene.addRoad( road , false , false );
-			road = BuildingFactory.createBuildingByVO( roadVO ) as Road ;
-			road.nodeX = 8*4+8 ;
-			road.nodeZ = 8*4+3 ;
-			roadScene.addRoad( road , false , false );
-			road = BuildingFactory.createBuildingByVO( roadVO ) as Road ;
-			road.nodeX = 8*4+7 ;
-			road.nodeZ = 8*4+4 ;
-			roadScene.addRoad( road, false , false  );
-			//
-			var temp:Road; 
-			for( i = 1 ; i<4; ++i){
-				for ( j =4 ; j<7;++j){
-					road = BuildingFactory.createBuildingByVO( roadVO ) as Road ;
-					road.nodeX = 8*4+i ;
-					road.nodeZ =  8*4+j ;
-					if(i==2&&j==5){
-						temp = road ;
-					}
-					roadScene.addRoad( road, false , false  );
-				}
-			}
-			roadScene.removeRoad(temp);
-			//
-			roadScene.addRoad( road, false , false  );
-			road =BuildingFactory.createBuildingByVO( roadVO ) as Road ;
-			road.nodeX = 8*4+7 ;
-			road.nodeZ = 8*4+7 ;
-			roadScene.addRoad( road , false , false  );
-			
 			roadScene.updateAllUI();
-			roadScene.sortAll() ;
-			
-		
-			
-			//添加home1
-			baseVO = new BaseBuildingVO();
-			baseVO.type=BuildingType.BUSINESS ;
-			baseVO.span = 2 ;
-			var bvo:BuildingVO = new BuildingVO();
-			bvo.name = "Apple Shop";
-			bvo.baseVO = baseVO ;
-			bvo.nodeX = 9*4   ;
-			bvo.nodeZ = 8*4+1 ;
-			var building:BaseBuilding= BuildingFactory.createBuildingByVO( bvo ) ;
-			buildingScene.addBuilding( building, false);
-			
-			baseVO = new BaseBuildingVO();
-			baseVO.type=BuildingType.HOME ;
-			
-			bvo = new BuildingVO();
-			bvo.name = "Red Victorian House";
-			bvo.baseVO = baseVO ;
-			bvo.nodeX = 9*4   ;
-			bvo.nodeZ = 10*4-2 ;
-			building= BuildingFactory.createBuildingByVO( bvo ) ;
-			buildingScene.addBuilding( building, false);
-			
-			
-			bvo = new BuildingVO();
-			bvo.name = "Yellow Victorian House";
-			bvo.baseVO = baseVO ;
-			bvo.nodeX = 8*4   ;
-			bvo.nodeZ = 10*4-2 ;
-			building= BuildingFactory.createBuildingByVO( bvo ) ;
-			buildingScene.addBuilding( building, false);
-			
-			bvo = new BuildingVO();
-			bvo.name = "My House";
-			bvo.baseVO = baseVO ;
-			bvo.nodeX = 9*4   ;
-			bvo.nodeZ = 9*4+1 ;
-			building= BuildingFactory.createBuildingByVO( bvo ) ;
-			buildingScene.addBuilding( building, false);
-			
-			
-			
-			GameData.villageMode=VillageMode.NORMAL ;
+			roadScene.sortAll();
 			buildingScene.sortAll();
-			sortIcons();
+			buildingScene.addMoveItems();
+			if(iconScene.visible){
+				sortIcons();
+			}
 			run() ;
-//			GameData.villageMode=VillageMode.EDIT ;
+		}
+		private function tempShowBuilding( bvos:Vector.<BuildingVO>):void{
+			if(bvos){
+				var building:BaseBuilding ;
+				for each( var bvo:BuildingVO in bvos){
+					building = BuildingFactory.createBuildingByVO( bvo );
+					if(bvo.baseVO.subClass==BuildingType.DECORATION_ROAD || bvo.baseVO.subClass==BuildingType.DECORATION_GROUND ){
+						roadScene.addRoad( building as Road , false , false );
+					}else{
+						buildingScene.addBuilding( building , false );
+					}
+				}
+			}
 		}
 		
 		/**
