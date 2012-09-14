@@ -15,9 +15,6 @@ package local.enum
 		
 		/** 扩地中*/
 		public static const EXPANDING:int = 7 ;
-		/** 扩地完成  */
-		public static const EXPAND_COMPLETE:int = 8 ; 
-		
 		
 		/** 没有在路旁边 */
 		public static const NO_ROAD:int  = 20;
