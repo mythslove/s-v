@@ -1,5 +1,6 @@
 package local.view.topbar
 {
+	import local.map.item.BaseBuilding;
 	import local.view.base.BaseView;
 	
 	public class TopBar extends BaseView
@@ -14,6 +15,15 @@ package local.view.topbar
 		public function TopBar()
 		{
 			super();
+		}
+		
+		/**
+		 * 给建筑加商品 
+		 * @param buiding
+		 */		
+		public function addGoodsToBuilding( buiding:BaseBuilding):void
+		{
+			
 		}
 	}
 }

@@ -1,7 +1,9 @@
 package local.map.item
 {
+	import local.comm.GameData;
 	import local.enum.BuildingStatus;
 	import local.enum.BuildingType;
+	import local.enum.VillageMode;
 	import local.model.MapGridDataModel;
 	import local.vo.BuildingVO;
 	
@@ -14,10 +16,13 @@ package local.map.item
 		
 		override public function onClick():void
 		{
-			if( buildingVO.status==BuildingStatus.PRODUCTION_COMPLETE)
+			if( GameData.villageMode==VillageMode.NORMAL)
 			{
-				//收钱
-				
+				if( buildingVO.status==BuildingStatus.PRODUCTION_COMPLETE)
+				{
+					//收钱
+					
+				}
 			}
 			else
 			{
