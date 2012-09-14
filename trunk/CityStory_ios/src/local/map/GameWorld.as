@@ -51,7 +51,6 @@ package local.map
 				tempShowBuilding(myModel.decorations);
 				tempShowBuilding(myModel.homes);
 			}
-			roadScene.updateAllUI();
 			roadScene.sortAll();
 			buildingScene.sortAll();
 			buildingScene.addMoveItems();

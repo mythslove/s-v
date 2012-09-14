@@ -19,7 +19,6 @@ package local.map.item
 
 	public class BaseBuilding extends BaseMapObject
 	{
-		public var gameTimer:GameTimer;
 		public var buildingObject:BuildingObject ;
 		public var roadObject:RoadObject ;
 		public var buildingVO:BuildingVO ;
@@ -35,16 +34,10 @@ package local.map.item
 			nodeZ = buildingVO.nodeZ ;
 		}
 		
-		public function recoverStatus():void
-		{ }
-		
 		override public function update():void
 		{
 			if(buildingObject) {
 				buildingObject.update() ;
-			}
-			if(!GameData.villageMode && gameTimer){
-				gameTimer.update() ;
 			}
 		}
 		

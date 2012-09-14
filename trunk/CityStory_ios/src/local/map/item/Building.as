@@ -3,6 +3,7 @@ package local.map.item
 	import flash.display.Bitmap;
 	import flash.events.Event;
 	
+	import local.comm.GameData;
 	import local.enum.BuildingStatus;
 	import local.enum.BuildingType;
 	import local.map.GameWorld;
@@ -19,11 +20,22 @@ package local.map.item
 	 */	
 	public class Building extends BaseBuilding
 	{
+		public var gameTimer:GameTimer;
 		public var statusIcon:Bitmap ; //显示当前状态的icon
 		
 		public function Building(buildingVO:BuildingVO)
 		{
 			super(buildingVO);
+		}
+		
+		public function recoverStatus():void
+		{
+			clearGameTimer();
+			if(buildingVO.status == BuildingStatus.PRODUCTION || buildingVO.status==BuildingStatus.EXPANDING ) 
+			{
+				buildingVO.statusTime =  ( (buildingVO.statusTime-GameData.commDate.time)*0.001 )>>0 ;
+				createGameTimer( buildingVO.statusTime );
+			}
 		}
 		
 		override public function addToSceneFromTopScene():void
@@ -136,6 +148,14 @@ package local.map.item
 			if(statusIcon && statusIcon.parent){
 				statusIcon.parent.removeChild(statusIcon);
 				statusIcon.bitmapData=null;
+			}
+		}
+		
+		override public function update():void
+		{
+			super.update();
+			if(gameTimer){
+				gameTimer.update() ;
 			}
 		}
 		

@@ -3,10 +3,12 @@ package local.map.scene
 	import bing.iso.IsoObject;
 	import bing.iso.IsoScene;
 	
+	import local.comm.GameData;
 	import local.comm.GameSetting;
 	import local.enum.BuildingType;
 	import local.map.GameWorld;
 	import local.map.item.BaseBuilding;
+	import local.map.item.Building;
 	import local.map.item.MoveItem;
 	import local.map.item.Road;
 	import local.model.MapGridDataModel;
@@ -85,15 +87,11 @@ package local.map.scene
 		 */		
 		public function readySave():void
 		{
-			var date:Date = new Date();
-			var time:Number = date.time;
-			var len:int = numChildren ;
-			var build:BaseBuilding ;
-			for( var i:int = 0 ; i<len ; ++i)
-			{
-				build = getChildAt( i ) as BaseBuilding ;
-				if( build )
-				{
+			var time:Number = GameData.commDate.time ;
+			var build:Building ;
+			for each( var obj:IsoObject in children){
+				if( obj is Building){
+					build = obj as Building;
 					build.buildingVO.statusTime = 0 ;
 					if( build.gameTimer){
 						build.buildingVO.statusTime = time+build.gameTimer.duration*1000 ;
@@ -107,13 +105,9 @@ package local.map.scene
 		 */		
 		public function refreshBuildingStatus():void
 		{
-			var len:int = numChildren ;
-			var build:BaseBuilding ;
-			for( var i:int = 0 ; i<len ; ++i)
-			{
-				build = getChildAt( i ) as BaseBuilding ;
-				if( build ) {
-					build.recoverStatus();
+			for each( var obj:IsoObject in children){
+				if( obj is Building){
+					(obj as Building).recoverStatus();
 				}
 			}
 		}

@@ -20,6 +20,7 @@ package local.map.item
 		public function Road( buildingVO:BuildingVO )
 		{
 			super(buildingVO);
+			_direction = buildingVO.direction ;
 		}
 		
 		override public function showUI():void
@@ -37,6 +38,7 @@ package local.map.item
 		public function updateUI( direction:String ):void
 		{
 			_direction = direction ;
+			buildingVO.direction = direction ;
 			showUI();
 		}
 	}
