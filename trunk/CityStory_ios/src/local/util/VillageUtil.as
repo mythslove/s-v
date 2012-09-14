@@ -46,7 +46,7 @@ package local.util
 				_time = getTimer() ;
 			}
 			//保存文件
-			var file:File = new File( File.applicationStorageDirectory.url+"res/"+GameSetting.fdId+".amf");
+			var file:File = new File( File.applicationStorageDirectory.url+"res/"+GameSetting.fdId+".bin");
 			var stream:FileStream = new FileStream();
 			try
 			{
@@ -92,10 +92,10 @@ package local.util
 		 */		
 		public function readVillage():void
 		{
-			var file:File = new File( File.applicationStorageDirectory.url+"res/"+GameSetting.fdId+".amf");
+			var file:File = new File( File.applicationStorageDirectory.url+"res/"+GameSetting.fdId+".bin");
 			trace(file.nativePath);
 			if(!file.exists) {
-				file = new File(File.applicationDirectory.url+"res/village.amf");
+				file = new File(File.applicationDirectory.url+"res/village.bin");
 			}
 			if(file.exists)
 			{
