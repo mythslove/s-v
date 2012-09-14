@@ -12,13 +12,12 @@ package local.view.control
 		override public function set enabled(value:Boolean):void {
 			super.enabled = value ;
 			_enabled = value;
-			if(!value){
-				this.gotoAndStop("disabled");
-				mouseEnabled = false ;
-			}else{
+			if(value){
 				this.gotoAndStop("up");
-				mouseEnabled = true ;
+			}else{
+				this.gotoAndStop("disabled");
 			}
+			mouseEnabled = value ;
 		}
 		
 		public function Button()

@@ -91,6 +91,16 @@ package local.map
 			building.bottom.updateBuildingGridLayer();
 			
 			building.addChild( MoveBuildingButtons.instance );
+			var moveBtns:MoveBuildingButtons  = MoveBuildingButtons.instance ;
+			if(building.bottom.getWalkable()){
+				if( !moveBtns.okBtn.enabled){
+					moveBtns.okBtn.enabled = true  ;
+				}
+			}else{
+				if( moveBtns.okBtn.enabled){
+					moveBtns.okBtn.enabled = false ;
+				}
+			}
 		}
 		
 		override protected function configListeners():void

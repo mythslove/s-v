@@ -23,6 +23,10 @@ package local.map.item
 					//收钱
 					
 				}
+				else
+				{
+					super.onClick();
+				}
 			}
 			else
 			{

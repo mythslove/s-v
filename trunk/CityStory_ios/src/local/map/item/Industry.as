@@ -23,6 +23,10 @@ package local.map.item
 				else if( buildingVO.status==BuildingStatus.PRODUCTION_COMPLETE)
 				{
 				}
+				else
+				{
+					super.onClick();
+				}
 			}
 			else
 			{

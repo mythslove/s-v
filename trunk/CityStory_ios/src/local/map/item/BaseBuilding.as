@@ -65,10 +65,10 @@ package local.map.item
 				this.drawBottomGrid();
 				
 				var editorBtns:EditorBuildingButtons = EditorBuildingButtons.instance ;
-				editorBtns.rotateButton.enabled = editorBtns.rotateButton.enabled = editorBtns.sellButton.enabled = true ;
 				addChild( editorBtns );
+				editorBtns.stashButton.enabled = editorBtns.rotateButton.enabled = editorBtns.sellButton.enabled = true ;
 				if( buildingVO.status==BuildingStatus.BUILDING){
-					editorBtns.rotateButton.enabled = editorBtns.rotateButton.enabled = false ;
+					editorBtns.stashButton.enabled = editorBtns.rotateButton.enabled = false ;
 				}else if( buildingVO.baseVO.type==BuildingType.DECORATION){
 					editorBtns.rotateButton.enabled = false ;
 				}
