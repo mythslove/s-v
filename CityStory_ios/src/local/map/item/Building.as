@@ -21,7 +21,7 @@ package local.map.item
 	public class Building extends BaseBuilding
 	{
 		public var gameTimer:GameTimer;
-		public var statusIcon:Bitmap ; //显示当前状态的icon
+		public var statusIcon:Bitmap = new Bitmap() ; //显示当前状态的icon
 		
 		public function Building(buildingVO:BuildingVO)
 		{
@@ -111,45 +111,43 @@ package local.map.item
 		/**
 		 * 显示建筑当前的标识 
 		 */		
-		public function showBuildingFlagIcon():void
+		protected function showBuildingFlagIcon():void
 		{
-			if( buildingVO.status==BuildingStatus.NONE || buildingVO.status==BuildingStatus.BUILDING)
+			switch( buildingVO.status )
 			{
-				removeBuildingFlagIcon();
-			}
-			else
-			{
-				if(!statusIcon){
-					statusIcon = new Bitmap();
+				case BuildingStatus.NO_ROAD:
+					statusIcon.bitmapData = EmbedsManager.instance.getBitmapByName("NeedRoadsFlag").bitmapData;
 					GameWorld.instance.iconScene.addChild(statusIcon);
-				}
-				switch( buildingVO.status )
-				{
-					case BuildingStatus.NO_ROAD:
-						statusIcon.bitmapData = EmbedsManager.instance.getBitmapByName("NeedRoadsFlag").bitmapData;
-						break ;
-					case BuildingStatus.PRODUCTION_COMPLETE:
-						if( buildingVO.baseVO.type==BuildingType.INDUSTRY) {
-							statusIcon.bitmapData = EmbedsManager.instance.getBitmapByName("CollectGoodsFlag").bitmapData;
-						}else{
-							statusIcon.bitmapData = EmbedsManager.instance.getBitmapByName("CollectCoinFlag").bitmapData;
-						}
-						break ;
-					case BuildingStatus.LACK_MATERIAL:
-						statusIcon.bitmapData = EmbedsManager.instance.getBitmapByName("AddGoodsFlag").bitmapData;
-						break ;
-				}
-				statusIcon.x = screenX-statusIcon.width*0.5;
-				statusIcon.y = screenY+buildingVO.baseVO.span*_size-buildingObject.height - _size ;
+					break ;
+				case BuildingStatus.PRODUCTION:
+					
+					break ;
+				case BuildingStatus.PRODUCTION_COMPLETE:
+					if( buildingVO.baseVO.type==BuildingType.INDUSTRY) {
+						statusIcon.bitmapData = EmbedsManager.instance.getBitmapByName("CollectGoodsFlag").bitmapData;
+					}else{
+						statusIcon.bitmapData = EmbedsManager.instance.getBitmapByName("CollectCoinFlag").bitmapData;
+					}
+					GameWorld.instance.iconScene.addChild(statusIcon);
+					break ;
+				case BuildingStatus.LACK_MATERIAL:
+					statusIcon.bitmapData = EmbedsManager.instance.getBitmapByName("AddGoodsFlag").bitmapData;
+					GameWorld.instance.iconScene.addChild(statusIcon);
+					break ;
+				default:
+					removeBuildingFlagIcon();
+					break ;
 			}
+			statusIcon.x = screenX-statusIcon.width*0.5;
+			statusIcon.y = screenY+buildingVO.baseVO.span*_size-buildingObject.height - _size ;
 		}
 		
 		/**
 		 * 移除建筑当前的标识 
 		 */		
-		public function removeBuildingFlagIcon():void
+		protected function removeBuildingFlagIcon():void
 		{
-			if(statusIcon && statusIcon.parent){
+			if(statusIcon.parent){
 				statusIcon.parent.removeChild(statusIcon);
 				statusIcon.bitmapData=null;
 			}
@@ -172,10 +170,8 @@ package local.map.item
 		override public function dispose():void
 		{
 			super.dispose();
-			if(statusIcon && statusIcon.parent){
-				statusIcon.parent.removeChild(statusIcon);
-				statusIcon.bitmapData=null;
-			}
+			clearGameTimer();
+			removeBuildingFlagIcon();
 			statusIcon =  null ;
 		}
 	}
