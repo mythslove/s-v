@@ -1,6 +1,8 @@
 package local.map.item
 {
+	import local.comm.GameData;
 	import local.enum.BuildingStatus;
+	import local.enum.VillageMode;
 	import local.vo.BuildingVO;
 	
 	public class Industry extends Building
@@ -13,11 +15,14 @@ package local.map.item
 		
 		override public function onClick():void
 		{
-			if( buildingVO.status==BuildingStatus.LACK_MATERIAL)
+			if( GameData.villageMode==VillageMode.NORMAL)
 			{
-			}
-			else if( buildingVO.status==BuildingStatus.PRODUCTION_COMPLETE)
-			{
+				if( buildingVO.status==BuildingStatus.LACK_MATERIAL)
+				{
+				}
+				else if( buildingVO.status==BuildingStatus.PRODUCTION_COMPLETE)
+				{
+				}
 			}
 			else
 			{
