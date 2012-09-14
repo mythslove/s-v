@@ -8,6 +8,7 @@ package local.map.item
 	import local.enum.BuildingType;
 	import local.enum.VillageMode;
 	import local.map.GameWorld;
+	import local.map.cell.BuildStatusObject;
 	import local.model.MapGridDataModel;
 	import local.util.EmbedsManager;
 	import local.util.GameTimer;
@@ -23,6 +24,7 @@ package local.map.item
 	{
 		public var gameTimer:GameTimer;
 		public var statusIcon:Bitmap = new Bitmap() ; //显示当前状态的icon
+		protected var _buildStatusObj:BuildStatusObject ; //修建状态
 		
 		public function Building(buildingVO:BuildingVO)
 		{
@@ -169,7 +171,8 @@ package local.map.item
 					break ;
 			}
 			statusIcon.x = screenX-statusIcon.width*0.5;
-			statusIcon.y = screenY+buildingVO.baseVO.span*_size-buildingObject.height - _size ;
+			var het:Number = buildingObject? buildingObject.height : _buildStatusObj.height ;
+			statusIcon.y = screenY+buildingVO.baseVO.span*_size-het - _size ;
 		}
 		/*移除建筑当前的标识 */		
 		protected function removeBuildingFlagIcon():void
@@ -221,11 +224,21 @@ package local.map.item
 		
 		override public function showUI():void 
 		{
-			super.showUI();
-			if(parent==GameWorld.instance.buildingScene)
-			{
-				if( buildingVO.status==BuildingStatus.PRODUCTION){
-					createGameTimer( buildingVO.statusTime );
+			if( buildingVO.status==BuildingStatus.BUILDING){
+				_buildStatusObj = new BuildStatusObject();
+				if( buildingVO.buildClick<=1){
+//					_buildStatusObj.show();
+				}else{
+//					_buildStatusObj.show();
+				}
+				addChildAt( _buildStatusObj , 0 );
+			}else{
+				super.showUI();
+				if(parent==GameWorld.instance.buildingScene)
+				{
+					if( buildingVO.status==BuildingStatus.PRODUCTION){
+						createGameTimer( buildingVO.statusTime );
+					}
 				}
 			}
 			showBuildingFlagIcon() ;
@@ -257,7 +270,10 @@ package local.map.item
 					}else{
 						buildingVO.status = BuildingStatus.NO_ROAD ;
 					}
-					showBuildingFlagIcon();
+					removeChild(_buildStatusObj);
+					_buildStatusObj.dispose();
+					_buildStatusObj = null ;
+					showUI();
 				}
 			}
 			else
@@ -272,6 +288,10 @@ package local.map.item
 			clearGameTimer();
 			removeBuildingFlagIcon();
 			statusIcon =  null ;
+			if(_buildStatusObj){
+				_buildStatusObj.dispose();
+				_buildStatusObj = null ;
+			}
 		}
 	}
 }
