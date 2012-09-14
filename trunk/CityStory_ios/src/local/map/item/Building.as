@@ -93,6 +93,7 @@ package local.map.item
 		{
 			if(buildingVO.status==BuildingStatus.BUILDING){
 				//显示修建时的状态
+				super.showUI();
 			}else{
 				super.showUI();
 				showBuildingFlagIcon();

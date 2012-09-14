@@ -13,6 +13,7 @@ package local.map.item
 	import local.model.StorageModel;
 	import local.util.GameTimer;
 	import local.util.ResourceUtil;
+	import local.view.CenterViewLayer;
 	import local.view.building.EditorBuildingButtons;
 	import local.vo.BitmapAnimResVO;
 	import local.vo.BuildingVO;
@@ -64,6 +65,9 @@ package local.map.item
 				addChild( EditorBuildingButtons.instance );
 			}else{
 				flash(true);
+			}
+			if( GameData.villageMode!=VillageMode.VISIT){
+				CenterViewLayer.instance.bottomBar.gameTip.showBuildingTip(this);
 			}
 		}
 		

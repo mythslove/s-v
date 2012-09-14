@@ -14,7 +14,7 @@ package local.view.bottombar
 	{
 		public var editorBtn:EditorButton ;
 		public var marketBtn:MarketButton;
-		
+		public var gameTip:GameTip ;
 		
 		public function BottomBar()
 		{
@@ -35,8 +35,9 @@ package local.view.bottombar
 			marketBtn.y = - 80 ;
 			addChild(marketBtn);
 			
-			
-			
+			gameTip = new GameTip();
+			gameTip.x  = (GameSetting.SCREEN_WIDTH-gameTip.width)>>1 ;
+			addChild(gameTip);
 			
 			addEventListener(MouseEvent.CLICK , onMouseHandler );
 		}
