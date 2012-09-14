@@ -8,7 +8,7 @@ package local.map.item
 	 * 正在扩地时，显示的建筑 
 	 * @author zhouzhanglin
 	 */	
-	public class ExpandLandBuilding extends BaseBuilding
+	public class ExpandLandBuilding extends Building
 	{
 		public function ExpandLandBuilding(buildingVO:BuildingVO)
 		{
