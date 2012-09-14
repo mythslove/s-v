@@ -45,6 +45,7 @@ package  local.comm
 					world.roadScene.mouseChildren = false ;
 					world.topScene.visible = false ;
 					world.iconScene.visible = true ;
+					world.sortIcons();
 					CenterViewLayer.instance.visible=true;
 					break ;
 				case VillageMode.EDIT :
