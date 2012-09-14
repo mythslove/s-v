@@ -71,12 +71,16 @@ package
 		{
 			ResourceUtil.instance.removeEventListener("GameConfig" , gameConfigHandler );
 			var bytes:ByteArray = e.resVO.resObject as ByteArray;
-			
-			ShopModel.instance.allBuildingHash = bytes.readObject() as Dictionary ;
-			LandModel.instance.expands = bytes.readObject() as Vector.<ExpandVO>;
-			PlayerModel.instance.levels =  bytes.readObject() as Dictionary ;
-			CompsModel.instance.allCompsHash = bytes.readObject() as Dictionary ;
-			QuestModel.instance.allQuestArray = bytes.readObject() as Vector.<QuestVO>  ;
+			try{
+				bytes.uncompress();
+			}finally{
+				ShopModel.instance.allBuildingHash = bytes.readObject() as Dictionary ;
+				ShopModel.instance.baseBuildings = bytes.readObject() as Vector.<BaseBuildingVO> ;
+				LandModel.instance.expands = bytes.readObject() as Vector.<ExpandVO>;
+				PlayerModel.instance.levels =  bytes.readObject() as Dictionary ;
+				CompsModel.instance.allCompsHash = bytes.readObject() as Dictionary ;
+				QuestModel.instance.allQuestArray = bytes.readObject() as Vector.<QuestVO>  ;
+			}
 			
 			ResourceUtil.instance.deleteRes( "GameConfig");
 			loadRes();
