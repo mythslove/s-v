@@ -91,8 +91,12 @@ package local.map.item
 		
 		override public function showUI():void 
 		{
-			super.showUI();
-			showBuildingFlagIcon();
+			if(buildingVO.status==BuildingStatus.BUILDING){
+				//显示修建时的状态
+			}else{
+				super.showUI();
+				showBuildingFlagIcon();
+			}
 		} 
 		
 		/**
@@ -157,6 +161,12 @@ package local.map.item
 			if(gameTimer){
 				gameTimer.update() ;
 			}
+		}
+		
+		override public function storageToWorld():void
+		{
+			super.storageToWorld();
+			
 		}
 		
 		override public function dispose():void

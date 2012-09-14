@@ -16,6 +16,8 @@ package local.vo
 		
 		public var direction:String = "";//用于路和水
 		
+		public var product:ProductVO ; //要生产的东西，主要用于Industry
+		
 		private var _baseVO:BaseBuildingVO;
 		public function get baseVO():BaseBuildingVO
 		{
