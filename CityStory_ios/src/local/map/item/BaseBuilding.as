@@ -110,6 +110,10 @@ package local.map.item
 			{
 				//显示修建状态
 				buildingVO.status=BuildingStatus.BUILDING ;
+				this.removeChild( buildingObject );
+				buildingObject.dispose() ;
+				buildingObject = null ;
+				showUI() ;
 			}
 			//添加到地图数据中
 			BuildingModel.instance.addBuildingVO( buildingVO );

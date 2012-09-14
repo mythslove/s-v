@@ -43,6 +43,7 @@ package  local.comm
 					world.runUpdate = true ;
 					world.roadScene.mouseChildren = false ;
 					world.topScene.visible = false ;
+					world.topScene.clearAndDisposeChild();
 					world.iconScene.visible = true ;
 					world.buildingScene.checkRoadsAndIcons();
 					world.sortIcons();
