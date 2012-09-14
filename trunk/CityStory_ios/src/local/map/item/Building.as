@@ -6,6 +6,7 @@ package local.map.item
 	import local.comm.GameData;
 	import local.enum.BuildingStatus;
 	import local.enum.BuildingType;
+	import local.enum.VillageMode;
 	import local.map.GameWorld;
 	import local.model.MapGridDataModel;
 	import local.util.EmbedsManager;
@@ -166,6 +167,25 @@ package local.map.item
 		{
 			super.storageToWorld();
 			
+		}
+		
+		override public function onClick():void
+		{
+			if( GameData.villageMode==VillageMode.NORMAL && buildingVO.status==BuildingStatus.BUILDING){
+				//点击一次修一次 ，并加经验，判断能量是否足够
+				++buildingVO.buildClick ;
+				if( buildingVO.buildClick >= buildingVO.baseVO.click )
+				{
+					removeBuildingFlagIcon();
+					if( buildingVO.baseVO.type==BuildingType.HOME){
+						buildingVO.status=BuildingStatus.PRODUCTION;
+						createGameTimer( buildingVO.baseVO.time );
+					}else{
+						buildingVO.status=BuildingStatus.LACK_MATERIAL;
+						showBuildingFlagIcon() ;
+					}
+				}
+			}
 		}
 		
 		override public function dispose():void
