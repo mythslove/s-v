@@ -225,14 +225,15 @@ package local.map.item
 		override public function showUI():void 
 		{
 			if( buildingVO.status==BuildingStatus.BUILDING){
-				_buildStatusObj = new BuildStatusObject();
-				
+				if(!_buildStatusObj) {
+					_buildStatusObj = new BuildStatusObject();
+					addChildAt( _buildStatusObj , 0 );
+				}
 				if( buildingVO.buildClick<=1){
 					_buildStatusObj.show( EmbedsManager.instance.getAnimResVOByName("BuildStatus_"+xSpan+"_0")[0] );
 				}else{
 					_buildStatusObj.show( EmbedsManager.instance.getAnimResVOByName("BuildStatus_"+xSpan+"_1")[0] );
 				}
-				addChildAt( _buildStatusObj , 0 );
 			}else{
 				super.showUI();
 				if(parent==GameWorld.instance.buildingScene)
@@ -256,6 +257,7 @@ package local.map.item
 		override public function onClick():void
 		{
 			if( GameData.villageMode==VillageMode.NORMAL && buildingVO.status==BuildingStatus.BUILDING){
+				flash(true);
 				//点击一次修一次 ，并加经验，判断能量是否足够
 				++buildingVO.buildClick ;
 				if( buildingVO.buildClick >= buildingVO.baseVO.click )
@@ -274,8 +276,8 @@ package local.map.item
 					removeChild(_buildStatusObj);
 					_buildStatusObj.dispose();
 					_buildStatusObj = null ;
-					showUI();
 				}
+				showUI();
 			}
 			else
 			{

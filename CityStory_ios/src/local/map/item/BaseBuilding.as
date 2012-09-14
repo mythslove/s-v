@@ -40,6 +40,8 @@ package local.map.item
 		{
 			if(_buildingObject) {
 				_buildingObject.update() ;
+			}else if(_buildStatusObj){
+				_buildStatusObj.update() ;
 			}
 		}
 		
@@ -168,6 +170,8 @@ package local.map.item
 		{
 			if(_buildingObject) {
 				_buildingObject.flash( value );
+			}else if(_buildStatusObj){
+				_buildStatusObj.flash( value );
 			}
 		}
 		
