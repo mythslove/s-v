@@ -3,7 +3,9 @@ package
 	import flash.desktop.NativeApplication;
 	import flash.events.Event;
 	
+	import local.comm.GameData;
 	import local.comm.GlobalDispatcher;
+	import local.enum.VillageMode;
 	import local.event.VillageEvent;
 	import local.map.GameWorld;
 	import local.model.PlayerModel;
@@ -54,6 +56,7 @@ package
 			
 //			showDailyRewards();
 			GameWorld.instance.showBuildings();
+			GameData.villageMode = VillageMode.NORMAL ;
 		}
 		
 		//显示每日奖励
