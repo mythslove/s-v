@@ -242,7 +242,6 @@ package local.map.item
 		override public function onClick():void
 		{
 			if( GameData.villageMode==VillageMode.NORMAL && buildingVO.status==BuildingStatus.BUILDING){
-				this.flash(true);
 				//点击一次修一次 ，并加经验，判断能量是否足够
 				++buildingVO.buildClick ;
 				if( buildingVO.buildClick >= buildingVO.baseVO.click )
