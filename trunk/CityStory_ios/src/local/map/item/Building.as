@@ -12,6 +12,7 @@ package local.map.item
 	import local.model.MapGridDataModel;
 	import local.util.EmbedsManager;
 	import local.util.GameTimer;
+	import local.vo.BitmapAnimResVO;
 	import local.vo.BuildingVO;
 	
 	/**
@@ -24,7 +25,6 @@ package local.map.item
 	{
 		public var gameTimer:GameTimer;
 		public var statusIcon:Bitmap = new Bitmap() ; //显示当前状态的icon
-		protected var _buildStatusObj:BuildStatusObject ; //修建状态
 		
 		public function Building(buildingVO:BuildingVO)
 		{
@@ -75,7 +75,7 @@ package local.map.item
 			//修正图标位置
 			if(statusIcon && statusIcon.parent ){
 				statusIcon.x = screenX-statusIcon.width*0.5;
-				statusIcon.y = screenY+buildingVO.baseVO.span*_size-buildingObject.height - _size ;
+				statusIcon.y = screenY+buildingVO.baseVO.span*_size-_buildingObject.height - _size ;
 			}
 		}
 		
@@ -171,7 +171,7 @@ package local.map.item
 					break ;
 			}
 			statusIcon.x = screenX-statusIcon.width*0.5;
-			var het:Number = buildingObject? buildingObject.height : _buildStatusObj.height ;
+			var het:Number = _buildingObject? _buildingObject.height : _buildStatusObj.height ;
 			statusIcon.y = screenY+buildingVO.baseVO.span*_size-het - _size ;
 		}
 		/*移除建筑当前的标识 */		
@@ -226,10 +226,11 @@ package local.map.item
 		{
 			if( buildingVO.status==BuildingStatus.BUILDING){
 				_buildStatusObj = new BuildStatusObject();
+				
 				if( buildingVO.buildClick<=1){
-//					_buildStatusObj.show();
+					_buildStatusObj.show( EmbedsManager.instance.getAnimResVOByName("BuildStatus_"+xSpan+"_0")[0] );
 				}else{
-//					_buildStatusObj.show();
+					_buildStatusObj.show( EmbedsManager.instance.getAnimResVOByName("BuildStatus_"+xSpan+"_1")[0] );
 				}
 				addChildAt( _buildStatusObj , 0 );
 			}else{
@@ -288,10 +289,6 @@ package local.map.item
 			clearGameTimer();
 			removeBuildingFlagIcon();
 			statusIcon =  null ;
-			if(_buildStatusObj){
-				_buildStatusObj.dispose();
-				_buildStatusObj = null ;
-			}
 		}
 	}
 }

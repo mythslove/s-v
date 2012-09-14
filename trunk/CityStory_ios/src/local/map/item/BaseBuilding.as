@@ -6,12 +6,12 @@ package local.map.item
 	import local.enum.BuildingType;
 	import local.enum.VillageMode;
 	import local.map.GameWorld;
+	import local.map.cell.BuildStatusObject;
 	import local.map.cell.BuildingBottomGrid;
 	import local.map.cell.BuildingObject;
 	import local.map.cell.RoadObject;
 	import local.model.BuildingModel;
 	import local.model.StorageModel;
-	import local.util.GameTimer;
 	import local.util.ResourceUtil;
 	import local.view.CenterViewLayer;
 	import local.view.building.EditorBuildingButtons;
@@ -20,8 +20,9 @@ package local.map.item
 
 	public class BaseBuilding extends BaseMapObject
 	{
-		public var buildingObject:BuildingObject ;
-		public var roadObject:RoadObject ;
+		protected var _buildingObject:BuildingObject ;
+		protected var _roadObject:RoadObject ;
+		protected var _buildStatusObj:BuildStatusObject ; //修建状态
 		public var buildingVO:BuildingVO ;
 		public var bottom:BuildingBottomGrid ;
 		
@@ -37,16 +38,16 @@ package local.map.item
 		
 		override public function update():void
 		{
-			if(buildingObject) {
-				buildingObject.update() ;
+			if(_buildingObject) {
+				_buildingObject.update() ;
 			}
 		}
 		
 		override public function showUI():void
 		{
 			var barvo:Vector.<BitmapAnimResVO> = ResourceUtil.instance.getResVOByResId( name ).resObject as  Vector.<BitmapAnimResVO> ;
-			buildingObject = new BuildingObject(barvo);
-			addChildAt(buildingObject,0);
+			_buildingObject = new BuildingObject(barvo);
+			addChildAt(_buildingObject,0);
 			this.scaleX = buildingVO.rotation ;
 		}
 		
@@ -110,9 +111,9 @@ package local.map.item
 			{
 				//显示修建状态
 				buildingVO.status=BuildingStatus.BUILDING ;
-				this.removeChild( buildingObject );
-				buildingObject.dispose() ;
-				buildingObject = null ;
+				this.removeChild( _buildingObject );
+				_buildingObject.dispose() ;
+				_buildingObject = null ;
 				showUI() ;
 			}
 			//添加到地图数据中
@@ -156,8 +157,8 @@ package local.map.item
 		 */		
 		public function flash( value:Boolean):void
 		{
-			if(buildingObject) {
-				buildingObject.flash( value );
+			if(_buildingObject) {
+				_buildingObject.flash( value );
 			}
 		}
 		
@@ -165,13 +166,13 @@ package local.map.item
 		{
 			var flag:Boolean = value==1?false:true;
 			this.rotateX( flag );
-			buildingObject.scaleX = value ;
+			_buildingObject.scaleX = value ;
 			this.buildingVO.rotation = value ;
 		}
 		
 		override public function get scaleX():Number
 		{
-			return buildingObject.scaleX ;
+			return _buildingObject.scaleX ;
 		}
 		
 		/**添加底座*/		
@@ -181,12 +182,15 @@ package local.map.item
 				bottom = new BuildingBottomGrid(this);
 				addChildAt(bottom,0);
 				bottom.drawGrid();
-				if(buildingObject){
-					buildingObject.y -= GameSetting.GRID_SIZE*0.3 ;
-					buildingObject.alpha = 0.6 ;
-				}else if( roadObject){
-					roadObject.y -= GameSetting.GRID_SIZE*0.3 ;
-					roadObject.alpha = 0.6 ;
+				if(_buildingObject){
+					_buildingObject.y -= GameSetting.GRID_SIZE*0.25 ;
+					_buildingObject.alpha = 0.6 ;
+				}else if( _roadObject){
+					_roadObject.y -= GameSetting.GRID_SIZE*0.25 ;
+					_roadObject.alpha = 0.6 ;
+				}else if(_buildStatusObj){
+					_buildStatusObj.y -= GameSetting.GRID_SIZE*0.25 ;
+					_buildStatusObj.alpha = 0.6 ;
 				}
 			}
 		}
@@ -200,12 +204,15 @@ package local.map.item
 					bottom.parent.removeChild(bottom);
 				}
 				bottom = null ;
-				if(buildingObject){
-					buildingObject.y += GameSetting.GRID_SIZE*0.3 ;
-					buildingObject.alpha = 1 ;
-				}else if( roadObject){
-					roadObject.y += GameSetting.GRID_SIZE*0.3 ;
-					roadObject.alpha = 1 ;
+				if(_buildingObject){
+					_buildingObject.y += GameSetting.GRID_SIZE*0.25 ;
+					_buildingObject.alpha = 1 ;
+				}else if( _roadObject){
+					_roadObject.y += GameSetting.GRID_SIZE*0.25 ;
+					_roadObject.alpha = 1 ;
+				}else if(_buildStatusObj){
+					_buildStatusObj.y += GameSetting.GRID_SIZE*0.25 ;
+					_buildStatusObj.alpha =1 ;
 				}
 			}
 		}
@@ -222,10 +229,12 @@ package local.map.item
 		override public function dispose():void
 		{
 			super.dispose();
-			if(buildingObject) buildingObject.dispose();
-			if(roadObject) roadObject.dispose();
-			buildingObject = null ;
-			roadObject = null ;
+			if(_buildingObject) _buildingObject.dispose();
+			if(_roadObject) _roadObject.dispose();
+			if(_buildStatusObj) _buildStatusObj.dispose();
+			_buildingObject = null ;
+			_roadObject = null ;
+			_buildStatusObj = null ;
 		}
 	}
 }
