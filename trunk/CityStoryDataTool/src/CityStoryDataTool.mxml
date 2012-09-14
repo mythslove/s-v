@@ -7,7 +7,14 @@
 		<![CDATA[
 			import mx.controls.Alert;
 			
-			private var allBuildingHash:Dictionary ;
+			private var basics:Vector.<BaseBuildingVO>;
+			private var homes:Vector.<BaseBuildingVO>;
+			private var decors:Vector.<BaseBuildingVO>;
+			private var business:Vector.<BaseBuildingVO>;
+			private var industry:Vector.<BaseBuildingVO>;
+			private var wonders:Vector.<BaseBuildingVO>;
+			private var community:Vector.<BaseBuildingVO>;
+			
 			private var expands:Vector.<ExpandVO> ;
 			private var levelHash:Dictionary ;
 			private var compHash:Dictionary ;
@@ -44,7 +51,14 @@
 				stream.readBytes( bytes);
 				bytes.position =0  ;
 				var config:XML = XML( bytes.toString());
-				allBuildingHash = new Dictionary();
+
+				basics = new Vector.<BaseBuildingVO>();
+				homes = new Vector.<BaseBuildingVO>();
+				decors = new Vector.<BaseBuildingVO>();
+				business = new Vector.<BaseBuildingVO>();
+				industry = new Vector.<BaseBuildingVO>();
+				wonders = new Vector.<BaseBuildingVO>();
+				community = new Vector.<BaseBuildingVO>();
 				if( config)
 				{
 					var len:int = config.children().length();
@@ -77,7 +91,30 @@
 								
 							}
 						} 
-						allBuildingHash[baseVO.name] = baseVO ;
+						switch(baseVO.type)
+						{
+							case BuildingType.BASIC:
+								basics.push( baseVO );
+								break ;
+							case BuildingType.HOME:
+								homes.push( baseVO );
+								break ;
+							case BuildingType.BUSINESS:
+								business.push( baseVO );
+								break ;
+							case BuildingType.DECORATION:
+								decors.push( baseVO );
+								break ;
+							case BuildingType.COMMUNITY:
+								community.push( baseVO );
+								break ;
+							case BuildingType.INDUSTRY:
+								industry.push( baseVO );
+								break ;
+							case BuildingType.WONDERS:
+								wonders.push( baseVO );
+								break ;
+						}
 					}
 				}
 				else
@@ -408,7 +445,15 @@
 				file.removeEventListener(Event.SELECT , onSelectedSaveFile);
 				var stream:FileStream = new FileStream();
 				stream.open( file , FileMode.WRITE );
-				stream.writeObject( allBuildingHash );
+				
+				stream.writeObject( basics );
+				stream.writeObject( homes );
+				stream.writeObject( decors );
+				stream.writeObject( business );
+				stream.writeObject( industry );
+				stream.writeObject( wonders );
+				stream.writeObject( community );
+				
 				stream.writeObject( expands );
 				stream.writeObject( levelHash );
 				stream.writeObject( compHash );
