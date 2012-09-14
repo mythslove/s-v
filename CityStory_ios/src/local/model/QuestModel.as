@@ -25,10 +25,10 @@ package local.model
 		public var allQuestArray:Vector.<QuestVO> ; 
 		
 		/** 当前的quests */
-		public var currentQuests:Vector.<QuestVO>=new Vector.<QuestVO>() ;
+		public var currentQuests:Vector.<QuestVO> ;
 		
 		/** 完成了的quests ，key为qid，value为questVO*/
-		public var completedQuests:Dictionary = new Dictionary() ;
+		public var completedQuests:Dictionary   ;
 		
 		/**
 		 * 获得当前最新的quests
@@ -36,6 +36,9 @@ package local.model
 		 */		
 		public function getCurrentQuests():Vector.<QuestVO>
 		{
+			if(!currentQuests) currentQuests = new Vector.<QuestVO>();
+			if(!completedQuests) completedQuests = new Dictionary();
+			
 			var vo:QuestVO;
 			for(var i:int = 0 ; i<currentQuests.length ; ++i){
 				if(currentQuests[i].received){

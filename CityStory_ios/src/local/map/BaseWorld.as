@@ -200,6 +200,7 @@ package  local.map
 			this.panTo( MapGridDataModel.instance.mapPanX , MapGridDataModel.instance.mapPanY );
 			
 			//添加地图区域
+			if(!LandModel.instance.lands)  LandModel.instance.initLands();
 			for each( var landVO:LandVO in LandModel.instance.lands) {
 				drawMapZoneByFill(landVO);
 				MapGridDataModel.instance.landGridData.setWalkable( landVO.nodeX , landVO.nodeZ , true );

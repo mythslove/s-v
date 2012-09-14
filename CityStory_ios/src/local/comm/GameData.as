@@ -24,7 +24,6 @@ package  local.comm
 		 */	
 		public static var commVec:Vector3D = new Vector3D();
 		
-		
 		private static var _villageMode:String   ;
 		/**村庄的状态，VillageMode常量 */		
 		public static function get villageMode():String {
