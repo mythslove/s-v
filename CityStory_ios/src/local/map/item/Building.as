@@ -29,6 +29,15 @@ package local.map.item
 			super(buildingVO);
 		}
 		
+		
+		
+		
+		
+		
+		
+		
+		//============在buildingScene里遍历执行================================================
+		
 		public function recoverStatus():void
 		{
 			clearGameTimer();
@@ -39,20 +48,28 @@ package local.map.item
 			}
 		}
 		
-		override public function addToSceneFromTopScene():void
+		/**
+		 * 刷新icon和判断是否在路旁边 
+		 */		
+		public function checkRoadAndIcon():void
 		{
-			super.addToSceneFromTopScene();
-			//是否在路边
-			var flag:Boolean = MapGridDataModel.instance.checkAroundBuilding(this,BuildingType.DECORATION,BuildingType.DECORATION_ROAD) ;
-			if(flag){
-				if( buildingVO.status==BuildingStatus.NO_ROAD ){
-					startProduct();
+			//修建和扩地时不判断
+			if( buildingVO.status!=BuildingStatus.BUILDING && buildingVO.status!=BuildingStatus.EXPANDING && buildingVO.status!=BuildingStatus.NONE  )
+			{ 
+				//是否在路边
+				var flag:Boolean = MapGridDataModel.instance.checkAroundBuilding(this,BuildingType.DECORATION,BuildingType.DECORATION_ROAD) ;
+				if(flag){
+					if( buildingVO.status == BuildingStatus.NO_ROAD ){
+						startProduct();
+					}
+				}else{
+					if(buildingVO.status==BuildingStatus.PRODUCTION ){
+						clearGameTimer() ;
+					}
+					buildingVO.status=BuildingStatus.NO_ROAD ;
 				}
-			}else if( buildingVO.status==BuildingStatus.PRODUCTION ){
-				clearGameTimer();
-				buildingVO.status=BuildingStatus.NO_ROAD ;
-				showBuildingFlagIcon();
 			}
+			showBuildingFlagIcon()
 			//修正图标位置
 			if(statusIcon && statusIcon.parent ){
 				statusIcon.x = screenX-statusIcon.width*0.5;
@@ -60,6 +77,19 @@ package local.map.item
 			}
 		}
 		
+		//============在buildingScene里遍历执行=====================================================
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		//============计时====================================================
 		/*创建计时器, @param duration时间，单位为秒*/
 		protected function createGameTimer( duration:int ):void
 		{
@@ -81,7 +111,6 @@ package local.map.item
 				gameTimer = null ;
 			}
 		}
-		
 		/*计时完成*/
 		protected function gameTimerCompleteHandler( e:Event ):void
 		{
@@ -89,34 +118,29 @@ package local.map.item
 			buildingVO.status = BuildingStatus.PRODUCTION_COMPLETE ; //生产完成
 			showBuildingFlagIcon();//显示建筑当前的标识
 		}
+		//============计时====================================================
 		
-		override public function showUI():void 
-		{
-			if(buildingVO.status==BuildingStatus.BUILDING){
-				//显示修建时的状态
-				super.showUI();
-			}else{
-				super.showUI();
-				showBuildingFlagIcon();
-			}
-		} 
 		
-		/**
-		 * 开始生产 
-		 */		
-		protected function startProduct():void
-		{
-			//判断是否可以生产，Business的goods够不够，Industry的Product有没有
-			removeBuildingFlagIcon();
-		}
 		
-		/**
-		 * 显示建筑当前的标识 
-		 */		
+		
+		
+		
+		
+		
+		
+		
+		
+		//============显示和移除图标====================================================
+		/*显示建筑当前的标识 */		
 		protected function showBuildingFlagIcon():void
 		{
 			switch( buildingVO.status )
 			{
+				case BuildingStatus.BUILDING:
+					if(buildingVO.buildClick>0){
+						//显示修建的次数
+					}
+					break ;
 				case BuildingStatus.NO_ROAD:
 					statusIcon.bitmapData = EmbedsManager.instance.getBitmapByName("NeedRoadsFlag").bitmapData;
 					GameWorld.instance.iconScene.addChild(statusIcon);
@@ -133,7 +157,11 @@ package local.map.item
 					GameWorld.instance.iconScene.addChild(statusIcon);
 					break ;
 				case BuildingStatus.LACK_MATERIAL:
-					statusIcon.bitmapData = EmbedsManager.instance.getBitmapByName("AddGoodsFlag").bitmapData;
+					if( buildingVO.baseVO.type==BuildingType.INDUSTRY) { //工厂
+						statusIcon.bitmapData = EmbedsManager.instance.getBitmapByName("AddProductFlag").bitmapData;
+					}else if( buildingVO.baseVO.type==BuildingType.BUSINESS) { //商业
+						statusIcon.bitmapData = EmbedsManager.instance.getBitmapByName("AddGoodsFlag").bitmapData;
+					}
 					GameWorld.instance.iconScene.addChild(statusIcon);
 					break ;
 				default:
@@ -143,10 +171,7 @@ package local.map.item
 			statusIcon.x = screenX-statusIcon.width*0.5;
 			statusIcon.y = screenY+buildingVO.baseVO.span*_size-buildingObject.height - _size ;
 		}
-		
-		/**
-		 * 移除建筑当前的标识 
-		 */		
+		/*移除建筑当前的标识 */		
 		protected function removeBuildingFlagIcon():void
 		{
 			if(statusIcon.parent){
@@ -154,6 +179,57 @@ package local.map.item
 				statusIcon.bitmapData=null;
 			}
 		}
+		
+		//============显示和移除图标====================================================
+		
+		
+		
+		
+		
+		
+		
+		/*开始生产，从头开始计时 */		
+		protected function startProduct():void
+		{
+			//判断是否可以生产，Business的goods够不够，Industry的Product有没有
+			switch( buildingVO.baseVO.type)
+			{
+				case BuildingType.BUSINESS: //消耗物品
+					if( buildingVO.haveGoods){
+						buildingVO.status = BuildingStatus.PRODUCTION ;
+						createGameTimer( buildingVO.baseVO.time );
+					}else{
+						buildingVO.status = BuildingStatus.LACK_MATERIAL ;
+					}
+					break;
+				case BuildingType.INDUSTRY: //需要产品
+					if( buildingVO.product){
+						buildingVO.status = BuildingStatus.PRODUCTION ;
+						createGameTimer( buildingVO.product.time );
+					}else{
+						buildingVO.status = BuildingStatus.LACK_MATERIAL ;
+					}
+					break ;
+				case BuildingType.HOME: 
+				case BuildingType.COMMUNITY: 
+				case BuildingType.WONDERS:
+					buildingVO.status = BuildingStatus.PRODUCTION ;
+					createGameTimer( buildingVO.baseVO.time );
+					break ;
+			}
+		}
+		
+		override public function showUI():void 
+		{
+			super.showUI();
+			if(parent==GameWorld.instance.buildingScene)
+			{
+				if( buildingVO.status==BuildingStatus.PRODUCTION){
+					createGameTimer( buildingVO.statusTime );
+				}
+			}
+			showBuildingFlagIcon() ;
+		} 
 		
 		override public function update():void
 		{
@@ -163,28 +239,31 @@ package local.map.item
 			}
 		}
 		
-		override public function storageToWorld():void
-		{
-			super.storageToWorld();
-			
-		}
-		
 		override public function onClick():void
 		{
 			if( GameData.villageMode==VillageMode.NORMAL && buildingVO.status==BuildingStatus.BUILDING){
+				this.flash(true);
 				//点击一次修一次 ，并加经验，判断能量是否足够
 				++buildingVO.buildClick ;
 				if( buildingVO.buildClick >= buildingVO.baseVO.click )
 				{
-					removeBuildingFlagIcon();
-					if( buildingVO.baseVO.type==BuildingType.HOME){
-						buildingVO.status=BuildingStatus.PRODUCTION;
-						createGameTimer( buildingVO.baseVO.time );
+					var flag:Boolean = MapGridDataModel.instance.checkAroundBuilding(this,BuildingType.DECORATION,BuildingType.DECORATION_ROAD) ;
+					if(flag){
+						if( buildingVO.baseVO.type==BuildingType.BUSINESS || buildingVO.baseVO.type==BuildingType.INDUSTRY ){
+							buildingVO.status = BuildingStatus.LACK_MATERIAL ;
+						}else{
+							buildingVO.status = BuildingStatus.PRODUCTION ;
+							startProduct();
+						}
 					}else{
-						buildingVO.status=BuildingStatus.LACK_MATERIAL;
-						showBuildingFlagIcon() ;
+						buildingVO.status = BuildingStatus.NO_ROAD ;
 					}
+					showBuildingFlagIcon();
 				}
+			}
+			else
+			{
+				super.onClick();
 			}
 		}
 		

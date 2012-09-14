@@ -44,6 +44,7 @@ package  local.comm
 					world.roadScene.mouseChildren = false ;
 					world.topScene.visible = false ;
 					world.iconScene.visible = true ;
+					world.buildingScene.checkRoadsAndIcons();
 					world.sortIcons();
 					CenterViewLayer.instance.visible=true;
 					break ;

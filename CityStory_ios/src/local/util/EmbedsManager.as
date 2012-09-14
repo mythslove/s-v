@@ -80,6 +80,8 @@ package local.util
 		public static const AddGoodsFlag:Class; //需要商品时的标志
 		[Embed(source="../resource/comm/NeedRoadsFlag.png")]
 		public static const NeedRoadsFlag:Class; //建筑没在路边时的标志
+		[Embed(source="../resource/comm/AddProductFlag.png")]
+		public static const AddProductFlag:Class; //需要产品时的标志
 		
 		
 		

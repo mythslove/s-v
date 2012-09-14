@@ -112,6 +112,15 @@ package local.map.scene
 			}
 		}
 		
+		public function checkRoadsAndIcons():void
+		{
+			for each( var obj:IsoObject in children){
+				if( obj is Building){
+					(obj as Building).checkRoadAndIcon();
+				}
+			}
+		}
+		
 		/** 添加场景上走路的人 */
 		public function addMoveItems():void
 		{
