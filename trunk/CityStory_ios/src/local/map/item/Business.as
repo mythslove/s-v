@@ -14,11 +14,11 @@ package local.map.item
 		{
 			if( buildingVO.status==BuildingStatus.LACK_MATERIAL)
 			{
-				
+				this.flash(true);
 			}
 			else if( buildingVO.status==BuildingStatus.PRODUCTION_COMPLETE)
 			{
-				
+				this.flash(true);
 			}
 			else
 			{
