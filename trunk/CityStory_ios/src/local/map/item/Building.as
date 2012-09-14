@@ -148,7 +148,7 @@ package local.map.item
 					GameWorld.instance.iconScene.addChild(statusIcon);
 					break ;
 				case BuildingStatus.PRODUCTION:
-					
+					removeBuildingFlagIcon();
 					break ;
 				case BuildingStatus.PRODUCTION_COMPLETE:
 					if( buildingVO.baseVO.type==BuildingType.INDUSTRY) {
