@@ -4,6 +4,7 @@ package
 	import bing.res.ResProgressEvent;
 	import bing.res.ResVO;
 	
+	import flash.desktop.NativeApplication;
 	import flash.display.*;
 	import flash.events.Event;
 	import flash.net.registerClassAlias;
@@ -30,6 +31,8 @@ package
 			stage.align = StageAlign.TOP_LEFT;
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 			stage.color = 0 ;
+			NativeApplication.nativeApplication.executeInBackground = true ;
+				
 //			if (Capabilities.screenResolutionY <=960)
 //			{
 //				if(Capabilities.screenResolutionY<960){
