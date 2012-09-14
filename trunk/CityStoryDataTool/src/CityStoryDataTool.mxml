@@ -7,8 +7,8 @@
 		<![CDATA[
 			import mx.controls.Alert;
 			
+			private var shopBaseBuildingHash:Dictionary ;
 			private var shopBaseBuildings:Vector.<BaseBuildingVO>;
-			
 			private var expands:Vector.<ExpandVO> ;
 			private var levelHash:Dictionary ;
 			private var compHash:Dictionary ;
@@ -45,7 +45,7 @@
 				stream.readBytes( bytes);
 				bytes.position =0  ;
 				var config:XML = XML( bytes.toString());
-
+				shopBaseBuildingHash = new Dictionary();
 				shopBaseBuildings = new Vector.<BaseBuildingVO>();
 				if( config)
 				{
@@ -79,6 +79,7 @@
 								
 							}
 						} 
+						shopBaseBuildingHash[baseVO.name] = baseVO ;
 						shopBaseBuildings.push( baseVO );
 					}
 				}
@@ -305,7 +306,6 @@
 				file.removeEventListener(Event.SELECT , onSelectedQuestFile );
 				txtQuest.text = file.name ;
 				quests = new Vector.<QuestVO>();
-				
 				var stream:FileStream = new FileStream();
 				stream.open( file,FileMode.READ );
 				var bytes:ByteArray = new ByteArray();
@@ -410,11 +410,17 @@
 				file.removeEventListener(Event.SELECT , onSelectedSaveFile);
 				var stream:FileStream = new FileStream();
 				stream.open( file , FileMode.WRITE );
-				stream.writeObject( shopBaseBuildings );
-				stream.writeObject( expands );
-				stream.writeObject( levelHash );
-				stream.writeObject( compHash );
-				stream.writeObject( quests );
+				
+				var bytes:ByteArray = new ByteArray();
+				bytes.writeObject( shopBaseBuildingHash );
+				bytes.writeObject( shopBaseBuildings );
+				bytes.writeObject( expands );
+				bytes.writeObject( levelHash );
+				bytes.writeObject( compHash );
+				bytes.writeObject( quests );
+				
+				bytes.compress();
+				stream.writeBytes( bytes );
 				stream.close();
 				Alert.show("导出成功！");
 			}
