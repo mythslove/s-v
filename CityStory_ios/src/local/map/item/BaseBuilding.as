@@ -63,7 +63,16 @@ package local.map.item
 				world.topScene.addIsoObject( this );
 				world.roadScene.mouseChildren = world.buildingScene.mouseChildren = false ;
 				this.drawBottomGrid();
-				addChild( EditorBuildingButtons.instance );
+				
+				var editorBtns:EditorBuildingButtons = EditorBuildingButtons.instance ;
+				editorBtns.rotateButton.enabled = editorBtns.rotateButton.enabled = editorBtns.sellButton.enabled = true ;
+				addChild( editorBtns );
+				if( buildingVO.status==BuildingStatus.BUILDING){
+					editorBtns.rotateButton.enabled = editorBtns.rotateButton.enabled = false ;
+				}else if( buildingVO.baseVO.type==BuildingType.DECORATION){
+					editorBtns.rotateButton.enabled = false ;
+				}
+				
 			}else{
 				flash(true);
 			}

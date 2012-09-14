@@ -2,6 +2,8 @@ package local.map.item
 {
 	import flash.events.Event;
 	
+	import local.comm.GameData;
+	import local.enum.VillageMode;
 	import local.map.GameWorld;
 	import local.map.cell.BuildingObject;
 	import local.model.BuildingModel;
@@ -33,6 +35,13 @@ package local.map.item
 		
 		override public function flash( value:Boolean):void
 		{ }
+		
+		override public function onClick():void
+		{
+			if(GameData.villageMode==VillageMode.NORMAL){
+				super.onClick() ;
+			}
+		}
 		
 		/*计时完成*/
 		override protected function gameTimerCompleteHandler( e:Event ):void
