@@ -8,6 +8,7 @@ package local.map.scene
 	import local.enum.BuildingType;
 	import local.map.GameWorld;
 	import local.map.item.BaseBuilding;
+	import local.map.item.BasicBuilding;
 	import local.map.item.Building;
 	import local.map.item.MoveItem;
 	import local.map.item.Road;
@@ -106,7 +107,7 @@ package local.map.scene
 		public function refreshBuildingStatus():void
 		{
 			for each( var obj:IsoObject in children){
-				if( obj is Building){
+				if( obj is Building && !(obj is BasicBuilding) ){
 					(obj as Building).recoverStatus();
 				}
 			}
@@ -115,7 +116,7 @@ package local.map.scene
 		public function checkRoadsAndIcons():void
 		{
 			for each( var obj:IsoObject in children){
-				if( obj is Building){
+				if( obj is Building && !(obj is BasicBuilding) ){
 					(obj as Building).checkRoadAndIcon();
 				}
 			}
