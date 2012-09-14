@@ -32,16 +32,6 @@ package
 			GlobalDispatcher.instance.addEventListener( VillageEvent.NEW_VILLAGE , villageEvtHandler );
 			_villageUtil = new VillageUtil();
 			_villageUtil.readVillage();
-			NativeApplication.nativeApplication.addEventListener(Event.ACTIVATE , activateHandler);
-			NativeApplication.nativeApplication.addEventListener(Event.DEACTIVATE , deactivateHandler );
-		}
-		
-		private function activateHandler( e:Event ):void {
-			GameWorld.instance.buildingScene.refreshBuildingStatus();
-		}
-		
-		private function deactivateHandler( e:Event ):void {
-			_villageUtil.saveVillage( true );
 		}
 		
 		private function villageEvtHandler( e:VillageEvent ):void
@@ -53,10 +43,21 @@ package
 			addChild( CenterViewLayer.instance );
 			addChild( new Stats() );
 			
-			
 //			showDailyRewards();
 			GameWorld.instance.showBuildings();
 			GameData.villageMode = VillageMode.NORMAL ;
+			
+			NativeApplication.nativeApplication.addEventListener(Event.ACTIVATE , activateHandler);
+			NativeApplication.nativeApplication.addEventListener(Event.DEACTIVATE , deactivateHandler );
+		}
+		
+		private function activateHandler( e:Event ):void {
+			GameWorld.instance.buildingScene.refreshBuildingStatus();
+		}
+		
+		private function deactivateHandler( e:Event ):void {
+			GameWorld.instance.buildingScene.readySave();
+			_villageUtil.saveVillage( true );
 		}
 		
 		//显示每日奖励

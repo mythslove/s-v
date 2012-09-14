@@ -91,7 +91,7 @@ package local.map.scene
 			var time:Number = GameData.commDate.time ;
 			var build:Building ;
 			for each( var obj:IsoObject in children){
-				if( obj is Building){
+				if( obj is Building && !(obj is BasicBuilding)  ){
 					build = obj as Building;
 					build.buildingVO.statusTime = 0 ;
 					if( build.gameTimer){
