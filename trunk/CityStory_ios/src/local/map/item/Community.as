@@ -18,6 +18,7 @@ package local.map.item
 			{
 				if( buildingVO.status==BuildingStatus.PRODUCTION_COMPLETE)
 				{
+					flash(true);
 					//收钱
 					
 				}

@@ -483,7 +483,7 @@ package  local.map
 			for( var i:int = 0 ; i<iconScene.numChildren ; ++i){
 				arr.push( iconScene.getChildAt(i));
 			}
-			arr.sortOn("y",Array.DESCENDING) ;
+			arr.sortOn("y",Array.CASEINSENSITIVE) ;
 			for( i = arr.length-1 ; i>=0 ; --i){
 				iconScene.setChildIndex( arr[i] ,i );
 			}
