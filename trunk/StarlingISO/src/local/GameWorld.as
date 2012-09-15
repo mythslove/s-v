@@ -155,6 +155,7 @@ package local
 					_touchFinger1.y = pos.y ;
 					_endX = x ;
 					_endY = y ;
+					_isMove = false ;
 				}
 				else if( touch.phase==TouchPhase.MOVED)
 				{
@@ -179,7 +180,6 @@ package local
 						var obj:SIsoObject = touch.target.parent as SIsoObject ;
 						obj.alpha = obj.alpha==1? 0.5 : 1 ;
 					}
-					_isMove = false ;
 				}
 			}
 			else if(e.touches.length==2)
@@ -206,12 +206,12 @@ package local
 				var sizeDiff:Number = currentVector.length / previousVector.length;
 				sizeDiff = sizeDiff>1 ? 1+(sizeDiff-1)*.2 : 1-(1-sizeDiff)*.2 ;
 				changeWorldScale( sizeDiff , _middle.x , _middle.y );
+				_isMove = true ;
 			}
 			else
 			{
 				_endX = x ;
 				_endY = y ;
-				_isMove = false ;
 			}
 		}
 		
