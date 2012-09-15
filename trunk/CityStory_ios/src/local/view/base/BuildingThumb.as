@@ -46,5 +46,11 @@ package local.view.base
 			x*=value;
 			y*=value;
 		}
+		
+		public function center():void
+		{
+			x = -width>>1 ;
+			y = -height>>1 ;
+		}
 	}
 }
