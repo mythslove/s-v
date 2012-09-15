@@ -155,7 +155,7 @@ package local.map
 						if(GameData.villageMode == VillageMode.EDIT )
 						{
 							if(_mouseBuilding.bottom.getWalkable()){
-								_mouseBuilding.addToSceneFromTopScene();
+								_mouseBuilding.addToWorldFromTopScene();
 								_mouseBuilding = null ;
 								currentSelected = null ;
 								if(EditorBuildingButtons.instance.parent){
@@ -184,7 +184,7 @@ package local.map
 						else if(currentSelected) 
 						{
 							if( currentSelected.parent==topScene && GameData.villageMode == VillageMode.EDIT && currentSelected.bottom.getWalkable()){
-								currentSelected.addToSceneFromTopScene();
+								currentSelected.addToWorldFromTopScene();
 								_mouseBuilding=null;
 								if(EditorBuildingButtons.instance.parent){
 									EditorBuildingButtons.instance.parent.removeChild( EditorBuildingButtons.instance );

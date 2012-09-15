@@ -1,5 +1,7 @@
 package local.map.item
 {
+	import flash.geom.Point;
+	
 	import local.comm.GameData;
 	import local.comm.GameSetting;
 	import local.enum.BuildingStatus;
@@ -20,6 +22,8 @@ package local.map.item
 
 	public class BaseBuilding extends BaseMapObject
 	{
+		public static var cachePos:Point = new Point();
+		
 		protected var _buildingObject:BuildingObject ;
 		protected var _roadObject:RoadObject ;
 		protected var _buildStatusObj:BuildStatusObject ; //修建状态
@@ -57,6 +61,8 @@ package local.map.item
 		{
 			var world:GameWorld = GameWorld.instance ;
 			if(GameData.villageMode==VillageMode.EDIT){
+				cachePos.x = nodeX;
+				cachePos.y = nodeZ;
 				if(this is Road){
 					world.roadScene.removeRoad( this as Road );
 				}else{
@@ -86,7 +92,7 @@ package local.map.item
 		/**
 		 * 从topScene添加到场景上 
 		 */		
-		public function addToSceneFromTopScene():void
+		public function addToWorldFromTopScene():void
 		{
 			var world:GameWorld = GameWorld.instance ;
 			world.topScene.removeIsoObject( this );
@@ -96,6 +102,9 @@ package local.map.item
 				world.buildingScene.addBuilding( this );
 			}
 			world.roadScene.mouseChildren = world.buildingScene.mouseChildren = true ;
+			if(EditorBuildingButtons.instance.parent){
+				EditorBuildingButtons.instance.parent.removeChild( EditorBuildingButtons.instance );
+			}
 			this.removeBottomGrid();
 		}
 		
@@ -104,7 +113,7 @@ package local.map.item
 		 */		
 		public function storageToWorld():void
 		{
-			addToSceneFromTopScene();
+			addToWorldFromTopScene();
 			
 			//添加到地图数据中，并且从收藏箱数据中删除
 			BuildingModel.instance.addBuildingVO( buildingVO );
@@ -117,7 +126,7 @@ package local.map.item
 		public function shopToWorld():void
 		{
 			//减钱
-			addToSceneFromTopScene();
+			addToWorldFromTopScene();
 			if(buildingVO.baseVO.type!=BuildingType.DECORATION)
 			{
 				//显示修建状态

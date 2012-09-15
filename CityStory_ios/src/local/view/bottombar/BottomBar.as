@@ -6,6 +6,8 @@ package local.view.bottombar
 	import local.comm.GameData;
 	import local.comm.GameSetting;
 	import local.enum.VillageMode;
+	import local.map.GameWorld;
+	import local.map.item.BaseBuilding;
 	import local.util.PopUpManager;
 	import local.view.base.BaseView;
 	import local.view.shop.ShopOverViewPopUp;
@@ -56,6 +58,15 @@ package local.view.bottombar
 					PopUpManager.instance.addQueuePopUp( ShopOverViewPopUp.instance , true , 0 , 0 );
 					break ;
 				case doneBtn:
+					var world:GameWorld = GameWorld.instance ;
+					if( world.topScene.numChildren>0){
+						var building:BaseBuilding = world.topScene.getChildAt(0) as BaseBuilding;
+						if( building ){
+							building.nodeX = BaseBuilding.cachePos.x ;
+							building.nodeZ = BaseBuilding.cachePos.y ;
+						}
+						building.addToWorldFromTopScene();
+					}
 					GameData.villageMode = VillageMode.NORMAL ;
 					break ;
 			}
