@@ -60,18 +60,21 @@ package local.view.building
 				case okBtn:
 					if( GameData.villageMode==VillageMode.BUILDING_STORAGE){
 						building.storageToWorld();
+						GameData.villageMode = VillageMode.EDIT ;
 					}else if( GameData.villageMode==VillageMode.BUILDING_SHOP){
 						building.shopToWorld();
+						GameData.villageMode = VillageMode.NORMAL ;
 					}
 					break ;
 				case cancelBtn:
 					if( GameData.villageMode==VillageMode.BUILDING_STORAGE){
-						
+						GameData.villageMode = VillageMode.EDIT ;
+					}else if( GameData.villageMode==VillageMode.BUILDING_SHOP){
+						GameData.villageMode = VillageMode.NORMAL ;
 					}
 					break ;
 			}
 			if(parent) parent.removeChild(this);
-			GameData.villageMode = VillageMode.NORMAL ;
 		}
 	}
 }
