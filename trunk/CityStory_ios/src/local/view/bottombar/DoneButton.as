@@ -5,20 +5,15 @@ package local.view.bottombar
 	import local.view.control.Button;
 	
 	/**
-	 * 商店按钮 
+	 * 地图编辑确认按钮 
 	 * @author zzhanglin
 	 */	
-	public class MarketButton extends Button
+	public class DoneButton extends Button
 	{
-		public function MarketButton()
+		public function DoneButton()
 		{
 			super();
-		}
-		
-		
-		public function setVisible( value:Boolean ):void
-		{
-			super.visible = value ;
+			super.visible = false ;
 		}
 		
 		private var _tempVisible:Boolean ;
