@@ -43,9 +43,9 @@ package
 			addChild( CenterViewLayer.instance );
 			addChild( new Stats() );
 			
-//			showDailyRewards();
 			GameWorld.instance.showBuildings();
 			GameData.villageMode = VillageMode.NORMAL ;
+//			showDailyRewards();
 			
 			NativeApplication.nativeApplication.addEventListener(Event.ACTIVATE , activateHandler);
 			NativeApplication.nativeApplication.addEventListener(Event.DEACTIVATE , deactivateHandler );
