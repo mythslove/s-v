@@ -65,10 +65,10 @@ package local.view.bottombar
 						if( building ){
 							building.nodeX = BaseBuilding.cachePos.x ;
 							building.nodeZ = BaseBuilding.cachePos.y ;
-						}
-						building.addToWorldFromTopScene();
-						if(EditorBuildingButtons.instance.parent){
-							EditorBuildingButtons.instance.parent.removeChild( EditorBuildingButtons.instance );
+							building.addToWorldFromTopScene();
+							if(EditorBuildingButtons.instance.parent){
+								EditorBuildingButtons.instance.parent.removeChild( EditorBuildingButtons.instance );
+							}
 						}
 					}
 					GameData.villageMode = VillageMode.NORMAL ;
