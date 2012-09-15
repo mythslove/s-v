@@ -204,9 +204,8 @@ package local
 				
 				// scale
 				var sizeDiff:Number = currentVector.length / previousVector.length;
-				sizeDiff = sizeDiff>1 ? 1+(sizeDiff-1)*.15 : 1-(1-sizeDiff)*.15 ;
+				sizeDiff = sizeDiff>1 ? 1+(sizeDiff-1)*.2 : 1-(1-sizeDiff)*.2 ;
 				changeWorldScale( sizeDiff , _middle.x , _middle.y );
-				_isMove = false ;
 			}
 			else
 			{
