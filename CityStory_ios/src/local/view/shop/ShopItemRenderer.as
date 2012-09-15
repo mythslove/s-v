@@ -57,7 +57,7 @@ package local.view.shop
 					break ;
 			}
 			//图片
-			var img:BuildingThumb = new BuildingThumb( baseVO.name , 200,150);
+			var img:BuildingThumb = new BuildingThumb( baseVO.name , 200 , 150 );
 			imgContainer.addChild( img );
 			if(baseVO.span==1) img.setScale(1.5) ; 
 			img.center();

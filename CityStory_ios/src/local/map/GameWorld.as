@@ -10,6 +10,7 @@ package local.map
 	
 	import local.comm.GameData;
 	import local.comm.GameSetting;
+	import local.enum.BuildingStatus;
 	import local.enum.BuildingType;
 	import local.enum.VillageMode;
 	import local.map.item.BaseBuilding;
@@ -117,7 +118,7 @@ package local.map
 				case MouseEvent.MOUSE_DOWN:
 					_isGesture = false ;
 					_isMove = false ;
-					_moveSpeed = 0.36 ;
+					_moveSpeed = 0.4 ;
 					_mouseDownPos.x = root.mouseX ;
 					_mouseDownPos.y = root.mouseY ;
 					_worldPos.x = x ;
@@ -173,11 +174,7 @@ package local.map
 							if(e.target.parent!=currentSelected  ){
 								if(currentSelected) currentSelected.flash(false);
 								currentSelected = e.target.parent as BaseBuilding ;
-								//移动到中间
-								_endX =  GameSetting.SCREEN_WIDTH*0.5 - (sceneLayerOffsetX+currentSelected.screenX)*scaleX ;
-								_endY = GameSetting.SCREEN_HEIGHT*0.5 - (sceneLayerOffsetY+currentSelected.screenY+currentSelected.buildingVO.baseVO.span*_size)*scaleY ;
-								modifyEndPosition();
-								_moveSpeed = 0.15 ;
+								moveToCenter( currentSelected ) ;
 							}
 							currentSelected.onClick();
 						}
@@ -206,6 +203,19 @@ package local.map
 					removeEventListener(MouseEvent.MOUSE_MOVE , onMouseEvtHandler); 
 					removeEventListener(MouseEvent.MOUSE_UP , onMouseEvtHandler );
 					break ;
+			}
+		}
+		
+		//将building移动到屏幕中间
+		private function moveToCenter( building:BaseBuilding):void
+		{
+			if( building.buildingVO.status!=BuildingStatus.PRODUCTION_COMPLETE && building.buildingVO.status!=BuildingStatus.LACK_MATERIAL )
+			{
+				//移动到中间
+				_endX =  GameSetting.SCREEN_WIDTH*0.5 - (sceneLayerOffsetX+building.screenX)*scaleX ;
+				_endY = GameSetting.SCREEN_HEIGHT*0.5 - (sceneLayerOffsetY+building.screenY+building.buildingVO.baseVO.span*_size)*scaleY ;
+				modifyEndPosition();
+				_moveSpeed = 0.1 ;
 			}
 		}
 		
