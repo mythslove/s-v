@@ -18,9 +18,11 @@ package local.map.item
 			{
 				if( buildingVO.status==BuildingStatus.LACK_MATERIAL)
 				{
+					flash(true);
 				}
 				else if( buildingVO.status==BuildingStatus.PRODUCTION_COMPLETE)
 				{
+					flash(true);
 				}
 				else
 				{

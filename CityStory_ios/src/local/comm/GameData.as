@@ -47,7 +47,6 @@ package  local.comm
 					world.iconScene.visible = true ;
 					world.buildingScene.checkRoadsAndIcons();
 					world.sortIcons();
-					CenterViewLayer.instance.visible=true;
 					break ;
 				case VillageMode.EDIT :
 					world.buildingScene.mouseChildren = true ;
@@ -56,7 +55,6 @@ package  local.comm
 					world.roadScene.mouseChildren = true ;
 					world.topScene.visible = true ;
 					world.iconScene.visible = false ;
-					CenterViewLayer.instance.visible=true;
 					break ;
 				case VillageMode.BUILDING_STORAGE :
 				case VillageMode.BUILDING_SHOP :
@@ -66,7 +64,6 @@ package  local.comm
 					world.roadScene.mouseChildren = false ;
 					world.topScene.visible = true ;
 					world.iconScene.visible = false ;
-					CenterViewLayer.instance.visible=false;
 					break ;
 				case VillageMode.EXPAND :
 					world.buildingScene.mouseChildren = false ;
@@ -77,7 +74,6 @@ package  local.comm
 					world.topScene.visible = true ;
 					world.iconScene.visible = false ;
 					world.showExpandState();
-					CenterViewLayer.instance.visible=true;
 					break ;
 			}
 			if(world.currentSelected){

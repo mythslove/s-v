@@ -75,7 +75,7 @@ package local.map.item
 			//修正图标位置
 			if(statusIcon && statusIcon.parent ){
 				statusIcon.x = screenX-statusIcon.width*0.5;
-				statusIcon.y = screenY+buildingVO.baseVO.span*_size-_buildingObject.height - _size ;
+				statusIcon.y = screenY+buildingVO.baseVO.span*_size-_buildingObject.height - statusIcon.height*0.75 ;
 			}
 		}
 		

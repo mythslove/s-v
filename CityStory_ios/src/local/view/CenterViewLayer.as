@@ -58,13 +58,21 @@ package local.view
 			switch(mode)
 			{
 				case VillageMode.NORMAL :
+					bottomBar.visible = true ;
+					topBar.visible = true ;
 					break ;
 				case VillageMode.EDIT :
+					bottomBar.visible = false ;
+					topBar.visible = false ;
 					break ;
 				case VillageMode.BUILDING_STORAGE :
 				case VillageMode.BUILDING_SHOP :
+					bottomBar.visible = false ;
+					topBar.visible = false ;
 					break ;
 				case VillageMode.EXPAND :
+					bottomBar.visible = false ;
+					topBar.visible = false ;
 					break ;
 			}
 		}
