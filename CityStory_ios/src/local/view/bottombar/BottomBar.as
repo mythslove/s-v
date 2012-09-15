@@ -1,5 +1,7 @@
 package local.view.bottombar
 {
+	import com.greensock.TweenLite;
+	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
@@ -25,7 +27,7 @@ package local.view.bottombar
 		{
 			super.addedToStageHandler(e);
 			editorBtn = new EditorButton();
-			editorBtn.x = GameSetting.SCREEN_WIDTH-200 ;
+			editorBtn.x = GameSetting.SCREEN_WIDTH-260 ;
 			editorBtn.y = - 80 ;
 			addChild(editorBtn);
 			
@@ -50,5 +52,18 @@ package local.view.bottombar
 			}
 		}
 		
+		override public function set visible(value:Boolean):void
+		{
+			if( value){
+				super.visible = value ;
+				alpha = 1 ;
+			}else{
+				TweenLite.to( this , 0.2 , {alpha:0 , onComplete: onTweenCom} );
+			}
+		}
+		
+		private function onTweenCom():void{
+			super.visible = false ;
+		}
 	}
 }
