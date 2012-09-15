@@ -7,6 +7,7 @@ package local.view
 	import local.util.PopUpManager;
 	import local.view.base.BaseView;
 	import local.view.bottombar.BottomBar;
+	import local.view.bottombar.GameTip;
 	import local.view.topbar.TopBar;
 	
 	public class CenterViewLayer extends BaseView
@@ -20,6 +21,7 @@ package local.view
 		//======================================
 		public var bottomBar:BottomBar;
 		public var topBar:TopBar ;
+		public var gameTip:GameTip ;
 		
 		public function CenterViewLayer()
 		{
@@ -39,6 +41,10 @@ package local.view
 			topBar = new TopBar();
 			addChild(topBar);
 			topBar.x = (GameSetting.SCREEN_WIDTH-topBar.width)>>1 ;
+			
+			gameTip = new GameTip();
+			gameTip.x  = (GameSetting.SCREEN_WIDTH-gameTip.width)>>1 ;
+			addChild(gameTip);
 			
 			addChild(PopUpManager.instance);
 		}
