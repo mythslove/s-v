@@ -10,6 +10,7 @@ package local.view.bottombar
 	import local.map.item.BaseBuilding;
 	import local.util.PopUpManager;
 	import local.view.base.BaseView;
+	import local.view.building.EditorBuildingButtons;
 	import local.view.shop.ShopOverViewPopUp;
 	
 	public class BottomBar extends BaseView
@@ -66,6 +67,9 @@ package local.view.bottombar
 							building.nodeZ = BaseBuilding.cachePos.y ;
 						}
 						building.addToWorldFromTopScene();
+						if(EditorBuildingButtons.instance.parent){
+							EditorBuildingButtons.instance.parent.removeChild( EditorBuildingButtons.instance );
+						}
 					}
 					GameData.villageMode = VillageMode.NORMAL ;
 					break ;
