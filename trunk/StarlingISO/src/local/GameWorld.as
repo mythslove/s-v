@@ -177,7 +177,7 @@ package local
 				{
 					if(!_isMove && touch.target is PixelsImage && touch.target.parent is SIsoObject){
 						var obj:SIsoObject = touch.target.parent as SIsoObject ;
-						obj.alpha = 0.5 ;
+						obj.alpha = obj.alpha==1? 0.5 : 1 ;
 					}
 					_isMove = false ;
 				}
