@@ -102,9 +102,6 @@ package local.map.item
 				world.buildingScene.addBuilding( this );
 			}
 			world.roadScene.mouseChildren = world.buildingScene.mouseChildren = true ;
-			if(EditorBuildingButtons.instance.parent){
-				EditorBuildingButtons.instance.parent.removeChild( EditorBuildingButtons.instance );
-			}
 			this.removeBottomGrid();
 		}
 		
