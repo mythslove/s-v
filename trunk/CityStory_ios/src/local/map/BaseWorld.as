@@ -42,7 +42,7 @@ package  local.map
 		protected var _touchCount:int ; //手指触摸数量
 		private var _touchFinger1:Point = new Point(); //第一个点击的手指
 		private var _middle:Point = new Point(); //缩放时的中间点位置
-		protected var _moveSpeed:Number = 0.4 ; //移动的速度
+		protected var _moveSpeed:Number  ; //移动的速度
 		public var runUpdate:Boolean = true ; //是否运行建筑 的update
 		/**====================================================*/
 		
