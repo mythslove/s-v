@@ -141,7 +141,7 @@ package local.map.scene
 			var characNum:int ;
 			for(var i:int = 0 ; i<roads.length ; ++i)
 			{
-				if(Math.random()>0.6 && characNum<10 ){ //不超过10个人
+				if( characNum<10 && Math.random()>0.6 ){ //不超过10个人
 					road = roads[i];
 					var fairy:MoveItem = ObjectPool.instance.getCharacter() ;
 					fairy.nodeX  = road.nodeX;
@@ -149,7 +149,7 @@ package local.map.scene
 					addMoveItem( fairy , false ) ;
 					fairy.init();
 					++ characNum ;
-				}else if(Math.random()>0.6 && carNum<5){ //不超过5辆车
+				}else if(carNum<5 && Math.random()>0.6 ){ //不超过5辆车
 					road = roads[i];
 					if(road.direction!=""){
 						var car:MoveItem = ObjectPool.instance.getCar() ;

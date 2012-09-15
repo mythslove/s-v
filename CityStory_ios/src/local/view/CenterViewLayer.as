@@ -59,10 +59,15 @@ package local.view
 			{
 				case VillageMode.NORMAL :
 					bottomBar.visible = true ;
+					bottomBar.marketBtn.visible = true ;
+					bottomBar.editorBtn.visible = true ;
+					bottomBar.doneBtn.visible = false ;
 					topBar.visible = true ;
 					break ;
 				case VillageMode.EDIT :
-					bottomBar.visible = false ;
+					bottomBar.marketBtn.visible = false ;
+					bottomBar.editorBtn.visible = false ;
+					bottomBar.doneBtn.visible = true ;
 					topBar.visible = false ;
 					break ;
 				case VillageMode.BUILDING_STORAGE :

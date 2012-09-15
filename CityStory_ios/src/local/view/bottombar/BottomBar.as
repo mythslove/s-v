@@ -1,7 +1,5 @@
 package local.view.bottombar
 {
-	import com.greensock.TweenLite;
-	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
@@ -16,6 +14,7 @@ package local.view.bottombar
 	{
 		public var editorBtn:EditorButton ;
 		public var marketBtn:MarketButton;
+		public var doneBtn:DoneButton ;
 		
 		public function BottomBar()
 		{
@@ -26,15 +25,22 @@ package local.view.bottombar
 		override protected function addedToStageHandler( e:Event ):void
 		{
 			super.addedToStageHandler(e);
-			editorBtn = new EditorButton();
-			editorBtn.x = GameSetting.SCREEN_WIDTH-260 ;
-			editorBtn.y = - 80 ;
-			addChild(editorBtn);
 			
 			marketBtn = new MarketButton();
-			marketBtn.x = GameSetting.SCREEN_WIDTH-100 ;
-			marketBtn.y = - 80 ;
+			marketBtn.x = GameSetting.SCREEN_WIDTH-marketBtn.width-10 ;
+			marketBtn.y = - marketBtn.height-10 ;
 			addChild(marketBtn);
+			
+			
+			editorBtn = new EditorButton();
+			editorBtn.x = marketBtn.x-editorBtn.width-50 ;
+			editorBtn.y = - editorBtn.height-10 ;
+			addChild(editorBtn);
+			
+			doneBtn = new DoneButton();
+			doneBtn.x = GameSetting.SCREEN_WIDTH-doneBtn.width-10 ;
+			doneBtn.y = - doneBtn.height-10 ;
+			addChild(doneBtn);
 			
 			addEventListener(MouseEvent.CLICK , onMouseHandler );
 		}
@@ -49,21 +55,11 @@ package local.view.bottombar
 				case marketBtn:
 					PopUpManager.instance.addQueuePopUp( ShopOverViewPopUp.instance , true , 0 , 0 );
 					break ;
+				case doneBtn:
+					GameData.villageMode = VillageMode.NORMAL ;
+					break ;
 			}
 		}
 		
-		override public function set visible(value:Boolean):void
-		{
-			if( value){
-				super.visible = value ;
-				alpha = 1 ;
-			}else{
-				TweenLite.to( this , 0.2 , {alpha:0 , onComplete: onTweenCom} );
-			}
-		}
-		
-		private function onTweenCom():void{
-			super.visible = false ;
-		}
 	}
 }
