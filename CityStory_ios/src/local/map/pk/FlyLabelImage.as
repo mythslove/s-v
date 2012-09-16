@@ -57,7 +57,7 @@ package local.map.pk
 			removeEventListener(Event.ADDED_TO_STAGE , addedHandler );
 			scaleX = scaleY = 0 ;
 			var scale:Number = 1/GameWorld.instance.scaleX ;
-			TweenLite.to( this , 0.25 , { scaleX:scale  , scaleY:scale , onComplete: scaleOver}  );
+			TweenLite.to( this , 0.3 , { scaleX:scale  , scaleY:scale , onComplete: scaleOver}  );
 		}
 		
 		private function scaleOver():void

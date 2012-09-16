@@ -118,8 +118,8 @@ package local.map.pk
 			displayObj.y += p.y ;
 			CenterViewLayer.instance.addChildAt( displayObj,0);
 			
-			var obj:Object = {x: displayObj.x + (targetPoint.x > displayObj.x ? (-50) : (50)), y: displayObj.y + (targetPoint.y - displayObj.y) * 0.5 };
-			TweenMax.to( displayObj , 0.25 , {bezier:[ obj, { x:targetPoint.x , y:targetPoint.y }] , onComplete:over , onCompleteParams:[displayObj] ,alpha:0 });
+			var obj:Object = {x: displayObj.x + (targetPoint.x > displayObj.x ? -50 : 50 ) , y: displayObj.y + (targetPoint.y - displayObj.y) * 0.5 };
+			TweenMax.to( displayObj , 0.5 , {bezier:[ obj, { x:targetPoint.x , y:targetPoint.y }] , onComplete:over , onCompleteParams:[displayObj] ,alpha:0 });
 		}
 		
 		private function over( obj:DisplayObject ):void
