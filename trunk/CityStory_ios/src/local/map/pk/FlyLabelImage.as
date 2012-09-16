@@ -64,7 +64,7 @@ package local.map.pk
 		
 		private function scaleOver():void
 		{
-			TweenLite.to( this , 2 , {y: y-50 , alpha:0 , onComplete:remove} );
+			TweenLite.to( this , 2 , {y: y-60 , alpha:0 , onComplete:remove} );
 		}
 		
 		private function remove():void
