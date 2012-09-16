@@ -100,6 +100,13 @@ package local.util
 		public static const BuildStatus_3_1:Class; 
 		
 		
+		//========pickup图标====================
+		[Embed(source="../resource/comm/PickupCoin.png")]
+		public static const PickupCoin:Class ;
+		[Embed(source="../resource/comm/PickupExp.png")]
+		public static const PickupExp:Class ;
+		[Embed(source="../resource/comm/PickupGoods.png")]
+		public static const PickupGoods:Class ;
 		
 		
 		/**

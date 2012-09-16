@@ -55,9 +55,6 @@ package  local.map
 			y=-1200;
 			_endX = x ;
 			_endY = y ;
-			if(GameSetting.device=="iphone"){
-				changeWorldScale( 1.2 , GameSetting.SCREEN_WIDTH*0.5 , GameSetting.SCREEN_HEIGHT*0.5 ) ;
-			}
 			addBackground();
 		}
 		
@@ -190,6 +187,10 @@ package  local.map
 			initMap();
 			//添加侦听
 			configListeners();
+			//初始地图缩放
+			if(GameSetting.device=="iphone"){
+				changeWorldScale( 1.2 , GameSetting.SCREEN_WIDTH*0.5 , GameSetting.SCREEN_HEIGHT*0.5 ) ;
+			}
 		}
 		
 		/** 初始化地图 */
