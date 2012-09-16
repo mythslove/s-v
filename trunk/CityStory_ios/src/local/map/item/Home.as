@@ -50,6 +50,9 @@ package local.map.item
 				pkImgs.x = screenX ;
 				pkImgs.y = screenY ;
 				GameWorld.instance.effectScene.addChild( pkImgs );
+				
+				startProduct();
+				showBuildingFlagIcon();
 			}
 		}
 	}
