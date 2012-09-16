@@ -59,7 +59,7 @@ package local.map.pk
 			
 			var scale:Number = 1/GameWorld.instance.scaleX ;
 			
-			var bezierArray:Array = [ { x:x , y: y-70 } , { x:x , y:y+40+Math.random()*50 } ] ;
+			var bezierArray:Array = [ { x:x , y: y-50 } , { x:x , y:y+40+Math.random()*50 } ] ;
 			TweenMax.to( this , 0.25 , {bezierThrough:bezierArray , onComplete:show , scaleX:scale , scaleY:scale });
 		}
 		
