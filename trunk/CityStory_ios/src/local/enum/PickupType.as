@@ -19,6 +19,10 @@ package local.enum
 		 */		
 		public static const EXP:String = "exp";
 		/**
+		 * 商品
+		 */		
+		public static const GOOD:String = "good";
+		/**
 		 * components 
 		 */		 
 		public static const COMP:String = "comp" ;
