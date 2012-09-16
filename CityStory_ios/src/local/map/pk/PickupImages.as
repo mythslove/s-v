@@ -1,6 +1,7 @@
 package local.map.pk
 {
 	import flash.display.Bitmap;
+	import flash.display.DisplayObject;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.utils.Dictionary;
@@ -29,6 +30,7 @@ package local.map.pk
 		{
 			_pkHash[ pkType ] = value ;
 			var bmp:Bitmap = new Bitmap();
+			bmp.name = pkType ;
 			switch( pkType)
 			{
 				case PickupType.COIN:
@@ -43,6 +45,7 @@ package local.map.pk
 			}
 			bmp.y = - bmp.height>>1 ;
 			bmp.x = numChildren==0 ? -bmp.width*0.8 : -bmp.width*0.25  ;
+			addChild(bmp);
 		}
 		
 		override protected function addedToStageHandler(e:Event):void
@@ -64,19 +67,21 @@ package local.map.pk
 				clearTimeout( _timeoutId );
 			}
 			mouseEnabled = false ;
+			var obj:DisplayObject ;
 			var me:PlayerVO = PlayerModel.instance.me ;
-			for( var pkType:String in _pkHash)
+			for( var i:int = 0 ; i<numChildren ; ++i)
 			{
-				switch( pkType)
+				obj = getChildAt(i) ;
+				switch( obj.name )
 				{
 					case PickupType.COIN:
-						me.coin += _pkHash[pkType] ;
+						me.coin += _pkHash[obj.name] ;
 						break ;
 					case PickupType.EXP:
-						me.exp += _pkHash[pkType] ;
+						me.exp += _pkHash[obj.name] ;
 						break ;
 					case PickupType.GOOD:
-						me.goods += _pkHash[pkType] ;
+						me.goods += _pkHash[obj.name] ;
 						break ;
 				}
 			}

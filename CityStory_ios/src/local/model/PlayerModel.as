@@ -19,25 +19,24 @@ package local.model
 		
 		public var me:PlayerVO ;
 		
-		public function addCoin( value:int ):void
+		public function changeCoin( value:int ):void
 		{
 			me.coin+=value ;
 		}
 		
-		public function addCash( value:int ):void
+		public function changeCash( value:int ):void
 		{
 			me.cash+=value ;
 		}
 		
-		public function addEnergy( value:int ):void
+		public function changeEnergy( value:int ):void
 		{
-			
+			me.energy+=value ;
 		}
-		
 		
 		public function createPlayer():void
 		{
-			
+			me = new PlayerVO();
 		}
 	}
 }
