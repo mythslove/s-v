@@ -10,7 +10,7 @@ package  local.vo
 		
 		public var goods:int ; //物品，商品
 		
-		public var energy:int ; //能量
+		public var energy:int = 1 ; //能量
 		public var maxEnergy:int ; //能量容量
 		
 		public var coin:int; //金币数量

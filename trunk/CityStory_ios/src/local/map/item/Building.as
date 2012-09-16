@@ -6,14 +6,17 @@ package local.map.item
 	import local.comm.GameData;
 	import local.enum.BuildingStatus;
 	import local.enum.BuildingType;
+	import local.enum.PickupType;
 	import local.enum.VillageMode;
 	import local.map.GameWorld;
 	import local.map.cell.BuildStatusObject;
+	import local.map.pk.FlyLabelImage;
 	import local.model.MapGridDataModel;
+	import local.model.PlayerModel;
 	import local.util.EmbedsManager;
 	import local.util.GameTimer;
-	import local.vo.BitmapAnimResVO;
 	import local.vo.BuildingVO;
+	import local.vo.PlayerVO;
 	
 	/**
 	 * 除了装饰以外其他的建筑 
@@ -194,6 +197,23 @@ package local.map.item
 		
 		
 		
+		/* 减能量*/
+		protected function reduceEnergy():Boolean
+		{
+			var me:PlayerVO = PlayerModel.instance.me ;
+			if( me.energy>0){
+				var flyImg:FlyLabelImage = new FlyLabelImage( PickupType.ENERGY , -1 ) ;
+				flyImg.x = screenX ;
+				flyImg.y = screenY ;
+				GameWorld.instance.effectScene.addChild( flyImg );
+				PlayerModel.instance.changeEnergy( -1 ) ;
+				return true ;
+			}else{
+				//显示没有能量提示
+			}
+			return false ;
+		}
+		
 		/*开始生产，从头开始计时 */		
 		protected function startProduct():void
 		{
@@ -263,25 +283,9 @@ package local.map.item
 			if( GameData.villageMode==VillageMode.NORMAL && buildingVO.status==BuildingStatus.BUILDING){
 				flash(true);
 				//点击一次修一次 ，并加经验，判断能量是否足够
-				++buildingVO.buildClick ;
-				if( buildingVO.buildClick >= buildingVO.baseVO.click )
-				{
-					var flag:Boolean = MapGridDataModel.instance.checkAroundBuilding(this,BuildingType.DECORATION,BuildingType.DECORATION_ROAD) ;
-					if(flag){
-						if( buildingVO.baseVO.type==BuildingType.BUSINESS || buildingVO.baseVO.type==BuildingType.INDUSTRY ){
-							buildingVO.status = BuildingStatus.LACK_MATERIAL ;
-						}else{
-							buildingVO.status = BuildingStatus.PRODUCTION ;
-							startProduct();
-						}
-					}else{
-						buildingVO.status = BuildingStatus.NO_ROAD ;
-					}
-					removeChild(_buildStatusObj);
-					_buildStatusObj.dispose();
-					_buildStatusObj = null ;
+				if(reduceEnergy()){
+//					buildClick();
 				}
-				showUI();
 			}
 			else
 			{
@@ -289,6 +293,29 @@ package local.map.item
 			}
 		}
 		
+		/*修建时点击*/
+		protected function buildClick():void
+		{
+			++buildingVO.buildClick ;
+			if( buildingVO.buildClick >= buildingVO.baseVO.click )
+			{
+				var flag:Boolean = MapGridDataModel.instance.checkAroundBuilding(this,BuildingType.DECORATION,BuildingType.DECORATION_ROAD) ;
+				if(flag){
+					if( buildingVO.baseVO.type==BuildingType.BUSINESS || buildingVO.baseVO.type==BuildingType.INDUSTRY ){
+						buildingVO.status = BuildingStatus.LACK_MATERIAL ;
+					}else{
+						buildingVO.status = BuildingStatus.PRODUCTION ;
+						startProduct();
+					}
+				}else{
+					buildingVO.status = BuildingStatus.NO_ROAD ;
+				}
+				removeChild(_buildStatusObj);
+				_buildStatusObj.dispose();
+				_buildStatusObj = null ;
+			}
+			showUI();
+		}
 		override public function dispose():void
 		{
 			super.dispose();

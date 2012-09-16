@@ -181,7 +181,7 @@ package  local.map
 			addScene( roadScene );
 			addScene(buildingScene);
 			addScene(iconScene);
-			addChild( effectScene );
+			addScene( effectScene );
 			addScene(topScene);
 			//设置背景
 			initMap();

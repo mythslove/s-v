@@ -107,6 +107,8 @@ package local.util
 		public static const PickupExp:Class ;
 		[Embed(source="../resource/comm/PickupGoods.png")]
 		public static const PickupGoods:Class ;
+		[Embed(source="../resource/comm/PickupEnergy.png")]
+		public static const PickupEnergy:Class ;
 		
 		
 		/**
