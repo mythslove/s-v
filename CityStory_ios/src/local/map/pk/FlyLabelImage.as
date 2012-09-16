@@ -42,11 +42,13 @@ package local.map.pk
 			//文字
 			var txtf:TextField = new TextField();
 			var tf:TextFormat = txtf.defaultTextFormat ;
-			tf.size = 20 ;
+			tf.size = 30 ;
+			tf.color = 0xffffff ;
 			tf.bold = true ;
-			txtf.text = value>0 ? "+"+value : "-"+value ;
+			txtf.defaultTextFormat = tf ;
+			txtf.text = value>0 ? "+"+value : ""+value ;
 			txtf.x = -txtf.textWidth-10 ;
-			txtf.y = -bmp.height>>1 ;
+			txtf.y = (bmp.height-txtf.height)>>1  ;
 			addChild(txtf);
 			
 			addEventListener(Event.ADDED_TO_STAGE , addedHandler );
