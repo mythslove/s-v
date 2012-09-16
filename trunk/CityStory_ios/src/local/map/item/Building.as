@@ -283,7 +283,7 @@ package local.map.item
 				flash(true);
 				//点击一次修一次 ，并加经验，判断能量是否足够
 				if(reduceEnergy()){
-//					buildClick();
+					buildClick();
 				}
 			}
 			else
