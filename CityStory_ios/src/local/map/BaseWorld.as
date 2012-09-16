@@ -10,7 +10,6 @@ package  local.map
 	
 	import local.comm.*;
 	import local.enum.BuildingType;
-	import local.enum.VillageMode;
 	import local.map.item.*;
 	import local.map.scene.*;
 	import local.model.LandModel;
@@ -25,6 +24,7 @@ package  local.map
 		public var roadScene:RoadScene ; //道路，水层
 		public var buildingScene:BuildingScene; //建筑层
 		public var iconScene:IsoScene ; //显示icon层
+		public var effectScene:IsoScene ; //特效层
 		public var topScene:IsoScene ; //最上层,显示移动的建筑，以及显示一些特效动画
 		
 		protected var _mouseDownPos:Point = new Point(); //鼠标点击的位置
@@ -178,11 +178,13 @@ package  local.map
 			buildingScene = new BuildingScene();
 			iconScene = new IsoScene(0);
 			iconScene.mouseEnabled = iconScene.mouseChildren = false ;
+			effectScene = new IsoScene(0);
 			topScene = new IsoScene(0);
 			topScene.visible = topScene.mouseEnabled = false ;
 			addScene( roadScene );
 			addScene(buildingScene);
 			addScene(iconScene);
+			addChild( effectScene );
 			addScene(topScene);
 			//设置背景
 			initMap();
@@ -396,6 +398,11 @@ package  local.map
 			else if(EditorBuildingButtons.instance.parent)
 			{
 				EditorBuildingButtons.instance.scaleY =EditorBuildingButtons.instance.scaleX = 1/scaleX ;
+			}
+			var obj:DisplayObject ;
+			for( var i:int = 0 ; i <effectScene.numChildren ; ++i ){
+				obj = effectScene.getChildAt(i) ;
+				obj.scaleY = obj.scaleX = 1/scaleX ;
 			}
 		}
 		
