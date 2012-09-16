@@ -37,7 +37,6 @@ package local.map.pk
 					break ;
 			}
 			bmp.y = - bmp.height>>1 ;
-			bmp.scaleX = bmp.scaleY = 0.6 ;
 			addChild(bmp);
 			
 			//文字
