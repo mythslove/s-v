@@ -210,7 +210,7 @@ package local.map.item
 			}else{
 				//显示没有能量提示
 			}
-			return true ;  //这儿应该为false...................................
+			return false ;
 		}
 		
 		/*开始生产，从头开始计时 */		
