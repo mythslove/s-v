@@ -176,6 +176,7 @@ package  local.map
 			iconScene = new IsoScene(0);
 			iconScene.mouseEnabled = iconScene.mouseChildren = false ;
 			effectScene = new IsoScene(0);
+			effectScene.mouseEnabled = effectScene.mouseChildren = false ;
 			topScene = new IsoScene(0);
 			topScene.visible = topScene.mouseEnabled = false ;
 			addScene( roadScene );
