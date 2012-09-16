@@ -55,10 +55,12 @@ package local.map.pk
 		override protected function addedToStageHandler(e:Event):void
 		{
 			super.addedToStageHandler(e);
-			scaleX = scaleY = 1/GameWorld.instance.scaleX ;
+			scaleX = scaleY = 0.2 ;
+			
+			var scale:Number = 1/GameWorld.instance.scaleX ;
 			
 			var bezierArray:Array = [ { x:x , y: y-50 } , { x:x , y:y+50+Math.random()*50 } ] ;
-			TweenMax.to( this , 0.25 , {bezierThrough:bezierArray , onComplete:show});
+			TweenMax.to( this , 0.25 , {bezierThrough:bezierArray , onComplete:show , scaleX:scale , scaleY:scale });
 		}
 		
 		private function show():void
@@ -103,6 +105,7 @@ package local.map.pk
 				}
 //				targetPoint.setTo( target.x+centerLayer.x , target.y+ centerLayer.y );
 				movePickup( targetPoint , obj );
+				i--;
 			}
 			if( parent) parent.removeChild(this);	
 		}
@@ -116,7 +119,7 @@ package local.map.pk
 			CenterViewLayer.instance.addChildAt( displayObj,0);
 			
 			var obj:Object = {x: displayObj.x + (targetPoint.x > displayObj.x ? (-50) : (50)), y: displayObj.y + (targetPoint.y - displayObj.y) * 0.5 };
-			TweenMax.to( displayObj , 0.2 , {bezier:[ obj, { x:targetPoint.x , y:targetPoint.y }] , onComplete:over , onCompleteParams:[displayObj]  });
+			TweenMax.to( displayObj , 0.25 , {bezier:[ obj, { x:targetPoint.x , y:targetPoint.y }] , onComplete:over , onCompleteParams:[displayObj] ,alpha:0 });
 		}
 		
 		private function over( obj:DisplayObject ):void

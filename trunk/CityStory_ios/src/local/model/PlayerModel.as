@@ -29,9 +29,19 @@ package local.model
 			me.cash+=value ;
 		}
 		
+		public function changeExp( value:int ):void
+		{
+			me.exp+=value ;
+		}
+		
 		public function changeEnergy( value:int ):void
 		{
 			me.energy+=value ;
+		}
+		
+		public function changeGoods( value:int ):void
+		{
+			me.goods+=value ;
 		}
 		
 		public function createPlayer():void
