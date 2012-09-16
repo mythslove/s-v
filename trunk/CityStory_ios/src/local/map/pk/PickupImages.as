@@ -81,6 +81,7 @@ package local.map.pk
 				clearTimeout( _timeoutId );
 			}
 			mouseEnabled = false ;
+			var flyImg:FlyLabelImage ;
 			var obj:DisplayObject ;
 			var target:DisplayObject ; //要飞向的目标
 			var targetPoint:Point = new Point() ; //要飞向的目标位置
@@ -105,6 +106,12 @@ package local.map.pk
 				}
 //				targetPoint.setTo( target.x+centerLayer.x , target.y+ centerLayer.y );
 				movePickup( targetPoint , obj );
+				
+				flyImg = new FlyLabelImage( obj.name , _pkHash[obj.name] ) ;
+				flyImg.x = x-20*numChildren ;
+				flyImg.y = y-40*numChildren ;
+				parent.addChild( flyImg );
+				
 				i--;
 			}
 			if( parent) parent.removeChild(this);	
