@@ -146,7 +146,7 @@ package local.map.item
 			{
 				case BuildingStatus.BUILDING:
 					if(buildingVO.buildClick>0){
-						//显示修建的次数
+						//显示修建的次数的图标
 					}
 					break ;
 				case BuildingStatus.NO_ROAD:
@@ -196,7 +196,6 @@ package local.map.item
 		
 		
 		
-		
 		/* 减能量*/
 		protected function reduceEnergy():Boolean
 		{
@@ -211,7 +210,7 @@ package local.map.item
 			}else{
 				//显示没有能量提示
 			}
-			return false ;
+			return true ;
 		}
 		
 		/*开始生产，从头开始计时 */		

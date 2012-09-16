@@ -2,9 +2,10 @@ package local.map.item
 {
 	import local.comm.GameData;
 	import local.enum.BuildingStatus;
-	import local.enum.BuildingType;
+	import local.enum.PickupType;
 	import local.enum.VillageMode;
-	import local.model.MapGridDataModel;
+	import local.map.GameWorld;
+	import local.map.pk.PickupImages;
 	import local.vo.BuildingVO;
 	
 	public class Home extends Building
@@ -22,7 +23,7 @@ package local.map.item
 				{
 					flash(true);
 					//收钱
-					
+					collect();
 				}
 				else
 				{
@@ -32,6 +33,23 @@ package local.map.item
 			else
 			{
 				super.onClick();
+			}
+		}
+		
+		/* 收获*/
+		private function collect():void
+		{
+			if( reduceEnergy() ){
+				var pkImgs:PickupImages = new PickupImages();
+				if(buildingVO.baseVO.earnCoin){
+					pkImgs.addPK( PickupType.COIN , buildingVO.baseVO.earnCoin );
+				}
+				if( buildingVO.baseVO.earnExp ){
+					pkImgs.addPK( PickupType.EXP , buildingVO.baseVO.earnExp );
+				}
+				pkImgs.x = screenX ;
+				pkImgs.y = screenY ;
+				GameWorld.instance.effectScene.addChild( pkImgs );
 			}
 		}
 	}
