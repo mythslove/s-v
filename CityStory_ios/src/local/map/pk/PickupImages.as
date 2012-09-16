@@ -1,19 +1,23 @@
 package local.map.pk
 {
+	import com.greensock.TweenMax;
+	
 	import flash.display.Bitmap;
 	import flash.display.DisplayObject;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.geom.Point;
 	import flash.utils.Dictionary;
 	import flash.utils.clearTimeout;
 	import flash.utils.setTimeout;
 	
+	import local.comm.GameData;
 	import local.enum.PickupType;
 	import local.map.GameWorld;
 	import local.model.PlayerModel;
 	import local.util.EmbedsManager;
+	import local.view.CenterViewLayer;
 	import local.view.base.BaseView;
-	import local.vo.PlayerVO;
 	
 	public class PickupImages extends BaseView
 	{
@@ -52,9 +56,17 @@ package local.map.pk
 		{
 			super.addedToStageHandler(e);
 			scaleX = scaleY = 1/GameWorld.instance.scaleX ;
+			
+			var bezierArray:Array = [ { x:x , y: y-50 } , { x:x , y:y+50+Math.random()*50 } ] ;
+			TweenMax.to( this , 0.25 , {bezierThrough:bezierArray , onComplete:show});
+		}
+		
+		private function show():void
+		{
 			addEventListener(MouseEvent.MOUSE_DOWN , onMouseDownHandler , false , 0 , true  );
 			_timeoutId = setTimeout( fly , 3000 );
 		}
+			
 		
 		private function onMouseDownHandler( e:MouseEvent):void
 		{
@@ -68,29 +80,56 @@ package local.map.pk
 			}
 			mouseEnabled = false ;
 			var obj:DisplayObject ;
-			var me:PlayerVO = PlayerModel.instance.me ;
+			var target:DisplayObject ; //要飞向的目标
+			var targetPoint:Point = new Point() ; //要飞向的目标位置
+			var centerLayer:CenterViewLayer = CenterViewLayer.instance ;
 			for( var i:int = 0 ; i<numChildren ; ++i)
 			{
 				obj = getChildAt(i) ;
 				switch( obj.name )
 				{
 					case PickupType.COIN:
-						me.coin += _pkHash[obj.name] ;
+						PlayerModel.instance.changeCoin(  _pkHash[obj.name] );
+						target = centerLayer.topBar.coinBar ;
 						break ;
 					case PickupType.EXP:
-						me.exp += _pkHash[obj.name] ;
+						PlayerModel.instance.changeExp ( _pkHash[obj.name] );
+						target = centerLayer.topBar.lvBar ;
 						break ;
 					case PickupType.GOOD:
-						me.goods += _pkHash[obj.name] ;
+						PlayerModel.instance.changeGoods(  _pkHash[obj.name] );
+						target = centerLayer.topBar.goodsBar ;
 						break ;
 				}
+//				targetPoint.setTo( target.x+centerLayer.x , target.y+ centerLayer.y );
+				movePickup( targetPoint , obj );
+			}
+			if( parent) parent.removeChild(this);	
+		}
+		
+		private function movePickup( targetPoint:Point , displayObj:DisplayObject ):void
+		{
+			GameData.commPoint.setTo(0,0);
+			var p:Point = this.localToGlobal( GameData.commPoint ) ;
+			displayObj.x += p.x ;
+			displayObj.y += p.y ;
+			CenterViewLayer.instance.addChildAt( displayObj,0);
+			
+			var obj:Object = {x: displayObj.x + (targetPoint.x > displayObj.x ? (-50) : (50)), y: displayObj.y + (targetPoint.y - displayObj.y) * 0.5 };
+			TweenMax.to( displayObj , 0.2 , {bezier:[ obj, { x:targetPoint.x , y:targetPoint.y }] , onComplete:over , onCompleteParams:[displayObj]  });
+		}
+		
+		private function over( obj:DisplayObject ):void
+		{
+			if(obj .parent){
+				obj.parent.removeChild(obj );
 			}
 		}
+				
 		
 		override protected function removedFromStageHandler(e:Event):void
 		{
 			_pkHash = null ;
-			super.removeEventListener(e);
 			removeEventListener(MouseEvent.MOUSE_DOWN , onMouseDownHandler ) ;
 			dispose() ;
 		}
