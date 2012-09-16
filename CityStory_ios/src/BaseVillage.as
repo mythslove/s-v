@@ -4,6 +4,9 @@ package
 	import bing.res.ResProgressEvent;
 	import bing.res.ResVO;
 	
+	import com.greensock.plugins.BezierPlugin;
+	import com.greensock.plugins.TweenPlugin;
+	
 	import flash.desktop.NativeApplication;
 	import flash.display.*;
 	import flash.events.Event;
@@ -59,7 +62,9 @@ package
 //				GameSetting.minZoom = 0.4 ;
 //				GameSetting.device = "ipad";
 //			}
-
+			
+				
+			TweenPlugin.activate([BezierPlugin]);
 			registerVO();
 			loadConfig();
 		}

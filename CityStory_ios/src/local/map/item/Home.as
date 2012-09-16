@@ -41,10 +41,10 @@ package local.map.item
 		{
 			if( reduceEnergy() ){
 				var pkImgs:PickupImages = new PickupImages();
-				if(buildingVO.baseVO.earnCoin){
+				if(buildingVO.baseVO.earnCoin>0 ){
 					pkImgs.addPK( PickupType.COIN , buildingVO.baseVO.earnCoin );
 				}
-				if( buildingVO.baseVO.earnExp ){
+				if( buildingVO.baseVO.earnExp>0 ){
 					pkImgs.addPK( PickupType.EXP , buildingVO.baseVO.earnExp );
 				}
 				pkImgs.x = screenX ;
