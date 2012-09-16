@@ -49,6 +49,7 @@ package  local.map
 		public function BaseWorld()
 		{
 			super( GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE);
+			mouseChildren = mouseEnabled = false ;
 			
 			this.x =-50 + (GameSetting.SCREEN_WIDTH-GameSetting.MAP_WIDTH*scaleX)>>1 ;
 			y=-1200;
@@ -326,8 +327,14 @@ package  local.map
 			}
 		}
 		
-		public function run():void{ addEventListener(Event.ENTER_FRAME , onEnterFrameHandler ); }
-		public function stopRun():void{ removeEventListener(Event.ENTER_FRAME , onEnterFrameHandler ); }
+		public function run():void{ 
+			addEventListener(Event.ENTER_FRAME , onEnterFrameHandler );
+			mouseEnabled = mouseChildren=true ;
+		}
+		public function stopRun():void{ 
+			removeEventListener(Event.ENTER_FRAME , onEnterFrameHandler ); 
+			mouseEnabled = mouseChildren=false ;
+		}
 		override public function update():void { buildingScene.update() ; }
 		
 		private function onEnterFrameHandler(e:Event):void
