@@ -1,6 +1,5 @@
 package local.map.item
 {
-	import flash.display.Bitmap;
 	import flash.events.Event;
 	
 	import local.comm.GameData;
@@ -16,6 +15,7 @@ package local.map.item
 	import local.model.PlayerModel;
 	import local.util.EmbedsManager;
 	import local.util.GameTimer;
+	import local.view.base.StatusIcon;
 	import local.vo.BuildingVO;
 	import local.vo.PlayerVO;
 	
@@ -28,12 +28,13 @@ package local.map.item
 	public class Building extends BaseBuilding
 	{
 		public var gameTimer:GameTimer;
-		public var statusIcon:Bitmap = new Bitmap() ; //显示当前状态的icon
+		public var statusIcon:StatusIcon ; //显示当前状态的icon
 		
 		
 		public function Building(buildingVO:BuildingVO)
 		{
 			super(buildingVO);
+			statusIcon = new StatusIcon(this) ;
 		}
 		
 		
@@ -330,6 +331,7 @@ package local.map.item
 			super.dispose();
 			clearGameTimer();
 			removeBuildingFlagIcon();
+			if(statusIcon) statusIcon.dispose() ;
 			statusIcon =  null ;
 		}
 	}
