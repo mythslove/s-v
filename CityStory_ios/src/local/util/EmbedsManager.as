@@ -111,6 +111,20 @@ package local.util
 		public static const PickupEnergy:Class ;
 		
 		
+		
+		
+		//===================特效===========================
+		[Embed(source="../resource/effect/PlaceBuildingEffect.bd", mimeType="application/octet-stream") ]
+		public static const PlaceBuildingEffect:Class;  //放置建筑时的灰尘特效
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		/**
 		 * 获得嵌入的动画文件  
 		 * @param name

@@ -12,8 +12,11 @@ package local.map.item
 	import local.map.cell.BuildingBottomGrid;
 	import local.map.cell.BuildingObject;
 	import local.map.cell.RoadObject;
+	import local.map.cell.TimeAnimObject;
 	import local.model.BuildingModel;
 	import local.model.StorageModel;
+	import local.util.EmbedsManager;
+	import local.util.ObjectPool;
 	import local.util.ResourceUtil;
 	import local.view.CenterViewLayer;
 	import local.view.building.EditorBuildingButtons;
@@ -101,6 +104,21 @@ package local.map.item
 			}
 			world.roadScene.mouseChildren = world.buildingScene.mouseChildren = true ;
 			this.removeBottomGrid();
+			//显示放置特效
+			var barvo:BitmapAnimResVO = EmbedsManager.instance.getAnimResVOByName("PlaceBuildingEffect")[0] ;
+			var effect:TimeAnimObject = ObjectPool.instance.getTimeAnim( "PlaceBuildingEffect" );
+			effect.x = barvo.offsetX ;
+			effect.y = barvo.offsetY ;
+			if(xSpan==1){
+				effect.scaleX = effect.scaleY = 0.6 ;
+				effect.x = -50 ;
+				effect.y = -5 ;
+			}else if(xSpan==3){
+				effect.scaleX = effect.scaleY = 1.8 ;
+				effect.x = -150 ;
+				effect.y = -10 ;
+			}
+			this.addChildAt( effect , 0 );  
 		}
 		
 		/**
