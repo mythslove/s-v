@@ -122,6 +122,7 @@ package local.map.item
 		protected function gameTimerCompleteHandler( e:Event ):void
 		{
 			clearGameTimer();
+			buildingVO.statusTime = GameData.commDate.time ; //记录完成时间
 			buildingVO.status = BuildingStatus.PRODUCTION_COMPLETE ; //生产完成
 			showBuildingFlagIcon();//显示建筑当前的标识
 		}
@@ -174,6 +175,10 @@ package local.map.item
 					}
 					GameWorld.instance.iconScene.addChild(statusIcon);
 					break ;
+				case BuildingStatus.EXPIRED :
+					statusIcon.bitmapData = EmbedsManager.instance.getBitmapByName("ProductsExpiredFlag").bitmapData;
+					GameWorld.instance.iconScene.addChild(statusIcon);
+					break;
 				default:
 					removeBuildingFlagIcon();
 					break ;

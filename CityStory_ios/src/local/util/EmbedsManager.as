@@ -82,6 +82,8 @@ package local.util
 		public static const NeedRoadsFlag:Class; //建筑没在路边时的标志
 		[Embed(source="../resource/comm/AddProductFlag.png")]
 		public static const AddProductFlag:Class; //需要产品时的标志
+		[Embed(source="../resource/comm/ProductsExpiredFlag.png")]
+		public static const ProductsExpiredFlag:Class; //产品过期标志
 		
 		
 		

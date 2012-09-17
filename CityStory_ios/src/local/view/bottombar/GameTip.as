@@ -54,6 +54,11 @@ package local.view.bottombar
 							this.show() ;
 						}
 						break ;
+					case BuildingStatus.EXPIRED: 
+						//过期
+						this.show() ;
+						
+						break ;
 				}
 			}
 		}

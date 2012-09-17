@@ -29,6 +29,7 @@ package local.map.item
 					{
 						CenterViewLayer.instance.topBar.costGoodsToBuilding( this );
 						//显示减去多少goods
+						PlayerModel.instance.changeGoods( -buildingVO.baseVO.goodsCost ) ;
 						var flyImg:FlyLabelImage = new FlyLabelImage( PickupType.GOOD , -buildingVO.baseVO.goodsCost ) ;
 						flyImg.x = screenX ;
 						flyImg.y = screenY-20 ;
