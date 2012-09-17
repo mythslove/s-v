@@ -17,7 +17,7 @@
 	<item name="Apartments"  title="Apartments" type="home" click="3" priceCoin="40" addPop="15" requireLv="4" time="6000" earnCoin="180"/>
 	<item name="Apartments1"  title="Apartments1" type="home" click="3" priceCoin="60" addPop="15" requireLv="4" time="6000" earnCoin="130"/>
 	<item name="Greenhouse" title="Green house" span="2" type="industry" click="5" priceCoin="100" requireLv="5">
-		<product name="Flower" title="title" time="600" coinCost="120" earnGoods="200" earnExp="1" expireTime="1000"/>
+		<product name="Flower" title="Flower" time="600" coinCost="120" earnGoods="200" earnExp="1" expireTime="1000"/>
 		<product name="Ticket" title="Ticket" time="1600" coinCost="150" earnGoods="250" earnExp="1" expireTime="1300"/>
 	</item>
 </baseBuilding>
