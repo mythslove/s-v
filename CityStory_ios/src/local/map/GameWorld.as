@@ -68,7 +68,7 @@ package local.map
 					if(bvo.baseVO.subClass==BuildingType.DECORATION_ROAD || bvo.baseVO.subClass==BuildingType.DECORATION_GROUND ){
 						roadScene.addRoad( building as Road , false , false );
 					}else{
-						buildingScene.addBuilding( building , false );
+						buildingScene.addBuilding( building , false , true );
 					}
 				}
 			}

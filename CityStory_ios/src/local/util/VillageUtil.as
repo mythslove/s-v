@@ -110,7 +110,12 @@ package local.util
 					}else{
 						PlayerModel.instance.createPlayer() ;
 					}
+					
+					/*-----------------测试数据---------------------------------------*/
 					PlayerModel.instance.me.energy = 100 ;
+					PlayerModel.instance.me.goods = 100 ;
+					/*-----------------测试数据---------------------------------------*/
+					
 					//读取地图信息
 					BuildingModel.instance.basicTrees = stream.readObject() as Vector.<BuildingVO> ;
 					BuildingModel.instance.homes =  stream.readObject() as Vector.<BuildingVO> ;

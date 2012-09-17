@@ -48,11 +48,14 @@ package local.map.scene
 		 * @param isSort是否进行深度排序
 		 * @return 
 		 */		
-		public function addBuilding( building:BaseBuilding , isSort:Boolean=true ):BaseBuilding
+		public function addBuilding( building:BaseBuilding , isSort:Boolean=true , isInit:Boolean=false ):BaseBuilding
 		{
 			this.addIsoObject( building,isSort );
 			building.setWalkable( false , gridData );
 			MapGridDataModel.instance.addBuildingGridData(building);
+			if(isInit && building is Building){
+				( building as Building).recoverStatus() ;
+			}
 			return building;
 		}
 		

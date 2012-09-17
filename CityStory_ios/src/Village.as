@@ -41,7 +41,7 @@ package
 			
 			addChild( GameWorld.instance );
 			addChild( CenterViewLayer.instance );
-			addChild( new Stats() );
+//			addChild( new Stats() );
 			
 			GameWorld.instance.showBuildings();
 			GameData.villageMode = VillageMode.NORMAL ;
