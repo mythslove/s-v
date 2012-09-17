@@ -2,6 +2,8 @@ package local.map.item
 {
 	import flash.geom.Point;
 	
+	import flashx.textLayout.events.ModelChange;
+	
 	import local.comm.GameData;
 	import local.comm.GameSetting;
 	import local.enum.BuildingStatus;
@@ -14,6 +16,7 @@ package local.map.item
 	import local.map.cell.RoadObject;
 	import local.map.cell.TimeAnimObject;
 	import local.model.BuildingModel;
+	import local.model.PlayerModel;
 	import local.model.StorageModel;
 	import local.util.EmbedsManager;
 	import local.util.ObjectPool;
@@ -151,6 +154,9 @@ package local.map.item
 			}
 			//添加到地图数据中
 			BuildingModel.instance.addBuildingVO( buildingVO );
+			//加人口和人口容量
+			PlayerModel.instance.changePop( buildingVO.baseVO.addPop);
+			PlayerModel.instance.changeCap( buildingVO.baseVO.addCap);
 		}
 		
 		/**
@@ -160,10 +166,12 @@ package local.map.item
 		{
 			GameWorld.instance.topScene.removeIsoObject( this );
 			GameWorld.instance.roadScene.mouseChildren = GameWorld.instance.buildingScene.mouseChildren = true ;
-			
 			//添加到收藏箱中，并且从地图数据中移除
 			BuildingModel.instance.removeBuildingVO( buildingVO );
 			StorageModel.instance.addBuildingVOToStorage(buildingVO);
+			//减人口和人口容量
+			PlayerModel.instance.changePop( -buildingVO.baseVO.addPop);
+			PlayerModel.instance.changeCap( -buildingVO.baseVO.addCap);
 			this.dispose();
 		}
 		
@@ -181,6 +189,9 @@ package local.map.item
 			}else{
 				BuildingModel.instance.removeBuildingVO( buildingVO );
 			}
+			//减人口和人口容量
+			PlayerModel.instance.changePop( -buildingVO.baseVO.addPop);
+			PlayerModel.instance.changeCap( -buildingVO.baseVO.addCap);
 			this.dispose();
 		}
 		

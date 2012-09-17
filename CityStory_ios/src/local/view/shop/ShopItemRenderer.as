@@ -43,6 +43,7 @@ package local.view.shop
 					break ;
 				case BuildingType.INDUSTRY:
 					gotoAndStop("industry");
+					GameUtil.boldTextField( txtPopGoods ,  "+" + baseVO.products.length +" Contracts" ) ;
 					break ;
 				case BuildingType.COMMUNITY:
 					gotoAndStop("community");

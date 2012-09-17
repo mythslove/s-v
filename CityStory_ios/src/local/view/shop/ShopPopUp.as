@@ -72,6 +72,9 @@ package local.view.shop
 				case BuildingType.BUSINESS:
 					container.addChild(BusinessPanel.instance) ;
 					break ;
+				case BuildingType.INDUSTRY:
+					container.addChild(IndustryPanel.instance) ;
+					break ;
 			}
 		}
 		
