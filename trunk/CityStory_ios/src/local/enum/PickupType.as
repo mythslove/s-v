@@ -15,6 +15,10 @@ package local.enum
 		 */		
 		public static const COIN:String = "coin";
 		/**
+		 * 钱  
+		 */		
+		public static const CASH:String = "cash";
+		/**
 		 * 经验 
 		 */		
 		public static const EXP:String = "exp";
