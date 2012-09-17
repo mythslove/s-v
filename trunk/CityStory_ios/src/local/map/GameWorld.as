@@ -55,7 +55,6 @@ package local.map
 			}
 			roadScene.sortAll();
 			buildingScene.sortAll();
-			buildingScene.addMoveItems();
 			if(iconScene.visible){
 				sortIcons();
 			}
