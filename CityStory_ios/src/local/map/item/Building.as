@@ -185,7 +185,7 @@ package local.map.item
 			}
 			statusIcon.x = screenX-statusIcon.width*0.5;
 			var het:Number = _buildingObject? _buildingObject.height : _buildStatusObj.height ;
-			statusIcon.y = screenY+buildingVO.baseVO.span*_size-het - _size ;
+			statusIcon.y = screenY+buildingVO.baseVO.span*_size- het - statusIcon.height*0.75 ;
 		}
 		/*移除建筑当前的标识 */		
 		protected function removeBuildingFlagIcon():void

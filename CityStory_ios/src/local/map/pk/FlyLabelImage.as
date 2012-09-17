@@ -35,6 +35,9 @@ package local.map.pk
 				case PickupType.ENERGY:
 					bmp.bitmapData = EmbedsManager.instance.getBitmapByName("PickupEnergy").bitmapData;
 					break ;
+				case PickupType.CASH:
+					bmp.bitmapData = EmbedsManager.instance.getBitmapByName("PickupCash").bitmapData;
+					break ;
 			}
 			bmp.y = - bmp.height>>1 ;
 			addChild(bmp);
