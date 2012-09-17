@@ -11,6 +11,7 @@ package local.map.item
 	import local.map.GameWorld;
 	import local.map.cell.BuildStatusObject;
 	import local.map.pk.FlyLabelImage;
+	import local.map.pk.PickupImages;
 	import local.model.MapGridDataModel;
 	import local.model.PlayerModel;
 	import local.util.EmbedsManager;
@@ -291,6 +292,15 @@ package local.map.item
 		protected function buildClick():void
 		{
 			++buildingVO.buildClick ;
+			//掉修建时的经验
+			if(buildingVO.baseVO.clickExp>0){
+				var pkImgs:PickupImages = new PickupImages();
+				pkImgs.addPK( PickupType.EXP , buildingVO.baseVO.clickExp );
+				pkImgs.x = screenX ;
+				pkImgs.y = screenY ;
+				GameWorld.instance.effectScene.addChild( pkImgs );
+			}
+			
 			if( buildingVO.buildClick >= buildingVO.baseVO.click )
 			{
 				var flag:Boolean = MapGridDataModel.instance.checkAroundBuilding(this,BuildingType.DECORATION,BuildingType.DECORATION_ROAD) ;
