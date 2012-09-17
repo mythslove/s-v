@@ -27,6 +27,7 @@ package
 		public var addPop:int ; //可以增加多少人口
 		
 		public var products:Vector.<ProductVO> ; //可以生产的商品，主要用于industry
+		public var expireTime:int ; //过期时间，用于industry
 		
 	}
 }
