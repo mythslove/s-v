@@ -19,6 +19,7 @@ package local.map
 	import local.model.BuildingModel;
 	import local.model.LandModel;
 	import local.util.BuildingFactory;
+	import local.view.base.StatusIcon;
 	import local.view.building.EditorBuildingButtons;
 	import local.view.building.MoveBuildingButtons;
 	import local.vo.BuildingVO;
@@ -169,7 +170,13 @@ package local.map
 					}
 					else if(!_isGesture && !_isMove)
 					{
-						if(e.target.parent==_mouseBuilding)
+						if(e.target is StatusIcon)
+						{
+							if(currentSelected) currentSelected.flash(false);
+							currentSelected = (e.target as StatusIcon).building ;
+							currentSelected.onClick();
+						}
+						else if(e.target.parent==_mouseBuilding)
 						{
 							if(e.target.parent!=currentSelected  ){
 								if(currentSelected) currentSelected.flash(false);
