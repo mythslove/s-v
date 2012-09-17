@@ -104,7 +104,7 @@ package local.map.pk
 						target = centerLayer.topBar.goodsBar ;
 						break ;
 				}
-//				targetPoint.setTo( target.x+centerLayer.x , target.y+ centerLayer.y );
+				targetPoint.setTo( target.x+centerLayer.x , target.y+ centerLayer.y );
 				movePickup( targetPoint , obj );
 				
 				flyImg = new FlyLabelImage( obj.name , _pkHash[obj.name] ) ;

@@ -84,9 +84,7 @@ package local.map.item
 			}else{
 				flash(true);
 			}
-			if( GameData.villageMode!=VillageMode.VISIT){
-				CenterViewLayer.instance.gameTip.showBuildingTip(this);
-			}
+			CenterViewLayer.instance.gameTip.showBuildingTip(this);
 		}
 		
 		/**

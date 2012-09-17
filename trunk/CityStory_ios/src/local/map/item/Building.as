@@ -29,6 +29,7 @@ package local.map.item
 		public var gameTimer:GameTimer;
 		public var statusIcon:Bitmap = new Bitmap() ; //显示当前状态的icon
 		
+		
 		public function Building(buildingVO:BuildingVO)
 		{
 			super(buildingVO);
@@ -259,12 +260,6 @@ package local.map.item
 				}
 			}else{
 				super.showUI();
-				if(parent==GameWorld.instance.buildingScene)
-				{
-					if( buildingVO.status==BuildingStatus.PRODUCTION){
-						createGameTimer( buildingVO.statusTime );
-					}
-				}
 			}
 			showBuildingFlagIcon() ;
 		} 
