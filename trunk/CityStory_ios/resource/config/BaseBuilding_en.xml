@@ -7,7 +7,7 @@
 	<item name="Basic_Tree6" span="2" type="basic" click="3"/>
 	<item name="Basic_Tree7" span="1" type="basic" click="2"/>
 	<item name="Basic_Tree8" span="1" type="basic" click="2"/>
-	<item name="Road" title="Road" type="decoration" subClass="road"/>
+	<item name="Road" title="Road" type="decoration" subClass="road" coinCost="5"/>
 	<item name="Apple Shop"  span="2" title="Apple Shop" type="business" goodsCost="5" click="3" priceCoin="3500" addPop="10" requireLv="1" time="1200" earnCoin="100"/>
 	<item name="Annsui"  title="Annsui Shop" type="business" goodsCost="5" click="3" priceCoin="3000" addPop="10" requireLv="2" time="1200" earnCoin="150"/>
 	<item name="My House"  title="My House" type="home"  click="3" priceCoin="3" addPop="10" requireLv="1" time="120" earnCoin="100"/>
