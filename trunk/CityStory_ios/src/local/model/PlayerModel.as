@@ -21,27 +21,44 @@ package local.model
 		
 		public function changeCoin( value:int ):void
 		{
+			if(value==0) return ;
 			me.coin+=value ;
 		}
 		
 		public function changeCash( value:int ):void
 		{
+			if(value==0) return ;
 			me.cash+=value ;
 		}
 		
 		public function changeExp( value:int ):void
 		{
+			if(value==0) return ;
 			me.exp+=value ;
 		}
 		
 		public function changeEnergy( value:int ):void
 		{
+			if(value==0) return ;
 			me.energy+=value ;
 		}
 		
 		public function changeGoods( value:int ):void
 		{
+			if(value==0) return ;
 			me.goods+=value ;
+		}
+		
+		public function changePop( value:int ):void
+		{
+			if(value==0) return ;
+			me.pop+=value;
+		}
+		
+		public function changeCap( value:int ):void
+		{
+			if(value==0) return ;
+			me.cap += value ;
 		}
 		
 		public function createPlayer():void

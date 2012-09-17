@@ -24,6 +24,7 @@ package local.view.shop
 		//=====================================
 		public var btnClose:PopUpCloseButton ;
 		public var btnHomes:TabMenuButton ;
+		public var btnIndustry:TabMenuButton ;
 		public var btnBusiness:TabMenuButton ;
 		public var btnDecor:TabMenuButton ;
 		//=====================================
@@ -34,7 +35,7 @@ package local.view.shop
 			btnHomes.label="Homes";
 			btnBusiness.label="Business";
 			btnDecor.label="Decor";
-			
+			btnIndustry.label = "Industry";
 			addEventListener(MouseEvent.CLICK , onMouseHandler );
 		}
 		
@@ -68,6 +69,11 @@ package local.view.shop
 				case btnBusiness:
 					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , false );
 					ShopPopUp.instance.show(BuildingType.BUSINESS);
+					PopUpManager.instance.removeCurrentPopup() ;
+					break ;
+				case btnIndustry:
+					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , false );
+					ShopPopUp.instance.show(BuildingType.INDUSTRY);
 					PopUpManager.instance.removeCurrentPopup() ;
 					break ;
 			}

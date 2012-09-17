@@ -96,7 +96,9 @@ package local.view.shop
 			if(e.target is ShopItemRenderer)
 			{
 				var render:ShopItemRenderer = e.target as ShopItemRenderer ;
-				addItemToWorld( render );
+				if( checkMoney(render)){
+					addItemToWorld( render );
+				}
 			}
 		}
 	}
