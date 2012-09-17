@@ -114,6 +114,8 @@ package local.util
 					/*-----------------测试数据---------------------------------------*/
 					PlayerModel.instance.me.energy = 100 ;
 					PlayerModel.instance.me.goods = 100 ;
+					PlayerModel.instance.me.cash = 100 ;
+					PlayerModel.instance.me.coin = 100 ;
 					/*-----------------测试数据---------------------------------------*/
 					
 					//读取地图信息
