@@ -6,10 +6,15 @@ package local.view.building
 	import flash.events.MouseEvent;
 	
 	import local.comm.GameData;
+	import local.enum.BuildingType;
 	import local.enum.VillageMode;
 	import local.map.GameWorld;
 	import local.map.item.BaseBuilding;
+	import local.model.PlayerModel;
+	import local.util.BuildingFactory;
 	import local.view.base.BaseView;
+	import local.vo.BaseBuildingVO;
+	import local.vo.PlayerVO;
 	
 	/**
 	 * 建筑移动时，上面的确定和取消按钮 
@@ -63,7 +68,20 @@ package local.view.building
 						GameData.villageMode = VillageMode.EDIT ;
 					}else if( GameData.villageMode==VillageMode.BUILDING_SHOP){
 						building.shopToWorld();
-						GameData.villageMode = VillageMode.NORMAL ;
+						
+						var baseVO:BaseBuildingVO = building.buildingVO.baseVO ;
+						if( baseVO.type==BuildingType.DECORATION ){
+							var me:PlayerVO = PlayerModel.instance.me ;
+							if( me.cash>= baseVO.priceCash && me.coin>= baseVO.priceCoin ){
+								building = BuildingFactory.createBuildingByBaseVO( baseVO );
+								GameWorld.instance.addBuildingToTopScene( building );
+								return ;
+							}
+						}
+						else
+						{
+							GameData.villageMode = VillageMode.NORMAL ;
+						}
 					}
 					break ;
 				case cancelBtn:
