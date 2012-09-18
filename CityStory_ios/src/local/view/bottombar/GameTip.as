@@ -155,7 +155,7 @@ package local.view.bottombar
 			y= GameSetting.SCREEN_HEIGHT ;
 			visible = true ;
 			CenterViewLayer.instance.bottomBar.visible = false ;
-			TweenLite.to( this , 0.2 , { y :GameSetting.SCREEN_HEIGHT-height+25 , ease:Back.easeOut } );
+			TweenLite.to( this , 0.2 , { y :GameSetting.SCREEN_HEIGHT-height+10 , ease:Back.easeOut } );
 		}
 		
 		public function hide():void
