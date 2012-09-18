@@ -31,6 +31,7 @@ package local.map.item
 		public var gameTimer:GameTimer;
 		public var statusIcon:StatusIcon ; //显示当前状态的icon
 		
+		private var _gameTimerTick:int ;
 		
 		public function Building(buildingVO:BuildingVO)
 		{
@@ -307,9 +308,11 @@ package local.map.item
 		override public function update():void
 		{
 			super.update();
-			if(gameTimer){
+			if(gameTimer && _gameTimerTick>10 ){
 				gameTimer.update() ;
+				_gameTimerTick = 0;
 			}
+			++_gameTimerTick ;
 		}
 		
 		override public function onClick():void

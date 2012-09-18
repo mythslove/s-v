@@ -13,6 +13,7 @@ package local.view.bottombar
 		public var txtTime:TextField ;
 		public var progress:Sprite;
 		
+		private var _duration:Number ;
 		
 		public function GameTipProgressBar()
 		{
@@ -22,8 +23,11 @@ package local.view.bottombar
 		
 		public function showProgress( gameTimer:GameTimer , totalTime:Number ):void
 		{
-			GameUtil.boldTextField( txtTime , DateUtil.formatTimeToString( gameTimer.duration ) );
-			progress.x = - progress.width*gameTimer.duration/totalTime ;
+			if(_duration!=gameTimer.duration){
+				GameUtil.boldTextField( txtTime , DateUtil.formatTimeToString( gameTimer.duration ) );
+				progress.x = - progress.width*gameTimer.duration/totalTime ;
+				_duration = gameTimer.duration ;
+			}
 		}
 	}
 }
