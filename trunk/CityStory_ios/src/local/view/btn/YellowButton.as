@@ -5,6 +5,7 @@ package local.view.btn
 		public function YellowButton()
 		{
 			super();
+			super.txtLabel.textColor = 0x663300;
 		}
 	}
 }

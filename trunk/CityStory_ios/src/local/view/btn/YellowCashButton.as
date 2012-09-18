@@ -1,10 +1,10 @@
 package local.view.btn
 {
-	import flash.text.TextField;
+	import local.util.TextStyle;
 
 	public class YellowCashButton extends LabelButton
 	{
-		public var txtCash:TextField ;
+		public var txtCash:BitmapTextField ;
 		//=======================
 		protected var _cash:String ;
 		
@@ -12,6 +12,9 @@ package local.view.btn
 		{
 			super();
 			txtCash.defaultTextFormat = _tf ;
+			txtLabel.textColor = 0x663300;
+			txtCash.textColor = 0x663300;
+			txtCash.filters = TextStyle.grayDropFilters ;
 		}
 		
 		public function get cash():String

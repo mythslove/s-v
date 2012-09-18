@@ -1,8 +1,8 @@
 package local.view.btn
 {
-	import flash.text.TextField;
 	import flash.text.TextFormat;
 	
+	import local.util.TextStyle;
 	import local.view.control.Button;
 	
 	/**
@@ -11,7 +11,7 @@ package local.view.btn
 	 */	
 	public class LabelButton extends Button
 	{
-		public var txtLabel:TextField ;
+		public var txtLabel:BitmapTextField ;
 		//=====================
 		
 		private var _label:String ;
@@ -20,9 +20,13 @@ package local.view.btn
 		public function LabelButton()
 		{
 			super();
+			
 			_tf = txtLabel.defaultTextFormat ;
 			_tf.bold = true ;
+			_tf.align="center";
 			txtLabel.defaultTextFormat = _tf ;
+			txtLabel.textColor = 0xffffff ;
+			txtLabel.filters = TextStyle.grayDropFilters ;
 		}
 		
 		public function get label():String
