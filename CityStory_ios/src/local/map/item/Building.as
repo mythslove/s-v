@@ -214,24 +214,26 @@ package local.map.item
 		 */		
 		public function instant():void
 		{
-			var cash:int = GameUtil.timeToCash( gameTimer.duration ) ;
-			if(PlayerModel.instance.me.cash >= cash )
-			{
-				if(gameTimer && reduceEnergy()){
-					//扣cash
-					PlayerModel.instance.changeCash( -cash );
-					
-					var flyImg:FlyLabelImage = new FlyLabelImage( PickupType.CASH , -cash ) ;
-					flyImg.x = screenX ;
-					flyImg.y = screenY ;
-					GameWorld.instance.effectScene.addChild( flyImg );
-					
-					gameTimerCompleteHandler(null);
+			var cashCost:int = GameUtil.timeToCash( gameTimer.duration ) ;
+			if(cashCost>0){
+				if(PlayerModel.instance.me.cash >= cashCost )
+				{
+					if(gameTimer && reduceEnergy()){
+						//扣cash
+						PlayerModel.instance.changeCash( -cashCost );
+						
+						var flyImg:FlyLabelImage = new FlyLabelImage( PickupType.CASH , -cashCost ) ;
+						flyImg.x = screenX ;
+						flyImg.y = screenY ;
+						GameWorld.instance.effectScene.addChild( flyImg );
+						
+						gameTimerCompleteHandler(null);
+					}
 				}
-			}
-			else
-			{
-				trace(" cash不足");
+				else
+				{
+					trace(" cash不足");
+				}
 			}
 		}
 		
