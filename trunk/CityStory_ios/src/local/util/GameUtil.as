@@ -83,6 +83,7 @@ package local.util
 		 * @param txt
 		 */		
 		public static function boldTextField( tf:TextField , txt:String ):void{
+			tf.mouseEnabled = false ;
 			var tfort:TextFormat = tf.defaultTextFormat;
 			tfort.bold = true;
 			tf.defaultTextFormat = tfort ;

@@ -15,7 +15,7 @@ package local.view.btn
 		//=====================
 		
 		private var _label:String ;
-		private var _tf:TextFormat ;
+		protected var _tf:TextFormat ;
 		
 		public function LabelButton()
 		{

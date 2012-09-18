@@ -1,5 +1,7 @@
 package local.view.bottombar
 {
+	import com.greensock.TweenLite;
+	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
@@ -74,6 +76,42 @@ package local.view.bottombar
 					GameData.villageMode = VillageMode.NORMAL ;
 					break ;
 			}
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		public function setVisible( value:Boolean ):void
+		{
+			super.visible = value ;
+		}
+		
+		private var _tempVisible:Boolean ;
+		override public function set visible(value:Boolean):void
+		{
+			if(super.visible==value) return ;
+			_tempVisible = value ;
+			if( value){
+				alpha = 0 ;
+				TweenLite.to( this , 0.2 , {alpha:1 , onComplete: onTweenCom} );
+			}else{
+				alpha = 1 ;
+				TweenLite.to( this , 0.2 , {alpha:0 , onComplete: onTweenCom} );
+			}
+		}
+		
+		private function onTweenCom():void{
+			super.visible = _tempVisible ;
 		}
 		
 	}

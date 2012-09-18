@@ -19,6 +19,7 @@ package local.map
 	import local.model.BuildingModel;
 	import local.model.LandModel;
 	import local.util.BuildingFactory;
+	import local.view.CenterViewLayer;
 	import local.view.base.StatusIcon;
 	import local.view.building.EditorBuildingButtons;
 	import local.view.building.MoveBuildingButtons;
@@ -195,6 +196,7 @@ package local.map
 							}
 							currentSelected.flash(false);
 							currentSelected = null ;
+							CenterViewLayer.instance.gameTip.hide() ;
 						}
 						else if(GameData.villageMode==VillageMode.EXPAND)
 						{
