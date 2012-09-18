@@ -139,8 +139,7 @@ package local.view.bottombar
 						GameUtil.boldTextField( txtTitle , currentBuilding.buildingVO.name );
 						var goods:int = currentBuilding.buildingVO.product.earnGoods ;
 						GameUtil.boldTextField( txtInfo , goods+" goods have expired!" );
-//						btnYellowCash.label = "SAVE ALL FOR";
-						btnYellowCash.label = "保存所有";
+						btnYellowCash.label = "SAVE ALL FOR";
 						btnYellowCash.cash = GameUtil.expiredSaveAllCash(goods)+"";
 						btnGray.label = "RECOVER "+GameUtil.expiredRecverGoods(goods) +" GOODS";
 						break ;
