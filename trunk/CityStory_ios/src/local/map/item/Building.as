@@ -15,6 +15,7 @@ package local.map.item
 	import local.model.PlayerModel;
 	import local.util.EmbedsManager;
 	import local.util.GameTimer;
+	import local.util.GameUtil;
 	import local.view.base.StatusIcon;
 	import local.vo.BuildingVO;
 	import local.vo.PlayerVO;
@@ -208,6 +209,31 @@ package local.map.item
 		
 		
 		
+		/**
+		 * 立即完成
+		 */		
+		public function instant():void
+		{
+			var cash:int = GameUtil.timeToCash( gameTimer.duration ) ;
+			if(PlayerModel.instance.me.cash >= cash )
+			{
+				if(gameTimer){
+					//扣cash
+					PlayerModel.instance.changeCash( -cash );
+					
+					var flyImg:FlyLabelImage = new FlyLabelImage( PickupType.CASH , -cash ) ;
+					flyImg.x = screenX ;
+					flyImg.y = screenY ;
+					GameWorld.instance.effectScene.addChild( flyImg );
+					
+					gameTimerCompleteHandler(null);
+				}
+			}
+			else
+			{
+				trace(" cash不足");
+			}
+		}
 		
 		/* 减能量*/
 		protected function reduceEnergy():Boolean

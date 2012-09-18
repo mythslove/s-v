@@ -23,6 +23,7 @@ package local.view.bottombar
 	import local.view.base.BuildingThumb;
 	import local.view.btn.GreenButton;
 	import local.view.btn.MiniCloseButton;
+	import local.view.btn.YellowCashButton;
 
 	/**
 	 * 游戏的tip 
@@ -33,7 +34,10 @@ package local.view.bottombar
 		public var imgContainer:Sprite ;
 		public var btnClose:MiniCloseButton ;
 		public var btnGreen:GreenButton ;
+		public var btnYellowCash:YellowCashButton ;
 		public var txtInfo:TextField ;
+		public var txtTitle:TextField ;
+		public var progressBar:GameTipProgressBar ;
 		//===================================
 		
 		
@@ -63,6 +67,10 @@ package local.view.bottombar
 						this.hide() ;
 					}
 					break ;
+				case btnYellowCash:
+					currentBuilding.instant();
+					hide();
+					break ;
 			}
 		}
 		
@@ -84,8 +92,19 @@ package local.view.bottombar
 						this.show() ;
 						break ;
 					case BuildingStatus.PRODUCTION: //生产时，显示instant提示
-						
 						this.show() ;
+						gotoAndStop("product");
+						GameUtil.boldTextField( txtTitle , currentBuilding.buildingVO.name );
+						switch(currentBuilding.buildingVO.baseVO.type)
+						{
+							case BuildingType.INDUSTRY:
+								GameUtil.boldTextField( txtInfo , "Collect "+currentBuilding.buildingVO.product.earnGoods +" goods in:");
+								break ;
+							default:
+								GameUtil.boldTextField( txtInfo , "Collect "+currentBuilding.buildingVO.baseVO.earnCoin +" coins in:");
+								break ;
+						}
+						btnYellowCash.label = "SPEED UP FOR";
 						break ;
 					case BuildingStatus.PRODUCTION_COMPLETE:
 						
@@ -134,9 +153,14 @@ package local.view.bottombar
 		
 		private function updateHandler(e:Event):void
 		{
-			if(currentBuilding && currentBuilding.gameTimer)
+			if(currentBuilding && currentBuilding.gameTimer && progressBar)
 			{
-				
+				btnYellowCash.cash = GameUtil.timeToCash( currentBuilding.gameTimer.duration ) +"" ;
+				if(currentBuilding.buildingVO.product){
+					progressBar.showProgress( currentBuilding.gameTimer , currentBuilding.buildingVO.product.time ) ;
+				}else{
+					progressBar.showProgress( currentBuilding.gameTimer , currentBuilding.buildingVO.baseVO.time ) ;
+				}
 			}
 		}
 	}

@@ -4,34 +4,34 @@ package local.view.btn
 
 	public class YellowCashButton extends LabelButton
 	{
-		public var txtValue:TextField ;
+		public var txtCash:TextField ;
 		//=======================
-		protected var _value:String ;
+		protected var _cash:String ;
 		
 		public function YellowCashButton()
 		{
 			super();
-			txtValue.defaultTextFormat = _tf ;
+			txtCash.defaultTextFormat = _tf ;
 		}
 		
-		public function get value():String
+		public function get cash():String
 		{
-			return _value;
+			return _cash;
 		}
 		
-		public function set value(v:String):void
+		public function set cash(value:String):void
 		{
-			_value = v;
-			if(_value){
-				this.txtValue.text = _value ;
+			_cash = value;
+			if(_cash){
+				txtCash.text = _cash ;
 			}
 		}
 		
 		override public function gotoAndStop(frame:Object, scene:String=null):void{
 			super.gotoAndStop(frame,scene);
-			if( txtValue.text!=_value){
-				txtValue.defaultTextFormat = _tf ;
-				txtValue.text = _value ;
+			if( txtCash.text!=_cash){
+				txtCash.defaultTextFormat = _tf ;
+				txtCash.text = _cash ;
 			}
 		}
 	}
