@@ -39,7 +39,8 @@ package local.map.item
 						startProduct() ;
 						removeBuildingFlagIcon() ;
 					}else{
-						CenterViewLayer.instance.gameTip.showBuildingTip(this);
+						//没有足够的goods
+						CenterViewLayer.instance.gameTip.showLackGoods() ;
 					}
 				}
 				else if( buildingVO.status==BuildingStatus.PRODUCTION_COMPLETE)

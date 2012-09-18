@@ -16,6 +16,7 @@ package local.map.item
 	import local.util.EmbedsManager;
 	import local.util.GameTimer;
 	import local.util.GameUtil;
+	import local.view.CenterViewLayer;
 	import local.view.base.StatusIcon;
 	import local.vo.BuildingVO;
 	import local.vo.PlayerVO;
@@ -251,6 +252,7 @@ package local.map.item
 				return true ;
 			}else{
 				//显示没有能量提示
+				CenterViewLayer.instance.gameTip.showLackEnergy() ;
 			}
 			return false ;
 		}
