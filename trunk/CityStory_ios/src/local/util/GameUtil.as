@@ -98,5 +98,25 @@ package local.util
 		{
 			return ( 1 + Math.log( (time/60 + 10)/10 )/Math.LN10*8 )>>0 ;
 		}
+		
+		/**
+		 * 过期后，要保存所有的
+		 * @param goods
+		 * @return 
+		 */		
+		public static function expiredSaveAllCash( goods:int ):int
+		{
+			return Math.ceil( expiredRecverGoods(goods)/35 );
+		}
+		
+		/**
+		 * 过期后，可以得到多少goods 
+		 * @param goods
+		 * @return 
+		 */		
+		public static function expiredRecverGoods( goods:int ):int
+		{
+			return (goods/5)>>0;
+		}
 	}
 }

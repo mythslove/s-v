@@ -18,9 +18,11 @@ package local.view.bottombar
 	import local.enum.VillageMode;
 	import local.map.item.BaseBuilding;
 	import local.map.item.Building;
+	import local.map.item.Industry;
 	import local.util.GameUtil;
 	import local.view.CenterViewLayer;
 	import local.view.base.BuildingThumb;
+	import local.view.btn.GrayButton;
 	import local.view.btn.GreenButton;
 	import local.view.btn.MiniCloseButton;
 	import local.view.btn.YellowCashButton;
@@ -35,6 +37,7 @@ package local.view.bottombar
 		public var btnClose:MiniCloseButton ;
 		public var btnGreen:GreenButton ;
 		public var btnYellowCash:YellowCashButton ;
+		public var btnGray:GrayButton;
 		public var txtInfo:TextField ;
 		public var txtTitle:TextField ;
 		public var progressBar:GameTipProgressBar ;
@@ -68,7 +71,15 @@ package local.view.bottombar
 					}
 					break ;
 				case btnYellowCash:
-					currentBuilding.instant();
+					if(currentLabel=="product" || currentLabel=="expand"){ //生产中和扩地中
+						currentBuilding.instant();
+					}else if(currentLabel=="expired"){
+						( currentBuilding as Industry).expiredSaveAll() ;
+					}
+					hide();
+					break ;
+				case btnGray:
+					( currentBuilding as Industry).expiredRecover() ;
 					hide();
 					break ;
 			}
@@ -107,7 +118,7 @@ package local.view.bottombar
 						btnYellowCash.label = "SPEED UP FOR";
 						break ;
 					case BuildingStatus.PRODUCTION_COMPLETE:
-						
+						this.hide();
 						break ;
 					case BuildingStatus.LACK_MATERIAL: //没有原料时
 						if( building.buildingVO.baseVO.type==BuildingType.BUSINESS){ 
@@ -118,7 +129,13 @@ package local.view.bottombar
 					case BuildingStatus.EXPIRED: 
 						//过期
 						this.show() ;
-						
+						gotoAndStop("expired");
+						GameUtil.boldTextField( txtTitle , currentBuilding.buildingVO.name );
+						var goods:int = currentBuilding.buildingVO.product.earnGoods ;
+						GameUtil.boldTextField( txtInfo , goods+" goods have expired!" );
+						btnYellowCash.label = "SAVE ALL FOR";
+						btnYellowCash.cash = GameUtil.expiredSaveAllCash(goods)+"";
+						btnGray.label = "RECOVER "+GameUtil.expiredRecverGoods(goods) +" GOODS";
 						break ;
 				}
 			}
