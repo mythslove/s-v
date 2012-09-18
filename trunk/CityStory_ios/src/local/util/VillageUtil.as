@@ -112,10 +112,10 @@ package local.util
 					}
 					
 					/*-----------------测试数据---------------------------------------*/
-					PlayerModel.instance.me.energy = 100 ;
-					PlayerModel.instance.me.goods = 100 ;
-					PlayerModel.instance.me.cash = 100 ;
-					PlayerModel.instance.me.coin = 100 ;
+					PlayerModel.instance.me.energy = 10000 ;
+					PlayerModel.instance.me.goods = 10000 ;
+					PlayerModel.instance.me.cash = 10000 ;
+					PlayerModel.instance.me.coin = 10000 ;
 					/*-----------------测试数据---------------------------------------*/
 					
 					//读取地图信息
