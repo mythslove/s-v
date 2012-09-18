@@ -88,9 +88,12 @@
 		{
 			super();
 			mouseChildren = mouseEnabled = false;
+			
+			txt.width = width;
+			txt.height = height;
+			
 			this.graphics.clear();
 			removeChild(txt);
-			
 			addChild(_bmp);
 		}
 		
@@ -99,8 +102,6 @@
 		{
 			if (txt.text != value)
 			{
-				txt.width = width;
-				txt.height = height;
 				_bmp.bitmapData = new BitmapData(width,height,true,0xffffff);
 				scaleX = scaleY = 1;
 				txt.text = value;

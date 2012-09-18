@@ -87,10 +87,14 @@
 		public function BitmapTextField()
 		{
 			super();
+			
 			mouseChildren = mouseEnabled = false;
+			
+			txt.width = width;
+			txt.height = height;
+			
 			this.graphics.clear();
 			removeChild(txt);
-
 			addChild(_bmp);
 		}
 
