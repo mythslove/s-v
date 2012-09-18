@@ -58,11 +58,13 @@ package local.view.bottombar
 		private function mouseEvtHandler( e:MouseEvent ):void
 		{
 			e.stopPropagation() ;
+			if(e.target == btnClose || !currentBuilding )
+			{
+				this.hide() ;
+				return ;
+			}
 			switch( e.target )
 			{
-				case btnClose:
-					this.hide() ;
-					break ;
 				case btnGreen:
 					if(currentLabel=="noroad"){
 						GameData.villageMode = VillageMode.EDIT ;
@@ -170,13 +172,22 @@ package local.view.bottombar
 		
 		private function updateHandler(e:Event):void
 		{
-			if(currentBuilding && currentBuilding.gameTimer && progressBar)
+			if(currentBuilding)
 			{
-				btnYellowCash.cash = GameUtil.timeToCash( currentBuilding.gameTimer.duration ) +"" ;
-				if(currentBuilding.buildingVO.product){
-					progressBar.showProgress( currentBuilding.gameTimer , currentBuilding.buildingVO.product.time ) ;
-				}else{
-					progressBar.showProgress( currentBuilding.gameTimer , currentBuilding.buildingVO.baseVO.time ) ;
+				if(progressBar){
+					if(currentBuilding.gameTimer){
+						btnYellowCash.cash = GameUtil.timeToCash( currentBuilding.gameTimer.duration ) +"" ;
+						if(currentBuilding.buildingVO.product){
+							progressBar.showProgress( currentBuilding.gameTimer , currentBuilding.buildingVO.product.time ) ;
+						}else{
+							progressBar.showProgress( currentBuilding.gameTimer , currentBuilding.buildingVO.baseVO.time ) ;
+						}
+					}else{
+						progressBar.progress.x = 0 ;
+						GameUtil.boldTextField( progressBar.txtTime , "00:00:00" );
+						btnYellowCash.cash = "0";
+						currentBuilding = null 
+					}
 				}
 			}
 		}
