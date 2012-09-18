@@ -38,13 +38,13 @@ package bing.utils
 		{
 			if (time == 0)
 			{
-				return "0:00:00";
+				return "00:00:00";
 			}else
 			{
 				var h:int = time / 3600;
 				var m:int = time % 3600 / 60;
 				var s:int = time % 3600 % 60;
-				var hour:String = h > 0 ? h + ":" : "0:";
+				var hour:String = h > 0 ? String("0" + h).substr(-2, 2) + ":" : "00:";
 				var minute:String = m > 0 ? String("0" + m).substr(-2, 2) + ":" : "00:";
 				var second:String = s > 0 ? String("0" + s).substr(-2, 2) : "00";
 				return hour + minute + second;

@@ -89,5 +89,14 @@ package local.util
 			tf.defaultTextFormat = tfort ;
 			tf.text = txt ;
 		}
+		
+		
+		/**
+		 * 时间兑换成Cash
+		 */		
+		public static function timeToCash( time:int ):int
+		{
+			return ( 1 + Math.log( (time/60 + 10)/10 )/Math.LN10*8 )>>0 ;
+		}
 	}
 }
