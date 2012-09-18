@@ -2,6 +2,7 @@ package local.util
 {
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
+	import flash.filters.GlowFilter;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	
@@ -91,50 +92,7 @@ package local.util
 		}
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		//===================将文本框转换成位置==========================
-		
-		/**
-		 *  将文本框缓存成位图数据
-		 * @param txtField
-		 * @return 
-		 */		
-		public static function textFieldToBmd( txtField:TextField , bmd:BitmapData = null ):BitmapData
-		{
-			if(bmd){
-				bmd.fillRect( bmd.rect , 0xffffff );
-			}else{
-				bmd = new BitmapData(txtField.width,txtField.height , true , 0xffffff);
-			}
-			bmd.draw( txtField );
-			return bmd ;
-		}
-		
-		/**
-		 * 将文本框缓存成位图，并且添加到原文本的位置 
-		 * @param txtField
-		 */		
-		public static function textFieldToBitmap( txtField:TextField , bmd:BitmapData = null  ):void
-		{
-			if(txtField.parent){
-				var bmp:Bitmap = new Bitmap( textFieldToBmd(txtField , bmd) );
-				bmp.x = txtField.x ;
-				bmp.y = txtField.y ;
-				txtField.filters = null ;
-				var index:int = txtField.parent.getChildIndex(txtField);
-				txtField.parent.addChildAt( bmp , index );
-				txtField.parent.removeChild( txtField );
-			}
-		}
-		
-		
+
 		
 		
 		

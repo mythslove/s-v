@@ -36,6 +36,8 @@ package local.view.shop
 			btnBusiness.label="Business";
 			btnDecor.label="Decora";
 			btnIndustry.label = "Industry";
+			
+			
 			addEventListener(MouseEvent.CLICK , onMouseHandler );
 		}
 		
