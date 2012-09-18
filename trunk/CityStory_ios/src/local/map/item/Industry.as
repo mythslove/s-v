@@ -135,11 +135,11 @@ package local.map.item
 					PlayerModel.instance.changeCash( -cash );
 					
 					var flyImg:FlyLabelImage = new FlyLabelImage( PickupType.CASH , -cash ) ;
-					flyImg.x = screenX -20 ;
-					flyImg.y = screenY-flyImg.height ;
+					flyImg.x = screenX - 20 ;
+					flyImg.y = screenY - 50 ;
 					GameWorld.instance.effectScene.addChild( flyImg );
 					
-					buildingVO.status==BuildingStatus.PRODUCTION_COMPLETE ;
+					buildingVO.status = BuildingStatus.PRODUCTION_COMPLETE ;
 					onClick() ;
 				}
 			}
