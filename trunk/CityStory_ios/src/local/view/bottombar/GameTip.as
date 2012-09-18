@@ -69,8 +69,12 @@ package local.view.bottombar
 					if(currentLabel=="noroad"){
 						GameData.villageMode = VillageMode.EDIT ;
 						currentBuilding.onClick();
-						this.hide() ;
+					}else if(currentLabel=="energy"){
+						trace("打开商店Energy窗口");
+					}else if(currentLabel=="goods"){
+						trace("打开商店Goods窗口");
 					}
+					this.hide() ;
 					break ;
 				case btnYellowCash:
 					if(currentLabel=="product" || currentLabel=="expand"){ //生产中和扩地中
@@ -150,6 +154,31 @@ package local.view.bottombar
 				thumb.center() ;
 			}
 		}
+		
+		/**
+		 * 缺少energy 
+		 */		
+		public function showLackEnergy():void
+		{
+			currentBuilding = null ;
+			show();
+			gotoAndStop("energy");
+			btnGreen.label = "GE ENERGY";
+			GameUtil.boldTextField( txtInfo , "You don't have enough energy for this." );
+		}
+		
+		/**
+		 * 缺少商品 
+		 */		
+		public function showLackGoods():void
+		{
+			currentBuilding = null ;
+			show();
+			gotoAndStop("goods");
+			btnGreen.label = "GE GOODS";
+			GameUtil.boldTextField( txtInfo , "You don't have enough goods for this." );
+		}
+		
 		
 		private function show():void
 		{
