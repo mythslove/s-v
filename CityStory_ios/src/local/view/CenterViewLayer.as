@@ -43,6 +43,7 @@ package local.view
 			topBar.x = (GameSetting.SCREEN_WIDTH-topBar.width)>>1 ;
 			
 			gameTip = new GameTip();
+			gameTip. y = GameSetting.SCREEN_HEIGHT ;
 			gameTip.x  = (GameSetting.SCREEN_WIDTH-gameTip.width)>>1 ;
 			addChild(gameTip);
 			
