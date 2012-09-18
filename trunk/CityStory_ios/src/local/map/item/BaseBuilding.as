@@ -112,12 +112,14 @@ package local.map.item
 			//显示放置特效
 			var barvo:BitmapAnimResVO = EmbedsManager.instance.getAnimResVOByName("PlaceBuildingEffect")[0] ;
 			var effect:TimeAnimObject = ObjectPool.instance.getTimeAnim( "PlaceBuildingEffect" );
-			effect.x = barvo.offsetX ;
-			effect.y = barvo.offsetY ;
 			if(xSpan==1){
 				effect.scaleX = effect.scaleY = 0.6 ;
 				effect.x = -50 ;
 				effect.y = -5 ;
+			}else if(xSpan==2){
+				effect.scaleX = effect.scaleY = 1 ;
+				effect.x = barvo.offsetX ;
+				effect.y = barvo.offsetY ;
 			}else if(xSpan==3){
 				effect.scaleX = effect.scaleY = 1.8 ;
 				effect.x = -150 ;

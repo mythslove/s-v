@@ -19,6 +19,24 @@ package local.map.item
 		public function Industry(buildingVO:BuildingVO)
 		{
 			super(buildingVO);
+			if( buildingVO.status==BuildingStatus.PRODUCTION)
+			{
+				//生产中
+				var cha:Number =  buildingVO.statusTime-GameData.commDate.time  ;
+				if(cha<=0){
+					//生产完成了 , buildingVO.statusTime就是此建筑生产完成时的时间，单位为毫秒
+					buildingVO.status= BuildingStatus.PRODUCTION_COMPLETE ;
+				}
+			}
+			if( buildingVO.status==BuildingStatus.PRODUCTION_COMPLETE){
+				//生产完成了，判断是否过期
+				//当前时间-建造完成时的时间-过期时间 ， 如果大于0，则过期
+				cha = GameData.commDate.time - buildingVO.statusTime - buildingVO.product.expireTime*1000 ;
+				if(cha>=0){
+					//过期了
+					buildingVO.status = BuildingStatus.EXPIRED ; 
+				}
+			}
 		}
 		
 		override public function update():void
@@ -26,7 +44,7 @@ package local.map.item
 			super.update() ;
 			if( !gameTimer && buildingVO.status==BuildingStatus.PRODUCTION_COMPLETE)
 			{
-				if( GameData.commDate.time - buildingVO.statusTime>buildingVO.product.expireTime )
+				if( GameData.commDate.time - buildingVO.statusTime>buildingVO.product.expireTime*1000 )
 				{
 					buildingVO.status = BuildingStatus.EXPIRED ;
 					showBuildingFlagIcon() ;
