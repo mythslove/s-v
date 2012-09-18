@@ -37,8 +37,8 @@ package local.view.topbar
 			var temp:Number = Point.distance( globalPoint , new Point(goodsBar.x , goodsBar.y));
 			temp = temp>400 ? 0.5 : 0.25 ;
 			flyGoods( globalPoint , temp );
-			setTimeout( flyGoods , 200 , globalPoint , temp );
-			setTimeout( flyGoods , 400 , globalPoint , temp );
+			setTimeout( flyGoods , 150 , globalPoint , temp );
+			setTimeout( flyGoods , 300 , globalPoint , temp );
 		}
 		
 		private function flyGoods( targetPoint:Point , time:Number ):void

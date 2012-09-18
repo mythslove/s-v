@@ -9,6 +9,7 @@ package local.view.bottombar
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.text.TextField;
 	
 	import local.comm.GameData;
 	import local.comm.GameSetting;
@@ -17,7 +18,10 @@ package local.view.bottombar
 	import local.enum.VillageMode;
 	import local.map.item.BaseBuilding;
 	import local.map.item.Building;
+	import local.util.GameUtil;
+	import local.view.CenterViewLayer;
 	import local.view.base.BuildingThumb;
+	import local.view.btn.GreenButton;
 	import local.view.btn.MiniCloseButton;
 
 	/**
@@ -28,10 +32,9 @@ package local.view.bottombar
 	{
 		public var imgContainer:Sprite ;
 		public var btnClose:MiniCloseButton ;
-		
-		
-		
-		
+		public var btnGreen:GreenButton ;
+		public var txtInfo:TextField ;
+		//===================================
 		
 		
 		public var currentBuilding:Building ;
@@ -42,13 +45,25 @@ package local.view.bottombar
 			visible = false ;
 			stop();
 			imgContainer.mouseChildren = imgContainer.mouseEnabled = false ;
-			btnClose.addEventListener(MouseEvent.MOUSE_UP , closeHandler);
+			addEventListener(MouseEvent.CLICK , mouseEvtHandler );
 		}
 		
-		private function closeHandler( e:MouseEvent ):void
+		private function mouseEvtHandler( e:MouseEvent ):void
 		{
 			e.stopPropagation() ;
-			this.hide() ;
+			switch( e.target )
+			{
+				case btnClose:
+					this.hide() ;
+					break ;
+				case btnGreen:
+					if(currentLabel=="noroad"){
+						GameData.villageMode = VillageMode.EDIT ;
+						currentBuilding.onClick();
+						this.hide() ;
+					}
+					break ;
+			}
 		}
 		
 		
@@ -60,15 +75,16 @@ package local.view.bottombar
 				switch( building.buildingVO.status)
 				{
 					case BuildingStatus.NO_ROAD: //没路时，显示移动建筑提示 
-						//则显示goods不足提示
 						this.show() ;
+						gotoAndStop("noroad");
+						GameUtil.boldTextField( txtInfo , "Building must be next to a road in order to be used.");
+						btnGreen.label = "Move";
 						break ;
 					case BuildingStatus.EXPANDING: //扩地时，显示instant提示
-						//则显示goods不足提示
 						this.show() ;
 						break ;
 					case BuildingStatus.PRODUCTION: //生产时，显示instant提示
-						//则显示goods不足提示
+						
 						this.show() ;
 						break ;
 					case BuildingStatus.PRODUCTION_COMPLETE:
@@ -76,7 +92,7 @@ package local.view.bottombar
 						break ;
 					case BuildingStatus.LACK_MATERIAL: //没有原料时
 						if( building.buildingVO.baseVO.type==BuildingType.BUSINESS){ 
-							//则显示goods不足提示
+							
 							this.show() ;
 						}
 						break ;
@@ -89,10 +105,12 @@ package local.view.bottombar
 			}
 			
 			//图片
-			ContainerUtil.removeChildren( imgContainer );
-			var thumb:BuildingThumb = new BuildingThumb( building.buildingVO.name , 120 , 120 );
-			imgContainer.addChild( thumb );
-			thumb.center() ;
+			if(imgContainer){
+				ContainerUtil.removeChildren( imgContainer );
+				var thumb:BuildingThumb = new BuildingThumb( building.buildingVO.name , 120 , 120 );
+				imgContainer.addChild( thumb );
+				thumb.center() ;
+			}
 		}
 		
 		private function show():void
@@ -100,14 +118,18 @@ package local.view.bottombar
 			addEventListener(Event.ENTER_FRAME , updateHandler );
 			y= GameSetting.SCREEN_HEIGHT ;
 			visible = true ;
+			CenterViewLayer.instance.bottomBar.visible = false ;
 			TweenLite.to( this , 0.2 , { y :GameSetting.SCREEN_HEIGHT-height+25 , ease:Back.easeOut } );
 		}
 		
 		public function hide():void
 		{
-			TweenLite.to( this , 0.1 , { y :GameSetting.SCREEN_HEIGHT , onComplete:function():void{ visible = false ;} } );
-			currentBuilding = null ;
-			removeEventListener(Event.ENTER_FRAME,updateHandler );
+			if(visible){
+				TweenLite.to( this , 0.1 , { y :GameSetting.SCREEN_HEIGHT , onComplete:function():void{ visible = false ;} } );
+				currentBuilding = null ;
+				CenterViewLayer.instance.bottomBar.visible = true ;
+				removeEventListener(Event.ENTER_FRAME,updateHandler );
+			}
 		}
 		
 		private function updateHandler(e:Event):void
