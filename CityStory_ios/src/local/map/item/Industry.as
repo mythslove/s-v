@@ -8,6 +8,7 @@ package local.map.item
 	import local.map.pk.FlyLabelImage;
 	import local.map.pk.PickupImages;
 	import local.model.PlayerModel;
+	import local.util.GameUtil;
 	import local.util.PopUpManager;
 	import local.view.CenterViewLayer;
 	import local.view.products.ProductsPopUp;
@@ -67,7 +68,7 @@ package local.map.item
 				else if( buildingVO.status==BuildingStatus.PRODUCTION_COMPLETE)
 				{
 					flash(true);
-					collect();
+					collect( buildingVO.product.earnGoods );
 				}
 				else if( buildingVO.status==BuildingStatus.EXPIRED)
 				{
@@ -88,15 +89,15 @@ package local.map.item
 		
 		
 		/* 收获*/
-		private function collect():void
+		private function collect( goods:int ):void
 		{
 			if( reduceEnergy() ){
 				var pkImgs:PickupImages = new PickupImages();
 				if(buildingVO.product.earnExp>0 ){
 					pkImgs.addPK( PickupType.EXP , buildingVO.product.earnExp );
 				}
-				if( buildingVO.product.earnGoods>0 ){
-					pkImgs.addPK( PickupType.GOOD , buildingVO.product.earnGoods );
+				if( goods>0 ){
+					pkImgs.addPK( PickupType.GOOD , goods );
 				}
 				pkImgs.x = screenX ;
 				pkImgs.y = screenY ;
@@ -105,6 +106,46 @@ package local.map.item
 				buildingVO.status = BuildingStatus.LACK_MATERIAL ;
 				buildingVO.product = null ;
 				showBuildingFlagIcon();
+			}
+		}
+		
+		
+		/**
+		 * 过期后恢复 
+		 */		
+		public function expiredRecover():void
+		{
+			var earnGoods:int = GameUtil.expiredRecverGoods( buildingVO.product.earnGoods );
+			flash(true);
+			collect( earnGoods );
+		}
+		
+		/**
+		 * 过期后保存所有商品 
+		 */		
+		public function expiredSaveAll():void
+		{
+			//判断玩家钱
+			var cash:int = GameUtil.expiredSaveAllCash( buildingVO.product.earnGoods );
+			if(PlayerModel.instance.me.cash >= cash )
+			{
+				if(reduceEnergy())
+				{
+					//扣cash
+					PlayerModel.instance.changeCash( -cash );
+					
+					var flyImg:FlyLabelImage = new FlyLabelImage( PickupType.CASH , -cash ) ;
+					flyImg.x = screenX -20 ;
+					flyImg.y = screenY-flyImg.height ;
+					GameWorld.instance.effectScene.addChild( flyImg );
+					
+					buildingVO.status==BuildingStatus.PRODUCTION_COMPLETE ;
+					onClick() ;
+				}
+			}
+			else
+			{
+				trace(" cash不足");
 			}
 		}
 		

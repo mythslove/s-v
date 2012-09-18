@@ -217,7 +217,7 @@ package local.map.item
 			var cash:int = GameUtil.timeToCash( gameTimer.duration ) ;
 			if(PlayerModel.instance.me.cash >= cash )
 			{
-				if(gameTimer){
+				if(gameTimer && reduceEnergy()){
 					//扣cash
 					PlayerModel.instance.changeCash( -cash );
 					
