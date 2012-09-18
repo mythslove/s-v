@@ -51,8 +51,13 @@ package local.map.item
 			clearGameTimer();
 			if(buildingVO.status == BuildingStatus.PRODUCTION || buildingVO.status==BuildingStatus.EXPANDING ) 
 			{
-				buildingVO.statusTime =  ( (buildingVO.statusTime-GameData.commDate.time)*0.001 )>>0 ;
-				createGameTimer( buildingVO.statusTime );
+				var cha:Number =  ( (buildingVO.statusTime-GameData.commDate.time)*0.001 )>>0 ;
+				if(cha>0){
+					buildingVO.statusTime = cha ;
+					createGameTimer( buildingVO.statusTime );
+				}else{
+					gameTimerCompleteHandler( null );
+				}
 			}
 		}
 		
@@ -123,7 +128,7 @@ package local.map.item
 		protected function gameTimerCompleteHandler( e:Event ):void
 		{
 			clearGameTimer();
-			buildingVO.statusTime = GameData.commDate.time ; //记录完成时间
+			buildingVO.statusTime = GameData.commDate.time ; //记录完成时间,单位毫秒
 			buildingVO.status = BuildingStatus.PRODUCTION_COMPLETE ; //生产完成
 			showBuildingFlagIcon();//显示建筑当前的标识
 		}
