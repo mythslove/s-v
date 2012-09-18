@@ -1,6 +1,7 @@
 package local.view.base
 {
 	import bing.res.ResVO;
+	import bing.utils.FixScale;
 	
 	import flash.display.Bitmap;
 	
@@ -38,6 +39,7 @@ package local.view.base
 				this.x=roadResVO.offsetXs[name];
 				this.y=roadResVO.offsetYs[name];
 			}
+			FixScale.setScale( this , maxW , maxH );
 		}
 		
 		public function setScale( value:Number):void

@@ -1,18 +1,23 @@
 package local.view.bottombar
 {
+	import bing.utils.ContainerUtil;
+	
 	import com.greensock.TweenLite;
 	import com.greensock.easing.Back;
 	
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.events.MouseEvent;
 	
 	import local.comm.GameData;
+	import local.comm.GameSetting;
 	import local.enum.BuildingStatus;
 	import local.enum.BuildingType;
 	import local.enum.VillageMode;
 	import local.map.item.BaseBuilding;
 	import local.map.item.Building;
+	import local.view.base.BuildingThumb;
 	import local.view.btn.MiniCloseButton;
 
 	/**
@@ -37,12 +42,18 @@ package local.view.bottombar
 			visible = false ;
 			stop();
 			imgContainer.mouseChildren = imgContainer.mouseEnabled = false ;
+			btnClose.addEventListener(MouseEvent.MOUSE_UP , closeHandler);
+		}
+		
+		private function closeHandler( e:MouseEvent ):void
+		{
+			e.stopPropagation() ;
+			this.hide() ;
 		}
 		
 		
 		public function showBuildingTip( building:BaseBuilding ):void
 		{
-			return ;
 			currentBuilding = building as Building;
 			if( GameData.villageMode==VillageMode.NORMAL){ 
 				// 如果是修建状态
@@ -76,19 +87,25 @@ package local.view.bottombar
 						break ;
 				}
 			}
+			
+			//图片
+			ContainerUtil.removeChildren( imgContainer );
+			var thumb:BuildingThumb = new BuildingThumb( building.buildingVO.name , 120 , 120 );
+			imgContainer.addChild( thumb );
+			thumb.center() ;
 		}
 		
 		private function show():void
 		{
 			addEventListener(Event.ENTER_FRAME , updateHandler );
-			y= 0 ;
+			y= GameSetting.SCREEN_HEIGHT ;
 			visible = true ;
-			TweenLite.to( this , 0.25 , { y :height-50 , ease:Back.easeOut } );
+			TweenLite.to( this , 0.2 , { y :GameSetting.SCREEN_HEIGHT-height+25 , ease:Back.easeOut } );
 		}
 		
 		public function hide():void
 		{
-			TweenLite.to( this , 0.2 , { y :0 , onComplete:function():void{ visible = false ;} } );
+			TweenLite.to( this , 0.1 , { y :GameSetting.SCREEN_HEIGHT , onComplete:function():void{ visible = false ;} } );
 			currentBuilding = null ;
 			removeEventListener(Event.ENTER_FRAME,updateHandler );
 		}
