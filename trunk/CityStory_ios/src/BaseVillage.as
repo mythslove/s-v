@@ -114,7 +114,7 @@ package
 					}
 				}
 			}
-			resVOs.push( new ResVO("localization_config" , "config/localization_"+GameSetting.local+".properties") );
+			resVOs.push( new ResVO("localization_config" , "config/localization_"+GameSetting.local+".bin") );
 			resVOs.push( new ResVO("ui_bar","swf/"+GameSetting.device+"/bar.swf"));
 			resVOs.push( new ResVO("ui_popup","swf/"+GameSetting.device+"/popup.swf"));
 			ResourceUtil.instance.addEventListener(ResProgressEvent.RES_LOAD_PROGRESS , gameInitResHandler );
