@@ -44,6 +44,7 @@ package local.view.storage
 		protected var _scroll:ScrollControllerH = new ScrollControllerH() ;
 		protected var _content:Sprite = new Sprite() ;
 		private var _btns:Vector.<MovieClip> ;
+		private var _renderPool:Array ;
 		private var _count:int ;
 		
 		public var menuBar:ToggleBar;
@@ -112,7 +113,7 @@ package local.view.storage
 			var len:int = items.length ;
 			for( var i:int = 0 ; i<len ; ++i )
 			{
-				render = new StorageItemRenderer(items[i]);
+				render = getStorageRender(items[i] , i+_count );
 				render.x = (i+_count)*140 ;
 				_content.addChild( render );
 			}
@@ -124,6 +125,21 @@ package local.view.storage
 			if( ComponentModel.instance.myComps){
 				
 			}
+		}
+		
+		private function getStorageRender( vo:Object , index:int  ):StorageItemRenderer
+		{
+			if(!_renderPool) _renderPool = [];
+			
+			var render:StorageItemRenderer ;
+			if(_renderPool.length>index){
+				render = _renderPool[index] ;
+			}else{
+				render = new StorageItemRenderer();
+				_renderPool.push( render );
+			}
+			render.vo = vo ;
+			return render ;
 		}
 		
 		private function onClickHandler( e:MouseEvent ):void

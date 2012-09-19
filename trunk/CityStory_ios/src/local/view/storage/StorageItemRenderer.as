@@ -1,41 +1,42 @@
 package local.view.storage
 {
+	import bing.utils.ContainerUtil;
+	
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.text.TextField;
 	
 	import local.model.ShopModel;
 	import local.util.GameUtil;
+	import local.view.base.BaseView;
 	import local.view.base.BuildingThumb;
 	import local.vo.BaseBuildingVO;
 	import local.vo.StorageBuildingVO;
 	
-	public class StorageItemRenderer extends Sprite
+	public class StorageItemRenderer extends BaseView
 	{
 		public var txtTitle:TextField ; //标题
 		public var imgContainer:Sprite; //图片
 		public var txtCount:TextField ;//数量
 		//============================
 		
-		private var _isBuilding:Boolean = true ;
+		private var isBuilding:Boolean = true ;
 		public var vo:Object ; //如果是建筑时，则是StorageBuildingVO ,如果是String ，则为Component的名称
 		
-		public function StorageItemRenderer( vo:Object )
+		public function StorageItemRenderer()
 		{
 			super();
 			mouseChildren = false ;
-			this.vo = vo ;
-			addEventListener(Event.ADDED_TO_STAGE , addedHandler );
 		}
 		
-		protected function addedHandler(e:Event):void
+		override protected function addedToStageHandler(e:Event):void
 		{
-			removeEventListener( Event.ADDED_TO_STAGE , addedHandler ) ;
-			
+			super.addedToStageHandler(e);
 			if(vo is String){
-				_isBuilding = false ;
+				isBuilding = false ;
 				GameUtil.boldTextField( txtTitle , vo.toString() );
 			}else{
+				isBuilding = true ;
 				var sbvo:StorageBuildingVO = vo as StorageBuildingVO ;
 				var bvo:BaseBuildingVO =  ShopModel.instance.allBuildingHash[sbvo.name] as BaseBuildingVO ;
 				GameUtil.boldTextField( txtTitle , bvo.title );
@@ -47,5 +48,12 @@ package local.view.storage
 			}
 		}
 		
+		override protected function removedFromStageHandler(e:Event):void
+		{
+			super.removedFromStageHandler(e);
+			txtTitle.text = txtCount.text="";
+			ContainerUtil.removeChildren( imgContainer );
+			vo = null ;
+		}
 	}
 }
