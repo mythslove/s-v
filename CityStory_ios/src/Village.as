@@ -36,6 +36,9 @@ package
 		
 		private function villageEvtHandler( e:VillageEvent ):void
 		{
+			if(e.type==VillageEvent.NEW_VILLAGE){
+				PlayerModel.instance.createPlayer();
+			}
 			GlobalDispatcher.instance.removeEventListener( VillageEvent.READED_VILLAGE , villageEvtHandler );
 			GlobalDispatcher.instance.removeEventListener( VillageEvent.NEW_VILLAGE , villageEvtHandler );
 			
