@@ -12,7 +12,7 @@ package local.comm
 		public static const MAP_HEIGHT:int = 2800;
 		
 		/** 网格大小 */		
-		public static const GRID_SIZE:int = 50 ;
+		public static const GRID_SIZE:int = 60 ;
 		
 		/** 地图大小*/
 		public static var GRID_X:int = 68 ;
