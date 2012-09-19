@@ -14,6 +14,6 @@ package local.util
 		/**
 		 * 灰色阴影 
 		 */		
-		public static var grayDropFilters:Array = [new DropShadowFilter(2,90,0,0.5,2,2)];
+		public static var grayDropFilters:Array = [new DropShadowFilter(3,90,0,0.5,2,2)];
 	}
 }

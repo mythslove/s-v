@@ -1,16 +1,16 @@
-﻿package 
+﻿package  local.view.control
 {
-
-	import flash.display.Sprite;
-	import flash.text.TextField;
+	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
+	import flash.display.Sprite;
+	import flash.text.TextField;
 	import flash.text.TextFormat;
-
-
+	
+	
 	public class BitmapTextField extends Sprite
 	{
-
+		
 		[Inspectable(type = "String",defaultValue = "Verdana")]
 		public function set font( value:String ):void
 		{
@@ -22,7 +22,7 @@
 		{
 			return txt.defaultTextFormat.font;
 		}
-		[Inspectable(defaultValue = "12")]
+		[Inspectable(defaultValue = "20")]
 		public function set size(value:String ):void
 		{
 			var format:TextFormat = txt.defaultTextFormat;
@@ -65,7 +65,7 @@
 			return txt.textColor ;
 		}
 		
-
+		
 		
 		
 		
@@ -77,44 +77,60 @@
 		{
 			return txt.defaultTextFormat;
 		}
-
-
-
-
+		
+		
+		
+		
 		public var txt:TextField;
 		private var _bmp:Bitmap = new Bitmap();
-
+		
 		public function BitmapTextField()
 		{
 			super();
-			
 			mouseChildren = mouseEnabled = false;
 			
 			txt.width = width;
 			txt.height = height;
 			
-			this.graphics.clear();
-			removeChild(txt);
+			var format:TextFormat = txt.defaultTextFormat ;
+			format.bold = true ;
+			format.align="center";
+			format.font="Verdana";
+			format.size = 20 ;
+			txt.defaultTextFormat = format ;
+			txt.textColor = 0xffffff ;
+			
+			while(numChildren>0){
+				removeChildAt(0);
+			}
 			addChild(_bmp);
 		}
-
-
+		
+		
 		public function set text( value:String ):void
 		{
 			if (txt.text != value)
 			{
-				txt.width = width;
-				txt.height = height;
-				_bmp.bitmapData = new BitmapData(width,height,true,0xffffff);
-				scaleX = scaleY = 1;
 				txt.text = value;
+				scaleX = scaleY = 1;
+				if(_bmp.bitmapData){
+					if(txt.width!=_bmp.bitmapData.width || txt.height!=_bmp.bitmapData.height){
+						_bmp.bitmapData = new BitmapData(txt.width,txt.height,true,0xffffff);
+					}else{
+						_bmp.bitmapData.fillRect( _bmp.bitmapData.rect , 0xffffff );
+					}
+				}
+				else
+				{
+					_bmp.bitmapData = new BitmapData(txt.width,txt.height,true,0xffffff);
+				}
 				_bmp.bitmapData.draw( txt );
 			}
 		}
 		public function get text():String{
 			return txt.text;
 		}
-
+		
 		override public function set filters( value:Array):void
 		{
 			txt.filters = value;
@@ -129,7 +145,7 @@
 			txt.filters = null ;
 			txt = null ;
 		}
-
+		
 		public function dispose():void
 		{
 			if(_bmp.bitmapData){
@@ -140,5 +156,5 @@
 			txt = null ;
 		}
 	}
-
+	
 }

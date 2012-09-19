@@ -3,6 +3,7 @@ package local.view.btn
 	import flash.text.TextFormat;
 	
 	import local.util.TextStyle;
+	import local.view.control.BitmapTextField;
 	import local.view.control.Button;
 	
 	/**
@@ -21,11 +22,6 @@ package local.view.btn
 		{
 			super();
 			
-			_tf = txtLabel.defaultTextFormat ;
-			_tf.bold = true ;
-			_tf.align="center";
-			txtLabel.defaultTextFormat = _tf ;
-			txtLabel.textColor = 0xffffff ;
 			txtLabel.filters = TextStyle.grayDropFilters ;
 		}
 		
