@@ -36,8 +36,8 @@ package local.model
 			for( var i:int = 0 ; i <3 ; ++i ){
 				for( var j:uint = 0 ; j<3 ; ++j ){
 					vo= new LandVO();
-					vo.nodeX = 8+i ;
-					vo.nodeZ = 8+j ;
+					vo.nodeX = 7+i ;
+					vo.nodeZ = 7+j ;
 					lands[count] = vo ;
 					++count ;
 					if(count>6) return ;

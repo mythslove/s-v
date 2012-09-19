@@ -152,9 +152,9 @@ package  local.map
 			map.graphics.drawRect( 0 ,1000 , bmd.width , bmd.height );
 			map.graphics.endFill();
 			
-			mat.identity(); mat.translate( 3500  ,1500 );
+			mat.identity(); mat.translate( 3600  ,1800 );
 			map.graphics.beginBitmapFill( bmd , mat , false  );
-			map.graphics.drawRect( 3500  , 1500 , bmd.width , bmd.height );
+			map.graphics.drawRect( 3600  , 1800 , bmd.width , bmd.height );
 			map.graphics.endFill();
 			
 			this.setBackGround( map );
@@ -188,10 +188,6 @@ package  local.map
 			initMap();
 			//添加侦听
 			configListeners();
-			//初始地图缩放
-			if(GameSetting.device=="iphone"){
-				changeWorldScale( 1.2 , GameSetting.SCREEN_WIDTH*0.5 , GameSetting.SCREEN_HEIGHT*0.5 ) ;
-			}
 		}
 		
 		/** 初始化地图 */
@@ -235,10 +231,11 @@ package  local.map
 			}
 			
 			var bvo:BuildingVO ;
-			for( i = 0 ; i<GameSetting.GRID_X ; i+=2  ){
-				for( j = 0 ; j<GameSetting.GRID_Z ;  j+=2){
-					if( !gameGridData.getNode(i,j).walkable && MapGridDataModel.instance.mapGridData.getNode(i,j).walkable 
-						&& Math.random()>0.8 ){
+			var rate:Number = GameSetting.device=="iphone" ? 0.95 : 0.92 ;
+			for( i = 0 ; i<GameSetting.GRID_X ; ++i  ){
+				for( j = 0 ; j<GameSetting.GRID_Z ;  ++j ){
+					if( Math.random()>rate && !gameGridData.getNode(i,j).walkable && 
+						MapGridDataModel.instance.mapGridData.getNode(i,j).walkable ){
 						var index:int = (Math.random()*8 )>>0 ;
 						bvo = new BuildingVO();
 						bvo.baseVO = basicVOs[index] ;
