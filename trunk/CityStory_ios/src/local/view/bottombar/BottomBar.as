@@ -68,25 +68,32 @@ package local.view.bottombar
 					PopUpManager.instance.addQueuePopUp( ShopOverViewPopUp.instance , true , 0 , 0 );
 					break ;
 				case doneBtn:
-					var world:GameWorld = GameWorld.instance ;
-					if( world.topScene.numChildren>0){
-						var building:BaseBuilding = world.topScene.getChildAt(0) as BaseBuilding;
-						if( building ){
-							building.nodeX = BaseBuilding.cachePos.x ;
-							building.nodeZ = BaseBuilding.cachePos.y ;
-							building.addToWorldFromTopScene();
-							if(EditorBuildingButtons.instance.parent){
-								EditorBuildingButtons.instance.parent.removeChild( EditorBuildingButtons.instance );
-							}
-						}
-					}
+					checkTopSceneBuilding();
 					GameData.villageMode = VillageMode.NORMAL ;
 					break ;
 				case storageBtn:
+					checkTopSceneBuilding();
 					GameData.villageMode = VillageMode.BUILDING_STORAGE ;
 					break ;
 			}
 		}
+		
+		private function checkTopSceneBuilding():void
+		{
+			var world:GameWorld = GameWorld.instance ;
+			if( world.topScene.numChildren>0){
+				var building:BaseBuilding = world.topScene.getChildAt(0) as BaseBuilding;
+				if( building ){
+					building.nodeX = BaseBuilding.cachePos.x ;
+					building.nodeZ = BaseBuilding.cachePos.y ;
+					building.addToWorldFromTopScene();
+					if(EditorBuildingButtons.instance.parent){
+						EditorBuildingButtons.instance.parent.removeChild( EditorBuildingButtons.instance );
+					}
+				}
+			}
+		}
+		
 		
 		/**
 		 * 显示收藏箱 

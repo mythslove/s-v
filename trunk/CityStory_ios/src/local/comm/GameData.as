@@ -59,6 +59,7 @@ package  local.comm
 					world.buildingScene.removeMoveItems();
 					world.runUpdate = false ;
 					world.roadScene.mouseChildren = true ;
+					world.topScene.clearAndDisposeChild();
 					world.topScene.visible = true ;
 					world.iconScene.visible = false ;
 					break ;
