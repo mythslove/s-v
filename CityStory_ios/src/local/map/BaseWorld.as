@@ -163,12 +163,6 @@ package  local.map
 		override protected function addedToStageHandler(e:Event):void
 		{
 			super.addedToStageHandler(e);
-			
-			//显示地图网格
-//			var gridScene:IsoScene = new IsoScene(GameSetting.GRID_SIZE);
-//			(gridScene.addChild( new IsoGrid(GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE)) as IsoGrid).render() ;
-//			gridScene.cacheAsBitmap=true;
-//			this.addScene(gridScene);
 			//添加iso场景
 			roadScene = new RoadScene();
 			roadScene.mouseChildren = false ; 
@@ -184,6 +178,11 @@ package  local.map
 			addScene(iconScene);
 			addScene( effectScene );
 			addScene(topScene);
+			//显示地图网格
+			var gridScene:IsoScene = new IsoScene(GameSetting.GRID_SIZE);
+			(gridScene.addChild( new IsoGrid(GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE)) as IsoGrid).render() ;
+			gridScene.cacheAsBitmap=true;
+			this.addScene(gridScene);
 			//设置背景
 			initMap();
 			//添加侦听
