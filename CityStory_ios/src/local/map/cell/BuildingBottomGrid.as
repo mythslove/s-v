@@ -28,7 +28,7 @@ package local.map.cell
 		public function BuildingBottomGrid( building:BaseBuilding )
 		{
 			super();
-			this.mouseChildren = this.mouseEnabled = false ;
+			this.mouseChildren = false ;
 			_building = building ;
 		}
 		
