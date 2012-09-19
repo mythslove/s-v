@@ -14,6 +14,7 @@ package
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
 	
+	import local.comm.GameData;
 	import local.comm.GameSetting;
 	import local.model.CompsModel;
 	import local.model.LandModel;
@@ -113,6 +114,7 @@ package
 					}
 				}
 			}
+			resVOs.push( new ResVO("localization_config" , "config/localization_"+GameSetting.local+".properties") );
 			resVOs.push( new ResVO("ui_bar","swf/"+GameSetting.device+"/bar.swf"));
 			resVOs.push( new ResVO("ui_popup","swf/"+GameSetting.device+"/popup.swf"));
 			ResourceUtil.instance.addEventListener(ResProgressEvent.RES_LOAD_PROGRESS , gameInitResHandler );
@@ -140,6 +142,10 @@ package
 		/** 资源加载完成后 , 初始化游戏界面和游戏 */
 		protected function initGame():void
 		{
+			var bytes:ByteArray = ResourceUtil.instance.getResVOByResId("localization_config").resObject as ByteArray;
+			GameData.lang = bytes.readObject() ;
+			var lang:Object = GameData.lang ;
+			ResourceUtil.instance.deleteRes( "localization_config");
 			ShopModel.instance.initShopDataAndRender();
 		}
 		

@@ -1,7 +1,6 @@
 package local.view.btn
 {
 	import flash.display.MovieClip;
-	import flash.text.TextFormat;
 	
 	import local.util.TextStyle;
 	import local.view.control.BitmapTextField;
@@ -13,7 +12,6 @@ package local.view.btn
 		
 		
 		private var _label:String ;
-		private var _tf:TextFormat ;
 		
 		public function TabMenuButton( label:String = null , name:String = null )
 		{
@@ -50,7 +48,6 @@ package local.view.btn
 		override public function gotoAndStop(frame:Object, scene:String=null):void{
 			super.gotoAndStop(frame,scene);
 			if( txtLabel.text!=_label){
-				txtLabel.defaultTextFormat = _tf ;
 				txtLabel.text = _label ;
 			}
 		}

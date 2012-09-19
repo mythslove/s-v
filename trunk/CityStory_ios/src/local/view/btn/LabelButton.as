@@ -1,7 +1,5 @@
 package local.view.btn
 {
-	import flash.text.TextFormat;
-	
 	import local.util.TextStyle;
 	import local.view.control.BitmapTextField;
 	import local.view.control.Button;
@@ -16,7 +14,6 @@ package local.view.btn
 		//=====================
 		
 		private var _label:String ;
-		protected var _tf:TextFormat ;
 		
 		public function LabelButton()
 		{
@@ -41,7 +38,6 @@ package local.view.btn
 		override public function gotoAndStop(frame:Object, scene:String=null):void{
 			super.gotoAndStop(frame,scene);
 			if( txtLabel.text!=_label){
-				txtLabel.defaultTextFormat = _tf ;
 				txtLabel.text = _label ;
 			}
 		}

@@ -31,7 +31,6 @@ package local.view.btn
 		override public function gotoAndStop(frame:Object, scene:String=null):void{
 			super.gotoAndStop(frame,scene);
 			if( txtCash.text!=_cash){
-				txtCash.defaultTextFormat = _tf ;
 				txtCash.text = _cash ;
 			}
 		}
