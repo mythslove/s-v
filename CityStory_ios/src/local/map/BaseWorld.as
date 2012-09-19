@@ -52,7 +52,7 @@ package  local.map
 			mouseChildren = mouseEnabled = false ;
 			
 			this.x =-50 + (GameSetting.SCREEN_WIDTH-GameSetting.MAP_WIDTH*scaleX)>>1 ;
-			y=-1200;
+			y=-1260;
 			_endX = x ;
 			_endY = y ;
 			addBackground();
