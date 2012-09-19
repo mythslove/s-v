@@ -9,6 +9,12 @@ package  local.comm
 
 	public class GameData
 	{
+		
+		/**
+		 * 语言包 
+		 */		
+		public static var lang:Object ;
+		
 		/**
 		 * 公用的date
 		 */		
