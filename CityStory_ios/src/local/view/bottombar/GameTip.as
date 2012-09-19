@@ -94,6 +94,9 @@ package local.view.bottombar
 		
 		public function showBuildingTip( building:BaseBuilding ):void
 		{
+			if(currentBuilding==building){
+				return ;
+			}
 			currentBuilding = building as Building;
 			if( GameData.villageMode==VillageMode.NORMAL){ 
 				// 如果是修建状态
@@ -194,9 +197,9 @@ package local.view.bottombar
 			if(visible){
 				TweenLite.to( this , 0.1 , { y :GameSetting.SCREEN_HEIGHT , onComplete:function():void{ visible = false ;} } );
 				currentBuilding = null ;
-				CenterViewLayer.instance.bottomBar.visible = true ;
 				removeEventListener(Event.ENTER_FRAME,updateHandler );
 			}
+			CenterViewLayer.instance.bottomBar.visible = true ;
 		}
 		
 		private function updateHandler(e:Event):void
