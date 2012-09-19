@@ -174,9 +174,6 @@ package local.map
 						{
 							if(currentSelected) currentSelected.flash(false);
 							currentSelected = (e.target as StatusIcon).building ;
-							if( CenterViewLayer.instance.gameTip.currentBuilding!=currentSelected){
-								CenterViewLayer.instance.gameTip.hide() ;
-							}
 							currentSelected.onClick();
 						}
 						else if(e.target.parent==_mouseBuilding)
@@ -185,9 +182,6 @@ package local.map
 								if(currentSelected) currentSelected.flash(false);
 								currentSelected = e.target.parent as BaseBuilding ;
 								moveToCenter( currentSelected ) ;
-							}
-							if( CenterViewLayer.instance.gameTip.currentBuilding!=currentSelected){
-								CenterViewLayer.instance.gameTip.hide() ;
 							}
 							currentSelected.onClick();
 						}
@@ -202,12 +196,16 @@ package local.map
 							}
 							currentSelected.flash(false);
 							currentSelected = null ;
-							CenterViewLayer.instance.gameTip.hide() ;
+							CenterViewLayer.instance.gameTip.hide() ; //隐藏gameTip
 						}
 						else if(GameData.villageMode==VillageMode.EXPAND)
 						{
 							//用点击区域来判断
 							clickExpandButton( pixelPointToGrid(root.mouseX , root.mouseY,0,0,_size*4 ) );
+						}
+						//隐藏gameTip
+						if( currentSelected && CenterViewLayer.instance.gameTip.currentBuilding!=currentSelected){
+							CenterViewLayer.instance.gameTip.hide() ;
 						}
 					}
 					
