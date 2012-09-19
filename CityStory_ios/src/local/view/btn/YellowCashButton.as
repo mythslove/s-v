@@ -1,6 +1,7 @@
 package local.view.btn
 {
 	import local.util.TextStyle;
+	import local.view.control.BitmapTextField;
 
 	public class YellowCashButton extends LabelButton
 	{
@@ -11,9 +12,6 @@ package local.view.btn
 		public function YellowCashButton()
 		{
 			super();
-			txtCash.defaultTextFormat = _tf ;
-			txtLabel.textColor = 0x663300;
-			txtCash.textColor = 0x663300;
 			txtCash.filters = TextStyle.grayDropFilters ;
 		}
 		

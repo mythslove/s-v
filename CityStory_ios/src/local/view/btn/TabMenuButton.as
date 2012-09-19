@@ -4,6 +4,7 @@ package local.view.btn
 	import flash.text.TextFormat;
 	
 	import local.util.TextStyle;
+	import local.view.control.BitmapTextField;
 	
 	public class TabMenuButton extends MovieClip
 	{
@@ -20,11 +21,6 @@ package local.view.btn
 			mouseChildren = false ;
 			stop();
 			
-			_tf = txtLabel.defaultTextFormat ;
-			_tf.bold = true ;
-			_tf.align="center";
-			txtLabel.defaultTextFormat = _tf ;
-			txtLabel.textColor = 0xffffff ;
 			txtLabel.filters = TextStyle.blackGlowfilters ;
 			
 			if(label){
