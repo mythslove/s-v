@@ -174,6 +174,9 @@ package local.map
 						{
 							if(currentSelected) currentSelected.flash(false);
 							currentSelected = (e.target as StatusIcon).building ;
+							if( CenterViewLayer.instance.gameTip.currentBuilding!=currentSelected){
+								CenterViewLayer.instance.gameTip.hide() ;
+							}
 							currentSelected.onClick();
 						}
 						else if(e.target.parent==_mouseBuilding)
@@ -182,6 +185,9 @@ package local.map
 								if(currentSelected) currentSelected.flash(false);
 								currentSelected = e.target.parent as BaseBuilding ;
 								moveToCenter( currentSelected ) ;
+							}
+							if( CenterViewLayer.instance.gameTip.currentBuilding!=currentSelected){
+								CenterViewLayer.instance.gameTip.hide() ;
 							}
 							currentSelected.onClick();
 						}

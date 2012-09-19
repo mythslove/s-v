@@ -196,9 +196,9 @@ package local.view.bottombar
 		{
 			if(visible){
 				TweenLite.to( this , 0.1 , { y :GameSetting.SCREEN_HEIGHT , onComplete:function():void{ visible = false ;} } );
-				currentBuilding = null ;
 				removeEventListener(Event.ENTER_FRAME,updateHandler );
 			}
+			currentBuilding = null ;
 			CenterViewLayer.instance.bottomBar.visible = true ;
 		}
 		
