@@ -1,5 +1,7 @@
 package local.model
 {
+	import bing.utils.Guid;
+	
 	import local.enum.BuildingStatus;
 	import local.enum.BuildingType;
 	import local.map.item.BaseBuilding;
@@ -47,6 +49,9 @@ package local.model
 		
 		public function addBuildingVO( vo:BuildingVO ):void
 		{
+			if(!vo.id){
+				vo.id = Guid.create();
+			}
 			switch( vo.baseVO.type  )
 			{
 				case BuildingType.BASIC:
