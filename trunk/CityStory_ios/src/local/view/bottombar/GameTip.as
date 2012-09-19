@@ -103,7 +103,7 @@ package local.view.bottombar
 						this.show() ;
 						gotoAndStop("noroad");
 						GameUtil.boldTextField( txtInfo , "Building must be next to a road in order to be used.");
-						btnGreen.label = "Move";
+						btnGreen.label = "MOVE";
 						break ;
 					case BuildingStatus.EXPANDING: //扩地时，显示instant提示
 						this.show() ;
