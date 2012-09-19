@@ -63,15 +63,22 @@ package local.view
 					bottomBar.marketBtn.visible = true ;
 					bottomBar.editorBtn.visible = true ;
 					bottomBar.doneBtn.visible = false ;
+					bottomBar.storageBtn.visible = false ;
 					topBar.visible = true ;
 					break ;
 				case VillageMode.EDIT :
 					bottomBar.marketBtn.visible = false ;
 					bottomBar.editorBtn.visible = false ;
 					bottomBar.doneBtn.visible = true ;
+					bottomBar.storageBtn.visible = true ;
 					topBar.visible = false ;
 					break ;
 				case VillageMode.BUILDING_STORAGE :
+					bottomBar.doneBtn.visible = false ;
+					bottomBar.storageBtn.visible = false ;
+					bottomBar.showStorage();
+					topBar.visible = false ;
+					break ;
 				case VillageMode.BUILDING_SHOP :
 					bottomBar.visible = false ;
 					topBar.visible = false ;

@@ -4,9 +4,13 @@ package local.view.storage
 	
 	public class StorageMenuButton extends MovieClip
 	{
-		public function StorageMenuButton()
+		public function StorageMenuButton( name:String )
 		{
 			super();
+			mouseChildren = false ;
+			stop();
+			
+			this.name = name ;
 		}
 	}
 }
