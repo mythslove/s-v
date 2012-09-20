@@ -120,8 +120,8 @@ package local.util
 		//===================特效===========================
 		[Embed(source="../resource/effect/PlaceBuildingEffect.bd", mimeType="application/octet-stream") ]
 		public static const PlaceBuildingEffect:Class;  //放置建筑时的灰尘特效
-		
-		
+		[Embed(source="../resource/effect/ExpandButton.bd", mimeType="application/octet-stream") ]
+		public static const ExpandButton:Class ; //扩地建筑
 		
 		
 		
