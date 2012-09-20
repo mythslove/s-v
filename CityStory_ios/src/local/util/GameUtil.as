@@ -97,10 +97,10 @@ package local.util
 		 * @return 
 		 */		
 		public static function getTimeString( time:int ):String{
-			if(time>24*3600) return Math.floor(time/3600/24)+" Day"
-			if( time>3600) return Math.floor(time/3600)+ " Hours" ;
-			if( time>60) return Math.floor(time/60)+ " Mins" ;
-			return time + " Secs" ;
+			if(time>24*3600) return Math.floor(time/3600/24)+" "+localizationString("days");
+			if( time>3600) return Math.floor(time/3600)+" "+localizationString("hours");
+			if( time>60) return Math.floor(time/60)+" "+localizationString("mins");
+			return time +" "+localizationString("secs");
 		}
 		
 		/**

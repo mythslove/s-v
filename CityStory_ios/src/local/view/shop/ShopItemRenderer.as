@@ -35,7 +35,7 @@ package local.view.shop
 			{
 				case BuildingType.HOME:
 					gotoAndStop("homes");
-					GameUtil.boldTextField( txtPopGoods ,  "Pop: +" + baseVO.addPop ) ;
+					GameUtil.boldTextField( txtPopGoods ,  GameUtil.localizationString("pop") + ": +" + baseVO.addPop ) ;
 					GameUtil.boldTextField( txtCoin ,  "+"+ GameUtil.moneyFormat(baseVO.earnCoin)+" / "+ GameUtil.getTimeString( baseVO.time ) ) ;
 					break ;
 				case BuildingType.DECORATION:
@@ -43,7 +43,7 @@ package local.view.shop
 					break ;
 				case BuildingType.INDUSTRY:
 					gotoAndStop("industry");
-					GameUtil.boldTextField( txtPopGoods ,  "+" + baseVO.products.length +" Contracts" ) ;
+					GameUtil.boldTextField( txtPopGoods ,  "+" + baseVO.products.length +" "+GameUtil.localizationString("contracts") ) ;
 					break ;
 				case BuildingType.COMMUNITY:
 					gotoAndStop("community");

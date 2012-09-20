@@ -119,11 +119,11 @@ package local.view.bottombar
 						{
 							case BuildingType.INDUSTRY:
 								GameUtil.boldTextField( txtInfo , GameUtil.localizationString( "gametip.build.product.info",  
-									currentBuilding.buildingVO.product.earnGoods , GameUtil.localizationString("goods").toLocaleLowerCase()) );
+									currentBuilding.buildingVO.product.earnGoods , GameUtil.localizationString("goods").toLowerCase()) );
 								break ;
 							default:
 								GameUtil.boldTextField( txtInfo , GameUtil.localizationString( "gametip.build.product.info",  
-									currentBuilding.buildingVO.baseVO.earnCoin , GameUtil.localizationString("coins").toLocaleLowerCase() ) );
+									currentBuilding.buildingVO.baseVO.earnCoin , GameUtil.localizationString("coins").toLowerCase() ) );
 								break ;
 						}
 						btnYellowCash.label = GameUtil.localizationString("gametip.build.product.button" ); 
