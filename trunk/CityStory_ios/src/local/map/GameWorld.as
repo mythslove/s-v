@@ -2,8 +2,6 @@ package local.map
 {
 	import bing.iso.IsoObject;
 	
-	import com.greensock.TweenLite;
-	
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import flash.utils.Dictionary;
@@ -14,17 +12,21 @@ package local.map
 	import local.enum.BuildingType;
 	import local.enum.VillageMode;
 	import local.map.item.BaseBuilding;
+	import local.map.item.BaseMapObject;
+	import local.map.item.BasicBuilding;
 	import local.map.item.Road;
 	import local.map.land.ExpandLandButton;
 	import local.map.land.ExpandSign;
 	import local.model.BuildingModel;
 	import local.model.LandModel;
+	import local.model.MapGridDataModel;
 	import local.util.BuildingFactory;
 	import local.view.CenterViewLayer;
 	import local.view.base.StatusIcon;
 	import local.view.building.EditorBuildingButtons;
 	import local.view.building.MoveBuildingButtons;
 	import local.vo.BuildingVO;
+	import local.vo.LandVO;
 
 	public class GameWorld extends BaseWorld
 	{
@@ -263,6 +265,21 @@ package local.map
 			}
 		}
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		//================扩地=================================
+		
 		private function clickExpandButton( nodePoint:Point ):void
 		{
 			//判断此区域是否可以扩展
@@ -270,9 +287,43 @@ package local.map
 				if( obj.nodeX==nodePoint.x && obj.nodeZ == nodePoint.y ){
 					//可以扩展，弹出扩地提示
 					trace("expand");
+//					var landVO:LandVO = new LandVO();
+//					landVO.nodeX = nodePoint.x ;
+//					landVO.nodeZ = nodePoint.y ;
+//					expandLand( landVO );
 					break ;
 				}
 			}
+		}
+		
+		public function expandLand( landVO:LandVO ):void
+		{
+			LandModel.instance.lands.push( landVO );
+			//删除地上有的
+			var i:int = landVO.nodeX*4 ;
+			var j:int =  landVO.nodeZ*4 ;
+			var maxi:int = i+4 ;
+			var maxj:int = j+4 ;
+			var build:BaseMapObject ;
+			for( i ; i<maxi ; ++i)
+			{
+				for( j = landVO.nodeZ*4 ; j<maxj ; ++j){
+					build = MapGridDataModel.instance.getMapObject( i*_size , j*_size );
+					if(build){
+						if(build is BasicBuilding){
+							buildingScene.removeBuilding( build as BasicBuilding );
+						}else{
+							buildingScene.removeIsoObject( build );
+							MapGridDataModel.instance.removeBuildingGridData( build );
+							buildingScene.gridData.getNode(i,j).walkable = true ;
+						}
+					}
+				}
+			}
+			//画地图
+			drawMapZoneByFill( landVO );
+			//添加一个ExpandBuilding在上面
+			
 		}
 		
 		/** 显示扩地状态 */
@@ -301,5 +352,15 @@ package local.map
 			
 			changeWorldScale(GameSetting.minZoom/scaleX+0.0001 , GameSetting.SCREEN_WIDTH*0.5 , GameSetting.SCREEN_HEIGHT*0.5 ) ;
 		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 }
