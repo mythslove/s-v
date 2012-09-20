@@ -1,10 +1,14 @@
 package local.util
 {
+	import bing.utils.StringUtil;
+	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.filters.GlowFilter;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
+	
+	import local.comm.GameData;
 	
 	/**
 	 * 游戏工具类 
@@ -12,6 +16,27 @@ package local.util
 	 */	
 	public class GameUtil
 	{
+		
+		/**
+		 * 通过key获取本地化语言 
+		 * @param key
+		 * @param param 占位符文字替换
+		 * @return 
+		 */		
+		public static function localizationString( key:String , ...param ):String
+		{
+			var temp:String = GameData.lang[key]  ;
+			if(temp){
+				if(param && param.length>0){
+					temp = StringUtil.stringFormat (temp , param );
+				}
+			}else{
+				temp = "";
+			}
+			return temp;
+		}
+		
+		
 		/**
 		 * 方向位置 
 		 * @param p1
