@@ -201,10 +201,8 @@ package  local.map
 			var i:int , j:int ;
 			var gameGridData:Grid = MapGridDataModel.instance.gameGridData ;
 			var maxX:int ,maxZ:int ;
-			
 			//地图数据
 			this.panTo( MapGridDataModel.instance.mapPanX , MapGridDataModel.instance.mapPanY );
-			
 			//添加地图区域
 			if(!LandModel.instance.lands)  LandModel.instance.initLands();
 			for each( var landVO:LandVO in LandModel.instance.lands) {
@@ -220,10 +218,8 @@ package  local.map
 				}
 			}
 			//	drawMapZoneByLine();
-			
 			//添加扩地牌
 			addExpandSign();
-			
 			//随机添加树
 			addTrees();
 		}
