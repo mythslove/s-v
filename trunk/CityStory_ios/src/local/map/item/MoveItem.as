@@ -17,9 +17,9 @@ package local.map.item
 	 * 4	1
 	 * 3	2
 	 * 在菱形块的索引位置_roadIndex
-	 *		0
-	 * 3		1
-	 * 		2
+	 *			0
+	 * 3				1
+	 * 			2
 	 * @author zhouzhanglin
 	 */	
 	public class MoveItem extends BaseMapObject
