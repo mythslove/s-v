@@ -292,10 +292,10 @@ package  local.map
 				var index:int ;
 				for( var key:String in lands)
 				{
-					if(temp || Math.random()>0.6){
-						
+					if(temp || Math.random()>0.6)
+					{
 						if(_expandSigns.length>index){
-							expandSign = _expandSigns[index]
+							expandSign = _expandSigns[index] ;
 						}else{
 							expandSign = new ExpandSign();
 							_expandSigns.push( expandSign );
@@ -306,6 +306,7 @@ package  local.map
 						buildingScene.addIsoObject( expandSign , false );
 						expandSign.setWalkable( false , buildingScene.gridData );
 						MapGridDataModel.instance.addBuildingGridData(expandSign);
+						expandSign.checkScale();
 					}
 					temp = false ;
 					++index;

@@ -35,6 +35,7 @@ package local.map
 		}
 		//-----------------------------------------------------------------
 		private var _mouseBuilding:BaseBuilding; //按下时点击到的建筑
+		private var _expandLandBtns:Vector.<ExpandLandButton> = new Vector.<ExpandLandButton>();//扩地按钮
 		
 		/** 
 		 * 显示所有的建筑 
@@ -281,13 +282,20 @@ package local.map
 			var lands:Dictionary = LandModel.instance.getCanExpandLand();
 			var arr:Array ;
 			var expandLandBtn:ExpandLandButton ;
+			var index:int ;
 			for( var key:String in lands)
 			{
 				arr = key.split("-");
-				expandLandBtn = new ExpandLandButton();
+				if(_expandLandBtns.length>index){
+					expandLandBtn = _expandLandBtns[index];
+				}else{
+					expandLandBtn = new ExpandLandButton();
+					_expandLandBtns.push( expandLandBtn );
+				}
 				expandLandBtn.nodeX = int( arr[0] ) ;
 				expandLandBtn.nodeZ = int (arr[1] ) ;
 				topScene.addIsoObject( expandLandBtn , false );
+				++index ;
 			}
 			topScene.sortAll() ;
 			
