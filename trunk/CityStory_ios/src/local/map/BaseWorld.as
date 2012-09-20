@@ -37,6 +37,7 @@ package  local.map
 		
 		private var _basicVOs:Vector.<BaseBuildingVO> ; //所有的树的BaseBuildingVO
 		protected var _expandSigns:Vector.<ExpandSign> = new Vector.<ExpandSign>() ; //所有的扩地标志
+		private var _trees:Vector.<BasicBuilding> = new Vector.<BasicBuilding>();//所有的树
 		/**===============用于地图移动和缩放=========================*/
 		protected var _isMove:Boolean ; //当前是否在移动地图
 		protected var _isGesture:Boolean ; //当前是否在缩放地图
@@ -247,20 +248,35 @@ package  local.map
 			
 			var basicBuild:BasicBuilding ;
 			var bvo:BuildingVO ;
+			var treeIndex:int ;
 			var rate:Number = GameSetting.device=="iphone" ? 0.95 : 0.92 ;
 			for( i = 0 ; i<GameSetting.GRID_X ; ++i  ){
 				for( j = 0 ; j<GameSetting.GRID_Z ;  ++j ){
 					if( Math.random()>rate && !gameGridData.getNode(i,j).walkable && 
 						MapGridDataModel.instance.mapGridData.getNode(i,j).walkable ){
-						var index:int = (Math.random()*8 )>>0 ;
-						bvo = new BuildingVO();
-						bvo.baseVO = _basicVOs[index] ;
-						bvo.name = _basicVOs[index].name ;
-						bvo.nodeX = i ;
-						bvo.nodeZ = j ;
-						basicBuild = new BasicBuilding(bvo ) ;
-						basicBuild.mouseChildren =  false ;
-						buildingScene.addBuilding( basicBuild , false  );
+						if(_trees.length>treeIndex)
+						{
+							basicBuild = _trees[treeIndex] ;
+							basicBuild.buildingVO.nodeX = i ;
+							basicBuild.buildingVO.nodeZ = j ;
+							basicBuild.nodeX = i ;
+							basicBuild.nodeZ = j ;
+							buildingScene.addBuilding( basicBuild , false  );
+						}
+						else
+						{
+							var index:int = (Math.random()*8 )>>0 ;
+							bvo = new BuildingVO();
+							bvo.nodeX = i ;
+							bvo.nodeZ = j ;
+							bvo.baseVO = _basicVOs[index] ;
+							bvo.name = _basicVOs[index].name ;
+							basicBuild = new BasicBuilding(bvo ) ;
+							basicBuild.mouseChildren =  false ;
+							buildingScene.addBuilding( basicBuild , false  );
+							_trees.push( basicBuild );
+						}
+						++treeIndex ;
 					}
 				}
 			}
@@ -273,20 +289,26 @@ package  local.map
 				var arr:Array ;
 				var expandSign:ExpandSign ;
 				var temp:Boolean=true ;
+				var index:int ;
 				for( var key:String in lands)
 				{
 					if(temp || Math.random()>0.6){
+						
+						if(_expandSigns.length>index){
+							expandSign = _expandSigns[index]
+						}else{
+							expandSign = new ExpandSign();
+							_expandSigns.push( expandSign );
+						}
 						arr = key.split("-");
-						expandSign = new ExpandSign();
 						expandSign.nodeX = int( arr[0] )*4+2 ;
 						expandSign.nodeZ = int (arr[1] )*4 +1 ;
 						buildingScene.addIsoObject( expandSign , false );
 						expandSign.setWalkable( false , buildingScene.gridData );
 						MapGridDataModel.instance.addBuildingGridData(expandSign);
-						
-						_expandSigns.push( expandSign );
 					}
 					temp = false ;
+					++index;
 				}
 			}
 		}
