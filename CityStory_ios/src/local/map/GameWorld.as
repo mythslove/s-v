@@ -2,8 +2,6 @@ package local.map
 {
 	import bing.iso.IsoObject;
 	
-	import com.greensock.TweenLite;
-	
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import flash.utils.Dictionary;
@@ -285,11 +283,7 @@ package local.map
 				topScene.addIsoObject( expandLandBtn , false );
 			}
 			topScene.sortAll() ;
-			
-			var obj:Object = {scale:scaleX};
-			TweenLite.to( obj , 1 , {scale:GameSetting.minZoom , onUpdate:function():void{
-				changeWorldScale( obj.scale , GameSetting.SCREEN_WIDTH*0.5 , GameSetting.SCREEN_HEIGHT*0.5 ) ;
-			}});
+			changeWorldScale(GameSetting.minZoom , GameSetting.SCREEN_WIDTH*0.5 , GameSetting.SCREEN_HEIGHT*0.5 ) ;
 		}
 	}
 }
