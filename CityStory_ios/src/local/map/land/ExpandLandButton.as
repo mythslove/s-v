@@ -7,7 +7,7 @@ package local.map.land
 	import local.util.EmbedsManager;
 
 	/**
-	 * 扩地的按钮 
+	 * 扩地的按钮 4*4大小
 	 * @author zhouzhanglin
 	 */	
 	public class ExpandLandButton extends BaseMapObject
