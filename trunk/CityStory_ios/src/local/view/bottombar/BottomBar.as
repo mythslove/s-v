@@ -69,7 +69,7 @@ package local.view.bottombar
 					break ;
 				case doneBtn:
 					if(GameData.villageMode==VillageMode.EXPAND){
-						GameWorld.instance.topScene.clearAndDisposeChild() ;
+						GameWorld.instance.topScene.clear();
 					}else{
 						checkTopSceneBuilding();
 					}

@@ -32,12 +32,17 @@ package local.map.land
 			_container = new Sprite();
 			addChild(_container);
 			_container.addChild(bmp);
-			
-			if( screenX>GameSetting.SCREEN_WIDTH*0.5)
-			{
+		}
+		
+		public function checkScale():void
+		{
+			if( screenX>GameSetting.SCREEN_WIDTH*0.5){
 				_container.scaleX = -1 ;
+			}else{
+				_container.scaleX = 1;
 			}
 		}
+			
 		
 		override public function dispose():void
 		{
