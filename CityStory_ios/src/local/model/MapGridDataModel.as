@@ -99,6 +99,11 @@ package local.model
 			return build;
 		}
 		
+		public function getMapObject( x:int , z:int ):BaseMapObject
+		{
+			return  _grid2Building.getValue(x+"-"+z) as BaseMapObject ;
+		}
+		
 		/**
 		 * 判断建筑周围是否有相应的建筑 
 		 * @param building

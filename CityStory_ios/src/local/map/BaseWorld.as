@@ -35,9 +35,9 @@ package  local.map
 		
 		public var currentSelected:BaseBuilding ; //当前选中的建筑
 		
-		private var _basicVOs:Vector.<BaseBuildingVO> ; //所有的树的BaseBuildingVO
+		protected var _basicVOs:Vector.<BaseBuildingVO> ; //所有的树的BaseBuildingVO
 		protected var _expandSigns:Vector.<ExpandSign> = new Vector.<ExpandSign>() ; //所有的扩地标志
-		private var _trees:Vector.<BasicBuilding> = new Vector.<BasicBuilding>();//所有的树
+		protected var _trees:Vector.<BasicBuilding> = new Vector.<BasicBuilding>();//所有的树
 		/**===============用于地图移动和缩放=========================*/
 		protected var _isMove:Boolean ; //当前是否在移动地图
 		protected var _isGesture:Boolean ; //当前是否在缩放地图
@@ -248,7 +248,7 @@ package  local.map
 			var rate:Number = GameSetting.device=="iphone" ? 0.95 : 0.92 ;
 			for( i = 0 ; i<GameSetting.GRID_X ; ++i  ){
 				for( j = 0 ; j<GameSetting.GRID_Z ;  ++j ){
-					if( Math.random()>rate && !gameGridData.getNode(i,j).walkable && 
+					if( Math.random()>rate && !gameGridData.getNode(i,j).walkable &&
 						MapGridDataModel.instance.mapGridData.getNode(i,j).walkable ){
 						if(_trees.length>treeIndex)
 						{
@@ -263,8 +263,7 @@ package  local.map
 						{
 							var index:int = (Math.random()*8 )>>0 ;
 							bvo = new BuildingVO();
-							bvo.nodeX = i ;
-							bvo.nodeZ = j ;
+							bvo.nodeX = i ; bvo.nodeZ = j ;
 							bvo.baseVO = _basicVOs[index] ;
 							bvo.name = _basicVOs[index].name ;
 							basicBuild = new BasicBuilding(bvo ) ;
