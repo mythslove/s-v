@@ -64,11 +64,11 @@ package  local.map
 			var offset:Number ;
 			
 			var map:Shape = new Shape();
-//			map.graphics.beginFill(0x859E21  );
-//			map.graphics.drawRect(0,0,GameSetting.MAP_WIDTH , GameSetting.MAP_HEIGHT);
-//			map.graphics.endFill();
-//			this.setBackGround( map );
-//			return ;
+			map.graphics.beginFill(0x859E21  );
+			map.graphics.drawRect(0,0,GameSetting.MAP_WIDTH , GameSetting.MAP_HEIGHT);
+			map.graphics.endFill();
+			this.setBackGround( map );
+			return ;
 			
 			var bmd:BitmapData = EmbedsManager.instance.getBitmapByName("MapBlock").bitmapData;
 			map.graphics.beginBitmapFill( bmd , mat , true  );
