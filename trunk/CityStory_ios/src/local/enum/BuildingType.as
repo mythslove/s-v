@@ -8,7 +8,7 @@ package local.enum
 	{
 		public static const BASIC:String = "basic" ;
 		public static const EXPAND_BUILDING:String = "expandBuilding";
-		public static const EXPAND_BUTTON:String = "expandButton";
+		public static const EXPAND_SIGN:String = "expandSign";
 		
 		public static const HOME:String = "home" ;
 		public static const HOME_RESIDENCE:String = "residence" ;
