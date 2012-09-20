@@ -45,7 +45,7 @@ package bing.utils
 		 * @param param
 		 * @return 
 		 */		
-		public static function stringFormat( str:String , ...param ):String{
+		public static function stringFormat( str:String ,param:Array ):String{
 			var reg:RegExp = /\{(\d)\}/ ;
 			var i:int ;
 			while(str.search(reg)>-1 ){

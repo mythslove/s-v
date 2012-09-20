@@ -105,8 +105,8 @@ package local.view.bottombar
 					case BuildingStatus.NO_ROAD: //没路时，显示移动建筑提示 
 						this.show() ;
 						gotoAndStop("noroad");
-						GameUtil.boldTextField( txtInfo , "Building must be next to a road in order to be used.");
-						btnGreen.label = "MOVE";
+						GameUtil.boldTextField( txtInfo , GameUtil.localizationString("gametip.build.noroad.info" ) );
+						btnGreen.label =  GameUtil.localizationString("gametip.build.noroad.button" ); 
 						break ;
 					case BuildingStatus.EXPANDING: //扩地时，显示instant提示
 						this.show() ;
@@ -118,13 +118,15 @@ package local.view.bottombar
 						switch(currentBuilding.buildingVO.baseVO.type)
 						{
 							case BuildingType.INDUSTRY:
-								GameUtil.boldTextField( txtInfo , "Collect "+currentBuilding.buildingVO.product.earnGoods +" goods in:");
+								GameUtil.boldTextField( txtInfo , GameUtil.localizationString( "gametip.build.product.info",  
+									currentBuilding.buildingVO.product.earnGoods , GameUtil.localizationString("goods").toLocaleLowerCase()) );
 								break ;
 							default:
-								GameUtil.boldTextField( txtInfo , "Collect "+currentBuilding.buildingVO.baseVO.earnCoin +" coins in:");
+								GameUtil.boldTextField( txtInfo , GameUtil.localizationString( "gametip.build.product.info",  
+									currentBuilding.buildingVO.baseVO.earnCoin , GameUtil.localizationString("coins").toLocaleLowerCase() ) );
 								break ;
 						}
-						btnYellowCash.label = "SPEED UP FOR";
+						btnYellowCash.label = GameUtil.localizationString("gametip.build.product.button" ); 
 						break ;
 					case BuildingStatus.PRODUCTION_COMPLETE:
 						this.hide();
@@ -141,10 +143,10 @@ package local.view.bottombar
 						gotoAndStop("expired");
 						GameUtil.boldTextField( txtTitle , currentBuilding.buildingVO.name );
 						var goods:int = currentBuilding.buildingVO.product.earnGoods ;
-						GameUtil.boldTextField( txtInfo , goods+" goods have expired!" );
-						btnYellowCash.label = "SAVE ALL FOR";
+						GameUtil.boldTextField( txtInfo , GameUtil.localizationString("gametip.goods.expired.info",goods)  );
+						btnYellowCash.label = GameUtil.localizationString("gametip.goods.expired.button.saveall");
 						btnYellowCash.cash = GameUtil.expiredSaveAllCash(goods)+"";
-						btnGray.label = "RECOVER "+GameUtil.expiredRecverGoods(goods) +" GOODS";
+						btnGray.label =  GameUtil.localizationString("gametip.goods.expired.button.recover" , GameUtil.expiredRecverGoods(goods) ); 
 						break ;
 				}
 			}
@@ -166,8 +168,8 @@ package local.view.bottombar
 			currentBuilding = null ;
 			show();
 			gotoAndStop("energy");
-			btnGreen.label = "GE ENERGY";
-			GameUtil.boldTextField( txtInfo , "You don't have enough energy for this." );
+			btnGreen.label = GameUtil.localizationString("gametip.noenergy.button")  ;
+			GameUtil.boldTextField( txtInfo , GameUtil.localizationString("gametip.noenergy.info") );
 		}
 		
 		/**
@@ -178,8 +180,8 @@ package local.view.bottombar
 			currentBuilding = null ;
 			show();
 			gotoAndStop("goods");
-			btnGreen.label = "GE GOODS";
-			GameUtil.boldTextField( txtInfo , "You don't have enough goods for this." );
+			btnGreen.label = GameUtil.localizationString("gametip.nogoods.button")  ;
+			GameUtil.boldTextField( txtInfo , GameUtil.localizationString("gametip.nogoods.info") );
 		}
 		
 		
