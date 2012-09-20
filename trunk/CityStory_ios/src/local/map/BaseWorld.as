@@ -223,10 +223,17 @@ package  local.map
 			addExpandSign();
 			
 			//随机添加树
+			addTrees();
+		}
+		
+		private function addTrees():void
+		{
+			var i:int , j:int ;
+			var gameGridData:Grid = MapGridDataModel.instance.gameGridData ;
 			if(!_basicVOs){
 				var basicVO:BaseBuildingVO ;
 				_basicVOs = new Vector.<BaseBuildingVO>( 8 , true );
-				for( i = 0 ; i<8 ; ++i ) {
+				for(var i:int = 0 ; i<8 ; ++i ) {
 					basicVO = new BaseBuildingVO();
 					basicVO.name = "Basic_Tree"+( i+1 ) ; 
 					basicVO.type = BuildingType.BASIC ;
