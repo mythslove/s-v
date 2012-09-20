@@ -75,7 +75,7 @@ package  local.comm
 				case VillageMode.EXPAND :
 					world.buildingScene.mouseChildren = false ;
 					world.buildingScene.removeMoveItems();
-					world.buildingScene.alpha=0.6;
+					world.buildingScene.alpha=0.5;
 					world.runUpdate = false ;
 					world.roadScene.mouseChildren = false ;
 					world.topScene.visible = true ;

@@ -266,7 +266,7 @@ package local.map
 			for each( var obj:IsoObject in topScene.children){
 				if( obj.nodeX==nodePoint.x && obj.nodeZ == nodePoint.y ){
 					//可以扩展，弹出扩地提示
-					trace("expand");
+					
 					break ;
 				}
 			}
