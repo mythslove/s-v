@@ -13,21 +13,19 @@
 		 */		
 		public static function setScale(mc:DisplayObject , fixWid:int , fixHet:int ):DisplayObject
 		{
-			if(mc.width<fixWid && mc.height<fixHet )
-			{
-				return mc;
+			if(mc.width<fixWid && mc.height<fixHet ) return mc;
+			
+			if(mc.height>fixHet) {
+				var scale:Number = fixHet/mc.height ;
+				mc.height *= scale ;
+				mc.width *= scale ;
 			}
-			if(mc.width/mc.height>fixWid/fixHet)
-			{
-				//根据宽度
-				mc.height = mc.height/mc.width * fixHet ;
-				mc.width = fixWid ;
-			}else{
-				//根据高度
-				mc.width = mc.width/mc.height * fixWid ;
-				mc.height = fixHet ;
+			if(mc.width>fixWid){
+				scale = fixWid/mc.width ;
+				mc.height *= scale ;
+				mc.width *= scale ;
 			}
-			return mc
+			return mc ;
 		}
 	
 	}
