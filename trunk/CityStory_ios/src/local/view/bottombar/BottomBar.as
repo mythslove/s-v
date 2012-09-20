@@ -68,7 +68,11 @@ package local.view.bottombar
 					PopUpManager.instance.addQueuePopUp( ShopOverViewPopUp.instance , true , 0 , 0 );
 					break ;
 				case doneBtn:
-					checkTopSceneBuilding();
+					if(GameData.villageMode==VillageMode.EXPAND){
+						GameWorld.instance.topScene.clearAndDisposeChild() ;
+					}else{
+						checkTopSceneBuilding();
+					}
 					GameData.villageMode = VillageMode.NORMAL ;
 					break ;
 				case storageBtn:
@@ -93,7 +97,6 @@ package local.view.bottombar
 				}
 			}
 		}
-		
 		
 		/**
 		 * 显示收藏箱 
