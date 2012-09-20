@@ -14,6 +14,7 @@ package local.map
 	import local.map.item.BaseBuilding;
 	import local.map.item.Road;
 	import local.map.land.ExpandLandButton;
+	import local.map.land.ExpandSign;
 	import local.model.BuildingModel;
 	import local.model.LandModel;
 	import local.util.BuildingFactory;
@@ -174,6 +175,10 @@ package local.map
 							currentSelected = (e.target as StatusIcon).building ;
 							currentSelected.onClick();
 						}
+						else if(e.target is ExpandSign)
+						{
+							GameData.villageMode = VillageMode.EXPAND ;
+						}
 						else if(e.target.parent==_mouseBuilding)
 						{
 							if(e.target.parent!=currentSelected  ){
@@ -283,7 +288,7 @@ package local.map
 				topScene.addIsoObject( expandLandBtn , false );
 			}
 			topScene.sortAll() ;
-			changeWorldScale(GameSetting.minZoom , GameSetting.SCREEN_WIDTH*0.5 , GameSetting.SCREEN_HEIGHT*0.5 ) ;
+			changeWorldScale(GameSetting.minZoom+0.00001 , GameSetting.SCREEN_WIDTH*0.5 , GameSetting.SCREEN_HEIGHT*0.5 ) ;
 		}
 	}
 }
