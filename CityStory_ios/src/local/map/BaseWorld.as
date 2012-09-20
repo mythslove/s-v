@@ -36,6 +36,7 @@ package  local.map
 		public var currentSelected:BaseBuilding ; //当前选中的建筑
 		
 		private var _basicVOs:Vector.<BaseBuildingVO> ; //所有的树的BaseBuildingVO
+		protected var _expandSigns:Vector.<ExpandSign> = new Vector.<ExpandSign>() ; //所有的扩地标志
 		/**===============用于地图移动和缩放=========================*/
 		protected var _isMove:Boolean ; //当前是否在移动地图
 		protected var _isGesture:Boolean ; //当前是否在缩放地图
@@ -233,7 +234,7 @@ package  local.map
 			if(!_basicVOs){
 				var basicVO:BaseBuildingVO ;
 				_basicVOs = new Vector.<BaseBuildingVO>( 8 , true );
-				for(var i:int = 0 ; i<8 ; ++i ) {
+				for(i = 0 ; i<8 ; ++i ) {
 					basicVO = new BaseBuildingVO();
 					basicVO.name = "Basic_Tree"+( i+1 ) ; 
 					basicVO.type = BuildingType.BASIC ;
@@ -282,9 +283,21 @@ package  local.map
 						buildingScene.addIsoObject( expandSign , false );
 						expandSign.setWalkable( false , buildingScene.gridData );
 						MapGridDataModel.instance.addBuildingGridData(expandSign);
+						
+						_expandSigns.push( expandSign );
 					}
 					temp = false ;
 				}
+			}
+		}
+		
+		/**
+		 * 显示和隐藏扩地标志 
+		 * @param value
+		 */		
+		public function visibleExpandSigns( value:Boolean):void{
+			for each( var sign:ExpandSign in _expandSigns){
+				sign.visible = value ;
 			}
 		}
 		

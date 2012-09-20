@@ -84,7 +84,10 @@ package local.view
 					topBar.visible = false ;
 					break ;
 				case VillageMode.EXPAND :
-					bottomBar.visible = false ;
+					bottomBar.marketBtn.visible = false ;
+					bottomBar.editorBtn.visible = false ;
+					bottomBar.doneBtn.visible = true ;
+					bottomBar.storageBtn.visible = false ;
 					topBar.visible = false ;
 					break ;
 			}

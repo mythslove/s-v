@@ -51,6 +51,7 @@ package  local.comm
 					world.topScene.visible = false ;
 					world.topScene.clearAndDisposeChild();
 					world.iconScene.visible = true ;
+					world.visibleExpandSigns( true ) ;
 					world.buildingScene.checkRoadsAndIcons();
 					world.sortIcons();
 					break ;
@@ -80,6 +81,7 @@ package  local.comm
 					world.roadScene.mouseChildren = false ;
 					world.topScene.visible = true ;
 					world.iconScene.visible = false ;
+					world.visibleExpandSigns( false ) ;
 					world.showExpandState();
 					break ;
 			}

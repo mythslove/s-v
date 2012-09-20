@@ -2,6 +2,8 @@ package local.map
 {
 	import bing.iso.IsoObject;
 	
+	import com.greensock.TweenLite;
+	
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import flash.utils.Dictionary;
@@ -266,7 +268,7 @@ package local.map
 			for each( var obj:IsoObject in topScene.children){
 				if( obj.nodeX==nodePoint.x && obj.nodeZ == nodePoint.y ){
 					//可以扩展，弹出扩地提示
-					
+					trace("expand");
 					break ;
 				}
 			}
@@ -288,7 +290,8 @@ package local.map
 				topScene.addIsoObject( expandLandBtn , false );
 			}
 			topScene.sortAll() ;
-			changeWorldScale(GameSetting.minZoom+0.00001 , GameSetting.SCREEN_WIDTH*0.5 , GameSetting.SCREEN_HEIGHT*0.5 ) ;
+			
+			changeWorldScale(GameSetting.minZoom/scaleX+0.0001 , GameSetting.SCREEN_WIDTH*0.5 , GameSetting.SCREEN_HEIGHT*0.5 ) ;
 		}
 	}
 }
