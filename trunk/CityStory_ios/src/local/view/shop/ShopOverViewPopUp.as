@@ -9,6 +9,7 @@ package local.view.shop
 	import local.comm.GameSetting;
 	import local.enum.BuildingType;
 	import local.map.GameWorld;
+	import local.util.GameUtil;
 	import local.util.PopUpManager;
 	import local.view.base.BaseView;
 	import local.view.btn.PopUpCloseButton;
@@ -32,10 +33,10 @@ package local.view.shop
 		public function ShopOverViewPopUp(){
 			super();
 			
-			btnHomes.label="Homes";
-			btnBusiness.label="Business";
-			btnDecor.label="Decora";
-			btnIndustry.label = "Industry";
+			btnHomes.label= GameUtil.localizationString("homes").toUpperCase() ;
+			btnBusiness.label= GameUtil.localizationString("business").toUpperCase();
+			btnDecor.label=GameUtil.localizationString("decora").toUpperCase();
+			btnIndustry.label =GameUtil.localizationString("industry").toUpperCase(); 
 			
 			
 			addEventListener(MouseEvent.CLICK , onMouseHandler );

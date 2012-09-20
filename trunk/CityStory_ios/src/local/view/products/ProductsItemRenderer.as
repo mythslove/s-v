@@ -30,7 +30,7 @@ package local.view.products
 		{
 			super();
 			mouseEnabled = false ;
-			btnStart.label="Start";
+			btnStart.label=GameUtil.localizationString("start").toUpperCase();
 			
 			txtEarnGoods.mouseEnabled = false ;
 			txtTitle.mouseEnabled = false ;
@@ -46,7 +46,7 @@ package local.view.products
 			GameUtil.boldTextField( txtEarnGoods ,  "+" + proVO.earnGoods ) ;
 			price.gotoAndStop("coin");
 			GameUtil.boldTextField( price.txtPrice ,  GameUtil.moneyFormat( proVO.coinCost ) );
-			txtCollect.text = "Collect:";
+			txtCollect.text = GameUtil.localizationString("collect")+":";
 			GameUtil.boldTextField( txtTime ,  GameUtil.getTimeString( proVO.time )  ) ;
 			
 			//标题
