@@ -7,10 +7,13 @@ package  local.map
 	import flash.events.*;
 	import flash.geom.*;
 	import flash.ui.*;
+	import flash.utils.Dictionary;
 	
 	import local.comm.*;
 	import local.enum.BuildingType;
+	import local.enum.VillageMode;
 	import local.map.item.*;
+	import local.map.land.ExpandSign;
 	import local.map.scene.*;
 	import local.model.LandModel;
 	import local.model.MapGridDataModel;
@@ -32,6 +35,7 @@ package  local.map
 		
 		public var currentSelected:BaseBuilding ; //当前选中的建筑
 		
+		private var _basicVOs:Vector.<BaseBuildingVO> ; //所有的树的BaseBuildingVO
 		/**===============用于地图移动和缩放=========================*/
 		protected var _isMove:Boolean ; //当前是否在移动地图
 		protected var _isGesture:Boolean ; //当前是否在缩放地图
@@ -215,20 +219,25 @@ package  local.map
 			}
 			//	drawMapZoneByLine();
 			
-			//随机添加树，石头
-			var basicBuild:BasicBuilding ;
-			var basicVO:BaseBuildingVO ;
-			var basicVOs:Vector.<BaseBuildingVO> = new Vector.<BaseBuildingVO>( 8 , true );
-			for( i = 0 ; i<8 ; ++i ) {
-				basicVO = new BaseBuildingVO();
-				basicVO.name = "Basic_Tree"+( i+1 ) ; 
-				basicVO.type = BuildingType.BASIC ;
-				if(i<6) {
-					basicVO.span = 1 ;
+			//添加扩地牌
+			addExpandSign();
+			
+			//随机添加树
+			if(!_basicVOs){
+				var basicVO:BaseBuildingVO ;
+				_basicVOs = new Vector.<BaseBuildingVO>( 8 , true );
+				for( i = 0 ; i<8 ; ++i ) {
+					basicVO = new BaseBuildingVO();
+					basicVO.name = "Basic_Tree"+( i+1 ) ; 
+					basicVO.type = BuildingType.BASIC ;
+					if(i<6) {
+						basicVO.span = 1 ;
+					}
+					_basicVOs[i] = basicVO ;
 				}
-				basicVOs[i] = basicVO ;
 			}
 			
+			var basicBuild:BasicBuilding ;
 			var bvo:BuildingVO ;
 			var rate:Number = GameSetting.device=="iphone" ? 0.95 : 0.92 ;
 			for( i = 0 ; i<GameSetting.GRID_X ; ++i  ){
@@ -237,14 +246,37 @@ package  local.map
 						MapGridDataModel.instance.mapGridData.getNode(i,j).walkable ){
 						var index:int = (Math.random()*8 )>>0 ;
 						bvo = new BuildingVO();
-						bvo.baseVO = basicVOs[index] ;
-						bvo.name = basicVOs[index].name ;
+						bvo.baseVO = _basicVOs[index] ;
+						bvo.name = _basicVOs[index].name ;
 						bvo.nodeX = i ;
 						bvo.nodeZ = j ;
 						basicBuild = new BasicBuilding(bvo ) ;
 						basicBuild.mouseChildren =  false ;
 						buildingScene.addBuilding( basicBuild , false  );
 					}
+				}
+			}
+		}
+		
+		private function addExpandSign():void
+		{
+			if(GameData.villageMode!=VillageMode.VISIT){
+				var lands:Dictionary = LandModel.instance.getCanExpandLand();
+				var arr:Array ;
+				var expandSign:ExpandSign ;
+				var temp:Boolean=true ;
+				for( var key:String in lands)
+				{
+					if(temp || Math.random()>0.6){
+						arr = key.split("-");
+						expandSign = new ExpandSign();
+						expandSign.nodeX = int( arr[0] )*4+2 ;
+						expandSign.nodeZ = int (arr[1] )*4 +1 ;
+						buildingScene.addIsoObject( expandSign , false );
+						expandSign.setWalkable( false , buildingScene.gridData );
+						MapGridDataModel.instance.addBuildingGridData(expandSign);
+					}
+					temp = false ;
 				}
 			}
 		}

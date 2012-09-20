@@ -2,11 +2,8 @@ package local.map.land
 {
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
-	import flash.events.MouseEvent;
 	
-	import local.comm.GameData;
 	import local.comm.GameSetting;
-	import local.enum.VillageMode;
 	import local.map.item.BaseMapObject;
 	import local.util.EmbedsManager;
 	import local.vo.BitmapAnimResVO;
@@ -40,21 +37,12 @@ package local.map.land
 			{
 				_container.scaleX = -1 ;
 			}
-			
-			addEventListener(MouseEvent.MIDDLE_CLICK , onClickHandler , false , 0 , true );
-		}
-		
-		private function onClickHandler( e:MouseEvent ):void
-		{
-			e.stopPropagation() ;
-			GameData.villageMode = VillageMode.EXPAND ;
 		}
 		
 		override public function dispose():void
 		{
 			super.dispose() ;
 			_container = null ;
-			removeEventListener(MouseEvent.MIDDLE_CLICK , onClickHandler );
 		}
 	}
 }
