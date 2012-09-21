@@ -5,7 +5,10 @@ package local.map.item
 	import local.enum.PickupType;
 	import local.enum.VillageMode;
 	import local.map.GameWorld;
+	import local.map.cell.BuildingObject;
 	import local.map.pk.PickupImages;
+	import local.util.ResourceUtil;
+	import local.vo.BitmapAnimResVO;
 	import local.vo.BuildingVO;
 
 	/**
@@ -28,6 +31,15 @@ package local.map.item
 					buildClick();
 				}
 			}
+		}
+		
+		override public function showUI():void
+		{
+			var barvo:Vector.<BitmapAnimResVO> = ResourceUtil.instance.getResVOByResId( name ).resObject as  Vector.<BitmapAnimResVO> ;
+			_buildingObject = new BuildingObject(barvo);
+			addChildAt(_buildingObject,0);
+			this.scaleX = buildingVO.rotation ;
+			showBuildingFlagIcon();
 		}
 		
 		/*砍树时点击*/

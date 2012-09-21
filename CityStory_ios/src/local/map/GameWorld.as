@@ -54,8 +54,9 @@ package local.map
 			else //显示自己的村庄
 			{
 				var myModel:BuildingModel = BuildingModel.instance ;
-				if(myModel.expandBuilding){
+				if(myModel.expandBuilding){ //有扩地
 					buildingScene.addBuilding( BuildingFactory.createBuildingByVO( myModel.expandBuilding ) , false , true );
+					removeExpandSigns();
 				}
 				tempShowBuilding(myModel.basicTrees);
 				tempShowBuilding(myModel.business);
@@ -344,6 +345,7 @@ package local.map
 			topScene.clear();
 			GameData.villageMode = VillageMode.NORMAL ;
 			GameData.hasExpanding = true ;
+			removeExpandSigns() ;
 		}
 		
 		/** 显示扩地状态 */

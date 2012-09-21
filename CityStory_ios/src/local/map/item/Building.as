@@ -226,7 +226,7 @@ package local.map.item
 						
 						var flyImg:FlyLabelImage = new FlyLabelImage( PickupType.CASH , -cashCost ) ;
 						flyImg.x = screenX ;
-						flyImg.y = screenY ;
+						flyImg.y = screenY-50 ;
 						GameWorld.instance.effectScene.addChild( flyImg );
 						
 						gameTimerCompleteHandler(null);

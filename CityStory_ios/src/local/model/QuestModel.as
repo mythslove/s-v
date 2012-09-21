@@ -1,7 +1,5 @@
 package local.model
 {
-	import flash.utils.Dictionary;
-	
 	import local.vo.PlayerVO;
 	import local.vo.QuestVO;
 
@@ -25,10 +23,10 @@ package local.model
 		public var allQuestArray:Vector.<QuestVO> ; 
 		
 		/** 当前的quests */
-		public var currentQuests:Vector.<QuestVO> = null ;
+		public var currentQuests:Vector.<QuestVO> ;
 		
 		/** 完成了的quests ，key为qid，value为questVO*/
-		public var completedQuests:Dictionary  = null  ;
+		public var completedQuests:Object  ;
 		
 		/**
 		 * 获得当前最新的quests
@@ -37,7 +35,7 @@ package local.model
 		public function getCurrentQuests():Vector.<QuestVO>
 		{
 			if(!currentQuests) currentQuests = new Vector.<QuestVO>();
-			if(!completedQuests) completedQuests = new Dictionary();
+			if(!completedQuests) completedQuests = new Object();
 			
 			var vo:QuestVO;
 			for(var i:int = 0 ; i<currentQuests.length ; ++i){
