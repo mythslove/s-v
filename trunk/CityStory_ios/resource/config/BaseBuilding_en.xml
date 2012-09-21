@@ -17,7 +17,7 @@
 	<item name="Annsui"  title="Annsui Shop" type="business" goodsCost="5" click="3" priceCoin="3000" requireLv="2" time="12000" earnCoin="150"/>
 	<item name="My House"  title="My House" type="home"  click="3" priceCoin="3" addPop="10" requireLv="1" time="120" earnCoin="100"/>
 	<item name="Red Victorian House"  title="Red Victorian House" type="home"  click="3" priceCash="2" addPop="10" requireLv="2" time="40" earnCoin="500"/>
-	<item name="Yellow Victorian House"  title="Yellow Victorian House" type="home"  click="3" priceCoin="6" addPop="12" 
+	<item name="Yellow Victorian House"  title="Yellow Victorian House" type="home" addPop="8"  click="3" priceCoin="6" addPop="12" 
 	requireLv="3" time="18000" earnCoin="150"/>
 	<item name="Apartments"  title="Apartments" type="home" click="3" priceCoin="40" addPop="15" requireLv="4" time="6000" earnCoin="180"/>
 	<item name="Apartments1"  title="Apartments1" type="home" click="3" priceCoin="60" addPop="15" requireLv="4" time="6000" earnCoin="130"/>
