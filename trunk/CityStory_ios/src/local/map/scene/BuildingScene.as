@@ -139,12 +139,12 @@ package local.map.scene
 					}
 				}
 			}
-			
-			var carNum:int ;
-			var characNum:int ;
+			var maxCar:int = GameSetting.device=="iphone" ? 5 : 8 ;
+			var maxChara:int = GameSetting.device=="iphone" ? 10 : 15 ;
+			var carNum:int , characNum:int ;
 			for(var i:int = 0 ; i<roads.length ; ++i)
 			{
-				if( characNum<10 && Math.random()>0.6 ){ //不超过10个人
+				if( characNum<maxChara && Math.random()>0.6 ){ 
 					road = roads[i];
 					var fairy:MoveItem = ObjectPool.instance.getCharacter() ;
 					fairy.nodeX  = road.nodeX;
@@ -152,7 +152,7 @@ package local.map.scene
 					addMoveItem( fairy , false ) ;
 					fairy.init();
 					++ characNum ;
-				}else if(carNum<5 && Math.random()>0.4 ){ //不超过5辆车
+				}else if(carNum<maxCar && Math.random()>0.4 ){ 
 					road = roads[i];
 					if(road.direction!=""){
 						var car:MoveItem = ObjectPool.instance.getCar() ;
