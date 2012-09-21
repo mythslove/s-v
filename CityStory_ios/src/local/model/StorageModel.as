@@ -126,7 +126,7 @@ package local.model
 				for( var i:int = 0 ; i<len ; ++i ){
 					if(arr[i].name==name){
 						arr[i].num--;
-						if(arr[i].num==0){
+						if(arr[i].num<=0){
 							arr.splice( i , 1 );
 						}
 						break ;
