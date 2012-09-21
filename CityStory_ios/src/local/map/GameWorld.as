@@ -56,7 +56,7 @@ package local.map
 				var myModel:BuildingModel = BuildingModel.instance ;
 				if(myModel.expandBuilding){ //有扩地
 					buildingScene.addBuilding( BuildingFactory.createBuildingByVO( myModel.expandBuilding ) , false , true );
-					removeExpandSigns();
+					visibleExpandSigns(false);
 				}
 				tempShowBuilding(myModel.basicTrees);
 				tempShowBuilding(myModel.business);
@@ -308,7 +308,9 @@ package local.map
 		
 		public function expandLand( landVO:LandVO ):void
 		{
+			//玩家已经拥有这块土地
 			LandModel.instance.lands.push( landVO );
+			MapGridDataModel.instance.landGridData.setWalkable( landVO.nodeX , landVO.nodeZ , true ); 
 			//删除地上有的
 			var i:int = landVO.nodeX*4 ;
 			var j:int =  landVO.nodeZ*4 ;
@@ -325,9 +327,9 @@ package local.map
 						}else{
 							buildingScene.removeIsoObject( build );
 							MapGridDataModel.instance.removeBuildingGridData( build );
-							buildingScene.gridData.getNode(i,j).walkable = true ;
 						}
 					}
+					MapGridDataModel.instance.gameGridData.setWalkable( i , j , true ); //将这块土地的小格子全部设置为可用
 				}
 			}
 			//画地图

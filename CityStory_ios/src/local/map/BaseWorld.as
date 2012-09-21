@@ -284,31 +284,40 @@ package  local.map
 				var arr:Array ;
 				var expandSign:ExpandSign ;
 				var temp:Boolean=true ;
-				var index:int ;
+				var index:int , nx:int , nz:int ;
 				for( var key:String in lands)
 				{
 					if(temp || Math.random()>0.6)
 					{
-						if(_expandSigns.length>index){
-							expandSign = _expandSigns[index] ;
-						}else{
-							expandSign = new ExpandSign();
-							_expandSigns.push( expandSign );
-						}
 						arr = key.split("-");
-						expandSign.nodeX = int( arr[0] )*4+2 ;
-						expandSign.nodeZ = int (arr[1] )*4 +1 ;
-						buildingScene.addIsoObject( expandSign , sort );
-						expandSign.setWalkable( false , buildingScene.gridData );
-						MapGridDataModel.instance.addBuildingGridData(expandSign);
-						expandSign.checkScale();
+						for( var i:int = 1 ; i<4 ; ++i ){
+							for( var j:int = 1 ;  j<4 ; ++j ){
+								nx = int( arr[0] )*4+i ;
+								nz = int (arr[1] )*4+j ;
+								if( ( sort && buildingScene.gridData.getNode(nx,nz).walkable) || !buildingScene.gridData.getNode(nx,nz).walkable )
+								{
+									if(_expandSigns.length>index){
+										expandSign = _expandSigns[index] ;
+									}else{
+										expandSign = new ExpandSign();
+										_expandSigns.push( expandSign );
+									}
+									expandSign.nodeX = nx ;
+									expandSign.nodeZ = nz ;
+									buildingScene.addIsoObject( expandSign , sort );
+									expandSign.setWalkable( false , buildingScene.gridData );
+									MapGridDataModel.instance.addBuildingGridData(expandSign);
+									expandSign.checkScale();
+									temp = false ;
+									i = 4;j=4;
+								}
+							}
+						}
+						
 					}
-					temp = false ;
 					++index;
 				}
 			}
-			if(sort)	//为true时，不是初始化地图时，是游戏中扩地完成后重新添加扩地图标
-				visibleExpandSigns(true);
 		}
 		
 		/**
@@ -329,7 +338,6 @@ package  local.map
 			for each( var sign:ExpandSign in _expandSigns){
 				if(sign.parent){
 					buildingScene.removeIsoObject( sign);
-					sign.setWalkable( true , buildingScene.gridData );
 					MapGridDataModel.instance.removeBuildingGridData(sign);
 				}
 			}
