@@ -63,12 +63,14 @@ package local.view.building
 			switch( e.target)
 			{
 				case okBtn:
-					if( GameData.villageMode==VillageMode.BUILDING_STORAGE){
+					if( GameData.villageMode==VillageMode.BUILDING_STORAGE)
+					{
 						building.storageToWorld();
 						GameData.villageMode = VillageMode.EDIT ;
-					}else if( GameData.villageMode==VillageMode.BUILDING_SHOP){
-						building.shopToWorld();
-						
+					}
+					else if( GameData.villageMode==VillageMode.BUILDING_SHOP)
+					{
+						building.shopToWorld();						
 						var baseVO:BaseBuildingVO = building.buildingVO.baseVO ;
 						if( baseVO.type==BuildingType.DECORATION ){
 							var me:PlayerVO = PlayerModel.instance.me ;

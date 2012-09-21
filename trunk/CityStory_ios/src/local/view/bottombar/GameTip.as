@@ -21,12 +21,14 @@ package local.view.bottombar
 	import local.map.item.ExpandLandBuilding;
 	import local.map.item.Industry;
 	import local.util.GameUtil;
+	import local.util.PopUpManager;
 	import local.view.CenterViewLayer;
 	import local.view.base.BuildingThumb;
 	import local.view.btn.GrayButton;
 	import local.view.btn.GreenButton;
 	import local.view.btn.MiniCloseButton;
 	import local.view.btn.YellowCashButton;
+	import local.view.shop.ShopPopUp;
 
 	/**
 	 * 游戏的tip 
@@ -59,7 +61,7 @@ package local.view.bottombar
 		private function mouseEvtHandler( e:MouseEvent ):void
 		{
 			e.stopPropagation() ;
-			if(e.target == btnClose || !currentBuilding )
+			if(e.target == btnClose || (!currentBuilding && currentLabel!="nopop" ) )
 			{
 				this.hide() ;
 				return ;
@@ -75,7 +77,10 @@ package local.view.bottombar
 					}else if(currentLabel=="goods"){
 						trace("打开商店Goods窗口");
 					}else if( currentLabel=="nopop"){
-						trace("建筑不够，不能将工厂放置在地图上");
+						GameData.villageMode = VillageMode.NORMAL ;
+						//打开商店的房子窗口
+						PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , false );
+						ShopPopUp.instance.show(BuildingType.HOME);
 					}
 					this.hide() ;
 					break ;
@@ -156,15 +161,6 @@ package local.view.bottombar
 						break ;
 				}
 			}
-			else if( GameData.villageMode==VillageMode.BUILDING_STORAGE)
-			{
-				if(building is Industry && building.buildingVO.status==BuildingStatus.NONE)
-				{
-					this.show() ;
-					gotoAndStop("nopop");
-					
-				}
-			}
 			//图片
 			if(imgContainer){
 				ContainerUtil.removeChildren( imgContainer );
@@ -196,6 +192,17 @@ package local.view.bottombar
 			gotoAndStop("goods");
 			btnGreen.label = GameUtil.localizationString("gametip.nogoods.button")  ;
 			GameUtil.boldTextField( txtInfo , GameUtil.localizationString("gametip.nogoods.info") );
+		}
+		
+		/**
+		 * 工厂缺少人口 
+		 */		
+		public function showLackPop():void
+		{
+			this.show() ;
+			gotoAndStop("nopop");
+			GameUtil.boldTextField( txtInfo , "need pop "+GameUtil.buildIndustryPop() );
+			btnGreen.label = "GET HOMES"  ;
 		}
 		
 		
