@@ -146,13 +146,15 @@ package local.util
 		 * @param name
 		 * @return 
 		 */		
-		public function getBitmapFontByName(name:String):PxBitmapFont
+		public function getBitmapFontByName(name:String , device:Boolean=true):PxBitmapFont
 		{
+			var ext:String = "";
+			if(device) ext = "_"+GameSetting.device ;
 			if(_resHash[name]) {
 				return _resHash[name] as PxBitmapFont;
 			}
-			var bmd:BitmapData = ( new EmbedsManager[name+"_"+GameSetting.device]() as Bitmap).bitmapData ;
-			var config:XML = XML( new EmbedsManager[name+"Fnt_"+GameSetting.device]() )  ;
+			var bmd:BitmapData = ( new EmbedsManager[name+ext]() as Bitmap).bitmapData ;
+			var config:XML = XML( new EmbedsManager[name+"Fnt"+ext]() )  ;
 			_resHash[name] = new PxBitmapFont().loadAngelCode( bmd , config );
 				
 			return _resHash[name] as PxBitmapFont ;
