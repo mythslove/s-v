@@ -64,6 +64,16 @@ package local.map.item
 			}
 		}
 		
+		override public function storageToWorld():void
+		{
+			super.storageToWorld();
+			if(buildingVO.baseVO.type!=BuildingType.DECORATION)
+			{
+				buildingVO.status = BuildingStatus.NO_ROAD ;
+				checkRoadAndIcon();
+			}
+		}
+		
 		/**
 		 * 刷新icon和判断是否在路旁边 
 		 */		
