@@ -18,6 +18,7 @@ package local.view.bottombar
 	import local.enum.VillageMode;
 	import local.map.item.BaseBuilding;
 	import local.map.item.Building;
+	import local.map.item.ExpandLandBuilding;
 	import local.map.item.Industry;
 	import local.util.GameUtil;
 	import local.view.CenterViewLayer;
@@ -217,7 +218,11 @@ package local.view.bottombar
 						if(currentBuilding.buildingVO.product){
 							progressBar.showProgress( currentBuilding.gameTimer , currentBuilding.buildingVO.product.time ) ;
 						}else{
-							progressBar.showProgress( currentBuilding.gameTimer , currentBuilding.buildingVO.baseVO.time ) ;
+							if(currentBuilding is ExpandLandBuilding){
+								progressBar.showProgress( currentBuilding.gameTimer , (currentBuilding as ExpandLandBuilding).totalTime ) ;
+							}else{
+								progressBar.showProgress( currentBuilding.gameTimer , currentBuilding.buildingVO.baseVO.time ) ;
+							}
 						}
 					}else{
 						progressBar.progress.x = 0 ;
