@@ -3,12 +3,15 @@ package local.util
 	import bing.res.ResVO;
 	
 	import flash.display.Bitmap;
+	import flash.display.BitmapData;
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
 	
 	import local.comm.GameSetting;
 	import local.vo.BitmapAnimResVO;
 	import local.vo.RoadResVO;
+	
+	import pxBitmapFont.PxBitmapFont;
 
 	/**
 	 * 绑定的资源 管理类
@@ -128,6 +131,32 @@ package local.util
 		
 		
 		
+		//================BitmapFont字体===========================
+		
+		[Embed(source="../resource/font/Verdana_iphone.fnt", mimeType="application/octet-stream") ]
+		public static const VerdanaBigFnt_iphone:Class;
+		[Embed(source="../resource/font/Verdana_iphone.png") ]
+		public static const VerdanaBig_iphone:Class;
+		
+		
+		
+		
+		/**
+		 * 返回BitmapFont配置 
+		 * @param name
+		 * @return 
+		 */		
+		public function getBitmapFontByName(name:String):PxBitmapFont
+		{
+			if(_resHash[name]) {
+				return _resHash[name] as PxBitmapFont;
+			}
+			var bmd:BitmapData = ( new EmbedsManager[name+"_"+GameSetting.device]() as Bitmap).bitmapData ;
+			var config:XML = XML( new EmbedsManager[name+"Fnt_"+GameSetting.device]() )  ;
+			_resHash[name] = new PxBitmapFont().loadAngelCode( bmd , config );
+				
+			return _resHash[name] as PxBitmapFont ;
+		}
 		
 		
 		/**
