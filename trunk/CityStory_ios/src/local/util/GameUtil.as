@@ -9,6 +9,8 @@ package local.util
 	import flash.text.TextFormat;
 	
 	import local.comm.GameData;
+	import local.enum.BuildingType;
+	import local.model.BuildingModel;
 	import local.model.LandModel;
 	
 	/**
@@ -162,6 +164,19 @@ package local.util
 		{
 			var len:int = LandModel.instance.expands.length ;
 			return 120*len ;
+		}
+		
+		/**
+		 * 修建工厂需要几个人口 
+		 * @return 
+		 */		
+		public static function buildIndustryPop():int
+		{
+			var count:int ;
+			if( BuildingModel.instance.industry){
+				count = BuildingModel.instance.industry.length ;
+			}
+			return  80*count*count+10*count*count+150 ;
 		}
 	}
 }
