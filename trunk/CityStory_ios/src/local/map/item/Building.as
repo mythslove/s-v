@@ -225,7 +225,7 @@ package local.map.item
 						PlayerModel.instance.changeCash( -cashCost );
 						
 						var flyImg:FlyLabelImage = new FlyLabelImage( PickupType.CASH , -cashCost ) ;
-						flyImg.x = screenX ;
+						flyImg.x = screenX-20 ;
 						flyImg.y = screenY-50 ;
 						GameWorld.instance.effectScene.addChild( flyImg );
 						
