@@ -7,6 +7,7 @@ package local.map.item
 	import local.map.GameWorld;
 	import local.map.cell.BuildingObject;
 	import local.map.pk.PickupImages;
+	import local.model.BuildingModel;
 	import local.util.ResourceUtil;
 	import local.vo.BitmapAnimResVO;
 	import local.vo.BuildingVO;
@@ -59,6 +60,7 @@ package local.map.item
 			if( buildingVO.buildClick >= buildingVO.baseVO.click )
 			{
 				GameWorld.instance.buildingScene.removeBuilding( this );
+				BuildingModel.instance.removeBuilding( this );
 				this.dispose() ;
 			}else{
 				showBuildingFlagIcon() ;
