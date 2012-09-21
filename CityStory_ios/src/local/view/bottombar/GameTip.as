@@ -110,6 +110,9 @@ package local.view.bottombar
 						break ;
 					case BuildingStatus.EXPANDING: //扩地时，显示instant提示
 						this.show() ;
+						gotoAndStop("expand");
+						GameUtil.boldTextField( txtInfo , "expanding ..." );
+						btnYellowCash.label = GameUtil.localizationString("gametip.build.product.button" ); 
 						break ;
 					case BuildingStatus.PRODUCTION: //生产时，显示instant提示
 						this.show() ;

@@ -49,7 +49,7 @@ package local.model
 		{
 			//手动写一个扩地时的建筑
 			var baseVO:BaseBuildingVO  = new BaseBuildingVO() ;
-			baseVO.name = "ExpandLandBuilding";
+			baseVO.name = "ExpandBuilding";
 			baseVO.span = 4;
 			baseVO.type = BuildingType.EXPAND_BUILDING ;
 			allBuildingHash[baseVO.name] = baseVO ;

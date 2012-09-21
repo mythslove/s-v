@@ -9,6 +9,7 @@ package local.util
 	import flash.text.TextFormat;
 	
 	import local.comm.GameData;
+	import local.model.LandModel;
 	
 	/**
 	 * 游戏工具类 
@@ -151,6 +152,16 @@ package local.util
 		public static function expiredRecverGoods( goods:int ):int
 		{
 			return (goods/5)>>0;
+		}
+		
+		/**
+		 * 返回扩地需要花费的时间 
+		 * @return 
+		 */		
+		public static function getExpandTime():int
+		{
+			var len:int = LandModel.instance.expands.length ;
+			return 60*len ;
 		}
 	}
 }

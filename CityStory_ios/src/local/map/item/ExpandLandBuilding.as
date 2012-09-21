@@ -1,20 +1,22 @@
 package local.map.item
 {
+	import bing.utils.Guid;
+	
 	import flash.events.Event;
 	
 	import local.comm.GameData;
+	import local.enum.BuildingStatus;
 	import local.enum.VillageMode;
 	import local.map.GameWorld;
 	import local.map.cell.BuildingObject;
 	import local.model.BuildingModel;
-	import local.model.LandModel;
-	import local.model.MapGridDataModel;
 	import local.model.ShopModel;
 	import local.util.BuildingFactory;
 	import local.util.EmbedsManager;
+	import local.util.GameUtil;
+	import local.view.CenterViewLayer;
 	import local.vo.BaseBuildingVO;
 	import local.vo.BuildingVO;
-	import local.vo.LandVO;
 	
 	/**
 	 * 正在扩地时，显示的建筑 
@@ -25,11 +27,12 @@ package local.map.item
 		public function ExpandLandBuilding(buildingVO:BuildingVO)
 		{
 			super(buildingVO);
+			buildingVO.status = BuildingStatus.EXPANDING ;
 		}
 		
 		override public function showUI():void
 		{
-			_buildingObject = new BuildingObject(EmbedsManager.instance.getAnimResVOByName("ExpandLandBuilding"));
+			_buildingObject = new BuildingObject(EmbedsManager.instance.getAnimResVOByName("ExpandBuilding"));
 			addChildAt(_buildingObject,0);
 		}
 		
@@ -40,7 +43,14 @@ package local.map.item
 		{
 			if(GameData.villageMode==VillageMode.NORMAL){
 				super.onClick() ;
+				CenterViewLayer.instance.gameTip.showBuildingTip( this );
 			}
+		}
+		
+		override public function startProduct():void
+		{
+			clearGameTimer();
+			createGameTimer( GameUtil.getExpandTime() );
 		}
 		
 		/*计时完成*/
@@ -48,12 +58,7 @@ package local.map.item
 		{
 			//删除此对象
 			GameWorld.instance.buildingScene.removeBuilding( this );
-			//画地图
-			var landVO:LandVO = new LandVO();
-			landVO.nodeX = nodeX ;
-			landVO.nodeZ = nodeZ ;
-			LandModel.instance.lands.push(landVO);
-			GameWorld.instance.drawMapZoneByFill( landVO );
+			BuildingModel.instance.removeBuilding( this );
 			//随机添加几棵树
 			var basics:Vector.<BaseBuildingVO> = ShopModel.instance.basicBuildings ;
 			if( basics){
@@ -61,7 +66,7 @@ package local.map.item
 				var building:BaseBuilding ;
 				for( var i:int = 0 ; i <span ; ++i ){
 					for( var j:int = 0 ; j<span ; ++j ){
-						if ( Math.random()>.5 && GameWorld.instance.buildingScene.gridData.getNode( nodeX+i , nodeZ+j).walkable )
+						if ( Math.random()>.6 && GameWorld.instance.buildingScene.gridData.getNode( nodeX+i , nodeZ+j).walkable )
 						{
 							building = BuildingFactory.createBuildingByBaseVO(  basics[(Math.random()*basics.length)>>0 ] ) ;
 							GameWorld.instance.buildingScene.addBuilding( building );
@@ -70,7 +75,6 @@ package local.map.item
 					}
 				}
 			}
-			
 			//清理
 			this.dispose();
 		}

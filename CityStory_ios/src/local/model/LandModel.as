@@ -30,7 +30,7 @@ package local.model
 		/**如果当前没有Land，则初始化四块地**/
 		public function initLands():void
 		{
-			lands = new Vector.<LandVO>(7,true);
+			lands = new Vector.<LandVO>();
 			var vo:LandVO ;
 			var count:int ;
 			for( var i:int = 0 ; i <3 ; ++i ){

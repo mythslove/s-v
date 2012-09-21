@@ -14,17 +14,20 @@ package local.map
 	import local.map.item.BaseBuilding;
 	import local.map.item.BaseMapObject;
 	import local.map.item.BasicBuilding;
+	import local.map.item.ExpandLandBuilding;
 	import local.map.item.Road;
 	import local.map.land.ExpandLandButton;
 	import local.map.land.ExpandSign;
 	import local.model.BuildingModel;
 	import local.model.LandModel;
 	import local.model.MapGridDataModel;
+	import local.model.ShopModel;
 	import local.util.BuildingFactory;
 	import local.view.CenterViewLayer;
 	import local.view.base.StatusIcon;
 	import local.view.building.EditorBuildingButtons;
 	import local.view.building.MoveBuildingButtons;
+	import local.vo.BaseBuildingVO;
 	import local.vo.BuildingVO;
 	import local.vo.LandVO;
 
@@ -51,6 +54,9 @@ package local.map
 			else //显示自己的村庄
 			{
 				var myModel:BuildingModel = BuildingModel.instance ;
+				if(myModel.expandBuilding){
+					buildingScene.addBuilding( BuildingFactory.createBuildingByVO( myModel.expandBuilding ) , false , true );
+				}
 				tempShowBuilding(myModel.basicTrees);
 				tempShowBuilding(myModel.business);
 				tempShowBuilding(myModel.industry);
@@ -87,7 +93,7 @@ package local.map
 		{
 			//放在当前屏幕中间
 			var offsetY:Number = building.buildingVO.baseVO.span*0.5*_size;
-			var p:Point = pixelPointToGrid( GameSetting.SCREEN_WIDTH*0.5 , GameSetting.SCREEN_HEIGHT*0.5,0,  offsetY , _size );
+			var p:Point = pixelPointToGrid( GameSetting.SCREEN_WIDTH*0.5 , GameSetting.SCREEN_HEIGHT*0.5 , 0,  offsetY , _size );
 			building.nodeX = p.x ;
 			building.nodeZ = p.y ;
 			
@@ -182,7 +188,11 @@ package local.map
 						}
 						else if(e.target is ExpandSign)
 						{
-							GameData.villageMode = VillageMode.EXPAND ;
+							if( !GameData.hasExpanding ){
+								GameData.villageMode = VillageMode.EXPAND ;
+							}else{
+								trace("已经有地在扩了");
+							}
 						}
 						else if(e.target.parent==_mouseBuilding)
 						{
@@ -286,11 +296,10 @@ package local.map
 			for each( var obj:IsoObject in topScene.children){
 				if( obj.nodeX==nodePoint.x && obj.nodeZ == nodePoint.y ){
 					//可以扩展，弹出扩地提示
-					trace("expand");
-//					var landVO:LandVO = new LandVO();
-//					landVO.nodeX = nodePoint.x ;
-//					landVO.nodeZ = nodePoint.y ;
-//					expandLand( landVO );
+					var landVO:LandVO = new LandVO();
+					landVO.nodeX = nodePoint.x ;
+					landVO.nodeZ = nodePoint.y ;
+					expandLand( landVO );
 					break ;
 				}
 			}
@@ -323,7 +332,18 @@ package local.map
 			//画地图
 			drawMapZoneByFill( landVO );
 			//添加一个ExpandBuilding在上面
-			
+			var building:BaseBuilding = BuildingFactory.createBuildingByBaseVO( ShopModel.instance.allBuildingHash["ExpandBuilding"] as BaseBuildingVO );
+			building.nodeX = landVO.nodeX*4 ;
+			building.nodeZ = landVO.nodeZ*4 ;
+			building.buildingVO.nodeX = building.nodeX;
+			building.buildingVO.nodeZ = building.nodeZ;
+			buildingScene.addBuilding( building );
+			BuildingModel.instance.addBuilding( building ) ;
+			(building as ExpandLandBuilding).startProduct() ;
+			//正常化
+			topScene.clear();
+			GameData.villageMode = VillageMode.NORMAL ;
+			GameData.hasExpanding = true ;
 		}
 		
 		/** 显示扩地状态 */

@@ -5,6 +5,7 @@ package local.model
 	import local.enum.BuildingStatus;
 	import local.enum.BuildingType;
 	import local.map.item.BaseBuilding;
+	import local.map.item.ExpandLandBuilding;
 	import local.vo.BuildingVO;
 
 	/**
@@ -20,6 +21,9 @@ package local.model
 			return _instance; 
 		}
 		//=================================
+		
+		/** 正在扩地的建筑 */
+		public var expandBuilding:BuildingVO ;
 		
 		/** 基本的建筑 */
 		public var basicTrees:Vector.<BuildingVO> ; 
@@ -82,6 +86,9 @@ package local.model
 					if(!industry) industry = new Vector.<BuildingVO>();
 					industry.push( vo );
 					break ;
+				case BuildingType.EXPAND_BUILDING:
+					expandBuilding = vo ;
+					break ;
 			}
 		}
 		
@@ -115,6 +122,9 @@ package local.model
 					break ;
 				case BuildingType.INDUSTRY:
 					arr = industry ;
+					break ;
+				case BuildingType.EXPAND_BUILDING:
+					expandBuilding = null ;
 					break ;
 			}
 			if(arr){

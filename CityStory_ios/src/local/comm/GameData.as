@@ -90,5 +90,8 @@ package  local.comm
 				world.currentSelected = null ;
 			}
 		}
+		
+		/** 当前是否有地在扩 */
+		public static var hasExpanding:Boolean = false ;
 	}
 }
