@@ -161,7 +161,7 @@ package local.util
 		public static function getExpandTime():int
 		{
 			var len:int = LandModel.instance.expands.length ;
-			return 60*len ;
+			return 120*len ;
 		}
 	}
 }
