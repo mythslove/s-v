@@ -6,6 +6,7 @@ package local.util
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
 	
+	import local.comm.GameSetting;
 	import local.vo.BitmapAnimResVO;
 	import local.vo.RoadResVO;
 
@@ -104,15 +105,15 @@ package local.util
 		
 		//========pickup图标====================
 		[Embed(source="../resource/comm/PickupCoin.png")]
-		public static const PickupCoin:Class ;
+		public static const PickupCoin_iphone:Class ;
 		[Embed(source="../resource/comm/PickupCash.png")]
-		public static const PickupCash:Class ;
+		public static const PickupCash_iphone:Class ;
 		[Embed(source="../resource/comm/PickupExp.png")]
-		public static const PickupExp:Class ;
+		public static const PickupExp_iphone:Class ;
 		[Embed(source="../resource/comm/PickupGoods.png")]
-		public static const PickupGoods:Class ;
+		public static const PickupGoods_iphone:Class ;
 		[Embed(source="../resource/comm/PickupEnergy.png")]
-		public static const PickupEnergy:Class ;
+		public static const PickupEnergy_iphone:Class ;
 		
 		
 		
@@ -134,8 +135,9 @@ package local.util
 		 * @param name
 		 * @return 
 		 */		
-		public function getAnimResVOByName( name:String ):Vector.<BitmapAnimResVO>
+		public function getAnimResVOByName( name:String , device:Boolean=false ):Vector.<BitmapAnimResVO>
 		{
+			if(device) name+="_"+GameSetting.device ;
 			if(_resHash[name]) {
 				return _resHash[name] as Vector.<BitmapAnimResVO> ;
 			}
@@ -152,8 +154,9 @@ package local.util
 		 * @param name
 		 * @return 
 		 */		
-		public function getBitmapByName( name :String ):Bitmap
+		public function getBitmapByName( name :String , device:Boolean = false ):Bitmap
 		{
+			if(device) name+="_"+GameSetting.device ;
 			if(_resHash[name]) {
 				return _resHash[name] as Bitmap ;
 			}
@@ -170,8 +173,9 @@ package local.util
 		 * @param name
 		 * @return 
 		 */		
-		public function getRoadResVOByName( name:String ):RoadResVO
+		public function getRoadResVOByName( name:String  , device:Boolean = false ):RoadResVO
 		{
+			if(device) name+="_"+GameSetting.device ;
 			if(_resHash[name]) {
 				return _resHash[name] as RoadResVO ;
 			}

@@ -43,7 +43,7 @@ package local.view.topbar
 		
 		private function flyGoods( targetPoint:Point , time:Number ):void
 		{
-			var bmp:Bitmap = new Bitmap ( EmbedsManager.instance.getBitmapByName("PickupGoods").bitmapData  );
+			var bmp:Bitmap = new Bitmap ( EmbedsManager.instance.getBitmapByName("PickupGoods",true).bitmapData  );
 			bmp.x = goodsBar.x ;
 			bmp.y = goodsBar.y ;
 			addChild(bmp);
