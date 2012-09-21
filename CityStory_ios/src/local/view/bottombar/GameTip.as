@@ -74,6 +74,8 @@ package local.view.bottombar
 						trace("打开商店Energy窗口");
 					}else if(currentLabel=="goods"){
 						trace("打开商店Goods窗口");
+					}else if( currentLabel=="nopop"){
+						trace("建筑不够，不能将工厂放置在地图上");
 					}
 					this.hide() ;
 					break ;
@@ -154,7 +156,15 @@ package local.view.bottombar
 						break ;
 				}
 			}
-			
+			else if( GameData.villageMode==VillageMode.BUILDING_STORAGE)
+			{
+				if(building is Industry && building.buildingVO.status==BuildingStatus.NONE)
+				{
+					this.show() ;
+					gotoAndStop("nopop");
+					
+				}
+			}
 			//图片
 			if(imgContainer){
 				ContainerUtil.removeChildren( imgContainer );
