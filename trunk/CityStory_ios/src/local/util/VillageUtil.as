@@ -69,13 +69,13 @@ package local.util
 				stream.writeObject( StorageModel.instance.industry );
 				stream.writeObject( StorageModel.instance.wonders );
 				stream.writeObject( StorageModel.instance.business );
+				//lands
+				stream.writeObject( LandModel.instance.lands );
 				//写任务
 				stream.writeObject(QuestModel.instance.currentQuests );
 				stream.writeObject(QuestModel.instance.completedQuests );
 				//Component
 				stream.writeObject( ComponentModel.instance.myComps ) ;
-				//lands
-				stream.writeObject( LandModel.instance.lands );
 			}
 			catch( e:Error)
 			{
@@ -135,14 +135,14 @@ package local.util
 					StorageModel.instance.industry =  stream.readObject() as Vector.<StorageBuildingVO> ;
 					StorageModel.instance.wonders =  stream.readObject() as Vector.<StorageBuildingVO> ;
 					StorageModel.instance.business =  stream.readObject() as Vector.<StorageBuildingVO> ;
-					//读任务
-					QuestModel.instance.currentQuests = stream.readObject() as Vector.<QuestVO>;
-					QuestModel.instance.completedQuests = stream.readObject() as Dictionary;
-					//Component
-					ComponentModel.instance.myComps = stream.readObject as Vector.<ComponentVO>;
 					//lands
 					LandModel.instance.lands = stream.readObject() as Vector.<LandVO> ;
 					if(!LandModel.instance.lands) LandModel.instance.initLands() ;
+					//读任务
+					QuestModel.instance.currentQuests = stream.readObject() as Vector.<QuestVO>;
+					QuestModel.instance.completedQuests = stream.readObject();
+					//Component
+					ComponentModel.instance.myComps = stream.readObject as Vector.<ComponentVO>;
 					//村庄信息已经读取完成
 					GlobalDispatcher.instance.dispatchEvent( new VillageEvent(VillageEvent.READED_VILLAGE));
 				}

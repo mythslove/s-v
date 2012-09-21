@@ -63,6 +63,7 @@ package  local.comm
 					world.topScene.clearAndDisposeChild();
 					world.topScene.visible = true ;
 					world.iconScene.visible = false ;
+					world.visibleExpandSigns( false ) ;
 					break ;
 				case VillageMode.BUILDING_STORAGE :
 				case VillageMode.BUILDING_SHOP :

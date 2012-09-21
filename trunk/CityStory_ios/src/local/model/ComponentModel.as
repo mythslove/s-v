@@ -18,6 +18,6 @@ package local.model
 		public var allComps:Dictionary ;
 		
 		/** 我拥有的components*/
-		public var myComps:Vector.<ComponentVO> = null ;
+		public var myComps:Vector.<ComponentVO> ;
 	}
 }

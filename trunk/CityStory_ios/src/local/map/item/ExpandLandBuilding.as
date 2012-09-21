@@ -1,7 +1,5 @@
 package local.map.item
 {
-	import bing.utils.Guid;
-	
 	import flash.events.Event;
 	
 	import local.comm.GameData;
@@ -10,6 +8,7 @@ package local.map.item
 	import local.map.GameWorld;
 	import local.map.cell.BuildingObject;
 	import local.model.BuildingModel;
+	import local.model.MapGridDataModel;
 	import local.model.ShopModel;
 	import local.util.BuildingFactory;
 	import local.util.EmbedsManager;
@@ -56,6 +55,7 @@ package local.map.item
 		/*计时完成*/
 		override protected function gameTimerCompleteHandler( e:Event ):void
 		{
+			MapGridDataModel.instance.landGridData.setWalkable( nodeX/4 , nodeZ/4 , true );
 			//删除此对象
 			GameWorld.instance.buildingScene.removeBuilding( this );
 			BuildingModel.instance.removeBuilding( this );
@@ -66,9 +66,14 @@ package local.map.item
 				var building:BaseBuilding ;
 				for( var i:int = 0 ; i <span ; ++i ){
 					for( var j:int = 0 ; j<span ; ++j ){
-						if ( Math.random()>.6 && GameWorld.instance.buildingScene.gridData.getNode( nodeX+i , nodeZ+j).walkable )
+						if ( Math.random()>.8 && GameWorld.instance.buildingScene.gridData.getNode( nodeX+i , nodeZ+j).walkable )
 						{
 							building = BuildingFactory.createBuildingByBaseVO(  basics[(Math.random()*basics.length)>>0 ] ) ;
+							building.nodeX = nodeX+i ;
+							building.nodeZ = nodeZ+j ;
+							building.buildingVO.nodeX = nodeX+i ;
+							building.buildingVO.nodeZ = nodeZ+j ;
+							building.buildingVO.status=BuildingStatus.BUILDING ; //修建状态，说明可以点击
 							GameWorld.instance.buildingScene.addBuilding( building );
 							BuildingModel.instance.addBuilding( building );
 						}
@@ -77,6 +82,9 @@ package local.map.item
 			}
 			//清理
 			this.dispose();
+			GameData.hasExpanding = false ;
+			GameWorld.instance.removeExpandSigns();
+			GameWorld.instance.addExpandSign(true);
 		}
 	}
 }

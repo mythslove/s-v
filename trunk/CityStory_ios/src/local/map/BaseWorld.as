@@ -277,7 +277,7 @@ package  local.map
 			}
 		}
 		
-		private function addExpandSign():void
+		public function addExpandSign( sort:Boolean = false ):void
 		{
 			if(GameData.villageMode!=VillageMode.VISIT){
 				var lands:Dictionary = LandModel.instance.getCanExpandLand();
@@ -298,7 +298,7 @@ package  local.map
 						arr = key.split("-");
 						expandSign.nodeX = int( arr[0] )*4+2 ;
 						expandSign.nodeZ = int (arr[1] )*4 +1 ;
-						buildingScene.addIsoObject( expandSign , false );
+						buildingScene.addIsoObject( expandSign , sort );
 						expandSign.setWalkable( false , buildingScene.gridData );
 						MapGridDataModel.instance.addBuildingGridData(expandSign);
 						expandSign.checkScale();
@@ -307,6 +307,8 @@ package  local.map
 					++index;
 				}
 			}
+			if(sort)	//为true时，不是初始化地图时，是游戏中扩地完成后重新添加扩地图标
+				visibleExpandSigns(true);
 		}
 		
 		/**
@@ -315,7 +317,21 @@ package  local.map
 		 */		
 		public function visibleExpandSigns( value:Boolean):void{
 			for each( var sign:ExpandSign in _expandSigns){
-				sign.visible = value ;
+				if( !sign.getWalkable(buildingScene.gridData)){
+					sign.visible = value ;
+				}
+			}
+		}
+		
+		/** 移除场景上所有的扩地标志 */
+		public function removeExpandSigns():void
+		{
+			for each( var sign:ExpandSign in _expandSigns){
+				if(sign.parent){
+					buildingScene.removeIsoObject( sign);
+					sign.setWalkable( true , buildingScene.gridData );
+					MapGridDataModel.instance.removeBuildingGridData(sign);
+				}
 			}
 		}
 		
