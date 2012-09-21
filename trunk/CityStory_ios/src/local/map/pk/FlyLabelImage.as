@@ -12,6 +12,9 @@ package local.map.pk
 	import local.map.GameWorld;
 	import local.util.EmbedsManager;
 	
+	import pxBitmapFont.PxTextAlign;
+	import pxBitmapFont.PxTextField;
+	
 	public class FlyLabelImage extends Sprite
 	{
 		public function FlyLabelImage( pkType:String , value:int )
@@ -43,16 +46,15 @@ package local.map.pk
 			addChild(bmp);
 			
 			//文字
-			var txtf:TextField = new TextField();
-			var tf:TextFormat = txtf.defaultTextFormat ;
-			tf.size = 30 ;
-			tf.color = 0xffffff ;
-			tf.bold = true ;
-			txtf.defaultTextFormat = tf ;
-			txtf.text = value>0 ? "+"+value : ""+value ;
-			txtf.x = -txtf.textWidth-10 ;
-			txtf.y = (bmp.height-txtf.height)>>1  ;
-			addChild(txtf);
+			var txt:PxTextField = new PxTextField( EmbedsManager.instance.getBitmapFontByName("VerdanaBig") );
+			txt.fixedWidth = false ;
+			txt.useColor = false ;
+			txt.mouseChildren = txt.mouseChildren = false ;
+			txt.alignment = PxTextAlign.RIGHT;
+			txt.text = value>0 ? "+"+value : ""+value ;
+			txt.x = -txt.width-10 ;
+			txt.y = -txt.height>>1  ;
+			addChild(txt);
 			
 			addEventListener(Event.ADDED_TO_STAGE , addedHandler );
 		}
