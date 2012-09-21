@@ -277,13 +277,17 @@ package  local.map
 			}
 		}
 		
+		/**
+		 *  添加扩地牌子
+		 * @param sort 为ture表示不是初始化地图时，而是后面扩地完成后重新添加的
+		 */		
 		public function addExpandSign( sort:Boolean = false ):void
 		{
 			if(GameData.villageMode!=VillageMode.VISIT){
 				var lands:Dictionary = LandModel.instance.getCanExpandLand();
 				var arr:Array ;
 				var expandSign:ExpandSign ;
-				var temp:Boolean=true ;
+				var temp:Boolean=true ; //必须至少有一个扩地牌
 				var index:int , nx:int , nz:int ;
 				for( var key:String in lands)
 				{
@@ -309,13 +313,12 @@ package  local.map
 									MapGridDataModel.instance.addBuildingGridData(expandSign);
 									expandSign.checkScale();
 									temp = false ;
-									i = 4;j=4;
+									++index;
+									i = 4;j=4; //跳出两个for循环
 								}
 							}
 						}
-						
 					}
-					++index;
 				}
 			}
 		}
