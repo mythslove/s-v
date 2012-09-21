@@ -7,7 +7,6 @@ package local.view.building
 	
 	import local.map.GameWorld;
 	import local.map.item.BaseBuilding;
-	import local.model.StorageModel;
 	import local.view.base.BaseView;
 	
 	/**
@@ -64,8 +63,8 @@ package local.view.building
 					GameWorld.instance.buildingScene.rotateBuilding( building );
 					break ;
 				case sellButton:
-					
-//					if(parent) parent.removeChild(this);
+					if(parent) parent.removeChild(this);
+					building.sell() ;
 					break ;
 				case stashButton:
 					if(parent) parent.removeChild(this);

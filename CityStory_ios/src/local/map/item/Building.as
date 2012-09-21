@@ -64,6 +64,9 @@ package local.map.item
 			}
 		}
 		
+		/**
+		 * 从收藏箱里拿出来，重新判断是否在路旁边
+		 */		
 		override public function storageToWorld():void
 		{
 			super.storageToWorld();
