@@ -25,10 +25,10 @@ package local.model
 		public var allQuestArray:Vector.<QuestVO> ; 
 		
 		/** 当前的quests */
-		public var currentQuests:Vector.<QuestVO> ;
+		public var currentQuests:Vector.<QuestVO> = null ;
 		
 		/** 完成了的quests ，key为qid，value为questVO*/
-		public var completedQuests:Dictionary   ;
+		public var completedQuests:Dictionary  = null  ;
 		
 		/**
 		 * 获得当前最新的quests

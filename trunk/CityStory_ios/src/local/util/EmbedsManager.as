@@ -123,8 +123,8 @@ package local.util
 		public static const PlaceBuildingEffect:Class;  //放置建筑时的灰尘特效
 		[Embed(source="../resource/effect/ExpandSign.bd", mimeType="application/octet-stream") ]
 		public static const ExpandSign:Class ; //扩地标识
-		
-		
+		[Embed(source="../resource/effect/ExpandBuilding.bd", mimeType="application/octet-stream") ]
+		public static const ExpandBuilding:Class ; //扩地后上面的占位建筑
 		
 		
 		

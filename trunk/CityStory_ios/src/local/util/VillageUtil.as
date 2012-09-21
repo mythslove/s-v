@@ -54,6 +54,7 @@ package local.util
 				//写玩家信息
 				stream.writeObject( PlayerModel.instance.me );
 				//地图上的建筑
+				stream.writeObject( BuildingModel.instance.expandBuilding );
 				stream.writeObject( BuildingModel.instance.basicTrees );
 				stream.writeObject( BuildingModel.instance.homes );
 				stream.writeObject( BuildingModel.instance.community );
@@ -119,6 +120,7 @@ package local.util
 					/*-----------------测试数据---------------------------------------*/
 					
 					//读取地图信息
+					BuildingModel.instance.expandBuilding = stream.readObject() as BuildingVO ;
 					BuildingModel.instance.basicTrees = stream.readObject() as Vector.<BuildingVO> ;
 					BuildingModel.instance.homes =  stream.readObject() as Vector.<BuildingVO> ;
 					BuildingModel.instance.community =  stream.readObject() as Vector.<BuildingVO> ;
@@ -140,6 +142,7 @@ package local.util
 					ComponentModel.instance.myComps = stream.readObject as Vector.<ComponentVO>;
 					//lands
 					LandModel.instance.lands = stream.readObject() as Vector.<LandVO> ;
+					if(!LandModel.instance.lands) LandModel.instance.initLands() ;
 					//村庄信息已经读取完成
 					GlobalDispatcher.instance.dispatchEvent( new VillageEvent(VillageEvent.READED_VILLAGE));
 				}
@@ -156,12 +159,6 @@ package local.util
 			{
 				GlobalDispatcher.instance.dispatchEvent( new VillageEvent(VillageEvent.NEW_VILLAGE));
 			}
-			
-			
-			
-			
-			var lands:Vector.<LandVO> = LandModel.instance.lands ;
-			if(!lands) LandModel.instance.initLands() ;
 		}
 	}
 }

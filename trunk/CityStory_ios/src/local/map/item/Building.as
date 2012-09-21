@@ -257,8 +257,8 @@ package local.map.item
 			return false ;
 		}
 		
-		/*开始生产，从头开始计时 */		
-		protected function startProduct():void
+		/** 开始生产，从头开始计时  */		
+		public function startProduct():void
 		{
 			clearGameTimer();
 			//判断是否可以生产，Business的goods够不够，Industry的Product有没有
