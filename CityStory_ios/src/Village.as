@@ -55,6 +55,7 @@ package
 		}
 		
 		private function activateHandler( e:Event ):void {
+			GameData.commDate = new Date();
 			GameWorld.instance.buildingScene.refreshBuildingStatus();
 		}
 		
