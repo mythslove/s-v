@@ -23,6 +23,8 @@ package local.map.item
 	 */	
 	public class ExpandLandBuilding extends Building
 	{
+		public var totalTime:int ;
+		
 		public function ExpandLandBuilding(buildingVO:BuildingVO)
 		{
 			super(buildingVO);
@@ -33,6 +35,7 @@ package local.map.item
 		{
 			_buildingObject = new BuildingObject(EmbedsManager.instance.getAnimResVOByName("ExpandBuilding"));
 			addChildAt(_buildingObject,0);
+			totalTime = GameUtil.getExpandTime() ;
 		}
 		
 		override public function flash( value:Boolean):void
