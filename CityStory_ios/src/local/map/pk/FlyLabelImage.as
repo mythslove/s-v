@@ -54,7 +54,7 @@ package local.map.pk
 			txt.mouseChildren = txt.mouseChildren = false ;
 			txt.alignment = PxTextAlign.RIGHT;
 			txt.text = value>0 ? "+"+value : ""+value ;
-			txt.x = -txt.width-10 ;
+			txt.x = -txt.width-5 ;
 			txt.y = -txt.height>>1  ;
 			addChild(txt);
 			
