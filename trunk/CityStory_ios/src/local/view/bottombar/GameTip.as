@@ -205,13 +205,13 @@ package local.view.bottombar
 			y= GameSetting.SCREEN_HEIGHT ;
 			visible = true ;
 			CenterViewLayer.instance.bottomBar.visible = false ;
-			TweenLite.to( this , 0.2 , { y :GameSetting.SCREEN_HEIGHT-height+10 , ease:Back.easeOut } );
+			TweenLite.to( this , 0.25 , { y :GameSetting.SCREEN_HEIGHT-height+10 , ease:Back.easeOut } );
 		}
 		
 		public function hide():void
 		{
 			if(visible){
-				TweenLite.to( this , 0.1 , { y :GameSetting.SCREEN_HEIGHT , onComplete:function():void{ visible = false ;} } );
+				TweenLite.to( this , 0.2 , { y :GameSetting.SCREEN_HEIGHT , onComplete:function():void{ visible = false ;} } );
 				removeEventListener(Event.ENTER_FRAME,updateHandler );
 			}
 			currentBuilding = null ;

@@ -121,7 +121,7 @@ package local.view.bottombar
 		private var _tempVisible:Boolean ;
 		override public function set visible(value:Boolean):void
 		{
-			if(super.visible==value) return ;
+			if(_tempVisible==value) return ;
 			_tempVisible = value ;
 			if( value){
 				alpha = 0 ;
