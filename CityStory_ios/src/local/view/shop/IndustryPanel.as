@@ -2,7 +2,9 @@ package local.view.shop
 {
 	import flash.events.MouseEvent;
 	
+	import local.model.PlayerModel;
 	import local.model.ShopModel;
+	import local.util.GameUtil;
 
 	public class IndustryPanel extends ShopPanel
 	{
@@ -43,10 +45,24 @@ package local.view.shop
 			if(e.target is ShopItemRenderer)
 			{
 				var render:ShopItemRenderer = e.target as ShopItemRenderer ;
-				if( checkMoney(render)){
+				if( checkMoney(render) && checkPop() ){
 					addItemToWorld( render );
 				}
 			}
+		}
+		
+		/**
+		 * 判断人口 
+		 * @return 
+		 */		
+		private function checkPop():Boolean
+		{
+			if( PlayerModel.instance.getCurrentPop()>= GameUtil.buildIndustryPop())
+			{
+				return true ;
+			}
+			trace("当前人口：",PlayerModel.instance.getCurrentPop() , "需要人口："+GameUtil.buildIndustryPop());
+			return false ;
 		}
 	}
 }

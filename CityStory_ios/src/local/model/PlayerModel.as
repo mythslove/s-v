@@ -61,6 +61,14 @@ package local.model
 			me.cap += value ;
 		}
 		
+		/** 返回当前的人口，不超过容量*/
+		public function getCurrentPop():int
+		{
+			if(me.pop>me.cap) return me.cap;
+			return me.pop;
+		}
+		
+		
 		public function createPlayer():void
 		{
 			me = new PlayerVO();
