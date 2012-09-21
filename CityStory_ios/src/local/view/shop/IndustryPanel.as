@@ -61,6 +61,7 @@ package local.view.shop
 			{
 				return true ;
 			}
+			//弹出窗口提示
 			trace("当前人口：",PlayerModel.instance.getCurrentPop() , "需要人口："+GameUtil.buildIndustryPop());
 			return false ;
 		}

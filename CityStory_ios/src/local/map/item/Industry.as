@@ -53,6 +53,16 @@ package local.map.item
 			}
 		}
 		
+		override public function storageToWorld():void
+		{
+			//判断人口
+			if( PlayerModel.instance.getCurrentPop()>= GameUtil.buildIndustryPop()){
+				super.storageToWorld();
+			}else{
+				CenterViewLayer.instance.gameTip.showLackPop();
+			}
+		}
+		
 		override public function onClick():void
 		{
 			if( GameData.villageMode==VillageMode.NORMAL)

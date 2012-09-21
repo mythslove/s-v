@@ -17,7 +17,7 @@ package  local.vo
 		public var cash:int = 10 ; //现金数量
 		
 		public var pop:int; //当前人口数量
-		public var cap:int = 100 ; //人口容量
+		public var cap:int = 200 ; //人口容量
 		
 		public var level:int = 1 ; //玩家等级
 		public var exp:int; //玩家当前经验值
