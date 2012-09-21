@@ -76,15 +76,15 @@ package local.util
 			var temp:int = len%3 ;
 			var count:int ;
 			for( var i:int = 0 ; i<len ; ++i){
-				result = result.concat(str.charAt(i));
+				result += str.charAt(i) ;
 				if(i>=temp){
 					++count ;
 					if(count>2 && i<len-1){
-						result = result.concat(",");
+						result += "," ;
 						count =0 ;
 					}
 				}else if(len>3 && i+1==temp){
-					result = result.concat(",");
+					result +=  ","  ;
 				}
 			}
 			return result ;
