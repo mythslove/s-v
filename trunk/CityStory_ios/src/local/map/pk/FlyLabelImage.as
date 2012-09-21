@@ -17,6 +17,8 @@ package local.map.pk
 	
 	public class FlyLabelImage extends Sprite
 	{
+		private var txt:PxTextField ;
+		
 		public function FlyLabelImage( pkType:String , value:int )
 		{
 			super();
@@ -46,7 +48,7 @@ package local.map.pk
 			addChild(bmp);
 			
 			//文字
-			var txt:PxTextField = new PxTextField( EmbedsManager.instance.getBitmapFontByName("VerdanaBig") );
+			txt = new PxTextField( EmbedsManager.instance.getBitmapFontByName("VerdanaBig") );
 			txt.fixedWidth = false ;
 			txt.useColor = false ;
 			txt.mouseChildren = txt.mouseChildren = false ;
@@ -77,6 +79,8 @@ package local.map.pk
 			if(parent){
 				parent.removeChild(this);
 			}
+			txt.destroy() ;
+			txt= null ;
 		}
 	}
 }
