@@ -132,12 +132,14 @@ package local.util
 		
 		
 		//================BitmapFont字体===========================
-		
 		[Embed(source="../resource/font/Verdana_iphone.fnt", mimeType="application/octet-stream") ]
 		public static const VerdanaBigFnt_iphone:Class;
 		[Embed(source="../resource/font/Verdana_iphone.png") ]
 		public static const VerdanaBig_iphone:Class;
-		
+		[Embed(source="../resource/font/VerdanaSmall_iphone.fnt", mimeType="application/octet-stream") ]
+		public static const VerdanaSmallFnt_iphone:Class;
+		[Embed(source="../resource/font/VerdanaSmall_iphone.png") ]
+		public static const VerdanaSmall_iphone:Class;
 		
 		
 		
