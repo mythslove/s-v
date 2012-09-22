@@ -18,10 +18,10 @@ package local.view.topbar
 			_label = new PxTextField( EmbedsManager.instance.getBitmapFontByName("VerdanaSmall") );
 			_label.useColor = false ;
 			_label.fixedWidth = true ;
-			_label.width = 100 ;
+			_label.width = 200 ;
 			_label.alignment = PxTextAlign.CENTER ;
+			_label.y = 15;
 			addChild(_label);
-			_label.text = "0/0";
 		}
 		
 		public function show( value:int , max:int ):void
