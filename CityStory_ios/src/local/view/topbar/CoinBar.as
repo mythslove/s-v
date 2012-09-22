@@ -21,7 +21,7 @@ package local.view.topbar
 			_label.width = 200 ;
 			_label.alignment = PxTextAlign.CENTER ;
 			_label.x = 5;
-			_label.y = 15;
+			_label.y = 12;
 			addChild(_label);
 		}
 		
