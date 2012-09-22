@@ -3,7 +3,6 @@ package local.view.topbar
 	import flash.display.Sprite;
 	
 	import local.util.EmbedsManager;
-	import local.util.GameUtil;
 	
 	import pxBitmapFont.PxTextAlign;
 	import pxBitmapFont.PxTextField;
@@ -26,7 +25,7 @@ package local.view.topbar
 		
 		public function show( value:int , max:int ):void
 		{
-			_label.text = GameUtil.moneyFormat(value) +"/"+ max ;
+			_label.text = value +"/"+ max ;
 		}
 	}
 }
