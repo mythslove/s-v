@@ -3,13 +3,16 @@ package local.view.topbar
 	import com.greensock.TweenLite;
 	
 	import flash.display.Bitmap;
+	import flash.events.Event;
 	import flash.geom.Point;
 	import flash.utils.setTimeout;
 	
 	import local.comm.GameData;
 	import local.map.item.BaseBuilding;
+	import local.model.PlayerModel;
 	import local.util.EmbedsManager;
 	import local.view.base.BaseView;
+	import local.vo.PlayerVO;
 	
 	public class TopBar extends BaseView
 	{
@@ -24,6 +27,16 @@ package local.view.topbar
 		{
 			super();
 			mouseEnabled = false ;
+		}
+		
+		override protected function addedToStageHandler(e:Event):void
+		{
+			super.addedToStageHandler(e);
+			var me:PlayerVO = PlayerModel.instance.me ;
+			cashBar.show( me.cash );
+			coinBar.show( me.coin );
+			goodsBar.show( me.goods );
+			energyBar.show( me.energy , me.maxEnergy );
 		}
 		
 		/**

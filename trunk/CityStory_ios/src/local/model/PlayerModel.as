@@ -2,6 +2,7 @@ package local.model
 {
 	import flash.utils.Dictionary;
 	
+	import local.view.CenterViewLayer;
 	import local.vo.PlayerVO;
 
 	public class PlayerModel
@@ -23,12 +24,14 @@ package local.model
 		{
 			if(value==0) return ;
 			me.coin+=value ;
+			CenterViewLayer.instance.topBar.coinBar.show( me.coin );
 		}
 		
 		public function changeCash( value:int ):void
 		{
 			if(value==0) return ;
 			me.cash+=value ;
+			CenterViewLayer.instance.topBar.cashBar.show( me.cash );
 		}
 		
 		public function changeExp( value:int ):void
@@ -41,12 +44,14 @@ package local.model
 		{
 			if(value==0) return ;
 			me.energy+=value ;
+			CenterViewLayer.instance.topBar.energyBar.show( me.energy , me.maxEnergy );
 		}
 		
 		public function changeGoods( value:int ):void
 		{
 			if(value==0) return ;
 			me.goods+=value ;
+			CenterViewLayer.instance.topBar.goodsBar.show( me.goods );
 		}
 		
 		public function changePop( value:int ):void
