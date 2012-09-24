@@ -49,7 +49,7 @@ package local.util
 								num = BuildingModel.instance.getCountByName( questType , sonType ) ;
 								break ;
 							case QuestType.OWN_TYPE:
-								num = BuildingModel.instance.getCountByType questType ) ;
+								num = BuildingModel.instance.getCountByType( questType ) ;
 								break ;
 							case QuestType.OWN_COMP:
 								num = CompsModel.instance.getCompCount( sonType );
