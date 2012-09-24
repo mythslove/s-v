@@ -2,6 +2,8 @@ package local.model
 {
 	import flash.utils.Dictionary;
 	
+	import local.enum.QuestType;
+	import local.util.QuestUtil;
 	import local.vo.ComponentVO;
 
 	/**
@@ -28,11 +30,13 @@ package local.model
 		public var myComps:Dictionary ;
 		
 		
-		public function parseConfig( comps:Vector.<String>):void
-		{
-			
-		}
 		
+		
+		/**
+		 * 通过名字来找到ComponentVO 
+		 * @param name
+		 * @return 
+		 */		
 		public function getCompByName( name:String ):ComponentVO
 		{
 			if(allComps && allComps.hasOwnProperty(name)){
@@ -42,6 +46,11 @@ package local.model
 		}
 		
 		
+		/**
+		 * 获取我的Compoent的数量
+		 * @param name
+		 * @return 
+		 */		 
 		public function getCompCount(name:String ):int
 		{
 			if(myComps && myComps.hasOwnProperty(name)){
@@ -51,7 +60,11 @@ package local.model
 		}
 		
 		
-		
+		/**
+		 * 添加一个Component 
+		 * @param name
+		 * @param value
+		 */		
 		public function addComp( name:String , value:int ):void
 		{
 			if(!myComps) myComps = new Dictionary();
@@ -64,9 +77,14 @@ package local.model
 			}else if(allComps && allComps.hasOwnProperty(name)){
 				myComps[name] = value ;
 			}
-//			QuestModel.instance.handleTypeCount( QuestType.OWNPKUP , pickupAlias );
+			QuestUtil.instance.handleOwn( QuestType.OWN_COMP , name );
 		}
 		
+		/**
+		 * 从我的comps中减去value个Componentt 
+		 * @param name
+		 * @param value
+		 */		
 		public function reduceComp( name:String , value:int ):void
 		{
 			if(myComps && myComps.hasOwnProperty(name)){
@@ -74,9 +92,23 @@ package local.model
 				if(myComps[name]<0){
 					myComps[name] = 0 ;
 				}
-//				QuestModel.instance.handleTypeCount( QuestType.OWNPKUP , pickupAlias );
+				QuestUtil.instance.handleOwn( QuestType.OWN_COMP , name );
 			}
 		}
 	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		//==============任务统计==========================
+		
+		public function 
+		
+		
 	}
 }
