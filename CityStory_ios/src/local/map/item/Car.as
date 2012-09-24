@@ -17,7 +17,7 @@ package local.map.item
 		override public function init():void
 		{
 			super.init();
-			_speed = 0.8 ;
+			_speed = 1 ;
 			_roadIndex = (Math.random()*4 ) >>1 ;
 			setScreenPosition( _roads[_roadIndex].x+screenX ,_roads[_roadIndex].y+screenY );
 		}
