@@ -139,20 +139,20 @@ package local.map.scene
 					}
 				}
 			}
-			var maxCar:int = GameSetting.device=="iphone" ? 5 : 8 ;
-			var maxChara:int = GameSetting.device=="iphone" ? 10 : 15 ;
-			var carNum:int , characNum:int ;
-			for(var i:int = 0 ; i<roads.length ; ++i)
+			var carRate:int = GameSetting.device=="iphone" ? 8 : 5 ;
+			var characterRate:int = GameSetting.device=="iphone" ? 5 : 3 ;
+			var len:int = roads.length ;
+			for(var i:int = 0 ; i<len ; ++i)
 			{
-				if( characNum<maxChara && Math.random()>0.6 ){ 
+				if( Math.random()>0.4 && i%characterRate==0 ){ 
 					road = roads[i];
 					var fairy:MoveItem = ObjectPool.instance.getCharacter() ;
 					fairy.nodeX  = road.nodeX;
 					fairy.nodeZ = road.nodeZ;
 					addMoveItem( fairy , false ) ;
 					fairy.init();
-					++ characNum ;
-				}else if(carNum<maxCar && Math.random()>0.4 ){ 
+				}
+				if(Math.random()>0.5 && i%carRate==0 ){ 
 					road = roads[i];
 					if(road.direction!=""){
 						var car:MoveItem = ObjectPool.instance.getCar() ;
@@ -160,7 +160,6 @@ package local.map.scene
 						car.nodeZ = road.nodeZ;
 						addMoveItem( car , false ) ;
 						car.init();
-						++carNum;
 					}
 				}
 			}
