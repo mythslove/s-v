@@ -19,6 +19,8 @@ package local.model
 		}
 		//=======================================
 		
+		public static const MAX_COUNT:int = 50 ;
+		
 		/** 所有的components */
 		public var allComps:Dictionary ;
 		
@@ -56,8 +58,8 @@ package local.model
 			
 			if(myComps.hasOwnProperty(name)){
 				myComps[name]+=value ;
-				if( myComps[name]>50 ){
-					myComps[name] = 50 ;
+				if( myComps[name]>MAX_COUNT ){
+					myComps[name] = MAX_COUNT ;
 				}
 			}else if(allComps && allComps.hasOwnProperty(name)){
 				myComps[name] = value ;
