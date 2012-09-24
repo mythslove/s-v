@@ -56,6 +56,9 @@ package local.model
 			
 			if(myComps.hasOwnProperty(name)){
 				myComps[name]+=value ;
+				if( myComps[name]>50 ){
+					myComps[name] = 50 ;
+				}
 			}else if(allComps && allComps.hasOwnProperty(name)){
 				myComps[name] = value ;
 			}

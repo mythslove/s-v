@@ -41,7 +41,7 @@ package local.view.storage
 				isBuilding = false ;
 				var compVO:ComponentVO = CompsModel.instance.allComps[ vo.toString() ];
 				GameUtil.boldTextField( txtTitle , compVO.title );
-				GameUtil.boldTextField( txtCount , "×"+CompsModel.instance.getCompCount(vo.toString()) );
+				GameUtil.boldTextField( txtCount , CompsModel.instance.getCompCount(vo.toString())+"/50" );
 				var bmp:Bitmap = new Bitmap( EmbedsManager.instance.getBitmapByName("Comp_"+vo.toString(),true).bitmapData ) ;
 				FixScale.setScale(bmp, 120 , 90);
 				imgContainer.addChild( bmp );
