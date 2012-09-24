@@ -419,7 +419,6 @@
 				bytes.writeObject( compHash );
 				bytes.writeObject( quests );
 				
-				bytes.compress();
 				stream.writeBytes( bytes );
 				stream.close();
 				Alert.show("导出成功！");
