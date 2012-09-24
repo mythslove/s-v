@@ -234,8 +234,8 @@ package local.map.item
 			CompsModel.instance.addComp( name , value );
 			
 			var flyImg:FlyLabelImage = new FlyLabelImage(  name , value ) ;
-			flyImg.x = screenX + RandomUtil.wave*_size ;
-			flyImg.y = screenY ;
+			flyImg.x = screenX  ;
+			flyImg.y = screenY  ;
 			GameWorld.instance.effectScene.addChild( flyImg );
 		}
 		
