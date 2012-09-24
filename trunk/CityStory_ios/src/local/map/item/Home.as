@@ -57,8 +57,8 @@ package local.map.item
 				showBuildingFlagIcon();
 				
 				//收Comp
-				setTimeout( collectComp , 500 , "Wood" , 2 );
-				setTimeout( collectComp , 1000 , "Stone" , 1 );
+				setTimeout( collectComp , 100 , "Wood" , 2 );
+				setTimeout( collectComp , 400 , "Stone" , 1 );
 			}
 		}
 	}
