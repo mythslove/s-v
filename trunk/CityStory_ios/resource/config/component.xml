@@ -1,3 +1,4 @@
 <component>
-	<item name="" cash="" />
+	<item name="Stone" title="Stone" cash="2" />
+	<item name="Wood" title="Wood" cash="3" />
 </component>

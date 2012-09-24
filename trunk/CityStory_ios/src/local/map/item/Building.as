@@ -1,5 +1,7 @@
 package local.map.item
 {
+	import bing.utils.RandomUtil;
+	
 	import flash.events.Event;
 	
 	import local.comm.GameData;
@@ -11,6 +13,7 @@ package local.map.item
 	import local.map.cell.BuildStatusObject;
 	import local.map.pk.FlyLabelImage;
 	import local.map.pk.PickupImages;
+	import local.model.CompsModel;
 	import local.model.MapGridDataModel;
 	import local.model.PlayerModel;
 	import local.util.EmbedsManager;
@@ -221,6 +224,20 @@ package local.map.item
 		//============显示和移除图标====================================================
 		
 		
+		/**
+		 * 收集Component 
+		 * @param name
+		 * @param value
+		 */		
+		public function collectComp( name:String , value:int ):void
+		{
+			CompsModel.instance.addComp( name , value );
+			
+			var flyImg:FlyLabelImage = new FlyLabelImage(  name , value ) ;
+			flyImg.x = screenX + RandomUtil.wave*50 ;
+			flyImg.y = screenY ;
+			GameWorld.instance.effectScene.addChild( flyImg );
+		}
 		
 		
 		
@@ -259,7 +276,8 @@ package local.map.item
 			if( me.energy>0){
 				var flyImg:FlyLabelImage = new FlyLabelImage( PickupType.ENERGY , -1 ) ;
 				flyImg.x = screenX ;
-				flyImg.y = screenY ;
+				var het:Number = _buildingObject? _buildingObject.height : _buildStatusObj.height ;
+				flyImg.y = screenY+buildingVO.baseVO.span*_size- het - statusIcon.height*0.5 ;
 				GameWorld.instance.effectScene.addChild( flyImg );
 				PlayerModel.instance.changeEnergy( -1 ) ;
 				return true ;

@@ -25,7 +25,7 @@ package local.map.pk
 			mouseEnabled = mouseChildren = false ;
 			//图标
 			var bmp:Bitmap = new Bitmap();
-			bmp.name = pkType ;
+//			bmp.name = pkType ;
 			switch( pkType)
 			{
 				case PickupType.COIN:
@@ -42,6 +42,9 @@ package local.map.pk
 					break ;
 				case PickupType.CASH:
 					bmp.bitmapData = EmbedsManager.instance.getBitmapByName("PickupCash",true).bitmapData;
+					break ;
+				default: //component
+					bmp.bitmapData = EmbedsManager.instance.getBitmapByName("Comp_"+pkType,true).bitmapData;
 					break ;
 			}
 			bmp.y = - bmp.height>>1 ;

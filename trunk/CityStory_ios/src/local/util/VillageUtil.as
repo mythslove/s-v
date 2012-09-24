@@ -10,13 +10,12 @@ package local.util
 	import local.comm.GlobalDispatcher;
 	import local.event.VillageEvent;
 	import local.model.BuildingModel;
-	import local.model.ComponentModel;
+	import local.model.CompsModel;
 	import local.model.LandModel;
 	import local.model.PlayerModel;
 	import local.model.QuestModel;
 	import local.model.StorageModel;
 	import local.vo.BuildingVO;
-	import local.vo.ComponentVO;
 	import local.vo.LandVO;
 	import local.vo.PlayerVO;
 	import local.vo.QuestVO;
@@ -75,7 +74,7 @@ package local.util
 				stream.writeObject(QuestModel.instance.currentQuests );
 				stream.writeObject(QuestModel.instance.completedQuests );
 				//Component
-				stream.writeObject( ComponentModel.instance.myComps ) ;
+				stream.writeObject( CompsModel.instance.myComps ) ;
 			}
 			catch( e:Error)
 			{
@@ -118,7 +117,6 @@ package local.util
 					PlayerModel.instance.me.cash = 10000 ;
 					PlayerModel.instance.me.coin = 10000 ;
 					/*-----------------测试数据---------------------------------------*/
-					
 					//读取地图信息
 					BuildingModel.instance.expandBuilding = stream.readObject() as BuildingVO ;
 					BuildingModel.instance.basicTrees = stream.readObject() as Vector.<BuildingVO> ;
@@ -140,9 +138,9 @@ package local.util
 					if(!LandModel.instance.lands) LandModel.instance.initLands() ;
 					//读任务
 					QuestModel.instance.currentQuests = stream.readObject() as Vector.<QuestVO>;
-					QuestModel.instance.completedQuests = stream.readObject();
-					//Component
-					ComponentModel.instance.myComps = stream.readObject as Vector.<ComponentVO>;
+					QuestModel.instance.completedQuests = stream.readObject() as Dictionary ;
+					//掉落物
+					CompsModel.instance.myComps = stream.readObject as Dictionary ;
 					//村庄信息已经读取完成
 					GlobalDispatcher.instance.dispatchEvent( new VillageEvent(VillageEvent.READED_VILLAGE));
 				}

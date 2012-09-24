@@ -1,5 +1,7 @@
 package local.map.item
 {
+	import flash.utils.setTimeout;
+	
 	import local.comm.GameData;
 	import local.enum.BuildingStatus;
 	import local.enum.PickupType;
@@ -53,6 +55,10 @@ package local.map.item
 				
 				startProduct();
 				showBuildingFlagIcon();
+				
+				//收Comp
+				setTimeout( collectComp , 500 , "Wood" , 2 );
+				setTimeout( collectComp , 1000 , "Stone" , 1 );
 			}
 		}
 	}

@@ -117,7 +117,11 @@ package local.util
 		public static const PickupGoods_iphone:Class ;
 		[Embed(source="../resource/comm/PickupEnergy.png")]
 		public static const PickupEnergy_iphone:Class ;
-		
+		//========Component图标====================
+		[Embed(source="../resource/comp/Stone_iphone.png")]
+		public static const Comp_Stone_iphone:Class ;
+		[Embed(source="../resource/comp/Wood_iphone.png")]
+		public static const Comp_Wood_iphone:Class ;
 		
 		
 		
