@@ -234,7 +234,7 @@ package local.map.item
 			CompsModel.instance.addComp( name , value );
 			
 			var flyImg:FlyLabelImage = new FlyLabelImage(  name , value ) ;
-			flyImg.x = screenX + RandomUtil.wave*50 ;
+			flyImg.x = screenX + RandomUtil.wave*_size ;
 			flyImg.y = screenY ;
 			GameWorld.instance.effectScene.addChild( flyImg );
 		}
@@ -256,7 +256,7 @@ package local.map.item
 						
 						var flyImg:FlyLabelImage = new FlyLabelImage( PickupType.CASH , -cashCost ) ;
 						flyImg.x = screenX-20 ;
-						flyImg.y = screenY-50 ;
+						flyImg.y = screenY-70 ;
 						GameWorld.instance.effectScene.addChild( flyImg );
 						
 						gameTimerCompleteHandler(null);
