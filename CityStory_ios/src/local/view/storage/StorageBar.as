@@ -131,7 +131,7 @@ package local.view.storage
 				{
 					if(myComps[key]>0){
 						render = getStorageRender( key , temp+_count );
-						render.x = temp*(render.width+10) ;
+						render.x = (_count+temp)*(render.width+10) ;
 						_content.addChild( render );
 						++ temp ;
 					}
