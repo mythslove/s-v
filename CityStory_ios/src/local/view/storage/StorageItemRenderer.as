@@ -1,13 +1,16 @@
 package local.view.storage
 {
 	import bing.utils.ContainerUtil;
+	import bing.utils.FixScale;
 	
+	import flash.display.Bitmap;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.text.TextField;
 	
 	import local.model.CompsModel;
 	import local.model.ShopModel;
+	import local.util.EmbedsManager;
 	import local.util.GameUtil;
 	import local.view.base.BaseView;
 	import local.view.base.BuildingThumb;
@@ -39,6 +42,12 @@ package local.view.storage
 				var compVO:ComponentVO = CompsModel.instance.allComps[ vo.toString() ];
 				GameUtil.boldTextField( txtTitle , compVO.title );
 				GameUtil.boldTextField( txtCount , "×"+CompsModel.instance.getCompCount(vo.toString()) );
+				var bmp:Bitmap = new Bitmap( EmbedsManager.instance.getBitmapByName("Comp_"+vo.toString(),true).bitmapData ) ;
+				FixScale.setScale(bmp, 120 , 90);
+				imgContainer.addChild( bmp );
+				bmp.x = -bmp.width>>1 ;
+				bmp.y = -bmp.height>>1 ;
+				
 			}else{
 				isBuilding = true ;
 				var sbvo:StorageBuildingVO = vo as StorageBuildingVO ;
