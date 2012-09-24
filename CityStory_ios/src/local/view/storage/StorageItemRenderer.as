@@ -6,11 +6,13 @@ package local.view.storage
 	import flash.events.Event;
 	import flash.text.TextField;
 	
+	import local.model.CompsModel;
 	import local.model.ShopModel;
 	import local.util.GameUtil;
 	import local.view.base.BaseView;
 	import local.view.base.BuildingThumb;
 	import local.vo.BaseBuildingVO;
+	import local.vo.ComponentVO;
 	import local.vo.StorageBuildingVO;
 	
 	public class StorageItemRenderer extends BaseView
@@ -34,7 +36,9 @@ package local.view.storage
 			super.addedToStageHandler(e);
 			if(vo is String){
 				isBuilding = false ;
-				GameUtil.boldTextField( txtTitle , vo.toString() );
+				var compVO:ComponentVO = CompsModel.instance.allComps[ vo.toString() ];
+				GameUtil.boldTextField( txtTitle , compVO.title );
+				GameUtil.boldTextField( txtCount , "×"+CompsModel.instance.getCompCount(vo.toString()) );
 			}else{
 				isBuilding = true ;
 				var sbvo:StorageBuildingVO = vo as StorageBuildingVO ;

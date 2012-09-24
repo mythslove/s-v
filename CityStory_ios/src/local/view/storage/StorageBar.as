@@ -9,12 +9,13 @@ package local.view.storage
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.utils.Dictionary;
 	
 	import local.comm.GameData;
 	import local.enum.VillageMode;
 	import local.map.GameWorld;
 	import local.map.item.BaseBuilding;
-	import local.model.ComponentModel;
+	import local.model.CompsModel;
 	import local.model.ShopModel;
 	import local.model.StorageModel;
 	import local.util.BuildingFactory;
@@ -114,16 +115,27 @@ package local.view.storage
 			for( var i:int = 0 ; i<len ; ++i )
 			{
 				render = getStorageRender(items[i] , i+_count );
-				render.x = (i+_count)*140 ;
+				render.x = (i+_count)*(render.width+10) ;
 				_content.addChild( render );
 			}
 			_count+=len ;
 		}
 		
-		private function addComps( count:int=0 ):void
+		private function addComps():void
 		{
-			if( ComponentModel.instance.myComps){
-				
+			var myComps:Dictionary = CompsModel.instance.myComps ;
+			if(myComps){
+				var render:StorageItemRenderer ;
+				var temp:int ;
+				for ( var key:String in myComps)
+				{
+					if(myComps[key]>0){
+						render = getStorageRender( key , temp+_count );
+						render.x = temp*(render.width+10) ;
+						_content.addChild( render );
+						++ temp ;
+					}
+				}
 			}
 		}
 		
