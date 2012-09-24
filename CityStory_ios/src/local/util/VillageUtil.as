@@ -3,6 +3,7 @@ package local.util
 	import flash.filesystem.File;
 	import flash.filesystem.FileMode;
 	import flash.filesystem.FileStream;
+	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
 	import flash.utils.getTimer;
 	
@@ -140,17 +141,15 @@ package local.util
 					QuestModel.instance.currentQuests = stream.readObject() as Vector.<QuestVO>;
 					QuestModel.instance.completedQuests = stream.readObject() as Dictionary ;
 					//掉落物
-					CompsModel.instance.myComps = stream.readObject as Dictionary ;
-					//村庄信息已经读取完成
-					GlobalDispatcher.instance.dispatchEvent( new VillageEvent(VillageEvent.READED_VILLAGE));
-				}
-				catch( e:Error)
-				{
-					GlobalDispatcher.instance.dispatchEvent( new VillageEvent(VillageEvent.NEW_VILLAGE));
+					var bytes:ByteArray = new ByteArray();
+					stream.readBytes( bytes );
+					CompsModel.instance.myComps = bytes.readObject() as Dictionary ;
 				}
 				finally
 				{
 					stream.close();
+					//村庄信息已经读取完成
+					GlobalDispatcher.instance.dispatchEvent( new VillageEvent(VillageEvent.READED_VILLAGE));
 				}
 			}
 			else
