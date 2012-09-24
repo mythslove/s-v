@@ -5,6 +5,7 @@ package local.util
 	import local.enum.QuestType;
 	import local.event.QuestEvent;
 	import local.model.BuildingModel;
+	import local.model.CompsModel;
 	import local.model.QuestModel;
 	import local.vo.BuildingVO;
 	import local.vo.QuestTaskVO;
@@ -50,6 +51,9 @@ package local.util
 							case QuestType.OWN_TYPE:
 								num = BuildingModel.instance.getCountByType questType ) ;
 								break ;
+							case QuestType.OWN_COMP:
+								num = CompsModel.instance.getCompCount( sonType );
+								break ;
 						}
 						if( updateSetCount( vo , questType , sonType , num ) ){
 							isUpdate = true ;
@@ -62,7 +66,12 @@ package local.util
 		}
 		
 		
-		
+		/**
+		 * 更新此quest，用于累加数值的
+		 * @param questType
+		 * @param sonType
+		 * @param num
+		 */		
 		public function handleAddCount( questType:String , sonType:String = "" , num:int = 1 ):void
 		{
 			var isUpdate:Boolean ;

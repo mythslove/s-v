@@ -13,6 +13,11 @@ package local.enum
 		public static const OWN_TYPE:String = "owntype";
 		
 		/**
+		 * 拥有某一种Compoent的数量，sonType为 Component的 name 
+		 */		
+		public static const OWN_COMP:String = "ownComp";
+		
+		/**
 		 * 修建某个建筑 ，sonType为BaseBuildingVO的name 
 		 */		
 		public static const BUILD:String = "build";
