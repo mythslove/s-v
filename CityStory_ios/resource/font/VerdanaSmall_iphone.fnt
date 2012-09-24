@@ -6,18 +6,18 @@
     <page id="0" file="VerdanaSmall_iphone_0.png" />
   </pages>
   <chars count="13">
-    <char id="44" x="184" y="0" width="9" height="9" xoffset="-1" yoffset="16" xadvance="7" page="0" chnl="15" />
-    <char id="47" x="0" y="0" width="14" height="21" xoffset="0" yoffset="4" xadvance="14" page="0" chnl="15" />
-    <char id="48" x="15" y="0" width="16" height="17" xoffset="-1" yoffset="5" xadvance="14" page="0" chnl="15" />
-    <char id="49" x="161" y="0" width="13" height="17" xoffset="1" yoffset="5" xadvance="14" page="0" chnl="15" />
-    <char id="50" x="83" y="0" width="15" height="17" xoffset="0" yoffset="5" xadvance="14" page="0" chnl="15" />
-    <char id="51" x="131" y="0" width="14" height="17" xoffset="0" yoffset="5" xadvance="14" page="0" chnl="15" />
-    <char id="52" x="32" y="0" width="16" height="17" xoffset="-1" yoffset="5" xadvance="14" page="0" chnl="15" />
-    <char id="53" x="99" y="0" width="15" height="17" xoffset="0" yoffset="5" xadvance="14" page="0" chnl="15" />
-    <char id="54" x="115" y="0" width="15" height="17" xoffset="0" yoffset="5" xadvance="14" page="0" chnl="15" />
-    <char id="55" x="146" y="0" width="14" height="17" xoffset="0" yoffset="5" xadvance="14" page="0" chnl="15" />
-    <char id="56" x="49" y="0" width="16" height="17" xoffset="-1" yoffset="5" xadvance="14" page="0" chnl="15" />
-    <char id="57" x="66" y="0" width="16" height="17" xoffset="-1" yoffset="5" xadvance="14" page="0" chnl="15" />
-    <char id="58" x="175" y="0" width="8" height="13" xoffset="0" yoffset="9" xadvance="8" page="0" chnl="15" />
+    <char id="44" x="184" y="0" width="10" height="10" xoffset="-1" yoffset="16" xadvance="7" page="0" chnl="15" />
+    <char id="47" x="0" y="0" width="15" height="22" xoffset="0" yoffset="4" xadvance="14" page="0" chnl="15" />
+    <char id="48" x="15" y="0" width="17" height="18" xoffset="-1" yoffset="5" xadvance="14" page="0" chnl="15" />
+    <char id="49" x="161" y="0" width="14" height="18" xoffset="1" yoffset="5" xadvance="14" page="0" chnl="15" />
+    <char id="50" x="83" y="0" width="16" height="18" xoffset="0" yoffset="5" xadvance="14" page="0" chnl="15" />
+    <char id="51" x="131" y="0" width="15" height="18" xoffset="0" yoffset="5" xadvance="14" page="0" chnl="15" />
+    <char id="52" x="32" y="0" width="17" height="18" xoffset="-1" yoffset="5" xadvance="14" page="0" chnl="15" />
+    <char id="53" x="99" y="0" width="16" height="18" xoffset="0" yoffset="5" xadvance="14" page="0" chnl="15" />
+    <char id="54" x="115" y="0" width="16" height="18" xoffset="0" yoffset="5" xadvance="14" page="0" chnl="15" />
+    <char id="55" x="146" y="0" width="15" height="18" xoffset="0" yoffset="5" xadvance="14" page="0" chnl="15" />
+    <char id="56" x="49" y="0" width="17" height="18" xoffset="-1" yoffset="5" xadvance="14" page="0" chnl="15" />
+    <char id="57" x="66" y="0" width="17" height="18" xoffset="-1" yoffset="5" xadvance="14" page="0" chnl="15" />
+    <char id="58" x="175" y="0" width="9" height="14" xoffset="0" yoffset="9" xadvance="8" page="0" chnl="15" />
   </chars>
 </font>
