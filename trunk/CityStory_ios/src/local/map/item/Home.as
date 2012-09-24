@@ -56,9 +56,11 @@ package local.map.item
 				startProduct();
 				showBuildingFlagIcon();
 				
-				//收Comp
-				setTimeout( collectComp , 100 , "Wood" , 2 );
-				setTimeout( collectComp , 400 , "Stone" , 1 );
+				//收Comp-----------------------测试用------------------
+				if(Math.random()>0.86){
+					setTimeout( collectComp , 100 , "Wood" , 2 );
+					setTimeout( collectComp , 400 , "Stone" , 1 );
+				}
 			}
 		}
 	}
