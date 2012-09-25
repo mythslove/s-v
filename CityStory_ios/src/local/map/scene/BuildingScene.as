@@ -139,12 +139,12 @@ package local.map.scene
 					}
 				}
 			}
-			var carRate:int = GameSetting.device=="iphone" ? 8 : 5 ;
-			var characterRate:int = GameSetting.device=="iphone" ? 5 : 3 ;
+			var carRate:int = GameSetting.device=="iphone" ? 5 : 4 ;
+			var characterRate:int = GameSetting.device=="iphone" ? 4 : 2 ;
 			var len:int = roads.length ;
 			for(var i:int = 0 ; i<len ; ++i)
 			{
-				if( Math.random()>0.4 && i%characterRate==0 ){ 
+				if( Math.random()>0.3 && i%characterRate==0 ){ 
 					road = roads[i];
 					var fairy:MoveItem = ObjectPool.instance.getCharacter() ;
 					fairy.nodeX  = road.nodeX;
@@ -152,7 +152,7 @@ package local.map.scene
 					addMoveItem( fairy , false ) ;
 					fairy.init();
 				}
-				if(Math.random()>0.5 && i%carRate==0 ){ 
+				if(Math.random()>0.4 && i%carRate==0 ){ 
 					road = roads[i];
 					if(road.direction!=""){
 						var car:MoveItem = ObjectPool.instance.getCar() ;
