@@ -59,7 +59,7 @@ package local.map.item
 			if( PlayerModel.instance.getCurrentPop()>= GameUtil.buildIndustryPop()){
 				super.storageToWorld();
 			}else{
-				CenterViewLayer.instance.gameTip.showLackPop();
+				CenterViewLayer.instance.gameTip.showLackPop( this );
 			}
 		}
 		

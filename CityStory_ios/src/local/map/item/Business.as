@@ -40,7 +40,7 @@ package local.map.item
 						removeBuildingFlagIcon() ;
 					}else{
 						//没有足够的goods
-						CenterViewLayer.instance.gameTip.showLackGoods() ;
+						CenterViewLayer.instance.gameTip.showLackGoods( this ) ;
 					}
 				}
 				else if( buildingVO.status==BuildingStatus.PRODUCTION_COMPLETE)
