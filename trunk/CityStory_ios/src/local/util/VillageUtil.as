@@ -32,19 +32,11 @@ package local.util
 		}
 		//=======================================
 		
-		private var _time:int ;
-		
 		/**
 		 * 保存村庄信息 
 		 */		
-		public function saveVillage(enforce:Boolean):void
+		public function saveVillage():void
 		{
-			if(!enforce){
-				if(getTimer()-_time<2000){
-					return ;
-				}
-				_time = getTimer() ;
-			}
 			//保存文件
 			var file:File = new File( File.applicationStorageDirectory.url+"res/"+GameSetting.fdId+".bin");
 			var stream:FileStream = new FileStream();
@@ -113,8 +105,8 @@ package local.util
 					}
 					
 					/*-----------------测试数据---------------------------------------*/
-					PlayerModel.instance.me.energy = 10 ;
-					PlayerModel.instance.me.goods = 20 ;
+					PlayerModel.instance.me.energy = 40 ;
+					PlayerModel.instance.me.goods = 40 ;
 					PlayerModel.instance.me.cash = 10000 ;
 					PlayerModel.instance.me.coin = 10000 ;
 					/*-----------------测试数据---------------------------------------*/
