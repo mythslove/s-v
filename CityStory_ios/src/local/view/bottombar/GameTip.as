@@ -177,6 +177,9 @@ package local.view.bottombar
 		 */		
 		public function showLackEnergy( building:Building ):void
 		{
+			if(currentBuilding==building){
+				return ;
+			}
 			currentBuilding = building ;
 			show();
 			gotoAndStop("energy");
@@ -189,6 +192,9 @@ package local.view.bottombar
 		 */		
 		public function showLackGoods( building:Building ):void
 		{
+			if(currentBuilding==building){
+				return ;
+			}
 			currentBuilding = building ;
 			show();
 			gotoAndStop("goods");
@@ -201,6 +207,9 @@ package local.view.bottombar
 		 */		
 		public function showLackPop( building:Building ):void
 		{
+			if(currentBuilding==building){
+				return ;
+			}
 			currentBuilding = building ;
 			this.show() ;
 			gotoAndStop("nopop");
