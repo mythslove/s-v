@@ -250,7 +250,7 @@ package local.map.item
 			if(cashCost>0){
 				if(PlayerModel.instance.me.cash >= cashCost )
 				{
-					if(gameTimer && reduceEnergy()){
+					if(gameTimer ){
 						//扣cash
 						PlayerModel.instance.changeCash( -cashCost );
 						
