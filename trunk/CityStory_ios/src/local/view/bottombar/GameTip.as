@@ -173,9 +173,9 @@ package local.view.bottombar
 		/**
 		 * 缺少energy 
 		 */		
-		public function showLackEnergy():void
+		public function showLackEnergy( building:Building ):void
 		{
-			currentBuilding = null ;
+			currentBuilding = building ;
 			show();
 			gotoAndStop("energy");
 			btnGreen.label = GameUtil.localizationString("gametip.noenergy.button")  ;
@@ -185,9 +185,9 @@ package local.view.bottombar
 		/**
 		 * 缺少商品 
 		 */		
-		public function showLackGoods():void
+		public function showLackGoods( building:Building ):void
 		{
-			currentBuilding = null ;
+			currentBuilding = building ;
 			show();
 			gotoAndStop("goods");
 			btnGreen.label = GameUtil.localizationString("gametip.nogoods.button")  ;
@@ -197,8 +197,9 @@ package local.view.bottombar
 		/**
 		 * 工厂缺少人口 
 		 */		
-		public function showLackPop():void
+		public function showLackPop( building:Building ):void
 		{
+			currentBuilding = building ;
 			this.show() ;
 			gotoAndStop("nopop");
 			GameUtil.boldTextField( txtInfo , "need pop "+GameUtil.buildIndustryPop() );

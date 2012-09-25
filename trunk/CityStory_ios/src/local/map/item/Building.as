@@ -283,7 +283,7 @@ package local.map.item
 				return true ;
 			}else{
 				//显示没有能量提示
-				CenterViewLayer.instance.gameTip.showLackEnergy() ;
+				CenterViewLayer.instance.gameTip.showLackEnergy( this ) ;
 			}
 			return false ;
 		}
