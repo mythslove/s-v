@@ -73,5 +73,22 @@ package local.view.shop
 			}
 			return false ;
 		}
+		
+		/**
+		 *  滚动位置直接滚到name建筑位置
+		 * @param name
+		 */		
+		public function scrollToBuilding( buildName:String ):void
+		{
+			var item:ShopItemRenderer ;
+			for(var i:int = 0 ; i<_content.numChildren ; ++i)
+			{
+				item = _content.getChildAt(i) as ShopItemRenderer ;
+				if( item && item.baseVO && item.baseVO.name==buildName ){
+					_scroll.scrollTo( item.x );
+					break ;
+				}
+			}
+		}
 	}
 }
