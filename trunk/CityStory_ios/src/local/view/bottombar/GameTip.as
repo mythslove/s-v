@@ -106,6 +106,8 @@ package local.view.bottombar
 				return ;
 			}
 			currentBuilding = building as Building;
+			if(!currentBuilding) return ;
+			
 			if( GameData.villageMode==VillageMode.NORMAL){ 
 				// 如果是修建状态
 				switch( building.buildingVO.status)
