@@ -61,7 +61,7 @@ package
 		
 		private function deactivateHandler( e:Event ):void {
 			GameWorld.instance.buildingScene.readySave();
-			_villageUtil.saveVillage( true );
+			_villageUtil.saveVillage();
 		}
 		
 		//显示每日奖励
