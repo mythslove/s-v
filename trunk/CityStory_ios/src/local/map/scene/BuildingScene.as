@@ -140,7 +140,7 @@ package local.map.scene
 				}
 			}
 			var carRate:int = GameSetting.device=="iphone" ? 5 : 4 ;
-			var characterRate:int = GameSetting.device=="iphone" ? 4 : 2 ;
+			var characterRate:int = GameSetting.device=="iphone" ? 4 : 3 ;
 			var len:int = roads.length ;
 			for(var i:int = 0 ; i<len ; ++i)
 			{
