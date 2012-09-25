@@ -349,7 +349,7 @@ package  local.map
 		/** 添加侦听 */
 		protected function configListeners():void
 		{
-			if(Multitouch.supportsGestureEvents){
+			if(Multitouch.supportsTouchEvents){
 				Multitouch.inputMode = MultitouchInputMode.TOUCH_POINT ;
 				this.addEventListener(TouchEvent.TOUCH_BEGIN , onTouchHandler ) ;
 				this.addEventListener(TouchEvent.TOUCH_MOVE , onTouchHandler ) ;
