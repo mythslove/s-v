@@ -35,6 +35,36 @@ package  local.util
 		}
 		
 		
+		/**
+		 * 是否已经弹出来，或者已经在队列中 
+		 * @param obj 类或者实例
+		 * @return 
+		 */		
+		public function isInPop( obj:Object ):Boolean
+		{
+			var len:int = _popupList.length ;
+			var cls:Class = obj as Class ;
+			if( cls ){
+				for( var i:int = 0 ; i<len ; ++i){
+					if(_popupList[i].window is cls) return true ;
+				}
+				for( i=0;i<numChildren ; ++i){
+					if(getChildAt(i) is cls) return true ;
+				}
+			}
+			else
+			{
+				for( i = 0 ; i<len ; ++i){
+					if( obj == _popupList[i].window ) return true ;
+				}
+				for( i=0 ; i<numChildren ; ++i){
+					if( obj == getChildAt(i) ) return true ;
+				}
+			}
+			return false;
+		}
+		
+		
 		//---------------------------序列显示弹出窗口----------------------------------------------
 		/**
 		 * 添加弹出窗口 
