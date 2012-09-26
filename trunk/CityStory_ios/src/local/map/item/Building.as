@@ -8,6 +8,7 @@ package local.map.item
 	import local.enum.BuildingStatus;
 	import local.enum.BuildingType;
 	import local.enum.PickupType;
+	import local.enum.QuestType;
 	import local.enum.VillageMode;
 	import local.map.GameWorld;
 	import local.map.cell.BuildStatusObject;
@@ -19,6 +20,7 @@ package local.map.item
 	import local.util.EmbedsManager;
 	import local.util.GameTimer;
 	import local.util.GameUtil;
+	import local.util.QuestUtil;
 	import local.view.CenterViewLayer;
 	import local.view.base.StatusIcon;
 	import local.vo.BuildingVO;
@@ -392,6 +394,11 @@ package local.map.item
 				removeChild(_buildStatusObj);
 				_buildStatusObj.dispose();
 				_buildStatusObj = null ;
+				
+				//修建完成后的任务判断
+				QuestUtil.instance.handleAddCount( QuestType.BUILD , buildingVO.name );
+				QuestUtil.instance.handleOwn( QuestType.OWN_BUILDING , buildingVO.name );
+				QuestUtil.instance.handleOwn( QuestType.OWN_TYPE , buildingVO.baseVO.type );
 			}
 			showUI();
 		}
