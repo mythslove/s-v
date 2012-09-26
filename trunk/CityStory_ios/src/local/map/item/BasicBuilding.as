@@ -3,11 +3,13 @@ package local.map.item
 	import local.comm.GameData;
 	import local.enum.BuildingStatus;
 	import local.enum.PickupType;
+	import local.enum.QuestType;
 	import local.enum.VillageMode;
 	import local.map.GameWorld;
 	import local.map.cell.BuildingObject;
 	import local.map.pk.PickupImages;
 	import local.model.BuildingModel;
+	import local.util.QuestUtil;
 	import local.util.ResourceUtil;
 	import local.vo.BitmapAnimResVO;
 	import local.vo.BuildingVO;
@@ -62,6 +64,8 @@ package local.map.item
 				GameWorld.instance.buildingScene.removeBuilding( this );
 				BuildingModel.instance.removeBuilding( this );
 				this.dispose() ;
+				//砍树任务
+				QuestUtil.instance.handleAddCount( QuestType.CHOP );
 			}else{
 				showBuildingFlagIcon() ;
 			}
