@@ -62,6 +62,7 @@ package
 		private function deactivateHandler( e:Event ):void {
 			GameWorld.instance.buildingScene.readySave();
 			_villageUtil.saveVillage();
+//			showDailyRewards();
 		}
 		
 		//显示每日奖励
@@ -70,7 +71,7 @@ package
 			var me:PlayerVO = PlayerModel.instance.me;
 			var result:int = 0 ; //0为第一天奖励，1为奖励天数+1
 			var tempDate:Date = new Date();
-			var today:Date = new Date(tempDate.fullYear,tempDate.month,tempDate.date);
+			var today:Date = new Date(GameData.commDate.fullYear,GameData.commDate.month,GameData.commDate.date);
 			if(me.dailyRewardsTime)
 			{
 				var last:Date = new Date(me.dailyRewardsTime[0],me.dailyRewardsTime[1],me.dailyRewardsTime[2]);
@@ -80,8 +81,11 @@ package
 				}
 				result= result==1?1:0 ;
 			}
-//			var dailyRewardsPop:DailyRewardsPopUp = new DailyRewardsPopUp(today,result);
-//			PopUpManager.instance.addQueuePopUp(dailyRewardsPop);
+//			if( !PopUpManager.instance.isInPop( DailyRewardsPopUp ) )
+//			{
+//				var dailyRewardsPop:DailyRewardsPopUp = new DailyRewardsPopUp(today,result);
+//				PopUpManager.instance.addQueuePopUp(dailyRewardsPop);
+//			}
 		}
 	}
 }
