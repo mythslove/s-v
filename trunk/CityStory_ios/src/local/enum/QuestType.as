@@ -9,7 +9,7 @@ package local.enum
 		
 		/**
 		 * 拥有某一种类型的建筑数量，sonType为 BuildingType中的主类型，如wonders,commnuity,homes 
-		 */		
+		 */	
 		public static const OWN_TYPE:String = "owntype";
 		
 		/**
