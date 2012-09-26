@@ -3,11 +3,13 @@ package local.map.item
 	import local.comm.GameData;
 	import local.enum.BuildingStatus;
 	import local.enum.PickupType;
+	import local.enum.QuestType;
 	import local.enum.VillageMode;
 	import local.map.GameWorld;
 	import local.map.pk.FlyLabelImage;
 	import local.map.pk.PickupImages;
 	import local.model.PlayerModel;
+	import local.util.QuestUtil;
 	import local.view.CenterViewLayer;
 	import local.vo.BuildingVO;
 	
@@ -78,6 +80,9 @@ package local.map.item
 				buildingVO.status = BuildingStatus.LACK_MATERIAL ;
 				buildingVO.haveGoods = false ;
 				showBuildingFlagIcon();
+				
+				//任务判断
+				QuestUtil.instance.handleAddCount( QuestType.COLLECT , buildingVO.name );
 			}
 		}
 	}

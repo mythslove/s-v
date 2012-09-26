@@ -5,9 +5,11 @@ package local.map.item
 	import local.comm.GameData;
 	import local.enum.BuildingStatus;
 	import local.enum.PickupType;
+	import local.enum.QuestType;
 	import local.enum.VillageMode;
 	import local.map.GameWorld;
 	import local.map.pk.PickupImages;
+	import local.util.QuestUtil;
 	import local.vo.BuildingVO;
 	
 	public class Home extends Building
@@ -61,6 +63,9 @@ package local.map.item
 					setTimeout( collectComp , 100 , "Wood" , 2 );
 					setTimeout( collectComp , 800 , "Stone" , 1 );
 				}
+				
+				//任务判断
+				QuestUtil.instance.handleAddCount( QuestType.COLLECT , buildingVO.name );
 			}
 		}
 	}
