@@ -12,12 +12,12 @@ package bing.starling.component
 	{
 		private var _bmd:BitmapData ;
 		private static var _basePoint:Point = new Point();
-		private var _atlasPoint:Point ;
+		private var _regionRect:Rectangle ;
 		
-		public function PixelsImage(texture:Texture , bmd:BitmapData , atlasPoint:Point )
+		public function PixelsImage(texture:Texture , bmd:BitmapData , regionRect:Rectangle )
 		{
 			super(texture);
-			this._atlasPoint = atlasPoint ;
+			this._regionRect = regionRect ;
 			this._bmd = bmd ;
 		}
 		
@@ -26,8 +26,8 @@ package bing.starling.component
 			var displayObj:DisplayObject = super.hitTest(localPoint,forTouch);
 			if( displayObj){
 				var temp:Point = localPoint.clone();
-				temp.x += _atlasPoint.x ;
-				temp.y += _atlasPoint.y ;
+				temp.x += _regionRect.x ;
+				temp.y += _regionRect.y ;
 				if( _bmd.hitTest( _basePoint , 128 , temp )){
 					return this ;
 				}
