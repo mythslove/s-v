@@ -24,11 +24,8 @@ package local
 			//动态生成材质
 			TextureAssets.instance.createBuildingTexture() ;
 			
-//			var world:GameWorld = new GameWorld();
-//			addChild( world );
-	
-			var img:Image = new Image( TextureAssets.instance.buildingTexture.getTexture("Basic_Tree1_0_0") );
-			addChild(img);
+			var world:GameWorld = new GameWorld();
+			addChild( world );
 		}
 	}
 }
