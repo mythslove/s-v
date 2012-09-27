@@ -29,22 +29,28 @@ package local.util
 		public var buildingTexture:TextureAtlas ;
 		public var buildingBmd:BitmapData = new BitmapData(2048,2048,true,0xffffff);
 		
+		
 		public function createBuildingTexture():void
 		{
+			var name2Rect:Dictionary = new Dictionary();
 			var maxRect:MaxRectsBinPack = new MaxRectsBinPack(2048,2048,false);
 			var allBuildingHash:Dictionary = ShopModel.instance.allBuildingHash ;
 			if( allBuildingHash){
+				
+				//拼接图片
 				var baseVO:BaseBuildingVO ;
 				var resVO:ResVO ;
 				for ( var name:String in allBuildingHash){
 					baseVO =  allBuildingHash[name] as BaseBuildingVO ;
 					resVO = ResourceUtil.instance.getResVOByResId(name);
 					if(baseVO.subClass==BuildingType.DECORATION_ROAD || baseVO.subClass==BuildingType.DECORATION_GROUND){
-						parseResRoad( resVO.resObject as RoadResVO , maxRect );
+						parseResRoad( name , name2Rect , resVO.resObject as RoadResVO , maxRect );
 					}else{
-						parseBarvos( resVO.resObject as Vector.<BitmapAnimResVO> , maxRect );
+						parseBarvos( name , name2Rect , resVO.resObject as Vector.<BitmapAnimResVO> , maxRect );
 					}
 				}
+				
+				//创建材质
 				var texture:Texture = Texture.fromBitmapData( buildingBmd , false ) ;
 				buildingTexture = new TextureAtlas(texture);
 				var count:int ;
@@ -65,7 +71,7 @@ package local.util
 						var barvos:Vector.<BitmapAnimResVO> = resVO.resObject as Vector.<BitmapAnimResVO> ;
 						for( i = 0 ; i<barvos.length ; ++i){
 							for( var j:int = 0 ; j<barvos[i].bmds.length ; ++j ){
-								buildingTexture.addRegion( baseVO.name+i+j , maxRect.usedRectangles[count]);
+								buildingTexture.addRegion( baseVO.name+"_"+i+"_"+j , maxRect.usedRectangles[count]);
 								barvos[i].bmds[j].dispose();
 								++count;
 							}
@@ -77,20 +83,26 @@ package local.util
 			
 		}
 		
-		private function parseBarvos( barvos:Vector.<BitmapAnimResVO> , maxRect:MaxRectsBinPack ):void
+		private function parseBarvos( name:String , name2Rect:Dictionary , barvos:Vector.<BitmapAnimResVO> , maxRect:MaxRectsBinPack ):void
 		{
 			var rect:Rectangle ;
 			var bmd:BitmapData ;
+			var layer:int ; //层数
 			for each( var vo:BitmapAnimResVO in barvos){
 				for( var i:int = 0 ; i<vo.bmds.length ; ++i){
 					bmd = vo.bmds[i] ;
 					rect  = maxRect.insert( bmd.width , bmd.height , MaxRectsBinPack.ContactPointRule) ;
 					buildingBmd.copyPixels( bmd , bmd.rect , GameData.commPoint );
+					name2Rect[name+"_"+layer+"_"+i ] = rect ;
+					++layer ;
+					
+					bmd.dispose() ;
 				}
+				vo.bmds = null ;
 			}
 		}
 		
-		private function parseResRoad( roadResVO:RoadResVO , maxRect:MaxRectsBinPack ):void
+		private function parseResRoad(  name:String , name2Rect:Dictionary , roadResVO:RoadResVO , maxRect:MaxRectsBinPack ):void
 		{
 			var rect:Rectangle ;
 			var bmd:BitmapData ;
@@ -99,8 +111,12 @@ package local.util
 				bmd = roadResVO.bmds[key] as BitmapData ;
 				rect  = maxRect.insert( bmd.width , bmd.height , MaxRectsBinPack.ContactPointRule) ;
 				buildingBmd.copyPixels( bmd , bmd.rect , GameData.commPoint );
+				name2Rect[name+key ] = rect ;
 				++i ;
+				
+				bmd.dispose();
 			}
+			roadResVO.bmds = null ;
 		}
 	}
 }
