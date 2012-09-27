@@ -110,7 +110,7 @@ package  local.util
 		{
 			if(this.numChildren==0 && !_currentPopupObj && _popupList.length>0)
 			{
-				_currentPopupObj = _popupList.pop();
+				_currentPopupObj = _popupList.shift(); 
 				var mc:DisplayObject =  _currentPopupObj.window as DisplayObject;
 				if(_currentPopupObj.modal){
 					var mask:PopupMask = new PopupMask();
