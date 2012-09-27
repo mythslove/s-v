@@ -3,6 +3,7 @@ package local
 	import bing.starling.iso.SIsoWorld;
 	
 	import local.comm.GameSetting;
+	import local.util.TextureAssets;
 	
 	import starling.display.*;
 	import starling.events.Event;
@@ -19,6 +20,10 @@ package local
 		private function addedHandler(e:Event):void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE , addedHandler );
+			
+			//动态生成材质
+			TextureAssets.instance.createBuildingTexture() ;
+			
 			var world:GameWorld = new GameWorld();
 			addChild( world );
 		}
