@@ -69,5 +69,23 @@ package local.vo
 		}
 		
 		
+		/**
+		 * 返回跳过此questVO需要多少钱 
+		 * @return 
+		 */		
+		public function getAllSkipCash():int
+		{
+			var cash:int ;
+			var len :int = tasks.length;
+			var task:QuestTaskVO ;
+			for( var i:int = 0 ;  i<len ; ++i )
+			{
+				task = tasks[i] as QuestTaskVO ;
+				if( !task.isComplete){
+					cash+= task.skipCash;
+				}
+			}
+			return cash ;
+		}
 	}
 }
