@@ -78,6 +78,27 @@ package local.view.shop
 			}
 		}
 		
+		/**
+		 *  跳转到相应的选项，并滚到name建筑位置
+		 * @type 建筑的大类型 
+		 * @param name
+		 */		
+		public function scrollToBuilding( type:String , buildName:String ):void
+		{
+			show(type) ;
+			if( container.numChildren>0 && container.getChildAt(0) is ShopPanel)
+			{
+				(  container.getChildAt(0) as ShopPanel ).scrollToBuilding( buildName );
+			}
+		}
+		
+		
+		
+		
+		
+		
+		
+		
 		private function close():void{
 			mouseChildren=false;
 			TweenLite.to( this , 0.2 , { x:x+200 , ease: Back.easeIn , onComplete:onTweenCom});
