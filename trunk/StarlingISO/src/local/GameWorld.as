@@ -1,5 +1,6 @@
 package local
 {
+	import bing.res.ResVO;
 	import bing.starling.component.PixelsImage;
 	import bing.starling.component.Rhombus;
 	import bing.starling.iso.SIsoGrid;
@@ -12,6 +13,11 @@ package local
 	import flash.geom.Point;
 	
 	import local.comm.GameSetting;
+	import local.util.EmbedManager;
+	import local.util.ResourceUtil;
+	import local.util.TextureAssets;
+	import local.vo.BitmapAnimResVO;
+	import local.vo.RoadResVO;
 	
 	import starling.core.Starling;
 	import starling.display.*;
@@ -20,7 +26,6 @@ package local
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
 	import starling.textures.Texture;
-	import local.util.EmbedManager;
 	
 	public class GameWorld extends SIsoWorld
 	{
@@ -69,7 +74,10 @@ package local
 			//添加筑
 			var house:SIsoObject ;
 			var bird:Birds ;
-			var houses:Array = ["house1","house2","house3","tree1","tree2","house1"]
+			var houses:Array = ["Basic_Tree1","Clutch","Apple Shop","Greenhouse","Hermes Shop","Coco"] ;
+			var assets:TextureAssets = TextureAssets.instance ;
+			var bName:String ;
+			var resVO:ResVO ;
 			for( var i:int = 0 ; i<15 ; ++i )
 			{
 				for( var j:int =0 ; j<15 ; ++j )
@@ -79,41 +87,24 @@ package local
 						house.nodeX = i*2 ;
 						house.nodeZ = j*2 ;
 						var temp:int = (Math.random()*houses.length)>>0 ;
-						var img:Image = new PixelsImage( EmbedManager.createTextureAtlas("Atlas").getTexture(houses[temp]) ,
-							EmbedManager.getBmd("Atlas") , EmbedManager.getBmpPoint(houses[temp]));
-						switch(temp)
-						{
-							case 0:
-							case 5:
-								img.x = -59 ;
-								img.y = -54 ;
-								break;
-							case 1:
-								img.x = -76 ;
-								img.y = -70 ;
-								break;
-							case 2:
-								img.x = -63 ;
-								img.y = -42 ;
-								break;
-							case 3:
-								img.x = -42 ;
-								img.y = -30 ;
-								break;
-							case 4 :
-								img.x = -20 ;
-								img.y = -25 ;
-								break;
+						bName = houses[temp] ;
+						var img:Image = new PixelsImage( assets.buildingTexture.getTexture(bName+"_0_0"),assets.buildingBmd, assets.buildingTexture.getRegion(bName+"_0_0") );
+						resVO = ResourceUtil.instance.getResVOByResId( bName );
+						if(resVO && resVO.resObject ){
+							if(resVO.resObject is Vector.<BitmapAnimResVO>){
+								img.x = (resVO.resObject as Vector.<BitmapAnimResVO>)[0].offsetX ;
+								img.y = (resVO.resObject as Vector.<BitmapAnimResVO>)[0].offsetY ;
+							}
 						}
 						house.addChild(img);
 						buildingScene.addIsoObject( house,false );
 					}
 					else
 					{
-						bird = new Birds(_size , 1 , 1 );
-						bird.nodeX = i*2 ;
-						bird.nodeZ = j*2 ;
-						buildingScene.addIsoObject( bird,false );
+//						bird = new Birds(_size , 1 , 1 );
+//						bird.nodeX = i*2 ;
+//						bird.nodeZ = j*2 ;
+//						buildingScene.addIsoObject( bird,false );
 					}
 				}
 			}
