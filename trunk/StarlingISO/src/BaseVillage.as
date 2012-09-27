@@ -55,7 +55,7 @@ package
 					GameSetting.SCREEN_WIDTH = 1024;
 					GameSetting.SCREEN_HEIGHT = 768;
 					GameSetting.minZoom = 0.4 ;
-					GameSetting.device = "ipad";
+//					GameSetting.device = "ipad";
 				}
 			}
 				
@@ -98,9 +98,6 @@ package
 					}
 				}
 			}
-			resVOs.push( new ResVO("localization_config" , "config/localization_"+GameSetting.local+".bin") );
-			resVOs.push( new ResVO("ui_bar","swf/"+GameSetting.device+"/bar.swf"));
-			resVOs.push( new ResVO("ui_popup","swf/"+GameSetting.device+"/popup.swf"));
 			ResourceUtil.instance.addEventListener(ResProgressEvent.RES_LOAD_PROGRESS , gameInitResHandler );
 			ResourceUtil.instance.addEventListener("gameInitRes" , gameInitResHandler );
 			ResourceUtil.instance.queueLoad( "gameInitRes" , resVOs , 10 );
@@ -137,6 +134,7 @@ package
 		private function registerVO():void
 		{
 			registerClassAlias( "BaseBuildingVO" , BaseBuildingVO );
+			registerClassAlias( "ProductVO" , ProductVO );
 		}
 	}
 }

@@ -15,8 +15,8 @@ package local.comm
 		public static const GRID_SIZE:int = 60 ;
 		
 		/** 地图大小*/
-		public static var GRID_X:int = 68 ;
-		public static var GRID_Z:int = 68 ;
+		public static var GRID_X:int = 30 ;
+		public static var GRID_Z:int = 30 ;
 		
 		/** 地图的最大缩放值 */
 		public static var minZoom:Number=0.7 ;
