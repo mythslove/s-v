@@ -1,4 +1,4 @@
-package local
+package local.util
 {
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
