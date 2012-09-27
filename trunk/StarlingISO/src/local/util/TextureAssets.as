@@ -99,7 +99,7 @@ package local.util
 				bmd = roadResVO.bmds[key] as BitmapData ;
 				rect  = maxRect.insert( bmd.width , bmd.height , MaxRectsBinPack.ContactPointRule) ;
 				buildingBmd.copyPixels( bmd , bmd.rect , GameData.commPoint );
-				++i
+				++i ;
 			}
 		}
 	}
