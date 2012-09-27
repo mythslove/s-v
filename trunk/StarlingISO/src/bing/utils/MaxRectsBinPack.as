@@ -113,7 +113,7 @@ package bing.utils
 			if (newNode.height == 0) return newNode;
 			
 			placeRectangle(newNode);
-			trace(newNode);
+//			trace(newNode);
 			return newNode;
 		}
 		
