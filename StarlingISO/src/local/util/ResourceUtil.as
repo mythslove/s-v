@@ -110,11 +110,13 @@ package local.util
 			{
 				var roadResVO:RoadResVO =new RoadResVO();
 				var num:int = bytes.readUnsignedByte() ; //路块的数量
+				var rect:Rectangle = new Rectangle();
 				for( var i:int = 0 ; i<num ; ++i)
 				{
 					roadResVO.offsetXs[ resVO.resId+_directions[i] ] = bytes.readShort();
 					roadResVO.offsetYs[ resVO.resId+_directions[i] ] = bytes.readShort();
-					var rect:Rectangle = new Rectangle(0,0 , bytes.readUnsignedShort() , bytes.readUnsignedShort());
+					rect.width = bytes.readUnsignedShort() ;
+					rect.height = bytes.readUnsignedShort() ;
 					var pngBytes:ByteArray =new ByteArray();
 					bytes.readBytes( pngBytes, 0 , bytes.readDouble() );
 					var bmd:BitmapData = new BitmapData( rect.width , rect.height );
