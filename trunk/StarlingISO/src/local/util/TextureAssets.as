@@ -54,31 +54,10 @@ package local.util
 				var texture:Texture = Texture.fromBitmapData( buildingBmd , false ) ;
 				buildingTexture = new TextureAtlas(texture);
 				var count:int ;
-				for ( name in allBuildingHash){
-					baseVO =  allBuildingHash[name] as BaseBuildingVO ;
-					resVO = ResourceUtil.instance.getResVOByResId(name);
-					if(baseVO.subClass==BuildingType.DECORATION_ROAD || baseVO.subClass==BuildingType.DECORATION_GROUND){
-						var roadResVO:RoadResVO  = resVO.resObject as RoadResVO;
-						var i:int ;
-						for( var key:String in roadResVO.bmds){
-							buildingTexture.addRegion( baseVO.name+key,maxRect.usedRectangles[count]);
-							(roadResVO.bmds[key] as BitmapData).dispose() ;
-							++i ;
-							++count ;
-						}
-						roadResVO.bmds = null ;
-					}else{
-						var barvos:Vector.<BitmapAnimResVO> = resVO.resObject as Vector.<BitmapAnimResVO> ;
-						for( i = 0 ; i<barvos.length ; ++i){
-							for( var j:int = 0 ; j<barvos[i].bmds.length ; ++j ){
-								buildingTexture.addRegion( baseVO.name+"_"+i+"_"+j , maxRect.usedRectangles[count]);
-								barvos[i].bmds[j].dispose();
-								++count;
-							}
-							barvos[i].bmds = null ;
-						}
-					}
+				for ( name in name2Rect){
+					buildingTexture.addRegion( name , name2Rect[name] );
 				}
+				name2Rect = null ;
 			}
 			
 		}
@@ -92,6 +71,8 @@ package local.util
 				for( var i:int = 0 ; i<vo.bmds.length ; ++i){
 					bmd = vo.bmds[i] ;
 					rect  = maxRect.insert( bmd.width , bmd.height , MaxRectsBinPack.ContactPointRule) ;
+					GameData.commPoint.x = rect.x ;
+					GameData.commPoint.y = rect.y ;
 					buildingBmd.copyPixels( bmd , bmd.rect , GameData.commPoint );
 					name2Rect[name+"_"+layer+"_"+i ] = rect ;
 					++layer ;
@@ -110,6 +91,8 @@ package local.util
 			for( var key:String in roadResVO.bmds){
 				bmd = roadResVO.bmds[key] as BitmapData ;
 				rect  = maxRect.insert( bmd.width , bmd.height , MaxRectsBinPack.ContactPointRule) ;
+				GameData.commPoint.x = rect.x ;
+				GameData.commPoint.y = rect.y ;
 				buildingBmd.copyPixels( bmd , bmd.rect , GameData.commPoint );
 				name2Rect[name+key ] = rect ;
 				++i ;
