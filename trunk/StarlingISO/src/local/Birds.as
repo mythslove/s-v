@@ -20,7 +20,7 @@ package local
 		private function addedHandler ( e:Event ):void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE , addedHandler );
-			_mc = new MovieClip( Assets.createTextureAtlas("Atlas").getTextures("GhostHouse") );
+			_mc = new MovieClip( EmbedManager.createTextureAtlas("Atlas").getTextures("GhostHouse") );
 			_mc.touchable = false ;
 			addChild(_mc);
 			_mc.x = -90 ;

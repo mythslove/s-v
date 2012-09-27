@@ -11,6 +11,8 @@ package local
 	import flash.geom.Matrix;
 	import flash.geom.Point;
 	
+	import local.comm.GameSetting;
+	
 	import starling.core.Starling;
 	import starling.display.*;
 	import starling.events.Event;
@@ -76,8 +78,8 @@ package local
 						house.nodeX = i*2 ;
 						house.nodeZ = j*2 ;
 						var temp:int = (Math.random()*houses.length)>>0 ;
-						var img:Image = new PixelsImage( Assets.createTextureAtlas("Atlas").getTexture(houses[temp]) ,
-							Assets.getBmd("Atlas") , Assets.getBmpPoint(houses[temp]));
+						var img:Image = new PixelsImage( EmbedManager.createTextureAtlas("Atlas").getTexture(houses[temp]) ,
+							EmbedManager.getBmd("Atlas") , EmbedManager.getBmpPoint(houses[temp]));
 						switch(temp)
 						{
 							case 0:
@@ -251,7 +253,7 @@ package local
 		{
 			var bg:Sprite = new Sprite() ;
 			//地面
-			var bgTexture:Texture = Assets.createTextureByName("bgFill1");
+			var bgTexture:Texture = EmbedManager.createTextureByName("bgFill1");
 			bgTexture.repeat = true ;
 			var img:Image = new Image(bgTexture);
 			img.blendMode = BlendMode.NONE ;
@@ -266,7 +268,7 @@ package local
 			img.height = GameSetting.MAP_HEIGHT ;
 			bg.addChild( img );
 			//树
-			var treeTexture:Texture = Assets.createTextureByName("bgTree");
+			var treeTexture:Texture = EmbedManager.createTextureByName("bgTree");
 			treeTexture.repeat = true ;
 			img = new Image(treeTexture);
 			factor = GameSetting.MAP_WIDTH/GameSetting.MAP_HEIGHT ;

@@ -8,7 +8,7 @@ package local
 	import starling.textures.Texture;
 	import starling.textures.TextureAtlas;
 
-	public class Assets
+	public class EmbedManager
 	{
 		[Embed(source="../assets/bgFill1.jpg")]
 		private static const bgFill1:Class ;
@@ -30,7 +30,7 @@ package local
 		{
 			if( _textureDic[name] ) return _textureDic[name] as Texture ;
 			
-			var bmp:Bitmap = new Assets[name]() as Bitmap ;
+			var bmp:Bitmap = new EmbedManager[name]() as Bitmap ;
 			var texture:Texture = Texture.fromBitmap( bmp , false );
 			_textureDic[name] = texture ;
 			bmp.bitmapData.dispose();
@@ -41,7 +41,7 @@ package local
 		{
 			if( _textureDic[name] ) return _textureDic[name] as TextureAtlas ;
 			
-			var bmp:Bitmap = new Assets[name]() as Bitmap ;
+			var bmp:Bitmap = new EmbedManager[name]() as Bitmap ;
 			_bmdDic[name] = bmp.bitmapData; 
 			var xml:XML = XML( new AtlasXml() )  ;
 			parseXML( xml ) ;
