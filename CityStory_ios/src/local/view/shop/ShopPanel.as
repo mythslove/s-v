@@ -1,6 +1,7 @@
 package local.view.shop
 {
 	import flash.display.Sprite;
+	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
 	import local.comm.GameData;
@@ -32,6 +33,22 @@ package local.view.shop
 			addChild(container);
 			
 			_content.addEventListener(MouseEvent.CLICK , onItemHandler );
+			_scroll.addEventListener( ScrollControllerH.SCROLL_POSITION_CHANGE , scrollChangeHandler );
+		}
+		
+		public function scrollChangeHandler( e:Event ):void
+		{
+			var render:ShopItemRenderer ;
+			for( var i:int = 0 ; i<_content.numChildren ; ++i ){
+				render = _content.getChildAt(i) as ShopItemRenderer ;
+				if(render){
+					if(render.x+render.width-_content.scrollRect.x<0 || render.x-_content.scrollRect.x>_content.width){
+						render.visible=false;
+					}else{
+						render.visible = true ;
+					}
+				}
+			}
 		}
 		
 		protected function onItemHandler( e:MouseEvent):void
@@ -89,6 +106,7 @@ package local.view.shop
 					break ;
 				}
 			}
+			scrollChangeHandler(null);
 		}
 	}
 }
