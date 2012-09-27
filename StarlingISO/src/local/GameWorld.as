@@ -20,6 +20,7 @@ package local
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
 	import starling.textures.Texture;
+	import local.util.EmbedManager;
 	
 	public class GameWorld extends SIsoWorld
 	{

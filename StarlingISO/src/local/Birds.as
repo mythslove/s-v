@@ -5,6 +5,7 @@ package local
 	import starling.core.Starling;
 	import starling.display.MovieClip;
 	import starling.events.Event;
+	import local.util.EmbedManager;
 	
 	public class Birds extends SIsoObject
 	{
