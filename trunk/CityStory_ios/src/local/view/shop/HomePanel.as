@@ -87,6 +87,8 @@ package local.view.shop
 			}
 			_scroll.addScrollControll( _content , container );
 			container.addChild(_content);
+			
+			scrollChangeHandler(null);
 		}
 		
 		
