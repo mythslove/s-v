@@ -2,6 +2,8 @@ package local
 {
 	import bing.starling.iso.SIsoWorld;
 	
+	import local.comm.GameSetting;
+	
 	import starling.display.*;
 	import starling.events.Event;
 	
