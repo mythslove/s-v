@@ -213,7 +213,7 @@ package local
 		
 		private function changeWorldScale( value:Number , px:Number , py:Number ):void
 		{
-			if(scaleX*value>0.6 && scaleX*value<2 ) {
+			if(scaleX*value>0.5 && scaleX*value<2.5 ) {
 				
 				_zoomM.identity() ;
 				_zoomM.scale(scaleX,scaleY);
