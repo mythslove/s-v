@@ -17,7 +17,6 @@ package local
 	import local.util.ResourceUtil;
 	import local.util.TextureAssets;
 	import local.vo.BitmapAnimResVO;
-	import local.vo.RoadResVO;
 	
 	import starling.core.Starling;
 	import starling.display.*;
@@ -73,8 +72,7 @@ package local
 			
 			//添加筑
 			var house:SIsoObject ;
-			var bird:Birds ;
-			var houses:Array = ["Basic_Tree1","Clutch","Apple Shop","Greenhouse","Hermes Shop","Coco"] ;
+			var houses:Array = ["Basic_Tree1","Clutch","Apple Shop","Greenhouse","Hermes Shop","Coco","TV Tower"] ;
 			var assets:TextureAssets = TextureAssets.instance ;
 			var bName:String ;
 			var resVO:ResVO ;
@@ -98,13 +96,6 @@ package local
 						}
 						house.addChild(img);
 						buildingScene.addIsoObject( house,false );
-					}
-					else
-					{
-						bird = new Birds(_size , 1 , 1 );
-						bird.nodeX = i*2 ;
-						bird.nodeZ = j*2 ;
-						buildingScene.addIsoObject( bird,false );
 					}
 				}
 			}

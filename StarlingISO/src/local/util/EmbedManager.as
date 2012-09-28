@@ -16,11 +16,11 @@ package local.util
 		private static const bgTree:Class ;
 		
 		
-		[Embed(source="../assets/atlas.xml", mimeType="application/octet-stream")]
-		public static const AtlasXml:Class;
-		
-		[Embed(source="../assets/atlas.png")]
-		public static const Atlas:Class;
+//		[Embed(source="../assets/atlas.xml", mimeType="application/octet-stream")]
+//		public static const AtlasXml:Class;
+//		
+//		[Embed(source="../assets/atlas.png")]
+//		public static const Atlas:Class;
 		
 		private static var _textureDic:Dictionary = new Dictionary() ;
 		private static var _bmdDic:Dictionary = new Dictionary();
@@ -37,19 +37,19 @@ package local.util
 			return texture;
 		}
 		
-		public static function createTextureAtlas( name:String ):TextureAtlas
-		{
-			if( _textureDic[name] ) return _textureDic[name] as TextureAtlas ;
-			
-			var bmp:Bitmap = new EmbedManager[name]() as Bitmap ;
-			_bmdDic[name] = bmp.bitmapData; 
-			var xml:XML = XML( new AtlasXml() )  ;
-			parseXML( xml ) ;
-			var atals:TextureAtlas = new TextureAtlas( Texture.fromBitmap( bmp,false ) , xml );
-			_textureDic[name] = atals ;
-//			bmp.bitmapData.dispose();
-			return atals;
-		}
+//		public static function createTextureAtlas( name:String ):TextureAtlas
+//		{
+//			if( _textureDic[name] ) return _textureDic[name] as TextureAtlas ;
+//			
+//			var bmp:Bitmap = new EmbedManager[name]() as Bitmap ;
+//			_bmdDic[name] = bmp.bitmapData; 
+//			var xml:XML = XML( new AtlasXml() )  ;
+//			parseXML( xml ) ;
+//			var atals:TextureAtlas = new TextureAtlas( Texture.fromBitmap( bmp,false ) , xml );
+//			_textureDic[name] = atals ;
+////			bmp.bitmapData.dispose();
+//			return atals;
+//		}
 		
 		public static function getBmd( name:String ):BitmapData
 		{

@@ -50,6 +50,7 @@ package local.map.cell
 						mc = new MovieClip( TextureAssets.instance.buildingTexture.getTextures(tempName) , (Starling.current.nativeStage.frameRate / vo.frame)>>0 ) ;
 					}
 					addChild( mc );
+					Starling.juggler.add( mc );
 				}
 				else
 				{
