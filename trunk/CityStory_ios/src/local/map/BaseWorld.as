@@ -368,21 +368,21 @@ package  local.map
 				case TouchEvent.TOUCH_BEGIN:
 					++_touchCount ;
 					if(_touchCount==1){
-						_touchFinger1.x = e.stageX ;
-						_touchFinger1.y = e.stageY ;
-						_touches[0].stageX = e.stageX ;
-						_touches[0].stageY = e.stageY ;
-						_touches[0].prevX = e.stageX ;
-						_touches[0].prevY = e.stageY ;
+						_touchFinger1.x = e.stageX/root.scaleX ;
+						_touchFinger1.y = e.stageY/root.scaleX ;
+						_touches[0].stageX = e.stageX/root.scaleX ;
+						_touches[0].stageY = e.stageY/root.scaleX ;
+						_touches[0].prevX = e.stageX/root.scaleX ;
+						_touches[0].prevY = e.stageY/root.scaleX ;
 						_touches[0].id = e.touchPointID ;
 					}
 					else if(_touchCount==2){
-						_middle.x = _touchFinger1.x+(e.stageX-_touchFinger1.x)*0.5 ;
-						_middle.y = _touchFinger1.y+(e.stageY-_touchFinger1.y)*0.5 ;
-						_touches[1].stageX = e.stageX ;
-						_touches[1].stageY = e.stageY ;
-						_touches[1].prevX = e.stageX ;
-						_touches[1].prevY = e.stageY ;
+						_middle.x = _touchFinger1.x+(e.stageX/root.scaleX-_touchFinger1.x)*0.5 ;
+						_middle.y = _touchFinger1.y+(e.stageY/root.scaleX-_touchFinger1.y)*0.5 ;
+						_touches[1].stageX = e.stageX/root.scaleX ;
+						_touches[1].stageY = e.stageY/root.scaleX ;
+						_touches[1].prevX = e.stageX/root.scaleX ;
+						_touches[1].prevY = e.stageY/root.scaleX ;
 						_touches[1].id = e.touchPointID ;
 					}
 					break;
@@ -395,8 +395,8 @@ package  local.map
 							if(touch.id==e.touchPointID){
 								touch.prevX = touch.stageX ;
 								touch.prevY = touch.stageY;
-								touch.stageX = e.stageX ;
-								touch.stageY = e.stageY ;
+								touch.stageX = e.stageX/root.scaleX ;
+								touch.stageY = e.stageY/root.scaleX ;
 								//放大缩小
 								var touchA:Touch = _touches[0];
 								var touchB:Touch = _touches[1];
