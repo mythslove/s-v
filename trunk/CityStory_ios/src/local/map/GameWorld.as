@@ -155,7 +155,7 @@ package local.map
 								EditorBuildingButtons.instance.parent.removeChild( EditorBuildingButtons.instance );
 							}
 						}else {
-							//如果不是编译状态，则移动地图
+							//如果不是编辑状态，则移动地图
 							_endX =  _worldPos.x + root.mouseX-_mouseDownPos.x ;
 							_endY = _worldPos.y + root.mouseY-_mouseDownPos.y ;
 							modifyEndPosition();
