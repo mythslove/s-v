@@ -47,7 +47,7 @@ package local.map.cell
 						mc = new PixelsMovieClip( TextureAssets.instance.buildingTexture.getTextures(tempName),  TextureAssets.instance.buildingBmd ,
 							regions , (Starling.current.nativeStage.frameRate / vo.frame)>>0 );
 					}else{
-						mc = new MovieClip() ;
+						mc = new MovieClip( TextureAssets.instance.buildingTexture.getTextures(tempName) , (Starling.current.nativeStage.frameRate / vo.frame)>>0 ) ;
 					}
 					addChild( mc );
 				}
