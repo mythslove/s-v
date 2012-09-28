@@ -1,5 +1,6 @@
 package local.util
 {
+	import bing.ds.HashMap;
 	import bing.res.ResVO;
 	import bing.utils.MaxRectsBinPack;
 	
@@ -32,7 +33,7 @@ package local.util
 		
 		public function createBuildingTexture():void
 		{
-			var name2Rect:Dictionary = new Dictionary();
+			var name2Rect:HashMap = new HashMap();
 			var maxRect:MaxRectsBinPack = new MaxRectsBinPack(2048,2048,false);
 			var allBuildingHash:Dictionary = ShopModel.instance.allBuildingHash ;
 			if( allBuildingHash){
@@ -55,14 +56,15 @@ package local.util
 				buildingTexture = new TextureAtlas(texture);
 				var count:int ;
 				for ( name in name2Rect){
-					buildingTexture.addRegion( name , name2Rect[name] );
+					buildingTexture.addRegion( name , name2Rect.getValue(name) as Rectangle);
 				}
+				name2Rect.clear();
 				name2Rect = null ;
 			}
 			
 		}
 		
-		private function parseBarvos( name:String , name2Rect:Dictionary , barvos:Vector.<BitmapAnimResVO> , maxRect:MaxRectsBinPack ):void
+		private function parseBarvos( name:String , name2Rect:HashMap , barvos:Vector.<BitmapAnimResVO> , maxRect:MaxRectsBinPack ):void
 		{
 			var rect:Rectangle ;
 			var bmd:BitmapData ;
@@ -74,7 +76,7 @@ package local.util
 					GameData.commPoint.x = rect.x ;
 					GameData.commPoint.y = rect.y ;
 					buildingBmd.copyPixels( bmd , bmd.rect , GameData.commPoint );
-					name2Rect[name+"_"+layer+"_"+i ] = rect ;
+					name2Rect.put( name+"_"+layer+"_"+i , rect ) ;
 					bmd.dispose() ;
 				}
 				++layer ;
@@ -82,7 +84,7 @@ package local.util
 			}
 		}
 		
-		private function parseResRoad(  name:String , name2Rect:Dictionary , roadResVO:RoadResVO , maxRect:MaxRectsBinPack ):void
+		private function parseResRoad(  name:String , name2Rect:HashMap , roadResVO:RoadResVO , maxRect:MaxRectsBinPack ):void
 		{
 			var rect:Rectangle ;
 			var bmd:BitmapData ;
@@ -93,7 +95,7 @@ package local.util
 				GameData.commPoint.x = rect.x ;
 				GameData.commPoint.y = rect.y ;
 				buildingBmd.copyPixels( bmd , bmd.rect , GameData.commPoint );
-				name2Rect[name+key ] = rect ;
+				name2Rect.put(  name+key , rect ) ;
 				++i ;
 				
 				bmd.dispose();
