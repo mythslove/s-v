@@ -36,12 +36,11 @@ package bing.starling.component
 			var displayObj:DisplayObject = super.hitTest(localPoint,forTouch);
 			if( displayObj){
 				var temp:Point = localPoint.clone();
-				trace( this.currentFrame );
-//				temp.x += _regionRect.x ;
-//				temp.y += _regionRect.y ;
-//				if( _srcBmd.hitTest( _basePoint , AlphaThreshold , temp )){
-//					return this ;
-//				}
+				temp.x += _regionRects[currentFrame].x ;
+				temp.y += _regionRects[currentFrame].y ;
+				if( _srcBmd.hitTest( _basePoint , AlphaThreshold , temp )){
+					return this ;
+				}
 			}
 			return null ;
 		}

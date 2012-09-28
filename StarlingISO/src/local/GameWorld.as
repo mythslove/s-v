@@ -101,10 +101,10 @@ package local
 					}
 					else
 					{
-//						bird = new Birds(_size , 1 , 1 );
-//						bird.nodeX = i*2 ;
-//						bird.nodeZ = j*2 ;
-//						buildingScene.addIsoObject( bird,false );
+						bird = new Birds(_size , 1 , 1 );
+						bird.nodeX = i*2 ;
+						bird.nodeZ = j*2 ;
+						buildingScene.addIsoObject( bird,false );
 					}
 				}
 			}
@@ -172,7 +172,7 @@ package local
 				}
 				if( touch.phase == TouchPhase.ENDED)
 				{
-					if(!_isMove && touch.target is PixelsImage && touch.target.parent is SIsoObject){
+					if(!_isMove && touch.target.parent is SIsoObject){
 						var obj:SIsoObject = touch.target.parent as SIsoObject ;
 						obj.alpha = obj.alpha==1? 0.5 : 1 ;
 					}
