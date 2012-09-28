@@ -2,8 +2,6 @@ package local.vo
 {
 	import flash.display.BitmapData;
 	import flash.geom.Point;
-	
-	import starling.textures.Texture;
 
 	/**
 	 * 位置动画资源 ，在二进制中，按照此属性的顺序写
