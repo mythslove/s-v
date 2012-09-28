@@ -12,15 +12,15 @@ package bing.starling.component
 	{
 		public var AlphaThreshold:int = 128 ;
 		
-		private var _bmd:BitmapData ;
+		private var _srcBmd:BitmapData ;
 		private static var _basePoint:Point = new Point();
 		private var _regionRect:Rectangle ;
 		
-		public function PixelsImage(texture:Texture , bmd:BitmapData , regionRect:Rectangle )
+		public function PixelsImage(texture:Texture , srcBmd:BitmapData , regionRect:Rectangle )
 		{
 			super(texture);
 			this._regionRect = regionRect ;
-			this._bmd = bmd ;
+			this._srcBmd = srcBmd ;
 		}
 		
 		override public function hitTest(localPoint:Point, forTouch:Boolean=false):DisplayObject
@@ -30,7 +30,7 @@ package bing.starling.component
 				var temp:Point = localPoint.clone();
 				temp.x += _regionRect.x ;
 				temp.y += _regionRect.y ;
-				if( _bmd.hitTest( _basePoint , AlphaThreshold , temp )){
+				if( _srcBmd.hitTest( _basePoint , AlphaThreshold , temp )){
 					return this ;
 				}
 			}
