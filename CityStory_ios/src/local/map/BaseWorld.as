@@ -466,11 +466,13 @@ package  local.map
 		{
 			if(scaleX*value>GameSetting.minZoom && scaleX*value<2.5) {
 				var m:Matrix = this.transform.matrix;
-				m.tx -= px;
-				m.ty -= py;
+				var vx:Number = x ;
+				var vy:Number = y ;
+				m.tx -= px+vx ;
+				m.ty -= py+vy ;
 				m.scale(value, value);
-				m.tx += px;
-				m.ty += py;
+				m.tx += px+vx*value ;
+				m.ty += py+vy*value ;
 				this.transform.matrix = m;
 				_mouseDownPos.x = _endX = x;
 				_mouseDownPos.y = _endY = y ;
