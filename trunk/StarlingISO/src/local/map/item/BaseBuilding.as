@@ -31,7 +31,7 @@ package local.map.item
 		{
 			var barvo:Vector.<BitmapAnimResVO> = ResourceUtil.instance.getResVOByResId( name ).resObject as  Vector.<BitmapAnimResVO> ;
 			_buildingObject = new BuildingObject( name , barvo);
-			addChildAt(_buildingObject,0);
+			addChildAt(_buildingObject,0)
 			this.scaleX = buildingVO.rotation ;
 		}
 		
