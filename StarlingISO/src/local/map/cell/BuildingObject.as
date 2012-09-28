@@ -38,17 +38,19 @@ package local.map.cell
 				tempName = name+"_"+i+"_" ;
 				if(vo.isAnim)
 				{
-					var bmdLen:int = vo.bmds.length ;
-					var regions:Vector.<Rectangle> = new Vector.<Rectangle>(bmdLen , true );
-					for( var j:int = 0 ; j<bmdLen ; ++j ){
+					var regions:Vector.<Rectangle> = new Vector.<Rectangle>(vo.frame , true );
+					for( var j:int = 0 ; j<vo.frame ; ++j ){
 						regions[j] = TextureAssets.instance.buildingTexture.getRegion(  tempName+j ) ;
 					}
 					if(i==0){
 						mc = new PixelsMovieClip( TextureAssets.instance.buildingTexture.getTextures(tempName),  TextureAssets.instance.buildingBmd ,
-							regions , (Starling.current.nativeStage.frameRate / vo.frame)>>0 );
+							regions , (Starling.current.nativeStage.frameRate/vo.frame)>>0 );
 					}else{
 						mc = new MovieClip( TextureAssets.instance.buildingTexture.getTextures(tempName) , (Starling.current.nativeStage.frameRate / vo.frame)>>0 ) ;
+						mc.touchable = false ;
 					}
+					mc.x = vo.offsetX ;
+					mc.y = vo.offsetY ;
 					addChild( mc );
 					Starling.juggler.add( mc );
 				}
@@ -60,6 +62,7 @@ package local.map.cell
 							TextureAssets.instance.buildingTexture.getRegion(tempName)  ); 
 					}else{
 						img = new Image( TextureAssets.instance.buildingTexture.getTexture( tempName )  ) ;
+						img.touchable = false ;
 					}
 					img.x = vo.offsetX ;
 					img.y = vo.offsetY ;
@@ -96,8 +99,9 @@ package local.map.cell
 //			}
 		}
 		
-		public function dispose():void
+		override public function dispose():void
 		{
+			super.dispose();
 //			for( var i:int = 0 ; i<numChildren ; ++i){
 //				if(getChildAt(i) is BaseAnimObject ){
 //					( getChildAt(i) as BaseAnimObject ).dispose() ;

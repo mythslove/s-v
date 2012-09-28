@@ -48,8 +48,6 @@ package local.map.item
 		
 		override public function set scaleX(value:Number):void
 		{
-			var flag:Boolean = value==1?false:true;
-			this.rotateX( flag );
 			_buildingObject.scaleX = value ;
 			this.buildingVO.rotation = value ;
 		}

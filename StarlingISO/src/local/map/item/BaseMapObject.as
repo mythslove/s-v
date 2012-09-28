@@ -2,7 +2,8 @@ package local.map.item
 {
 	import bing.starling.iso.SIsoObject;
 	
-	import flash.events.Event;
+	import starling.events.Event;
+	
 	
 	public class BaseMapObject extends SIsoObject
 	{
