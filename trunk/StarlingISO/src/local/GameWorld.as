@@ -89,6 +89,9 @@ package local
 						bvo.nodeZ = j*2 ;
 						house = new BaseBuilding(bvo);
 						buildingScene.addIsoObject( house,false );
+						if(bName=="TV Tower"){
+							i=j=15 ;
+						}
 					}
 				}
 			}
