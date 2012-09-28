@@ -14,7 +14,6 @@ package local.vo
 		public var offsetX:int ; //偏移
 		public var offsetY:int ;
 		public var bmds:Vector.<BitmapData> ;
-		public var textures:Vector.<Texture> ;
 		public var isAnim:Boolean ;
 		public var row:int ;
 		public var col:int ;
