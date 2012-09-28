@@ -105,8 +105,8 @@ package local.util
 					}
 					
 					/*-----------------测试数据---------------------------------------*/
-					PlayerModel.instance.me.energy = 40 ;
-					PlayerModel.instance.me.goods = 40 ;
+					PlayerModel.instance.me.energy = 400 ;
+					PlayerModel.instance.me.goods = 400 ;
 					PlayerModel.instance.me.cash = 10000 ;
 					PlayerModel.instance.me.coin = 10000 ;
 					/*-----------------测试数据---------------------------------------*/
