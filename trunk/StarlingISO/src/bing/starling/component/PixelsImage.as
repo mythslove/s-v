@@ -10,6 +10,8 @@ package bing.starling.component
 	
 	public class PixelsImage extends Image
 	{
+		public var AlphaThreshold:int = 128 ;
+		
 		private var _bmd:BitmapData ;
 		private static var _basePoint:Point = new Point();
 		private var _regionRect:Rectangle ;
@@ -28,7 +30,7 @@ package bing.starling.component
 				var temp:Point = localPoint.clone();
 				temp.x += _regionRect.x ;
 				temp.y += _regionRect.y ;
-				if( _bmd.hitTest( _basePoint , 128 , temp )){
+				if( _bmd.hitTest( _basePoint , AlphaThreshold , temp )){
 					return this ;
 				}
 			}
