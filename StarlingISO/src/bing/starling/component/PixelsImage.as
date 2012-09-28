@@ -8,6 +8,10 @@ package bing.starling.component
 	import starling.display.Image;
 	import starling.textures.Texture;
 	
+	/**
+	 * 支持像素极检测的图片 
+	 * @author zhouzhanglin
+	 */	
 	public class PixelsImage extends Image
 	{
 		private static var _basePoint:Point = new Point();
@@ -17,7 +21,7 @@ package bing.starling.component
 		private var _regionRect:Rectangle ;
 		
 		/**
-		 * 支持像素极检测的图片
+		 * 构造
 		 * @param texture 
 		 * @param srcBmd Atlas图片
 		 * @param regionRect 在Atlas图片上的位置
