@@ -47,7 +47,7 @@ package local.view.topbar
 		{
 			GameData.commPoint.setTo(0,0);
 			var globalPoint:Point = building.localToGlobal( GameData.commPoint );
-			var temp:Number = Point.distance( globalPoint , new Point(goodsBar.x , goodsBar.y));
+			var temp:Number = Point.distance( globalPoint , new Point(goodsBar.x+x , goodsBar.y ));
 			temp = temp>400 ? 0.5 : 0.25 ;
 			flyGoods( globalPoint , temp );
 			setTimeout( flyGoods , 150 , globalPoint , temp );
@@ -57,7 +57,7 @@ package local.view.topbar
 		private function flyGoods( targetPoint:Point , time:Number ):void
 		{
 			var bmp:Bitmap = new Bitmap ( EmbedsManager.instance.getBitmapByName("PickupGoods",true).bitmapData  );
-			bmp.x = goodsBar.x ;
+			bmp.x = goodsBar.x+x  ;
 			bmp.y = goodsBar.y ;
 			addChild(bmp);
 			TweenLite.to( bmp , time , { x:targetPoint.x/root.scaleX , y:targetPoint.y/root.scaleX , scaleX:0.5 , scaleY:0.5 , alpha:0.2 , 
