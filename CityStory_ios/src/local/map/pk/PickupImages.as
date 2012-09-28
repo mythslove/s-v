@@ -121,8 +121,8 @@ package local.map.pk
 		{
 			GameData.commPoint.setTo(0,0);
 			var p:Point = this.localToGlobal( GameData.commPoint ) ;
-			displayObj.x += p.x ;
-			displayObj.y += p.y ;
+			displayObj.x += p.x/root.scaleX ;
+			displayObj.y += p.y/root.scaleX ;
 			CenterViewLayer.instance.addChildAt( displayObj,0);
 			
 			var temp:Number = Point.distance( targetPoint , new Point(displayObj.x,displayObj.y));
