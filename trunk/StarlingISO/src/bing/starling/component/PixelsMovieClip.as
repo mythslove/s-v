@@ -8,6 +8,10 @@ package bing.starling.component
 	import starling.display.MovieClip;
 	import starling.textures.Texture;
 	
+	/**
+	 *  支持鼠标像素检测的动画
+	 * @author zhouzhanglin
+	 */	
 	public class PixelsMovieClip extends MovieClip
 	{
 		private static var _basePoint:Point = new Point();
@@ -17,11 +21,11 @@ package bing.starling.component
 		private var _regionRects:Vector.<Rectangle> ;
 		
 		/**
-		 * 
-		 * @param textures
-		 * @param srcBmd
-		 * @param regionRect
-		 * @param fps
+		 * 构造
+		 * @param textures 
+		 * @param srcBmd Atlas源图片
+		 * @param regionRect Atlas源图片的区域
+		 * @param fps 
 		 */		
 		public function PixelsMovieClip(textures:Vector.<Texture>, srcBmd:BitmapData , regionRect:Vector.<Rectangle> , fps:Number=12 )
 		{
