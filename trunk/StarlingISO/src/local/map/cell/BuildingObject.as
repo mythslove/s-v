@@ -1,11 +1,16 @@
 package local.map.cell
 {
 	import bing.starling.component.PixelsImage;
+	import bing.starling.component.PixelsMovieClip;
+	
+	import flash.geom.Rectangle;
 	
 	import local.util.TextureAssets;
 	import local.vo.BitmapAnimResVO;
 	
+	import starling.core.Starling;
 	import starling.display.Image;
+	import starling.display.MovieClip;
 	import starling.display.Sprite;
 	
 	public class BuildingObject extends Sprite
@@ -25,18 +30,30 @@ package local.map.cell
 		{
 			var len:int = _bavos.length ;
 			var vo:BitmapAnimResVO ;
-			var layer:int ; //层
 			var img:Image ;
+			var mc:MovieClip ;
 			var tempName:String ;
 			for( var i:int = 0 ; i <len ; ++i ){
 				vo = _bavos[i] ;
+				tempName = name+"_"+i+"_" ;
 				if(vo.isAnim)
 				{
-					
+					var bmdLen:int = vo.bmds.length ;
+					var regions:Vector.<Rectangle> = new Vector.<Rectangle>(bmdLen , true );
+					for( var j:int = 0 ; j<bmdLen ; ++j ){
+						regions[j] = TextureAssets.instance.buildingTexture.getRegion(  tempName+j ) ;
+					}
+					if(i==0){
+						mc = new PixelsMovieClip( TextureAssets.instance.buildingTexture.getTextures(tempName),  TextureAssets.instance.buildingBmd ,
+							regions , (Starling.current.nativeStage.frameRate / vo.frame)>>0 );
+					}else{
+						mc = new MovieClip() ;
+					}
+					addChild( mc );
 				}
 				else
 				{
-					tempName = name+"_"+layer+"_"+i ;
+					tempName += "0" ;
 					if(i==0){
 						img = new PixelsImage(TextureAssets.instance.buildingTexture.getTexture(tempName) , TextureAssets.instance.buildingBmd ,
 							TextureAssets.instance.buildingTexture.getRegion(tempName)  ); 
@@ -47,7 +64,6 @@ package local.map.cell
 					img.y = vo.offsetY ;
 					addChild(img);
 				}
-				++layer ;
 			}
 		}
 		
