@@ -33,6 +33,7 @@ package local.map.cell
 			var img:Image ;
 			var mc:MovieClip ;
 			var tempName:String ;
+			
 			for( var i:int = 0 ; i <len ; ++i ){
 				vo = _bavos[i] ;
 				tempName = name+"_"+i+"_" ;
@@ -40,7 +41,8 @@ package local.map.cell
 				{
 					var regions:Vector.<Rectangle> = new Vector.<Rectangle>(vo.frame , true );
 					for( var j:int = 0 ; j<vo.frame ; ++j ){
-						regions[j] = TextureAssets.instance.buildingTexture.getRegion(  tempName+j ) ;
+						var ext:String = j<10?"00"+j :  ( j<100?"0"+j:j+"") ;
+						regions[j] = TextureAssets.instance.buildingTexture.getRegion(  tempName+ext ) ;
 					}
 					if(i==0){
 						mc = new PixelsMovieClip( TextureAssets.instance.buildingTexture.getTextures(tempName),  TextureAssets.instance.buildingBmd ,
@@ -56,7 +58,7 @@ package local.map.cell
 				}
 				else
 				{
-					tempName += "0" ;
+					tempName += "000" ;
 					if(i==0){
 						img = new PixelsImage(TextureAssets.instance.buildingTexture.getTexture(tempName) , TextureAssets.instance.buildingBmd ,
 							TextureAssets.instance.buildingTexture.getRegion(tempName)  ); 

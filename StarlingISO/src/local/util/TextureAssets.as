@@ -70,6 +70,7 @@ package local.util
 			var rect:Rectangle ;
 			var bmd:BitmapData ;
 			var layer:int ; //层数
+			var ext:String ;
 			for each( var vo:BitmapAnimResVO in barvos){
 				for( var i:int = 0 ; i<vo.bmds.length ; ++i){
 					bmd = vo.bmds[i] ;
@@ -77,7 +78,8 @@ package local.util
 					GameData.commPoint.x = rect.x ;
 					GameData.commPoint.y = rect.y ;
 					buildingBmd.copyPixels( bmd , bmd.rect , GameData.commPoint );
-					name2Rect.put( name+"_"+layer+"_"+i , rect ) ;
+					ext = i<10?"00"+i :  ( i<100?"0"+i:i+"") ;
+					name2Rect.put( name+"_"+layer+"_"+ext , rect ) ;
 					bmd.dispose() ;
 				}
 				++layer ;
