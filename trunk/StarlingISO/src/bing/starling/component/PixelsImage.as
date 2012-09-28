@@ -10,12 +10,18 @@ package bing.starling.component
 	
 	public class PixelsImage extends Image
 	{
-		public var AlphaThreshold:int = 128 ;
-		
-		private var _srcBmd:BitmapData ;
 		private static var _basePoint:Point = new Point();
+		/** alpha 检测阈值 */
+		public var AlphaThreshold:int = 128 ;
+		private var _srcBmd:BitmapData ;
 		private var _regionRect:Rectangle ;
 		
+		/**
+		 * 支持像素极检测的图片
+		 * @param texture 
+		 * @param srcBmd Atlas图片
+		 * @param regionRect 在Atlas图片上的位置
+		 */		
 		public function PixelsImage(texture:Texture , srcBmd:BitmapData , regionRect:Rectangle )
 		{
 			super(texture);
@@ -35,7 +41,6 @@ package bing.starling.component
 				}
 			}
 			return null ;
-				
 		}
 	}
 }
