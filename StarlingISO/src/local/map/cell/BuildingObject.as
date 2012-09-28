@@ -44,9 +44,9 @@ package local.map.cell
 					}
 					if(i==0){
 						mc = new PixelsMovieClip( TextureAssets.instance.buildingTexture.getTextures(tempName),  TextureAssets.instance.buildingBmd ,
-							regions , (Starling.current.nativeStage.frameRate/vo.frame)>>0 );
+							regions , vo.frame );
 					}else{
-						mc = new MovieClip( TextureAssets.instance.buildingTexture.getTextures(tempName) , (Starling.current.nativeStage.frameRate / vo.frame)>>0 ) ;
+						mc = new MovieClip( TextureAssets.instance.buildingTexture.getTextures(tempName) , vo.frame ) ;
 						mc.touchable = false ;
 					}
 					mc.x = vo.offsetX ;
