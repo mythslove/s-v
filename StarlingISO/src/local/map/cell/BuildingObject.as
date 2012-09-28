@@ -74,8 +74,8 @@ package local.map.cell
 		public function update():void
 		{
 //			for( var i:int = 0 ; i<numChildren ; ++i){
-//				if(getChildAt(i) is BaseAnimObject ){
-//					( getChildAt(i) as BaseAnimObject ).update() ;
+//				if(getChildAt(i) is MovieClip ){
+//					trace(( getChildAt(i) as MovieClip ).currentFrame);
 //				}
 //			}
 //			if(_tinyBmp.visible){

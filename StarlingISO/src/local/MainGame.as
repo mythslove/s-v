@@ -2,12 +2,9 @@ package local
 {
 	import bing.starling.iso.SIsoWorld;
 	
-	import flash.display.Bitmap;
-	
 	import local.comm.GameSetting;
 	import local.util.TextureAssets;
 	
-	import starling.core.Starling;
 	import starling.display.*;
 	import starling.events.Event;
 	
@@ -31,9 +28,9 @@ package local
 			var world:GameWorld = new GameWorld();
 			addChild( world );
 			
-			var bmp:Bitmap = new Bitmap( TextureAssets.instance.buildingBmd);
-			bmp.scaleX  = bmp.scaleY = .4 ;
-			Starling.current.nativeStage.addChild(bmp);
+//			var bmp:Bitmap = new Bitmap( TextureAssets.instance.buildingBmd);
+//			bmp.scaleX  = bmp.scaleY = .4 ;
+//			Starling.current.nativeStage.addChild(bmp);
 		}
 	}
 }
