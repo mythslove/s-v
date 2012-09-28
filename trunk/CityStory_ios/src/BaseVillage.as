@@ -63,7 +63,7 @@ package
 					GameSetting.SCREEN_WIDTH = 1024;
 					GameSetting.SCREEN_HEIGHT = 768;
 					GameSetting.minZoom = 0.4 ;
-					GameSetting.device = "ipad";
+//					GameSetting.device = "ipad";
 				}
 			}
 				
