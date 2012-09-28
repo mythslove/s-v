@@ -77,7 +77,8 @@ package local.view.building
 							if( me.cash>= baseVO.priceCash && me.coin>= baseVO.priceCoin ){
 								building = BuildingFactory.createBuildingByBaseVO( baseVO );
 								GameWorld.instance.addBuildingToTopScene( building );
-								return ;
+							}else{
+								GameData.villageMode = VillageMode.NORMAL ;
 							}
 						}
 						else
