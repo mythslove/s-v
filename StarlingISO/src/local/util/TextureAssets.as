@@ -54,8 +54,9 @@ package local.util
 				//创建材质
 				var texture:Texture = Texture.fromBitmapData( buildingBmd , false ) ;
 				buildingTexture = new TextureAtlas(texture);
-				var count:int ;
-				for ( name in name2Rect){
+				var len:int = name2Rect.keys().length ;
+				for ( var i:int = 0 ; i<len ; ++i){
+					name = name2Rect.keys()[i] ;
 					buildingTexture.addRegion( name , name2Rect.getValue(name) as Rectangle);
 				}
 				name2Rect.clear();
