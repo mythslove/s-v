@@ -5,40 +5,43 @@ package bing.starling.component
 	import flash.geom.Rectangle;
 	
 	import starling.display.DisplayObject;
-	import starling.display.Image;
+	import starling.display.MovieClip;
 	import starling.textures.Texture;
 	
-	public class PixelsImage extends Image
+	public class PixelsMovieClip extends MovieClip
 	{
 		private static var _basePoint:Point = new Point();
 		/** alpha 检测阈值 */
 		public var AlphaThreshold:int = 128 ;
 		private var _srcBmd:BitmapData ;
-		private var _regionRect:Rectangle ;
+		private var _regionRects:Vector.<Rectangle> ;
 		
 		/**
-		 * 支持像素极检测的图片
-		 * @param texture 
-		 * @param srcBmd Atlas图片
-		 * @param regionRect 在Atlas图片上的位置
+		 * 
+		 * @param textures
+		 * @param srcBmd
+		 * @param regionRect
+		 * @param fps
 		 */		
-		public function PixelsImage(texture:Texture , srcBmd:BitmapData , regionRect:Rectangle )
+		public function PixelsMovieClip(textures:Vector.<Texture>, srcBmd:BitmapData , regionRect:Vector.<Rectangle> , fps:Number=12 )
 		{
-			super(texture);
-			this._regionRect = regionRect ;
+			super(textures, fps);
 			this._srcBmd = srcBmd ;
+			this._regionRects =  regionRect ;
 		}
+		
 		
 		override public function hitTest(localPoint:Point, forTouch:Boolean=false):DisplayObject
 		{
 			var displayObj:DisplayObject = super.hitTest(localPoint,forTouch);
 			if( displayObj){
 				var temp:Point = localPoint.clone();
-				temp.x += _regionRect.x ;
-				temp.y += _regionRect.y ;
-				if( _srcBmd.hitTest( _basePoint , AlphaThreshold , temp )){
-					return this ;
-				}
+				trace( this.currentFrame );
+//				temp.x += _regionRect.x ;
+//				temp.y += _regionRect.y ;
+//				if( _srcBmd.hitTest( _basePoint , AlphaThreshold , temp )){
+//					return this ;
+//				}
 			}
 			return null ;
 		}
@@ -47,7 +50,7 @@ package bing.starling.component
 		{
 			super.dispose();
 			_srcBmd = null ;
-			_regionRect = null ;
+			_regionRects = null ;
 		}
 	}
 }
