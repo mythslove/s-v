@@ -75,10 +75,9 @@ package local.util
 					GameData.commPoint.y = rect.y ;
 					buildingBmd.copyPixels( bmd , bmd.rect , GameData.commPoint );
 					name2Rect[name+"_"+layer+"_"+i ] = rect ;
-					++layer ;
-					
 					bmd.dispose() ;
 				}
+				++layer ;
 				vo.bmds = null ;
 			}
 		}

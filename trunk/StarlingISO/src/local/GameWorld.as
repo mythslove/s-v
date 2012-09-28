@@ -1,7 +1,5 @@
 package local
 {
-	import bing.res.ResVO;
-	import bing.starling.component.PixelsImage;
 	import bing.starling.component.Rhombus;
 	import bing.starling.iso.SIsoGrid;
 	import bing.starling.iso.SIsoObject;
@@ -13,10 +11,11 @@ package local
 	import flash.geom.Point;
 	
 	import local.comm.GameSetting;
+	import local.map.item.BaseBuilding;
+	import local.model.ShopModel;
 	import local.util.EmbedManager;
-	import local.util.ResourceUtil;
 	import local.util.TextureAssets;
-	import local.vo.BitmapAnimResVO;
+	import local.vo.BuildingVO;
 	
 	import starling.core.Starling;
 	import starling.display.*;
@@ -71,30 +70,24 @@ package local
 			this.addScene(buildingScene);
 			
 			//添加筑
-			var house:SIsoObject ;
+			var house:BaseBuilding ;
 			var houses:Array = ["Basic_Tree1","Clutch","Apple Shop","Greenhouse","Hermes Shop","Coco","TV Tower"] ;
 			var assets:TextureAssets = TextureAssets.instance ;
+			var bvo:BuildingVO ;
 			var bName:String ;
-			var resVO:ResVO ;
 			for( var i:int = 0 ; i<15 ; ++i )
 			{
 				for( var j:int =0 ; j<15 ; ++j )
 				{
 					if(Math.random()>0.2){
-						house = new SIsoObject(_size , 2 , 1 );
-						house.nodeX = i*2 ;
-						house.nodeZ = j*2 ;
 						var temp:int = (Math.random()*houses.length)>>0 ;
 						bName = houses[temp] ;
-						var img:Image = new PixelsImage( assets.buildingTexture.getTexture(bName+"_0_0"),assets.buildingBmd, assets.buildingTexture.getRegion(bName+"_0_0") );
-						resVO = ResourceUtil.instance.getResVOByResId( bName );
-						if(resVO && resVO.resObject ){
-							if(resVO.resObject is Vector.<BitmapAnimResVO>){
-								img.x = (resVO.resObject as Vector.<BitmapAnimResVO>)[0].offsetX ;
-								img.y = (resVO.resObject as Vector.<BitmapAnimResVO>)[0].offsetY ;
-							}
-						}
-						house.addChild(img);
+						bvo = new BuildingVO();
+						bvo.name = bName ;
+						bvo.baseVO = ShopModel.instance.allBuildingHash[bName];
+						bvo.nodeX = i*2 ;
+						bvo.nodeZ = j*2 ;
+						house = new BaseBuilding(bvo);
 						buildingScene.addIsoObject( house,false );
 					}
 				}
@@ -163,8 +156,8 @@ package local
 				}
 				if( touch.phase == TouchPhase.ENDED)
 				{
-					if(!_isMove && touch.target.parent is SIsoObject){
-						var obj:SIsoObject = touch.target.parent as SIsoObject ;
+					if(!_isMove && touch.target.parent.parent is SIsoObject){
+						var obj:SIsoObject = touch.target.parent.parent as SIsoObject ;
 						obj.alpha = obj.alpha==1? 0.5 : 1 ;
 					}
 				}
