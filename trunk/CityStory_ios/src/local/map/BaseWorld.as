@@ -464,7 +464,7 @@ package  local.map
 		/**修改地图的缩放值和地图的位置*/
 		protected function changeWorldScale( value:Number , px:Number , py:Number ):void
 		{
-			if(scaleX*value>GameSetting.minZoom && scaleX*value<2.2) {
+			if(scaleX*value>GameSetting.minZoom && scaleX*value<2.3) {
 				var m:Matrix = this.transform.matrix;
 				var vx:Number = x ;
 				var vy:Number = y ;
