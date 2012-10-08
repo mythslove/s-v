@@ -81,7 +81,7 @@ package local.model
 			urlLoader.dataFormat = URLLoaderDataFormat.BINARY;
 			urlLoader.addEventListener(Event.COMPLETE , loadedHandler);
 			urlLoader.addEventListener(IOErrorEvent.IO_ERROR , errorHandler );
-			urlLoader.load( new URLRequest("C:\\village.bin") );
+			urlLoader.load( new URLRequest("res/config/TestVillage.bin") );
 		}
 		
 		/**
