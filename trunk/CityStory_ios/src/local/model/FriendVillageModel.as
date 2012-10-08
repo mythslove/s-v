@@ -6,6 +6,7 @@ package local.model
 	import flash.net.URLLoader;
 	import flash.net.URLLoaderDataFormat;
 	import flash.net.URLRequest;
+	import flash.system.System;
 	import flash.utils.ByteArray;
 	
 	import local.comm.GameData;
@@ -121,6 +122,7 @@ package local.model
 			GameWorld.instance.initMap( false ) ;
 			GameWorld.instance.showBuildings(false);
 			GameData.villageMode = VillageMode.VISIT ;
+			System.gc();
 		}
 		
 		/**

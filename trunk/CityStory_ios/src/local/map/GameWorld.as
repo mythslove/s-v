@@ -4,6 +4,7 @@ package local.map
 	
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
+	import flash.system.System;
 	import flash.utils.Dictionary;
 	
 	import local.comm.GameData;
@@ -429,6 +430,7 @@ package local.map
 			initMap() ;
 			showBuildings();
 			GameData.villageMode = VillageMode.NORMAL;
+			System.gc();
 		}
 	}
 }
