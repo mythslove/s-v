@@ -4,11 +4,14 @@ package local.view.topbar
 	
 	import flash.display.Bitmap;
 	import flash.events.Event;
+	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import flash.utils.setTimeout;
 	
 	import local.comm.GameData;
+	import local.map.GameWorld;
 	import local.map.item.BaseBuilding;
+	import local.model.FriendVillageModel;
 	import local.model.PlayerModel;
 	import local.util.EmbedsManager;
 	import local.view.base.BaseView;
@@ -37,6 +40,17 @@ package local.view.topbar
 			coinBar.show( me.coin );
 			goodsBar.show( me.goods );
 			energyBar.show( me.energy , me.maxEnergy );
+			
+			addEventListener(MouseEvent.CLICK , onClickHandler );
+		}
+		
+		private function onClickHandler( e:MouseEvent ):void
+		{
+			if(e.target is GoodsBar){
+				FriendVillageModel.instance.loadFridendVillage("dd");
+			}else if(e.target is EnergyBar){
+				GameWorld.instance.goHome();
+			}
 		}
 		
 		/**

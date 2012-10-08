@@ -123,10 +123,10 @@ package local.map.scene
 		/**
 		 * 清空这个村庄 
 		 */		
-		override public function clear():void
+		override public function clearAndDisposeChild():void
 		{
-			super.clear();
-			_groundNodeHash = null ;
+			super.clearAndDisposeChild();
+			_groundNodeHash = new Dictionary() ;
 		}
 	}
 }

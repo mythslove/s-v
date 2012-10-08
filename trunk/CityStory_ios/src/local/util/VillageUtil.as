@@ -54,6 +54,8 @@ package local.util
 				stream.writeObject( BuildingModel.instance.industry );
 				stream.writeObject( BuildingModel.instance.wonders );
 				stream.writeObject( BuildingModel.instance.business );
+				//lands
+				stream.writeObject( LandModel.instance.lands );
 				//收藏箱中的信息
 				stream.writeObject( StorageModel.instance.homes );
 				stream.writeObject( StorageModel.instance.community );
@@ -61,8 +63,6 @@ package local.util
 				stream.writeObject( StorageModel.instance.industry );
 				stream.writeObject( StorageModel.instance.wonders );
 				stream.writeObject( StorageModel.instance.business );
-				//lands
-				stream.writeObject( LandModel.instance.lands );
 				//写任务
 				stream.writeObject(QuestModel.instance.currentQuests );
 				stream.writeObject(QuestModel.instance.completedQuests );
@@ -119,6 +119,9 @@ package local.util
 					BuildingModel.instance.industry =  stream.readObject() as Vector.<BuildingVO> ;
 					BuildingModel.instance.wonders =  stream.readObject() as Vector.<BuildingVO> ;
 					BuildingModel.instance.business =  stream.readObject() as Vector.<BuildingVO> ;
+					//lands
+					LandModel.instance.lands = stream.readObject() as Vector.<LandVO> ;
+					if(!LandModel.instance.lands) LandModel.instance.initLands() ;
 					//读取收藏箱信息
 					StorageModel.instance.homes =  stream.readObject() as Vector.<StorageBuildingVO> ;
 					StorageModel.instance.community =  stream.readObject() as Vector.<StorageBuildingVO> ;
@@ -126,9 +129,6 @@ package local.util
 					StorageModel.instance.industry =  stream.readObject() as Vector.<StorageBuildingVO> ;
 					StorageModel.instance.wonders =  stream.readObject() as Vector.<StorageBuildingVO> ;
 					StorageModel.instance.business =  stream.readObject() as Vector.<StorageBuildingVO> ;
-					//lands
-					LandModel.instance.lands = stream.readObject() as Vector.<LandVO> ;
-					if(!LandModel.instance.lands) LandModel.instance.initLands() ;
 					//读任务
 					QuestModel.instance.currentQuests = stream.readObject() as Vector.<QuestVO>;
 					QuestModel.instance.completedQuests = stream.readObject() as Dictionary ;

@@ -10,6 +10,8 @@ package  local.comm
 	public class GameData
 	{
 		
+		public static var version:Number = 1.0 ;
+		
 		/**
 		 * 语言包 
 		 */		
@@ -84,6 +86,12 @@ package  local.comm
 					world.iconScene.visible = false ;
 					world.visibleExpandSigns( false ) ;
 					world.showExpandState();
+					break ;
+				case VillageMode.VISIT:
+					world.runUpdate = true ;
+					world.roadScene.mouseChildren = false ;
+					world.topScene.visible = false ;
+					world.iconScene.visible = false ;
 					break ;
 			}
 			if(world.currentSelected){

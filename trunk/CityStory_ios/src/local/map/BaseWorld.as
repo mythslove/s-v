@@ -15,6 +15,7 @@ package  local.map
 	import local.map.item.*;
 	import local.map.land.ExpandSign;
 	import local.map.scene.*;
+	import local.model.FriendVillageModel;
 	import local.model.LandModel;
 	import local.model.MapGridDataModel;
 	import local.util.EmbedsManager;
@@ -196,7 +197,7 @@ package  local.map
 		}
 		
 		/** 初始化地图 */
-		protected function initMap():void
+		public function initMap():void
 		{
 			var i:int , j:int ;
 			var gameGridData:Grid = MapGridDataModel.instance.gameGridData ;
@@ -205,7 +206,9 @@ package  local.map
 			this.panTo( MapGridDataModel.instance.mapPanX , MapGridDataModel.instance.mapPanY );
 			//添加地图区域
 			if(!LandModel.instance.lands)  LandModel.instance.initLands();
-			for each( var landVO:LandVO in LandModel.instance.lands) {
+			
+			var lands:Vector.<LandVO> = GameData.villageMode==VillageMode.VISIT ? FriendVillageModel.instance.lands:LandModel.instance.lands ;
+			for each( var landVO:LandVO in lands) {
 				drawMapZoneByFill(landVO);
 				MapGridDataModel.instance.landGridData.setWalkable( landVO.nodeX , landVO.nodeZ , true );
 				//将GameGridData的数据设置为可行
@@ -219,7 +222,7 @@ package  local.map
 			}
 			//	drawMapZoneByLine();
 			//添加扩地牌
-			addExpandSign();
+			if(GameData.villageMode!=VillageMode.VISIT ) addExpandSign();
 			//随机添加树
 			addTrees();
 		}
@@ -272,6 +275,18 @@ package  local.map
 							_trees.push( basicBuild );
 						}
 						++treeIndex ;
+					}
+				}
+			}
+		}
+		
+		/** 移除所有的树 */
+		protected function removeTrees():void
+		{
+			if(_trees){
+				for each( var basicBuilding:BasicBuilding in _trees){
+					if(basicBuilding.parent==buildingScene){
+						buildingScene.removeBuilding( basicBuilding );
 					}
 				}
 			}

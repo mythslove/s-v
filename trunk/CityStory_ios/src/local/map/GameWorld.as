@@ -19,10 +19,12 @@ package local.map
 	import local.map.land.ExpandLandButton;
 	import local.map.land.ExpandSign;
 	import local.model.BuildingModel;
+	import local.model.FriendVillageModel;
 	import local.model.LandModel;
 	import local.model.MapGridDataModel;
 	import local.model.ShopModel;
 	import local.util.BuildingFactory;
+	import local.util.PopUpManager;
 	import local.view.CenterViewLayer;
 	import local.view.base.StatusIcon;
 	import local.view.building.EditorBuildingButtons;
@@ -49,7 +51,21 @@ package local.map
 		{
 			if( GameData.villageMode==VillageMode.VISIT) //显示好友村庄
 			{
+				var friendModel:FriendVillageModel = FriendVillageModel.instance ;
+				if(friendModel.expandBuilding){ //有扩地
+					buildingScene.addBuilding( BuildingFactory.createBuildingByVO( friendModel.expandBuilding ) , false , true );
+				}
+				tempShowBuilding(friendModel.basicTrees);
+				tempShowBuilding(friendModel.business);
+				tempShowBuilding(friendModel.industry);
+				tempShowBuilding(friendModel.community);
+				tempShowBuilding(friendModel.decorations);
+				tempShowBuilding(friendModel.homes);
 				
+				roadScene.sortAll();
+				buildingScene.sortAll();
+				
+				friendModel.clear();
 			}
 			else //显示自己的村庄
 			{
@@ -64,13 +80,14 @@ package local.map
 				tempShowBuilding(myModel.community);
 				tempShowBuilding(myModel.decorations);
 				tempShowBuilding(myModel.homes);
+				
+				roadScene.sortAll();
+				buildingScene.sortAll();
+				if(iconScene.visible){
+					sortIcons();
+				}
+				run() ;
 			}
-			roadScene.sortAll();
-			buildingScene.sortAll();
-			if(iconScene.visible){
-				sortIcons();
-			}
-			run() ;
 		}
 		private function tempShowBuilding( bvos:Vector.<BuildingVO>):void{
 			if(bvos){
@@ -202,7 +219,12 @@ package local.map
 								currentSelected = e.target.parent as BaseBuilding ;
 								moveToCenter( currentSelected ) ;
 							}
-							currentSelected.onClick();
+							//判断是不是在好友村庄
+							if(GameData.villageMode!=VillageMode.VISIT){
+								currentSelected.onClick();
+							}else{
+								currentSelected.flash(true);
+							}
 						}
 						else if(currentSelected) 
 						{
@@ -240,7 +262,8 @@ package local.map
 		//将building移动到屏幕中间
 		private function moveToCenter( building:BaseBuilding):void
 		{
-			if( building.buildingVO.status!=BuildingStatus.PRODUCTION_COMPLETE && building.buildingVO.status!=BuildingStatus.LACK_MATERIAL )
+			if( GameData.villageMode==VillageMode.VISIT ||
+				(building.buildingVO.status!=BuildingStatus.PRODUCTION_COMPLETE && building.buildingVO.status!=BuildingStatus.LACK_MATERIAL) )
 			{
 				//移动到中间
 				_endX =  GameSetting.SCREEN_WIDTH*0.5 - (sceneLayerOffsetX+building.screenX)*scaleX ;
@@ -378,13 +401,36 @@ package local.map
 		}
 		
 		
+		/**
+		 * 用于跳转到其他玩家场景时，清除当前场景
+		 */		
+		public function clearWorldAndData():void
+		{
+			removeExpandSigns();
+			removeTrees();
+			iconScene.clear();
+			topScene.clear();
+			roadScene.clearAndDisposeChild();
+			buildingScene.removeMoveItems();
+			buildingScene.clearAndDisposeChild();
+			//清理数据
+			MapGridDataModel.instance.clearBuildingGridData();
+			MapGridDataModel.instance.gameGridData.setAllWalkable(false);
+			MapGridDataModel.instance.landGridData.setAllWalkable(false);
+		}
 		
-		
-		
-		
-		
-		
-		
-		
+		/**
+		 *  显示玩家自己的村庄
+		 */		
+		public function goHome():void
+		{
+			PopUpManager.instance.clearAll();
+			clearWorldAndData();
+			GameData.villageMode = VillageMode.NORMAL;
+			initMap() ;
+			showBuildings();
+			buildingScene.addMoveItems();
+			buildingScene.refreshBuildingStatus();
+		}
 	}
 }

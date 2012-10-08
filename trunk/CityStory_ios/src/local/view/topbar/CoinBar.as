@@ -15,6 +15,7 @@ package local.view.topbar
 		public function CoinBar()
 		{
 			super();
+			mouseChildren=false;
 			_label = new PxTextField( EmbedsManager.instance.getBitmapFontByName("VerdanaSmall") );
 			_label.useColor = false ;
 			_label.fixedWidth = true ;

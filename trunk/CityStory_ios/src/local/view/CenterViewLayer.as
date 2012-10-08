@@ -90,7 +90,12 @@ package local.view
 					bottomBar.storageBtn.visible = false ;
 					topBar.visible = false ;
 					break ;
+				case VillageMode.VISIT:
+					bottomBar.marketBtn.visible = false ;
+					bottomBar.editorBtn.visible = false ;
+					break ;
 			}
+			gameTip.hide();
 		}
 	}
 }
