@@ -116,6 +116,7 @@ package local.model
 			PopUpManager.instance.removeCurrentPopup();
 			
 			//显示村庄
+			GameWorld.instance.buildingScene.readySave();
 			GameWorld.instance.clearWorldAndData();
 			GameWorld.instance.initMap( false ) ;
 			GameWorld.instance.showBuildings(false);
