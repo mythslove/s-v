@@ -38,13 +38,13 @@ package local.map.pk
 			switch( pkType)
 			{
 				case PickupType.COIN:
-					bmp.bitmapData = EmbedsManager.instance.getBitmapByName("PickupCoin",true).bitmapData;
+					bmp.bitmapData = EmbedsManager.instance.getSwfBmd("local.view.pk.PickupCoin");
 					break ;
 				case PickupType.EXP:
-					bmp.bitmapData = EmbedsManager.instance.getBitmapByName("PickupExp",true).bitmapData;
+					bmp.bitmapData = EmbedsManager.instance.getSwfBmd("local.view.pk.PickupExp");
 					break ;
 				case PickupType.GOOD:
-					bmp.bitmapData = EmbedsManager.instance.getBitmapByName("PickupGoods",true).bitmapData;
+					bmp.bitmapData = EmbedsManager.instance.getSwfBmd("local.view.pk.PickupGoods");
 					break ;
 			}
 			bmp.y = - bmp.height>>1 ;

@@ -114,6 +114,8 @@ package
 			resVOs.push( new ResVO("localization_config" , "config/localization_"+GameSetting.local+".bin") );
 			resVOs.push( new ResVO("ui_bar","swf/"+GameSetting.device+"/bar.swf"));
 			resVOs.push( new ResVO("ui_popup","swf/"+GameSetting.device+"/popup.swf"));
+			resVOs.push( new ResVO("ui_pickup","swf/"+GameSetting.device+"/pickup.swf"));
+			resVOs.push( new ResVO("ui_comp","swf/"+GameSetting.device+"/comp.swf"));
 			ResourceUtil.instance.addEventListener(ResProgressEvent.RES_LOAD_PROGRESS , gameInitResHandler );
 			ResourceUtil.instance.addEventListener("gameInitRes" , gameInitResHandler );
 			ResourceUtil.instance.queueLoad( "gameInitRes" , resVOs , 10 );
