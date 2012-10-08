@@ -47,27 +47,9 @@ package local.map
 		/** 
 		 * 显示所有的建筑 
 		 */
-		public function showBuildings():void
+		public function showBuildings( isHome:Boolean=true ):void
 		{
-			if( GameData.villageMode==VillageMode.VISIT) //显示好友村庄
-			{
-				var friendModel:FriendVillageModel = FriendVillageModel.instance ;
-				if(friendModel.expandBuilding){ //有扩地
-					buildingScene.addBuilding( BuildingFactory.createBuildingByVO( friendModel.expandBuilding ) , false , true );
-				}
-				tempShowBuilding(friendModel.basicTrees);
-				tempShowBuilding(friendModel.business);
-				tempShowBuilding(friendModel.industry);
-				tempShowBuilding(friendModel.community);
-				tempShowBuilding(friendModel.decorations);
-				tempShowBuilding(friendModel.homes);
-				
-				roadScene.sortAll();
-				buildingScene.sortAll();
-				
-				friendModel.clear();
-			}
-			else //显示自己的村庄
+			if( isHome ) //显示自己的村庄
 			{
 				var myModel:BuildingModel = BuildingModel.instance ;
 				if(myModel.expandBuilding){ //有扩地
@@ -87,6 +69,24 @@ package local.map
 					sortIcons();
 				}
 				run() ;
+			}
+			else //显示好友村庄
+			{
+				var friendModel:FriendVillageModel = FriendVillageModel.instance ;
+				if(friendModel.expandBuilding){ //有扩地
+					buildingScene.addBuilding( BuildingFactory.createBuildingByVO( friendModel.expandBuilding ) , false , false );
+				}
+				tempShowBuilding(friendModel.basicTrees);
+				tempShowBuilding(friendModel.business);
+				tempShowBuilding(friendModel.industry);
+				tempShowBuilding(friendModel.community);
+				tempShowBuilding(friendModel.decorations);
+				tempShowBuilding(friendModel.homes);
+				
+				roadScene.sortAll();
+				buildingScene.sortAll();
+				
+				friendModel.clear();
 			}
 		}
 		private function tempShowBuilding( bvos:Vector.<BuildingVO>):void{
