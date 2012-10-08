@@ -44,7 +44,9 @@ package local.map.item
 		
 		override public function update():void
 		{
-			super.update() ;
+			if(gameTimer){
+				super.update() ;
+			}
 			if( !gameTimer && buildingVO.status==BuildingStatus.PRODUCTION_COMPLETE)
 			{
 				if( GameData.commDate.time - buildingVO.statusTime>buildingVO.product.expireTime*1000 )
