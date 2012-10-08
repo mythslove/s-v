@@ -87,7 +87,7 @@ package local.map.item
 				else if( buildingVO.status==BuildingStatus.EXPIRED)
 				{
 					flash(true);
-					//过期
+					//显示产品过期的提示
 					CenterViewLayer.instance.gameTip.showBuildingTip( this ) ;
 				}
 				else
