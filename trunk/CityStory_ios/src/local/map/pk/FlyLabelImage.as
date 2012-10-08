@@ -51,7 +51,7 @@ package local.map.pk
 			addChild(bmp);
 			
 			//文字
-			txt = new PxTextField( EmbedsManager.instance.getBitmapFontByName("VerdanaBig") );
+			txt = new PxTextField( EmbedsManager.instance.getBitmapFontByName("VerdanaBig",false) );
 			txt.fixedWidth = false ;
 			txt.useColor = false ;
 			txt.mouseChildren = txt.mouseChildren = false ;
