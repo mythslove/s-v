@@ -57,12 +57,12 @@ package
 		private function activateHandler( e:Event ):void {
 			GameData.commDate = new Date();
 			GameWorld.instance.buildingScene.refreshBuildingStatus();
+//			showDailyRewards();
 		}
 		
 		private function deactivateHandler( e:Event ):void {
 			GameWorld.instance.buildingScene.readySave();
 			_villageUtil.saveVillage();
-//			showDailyRewards();
 		}
 		
 		//显示每日奖励
