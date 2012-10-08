@@ -88,10 +88,11 @@ package  local.comm
 					world.showExpandState();
 					break ;
 				case VillageMode.VISIT:
-					world.runUpdate = true ;
 					world.roadScene.mouseChildren = false ;
 					world.topScene.visible = false ;
 					world.iconScene.visible = false ;
+					world.buildingScene.addMoveItems();
+					world.runUpdate = true ;
 					break ;
 			}
 			if(world.currentSelected){

@@ -116,6 +116,9 @@ package local.map.scene
 			}
 		}
 		
+		/**
+		 * 判断是否在路旁边 
+		 */		
 		public function checkRoadsAndIcons():void
 		{
 			for each( var obj:IsoObject in children){

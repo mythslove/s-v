@@ -208,6 +208,7 @@ package  local.map
 			if(!LandModel.instance.lands)  LandModel.instance.initLands();
 			
 			var lands:Vector.<LandVO> = isHome? LandModel.instance.lands : FriendVillageModel.instance.lands ;
+			roadScene.graphics.clear() ;
 			for each( var landVO:LandVO in lands) {
 				drawMapZoneByFill(landVO);
 				MapGridDataModel.instance.landGridData.setWalkable( landVO.nodeX , landVO.nodeZ , true );
