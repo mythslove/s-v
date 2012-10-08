@@ -6,8 +6,21 @@ package local.util
 	import flash.display.BitmapData;
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
+	import flash.utils.getDefinitionByName;
 	
 	import local.comm.GameSetting;
+	import local.view.comp.CompStone;
+	import local.view.comp.CompWood;
+	import local.view.pk.PickupCash;
+	import local.view.pk.PickupCashSmall;
+	import local.view.pk.PickupCoin;
+	import local.view.pk.PickupCoinSmall;
+	import local.view.pk.PickupEnergy;
+	import local.view.pk.PickupEnergySmall;
+	import local.view.pk.PickupExp;
+	import local.view.pk.PickupExpSmall;
+	import local.view.pk.PickupGoods;
+	import local.view.pk.PickupGoodsSmall;
 	import local.vo.BitmapAnimResVO;
 	import local.vo.RoadResVO;
 	
@@ -106,23 +119,11 @@ package local.util
 		public static const BuildStatus_3_1:Class; 
 		
 		
-		//========pickup图标====================
-		[Embed(source="../resource/comm/PickupCoin.png")]
-		public static const PickupCoin_iphone:Class ;
-		[Embed(source="../resource/comm/PickupCash.png")]
-		public static const PickupCash_iphone:Class ;
-		[Embed(source="../resource/comm/PickupExp.png")]
-		public static const PickupExp_iphone:Class ;
-		[Embed(source="../resource/comm/PickupGoods.png")]
-		public static const PickupGoods_iphone:Class ;
-		[Embed(source="../resource/comm/PickupEnergy.png")]
-		public static const PickupEnergy_iphone:Class ;
-		//========Component图标====================
-		[Embed(source="../resource/comp/Stone_iphone.png")]
-		public static const Comp_Stone_iphone:Class ;
-		[Embed(source="../resource/comp/Wood_iphone.png")]
-		public static const Comp_Wood_iphone:Class ;
+		//========pickup和component图标====================
+		PickupCash,PickupCashSmall,PickupCoin,PickupCoinSmall,PickupEnergy,PickupEnergySmall,
+		PickupExp,PickupExpSmall,PickupGoods,PickupGoodsSmall
 		
+		CompStone , CompWood;
 		
 		
 		//===================特效===========================
@@ -202,7 +203,20 @@ package local.util
 			_resHash[name] = resVO.resObject ;
 			return _resHash[name]  ;
 		}
-			
+		
+		/**
+		 * 获取嵌入到swf的bitmapData 
+		 * @param name
+		 * @return 
+		 */		
+		public function getSwfBmd( name:String ):BitmapData
+		{
+			var type:Class = getDefinitionByName( name ) as Class;
+			if(type){
+				return new type(0,0) as BitmapData ;
+			}
+			return null ;
+		}
 		
 		
 		/**

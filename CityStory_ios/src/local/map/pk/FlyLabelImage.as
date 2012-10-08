@@ -29,22 +29,23 @@ package local.map.pk
 			switch( pkType)
 			{
 				case PickupType.COIN:
-					bmp.bitmapData = EmbedsManager.instance.getBitmapByName("PickupCoin",true).bitmapData;
+					bmp.bitmapData = EmbedsManager.instance.getSwfBmd("local.view.pk.PickupCoinSmall");
 					break ;
 				case PickupType.EXP:
-					bmp.bitmapData = EmbedsManager.instance.getBitmapByName("PickupExp",true).bitmapData;
+					bmp.bitmapData = EmbedsManager.instance.getSwfBmd("local.view.pk.PickupExpSmall");
 					break ;
 				case PickupType.GOOD:
-					bmp.bitmapData = EmbedsManager.instance.getBitmapByName("PickupGoods",true).bitmapData;
+					bmp.bitmapData = EmbedsManager.instance.getSwfBmd("local.view.pk.PickupGoodsSmall");
 					break ;
 				case PickupType.ENERGY:
-					bmp.bitmapData = EmbedsManager.instance.getBitmapByName("PickupEnergy",true).bitmapData;
+					bmp.bitmapData = EmbedsManager.instance.getSwfBmd("local.view.pk.PickupEnergySmall");
 					break ;
 				case PickupType.CASH:
-					bmp.bitmapData = EmbedsManager.instance.getBitmapByName("PickupCash",true).bitmapData;
+					bmp.bitmapData = EmbedsManager.instance.getSwfBmd("local.view.pk.PickupCashSmall");
 					break ;
 				default: //component
-					bmp.bitmapData = EmbedsManager.instance.getBitmapByName("Comp_"+pkType,true).bitmapData;
+					bmp.bitmapData = EmbedsManager.instance.getSwfBmd("local.view.comp.Comp"+pkType);
+					bmp.scaleX = bmp.scaleY = 0.7 ;
 					break ;
 			}
 			bmp.y = - bmp.height>>1 ;
