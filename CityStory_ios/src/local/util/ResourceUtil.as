@@ -31,7 +31,7 @@ package local.util
 			if(_instance){
 				throw new Error("重复实例化");
 			}
-			this.cdns = Vector.<String>(["res/"]); 
+			this.cdns = Vector.<String>(["res/",""]); 
 			this.maxLoadNum = 8 ;
 			this.isRemote = false ;
 		}
