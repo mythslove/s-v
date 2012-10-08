@@ -54,15 +54,23 @@ package
 			NativeApplication.nativeApplication.addEventListener(Event.DEACTIVATE , deactivateHandler );
 		}
 		
-		private function activateHandler( e:Event ):void {
-			GameData.commDate = new Date();
-			GameWorld.instance.buildingScene.refreshBuildingStatus();
-//			showDailyRewards();
+		private function activateHandler( e:Event ):void 
+		{
+			if(GameData.villageMode!=VillageMode.VISIT)
+			{
+				GameData.commDate = new Date();
+				GameWorld.instance.buildingScene.refreshBuildingStatus();
+				//			showDailyRewards();
+			}
 		}
 		
-		private function deactivateHandler( e:Event ):void {
-			GameWorld.instance.buildingScene.readySave();
-			_villageUtil.saveVillage();
+		private function deactivateHandler( e:Event ):void 
+		{
+			if(GameData.villageMode!=VillageMode.VISIT)
+			{
+				GameWorld.instance.buildingScene.readySave();
+				_villageUtil.saveVillage();
+			}
 		}
 		
 		//显示每日奖励

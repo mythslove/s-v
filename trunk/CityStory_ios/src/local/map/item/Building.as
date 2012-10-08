@@ -56,8 +56,6 @@ package local.map.item
 		
 		public function recoverStatus():void
 		{
-			if(GameData.villageMode==VillageMode.VISIT) return ;
-			
 			clearGameTimer();
 			if(buildingVO.status == BuildingStatus.PRODUCTION || buildingVO.status==BuildingStatus.EXPANDING ) 
 			{

@@ -426,11 +426,9 @@ package local.map
 		{
 			PopUpManager.instance.clearAll();
 			clearWorldAndData();
-			GameData.villageMode = VillageMode.NORMAL;
 			initMap() ;
 			showBuildings();
-			buildingScene.addMoveItems();
-			buildingScene.refreshBuildingStatus();
+			GameData.villageMode = VillageMode.NORMAL;
 		}
 	}
 }

@@ -117,10 +117,9 @@ package local.model
 			
 			//显示村庄
 			GameWorld.instance.clearWorldAndData();
-			GameData.villageMode = VillageMode.VISIT ;
-			GameWorld.instance.initMap() ;
+			GameWorld.instance.initMap( false ) ;
 			GameWorld.instance.showBuildings();
-			GameWorld.instance.buildingScene.addMoveItems();
+			GameData.villageMode = VillageMode.VISIT ;
 		}
 		
 		/**

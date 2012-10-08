@@ -197,7 +197,7 @@ package  local.map
 		}
 		
 		/** 初始化地图 */
-		public function initMap():void
+		public function initMap( isHome:Boolean=true ):void
 		{
 			var i:int , j:int ;
 			var gameGridData:Grid = MapGridDataModel.instance.gameGridData ;
@@ -207,7 +207,7 @@ package  local.map
 			//添加地图区域
 			if(!LandModel.instance.lands)  LandModel.instance.initLands();
 			
-			var lands:Vector.<LandVO> = GameData.villageMode==VillageMode.VISIT ? FriendVillageModel.instance.lands:LandModel.instance.lands ;
+			var lands:Vector.<LandVO> = isHome? LandModel.instance.lands : FriendVillageModel.instance.lands ;
 			for each( var landVO:LandVO in lands) {
 				drawMapZoneByFill(landVO);
 				MapGridDataModel.instance.landGridData.setWalkable( landVO.nodeX , landVO.nodeZ , true );
@@ -222,7 +222,7 @@ package  local.map
 			}
 			//	drawMapZoneByLine();
 			//添加扩地牌
-			if(GameData.villageMode!=VillageMode.VISIT ) addExpandSign();
+			if(isHome) addExpandSign();
 			//随机添加树
 			addTrees();
 		}
@@ -298,39 +298,37 @@ package  local.map
 		 */		
 		public function addExpandSign( sort:Boolean = false ):void
 		{
-			if(GameData.villageMode!=VillageMode.VISIT){
-				var lands:Dictionary = LandModel.instance.getCanExpandLand();
-				var arr:Array ;
-				var expandSign:ExpandSign ;
-				var temp:Boolean=true ; //必须至少有一个扩地牌
-				var index:int , nx:int , nz:int ;
-				for( var key:String in lands)
+			var lands:Dictionary = LandModel.instance.getCanExpandLand();
+			var arr:Array ;
+			var expandSign:ExpandSign ;
+			var temp:Boolean=true ; //必须至少有一个扩地牌
+			var index:int , nx:int , nz:int ;
+			for( var key:String in lands)
+			{
+				if(temp || Math.random()>0.6)
 				{
-					if(temp || Math.random()>0.6)
-					{
-						arr = key.split("-");
-						for( var i:int = 1 ; i<4 ; ++i ){
-							for( var j:int = 1 ;  j<4 ; ++j ){
-								nx = int( arr[0] )*4+i ;
-								nz = int (arr[1] )*4+j ;
-								if( ( sort && buildingScene.gridData.getNode(nx,nz).walkable) || !buildingScene.gridData.getNode(nx,nz).walkable )
-								{
-									if(_expandSigns.length>index){
-										expandSign = _expandSigns[index] ;
-									}else{
-										expandSign = new ExpandSign();
-										_expandSigns.push( expandSign );
-									}
-									expandSign.nodeX = nx ;
-									expandSign.nodeZ = nz ;
-									buildingScene.addIsoObject( expandSign , sort );
-									expandSign.setWalkable( false , buildingScene.gridData );
-									MapGridDataModel.instance.addBuildingGridData(expandSign);
-									expandSign.checkScale();
-									temp = false ;
-									++index;
-									i = 4;j=4; //跳出两个for循环
+					arr = key.split("-");
+					for( var i:int = 1 ; i<4 ; ++i ){
+						for( var j:int = 1 ;  j<4 ; ++j ){
+							nx = int( arr[0] )*4+i ;
+							nz = int (arr[1] )*4+j ;
+							if( ( sort && buildingScene.gridData.getNode(nx,nz).walkable) || !buildingScene.gridData.getNode(nx,nz).walkable )
+							{
+								if(_expandSigns.length>index){
+									expandSign = _expandSigns[index] ;
+								}else{
+									expandSign = new ExpandSign();
+									_expandSigns.push( expandSign );
 								}
+								expandSign.nodeX = nx ;
+								expandSign.nodeZ = nz ;
+								buildingScene.addIsoObject( expandSign , sort );
+								expandSign.setWalkable( false , buildingScene.gridData );
+								MapGridDataModel.instance.addBuildingGridData(expandSign);
+								expandSign.checkScale();
+								temp = false ;
+								++index;
+								i = 4;j=4; //跳出两个for循环
 							}
 						}
 					}
