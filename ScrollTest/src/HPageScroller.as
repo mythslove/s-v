@@ -7,55 +7,68 @@ package
 	import flash.events.EventDispatcher;
 	import flash.events.MouseEvent;
 	import flash.geom.Rectangle;
-	import flash.utils.getTimer;
 	
 	public class HPageScroller extends EventDispatcher
 	{
 		public static const SCROLL_POSITION_CHANGE : String = "ScrollPositionChange";
 		public static const SCROLL_OVER:String = "ScrollOver";
 		
-		private const SCROLLING_MIN_SPEED : Number = 0.20; // in pixels/ms
-		private const SCROLLING_MAX_SPEED : Number = 4; // in pixels/ms
-		
 		private var _container:Sprite ;
+		private var _content:Sprite ;
 		private var _mask:Shape ;
 		private var _containerViewport:Rectangle ;
-		private var _pageCap:int ;
 		
-		private var _previousFingerPosition : Number = 0;
-		private var _currentFingerPosition : Number = 0;
+		private var _prevContainerPos:Number ;
+		private var _mouseDownPos:Number;
+		private var _endPos:Number ;
 		
+		private var _perCount:int ;
+		private var _itemCap:int ;
 		private var _totalPage:int ;
 		private var _currentPage:int ; //以0开始
 		private var _endPosition:Number ;
+		private var _itemNum:int ;//item的数量
 		
 		public function get totalPage():int{ return _totalPage; }
 		public function get currentPage():int{ return _currentPage+1; }
-		
+		private function set endPos( value:Number ):void
+		{
+			if(value>0){
+				_endPos= 0 ;
+			}else if(value<-_totalPage*_containerViewport.width){
+				_endPos = -_totalPage*_containerViewport.width ;
+			}else{
+				_endPos = value ;
+			}
+		}
 		
 		/**
 		 * 
 		 * @param container
-		 * @param items 所有的items
-		 * @param perCount 每页有几个item
+		 * @param content
 		 * @param pageCap 每页的间隔
-		 * @param itemCap 每个item的间隔
+		 * @param itemCap item的间隔
 		 * @param containerViewport
-		 * 
 		 */		
-		public function addScrollControll(container:Sprite , 
-															pageCap:int ,
-															containerViewport : Rectangle = null):void
+		public function addScrollControll(	container:Sprite , 
+											content:Sprite ,
+											perCount:int , 
+											itemCap:int =5 ,
+											containerViewport : Rectangle = null):void
 		{
+			this._content = content ;
 			this._container = container ;
-			this._pageCap = pageCap ;
 			this._containerViewport = containerViewport ;
+			this._perCount = perCount ;
+			this._itemCap = itemCap ;
 			
+			_itemNum = 0 ;
 			_totalPage = 0 ;
 			_currentPage = 0 ;
+			_prevContainerPos = 0;
 			
 			addMask();
-			
+			_container.addEventListener(MouseEvent.MOUSE_DOWN, onMouseHandler);
 		}
 		
 		private function addMask():void
@@ -72,50 +85,87 @@ package
 		}
 		
 		
-		public function addPage( page:DisplayObject ):void
+		public function addItem( item:DisplayObject ):void
 		{
-			page.x = ( page.width+_pageCap ) * _totalPage ;
-			_totalPage++ ;
-			_container.addChild( page );
-		}
-		
-		
-		
-		private function onMouseDown(e:MouseEvent):void
-		{
-			_container.mouseChildren = true  ;
-			
-			_previousFingerPosition = e.stageX;
-			_currentFingerPosition = _previousFingerPosition;
-			
-			_container.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove );
-			_container.addEventListener(MouseEvent.MOUSE_UP, onMouseUp );
-			_container.addEventListener(MouseEvent.RELEASE_OUTSIDE, onMouseUp );
-			_container.addEventListener(Event.ENTER_FRAME , onEnterFrame);
-		}
-		
-		private function onMouseMove( e:MouseEvent ):void
-		{
-			if(e.buttonDown) {
-				_container.mouseChildren = false  ;
-				
-				// Update finger position
-				_currentFingerPosition = e.stageX;
+			var pageOffset:Number = _containerViewport.width*_totalPage ;
+			var initOffset:int = (_containerViewport.width-item.width*_perCount-_itemCap*(_perCount-1) )*0.5 ;
+	
+			item.x = pageOffset  + initOffset + (_itemNum%_perCount)*(item.width + _itemCap)   ;
+			checkVisible( item );
+			_content.addChild(item);
+			++_itemNum ;
+			if(_itemNum%_perCount==0){
+				++_totalPage;
 			}
-			
 		}
 		
-		private function onMouseUp( e:MouseEvent ):void
+		private function checkVisible( item :DisplayObject):void
 		{
-			_container.mouseChildren = true  ;
-			_container.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
-			_container.removeEventListener(MouseEvent.MOUSE_UP, onMouseUp);
-			_container.removeEventListener(MouseEvent.RELEASE_OUTSIDE, onMouseUp );
+			var position:Number = item.x+_content.x ;
+			if(position<-_containerViewport.width || position>_containerViewport.width*2 ){
+				item.visible = false ;
+			}else{
+				item.visible=true;
+			}
 		}
+		
+		private function onMouseHandler( e:MouseEvent ):void
+		{
+			switch(e.type)
+			{
+				case MouseEvent.MOUSE_DOWN:
+					_container.mouseChildren = true  ;
+					_mouseDownPos = e.stageX ;
+					_prevContainerPos = _content.x ;
+					_container.addEventListener(MouseEvent.MOUSE_MOVE, onMouseHandler );
+					_container.addEventListener(MouseEvent.MOUSE_UP, onMouseHandler );
+					_container.addEventListener(MouseEvent.RELEASE_OUTSIDE, onMouseHandler );
+					break ;
+				case MouseEvent.MOUSE_MOVE:
+					if(e.buttonDown) {
+						_container.mouseChildren = false  ;
+						endPos = _prevContainerPos +  e.stageX-_mouseDownPos ;
+						if(!_container.hasEventListener(Event.ENTER_FRAME)){
+							_container.addEventListener(Event.ENTER_FRAME , onEnterFrame);
+						}
+						break ;
+					}
+				default:
+					_container.mouseEnabled = false ;
+					_container.mouseChildren = false  ;
+					_container.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseHandler);
+					_container.removeEventListener(MouseEvent.MOUSE_UP, onMouseHandler);
+					_container.removeEventListener(MouseEvent.MOUSE_OUT, onMouseHandler);
+					_container.removeEventListener(MouseEvent.RELEASE_OUTSIDE, onMouseHandler );
+					if(!_container.hasEventListener(Event.ENTER_FRAME)){
+						_container.addEventListener(Event.ENTER_FRAME , onEnterFrame);
+					}
+					//判断翻页
+					var cha:Number = _mouseDownPos-e.stageX ;
+					if(cha>_containerViewport.width*0.4 ){ //向右翻页
+						if(_currentPage<_totalPage)  ++_currentPage ;
+					}else if( cha<-_containerViewport.width*0.4){
+						if(_currentPage>0 ) --_currentPage  ;
+					}
+					endPos = -_currentPage*_containerViewport.width ;
+					break ;
+			}
+		}
+		
 		
 		private function onEnterFrame( e:Event ):void
 		{
-			
+			if( Math.abs(_content.x -_endPos)>1 ){
+				_content.x  += (_endPos-_content.x)*0.4 ;
+			}else{
+				_content.x = _endPos ;
+				for( var i:int = 0 ; i<_content.numChildren ; ++i){
+					checkVisible( _content.getChildAt(i) );
+				}
+				_container.mouseChildren = true  ;
+				_container.mouseEnabled = true ;
+				_container.removeEventListener(Event.ENTER_FRAME , onEnterFrame);
+			}
 		}
 		
 		
@@ -125,10 +175,17 @@ package
 				_mask.parent.removeChild(_mask);
 			}
 			_mask = null ;
-			_container.mask = null ;
 			_containerViewport = null ;
-			_container.removeEventListener(MouseEvent.MOUSE_DOWN, onMouseDown  );
-			_container=  null ;
+			if(_container){
+				_container.mask = null ;
+				_container.mouseChildren = true  ;
+				_container.removeEventListener(Event.ENTER_FRAME , onEnterFrame);
+				_container.removeEventListener(MouseEvent.MOUSE_DOWN, onMouseHandler);
+				_container.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseHandler);
+				_container.removeEventListener(MouseEvent.MOUSE_UP, onMouseHandler);
+				_container.removeEventListener(MouseEvent.RELEASE_OUTSIDE, onMouseHandler );
+				_container=  null ;
+			}
 		}
 	}
 }
