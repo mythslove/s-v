@@ -28,10 +28,10 @@ package local.view.bottombar
 			_tempVisible = value ;
 			if( value){
 				alpha = 0 ;
-				TweenLite.to( this , 0.2 , {alpha:1 , onComplete: onTweenCom} );
+				TweenLite.to( this , 0.25 , {alpha:1 , onComplete: onTweenCom} );
 			}else{
 				alpha = 1 ;
-				TweenLite.to( this , 0.2 , {alpha:0 , onComplete: onTweenCom} );
+				TweenLite.to( this , 0.25 , {alpha:0 , onComplete: onTweenCom} );
 			}
 		}
 		
