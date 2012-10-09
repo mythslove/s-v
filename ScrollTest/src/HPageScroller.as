@@ -4,7 +4,9 @@ package
 	import flash.display.Shape;
 	import flash.display.Sprite;
 	import flash.events.EventDispatcher;
+	import flash.events.MouseEvent;
 	import flash.geom.Rectangle;
+	import flash.utils.getTimer;
 	
 	public class HPageScroller extends EventDispatcher
 	{
@@ -16,14 +18,21 @@ package
 		
 		private var _container:Sprite ;
 		private var _mask:Shape ;
-		private var _items:Vector.<DisplayObject> ;
 		private var _containerViewport:Rectangle ;
 		private var _pageCap:int ;
-		private var _itemCap:int ;
-		private var _perCount:int ;
+		
+		private var _previousFingerPosition : Number = 0;
+		private var _currentFingerPosition : Number = 0;
+		
+		private var _totalPage:int ;
+		private var _currentPage:int ; //以0开始
+		
+		public function get totalPage():int{ return _totalPage; }
+		public function get currentPage():int{ return _currentPage+1; }
+		
 		
 		/**
-		 *  
+		 * 
 		 * @param container
 		 * @param items 所有的items
 		 * @param perCount 每页有几个item
@@ -33,21 +42,17 @@ package
 		 * 
 		 */		
 		public function addScrollControll(container:Sprite , 
-															items:Vector.<DisplayObject> , 
-															perCount:int ,
 															pageCap:int ,
-															itemCap:int ,
 															containerViewport : Rectangle = null):void
 		{
 			this._container = container ;
-			this._items = items ;
 			this._pageCap = pageCap ;
-			this._itemCap = itemCap ;
 			this._containerViewport = containerViewport ;
 			
-			addMask();
+			_totalPage = 0 ;
+			_currentPage = 0 ;
 			
-			addItems();
+			addMask();
 			
 		}
 		
@@ -64,13 +69,59 @@ package
 			_container.mask = _mask ;
 		}
 		
-		private function addItems():void
+		
+		public function addPage( page:DisplayObject ):void
 		{
-			var len:int = _items.length ;
-			for( var i:int = 0 ; i<len ; ++i )
-			{
-				var item:DisplayObject = _items[i] ;
+			page.x = ( page.width+_pageCap ) * _totalPage ;
+			_totalPage++ ;
+			_container.addChild( page );
+		}
+		
+		
+		
+		private function onMouseDown(e:MouseEvent):void
+		{
+			_container.mouseChildren = true  ;
+			
+			_previousFingerPosition = e.stageX;
+			_currentFingerPosition = _previousFingerPosition;
+			
+			_container.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove );
+			_container.addEventListener(MouseEvent.MOUSE_UP, onMouseUp );
+			_container.addEventListener(MouseEvent.RELEASE_OUTSIDE, onMouseUp );
+		}
+		
+		private function onMouseMove( e:MouseEvent ):void
+		{
+			if(e.buttonDown) {
+				_container.mouseChildren = false  ;
+				
+				// Update finger position
+				_currentFingerPosition = e.stageX;
 			}
+			
+		}
+		
+		private function onMouseUp( e:MouseEvent ):void
+		{
+			_container.mouseChildren = true  ;
+			_container.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
+			_container.removeEventListener(MouseEvent.MOUSE_UP, onMouseUp);
+			_container.removeEventListener(MouseEvent.RELEASE_OUTSIDE, onMouseUp );
+		}
+		
+		
+		
+		public function removeScrollControll() : void
+		{
+			if(_mask && _mask.parent){
+				_mask.parent.removeChild(_mask);
+			}
+			_mask = null ;
+			_container.mask = null ;
+			_containerViewport = null ;
+			_container.removeEventListener(MouseEvent.MOUSE_DOWN, onMouseDown  );
+			_container=  null ;
 		}
 	}
 }
