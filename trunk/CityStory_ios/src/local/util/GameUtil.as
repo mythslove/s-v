@@ -2,15 +2,10 @@ package local.util
 {
 	import bing.utils.StringUtil;
 	
-	import flash.display.Bitmap;
-	import flash.display.BitmapData;
-	import flash.filters.GlowFilter;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
-	import flash.text.TextFormatAlign;
 	
 	import local.comm.GameData;
-	import local.enum.BuildingType;
 	import local.model.BuildingModel;
 	import local.model.LandModel;
 	
@@ -120,18 +115,6 @@ package local.util
 			tf.text = txt ;
 		}
 		
-		
-		/**
-		 * 将文本缓存成位图 
-		 * @param tf
-		 */		
-		public static function cacheTextFieldAsBitmap( tf:TextField ):void
-		{
-			if(tf.defaultTextFormat.align==TextFormatAlign.LEFT){
-				tf.width = tf.textWidth+4;
-			}
-			tf.cacheAsBitmap = true ;
-		}
 		
 		
 		
