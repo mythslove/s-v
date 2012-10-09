@@ -8,6 +8,8 @@ package
 	import flash.events.MouseEvent;
 	import flash.geom.Rectangle;
 	
+	[Event(name="ScrollPositionChange", type="flash.events.Event")]
+	[Event(name="ScrollOver", type="flash.events.Event")]
 	public class HPageScroller extends EventDispatcher
 	{
 		public static const SCROLL_POSITION_CHANGE : String = "ScrollPositionChange";
@@ -29,7 +31,7 @@ package
 		private var _endPosition:Number ;
 		private var _itemNum:int ;//item的数量
 		
-		public function get totalPage():int{ return _totalPage; }
+		public function get totalPage():int{ return _totalPage+1 ; }
 		public function get currentPage():int{ return _currentPage+1; }
 		private function set endPos( value:Number ):void
 		{
@@ -128,6 +130,7 @@ package
 						if(!_container.hasEventListener(Event.ENTER_FRAME)){
 							_container.addEventListener(Event.ENTER_FRAME , onEnterFrame);
 						}
+						this.dispatchEvent( new Event(SCROLL_POSITION_CHANGE));
 						break ;
 					}
 				default:
@@ -137,17 +140,19 @@ package
 					_container.removeEventListener(MouseEvent.MOUSE_UP, onMouseHandler);
 					_container.removeEventListener(MouseEvent.MOUSE_OUT, onMouseHandler);
 					_container.removeEventListener(MouseEvent.RELEASE_OUTSIDE, onMouseHandler );
-					if(!_container.hasEventListener(Event.ENTER_FRAME)){
-						_container.addEventListener(Event.ENTER_FRAME , onEnterFrame);
-					}
 					//判断翻页
 					var cha:Number = _mouseDownPos-e.stageX ;
 					if(cha>_containerViewport.width*0.4 ){ //向右翻页
-						if(_currentPage<_totalPage)  ++_currentPage ;
+						nextPage();
 					}else if( cha<-_containerViewport.width*0.4){
-						if(_currentPage>0 ) --_currentPage  ;
+						prevPage();
+					}else{
+						endPos = _prevContainerPos ;
 					}
-					endPos = -_currentPage*_containerViewport.width ;
+					this.dispatchEvent( new Event(SCROLL_POSITION_CHANGE));
+					if(!_container.hasEventListener(Event.ENTER_FRAME)){
+						_container.addEventListener(Event.ENTER_FRAME , onEnterFrame);
+					}
 					break ;
 			}
 		}
@@ -165,9 +170,54 @@ package
 				_container.mouseChildren = true  ;
 				_container.mouseEnabled = true ;
 				_container.removeEventListener(Event.ENTER_FRAME , onEnterFrame);
+				this.dispatchEvent( new Event(SCROLL_OVER));
 			}
 		}
 		
+		public function nextPage():void
+		{
+			if(hasNextPage())  ++_currentPage ;
+			endPos = -_currentPage*_containerViewport.width ;
+			
+		}
+		
+		public function prevPage():void
+		{
+			if( hasPrevPage() ) --_currentPage  ;
+			endPos = -_currentPage*_containerViewport.width ;
+		}
+		
+		public function hasPrevPage():Boolean
+		{
+			return _currentPage>0 ;
+		}
+		
+		public function hasNextPage():Boolean
+		{
+			return _currentPage<_totalPage ;
+		}
+		
+		public function scrollToPage( page:int , animation:Boolean ):void
+		{
+			if(page<0) page=0 ;
+			else if(page>=_totalPage) page = _totalPage ;
+			_currentPage=page ;
+			if(animation){
+				for( var i:int = 0 ; i<_content.numChildren ; ++i){
+					_content.getChildAt(i).visible = true ;
+				}
+				endPos = -_currentPage*_containerViewport.width ;
+			}else{
+				_content.x = -_currentPage*_containerViewport.width;
+				for( i = 0 ; i<_content.numChildren ; ++i){
+					checkVisible( _content.getChildAt(i) );
+				}
+				_container.mouseChildren = true  ;
+				_container.mouseEnabled = true ;
+				_container.removeEventListener(Event.ENTER_FRAME , onEnterFrame);
+				this.dispatchEvent( new Event(SCROLL_OVER));
+			}
+		}
 		
 		public function removeScrollControll() : void
 		{
