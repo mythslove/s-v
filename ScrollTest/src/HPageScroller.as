@@ -3,6 +3,7 @@ package
 	import flash.display.DisplayObject;
 	import flash.display.Shape;
 	import flash.display.Sprite;
+	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.events.MouseEvent;
 	import flash.geom.Rectangle;
@@ -26,6 +27,7 @@ package
 		
 		private var _totalPage:int ;
 		private var _currentPage:int ; //以0开始
+		private var _endPosition:Number ;
 		
 		public function get totalPage():int{ return _totalPage; }
 		public function get currentPage():int{ return _currentPage+1; }
@@ -89,6 +91,7 @@ package
 			_container.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove );
 			_container.addEventListener(MouseEvent.MOUSE_UP, onMouseUp );
 			_container.addEventListener(MouseEvent.RELEASE_OUTSIDE, onMouseUp );
+			_container.addEventListener(Event.ENTER_FRAME , onEnterFrame);
 		}
 		
 		private function onMouseMove( e:MouseEvent ):void
@@ -110,6 +113,10 @@ package
 			_container.removeEventListener(MouseEvent.RELEASE_OUTSIDE, onMouseUp );
 		}
 		
+		private function onEnterFrame( e:Event ):void
+		{
+			
+		}
 		
 		
 		public function removeScrollControll() : void
