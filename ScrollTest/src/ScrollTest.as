@@ -32,12 +32,16 @@ package
 			for( var i:int = 0  ; i<14 ; ++i){
 				scroller.addItem( createItem(i) );
 			}
+			scroller.addEventListener("ScrollPositionChange",onChange);
 			scroller.addEventListener("ScrollOver",onScrollOver);
 		}
-		
+		private function onChange( e:Event):void
+		{
+			trace("scroller Change");
+		}
 		private function onScrollOver( e:Event):void
 		{
-			trace(scroller.currentPage , scroller.totalPage );
+			trace(scroller.currentPage , scroller.totalPage , "scroller Over" );
 		}
 		
 		private function onClickHandler( e:MouseEvent ):void
