@@ -6,7 +6,7 @@ package
 	import flash.events.EventDispatcher;
 	import flash.geom.Rectangle;
 	
-	public class ShopPageScroller extends EventDispatcher
+	public class HPageScroller extends EventDispatcher
 	{
 		public static const SCROLL_POSITION_CHANGE : String = "ScrollPositionChange";
 		public static const SCROLL_OVER:String = "ScrollOver";
