@@ -9,6 +9,7 @@ package
 	public class ScrollTest extends Sprite
 	{
 		private var scroller:HPageScroller ;
+		private var content:Sprite ;
 		
 		public function ScrollTest()
 		{
@@ -22,7 +23,7 @@ package
 			container.x = container.y = 20 ;
 			addChild(container);
 			
-			var content:Sprite = new Sprite();
+			content = new Sprite();
 			content.addEventListener(MouseEvent.CLICK , onClickHandler );
 			container.addChild( content );
 			
@@ -41,7 +42,8 @@ package
 		
 		private function onClickHandler( e:MouseEvent ):void
 		{
-//			scroller.scrollToPage(25,true);
+//			scroller.scrollToPage(6,true);
+			scroller.scrollToItem( content.getChildAt(7) , true );
 		}
 		
 		private function createItem( index:int ):Sprite

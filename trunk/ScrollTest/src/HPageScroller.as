@@ -180,6 +180,8 @@ package
 		{
 			if(hasNextPage())  ++_currentPage ;
 			endPos = -_currentPage*_containerViewport.width ;
+			this.dispatchEvent( new Event(SCROLL_POSITION_CHANGE));
+			_container.addEventListener(Event.ENTER_FRAME , onEnterFrame);
 			
 		}
 		
@@ -187,6 +189,8 @@ package
 		{
 			if( hasPrevPage() ) --_currentPage  ;
 			endPos = -_currentPage*_containerViewport.width ;
+			this.dispatchEvent( new Event(SCROLL_POSITION_CHANGE));
+			_container.addEventListener(Event.ENTER_FRAME , onEnterFrame);
 		}
 		
 		public function hasPrevPage():Boolean
@@ -201,6 +205,7 @@ package
 		
 		public function scrollToPage( page:int , animation:Boolean ):void
 		{
+			page-=1;
 			if(page<0) page=0 ;
 			else if(page>=_totalPage) page = _totalPage ;
 			_currentPage=page ;
@@ -209,6 +214,8 @@ package
 					_content.getChildAt(i).visible = true ;
 				}
 				endPos = -_currentPage*_containerViewport.width ;
+				this.dispatchEvent( new Event(SCROLL_POSITION_CHANGE));
+				_container.addEventListener(Event.ENTER_FRAME , onEnterFrame);
 			}else{
 				_content.x = -_currentPage*_containerViewport.width;
 				for( i = 0 ; i<_content.numChildren ; ++i){
@@ -218,6 +225,14 @@ package
 				_container.mouseEnabled = true ;
 				_container.removeEventListener(Event.ENTER_FRAME , onEnterFrame);
 				this.dispatchEvent( new Event(SCROLL_OVER));
+			}
+		}
+		
+		public function scrollToItem( item:DisplayObject , animation:Boolean  ):void
+		{
+			if(item.parent==_content){
+				var index:int = _content.getChildIndex(item);
+				scrollToPage( 1+(index/_perCount)>>0  , animation);
 			}
 		}
 		
@@ -239,6 +254,7 @@ package
 				_container.removeEventListener(MouseEvent.RELEASE_OUTSIDE, onMouseHandler );
 				_container=  null ;
 			}
+			_content =  null ;
 		}
 	}
 }
