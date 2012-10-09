@@ -15,6 +15,8 @@ package
 		public static const SCROLL_POSITION_CHANGE : String = "ScrollPositionChange";
 		public static const SCROLL_OVER:String = "ScrollOver";
 		
+		public var speed:Number = 0.5 ;
+		
 		private var _container:Sprite ;
 		private var _content:Sprite ;
 		private var _mask:Shape ;
@@ -163,7 +165,7 @@ package
 		private function onEnterFrame( e:Event ):void
 		{
 			if( Math.abs(_content.x -_endPos)>1 ){
-				_content.x  += (_endPos-_content.x)*0.4 ;
+				_content.x  += (_endPos-_content.x)*speed ;
 			}else{
 				_content.x = _endPos ;
 				for( var i:int = 0 ; i<_content.numChildren ; ++i){
