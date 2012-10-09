@@ -91,11 +91,11 @@ package local.view
 					topBar.visible = false ;
 					break ;
 				case VillageMode.VISIT:
+					gameTip.hide();
 					bottomBar.marketBtn.visible = false ;
 					bottomBar.editorBtn.visible = false ;
 					break ;
 			}
-			gameTip.hide();
 		}
 	}
 }
