@@ -78,12 +78,6 @@ package local.model
 						break ;
 					case BuildingType.BUSINESS :
 						businessRenderers.push( new ShopItemRenderer(baseVO) );
-						businessRenderers.push( new ShopItemRenderer(baseVO) );
-						businessRenderers.push( new ShopItemRenderer(baseVO) );
-						businessRenderers.push( new ShopItemRenderer(baseVO) );
-						businessRenderers.push( new ShopItemRenderer(baseVO) );
-						businessRenderers.push( new ShopItemRenderer(baseVO) );
-						businessRenderers.push( new ShopItemRenderer(baseVO) );
 						break ;
 				}
 			}
