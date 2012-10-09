@@ -49,7 +49,7 @@ package local.view.shop
 			GameWorld.instance.stopRun();
 			x = GameSetting.SCREEN_WIDTH>>1 ;
 			y = GameSetting.SCREEN_HEIGHT>>1 ;
-			TweenLite.from( this , 0.25 , { x:x-200 , ease: Back.easeOut });
+			TweenLite.from( this , 0.2 , { x:x-200 , ease: Back.easeOut });
 		}
 		
 		private function onMouseHandler( e:MouseEvent ):void
@@ -84,7 +84,7 @@ package local.view.shop
 		
 		private function close():void{
 			mouseChildren=false;
-			TweenLite.to( this , 0.25 , { x:x+200 , ease: Back.easeIn , onComplete:onTweenCom});
+			TweenLite.to( this , 0.2 , { x:x+200 , ease: Back.easeIn , onComplete:onTweenCom});
 		}
 		
 		private function onTweenCom():void{
