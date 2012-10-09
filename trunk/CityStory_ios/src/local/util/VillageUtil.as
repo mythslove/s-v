@@ -32,6 +32,8 @@ package local.util
 		}
 		//=======================================
 		
+		private var _bytes:ByteArray = new ByteArray();
+		
 		/**
 		 * 保存村庄信息 
 		 */		
@@ -39,35 +41,36 @@ package local.util
 		{
 			//保存文件
 			var file:File = new File( File.applicationStorageDirectory.url+"res/"+GameSetting.fdId+".bin");
+			_bytes.clear();
 			var stream:FileStream = new FileStream();
+			stream.open( file , FileMode.WRITE );
 			try
 			{
-				stream.open( file , FileMode.WRITE );
 				//写玩家信息
-				stream.writeObject( PlayerModel.instance.me );
+				_bytes.writeObject( PlayerModel.instance.me );
 				//地图上的建筑
-				stream.writeObject( BuildingModel.instance.expandBuilding );
-				stream.writeObject( BuildingModel.instance.basicTrees );
-				stream.writeObject( BuildingModel.instance.homes );
-				stream.writeObject( BuildingModel.instance.community );
-				stream.writeObject( BuildingModel.instance.decorations );
-				stream.writeObject( BuildingModel.instance.industry );
-				stream.writeObject( BuildingModel.instance.wonders );
-				stream.writeObject( BuildingModel.instance.business );
+				_bytes.writeObject( BuildingModel.instance.expandBuilding );
+				_bytes.writeObject( BuildingModel.instance.basicTrees );
+				_bytes.writeObject( BuildingModel.instance.homes );
+				_bytes.writeObject( BuildingModel.instance.community );
+				_bytes.writeObject( BuildingModel.instance.decorations );
+				_bytes.writeObject( BuildingModel.instance.industry );
+				_bytes.writeObject( BuildingModel.instance.wonders );
+				_bytes.writeObject( BuildingModel.instance.business );
 				//lands
-				stream.writeObject( LandModel.instance.lands );
+				_bytes.writeObject( LandModel.instance.lands );
 				//收藏箱中的信息
-				stream.writeObject( StorageModel.instance.homes );
-				stream.writeObject( StorageModel.instance.community );
-				stream.writeObject( StorageModel.instance.decors );
-				stream.writeObject( StorageModel.instance.industry );
-				stream.writeObject( StorageModel.instance.wonders );
-				stream.writeObject( StorageModel.instance.business );
+				_bytes.writeObject( StorageModel.instance.homes );
+				_bytes.writeObject( StorageModel.instance.community );
+				_bytes.writeObject( StorageModel.instance.decors );
+				_bytes.writeObject( StorageModel.instance.industry );
+				_bytes.writeObject( StorageModel.instance.wonders );
+				_bytes.writeObject( StorageModel.instance.business );
 				//写任务
-				stream.writeObject(QuestModel.instance.currentQuests );
-				stream.writeObject(QuestModel.instance.completedQuests );
+				_bytes.writeObject(QuestModel.instance.currentQuests );
+				_bytes.writeObject(QuestModel.instance.completedQuests );
 				//Component
-				stream.writeObject( CompsModel.instance.myComps ) ;
+				_bytes.writeObject( CompsModel.instance.myComps ) ;
 			}
 			catch( e:Error)
 			{
@@ -75,6 +78,7 @@ package local.util
 			}
 			finally
 			{
+				stream.writeBytes( _bytes );
 				stream.close();
 			}
 		}
