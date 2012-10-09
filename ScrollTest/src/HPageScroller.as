@@ -121,6 +121,7 @@ package
 					_prevContainerPos = _content.x ;
 					_container.addEventListener(MouseEvent.MOUSE_MOVE, onMouseHandler );
 					_container.addEventListener(MouseEvent.MOUSE_UP, onMouseHandler );
+					_container.addEventListener(MouseEvent.ROLL_OUT, onMouseHandler );
 					_container.addEventListener(MouseEvent.RELEASE_OUTSIDE, onMouseHandler );
 					break ;
 				case MouseEvent.MOUSE_MOVE:
@@ -139,6 +140,7 @@ package
 					_container.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseHandler);
 					_container.removeEventListener(MouseEvent.MOUSE_UP, onMouseHandler);
 					_container.removeEventListener(MouseEvent.MOUSE_OUT, onMouseHandler);
+					_container.removeEventListener(MouseEvent.ROLL_OUT, onMouseHandler );
 					_container.removeEventListener(MouseEvent.RELEASE_OUTSIDE, onMouseHandler );
 					//判断翻页
 					var cha:Number = _mouseDownPos-e.stageX ;
@@ -233,6 +235,7 @@ package
 				_container.removeEventListener(MouseEvent.MOUSE_DOWN, onMouseHandler);
 				_container.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseHandler);
 				_container.removeEventListener(MouseEvent.MOUSE_UP, onMouseHandler);
+				_container.removeEventListener(MouseEvent.ROLL_OUT, onMouseHandler );
 				_container.removeEventListener(MouseEvent.RELEASE_OUTSIDE, onMouseHandler );
 				_container=  null ;
 			}
