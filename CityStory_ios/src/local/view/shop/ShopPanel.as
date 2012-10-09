@@ -3,6 +3,7 @@ package local.view.shop
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.geom.ColorTransform;
 	
 	import local.comm.GameData;
 	import local.enum.VillageMode;
@@ -33,6 +34,9 @@ package local.view.shop
 			addChild(container);
 			
 			_content.addEventListener(MouseEvent.CLICK , onItemHandler );
+			_content.addEventListener(MouseEvent.MOUSE_DOWN , mouseHandler );
+			_content.addEventListener(MouseEvent.MOUSE_UP , mouseHandler );
+			_content.addEventListener(MouseEvent.RELEASE_OUTSIDE , mouseHandler );
 			_scroll.addEventListener( ScrollControllerH.SCROLL_POSITION_CHANGE , scrollChangeHandler );
 		}
 		
@@ -54,6 +58,30 @@ package local.view.shop
 		protected function onItemHandler( e:MouseEvent):void
 		{
 			e.stopPropagation();
+		}
+		
+		private function mouseHandler( e:MouseEvent ):void
+		{
+			if(e.target is ShopItemRenderer){
+				var render:ShopItemRenderer = e.target as ShopItemRenderer ;
+				switch(e.type)
+				{
+					case MouseEvent.MOUSE_DOWN:
+						var colorTf:ColorTransform = render.transform.colorTransform ;
+						colorTf.redMultiplier = 0.5 ;
+						colorTf.greenMultiplier = 0.5 ;
+						colorTf.blueMultiplier = 0.5 ;
+						render.transform.colorTransform = colorTf ;
+						break ;
+					default:
+						colorTf = render.transform.colorTransform ;
+						colorTf.redMultiplier = 1 ;
+						colorTf.greenMultiplier = 1 ;
+						colorTf.blueMultiplier = 1 ;
+						render.transform.colorTransform = colorTf ;
+						break ;
+				}
+			}
 		}
 		
 		/**

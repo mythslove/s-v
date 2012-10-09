@@ -81,12 +81,6 @@ package local.view.shop
 			}
 			price.txtPrice.width = price.txtPrice.textWidth+10;
 			price.x=(width-price.width)>>1 ;
-			
-			//文本缓存位置
-			if(txtCoin) GameUtil.cacheTextFieldAsBitmap( txtCoin ); 
-			if(txtPopGoods) GameUtil.cacheTextFieldAsBitmap( txtPopGoods ); 
-			if(txtTitle) GameUtil.cacheTextFieldAsBitmap( txtTitle ); 
-			if(price) GameUtil.cacheTextFieldAsBitmap( price.txtPrice ); 
 		}
 		
 		override protected function addedToStageHandler(e:Event):void
