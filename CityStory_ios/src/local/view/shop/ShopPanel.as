@@ -37,6 +37,7 @@ package local.view.shop
 			_content.addEventListener(MouseEvent.MOUSE_DOWN , mouseHandler );
 			_content.addEventListener(MouseEvent.MOUSE_UP , mouseHandler );
 			_content.addEventListener(MouseEvent.RELEASE_OUTSIDE , mouseHandler );
+			_content.addEventListener(MouseEvent.MOUSE_MOVE , mouseHandler );
 			_scroll.addEventListener( ScrollControllerH.SCROLL_POSITION_CHANGE , scrollChangeHandler );
 		}
 		
@@ -75,10 +76,12 @@ package local.view.shop
 						break ;
 					default:
 						colorTf = render.transform.colorTransform ;
-						colorTf.redMultiplier = 1 ;
-						colorTf.greenMultiplier = 1 ;
-						colorTf.blueMultiplier = 1 ;
-						render.transform.colorTransform = colorTf ;
+						if( colorTf.redMultiplier != 1 ){
+							colorTf.redMultiplier = 1 ;
+							colorTf.greenMultiplier = 1 ;
+							colorTf.blueMultiplier = 1 ;
+							render.transform.colorTransform = colorTf ;
+						}
 						break ;
 				}
 			}

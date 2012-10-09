@@ -57,10 +57,12 @@ package local.view.control
 					this.gotoAndStop("up");
 					if(autoColor){
 						colorTf = transform.colorTransform ;
-						colorTf.redMultiplier = 1 ;
-						colorTf.greenMultiplier = 1 ;
-						colorTf.blueMultiplier = 1 ;
-						transform.colorTransform = colorTf ;
+						if( colorTf.redMultiplier != 1 ){
+							colorTf.redMultiplier = 1 ;
+							colorTf.greenMultiplier = 1 ;
+							colorTf.blueMultiplier = 1 ;
+							transform.colorTransform = colorTf ;
+						}
 					}
 					break ;
 			}
