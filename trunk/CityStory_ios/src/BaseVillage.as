@@ -49,11 +49,11 @@ package
 					GameSetting.SCREEN_WIDTH = 960;
 					GameSetting.SCREEN_HEIGHT = 640;
 				}
-				else if(Capabilities.screenResolutionY ==1136)
-				{
-					GameSetting.SCREEN_WIDTH = 1136;
-					GameSetting.SCREEN_HEIGHT = 640 ;
-				}
+//				else if(Capabilities.screenResolutionY ==1136)
+//				{
+//					GameSetting.SCREEN_WIDTH = 1136;
+//					GameSetting.SCREEN_HEIGHT = 640 ;
+//				}
 				else 
 				{
 					if(Capabilities.screenResolutionY==2048){
