@@ -45,7 +45,9 @@ package local.map.item
 		override public function update():void
 		{
 			if(gameTimer){
-				super.update() ;
+				if(_buildingObject && !_buildingObject.playAnim) _buildingObject.playAnim = true ;
+			}else{
+				if(_buildingObject && _buildingObject.playAnim) _buildingObject.playAnim = false ;
 			}
 			if( !gameTimer && buildingVO.status==BuildingStatus.PRODUCTION_COMPLETE)
 			{

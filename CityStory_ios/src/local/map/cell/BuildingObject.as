@@ -10,6 +10,11 @@ package local.map.cell
 	
 	public class BuildingObject extends InteractivePNG
 	{
+		/**
+		 * 是否播放动画 
+		 */		
+		public var playAnim:Boolean=true;
+		
 		private var _bavos:Vector.<BitmapAnimResVO> ;
 		private var _tinyBmp:Bitmap ;
 		private var _tinyAlpha:Number = 0.05 ;
@@ -49,9 +54,11 @@ package local.map.cell
 		
 		public function update():void
 		{
-			for( var i:int = 0 ; i<numChildren ; ++i){
-				if(getChildAt(i) is BaseAnimObject ){
-					( getChildAt(i) as BaseAnimObject ).update() ;
+			if(playAnim){
+				for( var i:int = 0 ; i<numChildren ; ++i){
+					if(getChildAt(i) is BaseAnimObject ){
+						( getChildAt(i) as BaseAnimObject ).update() ;
+					}
 				}
 			}
 			if(_tinyBmp.visible){
