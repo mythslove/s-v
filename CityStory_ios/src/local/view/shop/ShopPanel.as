@@ -34,11 +34,12 @@ package local.view.shop
 			addChild(container);
 			container.addChild(_content);
 			
-			container.addEventListener(MouseEvent.CLICK , onItemHandler );
-			container.addEventListener(MouseEvent.MOUSE_DOWN , mouseHandler );
-			container.addEventListener(MouseEvent.MOUSE_UP , mouseHandler );
-			container.addEventListener(MouseEvent.RELEASE_OUTSIDE , mouseHandler );
-			container.addEventListener(MouseEvent.MOUSE_MOVE , mouseHandler );
+			_content.addEventListener(MouseEvent.CLICK , onItemHandler );
+			_content.addEventListener(MouseEvent.MOUSE_DOWN , mouseHandler );
+			_content.addEventListener(MouseEvent.MOUSE_UP , mouseHandler );
+			_content.addEventListener(MouseEvent.ROLL_OUT , mouseHandler );
+			_content.addEventListener(MouseEvent.RELEASE_OUTSIDE , mouseHandler );
+			_content.addEventListener(MouseEvent.MOUSE_MOVE , mouseHandler );
 			_scroll.addEventListener( HPageScroller.SCROLL_POSITION_CHANGE , scrollChangeHandler );
 		}
 		
