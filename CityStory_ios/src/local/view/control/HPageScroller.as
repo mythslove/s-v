@@ -7,6 +7,7 @@ package local.view.control
 	import flash.events.EventDispatcher;
 	import flash.events.MouseEvent;
 	import flash.geom.Rectangle;
+	import flash.utils.getTimer;
 	
 	[Event(name="ScrollPositionChange", type="flash.events.Event")]
 	[Event(name="ScrollOver", type="flash.events.Event")]
@@ -15,7 +16,7 @@ package local.view.control
 		public static const SCROLL_POSITION_CHANGE : String = "ScrollPositionChange";
 		public static const SCROLL_OVER:String = "ScrollOver";
 		
-		public var speed:Number = 0.4 ;
+		public var speed:Number = 0.5 ;
 		
 		private var _container:Sprite ;
 		private var _content:Sprite ;
@@ -25,6 +26,7 @@ package local.view.control
 		private var _prevContainerPos:Number ;
 		private var _mouseDownPos:Number;
 		private var _endPos:Number ;
+		private var _mouseTime:Number ;
 		
 		private var _perCount:int ;
 		private var _itemCap:int ;
@@ -121,6 +123,7 @@ package local.view.control
 			{
 				case MouseEvent.MOUSE_DOWN:
 					_container.mouseChildren = true  ;
+					_mouseTime  = getTimer() ;
 					_mouseDownPos = e.stageX ;
 					_prevContainerPos = _content.x ;
 					_container.addEventListener(MouseEvent.MOUSE_MOVE, onMouseHandler );
@@ -147,9 +150,10 @@ package local.view.control
 					_container.removeEventListener(MouseEvent.RELEASE_OUTSIDE, onMouseHandler );
 					//判断翻页
 					var cha:Number = _mouseDownPos-e.stageX ;
-					if(cha>_containerViewport.width*0.4 ){ //向右翻页
+					var timeCha:Number = getTimer()-_mouseTime ;
+					if(cha>_containerViewport.width*0.4 || (cha>0 && timeCha<200 )){ //向右翻页
 						nextPage();
-					}else if( cha<-_containerViewport.width*0.4){
+					}else if( cha<-_containerViewport.width*0.4 || (cha<0 && timeCha<200 ) ){
 						prevPage();
 					}else{
 						endPos = _prevContainerPos ;
