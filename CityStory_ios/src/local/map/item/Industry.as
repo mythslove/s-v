@@ -49,6 +49,7 @@ package local.map.item
 			}else{
 				if(_buildingObject && _buildingObject.playAnim) _buildingObject.playAnim = false ;
 			}
+			super.update();
 			if( !gameTimer && buildingVO.status==BuildingStatus.PRODUCTION_COMPLETE)
 			{
 				if( GameData.commDate.time - buildingVO.statusTime>buildingVO.product.expireTime*1000 )
