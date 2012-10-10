@@ -62,7 +62,7 @@ package
 			{
 				GameData.commDate = new Date();
 				GameWorld.instance.buildingScene.refreshBuildingStatus();
-				//			showDailyRewards();
+//			showDailyRewards();
 			}
 		}
 		
