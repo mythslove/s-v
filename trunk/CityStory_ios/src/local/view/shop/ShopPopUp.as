@@ -75,6 +75,12 @@ package local.view.shop
 				case BuildingType.INDUSTRY:
 					container.addChild(IndustryPanel.instance) ;
 					break ;
+				case BuildingType.COMMUNITY:
+					container.addChild(CommunityPanel.instance) ;
+					break ;
+				case BuildingType.WONDERS:
+					container.addChild(WonderPanel.instance) ;
+					break ;
 			}
 		}
 		

@@ -9,11 +9,9 @@ package local.view.shop
 	import local.comm.GameSetting;
 	import local.enum.BuildingType;
 	import local.map.GameWorld;
-	import local.util.GameUtil;
 	import local.util.PopUpManager;
 	import local.view.base.BaseView;
 	import local.view.btn.PopUpCloseButton;
-	import local.view.btn.TabMenuButton;
 	
 	public class ShopOverViewPopUp extends BaseView
 	{
@@ -24,21 +22,16 @@ package local.view.shop
 		}
 		//=====================================
 		public var btnClose:PopUpCloseButton ;
-		public var btnHomes:TabMenuButton ;
-		public var btnIndustry:TabMenuButton ;
-		public var btnBusiness:TabMenuButton ;
-		public var btnDecor:TabMenuButton ;
+		public var btnHomes:ShopOverViewHomeButton ;
+		public var btnIndustry:ShopOverViewIndustryButton ;
+		public var btnBusiness:ShopOverViewBusinessButton ;
+		public var btnDecor:ShopOverViewDecorButton ;
+		public var btnCommunity:ShopOverViewCommunityButton ;
+		public var btnWonders:ShopOverViewWondersButton ;
 		//=====================================
 		
 		public function ShopOverViewPopUp(){
 			super();
-			
-			btnHomes.label= GameUtil.localizationString("homes").toUpperCase() ;
-			btnBusiness.label= GameUtil.localizationString("business").toUpperCase();
-			btnDecor.label=GameUtil.localizationString("decora").toUpperCase();
-			btnIndustry.label =GameUtil.localizationString("industry").toUpperCase(); 
-			
-			
 			addEventListener(MouseEvent.CLICK , onMouseHandler );
 		}
 		
@@ -78,6 +71,10 @@ package local.view.shop
 					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , false );
 					ShopPopUp.instance.show(BuildingType.INDUSTRY);
 					PopUpManager.instance.removeCurrentPopup() ;
+					break ;
+				case btnCommunity:
+					break ;
+				case btnWonders:
 					break ;
 			}
 		}
