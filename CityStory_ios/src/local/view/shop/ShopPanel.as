@@ -26,8 +26,8 @@ package local.view.shop
 		{
 			super();
 			container = new Sprite();
-			container.x = 5 ;
-			container.y = 130 ;
+			container.x = 30 ;
+			container.y = 70 ;
 			container.graphics.beginFill(0,0);
 			container.graphics.drawRect(0,0,825,370);
 			container.graphics.endFill();

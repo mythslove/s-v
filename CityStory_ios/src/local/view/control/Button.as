@@ -75,5 +75,11 @@ package local.view.control
 			removeEventListener(MouseEvent.MOUSE_UP , onMouseHandler);
 			removeEventListener(MouseEvent.RELEASE_OUTSIDE , onMouseHandler );
 		}
+		
+		override public function gotoAndStop(frame:Object, scene:String=null):void{
+			if(totalFrames>1){
+				super.gotoAndStop( frame, scene );
+			}
+		}
 	}
 }

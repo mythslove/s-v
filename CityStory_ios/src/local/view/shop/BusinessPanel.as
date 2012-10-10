@@ -45,7 +45,6 @@ package local.view.shop
 			mainTypeBar.buttons = mcs ;
 			addChild(mainTypeBar);
 			mainTypeBar.x = 10 ;
-			mainTypeBar.y= 50 ;
 			mainTypeBar.addEventListener(ToggleBarEvent.TOGGLE_CHANGE , toggleChangeHandler);
 			mainTypeBar.selected = mcs[0];
 		}
