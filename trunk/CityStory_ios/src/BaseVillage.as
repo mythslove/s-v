@@ -54,17 +54,17 @@ package
 //					GameSetting.SCREEN_WIDTH = 1136;
 //					GameSetting.SCREEN_HEIGHT = 640 ;
 //				}
-				else 
-				{
-					if(Capabilities.screenResolutionY==2048){
-						this.scaleX = 2;
-						this.scaleY = 2;
-					}
-					GameSetting.SCREEN_WIDTH = 1024;
-					GameSetting.SCREEN_HEIGHT = 768;
-					GameSetting.minZoom = 0.4 ;
+//				else 
+//				{
+//					if(Capabilities.screenResolutionY==2048){
+//						this.scaleX = 2;
+//						this.scaleY = 2;
+//					}
+//					GameSetting.SCREEN_WIDTH = 1024;
+//					GameSetting.SCREEN_HEIGHT = 768;
+//					GameSetting.minZoom = 0.4 ;
 //					GameSetting.device = "ipad";
-				}
+//				}
 			}
 				
 			TweenPlugin.activate([BezierPlugin]);
