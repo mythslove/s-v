@@ -44,11 +44,6 @@ package local.map.item
 		
 		override public function update():void
 		{
-			if(gameTimer){
-				if(_buildingObject && !_buildingObject.playAnim) _buildingObject.playAnim = true ;
-			}else{
-				if(_buildingObject && _buildingObject.playAnim) _buildingObject.playAnim = false ;
-			}
 			super.update();
 			if( !gameTimer && buildingVO.status==BuildingStatus.PRODUCTION_COMPLETE)
 			{
@@ -103,6 +98,25 @@ package local.map.item
 				super.onClick();
 			}
 		}
+		
+		
+		
+		
+		//==========重写计时器的方法 ==============================
+		override protected function createGameTimer(duration:int):void{
+			super.createGameTimer(duration);
+			if(gameTimer){
+				if(_buildingObject) _buildingObject.playAnim = true ;
+			}
+		}
+		override protected function clearGameTimer():void{
+			super.clearGameTimer();
+			if(_buildingObject) _buildingObject.playAnim = false ;
+		}
+		//==========重写计时器的方法 ==============================
+		
+		
+		
 		
 		
 		/* 收获*/
