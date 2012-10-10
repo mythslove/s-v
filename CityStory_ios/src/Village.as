@@ -9,6 +9,7 @@ package
 	import local.event.VillageEvent;
 	import local.map.GameWorld;
 	import local.model.PlayerModel;
+	import local.util.AnalysisUtil;
 	import local.util.VillageUtil;
 	import local.view.CenterViewLayer;
 	import local.vo.PlayerVO;
@@ -49,6 +50,7 @@ package
 			GameWorld.instance.showBuildings();
 			GameData.villageMode = VillageMode.NORMAL ;
 //			showDailyRewards();
+			AnalysisUtil.init();
 			
 			NativeApplication.nativeApplication.addEventListener(Event.ACTIVATE , activateHandler);
 			NativeApplication.nativeApplication.addEventListener(Event.DEACTIVATE , deactivateHandler );
