@@ -24,5 +24,23 @@ package  local.vo
 		public var minExp:int ;
 		public var maxExp:int = 150 ;
 		
+		
+		
+		
+		
+		
+		//=====统计用==================
+		public var runTime:Number = 0 ; //运行的时间
+		public var loginTime:int = 0 ; //进游戏的次数
+		public var monthLoginTime:int = 0 ;//每个月进游戏的次数
+		public var playedDay:int = 0 ; //玩游戏的天数
+		public var totalDay:int = 0 ;//玩游戏数的天数
+		public var monthIap:Number =0 ;//一个月总共花费的钱
+		public var todayIap:Number = 0 ;//今天花的钱
+		public var totalIap:Number =0 ; //生涯中总共花的钱
+		public var monthIapCount:int = 0 ;//一个月支付次数
+		public var totalIapCount:int = 0 ;//总的支付次数
+		//==========================
+		
 	}
 }
