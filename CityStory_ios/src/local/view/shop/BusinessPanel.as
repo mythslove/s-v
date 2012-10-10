@@ -54,51 +54,38 @@ package local.view.shop
 		{
 			ContainerUtil.removeChildren(_content);
 			_scroll.removeScrollControll();
+			_scroll.addScrollControll( _content , container , 3);
 			
 			var itemRenders:Vector.<ShopItemRenderer> = ShopModel.instance.businessRenderers ;
 			if(!itemRenders) return ;
-			var len:int =itemRenders.length ,  count:int , cop:int=5 ;
+			var len:int =itemRenders.length  ;
 			var render:ShopItemRenderer ;
 			for( var i:int = 0 ; i <len ; ++i ) {
 				render = itemRenders[i] ;
 				if(e.selectedName==TAB_ALL){
-					render.x = (render.width+cop)*count ;
-					_content.addChild( render );
-					++count ;
+					_scroll.addItem( render );
 				}
 				else if(e.selectedName==TAB_SHOPS){
 					if( render.baseVO.subClass==BuildingType.BUSINESS_SHOPS){
-						render.x = (render.width+cop)*count ;
-						_content.addChild( render );
-						++count ;
+						_scroll.addItem( render );
 					}
 				}
 				else if(e.selectedName==TAB_RESTAURANTS){
 					if( render.baseVO.subClass==BuildingType.BUSINESS_RESTAURANTS){
-						render.x = (render.width+cop)*count ;
-						_content.addChild( render );
-						++count ;
+						_scroll.addItem( render );
 					}
 				}
 				else if(e.selectedName==TAB_SERVICES){
 					if( render.baseVO.subClass==BuildingType.BUSINESS_SERVICES){
-						render.x = (render.width+cop)*count ;
-						_content.addChild( render );
-						++count ;
+						_scroll.addItem( render );
 					}
 				}
 				else if(e.selectedName==TAB_OFFICES){
 					if( render.baseVO.subClass==BuildingType.BUSINESS_OFFICES){
-						render.x = (render.width+cop)*count ;
-						_content.addChild( render );
-						++count ;
+						_scroll.addItem( render );
 					}
 				}
 			}
-			_scroll.addScrollControll( _content , container );
-			container.addChild(_content);
-			
-			scrollChangeHandler(null);
 		}
 		
 		

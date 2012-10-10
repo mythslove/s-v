@@ -4,7 +4,6 @@ package local.view.shop
 	
 	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
-	import flash.geom.Rectangle;
 	
 	import local.enum.BuildingType;
 	import local.model.ShopModel;
@@ -51,44 +50,33 @@ package local.view.shop
 		{
 			ContainerUtil.removeChildren(_content);
 			_scroll.removeScrollControll();
+			_scroll.addScrollControll( _content , container , 3 );
 			
 			var itemRenders:Vector.<ShopItemRenderer> = ShopModel.instance.homesRenderers ;
 			if(!itemRenders) return ;
-			var len:int =itemRenders.length ,  count:int , cop:int=5 ;
+			var len:int =itemRenders.length  ;
 			var render:ShopItemRenderer ;
 			for( var i:int = 0 ; i <len ; ++i ) {
 				render = itemRenders[i] ;
 				if(e.selectedName==TAB_ALL){
-					render.x = (render.width+cop)*count ;
-					_content.addChild( render );
-					++count ;
+					_scroll.addItem( render );
 				}
 				else if(e.selectedName==TAB_RESIDENCE){
 					if( render.baseVO.subClass==BuildingType.HOME_RESIDENCE){
-						render.x = (render.width+cop)*count ;
-						_content.addChild( render );
-						++count ;
+						_scroll.addItem( render );
 					}
 				}
 				else if(e.selectedName==TAB_CONDOS){
 					if( render.baseVO.subClass==BuildingType.HOME_CONDOS){
-						render.x = (render.width+cop)*count ;
-						_content.addChild( render );
-						++count ;
+						_scroll.addItem( render );
 					}
 				}
 				else if(e.selectedName==TAB_MANSIONS){
 					if( render.baseVO.subClass==BuildingType.HOME_MANSIONS){
-						render.x = (render.width+cop)*count ;
-						_content.addChild( render );
-						++count ;
+						_scroll.addItem( render );
 					}
 				}
 			}
-			_scroll.addScrollControll( _content , container );
-			container.addChild(_content);
-			
-			scrollChangeHandler(null);
 		}
 		
 		

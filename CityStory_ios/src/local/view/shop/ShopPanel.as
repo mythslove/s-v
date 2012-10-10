@@ -12,14 +12,14 @@ package local.view.shop
 	import local.model.PlayerModel;
 	import local.util.BuildingFactory;
 	import local.util.PopUpManager;
-	import local.view.control.ScrollControllerH;
+	import local.view.control.HPageScroller;
 	import local.vo.BaseBuildingVO;
 	import local.vo.PlayerVO;
 	
 	public class ShopPanel extends Sprite
 	{
 		public var container:Sprite ;
-		protected var _scroll:ScrollControllerH = new ScrollControllerH() ;
+		protected var _scroll:HPageScroller = new HPageScroller() ;
 		protected var _content:Sprite = new Sprite() ;
 		
 		public function ShopPanel()
@@ -32,28 +32,19 @@ package local.view.shop
 			container.graphics.drawRect(0,0,825,370);
 			container.graphics.endFill();
 			addChild(container);
+			container.addChild(_content);
 			
 			_content.addEventListener(MouseEvent.CLICK , onItemHandler );
 			_content.addEventListener(MouseEvent.MOUSE_DOWN , mouseHandler );
 			_content.addEventListener(MouseEvent.MOUSE_UP , mouseHandler );
 			_content.addEventListener(MouseEvent.RELEASE_OUTSIDE , mouseHandler );
 			_content.addEventListener(MouseEvent.MOUSE_MOVE , mouseHandler );
-			_scroll.addEventListener( ScrollControllerH.SCROLL_POSITION_CHANGE , scrollChangeHandler );
+			_scroll.addEventListener( HPageScroller.SCROLL_POSITION_CHANGE , scrollChangeHandler );
 		}
 		
-		public function scrollChangeHandler( e:Event ):void
+		private function scrollChangeHandler( e:Event ):void
 		{
-			var render:ShopItemRenderer ;
-			for( var i:int = 0 ; i<_content.numChildren ; ++i ){
-				render = _content.getChildAt(i) as ShopItemRenderer ;
-				if(render){
-					if(render.x+render.width-_content.scrollRect.x<0 || render.x-_content.scrollRect.x>_content.width){
-						render.visible=false;
-					}else{
-						render.visible = true ;
-					}
-				}
-			}
+			
 		}
 		
 		protected function onItemHandler( e:MouseEvent):void
@@ -133,11 +124,10 @@ package local.view.shop
 			{
 				item = _content.getChildAt(i) as ShopItemRenderer ;
 				if( item && item.baseVO && item.baseVO.name==buildName ){
-					_scroll.scrollTo( item.x );
+					_scroll.scrollToItem( item , false );
 					break ;
 				}
 			}
-			scrollChangeHandler(null);
 		}
 	}
 }
