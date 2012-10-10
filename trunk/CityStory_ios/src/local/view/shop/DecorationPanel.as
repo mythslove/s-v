@@ -21,18 +21,17 @@ package local.view.shop
 		
 		private function init():void
 		{
+			_scroll.addScrollControll( _content , container , 3);
+			
 			var itemRenders:Vector.<ShopItemRenderer> = ShopModel.instance.decorsRenderers ;
 			if(!itemRenders) return ;
-			var len:int =itemRenders.length , cop:int=5 ;
+			var len:int =itemRenders.length ;
 			var render:ShopItemRenderer ;
 			for( var i:int=0 ; i<len ; ++i )
 			{
-				render = itemRenders[i] ;
-				render.x = (render.width+cop)*i ;
-				_content.addChild( render );
+				render = itemRenders[i];
+				_scroll.addItem( render );
 			}
-			_scroll.addScrollControll( _content , container);
-			container.addChild(_content);
 		}
 		
 		
