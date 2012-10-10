@@ -41,7 +41,11 @@ package local.view.shop
 			GameWorld.instance.stopRun();
 			x = GameSetting.SCREEN_WIDTH>>1 ;
 			y = GameSetting.SCREEN_HEIGHT>>1 ;
-			TweenLite.from( this , 0.2 , { x:x-200 , ease: Back.easeOut });
+			TweenLite.from( this , 0.2 , { x:x-200 , ease: Back.easeOut , onComplete:showTweenOver });
+		}
+		
+		private function showTweenOver():void{
+			GameWorld.instance.visible=false;
 		}
 		
 		private function onMouseHandler( e:MouseEvent ):void
@@ -116,6 +120,7 @@ package local.view.shop
 		override protected function removedFromStageHandler(e:Event):void{
 			super.removedFromStageHandler(e);
 			GameWorld.instance.run();
+			GameWorld.instance.visible=true;
 		}
 	}
 }
