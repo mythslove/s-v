@@ -91,16 +91,18 @@ package
 		
 		public function addItem( item:DisplayObject ):void
 		{
+			if(_itemNum>0 && _itemNum%_perCount==0){
+				++_totalPage;
+			}
+			
 			var pageOffset:Number = _containerViewport.width*_totalPage ;
 			var initOffset:int = (_containerViewport.width-item.width*_perCount-_itemCap*(_perCount-1) )*0.5 ;
-	
+			
 			item.x = pageOffset  + initOffset + (_itemNum%_perCount)*(item.width + _itemCap)   ;
 			checkVisible( item );
 			_content.addChild(item);
+			
 			++_itemNum ;
-			if(_itemNum%_perCount==0){
-				++_totalPage;
-			}
 		}
 		
 		private function checkVisible( item :DisplayObject):void
