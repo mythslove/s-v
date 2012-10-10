@@ -114,7 +114,7 @@ package local.map.item
 			_currNode.setTo( col , row );
 			xpos = _currNode.x*_size ;
 			zpos = _currNode.y*_size ;
-			var ran:Number = 0.3 ;
+			var ran:Number = 0.25 ;
 			var road:Road ;
 			if(_roadIndex==0)
 			{
