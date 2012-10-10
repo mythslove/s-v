@@ -58,7 +58,7 @@ package  local.map
 			super( GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE);
 			mouseChildren = mouseEnabled = false ;
 			
-			this.x =-50 + (GameSetting.SCREEN_WIDTH-GameSetting.MAP_WIDTH*scaleX)>>1 ;
+			this.x = (GameSetting.SCREEN_WIDTH-GameSetting.MAP_WIDTH*scaleX)>>1 ;
 			y=-1260;
 			_endX = x ;
 			_endY = y ;
