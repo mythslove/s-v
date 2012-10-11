@@ -5,14 +5,14 @@
 	import flash.display.Shape;
 	import flash.geom.Matrix;
 
-	public class GraphicsScaleBitmap extends Shape
+	public class GraphicsScale9Bitmap extends Shape
 	{
 
 		private var _srcBmd:BitmapData;
 		private var _scale9Grid:Rectangle;
 		private var _smooth:Boolean;
 
-		public function GraphicsScaleBitmap( srcBmd:BitmapData , $scale9Grid : Rectangle , smooth:Boolean=false)
+		public function GraphicsScale9Bitmap( srcBmd:BitmapData , $scale9Grid : Rectangle , smooth:Boolean=false)
 		{
 			this._srcBmd = srcBmd;
 			this._smooth = smooth;
