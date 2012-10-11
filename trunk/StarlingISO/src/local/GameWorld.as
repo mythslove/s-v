@@ -6,6 +6,8 @@ package local
 	import bing.starling.iso.SIsoScene;
 	import bing.starling.iso.SIsoWorld;
 	
+	import com.greensock.TweenLite;
+	
 	import flash.events.MouseEvent;
 	import flash.geom.Matrix;
 	import flash.geom.Point;
@@ -30,7 +32,6 @@ package local
 		public var buildingScene:SIsoScene ;
 		protected var _endX:int ;
 		protected var _endY:int;
-		private var _zoomM:Matrix = new Matrix();
 		private var _touchFinger1:Point = new Point();
 		private var _middle:Point = new Point();
 		private var _isMove:Boolean ;
@@ -117,7 +118,7 @@ package local
 		private function onMouseWheel( e:MouseEvent ):void
 		{
 			e.stopPropagation();
-			var value:Number = e.delta>0?1.1:0.95 ;
+			var value:Number = e.delta>0?1.2:0.92 ;
 			changeWorldScale(value,e.stageX , e.stageY);
 		}
 		
@@ -184,7 +185,6 @@ package local
 				
 				// scale
 				var sizeDiff:Number = currentVector.length / previousVector.length;
-				sizeDiff = sizeDiff>1 ? 1+(sizeDiff-1)*.2 : 1-(1-sizeDiff)*.2 ;
 				changeWorldScale( sizeDiff , _middle.x , _middle.y );
 				_isMove = true ;
 			}
@@ -195,32 +195,47 @@ package local
 			}
 		}
 		
-		private function changeWorldScale( value:Number , px:Number , py:Number ):void
+		//================缩放地图=======================
+		private var _zoomObj:Object = {"value":1};
+		private var _zoomTween:TweenLite ;
+		private var _zoomM:Matrix = new Matrix();
+		private function changeWorldScale( value:Number , px:Number , py:Number , time:Number=0.2 ):void
 		{
 			if(scaleX*value>0.5 && scaleX*value<2.5 ) {
 				
-				_zoomM.identity() ;
-				_zoomM.scale(scaleX,scaleY);
-				_zoomM.translate( x , y );
-				_zoomM.tx -= px;
-				_zoomM.ty -= py;
-				_zoomM.scale(value, value);
-				_zoomM.tx += px;
-				_zoomM.ty += py;
+				var prevScale:Number = scaleX ;
+				var prevX:Number =x , prevY:Number = y ;
 				
-				this.scaleX = _zoomM.a ;
-				this.scaleY = _zoomM.d ;
-				this.x = _zoomM.tx ;
-				this.y = _zoomM.ty ;
-				
-				if(x>0) x=0 ;
-				else if(x<-GameSetting.MAP_WIDTH*scaleX+GameSetting.SCREEN_WIDTH){
-					x = -GameSetting.MAP_WIDTH*scaleX+GameSetting.SCREEN_WIDTH ;
+				_zoomObj.value=1;
+				if(_zoomTween){
+					_zoomTween.kill() ;
+					_zoomTween = null ;
 				}
-				if(y>0) y=0 ;
-				else if(y<-GameSetting.MAP_HEIGHT*scaleX+GameSetting.SCREEN_HEIGHT){
-					y = -GameSetting.MAP_HEIGHT*scaleX+GameSetting.SCREEN_HEIGHT ;
-				}
+				_zoomTween = TweenLite.to( _zoomObj , time , { value:value , onUpdate:function():void
+				{
+					_zoomM.identity() ;
+					_zoomM.scale(prevScale,prevScale);
+					_zoomM.translate( prevX , prevY );
+					_zoomM.tx -= px;
+					_zoomM.ty -= py;
+					_zoomM.scale(_zoomObj.value,_zoomObj.value);
+					_zoomM.tx += px;
+					_zoomM.ty += py;
+					
+					scaleX = _zoomM.a ;
+					scaleY = _zoomM.d ;
+					_endX = x = _zoomM.tx ;
+					_endY = y = _zoomM.ty ;
+					
+					if(_endX>0) x = _endX=0 ;
+					else if(_endX<-GameSetting.MAP_WIDTH*scaleX+GameSetting.SCREEN_WIDTH){
+						x = _endX = -GameSetting.MAP_WIDTH*scaleX+GameSetting.SCREEN_WIDTH ;
+					}
+					if(_endY>0) y=_endY=0 ;
+					else if(_endY<-GameSetting.MAP_HEIGHT*scaleY+GameSetting.SCREEN_HEIGHT){
+						y=_endY = -GameSetting.MAP_HEIGHT*scaleY+GameSetting.SCREEN_HEIGHT ;
+					}
+				}} );
 			}
 			_endX = x;
 			_endY = y ;
