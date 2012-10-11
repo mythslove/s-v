@@ -142,7 +142,11 @@ package bing.res
 					loader.load( new URLRequest(url) ,_currContext);
 				}
 			}else{
-				loader.load( new URLRequest(url) );
+				if(resVO.isNewContext){
+					loader.load( new URLRequest(url) ,_newContext);
+				}else{
+					loader.load( new URLRequest(url) ,_currContext);
+				}
 			}
 			_currentLoadNum++;
 		}
@@ -325,10 +329,12 @@ package bing.res
 		{
 			var resVO:ResVO = getResVOByResId(resId);
 			var obj:Object= null ;
-			if(resVO && resVO.resObject )
+			if(resVO && resVO.resObject && resVO.resObject is Loader )
 			{
+				var loader:Loader = resVO.resObject as Loader ;
 				try{
-					obj = new (getDefinitionByName(clsName) as Class)();
+					var cls:Class = loader.contentLoaderInfo.applicationDomain.getDefinition(clsName) as Class ;
+					obj = new cls();
 				}catch(e:Error){}
 			}
 			return obj ;
