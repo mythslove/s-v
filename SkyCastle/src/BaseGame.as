@@ -76,11 +76,11 @@ package
 			res.push( new ResVO("init_config","res/config.bin"));
 			res.push( new ResVO(GameData.currentMapId+"_DATA","res/map/"+GameData.currentMapId+"_DATA.bin") ); 
 			res.push( new ResVO(GameData.currentMapId+"_BUILDINGS","res/map/"+GameData.currentMapId+"_BUILDINGS.bin") ); 
-			res.push( new ResVO(GameData.currentMapId+"_BACKGROUND","res/map/"+GameData.currentMapId+"_BACKGROUND.swf"));
-			res.push( new ResVO("init_effect","res/skin/Effect.swf") );
-			res.push( new ResVO("init_Popup","res/skin/Popup.swf") );
-			res.push( new ResVO("init_ui","res/skin/ui.swf"));
-			res.push( new ResVO("init_SoundsCore","res/skin/SoundsCore.swf") );
+			res.push( new ResVO(GameData.currentMapId+"_BACKGROUND","res/map/"+GameData.currentMapId+"_BACKGROUND.swf",false));
+			res.push( new ResVO("init_effect","res/skin/Effect.swf",false) );
+			res.push( new ResVO("init_Popup","res/skin/Popup.swf",false) );
+			res.push( new ResVO("init_ui","res/skin/ui.swf",false));
+			res.push( new ResVO("init_SoundsCore","res/skin/SoundsCore.swf",false) );
 			res.push( new ResVO("Basic_Avatar","res/character/Basic_AvatarFemale.swf") );
 			res.push( new ResVO("Basic_Bamboo","res/tree/Basic_Bamboo.swf") );
 			res.push( new ResVO("Basic_Grass","res/tree/Basic_Grass.swf") );

@@ -11,7 +11,6 @@ package bing.res
 	import flash.system.LoaderContext;
 	import flash.system.SecurityDomain;
 	import flash.utils.Dictionary;
-	import flash.utils.getDefinitionByName;
 	
 	/**
 	 * 资源加载错误
@@ -325,10 +324,12 @@ package bing.res
 		{
 			var resVO:ResVO = getResVOByResId(resId);
 			var obj:Object= null ;
-			if(resVO && resVO.resObject )
+			if(resVO && resVO.resObject && resVO.resObject is Loader )
 			{
+				var loader:Loader = resVO.resObject as Loader ;
 				try{
-					obj = new (getDefinitionByName(clsName) as Class)();
+					var cls:Class = loader.contentLoaderInfo.applicationDomain.getDefinition(clsName) as Class ;
+					obj = new cls();
 				}catch(e:Error){}
 			}
 			return obj ;
