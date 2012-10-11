@@ -11,6 +11,7 @@ package bing.res
 	import flash.system.LoaderContext;
 	import flash.system.SecurityDomain;
 	import flash.utils.Dictionary;
+	import flash.utils.getDefinitionByName;
 	
 	/**
 	 * 资源加载错误
@@ -58,7 +59,7 @@ package bing.res
 			cdns=new Vector.<String>() ;
 			_currentLoadNum = 0 ;
 			_currContext = new LoaderContext(false , ApplicationDomain.currentDomain);
-			_newContext = new LoaderContext(false , new ApplicationDomain() );
+			_newContext = new LoaderContext(false ,  new ApplicationDomain());
 		}
 		
 		/**
@@ -133,7 +134,7 @@ package bing.res
 			loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR , ioErrorHandler );
 			var url:String = cdns[resVO.loadError]+resVO.url ;
 			if(isRemote){
-				if( resVO.isNewContext ){
+				if(resVO.isNewContext){
 					_newContext.securityDomain = SecurityDomain.currentDomain;
 					loader.load( new URLRequest(url) ,_newContext);
 				}else{
@@ -141,7 +142,11 @@ package bing.res
 					loader.load( new URLRequest(url) ,_currContext);
 				}
 			}else{
-				loader.load( new URLRequest(url) );
+				if(resVO.isNewContext){
+					loader.load( new URLRequest(url) ,_newContext);
+				}else{
+					loader.load( new URLRequest(url) ,_currContext);
+				}
 			}
 			_currentLoadNum++;
 		}
