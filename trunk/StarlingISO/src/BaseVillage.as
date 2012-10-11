@@ -8,7 +8,6 @@ package
 	import flash.display.*;
 	import flash.events.Event;
 	import flash.net.registerClassAlias;
-	import flash.system.Capabilities;
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
 	
@@ -23,42 +22,12 @@ package
 		{
 			super();
 			stage.frameRate=60;
-			stage.quality = StageQuality.LOW; 
 			// 支持 autoOrient
 			stage.align = StageAlign.TOP_LEFT;
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 			stage.color = 0 ;
 			NativeApplication.nativeApplication.executeInBackground = true ;
 			
-			if(Capabilities.os.toLowerCase().indexOf("windows")==-1)
-			{
-				if (Capabilities.screenResolutionY <=960)
-				{
-					if(Capabilities.screenResolutionY<960){
-						this.scaleX = 0.5;
-						this.scaleY = 0.5;
-					}
-					GameSetting.SCREEN_WIDTH = 960;
-					GameSetting.SCREEN_HEIGHT = 640;
-				}
-				else if(Capabilities.screenResolutionY ==1136)
-				{
-					GameSetting.SCREEN_WIDTH = 1136;
-					GameSetting.SCREEN_HEIGHT = 640 ;
-				}
-				else 
-				{
-					if(Capabilities.screenResolutionY==2048){
-						this.scaleX = 2;
-						this.scaleY = 2;
-					}
-					GameSetting.SCREEN_WIDTH = 1024;
-					GameSetting.SCREEN_HEIGHT = 768;
-					GameSetting.minZoom = 0.4 ;
-//					GameSetting.device = "ipad";
-				}
-			}
-				
 			registerVO();
 			loadConfig();
 		}
