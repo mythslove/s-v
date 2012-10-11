@@ -6,7 +6,7 @@ package bing.res
 
 	public class ResVO
 	{
-		public function ResVO( resId:String="" , url:String="" )
+		public function ResVO( resId:String="" , url:String="" , isSonContext:Boolean=true )
 		{
 			this.resId =resId ;
 			this.url = url ;
@@ -27,7 +27,7 @@ package bing.res
 		
 		public var loadError:int = 0 ;//计算加载错误/	错误的次数
 		public var isQueue:Boolean=false ;//是否是序列加载中
-		
+		public var isSonContext:Boolean ; //是否在子域，如果为false，则为当前域
 		
 		public function toString():String
 		{
