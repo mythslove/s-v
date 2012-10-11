@@ -2,9 +2,12 @@ package local.comm
 {
 	public class GameSetting
 	{
+		
 		//屏幕大小 
 		public static var SCREEN_WIDTH:int =960;
 		public static var SCREEN_HEIGHT:int = 640;
+		
+		public static const ASPECT_RATIO:Number = SCREEN_HEIGHT / SCREEN_WIDTH;
 		
 		
 		//地图大小
@@ -24,7 +27,7 @@ package local.comm
 		/** 本地语言 */
 		public static var local:String = "en";
 		
-		public static var device:String =  "iphone";
+		public static var isIpad:Boolean ;
 		
 		/*facebookId*/
 		public static var fdId:String = "village";
