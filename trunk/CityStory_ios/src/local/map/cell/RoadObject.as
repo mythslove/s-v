@@ -8,7 +8,7 @@ package local.map.cell
 	
 	public class RoadObject extends InteractivePNG
 	{
-		private var _roadResVO:RoadResVO ;
+		public var roadResVO:RoadResVO ;
 		private var _roadBmp:Bitmap = new Bitmap() ;
 		
 		public function RoadObject( name:String , roadResVO:RoadResVO )
@@ -16,21 +16,21 @@ package local.map.cell
 			super();
 			this.name = name ;
 			mouseChildren = false ;
-			this._roadResVO = roadResVO ;
+			this.roadResVO = roadResVO ;
 			addChild(_roadBmp);
 		}
 		
 		public function show( direction:String ):void
 		{
 			super._bitmapForHitDetection = _roadBmp ;
-			_roadBmp.bitmapData = _roadResVO.bmds[name+direction] ;
-			_roadBmp.x =  _roadResVO.offsetXs[name+direction ] ;
-			_roadBmp.y =  _roadResVO.offsetYs[name+direction ] ;
+			_roadBmp.bitmapData = roadResVO.bmds[name+direction] ;
+			_roadBmp.x =  roadResVO.offsetXs[name+direction ] ;
+			_roadBmp.y =  roadResVO.offsetYs[name+direction ] ;
 		}
 		
 		public function dispose():void
 		{
-			_roadResVO = null ;
+			roadResVO = null ;
 			_roadBmp = null ;
 			super.disableInteractivePNG() ;
 		}

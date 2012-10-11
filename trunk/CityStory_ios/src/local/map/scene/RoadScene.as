@@ -5,7 +5,7 @@ package local.map.scene
 	import local.model.MapGridDataModel;
 
 	/**
-	 * 路，水层 
+	 * 路，水层 ，以及地面装饰
 	 * @author zhouzhanglin
 	 */	
 	public class RoadScene extends BaseGroundScene
