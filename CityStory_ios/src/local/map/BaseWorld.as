@@ -3,6 +3,8 @@ package  local.map
 	import bing.iso.*;
 	import bing.iso.path.Grid;
 	
+	import com.greensock.TweenLite;
+	
 	import flash.display.*;
 	import flash.events.*;
 	import flash.geom.*;
@@ -11,7 +13,6 @@ package  local.map
 	
 	import local.comm.*;
 	import local.enum.BuildingType;
-	import local.enum.VillageMode;
 	import local.map.item.*;
 	import local.map.land.ExpandSign;
 	import local.map.scene.*;
@@ -425,7 +426,6 @@ package  local.map
 								
 								// scale
 								var sizeDiff:Number = currentVector.length / previousVector.length;
-								sizeDiff = sizeDiff>1 ? 1+(sizeDiff-1)*.15 : 1-(1-sizeDiff)*.15 ;
 								changeWorldScale( sizeDiff , _middle.x , _middle.y );
 							}
 						}
@@ -457,13 +457,13 @@ package  local.map
 		
 		/** 修正地图位置，防止地图溢出边缘 */
 		protected function modifyEndPosition():void{
-			if(_endX>0) _endX=0 ;
+			if(_endX>0) x = _endX=0 ;
 			else if(_endX<-GameSetting.MAP_WIDTH*scaleX+GameSetting.SCREEN_WIDTH){
-				_endX = -GameSetting.MAP_WIDTH*scaleX+GameSetting.SCREEN_WIDTH ;
+				x = _endX = -GameSetting.MAP_WIDTH*scaleX+GameSetting.SCREEN_WIDTH ;
 			}
-			if(_endY>0) _endY=0 ;
+			if(_endY>0) y=_endY=0 ;
 			else if(_endY<-GameSetting.MAP_HEIGHT*scaleY+GameSetting.SCREEN_HEIGHT){
-				_endY = -GameSetting.MAP_HEIGHT*scaleY+GameSetting.SCREEN_HEIGHT ;
+				y=_endY = -GameSetting.MAP_HEIGHT*scaleY+GameSetting.SCREEN_HEIGHT ;
 			}
 		}
 		
@@ -471,32 +471,47 @@ package  local.map
 		private function onMouseWheelHandler(e:MouseEvent):void
 		{
 			e.stopPropagation();
-			var value:Number = e.delta>0?1.1:0.95 ;
+			var value:Number = e.delta>0?1.12:0.92 ;
 			changeWorldScale(value,root.mouseX,root.mouseY);
 		}
 		
-		/**修改地图的缩放值和地图的位置*/
-		protected function changeWorldScale( value:Number , px:Number , py:Number ):void
+		
+		//===============修改地图的缩放值和地图的位置======================
+		private var _zoomM:Matrix = new Matrix();
+		private var _zoomObj:Object = {"value":1};
+		private var _zoomTween:TweenLite ;
+		protected function changeWorldScale( value:Number , px:Number , py:Number , time:Number=0.2):void
 		{
+			var prevScale:Number = scaleX ;
+			var prevX:Number =x , prevY:Number = y ;
 			if(scaleX*value>GameSetting.minZoom && scaleX*value<2.3) {
-				var m:Matrix = this.transform.matrix;
-				m.tx -= px ;
-				m.ty -= py ;
-				m.scale(value, value);
-				m.tx += px ;
-				m.ty += py ;
-				this.transform.matrix = m;
-				_mouseDownPos.x = _endX = x;
-				_mouseDownPos.y = _endY = y ;
-				modifyEndPosition();
-				x = _endX ;
-				y = _endY ;
-				
-				changeIconSize();
+				_zoomObj.value=1;
+				if(_zoomTween){
+					_zoomTween.kill() ;
+					_zoomTween = null ;
+				}
+				_zoomTween = TweenLite.to( _zoomObj , time , { value:value , onUpdate:function():void{
+					_zoomM.identity() ;
+					_zoomM.scale(prevScale,prevScale);
+					_zoomM.translate( prevX , prevY );
+					_zoomM.tx -= px;
+					_zoomM.ty -= py;
+					_zoomM.scale(_zoomObj.value,_zoomObj.value);
+					_zoomM.tx += px;
+					_zoomM.ty += py;
+					
+					scaleX = _zoomM.a ;
+					scaleY = _zoomM.d ;
+					_endX = x = _zoomM.tx ;
+					_endY = y = _zoomM.ty ;
+					modifyEndPosition();
+				}, onComplete:changeIconSize } );
+					
 			}
 			_endX = x;
 			_endY = y ;
 		}
+		
 		
 		protected function changeIconSize():void
 		{
