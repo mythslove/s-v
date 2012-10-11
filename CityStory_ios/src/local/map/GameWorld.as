@@ -218,7 +218,12 @@ package local.map
 							if(e.target.parent!=currentSelected  ){
 								if(currentSelected) currentSelected.flash(false);
 								currentSelected = e.target.parent as BaseBuilding ;
-								moveToCenter( currentSelected ) ;
+								if( GameData.villageMode==VillageMode.VISIT ||
+									(currentSelected.buildingVO.status!=BuildingStatus.PRODUCTION_COMPLETE && 
+										currentSelected.buildingVO.status!=BuildingStatus.LACK_MATERIAL) )
+								{
+									moveToCenter( currentSelected ) ;
+								}
 							}
 							//判断是不是在好友村庄
 							if(GameData.villageMode!=VillageMode.VISIT){
@@ -263,15 +268,11 @@ package local.map
 		//将building移动到屏幕中间
 		private function moveToCenter( building:BaseBuilding):void
 		{
-			if( GameData.villageMode==VillageMode.VISIT ||
-				(building.buildingVO.status!=BuildingStatus.PRODUCTION_COMPLETE && building.buildingVO.status!=BuildingStatus.LACK_MATERIAL) )
-			{
-				//移动到中间
-				_endX =  GameSetting.SCREEN_WIDTH*0.5 - (sceneLayerOffsetX+building.screenX)*scaleX ;
-				_endY = GameSetting.SCREEN_HEIGHT*0.5 - (sceneLayerOffsetY+building.screenY+building.buildingVO.baseVO.span*_size)*scaleY ;
-				modifyEndPosition();
-				_moveSpeed = 0.1 ;
-			}
+			//移动到中间
+			_endX =  GameSetting.SCREEN_WIDTH*0.5 - (sceneLayerOffsetX+building.screenX)*scaleX ;
+			_endY = GameSetting.SCREEN_HEIGHT*0.5 - (sceneLayerOffsetY+building.screenY+building.buildingVO.baseVO.span*_size)*scaleY ;
+			modifyEndPosition();
+			_moveSpeed = 0.1 ;
 		}
 		
 		private function moveTopBuilding():void
