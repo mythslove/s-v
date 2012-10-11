@@ -6,10 +6,11 @@ package bing.res
 
 	public class ResVO
 	{
-		public function ResVO( resId:String="" , url:String="" )
+		public function ResVO( resId:String="" , url:String="" , isNewContext:Boolean=true )
 		{
 			this.resId =resId ;
 			this.url = url ;
+			this.isNewContext = isNewContext ;
 		}
 		public var resId:String ; //资源文件的唯一标识
 		public var url:String ; //资源文件地址
@@ -28,6 +29,7 @@ package bing.res
 		public var loadError:int = 0 ;//计算加载错误/	错误的次数
 		public var isQueue:Boolean=false ;//是否是序列加载中
 		
+		public var isNewContext:Boolean ; //是否是加载到新域
 		
 		public function toString():String
 		{
