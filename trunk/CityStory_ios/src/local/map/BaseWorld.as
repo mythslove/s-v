@@ -482,9 +482,11 @@ package  local.map
 		private var _zoomTween:TweenLite ;
 		protected function changeWorldScale( value:Number , px:Number , py:Number , time:Number=0.2):void
 		{
-			var prevScale:Number = scaleX ;
-			var prevX:Number =x , prevY:Number = y ;
-			if(scaleX*value>GameSetting.minZoom && scaleX*value<2.3) {
+			if(scaleX*value>GameSetting.minZoom && scaleX*value<2.3) 
+			{
+				var prevScale:Number = scaleX ;
+				var prevX:Number =x , prevY:Number = y ;
+				
 				_zoomObj.value=1;
 				if(_zoomTween){
 					_zoomTween.kill() ;
