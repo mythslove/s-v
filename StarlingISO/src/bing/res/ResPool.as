@@ -11,7 +11,6 @@ package bing.res
 	import flash.system.LoaderContext;
 	import flash.system.SecurityDomain;
 	import flash.utils.Dictionary;
-	import flash.utils.getDefinitionByName;
 	
 	/**
 	 * 资源加载错误
@@ -30,7 +29,8 @@ package bing.res
 		protected static var _instance:ResPool; 
 		protected var _resDictionary:Dictionary ;
 		protected var _loadList:Array ;
-		protected var _context:LoaderContext ;
+		protected var _currContext:LoaderContext ;
+		protected var _newContext:LoaderContext ;
 		public var isRemote:Boolean =true ; //是否为远程加载 
 		public var cdns:Vector.<String>;
 		public var maxLoadNum:int = 4 ;//最大的下载数
@@ -57,7 +57,8 @@ package bing.res
 			_loadList = [];
 			cdns=new Vector.<String>() ;
 			_currentLoadNum = 0 ;
-			_context = new LoaderContext(false , ApplicationDomain.currentDomain);
+			_currContext = new LoaderContext(false , ApplicationDomain.currentDomain);
+			_newContext = new LoaderContext(false , new ApplicationDomain() );
 		}
 		
 		/**
@@ -132,8 +133,13 @@ package bing.res
 			loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR , ioErrorHandler );
 			var url:String = cdns[resVO.loadError]+resVO.url ;
 			if(isRemote){
-				_context.securityDomain = SecurityDomain.currentDomain;
-				loader.load( new URLRequest(url) ,_context);
+				if( resVO.isNewContext ){
+					_newContext.securityDomain = SecurityDomain.currentDomain;
+					loader.load( new URLRequest(url) ,_newContext);
+				}else{
+					_currContext.securityDomain = SecurityDomain.currentDomain;
+					loader.load( new URLRequest(url) ,_currContext);
+				}
 			}else{
 				loader.load( new URLRequest(url) );
 			}
@@ -318,10 +324,12 @@ package bing.res
 		{
 			var resVO:ResVO = getResVOByResId(resId);
 			var obj:Object= null ;
-			if(resVO && resVO.resObject )
+			if(resVO && resVO.resObject && resVO.resObject is Loader )
 			{
+				var loader:Loader = resVO.resObject as Loader ;
 				try{
-					obj = new (getDefinitionByName(clsName) as Class)();
+					var cls:Class = loader.contentLoaderInfo.applicationDomain.getDefinition(clsName) as Class ;
+					obj = new cls();
 				}catch(e:Error){}
 			}
 			return obj ;
