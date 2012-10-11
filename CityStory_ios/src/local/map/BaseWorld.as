@@ -505,7 +505,8 @@ package  local.map
 					_endX = x = _zoomM.tx ;
 					_endY = y = _zoomM.ty ;
 					modifyEndPosition();
-				}, onComplete:changeIconSize } );
+					changeIconSize();
+				}} );
 					
 			}
 			_endX = x;
