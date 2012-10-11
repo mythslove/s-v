@@ -90,7 +90,7 @@ package local.utils
 				var loader:Loader = new Loader();
 				loader.name = resVO.resId ;
 				loader.contentLoaderInfo.addEventListener(Event.COMPLETE , swfBytesLoadedHandler );
-				var loaderContext :LoaderContext = new LoaderContext( false , ApplicationDomain.currentDomain ) ;
+				var loaderContext :LoaderContext = new LoaderContext( false , new ApplicationDomain ) ;
 				loaderContext.allowCodeImport = true ;
 				loader.loadBytes( newBytes , loaderContext );
 				if(key==0){
