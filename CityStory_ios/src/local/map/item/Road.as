@@ -37,9 +37,12 @@ package local.map.item
 		
 		public function updateUI( direction:String ):void
 		{
-			_direction = direction ;
-			buildingVO.direction = direction ;
-			showUI();
+			if(_roadObject && _roadObject.roadResVO && 
+				_roadObject.roadResVO.offsetXs.hasOwnProperty(name+direction)){
+				_direction = direction ;
+				buildingVO.direction = direction ;
+				showUI();
+			}
 		}
 	}
 }
