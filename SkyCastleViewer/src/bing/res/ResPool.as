@@ -8,7 +8,6 @@ package bing.res
 	import flash.net.URLLoaderDataFormat;
 	import flash.net.URLRequest;
 	import flash.system.ApplicationDomain;
-	import flash.system.ImageDecodingPolicy;
 	import flash.system.LoaderContext;
 	import flash.system.SecurityDomain;
 	import flash.utils.Dictionary;
@@ -30,7 +29,10 @@ package bing.res
 	{
 		protected static var _instance:ResPool; 
 		protected var _resDictionary:Dictionary ;
-		protected var _loadList:Vector.<ResVO> ;
+		protected var _loadList:Array ;
+		protected var _currContext:LoaderContext ;
+		protected var _newContext:LoaderContext ;
+		public var isRemote:Boolean =true ; //是否为远程加载 
 		public var cdns:Vector.<String>;
 		public var maxLoadNum:int = 4 ;//最大的下载数
 		protected var _currentLoadNum:int = 0 ;
@@ -40,6 +42,7 @@ package bing.res
 			if(_instance){
 				throw new Error("重复实例化");
 			}
+			_instance = this ;
 			init();
 		}
 		
@@ -51,10 +54,12 @@ package bing.res
 		
 		protected function init():void
 		{
-			_resDictionary = new Dictionary();
-			_loadList = new Vector.<ResVO>();
+			_resDictionary = new Dictionary(true);
+			_loadList = [];
 			cdns=new Vector.<String>() ;
 			_currentLoadNum = 0 ;
+			_currContext = new LoaderContext(false , ApplicationDomain.currentDomain);
+			_newContext = new LoaderContext(false ,  new ApplicationDomain());
 		}
 		
 		/**
@@ -81,6 +86,7 @@ package bing.res
 		protected function setResType( resVO:ResVO ):void
 		{
 			var extender:String=  resVO.url.substring( resVO.url.lastIndexOf(".")+1).toLocaleLowerCase();
+			resVO.extension = extender ;
 			switch( extender)
 			{
 				case "txt":
@@ -93,7 +99,7 @@ package bing.res
 					break ;
 				case "png":
 				case "jpg":
-				case "gif":
+				case "jpeg":
 				case "bmp":
 					resVO.resType = ResType.IMG;
 					break ;
@@ -122,17 +128,26 @@ package bing.res
 		}
 		protected function loaderARes(resVO:ResVO):void
 		{
-			var context:LoaderContext = new LoaderContext(false , ApplicationDomain.currentDomain);
-			context.imageDecodingPolicy = ImageDecodingPolicy.ON_DEMAND;
 			var loader:Loader = new Loader();
 			loader.name = resVO.resId ;
 			loader.contentLoaderInfo.addEventListener(Event.COMPLETE , loaderHandler);
 			loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR , ioErrorHandler );
 			var url:String = cdns[resVO.loadError]+resVO.url ;
-			if(url.indexOf("http:")==0){
-				context.securityDomain = SecurityDomain.currentDomain;
+			if(isRemote){
+				if(resVO.isNewContext){
+					_newContext.securityDomain = SecurityDomain.currentDomain;
+					loader.load( new URLRequest(url) ,_newContext);
+				}else{
+					_currContext.securityDomain = SecurityDomain.currentDomain;
+					loader.load( new URLRequest(url) ,_currContext);
+				}
+			}else{
+				if(resVO.isNewContext){
+					loader.load( new URLRequest(url) ,_newContext);
+				}else{
+					loader.load( new URLRequest(url) ,_currContext);
+				}
 			}
-			loader.load( new URLRequest(url) ,context);
 			_currentLoadNum++;
 		}
 		protected function urlLoaderARes(resVO:ResVO):void
@@ -155,7 +170,14 @@ package bing.res
 			var resVO:ResVO = _resDictionary[resLoader.name] as ResVO ;
 			handleRes(resVO , resLoader );
 			//抛出资源加载完成事件
-			loadedResVO(resVO);
+			var resLoadedEvent:ResLoadedEvent = new ResLoadedEvent(resVO.resId);
+			resLoadedEvent.resVO = resVO ;
+			this.dispatchEvent( resLoadedEvent );
+			_currentLoadNum--;
+			if( _loadList.length>0 ){ 	//下载下一个
+				resVO = _loadList.shift() ;
+				loadAResource( resVO );
+			}
 		}
 		
 		protected function urlLoaderHandler(e:Event):void
@@ -166,12 +188,6 @@ package bing.res
 			urlLoader.removeEventListener(IOErrorEvent.IO_ERROR , ioErrorHandler );
 			var resVO:ResVO = _resDictionary[urlLoader.name] as ResVO ;
 			handleRes(resVO , urlLoader.data );
-			//抛出资源加载完成事件
-			loadedResVO(resVO);
-		}
-		
-		protected function loadedResVO( resVO:ResVO ):void
-		{
 			//抛出资源加载完成事件
 			var resLoadedEvent:ResLoadedEvent = new ResLoadedEvent(resVO.resId);
 			resLoadedEvent.resVO = resVO ;
@@ -237,15 +253,12 @@ package bing.res
 				else
 				{
 					this.dispatchEvent( e );
-					if(resVO.isQueue){ //如果是序列加载，并且加载失败，则跳过此资源
-						resObjectLoadedHandler(null);
-					}
 				}
 			}
 		}
 		
 		/**
-		 * 判断资源是否下载完成  
+		 * 判断资源是否在下载或者 已经下载完成  
 		 * @param resId 资源唯一标识 
 		 * @return 
 		 */		
@@ -265,6 +278,21 @@ package bing.res
 			return false;
 		}
 		
+		/**
+		 * 判断资源是否下载完成 
+		 * @param resId
+		 * @return 
+		 */		
+		public function checkResLoaded( resId:String ):Boolean
+		{
+			if(_resDictionary[resId]) {
+				var resVO:ResVO = _resDictionary[resId] as ResVO;
+				if( resVO && resVO.resObject) {
+					return true;
+				}
+			}
+			return false;
+		}
 		
 		/**
 		 *  删除资源
@@ -301,74 +329,29 @@ package bing.res
 		{
 			var resVO:ResVO = getResVOByResId(resId);
 			var obj:Object= null ;
-			if(resVO && resVO.resObject )
+			if(resVO && resVO.resObject && resVO.resObject is Loader )
 			{
+				var loader:Loader = resVO.resObject as Loader ;
 				try{
-					obj = new (getDefinitionByName(clsName) as Class)();
+					var cls:Class = loader.contentLoaderInfo.applicationDomain.getDefinition(clsName) as Class ;
+					obj = new cls();
 				}catch(e:Error){}
 			}
 			return obj ;
 		}
 		
 		
-		//======================================================
-		//=========加载多个资源====================================
-		//======================================================
-		
-		protected  var _resArray:Vector.<ResVO>;
-		protected var _queueHash :Dictionary ;
-		protected var _queueLoaded:int ;
-		protected var _total:int ;
-		
 		/**
 		 * 加载多个 
+		 * @param name 序列加载的名称
 		 * @param resArray [{name:"nam" , url:"role/aa.swf" , baseURL:baseURL}]
 		 * @param maxNum 最多一次能开几个加载进程
 		 */		
-		public function queueLoad( resArray:Vector.<ResVO>, maxNum:int =2 ):void
+		public function queueLoad( name:String , resArray:Array, maxNum:int =2 ):void
 		{
-			_resArray = resArray ;
-			_queueHash = new Dictionary(true) ;
-			_total= resArray.length ;
-			_queueLoaded = 0;
-			for( var i:int=0 ; i<maxNum && i<_total ; ++i){
-				startQueueLoad();
-			}
+			new QueueLoader( name , resArray , maxNum  );
 		}
 		
-		protected function startQueueLoad():void
-		{
-			var content:ResVO = _resArray.shift();
-			content.isQueue = true ;
-			this._queueHash[content.resId] = content;
-			this.addEventListener( content.resId , resObjectLoadedHandler );
-			this.loadRes( content );
-		}
-		protected function resObjectLoadedHandler(e:Event):void
-		{
-			_queueLoaded ++;
-			var evtLoadedEvt:ResLoadedEvent
-			if(e){
-				evtLoadedEvt = (e as ResLoadedEvent);
-				this.removeEventListener( evtLoadedEvt.resVO.resId , resObjectLoadedHandler );
-			}
-			//加载进度
-			var evt:ResProgressEvent = new ResProgressEvent(ResProgressEvent.RES_LOAD_PROGRESS);
-			evt.total = _total ;
-			evt.loaded = _queueLoaded ;
-			if(evtLoadedEvt){
-				evt.name = evtLoadedEvt.resVO.resId ;
-			}
-			this.dispatchEvent( evt );
-			//判断是否还要加载
-			if(_resArray.length>0){
-				startQueueLoad();
-			}else if(_queueLoaded==_total){
-				_resArray = null ;
-				_queueHash = null ;
-				this.dispatchEvent(new ResLoadedEvent(ResLoadedEvent.QUEUE_LOADED));
-			}
-		}
 		
 		//==================dispose==================
 		
@@ -382,8 +365,92 @@ package bing.res
 				resVO.dispose();
 			}
 			_resDictionary = new Dictionary();
-			_loadList = new Vector.<ResVO>();
+			_loadList = [];
 			_currentLoadNum = 0 ;
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+//=================================
+//==========序列加载=================
+
+import bing.res.ResLoadedEvent;
+import bing.res.ResPool;
+import bing.res.ResProgressEvent;
+import bing.res.ResVO;
+
+import flash.events.Event;
+import flash.utils.Dictionary;
+
+
+class QueueLoader
+{
+	public var name:String ;
+	protected  var _resArray:Array;
+	protected var _queueHash :Dictionary ;
+	protected var _queueLoaded:int ;
+	protected var _total:int ;
+	
+	/**
+	 * 加载多个 
+	 * @param resArray [{name:"nam" , url:"role/aa.swf" , baseURL:baseURL}]
+	 * @param maxNum 最多一次能开几个加载进程
+	 */		
+	public function QueueLoader( name:String , resArray:Array, maxNum:int =2 )
+	{
+		this.name = name ;
+		_resArray = resArray ;
+		_queueHash = new Dictionary(true) ;
+		_total= resArray.length ;
+		_queueLoaded = 0;
+		for( var i:int=0 ; i<maxNum && i<_total ; ++i){
+			startQueueLoad();
+		}
+	}
+	
+	protected function startQueueLoad():void
+	{
+		var content:ResVO = _resArray.shift();
+		content.isQueue = true ;
+		this._queueHash[content.resId] = content;
+		ResPool.instance.addEventListener( content.resId , resObjectLoadedHandler );
+		ResPool.instance.loadRes( content );
+	}
+	protected function resObjectLoadedHandler(e:Event):void
+	{
+		_queueLoaded ++;
+		var evtLoadedEvt:ResLoadedEvent ;
+		if(e){
+			evtLoadedEvt = (e as ResLoadedEvent);
+			ResPool.instance.removeEventListener( evtLoadedEvt.resVO.resId , resObjectLoadedHandler );
+		}
+		//加载进度
+		var evt:ResProgressEvent = new ResProgressEvent(ResProgressEvent.RES_LOAD_PROGRESS);
+		evt.total = _total ;
+		evt.loaded = _queueLoaded ;
+		evt.queueName = name ;
+		if(evtLoadedEvt){
+			evt.name = evtLoadedEvt.resVO.resId ;
+		}
+		ResPool.instance.dispatchEvent( evt );
+		//判断是否还要加载
+		if(_resArray.length>0){
+			startQueueLoad();
+		}else if(_queueLoaded==_total){
+			_resArray = null ;
+			_queueHash = null ;
+			ResPool.instance.dispatchEvent( new ResLoadedEvent( name ) );
+			
+			_queueHash = null ;
+			_resArray = null ;
 		}
 	}
 }
