@@ -26,6 +26,7 @@ package
 			stage.align = StageAlign.TOP_LEFT;
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 			stage.color = 0 ;
+			stage.mouseChildren = false ;
 			NativeApplication.nativeApplication.executeInBackground = true ;
 			
 			registerVO();
