@@ -96,9 +96,9 @@ package local.utils
 				loader.name = resVO.resId ;
 				loader.contentLoaderInfo.addEventListener(Event.COMPLETE , swfBytesLoadedHandler );
 				if(resVO.isNewContext){
-					loader.loadBytes(newBytes ,new LoaderContext(false, new ApplicationDomain()));
+					loader.loadBytes(newBytes ,_newContext);
 				}else{
-					loader.loadBytes(newBytes ,new LoaderContext(false,ApplicationDomain.currentDomain));
+					loader.loadBytes(newBytes ,_currContext);
 				}
 				if(key==0){
 					SystemUtil.debug( resVO.resId +".swf没有加密");
