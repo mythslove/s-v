@@ -54,7 +54,7 @@ package local.view.shop
 			
 			img = EmbedManager.getUIImage( "ShopOverViewTitle_en" ) ;
 			img.x = (_wid - img.width)>>1;
-			img.y = 10 ;
+			img.y = 15 ;
 			addChild(img);
 			
 			var btnBgs:Vector.<Image>=new Vector.<Image>(6,true) ;

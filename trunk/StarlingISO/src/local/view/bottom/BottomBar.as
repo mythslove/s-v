@@ -37,7 +37,7 @@ package local.view.bottom
 			switch( btn )
 			{
 				case _btnMarket:
-					PopUpManager.instance.addQueuePopUp( new ShopOverViewPopUp());
+					PopUpManager.instance.addQueuePopUp( ShopOverViewPopUp.instance);
 					break ;
 			}
 		}
