@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker http://texturepacker.com-->
-<!-- $TexturePacker:SmartUpdate:401de95c423e7f18d9412d949f34a0e5$ -->
+<!-- $TexturePacker:SmartUpdate:c5b7d70407c654dd84177022cb2e952e$ -->
 <TextureAtlas imagePath="ui.png">
-    <SubTexture name="BUSINESS_en" x="231" y="521" width="90" height="20" frameX="-10" frameY="-2" frameWidth="110" frameHeight="24"/>
-    <SubTexture name="COMMUNITY_en" x="399" y="325" width="108" height="20" frameX="-1" frameY="-2" frameWidth="110" frameHeight="24"/>
-    <SubTexture name="DECOR_en" x="68" y="506" width="62" height="20" frameX="-24" frameY="-2" frameWidth="110" frameHeight="24"/>
-    <SubTexture name="HOMES_en" x="2" y="506" width="64" height="20" frameX="-23" frameY="-2" frameWidth="110" frameHeight="24"/>
-    <SubTexture name="INDUSTRY_en" x="139" y="504" width="90" height="20" frameX="-10" frameY="-2" frameWidth="110" frameHeight="24"/>
-    <SubTexture name="PopUpCloseButtonUp" x="347" y="425" width="34" height="34"/>
-    <SubTexture name="ShopItemBgUp" x="2" y="325" width="135" height="179"/>
-    <SubTexture name="ShopOverViewBusinessButton" x="139" y="432" width="102" height="70" frameX="0" frameY="-5" frameWidth="104" frameHeight="76"/>
-    <SubTexture name="ShopOverViewCommunityButton" x="243" y="425" width="102" height="72" frameX="0" frameY="-3" frameWidth="104" frameHeight="76"/>
-    <SubTexture name="ShopOverViewDecorButton" x="139" y="358" width="102" height="72" frameX="0" frameY="-3" frameWidth="104" frameHeight="76"/>
-    <SubTexture name="ShopOverViewHomeButton" x="399" y="347" width="102" height="74" frameX="0" frameY="-1" frameWidth="104" frameHeight="76"/>
-    <SubTexture name="ShopOverViewIndustryButton" x="399" y="423" width="102" height="72" frameX="0" frameY="-3" frameWidth="104" frameHeight="76"/>
-    <SubTexture name="ShopOverViewItemBg" x="273" y="325" width="124" height="98"/>
-    <SubTexture name="ShopOverViewTitle_en" x="139" y="325" width="132" height="31"/>
-    <SubTexture name="ShopOverViewWondersButton" x="347" y="497" width="102" height="66" frameX="0" frameY="-9" frameWidth="104" frameHeight="76"/>
-    <SubTexture name="WONDERS_en" x="243" y="499" width="92" height="20" frameX="-7" frameY="-2" frameWidth="110" frameHeight="24"/>
-    <SubTexture name="popupbg" x="2" y="2" width="481" height="321"/>
+    <SubTexture name="BUSINESS_en" x="866" y="969" width="176" height="37" frameX="-23" frameY="-6" frameWidth="220" frameHeight="47"/>
+    <SubTexture name="COMMUNITY_en" x="524" y="790" width="216" height="37" frameX="-1" frameY="-5" frameWidth="220" frameHeight="47"/>
+    <SubTexture name="DECOR_en" x="932" y="723" width="124" height="37" frameX="-48" frameY="-6" frameWidth="220" frameHeight="47"/>
+    <SubTexture name="HOMES_en" x="926" y="788" width="128" height="37" frameX="-46" frameY="-6" frameWidth="220" frameHeight="47"/>
+    <SubTexture name="INDUSTRY_en" x="686" y="969" width="178" height="37" frameX="-21" frameY="-5" frameWidth="220" frameHeight="47"/>
+    <SubTexture name="MarketButtonUp" x="932" y="646" width="73" height="75"/>
+    <SubTexture name="PopUpCloseButtonUp" x="966" y="2" width="67" height="67"/>
+    <SubTexture name="ShopItemBgUp" x="2" y="646" width="270" height="357"/>
+    <SubTexture name="ShopOverViewBusinessButton" x="686" y="829" width="202" height="138" frameX="-2" frameY="-11" frameWidth="208" frameHeight="152"/>
+    <SubTexture name="ShopOverViewCommunityButton" x="728" y="646" width="202" height="140" frameX="-1" frameY="-9" frameWidth="208" frameHeight="152"/>
+    <SubTexture name="ShopOverViewDecorButton" x="524" y="646" width="202" height="142" frameX="-2" frameY="-7" frameWidth="208" frameHeight="152"/>
+    <SubTexture name="ShopOverViewHomeButton" x="274" y="843" width="204" height="148" frameX="0" frameY="-2" frameWidth="208" frameHeight="152"/>
+    <SubTexture name="ShopOverViewIndustryButton" x="480" y="843" width="204" height="142" frameX="0" frameY="-7" frameWidth="208" frameHeight="152"/>
+    <SubTexture name="ShopOverViewItemBg" x="274" y="646" width="248" height="195"/>
+    <SubTexture name="ShopOverViewTitle_en" x="1044" y="959" width="264" height="61"/>
+    <SubTexture name="ShopOverViewWondersButton" x="890" y="827" width="204" height="130" frameX="0" frameY="-19" frameWidth="208" frameHeight="152"/>
+    <SubTexture name="WONDERS_en" x="742" y="788" width="182" height="37" frameX="-16" frameY="-5" frameWidth="220" frameHeight="47"/>
+    <SubTexture name="popupbg" x="2" y="2" width="962" height="642"/>
 </TextureAtlas>

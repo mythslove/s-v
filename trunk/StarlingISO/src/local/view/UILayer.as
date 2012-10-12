@@ -1,8 +1,8 @@
 package local.view
 {
-	import local.util.PopUpManager;
+	import local.comm.GameSetting;
 	import local.view.base.BaseView;
-	import local.view.shop.ShopOverViewPopUp;
+	import local.view.bottom.BottomBar;
 	
 	import starling.events.Event;
 	
@@ -16,6 +16,8 @@ package local.view
 		}
 		//-----------------------------------------------------------
 		
+		public var bottomBar:BottomBar ;
+		
 		public function UILayer()
 		{
 			
@@ -24,7 +26,10 @@ package local.view
 		override protected function addedToStageHandler(e:Event):void
 		{
 			super.addedToStageHandler(e);
-			PopUpManager.instance.addQueuePopUp( new ShopOverViewPopUp());
+			
+			bottomBar = new BottomBar();
+			bottomBar.y = GameSetting.SCREEN_HEIGHT ;
+			addChild(bottomBar);
 		}
 	}
 }
