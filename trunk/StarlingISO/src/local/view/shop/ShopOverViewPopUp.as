@@ -73,28 +73,34 @@ package local.view.shop
 				addChild(img);
 			}
 			
+			var tempW:Number , tempH:Number ;
 			img = EmbedManager.getUIImage( "ShopOverViewHomeButton" );
-			img.x = btnBgs[0].x+(btnBgs[0].width-img.width)*0.5 ;
-			img.y = btnBgs[0].y+(btnBgs[0].height-img.height)*0.5 ;
+			tempW = img.width;
+			tempH = img.height ;
 			_btnHomes = new Button();
+			_btnHomes.x = btnBgs[0].x+(btnBgs[0].width-img.width)*0.5 ;
+			_btnHomes.y = btnBgs[0].y+(btnBgs[0].height-img.height)*0.5 ;
 			_btnHomes.defaultSkin = img ;
 			addChild(_btnHomes);
 			img = EmbedManager.getUIImage( "HOMES_en" );
-			img.x = btnBgs[0].x+(btnBgs[0].width-img.width)*0.5 ;
-			img.y = btnBgs[0].y +btnBgs[0].height -img.height-10 ;
+			img.x = (tempW-img.width)*0.5 ;
+			img.y = tempH-img.height ;
 			img.touchable = false ;
 			_btnHomes.addChild( img );
 			_btnHomes.onRelease.add(onClickHandler);
 			
+			
 			img = EmbedManager.getUIImage( "ShopOverViewCommunityButton" );
+			tempW = img.width;
+			tempH = img.height ;
 			_btnCommunity = new Button();
 			_btnCommunity.x = btnBgs[1].x+(btnBgs[1].width-img.width)*0.5 ;
 			_btnCommunity.y = btnBgs[1].y+(btnBgs[1].height-img.height)*0.5 ;
 			_btnCommunity.defaultSkin = img ;
 			addChild(_btnCommunity);
 			img = EmbedManager.getUIImage( "COMMUNITY_en" );
-			img.x = (btnBgs[1].width-img.width)*0.5 ;
-			img.y = btnBgs[1].height-img.height-10 ;
+			img.x = (tempW-img.width)*0.5 ;
+			img.y = tempH-img.height ;
 			img.touchable = false ;
 			_btnCommunity.addChild( img );
 			_btnCommunity.onRelease.add(onClickHandler);
