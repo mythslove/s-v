@@ -39,8 +39,7 @@ package local.util
 			if( _textureDic[name] ) return _textureDic[name] as TextureAtlas ;
 			
 			var bmp:Bitmap = new EmbedManager[name]() as Bitmap ;
-			name+="_XML" ;
-			var xml:XML = XML( new EmbedManager[name]() )  ;
+			var xml:XML = XML( new EmbedManager[name+"_XML"]() )  ;
 			var atals:TextureAtlas = new TextureAtlas( Texture.fromBitmap( bmp,false ) , xml );
 			_textureDic[name] = atals ;
 			bmp.bitmapData.dispose();
@@ -62,8 +61,7 @@ package local.util
 			if( _textureDic[name] ) return _textureDic[name] as TextureAtlas ;
 			
 			var bmp:Bitmap = new EmbedManager[name]() as Bitmap ;
-			name+="_XML" ;
-			var xml:XML = XML( new EmbedManager[name]() )  ;
+			var xml:XML = XML( new EmbedManager[name+"_XML"]() )  ;
 			var atals:TextureAtlas = new TextureAtlas( Texture.fromBitmap( bmp,false ) , xml );
 			_textureDic[name] = atals ;
 			bmp.bitmapData.dispose();

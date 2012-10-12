@@ -135,7 +135,7 @@ package  local.util
 		 * @param mc 
 		 * @param topOrBottom 添加到弹出窗口的最上面还是最下面，默认为最上
 		 */		
-		public function addPopUp( mc:DisplayObject , modal:Boolean=true , topOrBottom:Boolean=true , maskAlpha:Number=0.8):void
+		public function addPopUp( mc:DisplayObject , modal:Boolean=true , topOrBottom:Boolean=true , maskAlpha:Number=0.5):void
 		{
 			if(!mc || this.contains(mc)) return ;
 			
@@ -209,7 +209,7 @@ import starling.events.Event;
  */	
 class PopupMask extends Quad
 {
-	public function PopupMask( color:uint=0 , alpha:Number =0.8 )
+	public function PopupMask( color:uint=0 , alpha:Number =0.5 )
 	{
 		super(GameSetting.SCREEN_WIDTH,GameSetting.SCREEN_HEIGHT ,color);
 		addEventListener(Event.ADDED_TO_STAGE , addedHandler) ;

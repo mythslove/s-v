@@ -123,9 +123,11 @@ package local.view.shop
 			x = GameSetting.SCREEN_WIDTH>>1 ;
 			y = GameSetting.SCREEN_HEIGHT>>1 ;
 			
-			scaleX = scaleY= .5 ;
+			scaleX = scaleY= 0 ;
 			alpha = 0 ;
-			TweenLite.to( this , 0.4 , { scaleX:1 , scaleY:1 , alpha:1  , ease: Back.easeOut });
+			TweenLite.to( this , 0.3 , { scaleX:1 , scaleY:1 , alpha:1  , ease: Back.easeOut , onComplete:function():void{
+				if(!GameSetting.isIpad) GameWorld.instance.visible=false;
+			} });
 		}
 		
 		private function onClickHandler( btn:Button ):void
@@ -140,7 +142,7 @@ package local.view.shop
 		
 		private function close():void{
 			touchable=false;
-			TweenLite.to( this , 0.4 , { scaleX:0.5 , scaleY:0.5 , alpha:0 , ease: Back.easeIn , onComplete:onTweenCom});
+			TweenLite.to( this , 0.4 , { scaleX:0.3 , scaleY:0 , alpha:0 , ease: Back.easeIn , onComplete:onTweenCom});
 		}
 		
 		private function onTweenCom():void{
@@ -149,6 +151,7 @@ package local.view.shop
 		override protected function removedFromStageHandler(e:Event):void{
 			super.removedFromStageHandler(e);
 			GameWorld.instance.run();
+			GameWorld.instance.visible=true;
 		}
 	}
 }
