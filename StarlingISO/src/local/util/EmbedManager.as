@@ -81,7 +81,7 @@ package local.util
 		
 		public static function getUIImage( name:String ):Image{
 			var img:Image = new Image(getUITexture(name));
-			img.scaleX = img.scaleY = 2; 
+//			img.scaleX = img.scaleY = 2; 
 			return img;
 		}
 	}
