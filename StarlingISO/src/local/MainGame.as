@@ -3,7 +3,10 @@ package local
 	import bing.starling.iso.SIsoWorld;
 	
 	import local.comm.GameSetting;
+	import local.map.GameWorld;
+	import local.util.PopUpManager;
 	import local.util.TextureAssets;
+	import local.view.UILayer;
 	
 	import starling.display.*;
 	import starling.events.Event;
@@ -25,8 +28,11 @@ package local
 			TextureAssets.instance.createBuildingTexture() ;
 			
 			
-			var world:GameWorld = new GameWorld();
-			addChild( world );
+			addChild( GameWorld.instance );
+			
+			addChild(UILayer.instance);
+			
+			addChild(PopUpManager.instance);
 			
 //			var bmp:Bitmap = new Bitmap( TextureAssets.instance.buildingBmd);
 //			bmp.scaleX  = bmp.scaleY = .4 ;

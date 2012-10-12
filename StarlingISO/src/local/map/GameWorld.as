@@ -1,4 +1,4 @@
-package local
+package local.map
 {
 	import bing.starling.component.Rhombus;
 	import bing.starling.iso.SIsoGrid;
@@ -29,6 +29,13 @@ package local
 	
 	public class GameWorld extends SIsoWorld
 	{
+		private static var _instance:GameWorld;
+		public static function get instance():GameWorld {
+			if(!_instance) _instance = new GameWorld();
+			return _instance ;
+		}
+		//-----------------------------------------------------------------
+		
 		public var buildingScene:SIsoScene ;
 		protected var _endX:int ;
 		protected var _endY:int;
@@ -94,8 +101,14 @@ package local
 				}
 			}
 			buildingScene.sortAll();
-			
+			run();
+		}
+		
+		public function run():void{
 			addEventListener(Event.ENTER_FRAME , onEnterFrameHandler );
+		}
+		public function stopRun():void{
+			removeEventListener(Event.ENTER_FRAME , onEnterFrameHandler );
 		}
 		
 		private function onEnterFrameHandler( e:Event ):void
