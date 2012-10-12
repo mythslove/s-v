@@ -37,7 +37,7 @@ package local.view.bottom
 			switch( btn )
 			{
 				case _btnMarket:
-					PopUpManager.instance.addQueuePopUp( ShopOverViewPopUp.instance);
+					PopUpManager.instance.addQueuePopUp( ShopOverViewPopUp.instance , GameSetting.isIpad);
 					break ;
 			}
 		}
