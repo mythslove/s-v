@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://texturepacker.com-->
+<!-- $TexturePacker:SmartUpdate:b423f9dc723525cc309b033b1f60dceb$ -->
+<TextureAtlas imagePath="ui.png">
+    <SubTexture name="BUSINESS_en" x="231" y="521" width="90" height="20" frameX="-10" frameY="-2" frameWidth="110" frameHeight="24"/>
+    <SubTexture name="COMMUNITY_en" x="399" y="325" width="108" height="20" frameX="-1" frameY="-2" frameWidth="110" frameHeight="24"/>
+    <SubTexture name="DECOR_en" x="68" y="506" width="62" height="20" frameX="-24" frameY="-2" frameWidth="110" frameHeight="24"/>
+    <SubTexture name="HOMES_en" x="2" y="506" width="64" height="20" frameX="-23" frameY="-2" frameWidth="110" frameHeight="24"/>
+    <SubTexture name="INDUSTRY_en" x="139" y="504" width="90" height="20" frameX="-10" frameY="-2" frameWidth="110" frameHeight="24"/>
+    <SubTexture name="ShopItemBgUp" x="2" y="325" width="135" height="179"/>
+    <SubTexture name="ShopOverViewBusinessButton" x="139" y="432" width="102" height="70" frameX="0" frameY="-5" frameWidth="104" frameHeight="76"/>
+    <SubTexture name="ShopOverViewCommunityButton" x="243" y="425" width="102" height="72" frameX="0" frameY="-3" frameWidth="104" frameHeight="76"/>
+    <SubTexture name="ShopOverViewDecorButton" x="139" y="358" width="102" height="72" frameX="0" frameY="-3" frameWidth="104" frameHeight="76"/>
+    <SubTexture name="ShopOverViewHomeButton" x="399" y="347" width="102" height="74" frameX="0" frameY="-1" frameWidth="104" frameHeight="76"/>
+    <SubTexture name="ShopOverViewIndustryButton" x="399" y="423" width="102" height="72" frameX="0" frameY="-3" frameWidth="104" frameHeight="76"/>
+    <SubTexture name="ShopOverViewItemBg" x="273" y="325" width="124" height="98"/>
+    <SubTexture name="ShopOverViewTitle_en" x="139" y="325" width="132" height="31"/>
+    <SubTexture name="ShopOverViewWondersButton" x="347" y="497" width="102" height="66" frameX="0" frameY="-9" frameWidth="104" frameHeight="76"/>
+    <SubTexture name="WONDERS_en" x="243" y="499" width="92" height="20" frameX="-7" frameY="-2" frameWidth="110" frameHeight="24"/>
+    <SubTexture name="popupbg" x="2" y="2" width="481" height="321"/>
+</TextureAtlas>
