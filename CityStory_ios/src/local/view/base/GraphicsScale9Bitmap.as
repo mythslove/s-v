@@ -21,7 +21,7 @@
 
 		public function setSize(w:Number , h:Number):void
 		{
-			if (this.width != w && this.height != h)
+			if (this.width != w || this.height != h)
 			{
 				resizeGraphic(w,h);
 			}
