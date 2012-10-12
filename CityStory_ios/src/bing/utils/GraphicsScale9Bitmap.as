@@ -1,4 +1,4 @@
-﻿package local.view.base
+﻿package bing.utils
 {
 	import flash.display.BitmapData;
 	import flash.geom.Rectangle;
