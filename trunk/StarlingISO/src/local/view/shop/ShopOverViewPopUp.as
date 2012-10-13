@@ -12,9 +12,7 @@ package local.view.shop
 	import local.util.PopUpManager;
 	import local.view.base.BaseView;
 	
-	import starling.display.DisplayObjectContainer;
 	import starling.display.Image;
-	import starling.display.Sprite;
 	import starling.events.Event;
 	
 	public class ShopOverViewPopUp extends BaseView
