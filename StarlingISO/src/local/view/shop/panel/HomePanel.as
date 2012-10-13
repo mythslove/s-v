@@ -21,6 +21,8 @@ package local.view.shop.panel
 	
 	import org.osmf.layout.LayoutMode;
 	
+	import starling.events.Event;
+	
 	public class HomePanel extends ShopPanel
 	{
 		private static var _instance:HomePanel;
@@ -77,6 +79,10 @@ package local.view.shop.panel
 			this._transitionManager = new TabBarSlideTransitionManager(this._navigator, this._tabBar);
 			this._transitionManager.duration = 0.4;
 			this._transitionManager.ease = Cubic.easeOut;
+		}
+		
+		override protected function addedToStageHandler(e:Event):void{
+			super.addedToStageHandler(e);
 			
 			this._tabBar.selectedIndex = 0 ;
 			this._navigator.showScreen( TAB_ALL );
@@ -116,23 +122,24 @@ package local.view.shop.panel
 		
 		private function navigator_onChange(navigator:ScreenNavigator):void
 		{
-			const dataProvider:ListCollection = this._tabBar.dataProvider;
-			const itemCount:int = dataProvider.length;
-			for(var i:int = 0; i < itemCount; i++)
-			{
-				var item:Object = dataProvider.getItemAt(i);
-				if(navigator.activeScreenID == item.action)
-				{
-					this._tabBar.selectedIndex = i;
-					break;
-				}
-			}
+//			const dataProvider:ListCollection = this._tabBar.dataProvider;
+//			const itemCount:int = dataProvider.length;
+//			for(var i:int = 0; i < itemCount; i++)
+//			{
+//				var item:Object = dataProvider.getItemAt(i);
+//				if(navigator.activeScreenID == item.action)
+//				{
+//					this._tabBar.selectedIndex = i;
+//					break;
+//				}
+//			}
 		}
 		
 		private function tabBar_onChange(tabBar:TabBar):void
 		{
-			this._navigator.showScreen(tabBar.selectedItem.action);
+			if(tabBar.selectedItem){
+				this._navigator.showScreen(tabBar.selectedItem.action);
+			}
 		}
-		
 	}
 }
