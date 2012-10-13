@@ -1,5 +1,9 @@
 package local.view
 {
+	import feathers.controls.text.TextFieldTextRenderer;
+	import feathers.core.FeathersControl;
+	import feathers.core.ITextRenderer;
+	
 	import local.comm.GameSetting;
 	import local.view.base.BaseView;
 	import local.view.bottom.BottomBar;
@@ -20,7 +24,9 @@ package local.view
 		
 		public function UILayer()
 		{
-			
+			FeathersControl.defaultTextRendererFactory = function():ITextRenderer{
+				return new TextFieldTextRenderer();
+			}
 		}
 		
 		override protected function addedToStageHandler(e:Event):void
