@@ -44,10 +44,12 @@ package local.util
 				for ( var name:String in allBuildingHash){
 					baseVO =  allBuildingHash[name] as BaseBuildingVO ;
 					resVO = ResourceUtil.instance.getResVOByResId(name);
-					if(baseVO.subClass==BuildingType.DECORATION_ROAD || baseVO.subClass==BuildingType.DECORATION_GROUND){
-						parseResRoad( name , name2Rect , resVO.resObject as RoadResVO , maxRect );
-					}else{
-						parseBarvos( name , name2Rect , resVO.resObject as Vector.<BitmapAnimResVO> , maxRect );
+					if(resVO){
+						if(baseVO.subClass==BuildingType.DECORATION_ROAD || baseVO.subClass==BuildingType.DECORATION_GROUND){
+							parseResRoad( name , name2Rect , resVO.resObject as RoadResVO , maxRect );
+						}else{
+							parseBarvos( name , name2Rect , resVO.resObject as Vector.<BitmapAnimResVO> , maxRect );
+						}
 					}
 				}
 				
