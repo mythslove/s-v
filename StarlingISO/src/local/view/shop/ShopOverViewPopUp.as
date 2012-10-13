@@ -11,6 +11,7 @@ package local.view.shop
 	import local.util.EmbedManager;
 	import local.util.PopUpManager;
 	import local.view.base.BaseView;
+	import local.view.base.GameButton;
 	
 	import starling.display.Image;
 	import starling.events.Event;
@@ -23,13 +24,13 @@ package local.view.shop
 			return _instance ;
 		}
 		//=====================================
-		private var _btnClose:Button ;
-		private var _btnHomes:Button ;
-		private var _btnIndustry:Button ;
-		private var _btnBusiness:Button ;
-		private var _btnDecor:Button ;
-		private var _btnCommunity:Button ;
-		private var _btnWonders:Button ;
+		private var _btnClose:GameButton ;
+		private var _btnHomes:GameButton ;
+		private var _btnIndustry:GameButton ;
+		private var _btnBusiness:GameButton ;
+		private var _btnDecor:GameButton ;
+		private var _btnCommunity:GameButton ;
+		private var _btnWonders:GameButton ;
 		
 		private var _wid:Number ;
 		private var _het:Number ;
@@ -75,7 +76,7 @@ package local.view.shop
 			img = EmbedManager.getUIImage( "ShopOverViewHomeButton" );
 			tempW = img.width;
 			tempH = img.height ;
-			_btnHomes = new Button();
+			_btnHomes = new GameButton();
 			_btnHomes.x = btnBgs[0].x+(btnBgs[0].width-img.width)*0.5 ;
 			_btnHomes.y = btnBgs[0].y+(btnBgs[0].height-img.height)*0.5 ;
 			_btnHomes.defaultSkin = img ;
@@ -91,7 +92,7 @@ package local.view.shop
 			img = EmbedManager.getUIImage( "ShopOverViewCommunityButton" );
 			tempW = img.width;
 			tempH = img.height ;
-			_btnCommunity = new Button();
+			_btnCommunity = new GameButton();
 			_btnCommunity.x = btnBgs[1].x+(btnBgs[1].width-img.width)*0.5 ;
 			_btnCommunity.y = btnBgs[1].y+(btnBgs[1].height-img.height)*0.5 ;
 			_btnCommunity.defaultSkin = img ;
@@ -106,7 +107,7 @@ package local.view.shop
 			img = EmbedManager.getUIImage( "ShopOverViewDecorButton" );
 			tempW = img.width;
 			tempH = img.height ;
-			_btnDecor = new Button();
+			_btnDecor = new GameButton();
 			_btnDecor.x = btnBgs[2].x+(btnBgs[2].width-img.width)*0.5 ;
 			_btnDecor.y = btnBgs[2].y+(btnBgs[2].height-img.height)*0.5 ;
 			_btnDecor.defaultSkin = img ;
@@ -122,7 +123,7 @@ package local.view.shop
 			img = EmbedManager.getUIImage( "ShopOverViewBusinessButton" );
 			tempW = img.width;
 			tempH = img.height ;
-			_btnBusiness = new Button();
+			_btnBusiness = new GameButton();
 			_btnBusiness.x = btnBgs[3].x+(btnBgs[3].width-img.width)*0.5 ;
 			_btnBusiness.y = btnBgs[3].y+(btnBgs[3].height-img.height)*0.5 ;
 			_btnBusiness.defaultSkin = img ;
@@ -138,7 +139,7 @@ package local.view.shop
 			img = EmbedManager.getUIImage( "ShopOverViewIndustryButton" );
 			tempW = img.width;
 			tempH = img.height ;
-			_btnIndustry = new Button();
+			_btnIndustry = new GameButton();
 			_btnIndustry.x = btnBgs[4].x+(btnBgs[4].width-img.width)*0.5 ;
 			_btnIndustry.y = btnBgs[4].y+(btnBgs[4].height-img.height)*0.5 ;
 			_btnIndustry.defaultSkin = img ;
@@ -154,7 +155,7 @@ package local.view.shop
 			img = EmbedManager.getUIImage( "ShopOverViewWondersButton" );
 			tempW = img.width;
 			tempH = img.height ;
-			_btnWonders = new Button();
+			_btnWonders = new GameButton();
 			_btnWonders.x = btnBgs[5].x+(btnBgs[5].width-img.width)*0.5 ;
 			_btnWonders.y = btnBgs[5].y+(btnBgs[5].height-img.height)*0.5 ;
 			_btnWonders.defaultSkin = img ;
@@ -168,7 +169,7 @@ package local.view.shop
 			
 			
 			img = EmbedManager.getUIImage( CommUISetting.POPUPCLOSEBUTTONUP );
-			_btnClose = new Button();
+			_btnClose = new GameButton();
 			_btnClose.defaultSkin = img ;
 			addChild(_btnClose);
 			_btnClose.x = _wid - img.width - 10 ;
