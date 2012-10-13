@@ -93,6 +93,7 @@ package
 		/** 资源加载完成后 , 初始化游戏界面和游戏 */
 		protected function initGame():void
 		{
+			ShopModel.instance.initShopData();
 		}
 		
 		

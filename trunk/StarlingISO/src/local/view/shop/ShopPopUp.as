@@ -59,6 +59,8 @@ package local.view.shop
 			_btnClose.onRelease.add(onClickHandler);
 			
 			_container = new Sprite();
+			_container.x = 40;
+			_container.y = 120 ;
 			addChild(_container);
 		}
 		
