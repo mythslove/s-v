@@ -105,6 +105,69 @@ package local.view.shop
 			_btnCommunity.addChild( img );
 			_btnCommunity.onRelease.add(onClickHandler);
 			
+			img = EmbedManager.getUIImage( "ShopOverViewDecorButton" );
+			tempW = img.width;
+			tempH = img.height ;
+			_btnDecor = new Button();
+			_btnDecor.x = btnBgs[2].x+(btnBgs[2].width-img.width)*0.5 ;
+			_btnDecor.y = btnBgs[2].y+(btnBgs[2].height-img.height)*0.5 ;
+			_btnDecor.defaultSkin = img ;
+			addChild(_btnDecor);
+			img = EmbedManager.getUIImage( "DECOR_en" );
+			img.x = (tempW-img.width)*0.5 ;
+			img.y = tempH-img.height ;
+			img.touchable = false ;
+			_btnDecor.addChild( img );
+			_btnDecor.onRelease.add(onClickHandler);
+			
+			
+			img = EmbedManager.getUIImage( "ShopOverViewBusinessButton" );
+			tempW = img.width;
+			tempH = img.height ;
+			_btnBusiness = new Button();
+			_btnBusiness.x = btnBgs[3].x+(btnBgs[3].width-img.width)*0.5 ;
+			_btnBusiness.y = btnBgs[3].y+(btnBgs[3].height-img.height)*0.5 ;
+			_btnBusiness.defaultSkin = img ;
+			addChild(_btnBusiness);
+			img = EmbedManager.getUIImage( "BUSINESS_en" );
+			img.x = (tempW-img.width)*0.5 ;
+			img.y = tempH-img.height ;
+			img.touchable = false ;
+			_btnBusiness.addChild( img );
+			_btnBusiness.onRelease.add(onClickHandler);
+			
+			
+			img = EmbedManager.getUIImage( "ShopOverViewIndustryButton" );
+			tempW = img.width;
+			tempH = img.height ;
+			_btnIndustry = new Button();
+			_btnIndustry.x = btnBgs[4].x+(btnBgs[4].width-img.width)*0.5 ;
+			_btnIndustry.y = btnBgs[4].y+(btnBgs[4].height-img.height)*0.5 ;
+			_btnIndustry.defaultSkin = img ;
+			addChild(_btnIndustry);
+			img = EmbedManager.getUIImage( "INDUSTRY_en" );
+			img.x = (tempW-img.width)*0.5 ;
+			img.y = tempH-img.height ;
+			img.touchable = false ;
+			_btnIndustry.addChild( img );
+			_btnIndustry.onRelease.add(onClickHandler);
+			
+			
+			img = EmbedManager.getUIImage( "ShopOverViewWondersButton" );
+			tempW = img.width;
+			tempH = img.height ;
+			_btnWonders = new Button();
+			_btnWonders.x = btnBgs[5].x+(btnBgs[5].width-img.width)*0.5 ;
+			_btnWonders.y = btnBgs[5].y+(btnBgs[5].height-img.height)*0.5 ;
+			_btnWonders.defaultSkin = img ;
+			addChild(_btnWonders);
+			img = EmbedManager.getUIImage( "WONDERS_en" );
+			img.x = (tempW-img.width)*0.5 ;
+			img.y = tempH-img.height ;
+			img.touchable = false ;
+			_btnWonders.addChild( img );
+			_btnWonders.onRelease.add(onClickHandler);
+			
 			
 			img = EmbedManager.getUIImage( CommUISetting.POPUPCLOSEBUTTONUP );
 			_btnClose = new Button();
@@ -142,6 +205,7 @@ package local.view.shop
 		
 		private function close():void{
 			touchable=false;
+			GameWorld.instance.visible=true;
 			TweenLite.to( this , 0.4 , { scaleX:0.3 , scaleY:0 , alpha:0 , ease: Back.easeIn , onComplete:onTweenCom});
 		}
 		
@@ -151,7 +215,6 @@ package local.view.shop
 		override protected function removedFromStageHandler(e:Event):void{
 			super.removedFromStageHandler(e);
 			GameWorld.instance.run();
-			GameWorld.instance.visible=true;
 		}
 	}
 }
