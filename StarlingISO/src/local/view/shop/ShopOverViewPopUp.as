@@ -43,12 +43,21 @@ package local.view.shop
 		
 		private function init():void
 		{
+			//背景
 			var img:Image = EmbedManager.getUIImage( CommUISetting.POPUPBG ) ;
 			addChild( img );
 			_wid = img.width ;
 			_het = img.height ;
 			pivotX = _wid>>1 ;
 			pivotY = _het>>1 ;
+			//关闭按钮
+			img = EmbedManager.getUIImage( CommUISetting.POPUPCLOSEBUTTONUP );
+			_btnClose = new GameButton();
+			_btnClose.defaultSkin = img ;
+			addChild(_btnClose);
+			_btnClose.x = _wid - img.width - 10 ;
+			_btnClose.y = 10 ;
+			_btnClose.onRelease.add(onClickHandler);
 			
 			
 			img = EmbedManager.getUIImage( "ShopOverViewTitle_en" ) ;
@@ -166,15 +175,6 @@ package local.view.shop
 			img.touchable = false ;
 			_btnWonders.addChild( img );
 			_btnWonders.onRelease.add(onClickHandler);
-			
-			
-			img = EmbedManager.getUIImage( CommUISetting.POPUPCLOSEBUTTONUP );
-			_btnClose = new GameButton();
-			_btnClose.defaultSkin = img ;
-			addChild(_btnClose);
-			_btnClose.x = _wid - img.width - 10 ;
-			_btnClose.y = 10 ;
-			_btnClose.onRelease.add(onClickHandler);
 		}
 		
 		override protected function addedToStageHandler(e:Event):void

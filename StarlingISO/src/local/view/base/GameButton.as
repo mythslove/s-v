@@ -4,16 +4,19 @@ package local.view.base
 	
 	import local.util.GameUtil;
 	
+	import starling.display.DisplayObject;
 	import starling.display.Quad;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
+	import starling.textures.Texture;
 	
 	public class GameButton extends Button
 	{
-		public function GameButton()
+		public function GameButton( defaultSkin:DisplayObject =null)
 		{
 			super();
+			if(!defaultSkin) this.defaultSkin = defaultSkin ;
 			addEventListener(TouchEvent.TOUCH , onTouchHandler );
 		}
 		
