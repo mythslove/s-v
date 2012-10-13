@@ -29,5 +29,9 @@ package local.view.base
 			}
 		}
 		
+		override public function dispose():void{
+			super.dispose();
+			removeEventListener(TouchEvent.TOUCH , onTouchHandler );
+		}
 	}
 }
