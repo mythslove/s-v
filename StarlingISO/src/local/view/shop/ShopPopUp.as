@@ -4,7 +4,6 @@ package local.view.shop
 	import com.greensock.easing.Back;
 	
 	import feathers.controls.Button;
-	import feathers.display.Image;
 	import feathers.display.Sprite;
 	
 	import local.comm.CommUISetting;
@@ -15,10 +14,18 @@ package local.view.shop
 	import local.view.base.BaseView;
 	import local.view.base.GameButton;
 	
+	import starling.display.Image;
 	import starling.events.Event;
 	
 	public class ShopPopUp extends BaseView
 	{
+		private static var _instance:ShopPopUp;
+		public static function get instance():ShopPopUp{
+			if(!_instance) _instance = new ShopPopUp();
+			return _instance ;
+		}
+		//=====================================
+		
 		public var _container:Sprite ;
 		public var _btnClose:GameButton ;
 		
@@ -48,6 +55,9 @@ package local.view.shop
 			_btnClose.x = _wid - img.width - 10 ;
 			_btnClose.y = 10 ;
 			_btnClose.onRelease.add(onClickHandler);
+			
+			_container = new Sprite();
+			addChild(_container);
 		}
 		
 		
@@ -75,6 +85,37 @@ package local.view.shop
 					break ;
 			}
 		}
+		
+		/**
+		 * 显示 
+		 * @param type BuildingType
+		 */		
+		public function show( type:String ):void
+		{
+			_container.removeChildren();
+//			switch( type )
+//			{
+//				case BuildingType.HOME:
+//					_container.addChild(HomePanel.instance) ;
+//					break ;
+//				case BuildingType.DECORATION:
+//					_container.addChild(DecorationPanel.instance) ;
+//					break ;
+//				case BuildingType.BUSINESS:
+//					_container.addChild(BusinessPanel.instance) ;
+//					break ;
+//				case BuildingType.INDUSTRY:
+//					_container.addChild(IndustryPanel.instance) ;
+//					break ;
+//				case BuildingType.COMMUNITY:
+//					_container.addChild(CommunityPanel.instance) ;
+//					break ;
+//				case BuildingType.WONDERS:
+//					_container.addChild(WonderPanel.instance) ;
+//					break ;
+//			}
+		}
+		
 		
 		private function close():void{
 			touchable=false;

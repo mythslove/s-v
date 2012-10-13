@@ -7,6 +7,7 @@ package local.view.shop
 	
 	import local.comm.CommUISetting;
 	import local.comm.GameSetting;
+	import local.enum.BuildingType;
 	import local.map.GameWorld;
 	import local.util.EmbedManager;
 	import local.util.PopUpManager;
@@ -199,6 +200,30 @@ package local.view.shop
 				case _btnClose:
 					close();
 					break ;
+				case _btnHomes:
+					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , false );
+					ShopPopUp.instance.show(BuildingType.HOME);
+					PopUpManager.instance.removeCurrentPopup() ;
+					break ;
+//				case _btnDecor:
+//					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , false );
+//					ShopPopUp.instance.show(BuildingType.DECORATION);
+//					PopUpManager.instance.removeCurrentPopup() ;
+//					break ;
+//				case _btnBusiness:
+//					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , false );
+//					ShopPopUp.instance.show(BuildingType.BUSINESS);
+//					PopUpManager.instance.removeCurrentPopup() ;
+//					break ;
+//				case _btnIndustry:
+//					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , false );
+//					ShopPopUp.instance.show(BuildingType.INDUSTRY);
+//					PopUpManager.instance.removeCurrentPopup() ;
+//					break ;
+//				case _btnCommunity:
+//					break ;
+//				case _btnWonders:
+//					break ;
 			}
 		}
 		
@@ -214,6 +239,7 @@ package local.view.shop
 		override protected function removedFromStageHandler(e:Event):void{
 			super.removedFromStageHandler(e);
 			GameWorld.instance.run();
+			GameWorld.instance.visible=true;
 		}
 	}
 }
