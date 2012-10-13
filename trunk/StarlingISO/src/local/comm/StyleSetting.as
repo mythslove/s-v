@@ -1,6 +1,6 @@
 package local.comm
 {
-	public class CommUISetting
+	public class StyleSetting
 	{
 		public static const POPUPBG :String= "popupbg";
 		

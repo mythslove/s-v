@@ -6,13 +6,15 @@ package local.view.shop
 	import feathers.controls.Button;
 	import feathers.display.Sprite;
 	
-	import local.comm.CommUISetting;
+	import local.comm.StyleSetting;
 	import local.comm.GameSetting;
+	import local.enum.BuildingType;
 	import local.map.GameWorld;
 	import local.util.EmbedManager;
 	import local.util.PopUpManager;
 	import local.view.base.BaseView;
 	import local.view.base.GameButton;
+	import local.view.shop.panel.HomePanel;
 	
 	import starling.display.Image;
 	import starling.events.Event;
@@ -41,14 +43,14 @@ package local.view.shop
 		private function init():void
 		{
 			//背景
-			var img:Image = EmbedManager.getUIImage( CommUISetting.POPUPBG ) ;
+			var img:Image = EmbedManager.getUIImage( StyleSetting.POPUPBG ) ;
 			addChild( img );
 			_wid = img.width ;
 			_het = img.height ;
 			pivotX = _wid>>1 ;
 			pivotY = _het>>1 ;
 			//关闭按钮
-			img = EmbedManager.getUIImage( CommUISetting.POPUPCLOSEBUTTONUP );
+			img = EmbedManager.getUIImage( StyleSetting.POPUPCLOSEBUTTONUP );
 			_btnClose = new GameButton();
 			_btnClose.defaultSkin = img ;
 			addChild(_btnClose);
@@ -93,11 +95,11 @@ package local.view.shop
 		public function show( type:String ):void
 		{
 			_container.removeChildren();
-//			switch( type )
-//			{
-//				case BuildingType.HOME:
-//					_container.addChild(HomePanel.instance) ;
-//					break ;
+			switch( type )
+			{
+				case BuildingType.HOME:
+					_container.addChild(HomePanel.instance) ;
+					break ;
 //				case BuildingType.DECORATION:
 //					_container.addChild(DecorationPanel.instance) ;
 //					break ;
@@ -113,7 +115,7 @@ package local.view.shop
 //				case BuildingType.WONDERS:
 //					_container.addChild(WonderPanel.instance) ;
 //					break ;
-//			}
+			}
 		}
 		
 		
