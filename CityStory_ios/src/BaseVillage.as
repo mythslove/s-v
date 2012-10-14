@@ -11,7 +11,6 @@ package
 	import flash.display.*;
 	import flash.events.Event;
 	import flash.net.registerClassAlias;
-	import flash.system.Capabilities;
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
 	
@@ -38,33 +37,27 @@ package
 			stage.color = 0 ;
 			NativeApplication.nativeApplication.executeInBackground = true ;
 			
-			if(Capabilities.os.toLowerCase().indexOf("windows")==-1)
-			{
-				if (Capabilities.screenResolutionY <=960)
-				{
-					if(Capabilities.screenResolutionY<960){
-						this.scaleX = 0.5;
-						this.scaleY = 0.5;
-					}
-					GameSetting.SCREEN_WIDTH = 960;
-					GameSetting.SCREEN_HEIGHT = 640;
+			if(stage.fullScreenWidth >= 1024){
+				//ipad1,2,3
+//				GameSetting.isIPad = true ;
+				GameSetting.SCREEN_HEIGHT = 768 ;
+				GameSetting.SCREEN_WIDTH = 1024;
+				if(stage.fullScreenWidth==2048){
+					scaleX = scaleY = 2;
 				}
-//				else if(Capabilities.screenResolutionY ==1136)
-//				{
-//					GameSetting.SCREEN_WIDTH = 1136;
-//					GameSetting.SCREEN_HEIGHT = 640 ;
-//				}
-//				else 
-//				{
-//					if(Capabilities.screenResolutionY==2048){
-//						this.scaleX = 2;
-//						this.scaleY = 2;
-//					}
-//					GameSetting.SCREEN_WIDTH = 1024;
-//					GameSetting.SCREEN_HEIGHT = 768;
-//					GameSetting.minZoom = 0.4 ;
-//					GameSetting.device = "ipad";
-//				}
+			}else if( stage.stage.fullScreenHeight >= 1136){
+				//iphone5
+				GameSetting.isIPad = false ;
+				GameSetting.SCREEN_HEIGHT  = 640 ;
+				GameSetting.SCREEN_WIDTH  = 960;
+			}else {
+				//iphone4,4s,3GS
+				GameSetting.isIPad = false ;
+				GameSetting.SCREEN_HEIGHT =640 ;
+				GameSetting.SCREEN_WIDTH = 960;
+				if(stage.fullScreenWidth<960){
+					scaleX = scaleY = 0.5 ;
+				}
 			}
 				
 			TweenPlugin.activate([BezierPlugin]);

@@ -45,7 +45,7 @@ package local.view.shop
 		}
 		
 		private function showTweenOver():void{
-			GameWorld.instance.visible=false;
+			if(GameSetting.SCREEN_WIDTH<1024) GameWorld.instance.visible=false;
 		}
 		
 		private function onMouseHandler( e:MouseEvent ):void

@@ -250,7 +250,7 @@ package  local.map
 			var basicBuild:BasicBuilding ;
 			var bvo:BuildingVO ;
 			var treeIndex:int ;
-			var rate:Number = GameSetting.device=="iphone" ? 0.95 : 0.92 ;
+			var rate:Number = GameSetting.isIPad ? 0.92 : 0.95 ;
 			for( i = 0 ; i<GameSetting.GRID_X ; ++i  ){
 				for( j = 0 ; j<GameSetting.GRID_Z ;  ++j ){
 					if( Math.random()>rate && !gameGridData.getNode(i,j).walkable &&
