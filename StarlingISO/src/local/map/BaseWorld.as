@@ -105,19 +105,19 @@ package local.map
 			map.addChild(img);
 			offset = img.width ;
 			
-			img = EmbedManager.getMapImage("bottomsea2");
+ 			img = EmbedManager.getMapImage("bottomsea2");
 			img.x = offset ; img.y = GameSetting.MAP_HEIGHT-img.height ;
 			map.addChild(img);
 			offset += img.width ;
 			
 			img = EmbedManager.getMapImage("bottomsea2");
-			img.scaleX = -1 ;
+			img.scaleX = -1 ; img.pivotX = img.width ;
 			img.x = offset ; img.y = GameSetting.MAP_HEIGHT-img.height ;
 			map.addChild(img);
 			offset += img.width ;
 			
 			img =EmbedManager.getMapImage("bottomsea1");
-			img.scaleX = -1 ;
+			img.scaleX = -1 ; img.pivotX = img.width ;
 			img.x = offset ; img.y = GameSetting.MAP_HEIGHT-img.height ;
 			map.addChild(img);
 			//=================================
@@ -140,7 +140,7 @@ package local.map
 			img = EmbedManager.getMapImage("rightsea1");
 			img. x=GameSetting.MAP_WIDTH-img.width ; img.y = offset ;
 			map.addChild(img);
-			offset += img.height+50 ;
+			offset += img.height ;
 			
 			img = EmbedManager.getMapImage("rightsea2");
 			img. x=GameSetting.MAP_WIDTH-img.width ; img.y = offset ;
@@ -158,7 +158,7 @@ package local.map
 			img = EmbedManager.getMapImage("smallheightmap1");
 			img.x = 3600 ;  img.y = 1800 ;
 			map.addChild(img);
-			
+	
 			map.flatten();
 			this.setBackGround( map );
 		}
@@ -327,6 +327,7 @@ package local.map
 				var pos:Point = touch.getLocation(stage); 
 				if(touch.phase==TouchPhase.BEGAN)
 				{
+					_moveSpeed = 0.4 ;
 					_touchFinger1.x = pos.x ;
 					_touchFinger1.y = pos.y ;
 					_endX = x ;

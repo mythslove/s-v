@@ -1,6 +1,8 @@
 package local.map
 {
+	import local.comm.GameData;
 	import local.enum.BuildingType;
+	import local.enum.VillageMode;
 	import local.map.item.BaseBuilding;
 	import local.map.item.Road;
 	import local.model.BuildingModel;
@@ -9,6 +11,7 @@ package local.map
 	import local.vo.BuildingVO;
 	
 	import starling.display.*;
+	import starling.events.Event;
 	
 	public class GameWorld extends BaseWorld
 	{
@@ -18,8 +21,10 @@ package local.map
 			return _instance ;
 		}
 		//-----------------------------------------------------------------
-		public function GameWorld()
-		{
+		override protected function addedToStageHandler(e:Event):void{
+			super.addedToStageHandler(e);
+			GameWorld.instance.showBuildings();
+			GameData.villageMode = VillageMode.NORMAL ;
 		}
 		
 		public function goHome():void

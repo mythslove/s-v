@@ -71,9 +71,6 @@ package
 			GlobalDispatcher.instance.removeEventListener( VillageEvent.READED_VILLAGE , villageEvtHandler );
 			GlobalDispatcher.instance.removeEventListener( VillageEvent.NEW_VILLAGE , villageEvtHandler );
 			
-			GameWorld.instance.showBuildings();
-//			GameData.villageMode = VillageMode.NORMAL ;
-			
 			NativeApplication.nativeApplication.addEventListener(Event.ACTIVATE , activateHandler);
 			NativeApplication.nativeApplication.addEventListener(Event.DEACTIVATE , deactivateHandler );
 		}
