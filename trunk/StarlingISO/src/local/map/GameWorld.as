@@ -3,6 +3,8 @@ package local.map
 	import local.enum.BuildingType;
 	import local.map.item.BaseBuilding;
 	import local.map.item.Road;
+	import local.model.BuildingModel;
+	import local.model.FriendVillageModel;
 	import local.util.BuildingFactory;
 	import local.vo.BuildingVO;
 	
@@ -26,7 +28,7 @@ package local.map
 		}
 		
 		private var _mouseBuilding:BaseBuilding; //按下时点击到的建筑
-		private var _expandLandBtns:Vector.<ExpandLandButton> = new Vector.<ExpandLandButton>();//扩地按钮
+//		private var _expandLandBtns:Vector.<ExpandLandButton> = new Vector.<ExpandLandButton>();//扩地按钮
 		
 		/** 
 		 * 显示所有的建筑 
@@ -38,7 +40,7 @@ package local.map
 				var myModel:BuildingModel = BuildingModel.instance ;
 				if(myModel.expandBuilding){ //有扩地
 					buildingScene.addBuilding( BuildingFactory.createBuildingByVO( myModel.expandBuilding ) , false , true );
-					visibleExpandSigns(false);
+//					visibleExpandSigns(false);
 				}
 				tempShowBuilding(myModel.basicTrees);
 				tempShowBuilding(myModel.business);
@@ -50,7 +52,7 @@ package local.map
 				roadScene.sortAll();
 				buildingScene.sortAll();
 				if(iconScene.visible){
-					sortIcons();
+//					sortIcons();
 				}
 				run() ;
 			}

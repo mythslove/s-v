@@ -97,66 +97,66 @@ package local.map
 			var offset:Number ;
 			var map:Sprite = new Sprite();
 			
-			var tiledImg:TiledImage = new TiledImage(EmbedManager.createTextureByName("MapBlock"));
+			var tiledImg:TiledImage = new TiledImage(EmbedManager.getMapTexture("mapBlock"));
 			tiledImg.setSize( GameSetting.MAP_WIDTH,GameSetting.MAP_HEIGHT);
 			map.addChild( tiledImg );
 			
-			var img:Image = new Image(EmbedManager.createTextureByName("Bottomsea1"));
+			var img:Image = EmbedManager.getMapImage("bottomsea1");
 			img.y = GameSetting.MAP_HEIGHT-img.height ;
 			map.addChild(img);
 			offset = img.width ;
 			
-			img = new Image(EmbedManager.createTextureByName("Bottomsea2"));
+			img = EmbedManager.getMapImage("bottomsea2");
 			img.x = offset ; img.y = GameSetting.MAP_HEIGHT-img.height ;
 			map.addChild(img);
 			offset += img.width ;
 			
-			img = new Image(EmbedManager.createTextureByName("Bottomsea2"));
+			img = EmbedManager.getMapImage("bottomsea2");
 			img.scaleX = -1 ;
 			img.x = offset ; img.y = GameSetting.MAP_HEIGHT-img.height ;
 			map.addChild(img);
 			offset += img.width ;
 			
-			img = new Image(EmbedManager.createTextureByName("Bottomsea1"));
+			img =EmbedManager.getMapImage("bottomsea1");
 			img.scaleX = -1 ;
 			img.x = offset ; img.y = GameSetting.MAP_HEIGHT-img.height ;
 			map.addChild(img);
 			//=================================
-			img = new Image(EmbedManager.createTextureByName("HeightMap1"));
+			img = EmbedManager.getMapImage("heightmap1");
 			img.y = 300 ;
 			map.addChild(img);
 			offset = img.width ;
 			
-			img = new Image(EmbedManager.createTextureByName("HeightMap2"));
+			img = EmbedManager.getMapImage("heightmap2");
 			img. x=offset ; img.y = 215 ;
 			map.addChild(img);
 			offset += img.width+50 ;
 			
-			img = new Image(EmbedManager.createTextureByName("RightHeight1"));
+			img =EmbedManager.getMapImage("rightheight1");
 			img.x = offset ;
 			map.addChild(img);
 			
 			//=========================
 			offset = 100;
-			img = new Image(EmbedManager.createTextureByName("Rightsea1"));
+			img = EmbedManager.getMapImage("rightsea1");
 			img. x=GameSetting.MAP_WIDTH-img.width ; img.y = offset ;
 			map.addChild(img);
 			offset += img.height+50 ;
 			
-			img = new Image(EmbedManager.createTextureByName("Rightsea2"));
+			img = EmbedManager.getMapImage("rightsea2");
 			img. x=GameSetting.MAP_WIDTH-img.width ; img.y = offset ;
 			map.addChild(img);
 			offset += img.height ;
 			
-			img = new Image(EmbedManager.createTextureByName("Water1"));
+			img = EmbedManager.getMapImage("water1");
 			img. x = 2760 ; img.y = 300 ;
 			map.addChild(img);
 			//===============================
-			img = new Image(EmbedManager.createTextureByName("SmallHeightMap"));
+			img = EmbedManager.getMapImage("smallheightmap");
 			img.y = 1000 ;
 			map.addChild(img);
 			
-			img = new Image(EmbedManager.createTextureByName("SmallHeightMap"));
+			img = EmbedManager.getMapImage("smallheightmap");
 			img.x = 3600 ;  img.y = 1800 ;
 			map.addChild(img);
 			
