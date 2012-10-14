@@ -6,6 +6,7 @@ package local.view.bottom
 	import local.util.EmbedManager;
 	import local.util.PopUpManager;
 	import local.view.base.BaseView;
+	import local.view.base.GameButton;
 	import local.view.shop.ShopOverViewPopUp;
 	
 	import starling.display.Image;
@@ -13,7 +14,7 @@ package local.view.bottom
 	
 	public class BottomBar extends BaseView
 	{
-		private var _btnMarket:Button;
+		private var _btnMarket:GameButton ;
 		
 		public function BottomBar()
 		{
@@ -22,7 +23,7 @@ package local.view.bottom
 		
 		override protected function addedToStageHandler(e:Event):void
 		{
-			_btnMarket = new Button();
+			_btnMarket = new GameButton();
 			var img:Image =EmbedManager.getUIImage("MarketButtonUp");
 			_btnMarket.defaultSkin = img;
 			_btnMarket.validate();
