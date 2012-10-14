@@ -5,8 +5,8 @@ package local.view.shop
 	
 	import feathers.controls.Button;
 	
-	import local.comm.StyleSetting;
 	import local.comm.GameSetting;
+	import local.comm.StyleSetting;
 	import local.enum.BuildingType;
 	import local.map.GameWorld;
 	import local.util.EmbedManager;
@@ -201,7 +201,7 @@ package local.view.shop
 					close();
 					break ;
 				case _btnHomes:
-					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , false );
+					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , GameSetting.isIpad );
 					ShopPopUp.instance.show(BuildingType.HOME);
 					PopUpManager.instance.removeCurrentPopup() ;
 					break ;
