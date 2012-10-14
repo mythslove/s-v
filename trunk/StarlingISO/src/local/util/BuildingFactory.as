@@ -19,43 +19,43 @@ package local.util
 		public static function createBuildingByVO( buildingVO:BuildingVO ):BaseBuilding
 		{
 			var building:BaseBuilding ;
-//			switch( buildingVO.baseVO.type)
-//			{
-//				case BuildingType.BASIC:
-//					building = new BasicBuilding(buildingVO);
-//					break ;
-//				case BuildingType.DECORATION:
-//					if(buildingVO.baseVO.subClass==BuildingType.DECORATION_ROAD || 
-//						buildingVO.baseVO.subClass==BuildingType.DECORATION_GROUND)
-//					{
-//						building = new Road(buildingVO);
-//					}else{
-//						building = new BaseBuilding(buildingVO);
-//					}
-//					break ;
-//				case BuildingType.BUSINESS:
-//					building = new Business(buildingVO);
-//					break ;
-//				case BuildingType.INDUSTRY:
-//					building = new Industry(buildingVO);
-//					break ;
-//				case BuildingType.HOME:
-//					building = new Home(buildingVO);
-//					break ;
-//				case BuildingType.WONDERS:
-//					building = new Community(buildingVO);
-//					break ;
-//				case BuildingType.COMMUNITY:
-//					building = new Community(buildingVO);
-//					break ;
-//				case BuildingType.EXPAND_BUILDING:
-//					building = new ExpandLandBuilding(buildingVO);
-//					break ;
-//				default:
-//					building = new Building(buildingVO);
-//					break ;
-//			}
-//			return building ;
+			switch( buildingVO.baseVO.type)
+			{
+				case BuildingType.BASIC:
+					building = new BasicBuilding(buildingVO);
+					break ;
+				case BuildingType.DECORATION:
+					if(buildingVO.baseVO.subClass==BuildingType.DECORATION_ROAD || 
+						buildingVO.baseVO.subClass==BuildingType.DECORATION_GROUND)
+					{
+						building = new Road(buildingVO);
+					}else{
+						building = new BaseBuilding(buildingVO);
+					}
+					break ;
+				case BuildingType.BUSINESS:
+					building = new Business(buildingVO);
+					break ;
+				case BuildingType.INDUSTRY:
+					building = new Industry(buildingVO);
+					break ;
+				case BuildingType.HOME:
+					building = new Home(buildingVO);
+					break ;
+				case BuildingType.WONDERS:
+					building = new Community(buildingVO);
+					break ;
+				case BuildingType.COMMUNITY:
+					building = new Community(buildingVO);
+					break ;
+				case BuildingType.EXPAND_BUILDING:
+					building = new ExpandLandBuilding(buildingVO);
+					break ;
+				default:
+					building = new Building(buildingVO);
+					break ;
+			}
+			return building ;
 		}
 		
 		/**

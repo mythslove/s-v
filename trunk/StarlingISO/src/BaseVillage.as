@@ -105,7 +105,16 @@ package
 		private function registerVO():void
 		{
 			registerClassAlias( "BaseBuildingVO" , BaseBuildingVO );
+			registerClassAlias( "BuildingVO" , BuildingVO );
+			registerClassAlias( "PlayerVO" , PlayerVO );
+			registerClassAlias( "LandVO" , LandVO );
+			registerClassAlias( "LevelVO" , LevelVO );
+			registerClassAlias( "StorageBuildingVO" , StorageBuildingVO );
+			registerClassAlias( "ExpandVO" , ExpandVO );
 			registerClassAlias( "ProductVO" , ProductVO );
+			registerClassAlias( "ComponentVO" , ComponentVO );
+			registerClassAlias( "QuestVO" , QuestVO );
+			registerClassAlias( "QuestTaskVO" , QuestTaskVO );
 		}
 	}
 }

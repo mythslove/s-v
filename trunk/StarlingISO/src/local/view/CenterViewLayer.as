@@ -10,19 +10,19 @@ package local.view
 	
 	import starling.events.Event;
 	
-	public class UILayer extends BaseView
+	public class CenterViewLayer extends BaseView
 	{
-		private static var _instance:UILayer; 
-		public static function get instance():UILayer
+		private static var _instance:CenterViewLayer; 
+		public static function get instance():CenterViewLayer
 		{
-			if(!_instance)  _instance= new UILayer();
+			if(!_instance)  _instance= new CenterViewLayer();
 			return _instance ;
 		}
 		//-----------------------------------------------------------
 		
 		public var bottomBar:BottomBar ;
 		
-		public function UILayer()
+		public function CenterViewLayer()
 		{
 			FeathersControl.defaultTextRendererFactory = function():ITextRenderer{
 				return new TextFieldTextRenderer();

@@ -6,7 +6,7 @@ package local
 	import local.map.GameWorld;
 	import local.util.PopUpManager;
 	import local.util.TextureAssets;
-	import local.view.UILayer;
+	import local.view.CenterViewLayer;
 	
 	import starling.display.*;
 	import starling.events.Event;
@@ -30,7 +30,7 @@ package local
 			
 			addChild( GameWorld.instance );
 			
-			addChild(UILayer.instance);
+			addChild(CenterViewLayer.instance);
 			
 			addChild(PopUpManager.instance);
 			
