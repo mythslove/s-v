@@ -2,10 +2,9 @@ package local.util
 {
 	import bing.utils.DateUtil;
 	
+	import flash.events.Event;
+	import flash.events.EventDispatcher;
 	import flash.utils.getTimer;
-	
-	import starling.events.Event;
-	import starling.events.EventDispatcher;
 	
 	[Event(name="complete",type="flash.events.Event")]
 	public class GameTimer extends EventDispatcher

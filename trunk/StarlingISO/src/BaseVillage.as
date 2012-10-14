@@ -4,6 +4,9 @@ package
 	import bing.res.ResProgressEvent;
 	import bing.res.ResVO;
 	
+	import com.greensock.plugins.BezierPlugin;
+	import com.greensock.plugins.TweenPlugin;
+	
 	import flash.desktop.NativeApplication;
 	import flash.display.*;
 	import flash.events.Event;
@@ -12,7 +15,7 @@ package
 	import flash.utils.Dictionary;
 	
 	import local.comm.GameSetting;
-	import local.model.ShopModel;
+	import local.model.*;
 	import local.util.ResourceUtil;
 	import local.vo.*;
 	
@@ -29,6 +32,7 @@ package
 			stage.mouseChildren = false ;
 			NativeApplication.nativeApplication.executeInBackground = true ;
 			
+			TweenPlugin.activate([BezierPlugin]);
 			registerVO();
 			loadConfig();
 		}
@@ -45,6 +49,10 @@ package
 			var bytes:ByteArray = e.resVO.resObject as ByteArray;
 			ShopModel.instance.allBuildingHash = bytes.readObject() as Dictionary ;
 			ShopModel.instance.baseBuildings = bytes.readObject() as Vector.<BaseBuildingVO> ;
+			LandModel.instance.expands = bytes.readObject() as Vector.<ExpandVO>;
+			PlayerModel.instance.levels =  bytes.readObject() as Dictionary ;
+			CompsModel.instance.allComps = bytes.readObject() as Dictionary ;
+			QuestModel.instance.allQuestArray = bytes.readObject() as Vector.<QuestVO>  ;
 			ResourceUtil.instance.deleteRes( "GameConfig");
 			loadRes();
 		}

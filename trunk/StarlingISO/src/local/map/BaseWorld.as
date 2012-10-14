@@ -2,7 +2,6 @@ package local.map
 {
 	import bing.iso.path.Grid;
 	import bing.starling.component.Rhombus;
-	import bing.starling.iso.SIsoGrid;
 	import bing.starling.iso.SIsoObject;
 	import bing.starling.iso.SIsoScene;
 	import bing.starling.iso.SIsoUtils;
@@ -152,14 +151,15 @@ package local.map
 			img. x = 2760 ; img.y = 300 ;
 			map.addChild(img);
 			//===============================
-			img = EmbedManager.getMapImage("smallheightmap");
+			img = EmbedManager.getMapImage("smallheightmap1");
 			img.y = 1000 ;
 			map.addChild(img);
 			
-			img = EmbedManager.getMapImage("smallheightmap");
+			img = EmbedManager.getMapImage("smallheightmap1");
 			img.x = 3600 ;  img.y = 1800 ;
 			map.addChild(img);
 			
+			map.flatten();
 			this.setBackGround( map );
 		}
 	
@@ -181,10 +181,10 @@ package local.map
 			addScene( effectScene );
 			addScene(topScene);
 			//显示地图网格
-			var gridScene:SIsoScene = new SIsoScene(GameSetting.GRID_SIZE);
-			gridScene.addChild( new SIsoGrid(GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE)) as SIsoGrid
-			gridScene.flatten() ;
-			this.addScene(gridScene);
+//			var gridScene:SIsoScene = new SIsoScene(GameSetting.GRID_SIZE);
+//			gridScene.addChild( new SIsoGrid(GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE)) as SIsoGrid
+//			gridScene.flatten() ;
+//			this.addScene(gridScene);
 			//初始化地图
 			initMap();
 			//添加侦听

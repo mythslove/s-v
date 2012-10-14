@@ -1,5 +1,7 @@
 package local.map.item
 {
+	import flash.events.Event;
+	
 	import local.comm.GameData;
 	import local.enum.BuildingStatus;
 	import local.enum.VillageMode;
@@ -13,8 +15,6 @@ package local.map.item
 	import local.vo.BaseBuildingVO;
 	import local.vo.BitmapAnimResVO;
 	import local.vo.BuildingVO;
-	
-	import starling.events.Event;
 	
 	/**
 	 * 正在扩地时，显示的建筑 
@@ -56,7 +56,7 @@ package local.map.item
 //		}
 		
 		/*计时完成*/
-		override protected function gameTimerCompleteHandler( e:Event ):void
+		override protected function gameTimerCompleteHandler( e:flash.events.Event ):void
 		{
 			//删除此对象
 			GameWorld.instance.buildingScene.removeBuilding( this );
