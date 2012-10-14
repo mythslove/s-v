@@ -59,8 +59,10 @@ package local.view.base
 		override public function dispose():void
 		{
 			super.dispose();
-			_img.dispose() ;
-			_img = null ;
+			if(_img){
+				_img.dispose() ;
+				_img = null ;
+			}
 		}
 	}
 }

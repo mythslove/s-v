@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker http://texturepacker.com-->
-<!-- $TexturePacker:SmartUpdate:44d27a67b1f7bd73e93a41c66053c3aa$ -->
+<!-- $TexturePacker:SmartUpdate:e1ded6239b2b7fd4bc2c1c340a09836b$ -->
 <TextureAtlas imagePath="ui.png">
     <SubTexture name="BUSINESS_en" x="594" y="969" width="176" height="37" frameX="-23" frameY="-6" frameWidth="220" frameHeight="47"/>
     <SubTexture name="COMMUNITY_en" x="252" y="790" width="216" height="37" frameX="-1" frameY="-5" frameWidth="220" frameHeight="47"/>
@@ -8,8 +8,8 @@
     <SubTexture name="HOMES_en" x="654" y="788" width="128" height="37" frameX="-46" frameY="-6" frameWidth="220" frameHeight="47"/>
     <SubTexture name="INDUSTRY_en" x="414" y="969" width="178" height="37" frameX="-21" frameY="-5" frameWidth="220" frameHeight="47"/>
     <SubTexture name="MarketButtonUp" x="898" y="646" width="73" height="75"/>
-    <SubTexture name="PopUpCloseButtonUp" x="729" y="646" width="67" height="67"/>
-    <SubTexture name="ShopItemBgUp" x="660" y="646" width="67" height="68"/>
+    <SubTexture name="PopUpCloseButtonUp" x="732" y="646" width="67" height="67"/>
+    <SubTexture name="ShopItemBgUp" x="660" y="646" width="70" height="70"/>
     <SubTexture name="ShopOverViewBusinessButton" x="414" y="829" width="202" height="138" frameX="-2" frameY="-11" frameWidth="208" frameHeight="152"/>
     <SubTexture name="ShopOverViewCommunityButton" x="456" y="646" width="202" height="140" frameX="-1" frameY="-9" frameWidth="208" frameHeight="152"/>
     <SubTexture name="ShopOverViewDecorButton" x="252" y="646" width="202" height="142" frameX="-2" frameY="-7" frameWidth="208" frameHeight="152"/>
@@ -20,7 +20,7 @@
     <SubTexture name="ShopOverViewWondersButton" x="618" y="827" width="204" height="130" frameX="0" frameY="-19" frameWidth="208" frameHeight="152"/>
     <SubTexture name="TabButtonDown" x="824" y="786" width="64" height="64"/>
     <SubTexture name="TabButtonSelected" x="926" y="723" width="64" height="64"/>
-    <SubTexture name="TabButtonUp" x="798" y="646" width="64" height="64"/>
+    <SubTexture name="TabButtonUp" x="801" y="646" width="64" height="64"/>
     <SubTexture name="WONDERS_en" x="470" y="788" width="182" height="37" frameX="-16" frameY="-5" frameWidth="220" frameHeight="47"/>
     <SubTexture name="popupbg" x="2" y="2" width="962" height="642"/>
 </TextureAtlas>

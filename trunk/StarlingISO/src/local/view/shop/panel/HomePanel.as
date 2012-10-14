@@ -1,17 +1,13 @@
 package local.view.shop.panel
 {
 	
-	import com.gskinner.motion.easing.Cubic;
-	
 	import feathers.controls.Button;
 	import feathers.controls.List;
-	import feathers.controls.ScreenNavigator;
-	import feathers.controls.ScreenNavigatorItem;
+	import feathers.controls.Scroller;
 	import feathers.controls.TabBar;
 	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.data.ListCollection;
-	import feathers.layout.HorizontalLayout;
-	import feathers.motion.transitions.TabBarSlideTransitionManager;
+	import feathers.layout.TiledRowsLayout;
 	
 	import flash.text.TextFormat;
 	
@@ -37,9 +33,9 @@ package local.view.shop.panel
 		public static const  TAB_MANSIONS:String = "MANSIONS";
 		
 		
-		private var _navigator:ScreenNavigator;
 		private var _tabBar:TabBar;
-		private var _transitionManager:TabBarSlideTransitionManager;
+		private var _layout:TiledRowsLayout ;
+		private var _list:List ;
 		
 		public function HomePanel()
 		{
@@ -49,17 +45,11 @@ package local.view.shop.panel
 		
 		private function init():void
 		{
-			this._navigator = new ScreenNavigator();
-			_navigator.y = 100 ;
-			_navigator.x = 40 ;
-			_navigator.width = 800 ;
-			this._navigator.onChange.add(navigator_onChange);
-			this.addChild(this._navigator);
-			
-			this._navigator.addScreen(TAB_ALL, new ScreenNavigatorItem(getShopItemLists(TAB_ALL)));
-			this._navigator.addScreen(TAB_RESIDENCE, new ScreenNavigatorItem(getShopItemLists(TAB_RESIDENCE)));
-			this._navigator.addScreen(TAB_CONDOS, new ScreenNavigatorItem(getShopItemLists(TAB_CONDOS)));
-			this._navigator.addScreen(TAB_MANSIONS, new ScreenNavigatorItem(getShopItemLists(TAB_MANSIONS)));
+			_layout = new TiledRowsLayout();
+			_layout.paging = TiledRowsLayout.PAGING_HORIZONTAL;
+			_layout.useSquareTiles = false;
+			_layout.tileHorizontalAlign = TiledRowsLayout.HORIZONTAL_ALIGN_CENTER;
+			_layout.horizontalAlign = TiledRowsLayout.HORIZONTAL_ALIGN_CENTER;
 			
 			this._tabBar = new TabBar();
 			_tabBar.direction = LayoutMode.HORIZONTAL;
@@ -69,23 +59,32 @@ package local.view.shop.panel
 			this.addChild(this._tabBar);
 			this._tabBar.dataProvider = new ListCollection(
 				[
-					{ label: TAB_ALL, action: TAB_ALL },
-					{ label: TAB_RESIDENCE, action: TAB_RESIDENCE },
-					{ label: TAB_CONDOS, action: TAB_CONDOS },
-					{ label: TAB_MANSIONS, action: TAB_MANSIONS }
+					{ label: TAB_ALL }, { label: TAB_RESIDENCE }, { label: TAB_CONDOS }, { label: TAB_MANSIONS }
 				]);
 			_tabBar.width = _tabBar.maxWidth =_tabBar.dataProvider.data.length*160  ;
-				
-			this._transitionManager = new TabBarSlideTransitionManager(this._navigator, this._tabBar);
-			this._transitionManager.duration = 0.4;
-			this._transitionManager.ease = Cubic.easeOut;
+			
+			_list = new List();
+			_list.width = _list.maxWidth = 800 ;
+			_list.height = 340;
+			_list.itemRendererFactory = function():IListItemRenderer {
+				return new ShopItemRenderer();
+			};
+			_list.layout = _layout;
+			_list.y = 80 ;
+			_list.x = 40 ;
+			_list.scrollerProperties.snapToPages = true;
+			_list.scrollerProperties.scrollBarDisplayMode = Scroller.SCROLL_BAR_DISPLAY_MODE_NONE;
+			_list.scrollerProperties.horizontalScrollPolicy = Scroller.SCROLL_POLICY_ON;
+			addChild(_list);
+			
 		}
+		
 		
 		override protected function addedToStageHandler(e:Event):void{
 			super.addedToStageHandler(e);
 			
 			this._tabBar.selectedIndex = 0 ;
-			this._navigator.showScreen( TAB_ALL );
+			tabBar_onChange( _tabBar );
 		}
 		
 		private function tabInitializer(tab:Button , item:Object ):void
@@ -98,47 +97,18 @@ package local.view.shop.panel
 			tab.paddingLeft = tab.paddingRight = 4;
 		}
 		
-		private function getShopItemLists( name:String ):List
-		{
-			var list:List = new List();
-			if(name==TAB_ALL){
-				list.dataProvider = new ListCollection( ShopModel.instance.baseHomes );
-			}
-			list.width = list.maxWidth = 800 ;
-			list.itemRendererType = ShopItemRenderer ;
-			list.itemRendererFactory = shopItemRenderInitializer;
-			const listLayout:HorizontalLayout = new HorizontalLayout();
-			listLayout.gap = 10 ;
-			listLayout.horizontalAlign = HorizontalLayout.HORIZONTAL_ALIGN_CENTER;
-			list.layout = listLayout;
-			return list ;
-		}
-		
-		private function shopItemRenderInitializer():IListItemRenderer
-		{
-			var render:ShopItemRenderer = new ShopItemRenderer();
-			return render ;
-		}
-		
-		private function navigator_onChange(navigator:ScreenNavigator):void
-		{
-//			const dataProvider:ListCollection = this._tabBar.dataProvider;
-//			const itemCount:int = dataProvider.length;
-//			for(var i:int = 0; i < itemCount; i++)
-//			{
-//				var item:Object = dataProvider.getItemAt(i);
-//				if(navigator.activeScreenID == item.action)
-//				{
-//					this._tabBar.selectedIndex = i;
-//					break;
-//				}
-//			}
-		}
-		
 		private function tabBar_onChange(tabBar:TabBar):void
 		{
 			if(tabBar.selectedItem){
-				this._navigator.showScreen(tabBar.selectedItem.action);
+				switch(tabBar.selectedItem.label)
+				{
+					case TAB_ALL:
+						_list.dataProvider = new ListCollection( ShopModel.instance.baseHomes );
+						break ;
+					default:
+						_list.dataProvider = null ;
+						break ;
+				}
 			}
 		}
 	}
