@@ -42,14 +42,13 @@ package local.view.shop
 		public function set isSelected(value:Boolean):void{ _isSelected = value ;}
 
 		protected var _onChange:Signal = new Signal(ShopItemRenderer);
-		public function get onChange():ISignal{
-			return _onChange;
-		}
+		public function get onChange():ISignal{ return _onChange; }
 		
 
 		private var _baseVO:BaseBuildingVO ;
 		private var _wid:int = 260 ;
 		private var _het:int = 340 ;
+		private var _isMove:Boolean;
 	
 		public function ShopItemRenderer()
 		{
@@ -92,15 +91,25 @@ package local.view.shop
 				var touch:Touch = e.touches[0] ;
 				if(touch.phase==TouchPhase.BEGAN){
 					GameUtil.dark( this );
+					_isMove = false ;
 				}else{
 					GameUtil.light( this );
+				}
+				if(touch.phase==TouchPhase.MOVED){
+					_isMove = true ;
+				}else if(touch.phase==TouchPhase.ENDED){
+					if(!_isMove){
+						trace("tap");
+					}
 				}
 			}
 		}
 		
 		override public function dispose():void
 		{
-			removeEventListener(TouchEvent.TOUCH , onTouchHandler );
+			super.dispose();
+			_onChange.removeAll();
+			_onChange = null ;
 			_data = null ;
 			_owner = null ;
 			_baseVO = null ;
