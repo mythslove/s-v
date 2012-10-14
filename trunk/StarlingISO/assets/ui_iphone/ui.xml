@@ -1,26 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker http://texturepacker.com-->
-<!-- $TexturePacker:SmartUpdate:e1ded6239b2b7fd4bc2c1c340a09836b$ -->
+<!-- $TexturePacker:SmartUpdate:673eddfa61555726427ae2daef5c356e$ -->
 <TextureAtlas imagePath="ui.png">
+    <SubTexture name="AddGoodsFlag" x="966" y="374" width="50" height="44"/>
+    <SubTexture name="AddProductFlag" x="966" y="374" width="50" height="44"/>
     <SubTexture name="BUSINESS_en" x="594" y="969" width="176" height="37" frameX="-23" frameY="-6" frameWidth="220" frameHeight="47"/>
+    <SubTexture name="BuildingBottomGridGreen" x="784" y="709" width="122" height="62"/>
+    <SubTexture name="BuildingBottomGridRed" x="772" y="959" width="122" height="62"/>
     <SubTexture name="COMMUNITY_en" x="252" y="790" width="216" height="37" frameX="-1" frameY="-5" frameWidth="220" frameHeight="47"/>
-    <SubTexture name="DECOR_en" x="772" y="959" width="124" height="37" frameX="-48" frameY="-6" frameWidth="220" frameHeight="47"/>
+    <SubTexture name="CashIcon" x="966" y="112" width="50" height="53"/>
+    <SubTexture name="CoinIcon" x="966" y="167" width="49" height="51" frameX="-2" frameY="-1" frameWidth="53" frameHeight="53"/>
+    <SubTexture name="CollectCoinFlag" x="966" y="220" width="50" height="47"/>
+    <SubTexture name="CollectGoodsFlag" x="966" y="269" width="50" height="47"/>
+    <SubTexture name="DECOR_en" x="784" y="773" width="124" height="37" frameX="-48" frameY="-6" frameWidth="220" frameHeight="47"/>
+    <SubTexture name="EnergyIcon" x="966" y="318" width="41" height="54" frameX="-2" frameY="0" frameWidth="45" frameHeight="58"/>
+    <SubTexture name="ExpIcon" x="966" y="59" width="52" height="51" frameX="-2" frameY="-1" frameWidth="54" frameHeight="53"/>
+    <SubTexture name="GoodsIcon" x="966" y="2" width="51" height="55"/>
     <SubTexture name="HOMES_en" x="654" y="788" width="128" height="37" frameX="-46" frameY="-6" frameWidth="220" frameHeight="47"/>
     <SubTexture name="INDUSTRY_en" x="414" y="969" width="178" height="37" frameX="-21" frameY="-5" frameWidth="220" frameHeight="47"/>
-    <SubTexture name="MarketButtonUp" x="898" y="646" width="73" height="75"/>
-    <SubTexture name="PopUpCloseButtonUp" x="732" y="646" width="67" height="67"/>
-    <SubTexture name="ShopItemBgUp" x="660" y="646" width="70" height="70"/>
+    <SubTexture name="MarketButtonUp" x="660" y="709" width="73" height="75"/>
+    <SubTexture name="NeedRoadsFlag" x="966" y="467" width="40" height="45"/>
+    <SubTexture name="PopUpCloseButtonUp" x="824" y="812" width="67" height="67"/>
+    <SubTexture name="ProductsExpiredFlag" x="966" y="420" width="40" height="45"/>
+    <SubTexture name="ShopItemBgUp" x="896" y="812" width="70" height="70"/>
     <SubTexture name="ShopOverViewBusinessButton" x="414" y="829" width="202" height="138" frameX="-2" frameY="-11" frameWidth="208" frameHeight="152"/>
     <SubTexture name="ShopOverViewCommunityButton" x="456" y="646" width="202" height="140" frameX="-1" frameY="-9" frameWidth="208" frameHeight="152"/>
     <SubTexture name="ShopOverViewDecorButton" x="252" y="646" width="202" height="142" frameX="-2" frameY="-7" frameWidth="208" frameHeight="152"/>
     <SubTexture name="ShopOverViewHomeButton" x="2" y="843" width="204" height="148" frameX="0" frameY="-2" frameWidth="208" frameHeight="152"/>
     <SubTexture name="ShopOverViewIndustryButton" x="208" y="843" width="204" height="142" frameX="0" frameY="-7" frameWidth="208" frameHeight="152"/>
     <SubTexture name="ShopOverViewItemBg" x="2" y="646" width="248" height="195"/>
-    <SubTexture name="ShopOverViewTitle_en" x="660" y="723" width="264" height="61"/>
+    <SubTexture name="ShopOverViewTitle_en" x="660" y="646" width="264" height="61"/>
     <SubTexture name="ShopOverViewWondersButton" x="618" y="827" width="204" height="130" frameX="0" frameY="-19" frameWidth="208" frameHeight="152"/>
-    <SubTexture name="TabButtonDown" x="824" y="786" width="64" height="64"/>
-    <SubTexture name="TabButtonSelected" x="926" y="723" width="64" height="64"/>
-    <SubTexture name="TabButtonUp" x="801" y="646" width="64" height="64"/>
+    <SubTexture name="TabButtonDown" x="896" y="950" width="64" height="64"/>
+    <SubTexture name="TabButtonSelected" x="890" y="884" width="64" height="64"/>
+    <SubTexture name="TabButtonUp" x="824" y="881" width="64" height="64"/>
     <SubTexture name="WONDERS_en" x="470" y="788" width="182" height="37" frameX="-16" frameY="-5" frameWidth="220" frameHeight="47"/>
     <SubTexture name="popupbg" x="2" y="2" width="962" height="642"/>
 </TextureAtlas>
