@@ -24,7 +24,10 @@ package local.comm
 		/** 本地语言 */
 		public static var local:String = "en";
 		
-		public static var device:String =  "iphone";
+		public static var isIPad:Boolean ;
+		public static function get device():String{
+			return isIPad?"ipad":"iphone";
+		}
 		
 		/*facebookId*/
 		public static var fdId:String = "village";
