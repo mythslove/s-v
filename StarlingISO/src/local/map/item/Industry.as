@@ -2,18 +2,8 @@ package local.map.item
 {
 	import local.comm.GameData;
 	import local.enum.BuildingStatus;
-	import local.enum.PickupType;
-	import local.enum.QuestType;
 	import local.enum.VillageMode;
-	import local.map.GameWorld;
-	import local.map.pk.FlyLabelImage;
-	import local.map.pk.PickupImages;
-	import local.model.PlayerModel;
 	import local.util.GameUtil;
-	import local.util.PopUpManager;
-	import local.util.QuestUtil;
-	import local.view.CenterViewLayer;
-	import local.view.products.ProductsPopUp;
 	import local.vo.BuildingVO;
 	import local.vo.ProductVO;
 	
@@ -122,25 +112,25 @@ package local.map.item
 		/* 收获*/
 		private function collect( goods:int ):void
 		{
-			if( reduceEnergy() ){
-				var pkImgs:PickupImages = new PickupImages();
-				if(buildingVO.product.earnExp>0 ){
-					pkImgs.addPK( PickupType.EXP , buildingVO.product.earnExp );
-				}
-				if( goods>0 ){
-					pkImgs.addPK( PickupType.GOOD , goods );
-				}
-				pkImgs.x = screenX ;
-				pkImgs.y = screenY ;
-				GameWorld.instance.effectScene.addChild( pkImgs );
-				
-				buildingVO.status = BuildingStatus.LACK_MATERIAL ;
-				buildingVO.product = null ;
-				showBuildingFlagIcon();
-				
-				//任务判断
-				QuestUtil.instance.handleAddCount( QuestType.COLLECT , buildingVO.name );
-			}
+//			if( reduceEnergy() ){
+//				var pkImgs:PickupImages = new PickupImages();
+//				if(buildingVO.product.earnExp>0 ){
+//					pkImgs.addPK( PickupType.EXP , buildingVO.product.earnExp );
+//				}
+//				if( goods>0 ){
+//					pkImgs.addPK( PickupType.GOOD , goods );
+//				}
+//				pkImgs.x = screenX ;
+//				pkImgs.y = screenY ;
+//				GameWorld.instance.effectScene.addChild( pkImgs );
+//				
+//				buildingVO.status = BuildingStatus.LACK_MATERIAL ;
+//				buildingVO.product = null ;
+//				showBuildingFlagIcon();
+//				
+//				//任务判断
+//				QuestUtil.instance.handleAddCount( QuestType.COLLECT , buildingVO.name );
+//			}
 		}
 		
 		
@@ -159,28 +149,28 @@ package local.map.item
 		 */		
 		public function expiredSaveAll():void
 		{
-			//判断玩家钱
-			var cash:int = GameUtil.expiredSaveAllCash( buildingVO.product.earnGoods );
-			if(PlayerModel.instance.me.cash >= cash )
-			{
-				if(reduceEnergy())
-				{
-					//扣cash
-					PlayerModel.instance.changeCash( -cash );
-					
-					var flyImg:FlyLabelImage = new FlyLabelImage( PickupType.CASH , -cash ) ;
-					flyImg.x = screenX - 20 ;
-					flyImg.y = screenY - 50 ;
-					GameWorld.instance.effectScene.addChild( flyImg );
-					
-					buildingVO.status = BuildingStatus.PRODUCTION_COMPLETE ;
-					onClick() ;
-				}
-			}
-			else
-			{
-				trace(" cash不足");
-			}
+//			//判断玩家钱
+//			var cash:int = GameUtil.expiredSaveAllCash( buildingVO.product.earnGoods );
+//			if(PlayerModel.instance.me.cash >= cash )
+//			{
+//				if(reduceEnergy())
+//				{
+//					//扣cash
+//					PlayerModel.instance.changeCash( -cash );
+//					
+//					var flyImg:FlyLabelImage = new FlyLabelImage( PickupType.CASH , -cash ) ;
+//					flyImg.x = screenX - 20 ;
+//					flyImg.y = screenY - 50 ;
+//					GameWorld.instance.effectScene.addChild( flyImg );
+//					
+//					buildingVO.status = BuildingStatus.PRODUCTION_COMPLETE ;
+//					onClick() ;
+//				}
+//			}
+//			else
+//			{
+//				trace(" cash不足");
+//			}
 		}
 		
 		/**
@@ -189,16 +179,16 @@ package local.map.item
 		 */		
 		public function addProduct( product:ProductVO):void
 		{
-			//显示减钱
-			PlayerModel.instance.changeCoin( -product.coinCost  ) ;
-			var flyImg:FlyLabelImage = new FlyLabelImage( PickupType.COIN , -product.coinCost ) ;
-			flyImg.x = screenX ;
-			flyImg.y = screenY-20 ;
-			GameWorld.instance.effectScene.addChild( flyImg );
-			//开始生产
-			buildingVO.product = product ;
-			startProduct() ;
-			removeBuildingFlagIcon() ;
+//			//显示减钱
+//			PlayerModel.instance.changeCoin( -product.coinCost  ) ;
+//			var flyImg:FlyLabelImage = new FlyLabelImage( PickupType.COIN , -product.coinCost ) ;
+//			flyImg.x = screenX ;
+//			flyImg.y = screenY-20 ;
+//			GameWorld.instance.effectScene.addChild( flyImg );
+//			//开始生产
+//			buildingVO.product = product ;
+//			startProduct() ;
+//			removeBuildingFlagIcon() ;
 		}
 	}
 }

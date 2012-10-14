@@ -12,26 +12,11 @@ package local.util
 		//=========地图资源，地图数据和图片======================
 		[ Embed(source="../assets/map/mapData.map", mimeType="application/octet-stream") ]
 		public static const MapData:Class ; //地图数据
-		[ Embed(source="../assets/map/bottomsea1.png") ]
-		public static const Bottomsea1:Class ;
-		[ Embed(source="../assets/map/bottomsea2.png") ]
-		public static const Bottomsea2:Class ;
-		[ Embed(source="../assets/map/rightsea1.png") ]
-		public static const Rightsea1:Class ;
-		[ Embed(source="../assets/map/rightsea2.png") ]
-		public static const Rightsea2:Class ;
-		[ Embed(source="../assets/map/heightmap1.png") ]
-		public static const HeightMap1:Class ;
-		[ Embed(source="../assets/map/heightmap2.png") ]
-		public static const HeightMap2:Class ;
-		[ Embed(source="../assets/map/rightheight1.png") ]
-		public static const RightHeight1:Class ;
-		[ Embed(source="../assets/map/smallheightmap1.png") ]
-		public static const SmallHeightMap:Class ;
-		[ Embed(source="../assets/map/water1.png") ]
-		public static const Water1:Class ;
-		[ Embed(source="../assets/map/mapBlock.png") ]
-		public static const MapBlock:Class ;
+		
+		[ Embed(source="../assets/map/map.png")]
+		public static const MAP:Class ;
+		[ Embed(source="../assets/map/map.xml", mimeType="application/octet-stream")]
+		public static const MAP_XML:Class ;
 		//=======================================
 		
 		
@@ -69,34 +54,36 @@ package local.util
 		
 		
 		
-		
-		
-		
-		public static function getUITextureAtlas():TextureAtlas{
-			var name:String = "UI_IPHONE";
-//			if(GameSetting.isIpad){
-//				name = "UI_IPAD";
-//			}
-			
-			if( _textureDic[name] ) return _textureDic[name] as TextureAtlas ;
-			
-			var bmp:Bitmap = new EmbedManager[name]() as Bitmap ;
-			var xml:XML = XML( new EmbedManager[name+"_XML"]() )  ;
-			var atals:TextureAtlas = new TextureAtlas( Texture.fromBitmap( bmp,false ) , xml );
-			_textureDic[name] = atals ;
-			bmp.bitmapData.dispose();
-			return atals;
+		public static function getMapTexture(name:String ):Texture
+		{
+			if( _textureDic[name] ) return _textureDic[name] as Texture ;
+			var texture:Texture = createTextureAtlas("MAP").getTexture(name) ;
+			_textureDic[name] = texture ;
+			return texture ;
 		}
+		public static function getMapImage( name:String ):Image{
+			var img:Image = new Image(getMapTexture(name));
+//			img.scaleX = img.scaleY = 2; 
+			return img;
+		}
+		
+		
+		
+		
+		
 		
 		public static function getUITexture( name:String ):Texture{
 			
 			if( _textureDic[name] ) return _textureDic[name] as Texture ;
 			
-			var texture:Texture = getUITextureAtlas().getTexture(name) ;
+			var uiName:String = "UI_IPHONE";
+//			if(GameSetting.isIpad){
+//				uiName = "UI_IPAD";
+//			}
+			var texture:Texture = createTextureAtlas(uiName).getTexture(name) ;
 			_textureDic[name] = texture ;
 			return texture ;
 		}
-		
 		public static function getUIImage( name:String ):Image{
 			var img:Image = new Image(getUITexture(name));
 //			img.scaleX = img.scaleY = 2; 
