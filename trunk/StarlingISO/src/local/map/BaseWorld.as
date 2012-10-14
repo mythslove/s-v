@@ -2,14 +2,13 @@ package local.map
 {
 	import bing.iso.path.Grid;
 	import bing.starling.component.Rhombus;
+	import bing.starling.component.TileImage;
 	import bing.starling.iso.SIsoObject;
 	import bing.starling.iso.SIsoScene;
 	import bing.starling.iso.SIsoUtils;
 	import bing.starling.iso.SIsoWorld;
 	
 	import com.greensock.TweenLite;
-	
-	import feathers.display.TiledImage;
 	
 	import flash.events.MouseEvent;
 	import flash.geom.Matrix;
@@ -96,7 +95,7 @@ package local.map
 			var offset:Number ;
 			var map:Sprite = new Sprite();
 			
-			var tiledImg:TiledImage = new TiledImage(EmbedManager.getMapTexture("mapBlock"));
+			var tiledImg:TileImage = new TileImage(EmbedManager.createTextureByName("MAPBLOCK"));
 			tiledImg.setSize( GameSetting.MAP_WIDTH,GameSetting.MAP_HEIGHT);
 			map.addChild( tiledImg );
 			
@@ -233,6 +232,7 @@ package local.map
 			screenPos = SIsoUtils.isoToScreen(p);
 			
 			var landBlock:Rhombus = new Rhombus(GameSetting.GRID_SIZE*8,GameSetting.GRID_SIZE*4,0x97B425);
+			landBlock.alpha = 0.6 ;
 			landBlock.x = screenPos.x*_size*4 ;
 			landBlock.y = screenPos.y*_size*4 
 			landScene.addChild(landBlock);

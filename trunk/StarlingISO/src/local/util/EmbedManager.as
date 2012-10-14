@@ -13,6 +13,8 @@ package local.util
 		[ Embed(source="../assets/map/mapData.map", mimeType="application/octet-stream") ]
 		public static const MapData:Class ; //地图数据
 		
+		[ Embed(source="../assets/map/mapBlock.png")]
+		public static const MAPBLOCK:Class;
 		[ Embed(source="../assets/map/map.png")]
 		public static const MAP:Class ;
 		[ Embed(source="../assets/map/map.xml", mimeType="application/octet-stream")]
@@ -62,9 +64,7 @@ package local.util
 			return texture ;
 		}
 		public static function getMapImage( name:String ):Image{
-			var img:Image = new Image(getMapTexture(name));
-//			img.scaleX = img.scaleY = 2; 
-			return img;
+			return new Image(getMapTexture(name));
 		}
 		
 		
