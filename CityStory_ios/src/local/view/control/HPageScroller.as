@@ -151,9 +151,9 @@ package local.view.control
 					//判断翻页
 					var cha:Number = _mouseDownPos-e.stageX ;
 					var timeCha:Number = getTimer()-_mouseTime ;
-					if(cha>_containerViewport.width*0.4 || (cha>0 && timeCha<200 )){ //向右翻页
+					if(cha>_containerViewport.width*_container.root.scaleX*0.4 || (cha>0 && timeCha<200 )){ //向右翻页
 						nextPage();
-					}else if( cha<-_containerViewport.width*0.4 || (cha<0 && timeCha<200 ) ){
+					}else if( cha<-_containerViewport.width*_container.root.scaleX*0.4 || (cha<0 && timeCha<200 ) ){
 						prevPage();
 					}else{
 						endPos = _prevContainerPos ;
