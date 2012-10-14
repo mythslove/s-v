@@ -13,7 +13,6 @@ package local.view.shop
 	import org.osflash.signals.ISignal;
 	import org.osflash.signals.Signal;
 	
-	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
@@ -50,14 +49,13 @@ package local.view.shop
 
 		private var _baseVO:BaseBuildingVO ;
 		private var _wid:int = 260 ;
-		private var _het:int = 320 ;
+		private var _het:int = 340 ;
 	
 		public function ShopItemRenderer()
 		{
 			super();
 			this.width = _wid ;
 			this.height = _het ;
-			addEventListener(Event.REMOVED_FROM_STAGE , removedHandler );
 			addEventListener(TouchEvent.TOUCH , onTouchHandler );
 		}
 		
@@ -88,26 +86,24 @@ package local.view.shop
 			addChild(txtTitle);
 		}
 		
-		private function removedHandler( e:Event ):void
-		{
-			removeEventListener(TouchEvent.TOUCH , onTouchHandler );
-			removeEventListener(Event.REMOVED_FROM_STAGE , removedHandler );
-			_data = null ;
-			_owner = null ;
-			_baseVO = null ;
-		}
-		
 		private function onTouchHandler( e:TouchEvent ):void
 		{
 			if(e.touches.length>0){
 				var touch:Touch = e.touches[0] ;
 				if(touch.phase==TouchPhase.BEGAN){
 					GameUtil.dark( this );
-				}else if(touch.phase==TouchPhase.ENDED){
+				}else{
 					GameUtil.light( this );
 				}
 			}
 		}
 		
+		override public function dispose():void
+		{
+			removeEventListener(TouchEvent.TOUCH , onTouchHandler );
+			_data = null ;
+			_owner = null ;
+			_baseVO = null ;
+		}
 	}
 }
