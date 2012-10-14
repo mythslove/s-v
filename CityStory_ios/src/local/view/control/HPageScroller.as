@@ -142,7 +142,7 @@ package local.view.control
 						break ;
 					}
 				default:
-					_container.mouseChildren = _container.mouseEnabled = false ;
+					_container.mouseChildren = true  ;
 					_container.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseHandler);
 					_container.removeEventListener(MouseEvent.MOUSE_UP, onMouseHandler);
 					_container.removeEventListener(MouseEvent.MOUSE_OUT, onMouseHandler);
@@ -176,7 +176,6 @@ package local.view.control
 				for( var i:int = 0 ; i<_content.numChildren ; ++i){
 					checkVisible( _content.getChildAt(i) );
 				}
-				_container.mouseEnabled = _container.mouseChildren = true  ;
 				_container.removeEventListener(Event.ENTER_FRAME , onEnterFrame);
 				this.dispatchEvent( new Event(SCROLL_OVER));
 			}
