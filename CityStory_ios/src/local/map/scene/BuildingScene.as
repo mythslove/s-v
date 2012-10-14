@@ -142,8 +142,8 @@ package local.map.scene
 					}
 				}
 			}
-			var carRate:int = GameSetting.isIPad ? 4 : 5 ;
-			var characterRate:int = GameSetting.isIPad ? 3 : 4 ;
+			var carRate:int = GameSetting.SCREEN_WIDTH>=1024 ? 4 : 5 ;
+			var characterRate:int = GameSetting.SCREEN_WIDTH>=1024 ? 3 : 4 ;
 			var len:int = roads.length ;
 			for(var i:int = 0 ; i<len ; ++i)
 			{
