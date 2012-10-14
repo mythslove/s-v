@@ -2,8 +2,6 @@ package local.model
 {
 	import flash.utils.Dictionary;
 	
-	import local.enum.QuestType;
-	import local.util.QuestUtil;
 	import local.vo.ComponentVO;
 
 	/**
@@ -77,7 +75,7 @@ package local.model
 			}else if(allComps && allComps.hasOwnProperty(name)){
 				myComps[name] = value ;
 			}
-			QuestUtil.instance.handleOwn( QuestType.OWN_COMP , name );
+//			QuestUtil.instance.handleOwn( QuestType.OWN_COMP , name );
 		}
 		
 		/**
@@ -92,7 +90,7 @@ package local.model
 				if(myComps[name]<0){
 					myComps[name] = 0 ;
 				}
-				QuestUtil.instance.handleOwn( QuestType.OWN_COMP , name );
+//				QuestUtil.instance.handleOwn( QuestType.OWN_COMP , name );
 			}
 		}
 	

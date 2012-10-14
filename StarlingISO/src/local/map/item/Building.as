@@ -1,9 +1,9 @@
 package local.map.item
 {
+	import flash.events.Event;
+	
 	import local.util.GameTimer;
 	import local.vo.BuildingVO;
-	
-	import starling.events.Event;
 	
 	public class Building extends BaseBuilding
 	{
@@ -35,7 +35,7 @@ package local.map.item
 		protected function clearGameTimer():void
 		{
 		}
-		protected function gameTimerCompleteHandler(e:Event):void
+		protected function gameTimerCompleteHandler(e:flash.events.Event):void
 		{
 			
 		}
