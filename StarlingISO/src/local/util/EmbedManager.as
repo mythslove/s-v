@@ -9,10 +9,30 @@ package local.util
 
 	public class EmbedManager
 	{
-		[Embed(source="../assets/bgFill1.jpg")]
-		private static const bgFill1:Class ;
-		[Embed(source="../assets/bgTree.png")]
-		private static const bgTree:Class ;
+		//=========地图资源，地图数据和图片======================
+		[ Embed(source="../assets/map/mapData.map", mimeType="application/octet-stream") ]
+		public static const MapData:Class ; //地图数据
+		[ Embed(source="../assets/map/bottomsea1.png") ]
+		public static const Bottomsea1:Class ;
+		[ Embed(source="../assets/map/bottomsea2.png") ]
+		public static const Bottomsea2:Class ;
+		[ Embed(source="../assets/map/rightsea1.png") ]
+		public static const Rightsea1:Class ;
+		[ Embed(source="../assets/map/rightsea2.png") ]
+		public static const Rightsea2:Class ;
+		[ Embed(source="../assets/map/heightmap1.png") ]
+		public static const HeightMap1:Class ;
+		[ Embed(source="../assets/map/heightmap2.png") ]
+		public static const HeightMap2:Class ;
+		[ Embed(source="../assets/map/rightheight1.png") ]
+		public static const RightHeight1:Class ;
+		[ Embed(source="../assets/map/smallheightmap1.png") ]
+		public static const SmallHeightMap:Class ;
+		[ Embed(source="../assets/map/water1.png") ]
+		public static const Water1:Class ;
+		[ Embed(source="../assets/map/mapBlock.png") ]
+		public static const MapBlock:Class ;
+		//=======================================
 		
 		
 		[Embed(source="../assets/ui_iphone/ui.xml", mimeType="application/octet-stream")]

@@ -2,6 +2,7 @@ package local.map.item
 {
 	import local.comm.GameSetting;
 	import local.map.cell.BuildingObject;
+	import local.map.cell.RoadObject;
 	import local.util.ResourceUtil;
 	import local.vo.BitmapAnimResVO;
 	import local.vo.BuildingVO;
@@ -9,7 +10,9 @@ package local.map.item
 	public class BaseBuilding extends BaseMapObject
 	{
 		protected var _buildingObject:BuildingObject ;
+		protected var _roadObject:RoadObject ;
 		public var buildingVO:BuildingVO ;
+		
 		
 		public function BaseBuilding(buildingVO:BuildingVO )
 		{
@@ -44,6 +47,11 @@ package local.map.item
 			if(_buildingObject) {
 				_buildingObject.flash( value );
 			}
+		}
+
+		public function onClick():void
+		{
+			
 		}
 		
 		override public function set scaleX(value:Number):void
