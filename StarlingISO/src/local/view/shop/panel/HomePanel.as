@@ -48,6 +48,7 @@ package local.view.shop.panel
 			_layout = new TiledRowsLayout();
 			_layout.paging = TiledRowsLayout.PAGING_HORIZONTAL;
 			_layout.useSquareTiles = false;
+			_layout.gap = 5;
 			_layout.tileHorizontalAlign = TiledRowsLayout.HORIZONTAL_ALIGN_CENTER;
 			_layout.horizontalAlign = TiledRowsLayout.HORIZONTAL_ALIGN_CENTER;
 			
@@ -64,14 +65,14 @@ package local.view.shop.panel
 			_tabBar.width = _tabBar.maxWidth =_tabBar.dataProvider.data.length*160  ;
 			
 			_list = new List();
-			_list.width = _list.maxWidth = 800 ;
+			_list.width = _list.maxWidth = 840 ;
 			_list.height = 340;
 			_list.itemRendererFactory = function():IListItemRenderer {
 				return new ShopItemRenderer();
 			};
 			_list.layout = _layout;
 			_list.y = 80 ;
-			_list.x = 40 ;
+			_list.x = 20 ;
 			_list.scrollerProperties.snapToPages = true;
 			_list.scrollerProperties.scrollBarDisplayMode = Scroller.SCROLL_BAR_DISPLAY_MODE_NONE;
 			_list.scrollerProperties.horizontalScrollPolicy = Scroller.SCROLL_POLICY_ON;
