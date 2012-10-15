@@ -29,12 +29,10 @@ package local.comm
 			return isIPad?"ipad":"iphone";
 		}
 		
-		/*facebookId*/
+		/**facebookId*/
 		public static var fdId:String = "village";
 		
-		/**
-		 * 任务有多少步骤 
-		 */		
+		/**任务有多少步骤  */		
 		public static const TUTOR_STEP:int = 0 ;
 	}
 }
