@@ -134,14 +134,16 @@ package local.map.item
 				pkImgs.y = screenY ;
 				GameWorld.instance.effectScene.addChild( pkImgs );
 				
-				buildingVO.status = BuildingStatus.LACK_MATERIAL ;
-				buildingVO.product = null ;
-				showBuildingFlagIcon();
 				
 				//任务判断
 				QuestUtil.instance.handleCount( QuestType.COLLECT_BY_NAME , buildingVO.name );
 				QuestUtil.instance.handleCount( QuestType.COLLECT_BY_SONTYPE , buildingVO.baseVO.subClass );
 				QuestUtil.instance.handleCount( QuestType.COLLECT_BY_TYPE , buildingVO.baseVO.type );
+				QuestUtil.instance.handleCount( QuestType.PRODUCT_GOODS , buildingVO.product.name );
+					
+				buildingVO.status = BuildingStatus.LACK_MATERIAL ;
+				buildingVO.product = null ;
+				showBuildingFlagIcon();
 			}
 		}
 		
