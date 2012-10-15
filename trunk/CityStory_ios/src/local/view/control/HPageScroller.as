@@ -16,7 +16,7 @@ package local.view.control
 		public static const SCROLL_POSITION_CHANGE : String = "ScrollPositionChange";
 		public static const SCROLL_OVER:String = "ScrollOver";
 		
-		public var speed:Number = 0.6 ;
+		public var speed:Number = 0.4 ;
 		
 		private var _container:Sprite ;
 		private var _content:Sprite ;
