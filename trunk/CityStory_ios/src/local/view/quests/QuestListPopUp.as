@@ -9,9 +9,11 @@ package local.view.quests
 	
 	import local.comm.GameSetting;
 	import local.map.GameWorld;
+	import local.model.QuestModel;
 	import local.util.PopUpManager;
 	import local.view.base.BaseView;
 	import local.view.btn.PopUpCloseButton;
+	import local.vo.QuestVO;
 
 	public class QuestListPopUp extends BaseView
 	{
@@ -42,6 +44,7 @@ package local.view.quests
 		
 		private function showTweenOver():void{
 			if(GameSetting.SCREEN_WIDTH<1024) GameWorld.instance.visible=false;
+			showList();
 		}
 		
 		private function onMouseHandler( e:MouseEvent ):void
@@ -55,10 +58,21 @@ package local.view.quests
 		}
 		
 		
-		
-		
-		
-		
+		private function showList():void
+		{
+			var questModel:QuestModel = QuestModel.instance ;
+			//判断是否有任务
+			if(!questModel.currentQuests || questModel.currentQuests.length<questModel.MAX_COUNT){
+				questModel.getCurrentQuests()
+				questModel.checkCompleteQuest();
+			}
+			//当前的任务
+			if(questModel.currentQuests){
+				for each( var qvo:QuestVO in questModel.currentQuests){
+					trace(qvo);
+				}
+			}
+		}
 		
 		
 		

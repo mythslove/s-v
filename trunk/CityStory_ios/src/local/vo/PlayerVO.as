@@ -25,7 +25,7 @@ package  local.vo
 		public var maxExp:int = 150 ;
 		
 		
-		
+		public var tutorStep:int ; //新手指引当前步数
 		
 		
 		
