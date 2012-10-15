@@ -65,7 +65,9 @@ package local.map.item
 				}
 				
 				//任务判断
-				QuestUtil.instance.handleAddCount( QuestType.COLLECT , buildingVO.name );
+				QuestUtil.instance.handleCount( QuestType.COLLECT_BY_NAME , buildingVO.name );
+				QuestUtil.instance.handleCount( QuestType.COLLECT_BY_SONTYPE , buildingVO.baseVO.subClass );
+				QuestUtil.instance.handleCount( QuestType.COLLECT_BY_TYPE , buildingVO.baseVO.type );
 			}
 		}
 	}

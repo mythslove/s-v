@@ -144,8 +144,9 @@ package local.map.item
 			PlayerModel.instance.changeCap( buildingVO.baseVO.addCap);
 			
 			//任务判断
-			QuestUtil.instance.handleOwn( QuestType.OWN_BUILDING , buildingVO.name );
-			QuestUtil.instance.handleOwn( QuestType.OWN_TYPE , buildingVO.baseVO.type );
+			QuestUtil.instance.handleOwn( QuestType.OWN_BD_BY_NAME , buildingVO.name );
+			QuestUtil.instance.handleOwn( QuestType.OWN_BD_BY_TYPE , buildingVO.baseVO.type );
+			QuestUtil.instance.handleCount( QuestType.PLACE_BY_TYPE , buildingVO.baseVO.type );
 		}
 		
 		/**
@@ -181,15 +182,19 @@ package local.map.item
 			else
 			{
 				//修建完成后的任务判断
-				QuestUtil.instance.handleAddCount( QuestType.BUILD , buildingVO.name );
-				QuestUtil.instance.handleOwn( QuestType.OWN_BUILDING , buildingVO.name );
-				QuestUtil.instance.handleOwn( QuestType.OWN_TYPE , buildingVO.baseVO.type );
+				QuestUtil.instance.handleCount( QuestType.BUILD_BD_BY_NAME  , buildingVO.name );
+				QuestUtil.instance.handleCount( QuestType.BUILD_BD_BY_TYPE  , buildingVO.baseVO.type );
+				QuestUtil.instance.handleOwn( QuestType.OWN_BD_BY_NAME , buildingVO.name );
+				QuestUtil.instance.handleOwn( QuestType.OWN_BD_BY_TYPE , buildingVO.baseVO.type );
 			}
 			//添加到地图数据中
 			BuildingModel.instance.addBuildingVO( buildingVO );
 			//加人口和人口容量
 			PlayerModel.instance.changePop( buildingVO.baseVO.addPop);
 			PlayerModel.instance.changeCap( buildingVO.baseVO.addCap);
+			
+			//任务
+			QuestUtil.instance.handleCount( QuestType.PLACE_BY_TYPE , buildingVO.baseVO.type );
 		}
 		
 		/**
@@ -207,8 +212,8 @@ package local.map.item
 			PlayerModel.instance.changeCap( -buildingVO.baseVO.addCap);
 			
 			//任务判断
-			QuestUtil.instance.handleOwn( QuestType.OWN_BUILDING , buildingVO.name );
-			QuestUtil.instance.handleOwn( QuestType.OWN_TYPE , buildingVO.baseVO.type );
+			QuestUtil.instance.handleOwn( QuestType.OWN_BD_BY_NAME , buildingVO.name );
+			QuestUtil.instance.handleOwn( QuestType.OWN_BD_BY_TYPE , buildingVO.baseVO.type );
 			
 			this.dispose();
 		}
@@ -227,8 +232,8 @@ package local.map.item
 			PlayerModel.instance.changeCap( -buildingVO.baseVO.addCap);
 			
 			//任务判断
-			QuestUtil.instance.handleOwn( QuestType.OWN_BUILDING , buildingVO.name );
-			QuestUtil.instance.handleOwn( QuestType.OWN_TYPE , buildingVO.baseVO.type );
+			QuestUtil.instance.handleOwn( QuestType.OWN_BD_BY_NAME , buildingVO.name );
+			QuestUtil.instance.handleOwn( QuestType.OWN_BD_BY_TYPE , buildingVO.baseVO.type );
 			
 			this.dispose();
 		}

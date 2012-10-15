@@ -2,6 +2,8 @@ package local.model
 {
 	import flash.utils.Dictionary;
 	
+	import local.enum.QuestType;
+	import local.util.QuestUtil;
 	import local.view.CenterViewLayer;
 	import local.vo.PlayerVO;
 
@@ -58,6 +60,9 @@ package local.model
 		{
 			if(value==0) return ;
 			me.pop+=value;
+			
+			//人口任务
+			QuestUtil.instance.handleOwn( QuestType.HAVE_POP );
 		}
 		
 		public function changeCap( value:int ):void

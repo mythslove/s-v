@@ -396,9 +396,10 @@ package local.map.item
 				_buildStatusObj = null ;
 				
 				//修建完成后的任务判断
-				QuestUtil.instance.handleAddCount( QuestType.BUILD , buildingVO.name );
-				QuestUtil.instance.handleOwn( QuestType.OWN_BUILDING , buildingVO.name );
-				QuestUtil.instance.handleOwn( QuestType.OWN_TYPE , buildingVO.baseVO.type );
+				QuestUtil.instance.handleCount( QuestType.BUILD_BD_BY_NAME  , buildingVO.name );
+				QuestUtil.instance.handleCount( QuestType.BUILD_BD_BY_TYPE  , buildingVO.baseVO.type );
+				QuestUtil.instance.handleOwn( QuestType.OWN_BD_BY_NAME , buildingVO.name );
+				QuestUtil.instance.handleOwn( QuestType.OWN_BD_BY_TYPE , buildingVO.baseVO.type );
 			}
 			showUI();
 		}
