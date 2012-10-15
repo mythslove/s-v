@@ -314,7 +314,7 @@ package local.map
 		{
 			e.stopPropagation();
 			var value:Number = e.delta>0?1.2:0.92 ;
-			changeWorldScale(value,e.stageX*root.scaleX , e.stageY*root.scaleY);
+			changeWorldScale(value,e.stageX/Starling.contentScaleFactor , e.stageY/Starling.contentScaleFactor);
 		}
 		
 		private function onTouchedHandler( e:TouchEvent ):void
