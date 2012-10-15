@@ -87,5 +87,33 @@ package local.vo
 			}
 			return cash ;
 		}
+		
+		/**
+		 * 判断是否完成此quest所有的tasks
+		 * @return 
+		 */		
+		public function checkComplete():Boolean
+		{
+			if (tasks!=null){
+				var len:int = tasks.length ;
+				var item:QuestTaskVO ;
+				for(var i:int  = 0 ; i<len ; i++){
+					if( tasks[i] is QuestTaskVO){
+						item = tasks[i]  as QuestTaskVO;
+						if(item.isComplete ){
+							if(!item.isSendAnalysis){
+								//统计
+//								AnalysisUtil.send("Progress-Quest Goal Finished",
+//									{"Goal with Quest Name":title+"-"+item.intro});
+//								item.isSendAnalysis = true ;
+							}
+						}else{
+							return false ;
+						}
+					}
+				}
+			}
+			return true;
+		}
 	}
 }

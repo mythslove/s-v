@@ -2,12 +2,17 @@ package local.util
 {
 	import bing.utils.StringUtil;
 	
+	import flash.net.URLVariables;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	
 	import local.comm.GameData;
 	import local.model.BuildingModel;
+	import local.model.CompsModel;
 	import local.model.LandModel;
+	import local.model.PlayerModel;
+	import local.model.ShopModel;
+	import local.model.StorageModel;
 	
 	/**
 	 * 游戏工具类 
@@ -170,6 +175,63 @@ package local.util
 				count = BuildingModel.instance.industry.length ;
 			}
 			return  80*count*count+10*count*count+150 ;
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		/**
+		 * 领取奖励 
+		 * @param rewards
+		 */		
+		public static function earnQuestRewards( rewards:String ):void
+		{
+			if(!rewards) return ;
+			var urlVar:URLVariables = new URLVariables(rewards);
+			for( var key:String in urlVar)
+			{
+				switch( key.toLowerCase() )
+				{
+					case "coins":
+					case "coin":
+						PlayerModel.instance.changeCoin( int( urlVar[key] ) );
+						break;
+					case "cashs":
+					case "cash":
+						PlayerModel.instance.changeCash( int( urlVar[key] ) );
+						break ;
+					case "good":
+					case "goods":
+						PlayerModel.instance.changeGoods( int( urlVar[key] ) );
+						break;
+					case "energy":
+						PlayerModel.instance.changeEnergy( int( urlVar[key] ) );
+						break;
+					case "xp":
+					case "exp":
+						PlayerModel.instance.changeExp( int( urlVar[key] ) );
+						break ;
+					default:
+						if(CompsModel.instance.allComps[key]){
+							//奖励的组件comps
+							CompsModel.instance.addComp( key , int( urlVar[key] ) );
+						}
+						else if( ShopModel.instance.allBuildingHash[key])
+						{
+							//奖励的建筑
+							StorageModel.instance.addBuildingNameToStorage( key , int( urlVar[key] ) );
+						}
+						break ;
+				}
+			}
 		}
 	}
 }

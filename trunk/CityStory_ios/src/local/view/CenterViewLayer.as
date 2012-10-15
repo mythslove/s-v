@@ -1,14 +1,25 @@
 package local.view
 {
 	import flash.events.Event;
+	import flash.events.MouseEvent;
 	
 	import local.comm.GameSetting;
+	import local.comm.GlobalDispatcher;
 	import local.enum.VillageMode;
+	import local.event.LevelUpEvent;
+	import local.event.QuestEvent;
+	import local.model.QuestModel;
+	import local.util.AnalysisUtil;
 	import local.util.PopUpManager;
+	import local.util.SoundManager;
 	import local.view.base.BaseView;
 	import local.view.bottombar.BottomBar;
 	import local.view.bottombar.GameTip;
+	import local.view.quests.QuestCompletePopUp;
+	import local.view.quests.QuestListPopUp;
+	import local.view.topbar.QuestButton;
 	import local.view.topbar.TopBar;
+	import local.vo.QuestVO;
 	
 	public class CenterViewLayer extends BaseView
 	{
@@ -19,9 +30,12 @@ package local.view
 			return _instance; 
 		}
 		//======================================
+		
 		public var bottomBar:BottomBar;
 		public var topBar:TopBar ;
 		public var gameTip:GameTip ;
+		public var questBtn:QuestButton;
+		private var _questModel:QuestModel ;
 		
 		public function CenterViewLayer()
 		{
@@ -47,7 +61,16 @@ package local.view
 			gameTip.x  = (GameSetting.SCREEN_WIDTH-gameTip.width)>>1 ;
 			addChild(gameTip);
 			
+			questBtn = new QuestButton();
+			questBtn.x=5;
+			questBtn.y = topBar.height+50 ;
+			addChild(questBtn);
+			questBtn.addEventListener(MouseEvent.CLICK , btnQuestClickHandler );
+			
 			addChild(PopUpManager.instance);
+			
+			_questModel = QuestModel.instance ;
+			initQuests();
 		}
 		
 		/**
@@ -97,5 +120,53 @@ package local.view
 					break ;
 			}
 		}
+		
+		
+		//*****************************************************************************
+		//处理任务
+		//*****************************************************************************/
+		
+		private function initQuests():void
+		{
+			if(!_questModel.currentQuests || _questModel.currentQuests.length<QuestModel.instance.MAX_COUNT){
+				_questModel.getCurrentQuests() ;
+			}
+			GlobalDispatcher.instance.addEventListener( QuestEvent.QUEST_COMPLETE , globalEvtHandler );
+			GlobalDispatcher.instance.addEventListener( LevelUpEvent.LEVEL_UP , globalEvtHandler  );
+			//判断是否有已经完成了的
+			_questModel.checkCompleteQuest();
+		}
+		
+		private function globalEvtHandler( e:Event):void
+		{
+			switch(e.type)
+			{
+				case QuestEvent.QUEST_COMPLETE:
+					var vo:QuestVO = (e as QuestEvent).vo ;
+					PopUpManager.instance.addQueuePopUp( QuestCompletePopUp.instance,true,1000);
+					//获取新的任务
+					_questModel.getCurrentQuests() ;
+					_questModel.checkCompleteQuest();
+					//统计
+					AnalysisUtil.send("Progress-Quest Finished", {"Quest Name":vo.title});
+					break;
+				case LevelUpEvent.LEVEL_UP:
+					_questModel.getCurrentQuests() ;
+					_questModel.checkCompleteQuest();
+					break;
+			}
+		}
+		
+		private function btnQuestClickHandler(e:MouseEvent):void
+		{
+			e.stopPropagation();
+			SoundManager.instance.playButtonSound();
+
+			PopUpManager.instance.addQueuePopUp( QuestListPopUp.instance);
+		}
+		
+		//*****************************************************************************
+		//*****************************************************************************
+		
 	}
 }

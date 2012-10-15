@@ -2,6 +2,7 @@ package local.model
 {
 	import local.enum.BuildingType;
 	import local.map.item.BaseBuilding;
+	import local.vo.BaseBuildingVO;
 	import local.vo.BuildingVO;
 	import local.vo.StorageBuildingVO;
 
@@ -46,6 +47,21 @@ package local.model
 			addBuildingVOToStorage( baseBuilding.buildingVO );
 		}
 		
+		/**
+		 * 添加一个建筑到收藏箱 
+		 * @param name 建筑的名称
+		 * @param value 建筑的数量
+		 */		
+		public function addBuildingNameToStorage( name:String , value:int ):void
+		{
+			var vo:BuildingVO ;
+			for( var i:int = 0 ; i<value;++i){
+				vo = new BuildingVO();
+				vo.name = name ;
+				addBuildingVOToStorage(vo);
+			}
+		}
+			
 		/**
 		 * 添加一个建筑到收藏箱 
 		 * @param buildingVO
