@@ -65,7 +65,7 @@ package local.map.item
 				BuildingModel.instance.removeBuilding( this );
 				this.dispose() ;
 				//砍树任务
-				QuestUtil.instance.handleAddCount( QuestType.CHOP );
+				QuestUtil.instance.handleCount( QuestType.CLEAR_TREE );
 			}else{
 				showBuildingFlagIcon() ;
 			}

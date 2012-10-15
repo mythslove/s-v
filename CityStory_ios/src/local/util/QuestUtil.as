@@ -1,11 +1,8 @@
 package local.util
 {
-	import local.comm.GlobalDispatcher;
-	import local.enum.BuildingStatus;
 	import local.enum.QuestType;
-	import local.event.QuestEvent;
 	import local.model.BuildingModel;
-	import local.model.CompsModel;
+	import local.model.PlayerModel;
 	import local.model.QuestModel;
 	import local.vo.BuildingVO;
 	import local.vo.QuestTaskVO;
@@ -26,7 +23,7 @@ package local.util
 		//=================================
 		
 		/**
-		 * 处理OwnBuilding和OwnType这两种任务 
+		 * 处理own/have任务
 		 * @param questType
 		 * @param sonType
 		 */		
@@ -45,14 +42,14 @@ package local.util
 						num = 0 ;
 						switch( questType)
 						{
-							case QuestType.OWN_BUILDING:
+							case QuestType.OWN_BD_BY_NAME:
 								num = BuildingModel.instance.getCountByName( questType , sonType ) ;
 								break ;
-							case QuestType.OWN_TYPE:
+							case QuestType.OWN_BD_BY_TYPE:
 								num = BuildingModel.instance.getCountByType( questType ) ;
 								break ;
-							case QuestType.OWN_COMP:
-								num = CompsModel.instance.getCompCount( sonType );
+							case QuestType.HAVE_POP:
+								num = PlayerModel.instance.getCurrentPop() ;
 								break ;
 						}
 						if( updateSetCount( vo , questType , sonType , num ) ){
@@ -62,7 +59,7 @@ package local.util
 				}
 			}
 			
-			if(isUpdate) checkAllQuests();
+			if(isUpdate) QuestModel.instance.checkCompleteQuest();
 		}
 		
 		
@@ -72,7 +69,7 @@ package local.util
 		 * @param sonType
 		 * @param num
 		 */		
-		public function handleAddCount( questType:String , sonType:String = "" , num:int = 1 ):void
+		public function handleCount( questType:String , sonType:String = "" , num:int = 1 ):void
 		{
 			var isUpdate:Boolean ;
 			var currentQuests:Vector.<QuestVO> = QuestModel.instance.currentQuests ;
@@ -84,27 +81,8 @@ package local.util
 					isUpdate = true ;
 				}
 			}
-			if(isUpdate) checkAllQuests();
+			if(isUpdate) QuestModel.instance.checkCompleteQuest();
 		}
-		
-		/**
-		 * 判断是否有quest完成 
-		 */		
-		public function checkAllQuests():void 
-		{
-			var currentQuests:Vector.<QuestVO> = QuestModel.instance.currentQuests ;
-			for each( var vo:QuestVO in currentQuests )
-			{
-				if( vo.isAccept && !vo.isComplete && checkComplete(vo) ){
-					vo.isComplete = true ;
-					//抛出quest完成事件 
-					var evt:QuestEvent = new QuestEvent(QuestEvent.QUEST_COMPLETE);
-					evt.vo = vo ;
-					GlobalDispatcher.instance.dispatchEvent( evt );
-				}
-			}
-		}
-		
 		
 		
 		

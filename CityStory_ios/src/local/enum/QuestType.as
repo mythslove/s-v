@@ -8,38 +8,79 @@ package local.enum
 	public class QuestType
 	{
 		/**
-		 * 拥有某个种建筑的数量，sonType为建筑的name ，如shoe home
+		 * 拥有某个建筑的数量，sonType为建筑的name 
 		 */		
-		public static const OWN_BUILDING:String = "ownbuilding";
+		public static const OWN_BD_BY_NAME:String = "own_bd_by_name";
 		
 		/**
-		 * 拥有某一种类型的建筑数量，sonType为建筑的大类型，如wonders,commnuity,homes 
-		 */	
-		public static const OWN_TYPE:String = "owntype";
+		 * 拥有某种建筑的数量，sonType为建筑的大类型 
+		 */		
+		public static const OWN_BD_BY_TYPE:String = "own_bd_by_type";
 		
 		/**
-		 * 拥有某一种Compoent的数量，sonType为 Component的 name 
+		 * 拥有人口数量
 		 */		
-		public static const OWN_COMP:String = "owncomp";
+		public static const HAVE_POP:String = "have_pop";
 		
 		/**
-		 * 修建某个建筑 ，sonType为建筑的name
-		 */		
-		public static const BUILD:String = "build";
+		 * 修建某种建筑，sonType为建筑的name 
+		 */		 
+		public static const BUILD_BD_BY_NAME:String = "build_bd_by_name";
 		
 		/**
-		 * 普通收获的次数 , sonType可以为BuildingType，如果没有，则为全部-------------------
+		 * 修建某类建筑，sonType为建筑的大类型 
 		 */		
-		public static const COLLECT:String = "collect";
+		public static const BUILD_BD_BY_TYPE:String = "build_bd_by_type";
 		
 		/**
-		 * 砍树的数量 
+		 * 在某类型的建筑上面花费多少coin, sontType为建筑的类型 
 		 */		
-		public static const CHOP:String = "chop";
+		public static const SPEND_COIN_ON_BD_BY_TYPE:String = "spend_coin_on_bd_by_type";
 		
 		/**
-		 * 放置建筑 , sonType为 name
+		 * 扩地 
 		 */		
-		public static const PLACE:String = "place";
+		public static const EXPAND:String = "expand";
+		
+		/**
+		 * 清除树的数量 
+		 */		
+		public static const CLEAR_TREE:String= "clear_tree";
+		
+		/**
+		 * 为某种类型的建筑供应货物 , sonType为建筑的大类型 
+		 */		
+		public static const SUPPLY_BD_BY_TYPE:String = "supply_bd_by_type";
+		
+		/**
+		 * 为某个建筑供应货物 , sonType为建筑的name
+		 */		
+		public static const SUPPLY_BD_BY_NAME:String = "supply_bd_by_name";
+		
+		/**
+		 * 从某一类型的建筑上收获，sonType为建筑的大类型 
+		 */		
+		public static const COLLECT_BY_TYPE:String = "collect_by_type";
+		
+		/**
+		 * 从某一类型的建筑上收获，sonType为建筑的子类型 
+		 */		
+		public static const COLLECT_BY_SONTYPE:String  = "collect_by_sontype";
+		
+		/**
+		 * 从某一个建筑上收获，sonType为建筑的name
+		 */		
+		public static const COLLECT_BY_NAME:String  = "collect_by_name";
+		
+		/**
+		 * 生产商品，sonType为商品的name 
+		 */		
+		public static const PRODUCT_GOODS:String = "product_goods";
+		
+		/**
+		 *  放置某大类型的建筑. sonType为建筑的大类型
+		 */		
+		public static const PLACE_BY_TYPE:String =  "place_by_type";
+		
 	}
 }
