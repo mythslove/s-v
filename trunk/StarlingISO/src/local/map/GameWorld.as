@@ -54,6 +54,37 @@ package local.map
 				tempShowBuilding(myModel.decorations);
 				tempShowBuilding(myModel.homes);
 				
+				
+				
+				
+				
+				//添加测试建筑
+				var house:BaseBuilding ;
+				var houses:Array = ["My House","Red Victorian House","PandaFood","Red Victorian House","Hermes Shop","Coco","Clutch","Higher"] ;
+				var bvo:BuildingVO ;
+				var bName:String ;
+				for( var i:int = 7*4 ; i<7*4+8 ; ++i )
+				{
+					for( var j:int = 7*4 ; j<7*4+8 ; ++j )
+					{
+						if(Math.random()>0.25){
+							var temp:int = (Math.random()*houses.length)>>0 ;
+							bName = houses[temp] ;
+							bvo = new BuildingVO();
+							bvo.name = bName ;
+							bvo.nodeX = i ;
+							bvo.nodeZ = j ;
+							house = new BaseBuilding(bvo);
+							buildingScene.addBuilding( house,false,true);
+						}
+					}
+				}
+
+				
+				
+				
+				
+				
 				roadScene.sortAll();
 				buildingScene.sortAll();
 				if(iconScene.visible){

@@ -22,7 +22,7 @@ package local.vo
 		public function get baseVO():BaseBuildingVO
 		{
 			if(!_baseVO) { 
-				_baseVO = ShopModel.instance.allBuildingHash["name"] ;
+				_baseVO = ShopModel.instance.allBuildingHash[name] ;
 			}
 			return _baseVO;
 		}
