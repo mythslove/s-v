@@ -314,7 +314,7 @@
 				var config:XML = XML( bytes.toString());
 				if( config)
 				{
-					var len:int = config.children.length();
+					var len:int = config.children().length();
 					var item:* ;
 					for( var i:int = 0 ; i<len ; ++i )
 					{
