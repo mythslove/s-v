@@ -15,6 +15,8 @@ package
 	import local.view.CenterViewLayer;
 	import local.view.tutor.TutorView;
 	import local.vo.PlayerVO;
+	
+	import net.hires.debug.Stats;
 
 	public class Village extends BaseVillage
 	{
@@ -45,7 +47,7 @@ package
 			
 			addChild( GameWorld.instance );
 			addChild( CenterViewLayer.instance );
-//			addChild( new Stats() );
+			addChild( new Stats() );
 			AnalysisUtil.init();
 			
 			
