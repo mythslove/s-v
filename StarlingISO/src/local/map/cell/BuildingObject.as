@@ -1,23 +1,22 @@
 package local.map.cell
 {
-	import bing.starling.component.PixelsImage;
-	import bing.starling.component.PixelsMovieClip;
-	
 	import flash.geom.Rectangle;
 	
 	import local.util.TextureAssets;
 	import local.vo.BitmapAnimResVO;
 	
 	import starling.core.Starling;
+	import starling.display.BlendMode;
 	import starling.display.Image;
 	import starling.display.MovieClip;
 	import starling.display.Sprite;
+	import starling.utils.Color;
 	
 	public class BuildingObject extends Sprite
 	{
 		private var _bavos:Vector.<BitmapAnimResVO> ;
 		private var _tinyImg:Image ;
-		private var _tinyAlpha:Number = 0.05 ;
+		private var _tinyAlpha:Number = 0.03 ;
 		
 		public function BuildingObject( name:String , bavos:Vector.<BitmapAnimResVO> )
 		{
@@ -45,8 +44,7 @@ package local.map.cell
 						regions[j] = TextureAssets.instance.buildingTexture.getRegion(  tempName+ext ) ;
 					}
 					if(i==0){
-						mc = new PixelsMovieClip( TextureAssets.instance.buildingTexture.getTextures(tempName),  TextureAssets.instance.buildingBmd ,
-							regions , (Starling.current.nativeStage.frameRate/vo.rate)>>0 );
+						mc =TextureAssets.instance.createPixelsMovieClip( tempName,regions , (Starling.current.nativeStage.frameRate/vo.rate)>>0 );
 					}else{
 						mc = new MovieClip( TextureAssets.instance.buildingTexture.getTextures(tempName) , (Starling.current.nativeStage.frameRate/vo.rate)>>0 ) ;
 						mc.touchable = false ;
@@ -60,58 +58,55 @@ package local.map.cell
 				{
 					tempName += "000" ;
 					if(i==0){
-						img = new PixelsImage(TextureAssets.instance.buildingTexture.getTexture(tempName) , TextureAssets.instance.buildingBmd ,
-							TextureAssets.instance.buildingTexture.getRegion(tempName)  ); 
+						img = TextureAssets.instance.createPixelsImage( tempName );
 					}else{
 						img = new Image( TextureAssets.instance.buildingTexture.getTexture( tempName )  ) ;
 						img.touchable = false ;
 					}
-					img.x = vo.offsetX ;
-					img.y = vo.offsetY ;
+					img.x =  _bavos[0].offsetX ;
+					img.y =  _bavos[0].offsetY ;
 					addChild(img);
 				}
 			}
+			
+			
+			_tinyImg = new Image(TextureAssets.instance.buildingTexture.getTexture( name+"_0_000" ) );
+			_tinyImg.touchable = false ;
+			_tinyImg.blendMode = BlendMode.ADD ;
+			_tinyImg.color = Color.WHITE ;
+			_tinyImg.x =  _bavos[0].offsetX ;
+			_tinyImg.y =  _bavos[0].offsetY ;
+			_tinyImg.visible=false ;
+			addChild(_tinyImg);
 		}
 		
 		public function update():void
 		{
-//			for( var i:int = 0 ; i<numChildren ; ++i){
-//				if(getChildAt(i) is MovieClip ){
-//					trace(( getChildAt(i) as MovieClip ).currentFrame);
-//				}
-//			}
-//			if(_tinyBmp.visible){
-//				_tinyBmp.alpha += _tinyAlpha;
-//				if(_tinyBmp.alpha>1){
-//					_tinyAlpha = -0.05 ;
-//				}else if(_tinyBmp.alpha<-0.5){
-//					_tinyAlpha = 0.05 ;
-//				}
-//			}
+			if(_tinyImg.visible){
+				_tinyImg.alpha += _tinyAlpha;
+				if(_tinyImg.alpha>=1){
+					_tinyAlpha = -0.03 ;
+				}else if(_tinyImg.alpha<=0){
+					_tinyAlpha = 0.03 ;
+				}
+			}
 		}
 		
 		public function flash( value:Boolean ):void
 		{
-//			if( _tinyBmp.visible==value) return ;
-//			
-//			_tinyBmp.visible=value ;
-//			if(value){
-//				_tinyBmp.alpha=0.5;
-//				_tinyAlpha = 0.1 ;
-//			}
+			if( _tinyImg.visible==value) return ;
+			
+			_tinyImg.visible=value ;
+			if(value){
+				_tinyImg.alpha=0.5;
+				_tinyAlpha = 0.1 ;
+			}
 		}
 		
 		override public function dispose():void
 		{
 			super.dispose();
-//			for( var i:int = 0 ; i<numChildren ; ++i){
-//				if(getChildAt(i) is BaseAnimObject ){
-//					( getChildAt(i) as BaseAnimObject ).dispose() ;
-//				}
-//			}
-//			_bavos = null ;
-//			_tinyBmp = null ;
-//			super.disableInteractivePNG() ;
+			_tinyImg = null ;
 		}
 	}
 }

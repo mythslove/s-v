@@ -354,8 +354,12 @@ package local.map
 				if( touch.phase == TouchPhase.ENDED)
 				{
 					if(!_isMove && touch.target.parent.parent is SIsoObject){
-						var obj:SIsoObject = touch.target.parent.parent as SIsoObject ;
-						obj.alpha = obj.alpha==1? 0.5 : 1 ;
+						if(currentSelected) currentSelected.flash(false);
+						currentSelected = touch.target.parent.parent as BaseBuilding ;
+						currentSelected.flash(true);
+					}else{
+						if(currentSelected) currentSelected.flash(false);
+						currentSelected = null ;
 					}
 				}
 			}
