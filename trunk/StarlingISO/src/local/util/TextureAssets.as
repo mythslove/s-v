@@ -2,6 +2,8 @@ package local.util
 {
 	import bing.ds.HashMap;
 	import bing.res.ResVO;
+	import bing.starling.component.PixelsImage;
+	import bing.starling.component.PixelsMovieClip;
 	import bing.utils.MaxRectsBinPack;
 	
 	import flash.display.BitmapData;
@@ -106,6 +108,16 @@ package local.util
 				bmd.dispose();
 			}
 			roadResVO.bmds = null ;
+		}
+		
+		public function createPixelsImage( name:String ):PixelsImage
+		{
+			return new PixelsImage(buildingTexture.getTexture(name) , buildingBmd , buildingTexture.getRegion(name)  ); 
+		}
+		
+		public function createPixelsMovieClip( name:String ,regions:Vector.<Rectangle>, fps:Number ):PixelsMovieClip
+		{
+			return new PixelsMovieClip(buildingTexture.getTextures(name),  buildingBmd , regions ,fps );
 		}
 	}
 }
