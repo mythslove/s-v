@@ -4,6 +4,7 @@ package
 	import flash.events.Event;
 	
 	import local.comm.GameData;
+	import local.comm.GameSetting;
 	import local.comm.GlobalDispatcher;
 	import local.enum.VillageMode;
 	import local.event.VillageEvent;
@@ -12,6 +13,7 @@ package
 	import local.util.AnalysisUtil;
 	import local.util.VillageUtil;
 	import local.view.CenterViewLayer;
+	import local.view.tutor.TutorView;
 	import local.vo.PlayerVO;
 
 	public class Village extends BaseVillage
@@ -44,11 +46,20 @@ package
 			addChild( GameWorld.instance );
 			addChild( CenterViewLayer.instance );
 //			addChild( new Stats() );
+			AnalysisUtil.init();
+			
+			
+			var me:PlayerVO = PlayerModel.instance.me ;
+			if(me.tutorStep<GameSetting.TUTOR_STEP){
+				GameData.isShowTutor = true ;
+				addChild(TutorView.instance);
+			}else{
+				showDailyRewards();
+			}
+			
 			
 			GameWorld.instance.showBuildings();
 			GameData.villageMode = VillageMode.NORMAL ;
-//			showDailyRewards();
-			AnalysisUtil.init();
 			
 			NativeApplication.nativeApplication.addEventListener(Event.ACTIVATE , activateHandler);
 			NativeApplication.nativeApplication.addEventListener(Event.DEACTIVATE , deactivateHandler );
@@ -60,7 +71,7 @@ package
 			{
 				GameData.commDate = new Date();
 				GameWorld.instance.buildingScene.refreshBuildingStatus();
-//			showDailyRewards();
+//				showDailyRewards();
 			}
 		}
 		

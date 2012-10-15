@@ -9,6 +9,10 @@ package  local.comm
 
 	public class GameData
 	{
+		/**
+		 * 是否显示新手指引 
+		 */		
+		public static var isShowTutor:Boolean ;
 		
 		public static var version:Number = 1.0 ;
 		

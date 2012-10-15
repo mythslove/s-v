@@ -27,7 +27,7 @@ package local.util
 		 * @param questType
 		 * @param sonType
 		 */		
-		public function handleOwn( questType:String , sonType:String ):void
+		public function handleOwn( questType:String , sonType:String="" ):void
 		{
 			var isUpdate:Boolean ;
 			var currentQuests:Vector.<QuestVO> = QuestModel.instance.currentQuests ;
