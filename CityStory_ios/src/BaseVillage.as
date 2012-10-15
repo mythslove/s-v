@@ -47,12 +47,10 @@ package
 				}
 			}else if( stage.stage.fullScreenHeight >= 1136){
 				//iphone5
-				GameSetting.isIPad = false ;
 				GameSetting.SCREEN_HEIGHT  = 640 ;
 				GameSetting.SCREEN_WIDTH  = 960;
 			}else {
 				//iphone4,4s,3GS
-				GameSetting.isIPad = false ;
 				GameSetting.SCREEN_HEIGHT =640 ;
 				GameSetting.SCREEN_WIDTH = 960;
 				if(stage.fullScreenWidth<960){
