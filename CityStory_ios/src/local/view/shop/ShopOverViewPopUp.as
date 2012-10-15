@@ -55,22 +55,22 @@ package local.view.shop
 				case btnHomes:
 					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , true,0 );
 					ShopPopUp.instance.show(BuildingType.HOME);
-					PopUpManager.instance.removeCurrentPopup() ;
+					close();
 					break ;
 				case btnDecor:
 					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , true,0);
 					ShopPopUp.instance.show(BuildingType.DECORATION);
-					PopUpManager.instance.removeCurrentPopup() ;
+					close();
 					break ;
 				case btnBusiness:
 					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , true,0 );
 					ShopPopUp.instance.show(BuildingType.BUSINESS);
-					PopUpManager.instance.removeCurrentPopup() ;
+					close();
 					break ;
 				case btnIndustry:
 					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , true,0 );
 					ShopPopUp.instance.show(BuildingType.INDUSTRY);
-					PopUpManager.instance.removeCurrentPopup() ;
+					close();
 					break ;
 				case btnCommunity:
 					break ;
