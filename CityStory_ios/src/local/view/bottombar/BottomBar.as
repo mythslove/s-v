@@ -65,7 +65,7 @@ package local.view.bottombar
 					GameData.villageMode = VillageMode.EDIT ;
 					break ;
 				case marketBtn:
-					PopUpManager.instance.addQueuePopUp( ShopOverViewPopUp.instance , true , 0 , 0 );
+					PopUpManager.instance.addQueuePopUp( ShopOverViewPopUp.instance , true , 0);
 					break ;
 				case doneBtn:
 					if(GameData.villageMode==VillageMode.EXPAND){
