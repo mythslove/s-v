@@ -2,7 +2,9 @@ package local.vo
 {
 	import local.enum.QuestType;
 	import local.model.BuildingModel;
+	import local.model.PlayerModel;
 	import local.model.ShopModel;
+	import local.util.QuestUtil;
 
 	public class QuestTaskVO
 	{
@@ -42,22 +44,19 @@ package local.vo
 		/**
 		 * 初始化数据
 		 */		
-		public function init( acceptTime:int ):void
+		public function init( acceptTime:Number ):void
 		{
 			if ( current>0 ) return ;
-			var model:BuildingModel = BuildingModel.instance ;
 			switch( questType)
 			{
-				case QuestType.OWN_BUILDING:
-					if(sonType){
-						var baseVO:BaseBuildingVO = ShopModel.instance.allBuildingHash[sonType] as BaseBuildingVO ;
-						current = model.getCountByName( baseVO.type , baseVO.name ) ;
-					}
+				case QuestType.OWN_BD_BY_NAME:
+					_current = BuildingModel.instance.getCountByName( questType , sonType ) ;
 					break ;
-				case QuestType.OWN_TYPE:
-					if(sonType){
-						current = model.getCountByType( sonType ) ;
-					}
+				case QuestType.OWN_BD_BY_TYPE:
+					_current = BuildingModel.instance.getCountByType( questType ) ;
+					break ;
+				case QuestType.HAVE_POP:
+					_current = PlayerModel.instance.getCurrentPop() ;
 					break ;
 			}
 		}
