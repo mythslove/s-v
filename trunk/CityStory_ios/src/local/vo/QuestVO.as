@@ -1,6 +1,7 @@
 package local.vo
 {
 	import local.comm.GameData;
+	import local.util.AnalysisUtil;
 
 	public class QuestVO
 	{
@@ -96,16 +97,16 @@ package local.vo
 		{
 			if (tasks!=null){
 				var len:int = tasks.length ;
-				var item:QuestTaskVO ;
+				var task:QuestTaskVO ;
 				for(var i:int  = 0 ; i<len ; i++){
 					if( tasks[i] is QuestTaskVO){
-						item = tasks[i]  as QuestTaskVO;
-						if(item.isComplete ){
-							if(!item.isSendAnalysis){
+						task = tasks[i]  as QuestTaskVO;
+						if(task.isComplete ){
+							if(!task.isSendAnalysis){
 								//统计
-//								AnalysisUtil.send("Progress-Quest Goal Finished",
-//									{"Goal with Quest Name":title+"-"+item.intro});
-//								item.isSendAnalysis = true ;
+								AnalysisUtil.send("Progress-Quest Goal Finished",
+									{"Goal with Quest Name":title+"-"+task.info});
+								task.isSendAnalysis = true ;
 							}
 						}else{
 							return false ;
