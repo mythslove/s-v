@@ -40,6 +40,10 @@ package local.map.item
 						buildingVO.haveGoods = true ;
 						startProduct() ;
 						removeBuildingFlagIcon() ;
+						//任务
+						QuestUtil.instance.handleCount( QuestType.SUPPLY_BD_BY_NAME , buildingVO.name );
+						QuestUtil.instance.handleCount( QuestType.SUPPLY_BD_BY_TYPE , buildingVO.baseVO.type );
+						
 					}else{
 						//没有足够的goods
 						CenterViewLayer.instance.gameTip.showLackGoods( this ) ;

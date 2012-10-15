@@ -162,6 +162,8 @@ package local.map.item
 			}else if(buildingVO.baseVO.priceCoin>0 ){
 				PlayerModel.instance.changeCoin( -buildingVO.baseVO.priceCoin );
 				flyImg = new FlyLabelImage( PickupType.COIN , -buildingVO.baseVO.priceCoin ) ;
+				//任务
+				QuestUtil.instance.handleCount( QuestType.SPEND_COIN_ON_BD_BY_TYPE , buildingVO.baseVO.type , buildingVO.baseVO.priceCoin );
 			}
 			if(flyImg){
 				flyImg.x = screenX ;

@@ -4,6 +4,7 @@ package local.map.item
 	
 	import local.comm.GameData;
 	import local.enum.BuildingStatus;
+	import local.enum.QuestType;
 	import local.enum.VillageMode;
 	import local.map.GameWorld;
 	import local.map.cell.BuildingObject;
@@ -12,6 +13,7 @@ package local.map.item
 	import local.util.BuildingFactory;
 	import local.util.EmbedsManager;
 	import local.util.GameUtil;
+	import local.util.QuestUtil;
 	import local.view.CenterViewLayer;
 	import local.vo.BaseBuildingVO;
 	import local.vo.BuildingVO;
@@ -87,6 +89,8 @@ package local.map.item
 			GameWorld.instance.removeExpandSigns();
 			GameWorld.instance.addExpandSign(true);
 			GameWorld.instance.visibleExpandSigns(true);
+			//任务
+			QuestUtil.instance.handleCount( QuestType.EXPAND ) ;
 		}
 	}
 }
