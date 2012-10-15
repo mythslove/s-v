@@ -18,6 +18,8 @@ package local.vo
 		
 		private var _current:int ; //当前多少个
 		
+		public var isSendAnalysis:Boolean ; //用于flurry统计
+		
 		/** 当前数量*/
 		public function get current():int {
 			if ( _current<0) _current = 0;

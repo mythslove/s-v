@@ -2,6 +2,9 @@ package local.model
 {
 	import flash.utils.Dictionary;
 	
+	import local.comm.GlobalDispatcher;
+	import local.event.QuestEvent;
+	import local.util.GameUtil;
 	import local.vo.PlayerVO;
 	import local.vo.QuestVO;
 
@@ -19,7 +22,7 @@ package local.model
 		}
 		//=================================
 		
-		private const MAX_COUNT:int = 8 ; //最多读取前8个quests
+		public const MAX_COUNT:int = 5 ; //最多读取前几个quests
 		
 		/** 所有的quest */
 		public var allQuestArray:Vector.<QuestVO> ; 
@@ -40,16 +43,20 @@ package local.model
 			if(!completedQuests) completedQuests = new Dictionary();
 			
 			var vo:QuestVO;
+			var dic:Dictionary = new Dictionary();
 			for(var i:int = 0 ; i<currentQuests.length ; ++i){
 				if(currentQuests[i].received){
 					currentQuests.splice(i,1);
 					i--;
+				}else{
+					dic[ currentQuests[i].qid ] = true ;
 				}
 			}
 			var len:int = allQuestArray.length ;
-			for ( i = 0 ; i<len && currentQuests.length<MAX_COUNT ; ++i ) {
+			for ( i = 0 ; i<len && currentQuests.length<MAX_COUNT ; ++i )
+			{
 				vo = allQuestArray[i] ;
-				if( checkCondition(vo) ){
+				if( !dic[vo.qid] && checkCondition(vo) ){
 					currentQuests.push( vo );
 				}
 			}
@@ -85,7 +92,24 @@ package local.model
 			return false ;
 		}
 		
-		
+		/** 判断所有的任务中是否有任务完成*/
+		public function checkCompleteQuest():void
+		{
+			for each( var vo:QuestVO in currentQuests)
+			{
+				if(vo.isAccept && !vo.received && !vo.isComplete && vo.checkComplete()  ){
+					vo.isComplete=true;
+					completedQuests[vo.qid]=vo;
+					vo.received=true;
+					//抛出quest完成事件 
+					var evt:QuestEvent = new QuestEvent(QuestEvent.QUEST_COMPLETE);
+					evt.vo = vo ;
+					GlobalDispatcher.instance.dispatchEvent( evt );
+					//领取奖励
+					GameUtil.earnQuestRewards( vo.rewards );
+				}
+			}
+		}
 		
 	}
 }

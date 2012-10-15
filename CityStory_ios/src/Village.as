@@ -13,8 +13,6 @@ package
 	import local.util.VillageUtil;
 	import local.view.CenterViewLayer;
 	import local.vo.PlayerVO;
-	
-	import net.hires.debug.Stats;
 
 	public class Village extends BaseVillage
 	{
@@ -45,7 +43,7 @@ package
 			
 			addChild( GameWorld.instance );
 			addChild( CenterViewLayer.instance );
-			addChild( new Stats() );
+//			addChild( new Stats() );
 			
 			GameWorld.instance.showBuildings();
 			GameData.villageMode = VillageMode.NORMAL ;

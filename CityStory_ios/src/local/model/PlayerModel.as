@@ -78,5 +78,6 @@ package local.model
 		{
 			me = new PlayerVO();
 		}
+		
 	}
 }
