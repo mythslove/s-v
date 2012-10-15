@@ -203,7 +203,7 @@ package local.view.shop
 				case _btnHomes:
 					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , GameSetting.isIpad );
 					ShopPopUp.instance.show(BuildingType.HOME);
-					PopUpManager.instance.removeCurrentPopup() ;
+					close();
 					break ;
 //				case _btnDecor:
 //					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , false );
