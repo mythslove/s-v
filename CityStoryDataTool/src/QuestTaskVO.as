@@ -9,5 +9,6 @@ package
 		
 		public var questType:String="" ; //任务的类型
 		public var sonType:String="" ; //子类型
+		public var icon:String=""; //icon
 	}
 }
