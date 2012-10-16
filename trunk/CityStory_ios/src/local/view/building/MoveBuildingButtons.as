@@ -93,6 +93,7 @@ package local.view.building
 							GameData.villageMode = VillageMode.NORMAL ;
 						}
 						if(GameData.isShowTutor){
+							PlayerModel.instance.changeTutorStep();
 							CenterViewLayer.instance.questBtn.showTutor();
 						}
 					}
