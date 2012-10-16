@@ -114,25 +114,29 @@
 			addChild(_bmp);
 		}
 		
+		public function draw():void
+		{
+			scaleX = scaleY = 1;
+			if(_bmp.bitmapData){
+				if(txt.width!=_bmp.bitmapData.width || txt.height!=_bmp.bitmapData.height){
+					_bmp.bitmapData = new BitmapData(txt.width,txt.height,true,0xffffff);
+				}else{
+					_bmp.bitmapData.fillRect( _bmp.bitmapData.rect , 0xffffff );
+				}
+			}
+			else
+			{
+				_bmp.bitmapData = new BitmapData(txt.width,txt.height,true,0xffffff);
+			}
+			_bmp.bitmapData.draw( txt );
+		}
 		
 		public function set text( value:String ):void
 		{
 			if (txt.text != value)
 			{
 				txt.text = value;
-				scaleX = scaleY = 1;
-				if(_bmp.bitmapData){
-					if(txt.width!=_bmp.bitmapData.width || txt.height!=_bmp.bitmapData.height){
-						_bmp.bitmapData = new BitmapData(txt.width,txt.height,true,0xffffff);
-					}else{
-						_bmp.bitmapData.fillRect( _bmp.bitmapData.rect , 0xffffff );
-					}
-				}
-				else
-				{
-					_bmp.bitmapData = new BitmapData(txt.width,txt.height,true,0xffffff);
-				}
-				_bmp.bitmapData.draw( txt );
+				draw();
 			}
 		}
 		public function get text():String{
