@@ -101,6 +101,7 @@ package local.view.shop
 			var globalPoint:Point = localToGlobal( new Point());
 			var item:TutorItemVO = new TutorItemVO();
 			item.rectType = "roundRect" ;
+			item.alpha = .6 ;
 			item.rect = new Rectangle( globalPoint.x/root.scaleX,globalPoint.y/root.scaleX,width,height);
 			item.showArrow = true ;
 			item.arrowPoint = new Point(globalPoint.x/root.scaleX+width*0.5,globalPoint.y/root.scaleX);
