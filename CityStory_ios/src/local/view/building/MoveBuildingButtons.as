@@ -12,7 +12,6 @@ package local.view.building
 	import local.map.item.BaseBuilding;
 	import local.model.PlayerModel;
 	import local.util.BuildingFactory;
-	import local.view.CenterViewLayer;
 	import local.view.base.BaseView;
 	import local.vo.BaseBuildingVO;
 	import local.vo.PlayerVO;
@@ -94,7 +93,7 @@ package local.view.building
 						}
 						if(GameData.isShowTutor){
 							PlayerModel.instance.changeTutorStep();
-							CenterViewLayer.instance.questBtn.showTutor();
+							GameWorld.instance.showTutor();
 						}
 					}
 					break ;

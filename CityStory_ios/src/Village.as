@@ -50,17 +50,17 @@ package
 			addChild( new Stats() );
 			AnalysisUtil.init();
 			
-			
-//			if(PlayerModel.instance.me.tutorStep<GameSetting.TUTOR_STEP){
-//				GameData.isShowTutor = true ;
-//				addChild(TutorView.instance);
-//			}else{
-//				showDailyRewards();
-//			}
-			
-			
 			GameWorld.instance.showBuildings();
 			GameData.villageMode = VillageMode.NORMAL ;
+			
+			if(PlayerModel.instance.me.tutorStep<GameSetting.TUTOR_STEP){
+				GameData.isShowTutor = true ;
+				CenterViewLayer.instance.topBar.mouseChildren = false ;
+				CenterViewLayer.instance.questBtn.setVisible( false );
+				addChild(TutorView.instance);
+			}else{
+//				showDailyRewards();
+			}
 			
 			NativeApplication.nativeApplication.addEventListener(Event.ACTIVATE , activateHandler);
 			NativeApplication.nativeApplication.addEventListener(Event.DEACTIVATE , deactivateHandler );

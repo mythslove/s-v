@@ -1,7 +1,5 @@
 package local.map.item
 {
-	import bing.utils.RandomUtil;
-	
 	import flash.events.Event;
 	
 	import local.comm.GameData;
@@ -400,6 +398,12 @@ package local.map.item
 				QuestUtil.instance.handleCount( QuestType.BUILD_BD_BY_TYPE  , buildingVO.baseVO.type );
 				QuestUtil.instance.handleOwn( QuestType.OWN_BD_BY_NAME , buildingVO.name );
 				QuestUtil.instance.handleOwn( QuestType.OWN_BD_BY_TYPE , buildingVO.baseVO.type );
+				
+				if(GameData.isShowTutor){
+					PlayerModel.instance.changeTutorStep();
+					CenterViewLayer.instance.enable = true ;
+					CenterViewLayer.instance.questBtn.showTutor();
+				}
 			}
 			showUI();
 		}

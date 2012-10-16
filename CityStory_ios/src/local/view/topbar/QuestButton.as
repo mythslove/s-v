@@ -19,9 +19,11 @@ package local.view.topbar
 		
 		public function showTutor():void
 		{
+			setVisible(true) ;
 			var globalPoint:Point = localToGlobal( new Point());
 			var item:TutorItemVO = new TutorItemVO();
 			item.rectType = "roundRect" ;
+			item.alpha = 0 ;
 			item.rect = new Rectangle( globalPoint.x/root.scaleX,globalPoint.y/root.scaleX,width,height);
 			item.showArrow = true ;
 			item.arrowPoint = new Point(globalPoint.x/root.scaleX+width*0.5,globalPoint.y/root.scaleX);
@@ -31,7 +33,9 @@ package local.view.topbar
 		
 		public function setVisible( value:Boolean ):void
 		{
-			super.visible = value ;
+			TweenLite.killTweensOf(this);
+			_tempVisible = super.visible = value ;
+			alpha = 1;
 		}
 		
 		private var _tempVisible:Boolean ;

@@ -5,6 +5,7 @@ package local.model
 	import local.comm.GameData;
 	import local.comm.GameSetting;
 	import local.enum.QuestType;
+	import local.map.GameWorld;
 	import local.util.QuestUtil;
 	import local.view.CenterViewLayer;
 	import local.view.tutor.TutorView;
@@ -93,6 +94,8 @@ package local.model
 				GameData.isShowTutor = false ;
 				TutorView.instance.dispose();
 				TutorView.instance.parent.removeChild( TutorView.instance );
+				CenterViewLayer.instance.topBar.mouseChildren = true ;
+				GameWorld.instance.iconScene.mouseChildren = false ;
 			}
 		}
 		

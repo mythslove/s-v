@@ -9,6 +9,7 @@ package local.view
 	import local.enum.VillageMode;
 	import local.event.LevelUpEvent;
 	import local.event.QuestEvent;
+	import local.model.PlayerModel;
 	import local.model.QuestModel;
 	import local.util.AnalysisUtil;
 	import local.util.PopUpManager;
@@ -171,6 +172,7 @@ package local.view
 			SoundManager.instance.playButtonSound();
 			if(GameData.isShowTutor){
 				TutorView.instance.clearMask();
+				PlayerModel.instance.changeTutorStep();
 			}
 			PopUpManager.instance.addQueuePopUp( QuestListPopUp.instance);
 		}
@@ -178,5 +180,11 @@ package local.view
 		//*****************************************************************************
 		//*****************************************************************************
 		
+		
+		public function set enable( value:Boolean ):void
+		{
+			mouseChildren = value ;
+			alpha = value ? 1 : 0.5 ;
+		}
 	}
 }

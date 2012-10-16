@@ -423,5 +423,24 @@ package local.map
 			GameData.villageMode = VillageMode.NORMAL;
 			System.gc();
 		}
+		
+		
+		public function showTutor():void
+		{
+			iconScene.mouseChildren = false ;
+			CenterViewLayer.instance.enable = false ;
+			//查找正在修建中的房子
+			var building:BaseBuilding ;
+			for each(var obj:IsoObject in buildingScene.children){
+				obj.mouseEnabled = obj.mouseChildren =  false ;
+				if(obj is BaseBuilding){
+					building = obj as BaseBuilding ;
+					if( building is Home && building.buildingVO.buildClick < building.buildingVO.baseVO.click ){
+						moveToCenter(building);
+						obj.mouseChildren = true ;
+					}
+				}
+			}
+		}
 	}
 }
