@@ -47,7 +47,7 @@ package
 			
 			addChild( GameWorld.instance );
 			addChild( CenterViewLayer.instance );
-			addChild( new Stats() );
+//			addChild( new Stats() );
 			AnalysisUtil.init();
 			
 			GameWorld.instance.showBuildings();
