@@ -2,6 +2,8 @@ package local.view.shop
 {
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.geom.Point;
+	import flash.geom.Rectangle;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	
@@ -9,7 +11,9 @@ package local.view.shop
 	import local.util.GameUtil;
 	import local.view.base.BuildingThumb;
 	import local.view.base.MovieClipView;
+	import local.view.tutor.TutorView;
 	import local.vo.BaseBuildingVO;
+	import local.vo.TutorItemVO;
 	
 	public class ShopItemRenderer extends MovieClipView
 	{
@@ -90,6 +94,17 @@ package local.view.shop
 				init();
 				_inited = true ;
 			}
+		}
+		
+		public function showTutor():void
+		{
+			var globalPoint:Point = localToGlobal( new Point());
+			var item:TutorItemVO = new TutorItemVO();
+			item.rectType = "roundRect" ;
+			item.rect = new Rectangle( globalPoint.x/root.scaleX,globalPoint.y/root.scaleX,width,height);
+			item.showArrow = true ;
+			item.arrowPoint = new Point(globalPoint.x/root.scaleX+width*0.5,globalPoint.y/root.scaleX);
+			TutorView.instance.showTutor( item );
 		}
 		
 		override protected function removedFromStageHandler(e:Event):void

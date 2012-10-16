@@ -6,12 +6,14 @@ package local.view.shop
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
+	import local.comm.GameData;
 	import local.comm.GameSetting;
 	import local.enum.BuildingType;
 	import local.map.GameWorld;
 	import local.util.PopUpManager;
 	import local.view.base.BaseView;
 	import local.view.btn.PopUpCloseButton;
+	import local.view.tutor.TutorView;
 	
 	public class ShopOverViewPopUp extends BaseView
 	{
@@ -38,11 +40,16 @@ package local.view.shop
 		override protected function addedToStageHandler(e:Event):void
 		{
 			super.addedToStageHandler(e);
-			mouseChildren=true;
 			GameWorld.instance.stopRun();
 			x = GameSetting.SCREEN_WIDTH>>1 ;
 			y = GameSetting.SCREEN_HEIGHT>>1 ;
-			TweenLite.from( this , 0.2 , { x:x-200 , ease: Back.easeOut });
+			TweenLite.from( this , 0.2 , { x:x-200 , ease: Back.easeOut , onComplete:tweenOver });
+		}
+		private function tweenOver():void{
+			mouseChildren=true;
+			if(GameData.isShowTutor){
+				btnHomes.showTutor();
+			}
 		}
 		
 		private function onMouseHandler( e:MouseEvent ):void
@@ -53,6 +60,9 @@ package local.view.shop
 					close();
 					break ;
 				case btnHomes:
+					if(GameData.isShowTutor){
+						TutorView.instance.clearMask();
+					}
 					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , true,0 );
 					ShopPopUp.instance.show(BuildingType.HOME);
 					close();

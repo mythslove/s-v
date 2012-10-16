@@ -3,6 +3,7 @@ package local.view
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
+	import local.comm.GameData;
 	import local.comm.GameSetting;
 	import local.comm.GlobalDispatcher;
 	import local.enum.VillageMode;
@@ -19,6 +20,7 @@ package local.view
 	import local.view.quests.QuestListPopUp;
 	import local.view.topbar.QuestButton;
 	import local.view.topbar.TopBar;
+	import local.view.tutor.TutorView;
 	import local.vo.QuestVO;
 	
 	public class CenterViewLayer extends BaseView
@@ -85,6 +87,7 @@ package local.view
 					bottomBar.visible = true ;
 					bottomBar.marketBtn.visible = true ;
 					bottomBar.editorBtn.visible = true ;
+					questBtn.visible = true ;
 					bottomBar.doneBtn.visible = false ;
 					bottomBar.storageBtn.visible = false ;
 					topBar.visible = true ;
@@ -92,6 +95,7 @@ package local.view
 				case VillageMode.EDIT :
 					bottomBar.marketBtn.visible = false ;
 					bottomBar.editorBtn.visible = false ;
+					questBtn.visible = false ;
 					bottomBar.doneBtn.visible = true ;
 					bottomBar.storageBtn.visible = true ;
 					topBar.visible = false ;
@@ -99,16 +103,19 @@ package local.view
 				case VillageMode.BUILDING_STORAGE :
 					bottomBar.doneBtn.visible = false ;
 					bottomBar.storageBtn.visible = false ;
+					questBtn.visible = false ;
 					bottomBar.showStorage();
 					topBar.visible = false ;
 					break ;
 				case VillageMode.BUILDING_SHOP :
 					bottomBar.visible = false ;
 					topBar.visible = false ;
+					questBtn.visible = false ;
 					break ;
 				case VillageMode.EXPAND :
 					bottomBar.marketBtn.visible = false ;
 					bottomBar.editorBtn.visible = false ;
+					questBtn.visible = false ;
 					bottomBar.doneBtn.visible = true ;
 					bottomBar.storageBtn.visible = false ;
 					topBar.visible = false ;
@@ -117,6 +124,7 @@ package local.view
 					gameTip.hide();
 					bottomBar.marketBtn.visible = false ;
 					bottomBar.editorBtn.visible = false ;
+					questBtn.visible = false ;
 					break ;
 			}
 		}
@@ -161,7 +169,9 @@ package local.view
 		{
 			e.stopPropagation();
 			SoundManager.instance.playButtonSound();
-
+			if(GameData.isShowTutor){
+				TutorView.instance.clearMask();
+			}
 			PopUpManager.instance.addQueuePopUp( QuestListPopUp.instance);
 		}
 		
