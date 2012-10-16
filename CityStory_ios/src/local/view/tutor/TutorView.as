@@ -172,5 +172,17 @@ package local.view.tutor
 		{
 			visible = false ;
 		}
+		
+		public function dispose():void
+		{
+			_me = null ;
+			_bottom = null ;
+			TweenLite.killTweensOf( _shape );
+			_shape = null ;
+			if(_arrow){
+				_arrow.stop();
+				_arrow = null ;
+			}
+		}
 	}
 }

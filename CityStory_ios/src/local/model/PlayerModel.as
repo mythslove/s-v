@@ -2,9 +2,12 @@ package local.model
 {
 	import flash.utils.Dictionary;
 	
+	import local.comm.GameData;
+	import local.comm.GameSetting;
 	import local.enum.QuestType;
 	import local.util.QuestUtil;
 	import local.view.CenterViewLayer;
+	import local.view.tutor.TutorView;
 	import local.vo.PlayerVO;
 
 	public class PlayerModel
@@ -78,6 +81,20 @@ package local.model
 			return me.pop;
 		}
 		
+		/**
+		 * 改玩家新手指引的步数 
+		 * @param value
+		 */		
+		public function changeTutorStep( value:int =1  ):void
+		{
+			me.tutorStep+= value ;
+			if(me.tutorStep>= GameSetting.TUTOR_STEP){
+				trace("新手指引完成");
+				GameData.isShowTutor = false ;
+				TutorView.instance.dispose();
+				TutorView.instance.parent.removeChild( TutorView.instance );
+			}
+		}
 		
 		public function createPlayer():void
 		{
