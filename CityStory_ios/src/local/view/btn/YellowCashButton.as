@@ -12,7 +12,7 @@ package local.view.btn
 		public function YellowCashButton()
 		{
 			super();
-			txtCash.filters = TextStyle.grayDropFilters ;
+			TextStyle.setWhiteGropFilter( txtCash );
 		}
 		
 		public function get cash():String
