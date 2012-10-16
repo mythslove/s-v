@@ -162,7 +162,7 @@ package local.view.tutor
 			}
 			visible = true ;
 			_shape.alpha = 0 ;
-			TweenLite.to( _shape , 0.5 , {alpha:1});
+			TweenLite.to( _shape , 0.4 , {alpha:1});
 		}
 		
 		/**
