@@ -19,7 +19,7 @@ package local.view.btn
 		{
 			super();
 			
-			txtLabel.filters = TextStyle.grayDropFilters ;
+			TextStyle.setWhiteGropFilter( txtLabel );
 		}
 		
 		public function get label():String

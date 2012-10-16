@@ -19,7 +19,7 @@ package local.view.btn
 			mouseChildren = false ;
 			stop();
 			
-			txtLabel.filters = TextStyle.blackGlowfilters ;
+			TextStyle.setTabMenuFormat( txtLabel );
 			
 			if(label){
 				if(name){

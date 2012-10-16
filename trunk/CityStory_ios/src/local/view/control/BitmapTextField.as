@@ -66,8 +66,16 @@
 		}
 		
 		
-		
-		
+		override public function set width(value:Number):void{
+			txt.width = value ;
+		}
+		override public function set height(value:Number):void{
+			txt.height = value ;
+		}
+		public function setSize( w:Number , h:Number):void{
+			txt.width = w ;
+			txt.height =  h ;
+		}
 		
 		public function set  defaultTextFormat( value:TextFormat ):void
 		{
@@ -96,7 +104,7 @@
 			format.bold = true ;
 			format.align="center";
 			format.font="Verdana";
-			format.size = 20 ;
+			format.size = 10 ;
 			txt.defaultTextFormat = format ;
 			txt.textColor = 0xffffff ;
 			

@@ -3,12 +3,13 @@ package local.view.shop
 	import com.greensock.TweenLite;
 	import com.greensock.easing.Back;
 	
-	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.filters.GlowFilter;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
+	import flash.text.TextFormat;
 	
 	import local.comm.GameData;
 	import local.comm.GameSetting;
@@ -17,6 +18,7 @@ package local.view.shop
 	import local.util.PopUpManager;
 	import local.view.base.BaseView;
 	import local.view.btn.PopUpCloseButton;
+	import local.view.control.BitmapTextField;
 	import local.view.tutor.TutorView;
 	import local.vo.TutorItemVO;
 	
@@ -42,6 +44,24 @@ package local.view.shop
 			super();
 			homeButtonBg.mouseChildren = homeButtonBg.mouseEnabled = false ;
 			addEventListener(MouseEvent.CLICK , onMouseHandler );
+			
+			
+			var title:BitmapTextField = new BitmapTextField();
+			title.x = -520;
+			title.y = -300;
+			addChild( title );
+			title.filters = [
+				new GlowFilter(0x663300,1,8,8,50),
+				new GlowFilter(0xffffff,1,8,8,50)
+			];
+			var format:TextFormat = title.defaultTextFormat;
+			format.letterSpacing = 5;
+			format.color = 0xFFEB56;
+			format.size = 60 ;
+			title.defaultTextFormat = format ;
+			title.setSize(400,200);
+			title.text="Market";
+			addChild(title);
 		}
 		
 		override protected function addedToStageHandler(e:Event):void
