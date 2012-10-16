@@ -2,13 +2,10 @@ package local.view.tutor
 {
 	import com.greensock.TweenLite;
 	
-	import flash.display.GradientType;
 	import flash.display.Graphics;
 	import flash.display.MovieClip;
-	import flash.display.Shape;
 	import flash.display.Sprite;
 	import flash.events.Event;
-	import flash.geom.Matrix;
 	
 	import local.comm.GameSetting;
 	import local.model.PlayerModel;
@@ -27,7 +24,6 @@ package local.view.tutor
 		//==================================
 		
 		private var _me:PlayerVO ;
-		private var _shape:Shape ;
 		private var _bottom:Sprite ;
 		private var _arrow:MovieClip;
 		
@@ -38,9 +34,6 @@ package local.view.tutor
 	
 			_bottom = new Sprite();
 			addChild(_bottom);
-			
-			_shape = new Shape();
-			addChild(_shape);
 		}
 		
 		override protected function addedToStageHandler(e:Event):void
@@ -58,7 +51,6 @@ package local.view.tutor
 		 */		
 		private function getGraphics( alpha:Number ):Graphics
 		{
-			alpha = 0 ;
 			_bottom.graphics.clear();
 			_bottom.graphics.beginFill(0,alpha);
 			_bottom.graphics.drawRect(0,0,GameSetting.SCREEN_WIDTH , GameSetting.SCREEN_HEIGHT);
@@ -68,35 +60,19 @@ package local.view.tutor
 		
 		public function showTutor( item:TutorItemVO ):void
 		{
-			var shapeG:Graphics = _shape.graphics ;
-			shapeG.clear();
-			
-			var alphas:Array = [0,0.2,0.4];
-			var ratios:Array = [40,90,160] ;
 			var g:Graphics ;
+			
 			if(item.rectType=="roundRect")
 			{
 				g = getGraphics(item.alpha);
 				g.drawRoundRect( item.rect.x , item.rect.y , item.rect.width , item.rect.height ,25,25);
 				g.endFill();
-				
-				var matx:Matrix = new Matrix();
-				matx.createGradientBox(item.rect.width*3 , item.rect.height*3,0,item.rect.x-item.rect.width , item.rect.y-item.rect.height);
-				shapeG.beginGradientFill(GradientType.RADIAL,[0,0,0],alphas,ratios,matx);
-				shapeG.drawRect(0,0,GameSetting.SCREEN_WIDTH , GameSetting.SCREEN_HEIGHT);
-				shapeG.endFill();
 			}
 			else if(item.rectType=="ellipse")
 			{
 				g = getGraphics(item.alpha);
 				g.drawEllipse( item.rect.x , item.rect.y , item.rect.width , item.rect.height);
 				g.endFill();
-				
-				matx = new Matrix();
-				matx.createGradientBox(item.rect.width*3 , item.rect.height*3,0,item.rect.x-item.rect.width , item.rect.y-item.rect.height);
-				shapeG.beginGradientFill(GradientType.RADIAL,[0,0,0],alphas,ratios,matx);
-				shapeG.drawRect(0,0,GameSetting.SCREEN_WIDTH , GameSetting.SCREEN_HEIGHT);
-				shapeG.endFill();
 			}
 			else if( item.rectType == "none")
 			{
@@ -115,12 +91,6 @@ package local.view.tutor
 				g = getGraphics(item.alpha);
 				g.drawCircle( item.rect.x , item.rect.y , item.rect.width>>1);
 				g.endFill();
-				
-				matx = new Matrix();
-				matx.createGradientBox(item.rect.width*3 , item.rect.height*3,0,item.rect.x-item.rect.width*1.5 , item.rect.y-item.rect.height*1.5);
-				shapeG.beginGradientFill(GradientType.RADIAL,[0,0,0],alphas,ratios,matx);
-				shapeG.drawRect(0,0,GameSetting.SCREEN_WIDTH , GameSetting.SCREEN_HEIGHT);
-				shapeG.endFill();
 			}
 			else if(item.rectType=="tippop")
 			{
@@ -131,12 +101,6 @@ package local.view.tutor
 //				g = getGraphics(item.alpha);
 //				g.drawRoundRect( item.rect.x , item.rect.y , item.rect.width , item.rect.height ,12,12);
 //				g.endFill();
-//				
-//				matx = new Matrix();
-//				matx.createGradientBox(item.rect.width*3 , item.rect.height*3,0,item.rect.x-item.rect.width , item.rect.y-item.rect.height);
-//				shapeG.beginGradientFill(GradientType.RADIAL,[0,0,0],alphas,ratios,matx);
-//				shapeG.drawRect(0,0,GameSetting.SCREEN_WIDTH , GameSetting.SCREEN_HEIGHT);
-//				shapeG.endFill();
 			}
 			else if(item.rectType=="info")
 			{
@@ -161,8 +125,12 @@ package local.view.tutor
 				}
 			}
 			visible = true ;
-			_shape.alpha = 0 ;
-			TweenLite.to( _shape , 0.4 , {alpha:1});
+			if(item.alpha!=0){
+				_bottom.alpha = 0 ;
+				TweenLite.to( _bottom , 0.4 , {alpha: item.alpha});
+			}else{
+				_bottom.alpha = 1;
+			}
 		}
 		
 		/**
@@ -173,12 +141,12 @@ package local.view.tutor
 			visible = false ;
 		}
 		
-		public function dispose():void
+		override public function dispose():void
 		{
+			super.dispose();
 			_me = null ;
+			TweenLite.killTweensOf( _bottom );
 			_bottom = null ;
-			TweenLite.killTweensOf( _shape );
-			_shape = null ;
 			if(_arrow){
 				_arrow.stop();
 				_arrow = null ;

@@ -3,8 +3,12 @@ package local.view.shop
 	import com.greensock.TweenLite;
 	import com.greensock.easing.Back;
 	
+	import flash.display.DisplayObject;
+	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.geom.Point;
+	import flash.geom.Rectangle;
 	
 	import local.comm.GameData;
 	import local.comm.GameSetting;
@@ -14,6 +18,7 @@ package local.view.shop
 	import local.view.base.BaseView;
 	import local.view.btn.PopUpCloseButton;
 	import local.view.tutor.TutorView;
+	import local.vo.TutorItemVO;
 	
 	public class ShopOverViewPopUp extends BaseView
 	{
@@ -30,10 +35,12 @@ package local.view.shop
 		public var btnDecor:ShopOverViewDecorButton ;
 		public var btnCommunity:ShopOverViewCommunityButton ;
 		public var btnWonders:ShopOverViewWondersButton ;
+		public var homeButtonBg:Sprite ;
 		//=====================================
 		
 		public function ShopOverViewPopUp(){
 			super();
+			homeButtonBg.mouseChildren = homeButtonBg.mouseEnabled = false ;
 			addEventListener(MouseEvent.CLICK , onMouseHandler );
 		}
 		
@@ -48,8 +55,21 @@ package local.view.shop
 		private function tweenOver():void{
 			mouseChildren=true;
 			if(GameData.isShowTutor){
-				btnHomes.showTutor();
+				showTutor();
 			}
+		}
+		
+		
+		public function showTutor():void
+		{
+			var globalPoint:Point = localToGlobal( new Point(homeButtonBg.x+1,homeButtonBg.y+1));
+			var item:TutorItemVO = new TutorItemVO();
+			item.rectType = "roundRect" ;
+			item.alpha = .6 ;
+			item.rect = new Rectangle( globalPoint.x/root.scaleX,globalPoint.y/root.scaleX,homeButtonBg.width-2,homeButtonBg.height-4);
+			item.showArrow = true ;
+			item.arrowPoint = new Point(globalPoint.x/root.scaleX+homeButtonBg.width*0.5 , globalPoint.y);
+			TutorView.instance.showTutor( item );
 		}
 		
 		private function onMouseHandler( e:MouseEvent ):void

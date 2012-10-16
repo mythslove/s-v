@@ -17,7 +17,7 @@ package local.vo
 		/** 箭头角度*/
 		public var arrowAngle:int ;
 		/** mask透明度*/
-		public var alpha:Number=0.6;
+		public var alpha:Number=0 ;
 		/** 提示消息*/
 		public var info:String ;
 	}
