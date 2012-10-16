@@ -15,6 +15,7 @@ package local.view.bottombar
 	import local.view.building.EditorBuildingButtons;
 	import local.view.shop.ShopOverViewPopUp;
 	import local.view.storage.StorageBar;
+	import local.view.tutor.TutorView;
 	
 	public class BottomBar extends BaseView
 	{
@@ -65,6 +66,9 @@ package local.view.bottombar
 					GameData.villageMode = VillageMode.EDIT ;
 					break ;
 				case marketBtn:
+					if(GameData.isShowTutor){
+						TutorView.instance.clearMask();
+					}
 					PopUpManager.instance.addQueuePopUp( ShopOverViewPopUp.instance , true , 0);
 					break ;
 				case doneBtn:

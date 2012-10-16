@@ -12,6 +12,7 @@ package local.view.building
 	import local.map.item.BaseBuilding;
 	import local.model.PlayerModel;
 	import local.util.BuildingFactory;
+	import local.view.CenterViewLayer;
 	import local.view.base.BaseView;
 	import local.vo.BaseBuildingVO;
 	import local.vo.PlayerVO;
@@ -54,6 +55,11 @@ package local.view.building
 			scaleX = scaleY = 0 ;
 			var value:Number = 1/GameWorld.instance.scaleX ;
 			TweenLite.to( this , 0.25 , { scaleX:value , scaleY:value } );
+			if(GameData.isShowTutor){
+				cancelBtn.enabled = false ;
+			}else{
+				cancelBtn.enabled = true ;
+			}
 		}
 		
 		private function onClickHandler( e:MouseEvent ):void
@@ -85,6 +91,9 @@ package local.view.building
 						else
 						{
 							GameData.villageMode = VillageMode.NORMAL ;
+						}
+						if(GameData.isShowTutor){
+							CenterViewLayer.instance.questBtn.showTutor();
 						}
 					}
 					break ;

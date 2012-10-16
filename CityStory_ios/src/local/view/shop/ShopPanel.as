@@ -13,6 +13,7 @@ package local.view.shop
 	import local.util.BuildingFactory;
 	import local.util.PopUpManager;
 	import local.view.control.HPageScroller;
+	import local.view.tutor.TutorView;
 	import local.vo.BaseBuildingVO;
 	import local.vo.PlayerVO;
 	
@@ -21,6 +22,7 @@ package local.view.shop
 		public var container:Sprite ;
 		protected var _scroll:HPageScroller = new HPageScroller() ;
 		protected var _content:Sprite = new Sprite() ;
+		public function get content():Sprite{return _content;}
 		
 		public function ShopPanel()
 		{
@@ -51,6 +53,9 @@ package local.view.shop
 		protected function onItemHandler( e:MouseEvent):void
 		{
 			e.stopPropagation();
+			if(GameData.isShowTutor){
+				TutorView.instance.clearMask();
+			}
 		}
 		
 		private function mouseHandler( e:MouseEvent ):void

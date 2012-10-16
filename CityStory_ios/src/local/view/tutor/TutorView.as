@@ -10,6 +10,7 @@ package local.view.tutor
 	
 	import local.comm.GameSetting;
 	import local.model.PlayerModel;
+	import local.view.CenterViewLayer;
 	import local.view.base.BaseView;
 	import local.vo.PlayerVO;
 	import local.vo.TutorItemVO;
@@ -43,7 +44,7 @@ package local.view.tutor
 		override protected function addedToStageHandler(e:Event):void
 		{
 			super.addedToStageHandler(e);
-			
+			CenterViewLayer.instance.bottomBar.marketBtn.showTutor();
 		}
 		
 		/**

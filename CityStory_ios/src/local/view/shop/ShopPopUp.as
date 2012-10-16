@@ -9,6 +9,7 @@ package local.view.shop
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
+	import local.comm.GameData;
 	import local.comm.GameSetting;
 	import local.enum.BuildingType;
 	import local.map.GameWorld;
@@ -45,7 +46,12 @@ package local.view.shop
 		}
 		
 		private function showTweenOver():void{
-			if(GameSetting.SCREEN_WIDTH<1024) GameWorld.instance.visible=false;
+			if(GameSetting.SCREEN_WIDTH<1024) {
+				GameWorld.instance.visible=false;
+			}
+			if(GameData.isShowTutor && HomePanel.instance.content.numChildren>0 ){
+				(HomePanel.instance.content.getChildAt(0) as ShopItemRenderer).showTutor() ;
+			}
 		}
 		
 		private function onMouseHandler( e:MouseEvent ):void

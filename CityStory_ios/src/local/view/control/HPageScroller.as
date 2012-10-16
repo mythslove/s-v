@@ -35,6 +35,11 @@ package local.view.control
 		private var _endPosition:Number ;
 		private var _itemNum:int ;//item的数量
 		
+		/**
+		 * 是否锁定滑动 
+		 */		
+		public var scrollLock:Boolean  ;
+		
 		public function get totalPage():int{ return _totalPage+1 ; }
 		public function get currentPage():int{ return _currentPage+1; }
 		private function set endPos( value:Number ):void
@@ -132,14 +137,16 @@ package local.view.control
 					_container.addEventListener(MouseEvent.RELEASE_OUTSIDE, onMouseHandler );
 					break ;
 				case MouseEvent.MOUSE_MOVE:
-					if(e.buttonDown) {
-						_container.mouseChildren = false  ;
-						endPos = _prevContainerPos +  e.stageX-_mouseDownPos ;
-						if(!_container.hasEventListener(Event.ENTER_FRAME)){
-							_container.addEventListener(Event.ENTER_FRAME , onEnterFrame);
+					if(!scrollLock){
+						if(e.buttonDown) {
+							_container.mouseChildren = false  ;
+							endPos = _prevContainerPos +  e.stageX-_mouseDownPos ;
+							if(!_container.hasEventListener(Event.ENTER_FRAME)){
+								_container.addEventListener(Event.ENTER_FRAME , onEnterFrame);
+							}
+							this.dispatchEvent( new Event(SCROLL_POSITION_CHANGE));
+							break ;
 						}
-						this.dispatchEvent( new Event(SCROLL_POSITION_CHANGE));
-						break ;
 					}
 				default:
 					_container.mouseChildren = true  ;

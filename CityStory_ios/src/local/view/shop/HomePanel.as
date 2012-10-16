@@ -5,6 +5,7 @@ package local.view.shop
 	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
 	
+	import local.comm.GameData;
 	import local.enum.BuildingType;
 	import local.model.ShopModel;
 	import local.view.btn.TabMenuButton;
@@ -50,6 +51,9 @@ package local.view.shop
 			ContainerUtil.removeChildren(_content);
 			_scroll.removeScrollControll();
 			_scroll.addScrollControll( _content , container , 3 );
+			if(GameData.isShowTutor){
+				_scroll.scrollLock = true ;
+			}
 			
 			var itemRenders:Vector.<ShopItemRenderer> = ShopModel.instance.homesRenderers ;
 			if(!itemRenders) return ;
