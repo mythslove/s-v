@@ -1,5 +1,7 @@
 package local.view.tutor
 {
+	import com.greensock.TweenLite;
+	
 	import flash.display.GradientType;
 	import flash.display.Graphics;
 	import flash.display.MovieClip;
@@ -158,6 +160,9 @@ package local.view.tutor
 					_arrow.visible = false ;
 				}
 			}
+			visible = true ;
+			_shape.alpha = 0 ;
+			TweenLite.to( _shape , 0.5 , {alpha:1});
 		}
 		
 		/**
@@ -165,15 +170,7 @@ package local.view.tutor
 		 */		
 		public function clearMask():void
 		{
-			if(_arrow){
-				_arrow.visible=false ;
-			}
-			if(_bottom){
-				_bottom.graphics.clear();
-			}
-			if(_shape){
-				_shape.graphics.clear();
-			}
+			visible = false ;
 		}
 	}
 }
