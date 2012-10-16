@@ -51,13 +51,12 @@ package
 			AnalysisUtil.init();
 			
 			
-			var me:PlayerVO = PlayerModel.instance.me ;
-			if(me.tutorStep<GameSetting.TUTOR_STEP){
-				GameData.isShowTutor = true ;
-				addChild(TutorView.instance);
-			}else{
-				showDailyRewards();
-			}
+//			if(PlayerModel.instance.me.tutorStep<GameSetting.TUTOR_STEP){
+//				GameData.isShowTutor = true ;
+//				addChild(TutorView.instance);
+//			}else{
+//				showDailyRewards();
+//			}
 			
 			
 			GameWorld.instance.showBuildings();
