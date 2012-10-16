@@ -8,6 +8,7 @@ package local.view.tutor
 	import flash.events.Event;
 	
 	import local.comm.GameSetting;
+	import local.map.GameWorld;
 	import local.model.PlayerModel;
 	import local.view.CenterViewLayer;
 	import local.view.base.BaseView;
@@ -39,7 +40,14 @@ package local.view.tutor
 		override protected function addedToStageHandler(e:Event):void
 		{
 			super.addedToStageHandler(e);
-			CenterViewLayer.instance.bottomBar.marketBtn.showTutor();
+			if(_me.tutorStep==0){
+				CenterViewLayer.instance.bottomBar.editorBtn.enabled = false ;
+				CenterViewLayer.instance.bottomBar.marketBtn.showTutor();
+			}else if(_me.tutorStep==1){
+				GameWorld.instance.showTutor();
+			}else if(_me.tutorStep==2){
+				CenterViewLayer.instance.questBtn.showTutor() ;
+			}
 		}
 		
 		/**

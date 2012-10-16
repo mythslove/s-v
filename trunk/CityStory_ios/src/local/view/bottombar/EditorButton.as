@@ -38,5 +38,11 @@ package local.view.bottombar
 		private function onTweenCom():void{
 			super.visible = _tempVisible ;
 		}
+		
+		override public function set enabled(value:Boolean):void
+		{
+			super.enabled;
+			alpha = value?1:0.5;
+		}
 	}
 }

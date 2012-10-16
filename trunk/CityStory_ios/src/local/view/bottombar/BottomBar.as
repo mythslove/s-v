@@ -67,6 +67,7 @@ package local.view.bottombar
 					break ;
 				case marketBtn:
 					if(GameData.isShowTutor){
+						editorBtn.enabled = true ;
 						TutorView.instance.clearMask();
 					}
 					PopUpManager.instance.addQueuePopUp( ShopOverViewPopUp.instance , true , 0);
