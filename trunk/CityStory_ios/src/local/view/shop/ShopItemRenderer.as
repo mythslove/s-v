@@ -8,6 +8,7 @@ package local.view.shop
 	import flash.text.TextFormat;
 	
 	import local.enum.BuildingType;
+	import local.model.PlayerModel;
 	import local.util.GameUtil;
 	import local.view.base.BuildingThumb;
 	import local.view.base.MovieClipView;
@@ -25,6 +26,8 @@ package local.view.shop
 		//===========================
 		public var baseVO:BaseBuildingVO ;
 		private var _inited:Boolean ;
+		
+		private var _itemLock:ShopItemLock ;
 		
 		public function ShopItemRenderer( baseVO:BaseBuildingVO=null )
 		{
@@ -85,6 +88,27 @@ package local.view.shop
 			}
 			price.txtPrice.width = price.txtPrice.textWidth+10;
 			price.x=(width-price.width)>>1 ;
+			
+			//判断等级
+			var isLock:Boolean , lockText:String ;
+			if( baseVO.requireLv>0 && baseVO.requireLv>PlayerModel.instance.me.level){
+				isLock = true ;
+				lockText="Level\n"+baseVO.requireLv ;
+			}else if(baseVO.requirePop > 0 && baseVO.requirePop>PlayerModel.instance.getCurrentPop()){
+				isLock = true ;
+				lockText="Population\n"+baseVO.requirePop ;
+			}
+			if(isLock){
+				mouseEnabled = false ;
+				if(!_itemLock) _itemLock = new ShopItemLock();
+				_itemLock.x = _itemLock.y = 2 ;
+				GameUtil.boldTextField( _itemLock.txtInfo , lockText );
+				addChild(_itemLock);
+			}else if(_itemLock){
+				removeChild( _itemLock );
+				_itemLock = null ;
+				mouseEnabled = true ;
+			}
 		}
 		
 		override protected function addedToStageHandler(e:Event):void
