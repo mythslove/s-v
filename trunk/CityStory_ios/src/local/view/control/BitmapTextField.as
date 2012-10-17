@@ -105,7 +105,7 @@
 			format.bold = true ;
 			format.align="center";
 			format.font="Verdana";
-			format.size = 10 ;
+			format.size = 20 ;
 			txt.defaultTextFormat = format ;
 			txt.textColor = 0xffffff ;
 			
