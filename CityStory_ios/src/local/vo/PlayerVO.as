@@ -9,6 +9,7 @@ package  local.vo
 		public var dailyRewards:int ;
 		
 		public var goods:int ; //物品，商品
+		public var maxGoods:int = 200 ; //物品容量
 		
 		public var energy:int = 10 ; //能量
 		public var maxEnergy:int = 20 ; //能量容量
