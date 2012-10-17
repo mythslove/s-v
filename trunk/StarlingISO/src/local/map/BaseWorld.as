@@ -26,6 +26,7 @@ package local.map
 	import local.model.LandModel;
 	import local.model.MapGridDataModel;
 	import local.util.EmbedManager;
+	import local.view.building.MoveBuildingButtons;
 	import local.vo.BaseBuildingVO;
 	import local.vo.BuildingVO;
 	import local.vo.LandVO;
@@ -425,16 +426,16 @@ package local.map
 				
 				if(GameData.villageMode==VillageMode.BUILDING_SHOP ||GameData.villageMode==VillageMode.BUILDING_STORAGE )
 				{
-//					var moveBtns:MoveBuildingButtons  = MoveBuildingButtons.instance ;
-//					if(_mouseBuilding.bottom.getWalkable()){
-//						if( !moveBtns.okBtn.enabled){
-//							moveBtns.okBtn.enabled = true  ;
-//						}
-//					}else{
-//						if( moveBtns.okBtn.enabled){
-//							moveBtns.okBtn.enabled = false ;
-//						}
-//					}
+					var moveBtns:MoveBuildingButtons  = MoveBuildingButtons.instance ;
+					if(_mouseBuilding.bottom.getWalkable()){
+						if( !moveBtns.okBtn.enabled){
+							moveBtns.okBtn.enabled = true  ;
+						}
+					}else{
+						if( moveBtns.okBtn.enabled){
+							moveBtns.okBtn.enabled = false ;
+						}
+					}
 				}
 			}
 		}

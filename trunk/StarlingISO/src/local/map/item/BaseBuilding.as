@@ -1,9 +1,14 @@
 package local.map.item
 {
 	import local.comm.GameSetting;
+	import local.enum.BuildingStatus;
+	import local.enum.BuildingType;
+	import local.map.GameWorld;
 	import local.map.cell.BuildingBottomGrid;
 	import local.map.cell.BuildingObject;
 	import local.map.cell.RoadObject;
+	import local.model.BuildingModel;
+	import local.model.PlayerModel;
 	import local.util.ResourceUtil;
 	import local.vo.BitmapAnimResVO;
 	import local.vo.BuildingVO;
@@ -116,6 +121,90 @@ package local.map.item
 			super.nodeZ = value ;
 			buildingVO.nodeZ = value ;
 		}
+		
+		/**
+		 * 从商店中添加到世界中
+		 */		
+		public function shopToWorld():void
+		{
+			//减钱
+//			var flyImg:FlyLabelImage ;
+//			if( buildingVO.baseVO.priceCash>0 ){
+//				PlayerModel.instance.changeCash( -buildingVO.baseVO.priceCash );
+//				flyImg = new FlyLabelImage( PickupType.CASH , -buildingVO.baseVO.priceCash ) ;
+//			}else if(buildingVO.baseVO.priceCoin>0 ){
+//				PlayerModel.instance.changeCoin( -buildingVO.baseVO.priceCoin );
+//				flyImg = new FlyLabelImage( PickupType.COIN , -buildingVO.baseVO.priceCoin ) ;
+//				//任务
+//				QuestUtil.instance.handleCount( QuestType.SPEND_COIN_ON_BD_BY_TYPE , buildingVO.baseVO.type , buildingVO.baseVO.priceCoin );
+//			}
+//			if(flyImg){
+//				flyImg.x = screenX ;
+//				flyImg.y = screenY-20 ;
+//				GameWorld.instance.effectScene.addChild( flyImg );
+//			}
+			//添加到地图上
+			addToWorldFromTopScene();
+			if(buildingVO.baseVO.type!=BuildingType.DECORATION)
+			{
+				//显示修建状态
+				buildingVO.status=BuildingStatus.BUILDING ;
+				this.removeChild( _buildingObject );
+				_buildingObject.dispose() ;
+				_buildingObject = null ;
+				showUI() ;
+			}
+			else
+			{
+				//修建完成后的任务判断
+//				QuestUtil.instance.handleCount( QuestType.BUILD_BD_BY_NAME  , buildingVO.name );
+//				QuestUtil.instance.handleCount( QuestType.BUILD_BD_BY_TYPE  , buildingVO.baseVO.type );
+//				QuestUtil.instance.handleOwn( QuestType.OWN_BD_BY_NAME , buildingVO.name );
+//				QuestUtil.instance.handleOwn( QuestType.OWN_BD_BY_TYPE , buildingVO.baseVO.type );
+			}
+			//添加到地图数据中
+			BuildingModel.instance.addBuildingVO( buildingVO );
+			//加人口和人口容量
+			PlayerModel.instance.changePop( buildingVO.baseVO.addPop);
+			PlayerModel.instance.changeCap( buildingVO.baseVO.addCap);
+			
+			//任务
+//			QuestUtil.instance.handleCount( QuestType.PLACE_BY_TYPE , buildingVO.baseVO.type );
+		}
+		
+		/**
+		 * 从topScene添加到场景上 
+		 */		
+		public function addToWorldFromTopScene():void
+		{
+			var world:GameWorld = GameWorld.instance ;
+			world.topScene.removeIsoObject( this );
+			if(this is Road){
+				world.roadScene.addRoad( this as Road );
+			}else{
+				world.buildingScene.addBuilding( this );
+			}
+			world.roadScene.touchable = world.buildingScene.touchable = true ;
+			this.removeBottomGrid();
+			//显示放置特效
+//			var barvo:BitmapAnimResVO = EmbedsManager.instance.getAnimResVOByName("PlaceBuildingEffect")[0] ;
+//			var effect:TimeAnimObject = ObjectPool.instance.getTimeAnim( "PlaceBuildingEffect" );
+//			if(xSpan==1){
+//				effect.scaleX = effect.scaleY = 0.6 ;
+//				effect.x = -50 ;
+//				effect.y = -5 ;
+//			}else if(xSpan==2){
+//				effect.scaleX = effect.scaleY = 1 ;
+//				effect.x = barvo.offsetX ;
+//				effect.y = barvo.offsetY ;
+//			}else if(xSpan==3){
+//				effect.scaleX = effect.scaleY = 1.8 ;
+//				effect.x = -150 ;
+//				effect.y = -10 ;
+//			}
+//			this.addChildAt( effect , 0 );  
+		}
+		
 		
 		override public function dispose():void
 		{
