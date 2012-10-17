@@ -6,8 +6,8 @@ package local.view.shop
 	import feathers.controls.Button;
 	import feathers.display.Sprite;
 	
-	import local.comm.StyleSetting;
 	import local.comm.GameSetting;
+	import local.comm.StyleSetting;
 	import local.enum.BuildingType;
 	import local.map.GameWorld;
 	import local.util.EmbedManager;
@@ -43,7 +43,7 @@ package local.view.shop
 		private function init():void
 		{
 			//背景
-			var img:Image = EmbedManager.getUIImage( StyleSetting.POPUPBG ) ;
+			var img:Image = new Image(EmbedManager.createTextureByName(StyleSetting.POPUPBG ));
 			addChild( img );
 			_wid = img.width ;
 			_het = img.height ;

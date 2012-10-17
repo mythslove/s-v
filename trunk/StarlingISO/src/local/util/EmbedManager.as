@@ -26,6 +26,8 @@ package local.util
 		public static const UI_IPHONE_XML:Class;
 		[Embed(source="../assets/ui_iphone/ui.png")]
 		public static const UI_IPHONE:Class;
+		[Embed(source="../assets/ui_iphone/images/popupbg.png")]
+		public static const POPUPBG:Class;
 		
 		
 		private static var _textureDic:Dictionary = new Dictionary() ;
