@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" creationComplete="init();"
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%">
+	<s:layout>
+		<s:HorizontalLayout/>
+	</s:layout>
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import ghostcat.fileformat.swf.SWFDecoder;
+			import ghostcat.fileformat.swf.tag.SymbolClassTag;
+			
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.graphics.codec.PNGEncoder;
+			import mx.managers.PopUpManager;
+			
+			import tool.views.components.HandleProgressBar;
+			
+			private var _pbar:HandleProgressBar = new HandleProgressBar();
+			private var _loader:Loader;
+			private var _urlLoader:URLLoader ;
+			private var _swfDecoder:SWFDecoder ;
+			private var _mcListArray:ArrayCollection ;
+			private var _selectedMC:String ;
+			private var _mc:MovieClip ;
+			private var _exportFrames:int =1 ;
+			private var _exportScale:Number =1 ;
+			private var _exportFile:File =new File();
+			private var _mulFile:File = new File();
+			private var _bigFile:File = new File();
+			
+			private function init():void
+			{
+				addEventListener(Event.RESIZE , onResizeHandler );
+				onResizeHandler(null);
+				_exportFile.addEventListener(Event.SELECT , saveFileSelected );
+				_bigFile.addEventListener(Event.SELECT , bigFileSelected );
+				_mulFile.addEventListener(FileListEvent.SELECT_MULTIPLE , mulImagesSlected );
+			}
+			private function onResizeHandler( e:Event ):void
+			{
+				container.x = buildingContainer.width>>1;
+				container.y = buildingContainer.height>>1;
+			}
+			
+			//直接拖放
+			protected function container_nativeDragEnterHandler(event:NativeDragEvent):void
+			{
+				NativeDragManager.dropAction = NativeDragActions.COPY ; 
+				NativeDragManager.acceptDragDrop(event.target as InteractiveObject);
+			}
+			
+			protected function container_nativeDragDropHandler(event:NativeDragEvent):void
+			{
+				clear();
+				var file:File =  event.clipboard.getData( event.clipboard.formats[0])[0] as File;
+				if(file.extension.toLowerCase()!="swf") return ;
+				
+				lblName.text = file.name;
+				var stream:FileStream = new FileStream();
+				try{
+					stream.open( file , FileMode.READ);
+					var bytes:ByteArray = new ByteArray();
+					stream.readBytes( bytes , 0 , stream.bytesAvailable );
+					_swfDecoder = new SWFDecoder(bytes);
+					_mcListArray = new ArrayCollection(_swfDecoder.getTags(SymbolClassTag)[0].symbolClasses) ;
+					mcList.dataProvider = _mcListArray ;
+					//
+					_loader = new Loader();
+					_loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR , loaderErrorHandler );
+					_loader.load( new URLRequest(file.url) , new LoaderContext(false,ApplicationDomain.currentDomain ));					
+				}catch(e:Error){
+					trace(e.message);
+				}finally{
+					stream.close();
+				}
+			}
+			
+			private function loaderErrorHandler( e:IOErrorEvent ):void
+			{
+				trace(e.text);
+			}
+			
+			protected function skeletonList_changeHandler(event:Event):void
+			{
+				while(container.numChildren>0){
+					container.removeChildAt(0);
+				}
+				_mc = null ;
+				var index:int = mcList.selectedIndex;
+				_selectedMC = _mcListArray.source[index];
+				_mc = new (_loader.contentLoaderInfo.applicationDomain.getDefinition(_selectedMC) as Class)() as MovieClip ;
+				if(_mc){
+					txtFrames.text = _mc.totalFrames +"" ;
+					container.addChild(_mc);
+				}
+			}
+			
+			//------------------导入图片---------------------
+			private var maxW:int;
+			private var maxH:int;
+			private var minX:int ; 
+			private var minY:int ; 
+			private var temp:int = 0 ;
+			private function saveFileSelected( e:Event ):void
+			{
+				PopUpManager.addPopUp(_pbar,this,true);
+				PopUpManager.centerPopUp( _pbar);
+				maxH =  int.MIN_VALUE;
+				maxW = int.MIN_VALUE ;
+				minX = int.MAX_VALUE ;
+				minY = int.MAX_VALUE;
+				temp = 0 ;
+				_exportScale = Number(txtScale.text);
+				if(!_exportScale || _exportScale ===0) {
+					_exportScale = 1;
+				}
+				_exportFrames = int(txtFrames.text);
+				if(_exportFrames>0){
+					_mc.gotoAndPlay(1);
+					_mc.addEventListener(Event.ENTER_FRAME , onEnterFrameHandler);
+				}
+			}
+			private function onEnterFrameHandler( e:Event ):void
+			{
+				var rect:Rectangle = _mc.getBounds(_mc);
+				if(maxW<rect.right) maxW = rect.right  ; 
+				if(maxH<rect.bottom) maxH = rect.bottom ; 
+				
+				if(minX>rect.x) minX = rect.x; 
+				if(minY>rect.y) minY = rect.y; 
+				temp++;
+				if(temp==_exportFrames*2){
+					maxW-=minX;
+					maxH-=minY ;
+					temp = 0 ;
+					_mc.gotoAndPlay(1);
+					_mc.removeEventListener(Event.ENTER_FRAME , onEnterFrameHandler);
+					_mc.addEventListener(Event.ENTER_FRAME ,enterFrameExportHandler);
+				}
+			}
+			private function enterFrameExportHandler( e:Event ):void
+			{
+				var bmd:BitmapData = new BitmapData(maxW*_exportScale,maxH*_exportScale,true,0xffffff);
+				var matrix:Matrix = new Matrix(1,0,0,1,-minX,-minY);
+				matrix.scale( _exportScale , _exportScale );
+				bmd.draw( _mc , matrix );
+				var stream:FileStream = new FileStream();
+				try{
+					var name:String= temp<10?"00"+temp :  ( temp<100?"0"+temp:temp+"") ;
+//					name=temp+"" ;
+					var file:File = new File(_exportFile.nativePath+"/"+_selectedMC+"_"+name+".png");
+					stream.open( file , FileMode.WRITE);
+					var pngEncoder:PNGEncoder = new PNGEncoder();
+					var bytes:ByteArray = pngEncoder.encode( bmd );
+					stream.writeBytes( bytes, 0 , bytes.bytesAvailable );
+				}catch(e:Error){
+					trace(e);
+				}finally{
+					stream.close();
+				}
+				temp++;
+				if(temp==_exportFrames){
+					temp = 0 ;
+					_mc.removeEventListener(Event.ENTER_FRAME ,enterFrameExportHandler);
+					PopUpManager.removePopUp(_pbar);
+					Alert.show("完成 (Success)!");
+				}
+			}
+			//----------------------------------------------
+			private function clear():void
+			{
+				_selectedMC = null ;
+				_mcListArray = null ;
+				mcList.dataProvider = null ;
+				if(_loader){
+					_loader.unloadAndStop();
+					_loader.contentLoaderInfo.removeEventListener(IOErrorEvent.IO_ERROR , loaderErrorHandler );
+					_loader = null ;
+				}
+				if(_mc){
+					_mc.stop();
+					if(_mc.parent){
+						_mc.parent.removeChild(_mc);
+					}
+					_mc = null ;
+				}
+			}
+			
+			
+			
+			//*****************************************************************/
+			//*****************************************************************/
+			//*****************************************************************/
+			//*****************************************************************/
+			//*****************************************************************/
+			private var _selectedNum:int ;
+			private var _selectedArr:Array;
+			private var _bmds:Vector.<BitmapData>;
+			private var _loadNum:int  ;
+			private var _mulLoader:Loader;
+			
+			private function selectImagesHandler():void {
+				_mulFile.browseForOpenMultiple("选择序列图片",[ new FileFilter("图片文件","*.png;*.jpg")] ) ;
+			}
+			private function mulImagesSlected( e:FileListEvent ):void
+			{
+				btnCombine.enabled = false ;
+				_selectedArr = e.files ;
+				_selectedArr.sortOn("name" , Array.CASEINSENSITIVE );
+				_bmds = new Vector.<BitmapData>( _selectedArr.length, true );
+				_loadNum = 0 ;
+				_mulLoader = new Loader();
+				_mulLoader.contentLoaderInfo.addEventListener(Event.COMPLETE , mulImgLoadedHandler );
+				_mulLoader.load( new URLRequest( (_selectedArr[_loadNum] as File).nativePath ));
+			}
+			
+			private function mulImgLoadedHandler( e:Event):void
+			{
+				_mulLoader.contentLoaderInfo.removeEventListener(Event.COMPLETE , mulImgLoadedHandler );
+				_bmds[_loadNum] = (_mulLoader.content as Bitmap).bitmapData ; 
+				_loadNum++;
+				if(_loadNum==_selectedArr.length){
+					btnCombine.enabled = true ;
+				}else {
+					_mulLoader = new Loader();
+					_mulLoader.contentLoaderInfo.addEventListener(Event.COMPLETE , mulImgLoadedHandler );
+					_mulLoader.load( new URLRequest( (_selectedArr[_loadNum] as File).nativePath ));
+				}
+			}
+			
+			private function bigFileSelected(e:Event):void
+			{
+				btnCombine.enabled = false ;
+				var col:int = int(txtCol.text);
+				if(col<1) col=1;
+				else if(col>_bmds.length) col=_bmds.length ;
+				var row:int = Math.ceil( _bmds.length/col);
+				var wid:int = _bmds[0].width*col ;
+				var het:int = _bmds[0].height*row ;
+				var temp:int =0 ; 
+				var bigBmd:BitmapData = new BitmapData(wid,het,true,0xffffff);
+				var bmd:BitmapData; 
+				for( var i:int = 0 ;i<row ; ++i){
+					for( var j:int = 0 ; j<col ; ++j){
+						bmd = _bmds[temp] ;
+						bigBmd.copyPixels( bmd ,bmd.rect , new Point( _bmds[0].width*j, _bmds[0].height*i),null,null,true);
+						temp++;
+						if(temp==_bmds.length) break ;
+					}
+					if(temp==_bmds.length) break ;
+				}
+				var stream:FileStream = new FileStream();
+				try{
+					stream.open( _bigFile , FileMode.WRITE);
+					var pngEncoder:PNGEncoder = new PNGEncoder();
+					var bytes:ByteArray = pngEncoder.encode( bigBmd );
+					stream.writeBytes( bytes, 0 , bytes.bytesAvailable );
+				}catch(e:Error){
+					trace(e);
+				}finally{
+					stream.close();
+				}
+				Alert.show("完成 (Success)!");
+			}
+		]]>
+	</fx:Script>
+	<s:BorderContainer id="buildingContainer"  width="100%" height="100%" backgroundColor="#FCF0F0" borderColor="#FFC4C4"
+					   nativeDragEnter="container_nativeDragEnterHandler(event)" nativeDragDrop="container_nativeDragDropHandler(event)">
+		<mx:UIComponent id ="container" />
+	</s:BorderContainer>
+	<s:BorderContainer width="250" height="100%" borderColor="#B9B9B9">
+		<s:Label x="10" y="48" fontWeight="bold" text="Name"/>
+		<s:Label x="10" y="78" text="导出帧数(frames)"/>
+		<s:Label x="14" y="108" text="绽放比例(Scale)"/>
+		<s:Label x="10" y="16" color="#4CA709" text="SWF生成序列图片"/>
+		<s:Label x="10" y="364" color="#4CA709" text="合并序列图"/>
+		<s:TextInput id="txtFrames" x="116" y="74" width="102" text="1"/>
+		<s:Label id="lblName" x="63" y="47" text="标签"/>
+		<s:List id="mcList" x="10" y="133" width="208" height="169" change="skeletonList_changeHandler(event)"></s:List>
+		<s:Button x="116" y="310" width="102" height="24" label="导出(Export)" click="_exportFile.browseForDirectory('保存的位置(select a directory)');"/>
+		<s:TextInput id="txtScale" x="116" y="104" width="102" text="1"/>
+		<s:Button x="40" y="402" width="168" height="45" label="选择序列图(select images)" click="selectImagesHandler()"/>
+		<s:Button id="btnCombine" x="41" y="496" width="168" height="45" label="合并图片(combine)"
+				  enabled="false" click="_bigFile.browseForSave('保存');"/>
+		<s:Label x="22" y="470" fontWeight="bold" text="列数(Col)"/>
+		<s:TextInput id="txtCol" x="78" y="465" text="3"/>
+	</s:BorderContainer>
+</s:Group>

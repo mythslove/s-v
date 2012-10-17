@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%" >
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.utils.StringUtil;
+			
+			import spark.events.IndexChangeEvent;
+			
+			public var lang:Object = new Object(); //语言包
+			
+			public var keyArray:ArrayCollection  = new ArrayCollection();
+			
+			public var selectedKey:String ="" ; //当前选中的key
+			
+			protected function keyList_changeHandler(event:IndexChangeEvent):void
+			{
+				selectedKey = keyArray.getItemAt( keyList.selectedIndex ).toString();
+				if(selectedKey){
+					txtKey.text = selectedKey ;
+					txtValue.text = lang[selectedKey] ;
+				}
+			}
+			
+			private function submit():void
+			{
+				var key:String =  StringUtil.trim( txtKey.text ) ;
+				var value:String = StringUtil.trim( txtValue.text );
+				if( key && value){
+					lang[ key.toLowerCase() ] = value ;
+					if( txtSearch.text==""){
+						refreshList();
+					}
+				}
+			}
+			
+			private function deleteKey():void
+			{
+				if(selectedKey!="")
+				{
+					delete lang[selectedKey] ;
+					search();
+					txtValue.text="";
+					txtKey.text="";
+				}
+			}
+			
+			private function search():void
+			{
+				var txt:String = StringUtil.trim( txtSearch.text );
+				if(!txt) {
+					refreshList() ;
+					return ;
+				}
+				keyArray.removeAll();
+				for( var key:String in lang ) {
+					if(key.indexOf(txt)>-1 ){
+						keyArray.addItem( key );
+					}
+				}
+				keyList.dataProvider = keyArray ;
+			}
+			
+			private function refreshList():void
+			{
+				keyArray.removeAll();
+				for( var key:String in lang )
+				{
+					keyArray.addItem( key );
+				}
+				keyList.dataProvider = keyArray ;
+			}
+			
+			
+			
+			
+			
+			
+			//==========文件读取和存储=================
+			
+			private var file:File ;
+			
+			private function open():void
+			{
+				file = new File();
+				file.addEventListener(Event.SELECT , onSelectedOpenFile );
+				file.browseForOpen("选择文件" , [new FileFilter("语言包文件 .bin,.XML","*.bin;*.xml")  ]);
+			}
+			private function onSelectedOpenFile( e:Event ):void
+			{
+				file.removeEventListener(Event.SELECT , onSelectedOpenFile );
+				var stream:FileStream = new FileStream();
+				if(file.extension.toLowerCase()=="xml")
+				{
+					stream.open( file , FileMode.READ );
+					var bytes:ByteArray = new ByteArray();
+					stream.readBytes( bytes) ;
+					parseXML( XML(bytes.toString())  );
+				}
+				else
+				{
+					try
+					{
+						stream.open( file , FileMode.READ );
+						lang = stream.readObject() ;
+						refreshList() ;
+					}
+					catch( e:Error)
+					{
+						trace(e);
+					}
+					finally
+					{
+						stream.close();
+					}
+				}
+			}
+			
+			private function parseXML( config:XML ):void
+			{
+				lang = new Object();
+				var len:int = config.children().length();
+				var item:* ;
+				for( var i:int = 0 ; i<len ; ++i ){
+					item = config.children()[i];
+					var key:String = item.key[0].toString().toLocaleLowerCase() ;
+					if(item.value[0]){
+						var value:String = item.value[0].toString()  ;
+						lang[key] = value ; 
+					}else{
+						lang[key] = "" ; 
+					}
+				}
+				refreshList() ;
+			}
+			
+			
+			private function save():void
+			{
+				file = new File();
+				file.addEventListener(Event.SELECT , onSelectedSaveFile );
+				file.browseForSave( "保存文件");
+			}
+			private function onSelectedSaveFile( e:Event ):void
+			{
+				file.removeEventListener(Event.SELECT , onSelectedOpenFile );
+				if(file.nativePath.indexOf(".bin")==-1){
+					file = new File( file.nativePath+".bin");
+				}
+				var stream:FileStream = new FileStream();
+				try
+				{
+					stream.open( file , FileMode.WRITE );
+					stream.writeObject( lang ) ;
+					Alert.show("保存成功 !");
+				}
+				catch( e:Error)
+				{
+					trace(e);
+				}
+				finally
+				{
+					stream.close();
+				}
+			}
+		]]>
+	</fx:Script>
+	<s:Label x="21" y="127" text="Key"/>
+	<s:Label x="21" y="166" text="Value"/>
+	<s:TextArea id="txtValue" x="60" y="166" width="464" height="319" />
+	<s:TextInput id="txtKey" x="60" y="123" width="464"/>
+	<s:Button x="454" y="505" height="36" label="确认" click="submit()"/>
+	<s:Label x="561" y="30" text="列表"/>
+	<s:TextInput id="txtSearch" x="593" y="24" width="204" keyUp="search()"/>
+	<s:Button x="10" y="10" width="75" height="35" label="打开" click="open()"/>
+	<s:Button x="128" y="10" width="95" height="35" label="保存" click="save()"/>
+	<s:List id="keyList" x="561" bottom="10" width="324" height="538"
+			change="keyList_changeHandler(event)"></s:List>
+	<s:Button x="56" y="505" height="36" label="删除" click="deleteKey()"/>
+	<s:Button x="805" y="25" width="80" label="显示全部" click="refreshList()"/>
+</s:Group>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" creationComplete="init()"
+					   xmlns:s="library://ns.adobe.com/flex/spark" minWidth="900" minHeight="640"
+					   xmlns:mx="library://ns.adobe.com/flex/mx" showStatusBar="false" frameRate="60"
+					   xmlns:views="tool.views.*">
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import bing.iso.IsoGrid;
+			
+			import mx.graphics.codec.PNGEncoder;
+			
+			private function init():void
+			{
+//				var grid:IsoGrid = new IsoGrid(28,28,60);
+//				grid.render();
+//				var bmp:BitmapData = new BitmapData( grid.width,grid.height,true,0xffffff);
+//				var mat:Matrix = new Matrix();
+//				mat.translate(bmp.width*0.5,0);
+//				bmp.draw( grid,mat);
+//				var file:File = new File("c:/tt.png");
+//				var stream:FileStream = new FileStream();
+//				stream.open( file, FileMode.WRITE );
+//				var en:PNGEncoder = new PNGEncoder();
+//				var bytes:ByteArray = en.encode(bmp);
+//				stream.writeBytes(bytes);
+//				stream.close();
+			}
+			
+			
+		]]>
+	</fx:Script>
+	
+	<mx:TabNavigator x="0" y="0" width="100%" height="100%" paddingBottom="5" paddingTop="5">
+		<s:NavigatorContent width="100%" height="100%" label="建筑资源">
+			<views:BuildingView x="0" y="0" width="100%" height="100%">
+			</views:BuildingView>
+		</s:NavigatorContent>
+		<s:NavigatorContent width="100%" height="100%" label="道路/河流资源">
+			<views:RoadsView x="0" y="0" width="100%" height="100%">
+			</views:RoadsView>
+		</s:NavigatorContent>
+		<s:NavigatorContent width="100%" height="100%" label="地图数据">
+			<views:GameMapView x="0" y="0">
+			</views:GameMapView>
+		</s:NavigatorContent>
+		<s:NavigatorContent width="100%" height="100%" label="动画文件处理">
+			<views:AnimationView x="0" y="0"/>
+		</s:NavigatorContent>
+		<s:NavigatorContent width="100%" height="100%" label="国际化">
+			<views:LocalizationView x="0" y="0"/>
+		</s:NavigatorContent>
+	</mx:TabNavigator>
+</s:WindowedApplication>
