@@ -21,7 +21,7 @@ package local.view.shop
 		
 		private function init():void
 		{
-			_scroll.addScrollControll( _content , container , 3);
+			_scroll.addScrollControll( _content , container , 3,20);
 			
 			var itemRenders:Vector.<ShopItemRenderer> = ShopModel.instance.decorsRenderers ;
 			if(!itemRenders) return ;
@@ -32,6 +32,7 @@ package local.view.shop
 				render = itemRenders[i];
 				_scroll.addItem( render );
 			}
+			refreshPageButton();
 		}
 		
 		

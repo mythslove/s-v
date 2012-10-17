@@ -12,6 +12,7 @@ package local.view.shop
 	import local.model.PlayerModel;
 	import local.util.BuildingFactory;
 	import local.util.PopUpManager;
+	import local.view.btn.PageButton;
 	import local.view.control.HPageScroller;
 	import local.view.tutor.TutorView;
 	import local.vo.BaseBuildingVO;
@@ -24,17 +25,29 @@ package local.view.shop
 		protected var _content:Sprite = new Sprite() ;
 		public function get content():Sprite{return _content;}
 		
+		public var prevPageBtn:PageButton = new PageButton() ;
+		public var nextPageBtn:PageButton = new PageButton() ;
+		
 		public function ShopPanel()
 		{
 			super();
 			container = new Sprite();
 			container.x = 30 ;
-			container.y = 70 ;
+			container.y = 75 ;
 			container.graphics.beginFill(0,0);
 			container.graphics.drawRect(0,0,825,370);
 			container.graphics.endFill();
 			addChild(container);
 			container.addChild(_content);
+			prevPageBtn = new PageButton();
+			prevPageBtn.scaleX = -1 ;
+			prevPageBtn.x = 10 ;
+			prevPageBtn.y = 250 ;
+			addChild(prevPageBtn);
+			nextPageBtn = new PageButton();
+			nextPageBtn.x = 873;
+			nextPageBtn.y = 250 ;
+			addChild(nextPageBtn);
 			
 			_content.addEventListener(MouseEvent.CLICK , onItemHandler );
 			_content.addEventListener(MouseEvent.MOUSE_DOWN , mouseHandler );
@@ -43,11 +56,41 @@ package local.view.shop
 			_content.addEventListener(MouseEvent.RELEASE_OUTSIDE , mouseHandler );
 			_content.addEventListener(MouseEvent.MOUSE_MOVE , mouseHandler );
 			_scroll.addEventListener( HPageScroller.SCROLL_POSITION_CHANGE , scrollChangeHandler );
+			_scroll.addEventListener( HPageScroller.SCROLL_OVER , scrollChangeHandler );
+			
+			nextPageBtn.addEventListener(MouseEvent.CLICK , pageClickHandler );
+			prevPageBtn.addEventListener(MouseEvent.CLICK , pageClickHandler );
+		}
+		
+		/**
+		 * 刷新翻页按钮状态 
+		 */		
+		public function refreshPageButton():void
+		{
+			prevPageBtn.visible = _scroll.hasPrevPage() ;
+			nextPageBtn.visible = _scroll.hasNextPage() ;
 		}
 		
 		private function scrollChangeHandler( e:Event ):void
 		{
-			
+			if(e.type == HPageScroller.SCROLL_OVER )
+			{
+				prevPageBtn.visible = _scroll.hasPrevPage() ;
+				nextPageBtn.visible = _scroll.hasNextPage() ;
+			}
+			else
+			{
+				if(prevPageBtn.visible || nextPageBtn.visible){
+					prevPageBtn.visible = nextPageBtn.visible = false ;
+				}
+			}
+		}
+		
+		private function pageClickHandler(e:MouseEvent):void
+		{
+			e.stopPropagation() ;
+			if(e.target == nextPageBtn) _scroll.nextPage();
+			else _scroll.prevPage() ;
 		}
 		
 		protected function onItemHandler( e:MouseEvent):void

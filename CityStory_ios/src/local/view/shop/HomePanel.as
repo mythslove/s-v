@@ -35,13 +35,13 @@ package local.view.shop
 		
 		private function init():void
 		{
-			mainTypeBar = new ToggleBar();
+			mainTypeBar = new ToggleBar(22);
 			var mcs:Vector.<MovieClip>= Vector.<MovieClip>([
 				new TabMenuButton(TAB_ALL) ,new TabMenuButton(TAB_RESIDENCE),new TabMenuButton(TAB_CONDOS) ,new TabMenuButton(TAB_MANSIONS) 
 			]);
 			mainTypeBar.buttons = mcs ;
 			addChild(mainTypeBar);
-			mainTypeBar.x = 10 ;
+			mainTypeBar.x = 30 ;
 			mainTypeBar.addEventListener(ToggleBarEvent.TOGGLE_CHANGE , toggleChangeHandler);
 			mainTypeBar.selected = mcs[0];
 		}
@@ -50,7 +50,7 @@ package local.view.shop
 		{
 			ContainerUtil.removeChildren(_content);
 			_scroll.removeScrollControll();
-			_scroll.addScrollControll( _content , container , 3 );
+			_scroll.addScrollControll( _content , container , 3 ,20 );
 			if(GameData.isShowTutor){
 				_scroll.scrollLock = true ;
 			}
@@ -80,6 +80,7 @@ package local.view.shop
 					}
 				}
 			}
+			refreshPageButton();
 		}
 		
 		

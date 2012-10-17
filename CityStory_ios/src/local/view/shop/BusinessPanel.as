@@ -25,8 +25,6 @@ package local.view.shop
 		public static const  TAB_SERVICES:String = "SERVICES";
 		public static const  TAB_OFFICES:String = "OFFICES";
 		
-		
-		
 		public var mainTypeBar:ToggleBar;
 		
 		public function BusinessPanel()
@@ -37,14 +35,14 @@ package local.view.shop
 		
 		private function init():void
 		{
-			mainTypeBar = new ToggleBar();
+			mainTypeBar = new ToggleBar(22);
 			var mcs:Vector.<MovieClip>= Vector.<MovieClip>([
 				new TabMenuButton(TAB_ALL) ,new TabMenuButton(TAB_SHOPS),new TabMenuButton(TAB_RESTAURANTS) ,
 				new TabMenuButton(TAB_SERVICES) , new TabMenuButton(TAB_OFFICES) 
 			]);
 			mainTypeBar.buttons = mcs ;
 			addChild(mainTypeBar);
-			mainTypeBar.x = 10 ;
+			mainTypeBar.x = 30 ;
 			mainTypeBar.addEventListener(ToggleBarEvent.TOGGLE_CHANGE , toggleChangeHandler);
 			mainTypeBar.selected = mcs[0];
 		}
@@ -53,7 +51,7 @@ package local.view.shop
 		{
 			ContainerUtil.removeChildren(_content);
 			_scroll.removeScrollControll();
-			_scroll.addScrollControll( _content , container , 3);
+			_scroll.addScrollControll( _content , container , 3 , 20 );
 			
 			var itemRenders:Vector.<ShopItemRenderer> = ShopModel.instance.businessRenderers ;
 			if(!itemRenders) return ;
@@ -85,6 +83,7 @@ package local.view.shop
 					}
 				}
 			}
+			refreshPageButton();
 		}
 		
 		

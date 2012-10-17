@@ -2,6 +2,8 @@ package local.util
 {
 	import bing.utils.StringUtil;
 	
+	import flash.display.DisplayObject;
+	import flash.geom.ColorTransform;
 	import flash.net.URLVariables;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
@@ -231,6 +233,30 @@ package local.util
 						}
 						break ;
 				}
+			}
+		}
+		
+		
+		
+		
+		
+		
+		public static function dark( obj:DisplayObject ):void{
+			var colorTf:ColorTransform = obj.transform.colorTransform ;
+			if(colorTf.redMultiplier==1){
+				colorTf.redMultiplier = 0.5 ;
+				colorTf.greenMultiplier = 0.5 ;
+				colorTf.blueMultiplier = 0.5 ;
+				obj.transform.colorTransform = colorTf ;
+			}
+		}
+		public static function backDark( obj:DisplayObject ):void{
+			var colorTf:ColorTransform = obj.transform.colorTransform ;
+			if(colorTf.redMultiplier==0.5){
+				colorTf.redMultiplier = 1 ;
+				colorTf.greenMultiplier = 1 ;
+				colorTf.blueMultiplier = 1 ;
+				obj.transform.colorTransform = colorTf ;
 			}
 		}
 	}

@@ -22,20 +22,31 @@ package local.util
 		public static var grayDropFilters:Array = [new DropShadowFilter(3,90,0,0.5,2,2)];
 		
 		
-		/**
-		 * tabMenu标题样式 
-		 * @param tf
-		 */		
+		
+		
+		
+		
+		
+		
+		//tabMenu标题样式 ========================
+		public static var tabDefaultGlowfilters:Array=[ new GlowFilter(0x3082ab,1,3,3,12)];
+		public static var tabSeletectedGlowfilters:Array=[ new GlowFilter(0xAE7000,1,3,3,12)];
 		public static function setTabMenuFormat( tf:BitmapTextField ):void{
 			var format:TextFormat = tf.defaultTextFormat ;
 			format.font = "Verdana";
 			format.size = 20 ;
 			format.color = 0xffffff ;
-			tf.filters = blackGlowfilters ;
+			tf.filters = tabDefaultGlowfilters ;
 			tf.bold = true ;
 			tf.align = TextAlign.CENTER ;
 			tf.defaultTextFormat = format ;
 		}
+		
+		
+		
+		
+		
+		
 		
 		/**
 		 * 设置按钮的样式 

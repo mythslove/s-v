@@ -1,7 +1,9 @@
 package local.view.btn
 {
 	import flash.display.MovieClip;
+	import flash.geom.ColorTransform;
 	
+	import local.util.GameUtil;
 	import local.util.TextStyle;
 	import local.view.control.BitmapTextField;
 	
@@ -49,6 +51,17 @@ package local.view.btn
 			super.gotoAndStop(frame,scene);
 			if( txtLabel.text!=_label){
 				txtLabel.text = _label ;
+			}
+			if(currentLabel=="up"){
+				txtLabel.filters = TextStyle.tabDefaultGlowfilters ;
+				txtLabel.draw();
+				GameUtil.backDark(this);
+			}else if(currentLabel=="selected-up"){
+				txtLabel.filters = TextStyle.tabSeletectedGlowfilters ;
+				txtLabel.draw();
+				GameUtil.backDark(this);
+			}else if( currentLabel=="down"){
+				GameUtil.dark(this);
 			}
 		}
 	}

@@ -95,7 +95,7 @@ package local.model
 				TutorView.instance.dispose();
 				TutorView.instance.parent.removeChild( TutorView.instance );
 				CenterViewLayer.instance.topBar.mouseChildren = true ;
-				GameWorld.instance.iconScene.mouseChildren = false ;
+				GameWorld.instance.iconScene.mouseChildren = true ;
 			}
 		}
 		
