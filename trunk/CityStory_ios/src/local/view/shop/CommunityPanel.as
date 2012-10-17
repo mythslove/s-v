@@ -12,6 +12,7 @@ package local.view.shop
 		public function CommunityPanel()
 		{
 			super();
+			container.y =30 ; 
 		}
 	}
 }

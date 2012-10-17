@@ -12,6 +12,7 @@ package local.view.shop
 		public function WonderPanel()
 		{
 			super();
+			container.y =30 ; 
 		}
 	}
 }

@@ -87,8 +87,6 @@ package net.hires.debug {
                 <ms>MS:</ms>
                 <mem>MEM:</mem>
                 <memMax>MAX:</memMax>
-                <drawCalls>CALLS:</drawCalls>
-                <tris>TRIS:</tris>
             </xml>;
 
             style = new StyleSheet();
@@ -97,8 +95,6 @@ package net.hires.debug {
             style.setStyle("ms", {color: hex2css(theme.ms)});
             style.setStyle("mem", {color: hex2css(theme.mem)});
             style.setStyle("memMax", {color: hex2css(theme.memmax)});
-            style.setStyle("drawCalls", {color: hex2css(theme.drawcalls)});
-            style.setStyle("tris", {color: hex2css(theme.tris)});
 
             text = new TextField();
             text.width = WIDTH;
@@ -175,8 +171,6 @@ package net.hires.debug {
                 xml.fps = "FPS: " + fps + " / " + stage.frameRate;
                 xml.mem = "MEM: " + mem;
                 xml.memMax = "MAX: " + mem_max;
-                xml.drawCalls = "DRAW: " + drawCalls;
-                xml.tris = "TRIS: " + numTris;
 
                 fps = 0;
             }

@@ -16,12 +16,13 @@ package local.view.shop
 		public function DecorationPanel()
 		{
 			super();
+			container.y =30 ; 
 			init();
 		}
 		
 		private function init():void
 		{
-			_scroll.addScrollControll( _content , container , 3,20);
+			_scroll.addScrollControll( _content , container , 3 , 20 );
 			
 			var itemRenders:Vector.<ShopItemRenderer> = ShopModel.instance.decorsRenderers ;
 			if(!itemRenders) return ;

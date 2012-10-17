@@ -42,7 +42,7 @@ package local.view.shop
 			]);
 			mainTypeBar.buttons = mcs ;
 			addChild(mainTypeBar);
-			mainTypeBar.x = 30 ;
+			mainTypeBar.x = x + (888-mainTypeBar.width)>>1 ; //30
 			mainTypeBar.addEventListener(ToggleBarEvent.TOGGLE_CHANGE , toggleChangeHandler);
 			mainTypeBar.selected = mcs[0];
 		}
