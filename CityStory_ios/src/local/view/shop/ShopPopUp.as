@@ -31,6 +31,8 @@ package local.view.shop
 		public var btnBack:BackButton ;
 		//=====================================
 		
+		public var isLeft:Boolean ;
+		
 		public function ShopPopUp()
 		{
 			super();
@@ -45,6 +47,10 @@ package local.view.shop
 			GameWorld.instance.stopRun();
 			x = GameSetting.SCREEN_WIDTH>>1 ;
 			y = GameSetting.SCREEN_HEIGHT>>1 ;
+			var temp:int = 200 ;
+			if(isLeft){
+				temp = -200 ;
+			}
 			TweenLite.from( this , 0.2 , { x:x-200 , ease: Back.easeOut , onComplete:showTweenOver });
 		}
 		
@@ -65,7 +71,9 @@ package local.view.shop
 					close();
 					break ;
 				case btnBack:
+					isLeft = true ;
 					close();
+					ShopOverViewPopUp.instance.isLeft = true ;
 					PopUpManager.instance.addQueuePopUp( ShopOverViewPopUp.instance );
 					break ;
 			}
@@ -124,7 +132,11 @@ package local.view.shop
 		
 		private function close():void{
 			mouseChildren=false;
-			TweenLite.to( this , 0.2 , { x:x+200 , ease: Back.easeIn , onComplete:onTweenCom});
+			var temp:int = 200 ;
+			if(isLeft){
+				temp = -200 ;
+			}
+			TweenLite.to( this , 0.2 , { x:x+temp , ease: Back.easeIn , onComplete:onTweenCom});
 		}
 		private function onTweenCom():void{
 			PopUpManager.instance.removeCurrentPopup() ;
@@ -134,6 +146,7 @@ package local.view.shop
 			super.removedFromStageHandler(e);
 			GameWorld.instance.run();
 			GameWorld.instance.visible=true;
+			isLeft = false ;
 		}
 	}
 }

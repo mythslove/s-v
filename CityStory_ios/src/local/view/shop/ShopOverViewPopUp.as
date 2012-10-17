@@ -43,6 +43,8 @@ package local.view.shop
 		public var homeButtonBg:Sprite ;
 		//=====================================
 		
+		public var isLeft:Boolean ;
+		
 		public function ShopOverViewPopUp(){
 			super();
 			homeButtonBg.mouseChildren = homeButtonBg.mouseEnabled = false ;
@@ -69,7 +71,11 @@ package local.view.shop
 			GameWorld.instance.stopRun();
 			x = GameSetting.SCREEN_WIDTH>>1 ;
 			y = GameSetting.SCREEN_HEIGHT>>1 ;
-			TweenLite.from( this , 0.2 , { x:x-200 , ease: Back.easeOut , onComplete:tweenOver });
+			var temp:int = 200 ;
+			if(isLeft){
+				temp = -200 ;
+			}
+			TweenLite.from( this , 0.2 , { x:x-temp , ease: Back.easeOut , onComplete:tweenOver });
 		}
 		private function tweenOver():void{
 			mouseChildren=true;
@@ -93,6 +99,7 @@ package local.view.shop
 		
 		private function onMouseHandler( e:MouseEvent ):void
 		{
+			isLeft = false ;
 			switch( e.target )
 			{
 				case btnClose:
@@ -130,7 +137,11 @@ package local.view.shop
 		
 		private function close():void{
 			mouseChildren=false;
-			TweenLite.to( this , 0.2 , { x:x+200 , ease: Back.easeIn , onComplete:onTweenCom});
+			var temp:int = 200 ;
+			if(isLeft){
+				temp = -200 ;
+			}
+			TweenLite.to( this , 0.2 , { x:x+temp , ease: Back.easeIn , onComplete:onTweenCom});
 		}
 		
 		private function onTweenCom():void{
@@ -139,6 +150,7 @@ package local.view.shop
 		override protected function removedFromStageHandler(e:Event):void{
 			super.removedFromStageHandler(e);
 			GameWorld.instance.run();
+			isLeft = false ;
 		}
 	}
 }
