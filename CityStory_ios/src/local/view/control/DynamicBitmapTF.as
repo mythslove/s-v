@@ -30,8 +30,7 @@ package local.view.control
 		 * @param filters 滤镜 
 		 * @param backgroundColor 如果为0xffffff,则不使用背景
 		 */		
-		public function DynamicBitmapTF(w:Number,h:Number,
-										fontName:String ,
+		public function DynamicBitmapTF(fontName:String ,w:Number,h:Number = NaN , 
 										text:String = "",
 										align:String = TextAlign.CENTER, 
 										space:int = 2 ,
@@ -39,6 +38,7 @@ package local.view.control
 										bold:Boolean=false,
 										color:uint = 0xffffff ,
 										embedFonts:Boolean = false , 
+										wordWarp:Boolean = false ,
 										filters:Array = null,
 										backgroundColor:uint = 0xffffff )
 		{
@@ -46,12 +46,13 @@ package local.view.control
 			textField = new TextField();
 			textField.embedFonts = embedFonts ;
 			textField.width = w ;
-			textField.height = h ;
+			if(h) textField.height = h ;
 			textField.textColor = color ;
 			if(backgroundColor!=0xffffff){
 				textField.background = true ;
 				textField.backgroundColor = backgroundColor ;
 			}
+			textField.wordWrap = wordWarp ;
 			var tf:TextFormat = textField.defaultTextFormat ;
 			tf.align = align ;
 			tf.size = size ;

@@ -59,7 +59,7 @@ package local.view.shop
 				new DropShadowFilter(1,90,0xA0450A,1,1.3,1.3,20),
 				new DropShadowFilter(3,90,0xA0450A,0.5,3,3,0.5)
 			];
-			var title:DynamicBitmapTF = new DynamicBitmapTF(400,80,"grobold","MARKET","center",2,60,false,0xFECF2D,true,filters);
+			var title:DynamicBitmapTF = new DynamicBitmapTF("grobold",400,NaN,"MARKET","center",2,60,false,0xFECF2D,true,false,filters);
 			title.x = -200;
 			title.y = -240;
 			addChild( title );
