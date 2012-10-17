@@ -42,6 +42,8 @@ package local.util
 		
 		private var _resHash:Dictionary = new Dictionary();
 		
+		[Embed(source="../resource/font/GROBOLD.ttf",fontName="grobold",embedAsCFF="false")]
+		public static const GROBOLD:Class ;
 		
 		//================地图上行走的人和车=================================
 		[ Embed(source="../resource/character/Fairy.bd", mimeType="application/octet-stream") ]
@@ -163,7 +165,7 @@ package local.util
 			var bmd:BitmapData = ( new EmbedsManager[name+ext]() as Bitmap).bitmapData ;
 			var config:XML = XML( new EmbedsManager[name+"Fnt"+ext]() )  ;
 			_resHash[name] = new PxBitmapFont().loadAngelCode( bmd , config );
-				
+			
 			return _resHash[name] as PxBitmapFont ;
 		}
 		

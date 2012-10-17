@@ -15,6 +15,7 @@ package local.view.shop
 	import local.map.GameWorld;
 	import local.util.PopUpManager;
 	import local.view.base.BaseView;
+	import local.view.btn.BackButton;
 	import local.view.btn.PopUpCloseButton;
 	
 	public class ShopPopUp extends BaseView
@@ -27,12 +28,14 @@ package local.view.shop
 		//=====================================
 		public var btnClose:PopUpCloseButton ;
 		public var container:Sprite;
+		public var btnBack:BackButton ;
 		//=====================================
 		
 		public function ShopPopUp()
 		{
 			super();
 			btnClose.addEventListener(MouseEvent.CLICK , onMouseHandler );
+			btnBack.addEventListener(MouseEvent.CLICK , onMouseHandler );
 		}
 		
 		override protected function addedToStageHandler( e:Event ):void
@@ -60,6 +63,10 @@ package local.view.shop
 			{
 				case btnClose:
 					close();
+					break ;
+				case btnBack:
+					close();
+					PopUpManager.instance.addQueuePopUp( ShopOverViewPopUp.instance );
 					break ;
 			}
 		}
