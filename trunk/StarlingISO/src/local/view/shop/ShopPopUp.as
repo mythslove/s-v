@@ -133,6 +133,7 @@ package local.view.shop
 		override protected function removedFromStageHandler(e:Event):void{
 			super.removedFromStageHandler(e);
 			GameWorld.instance.run();
+			GameWorld.instance.visible=true;
 		}
 	}
 }
