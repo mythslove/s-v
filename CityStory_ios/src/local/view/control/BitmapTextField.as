@@ -99,6 +99,7 @@
 			
 			txt.width = width;
 			txt.height = height;
+			txt.wordWrap = false ;
 			
 			var format:TextFormat = txt.defaultTextFormat ;
 			format.bold = true ;
