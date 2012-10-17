@@ -1,9 +1,9 @@
 <level>
-	<item toLv="2" maxExp="300" maxEnergy="50" rewards="gem=1&coin=10" />
-	<item toLv="3" maxExp="400" maxEnergy="60" rewards="coin=12" />
-	<item toLv="4" maxExp="550" maxEnergy="70" rewards="coin=15" />
-	<item toLv="5" maxExp="650" maxEnergy="90" rewards="coin=20" />
-	<item toLv="6" maxExp="700" maxEnergy="100" rewards="coin=35" />
-	<item toLv="7" maxExp="800" maxEnergy="110" rewards="coin=40" />
-	<item toLv="8" maxExp="1000" maxEnergy="120" rewards="coin=55" />
+	<item toLv="2" maxExp="300" maxEnergy="50"  maxGoods="200" rewards="gem=1&coin=10" />
+	<item toLv="3" maxExp="400" maxEnergy="60"  maxGoods="300" rewards="coin=12" />
+	<item toLv="4" maxExp="550" maxEnergy="70"  maxGoods="400" rewards="coin=15" />
+	<item toLv="5" maxExp="650" maxEnergy="90"  maxGoods="500" rewards="coin=20" />
+	<item toLv="6" maxExp="700" maxEnergy="100"  maxGoods="700" rewards="coin=35" />
+	<item toLv="7" maxExp="800" maxEnergy="110"  maxGoods="800" rewards="coin=40" />
+	<item toLv="8" maxExp="1000" maxEnergy="120"  maxGoods="900" rewards="coin=55" />
 </level>
