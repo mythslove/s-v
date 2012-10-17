@@ -34,8 +34,6 @@ package local.map
 		{
 			
 		}
-		
-		private var _mouseBuilding:BaseBuilding; //按下时点击到的建筑
 //		private var _expandLandBtns:Vector.<ExpandLandButton> = new Vector.<ExpandLandButton>();//扩地按钮
 		
 		/** 

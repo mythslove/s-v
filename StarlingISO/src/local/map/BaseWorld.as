@@ -18,6 +18,7 @@ package local.map
 	import local.comm.GameData;
 	import local.comm.GameSetting;
 	import local.enum.BuildingType;
+	import local.enum.VillageMode;
 	import local.map.item.BaseBuilding;
 	import local.map.item.BasicBuilding;
 	import local.map.scene.*;
@@ -46,6 +47,7 @@ package local.map
 		public var topScene:SIsoScene ; //最上层,显示移动的建筑，以及显示一些特效动画
 		public var effectScene:SIsoScene ; //特效层
 		
+		protected var _mouseBuilding:BaseBuilding ; //鼠标按下时的建筑
 		protected var _mouseDownPos:Point = new Point(); //鼠标点击的位置
 		protected var _worldPos:Point = new Point(); //鼠标点击时场景的世界位置
 		public var currentSelected:BaseBuilding ; //当前选中的建筑
@@ -333,23 +335,38 @@ package local.map
 					_endX = x ;
 					_endY = y ;
 					_isMove = false ;
+					if(touch.target.parent.parent is BaseBuilding){
+						_mouseBuilding = touch.target.parent.parent as BaseBuilding ;
+					}else{
+						_mouseBuilding = null ;
+					}
 				}
 				else if( touch.phase==TouchPhase.MOVED)
 				{
-					var offsetX:int =  _endX+touch.globalX-touch.previousGlobalX ;
-					var offsetY:int =  _endY+touch.globalY-touch.previousGlobalY ;
 					
-					if(offsetX>0) offsetX=0 ;
-					else if(offsetX<-GameSetting.MAP_WIDTH*scaleX+GameSetting.SCREEN_WIDTH){
-						offsetX = -GameSetting.MAP_WIDTH*scaleX+GameSetting.SCREEN_WIDTH ;
-					}
-					if(offsetY>0) offsetY=0 ;
-					else if(offsetY<-GameSetting.MAP_HEIGHT*scaleY+GameSetting.SCREEN_HEIGHT){
-						offsetY = -GameSetting.MAP_HEIGHT*scaleY+GameSetting.SCREEN_HEIGHT ;
-					}
-					_endX = offsetX;
-					_endY = offsetY ;
 					_isMove = true ;
+					if( _mouseBuilding && _mouseBuilding.parent == topScene)  {
+						//如果是编译状态，则移动建筑
+						moveTopBuilding( pos.x,pos.y);
+//						if(EditorBuildingButtons.instance.parent){
+//							EditorBuildingButtons.instance.parent.removeChild( EditorBuildingButtons.instance );
+//						}
+					}else {
+						//如果不是编辑状态，则移动地图
+						var offsetX:int =  _endX+touch.globalX-touch.previousGlobalX ;
+						var offsetY:int =  _endY+touch.globalY-touch.previousGlobalY ;
+						
+						if(offsetX>0) offsetX=0 ;
+						else if(offsetX<-GameSetting.MAP_WIDTH*scaleX+GameSetting.SCREEN_WIDTH){
+							offsetX = -GameSetting.MAP_WIDTH*scaleX+GameSetting.SCREEN_WIDTH ;
+						}
+						if(offsetY>0) offsetY=0 ;
+						else if(offsetY<-GameSetting.MAP_HEIGHT*scaleY+GameSetting.SCREEN_HEIGHT){
+							offsetY = -GameSetting.MAP_HEIGHT*scaleY+GameSetting.SCREEN_HEIGHT ;
+						}
+						_endX = offsetX;
+						_endY = offsetY ;
+					}
 				}
 				if( touch.phase == TouchPhase.ENDED)
 				{
@@ -396,6 +413,32 @@ package local.map
 			}
 		}
 		
+		private function moveTopBuilding( mouseX:Number , mouseY:Number ):void
+		{
+			var span:int = _mouseBuilding.buildingVO.baseVO.span ;
+			var offsetY:Number = (span-1)*_size ;
+			var p:Point = pixelPointToGrid(mouseX,mouseY , 0 ,offsetY ); 
+			if(_mouseBuilding.nodeX!=p.x || _mouseBuilding.nodeZ!=p.y) {
+				_mouseBuilding.nodeX = p.x ;
+				_mouseBuilding.nodeZ= p.y ;
+				_mouseBuilding.bottom.updateBuildingGridLayer();
+				
+				if(GameData.villageMode==VillageMode.BUILDING_SHOP ||GameData.villageMode==VillageMode.BUILDING_STORAGE )
+				{
+//					var moveBtns:MoveBuildingButtons  = MoveBuildingButtons.instance ;
+//					if(_mouseBuilding.bottom.getWalkable()){
+//						if( !moveBtns.okBtn.enabled){
+//							moveBtns.okBtn.enabled = true  ;
+//						}
+//					}else{
+//						if( moveBtns.okBtn.enabled){
+//							moveBtns.okBtn.enabled = false ;
+//						}
+//					}
+				}
+			}
+		}
+		
 		//================缩放地图=======================
 		private var _zoomObj:Object = {"value":1};
 		private var _zoomTween:TweenLite ;
@@ -428,18 +471,22 @@ package local.map
 					_endX = x = _zoomM.tx ;
 					_endY = y = _zoomM.ty ;
 					
-					if(_endX>0) x = _endX=0 ;
-					else if(_endX<-GameSetting.MAP_WIDTH*scaleX+GameSetting.SCREEN_WIDTH){
-						x = _endX = -GameSetting.MAP_WIDTH*scaleX+GameSetting.SCREEN_WIDTH ;
-					}
-					if(_endY>0) y=_endY=0 ;
-					else if(_endY<-GameSetting.MAP_HEIGHT*scaleY+GameSetting.SCREEN_HEIGHT){
-						y=_endY = -GameSetting.MAP_HEIGHT*scaleY+GameSetting.SCREEN_HEIGHT ;
-					}
+					modifyEndPosition();
 				}} );
 			}
 			_endX = x;
 			_endY = y ;
+		}
+		
+		private function modifyEndPosition():void{
+			if(_endX>0) x = _endX=0 ;
+			else if(_endX<-GameSetting.MAP_WIDTH*scaleX+GameSetting.SCREEN_WIDTH){
+				x = _endX = -GameSetting.MAP_WIDTH*scaleX+GameSetting.SCREEN_WIDTH ;
+			}
+			if(_endY>0) y=_endY=0 ;
+			else if(_endY<-GameSetting.MAP_HEIGHT*scaleY+GameSetting.SCREEN_HEIGHT){
+				y=_endY = -GameSetting.MAP_HEIGHT*scaleY+GameSetting.SCREEN_HEIGHT ;
+			}
 		}
 	}
 }
