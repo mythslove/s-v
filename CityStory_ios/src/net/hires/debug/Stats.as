@@ -80,7 +80,8 @@ package net.hires.debug {
         public function Stats():void {
 
             mem_max = 0;
-
+			mouseEnabled = mouseChildren = false ;
+			alpha = 0.6 ;
             xml = <xml>
                 <fps>FPS:</fps>
                 <ms>MS:</ms>

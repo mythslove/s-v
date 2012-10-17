@@ -1,6 +1,8 @@
 package local.view.shop
 {
-	public class ShopOverViewWondersButton extends ShopOverViewButton
+	import local.view.control.Button;
+
+	public class ShopOverViewWondersButton extends Button
 	{
 		public function ShopOverViewWondersButton()
 		{
