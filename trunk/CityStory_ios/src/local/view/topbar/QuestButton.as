@@ -26,7 +26,8 @@ package local.view.topbar
 			item.alpha = 0 ;
 			item.rect = new Rectangle( globalPoint.x/root.scaleX,globalPoint.y/root.scaleX,width,height);
 			item.showArrow = true ;
-			item.arrowPoint = new Point(globalPoint.x/root.scaleX+width*0.5,globalPoint.y/root.scaleX);
+			item.arrowPoint = new Point(globalPoint.x/root.scaleX+width , globalPoint.y/root.scaleX+height*0.5);
+			item.arrowAngle = 90 ;
 			TutorView.instance.showTutor( item );
 		}
 		

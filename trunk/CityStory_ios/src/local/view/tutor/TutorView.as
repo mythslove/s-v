@@ -35,6 +35,10 @@ package local.view.tutor
 	
 			_bottom = new Sprite();
 			addChild(_bottom);
+			
+			_arrow = new TutorArrow();
+			_arrow.visible = false ;
+			addChild(_arrow);
 		}
 		
 		override protected function addedToStageHandler(e:Event):void
@@ -123,8 +127,8 @@ package local.view.tutor
 //				addChild(infoPop);
 			}
 			if(_arrow ){
-				if(_arrow.visible && item.arrowPoint){
-					
+				if(item.showArrow && item.arrowPoint){
+					_arrow.visible = true ;
 					_arrow.x = item.arrowPoint.x ;
 					_arrow.y = item.arrowPoint. y ;
 					_arrow.rotation = item.arrowAngle ;
