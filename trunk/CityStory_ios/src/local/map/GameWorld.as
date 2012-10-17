@@ -84,11 +84,13 @@ package local.map
 			if(bvos){
 				var building:BaseBuilding ;
 				for each( var bvo:BuildingVO in bvos){
-					building = BuildingFactory.createBuildingByVO( bvo );
-					if(bvo.baseVO.subClass==BuildingType.DECORATION_ROAD || bvo.baseVO.subClass==BuildingType.DECORATION_GROUND ){
-						roadScene.addRoad( building as Road , false , false );
-					}else{
-						buildingScene.addBuilding( building , false , true );
+					if(bvo.baseVO){
+						building = BuildingFactory.createBuildingByVO( bvo );
+						if(bvo.baseVO.subClass==BuildingType.DECORATION_ROAD || bvo.baseVO.subClass==BuildingType.DECORATION_GROUND ){
+							roadScene.addRoad( building as Road , false , false );
+						}else{
+							buildingScene.addBuilding( building , false , true );
+						}
 					}
 				}
 			}

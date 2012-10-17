@@ -24,7 +24,7 @@ package local.vo
 			if(!_baseVO) { 
 				_baseVO = ShopModel.instance.allBuildingHash[name] ;
 				if(!_baseVO){
-					throw new Error("商店中没有	"+name+"	这个建筑！");
+					trace("商店中没有	"+name+"	这个建筑！");
 				}
 			}
 			return _baseVO;
