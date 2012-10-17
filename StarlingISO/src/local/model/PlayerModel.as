@@ -2,6 +2,11 @@ package local.model
 {
 	import flash.utils.Dictionary;
 	
+	import local.comm.GameData;
+	import local.comm.GameSetting;
+	import local.enum.QuestType;
+	import local.map.GameWorld;
+	import local.view.CenterViewLayer;
 	import local.vo.PlayerVO;
 
 	public class PlayerModel
@@ -50,6 +55,9 @@ package local.model
 		{
 			if(value==0) return ;
 			me.goods+=value ;
+			if(me.goods>me.maxGoods){
+				me.goods = me.maxGoods ;
+			}
 //			CenterViewLayer.instance.topBar.goodsBar.show( me.goods );
 		}
 		
@@ -57,6 +65,9 @@ package local.model
 		{
 			if(value==0) return ;
 			me.pop+=value;
+			
+			//人口任务
+//			QuestUtil.instance.handleOwn( QuestType.HAVE_POP );
 		}
 		
 		public function changeCap( value:int ):void
@@ -72,10 +83,27 @@ package local.model
 			return me.pop;
 		}
 		
+		/**
+		 * 改玩家新手指引的步数 
+		 * @param value
+		 */		
+		public function changeTutorStep( value:int =1  ):void
+		{
+//			me.tutorStep+= value ;
+//			if(me.tutorStep>= GameSetting.TUTOR_STEP){
+//				trace("新手指引完成");
+//				GameData.isShowTutor = false ;
+//				TutorView.instance.dispose();
+//				TutorView.instance.parent.removeChild( TutorView.instance );
+//				CenterViewLayer.instance.topBar.mouseChildren = true ;
+//				GameWorld.instance.iconScene.mouseChildren = true ;
+//			}
+		}
 		
 		public function createPlayer():void
 		{
 			me = new PlayerVO();
 		}
+		
 	}
 }

@@ -11,6 +11,8 @@ package local.map
 	import local.model.BuildingModel;
 	import local.model.FriendVillageModel;
 	import local.util.BuildingFactory;
+	import local.view.CenterViewLayer;
+	import local.view.building.MoveBuildingButtons;
 	import local.vo.BuildingVO;
 	
 	import starling.display.*;
@@ -144,17 +146,17 @@ package local.map
 			building.drawBottomGrid();
 			building.bottom.updateBuildingGridLayer();
 			
-//			building.addChild( MoveBuildingButtons.instance );
-//			var moveBtns:MoveBuildingButtons  = MoveBuildingButtons.instance ;
-//			if(building.bottom.getWalkable()){
-//				if( !moveBtns.okBtn.enabled){
-//					moveBtns.okBtn.enabled = true  ;
-//				}
-//			}else{
-//				if( moveBtns.okBtn.enabled){
-//					moveBtns.okBtn.enabled = false ;
-//				}
-//			}
+			var moveBtns:MoveBuildingButtons  = MoveBuildingButtons.instance ;
+			building.addChild( moveBtns );
+			if(building.bottom.getWalkable()){
+				if( !moveBtns.okBtn.enabled){
+					moveBtns.okBtn.enabled = true  ;
+				}
+			}else{
+				if( moveBtns.okBtn.enabled){
+					moveBtns.okBtn.enabled = false ;
+				}
+			}
 		}
 		
 	}

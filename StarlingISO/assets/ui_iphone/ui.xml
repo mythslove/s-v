@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker http://texturepacker.com-->
-<!-- $TexturePacker:SmartUpdate:579b395f0541d3b8f0027a4c4dbd4ded$ -->
+<!-- $TexturePacker:SmartUpdate:4a8210682801db74f252a8de81af5876$ -->
 <TextureAtlas imagePath="ui.png">
     <SubTexture name="AddGoodsFlag" x="454" y="454" width="50" height="44"/>
     <SubTexture name="AddProductFlag" x="454" y="454" width="50" height="44"/>
     <SubTexture name="BUSINESS_en" x="2" y="614" width="176" height="37" frameX="-23" frameY="-6" frameWidth="220" frameHeight="47"/>
     <SubTexture name="BuildingBottomGridGreen" x="177" y="658" width="122" height="62"/>
     <SubTexture name="BuildingBottomGridRed" x="2" y="653" width="122" height="62"/>
+    <SubTexture name="BuildingCancelButtonUp" x="2" y="717" width="106" height="106"/>
+    <SubTexture name="BuildingOKButtonUp" x="2" y="825" width="106" height="106"/>
     <SubTexture name="COMMUNITY_en" x="268" y="2" width="216" height="37" frameX="-1" frameY="-5" frameWidth="220" frameHeight="47"/>
     <SubTexture name="CashIcon" x="458" y="301" width="50" height="53"/>
     <SubTexture name="CoinIcon" x="126" y="653" width="49" height="51" frameX="-2" frameY="-1" frameWidth="53" frameHeight="53"/>
@@ -31,8 +33,8 @@
     <SubTexture name="ShopOverViewItemBg" x="2" y="65" width="248" height="195"/>
     <SubTexture name="ShopOverViewTitle_en" x="2" y="2" width="264" height="61"/>
     <SubTexture name="ShopOverViewWondersButton" x="2" y="262" width="204" height="130" frameX="0" frameY="-19" frameWidth="208" frameHeight="152"/>
-    <SubTexture name="TabButtonDown" x="301" y="688" width="64" height="64"/>
-    <SubTexture name="TabButtonSelected" x="68" y="717" width="64" height="64"/>
-    <SubTexture name="TabButtonUp" x="2" y="717" width="64" height="64"/>
+    <SubTexture name="TabButtonDown" x="68" y="933" width="64" height="64"/>
+    <SubTexture name="TabButtonSelected" x="2" y="933" width="64" height="64"/>
+    <SubTexture name="TabButtonUp" x="110" y="717" width="64" height="64"/>
     <SubTexture name="WONDERS_en" x="2" y="536" width="182" height="37" frameX="-16" frameY="-5" frameWidth="220" frameHeight="47"/>
 </TextureAtlas>
