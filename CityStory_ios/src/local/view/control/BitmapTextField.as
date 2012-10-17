@@ -98,7 +98,7 @@
 			mouseChildren = mouseEnabled = false;
 			
 			txt.width = width;
-			txt.height = height;
+//			txt.height = height;
 			txt.wordWrap = false ;
 			
 			var format:TextFormat = txt.defaultTextFormat ;
