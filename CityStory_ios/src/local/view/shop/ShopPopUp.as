@@ -135,6 +135,7 @@ package local.view.shop
 		
 		
 		private function close():void{
+			GameWorld.instance.visible=true;
 			mouseChildren=false;
 			var temp:int = 200 ;
 			if(isLeft){
