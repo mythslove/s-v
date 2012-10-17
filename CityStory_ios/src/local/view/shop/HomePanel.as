@@ -35,7 +35,7 @@ package local.view.shop
 		
 		private function init():void
 		{
-			mainTypeBar = new ToggleBar(22);
+			mainTypeBar = new ToggleBar(15);
 			var mcs:Vector.<MovieClip>= Vector.<MovieClip>([
 				new TabMenuButton(TAB_ALL) ,new TabMenuButton(TAB_RESIDENCE),new TabMenuButton(TAB_CONDOS) ,new TabMenuButton(TAB_MANSIONS) 
 			]);
