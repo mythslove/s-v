@@ -57,7 +57,7 @@ package
 					scaleX = scaleY = 0.5 ;
 				}
 			}
-				
+			
 			TweenPlugin.activate([BezierPlugin]);
 			registerVO();
 			loadConfig();
