@@ -48,7 +48,7 @@ package local.view.shop.panel
 			_layout = new TiledRowsLayout();
 			_layout.paging = TiledRowsLayout.PAGING_HORIZONTAL;
 			_layout.useSquareTiles = false;
-			_layout.gap = 5;
+			_layout.gap = 5 ;
 			_layout.tileHorizontalAlign = TiledRowsLayout.HORIZONTAL_ALIGN_CENTER;
 			_layout.horizontalAlign = TiledRowsLayout.HORIZONTAL_ALIGN_CENTER;
 			
