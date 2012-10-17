@@ -57,6 +57,9 @@ package local.model
 		{
 			if(value==0) return ;
 			me.goods+=value ;
+			if(me.goods>me.maxGoods){
+				me.goods = me.maxGoods ;
+			}
 			CenterViewLayer.instance.topBar.goodsBar.show( me.goods );
 		}
 		
