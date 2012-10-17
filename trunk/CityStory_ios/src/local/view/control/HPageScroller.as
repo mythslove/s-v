@@ -35,6 +35,8 @@ package local.view.control
 		private var _endPosition:Number ;
 		private var _itemNum:int ;//item的数量
 		
+		private var _isMouseDown:Boolean;
+		
 		/**
 		 * 是否锁定滑动 
 		 */		
@@ -127,6 +129,7 @@ package local.view.control
 			switch(e.type)
 			{
 				case MouseEvent.MOUSE_DOWN:
+					_isMouseDown = true ;
 					_container.mouseChildren = true  ;
 					_mouseTime  = getTimer() ;
 					_mouseDownPos = e.stageX ;
@@ -150,6 +153,7 @@ package local.view.control
 					}
 				default:
 					_container.mouseChildren = true  ;
+					_isMouseDown = false ;
 					_container.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseHandler);
 					_container.removeEventListener(MouseEvent.MOUSE_UP, onMouseHandler);
 					_container.removeEventListener(MouseEvent.MOUSE_OUT, onMouseHandler);
@@ -184,7 +188,7 @@ package local.view.control
 					checkVisible( _content.getChildAt(i) );
 				}
 				_container.removeEventListener(Event.ENTER_FRAME , onEnterFrame);
-				this.dispatchEvent( new Event(SCROLL_OVER));
+				if(!_isMouseDown) this.dispatchEvent( new Event(SCROLL_OVER));
 			}
 		}
 		
