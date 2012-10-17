@@ -29,12 +29,12 @@ package local.util
 		
 		
 		//tabMenu标题样式 ========================
-		public static var tabDefaultGlowfilters:Array=[ new GlowFilter(0x3082ab,1,3,3,12)];
-		public static var tabSeletectedGlowfilters:Array=[ new GlowFilter(0xAE7000,1,3,3,12)];
+		public static var tabDefaultGlowfilters:Array=[ new GlowFilter(0x3082ab,1,3,3,20)];
+		public static var tabSeletectedGlowfilters:Array=[ new GlowFilter(0xAE7000,1,3,3,20)];
 		public static function setTabMenuFormat( tf:BitmapTextField ):void{
 			var format:TextFormat = tf.defaultTextFormat ;
 			format.font = "Verdana";
-			format.size = 20 ;
+			format.size = 17 ;
 			format.color = 0xffffff ;
 			tf.filters = tabDefaultGlowfilters ;
 			tf.bold = true ;

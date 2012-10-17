@@ -18,6 +18,7 @@ package local.view.shop
 		public function IndustryPanel()
 		{
 			super();
+			container.y =30 ; 
 			init();
 		}
 		

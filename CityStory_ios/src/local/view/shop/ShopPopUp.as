@@ -17,6 +17,8 @@ package local.view.shop
 	import local.view.base.BaseView;
 	import local.view.btn.BackButton;
 	import local.view.btn.PopUpCloseButton;
+	import local.view.iap.PopUpCashButton;
+	import local.view.iap.PopUpCoinButton;
 	
 	public class ShopPopUp extends BaseView
 	{
@@ -29,6 +31,8 @@ package local.view.shop
 		public var btnClose:PopUpCloseButton ;
 		public var container:Sprite;
 		public var btnBack:BackButton ;
+		public var btnCash:PopUpCashButton ;
+		public var btnCoin:PopUpCoinButton ;
 		//=====================================
 		
 		public var isLeft:Boolean ;
