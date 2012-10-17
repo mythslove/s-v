@@ -1,6 +1,9 @@
 package local.map
 {
+	import flash.geom.Point;
+	
 	import local.comm.GameData;
+	import local.comm.GameSetting;
 	import local.enum.BuildingType;
 	import local.enum.VillageMode;
 	import local.map.item.BaseBuilding;
@@ -124,5 +127,37 @@ package local.map
 				}
 			}
 		}
+		
+		
+		/**
+		 * 添加建筑到移动的的层上面，主要是从商店和收藏箱中的建筑 
+		 * @param building
+		 */		
+		public function addBuildingToTopScene( building:BaseBuilding ):void
+		{
+			//放在当前屏幕中间
+			var offsetY:Number = building.buildingVO.baseVO.span*0.5*_size;
+			var p:Point = pixelPointToGrid( GameSetting.SCREEN_WIDTH*0.5 , GameSetting.SCREEN_HEIGHT*0.5 , 0,  offsetY );
+			building.nodeX = p.x ;
+			building.nodeZ = p.y ;
+			
+			topScene.clearAndDisposeChild();
+			topScene.addIsoObject( building , false );
+			building.drawBottomGrid();
+			building.bottom.updateBuildingGridLayer();
+			
+//			building.addChild( MoveBuildingButtons.instance );
+//			var moveBtns:MoveBuildingButtons  = MoveBuildingButtons.instance ;
+//			if(building.bottom.getWalkable()){
+//				if( !moveBtns.okBtn.enabled){
+//					moveBtns.okBtn.enabled = true  ;
+//				}
+//			}else{
+//				if( moveBtns.okBtn.enabled){
+//					moveBtns.okBtn.enabled = false ;
+//				}
+//			}
+		}
+		
 	}
 }

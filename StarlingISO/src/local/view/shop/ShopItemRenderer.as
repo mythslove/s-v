@@ -5,8 +5,14 @@ package local.view.shop
 	import feathers.core.FeathersControl;
 	import feathers.display.Scale9Image;
 	
+	import local.comm.GameData;
 	import local.comm.StyleSetting;
+	import local.enum.VillageMode;
+	import local.map.GameWorld;
+	import local.map.item.BaseBuilding;
+	import local.util.BuildingFactory;
 	import local.util.GameUtil;
+	import local.util.PopUpManager;
 	import local.view.base.BuildingThumb;
 	import local.vo.BaseBuildingVO;
 	
@@ -25,7 +31,7 @@ package local.view.shop
 		public function get data():Object{ return _data ; }
 		public function set data(value:Object):void{
 			_data = value;
-			_baseVO = value as BaseBuildingVO;
+			baseVO = value as BaseBuildingVO;
 			show();
 		}
 		
@@ -45,7 +51,7 @@ package local.view.shop
 		public function get onChange():ISignal{ return _onChange; }
 		
 
-		private var _baseVO:BaseBuildingVO ;
+		public var baseVO:BaseBuildingVO ;
 		private var _wid:int = 260 ;
 		private var _het:int = 340 ;
 		private var _isMove:Boolean;
@@ -68,16 +74,16 @@ package local.view.shop
 			addChild(bg);
 			
 			//图片
-			var img:BuildingThumb = new BuildingThumb( _baseVO.name , 200 , 150 );
+			var img:BuildingThumb = new BuildingThumb( baseVO.name , 200 , 150 );
 			img.touchable = false ;
 			img.x=_wid>>1;
 			img.y = _het>>1 ;
 			addChild( img );
-			if(_baseVO.span==1 && img.height*1.2<150 ) img.setScale(1.2) ; 
+			if(baseVO.span==1 && img.height*1.2<150 ) img.setScale(1.2) ; 
 			img.center();
 			
 			//标题
-			var txtTitle:TextField =new TextField(_wid-10,50,_baseVO.title,"Verdana",20,0,true) ;
+			var txtTitle:TextField =new TextField(_wid-10,50,baseVO.title,"Verdana",20,0,true) ;
 			txtTitle.touchable = false;
 			txtTitle.hAlign = HAlign.CENTER ;
 			txtTitle.autoScale = true ;
@@ -99,7 +105,10 @@ package local.view.shop
 					_isMove = true ;
 				}else if(touch.phase==TouchPhase.ENDED){
 					if(!_isMove){
-						trace("tap");
+						var building:BaseBuilding = BuildingFactory.createBuildingByBaseVO( baseVO );
+						GameWorld.instance.addBuildingToTopScene( building);
+						GameData.villageMode=VillageMode.BUILDING_SHOP ;
+						PopUpManager.instance.removeCurrentPopup();
 					}
 				}
 			}
@@ -112,7 +121,7 @@ package local.view.shop
 			_onChange = null ;
 			_data = null ;
 			_owner = null ;
-			_baseVO = null ;
+			baseVO = null ;
 		}
 	}
 }
