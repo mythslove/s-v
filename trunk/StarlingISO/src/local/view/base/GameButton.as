@@ -61,6 +61,7 @@ package local.view.base
 				if(!disabledSkin) GameUtil.dark( this );
 			}
 			touchable = value ;
+			isEnabled = value ;
 		}
 		public function get enabled():Boolean{
 			return touchable;

@@ -2,10 +2,13 @@ package local.map.item
 {
 	import flash.geom.Point;
 	
+	import local.comm.GameData;
 	import local.comm.GameSetting;
 	import local.enum.BuildingStatus;
 	import local.enum.BuildingType;
+	import local.enum.VillageMode;
 	import local.map.GameWorld;
+	import local.map.cell.BuildStatusObject;
 	import local.map.cell.BuildingBottomGrid;
 	import local.map.cell.BuildingObject;
 	import local.map.cell.RoadObject;
@@ -13,6 +16,7 @@ package local.map.item
 	import local.model.PlayerModel;
 	import local.model.StorageModel;
 	import local.util.ResourceUtil;
+	import local.view.building.EditorBuildingButtons;
 	import local.vo.BitmapAnimResVO;
 	import local.vo.BuildingVO;
 
@@ -22,6 +26,7 @@ package local.map.item
 		
 		protected var _buildingObject:BuildingObject ;
 		protected var _roadObject:RoadObject ;
+		protected var _buildStatusObj:BuildStatusObject ; //修建状态
 		public var buildingVO:BuildingVO ;
 		public var bottom:BuildingBottomGrid; //底座
 		
@@ -38,6 +43,8 @@ package local.map.item
 		{
 			if(_buildingObject) {
 				_buildingObject.update() ;
+			}else if(_buildStatusObj){
+				_buildStatusObj.update() ;
 			}
 		}
 		
@@ -62,10 +69,10 @@ package local.map.item
 				}else if( _roadObject){
 					_roadObject.y -= GameSetting.GRID_SIZE*0.25 ;
 					_roadObject.alpha = 0.6 ;
-				}/*else if(_buildStatusObj){
+				}else if(_buildStatusObj){
 					_buildStatusObj.y -= GameSetting.GRID_SIZE*0.25 ;
 					_buildStatusObj.alpha = 0.6 ;
-				}*/
+				}
 			}
 		}
 		
@@ -84,10 +91,10 @@ package local.map.item
 				}else if( _roadObject){
 					_roadObject.y += GameSetting.GRID_SIZE*0.25 ;
 					_roadObject.alpha = 1 ;
-				}/*else if(_buildStatusObj){
+				}else if(_buildStatusObj){
 					_buildStatusObj.y += GameSetting.GRID_SIZE*0.25 ;
 					_buildStatusObj.alpha =1 ;
-				}*/
+				}
 			}
 		}
 		
@@ -140,12 +147,39 @@ package local.map.item
 		{
 			if(_buildingObject) {
 				_buildingObject.flash( value );
+			}else if(_buildStatusObj){
+				_buildStatusObj.flash( value );
 			}
 		}
 
 		public function onClick():void
 		{
-			
+			var world:GameWorld = GameWorld.instance ;
+			if(GameData.villageMode==VillageMode.EDIT){
+				cachePos.x = nodeX;
+				cachePos.y = nodeZ;
+				if(this is Road){
+					world.roadScene.removeRoad( this as Road );
+				}else{
+					world.buildingScene.removeBuilding( this );
+				}
+				world.topScene.addIsoObject( this );
+				world.roadScene.touchable = world.buildingScene.touchable = false ;
+				this.drawBottomGrid();
+				
+				var editorBtns:EditorBuildingButtons = EditorBuildingButtons.instance ;
+				addChild( editorBtns );
+				editorBtns.stashButton.enabled = editorBtns.rotateButton.enabled = editorBtns.sellButton.enabled = true ;
+				if( buildingVO.status==BuildingStatus.BUILDING){
+					editorBtns.stashButton.enabled = editorBtns.rotateButton.enabled = false ;
+				}else if( buildingVO.baseVO.type==BuildingType.DECORATION){
+					editorBtns.rotateButton.enabled = false ;
+				}
+				
+			}else{
+				flash(true);
+			}
+//			CenterViewLayer.instance.gameTip.showBuildingTip(this);
 		}
 		
 		override public function set scaleX(value:Number):void
@@ -256,9 +290,11 @@ package local.map.item
 		{
 			super.dispose();
 			if(_buildingObject) _buildingObject.dispose();
-			_buildingObject = null ;
 			if(_roadObject) _roadObject.dispose();
+			if(_buildStatusObj) _buildStatusObj.dispose();
+			_buildingObject = null ;
 			_roadObject = null ;
+			_buildStatusObj = null;
 		}
 	}
 }
