@@ -210,6 +210,7 @@ package local.util
 			vo.scaleX = bytes.readFloat();
 			vo.scaleY = bytes.readFloat();
 			vo.resName = bytes.readUTF();
+			vo.resName = vo.resName.substring(0,vo.resName.indexOf(".")) ;
 			
 			var exsit:Boolean;
 			if(vo.resName){
