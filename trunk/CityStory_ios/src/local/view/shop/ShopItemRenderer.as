@@ -94,9 +94,14 @@ package local.view.shop
 			if( baseVO.requireLv>0 && baseVO.requireLv>PlayerModel.instance.me.level){
 				isLock = true ;
 				lockText="Level\n"+baseVO.requireLv ;
-			}else if(GameUtil.buildIndustryPop()>PlayerModel.instance.getCurrentPop()){
+			}else if( baseVO.type==BuildingType.INDUSTRY){
+				if(GameUtil.buildIndustryPop()>PlayerModel.instance.getCurrentPop()){
+					isLock = true ;
+					lockText="Population\n"+GameUtil.buildIndustryPop() ;
+				}
+			}else if( baseVO.requirePop> 0 && baseVO.requirePop<PlayerModel.instance.getCurrentPop()){
 				isLock = true ;
-				lockText="Population\n"+GameUtil.buildIndustryPop() ;
+				lockText="Population\n"+baseVO.requirePop ;
 			}
 			if(isLock){
 				mouseEnabled = false ;
