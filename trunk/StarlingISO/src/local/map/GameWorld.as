@@ -10,9 +10,7 @@ package local.map
 	import local.map.item.Road;
 	import local.model.BuildingModel;
 	import local.model.FriendVillageModel;
-	import local.model.ShopModel;
 	import local.util.BuildingFactory;
-	import local.view.CenterViewLayer;
 	import local.view.building.MoveBuildingButtons;
 	import local.vo.BuildingVO;
 	
@@ -57,52 +55,6 @@ package local.map
 				tempShowBuilding(myModel.community);
 				tempShowBuilding(myModel.decorations);
 				tempShowBuilding(myModel.homes);
-				
-				
-				
-				
-				
-				//添加测试建筑
-//				var house:BaseBuilding ;
-//				var houses:Array = ["My House","Red Victorian House","Apartments","Red Victorian House","Hermes Shop","Coco","Clutch","Higher"] ;
-//				var bvo:BuildingVO ;
-//				var bName:String ;
-//				for( var i:int = 7*4 ; i<7*4+8 ; ++i )
-//				{
-//					for( var j:int = 7*4 ; j<7*4+8 ; ++j )
-//					{
-//						if(Math.random()>0.25){
-//							var temp:int = (Math.random()*houses.length)>>0 ;
-//							bName = houses[temp] ;
-//							bvo = new BuildingVO();
-//							bvo.name = bName ;
-//							bvo.nodeX = i ;
-//							bvo.nodeZ = j ;
-//							house = new BaseBuilding(bvo);
-//							buildingScene.addBuilding( house,false,true);
-//						}
-//					}
-//				}
-			
-				var road:Road ;
-				var bvo:BuildingVO ;
-				for( var i:int = 7*4 ; i<7*4+8 ; ++i )
-				{
-					for( var j:int = 7*4 ; j<7*4+8 ; ++j )
-					{
-						if(Math.random()>0.4){
-							bvo = new BuildingVO();
-							bvo.name = ShopModel.instance.baseDecors[0].name ;
-							bvo.nodeX = i ;
-							bvo.nodeZ = j ;
-							road = new Road(bvo);
-							roadScene.addRoad( road , false , false );
-						}
-					}
-				}
-				
-				
-				
 				
 				roadScene.updateAllUI();
 				roadScene.sortAll();
