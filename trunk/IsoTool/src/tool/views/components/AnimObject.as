@@ -83,6 +83,8 @@ package tool.views.components
 			this.vo = vo ;
 			x = vo.offsetX;
 			y = vo.offsetY ;
+			scaleX = vo.scaleX ;
+			scaleY = vo.scaleY ;
 			if(vo.isAnim)
 			{
 				if(anim) anim.dispose() ;

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
-		 xmlns:s="library://ns.adobe.com/flex/spark"
-		 xmlns:mx="library://ns.adobe.com/flex/mx"
-		 width="280" height="139">
+<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009"
+				   xmlns:s="library://ns.adobe.com/flex/spark"
+				   xmlns:mx="library://ns.adobe.com/flex/mx"
+				   width="280" height="229" borderColor="#696969" borderWeight="1">
 	<fx:Declarations>
 		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
 	</fx:Declarations>
@@ -20,6 +20,9 @@
 				if(vo){
 					txtPivotX.text = vo.offsetX+"";
 					txtPivotY.text = vo.offsetY+"";
+					txtScaleX.text = vo.scaleX +"";
+					txtScaleY.text = vo.scaleY+"";
+					lblResName.text = vo.resName ;
 					txtRow.text = vo.row+"";
 					txtCol.text = vo.col+"";
 					txtFrames.text = vo.frame+"";
@@ -30,6 +33,9 @@
 				{
 					txtPivotX.text = "";
 					txtPivotY.text = "";
+					txtScaleX.text = "";
+					txtScaleY.text = "";
+					lblResName.text = "" ;
 					txtRow.text = "";
 					txtCol.text = "";
 					txtFrames.text = "";
@@ -64,6 +70,13 @@
 				}
 			}
 			
+			protected function setScale():void
+			{
+				_vo.scaleX = Number(txtScaleX.text);
+				_vo.scaleY = Number(txtScaleY.text);
+				ok_clickHandler(null);
+			}
+			
 			protected function ok_clickHandler(event:MouseEvent):void
 			{
 				if(_vo){
@@ -80,14 +93,22 @@
 	<s:Label x="143" y="20" text="offsetY"/>
 	<s:TextInput id="txtPivotX" x="53" y="15" width="69" prompt="图片偏移值" textAlign="center"/>
 	<s:TextInput id="txtPivotY" x="184" y="15" width="69" prompt="图片偏移值" textAlign="center"/>
-	<s:Label x="10" y="50" text="row"/>
-	<s:Label x="10" y="80" text="rate"/>
-	<s:Label x="143" y="80" text="frames"/>
-	<s:TextInput id="txtRate" x="53" y="75" width="69" prompt="播放速度" textAlign="center"/>
-	<s:TextInput id="txtFrames" x="184" y="75" width="69" prompt="帧数" textAlign="center"/>
-	<s:Label x="143" y="50" text="col"/>
-	<s:TextInput id="txtRow" x="53" y="45" width="69" prompt="行数" textAlign="center"/>
-	<s:TextInput id="txtCol" x="184" y="45" width="69" prompt="列数" textAlign="center"/>
-	<s:CheckBox id="cbkAnim" x="10" y="111" label="启用动画" click="cbkAnim_clickHandler(event)"/>
-	<s:Button x="183" y="108" label="确定" click="ok_clickHandler(event)"/>
-</s:Group>
+	<s:Label x="10" y="141" text="row"/>
+	<s:Label x="10" y="171" text="rate"/>
+	<s:Label x="143" y="171" text="frames"/>
+	<s:TextInput id="txtRate" x="53" y="166" width="69" prompt="播放速度" textAlign="center"/>
+	<s:TextInput id="txtFrames" x="184" y="166" width="69" prompt="帧数" textAlign="center"/>
+	<s:Label x="143" y="141" text="col"/>
+	<s:TextInput id="txtRow" x="53" y="136" width="69" prompt="行数" textAlign="center"/>
+	<s:TextInput id="txtCol" x="184" y="136" width="69" prompt="列数" textAlign="center"/>
+	<s:CheckBox id="cbkAnim" x="10" y="202" label="启用动画" click="cbkAnim_clickHandler(event)"/>
+	<s:Button x="183" y="199" label="确定" click="ok_clickHandler(event)"/>
+	<mx:HRule y="47" width="96%" horizontalCenter="0"/>
+	<mx:HRule y="126" width="96%" horizontalCenter="0"/>
+	<s:Label id="lblResName" x="9" y="57" color="#C22525" text="资源名称"/>
+	<s:Label x="10" y="91" text="ScaleX"/>
+	<s:TextInput id="txtScaleX" x="56" y="85" width="42" text="1"/>
+	<s:Label x="110" y="91" text="ScaleY"/>
+	<s:TextInput id="txtScaleY" x="156" y="85" width="42" text="1"/>
+	<s:Button x="206" y="64" width="64" height="54" label="确定" click="setScale()"/>
+</s:BorderContainer>
