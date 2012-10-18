@@ -37,6 +37,8 @@ package local.map.cell
 				animObj = new BaseAnimObject( vo );
 				animObj.x = vo.offsetX ;
 				animObj.y = vo.offsetY ;
+				animObj.scaleX = vo.scaleX ;
+				animObj.scaleY = vo.scaleY ;
 				addChild(animObj);
 				if(i==0){
 					super._bitmapForHitDetection = animObj ;
