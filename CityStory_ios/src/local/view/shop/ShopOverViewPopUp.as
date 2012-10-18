@@ -75,6 +75,7 @@ package local.view.shop
 			if(isLeft){
 				temp = -200 ;
 			}
+			mouseChildren = false ;
 			TweenLite.from( this , 0.2 , { x:x-temp , ease: Back.easeOut , onComplete:tweenOver });
 		}
 		private function tweenOver():void{
@@ -151,6 +152,7 @@ package local.view.shop
 			super.removedFromStageHandler(e);
 			GameWorld.instance.run();
 			isLeft = false ;
+			GameWorld.instance.visible=true;
 		}
 	}
 }
