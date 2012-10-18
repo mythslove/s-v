@@ -5,6 +5,7 @@ package  local.comm
 	
 	import local.enum.VillageMode;
 	import local.map.GameWorld;
+	import local.view.CenterViewLayer;
 
 	public class GameData
 	{
@@ -40,7 +41,7 @@ package  local.comm
 		{
 			if(_villageMode==value) return ;
 			_villageMode = value ;
-//			CenterViewLayer.instance.changeStatus( value );
+			CenterViewLayer.instance.changeStatus( value );
 			var world:GameWorld = GameWorld.instance ;
 			switch(value){
 				case VillageMode.NORMAL :

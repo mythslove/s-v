@@ -1,5 +1,7 @@
 package local.map.item
 {
+	import flash.geom.Point;
+	
 	import local.comm.GameSetting;
 	import local.enum.BuildingStatus;
 	import local.enum.BuildingType;
@@ -9,12 +11,15 @@ package local.map.item
 	import local.map.cell.RoadObject;
 	import local.model.BuildingModel;
 	import local.model.PlayerModel;
+	import local.model.StorageModel;
 	import local.util.ResourceUtil;
 	import local.vo.BitmapAnimResVO;
 	import local.vo.BuildingVO;
 
 	public class BaseBuilding extends BaseMapObject
 	{
+		public static var cachePos:Point = new Point();
+		
 		protected var _buildingObject:BuildingObject ;
 		protected var _roadObject:RoadObject ;
 		public var buildingVO:BuildingVO ;
@@ -84,6 +89,47 @@ package local.map.item
 					_buildStatusObj.alpha =1 ;
 				}*/
 			}
+		}
+		
+		/**
+		 * 收到收藏箱 
+		 */		
+		public function stash():void
+		{
+			GameWorld.instance.topScene.removeIsoObject( this );
+			GameWorld.instance.roadScene.touchable = GameWorld.instance.buildingScene.touchable = true ;
+			//添加到收藏箱中，并且从地图数据中移除
+			BuildingModel.instance.removeBuildingVO( buildingVO );
+			StorageModel.instance.addBuildingVOToStorage(buildingVO);
+			//减人口和人口容量
+			PlayerModel.instance.changePop( -buildingVO.baseVO.addPop);
+			PlayerModel.instance.changeCap( -buildingVO.baseVO.addCap);
+			
+			//任务判断
+//			QuestUtil.instance.handleOwn( QuestType.OWN_BD_BY_NAME , buildingVO.name );
+//			QuestUtil.instance.handleOwn( QuestType.OWN_BD_BY_TYPE , buildingVO.baseVO.type );
+			
+			this.dispose();
+		}
+		
+		/**
+		 * 售出 
+		 */		
+		public function sell():void
+		{
+			GameWorld.instance.topScene.removeIsoObject( this );
+			GameWorld.instance.roadScene.touchable = GameWorld.instance.buildingScene.touchable = true ;
+			
+			BuildingModel.instance.removeBuildingVO( buildingVO );
+			//减人口和人口容量
+			PlayerModel.instance.changePop( -buildingVO.baseVO.addPop);
+			PlayerModel.instance.changeCap( -buildingVO.baseVO.addCap);
+			
+			//任务判断
+//			QuestUtil.instance.handleOwn( QuestType.OWN_BD_BY_NAME , buildingVO.name );
+//			QuestUtil.instance.handleOwn( QuestType.OWN_BD_BY_TYPE , buildingVO.baseVO.type );
+			
+			this.dispose();
 		}
 		
 		/**
@@ -211,6 +257,8 @@ package local.map.item
 			super.dispose();
 			if(_buildingObject) _buildingObject.dispose();
 			_buildingObject = null ;
+			if(_roadObject) _roadObject.dispose();
+			_roadObject = null ;
 		}
 	}
 }

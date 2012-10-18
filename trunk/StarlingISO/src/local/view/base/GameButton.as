@@ -1,5 +1,7 @@
 package local.view.base
 {
+	import com.greensock.TweenLite;
+	
 	import feathers.controls.Button;
 	
 	import local.util.GameUtil;
@@ -11,10 +13,11 @@ package local.view.base
 	
 	public class GameButton extends Button
 	{
-		public function GameButton( defaultSkin:DisplayObject =null)
+		public function GameButton( defaultSkin:DisplayObject =null , disabledSkin:DisplayObject = null )
 		{
 			super();
 			if(defaultSkin) this.defaultSkin = defaultSkin ;
+			if(disabledSkin) this.disabledSkin = disabledSkin ;
 			addEventListener(TouchEvent.TOUCH , onTouchHandler );
 		}
 		
@@ -32,9 +35,9 @@ package local.view.base
 		
 		public function set enabled( value:Boolean ):void{
 			if(value){
-				GameUtil.light( this );
+				if(!disabledSkin) GameUtil.light( this );
 			}else{
-				GameUtil.dark( this );
+				if(!disabledSkin) GameUtil.dark( this );
 			}
 			touchable = value ;
 		}
@@ -46,5 +49,36 @@ package local.view.base
 			super.dispose();
 			removeEventListener(TouchEvent.TOUCH , onTouchHandler );
 		}
+		
+		
+		
+		
+		
+		
+		
+		
+		public function setVisible( value:Boolean ):void
+		{
+			_tempVisible = super.visible = value ;
+		}
+		
+		private var _tempVisible:Boolean ;
+		override public function set visible(value:Boolean):void
+		{
+			if(_tempVisible==value) return ;
+			_tempVisible = value ;
+			if( value){
+				alpha = 0 ;
+				TweenLite.to( this , 0.3 , {alpha:1 , onComplete: onTweenCom} );
+			}else{
+				alpha = 1 ;
+				TweenLite.to( this , 0.3 , {alpha:0 , onComplete: onTweenCom} );
+			}
+		}
+		
+		private function onTweenCom():void{
+			super.visible = _tempVisible ;
+		}
+		
 	}
 }
