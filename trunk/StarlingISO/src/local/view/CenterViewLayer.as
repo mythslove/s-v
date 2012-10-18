@@ -12,6 +12,8 @@ package local.view
 	import local.view.base.GameButton;
 	import local.view.bottom.BottomBar;
 	
+	import starling.display.Image;
+	
 	public class CenterViewLayer extends Sprite
 	{
 		private static var _instance:CenterViewLayer; 
@@ -39,8 +41,9 @@ package local.view
 			bottomBar.y = GameSetting.SCREEN_HEIGHT ;
 			addChild(bottomBar);
 			
-			questBtn = new GameButton( EmbedManager.getUIImage("QuestButtonUp"));
-			questBtn.x=5;
+			var img:Image = EmbedManager.getUIImage("QuestButtonUp") ;
+			questBtn = new GameButton( img );
+			questBtn.x= img.width*0.5 + 5;
 			questBtn.y = 100 ;
 			addChild(questBtn);
 			questBtn.onRelease.add( questBtnClick );

@@ -17,7 +17,6 @@ package local.view.bottom
 	
 	import starling.display.Image;
 	import starling.display.Sprite;
-	import starling.events.Event;
 	
 	public class BottomBar extends Sprite
 	{
@@ -36,30 +35,30 @@ package local.view.bottom
 		{
 			var img:Image =EmbedManager.getUIImage("MarketButtonUp");
 			btnMarket = new GameButton(img);
-			btnMarket.x = GameSetting.SCREEN_WIDTH - img.width-5 ;
-			btnMarket.y = - img.height-5 ;
+			btnMarket.x = GameSetting.SCREEN_WIDTH - btnMarket.pivotX-5 ;
+			btnMarket.y = -btnMarket.pivotY-5 ;
 			addChild(btnMarket);
 			btnMarket.onRelease.add( onClickHandler );
 			
 			img = EmbedManager.getUIImage("EditorButtonUp");
 			btnEditor = new GameButton(img);
 			btnEditor.x = btnMarket.x-img.width-40;
-			btnEditor.y = -img.height-5;
+			btnEditor.y = -btnEditor.pivotY-5;
 			addChild( btnEditor );
 			btnEditor.onRelease.add( onClickHandler );
 			
 			img = EmbedManager.getUIImage("BottomBarStorageButtonUp");
 			btnStorage = new GameButton(img);
-			btnStorage.x = btnStorage.x+5;
-			btnStorage.y = -img.height-5;
+			btnStorage.x = btnStorage.pivotX+5;
+			btnStorage.y = -btnStorage.pivotY-5;
 			btnStorage.setVisible( false );
 			addChild( btnStorage );
 			btnStorage.onRelease.add( onClickHandler );
 			
 			img = EmbedManager.getUIImage("DoneButtonUp");
 			btnDone = new GameButton(img);
-			btnDone.x = GameSetting.SCREEN_WIDTH - img.width-5 ;
-			btnDone.y = -img.height-5;
+			btnDone.x = GameSetting.SCREEN_WIDTH - btnDone.pivotX-5 ;
+			btnDone.y = -btnDone.pivotY-5;
 			btnDone.setVisible( false );
 			addChild( btnDone );
 			btnDone.onRelease.add( onClickHandler );

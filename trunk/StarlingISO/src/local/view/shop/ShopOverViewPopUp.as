@@ -52,12 +52,10 @@ package local.view.shop
 			pivotX = _wid>>1 ;
 			pivotY = _het>>1 ;
 			//关闭按钮
-			img = EmbedManager.getUIImage( StyleSetting.POPUPCLOSEBUTTONUP );
-			_btnClose = new GameButton();
-			_btnClose.defaultSkin = img ;
+			_btnClose = new GameButton(EmbedManager.getUIImage( StyleSetting.POPUPCLOSEBUTTONUP) );
 			addChild(_btnClose);
-			_btnClose.x = _wid - img.width - 10 ;
-			_btnClose.y = 10 ;
+			_btnClose.x = _wid - _btnClose.pivotX - 10 ;
+			_btnClose.y = 10+_btnClose.pivotY ;
 			_btnClose.onRelease.add(onClickHandler);
 			
 			
@@ -86,10 +84,9 @@ package local.view.shop
 			img = EmbedManager.getUIImage( "ShopOverViewHomeButton" );
 			tempW = img.width;
 			tempH = img.height ;
-			_btnHomes = new GameButton();
-			_btnHomes.x = btnBgs[0].x+(btnBgs[0].width-img.width)*0.5 ;
-			_btnHomes.y = btnBgs[0].y+(btnBgs[0].height-img.height)*0.5 ;
-			_btnHomes.defaultSkin = img ;
+			_btnHomes = new GameButton(img);
+			_btnHomes.x = btnBgs[0].x+btnBgs[0].width*0.5 ;
+			_btnHomes.y = btnBgs[0].y+btnBgs[0].height*0.5 ;
 			addChild(_btnHomes);
 			img = EmbedManager.getUIImage( "HOMES_en" );
 			img.x = (tempW-img.width)*0.5 ;
@@ -102,10 +99,9 @@ package local.view.shop
 			img = EmbedManager.getUIImage( "ShopOverViewCommunityButton" );
 			tempW = img.width;
 			tempH = img.height ;
-			_btnCommunity = new GameButton();
-			_btnCommunity.x = btnBgs[1].x+(btnBgs[1].width-img.width)*0.5 ;
-			_btnCommunity.y = btnBgs[1].y+(btnBgs[1].height-img.height)*0.5 ;
-			_btnCommunity.defaultSkin = img ;
+			_btnCommunity = new GameButton(img);
+			_btnCommunity.x = btnBgs[1].x+btnBgs[1].width*0.5 ;
+			_btnCommunity.y = btnBgs[1].y+btnBgs[1].height*0.5 ;
 			addChild(_btnCommunity);
 			img = EmbedManager.getUIImage( "COMMUNITY_en" );
 			img.x = (tempW-img.width)*0.5 ;
@@ -117,10 +113,9 @@ package local.view.shop
 			img = EmbedManager.getUIImage( "ShopOverViewDecorButton" );
 			tempW = img.width;
 			tempH = img.height ;
-			_btnDecor = new GameButton();
-			_btnDecor.x = btnBgs[2].x+(btnBgs[2].width-img.width)*0.5 ;
-			_btnDecor.y = btnBgs[2].y+(btnBgs[2].height-img.height)*0.5 ;
-			_btnDecor.defaultSkin = img ;
+			_btnDecor = new GameButton(img);
+			_btnDecor.x = btnBgs[2].x+btnBgs[2].width*0.5 ;
+			_btnDecor.y = btnBgs[2].y+btnBgs[2].height*0.5 ;
 			addChild(_btnDecor);
 			img = EmbedManager.getUIImage( "DECOR_en" );
 			img.x = (tempW-img.width)*0.5 ;
@@ -133,10 +128,9 @@ package local.view.shop
 			img = EmbedManager.getUIImage( "ShopOverViewBusinessButton" );
 			tempW = img.width;
 			tempH = img.height ;
-			_btnBusiness = new GameButton();
-			_btnBusiness.x = btnBgs[3].x+(btnBgs[3].width-img.width)*0.5 ;
-			_btnBusiness.y = btnBgs[3].y+(btnBgs[3].height-img.height)*0.5 ;
-			_btnBusiness.defaultSkin = img ;
+			_btnBusiness = new GameButton(img);
+			_btnBusiness.x = btnBgs[3].x+btnBgs[3].width*0.5 ;
+			_btnBusiness.y = btnBgs[3].y+btnBgs[3].height*0.5 ;
 			addChild(_btnBusiness);
 			img = EmbedManager.getUIImage( "BUSINESS_en" );
 			img.x = (tempW-img.width)*0.5 ;
@@ -149,10 +143,9 @@ package local.view.shop
 			img = EmbedManager.getUIImage( "ShopOverViewIndustryButton" );
 			tempW = img.width;
 			tempH = img.height ;
-			_btnIndustry = new GameButton();
-			_btnIndustry.x = btnBgs[4].x+(btnBgs[4].width-img.width)*0.5 ;
-			_btnIndustry.y = btnBgs[4].y+(btnBgs[4].height-img.height)*0.5 ;
-			_btnIndustry.defaultSkin = img ;
+			_btnIndustry = new GameButton(img);
+			_btnIndustry.x = btnBgs[4].x+btnBgs[4].width*0.5 ;
+			_btnIndustry.y = btnBgs[4].y+btnBgs[4].height*0.5 ;
 			addChild(_btnIndustry);
 			img = EmbedManager.getUIImage( "INDUSTRY_en" );
 			img.x = (tempW-img.width)*0.5 ;
@@ -165,10 +158,9 @@ package local.view.shop
 			img = EmbedManager.getUIImage( "ShopOverViewWondersButton" );
 			tempW = img.width;
 			tempH = img.height ;
-			_btnWonders = new GameButton();
-			_btnWonders.x = btnBgs[5].x+(btnBgs[5].width-img.width)*0.5 ;
-			_btnWonders.y = btnBgs[5].y+(btnBgs[5].height-img.height)*0.5 ;
-			_btnWonders.defaultSkin = img ;
+			_btnWonders = new GameButton(img);
+			_btnWonders.x = btnBgs[5].x+btnBgs[5].width*0.5 ;
+			_btnWonders.y = btnBgs[5].y+btnBgs[5].height*0.5 ;
 			addChild(_btnWonders);
 			img = EmbedManager.getUIImage( "WONDERS_en" );
 			img.x = (tempW-img.width)*0.5 ;
