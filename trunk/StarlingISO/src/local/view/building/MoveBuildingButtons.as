@@ -15,7 +15,6 @@ package local.view.building
 	import local.vo.BaseBuildingVO;
 	import local.vo.PlayerVO;
 	
-	import starling.display.Image;
 	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
@@ -36,17 +35,11 @@ package local.view.building
 		public function MoveBuildingButtons()
 		{
 			super();
-			var img:Image = EmbedManager.getUIImage("BuildingCancelButtonUp") ;
-			cancelBtn = new GameButton(img );
-			cancelBtn.pivotX = img.width>>1 ;
-			cancelBtn.pivotY = img.height>>1 ;
+			cancelBtn = new GameButton(EmbedManager.getUIImage("BuildingCancelButtonUp")  );
 			cancelBtn.x = -100 ;
 			cancelBtn.y = -100 ;
 			
-			img = EmbedManager.getUIImage("BuildingOKButtonUp") ;
-			okBtn = new GameButton(img);
-			okBtn.pivotX = img.width>>1 ;
-			okBtn.pivotY = img.height>>1 ;
+			okBtn = new GameButton(EmbedManager.getUIImage("BuildingOKButtonUp"));
 			okBtn.x = 100 ;
 			okBtn.y = -100 ;
 			addChild(okBtn);
