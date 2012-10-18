@@ -50,6 +50,8 @@ package local.map.cell
 			_tinyBmp.transform.colorTransform = transform ;
 			_tinyBmp.x =  _bavos[0].offsetX ;
 			_tinyBmp.y =  _bavos[0].offsetY ;
+			_tinyBmp.scaleX = _bavos[0].scaleX ;
+			_tinyBmp.scaleY = _bavos[0].scaleY ;
 			_tinyBmp.visible=false ;
 			addChild(_tinyBmp);
 		}

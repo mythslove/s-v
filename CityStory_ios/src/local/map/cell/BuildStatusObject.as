@@ -47,9 +47,13 @@ package local.map.cell
 			_bmp.bitmapData = barvo.bmds[0] ;
 			_bmp.x = barvo.offsetX ;
 			_bmp.y = barvo.offsetY ;
+			_bmp.scaleX = barvo.scaleX ;
+			_bmp.scaleY = barvo.scaleY ;
 			_tinyBmp.bitmapData = barvo.bmds[0] ;
 			_tinyBmp.x = barvo.offsetX ;
 			_tinyBmp.y = barvo.offsetY ;
+			_tinyBmp.scaleX = barvo.scaleX ;
+			_tinyBmp.scaleY = barvo.scaleY ;
 		}
 		
 		public function update():void

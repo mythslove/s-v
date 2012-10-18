@@ -23,6 +23,8 @@ package local.map.cell
 		{
 			x = _vo.offsetX ;
 			y = _vo.offsetY ;
+			scaleX = _vo.scaleX ;
+			scaleY = _vo.scaleY ;
 			if(_vo.isAnim){
 				_anim = new AnimationBitmap( _vo.bmds,Vector.<ActionVO>([new ActionVO("anim",_vo.frame)]) , _vo.rate ) ;
 			}
