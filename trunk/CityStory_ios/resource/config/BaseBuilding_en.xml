@@ -8,8 +8,6 @@
 	<item name="Basic_Tree7" type="basic" click="2"/>
 	<item name="Basic_Tree8" type="basic" click="2"/>
 	<item name="Road" title="Road" type="decoration" subClass="road" priceCoin="5"/>
-	<item name="PandaFood" title="PandaFood" type="business" goodsCost="6" click="3" priceCoin="4000" requireLv="2" time="12000" earnCoin="200"/>
-	<item name="EV" title="EV" type="business" span="2" goodsCost="6" click="3" priceCoin="4000" requireLv="2" time="12000" earnCoin="200"/>
 	<item name="Clutch" title="Clutch" type="business" goodsCost="6" click="3" priceCoin="4000" requireLv="2" time="12000" earnCoin="200"/>
 	<item name="Coco" title="Coco" type="business" goodsCost="6" click="3" priceCash="10" requireLv="6" time="18000" earnCoin="300"/>
 	<item name="Hermes Shop" title="Hermes Shop" type="business" goodsCost="5" click="3" priceCoin="2500" requireLv="2" time="6000" earnCoin="200"/>
