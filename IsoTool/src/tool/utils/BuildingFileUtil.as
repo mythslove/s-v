@@ -81,6 +81,9 @@ package tool.utils
 			bytes.writeBoolean( true ); //普通图片
 			bytes.writeShort( vo.offsetX );
 			bytes.writeShort( vo.offsetY );
+			bytes.writeFloat(vo.scaleX);
+			bytes.writeFloat(vo.scaleY);
+			bytes.writeUTF(vo.resName);
 			var len:int = vo.bmds.length ;
 			bytes.writeByte( len );
 			var pngBytes:ByteArray ;
@@ -165,6 +168,9 @@ package tool.utils
 		{
 			vo.offsetX = bytes.readShort() ;
 			vo.offsetY = bytes.readShort() ;
+			vo.scaleX = bytes.readFloat();
+			vo.scaleY = bytes.readFloat();
+			vo.resName = bytes.readUTF();
 			
 			var len:int = bytes.readUnsignedByte() ;
 			vo.bmds = new Vector.<BitmapData>(len,true);

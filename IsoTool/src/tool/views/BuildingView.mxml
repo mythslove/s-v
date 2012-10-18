@@ -124,6 +124,8 @@
 							e.target.vo.offsetY = e.target.y ;
 							animView.txtPivotX.text =  e.target.x+"";
 							animView.txtPivotY.text =  e.target.y+"";
+							animView.txtScaleX.text = e.target.scaleX+"";
+							animView.txtScaleY.text = e.target.scaleY+"";
 							break ;
 					}
 				}
@@ -166,6 +168,7 @@
 					_loader.unloadAndStop();
 				}
 				_loader = new Loader();
+				_loader.name = file.name ;
 				_loader.contentLoaderInfo.addEventListener( Event.COMPLETE , loadedHandler );
 				_loader.load( new URLRequest(file.url));
 			}
@@ -177,6 +180,7 @@
 				var vo:BitmapAnimResVO = new BitmapAnimResVO();
 				vo.bmds = Vector.<BitmapData>( [ (_loader.content as Bitmap).bitmapData]) ;
 				vo.png = vo.bmds[0].clone() ;
+				vo.resName = _loader.name ;
 				
 				var animObj:AnimObject = new AnimObject();
 				container.addChild( animObj );
@@ -277,25 +281,25 @@
 	<s:BorderContainer width="280" height="100%" backgroundColor="#E7E7E7" borderColor="#F7F7F7">
 		<s:Label id="lblName" x="6" y="10" text="新文件"/>
 		<mx:HRule y="35" width="96%" horizontalCenter="0"/>
-		<mx:HRule y="134" width="96%" horizontalCenter="0"/>
-		<mx:HRule y="297" width="96%" horizontalCenter="0"/>
-		<views:BuildingAnimView id="animView" y="145" left="5" right="5">
+		<mx:HRule y="101" width="96%" horizontalCenter="0"/>
+		<mx:HRule y="423" width="96%" horizontalCenter="0"/>
+		<views:BuildingAnimView id="animView" y="123" left="0" right="0">
 		</views:BuildingAnimView>
-		<s:Button right="10" bottom="18" width="169" height="60" label="保存文件" 
+		<s:Button right="10" bottom="14" width="169" height="60" label="保存文件" 
 				  click="BuildingFileUtil.saveBuilding(container,int(txtGridX.text),int(txtGridZ.text))"/>
-		<s:Label x="10" y="76" text="gridX"/>
-		<s:Label x="127" y="76" text="gridZ"/>
-		<s:TextInput id="txtGridX" x="46" y="69" width="55" text="2" textAlign="center"/>
-		<s:TextInput id="txtGridZ" x="164" y="69" width="55" text="2" textAlign="center"/>
-		<s:Label x="10" y="45" fontSize="14" fontWeight="bold" text="建筑占用格子"/>
-		<s:Button y="99" right="10" width="93" height="27" label="设置"
+		<s:Label x="10" y="46" text="gridX"/>
+		<s:Label x="9" y="76" text="gridZ"/>
+		<s:TextInput id="txtGridX" x="46" y="39" width="55" text="2" textAlign="center"/>
+		<s:TextInput id="txtGridZ" x="46" y="69" width="55" text="2" textAlign="center"/>
+		<s:Button y="52" right="47" width="93" height="27" label="设置"
 				  click="gridBtn_clickHandler(event)"/>
 		<s:Button left="10" bottom="10" width="70" height="30" label="重置"
 				  click="clear_clickHandler(event)"/>
-		<s:Button left="10" bottom="52" width="70" height="30" label="Demo"
+		<s:Button left="10" bottom="46" width="70" height="30" label="Demo"
 				  click="demo_clickHandler(event)"/>
-		<views:BuildingRoadsView id="roadsView" y="308" left="5" right="5">
+		<views:BuildingRoadsView id="roadsView" y="361" left="5" right="5">
 		</views:BuildingRoadsView>
-		<s:Button x="11" y="443" label="放大缩小地图" click="button1_clickHandler(event)"/>
+		<s:Button x="11" y="431" width="258" height="35" label="放大缩小地图"
+				  click="button1_clickHandler(event)"/>
 	</s:BorderContainer>
 </s:Group>

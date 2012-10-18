@@ -17,6 +17,10 @@ package  tool.local.vos
 		public var col:int ;
 		public var frame:int ;
 		public var rate:int ;
+		public var scaleX:Number = 1 ;
+		public var scaleY:Number = 1 ;
+		public var resName:String ;//也许有相同的资源
+		
 		public var roads:Vector.<Point> ;
 		
 		//不保存，原图

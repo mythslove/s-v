@@ -2,7 +2,7 @@
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
 		 xmlns:s="library://ns.adobe.com/flex/spark"
 		 xmlns:mx="library://ns.adobe.com/flex/mx"
-		 width="280" height="110">
+		 width="280" height="56">
 	
 	<fx:Script>
 		<![CDATA[
@@ -67,8 +67,8 @@
 	<fx:Declarations>
 		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
 	</fx:Declarations>
-	<s:Button id="btnAddRoadLayer" y="10" left="10" right="10" height="40" label="添加路线层"
+	<s:Button id="btnAddRoadLayer" x="10" y="10" width="100" height="40" label="添加路线层"
 			  click="btnAddRoadLayer_clickHandler(event)"/>
-	<s:Button id="btnAddRoadPoint" y="54" left="10" right="10" height="40" label="添加点"
+	<s:Button id="btnAddRoadPoint" x="170" y="10" width="100" height="40" label="添加点"
 			  click="btnAddRoadPoint_clickHandler(event)" enabled="false"/>
 </s:Group>
