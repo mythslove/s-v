@@ -63,7 +63,7 @@ package local.map
 				
 				//添加测试建筑
 				var house:BaseBuilding ;
-				var houses:Array = ["My House","Red Victorian House","PandaFood","Red Victorian House","Hermes Shop","Coco","Clutch","Higher"] ;
+				var houses:Array = ["My House","Red Victorian House","Apartments","Red Victorian House","Hermes Shop","Coco","Clutch","Higher"] ;
 				var bvo:BuildingVO ;
 				var bName:String ;
 				for( var i:int = 7*4 ; i<7*4+8 ; ++i )
