@@ -54,6 +54,8 @@ package local.map.item
 			_animObject = new MoveItemAnimObject( vo, actionNun );
 			_animObject.x = vo.offsetX ;
 			_animObject.y = vo.offsetY ;
+			_animObject.scaleX = vo.scaleX ;
+			_animObject.scaleY = vo.scaleY ;
 			_itemLayer.addChild(_animObject);
 		}
 		
