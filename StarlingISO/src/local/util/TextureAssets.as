@@ -8,6 +8,7 @@ package local.util
 	
 	import flash.display.BitmapData;
 	import flash.geom.Rectangle;
+	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
 	
 	import local.comm.GameData;
@@ -68,6 +69,29 @@ package local.util
 						}
 					}
 				}
+				
+				
+				//绑定的材质
+				resVO = new ResVO("BuildStatus_1_0")  ;
+				ResourceUtil.instance.parseAnimFile( resVO, new EmbedManager.BuildStatus_1_0 as ByteArray) ;
+				parseBarvos( resVO.resId , buildingName2Rect , resVO.resObject as Vector.<BitmapAnimResVO> , buildingMaxRect );
+				resVO = new ResVO("BuildStatus_1_1")  ;
+				ResourceUtil.instance.parseAnimFile(resVO , new EmbedManager.BuildStatus_1_1 as ByteArray) ;
+				parseBarvos(  resVO.resId , buildingName2Rect , resVO.resObject as Vector.<BitmapAnimResVO> , buildingMaxRect );
+				resVO = new ResVO("BuildStatus_2_0")  ;
+				ResourceUtil.instance.parseAnimFile( resVO , new EmbedManager.BuildStatus_2_0 as ByteArray) ;
+				parseBarvos(  resVO.resId , buildingName2Rect , resVO.resObject as Vector.<BitmapAnimResVO> , buildingMaxRect );
+				resVO = new ResVO("BuildStatus_2_1")  ;
+				ResourceUtil.instance.parseAnimFile( resVO , new EmbedManager.BuildStatus_2_1 as ByteArray) ;
+				parseBarvos(  resVO.resId , buildingName2Rect , resVO.resObject as Vector.<BitmapAnimResVO> , buildingMaxRect );
+				resVO = new ResVO("BuildStatus_3_0")  ;
+				ResourceUtil.instance.parseAnimFile( resVO , new EmbedManager.BuildStatus_3_0 as ByteArray) ;
+				parseBarvos(  resVO.resId , buildingName2Rect , resVO.resObject as Vector.<BitmapAnimResVO> , buildingMaxRect );
+				resVO = new ResVO("BuildStatus_3_1")  ;
+				ResourceUtil.instance.parseAnimFile( resVO , new EmbedManager.BuildStatus_3_1 as ByteArray) ;
+				parseBarvos(  resVO.resId , buildingName2Rect , resVO.resObject as Vector.<BitmapAnimResVO> , buildingMaxRect );
+				
+				
 				
 				//创建材质
 				var buildingTexture:Texture = Texture.fromBitmapData( buildingLayerBmd , false ) ;

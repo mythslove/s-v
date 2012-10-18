@@ -29,6 +29,21 @@ package local.util
 		[Embed(source="../assets/ui_iphone/images/popupbg.png")]
 		public static const POPUPBG:Class;
 		
+		//========建筑修建时的状态图标====================
+		[Embed(source="../assets/effect/BuildStatus_1_0.bd", mimeType="application/octet-stream") ]
+		public static const BuildStatus_1_0:Class; 
+		[Embed(source="../assets/effect/BuildStatus_1_1.bd", mimeType="application/octet-stream") ]
+		public static const BuildStatus_1_1:Class; 
+		[Embed(source="../assets/effect/BuildStatus_2_0.bd", mimeType="application/octet-stream") ]
+		public static const BuildStatus_2_0:Class; 
+		[Embed(source="../assets/effect/BuildStatus_2_1.bd", mimeType="application/octet-stream") ]
+		public static const BuildStatus_2_1:Class; 
+		[Embed(source="../assets/effect/BuildStatus_3_0.bd", mimeType="application/octet-stream") ]
+		public static const BuildStatus_3_0:Class; 
+		[Embed(source="../assets/effect/BuildStatus_3_1.bd", mimeType="application/octet-stream") ]
+		public static const BuildStatus_3_1:Class; 
+		
+		
 		
 		private static var _textureDic:Dictionary = new Dictionary() ;
 		

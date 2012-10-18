@@ -34,13 +34,16 @@ package local.view.building
 				EmbedManager.getUIImage("BuildingStashButtonDisabled"));
 			stashButton.x = -120 ;
 			stashButton.y = -80 ;
+			
 			sellButton = new GameButton(EmbedManager.getUIImage("BuildingSellButtonUp"),
 				EmbedManager.getUIImage("BuildingSellButtonDisabled"));
 			sellButton.x = 120 ;
 			sellButton.y = -80 ;
+			
 			rotateButton = new GameButton(EmbedManager.getUIImage("BuildingRotateButtonUp"),
 				EmbedManager.getUIImage("BuildingRotateButtonDisabled"));
 			rotateButton.y = -120 ;
+			
 			addChild(sellButton);
 			addChild(stashButton);
 			addChild(rotateButton);
