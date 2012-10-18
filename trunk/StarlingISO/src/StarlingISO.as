@@ -1,34 +1,137 @@
 package
 {
+	import bing.res.ResLoadedEvent;
+	import bing.res.ResProgressEvent;
+	import bing.res.ResVO;
+	
+	import com.greensock.plugins.BezierPlugin;
+	import com.greensock.plugins.TweenPlugin;
+	
 	import flash.desktop.NativeApplication;
+	import flash.display.*;
 	import flash.events.Event;
 	import flash.geom.Rectangle;
+	import flash.net.registerClassAlias;
+	import flash.utils.ByteArray;
+	import flash.utils.Dictionary;
 	
 	import local.MainGame;
-	import local.comm.GameData;
 	import local.comm.GameSetting;
-	import local.comm.GlobalDispatcher;
-	import local.enum.VillageMode;
-	import local.event.VillageEvent;
-	import local.map.GameWorld;
-	import local.model.PlayerModel;
-	import local.util.VillageUtil;
+	import local.model.*;
+	import local.util.ResourceUtil;
+	import local.vo.*;
 	
 	import starling.core.Starling;
 	
-	public class StarlingISO extends BaseVillage
+	public class StarlingISO extends Sprite
 	{
+		[Embed(source="Default-Landscape.png")]
+		private const  IPAD_LOADING:Class ;
+		[Embed(source="Default.png")]
+		private const  IPHONE_LOADING:Class ;
+		
 		private var _starling:Starling ;
-		protected var _villageUtil:VillageUtil ;
+		private var _loading:Bitmap;
 		
 		public function StarlingISO()
 		{
 			super();
+			stage.frameRate=60;
+			// 支持 autoOrient
+			stage.align = StageAlign.TOP_LEFT;
+			stage.scaleMode = StageScaleMode.NO_SCALE;
+			stage.color = 0 ;
+			stage.mouseChildren = false ;
+			NativeApplication.nativeApplication.executeInBackground = true ;
+			
+			if(stage.fullScreenWidth % 1024==0){
+				_loading = new IPAD_LOADING() as Bitmap;
+			}else if(stage.fullScreenWidth % 480==0){
+				_loading = new IPHONE_LOADING() as Bitmap;
+				_loading.rotation= -90;
+				_loading.y = _loading.height;
+			}
+			addChild(_loading);
+			
+			TweenPlugin.activate([BezierPlugin]);
+			registerVO();
+			loadConfig();
 		}
 		
-		override protected function initGame():void
+		private function loadConfig():void
 		{
-			super.initGame();
+			ResourceUtil.instance.addEventListener("GameConfig" , gameConfigHandler );
+			ResourceUtil.instance.loadRes( new ResVO("GameConfig" , "config/config_"+GameSetting.local+".bin") );
+		}
+		
+		private function gameConfigHandler( e:ResLoadedEvent ):void
+		{
+			ResourceUtil.instance.removeEventListener("GameConfig" , gameConfigHandler );
+			var bytes:ByteArray = e.resVO.resObject as ByteArray;
+			ShopModel.instance.allBuildingHash = bytes.readObject() as Dictionary ;
+			ShopModel.instance.baseBuildings = bytes.readObject() as Vector.<BaseBuildingVO> ;
+			LandModel.instance.expands = bytes.readObject() as Vector.<ExpandVO>;
+			PlayerModel.instance.levels =  bytes.readObject() as Dictionary ;
+			CompsModel.instance.allComps = bytes.readObject() as Dictionary ;
+			QuestModel.instance.allQuestArray = bytes.readObject() as Vector.<QuestVO>  ;
+			ResourceUtil.instance.deleteRes( "GameConfig");
+			loadRes();
+		}
+		
+		/*加载初始资源*/
+		private function loadRes():void
+		{
+			var resVOs:Array = [] ;
+			var allBuildingHash:Dictionary = ShopModel.instance.allBuildingHash ;
+			if( allBuildingHash){
+				var baseVO:BaseBuildingVO ;
+				for ( var name:String in allBuildingHash){
+					baseVO =  allBuildingHash[name] as BaseBuildingVO ;
+					if(baseVO.url){
+						resVOs.push( new ResVO(name , baseVO.url ) ) ;
+					}
+				}
+			}
+			ResourceUtil.instance.addEventListener(ResProgressEvent.RES_LOAD_PROGRESS , gameInitResHandler );
+			ResourceUtil.instance.addEventListener("gameInitRes" , gameInitResHandler );
+			ResourceUtil.instance.queueLoad( "gameInitRes" , resVOs , 10 );
+		}
+		
+		private function gameInitResHandler( e:Event ):void
+		{
+			switch( e.type )
+			{
+				case ResProgressEvent.RES_LOAD_PROGRESS:
+					if((e as ResProgressEvent ).queueName=="gameInitRes"){
+						trace( Math.ceil( (e as ResProgressEvent ).loaded / (e as ResProgressEvent ).total *100 )+"%"  );
+					}
+					break ;
+				case "gameInitRes":
+					ResourceUtil.instance.removeEventListener(ResProgressEvent.RES_LOAD_PROGRESS , gameInitResHandler );
+					ResourceUtil.instance.removeEventListener("gameInitRes" , gameInitResHandler );
+					initGame();
+					break ;
+			}
+		}
+		
+		private function registerVO():void
+		{
+			registerClassAlias( "BaseBuildingVO" , BaseBuildingVO );
+			registerClassAlias( "BuildingVO" , BuildingVO );
+			registerClassAlias( "PlayerVO" , PlayerVO );
+			registerClassAlias( "LandVO" , LandVO );
+			registerClassAlias( "LevelVO" , LevelVO );
+			registerClassAlias( "StorageBuildingVO" , StorageBuildingVO );
+			registerClassAlias( "ExpandVO" , ExpandVO );
+			registerClassAlias( "ProductVO" , ProductVO );
+			registerClassAlias( "ComponentVO" , ComponentVO );
+			registerClassAlias( "QuestVO" , QuestVO );
+			registerClassAlias( "QuestTaskVO" , QuestTaskVO );
+		}
+		
+		private function initGame():void
+		{
+			ShopModel.instance.initShopData();
 			
 			Starling.multitouchEnabled = true;  // useful on mobile devices
 			Starling.handleLostContext = true; // not necessary on iOS. Saves a lot of memory!
@@ -55,42 +158,17 @@ package
 				GameSetting.SCREEN_HEIGHT =_starling.stage.stageHeight  = 640 ;
 				GameSetting.SCREEN_WIDTH = _starling.stage.stageWidth = 960;
 			}
-			_starling.start();
-			
-			GlobalDispatcher.instance.addEventListener( VillageEvent.READED_VILLAGE , villageEvtHandler );
-			GlobalDispatcher.instance.addEventListener( VillageEvent.NEW_VILLAGE , villageEvtHandler );
-			_villageUtil = new VillageUtil();
-			_villageUtil.readVillage();
+			_starling.stage3D.addEventListener(Event.CONTEXT3D_CREATE , contextCreatedHandler );
 		}
 		
-		private function villageEvtHandler( e:VillageEvent ):void
+		private function contextCreatedHandler( e:Event):void
 		{
-			if(e.type==VillageEvent.NEW_VILLAGE){
-				PlayerModel.instance.createPlayer();
-			}
-			GlobalDispatcher.instance.removeEventListener( VillageEvent.READED_VILLAGE , villageEvtHandler );
-			GlobalDispatcher.instance.removeEventListener( VillageEvent.NEW_VILLAGE , villageEvtHandler );
-			
-			NativeApplication.nativeApplication.addEventListener(Event.ACTIVATE , activateHandler);
-			NativeApplication.nativeApplication.addEventListener(Event.DEACTIVATE , deactivateHandler );
-		}
-		
-		private function activateHandler( e:Event ):void 
-		{
-			if(GameData.villageMode!=VillageMode.VISIT)
-			{
-				GameData.commDate = new Date();
-				GameWorld.instance.buildingScene.refreshBuildingStatus();
-			}
-		}
-		
-		private function deactivateHandler( e:Event ):void 
-		{
-			if(GameData.villageMode!=VillageMode.VISIT)
-			{
-				GameWorld.instance.buildingScene.readySave();
-				_villageUtil.saveVillage();
-			}
+			_starling.stage3D.removeEventListener(Event.CONTEXT3D_CREATE , contextCreatedHandler );
+			_starling.start() ;
+			//移除loading
+			removeChild(_loading);
+			_loading.bitmapData.dispose();
+			_loading = null ;
 		}
 		
 	}
