@@ -78,7 +78,7 @@ package local.util
 					buildingLayerTexture.addRegion( name , buildingName2Rect.getValue(name) as Rectangle);
 				}
 				
-				var groundTexture:Texture = Texture.fromBitmapData( buildingLayerBmd , false ) ;
+				var groundTexture:Texture = Texture.fromBitmapData( groundLayerBmd , false ) ;
 				groundLayerTexture = new TextureAtlas(groundTexture);
 				len = groundName2Rect.keys().length ;
 				for ( i = 0 ; i<len ; ++i){
@@ -137,7 +137,7 @@ package local.util
 				GameData.commPoint.x = rect.x ;
 				GameData.commPoint.y = rect.y ;
 				groundLayerBmd.copyPixels( bmd , bmd.rect , GameData.commPoint );
-				name2Rect.put(  name+key , rect ) ;
+				name2Rect.put(  key , rect ) ;
 				++i ;
 				
 				bmd.dispose();

@@ -17,8 +17,9 @@ package bing.starling.component
 		private static var _basePoint:Point = new Point();
 		/** alpha 检测阈值 */
 		public var AlphaThreshold:int = 128 ;
+		public var regionRect:Rectangle ;
+		
 		private var _srcBmd:BitmapData ;
-		private var _regionRect:Rectangle ;
 		
 		/**
 		 * 构造
@@ -29,7 +30,7 @@ package bing.starling.component
 		public function PixelsImage(texture:Texture , srcBmd:BitmapData , regionRect:Rectangle )
 		{
 			super(texture);
-			this._regionRect = regionRect ;
+			this.regionRect = regionRect ;
 			this._srcBmd = srcBmd ;
 		}
 		
@@ -38,8 +39,8 @@ package bing.starling.component
 			var displayObj:DisplayObject = super.hitTest(localPoint,forTouch);
 			if( displayObj){
 				var temp:Point = localPoint.clone();
-				temp.x += _regionRect.x ;
-				temp.y += _regionRect.y ;
+				temp.x += regionRect.x ;
+				temp.y += regionRect.y ;
 				if( _srcBmd.hitTest( _basePoint , AlphaThreshold , temp )){
 					return this ;
 				}
@@ -51,7 +52,7 @@ package bing.starling.component
 		{
 			super.dispose();
 			_srcBmd = null ;
-			_regionRect = null ;
+			regionRect = null ;
 		}
 	}
 }
