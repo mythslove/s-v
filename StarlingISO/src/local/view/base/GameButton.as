@@ -12,8 +12,18 @@ package local.view.base
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
 	
+	/**
+	 * 游戏中的按钮，默认居中对齐 
+	 * @author zhouzhanglin
+	 */	
 	public class GameButton extends Button
 	{
+		/**
+		 *  按下时变暗
+		 * @param defaultSkin 默认图片
+		 * @param disabledSkin 不可用时的图片
+		 * 
+		 */		
 		public function GameButton( defaultSkin:DisplayObject =null , disabledSkin:DisplayObject = null )
 		{
 			super();
