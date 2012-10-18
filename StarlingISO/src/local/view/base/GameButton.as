@@ -1,6 +1,7 @@
 package local.view.base
 {
 	import com.greensock.TweenLite;
+	import com.greensock.easing.Back;
 	
 	import feathers.controls.Button;
 	
@@ -16,9 +17,19 @@ package local.view.base
 		public function GameButton( defaultSkin:DisplayObject =null , disabledSkin:DisplayObject = null )
 		{
 			super();
-			if(defaultSkin) this.defaultSkin = defaultSkin ;
+			if(defaultSkin) {
+				this.defaultSkin = defaultSkin ;
+				pivotX = defaultSkin.width>>1 ;
+				pivotY = defaultSkin.height>>1;
+			}
 			if(disabledSkin) this.disabledSkin = disabledSkin ;
 			addEventListener(TouchEvent.TOUCH , onTouchHandler );
+		}
+		
+		override public function set defaultSkin(value:DisplayObject):void{
+			super.defaultSkin = value ;
+			pivotX = defaultSkin.width>>1 ;
+			pivotY = defaultSkin.height>>1;
 		}
 		
 		private function onTouchHandler( e:TouchEvent ):void
@@ -68,16 +79,19 @@ package local.view.base
 			if(_tempVisible==value) return ;
 			_tempVisible = value ;
 			if( value){
-				alpha = 0 ;
-				TweenLite.to( this , 0.3 , {alpha:1 , onComplete: onTweenCom} );
+				scaleY = scaleX = 0 ;
+				touchable = false ;
+				TweenLite.to( this , 0.3 , { scaleX: 1 , scaleY:1 , ease:Back.easeOut , onComplete: onTweenCom} );
 			}else{
-				alpha = 1 ;
-				TweenLite.to( this , 0.3 , {alpha:0 , onComplete: onTweenCom} );
+				scaleX = scaleY = 1;
+				touchable = false ;
+				TweenLite.to( this , 0.3 , {scaleX: 0 , scaleY:0 , ease:Back.easeIn  , onComplete: onTweenCom} );
 			}
 		}
 		
 		private function onTweenCom():void{
 			super.visible = _tempVisible ;
+			touchable = true ;
 		}
 		
 	}
