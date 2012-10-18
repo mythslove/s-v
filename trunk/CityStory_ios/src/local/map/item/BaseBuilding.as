@@ -170,8 +170,7 @@ package local.map.item
 				flyImg.y = screenY-20 ;
 				GameWorld.instance.effectScene.addChild( flyImg );
 			}
-			//添加到地图上
-			addToWorldFromTopScene();
+
 			if(buildingVO.baseVO.type!=BuildingType.DECORATION)
 			{
 				//显示修建状态
@@ -189,6 +188,8 @@ package local.map.item
 				QuestUtil.instance.handleOwn( QuestType.OWN_BD_BY_NAME , buildingVO.name );
 				QuestUtil.instance.handleOwn( QuestType.OWN_BD_BY_TYPE , buildingVO.baseVO.type );
 			}
+			//添加到地图上
+			addToWorldFromTopScene();
 			//添加到地图数据中
 			BuildingModel.instance.addBuildingVO( buildingVO );
 			//加人口和人口容量
