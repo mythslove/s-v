@@ -28,7 +28,7 @@ package tool.utils
 		public static var gridX:int ;
 		public static var gridZ:int ;
 		
-		public static function saveBuilding( $container:DisplayObjectContainer , $gridX:int , $gridZ:int  ):void
+		public static function saveAsBuilding( $container:DisplayObjectContainer , $gridX:int , $gridZ:int  ):void
 		{
 			container = $container ;
 			gridX = $gridX ;
@@ -38,6 +38,20 @@ package tool.utils
 			file = new File();
 			file.addEventListener(Event.SELECT , onSelectedSaveFile , false , 0 , true );
 			file.browseForSave( "保存" );
+		}
+		
+		public static function saveBuilding( $file:File , $container:DisplayObjectContainer , $gridX:int , $gridZ:int  ):void
+		{
+			if(! $file) {
+				saveAsBuilding($container,$gridX,$gridZ);
+				return ;
+			}
+			container = $container ;
+			gridX = $gridX ;
+			gridZ = $gridZ ;
+			if(container.numChildren==0 || gridX<1 || gridZ<1 ) return ;
+			file = $file ;
+			onSelectedSaveFile(null);
 		}
 		
 		private static function onSelectedSaveFile(e:Event):void

@@ -131,6 +131,8 @@
 				}
 			}
 			
+			
+			private var resFile:File ;
 			//直接拖放
 			protected function container_nativeDragEnterHandler(event:NativeDragEvent):void
 			{
@@ -140,8 +142,8 @@
 			
 			protected function container_nativeDragDropHandler(event:NativeDragEvent):void
 			{
-				var file:File =  event.clipboard.getData( event.clipboard.formats[0])[0] as File;
-				readFile(file);
+				resFile =  event.clipboard.getData( event.clipboard.formats[0])[0] as File;
+				readFile(resFile);
 			}
 			private function readFile(file:File):void
 			{
@@ -252,6 +254,7 @@
 				lblName.text = "";
 				ContainerUtil.removeChildren( container );
 				animView.showBitmap( null );
+				resFile = null ;
 			}
 			
 			/*显示demo  */
@@ -269,6 +272,14 @@
 				else map.scaleX = map.scaleY = 1 ;
 			}
 			
+			private function saveBuildings():void
+			{
+				if(resFile && resFile.extension=="bd"){
+					BuildingFileUtil.saveBuilding( resFile , container,int(txtGridX.text),int(txtGridZ.text)) ;
+				}else{
+					BuildingFileUtil.saveAsBuilding(container,int(txtGridX.text),int(txtGridZ.text)) ;
+				}
+			}
 		]]>
 	</fx:Script>
 	<s:BorderContainer id="map" width="100%" height="100%" backgroundColor="#333333" borderColor="#000000"
@@ -285,8 +296,8 @@
 		<mx:HRule y="423" width="96%" horizontalCenter="0"/>
 		<views:BuildingAnimView id="animView" y="123" left="0" right="0">
 		</views:BuildingAnimView>
-		<s:Button right="10" bottom="14" width="169" height="60" label="保存文件" 
-				  click="BuildingFileUtil.saveBuilding(container,int(txtGridX.text),int(txtGridZ.text))"/>
+		<s:Button right="78" bottom="14" width="101" height="60" label="保存文件" 
+				  click="saveBuildings()"/>
 		<s:Label x="10" y="46" text="gridX"/>
 		<s:Label x="9" y="76" text="gridZ"/>
 		<s:TextInput id="txtGridX" x="46" y="39" width="55" text="2" textAlign="center"/>
@@ -301,5 +312,7 @@
 		</views:BuildingRoadsView>
 		<s:Button x="11" y="431" width="258" height="35" label="放大缩小地图"
 				  click="button1_clickHandler(event)"/>
+		<s:Button right="0" bottom="22" height="44" label="另存为"
+				  click="BuildingFileUtil.saveAsBuilding(container,int(txtGridX.text),int(txtGridZ.text))"/>
 	</s:BorderContainer>
 </s:Group>
