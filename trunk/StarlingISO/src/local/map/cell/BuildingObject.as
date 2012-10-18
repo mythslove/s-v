@@ -51,6 +51,8 @@ package local.map.cell
 					}
 					mc.x = vo.offsetX ;
 					mc.y = vo.offsetY ;
+					mc.scaleX = vo.scaleX ;
+					mc.scaleY = vo.scaleY ;
 					addChild( mc );
 					Starling.juggler.add( mc );
 				}
