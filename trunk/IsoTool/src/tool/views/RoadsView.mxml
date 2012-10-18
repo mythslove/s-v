@@ -123,7 +123,7 @@
 			
 			
 			
-			
+			private var file:File ;
 			
 			//直接拖放
 			protected function container_nativeDragEnterHandler(event:NativeDragEvent):void
@@ -134,7 +134,7 @@
 			
 			protected function container_nativeDragDropHandler(event:NativeDragEvent):void
 			{
-				var file:File =  event.clipboard.getData( event.clipboard.formats[0])[0] as File;
+				file =  event.clipboard.getData( event.clipboard.formats[0])[0] as File;
 				readFile(file);
 				lblName.text = file.name ;
 			}
@@ -257,6 +257,15 @@
 					roadPop.show( lblName.text ,  roadResVO );
 				}
 			}
+			
+			private function saveRoads():void
+			{
+				if( file && file.extension=="rd"){
+					RoadFileUtil.saveBuilding( file , container);
+				}else{
+					RoadFileUtil.saveAsBuilding(container);
+				}
+			}
 		]]>
 	</fx:Script>
 	<s:BorderContainer width="100%" height="100%" backgroundColor="#333333" borderColor="#000000"
@@ -267,9 +276,8 @@
 	<s:BorderContainer width="200" height="100%" backgroundColor="#E7E7E7" borderColor="#F7F7F7">
 		<s:Label id="lblName" left="6" top="10" text="新文件"/>
 		<mx:HRule y="34" width="96%" horizontalCenter="0"/>
-		<s:Button bottom="10" width="169" height="60" label="保存文件"
-				  click="RoadFileUtil.saveBuilding(container);"
-				  horizontalCenter="0"/>
+		<s:Button left="10" bottom="10" width="106" height="60" label="保存文件"
+				  click="saveRoads()"/>
 		<s:Button left="115" bottom="79" width="70" height="30" label="重置"
 				  click="clear_clickHandler(event)"/>
 		<s:Button left="18" bottom="78" width="70" height="30" label="Demo"
@@ -281,5 +289,6 @@
 		<s:Button x="9" y="130" width="82" height="30" label="设置当前" click="setRoadOffset()"/>
 		<s:Button x="108" y="130" width="82" height="30" label="设置全部" click="setAllOffset()"/>
 		<s:Button x="16" y="212" width="167" height="40" label="在新窗口查看效果" click="viewRoadsWorld()"/>
+		<s:Button right="4" bottom="24" label="另存为.." click="RoadFileUtil.saveAsBuilding(container);"/>
 	</s:BorderContainer>
 </s:Group>

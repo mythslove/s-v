@@ -19,7 +19,7 @@ package tool.utils
 		private static var container:DisplayObjectContainer ;
 		
 		
-		public static function saveBuilding( $container:DisplayObjectContainer):void
+		public static function saveAsBuilding( $container:DisplayObjectContainer):void
 		{
 			container = $container ;
 			file = new File();
@@ -27,6 +27,16 @@ package tool.utils
 			file.browseForSave( "保存" );
 		}
 		
+		public static function saveBuilding($file:File ,  $container:DisplayObjectContainer):void
+		{
+			container = $container ;
+			if($file){
+				file = $file ;
+				onSelectedSaveFile(null);
+			}else{
+				saveAsBuilding($container);
+			}
+		}
 		
 		private static function onSelectedSaveFile(e:Event):void
 		{
