@@ -18,6 +18,9 @@ package local.vo
 		public var frame:int ;
 		public var rate:int ;
 		public var roads:Vector.<Point> ;
+		public var scaleX:Number = 1 ;
+		public var scaleY:Number = 1 ;
+		public var resName:String ;//也许有相同的资源
 		
 	}
 }
