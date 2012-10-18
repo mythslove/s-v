@@ -28,21 +28,13 @@ package local.map.land
 			var bmp:Bitmap = new Bitmap(brvo.bmds[0] ) ;
 			bmp.x = brvo.offsetX;
 			bmp.y = brvo.offsetY;
+			bmp.scaleX = brvo.scaleX ;
+			bmp.scaleY = brvo.scaleY ;
 			
 			_container = new Sprite();
 			addChild(_container);
 			_container.addChild(bmp);
 		}
-		
-		public function checkScale():void
-		{
-			if( screenX>GameSetting.SCREEN_WIDTH*0.5){
-				_container.scaleX = -1 ;
-			}else{
-				_container.scaleX = 1;
-			}
-		}
-			
 		
 		override public function dispose():void
 		{
