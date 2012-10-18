@@ -27,9 +27,11 @@ package local.view.shop
 			return _instance ;
 		}
 		//=====================================
+		public var isLeft:Boolean ;
 		
 		public var _container:Sprite ;
-		public var _btnClose:GameButton ;
+		public var btnClose:GameButton ;
+		public var btnBack:GameButton ;
 		
 		private var _wid:Number ;
 		private var _het:Number ;
@@ -50,11 +52,17 @@ package local.view.shop
 			pivotX = _wid>>1 ;
 			pivotY = _het>>1 ;
 			//关闭按钮
-			_btnClose = new GameButton(EmbedManager.getUIImage( StyleSetting.POPUPCLOSEBUTTONUP ));
-			_btnClose.x = _wid - _btnClose.pivotX - 10 ;
-			_btnClose.y = 10+_btnClose.pivotY ;
-			addChild(_btnClose);
-			_btnClose.onRelease.add(onClickHandler);
+			btnClose = new GameButton(EmbedManager.getUIImage( StyleSetting.POPUPCLOSEBUTTONUP ));
+			btnClose.x = _wid - btnClose.pivotX - 10 ;
+			btnClose.y = 10+btnClose.pivotY ;
+			addChild(btnClose);
+			btnClose.onRelease.add(onClickHandler);
+			
+			btnBack = new GameButton(EmbedManager.getUIImage( "BackButton" ));
+			btnBack.x = btnBack.pivotX+10;
+			btnBack.y = btnBack.pivotY+10;
+			addChild( btnBack );
+			btnBack.onRelease.add( onClickHandler );
 			
 			_container = new Sprite();
 			_container.x = 40;
@@ -71,19 +79,33 @@ package local.view.shop
 			x = GameSetting.SCREEN_WIDTH>>1 ;
 			y = GameSetting.SCREEN_HEIGHT>>1 ;
 			
-			scaleX = scaleY= 0 ;
-			alpha = 0 ;
-			TweenLite.to( this , 0.3 , { scaleX:1 , scaleY:1 , alpha:1  , ease: Back.easeOut , onComplete:function():void{
-				if(!GameSetting.isIpad) GameWorld.instance.visible=false;
-			} });
+			var temp:int = 200 ;
+			if(isLeft){
+				temp = -200 ;
+			}
+			TweenLite.from( this , 0.3 , { x:x-200 , ease: Back.easeOut , onComplete:showTweenOver });
+		}
+		private function showTweenOver():void{
+			if(GameSetting.SCREEN_WIDTH<1024) {
+				GameWorld.instance.visible=false;
+			}
+//			if(GameData.isShowTutor && HomePanel.instance.content.numChildren>0 ){
+//				(HomePanel.instance.content.getChildAt(0) as ShopItemRenderer).showTutor() ;
+//			}
 		}
 		
 		private function onClickHandler( btn:Button ):void
 		{
 			switch( btn)
 			{
-				case _btnClose:
+				case btnClose:
 					close();
+					break ;
+				case btnBack:
+					isLeft = true ;
+					close();
+					ShopOverViewPopUp.instance.isLeft = true ;
+					PopUpManager.instance.addQueuePopUp( ShopOverViewPopUp.instance );
 					break ;
 			}
 		}
@@ -120,18 +142,23 @@ package local.view.shop
 		
 		
 		private function close():void{
-			touchable=false;
 			GameWorld.instance.visible=true;
-			TweenLite.to( this , 0.4 , { scaleX:0.3 , scaleY:0 , alpha:0 , ease: Back.easeIn , onComplete:onTweenCom});
+			touchable=false;
+			var temp:int = 200 ;
+			if(isLeft){
+				temp = -200 ;
+			}
+			TweenLite.to( this , 0.3 , { x:x+temp , ease: Back.easeIn , onComplete:onTweenCom});
 		}
-		
 		private function onTweenCom():void{
 			PopUpManager.instance.removeCurrentPopup() ;
 		}
+		
 		override protected function removedFromStageHandler(e:Event):void{
 			super.removedFromStageHandler(e);
 			GameWorld.instance.run();
 			GameWorld.instance.visible=true;
+			isLeft = false ;
 		}
 	}
 }

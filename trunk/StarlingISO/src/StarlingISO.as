@@ -46,8 +46,8 @@ package
 			
 			if(stage.fullScreenWidth % 1024==0){
 				_loading = new IPAD_LOADING() as Bitmap;
-				_loading.height = stage.fullScreenWidth ;
-				_loading.width = stage.fullScreenHeight ;
+				_loading.width = stage.fullScreenWidth ;
+				_loading.height = stage.fullScreenHeight ;
 			}else{ // if(stage.fullScreenWidth % 480==0){
 				_loading = new IPHONE_LOADING() as Bitmap;
 				_loading.height = stage.fullScreenWidth ;

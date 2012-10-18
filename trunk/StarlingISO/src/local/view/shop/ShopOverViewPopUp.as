@@ -33,6 +33,8 @@ package local.view.shop
 		private var _btnCommunity:GameButton ;
 		private var _btnWonders:GameButton ;
 		
+		public var isLeft:Boolean ;
+		
 		private var _wid:Number ;
 		private var _het:Number ;
 		
@@ -178,15 +180,23 @@ package local.view.shop
 			x = GameSetting.SCREEN_WIDTH>>1 ;
 			y = GameSetting.SCREEN_HEIGHT>>1 ;
 			
-			scaleX = scaleY= 0 ;
-			alpha = 0 ;
-			TweenLite.to( this , 0.3 , { scaleX:1 , scaleY:1 , alpha:1  , ease: Back.easeOut , onComplete:function():void{
-				if(!GameSetting.isIpad) GameWorld.instance.visible=false;
-			} });
+			var temp:int = 200 ;
+			if(isLeft){
+				temp = -200 ;
+			}
+			touchable = false ;
+			TweenLite.from( this , 0.3 , { x:x-temp , ease: Back.easeOut , onComplete:tweenOver });
+		}
+		private function tweenOver():void{
+			touchable=true;
+//			if(GameData.isShowTutor){
+//				showTutor();
+//			}
 		}
 		
 		private function onClickHandler( btn:Button ):void
 		{
+			isLeft = false ;
 			switch( btn)
 			{
 				case _btnClose:
@@ -221,8 +231,11 @@ package local.view.shop
 		
 		private function close():void{
 			touchable=false;
-			GameWorld.instance.visible=true;
-			TweenLite.to( this , 0.4 , { scaleX:0.3 , scaleY:0 , alpha:0 , ease: Back.easeIn , onComplete:onTweenCom});
+			var temp:int = 200 ;
+			if(isLeft){
+				temp = -200 ;
+			}
+			TweenLite.to( this , 0.3 , { x:x+temp , ease: Back.easeIn , onComplete:onTweenCom});
 		}
 		
 		private function onTweenCom():void{
@@ -231,6 +244,7 @@ package local.view.shop
 		override protected function removedFromStageHandler(e:Event):void{
 			super.removedFromStageHandler(e);
 			GameWorld.instance.run();
+			isLeft = false ;
 			GameWorld.instance.visible=true;
 		}
 	}
