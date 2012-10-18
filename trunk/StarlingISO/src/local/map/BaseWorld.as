@@ -346,7 +346,6 @@ package local.map
 				}
 				else if( touch.phase==TouchPhase.MOVED)
 				{
-					
 					_isMove = true ;
 					if( _mouseBuilding && _mouseBuilding.parent == topScene)  {
 						//如果是编译状态，则移动建筑
