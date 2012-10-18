@@ -31,6 +31,10 @@ package local.util
 		
 		public var buildingTexture:TextureAtlas ;
 		public var buildingBmd:BitmapData = new BitmapData(2048,2048,true,0xffffff);
+		/**
+		 * key为资源名字，value为BitmapAnimResVO
+		 */		
+		private var _resNameHash:Dictionary = new Dictionary();
 		
 		
 		public function createBuildingTexture():void
@@ -38,8 +42,8 @@ package local.util
 			var name2Rect:HashMap = new HashMap();
 			var maxRect:MaxRectsBinPack = new MaxRectsBinPack(2048,2048,false);
 			var allBuildingHash:Dictionary = ShopModel.instance.allBuildingHash ;
-			if( allBuildingHash){
-				
+			if( allBuildingHash)
+			{
 				//拼接图片
 				var baseVO:BaseBuildingVO ;
 				var resVO:ResVO ;
@@ -63,8 +67,12 @@ package local.util
 					name = name2Rect.keys()[i] ;
 					buildingTexture.addRegion( name , name2Rect.getValue(name) as Rectangle);
 				}
+				
+				//释放资源
 				name2Rect.clear();
 				name2Rect = null ;
+				_resNameHash = null ;
+				ResourceUtil.instance.resNameHash = null ;
 			}
 			
 		}
@@ -76,15 +84,20 @@ package local.util
 			var layer:int ; //层数
 			var ext:String ;
 			for each( var vo:BitmapAnimResVO in barvos){
-				for( var i:int = 0 ; i<vo.bmds.length ; ++i){
-					bmd = vo.bmds[i] ;
-					rect  = maxRect.insert( bmd.width , bmd.height , MaxRectsBinPack.ContactPointRule) ;
-					GameData.commPoint.x = rect.x ;
-					GameData.commPoint.y = rect.y ;
-					buildingBmd.copyPixels( bmd , bmd.rect , GameData.commPoint );
-					ext = i<10?"00"+i :  ( i<100?"0"+i:i+"") ;
-					name2Rect.put( name+"_"+layer+"_"+ext , rect ) ;
-					bmd.dispose() ;
+				if(!_resNameHash.hasOwnProperty(vo.resName)){
+					for( var i:int = 0 ; i<vo.bmds.length ; ++i){
+						bmd = vo.bmds[i] ;
+						rect  = maxRect.insert( bmd.width , bmd.height , MaxRectsBinPack.ContactPointRule) ;
+						GameData.commPoint.x = rect.x ;
+						GameData.commPoint.y = rect.y ;
+						buildingBmd.copyPixels( bmd , bmd.rect , GameData.commPoint );
+						ext = i<10?"00"+i :  ( i<100?"0"+i:i+"") ;
+						name2Rect.put( vo.resName+"_"+ext , rect ) ;
+						bmd.dispose() ;
+					}
+					_resNameHash[vo.resName] = vo ;
+				}else{
+					trace("相同材质:"+vo.resName);
 				}
 				++layer ;
 				vo.bmds = null ;

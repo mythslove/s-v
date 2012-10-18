@@ -35,7 +35,7 @@ package local.map.cell
 			
 			for( var i:int = 0 ; i <len ; ++i ){
 				vo = _bavos[i] ;
-				tempName = name+"_"+i+"_" ;
+				tempName = vo.resName+"_" ;
 				if(vo.isAnim)
 				{
 					var regions:Vector.<Rectangle> = new Vector.<Rectangle>(vo.frame , true );
@@ -58,7 +58,7 @@ package local.map.cell
 				}
 				else
 				{
-					tempName += "000" ;
+					tempName = vo.resName+"_000" ;
 					if(i==0){
 						img = TextureAssets.instance.createPixelsImage( tempName );
 					}else{
@@ -75,7 +75,7 @@ package local.map.cell
 			}
 			
 			
-			_tinyImg = new Image(TextureAssets.instance.buildingTexture.getTexture( name+"_0_000" ) );
+			_tinyImg = new Image(TextureAssets.instance.buildingTexture.getTexture( _bavos[0].resName+"_000" ) );
 			_tinyImg.touchable = false ;
 			_tinyImg.blendMode = BlendMode.ADD ;
 			_tinyImg.color = Color.WHITE ;
