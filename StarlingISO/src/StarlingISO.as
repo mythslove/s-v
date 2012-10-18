@@ -46,7 +46,7 @@ package
 			
 			if(stage.fullScreenWidth % 1024==0){
 				_loading = new IPAD_LOADING() as Bitmap;
-			}else if(stage.fullScreenWidth % 480==0){
+			}else{ // if(stage.fullScreenWidth % 480==0)
 				_loading = new IPHONE_LOADING() as Bitmap;
 				_loading.rotation= -90;
 				_loading.y = _loading.height;
@@ -141,22 +141,23 @@ package
 			_starling.antiAliasing = 0 ;
 			_starling.enableErrorChecking = false ;
 			
-			if(stage.fullScreenWidth >= 1024){
+			if(stage.fullScreenWidth%1024==0){
 				//ipad1,2,3
 				GameSetting.isIpad = true ;
-				GameSetting.SCREEN_HEIGHT =_starling.stage.stageHeight  = 768 ;
 				GameSetting.SCREEN_WIDTH = _starling.stage.stageWidth = 1024;
-			}else if( stage.stage.fullScreenHeight >= 1136){
+				GameSetting.SCREEN_HEIGHT =_starling.stage.stageHeight  = 768 ;
+			}else if( stage.stage.fullScreenWidth % 1136==0 ){
 				//iphone5
-				GameSetting.isIpad = false ;
-				GameSetting.SCREEN_HEIGHT =_starling.stage.stageHeight  = 640 ;
 				GameSetting.SCREEN_WIDTH = _starling.stage.stageWidth = 960;
+				GameSetting.SCREEN_HEIGHT =_starling.stage.stageHeight  = 640 ;
 				_starling.stage.x = (1136-960)>>1 ;
-			}else {
+			}else if( stage.stage.fullScreenWidth % 480==0 ){
 				//iphone4,4s,3GS
-				GameSetting.isIpad = false ;
-				GameSetting.SCREEN_HEIGHT =_starling.stage.stageHeight  = 640 ;
 				GameSetting.SCREEN_WIDTH = _starling.stage.stageWidth = 960;
+				GameSetting.SCREEN_HEIGHT =_starling.stage.stageHeight  = 640 ;
+			}else{
+				GameSetting.SCREEN_WIDTH = _starling.stage.stageWidth = stage.stage.fullScreenWidth;
+				GameSetting.SCREEN_HEIGHT =_starling.stage.stageHeight  = stage.stage.fullScreenHeight ;
 			}
 			_starling.stage3D.addEventListener(Event.CONTEXT3D_CREATE , contextCreatedHandler );
 		}

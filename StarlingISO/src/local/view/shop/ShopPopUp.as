@@ -50,12 +50,10 @@ package local.view.shop
 			pivotX = _wid>>1 ;
 			pivotY = _het>>1 ;
 			//关闭按钮
-			img = EmbedManager.getUIImage( StyleSetting.POPUPCLOSEBUTTONUP );
-			_btnClose = new GameButton();
-			_btnClose.defaultSkin = img ;
+			_btnClose = new GameButton(EmbedManager.getUIImage( StyleSetting.POPUPCLOSEBUTTONUP ));
+			_btnClose.x = _wid - _btnClose.pivotX - 10 ;
+			_btnClose.y = 10+_btnClose.pivotY ;
 			addChild(_btnClose);
-			_btnClose.x = _wid - img.width - 10 ;
-			_btnClose.y = 10 ;
 			_btnClose.onRelease.add(onClickHandler);
 			
 			_container = new Sprite();

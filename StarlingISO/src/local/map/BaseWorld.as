@@ -33,6 +33,7 @@ package local.map
 	import local.vo.LandVO;
 	
 	import starling.core.Starling;
+	import starling.display.DisplayObject;
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.Event;
@@ -551,10 +552,26 @@ package local.map
 					_endY = y = _zoomM.ty ;
 					
 					modifyEndPosition();
+					changeIconSize();
 				}} );
 			}
 			_endX = x;
 			_endY = y ;
+		}
+		
+		
+		protected function changeIconSize():void
+		{
+			if(MoveBuildingButtons.instance.parent)	{
+				MoveBuildingButtons.instance.scaleY =MoveBuildingButtons.instance.scaleX = 1/scaleX ;
+			} else if(EditorBuildingButtons.instance.parent) {
+				EditorBuildingButtons.instance.scaleY =EditorBuildingButtons.instance.scaleX = 1/scaleX ;
+			}
+			var obj:DisplayObject ;
+			for( var i:int = 0 ; i <effectScene.numChildren ; ++i ){
+				obj = effectScene.getChildAt(i) ;
+				obj.scaleY = obj.scaleX = 1/scaleX ;
+			}
 		}
 		
 		private function modifyEndPosition():void{
