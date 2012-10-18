@@ -327,7 +327,6 @@ package  local.map
 								buildingScene.addIsoObject( expandSign , sort );
 								expandSign.setWalkable( false , buildingScene.gridData );
 								MapGridDataModel.instance.addBuildingGridData(expandSign);
-								expandSign.checkScale();
 								temp = false ;
 								++index;
 								i = 4;j=4; //跳出两个for循环
