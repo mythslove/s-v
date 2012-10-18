@@ -10,7 +10,6 @@ package local.view.base
 	
 	import starling.display.Image;
 	import starling.display.Sprite;
-	import starling.textures.Texture;
 	
 	public class BuildingThumb extends Sprite
 	{
@@ -24,18 +23,18 @@ package local.view.base
 		 */	
 		public function BuildingThumb(name:String ,  maxW:int , maxH:int)
 		{
-			var tempName:String = name+"_0_000" ;
-			_img = new Image(TextureAssets.instance.buildingTexture.getTexture(tempName));
 			var resVO:ResVO = ResourceUtil.instance.getResVOByResId(name);
 			if(resVO.resObject is Vector.<BitmapAnimResVO>)
 			{
 				var barvo:Vector.<BitmapAnimResVO> = resVO.resObject as Vector.<BitmapAnimResVO> ;
+				_img = new Image(TextureAssets.instance.buildingLayerTexture.getTexture(barvo[0].resName+"_000"));
 				_img.x=barvo[0].offsetX ;
 				_img.y=barvo[0].offsetY ;
 			}
 			else if( resVO.resObject is RoadResVO )
 			{
 				var roadResVO:RoadResVO = resVO.resObject as RoadResVO ;
+				_img = new Image(TextureAssets.instance.groundLayerTexture.getTexture(name));
 				_img.x=roadResVO.offsetXs[name];
 				_img.y=roadResVO.offsetYs[name];
 			}

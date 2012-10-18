@@ -34,7 +34,7 @@ package local
 			
 			addChild(PopUpManager.instance);
 			
-//			var bmp:Bitmap = new Bitmap( TextureAssets.instance.buildingBmd);
+//			var bmp:Bitmap = new Bitmap( TextureAssets.instance.groundLayerBmd);
 //			bmp.scaleX  = bmp.scaleY = .4 ;
 //			Starling.current.nativeStage.addChild(bmp);
 		}

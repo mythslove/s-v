@@ -41,12 +41,12 @@ package local.map.cell
 					var regions:Vector.<Rectangle> = new Vector.<Rectangle>(vo.frame , true );
 					for( var j:int = 0 ; j<vo.frame ; ++j ){
 						var ext:String = j<10?"00"+j :  ( j<100?"0"+j:j+"") ;
-						regions[j] = TextureAssets.instance.buildingTexture.getRegion(  tempName+ext ) ;
+						regions[j] = TextureAssets.instance.buildingLayerTexture.getRegion(  tempName+ext ) ;
 					}
 					if(i==0){
-						mc =TextureAssets.instance.createPixelsMovieClip( tempName,regions , (Starling.current.nativeStage.frameRate/vo.rate)>>0 );
+						mc =TextureAssets.instance.createBDLayerPixelsMovieClip( tempName,regions , (Starling.current.nativeStage.frameRate/vo.rate)>>0 );
 					}else{
-						mc = new MovieClip( TextureAssets.instance.buildingTexture.getTextures(tempName) , (Starling.current.nativeStage.frameRate/vo.rate)>>0 ) ;
+						mc = new MovieClip( TextureAssets.instance.buildingLayerTexture.getTextures(tempName) , (Starling.current.nativeStage.frameRate/vo.rate)>>0 ) ;
 						mc.touchable = false ;
 					}
 					mc.x = vo.offsetX ;
@@ -60,9 +60,9 @@ package local.map.cell
 				{
 					tempName = vo.resName+"_000" ;
 					if(i==0){
-						img = TextureAssets.instance.createPixelsImage( tempName );
+						img = TextureAssets.instance.createBDLayerPixelsImage( tempName );
 					}else{
-						img = new Image( TextureAssets.instance.buildingTexture.getTexture( tempName )  ) ;
+						img = new Image( TextureAssets.instance.buildingLayerTexture.getTexture( tempName )  ) ;
 						img.touchable = false ;
 					}
 					img.x =  _bavos[0].offsetX ;
@@ -75,7 +75,7 @@ package local.map.cell
 			}
 			
 			
-			_tinyImg = new Image(TextureAssets.instance.buildingTexture.getTexture( _bavos[0].resName+"_000" ) );
+			_tinyImg = new Image(TextureAssets.instance.buildingLayerTexture.getTexture( _bavos[0].resName+"_000" ) );
 			_tinyImg.touchable = false ;
 			_tinyImg.blendMode = BlendMode.ADD ;
 			_tinyImg.color = Color.WHITE ;
