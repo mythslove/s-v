@@ -67,6 +67,9 @@ package local.map.cell
 					}
 					img.x =  _bavos[0].offsetX ;
 					img.y =  _bavos[0].offsetY ;
+					img.scaleX =  _bavos[0].scaleX ;
+					img.scaleY =  _bavos[0].scaleY ;
+					
 					addChild(img);
 				}
 			}
@@ -78,6 +81,8 @@ package local.map.cell
 			_tinyImg.color = Color.WHITE ;
 			_tinyImg.x =  _bavos[0].offsetX ;
 			_tinyImg.y =  _bavos[0].offsetY ;
+			_tinyImg.scaleX = _bavos[0].scaleX ;
+			_tinyImg.scaleY = _bavos[0].scaleY ;
 			_tinyImg.visible=false ;
 			addChild(_tinyImg);
 		}

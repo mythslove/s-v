@@ -204,6 +204,9 @@ package local.util
 		{
 			vo.offsetX = bytes.readShort() ;
 			vo.offsetY = bytes.readShort() ;
+			vo.scaleX = bytes.readFloat();
+			vo.scaleY = bytes.readFloat();
+			vo.resName = bytes.readUTF();
 			
 			var len:int = bytes.readUnsignedByte() ;
 			vo.bmds = new Vector.<BitmapData>(len,true);
