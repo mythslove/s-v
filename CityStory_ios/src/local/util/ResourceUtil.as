@@ -14,6 +14,7 @@ package local.util
 	import flash.net.URLLoaderDataFormat;
 	import flash.net.URLRequest;
 	import flash.utils.ByteArray;
+	import flash.utils.Dictionary;
 	
 	import local.vo.BitmapAnimResVO;
 	import local.vo.RoadResVO;
@@ -41,6 +42,10 @@ package local.util
 			return _instance ;
 		}
 		//==================================
+		/**
+		 * key为资源名字，value为Vecter.<BitmapData>
+		 */		
+		private var _resNameHash:Dictionary = new Dictionary();
 		
 		/**
 		 * 下载一个资源 
@@ -198,7 +203,7 @@ package local.util
 		}
 		
 		
-		private static function readAnimObject( vo:BitmapAnimResVO , bytes:ByteArray ):void
+		private function readAnimObject( vo:BitmapAnimResVO , bytes:ByteArray ):void
 		{
 			vo.offsetX = bytes.readShort() ;
 			vo.offsetY = bytes.readShort() ;
@@ -206,8 +211,13 @@ package local.util
 			vo.scaleY = bytes.readFloat();
 			vo.resName = bytes.readUTF();
 			
+			var exsit:Boolean;
+			if(vo.resName){
+				exsit =  _resNameHash.hasOwnProperty(vo.resName) ;
+				if(exsit) vo.bmds = _resNameHash[vo.resName] as Vector.<BitmapData> ;
+			}
 			var len:int = bytes.readUnsignedByte() ;
-			vo.bmds = new Vector.<BitmapData>(len,true);
+			if(!exsit) vo.bmds = new Vector.<BitmapData>(len,true);
 			var bmd:BitmapData ;
 			var rect:Rectangle ;
 			var pngBytes:ByteArray ;
@@ -216,9 +226,11 @@ package local.util
 				rect = new Rectangle(0,0 , bytes.readUnsignedShort() , bytes.readUnsignedShort());
 				pngBytes = new ByteArray();
 				bytes.readBytes( pngBytes, 0 , bytes.readDouble() );
-				bmd = new BitmapData( rect.width , rect.height );
-				bmd.setPixels( rect , pngBytes );
-				vo.bmds[j] = bmd ;
+				if(!exsit) {
+					bmd = new BitmapData( rect.width , rect.height );
+					bmd.setPixels( rect , pngBytes );
+					vo.bmds[j] = bmd ;
+				}
 			}
 			
 			vo.isAnim = bytes.readBoolean() ;
@@ -229,9 +241,12 @@ package local.util
 				vo.frame = bytes.readUnsignedByte() ;
 				vo.rate = bytes.readUnsignedByte() ;
 			}
+			if(!exsit) {
+				_resNameHash[vo.resName]  = vo.bmds ;
+			}
 		}
 		
-		private static function readRoadsLayerObject( vo:BitmapAnimResVO , bytes:ByteArray ):void
+		private function readRoadsLayerObject( vo:BitmapAnimResVO , bytes:ByteArray ):void
 		{
 			var len:int = bytes.readUnsignedByte() ;
 			var p:Point ;

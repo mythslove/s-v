@@ -113,6 +113,7 @@ package local.util
 					PlayerModel.instance.me.goods = 400 ;
 					PlayerModel.instance.me.cash = 10000 ;
 					PlayerModel.instance.me.coin = 10000 ;
+					PlayerModel.instance.me.level =5;
 					/*-----------------测试数据---------------------------------------*/
 					//读取地图信息
 					BuildingModel.instance.expandBuilding = stream.readObject() as BuildingVO ;

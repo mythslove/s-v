@@ -89,14 +89,14 @@ package local.view.shop
 			price.txtPrice.width = price.txtPrice.textWidth+10;
 			price.x=(width-price.width)>>1 ;
 			
-			//判断等级
+			//判断等级和人口
 			var isLock:Boolean , lockText:String ;
 			if( baseVO.requireLv>0 && baseVO.requireLv>PlayerModel.instance.me.level){
 				isLock = true ;
 				lockText="Level\n"+baseVO.requireLv ;
-			}else if(baseVO.requirePop > 0 && baseVO.requirePop>PlayerModel.instance.getCurrentPop()){
+			}else if(GameUtil.buildIndustryPop()>PlayerModel.instance.getCurrentPop()){
 				isLock = true ;
-				lockText="Population\n"+baseVO.requirePop ;
+				lockText="Population\n"+GameUtil.buildIndustryPop() ;
 			}
 			if(isLock){
 				mouseEnabled = false ;
