@@ -525,10 +525,8 @@ package local.map
 		private function changeWorldScale( value:Number , px:Number , py:Number , time:Number=0.2 ):void
 		{
 			if(scaleX*value>0.5 && scaleX*value<2.5 ) {
-				
 				var prevScale:Number = scaleX ;
 				var prevX:Number =x , prevY:Number = y ;
-				
 				_zoomObj.value=1;
 				if(_zoomTween){
 					_zoomTween.kill() ;
