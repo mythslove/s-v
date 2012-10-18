@@ -1,16 +1,18 @@
 package local.view
 {
+	import feathers.controls.Button;
 	import feathers.controls.text.TextFieldTextRenderer;
 	import feathers.core.FeathersControl;
 	import feathers.core.ITextRenderer;
+	import feathers.display.Sprite;
 	
 	import local.comm.GameSetting;
-	import local.view.base.BaseView;
+	import local.enum.VillageMode;
+	import local.util.EmbedManager;
+	import local.view.base.GameButton;
 	import local.view.bottom.BottomBar;
 	
-	import starling.events.Event;
-	
-	public class CenterViewLayer extends BaseView
+	public class CenterViewLayer extends Sprite
 	{
 		private static var _instance:CenterViewLayer; 
 		public static function get instance():CenterViewLayer
@@ -21,21 +23,100 @@ package local.view
 		//-----------------------------------------------------------
 		
 		public var bottomBar:BottomBar ;
+		public var questBtn:GameButton; 
 		
 		public function CenterViewLayer()
 		{
 			FeathersControl.defaultTextRendererFactory = function():ITextRenderer{
 				return new TextFieldTextRenderer();
-			}
+			};
+			init();
 		}
-		
-		override protected function addedToStageHandler(e:Event):void
+
+		private function init():void
 		{
-			super.addedToStageHandler(e);
-			
 			bottomBar = new BottomBar();
 			bottomBar.y = GameSetting.SCREEN_HEIGHT ;
 			addChild(bottomBar);
+			
+			questBtn = new GameButton( EmbedManager.getUIImage("QuestButtonUp"));
+			questBtn.x=5;
+			questBtn.y = 100 ;
+			addChild(questBtn);
+			questBtn.onRelease.add( questBtnClick );
+		}
+		
+		/**
+		 * 改变UI的状态， mode为VillageMode中的常量
+		 * @param mode
+		 */		
+		public function changeStatus ( mode:String ):void
+		{
+			switch(mode)
+			{
+				case VillageMode.NORMAL :
+					bottomBar.visible = true ;
+					bottomBar.btnMarket.visible = true ;
+					bottomBar.btnEditor.visible = true ;
+					questBtn.visible = true ;
+					bottomBar.btnDone.visible = false ;
+					bottomBar.btnStorage.visible = false ;
+//					topBar.visible = true ;
+					break ;
+				case VillageMode.EDIT :
+					bottomBar.btnMarket.visible = false ;
+					bottomBar.btnEditor.visible = false ;
+					questBtn.visible = false ;
+					bottomBar.btnDone.visible = true ;
+					bottomBar.btnStorage.visible = true ;
+//					topBar.visible = false ;
+					break ;
+				case VillageMode.BUILDING_STORAGE :
+					bottomBar.btnDone.visible = false ;
+					bottomBar.btnStorage.visible = false ;
+					questBtn.visible = false ;
+					bottomBar.showStorage();
+//					topBar.visible = false ;
+					break ;
+				case VillageMode.BUILDING_SHOP :
+					bottomBar.visible = false ;
+//					topBar.visible = false ;
+					questBtn.visible = false ;
+					break ;
+				case VillageMode.EXPAND :
+					bottomBar.btnMarket.visible = false ;
+					bottomBar.btnEditor.visible = false ;
+					questBtn.visible = false ;
+					bottomBar.btnDone.visible = true ;
+					bottomBar.btnStorage.visible = false ;
+//					topBar.visible = false ;
+					break ;
+				case VillageMode.VISIT:
+//					gameTip.hide();
+					bottomBar.btnMarket.visible = false ;
+					bottomBar.btnEditor.visible = false ;
+					questBtn.visible = false ;
+					break ;
+			}
+		}
+		
+		private function questBtnClick( btn:Button ):void
+		{
+			
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		public function set enable( value:Boolean ):void
+		{
+			touchable = value ;
+			alpha = value ? 1 : 0.5 ;
 		}
 	}
 }
