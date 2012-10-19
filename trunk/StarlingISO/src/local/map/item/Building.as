@@ -331,8 +331,8 @@ package local.map.item
 			}
 			//图标飘动
 			if(statusIcon && statusIcon.parent){
-				statusIcon.y += Math.sin(_statusIconPosY)*0.1 ;
-				_statusIconPosY+=0.04 ;
+				statusIcon.y += Math.sin(_statusIconPosY)*0.15 ;
+				_statusIconPosY+=0.05 ;
 			}
 			++_gameTimerTick ;
 		}
