@@ -94,7 +94,7 @@ package local.view.shop
 			item.alpha = .6 ;
 			item.rect = new Rectangle( globalPoint.x/root.scaleX,globalPoint.y/root.scaleX,homeButtonBg.width-2,homeButtonBg.height-4);
 			item.showArrow = true ;
-			item.arrowPoint = new Point(globalPoint.x/root.scaleX+homeButtonBg.width*0.5 , globalPoint.y);
+			item.arrowPoint = new Point(globalPoint.x/root.scaleX+homeButtonBg.width*0.5 , globalPoint.y/root.scaleX);
 			TutorView.instance.showTutor( item );
 		}
 		
