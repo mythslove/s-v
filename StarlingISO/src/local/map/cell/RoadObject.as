@@ -2,6 +2,7 @@ package local.map.cell
 {
 	import bing.starling.component.PixelsImage;
 	
+	import local.comm.GameSetting;
 	import local.util.TextureAssets;
 	import local.vo.RoadResVO;
 	
@@ -24,8 +25,8 @@ package local.map.cell
 		public function show( direction:String ):void
 		{
 			_pixlesImg.texture = TextureAssets.instance.groundLayerTexture.getTexture(name+direction);
-			_pixlesImg.x =  roadResVO.offsetXs[name+direction ] ;
-			_pixlesImg.y =  roadResVO.offsetYs[name+direction ] ;
+			_pixlesImg.x =  roadResVO.offsetXs[name+direction ]*GameSetting.GAMESCALE ;
+			_pixlesImg.y =  roadResVO.offsetYs[name+direction ] *GameSetting.GAMESCALE;
 			_pixlesImg.regionRect = TextureAssets.instance.groundLayerTexture.getRegion(name+direction);
 		}
 		

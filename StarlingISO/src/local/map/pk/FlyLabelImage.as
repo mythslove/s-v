@@ -2,6 +2,7 @@ package local.map.pk
 {
 	import com.greensock.TweenLite;
 	
+	import local.comm.GameSetting;
 	import local.enum.PickupType;
 	import local.map.GameWorld;
 	import local.util.EmbedManager;
@@ -45,11 +46,11 @@ package local.map.pk
 			addChild(bmp);
 			
 			//文字
-			txt = new TextField( 200,60,"","Verdana",30,0xffffff,true );
+			txt = new TextField( 200*GameSetting.GAMESCALE,60*GameSetting.GAMESCALE,"","Verdana",30*GameSetting.GAMESCALE,0xffffff,true );
 			txt.hAlign = HAlign.RIGHT;
 			txt.vAlign = VAlign.CENTER ;
 			txt.text = value>0 ? "+"+value : ""+value ;
-			txt.x = -txt.width-5 ;
+			txt.x = -txt.width-5*GameSetting.GAMESCALE ;
 			txt.y = -txt.height>>1  ;
 			addChild(txt);
 			
@@ -66,7 +67,7 @@ package local.map.pk
 		
 		private function scaleOver():void
 		{
-			TweenLite.to( this , 2 , {y: y-60 , alpha:0 , onComplete:remove} );
+			TweenLite.to( this , 2 , {y: y-60*GameSetting.GAMESCALE , alpha:0 , onComplete:remove} );
 		}
 		
 		private function remove():void

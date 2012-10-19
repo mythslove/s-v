@@ -56,14 +56,14 @@ package local.view.shop
 			//关闭按钮
 			_btnClose = new GameButton(EmbedManager.getUIImage( StyleSetting.POPUPCLOSEBUTTONUP) );
 			addChild(_btnClose);
-			_btnClose.x = _wid - _btnClose.pivotX - 10 ;
-			_btnClose.y = 10+_btnClose.pivotY ;
+			_btnClose.x = _wid - _btnClose.pivotX - 10*GameSetting.GAMESCALE ;
+			_btnClose.y = 10*GameSetting.GAMESCALE +_btnClose.pivotY ;
 			_btnClose.onRelease.add(onClickHandler);
 			
 			
 			img = EmbedManager.getUIImage( "ShopOverViewTitle_en" ) ;
 			img.x = (_wid - img.width)>>1;
-			img.y = 15 ;
+			img.y = 15*GameSetting.GAMESCALE ;
 			addChild(img);
 			
 			var btnBgs:Vector.<Image>=new Vector.<Image>(6,true) ;
@@ -71,8 +71,8 @@ package local.view.shop
 			for(var i:int = 0 ; i<6 ; ++i)
 			{
 				img = EmbedManager.getUIImage( "ShopOverViewItemBg" ) ;
-				img.x = 80 + (img.width+30)*col ;
-				img.y = 150 + (img.height+30)*row ;
+				img.x = 80*GameSetting.GAMESCALE + (img.width+30*GameSetting.GAMESCALE)*col ;
+				img.y = 150*GameSetting.GAMESCALE + (img.height+30*GameSetting.GAMESCALE)*row ;
 				++col;
 				if(col==3) {
 					col = 0 ;
@@ -180,9 +180,9 @@ package local.view.shop
 			x = GameSetting.SCREEN_WIDTH>>1 ;
 			y = GameSetting.SCREEN_HEIGHT>>1 ;
 			
-			var temp:int = 200 ;
+			var temp:int = 200*GameSetting.GAMESCALE ;
 			if(isLeft){
-				temp = -200 ;
+				temp = -200*GameSetting.GAMESCALE ;
 			}
 			touchable = false ;
 			TweenLite.from( this , 0.3 , { x:x-temp , ease: Back.easeOut , onComplete:tweenOver });
@@ -208,19 +208,19 @@ package local.view.shop
 					close();
 					break ;
 				case _btnDecor:
-					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , false );
+					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , GameSetting.isIpad );
 					ShopPopUp.instance.show(BuildingType.DECORATION);
-					PopUpManager.instance.removeCurrentPopup() ;
+					close();
 					break ;
 				case _btnBusiness:
-					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , false );
+					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , GameSetting.isIpad );
 					ShopPopUp.instance.show(BuildingType.BUSINESS);
-					PopUpManager.instance.removeCurrentPopup() ;
+					close();
 					break ;
 				case _btnIndustry:
-					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , false );
+					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , GameSetting.isIpad );
 					ShopPopUp.instance.show(BuildingType.INDUSTRY);
-					PopUpManager.instance.removeCurrentPopup() ;
+					close();
 					break ;
 				case _btnCommunity:
 					break ;
@@ -231,9 +231,9 @@ package local.view.shop
 		
 		private function close():void{
 			touchable=false;
-			var temp:int = 200 ;
+			var temp:int = 200*GameSetting.GAMESCALE ;
 			if(isLeft){
-				temp = -200 ;
+				temp = -200*GameSetting.GAMESCALE ;
 			}
 			TweenLite.to( this , 0.3 , { x:x+temp , ease: Back.easeIn , onComplete:onTweenCom});
 		}

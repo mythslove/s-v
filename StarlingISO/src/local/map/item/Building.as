@@ -3,6 +3,7 @@ package local.map.item
 	import flash.events.Event;
 	
 	import local.comm.GameData;
+	import local.comm.GameSetting;
 	import local.enum.BuildingStatus;
 	import local.enum.BuildingType;
 	import local.enum.PickupType;
@@ -270,8 +271,8 @@ package local.map.item
 						PlayerModel.instance.changeCash( -cashCost );
 						
 						var flyImg:FlyLabelImage = new FlyLabelImage( PickupType.CASH , -cashCost ) ;
-						flyImg.x = screenX-20 ;
-						flyImg.y = screenY-70 ;
+						flyImg.x = screenX-20*GameSetting.GAMESCALE ;
+						flyImg.y = screenY-70*GameSetting.GAMESCALE ;
 						GameWorld.instance.effectScene.addChild( flyImg );
 						
 						gameTimerCompleteHandler(null);

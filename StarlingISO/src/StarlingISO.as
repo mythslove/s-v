@@ -18,6 +18,7 @@ package
 	import local.MainGame;
 	import local.comm.GameSetting;
 	import local.model.*;
+	import local.util.EmbedManager;
 	import local.util.ResourceUtil;
 	import local.vo.*;
 	
@@ -45,6 +46,7 @@ package
 			NativeApplication.nativeApplication.executeInBackground = true ;
 			
 			if(stage.fullScreenWidth % 1024==0){
+				GameSetting.isIpad = true ;
 				_loading = new IPAD_LOADING() as Bitmap;
 				_loading.width = stage.fullScreenWidth ;
 				_loading.height = stage.fullScreenHeight ;
@@ -96,6 +98,12 @@ package
 					}
 				}
 			}
+			var path:String = GameSetting.isIpad?"ipad":"iphone";
+			resVOs.push( new ResVO("game_ui_png","skin/"+path+"/ui.png"));
+			resVOs.push( new ResVO("game_ui_xml","skin/"+path+"/ui.xml"));
+			resVOs.push( new ResVO("game_map_png","skin/"+path+"/map.png"));
+			resVOs.push( new ResVO("game_map_xml","skin/"+path+"/map.xml"));
+			resVOs.push( new ResVO("mapData","config/mapData.map"));
 			ResourceUtil.instance.addEventListener(ResProgressEvent.RES_LOAD_PROGRESS , gameInitResHandler );
 			ResourceUtil.instance.addEventListener("gameInitRes" , gameInitResHandler );
 			ResourceUtil.instance.queueLoad( "gameInitRes" , resVOs , 10 );
@@ -113,6 +121,11 @@ package
 				case "gameInitRes":
 					ResourceUtil.instance.removeEventListener(ResProgressEvent.RES_LOAD_PROGRESS , gameInitResHandler );
 					ResourceUtil.instance.removeEventListener("gameInitRes" , gameInitResHandler );
+					EmbedManager.ui_png = ResourceUtil.instance.getResVOByResId("game_ui_png").resObject as Bitmap;
+					EmbedManager.ui_xml = XML(ResourceUtil.instance.getResVOByResId("game_ui_xml").resObject);
+					EmbedManager.map_png = ResourceUtil.instance.getResVOByResId("game_map_png").resObject as Bitmap;
+					EmbedManager.map_xml = XML(ResourceUtil.instance.getResVOByResId("game_map_xml").resObject);
+					
 					initGame();
 					break ;
 			}
@@ -147,7 +160,6 @@ package
 			
 			if(stage.fullScreenWidth%1024==0){
 				//ipad1,2,3
-				GameSetting.isIpad = true ;
 				GameSetting.SCREEN_WIDTH = _starling.stage.stageWidth = 1024;
 				GameSetting.SCREEN_HEIGHT =_starling.stage.stageHeight  = 768 ;
 			}else if( stage.fullScreenWidth % 1136==0 ){
@@ -156,12 +168,20 @@ package
 				GameSetting.SCREEN_HEIGHT =_starling.stage.stageHeight  = 640 ;
 				_starling.stage.x = (1136-960)>>1 ;
 			}else if( stage.fullScreenWidth % 480==0 ){
-				//iphone4,4s,3GS
-				GameSetting.SCREEN_WIDTH = _starling.stage.stageWidth = 960;
-				GameSetting.SCREEN_HEIGHT = _starling.stage.stageHeight  = 640 ;
+				//iphone4,4s
+				GameSetting.SCREEN_WIDTH = _starling.stage.stageWidth = 480;
+				GameSetting.SCREEN_HEIGHT = _starling.stage.stageHeight  = 320 ;
+				GameSetting.MAP_WIDTH /=2 ;
+				GameSetting.MAP_HEIGHT /=2 ;
+				GameSetting.GRID_SIZE /=2 ;
 			}else{
-				GameSetting.SCREEN_WIDTH = _starling.stage.stageWidth = stage.fullScreenWidth;
-				GameSetting.SCREEN_HEIGHT = _starling.stage.stageHeight  = stage.fullScreenHeight ;
+				GameSetting.SCREEN_WIDTH = _starling.stage.stageWidth = 480;
+				GameSetting.SCREEN_HEIGHT = _starling.stage.stageHeight  = 320 ;
+				_starling.viewPort.x = (stage.fullScreenWidth-480)>>1 ;
+				_starling.viewPort.y = (stage.fullScreenHeight-320)>>1 ;
+				GameSetting.MAP_WIDTH /=2 ;
+				GameSetting.MAP_HEIGHT /=2 ;
+				GameSetting.GRID_SIZE /=2 ;
 			}
 			_starling.stage3D.addEventListener(Event.CONTEXT3D_CREATE , contextCreatedHandler );
 		}

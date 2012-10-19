@@ -62,7 +62,7 @@ package local.map.pk
 			
 			var scale:Number = 1/GameWorld.instance.scaleX ;
 			
-			var bezierArray:Array = [ { x:x , y: y-50 } , { x:x , y:y+40+Math.random()*50 } ] ;
+			var bezierArray:Array = [ { x:x , y: y-50*GameSetting.GAMESCALE } , { x:x , y:y+40*GameSetting.GAMESCALE+Math.random()*50*GameSetting.GAMESCALE } ] ;
 			TweenMax.to( this , 0.25 , {bezierThrough:bezierArray , onComplete:show , scaleX:scale , scaleY:scale });
 		}
 		
@@ -131,8 +131,8 @@ package local.map.pk
 			CenterViewLayer.instance.addChildAt( displayObj,0);
 			
 			var temp:Number = Point.distance( targetPoint , new Point(displayObj.x,displayObj.y));
-			temp = temp>400 ? 0.5 : 0.25 ;
-			var obj:Object = {x: displayObj.x + (targetPoint.x > displayObj.x ? -50 : 50 ) , y: displayObj.y + (targetPoint.y - displayObj.y) * 0.5 };
+			temp = temp>400*GameSetting.GAMESCALE ? 0.5 : 0.25 ;
+			var obj:Object = {x: displayObj.x + (targetPoint.x > displayObj.x ? -50*GameSetting.GAMESCALE : 50*GameSetting.GAMESCALE ) , y: displayObj.y + (targetPoint.y - displayObj.y) * 0.5 };
 			TweenMax.to( displayObj , temp , {bezier:[ obj, { x:targetPoint.x , y:targetPoint.y }] , onComplete:over , onCompleteParams:[displayObj] ,alpha:0 });
 		}
 		

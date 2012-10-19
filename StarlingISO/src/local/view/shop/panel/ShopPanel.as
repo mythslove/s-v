@@ -5,6 +5,7 @@ package local.view.shop.panel
 	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.layout.TiledRowsLayout;
 	
+	import local.comm.GameSetting;
 	import local.util.EmbedManager;
 	import local.view.base.BaseView;
 	import local.view.base.GameButton;
@@ -39,20 +40,20 @@ package local.view.shop.panel
 			_layout = new TiledRowsLayout();
 			_layout.paging = TiledRowsLayout.PAGING_HORIZONTAL;
 			_layout.useSquareTiles = false;
-			_layout.gap = 5 ;
+			_layout.gap = 5*GameSetting.GAMESCALE ;
 			_layout.tileHorizontalAlign = TiledRowsLayout.HORIZONTAL_ALIGN_CENTER;
 			_layout.horizontalAlign = TiledRowsLayout.HORIZONTAL_ALIGN_CENTER;
 			
 			
 			_list = new List();
-			_list.width = _list.maxWidth = 840 ;
-			_list.height = 340;
+			_list.width = _list.maxWidth = 840*GameSetting.GAMESCALE ;
+			_list.height = 340*GameSetting.GAMESCALE;
 			_list.itemRendererFactory = function():IListItemRenderer {
 				return new ShopItemRenderer();
 			};
 			_list.layout = _layout;
-			_list.y = 80 ;
-			_list.x = 20 ;
+			_list.y = 80*GameSetting.GAMESCALE ;
+			_list.x = 20*GameSetting.GAMESCALE ;
 			_list.scrollerProperties.snapToPages = true;
 			_list.scrollerProperties.scrollBarDisplayMode = Scroller.SCROLL_BAR_DISPLAY_MODE_NONE;
 			_list.scrollerProperties.horizontalScrollPolicy = Scroller.SCROLL_POLICY_ON;
@@ -61,22 +62,22 @@ package local.view.shop.panel
 			
 			
 			prevBtn = new GameButton(EmbedManager.getUIImage("PageButton"));
-			prevBtn.x = 30-prevBtn.pivotX ;
+			prevBtn.x = 30*GameSetting.GAMESCALE-prevBtn.pivotX ;
 			prevBtn.scaleX = -1 ;
-			prevBtn.y = 260 ;
+			prevBtn.y = 260*GameSetting.GAMESCALE ;
 			container.addChild(prevBtn);
 			prevBtn.onRelease.add( pageClickHandler );
 			
 			nextBtn = new GameButton(EmbedManager.getUIImage("PageButton"));
 			nextBtn.x = _list.width+nextBtn.pivotX ;
-			nextBtn.y = 260 ;
+			nextBtn.y = 260*GameSetting.GAMESCALE ;
 			container.addChild(nextBtn);
 			nextBtn.onRelease.add( pageClickHandler );
 			
-			_pageTf = new TextField(250,60,"Page: 10/10" , "Verdana" , 30 , 0 , true );
+			_pageTf = new TextField(250*GameSetting.GAMESCALE,60*GameSetting.GAMESCALE,"Page: 10/10" , "Verdana" , 30*GameSetting.GAMESCALE , 0 , true );
 			_pageTf.hAlign = HAlign.LEFT ;
-			_pageTf.x = 80;
-			_pageTf.y = 420 ;
+			_pageTf.x = 80*GameSetting.GAMESCALE;
+			_pageTf.y = 420*GameSetting.GAMESCALE ;
 			container.addChild(_pageTf);
 		}
 		

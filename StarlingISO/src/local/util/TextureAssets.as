@@ -7,11 +7,12 @@ package local.util
 	import bing.utils.MaxRectsBinPack;
 	
 	import flash.display.BitmapData;
+	import flash.geom.Matrix;
 	import flash.geom.Rectangle;
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
 	
-	import local.comm.GameData;
+	import local.comm.GameSetting;
 	import local.enum.BuildingType;
 	import local.model.ShopModel;
 	import local.vo.BaseBuildingVO;
@@ -31,11 +32,11 @@ package local.util
 		//=======================================
 		//建筑层
 		public var buildingLayerTexture:TextureAtlas ;
-		public var buildingLayerBmd:BitmapData = new BitmapData(2048,2048,true,0xffffff);
+		public var buildingLayerBmd:BitmapData ;
 		
 		//地面层
 		public var groundLayerTexture:TextureAtlas ;
-		public var groundLayerBmd:BitmapData = new BitmapData(1024,512,true,0xffffff);
+		public var groundLayerBmd:BitmapData ;
 		
 		
 		/**
@@ -47,10 +48,18 @@ package local.util
 		public function createBuildingTexture():void
 		{
 			var buildingName2Rect:HashMap = new HashMap();
-			var buildingMaxRect:MaxRectsBinPack = new MaxRectsBinPack(2048,2048,false);
-			
 			var groundName2Rect:HashMap = new HashMap();
-			var groundMaxRect:MaxRectsBinPack = new MaxRectsBinPack(1024,512,false);
+			if(GameSetting.isIpad) {
+				buildingLayerBmd = new BitmapData(2048,2048,true,0xffffff) ;
+				groundLayerBmd = new BitmapData(1024,512,true,0xffffff);
+				var buildingMaxRect:MaxRectsBinPack = new MaxRectsBinPack(2048,2048,false);
+				var groundMaxRect:MaxRectsBinPack = new MaxRectsBinPack(1024,512,false);
+			}else{
+				buildingLayerBmd = new BitmapData(1024,1024,true,0xffffff) ;
+				groundLayerBmd = new BitmapData(512,256,true,0xffffff);
+				buildingMaxRect = new MaxRectsBinPack(1024,1024,false);
+				groundMaxRect = new MaxRectsBinPack(512,256,false);
+			}
 			
 			var allBuildingHash:Dictionary = ShopModel.instance.allBuildingHash ;
 			if( allBuildingHash)
@@ -129,14 +138,20 @@ package local.util
 			var bmd:BitmapData ;
 			var layer:int ; //层数
 			var ext:String ;
+			var mat:Matrix = new Matrix();
 			for each( var vo:BitmapAnimResVO in barvos){
 				if(!_resNameHash.hasOwnProperty(vo.resName)){
 					for( var i:int = 0 ; i<vo.bmds.length ; ++i){
+						mat.identity() ;
 						bmd = vo.bmds[i] ;
-						rect  = maxRect.insert( bmd.width , bmd.height , MaxRectsBinPack.ContactPointRule) ;
-						GameData.commPoint.x = rect.x ;
-						GameData.commPoint.y = rect.y ;
-						buildingLayerBmd.copyPixels( bmd , bmd.rect , GameData.commPoint );
+						if(GameSetting.isIpad){
+							rect  = maxRect.insert( bmd.width , bmd.height , MaxRectsBinPack.ContactPointRule) ;
+						}else{
+							rect  = maxRect.insert( bmd.width*0.5 , bmd.height*0.5 , MaxRectsBinPack.ContactPointRule) ;
+							mat.scale(0.5,0.5);
+						}
+						mat.translate( rect.x , rect.y );
+						buildingLayerBmd.draw( bmd , mat );
 						ext = i<10?"00"+i :  ( i<100?"0"+i:i+"") ;
 						name2Rect.put( vo.resName+"_"+ext , rect ) ;
 						bmd.dispose() ;
@@ -155,12 +170,20 @@ package local.util
 			var rect:Rectangle ;
 			var bmd:BitmapData ;
 			var i:int ;
-			for( var key:String in roadResVO.bmds){
+			var mat:Matrix = new Matrix();
+			for( var key:String in roadResVO.bmds)
+			{
+				mat.identity() ;
 				bmd = roadResVO.bmds[key] as BitmapData ;
-				rect  = maxRect.insert( bmd.width , bmd.height , MaxRectsBinPack.ContactPointRule) ;
-				GameData.commPoint.x = rect.x ;
-				GameData.commPoint.y = rect.y ;
-				groundLayerBmd.copyPixels( bmd , bmd.rect , GameData.commPoint );
+				if(GameSetting.isIpad){
+					rect  = maxRect.insert( bmd.width , bmd.height , MaxRectsBinPack.ContactPointRule) ;
+				}else{
+					rect  = maxRect.insert( bmd.width*0.5 , bmd.height*0.5 , MaxRectsBinPack.ContactPointRule) ;
+					mat.scale(0.5,0.5);
+				}
+				mat.translate( rect.x , rect.y );
+				groundLayerBmd.draw( bmd , mat );
+				
 				name2Rect.put(  key , rect ) ;
 				++i ;
 				

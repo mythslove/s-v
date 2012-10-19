@@ -42,23 +42,23 @@ package local.view.bottom
 			
 			img = EmbedManager.getUIImage("EditorButtonUp");
 			btnEditor = new GameButton(img);
-			btnEditor.x = btnMarket.x-img.width-40;
+			btnEditor.x = btnMarket.x-img.width-40*GameSetting.GAMESCALE ;
 			btnEditor.y = -btnEditor.pivotY-5;
 			addChild( btnEditor );
 			btnEditor.onRelease.add( onClickHandler );
 			
 			img = EmbedManager.getUIImage("BottomBarStorageButtonUp");
 			btnStorage = new GameButton(img);
-			btnStorage.x = btnStorage.pivotX+5;
-			btnStorage.y = -btnStorage.pivotY-5;
+			btnStorage.x = btnStorage.pivotX+5*GameSetting.GAMESCALE;
+			btnStorage.y = -btnStorage.pivotY-5*GameSetting.GAMESCALE;
 			btnStorage.setVisible( false );
 			addChild( btnStorage );
 			btnStorage.onRelease.add( onClickHandler );
 			
 			img = EmbedManager.getUIImage("DoneButtonUp");
 			btnDone = new GameButton(img);
-			btnDone.x = GameSetting.SCREEN_WIDTH - btnDone.pivotX-5 ;
-			btnDone.y = -btnDone.pivotY-5;
+			btnDone.x = GameSetting.SCREEN_WIDTH - btnDone.pivotX-5*GameSetting.GAMESCALE ;
+			btnDone.y = -btnDone.pivotY-5*GameSetting.GAMESCALE;
 			btnDone.setVisible( false );
 			addChild( btnDone );
 			btnDone.onRelease.add( onClickHandler );

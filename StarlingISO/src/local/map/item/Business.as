@@ -1,6 +1,7 @@
 package local.map.item
 {
 	import local.comm.GameData;
+	import local.comm.GameSetting;
 	import local.enum.BuildingStatus;
 	import local.enum.PickupType;
 	import local.enum.VillageMode;
@@ -32,7 +33,7 @@ package local.map.item
 						PlayerModel.instance.changeGoods( -buildingVO.baseVO.goodsCost ) ;
 						var flyImg:FlyLabelImage = new FlyLabelImage( PickupType.GOOD , -buildingVO.baseVO.goodsCost ) ;
 						flyImg.x = screenX ;
-						flyImg.y = screenY-20 ;
+						flyImg.y = screenY-20*GameSetting.GAMESCALE ;
 						GameWorld.instance.effectScene.addChild( flyImg );
 						//开始生产
 						buildingVO.haveGoods = true ;

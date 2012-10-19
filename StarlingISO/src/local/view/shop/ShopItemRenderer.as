@@ -6,6 +6,7 @@ package local.view.shop
 	import feathers.display.Scale9Image;
 	
 	import local.comm.GameData;
+	import local.comm.GameSetting;
 	import local.comm.StyleSetting;
 	import local.enum.VillageMode;
 	import local.map.GameWorld;
@@ -52,8 +53,8 @@ package local.view.shop
 		
 
 		public var baseVO:BaseBuildingVO ;
-		private var _wid:int = 260 ;
-		private var _het:int = 340 ;
+		private var _wid:int = 260*GameSetting.GAMESCALE ;
+		private var _het:int = 340*GameSetting.GAMESCALE ;
 		private var _isMove:Boolean;
 	
 		public function ShopItemRenderer()
@@ -74,20 +75,20 @@ package local.view.shop
 			addChild(bg);
 			
 			//图片
-			var img:BuildingThumb = new BuildingThumb( baseVO.name , 200 , 150 );
+			var img:BuildingThumb = new BuildingThumb( baseVO.name , 200*GameSetting.GAMESCALE , 150*GameSetting.GAMESCALE );
 			img.touchable = false ;
 			img.x=_wid>>1;
 			img.y = _het>>1 ;
 			addChild( img );
-			if(baseVO.span==1 && img.height*1.2<150 ) img.setScale(1.2) ; 
+			if(baseVO.span==1 && img.height*1.2<150*GameSetting.GAMESCALE ) img.setScale(1.2) ; 
 			img.center();
 			
 			//标题
-			var txtTitle:TextField =new TextField(_wid-10,50,baseVO.title,"Verdana",20,0,true) ;
+			var txtTitle:TextField =new TextField(_wid-10*GameSetting.GAMESCALE,50*GameSetting.GAMESCALE,baseVO.title,"Verdana",20*GameSetting.GAMESCALE,0,true) ;
 			txtTitle.touchable = false;
 			txtTitle.hAlign = HAlign.CENTER ;
 			txtTitle.autoScale = true ;
-			txtTitle.y = 5 ;
+			txtTitle.y = 5*GameSetting.GAMESCALE ;
 			addChild(txtTitle);
 		}
 		

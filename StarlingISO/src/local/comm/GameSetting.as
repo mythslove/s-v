@@ -7,15 +7,13 @@ package local.comm
 		public static var SCREEN_WIDTH:int =960;
 		public static var SCREEN_HEIGHT:int = 640;
 		
-		public static const ASPECT_RATIO:Number = SCREEN_HEIGHT / SCREEN_WIDTH;
-		
 		
 		//地图大小
-		public static const MAP_WIDTH:int = 4000;
-		public static const MAP_HEIGHT:int = 2800;
+		public static var MAP_WIDTH:int = 4000;
+		public static var MAP_HEIGHT:int = 2800;
 		
 		/** 网格大小 */		
-		public static const GRID_SIZE:int = 60 ;
+		public static var GRID_SIZE:int = 60 ;
 		
 		/** 地图大小*/
 		public static var GRID_X:int = 30 ;
@@ -31,5 +29,10 @@ package local.comm
 		
 		/*facebookId*/
 		public static var fdId:String = "village";
+		
+		
+		public static function get GAMESCALE():Number{
+			return isIpad? 1 : 0.5 ;
+		}
 	}
 }

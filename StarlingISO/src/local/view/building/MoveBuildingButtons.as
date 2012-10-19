@@ -3,6 +3,7 @@ package local.view.building
 	import com.greensock.TweenLite;
 	
 	import local.comm.GameData;
+	import local.comm.GameSetting;
 	import local.enum.BuildingType;
 	import local.enum.VillageMode;
 	import local.map.GameWorld;
@@ -36,12 +37,12 @@ package local.view.building
 		{
 			super();
 			cancelBtn = new GameButton(EmbedManager.getUIImage("BuildingCancelButtonUp")  );
-			cancelBtn.x = -100 ;
-			cancelBtn.y = -100 ;
+			cancelBtn.x = -100*GameSetting.GAMESCALE ;
+			cancelBtn.y = -100*GameSetting.GAMESCALE ;
 			
 			okBtn = new GameButton(EmbedManager.getUIImage("BuildingOKButtonUp"));
-			okBtn.x = 100 ;
-			okBtn.y = -100 ;
+			okBtn.x = 100*GameSetting.GAMESCALE ;
+			okBtn.y = -100*GameSetting.GAMESCALE ;
 			addChild(okBtn);
 			addChild(cancelBtn);
 			
@@ -70,7 +71,7 @@ package local.view.building
 				case okBtn:
 					if( GameData.villageMode==VillageMode.BUILDING_STORAGE)
 					{
-//							building.storageToWorld();
+						building.storageToWorld();
 						GameData.villageMode = VillageMode.EDIT ;
 					}
 					else if( GameData.villageMode==VillageMode.BUILDING_SHOP)

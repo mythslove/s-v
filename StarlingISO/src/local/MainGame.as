@@ -36,8 +36,8 @@ package local
 			//动态生成材质
 			TextureAssets.instance.createBuildingTexture() ;
 			
-//			var bmp:Bitmap = new Bitmap( TextureAssets.instance.groundLayerBmd);
-//			bmp.scaleX  = bmp.scaleY = .4 ;
+//			var bmp:Bitmap = new Bitmap( TextureAssets.instance.buildingLayerBmd);
+//			bmp.scaleX  = bmp.scaleY = 1 ;
 //			Starling.current.nativeStage.addChild(bmp);
 			
 			GlobalDispatcher.instance.addEventListener( VillageEvent.READED_VILLAGE , villageEvtHandler );

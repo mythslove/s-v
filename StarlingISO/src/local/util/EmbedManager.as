@@ -9,23 +9,15 @@ package local.util
 
 	public class EmbedManager
 	{
-		//=========地图资源，地图数据和图片======================
-		[ Embed(source="../assets/map/mapData.map", mimeType="application/octet-stream") ]
-		public static const MapData:Class ; //地图数据
+		public static var ui_png:Bitmap ;
+		public static var ui_xml:XML ;
+		public static var map_png:Bitmap;
+		public static var map_xml:XML ;
 		
-		[ Embed(source="../assets/map/mapBlock.png")]
+		
+		[ Embed(source="../assets/mapBlock.png")]
 		public static const MAPBLOCK:Class;
-		[ Embed(source="../assets/map/map.png")]
-		public static const MAP:Class ;
-		[ Embed(source="../assets/map/map.xml", mimeType="application/octet-stream")]
-		public static const MAP_XML:Class ;
-		//=======================================
 		
-		
-		[Embed(source="../assets/ui_iphone/ui.xml", mimeType="application/octet-stream")]
-		public static const UI_IPHONE_XML:Class;
-		[Embed(source="../assets/ui_iphone/ui.png")]
-		public static const UI_IPHONE:Class;
 		
 		//========建筑修建时的状态图标====================
 		[Embed(source="../assets/effect/BuildStatus_1_0.bd", mimeType="application/octet-stream") ]
@@ -70,11 +62,24 @@ package local.util
 		
 		
 		
-		
 		public static function getMapTexture(name:String ):Texture
 		{
 			if( _textureDic[name] ) return _textureDic[name] as Texture ;
-			var texture:Texture = createTextureAtlas("MAP").getTexture(name) ;
+			
+			var mapTextureAtlas:TextureAtlas ;
+			if( !_textureDic["map_png"] ){
+				mapTextureAtlas = new TextureAtlas( Texture.fromBitmap( map_png,false ) , map_xml );
+				_textureDic["map_png"] = mapTextureAtlas ;
+				map_png.bitmapData.dispose();
+				map_png = null ;
+				map_xml =  null ;
+				ResourceUtil.instance.deleteRes( "game_map_png");
+				ResourceUtil.instance.deleteRes( "game_map_xml");
+			}else{
+				mapTextureAtlas = _textureDic["map_png"]  ;
+			}
+			
+			var texture:Texture =  mapTextureAtlas.getTexture(name);
 			_textureDic[name] = texture ;
 			return texture ;
 		}
@@ -87,22 +92,29 @@ package local.util
 		
 		
 		
-		public static function getUITexture( name:String ):Texture{
-			
+		public static function getUITexture( name:String ):Texture
+		{
 			if( _textureDic[name] ) return _textureDic[name] as Texture ;
 			
-			var uiName:String = "UI_IPHONE";
-//			if(GameSetting.isIpad){
-//				uiName = "UI_IPAD";
-//			}
-			var texture:Texture = createTextureAtlas(uiName).getTexture(name) ;
+			var uiTextureAtlas:TextureAtlas ;
+			if( !_textureDic["ui_png"] ){
+				uiTextureAtlas = new TextureAtlas( Texture.fromBitmap( ui_png , false ) , ui_xml );
+				_textureDic["ui_png"] = uiTextureAtlas ;
+				ui_png.bitmapData.dispose();
+				ui_png = null ;
+				ui_xml = null ;
+				ResourceUtil.instance.deleteRes( "game_ui_png");
+				ResourceUtil.instance.deleteRes( "game_ui_xml");
+			}else{
+				uiTextureAtlas = _textureDic["ui_png"]  ;
+			}
+			
+			var texture:Texture =  uiTextureAtlas.getTexture(name);
 			_textureDic[name] = texture ;
 			return texture ;
 		}
 		public static function getUIImage( name:String ):Image{
-			var img:Image = new Image(getUITexture(name));
-//			img.scaleX = img.scaleY = 2; 
-			return img;
+			return new Image(getUITexture(name));
 		}
 	}
 }
