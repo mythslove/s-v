@@ -15,7 +15,7 @@ package local.comm
 	{
 		
 		
-		public static const POPUPBG :String= "POPUPBG";
+		public static const POPUPBG :String= "popupbg";
 		
 		public static const SHOPITEMBGUP :String= "ShopItemBgUp";
 		
