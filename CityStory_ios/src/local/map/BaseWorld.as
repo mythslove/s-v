@@ -445,11 +445,10 @@ package  local.map
 			removeEventListener(Event.ENTER_FRAME , onEnterFrameHandler ); 
 			mouseEnabled = mouseChildren=false ;
 		}
-		override public function update():void { buildingScene.update() ; }
 		
 		private function onEnterFrameHandler(e:Event):void
 		{
-			if(runUpdate)	update();
+			if(runUpdate) buildingScene.update() ;
 			if(x!=_endX) x += ( _endX-x)*_moveSpeed ; //缓动地图
 			if(y!=_endY) y += (_endY-y)*_moveSpeed ;
 		}
