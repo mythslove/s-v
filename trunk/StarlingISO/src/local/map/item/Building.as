@@ -79,7 +79,7 @@ package local.map.item
 			showBuildingFlagIcon()
 			//修正图标位置
 			if( _buildingObject && statusIcon && statusIcon.parent ){
-				statusIcon.x = screenX-statusIcon.width*0.5;
+				statusIcon.x = screenX;
 				statusIcon.y = screenY+buildingVO.baseVO.span*_size-_buildingObject.height - statusIcon.height*0.75 ;
 			}
 		}
@@ -182,7 +182,7 @@ package local.map.item
 					removeBuildingFlagIcon();
 					break ;
 			}
-			statusIcon.x = screenX-statusIcon.width*0.5;
+			statusIcon.x = screenX;
 			var het:Number = _buildingObject? _buildingObject.height : _buildStatusObj.height ;
 			statusIcon.y = screenY+buildingVO.baseVO.span*_size- het - statusIcon.height*0.75 ;
 		}

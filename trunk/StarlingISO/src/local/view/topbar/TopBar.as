@@ -89,7 +89,7 @@ package local.view.topbar
 		
 		private function flyGoods( targetPoint:Point , time:Number ):void
 		{
-			var bmp:Image = EmbedManager.getUIImage("PickupGoodsSmall");
+			var bmp:Image = EmbedManager.getUIImage("GoodsIcon");
 			bmp.x = goodsBar.x+x  ;
 			bmp.y = goodsBar.y ;
 			addChild(bmp);
