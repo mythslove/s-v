@@ -10,12 +10,14 @@ package local.view.shop.panel
 	import local.view.base.GameButton;
 	import local.view.shop.ShopItemRenderer;
 	
+	import starling.display.Sprite;
 	import starling.text.TextField;
 	import starling.utils.HAlign;
-	import starling.utils.VAlign;
 	
 	public class ShopPanel extends BaseView
 	{
+		public var container:Sprite ;
+		
 		protected var _list:List ;
 		protected var _pageTf:TextField ;
 		private var _layout:TiledRowsLayout ;
@@ -31,6 +33,9 @@ package local.view.shop.panel
 		
 		protected function init():void
 		{
+			container = new Sprite();
+			addChild(container);
+			
 			_layout = new TiledRowsLayout();
 			_layout.paging = TiledRowsLayout.PAGING_HORIZONTAL;
 			_layout.useSquareTiles = false;
@@ -52,27 +57,27 @@ package local.view.shop.panel
 			_list.scrollerProperties.scrollBarDisplayMode = Scroller.SCROLL_BAR_DISPLAY_MODE_NONE;
 			_list.scrollerProperties.horizontalScrollPolicy = Scroller.SCROLL_POLICY_ON;
 			_list.onScroll.add( listOnScroll );
-			addChild(_list);
+			container.addChild(_list);
 			
 			
 			prevBtn = new GameButton(EmbedManager.getUIImage("PageButton"));
 			prevBtn.x = 30-prevBtn.pivotX ;
 			prevBtn.scaleX = -1 ;
 			prevBtn.y = 260 ;
-			addChild(prevBtn);
+			container.addChild(prevBtn);
 			prevBtn.onRelease.add( pageClickHandler );
 			
 			nextBtn = new GameButton(EmbedManager.getUIImage("PageButton"));
 			nextBtn.x = _list.width+nextBtn.pivotX ;
 			nextBtn.y = 260 ;
-			addChild(nextBtn);
+			container.addChild(nextBtn);
 			nextBtn.onRelease.add( pageClickHandler );
 			
 			_pageTf = new TextField(250,60,"Page: 10/10" , "Verdana" , 30 , 0 , true );
 			_pageTf.hAlign = HAlign.LEFT ;
 			_pageTf.x = 80;
 			_pageTf.y = 420 ;
-			addChild(_pageTf);
+			container.addChild(_pageTf);
 		}
 		
 		protected function listOnScroll( list:List ):void

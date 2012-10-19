@@ -79,5 +79,10 @@ package local.view.building
 					break ;
 			}
 		}
+		
+		/**
+		 * 防止被清除 
+		 */		
+		override public function dispose():void{}
 	}
 }
