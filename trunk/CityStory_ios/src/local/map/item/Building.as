@@ -401,7 +401,7 @@ package local.map.item
 				
 				if(GameData.isShowTutor){
 					PlayerModel.instance.changeTutorStep();
-					CenterViewLayer.instance.enable = true ;
+					GameWorld.instance.removeTutor();
 					CenterViewLayer.instance.questBtn.showTutor();
 				}
 			}
