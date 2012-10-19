@@ -4,6 +4,7 @@ package local.map.cell
 	
 	import flash.display.Bitmap;
 	
+	import local.comm.GameSetting;
 	import local.util.TextureAssets;
 	import local.vo.BitmapAnimResVO;
 	
@@ -34,8 +35,8 @@ package local.map.cell
 			_tinyBmp.visible=false ;
 			addChild(_tinyBmp);
 			
-			pixelImg.x = _tinyBmp.x =  barv.offsetX ;
-			pixelImg.y = _tinyBmp.y =  barv.offsetY ;
+			pixelImg.x = _tinyBmp.x =  barv.offsetX*GameSetting.GAMESCALE ;
+			pixelImg.y = _tinyBmp.y =  barv.offsetY*GameSetting.GAMESCALE ;
 			pixelImg.scaleX = _tinyBmp.scaleX =  barv.scaleX ;
 			pixelImg.scaleY = _tinyBmp.scaleY =  barv.scaleY ;
 		}
