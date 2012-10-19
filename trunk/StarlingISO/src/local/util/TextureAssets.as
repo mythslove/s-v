@@ -34,8 +34,8 @@ package local.util
 		public var buildingLayerBmd:BitmapData = new BitmapData(2048,2048,true,0xffffff);
 		
 		//地面层
-		public var groundLayerTexture:TextureAtlas ;
-		public var groundLayerBmd:BitmapData = new BitmapData(1024,1024,true,0xffffff);
+//		public var groundLayerTexture:TextureAtlas ;
+//		public var groundLayerBmd:BitmapData = new BitmapData(1024,1024,true,0xffffff);
 		
 		
 		/**
@@ -49,8 +49,8 @@ package local.util
 			var buildingName2Rect:HashMap = new HashMap();
 			var buildingMaxRect:MaxRectsBinPack = new MaxRectsBinPack(2048,2048,false);
 			
-			var groundName2Rect:HashMap = new HashMap();
-			var groundMaxRect:MaxRectsBinPack = new MaxRectsBinPack(2048,1024,false);
+//			var groundName2Rect:HashMap = new HashMap();
+//			var groundMaxRect:MaxRectsBinPack = new MaxRectsBinPack(1024,1024,false);
 			
 			var allBuildingHash:Dictionary = ShopModel.instance.allBuildingHash ;
 			if( allBuildingHash)
@@ -63,7 +63,7 @@ package local.util
 					resVO = ResourceUtil.instance.getResVOByResId(name);
 					if(resVO){
 						if(baseVO.subClass==BuildingType.DECORATION_ROAD || baseVO.subClass==BuildingType.DECORATION_GROUND){
-							parseResRoad( name , groundName2Rect , resVO.resObject as RoadResVO , groundMaxRect );
+							parseResRoad( name , buildingName2Rect , resVO.resObject as RoadResVO , buildingMaxRect );
 						}else{
 							parseBarvos( name , buildingName2Rect , resVO.resObject as Vector.<BitmapAnimResVO> , buildingMaxRect );
 						}
@@ -102,21 +102,21 @@ package local.util
 					buildingLayerTexture.addRegion( name , buildingName2Rect.getValue(name) as Rectangle);
 				}
 				
-				var groundTexture:Texture = Texture.fromBitmapData( groundLayerBmd , false ) ;
-				groundLayerTexture = new TextureAtlas(groundTexture);
-				len = groundName2Rect.keys().length ;
-				for ( i = 0 ; i<len ; ++i){
-					name = groundName2Rect.keys()[i] ;
-					groundLayerTexture.addRegion( name , groundName2Rect.getValue(name) as Rectangle);
-				}
+//				var groundTexture:Texture = Texture.fromBitmapData( groundLayerBmd , false ) ;
+//				groundLayerTexture = new TextureAtlas(groundTexture);
+//				len = groundName2Rect.keys().length ;
+//				for ( i = 0 ; i<len ; ++i){
+//					name = groundName2Rect.keys()[i] ;
+//					groundLayerTexture.addRegion( name , groundName2Rect.getValue(name) as Rectangle);
+//				}
 				
 				//释放资源
 				buildingName2Rect.clear();
 				buildingName2Rect = null ;
-				groundName2Rect.clear();
-				groundName2Rect = null ;
+//				groundName2Rect.clear();
+//				groundName2Rect = null ;
+//				groundTexture = null ;
 				buildingTexture = null ;
-				groundTexture = null ;
 				_resNameHash = null ;
 				ResourceUtil.instance.resNameHash = null ;
 			}
@@ -160,7 +160,8 @@ package local.util
 				rect  = maxRect.insert( bmd.width , bmd.height , MaxRectsBinPack.ContactPointRule) ;
 				GameData.commPoint.x = rect.x ;
 				GameData.commPoint.y = rect.y ;
-				groundLayerBmd.copyPixels( bmd , bmd.rect , GameData.commPoint );
+//				groundLayerBmd.copyPixels( bmd , bmd.rect , GameData.commPoint );
+				
 				name2Rect.put(  key , rect ) ;
 				++i ;
 				
@@ -197,9 +198,9 @@ package local.util
 		 * @param name
 		 * @return 
 		 */		
-		public function createGDLayerPixelsImage( name:String ):PixelsImage
-		{
-			return new PixelsImage(groundLayerTexture.getTexture(name) , groundLayerBmd , groundLayerTexture.getRegion(name)  ); 
-		}
+//		public function createGDLayerPixelsImage( name:String ):PixelsImage
+//		{
+//			return new PixelsImage(groundLayerTexture.getTexture(name) , groundLayerBmd , groundLayerTexture.getRegion(name)  ); 
+//		}
 	}
 }

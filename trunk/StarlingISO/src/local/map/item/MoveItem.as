@@ -105,98 +105,98 @@ package local.map.item
 		/** 找下一个路点 */
 		protected function getNextPoint():void
 		{
-			var xpos:Number = screenY + screenX * .5;
-			var zpos:Number = screenY - screenX * .5;
-			var col:Number = (xpos / _size )>>0 ;
-			var row:Number = ( zpos / _size)>>0 ;
-			_currNode.setTo( col , row );
-			xpos = _currNode.x*_size ;
-			zpos = _currNode.y*_size ;
-			var ran:Number = 0.25 ;
-			var road:Road ;
-			if(_roadIndex==0)
-			{
-				if(_rightDirection){
-					if(_animObject.forward==4 || Math.random()>ran ){
-						road = MapGridDataModel.instance.getBuildingByData( (_currNode.x-1)*_size, zpos , BuildingType.DECORATION_ROAD ) as Road;
-						if(road) _roadIndex = 1 ; 
-					}
-					if(!road) _roadIndex = 3 ;
-				} 
-				else 
-				{
-					if(_animObject.forward==1|| Math.random()>ran ){
-						road = MapGridDataModel.instance.getBuildingByData(xpos,(_currNode.y-1)*_size , BuildingType.DECORATION_ROAD) as Road;
-						if(road) _roadIndex = 3 ;
-					}
-					if(!road) _roadIndex = 1 ;
-				}
-			}
-			else if(_roadIndex==1)
-			{
-				if(_rightDirection){
-					if(_animObject.forward==1|| Math.random()>ran ){
-						road = MapGridDataModel.instance.getBuildingByData( xpos, (_currNode.y-1) *_size , BuildingType.DECORATION_ROAD) as Road;
-						if(road) _roadIndex = 2 ;
-					}
-					if(!road)  _roadIndex = 0 ;
-				}
-				else
-				{
-					if(_animObject.forward==2|| Math.random()>ran ){
-						road = MapGridDataModel.instance.getBuildingByData( (_currNode.x+1)*_size,zpos , BuildingType.DECORATION_ROAD) as Road;
-						if(road) _roadIndex = 0 ;
-					}
-					if(!road) _roadIndex = 2 ;
-				}
-			}
-			else if(_roadIndex==2)
-			{
-				if(_rightDirection)
-				{
-					if(_animObject.forward==2|| Math.random()>ran ){
-						road = MapGridDataModel.instance.getBuildingByData( (_currNode.x+1)*_size, zpos , BuildingType.DECORATION_ROAD) as Road;
-						if(road) _roadIndex = 3 ;
-					}
-					if(!road)	_roadIndex = 1;
-				}
-				else
-				{
-					if(_animObject.forward==3|| Math.random()>ran ){
-						road = MapGridDataModel.instance.getBuildingByData( xpos, (_currNode.y+1)*_size , BuildingType.DECORATION_ROAD ) as Road;
-						if(road) _roadIndex = 1 ;
-					}
-					if(!road) _roadIndex = 3 ;
-				}
-			}
-			else
-			{
-				if(_rightDirection){
-					if(_animObject.forward==3|| Math.random()>ran ){
-						road = MapGridDataModel.instance.getBuildingByData(xpos,(_currNode.y+1)*_size , BuildingType.DECORATION_ROAD) as Road;
-						if(road)_roadIndex = 0 ;
-					}
-					if(!road) _roadIndex = 2 ;
-				}
-				else
-				{
-					if(_animObject.forward==4|| Math.random()>ran ){
-						road = MapGridDataModel.instance.getBuildingByData( (_currNode.x-1)*_size,zpos , BuildingType.DECORATION_ROAD) as Road;
-						if(road)	_roadIndex = 2;
-					}
-					if(!road)_roadIndex =0 ;
-				}
-			}
-			
-			_firstMove = true ;
-			_nextPoint = new Point();
-			if(road){
-				_nextPoint.x = road.screenX + _roads[_roadIndex].x  ;
-				_nextPoint.y = road.screenY + _roads[_roadIndex].y  ;
-			}else{
-				_nextPoint.x = xpos - zpos +_roads[_roadIndex].x ;
-				_nextPoint.y = (xpos+ zpos) * .5 + _roads[_roadIndex].y;
-			}
+//			var xpos:Number = screenY + screenX * .5;
+//			var zpos:Number = screenY - screenX * .5;
+//			var col:Number = (xpos / _size )>>0 ;
+//			var row:Number = ( zpos / _size)>>0 ;
+//			_currNode.setTo( col , row );
+//			xpos = _currNode.x*_size ;
+//			zpos = _currNode.y*_size ;
+//			var ran:Number = 0.25 ;
+//			var road:Road ;
+//			if(_roadIndex==0)
+//			{
+//				if(_rightDirection){
+//					if(_animObject.forward==4 || Math.random()>ran ){
+//						road = MapGridDataModel.instance.getBuildingByData( (_currNode.x-1)*_size, zpos , BuildingType.DECORATION_ROAD ) as Road;
+//						if(road) _roadIndex = 1 ; 
+//					}
+//					if(!road) _roadIndex = 3 ;
+//				} 
+//				else 
+//				{
+//					if(_animObject.forward==1|| Math.random()>ran ){
+//						road = MapGridDataModel.instance.getBuildingByData(xpos,(_currNode.y-1)*_size , BuildingType.DECORATION_ROAD) as Road;
+//						if(road) _roadIndex = 3 ;
+//					}
+//					if(!road) _roadIndex = 1 ;
+//				}
+//			}
+//			else if(_roadIndex==1)
+//			{
+//				if(_rightDirection){
+//					if(_animObject.forward==1|| Math.random()>ran ){
+//						road = MapGridDataModel.instance.getBuildingByData( xpos, (_currNode.y-1) *_size , BuildingType.DECORATION_ROAD) as Road;
+//						if(road) _roadIndex = 2 ;
+//					}
+//					if(!road)  _roadIndex = 0 ;
+//				}
+//				else
+//				{
+//					if(_animObject.forward==2|| Math.random()>ran ){
+//						road = MapGridDataModel.instance.getBuildingByData( (_currNode.x+1)*_size,zpos , BuildingType.DECORATION_ROAD) as Road;
+//						if(road) _roadIndex = 0 ;
+//					}
+//					if(!road) _roadIndex = 2 ;
+//				}
+//			}
+//			else if(_roadIndex==2)
+//			{
+//				if(_rightDirection)
+//				{
+//					if(_animObject.forward==2|| Math.random()>ran ){
+//						road = MapGridDataModel.instance.getBuildingByData( (_currNode.x+1)*_size, zpos , BuildingType.DECORATION_ROAD) as Road;
+//						if(road) _roadIndex = 3 ;
+//					}
+//					if(!road)	_roadIndex = 1;
+//				}
+//				else
+//				{
+//					if(_animObject.forward==3|| Math.random()>ran ){
+//						road = MapGridDataModel.instance.getBuildingByData( xpos, (_currNode.y+1)*_size , BuildingType.DECORATION_ROAD ) as Road;
+//						if(road) _roadIndex = 1 ;
+//					}
+//					if(!road) _roadIndex = 3 ;
+//				}
+//			}
+//			else
+//			{
+//				if(_rightDirection){
+//					if(_animObject.forward==3|| Math.random()>ran ){
+//						road = MapGridDataModel.instance.getBuildingByData(xpos,(_currNode.y+1)*_size , BuildingType.DECORATION_ROAD) as Road;
+//						if(road)_roadIndex = 0 ;
+//					}
+//					if(!road) _roadIndex = 2 ;
+//				}
+//				else
+//				{
+//					if(_animObject.forward==4|| Math.random()>ran ){
+//						road = MapGridDataModel.instance.getBuildingByData( (_currNode.x-1)*_size,zpos , BuildingType.DECORATION_ROAD) as Road;
+//						if(road)	_roadIndex = 2;
+//					}
+//					if(!road)_roadIndex =0 ;
+//				}
+//			}
+//			
+//			_firstMove = true ;
+//			_nextPoint = new Point();
+//			if(road){
+//				_nextPoint.x = road.screenX + _roads[_roadIndex].x  ;
+//				_nextPoint.y = road.screenY + _roads[_roadIndex].y  ;
+//			}else{
+//				_nextPoint.x = xpos - zpos +_roads[_roadIndex].x ;
+//				_nextPoint.y = (xpos+ zpos) * .5 + _roads[_roadIndex].y;
+//			}
 		}
 		
 		override public function dispose():void

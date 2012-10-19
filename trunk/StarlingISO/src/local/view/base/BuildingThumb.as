@@ -34,7 +34,7 @@ package local.view.base
 			else if( resVO.resObject is RoadResVO )
 			{
 				var roadResVO:RoadResVO = resVO.resObject as RoadResVO ;
-				_img = new Image(TextureAssets.instance.groundLayerTexture.getTexture(name));
+				_img = new Image(TextureAssets.instance.buildingLayerTexture.getTexture(name));
 				_img.x=roadResVO.offsetXs[name];
 				_img.y=roadResVO.offsetYs[name];
 			}

@@ -45,7 +45,7 @@ package local.view.shop
 		private function init():void
 		{
 			//背景
-			var img:Image = new Image(EmbedManager.createTextureByName(StyleSetting.POPUPBG ));
+			var img:Image = EmbedManager.getUIImage(StyleSetting.POPUPBG);
 			addChild( img );
 			_wid = img.width ;
 			_het = img.height ;

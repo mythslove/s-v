@@ -26,8 +26,6 @@ package local.util
 		public static const UI_IPHONE_XML:Class;
 		[Embed(source="../assets/ui_iphone/ui.png")]
 		public static const UI_IPHONE:Class;
-		[Embed(source="../assets/ui_iphone/images/popupbg.png")]
-		public static const POPUPBG:Class;
 		
 		//========建筑修建时的状态图标====================
 		[Embed(source="../assets/effect/BuildStatus_1_0.bd", mimeType="application/octet-stream") ]
