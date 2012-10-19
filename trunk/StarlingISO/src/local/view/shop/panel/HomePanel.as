@@ -2,18 +2,13 @@ package local.view.shop.panel
 {
 	
 	import feathers.controls.Button;
-	import feathers.controls.List;
-	import feathers.controls.Scroller;
 	import feathers.controls.TabBar;
-	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.data.ListCollection;
-	import feathers.layout.TiledRowsLayout;
 	
 	import flash.text.TextFormat;
 	
 	import local.comm.StyleSetting;
 	import local.model.ShopModel;
-	import local.view.shop.ShopItemRenderer;
 	
 	import org.osmf.layout.LayoutMode;
 	
@@ -34,23 +29,14 @@ package local.view.shop.panel
 		
 		
 		private var _tabBar:TabBar;
-		private var _layout:TiledRowsLayout ;
-		private var _list:List ;
 		
 		public function HomePanel()
 		{
 			super();
-			init();
 		}
 		
-		private function init():void
+		override protected function init():void
 		{
-			_layout = new TiledRowsLayout();
-			_layout.paging = TiledRowsLayout.PAGING_HORIZONTAL;
-			_layout.useSquareTiles = false;
-			_layout.gap = 5 ;
-			_layout.tileHorizontalAlign = TiledRowsLayout.HORIZONTAL_ALIGN_CENTER;
-			_layout.horizontalAlign = TiledRowsLayout.HORIZONTAL_ALIGN_CENTER;
 			
 			this._tabBar = new TabBar();
 			_tabBar.direction = LayoutMode.HORIZONTAL;
@@ -64,24 +50,12 @@ package local.view.shop.panel
 				]);
 			_tabBar.width = _tabBar.maxWidth =_tabBar.dataProvider.data.length*160  ;
 			
-			_list = new List();
-			_list.width = _list.maxWidth = 840 ;
-			_list.height = 340;
-			_list.itemRendererFactory = function():IListItemRenderer {
-				return new ShopItemRenderer();
-			};
-			_list.layout = _layout;
-			_list.y = 80 ;
-			_list.x = 20 ;
-			_list.scrollerProperties.snapToPages = true;
-			_list.scrollerProperties.scrollBarDisplayMode = Scroller.SCROLL_BAR_DISPLAY_MODE_NONE;
-			_list.scrollerProperties.horizontalScrollPolicy = Scroller.SCROLL_POLICY_ON;
-			addChild(_list);
-			
+			super.init();
 		}
 		
 		
-		override protected function addedToStageHandler(e:Event):void{
+		override protected function addedToStageHandler(e:Event):void
+		{
 			super.addedToStageHandler(e);
 			
 			this._tabBar.selectedIndex = 0 ;

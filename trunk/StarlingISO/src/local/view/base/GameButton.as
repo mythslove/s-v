@@ -84,7 +84,9 @@ package local.view.base
 			_tempVisible = super.visible = value ;
 		}
 		
-		private var _tempVisible:Boolean ;
+		private var _tempScaleX:Number = 1;
+		private var _tempScaleY:Number= 1 ;
+		private var _tempVisible:Boolean = true ;
 		override public function set visible(value:Boolean):void
 		{
 			if(_tempVisible==value) return ;
@@ -92,9 +94,10 @@ package local.view.base
 			if( value){
 				scaleY = scaleX = 0 ;
 				touchable = false ;
-				TweenLite.to( this , 0.3 , { scaleX: 1 , scaleY:1 , ease:Back.easeOut , onComplete: onTweenCom} );
+				TweenLite.to( this , 0.3 , { scaleX: _tempScaleX , scaleY:_tempScaleY , ease:Back.easeOut , onComplete: onTweenCom} );
 			}else{
-				scaleX = scaleY = 1;
+				_tempScaleX = scaleX<0 ? -1 :1  ;
+				_tempScaleY = scaleY<0 ? -1 :1  ;
 				touchable = false ;
 				TweenLite.to( this , 0.3 , {scaleX: 0 , scaleY:0 , ease:Back.easeIn  , onComplete: onTweenCom} );
 			}
