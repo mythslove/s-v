@@ -444,5 +444,23 @@ package local.map
 				}
 			}
 		}
+		public function removeTutor():void
+		{
+			iconScene.mouseChildren = true ;
+			CenterViewLayer.instance.enable = true ;
+			//查找正在修建中的房子
+			var building:BaseBuilding ;
+			for each(var obj:IsoObject in buildingScene.children){
+				if(obj is BasicBuilding){
+					obj.mouseEnabled = obj.mouseChildren =  false ;
+				}else if( obj is ExpandSign){
+					obj.mouseChildren = false ;
+					obj.mouseEnabled = true ;
+				}else{
+					obj.mouseEnabled = false ;
+					obj.mouseChildren = true ;
+				}
+			}
+		}
 	}
 }
