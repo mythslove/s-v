@@ -1,13 +1,15 @@
 package local.map.item
 {
+	import bing.starling.component.FrameSprite;
+	
 	import flash.geom.Point;
 	
 	import local.comm.GameData;
 	import local.comm.GameSetting;
+	import local.enum.BuildingType;
+	import local.model.MapGridDataModel;
 	import local.util.GameUtil;
 	import local.vo.BitmapAnimResVO;
-	
-	import starling.display.Sprite;
 	
 	/**
 	 * 可以移动的对象
@@ -31,8 +33,7 @@ package local.map.item
 		
 		protected var _speed:Number = 0.3 ;
 		protected var _nextPoint:Point;
-//		protected var _animObject:MoveItemAnimObject ;
-		protected var _itemLayer:Sprite ;
+		protected var _animObject:FrameSprite ;
 		protected var _firstMove:Boolean;
 		protected var _rightDirection:Boolean =true ; //是否是顺时针方向转
 		protected var _roads:Vector.<Point> ;
@@ -45,14 +46,13 @@ package local.map.item
 			_xSpan = _zSpan = 0 ;
 			touchable=false;
 			
-			_itemLayer = new Sprite();
-			addChild(_itemLayer);
-			
-//			var actionNun:int = (this is Car) ? 1 : 4 ; 
-//			_animObject = new MoveItemAnimObject( vo, actionNun );
-//			_animObject.x = vo.offsetX ;
-//			_animObject.y = vo.offsetY ;
-//			_itemLayer.addChild(_animObject);
+			var actionNun:int = (this is Car) ? 1 : 4 ; 
+			_animObject = new FrameSprite();
+			_animObject.x = vo.offsetX ;
+			_animObject.y = vo.offsetY ;
+			_animObject.scaleX = vo.scaleX ;
+			_animObject.scaleY = vo.scaleY ;
+			addChild(_animObject);
 		}
 		
 		/** 在位置设置后调用 */
@@ -105,7 +105,7 @@ package local.map.item
 		/** 找下一个路点 */
 		protected function getNextPoint():void
 		{
-			/*var xpos:Number = screenY + screenX * .5;
+			var xpos:Number = screenY + screenX * .5;
 			var zpos:Number = screenY - screenX * .5;
 			var col:Number = (xpos / _size )>>0 ;
 			var row:Number = ( zpos / _size)>>0 ;
@@ -196,18 +196,16 @@ package local.map.item
 			}else{
 				_nextPoint.x = xpos - zpos +_roads[_roadIndex].x ;
 				_nextPoint.y = (xpos+ zpos) * .5 + _roads[_roadIndex].y;
-			}*/
+			}
 		}
 		
 		override public function dispose():void
 		{
 			super.dispose();
-//			_animObject.dispose() ;
-//			_animObject = null ;
+			_animObject = null ;
 			_nextPoint = null ;
 			_currNode = null ;
 			_roads = null ;
-			_itemLayer = null ;
 		}
 	}
 }
