@@ -37,13 +37,6 @@ package local
 			//动态生成材质
 			TextureAssets.instance.createBuildingTexture() ;
 			
-			
-			addChild( GameWorld.instance );
-			
-			addChild(CenterViewLayer.instance);
-			
-			addChild(PopUpManager.instance);
-			
 //			var bmp:Bitmap = new Bitmap( TextureAssets.instance.groundLayerBmd);
 //			bmp.scaleX  = bmp.scaleY = .4 ;
 //			Starling.current.nativeStage.addChild(bmp);
@@ -63,6 +56,10 @@ package local
 			GlobalDispatcher.instance.removeEventListener( VillageEvent.READED_VILLAGE , villageEvtHandler );
 			GlobalDispatcher.instance.removeEventListener( VillageEvent.NEW_VILLAGE , villageEvtHandler );
 			
+			
+			addChild( GameWorld.instance );
+			addChild(CenterViewLayer.instance);
+			addChild(PopUpManager.instance);
 			
 			GameWorld.instance.showBuildings();
 			GameData.villageMode = VillageMode.NORMAL ;
