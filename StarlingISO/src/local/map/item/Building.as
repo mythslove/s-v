@@ -27,7 +27,7 @@ package local.map.item
 	{
 		public var gameTimer:GameTimer ;
 		public var statusIcon:StatusIcon ; //显示当前状态的icon
-		
+		private var _statusIconPosY:Number = 0 ;
 		private var _gameTimerTick:int ;
 		
 		public function Building(buildingVO:BuildingVO)
@@ -322,13 +322,17 @@ package local.map.item
 			}
 		}
 		
-		
 		override public function advanceTime(passedTime:Number):void
 		{
 			super.advanceTime(passedTime);
 			if(gameTimer && _gameTimerTick>10 ){
 				gameTimer.update() ;
 				_gameTimerTick = 0;
+			}
+			//图标飘动
+			if(statusIcon && statusIcon.parent){
+				statusIcon.y += Math.sin(_statusIconPosY)*0.1 ;
+				_statusIconPosY+=0.04 ;
 			}
 			++_gameTimerTick ;
 		}
