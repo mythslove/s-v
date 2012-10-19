@@ -207,25 +207,25 @@ package local.view.shop
 					ShopPopUp.instance.show(BuildingType.HOME);
 					close();
 					break ;
-//				case _btnDecor:
-//					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , false );
-//					ShopPopUp.instance.show(BuildingType.DECORATION);
-//					PopUpManager.instance.removeCurrentPopup() ;
-//					break ;
-//				case _btnBusiness:
-//					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , false );
-//					ShopPopUp.instance.show(BuildingType.BUSINESS);
-//					PopUpManager.instance.removeCurrentPopup() ;
-//					break ;
-//				case _btnIndustry:
-//					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , false );
-//					ShopPopUp.instance.show(BuildingType.INDUSTRY);
-//					PopUpManager.instance.removeCurrentPopup() ;
-//					break ;
-//				case _btnCommunity:
-//					break ;
-//				case _btnWonders:
-//					break ;
+				case _btnDecor:
+					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , false );
+					ShopPopUp.instance.show(BuildingType.DECORATION);
+					PopUpManager.instance.removeCurrentPopup() ;
+					break ;
+				case _btnBusiness:
+					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , false );
+					ShopPopUp.instance.show(BuildingType.BUSINESS);
+					PopUpManager.instance.removeCurrentPopup() ;
+					break ;
+				case _btnIndustry:
+					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , false );
+					ShopPopUp.instance.show(BuildingType.INDUSTRY);
+					PopUpManager.instance.removeCurrentPopup() ;
+					break ;
+				case _btnCommunity:
+					break ;
+				case _btnWonders:
+					break ;
 			}
 		}
 		
