@@ -55,7 +55,7 @@ package  local.comm
 					world.iconScene.visible = true ;
 //					world.visibleExpandSigns( true ) ;
 					world.buildingScene.checkRoadsAndIcons();
-//					world.sortIcons();
+					world.sortIcons();
 					break ;
 				case VillageMode.EDIT :
 					world.buildingScene.touchable = true ;

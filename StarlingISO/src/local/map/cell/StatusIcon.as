@@ -21,6 +21,9 @@ package local.map.cell
 		{
 			if(!_bmp){
 				_bmp = new Image( value );
+				_bmp.pivotX = _bmp.width>>1 ;
+//				_bmp.pivotY = _bmp.height>>1 ;
+				addChild(_bmp);
 			}else{
 				_bmp.texture = value;
 			}
