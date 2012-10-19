@@ -31,6 +31,7 @@ package local.map.cell
 		
 		override public function dispose():void
 		{
+			super.dispose() ;
 			_pixlesImg = null ;
 			roadResVO = null ;
 		}
