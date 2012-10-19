@@ -161,14 +161,19 @@ package local.view.control
 					_container.removeEventListener(MouseEvent.RELEASE_OUTSIDE, onMouseHandler );
 					//判断翻页
 					var cha:Number = _mouseDownPos-e.stageX/_container.root.scaleX ;
-					var timeCha:Number = getTimer()-_mouseTime ;
-					if(cha>_containerViewport.width*_container.root.scaleX*0.4 || (cha>0 && timeCha<200 )){ //向右翻页
-						nextPage();
-					}else if( cha<-_containerViewport.width*_container.root.scaleX*0.4 || (cha<0 && timeCha<200 ) ){
-						prevPage();
+					if(Math.abs(cha)>_containerViewport.width*_container.root.scaleX*0.1){
+						var timeCha:Number = getTimer()-_mouseTime ;
+						if(cha>_containerViewport.width*_container.root.scaleX*0.4 || (cha>0 && timeCha<200 )){ //向右翻页
+							nextPage();
+						}else if( cha<-_containerViewport.width*_container.root.scaleX*0.4 || (cha<0 && timeCha<200 ) ){
+							prevPage();
+						}else{
+							endPos = _prevContainerPos ;
+						}
 					}else{
 						endPos = _prevContainerPos ;
 					}
+					
 					this.dispatchEvent( new Event(SCROLL_POSITION_CHANGE));
 					if(!_container.hasEventListener(Event.ENTER_FRAME)){
 						_container.addEventListener(Event.ENTER_FRAME , onEnterFrame);
