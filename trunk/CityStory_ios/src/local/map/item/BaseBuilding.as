@@ -300,7 +300,7 @@ package local.map.item
 				}else if( _roadObject){
 					_roadObject.y += GameSetting.GRID_SIZE*0.25 ;
 					_roadObject.alpha = 1 ;
-				}else if(_buildStatusObj){
+				}else if(_buildStatusObj && _buildStatusObj.y!=0){
 					_buildStatusObj.y += GameSetting.GRID_SIZE*0.25 ;
 					_buildStatusObj.alpha =1 ;
 				}
