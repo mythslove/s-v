@@ -53,20 +53,20 @@ package local.view.shop
 			pivotY = _het>>1 ;
 			//关闭按钮
 			btnClose = new GameButton(EmbedManager.getUIImage( StyleSetting.POPUPCLOSEBUTTONUP ));
-			btnClose.x = _wid - btnClose.pivotX - 10 ;
-			btnClose.y = 10+btnClose.pivotY ;
+			btnClose.x = _wid - btnClose.pivotX - 10*GameSetting.GAMESCALE ;
+			btnClose.y = 10*GameSetting.GAMESCALE +btnClose.pivotY ;
 			addChild(btnClose);
 			btnClose.onRelease.add(onClickHandler);
 			
 			btnBack = new GameButton(EmbedManager.getUIImage( "BackButton" ));
-			btnBack.x = btnBack.pivotX+10;
-			btnBack.y = btnBack.pivotY+10;
+			btnBack.x = btnBack.pivotX+10*GameSetting.GAMESCALE;
+			btnBack.y = btnBack.pivotY+10*GameSetting.GAMESCALE;
 			addChild( btnBack );
 			btnBack.onRelease.add( onClickHandler );
 			
 			_container = new Sprite();
-			_container.x = 40;
-			_container.y = 120 ;
+			_container.x = 40*GameSetting.GAMESCALE;
+			_container.y = 120*GameSetting.GAMESCALE ;
 			addChild(_container);
 		}
 		
@@ -79,11 +79,11 @@ package local.view.shop
 			x = GameSetting.SCREEN_WIDTH>>1 ;
 			y = GameSetting.SCREEN_HEIGHT>>1 ;
 			
-			var temp:int = 200 ;
+			var temp:int = 200*GameSetting.GAMESCALE ;
 			if(isLeft){
-				temp = -200 ;
+				temp = -200*GameSetting.GAMESCALE ;
 			}
-			TweenLite.from( this , 0.3 , { x:x-200 , ease: Back.easeOut , onComplete:showTweenOver });
+			TweenLite.from( this , 0.3 , { x:x-temp , ease: Back.easeOut , onComplete:showTweenOver });
 		}
 		private function showTweenOver():void{
 			if(GameSetting.SCREEN_WIDTH<1024) {
@@ -144,9 +144,9 @@ package local.view.shop
 		private function close():void{
 			GameWorld.instance.visible=true;
 			touchable=false;
-			var temp:int = 200 ;
+			var temp:int = 200*GameSetting.GAMESCALE ;
 			if(isLeft){
-				temp = -200 ;
+				temp = -200*GameSetting.GAMESCALE ;
 			}
 			TweenLite.to( this , 0.3 , { x:x+temp , ease: Back.easeIn , onComplete:onTweenCom});
 		}

@@ -2,6 +2,7 @@ package local.map.cell
 {
 	import flash.geom.Rectangle;
 	
+	import local.comm.GameSetting;
 	import local.util.TextureAssets;
 	import local.vo.BitmapAnimResVO;
 	
@@ -51,8 +52,8 @@ package local.map.cell
 						mc = new MovieClip( TextureAssets.instance.buildingLayerTexture.getTextures(tempName) , (Starling.current.nativeStage.frameRate/vo.rate)>>0 ) ;
 						mc.touchable = false ;
 					}
-					mc.x = vo.offsetX ;
-					mc.y = vo.offsetY ;
+					mc.x = vo.offsetX*GameSetting.GAMESCALE ;
+					mc.y = vo.offsetY*GameSetting.GAMESCALE ;
 					mc.scaleX = vo.scaleX ;
 					mc.scaleY = vo.scaleY ;
 					addChild( mc );
@@ -66,8 +67,8 @@ package local.map.cell
 						img = new Image( TextureAssets.instance.buildingLayerTexture.getTexture( tempName )  ) ;
 						img.touchable = false ;
 					}
-					img.x =  _bavos[0].offsetX ;
-					img.y =  _bavos[0].offsetY ;
+					img.x =  _bavos[0].offsetX*GameSetting.GAMESCALE ;
+					img.y =  _bavos[0].offsetY*GameSetting.GAMESCALE ;
 					img.scaleX =  _bavos[0].scaleX ;
 					img.scaleY =  _bavos[0].scaleY ;
 					
@@ -80,8 +81,8 @@ package local.map.cell
 			_tinyImg.touchable = false ;
 			_tinyImg.blendMode = BlendMode.ADD ;
 			_tinyImg.color = Color.WHITE ;
-			_tinyImg.x =  _bavos[0].offsetX ;
-			_tinyImg.y =  _bavos[0].offsetY ;
+			_tinyImg.x =  _bavos[0].offsetX*GameSetting.GAMESCALE ;
+			_tinyImg.y =  _bavos[0].offsetY*GameSetting.GAMESCALE ;
 			_tinyImg.scaleX = _bavos[0].scaleX ;
 			_tinyImg.scaleY = _bavos[0].scaleY ;
 			_tinyImg.visible=false ;

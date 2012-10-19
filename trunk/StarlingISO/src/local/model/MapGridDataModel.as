@@ -10,6 +10,7 @@ package local.model
 	import local.map.item.BaseBuilding;
 	import local.map.item.BaseMapObject;
 	import local.util.EmbedManager;
+	import local.util.ResourceUtil;
 
 	public class MapGridDataModel
 	{
@@ -29,7 +30,7 @@ package local.model
 		public function MapGridDataModel()
 		{
 			//地图数据
-			var mapDataBytes:ByteArray = new EmbedManager.MapData() as ByteArray ;
+			var mapDataBytes:ByteArray = ResourceUtil.instance.getResVOByResId("mapData").resObject as ByteArray ;
 			mapPanX = mapDataBytes.readShort() ;  
 			mapPanY = mapDataBytes.readShort() ;
 			var maxX:int = mapDataBytes.readUnsignedByte() ;
@@ -55,6 +56,8 @@ package local.model
 			
 			landGridData = new Grid(GameSetting.GRID_X/4 , GameSetting.GRID_Z/4 ) ;
 			gameGridData = new Grid( GameSetting.GRID_X , GameSetting.GRID_Z ) ;
+			
+			ResourceUtil.instance.deleteRes( "mapData" );
 		}
 		
 		

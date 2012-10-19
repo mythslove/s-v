@@ -6,6 +6,7 @@ package local.view.shop.panel
 	
 	import flash.text.TextFormat;
 	
+	import local.comm.GameSetting;
 	import local.comm.StyleSetting;
 	import local.model.ShopModel;
 	import local.vo.BaseBuildingVO;
@@ -37,14 +38,14 @@ package local.view.shop.panel
 			this._tabBar = new TabBar();
 			_tabBar.direction = LayoutMode.HORIZONTAL;
 			_tabBar.tabInitializer = tabInitializer ;
-			_tabBar.gap = 5;
+			_tabBar.gap = 5*GameSetting.GAMESCALE ;
 			this._tabBar.onChange.add(tabBar_onChange);
 			this.addChild(this._tabBar);
 			this._tabBar.dataProvider = new ListCollection(
 				[
 					{ label: TAB_ALL }, { label: TAB_SHOPS }, { label: TAB_RESTAURANTS }, { label: TAB_SERVICES }, { label: TAB_OFFICES }
 				]);
-			_tabBar.width = _tabBar.maxWidth =_tabBar.dataProvider.data.length*170  ;
+			_tabBar.width = _tabBar.maxWidth =_tabBar.dataProvider.data.length*170*GameSetting.GAMESCALE   ;
 			
 			super.init();
 		}
@@ -64,8 +65,8 @@ package local.view.shop.panel
 			tab.downSkin =  StyleSetting.TAB_DOWN_SKIN() ;
 			tab.selectedUpSkin = StyleSetting.TAB_SELECTED_BUTTON() ;
 			tab.label = item.label ;
-			tab.defaultLabelProperties.textFormat = new TextFormat("Verdana",18,0xffffff,true);
-			tab.paddingLeft = tab.paddingRight = 4;
+			tab.defaultLabelProperties.textFormat = new TextFormat("Verdana",18*GameSetting.GAMESCALE ,0xffffff,true);
+			tab.paddingLeft = tab.paddingRight = 4*GameSetting.GAMESCALE  ;
 		}
 		
 		private function tabBar_onChange(tabBar:TabBar):void

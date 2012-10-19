@@ -2,6 +2,7 @@ package local.view.shop.panel
 {
 	import feathers.data.ListCollection;
 	
+	import local.comm.GameSetting;
 	import local.model.ShopModel;
 	
 	
@@ -18,7 +19,7 @@ package local.view.shop.panel
 		{
 			super.init();
 			_list.dataProvider = new ListCollection( ShopModel.instance.baseDecors );
-			container.y = -40 ;
+			container.y = -40*GameSetting.GAMESCALE  ;
 		}
 		
 	}

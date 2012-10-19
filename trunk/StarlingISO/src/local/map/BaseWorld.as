@@ -73,7 +73,7 @@ package local.map
 			super( GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE );
 			
 			this.x = (GameSetting.SCREEN_WIDTH-GameSetting.MAP_WIDTH*scaleX)>>1 ;
-			y=-1260;
+			y=-1260*GameSetting.GAMESCALE ;
 			_endX = x ;
 			_endY = y ;
 			addBackground();
@@ -110,21 +110,21 @@ package local.map
 			map.addChild(img);
 			//=================================
 			img = EmbedManager.getMapImage("heightmap1");
-			img.y = 300 ;
+			img.y = 300*GameSetting.GAMESCALE ;
 			map.addChild(img);
 			offset = img.width ;
 			
 			img = EmbedManager.getMapImage("heightmap2");
-			img. x=offset ; img.y = 215 ;
+			img. x=offset ; img.y = 215*GameSetting.GAMESCALE ;
 			map.addChild(img);
-			offset += img.width+50 ;
+			offset += img.width+50*GameSetting.GAMESCALE ;
 			
 			img =EmbedManager.getMapImage("rightheight1");
 			img.x = offset ;
 			map.addChild(img);
 			
 			//=========================
-			offset = 100;
+			offset = 100*GameSetting.GAMESCALE ;
 			img = EmbedManager.getMapImage("rightsea1");
 			img. x=GameSetting.MAP_WIDTH-img.width ; img.y = offset ;
 			map.addChild(img);
@@ -136,15 +136,15 @@ package local.map
 			offset += img.height ;
 			
 			img = EmbedManager.getMapImage("water1");
-			img. x = 2760 ; img.y = 300 ;
+			img. x = 2760*GameSetting.GAMESCALE ; img.y = 300*GameSetting.GAMESCALE ;
 			map.addChild(img);
 			//===============================
 			img = EmbedManager.getMapImage("smallheightmap1");
-			img.y = 1000 ;
+			img.y = 1000*GameSetting.GAMESCALE ;
 			map.addChild(img);
 			
 			img = EmbedManager.getMapImage("smallheightmap1");
-			img.x = 3600 ;  img.y = 1800 ;
+			img.x = 3600*GameSetting.GAMESCALE ;  img.y = 1800*GameSetting.GAMESCALE ;
 			map.addChild(img);
 	
 			map.flatten();
@@ -186,7 +186,8 @@ package local.map
 			var gameGridData:Grid = MapGridDataModel.instance.gameGridData ;
 			var maxX:int ,maxZ:int ;
 			//地图数据
-			this.panTo( MapGridDataModel.instance.mapPanX , MapGridDataModel.instance.mapPanY );
+			this.panTo( MapGridDataModel.instance.mapPanX*GameSetting.GAMESCALE , 
+				MapGridDataModel.instance.mapPanY*GameSetting.GAMESCALE );
 			//添加地图区域
 			if(!LandModel.instance.lands)  LandModel.instance.initLands();
 			

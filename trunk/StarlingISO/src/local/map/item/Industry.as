@@ -1,6 +1,7 @@
 package local.map.item
 {
 	import local.comm.GameData;
+	import local.comm.GameSetting;
 	import local.enum.BuildingStatus;
 	import local.enum.PickupType;
 	import local.enum.VillageMode;
@@ -164,8 +165,8 @@ package local.map.item
 					PlayerModel.instance.changeCash( -cash );
 					
 					var flyImg:FlyLabelImage = new FlyLabelImage( PickupType.CASH , -cash ) ;
-					flyImg.x = screenX - 20 ;
-					flyImg.y = screenY - 50 ;
+					flyImg.x = screenX - 20*GameSetting.GAMESCALE ;
+					flyImg.y = screenY - 50*GameSetting.GAMESCALE ;
 					GameWorld.instance.effectScene.addChild( flyImg );
 					
 					buildingVO.status = BuildingStatus.PRODUCTION_COMPLETE ;

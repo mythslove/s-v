@@ -50,7 +50,7 @@ package local.view
 			var img:Image = EmbedManager.getUIImage("QuestButtonUp") ;
 			questBtn = new GameButton( img );
 			questBtn.x= img.width*0.5 + 5;
-			questBtn.y = 100 ;
+			questBtn.y = 100*GameSetting.GAMESCALE ;
 			addChild(questBtn);
 			questBtn.onRelease.add( questBtnClick );
 		}

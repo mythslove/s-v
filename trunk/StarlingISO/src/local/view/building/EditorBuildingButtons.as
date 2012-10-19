@@ -2,6 +2,7 @@ package local.view.building
 {
 	import com.greensock.TweenLite;
 	
+	import local.comm.GameSetting;
 	import local.map.GameWorld;
 	import local.map.item.BaseBuilding;
 	import local.util.EmbedManager;
@@ -32,17 +33,17 @@ package local.view.building
 			super();
 			stashButton = new GameButton(EmbedManager.getUIImage("BuildingStashButtonUp"),
 				EmbedManager.getUIImage("BuildingStashButtonDisabled"));
-			stashButton.x = -120 ;
-			stashButton.y = -80 ;
+			stashButton.x = -120*GameSetting.GAMESCALE ;
+			stashButton.y = -80*GameSetting.GAMESCALE ;
 			
 			sellButton = new GameButton(EmbedManager.getUIImage("BuildingSellButtonUp"),
 				EmbedManager.getUIImage("BuildingSellButtonDisabled"));
-			sellButton.x = 120 ;
-			sellButton.y = -80 ;
+			sellButton.x = 120*GameSetting.GAMESCALE ;
+			sellButton.y = -80*GameSetting.GAMESCALE ;
 			
 			rotateButton = new GameButton(EmbedManager.getUIImage("BuildingRotateButtonUp"),
 				EmbedManager.getUIImage("BuildingRotateButtonDisabled"));
-			rotateButton.y = -120 ;
+			rotateButton.y = -120*GameSetting.GAMESCALE ;
 			
 			addChild(sellButton);
 			addChild(stashButton);
