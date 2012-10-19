@@ -76,7 +76,7 @@ package local.view.shop
 				temp = -200 ;
 			}
 			mouseChildren = false ;
-			TweenLite.from( this , 0.2 , { x:x-temp , ease: Back.easeOut , onComplete:tweenOver });
+			TweenLite.from( this , 0.3 , { x:x-temp , ease: Back.easeOut , onComplete:tweenOver });
 		}
 		private function tweenOver():void{
 			mouseChildren=true;
@@ -142,7 +142,7 @@ package local.view.shop
 			if(isLeft){
 				temp = -200 ;
 			}
-			TweenLite.to( this , 0.2 , { x:x+temp , ease: Back.easeIn , onComplete:onTweenCom});
+			TweenLite.to( this , 0.3 , { x:x+temp , ease: Back.easeIn , onComplete:onTweenCom});
 		}
 		
 		private function onTweenCom():void{
