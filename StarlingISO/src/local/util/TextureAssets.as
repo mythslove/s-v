@@ -35,7 +35,7 @@ package local.util
 		
 		//地面层
 		public var groundLayerTexture:TextureAtlas ;
-		public var groundLayerBmd:BitmapData = new BitmapData(1024,1024,true,0xffffff);
+		public var groundLayerBmd:BitmapData = new BitmapData(1024,512,true,0xffffff);
 		
 		
 		/**
@@ -50,7 +50,7 @@ package local.util
 			var buildingMaxRect:MaxRectsBinPack = new MaxRectsBinPack(2048,2048,false);
 			
 			var groundName2Rect:HashMap = new HashMap();
-			var groundMaxRect:MaxRectsBinPack = new MaxRectsBinPack(1024,1024,false);
+			var groundMaxRect:MaxRectsBinPack = new MaxRectsBinPack(1024,512,false);
 			
 			var allBuildingHash:Dictionary = ShopModel.instance.allBuildingHash ;
 			if( allBuildingHash)

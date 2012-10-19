@@ -3,6 +3,7 @@ package local
 	import bing.starling.iso.SIsoWorld;
 	
 	import flash.desktop.NativeApplication;
+	import flash.display.Bitmap;
 	import flash.events.Event;
 	
 	import local.comm.GameData;
@@ -17,6 +18,7 @@ package local
 	import local.util.VillageUtil;
 	import local.view.CenterViewLayer;
 	
+	import starling.core.Starling;
 	import starling.display.*;
 	import starling.events.Event;
 	
@@ -39,6 +41,7 @@ package local
 //			var bmp:Bitmap = new Bitmap( TextureAssets.instance.groundLayerBmd);
 //			bmp.scaleX  = bmp.scaleY = .4 ;
 //			Starling.current.nativeStage.addChild(bmp);
+			
 			GlobalDispatcher.instance.addEventListener( VillageEvent.READED_VILLAGE , villageEvtHandler );
 			GlobalDispatcher.instance.addEventListener( VillageEvent.NEW_VILLAGE , villageEvtHandler );
 			
