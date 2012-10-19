@@ -6,12 +6,14 @@ package local.map.item
 	import local.comm.GameSetting;
 	import local.enum.BuildingStatus;
 	import local.enum.BuildingType;
+	import local.enum.PickupType;
 	import local.enum.VillageMode;
 	import local.map.GameWorld;
 	import local.map.cell.BuildStatusObject;
 	import local.map.cell.BuildingBottomGrid;
 	import local.map.cell.BuildingObject;
 	import local.map.cell.RoadObject;
+	import local.map.pk.FlyLabelImage;
 	import local.model.BuildingModel;
 	import local.model.PlayerModel;
 	import local.model.StorageModel;
@@ -208,21 +210,21 @@ package local.map.item
 		public function shopToWorld():void
 		{
 			//减钱
-//			var flyImg:FlyLabelImage ;
-//			if( buildingVO.baseVO.priceCash>0 ){
-//				PlayerModel.instance.changeCash( -buildingVO.baseVO.priceCash );
-//				flyImg = new FlyLabelImage( PickupType.CASH , -buildingVO.baseVO.priceCash ) ;
-//			}else if(buildingVO.baseVO.priceCoin>0 ){
-//				PlayerModel.instance.changeCoin( -buildingVO.baseVO.priceCoin );
-//				flyImg = new FlyLabelImage( PickupType.COIN , -buildingVO.baseVO.priceCoin ) ;
-//				//任务
+			var flyImg:FlyLabelImage ;
+			if( buildingVO.baseVO.priceCash>0 ){
+				PlayerModel.instance.changeCash( -buildingVO.baseVO.priceCash );
+				flyImg = new FlyLabelImage( PickupType.CASH , -buildingVO.baseVO.priceCash ) ;
+			}else if(buildingVO.baseVO.priceCoin>0 ){
+				PlayerModel.instance.changeCoin( -buildingVO.baseVO.priceCoin );
+				flyImg = new FlyLabelImage( PickupType.COIN , -buildingVO.baseVO.priceCoin ) ;
+				//任务
 //				QuestUtil.instance.handleCount( QuestType.SPEND_COIN_ON_BD_BY_TYPE , buildingVO.baseVO.type , buildingVO.baseVO.priceCoin );
-//			}
-//			if(flyImg){
-//				flyImg.x = screenX ;
-//				flyImg.y = screenY-20 ;
-//				GameWorld.instance.effectScene.addChild( flyImg );
-//			}
+			}
+			if(flyImg){
+				flyImg.x = screenX ;
+				flyImg.y = screenY-20 ;
+				GameWorld.instance.effectScene.addChild( flyImg );
+			}
 			//添加到地图上
 			addToWorldFromTopScene();
 			if(buildingVO.baseVO.type!=BuildingType.DECORATION)
