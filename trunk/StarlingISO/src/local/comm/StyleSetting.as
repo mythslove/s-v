@@ -8,6 +8,8 @@ package local.comm
 	import flash.geom.Rectangle;
 	
 	import local.util.EmbedManager;
+	
+	import starling.textures.Texture;
 
 	public class StyleSetting
 	{
@@ -19,18 +21,21 @@ package local.comm
 		
 		public static const POPUPCLOSEBUTTONUP:String = "PopUpCloseButtonUp";
 		
-		public static function TAB_UP_SKIN():Scale3Image{
-			return new Scale3Image(new Scale3Textures(EmbedManager.getUITexture("TabButtonUp"),10,10) );
-		}
-		public static function TAB_DOWN_SKIN():Scale3Image{
-			return new Scale3Image(new Scale3Textures(EmbedManager.getUITexture("TabButtonDown"),10,10) );
-		}
-		public static function TAB_SELECTED_BUTTON():Scale3Image{
-			return new Scale3Image(new Scale3Textures(EmbedManager.getUITexture("TabButtonSelected"),10,10) );
-		}
 		
-		public static function SHOP_ITEM_BG_UP():Scale9Image{
-			return new Scale9Image(new Scale9Textures(EmbedManager.getUITexture("ShopItemBgUp"),new Rectangle(10,10,10,10)) );
-		}
+		
+		//tabButton
+		public static var tabButtonUpTexture:Scale3Textures = new Scale3Textures(EmbedManager.getUITexture("TabButtonUp"),10,10) ;
+		public static function TAB_UP_SKIN():Scale3Image{ return new Scale3Image( tabButtonUpTexture);  }
+		
+		public static var tabButtonDownTexture:Scale3Textures = new Scale3Textures(EmbedManager.getUITexture("TabButtonDown"),10,10) ;
+		public static function TAB_DOWN_SKIN():Scale3Image{ return new Scale3Image( tabButtonDownTexture ); }
+		
+		public static var tabButtonSelectedTexture:Scale3Textures = new Scale3Textures(EmbedManager.getUITexture("TabButtonSelected"),10,10) ;
+		public static function TAB_SELECTED_BUTTON():Scale3Image{ return new Scale3Image( tabButtonSelectedTexture ); }
+		
+		
+		//shopItemBg
+		public static var shopItemBgUpTexture:Scale9Textures = new Scale9Textures(EmbedManager.getUITexture("ShopItemBgUp"),new Rectangle(10,10,10,10)) ;
+		public static function SHOP_ITEM_BG_UP():Scale9Image{ return new Scale9Image(  shopItemBgUpTexture ); }
 	}
 }
