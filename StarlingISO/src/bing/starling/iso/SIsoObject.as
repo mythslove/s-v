@@ -7,9 +7,10 @@ package bing.starling.iso
 	import flash.geom.Rectangle;
 	import flash.geom.Vector3D;
 	
+	import starling.animation.IAnimatable;
 	import starling.display.Sprite;
 	
-	public class SIsoObject extends Sprite
+	public class SIsoObject extends Sprite implements IAnimatable
 	{
 		public var isSort:Boolean = false ;
 		protected var _position3D:Vector3D; //像素坐标
@@ -130,7 +131,7 @@ package bing.starling.iso
 		/**
 		 * 不断执行 
 		 */		
-		public function update():void
+		public function advanceTime(passedTime:Number):void
 		{
 			
 		}

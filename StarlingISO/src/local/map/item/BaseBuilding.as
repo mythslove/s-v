@@ -41,10 +41,10 @@ package local.map.item
 			nodeZ = buildingVO.nodeZ ;
 		}
 		
-		override public function update():void
+		override public function advanceTime(passedTime:Number):void
 		{
 			if(_buildingObject) {
-				_buildingObject.update() ;
+				_buildingObject.advanceTime( passedTime );
 			}else if(_buildStatusObj){
 				_buildStatusObj.update() ;
 			}

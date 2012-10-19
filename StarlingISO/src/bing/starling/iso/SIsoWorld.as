@@ -2,10 +2,11 @@ package bing.starling.iso
 {
 	import flash.geom.Point;
 	
+	import starling.animation.IAnimatable;
 	import starling.display.Sprite;
 	import starling.events.Event;
 	
-	public class SIsoWorld extends Sprite
+	public class SIsoWorld extends Sprite implements IAnimatable
 	{
 		protected var _gridX:int ;
 		protected var _gridZ:int ;
@@ -118,11 +119,11 @@ package bing.starling.iso
 		/********************************************************
 		 * 遍历所有IsoScene，并调用它的update方法
 		 * ********************************************************/
-		public function update():void
+		public function advanceTime(passedTime:Number):void
 		{
 			for each( var scene:SIsoScene in _scenes )
 			{
-				scene.update() ;
+				scene.advanceTime(passedTime) ;
 			}
 		}
 		

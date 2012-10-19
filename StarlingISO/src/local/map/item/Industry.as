@@ -32,15 +32,15 @@ package local.map.item
 			}
 		}
 		
-		override public function update():void
+		override public function advanceTime(passedTime:Number):void
 		{
-			super.update();
+			super.advanceTime(passedTime);
 			if( !gameTimer && buildingVO.status==BuildingStatus.PRODUCTION_COMPLETE)
 			{
 				if( GameData.commDate.time - buildingVO.statusTime>buildingVO.product.expireTime*1000 )
 				{
 					buildingVO.status = BuildingStatus.EXPIRED ;
-//					showBuildingFlagIcon() ;
+					showBuildingFlagIcon() ;
 				}
 			}
 		}
@@ -96,7 +96,7 @@ package local.map.item
 		override protected function createGameTimer(duration:int):void{
 			super.createGameTimer(duration);
 			if(gameTimer){
-//				if(_buildingObject) _buildingObject.playAnim = true ;
+				if(_buildingObject) _buildingObject.playAnim = true ;
 			}
 		}
 		override protected function clearGameTimer():void{

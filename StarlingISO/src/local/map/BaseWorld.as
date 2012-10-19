@@ -19,6 +19,7 @@ package local.map
 	import local.enum.BuildingStatus;
 	import local.enum.BuildingType;
 	import local.enum.VillageMode;
+	import local.map.cell.StatusIcon;
 	import local.map.item.BaseBuilding;
 	import local.map.item.BasicBuilding;
 	import local.map.scene.*;
@@ -76,23 +77,6 @@ package local.map
 			_endX = x ;
 			_endY = y ;
 			addBackground();
-		}
-		
-		public function run():void{ 
-			addEventListener(Event.ENTER_FRAME , onEnterFrameHandler );
-			touchable=true ;
-		}
-		public function stopRun():void{ 
-			removeEventListener(Event.ENTER_FRAME , onEnterFrameHandler ); 
-			touchable=false ;
-		}
-		override public function update():void { buildingScene.update() ; }
-		
-		private function onEnterFrameHandler(e:Event):void
-		{
-			if(runUpdate)	update();
-			if(x!=_endX) x += ( _endX-x)*_moveSpeed ; //缓动地图
-			if(y!=_endY) y += (_endY-y)*_moveSpeed ;
 		}
 		
 		private function addBackground():void
@@ -390,12 +374,12 @@ package local.map
 					}
 					else if(!_isMove)
 					{
-//						if(e.target is StatusIcon)
-//						{
-//							if(currentSelected) currentSelected.flash(false);
-//							currentSelected = (e.target as StatusIcon).building ;
-//							currentSelected.onClick();
-//						}
+						if(e.target is StatusIcon)
+						{
+							if(currentSelected) currentSelected.flash(false);
+							currentSelected = (e.target as StatusIcon).building ;
+							currentSelected.onClick();
+						}
 //						else if(e.target is ExpandSign)
 //						{
 //							if( !GameData.hasExpanding ){

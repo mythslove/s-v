@@ -323,9 +323,9 @@ package local.map.item
 		}
 		
 		
-		override public function update():void
+		override public function advanceTime(passedTime:Number):void
 		{
-			super.update();
+			super.advanceTime(passedTime);
 			if(gameTimer && _gameTimerTick>10 ){
 				gameTimer.update() ;
 				_gameTimerTick = 0;
