@@ -2,10 +2,8 @@ package local.map
 {
 	import flash.geom.Point;
 	
-	import local.comm.GameData;
 	import local.comm.GameSetting;
 	import local.enum.BuildingType;
-	import local.enum.VillageMode;
 	import local.map.item.BaseBuilding;
 	import local.map.item.Road;
 	import local.model.BuildingModel;
@@ -14,8 +12,9 @@ package local.map
 	import local.view.building.MoveBuildingButtons;
 	import local.vo.BuildingVO;
 	
+	import starling.animation.Juggler;
 	import starling.display.*;
-	import starling.events.Event;
+	import starling.events.EnterFrameEvent;
 	
 	public class GameWorld extends BaseWorld
 	{
@@ -25,12 +24,38 @@ package local.map
 			return _instance ;
 		}
 		//-----------------------------------------------------------------
+		private var _juggle:Juggler = new Juggler() ;
+//		private var _expandLandBtns:Vector.<ExpandLandButton> = new Vector.<ExpandLandButton>();//扩地按钮
+		
+		public function GameWorld()
+		{
+			super();
+			addEventListener(EnterFrameEvent.ENTER_FRAME , onEnterFrame );
+		}
+		
+		public function run():void{ 
+			_juggle.add(this);
+			touchable=true ;
+		}
+		public function stopRun():void{ 
+			_juggle.remove(this);
+			touchable=false ;
+		}
+		
+		private function onEnterFrame( e:EnterFrameEvent ):void
+		{
+			if(runUpdate)	{
+				buildingScene.advanceTime(e.passedTime) ;
+			}
+			if(x!=_endX) x += ( _endX-x)*_moveSpeed ; //缓动地图
+			if(y!=_endY) y += (_endY-y)*_moveSpeed ;
+		}
+		
 		
 		public function goHome():void
 		{
 			
 		}
-//		private var _expandLandBtns:Vector.<ExpandLandButton> = new Vector.<ExpandLandButton>();//扩地按钮
 		
 		/** 
 		 * 显示所有的建筑 
@@ -91,7 +116,6 @@ package local.map
 				}
 			}
 		}
-		
 		
 		/**
 		 * 添加建筑到移动的的层上面，主要是从商店和收藏箱中的建筑 

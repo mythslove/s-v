@@ -62,9 +62,9 @@ package local.map.item
 			_nextPoint = null ;
 		}
 		
-		override public function update():void
+		override public function advanceTime(passedTime:Number):void
 		{
-			super.update() ;
+			super.advanceTime(passedTime) ;
 //			_animObject.update();
 			if(_nextPoint){
 				moveToPoint();

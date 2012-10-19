@@ -49,10 +49,10 @@ package bing.starling.iso
 		/********************************************************
 		 * 更新：遍历所有的对象，并进行排序和更新操作
 		 * ********************************************************/
-		override public function update():void
+		override public function advanceTime(passedTime:Number):void
 		{
 			for each(var obj:SIsoObject in _sprites ) {
-				obj.update();
+				obj.advanceTime(passedTime);
 				if(obj.isSort)	{
 					sortIsoObject(obj);
 					obj.isSort = false ;

@@ -5,6 +5,7 @@ package local.map.cell
 	import local.util.TextureAssets;
 	import local.vo.BitmapAnimResVO;
 	
+	import starling.animation.IAnimatable;
 	import starling.core.Starling;
 	import starling.display.BlendMode;
 	import starling.display.Image;
@@ -12,11 +13,12 @@ package local.map.cell
 	import starling.display.Sprite;
 	import starling.utils.Color;
 	
-	public class BuildingObject extends Sprite
+	public class BuildingObject extends Sprite implements IAnimatable
 	{
 		private var _bavos:Vector.<BitmapAnimResVO> ;
 		private var _tinyImg:Image ;
 		private var _tinyAlpha:Number = 0.03 ;
+		public var playAnim:Boolean = true ;
 		
 		public function BuildingObject( name:String , bavos:Vector.<BitmapAnimResVO> )
 		{
@@ -54,7 +56,6 @@ package local.map.cell
 					mc.scaleX = vo.scaleX ;
 					mc.scaleY = vo.scaleY ;
 					addChild( mc );
-					Starling.juggler.add( mc );
 				}
 				else
 				{
@@ -87,8 +88,15 @@ package local.map.cell
 			addChild(_tinyImg);
 		}
 		
-		public function update():void
+		public function advanceTime(passedTime:Number):void
 		{
+			if(playAnim){
+				for( var i:int = 0 ; i<numChildren ; ++i){
+					if(getChildAt(i) is MovieClip ){
+						( getChildAt(i) as MovieClip ).advanceTime( passedTime );
+					}
+				}
+			}
 			if(_tinyImg.visible){
 				_tinyImg.alpha += _tinyAlpha;
 				if(_tinyImg.alpha>=1){
