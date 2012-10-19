@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://texturepacker.com-->
+<!-- $TexturePacker:SmartUpdate:e844d70a2abfc5ab8f88c351cbae4d27$ -->
+<TextureAtlas imagePath="map.png">
+    <SubTexture name="bottomsea1" x="369" y="341" width="310" height="320"/>
+    <SubTexture name="bottomsea2" x="2" y="130" width="690" height="96"/>
+    <SubTexture name="heightmap1" x="2" y="341" width="365" height="209"/>
+    <SubTexture name="heightmap2" x="2" y="228" width="635" height="111"/>
+    <SubTexture name="rightheight1" x="2" y="2" width="791" height="126"/>
+    <SubTexture name="rightsea1" x="694" y="130" width="84" height="220"/>
+    <SubTexture name="rightsea2" x="795" y="2" width="154" height="129"/>
+    <SubTexture name="smallheightmap1" x="780" y="133" width="129" height="169"/>
+    <SubTexture name="water1" x="681" y="352" width="282" height="131" frameX="-2" frameY="0" frameWidth="284" frameHeight="131"/>
+</TextureAtlas>
