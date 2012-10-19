@@ -22,7 +22,6 @@ package local
 	
 	public class MainGame extends SIsoWorld
 	{
-		private var _villageUtil:VillageUtil ;
 		
 		public function MainGame()
 		{
@@ -43,8 +42,7 @@ package local
 			GlobalDispatcher.instance.addEventListener( VillageEvent.READED_VILLAGE , villageEvtHandler );
 			GlobalDispatcher.instance.addEventListener( VillageEvent.NEW_VILLAGE , villageEvtHandler );
 			
-			_villageUtil = new VillageUtil();
-			_villageUtil.readVillage();
+			VillageUtil.instance.readVillage();
 		}
 		
 		
@@ -61,8 +59,9 @@ package local
 			addChild(CenterViewLayer.instance);
 			addChild(PopUpManager.instance);
 			
-			GameWorld.instance.showBuildings();
 			GameData.villageMode = VillageMode.NORMAL ;
+			GameWorld.instance.showBuildings();
+			VillageUtil.instance.startIntervalSave() ;
 			
 			NativeApplication.nativeApplication.addEventListener(flash.events.Event.ACTIVATE , activateHandler);
 			NativeApplication.nativeApplication.addEventListener(flash.events.Event.DEACTIVATE , deactivateHandler );
@@ -82,7 +81,7 @@ package local
 			if(GameData.villageMode!=VillageMode.VISIT)
 			{
 				GameWorld.instance.buildingScene.readySave();
-				_villageUtil.saveVillage();
+				VillageUtil.instance.saveVillage();
 			}
 		}
 		

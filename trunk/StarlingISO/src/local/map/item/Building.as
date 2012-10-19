@@ -58,6 +58,19 @@ package local.map.item
 			}
 		}
 		
+		/**
+		 * 从收藏箱里拿出来，重新判断是否在路旁边
+		 */		
+		override public function storageToWorld():void
+		{
+			super.storageToWorld();
+			if(buildingVO.baseVO.type!=BuildingType.DECORATION)
+			{
+				buildingVO.status = BuildingStatus.NO_ROAD ;
+				checkRoadAndIcon();
+			}
+		}
+		
 		public function checkRoadAndIcon():void
 		{
 			//修建和扩地时不判断

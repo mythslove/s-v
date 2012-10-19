@@ -205,6 +205,27 @@ package local.map.item
 		}
 		
 		/**
+		 * 从收藏箱中添加到游戏世界中 
+		 */		
+		public function storageToWorld():void
+		{
+			addToWorldFromTopScene();
+			
+			//添加到地图数据中，并且从收藏箱数据中删除
+			BuildingModel.instance.addBuildingVO( buildingVO );
+			StorageModel.instance.deleteStorageVO( buildingVO.name , buildingVO.baseVO.type );
+			
+			//加人口和人口容量
+			PlayerModel.instance.changePop( buildingVO.baseVO.addPop);
+			PlayerModel.instance.changeCap( buildingVO.baseVO.addCap);
+			
+			//任务判断
+//			QuestUtil.instance.handleOwn( QuestType.OWN_BD_BY_NAME , buildingVO.name );
+//			QuestUtil.instance.handleOwn( QuestType.OWN_BD_BY_TYPE , buildingVO.baseVO.type );
+//			QuestUtil.instance.handleCount( QuestType.PLACE_BY_TYPE , buildingVO.baseVO.type );
+		}
+		
+		/**
 		 * 从商店中添加到世界中
 		 */		
 		public function shopToWorld():void
