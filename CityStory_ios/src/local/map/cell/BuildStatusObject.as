@@ -49,6 +49,7 @@ package local.map.cell
 			_bmp.y = barvo.offsetY ;
 			_bmp.scaleX = barvo.scaleX ;
 			_bmp.scaleY = barvo.scaleY ;
+			
 			_tinyBmp.bitmapData = barvo.bmds[0] ;
 			_tinyBmp.x = barvo.offsetX ;
 			_tinyBmp.y = barvo.offsetY ;
