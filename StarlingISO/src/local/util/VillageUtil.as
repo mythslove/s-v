@@ -6,6 +6,7 @@ package local.util
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
 	import flash.utils.getTimer;
+	import flash.utils.setInterval;
 	
 	import local.comm.GameSetting;
 	import local.comm.GlobalDispatcher;
@@ -33,6 +34,14 @@ package local.util
 		//=======================================
 		
 		private var _bytes:ByteArray = new ByteArray();
+		
+		/**
+		 * 一分钟保存一次数据 
+		 */		
+		public function startIntervalSave():void
+		{
+			setInterval( saveVillage , 60000 );
+		}
 		
 		/**
 		 * 保存村庄信息 
