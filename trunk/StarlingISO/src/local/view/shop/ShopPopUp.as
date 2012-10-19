@@ -14,8 +14,7 @@ package local.view.shop
 	import local.util.PopUpManager;
 	import local.view.base.BaseView;
 	import local.view.base.GameButton;
-	import local.view.shop.panel.BusinessPanel;
-	import local.view.shop.panel.HomePanel;
+	import local.view.shop.panel.*;
 	
 	import starling.display.Image;
 	import starling.events.Event;
@@ -123,9 +122,9 @@ package local.view.shop
 				case BuildingType.HOME:
 					_container.addChild(HomePanel.instance) ;
 					break ;
-//				case BuildingType.DECORATION:
-//					_container.addChild(DecorationPanel.instance) ;
-//					break ;
+				case BuildingType.DECORATION:
+					_container.addChild(DecorationPanel.instance) ;
+					break ;
 				case BuildingType.BUSINESS:
 					_container.addChild(BusinessPanel.instance) ;
 					break ;

@@ -45,8 +45,8 @@ package local.view.building
 			addChild(okBtn);
 			addChild(cancelBtn);
 			
-			cancelBtn.addEventListener( TouchEvent.TOUCH , onClickHandler);
-			okBtn.addEventListener( TouchEvent.TOUCH , onClickHandler);
+			cancelBtn.onRelease.add( onClickHandler );
+			okBtn.onRelease.add( onClickHandler );
 		}
 		
 		override protected function addedToStageHandler(e:Event):void
@@ -62,57 +62,55 @@ package local.view.building
 //			}
 		}
 		
-		private function onClickHandler( e:TouchEvent ):void
+		private function onClickHandler( btn:GameButton ):void
 		{
-			e.stopPropagation() ;
-			if(e.touches.length==0) return ;
-			
-			var touch:Touch = e.touches[0] ;
-			if( touch.target is GameButton && touch.phase==TouchPhase.ENDED)
+			var building:BaseBuilding = GameWorld.instance.topScene.getChildAt(0) as BaseBuilding ;
+			switch( btn )
 			{
-				var building:BaseBuilding = GameWorld.instance.topScene.getChildAt(0) as BaseBuilding ;
-				switch( e.target)
-				{
-					case okBtn:
-						if( GameData.villageMode==VillageMode.BUILDING_STORAGE)
-						{
+				case okBtn:
+					if( GameData.villageMode==VillageMode.BUILDING_STORAGE)
+					{
 //							building.storageToWorld();
-							GameData.villageMode = VillageMode.EDIT ;
-						}
-						else if( GameData.villageMode==VillageMode.BUILDING_SHOP)
-						{
-							building.shopToWorld();
-							var baseVO:BaseBuildingVO = building.buildingVO.baseVO ;
-							if( baseVO.type==BuildingType.DECORATION ){
-								var me:PlayerVO = PlayerModel.instance.me ;
-								if( me.cash>= baseVO.priceCash && me.coin>= baseVO.priceCoin ){
-									building = BuildingFactory.createBuildingByBaseVO( baseVO );
-									GameWorld.instance.addBuildingToTopScene( building );
-									return ;
-								}else if( (baseVO.priceCash>0 && me.cash<baseVO.priceCash)||(baseVO.priceCoin>0 && me.coin<baseVO.priceCoin) ){
-									GameData.villageMode = VillageMode.NORMAL ;
-								}
-							}
-							else
-							{
+						GameData.villageMode = VillageMode.EDIT ;
+					}
+					else if( GameData.villageMode==VillageMode.BUILDING_SHOP)
+					{
+						building.shopToWorld();
+						var baseVO:BaseBuildingVO = building.buildingVO.baseVO ;
+						if( baseVO.type==BuildingType.DECORATION ){
+							var me:PlayerVO = PlayerModel.instance.me ;
+							if( me.cash>= baseVO.priceCash && me.coin>= baseVO.priceCoin ){
+								building = BuildingFactory.createBuildingByBaseVO( baseVO );
+								GameWorld.instance.addBuildingToTopScene( building );
+								return ;
+							}else if( (baseVO.priceCash>0 && me.cash<baseVO.priceCash)||(baseVO.priceCoin>0 && me.coin<baseVO.priceCoin) ){
 								GameData.villageMode = VillageMode.NORMAL ;
 							}
-	//						if(GameData.isShowTutor){
-	//							PlayerModel.instance.changeTutorStep();
-	//							GameWorld.instance.showTutor();
-	//						}
 						}
-						break ;
-					case cancelBtn:
-						if( GameData.villageMode==VillageMode.BUILDING_STORAGE){
-							GameData.villageMode = VillageMode.EDIT ;
-						}else if( GameData.villageMode==VillageMode.BUILDING_SHOP){
+						else
+						{
 							GameData.villageMode = VillageMode.NORMAL ;
 						}
-						break ;
-				}
-				if(parent) parent.removeChild(this);
+						//						if(GameData.isShowTutor){
+						//							PlayerModel.instance.changeTutorStep();
+						//							GameWorld.instance.showTutor();
+						//						}
+					}
+					break ;
+				case cancelBtn:
+					if( GameData.villageMode==VillageMode.BUILDING_STORAGE){
+						GameData.villageMode = VillageMode.EDIT ;
+					}else if( GameData.villageMode==VillageMode.BUILDING_SHOP){
+						GameData.villageMode = VillageMode.NORMAL ;
+					}
+					break ;
 			}
+			if(parent) parent.removeChild(this);
 		}
+		
+		/**
+		 * 防止被清除 
+		 */		
+		override public function dispose():void{}
 	}
 }
