@@ -11,6 +11,7 @@ package local.view
 	import local.util.EmbedManager;
 	import local.view.base.GameButton;
 	import local.view.bottom.BottomBar;
+	import local.view.topbar.TopBar;
 	
 	import starling.display.Image;
 	
@@ -24,6 +25,7 @@ package local.view
 		}
 		//-----------------------------------------------------------
 		
+		public var topBar:TopBar ;
 		public var bottomBar:BottomBar ;
 		public var questBtn:GameButton; 
 		
@@ -40,6 +42,10 @@ package local.view
 			bottomBar = new BottomBar();
 			bottomBar.y = GameSetting.SCREEN_HEIGHT ;
 			addChild(bottomBar);
+			
+			topBar = new TopBar();
+			topBar.x = (GameSetting.SCREEN_WIDTH-topBar.width)>>1; 
+			addChild(topBar);
 			
 			var img:Image = EmbedManager.getUIImage("QuestButtonUp") ;
 			questBtn = new GameButton( img );
@@ -64,7 +70,7 @@ package local.view
 					questBtn.visible = true ;
 					bottomBar.btnDone.visible = false ;
 					bottomBar.btnStorage.visible = false ;
-//					topBar.visible = true ;
+					topBar.visible = true ;
 					break ;
 				case VillageMode.EDIT :
 					bottomBar.btnMarket.visible = false ;
@@ -72,18 +78,18 @@ package local.view
 					questBtn.visible = false ;
 					bottomBar.btnDone.visible = true ;
 					bottomBar.btnStorage.visible = true ;
-//					topBar.visible = false ;
+					topBar.visible = false ;
 					break ;
 				case VillageMode.BUILDING_STORAGE :
 					bottomBar.btnDone.visible = false ;
 					bottomBar.btnStorage.visible = false ;
 					questBtn.visible = false ;
 					bottomBar.showStorage();
-//					topBar.visible = false ;
+					topBar.visible = false ;
 					break ;
 				case VillageMode.BUILDING_SHOP :
 					bottomBar.visible = false ;
-//					topBar.visible = false ;
+					topBar.visible = false ;
 					questBtn.visible = false ;
 					break ;
 				case VillageMode.EXPAND :
@@ -92,7 +98,7 @@ package local.view
 					questBtn.visible = false ;
 					bottomBar.btnDone.visible = true ;
 					bottomBar.btnStorage.visible = false ;
-//					topBar.visible = false ;
+					topBar.visible = false ;
 					break ;
 				case VillageMode.VISIT:
 //					gameTip.hide();

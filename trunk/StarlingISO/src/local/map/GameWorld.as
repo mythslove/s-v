@@ -25,11 +25,6 @@ package local.map
 			return _instance ;
 		}
 		//-----------------------------------------------------------------
-		override protected function addedToStageHandler(e:Event):void{
-			super.addedToStageHandler(e);
-			GameWorld.instance.showBuildings();
-			GameData.villageMode = VillageMode.NORMAL ;
-		}
 		
 		public function goHome():void
 		{
