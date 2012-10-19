@@ -1,6 +1,5 @@
 package local.view.shop.panel
 {
-	
 	import feathers.controls.Button;
 	import feathers.controls.TabBar;
 	import feathers.data.ListCollection;
@@ -15,26 +14,22 @@ package local.view.shop.panel
 	
 	import starling.events.Event;
 	
-	public class HomePanel extends ShopPanel
+	public class BusinessPanel extends ShopPanel
 	{
-		private static var _instance:HomePanel;
-		public static function get instance():HomePanel{
-			if(!_instance) _instance = new HomePanel();
+		private static var _instance:BusinessPanel;
+		public static function get instance():BusinessPanel{
+			if(!_instance) _instance = new BusinessPanel();
 			return _instance ;
 		}
 		//=====================================
 		public static const TAB_ALL:String = "ALL";
-		public static const  TAB_RESIDENCE:String = "RESIDENCE";
-		public static const  TAB_CONDOS:String = "CONDOS";
-		public static const  TAB_MANSIONS:String = "MANSIONS";
+		public static const  TAB_SHOPS:String = "SHOPS";
+		public static const  TAB_RESTAURANTS:String = "RESTAURANTS";
+		public static const  TAB_SERVICES:String = "SERVICES";
+		public static const  TAB_OFFICES:String = "OFFICES";
 		
 		
 		private var _tabBar:TabBar;
-		
-		public function HomePanel()
-		{
-			super();
-		}
 		
 		override protected function init():void
 		{
@@ -47,7 +42,7 @@ package local.view.shop.panel
 			this.addChild(this._tabBar);
 			this._tabBar.dataProvider = new ListCollection(
 				[
-					{ label: TAB_ALL }, { label: TAB_RESIDENCE }, { label: TAB_CONDOS }, { label: TAB_MANSIONS }
+					{ label: TAB_ALL }, { label: TAB_SHOPS }, { label: TAB_RESTAURANTS }, { label: TAB_SERVICES }, { label: TAB_OFFICES }
 				]);
 			_tabBar.width = _tabBar.maxWidth =_tabBar.dataProvider.data.length*170  ;
 			
@@ -79,11 +74,11 @@ package local.view.shop.panel
 				switch(tabBar.selectedItem.label)
 				{
 					case TAB_ALL:
-						_list.dataProvider = new ListCollection( ShopModel.instance.baseHomes );
+						_list.dataProvider = new ListCollection( ShopModel.instance.baseBusiness );
 						break ;
 					default:
 						var vos:Vector.<BaseBuildingVO> = new Vector.<BaseBuildingVO>();
-						for each(var vo:BaseBuildingVO in ShopModel.instance.baseHomes){
+						for each(var vo:BaseBuildingVO in ShopModel.instance.baseBusiness){
 							if(vo.subClass.toUpperCase()==tabBar.selectedItem.label){
 								vos.push( vo );
 							}
