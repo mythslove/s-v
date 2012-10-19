@@ -82,7 +82,7 @@ package local.view.shop.panel
 		
 		protected function listOnScroll( list:List ):void
 		{
-			var cha:int = list.horizontalScrollPosition / list.maxHorizontalScrollPosition - list.horizontalPageIndex
+			var cha:Number = list.horizontalScrollPosition / list.maxHorizontalScrollPosition - list.horizontalPageIndex
 			if( cha==0||cha==1||cha==-1){
 				var maxPage:int = list.maxHorizontalScrollPosition / list.maxWidth ;
 				var page:int = list.horizontalScrollPosition / list.maxHorizontalScrollPosition ;
