@@ -132,7 +132,7 @@ package local.view.control
 					_isMouseDown = true ;
 					_container.mouseChildren = true  ;
 					_mouseTime  = getTimer() ;
-					_mouseDownPos = e.stageX ;
+					_mouseDownPos = e.stageX/_container.root.scaleX ;
 					_prevContainerPos = _content.x ;
 					_container.addEventListener(MouseEvent.MOUSE_MOVE, onMouseHandler );
 					_container.addEventListener(MouseEvent.MOUSE_UP, onMouseHandler );
@@ -143,7 +143,7 @@ package local.view.control
 					if(!scrollLock){
 						if(e.buttonDown) {
 							_container.mouseChildren = false  ;
-							endPos = _prevContainerPos +  e.stageX-_mouseDownPos ;
+							endPos = _prevContainerPos +  e.stageX/_container.root.scaleX-_mouseDownPos ;
 							if(!_container.hasEventListener(Event.ENTER_FRAME)){
 								_container.addEventListener(Event.ENTER_FRAME , onEnterFrame);
 							}
@@ -160,7 +160,7 @@ package local.view.control
 					_container.removeEventListener(MouseEvent.ROLL_OUT, onMouseHandler );
 					_container.removeEventListener(MouseEvent.RELEASE_OUTSIDE, onMouseHandler );
 					//判断翻页
-					var cha:Number = _mouseDownPos-e.stageX ;
+					var cha:Number = _mouseDownPos-e.stageX/_container.root.scaleX ;
 					var timeCha:Number = getTimer()-_mouseTime ;
 					if(cha>_containerViewport.width*_container.root.scaleX*0.4 || (cha>0 && timeCha<200 )){ //向右翻页
 						nextPage();
