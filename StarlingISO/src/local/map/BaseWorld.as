@@ -374,13 +374,13 @@ package local.map
 					}
 					else if(!_isMove)
 					{
-						if(e.target is StatusIcon)
+						if(touch.target.parent is StatusIcon)
 						{
 							if(currentSelected) currentSelected.flash(false);
-							currentSelected = (e.target as StatusIcon).building ;
+							currentSelected = (touch.target.parent as StatusIcon).building ;
 							currentSelected.onClick();
 						}
-//						else if(e.target is ExpandSign)
+//						else if(touch.target is ExpandSign)
 //						{
 //							if( !GameData.hasExpanding ){
 //								GameData.villageMode = VillageMode.EXPAND ;
@@ -388,7 +388,7 @@ package local.map
 //								trace("已经有地在扩了");
 //							}
 //						}
-						if(touch.target.parent.parent==_mouseBuilding)
+						else if(_mouseBuilding && touch.target.parent.parent==_mouseBuilding)
 						{
 							if(touch.target.parent.parent!=currentSelected  ){
 								if(currentSelected) currentSelected.flash(false);
