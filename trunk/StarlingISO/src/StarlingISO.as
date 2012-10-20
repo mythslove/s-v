@@ -177,16 +177,17 @@ package
 			}else{
 				//其他类型
 				var viewPort:Rectangle = new Rectangle();
-				if (stage.fullScreenHeight / stage.fullScreenWidth < 0.5)
+				var fator:Number = 64/96 ;
+				if (stage.fullScreenHeight / stage.fullScreenWidth < fator)
 				{
 					viewPort.height = stage.fullScreenHeight;
-					viewPort.width  = int(viewPort.height / 0.5);
+					viewPort.width  = int(viewPort.height /fator);
 					viewPort.x = int((stage.fullScreenWidth - viewPort.width) / 2);
 				}
 				else
 				{
 					viewPort.width = stage.fullScreenWidth; 
-					viewPort.height = int(viewPort.width * 0.5);
+					viewPort.height = int(viewPort.width * fator);
 					viewPort.y = int((stage.fullScreenHeight - viewPort.height) / 2);
 				}
 				GameSetting.SCREEN_WIDTH  = _starling.stage.stageWidth = viewPort.width ;
