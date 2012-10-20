@@ -45,12 +45,13 @@ package
 			stage.mouseChildren = false ;
 			NativeApplication.nativeApplication.executeInBackground = true ;
 			
+			//判断是加载高清资源还是低清资源
 			if(stage.fullScreenWidth % 1024==0){
 				GameSetting.isIpad = true ;
 				_loading = new IPAD_LOADING() as Bitmap;
 				_loading.width = stage.fullScreenWidth ;
 				_loading.height = stage.fullScreenHeight ;
-			}else{ // if(stage.fullScreenWidth % 480==0){
+			}else{
 				_loading = new IPHONE_LOADING() as Bitmap;
 				_loading.height = stage.fullScreenWidth ;
 				_loading.width = stage.fullScreenHeight ;
@@ -164,8 +165,7 @@ package
 				GameSetting.SCREEN_HEIGHT =_starling.stage.stageHeight  = 768 ;
 			}else if( stage.fullScreenWidth % 1136==0 ){
 				//iphone5
-				GameSetting.SCREEN_WIDTH = _starling.stage.stageWidth = 960;
-				GameSetting.SCREEN_HEIGHT =_starling.stage.stageHeight  = 640 ;
+				GameSetting.SCREEN_WIDTH = _starling.stage.stageWidth = 1136 ;
 			}else if( stage.fullScreenWidth % 960==0 ){
 				//iphone4,4s , 如果需要高清，则注释下面五行
 //				GameSetting.SCREEN_WIDTH = _starling.stage.stageWidth = 480;
