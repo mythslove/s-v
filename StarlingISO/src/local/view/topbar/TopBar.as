@@ -7,6 +7,7 @@ package local.view.topbar
 	import flash.utils.setTimeout;
 	
 	import local.comm.GameData;
+	import local.comm.GameSetting;
 	import local.map.GameWorld;
 	import local.map.item.BaseBuilding;
 	import local.model.FriendVillageModel;
@@ -81,7 +82,7 @@ package local.view.topbar
 			GameData.commPoint.setTo(0,0);
 			var globalPoint:Point = building.localToGlobal( GameData.commPoint );
 			var temp:Number = Point.distance( globalPoint , new Point(goodsBar.x+x , goodsBar.y ));
-			temp = temp>400 ? 0.5 : 0.25 ;
+			temp = temp>400*GameSetting.GAMESCALE ? 0.5 : 0.25 ;
 			flyGoods( globalPoint , temp );
 			setTimeout( flyGoods , 150 , globalPoint , temp );
 			setTimeout( flyGoods , 300 , globalPoint , temp );

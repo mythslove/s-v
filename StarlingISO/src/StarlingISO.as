@@ -166,7 +166,6 @@ package
 				//iphone5
 				GameSetting.SCREEN_WIDTH = _starling.stage.stageWidth = 960;
 				GameSetting.SCREEN_HEIGHT =_starling.stage.stageHeight  = 640 ;
-				_starling.stage.x = (1136-960)>>1 ;
 			}else if( stage.fullScreenWidth % 480==0 ){
 				//iphone4,4s
 				GameSetting.SCREEN_WIDTH = _starling.stage.stageWidth = 480;
