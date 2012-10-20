@@ -60,7 +60,7 @@ package local.map
 		protected var _trees:Vector.<BasicBuilding> = new Vector.<BasicBuilding>();//所有的树
 		
 		/**===============用于地图移动和缩放=========================*/
-		protected var _moveSpeed:Number =0.4 ; //移动的速度
+		protected var _moveSpeed:Number =0.6 ; //移动的速度
 		public var runUpdate:Boolean = true ; //是否运行建筑 的update
 		protected var _endX:int ;
 		protected var _endY:int;
@@ -317,7 +317,7 @@ package local.map
 				var pos:Point = touch.getLocation(stage); 
 				if(touch.phase==TouchPhase.BEGAN)
 				{
-					_moveSpeed = 0.4 ;
+					_moveSpeed = 0.6 ;
 					_touchFinger1.x = pos.x ;
 					_touchFinger1.y = pos.y ;
 					_endX = x ;
