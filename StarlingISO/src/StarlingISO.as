@@ -166,15 +166,28 @@ package
 				//iphone5
 				GameSetting.SCREEN_WIDTH = _starling.stage.stageWidth = 960;
 				GameSetting.SCREEN_HEIGHT =_starling.stage.stageHeight  = 640 ;
-			}else if( stage.fullScreenWidth % 480==0 ){
-				//iphone4,4s
+			}else if( stage.fullScreenWidth % 960==0 ){
+				//iphone4,4s , 如果需要高清，则注释下面五行
+//				GameSetting.SCREEN_WIDTH = _starling.stage.stageWidth = 480;
+//				GameSetting.SCREEN_HEIGHT = _starling.stage.stageHeight  = 320 ;
+//				GameSetting.MAP_WIDTH /=2 ;
+//				GameSetting.MAP_HEIGHT /=2 ;
+//				GameSetting.GRID_SIZE /=2 ;
+			}
+			else if( stage.fullScreenWidth%480==0){
+				//3GS , 如果需要高清，注释下面两行
+//				GameSetting.SCREEN_WIDTH = _starling.stage.stageWidth = 960;
+//				GameSetting.SCREEN_HEIGHT = _starling.stage.stageHeight  = 640 ;
+				
+				//低清
 				GameSetting.SCREEN_WIDTH = _starling.stage.stageWidth = 480;
 				GameSetting.SCREEN_HEIGHT = _starling.stage.stageHeight  = 320 ;
 				GameSetting.MAP_WIDTH /=2 ;
 				GameSetting.MAP_HEIGHT /=2 ;
 				GameSetting.GRID_SIZE /=2 ;
-			}else{
-				//其他类型
+			}
+			else{
+				//其他类型设备
 				var viewPort:Rectangle = new Rectangle();
 				var fator:Number = 64/96 ;
 				if (stage.fullScreenHeight / stage.fullScreenWidth < fator)
