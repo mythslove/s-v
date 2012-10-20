@@ -69,7 +69,7 @@ package local.view.bottom
 			switch( btn )
 			{
 				case btnMarket:
-					PopUpManager.instance.addQueuePopUp( ShopOverViewPopUp.instance , GameSetting.isIpad);
+					PopUpManager.instance.addQueuePopUp( ShopOverViewPopUp.instance , true );
 					break ;
 				case btnEditor:
 					GameData.villageMode = VillageMode.EDIT ;

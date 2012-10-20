@@ -86,7 +86,7 @@ package local.view.shop
 			TweenLite.from( this , 0.3 , { x:x-temp , ease: Back.easeOut , onComplete:showTweenOver });
 		}
 		private function showTweenOver():void{
-			if(GameSetting.SCREEN_WIDTH<1024) {
+			if(GameSetting.SCREEN_WIDTH%480==0) {
 				GameWorld.instance.visible=false;
 			}
 //			if(GameData.isShowTutor && HomePanel.instance.content.numChildren>0 ){

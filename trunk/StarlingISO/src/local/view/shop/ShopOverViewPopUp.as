@@ -203,22 +203,22 @@ package local.view.shop
 					close();
 					break ;
 				case _btnHomes:
-					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , GameSetting.isIpad );
+					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , true );
 					ShopPopUp.instance.show(BuildingType.HOME);
 					close();
 					break ;
 				case _btnDecor:
-					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , GameSetting.isIpad );
+					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , true );
 					ShopPopUp.instance.show(BuildingType.DECORATION);
 					close();
 					break ;
 				case _btnBusiness:
-					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , GameSetting.isIpad );
+					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , true );
 					ShopPopUp.instance.show(BuildingType.BUSINESS);
 					close();
 					break ;
 				case _btnIndustry:
-					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , GameSetting.isIpad );
+					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , true );
 					ShopPopUp.instance.show(BuildingType.INDUSTRY);
 					close();
 					break ;
