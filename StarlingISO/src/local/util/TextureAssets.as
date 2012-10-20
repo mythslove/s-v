@@ -147,7 +147,7 @@ package local.util
 						if(GameSetting.isIpad){
 							rect  = maxRect.insert( bmd.width , bmd.height , MaxRectsBinPack.ContactPointRule) ;
 						}else{
-							rect  = maxRect.insert( bmd.width*0.5 , bmd.height*0.5 , MaxRectsBinPack.ContactPointRule) ;
+							rect  = maxRect.insert(bmd.width*0.5+1 , bmd.height*0.5+1 , MaxRectsBinPack.ContactPointRule) ;
 							mat.scale(0.5,0.5);
 						}
 						mat.translate( rect.x , rect.y );
@@ -178,7 +178,7 @@ package local.util
 				if(GameSetting.isIpad){
 					rect  = maxRect.insert( bmd.width , bmd.height , MaxRectsBinPack.ContactPointRule) ;
 				}else{
-					rect  = maxRect.insert( bmd.width*0.5 , bmd.height*0.5 , MaxRectsBinPack.ContactPointRule) ;
+					rect  = maxRect.insert( bmd.width*0.5+1 , bmd.height*0.5+1 , MaxRectsBinPack.ContactPointRule) ;
 					mat.scale(0.5,0.5);
 				}
 				mat.translate( rect.x , rect.y );
