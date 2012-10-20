@@ -175,13 +175,28 @@ package
 				GameSetting.MAP_HEIGHT /=2 ;
 				GameSetting.GRID_SIZE /=2 ;
 			}else{
-				GameSetting.SCREEN_WIDTH = _starling.stage.stageWidth = 480;
-				GameSetting.SCREEN_HEIGHT = _starling.stage.stageHeight  = 320 ;
-				_starling.viewPort.x = (stage.fullScreenWidth-480)>>1 ;
-				_starling.viewPort.y = (stage.fullScreenHeight-320)>>1 ;
-				GameSetting.MAP_WIDTH /=2 ;
-				GameSetting.MAP_HEIGHT /=2 ;
-				GameSetting.GRID_SIZE /=2 ;
+				//其他类型
+				var viewPort:Rectangle = new Rectangle();
+				if (stage.fullScreenHeight / stage.fullScreenWidth < 0.5)
+				{
+					viewPort.height = stage.fullScreenHeight;
+					viewPort.width  = int(viewPort.height / 0.5);
+					viewPort.x = int((stage.fullScreenWidth - viewPort.width) / 2);
+				}
+				else
+				{
+					viewPort.width = stage.fullScreenWidth; 
+					viewPort.height = int(viewPort.width * 0.5);
+					viewPort.y = int((stage.fullScreenHeight - viewPort.height) / 2);
+				}
+				GameSetting.SCREEN_WIDTH  = _starling.stage.stageWidth = viewPort.width ;
+				GameSetting.SCREEN_HEIGHT = _starling.stage.stageHeight= viewPort.height ;
+				_starling.viewPort = viewPort ;
+				if(viewPort.width<960){
+					GameSetting.MAP_WIDTH /=2 ;
+					GameSetting.MAP_HEIGHT /=2 ;
+					GameSetting.GRID_SIZE /=2 ;
+				}
 			}
 			_starling.stage3D.addEventListener(Event.CONTEXT3D_CREATE , contextCreatedHandler );
 		}
