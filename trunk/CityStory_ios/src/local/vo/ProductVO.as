@@ -13,5 +13,6 @@ package local.vo
 		public var earnGoods:int ; //可以收获的 商品数量
 		public var earnExp:int =1 ;
 		public var expireTime:int ; //过期时间
+		public var requireLv:int ; //使用需要玩家的等级要求
 	}
 }
