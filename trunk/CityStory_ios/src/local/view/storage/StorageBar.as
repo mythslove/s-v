@@ -12,6 +12,7 @@ package local.view.storage
 	import flash.utils.Dictionary;
 	
 	import local.comm.GameData;
+	import local.comm.GameSetting;
 	import local.enum.VillageMode;
 	import local.map.GameWorld;
 	import local.map.item.BaseBuilding;
@@ -192,6 +193,7 @@ package local.view.storage
 			super.addedToStageHandler(e);
 			menuBar.selected = _btns[0];
 			
+			x = ( GameSetting.SCREEN_WIDTH-width)>>1 ;
 			y=0;
 			TweenLite.to( this , 0.3 , { y:-height+15 , onComplete: function():void{ 
 				mouseChildren = true ;
