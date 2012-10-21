@@ -3,6 +3,7 @@ package local.map.pk
 	import com.greensock.TweenMax;
 	
 	import flash.display.Bitmap;
+	import flash.display.BitmapData;
 	import flash.display.DisplayObject;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -16,6 +17,7 @@ package local.map.pk
 	import local.map.GameWorld;
 	import local.model.PlayerModel;
 	import local.util.EmbedsManager;
+	import local.util.ResourceUtil;
 	import local.view.CenterViewLayer;
 	import local.view.base.BaseView;
 	
@@ -38,13 +40,16 @@ package local.map.pk
 			switch( pkType)
 			{
 				case PickupType.COIN:
-					bmp.bitmapData = EmbedsManager.instance.getSwfBmd("local.view.pk.PickupCoin");
+					bmp.bitmapData = ResourceUtil.instance.getInstanceByClassName("ui_pk","local.view.pk.Coin") as BitmapData ;
 					break ;
 				case PickupType.EXP:
-					bmp.bitmapData = EmbedsManager.instance.getSwfBmd("local.view.pk.PickupExp");
+					bmp.bitmapData = ResourceUtil.instance.getInstanceByClassName("ui_pk","local.view.pk.Exp") as BitmapData ;
 					break ;
 				case PickupType.GOOD:
-					bmp.bitmapData = EmbedsManager.instance.getSwfBmd("local.view.pk.PickupGoods");
+					bmp.bitmapData = ResourceUtil.instance.getInstanceByClassName("ui_pk","local.view.pk.Goods") as BitmapData ;
+					break ;
+				case PickupType.ENERGY:
+					bmp.bitmapData = ResourceUtil.instance.getInstanceByClassName("ui_pk","local.view.pk.Energy") as BitmapData ;
 					break ;
 			}
 			bmp.y = - bmp.height>>1 ;
@@ -102,6 +107,10 @@ package local.map.pk
 					case PickupType.GOOD:
 						PlayerModel.instance.changeGoods(  _pkHash[obj.name] );
 						target = centerLayer.topBar.goodsBar ;
+						break ;
+					case PickupType.ENERGY:
+						PlayerModel.instance.changeEnergy(  _pkHash[obj.name] );
+						target = centerLayer.topBar.energyBar ;
 						break ;
 				}
 				targetPoint.setTo( target.x+centerLayer.topBar.x , target.y+centerLayer.topBar.y );

@@ -59,7 +59,7 @@ package local.map.item
 				showBuildingFlagIcon();
 				
 				//收Comp-----------------------测试用------------------
-				if(Math.random()>0.85){
+				if(Math.random()>0.25){
 					setTimeout( collectComp , 100 , "Wood" , 2 );
 					setTimeout( collectComp , 800 , "Stone" , 1 );
 				}

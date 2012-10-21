@@ -103,10 +103,9 @@ package
 				}
 			}
 			resVOs.push( new ResVO("localization_config" , "config/localization_"+GameSetting.local+".bin") );
+			resVOs.push( new ResVO("ui_pk","swf/pickup.swf",false));
 			resVOs.push( new ResVO("ui_bar","swf/"+GameSetting.device+"/bar.swf",false));
 			resVOs.push( new ResVO("ui_popup","swf/"+GameSetting.device+"/popup.swf",false));
-			resVOs.push( new ResVO("ui_pickup","swf/"+GameSetting.device+"/pickup.swf",false));
-			resVOs.push( new ResVO("ui_comp","swf/"+GameSetting.device+"/comp.swf",false));
 			ResourceUtil.instance.addEventListener(ResProgressEvent.RES_LOAD_PROGRESS , gameInitResHandler );
 			ResourceUtil.instance.addEventListener("gameInitRes" , gameInitResHandler );
 			ResourceUtil.instance.queueLoad( "gameInitRes" , resVOs , 10 );

@@ -3,14 +3,14 @@ package local.map.pk
 	import com.greensock.TweenLite;
 	
 	import flash.display.Bitmap;
+	import flash.display.BitmapData;
 	import flash.display.Sprite;
 	import flash.events.Event;
-	import flash.text.TextField;
-	import flash.text.TextFormat;
 	
 	import local.enum.PickupType;
 	import local.map.GameWorld;
 	import local.util.EmbedsManager;
+	import local.util.ResourceUtil;
 	
 	import pxBitmapFont.PxTextAlign;
 	import pxBitmapFont.PxTextField;
@@ -29,25 +29,25 @@ package local.map.pk
 			switch( pkType)
 			{
 				case PickupType.COIN:
-					bmp.bitmapData = EmbedsManager.instance.getSwfBmd("local.view.pk.PickupCoinSmall");
+					bmp.bitmapData = ResourceUtil.instance.getInstanceByClassName("ui_pk","local.view.pk.Coin") as BitmapData;
 					break ;
 				case PickupType.EXP:
-					bmp.bitmapData = EmbedsManager.instance.getSwfBmd("local.view.pk.PickupExpSmall");
+					bmp.bitmapData = ResourceUtil.instance.getInstanceByClassName("ui_pk","local.view.pk.Exp") as BitmapData;
 					break ;
 				case PickupType.GOOD:
-					bmp.bitmapData = EmbedsManager.instance.getSwfBmd("local.view.pk.PickupGoodsSmall");
+					bmp.bitmapData = ResourceUtil.instance.getInstanceByClassName("ui_pk","local.view.pk.Goods") as BitmapData;
 					break ;
 				case PickupType.ENERGY:
-					bmp.bitmapData = EmbedsManager.instance.getSwfBmd("local.view.pk.PickupEnergySmall");
+					bmp.bitmapData = ResourceUtil.instance.getInstanceByClassName("ui_pk","local.view.pk.Energy") as BitmapData;
 					break ;
 				case PickupType.CASH:
-					bmp.bitmapData = EmbedsManager.instance.getSwfBmd("local.view.pk.PickupCashSmall");
+					bmp.bitmapData = ResourceUtil.instance.getInstanceByClassName("ui_pk","local.view.pk.Cash") as BitmapData
 					break ;
 				default: //component
-					bmp.bitmapData = EmbedsManager.instance.getSwfBmd("local.view.comp.Comp"+pkType);
-					bmp.scaleX = bmp.scaleY = 0.7 ;
+					bmp.bitmapData = ResourceUtil.instance.getInstanceByClassName("ui_pk","local.view.pk."+pkType) as BitmapData
 					break ;
 			}
+			bmp.scaleX = bmp.scaleY = 0.5 ;
 			bmp.y = - bmp.height>>1 ;
 			addChild(bmp);
 			
