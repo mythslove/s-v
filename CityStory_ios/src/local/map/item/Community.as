@@ -43,16 +43,12 @@ package local.map.item
 		private function collect():void
 		{
 			if( reduceEnergy() ){
-				var pkImgs:PickupImages = new PickupImages();
 				if(buildingVO.baseVO.earnCoin>0 ){
-					pkImgs.addPK( PickupType.COIN , buildingVO.baseVO.earnCoin );
+					PickupImages.addPK( PickupType.COIN , buildingVO.baseVO.earnCoin,screenX,screenY,_xSpan );
 				}
 				if( buildingVO.baseVO.earnExp>0 ){
-					pkImgs.addPK( PickupType.EXP , buildingVO.baseVO.earnExp );
+					PickupImages.addPK( PickupType.EXP , buildingVO.baseVO.earnExp,screenX,screenY,_xSpan );
 				}
-				pkImgs.x = screenX ;
-				pkImgs.y = screenY ;
-				GameWorld.instance.effectScene.addChild( pkImgs );
 				
 				startProduct();
 				showBuildingFlagIcon();
