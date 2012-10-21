@@ -9,18 +9,6 @@ package local.util
 	import flash.utils.getDefinitionByName;
 	
 	import local.comm.GameSetting;
-	import local.view.comp.CompStone;
-	import local.view.comp.CompWood;
-	import local.view.pk.PickupCash;
-	import local.view.pk.PickupCashSmall;
-	import local.view.pk.PickupCoin;
-	import local.view.pk.PickupCoinSmall;
-	import local.view.pk.PickupEnergy;
-	import local.view.pk.PickupEnergySmall;
-	import local.view.pk.PickupExp;
-	import local.view.pk.PickupExpSmall;
-	import local.view.pk.PickupGoods;
-	import local.view.pk.PickupGoodsSmall;
 	import local.vo.BitmapAnimResVO;
 	import local.vo.RoadResVO;
 	
@@ -120,12 +108,6 @@ package local.util
 		[Embed(source="../resource/effect/BuildStatus_3_1.bd", mimeType="application/octet-stream") ]
 		public static const BuildStatus_3_1:Class; 
 		
-		
-		//========pickup和component图标====================
-		PickupCash,PickupCashSmall,PickupCoin,PickupCoinSmall,PickupEnergy,PickupEnergySmall,
-		PickupExp,PickupExpSmall,PickupGoods,PickupGoodsSmall
-		
-		CompStone , CompWood;
 		
 		
 		//===================特效===========================
