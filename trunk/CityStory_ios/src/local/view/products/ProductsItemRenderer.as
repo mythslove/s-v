@@ -59,6 +59,8 @@ package local.view.products
 			}
 			txtTitle.y = ( 40 - txtTitle.textHeight)>>1 ;
 			
+			//玩家等级限制，是否lock
+			
 			btnStart.addEventListener(MouseEvent.CLICK , onStartHandler , false , 0 , true );
 		}
 		
