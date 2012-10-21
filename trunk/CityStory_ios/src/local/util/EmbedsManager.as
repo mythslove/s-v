@@ -188,20 +188,6 @@ package local.util
 			return _resHash[name]  ;
 		}
 		
-		/**
-		 * 获取嵌入到swf的bitmapData 
-		 * @param name
-		 * @return 
-		 */		
-		public function getSwfBmd( name:String ):BitmapData
-		{
-			var type:Class = getDefinitionByName( name ) as Class;
-			if(type){
-				return new type(0,0) as BitmapData ;
-			}
-			return null ;
-		}
-		
 		
 		/**
 		 * 获得嵌入的路资源文件  

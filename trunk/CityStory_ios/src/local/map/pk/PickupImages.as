@@ -15,6 +15,7 @@ package local.map.pk
 	import local.comm.GameData;
 	import local.enum.PickupType;
 	import local.map.GameWorld;
+	import local.model.CompsModel;
 	import local.model.PlayerModel;
 	import local.util.EmbedsManager;
 	import local.util.ResourceUtil;
@@ -51,9 +52,12 @@ package local.map.pk
 				case PickupType.ENERGY:
 					bmp.bitmapData = ResourceUtil.instance.getInstanceByClassName("ui_pk","local.view.pk.Energy") as BitmapData ;
 					break ;
+				default: //comp
+					bmp.bitmapData = ResourceUtil.instance.getInstanceByClassName("ui_pk","local.view.pk."+pkType) as BitmapData ;
+					break ;
 			}
 			bmp.y = - bmp.height>>1 ;
-			bmp.x = numChildren==0 ? -bmp.width*0.8 : -bmp.width*0.25  ;
+			bmp.x = -bmp.width +numChildren*bmp.width*0.8 ; //numChildren==0 ? -bmp.width*0.8 : -bmp.width*0.25  ;
 			addChild(bmp);
 		}
 		
@@ -65,7 +69,7 @@ package local.map.pk
 			var scale:Number = 1/GameWorld.instance.scaleX ;
 			
 			var bezierArray:Array = [ { x:x , y: y-50 } , { x:x , y:y+40+Math.random()*50 } ] ;
-			TweenMax.to( this , 0.25 , {bezierThrough:bezierArray , onComplete:show , scaleX:scale , scaleY:scale });
+			TweenMax.to( this , 0.3 , {bezierThrough:bezierArray , onComplete:show , scaleX:scale , scaleY:scale });
 		}
 		
 		private function show():void
@@ -112,6 +116,10 @@ package local.map.pk
 						PlayerModel.instance.changeEnergy(  _pkHash[obj.name] );
 						target = centerLayer.topBar.energyBar ;
 						break ;
+					default://comp
+						CompsModel.instance.addComp( obj.name ,  _pkHash[obj.name] );
+						target = centerLayer.topBar.lvBar ;
+						break ;
 				}
 				targetPoint.setTo( target.x+centerLayer.topBar.x , target.y+centerLayer.topBar.y );
 				movePickup( targetPoint , obj );
@@ -135,7 +143,7 @@ package local.map.pk
 			CenterViewLayer.instance.addChildAt( displayObj,0);
 			
 			var temp:Number = Point.distance( targetPoint , new Point(displayObj.x,displayObj.y));
-			temp = temp>400 ? 0.5 : 0.25 ;
+			temp = temp>400 ? 0.5 : 0.3 ;
 			var obj:Object = {x: displayObj.x + (targetPoint.x > displayObj.x ? -50 : 50 ) , y: displayObj.y + (targetPoint.y - displayObj.y) * 0.5 };
 			TweenMax.to( displayObj , temp , {bezier:[ obj, { x:targetPoint.x , y:targetPoint.y }] , onComplete:over , onCompleteParams:[displayObj] ,alpha:0 });
 		}

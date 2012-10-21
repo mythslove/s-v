@@ -3,6 +3,7 @@ package local.view.topbar
 	import com.greensock.TweenLite;
 	
 	import flash.display.Bitmap;
+	import flash.display.BitmapData;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
@@ -13,7 +14,7 @@ package local.view.topbar
 	import local.map.item.BaseBuilding;
 	import local.model.FriendVillageModel;
 	import local.model.PlayerModel;
-	import local.util.EmbedsManager;
+	import local.util.ResourceUtil;
 	import local.view.base.BaseView;
 	import local.vo.PlayerVO;
 	
@@ -70,11 +71,12 @@ package local.view.topbar
 		
 		private function flyGoods( targetPoint:Point , time:Number ):void
 		{
-			var bmp:Bitmap = new Bitmap ( EmbedsManager.instance.getSwfBmd("local.view.pk.PickupGoodsSmall") );
+			var bmp:Bitmap = new Bitmap ( ResourceUtil.instance.getInstanceByClassName("ui_pk","local.view.pk.Goods") as BitmapData );
+			bmp.scaleX = bmp.scaleY = 0.5 ;
 			bmp.x = goodsBar.x+x  ;
 			bmp.y = goodsBar.y ;
 			addChild(bmp);
-			TweenLite.to( bmp , time , { x:targetPoint.x/root.scaleX , y:targetPoint.y/root.scaleX , scaleX:0.5 , scaleY:0.5 , alpha:0.2 , 
+			TweenLite.to( bmp , time , { x:targetPoint.x/root.scaleX , y:targetPoint.y/root.scaleX , scaleX:0.3 , scaleY:0.3 , alpha:0.2 , 
 				onComplete:flyGoodsOver , onCompleteParams:[bmp] });
 		}
 		

@@ -4,6 +4,7 @@ package local.view.storage
 	import bing.utils.FixScale;
 	
 	import flash.display.Bitmap;
+	import flash.display.BitmapData;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.text.TextField;
@@ -12,6 +13,7 @@ package local.view.storage
 	import local.model.ShopModel;
 	import local.util.EmbedsManager;
 	import local.util.GameUtil;
+	import local.util.ResourceUtil;
 	import local.view.base.BaseView;
 	import local.view.base.BuildingThumb;
 	import local.vo.BaseBuildingVO;
@@ -42,7 +44,7 @@ package local.view.storage
 				var compVO:ComponentVO = CompsModel.instance.allComps[ vo.toString() ];
 				GameUtil.boldTextField( txtTitle , compVO.title );
 				GameUtil.boldTextField( txtCount , CompsModel.instance.getCompCount(vo.toString())+"/"+CompsModel.MAX_COUNT );
-				var bmp:Bitmap = new Bitmap( EmbedsManager.instance.getSwfBmd("local.view.comp.Comp"+vo.toString()) ) ;
+				var bmp:Bitmap = new Bitmap(ResourceUtil.instance.getInstanceByClassName("ui_pk","local.view.pk."+vo.toString()) as BitmapData ) ;
 				FixScale.setScale(bmp, 120 , 90);
 				imgContainer.addChild( bmp );
 				bmp.x = -bmp.width>>1 ;
