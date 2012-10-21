@@ -1,8 +1,7 @@
 package local.map.item
 {
-	import flash.utils.setTimeout;
-	
 	import local.comm.GameData;
+	import local.comm.GameSetting;
 	import local.enum.BuildingStatus;
 	import local.enum.PickupType;
 	import local.enum.QuestType;
@@ -60,8 +59,12 @@ package local.map.item
 				
 				//收Comp-----------------------测试用------------------
 				if(Math.random()>0.25){
-					setTimeout( collectComp , 100 , "Wood" , 2 );
-					setTimeout( collectComp , 800 , "Stone" , 1 );
+					var compImgs:PickupImages = new PickupImages();
+					compImgs.addPK( "Wood" , 2 );
+					compImgs.addPK( "Stone" , 1 );
+					compImgs.x = screenX+GameSetting.GRID_SIZE ;
+					compImgs.y = screenY+GameSetting.GRID_SIZE ;
+					GameWorld.instance.effectScene.addChild( compImgs );
 				}
 				
 				//任务判断

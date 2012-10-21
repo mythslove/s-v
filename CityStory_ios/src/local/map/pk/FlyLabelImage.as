@@ -25,7 +25,6 @@ package local.map.pk
 			mouseEnabled = mouseChildren = false ;
 			//图标
 			var bmp:Bitmap = new Bitmap();
-//			bmp.name = pkType ;
 			switch( pkType)
 			{
 				case PickupType.COIN:
