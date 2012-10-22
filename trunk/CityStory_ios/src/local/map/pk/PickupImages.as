@@ -87,7 +87,6 @@ package local.map.pk
 		
 		private function show():void
 		{
-			addEventListener(MouseEvent.MOUSE_DOWN , onMouseDownHandler , false  ,0 , true );
 			_timeoutId = setTimeout( fly , Math.random()*2000 );
 		}
 			
@@ -97,7 +96,7 @@ package local.map.pk
 			fly();
 		}
 		
-		private function fly():void
+		public function fly():void
 		{
 			if(_timeoutId>0) {
 				clearTimeout( _timeoutId );
@@ -162,7 +161,6 @@ package local.map.pk
 			if(this .parent){
 				this.parent.removeChild(this );
 			}
-			removeEventListener(MouseEvent.MOUSE_DOWN , onMouseDownHandler ) ;
 		}
 	}
 }
