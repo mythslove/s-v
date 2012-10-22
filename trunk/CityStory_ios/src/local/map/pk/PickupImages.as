@@ -66,6 +66,7 @@ package local.map.pk
 					bmp.bitmapData = ResourceUtil.instance.getInstanceByClassName("ui_pk","local.view.pk.Energy") as BitmapData ;
 					break ;
 				default: //comp
+					instance.mouseEnabled = false ;
 					instance.isComp = true ;
 					bmp.bitmapData = ResourceUtil.instance.getInstanceByClassName("ui_pk","local.view.pk."+pkType) as BitmapData ;
 					break ;
@@ -127,10 +128,12 @@ package local.map.pk
 					CompsModel.instance.addComp( _pkType ,_value );
 					break ;
 			}
-			flyImg = new FlyLabelImage( _pkType ,_value ) ;
-			flyImg.x = x ;
-			flyImg.y = y ;
-			parent.addChild( flyImg );
+			if(parent){
+				flyImg = new FlyLabelImage( _pkType ,_value ) ;
+				flyImg.x = x ;
+				flyImg.y = y ;
+				parent.addChild( flyImg );
+			}
 			
 			if(target){
 				targetPoint.setTo( target.x+centerLayer.topBar.x , target.y+centerLayer.topBar.y );

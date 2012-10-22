@@ -49,7 +49,7 @@ package local.view.storage
 				imgContainer.addChild( bmp );
 				bmp.x = -bmp.width>>1 ;
 				bmp.y = -bmp.height>>1 ;
-				
+				mouseEnabled = false ;
 			}else{
 				isBuilding = true ;
 				var sbvo:StorageBuildingVO = vo as StorageBuildingVO ;

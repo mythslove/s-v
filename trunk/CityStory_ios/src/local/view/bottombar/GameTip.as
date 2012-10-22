@@ -80,7 +80,7 @@ package local.view.bottombar
 					}else if( currentLabel=="nopop"){
 						GameData.villageMode = VillageMode.NORMAL ;
 						//打开商店的房子窗口
-						PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , false );
+						PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , true );
 						ShopPopUp.instance.show(BuildingType.HOME);
 					}
 					this.hide() ;
