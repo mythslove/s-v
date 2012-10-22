@@ -119,16 +119,12 @@ package local.map.item
 		private function collect( goods:int ):void
 		{
 			if( reduceEnergy() ){
-				var pkImgs:PickupImages = new PickupImages();
 				if(buildingVO.product.earnExp>0 ){
-					pkImgs.addPK( PickupType.EXP , buildingVO.product.earnExp );
+					PickupImages.addPK( PickupType.EXP , buildingVO.product.earnExp  ,screenX,screenY,_xSpan );
 				}
 				if( goods>0 ){
-					pkImgs.addPK( PickupType.GOOD , goods );
+					PickupImages.addPK( PickupType.GOOD , goods  ,screenX,screenY,_xSpan );
 				}
-				pkImgs.x = screenX ;
-				pkImgs.y = screenY ;
-				GameWorld.instance.effectScene.addChild( pkImgs );
 				
 				buildingVO.status = BuildingStatus.LACK_MATERIAL ;
 				buildingVO.product = null ;
