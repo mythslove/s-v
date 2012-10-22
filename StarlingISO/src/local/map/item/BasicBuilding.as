@@ -50,11 +50,7 @@ package local.map.item
 			
 			//掉修建时的经验
 			if(buildingVO.baseVO.clickExp>0){
-				var pkImgs:PickupImages = new PickupImages();
-				pkImgs.addPK( PickupType.EXP , buildingVO.baseVO.clickExp );
-				pkImgs.x = screenX ;
-				pkImgs.y = screenY ;
-				GameWorld.instance.effectScene.addChild( pkImgs );
+				PickupImages.addPK( PickupType.EXP , buildingVO.baseVO.clickExp,screenX,screenY,_xSpan );
 			}
 			
 			if( buildingVO.buildClick >= buildingVO.baseVO.click )

@@ -1,9 +1,13 @@
 package local.map.pk
 {
+	import bing.utils.MathUtil;
+	
+	import com.greensock.TweenLite;
 	import com.greensock.TweenMax;
+	import com.greensock.easing.Bounce;
+	import com.greensock.easing.Linear;
 	
 	import flash.geom.Point;
-	import flash.utils.Dictionary;
 	import flash.utils.clearTimeout;
 	import flash.utils.setTimeout;
 	
@@ -14,27 +18,37 @@ package local.map.pk
 	import local.model.PlayerModel;
 	import local.util.EmbedManager;
 	import local.view.CenterViewLayer;
-	import local.view.base.BaseView;
 	
 	import starling.display.DisplayObject;
 	import starling.display.Image;
-	import starling.events.Event;
+	import starling.display.Sprite;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
 	
-	public class PickupImages extends BaseView
+	public class PickupImages extends Sprite
 	{
-		private var _pkHash:Dictionary = new Dictionary(true);
+		public var _pkType:String ; 
+		public var _value:int ;
+		public var _span:int ;
 		private var _timeoutId:int ;
 		
-		public function PickupImages()
+		public function PickupImages(pkType:String , value:int , x:Number , y:Number , span:int)
 		{
 			super();
+			this.touchable = false ;
+			this.visible = false ;
+			this._pkType = pkType ;
+			this._value = value ;
+			this._span = span ;
+			this.x = x ;
+			this.y = y ;
+			
+			setTimeout( init , Math.random()*600 );
 		}
 		
-		public function addPK( pkType:String , value:int ):void
+		public static function addPK( pkType:String , value:int , x:Number , y:Number , span:int ):void
 		{
-			_pkHash[ pkType ] = value ;
+			var instance:PickupImages = new PickupImages(pkType , value , x , y,span);
 			var bmp:Image;
 			switch( pkType)
 			{
@@ -47,29 +61,32 @@ package local.map.pk
 				case PickupType.GOOD:
 					bmp = EmbedManager.getUIImage("GoodsIcon");
 					break ;
+				case PickupType.ENERGY:
+					bmp = EmbedManager.getUIImage("EnergyIcon");
+					break;
 			}
-			bmp.name = pkType ;
-			bmp.y = - bmp.height>>1 ;
-			bmp.x = numChildren==0 ? -bmp.width*0.8 : -bmp.width*0.25  ;
+			bmp.pivotX = bmp.width>>1 ;
+			bmp.pivotY = bmp.height>>1 ;
 			if(GameSetting.SCREEN_WIDTH<1024) bmp.scaleX = bmp.scaleY = 2 ;
-			addChild(bmp);
+			
+			instance.addChild( bmp );
+			GameWorld.instance.effectScene.addChild( instance );
 		}
 		
-		override protected function addedToStageHandler(e:Event):void
+		private function init():void
 		{
-			super.addedToStageHandler(e);
-			scaleX = scaleY = 0.2 ;
-			
-			var scale:Number = 1/GameWorld.instance.scaleX ;
-			
-			var bezierArray:Array = [ { x:x , y: y-50*GameSetting.GAMESCALE } , { x:x , y:y+40*GameSetting.GAMESCALE+Math.random()*50*GameSetting.GAMESCALE } ] ;
-			TweenMax.to( this , 0.25 , {bezierThrough:bezierArray , onComplete:show , scaleX:scale , scaleY:scale });
+			visible = true ;
+			scaleX = scaleY = 1/GameWorld.instance.scaleX ;
+			var temp:Number = GameSetting.GRID_SIZE*_span*0.5 ;
+			TweenLite.to(this, 0.75, {x: x+(temp+Math.random()*GameSetting.GRID_SIZE)*MathUtil.getRandomFlag()  , ease:Linear.easeNone});
+			TweenLite.to(this, 0.75, {y: y+temp+Math.random()*GameSetting.GRID_SIZE , ease:Bounce.easeOut , onComplete:show});
 		}
 		
 		private function show():void
 		{
+			touchable = true ;
 			this.addEventListener(TouchEvent.TOUCH , onTouchHandler);
-			_timeoutId = setTimeout( fly , 3000 );
+			_timeoutId = setTimeout( fly , Math.random()*2000 );
 		}
 		
 		
@@ -87,67 +104,64 @@ package local.map.pk
 			}
 			touchable = false ;
 			var flyImg:FlyLabelImage ;
-			var obj:DisplayObject ;
 			var target:DisplayObject ; //要飞向的目标
 			var targetPoint:Point = new Point() ; //要飞向的目标位置
 			var centerLayer:CenterViewLayer = CenterViewLayer.instance ;
-			for( var i:int = 0 ; i<numChildren ; ++i)
+			switch( _pkType )
 			{
-				obj = getChildAt(i) ;
-				switch( obj.name )
-				{
-					case PickupType.COIN:
-						PlayerModel.instance.changeCoin(  _pkHash[obj.name] );
-						target = centerLayer.topBar.coinBar ;
-						break ;
-					case PickupType.EXP:
-						PlayerModel.instance.changeExp ( _pkHash[obj.name] );
-						target = centerLayer.topBar.lvBar ;
-						break ;
-					case PickupType.GOOD:
-						PlayerModel.instance.changeGoods(  _pkHash[obj.name] );
-						target = centerLayer.topBar.goodsBar ;
-						break ;
-				}
-				targetPoint.setTo( target.x+centerLayer.topBar.x , target.y+centerLayer.topBar.y );
-				movePickup( targetPoint , obj );
-				
-				flyImg = new FlyLabelImage( obj.name , _pkHash[obj.name] ) ;
-				flyImg.x = x-20*numChildren ;
-				flyImg.y = y-40*numChildren ;
-				parent.addChild( flyImg );
-				
-				i--;
+				case PickupType.COIN:
+					PlayerModel.instance.changeCoin(  _value );
+					target = centerLayer.topBar.coinBar ;
+					break ;
+				case PickupType.EXP:
+					PlayerModel.instance.changeExp ( _value );
+					target = centerLayer.topBar.lvBar ;
+					break ;
+				case PickupType.GOOD:
+					PlayerModel.instance.changeGoods( _value );
+					target = centerLayer.topBar.goodsBar ;
+					break ;
+				case PickupType.ENERGY:
+					PlayerModel.instance.changeEnergy( _value );
+					target = centerLayer.topBar.energyBar ;
+					break ;
+				default://comp
+//					CompsModel.instance.addComp( _pkType ,_value );
+					break ;
 			}
-			if( parent) parent.removeChild(this);	
+			flyImg = new FlyLabelImage( _pkType ,_value ) ;
+			flyImg.x = x ;
+			flyImg.y = y ;
+			parent.addChild( flyImg );
+			
+			if(target){
+				targetPoint.setTo( target.x+centerLayer.topBar.x , target.y+centerLayer.topBar.y );
+				movePickup( targetPoint);
+			}else{
+				over();
+			}
 		}
 		
-		private function movePickup( targetPoint:Point , displayObj:DisplayObject ):void
+		private function movePickup( targetPoint:Point ):void
 		{
 			GameData.commPoint.setTo(0,0);
 			var p:Point = this.localToGlobal( GameData.commPoint ) ;
-			displayObj.x += p.x/root.scaleX ;
-			displayObj.y += p.y/root.scaleX ;
-			CenterViewLayer.instance.addChildAt( displayObj,0);
+			x = p.x/root.scaleX ;
+			y = p.y/root.scaleX ;
+			scaleX = scaleY =  1;
+			CenterViewLayer.instance.addChildAt( this,0);
 			
-			var temp:Number = Point.distance( targetPoint , new Point(displayObj.x,displayObj.y));
-			temp = temp>400*GameSetting.GAMESCALE ? 0.5 : 0.25 ;
-			var obj:Object = {x: displayObj.x + (targetPoint.x > displayObj.x ? -50*GameSetting.GAMESCALE : 50*GameSetting.GAMESCALE ) , y: displayObj.y + (targetPoint.y - displayObj.y) * 0.5 };
-			TweenMax.to( displayObj , temp , {bezier:[ obj, { x:targetPoint.x , y:targetPoint.y }] , onComplete:over , onCompleteParams:[displayObj] ,alpha:0 });
+			var temp:Number = Point.distance( targetPoint , new Point(this.x,this.y));
+			temp = temp>400*GameSetting.GAMESCALE ? 0.5 : 0.3 ;
+			var obj:Object = {x: this.x + (targetPoint.x > this.x ? -50*GameSetting.GAMESCALE : 50*GameSetting.GAMESCALE ) , y: this.y + (targetPoint.y - this.y) * 0.5 };
+			TweenMax.to( this , temp , {bezier:[ obj, { x:targetPoint.x , y:targetPoint.y }] , onComplete:over  ,alpha:0 });
 		}
 		
-		private function over( obj:DisplayObject ):void
+		private function over():void
 		{
-			if(obj .parent){
-				obj.parent.removeChild(obj );
+			if(this .parent){
+				this.parent.removeChild(this );
 			}
-		}
-		
-		
-		override protected function removedFromStageHandler(e:Event):void
-		{
-			_pkHash = null ;
-			removeEventListener(TouchEvent.TOUCH , onTouchHandler);
 			dispose() ;
 		}
 	}
