@@ -151,7 +151,7 @@ package local.map.pk
 			CenterViewLayer.instance.addChildAt( this,0);
 			
 			var temp:Number = Point.distance( targetPoint , new Point(this.x,this.y));
-			temp = temp>400 ? 0.5 : 0.3 ;
+			temp = temp>400 ? 0.55 : 0.3 ;
 			var obj:Object = {x: this.x + (targetPoint.x > this.x ? -50 : 50 ) , y: this.y + (targetPoint.y - this.y) * 0.5 };
 			TweenMax.to( this , temp , {bezier:[ obj, { x:targetPoint.x , y:targetPoint.y }] , onComplete:over  ,alpha:0 });
 		}
