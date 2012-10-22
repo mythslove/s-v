@@ -36,13 +36,20 @@ package local.view.topbar
 		override protected function addedToStageHandler(e:Event):void
 		{
 			super.addedToStageHandler(e);
+			showPlayerProperties();
+			addEventListener(MouseEvent.CLICK , onClickHandler );
+		}
+		
+		/**
+		 * 显示玩家属性 
+		 */		
+		public function showPlayerProperties():void
+		{
 			var me:PlayerVO = PlayerModel.instance.me ;
 			cashBar.show( me.cash );
 			coinBar.show( me.coin );
 			goodsBar.show( me.goods );
 			energyBar.show( me.energy , me.maxEnergy );
-			
-			addEventListener(MouseEvent.CLICK , onClickHandler );
 		}
 		
 		private function onClickHandler( e:MouseEvent ):void

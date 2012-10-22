@@ -5,7 +5,6 @@ package local.model
 	import local.comm.GameData;
 	import local.comm.GameSetting;
 	import local.enum.QuestType;
-	import local.map.GameWorld;
 	import local.util.QuestUtil;
 	import local.view.CenterViewLayer;
 	import local.view.tutor.TutorView;
@@ -46,8 +45,8 @@ package local.model
 			if(value==0) return ;
 			me.exp+=value ;
 			if(me.exp>me.maxExp){
-				trace("升级了");
 				me.level++ ;
+				trace("升级了:"+me.level);
 				me.minExp = me.maxExp ;
 				if(levels.hasOwnProperty(me.level)){
 					var levelVO:LevelVO = levels[me.level];
@@ -60,6 +59,9 @@ package local.model
 					me.maxGoods *= 2 ;
 				}
 //				var levelUpPopUp:
+				
+				//更新显示玩家属性
+				CenterViewLayer.instance.topBar.showPlayerProperties() ;
 			}
 		}
 		
