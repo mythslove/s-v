@@ -11,7 +11,6 @@ package local.map.pk
 	import flash.display.BitmapData;
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
-	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import flash.utils.clearTimeout;
 	import flash.utils.setTimeout;
@@ -27,10 +26,11 @@ package local.map.pk
 	
 	public class PickupImages extends Sprite
 	{
-		public var _pkType:String ; 
-		public var _value:int ;
-		public var _span:int ;
+		private var _pkType:String ; 
+		private var _value:int ;
+		private var _span:int ;
 		private var _timeoutId:int ;
+		public var isComp:Boolean ;
 		
 		public function PickupImages(pkType:String , value:int , x:Number , y:Number , span:int )
 		{
@@ -66,6 +66,7 @@ package local.map.pk
 					bmp.bitmapData = ResourceUtil.instance.getInstanceByClassName("ui_pk","local.view.pk.Energy") as BitmapData ;
 					break ;
 				default: //comp
+					instance.isComp = true ;
 					bmp.bitmapData = ResourceUtil.instance.getInstanceByClassName("ui_pk","local.view.pk."+pkType) as BitmapData ;
 					break ;
 			}
@@ -87,15 +88,13 @@ package local.map.pk
 		
 		private function show():void
 		{
-			_timeoutId = setTimeout( fly , Math.random()*2000 );
+			if( isComp ){
+				fly();
+			}else{
+				_timeoutId = setTimeout( fly , Math.random()*2000 );
+			}
 		}
 			
-		
-		private function onMouseDownHandler( e:MouseEvent):void
-		{
-			fly();
-		}
-		
 		public function fly():void
 		{
 			if(_timeoutId>0) {
