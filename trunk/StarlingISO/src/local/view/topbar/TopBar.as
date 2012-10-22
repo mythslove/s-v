@@ -94,7 +94,7 @@ package local.view.topbar
 			bmp.x = goodsBar.x+x  ;
 			bmp.y = goodsBar.y ;
 			addChild(bmp);
-			TweenLite.to( bmp , time , { x:targetPoint.x/root.scaleX , y:targetPoint.y/root.scaleX , scaleX:0.5 , scaleY:0.5 , alpha:0.2 , 
+			TweenLite.to( bmp , time , { x:targetPoint.x/root.scaleX , y:(targetPoint.y-bmp.height*0.5)/root.scaleX , scaleX:0.5 , scaleY:0.5 , alpha:0.2 , 
 				onComplete:flyGoodsOver , onCompleteParams:[bmp] });
 		}
 		
