@@ -3,7 +3,7 @@ package local.view.bottombar
 	import bing.utils.ContainerUtil;
 	
 	import com.greensock.TweenLite;
-	import com.greensock.easing.Back;
+	import com.greensock.easing.Circ;
 	
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
@@ -229,7 +229,7 @@ package local.view.bottombar
 				_tweenLite.kill();
 				_tweenLite = null ;
 			}
-			_tweenLite = TweenLite.to( this , 0.25 , { y :GameSetting.SCREEN_HEIGHT-height+10 , ease:Back.easeOut } );
+			_tweenLite = TweenLite.to( this , 0.2 , { y :GameSetting.SCREEN_HEIGHT-height+2 , ease:Circ.easeOut } );
 		}
 		
 		public function hide():void
