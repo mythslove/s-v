@@ -88,7 +88,7 @@ package local.map.pk
 		private function show():void
 		{
 			addEventListener(MouseEvent.MOUSE_DOWN , onMouseDownHandler , false  ,0 , true );
-			_timeoutId = setTimeout( fly , 2000+Math.random()*2000 );
+			_timeoutId = setTimeout( fly , Math.random()*2000 );
 		}
 			
 		
@@ -127,16 +127,19 @@ package local.map.pk
 					break ;
 				default://comp
 					CompsModel.instance.addComp( _pkType ,_value );
-					target = centerLayer.topBar.lvBar ;
 					break ;
 			}
-			targetPoint.setTo( target.x+centerLayer.topBar.x , target.y+centerLayer.topBar.y );
-			movePickup( targetPoint);
-			
 			flyImg = new FlyLabelImage( _pkType ,_value ) ;
 			flyImg.x = x ;
 			flyImg.y = y ;
 			parent.addChild( flyImg );
+			
+			if(target){
+				targetPoint.setTo( target.x+centerLayer.topBar.x , target.y+centerLayer.topBar.y );
+				movePickup( targetPoint);
+			}else{
+				over();
+			}
 		}
 		
 		private function movePickup( targetPoint:Point):void
