@@ -9,6 +9,7 @@ package local.model
 	import local.util.QuestUtil;
 	import local.view.CenterViewLayer;
 	import local.view.tutor.TutorView;
+	import local.vo.LevelVO;
 	import local.vo.PlayerVO;
 
 	public class PlayerModel
@@ -44,6 +45,22 @@ package local.model
 		{
 			if(value==0) return ;
 			me.exp+=value ;
+			if(me.exp>me.maxExp){
+				trace("升级了");
+				me.level++ ;
+				me.minExp = me.maxExp ;
+				if(levels.hasOwnProperty(me.level)){
+					var levelVO:LevelVO = levels[me.level];
+					me.maxExp = levelVO.maxExp ;
+					me.maxEnergy = levelVO.maxEnergy ;
+					me.maxGoods = levelVO.maxGoods ;
+				}else{
+					me.maxExp *= 2 ;
+					me.maxEnergy *= 2 ;
+					me.maxGoods *= 2 ;
+				}
+//				var levelUpPopUp:
+			}
 		}
 		
 		public function changeEnergy( value:int ):void
