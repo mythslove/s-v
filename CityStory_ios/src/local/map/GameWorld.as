@@ -15,6 +15,7 @@ package local.map
 	import local.map.item.*;
 	import local.map.land.ExpandLandButton;
 	import local.map.land.ExpandSign;
+	import local.map.pk.PickupImages;
 	import local.model.*;
 	import local.util.BuildingFactory;
 	import local.util.PopUpManager;
@@ -150,8 +151,13 @@ package local.map
 					}else{
 						_mouseBuilding = null ;
 					}
-					addEventListener(MouseEvent.MOUSE_MOVE , onMouseEvtHandler); 
-					addEventListener(MouseEvent.MOUSE_UP , onMouseEvtHandler );
+					if(e.target is PickupImages){
+						var pk:PickupImages = e.target as PickupImages ;
+						pk.fly() ;
+					}else{
+						addEventListener(MouseEvent.MOUSE_MOVE , onMouseEvtHandler); 
+						addEventListener(MouseEvent.MOUSE_UP , onMouseEvtHandler );
+					}
 					break ;
 				case MouseEvent.MOUSE_MOVE:
 					_isMove = true ;
