@@ -55,7 +55,7 @@ package local.view.shop
 			if(isLeft){
 				temp = -200 ;
 			}
-			TweenLite.from( this , 0.2 , { x:x-200 , ease: Back.easeOut , onComplete:showTweenOver });
+			TweenLite.from( this , 0.3 , { x:x-200 , ease: Back.easeOut , onComplete:showTweenOver });
 		}
 		
 		private function showTweenOver():void{
@@ -141,7 +141,7 @@ package local.view.shop
 			if(isLeft){
 				temp = -200 ;
 			}
-			TweenLite.to( this , 0.2 , { x:x+temp , ease: Back.easeIn , onComplete:onTweenCom});
+			TweenLite.to( this , 0.3 , { x:x+temp , ease: Back.easeIn , onComplete:onTweenCom});
 		}
 		private function onTweenCom():void{
 			PopUpManager.instance.removeCurrentPopup() ;

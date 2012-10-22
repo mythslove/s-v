@@ -1,5 +1,6 @@
 package local.view.products
 {
+	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
@@ -9,7 +10,7 @@ package local.view.products
 	import local.util.GameUtil;
 	import local.util.PopUpManager;
 	import local.view.base.BaseView;
-	import local.view.btn.DefaultButton1;
+	import local.view.btn.YellowButton;
 	import local.view.shop.ShopItemPrice;
 	import local.vo.PlayerVO;
 	import local.vo.ProductVO;
@@ -21,8 +22,8 @@ package local.view.products
 		public var price:ShopItemPrice
 		public var txtCollect:TextField ;
 		public var txtTime:TextField ;
-		public var btnStart:DefaultButton1 ;
-		
+		public var btnStart:YellowButton ;
+		public var iconContainer:Sprite;
 		//===============================
 		public var proVO:ProductVO ;
 		
@@ -37,6 +38,7 @@ package local.view.products
 			price.mouseChildren = price.mouseEnabled = false ;
 			txtCollect.mouseEnabled = false ;
 			txtTime.mouseEnabled = false ;
+			iconContainer.mouseChildren = iconContainer.mouseEnabled = false ;
 		}
 		
 		override protected function addedToStageHandler(e:Event):void
@@ -60,6 +62,14 @@ package local.view.products
 			txtTitle.y = ( 40 - txtTitle.textHeight)>>1 ;
 			
 			//玩家等级限制，是否lock
+			if(PlayerModel.instance.me.level<proVO.requireLv)
+			{
+				mouseEnabled = false ;
+				var lock:ProductsItemLock = new ProductsItemLock();
+				GameUtil.boldTextField( lock.txtInfo , "Level  "+proVO.requireLv );
+				addChild(lock);
+				price.visible = btnStart.visible = txtCollect.visible =  txtTime.visible = false ;
+			}
 			
 			btnStart.addEventListener(MouseEvent.CLICK , onStartHandler , false , 0 , true );
 		}

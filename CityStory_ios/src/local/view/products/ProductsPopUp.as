@@ -15,6 +15,8 @@ package local.view.products
 	import local.util.PopUpManager;
 	import local.view.base.BaseView;
 	import local.view.btn.PopUpCloseButton;
+	import local.view.iap.PopUpCashButton;
+	import local.view.iap.PopUpCoinButton;
 	import local.vo.ProductVO;
 	
 	public class ProductsPopUp extends BaseView
@@ -27,6 +29,8 @@ package local.view.products
 		//=====================================
 		public var btnClose:PopUpCloseButton ;
 		public var container:Sprite;
+		public var btnCash:PopUpCashButton ;
+		public var btnCoin:PopUpCoinButton ;
 		//=====================================
 		
 		private var _cacheProducts:Vector.<ProductsItemRenderer> = Vector.<ProductsItemRenderer>([
@@ -47,7 +51,7 @@ package local.view.products
 			GameWorld.instance.stopRun();
 			x = GameSetting.SCREEN_WIDTH>>1 ;
 			y = GameSetting.SCREEN_HEIGHT>>1 ;
-			TweenLite.from( this , 0.2 , { x:x-200 , ease: Back.easeOut });
+			TweenLite.from( this , 0.3 , { x:x-200 , ease: Back.easeOut });
 		}
 		
 		public function show( industry:Industry ):void
@@ -58,7 +62,7 @@ package local.view.products
 			if(products){
 				var len:int = products.length ;
 				var render:ProductsItemRenderer ;
-				var colGap:int = 80 , rowGap:int = 50 ;
+				var colGap:int = 40 , rowGap:int = 15 ;
 				var row:int , col:int ;
 				for( var i:int = 0 ; i<len ; ++i )
 				{
@@ -90,7 +94,7 @@ package local.view.products
 		
 		private function close():void{
 			mouseChildren=false;
-			TweenLite.to( this , 0.2 , { x:x+200 , ease: Back.easeIn , onComplete:onTweenCom});
+			TweenLite.to( this , 0.3 , { x:x+200 , ease: Back.easeIn , onComplete:onTweenCom});
 		}
 		private function onTweenCom():void{
 			PopUpManager.instance.removeCurrentPopup() ;

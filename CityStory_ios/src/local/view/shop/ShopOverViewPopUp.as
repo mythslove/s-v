@@ -110,22 +110,22 @@ package local.view.shop
 					if(GameData.isShowTutor){
 						TutorView.instance.clearMask();
 					}
-					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , true,0 );
+					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance);
 					ShopPopUp.instance.show(BuildingType.HOME);
 					close();
 					break ;
 				case btnDecor:
-					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , true,0);
+					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance);
 					ShopPopUp.instance.show(BuildingType.DECORATION);
 					close();
 					break ;
 				case btnBusiness:
-					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , true,0 );
+					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance );
 					ShopPopUp.instance.show(BuildingType.BUSINESS);
 					close();
 					break ;
 				case btnIndustry:
-					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , true,0 );
+					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance );
 					ShopPopUp.instance.show(BuildingType.INDUSTRY);
 					close();
 					break ;

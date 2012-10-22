@@ -10,11 +10,11 @@ package local.view.topbar
 	import flash.utils.setTimeout;
 	
 	import local.comm.GameData;
-	import local.map.GameWorld;
 	import local.map.item.BaseBuilding;
-	import local.model.FriendVillageModel;
 	import local.model.PlayerModel;
+	import local.util.PopUpManager;
 	import local.util.ResourceUtil;
+	import local.view.alert.PopulationAlert;
 	import local.view.base.BaseView;
 	import local.vo.PlayerVO;
 	
@@ -54,10 +54,9 @@ package local.view.topbar
 		
 		private function onClickHandler( e:MouseEvent ):void
 		{
+			e.stopPropagation();
 			if(e.target is GoodsBar){
-				FriendVillageModel.instance.loadFridendVillage("dd");
-			}else if(e.target is EnergyBar){
-				GameWorld.instance.goHome();
+				PopUpManager.instance.addQueuePopUp( new PopulationAlert);
 			}
 		}
 		

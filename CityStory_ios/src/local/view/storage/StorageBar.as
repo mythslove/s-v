@@ -5,6 +5,8 @@ package local.view.storage
 	import com.greensock.TweenLite;
 	import com.greensock.easing.Sine;
 	
+	import flash.display.Bitmap;
+	import flash.display.BitmapData;
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -20,8 +22,9 @@ package local.view.storage
 	import local.model.ShopModel;
 	import local.model.StorageModel;
 	import local.util.BuildingFactory;
+	import local.util.ResourceUtil;
 	import local.view.base.BaseView;
-	import local.view.btn.MiniCloseButton;
+	import local.view.btn.PopUpCloseButton;
 	import local.view.control.ScrollControllerH;
 	import local.view.control.ToggleBar;
 	import local.view.control.ToggleBarEvent;
@@ -41,7 +44,7 @@ package local.view.storage
 		}
 		//==================================
 		public var container:Sprite ;
-		public var btnClose:MiniCloseButton ;
+		public var btnClose:PopUpCloseButton ;
 		//============================
 		protected var _scroll:ScrollControllerH = new ScrollControllerH() ;
 		protected var _content:Sprite = new Sprite() ;
@@ -60,19 +63,39 @@ package local.view.storage
 		
 		private function init():void
 		{
-			container.graphics.beginFill(0,0);
-			container.graphics.drawRect(0,0,940,180);
-			container.graphics.endFill();
+			var bmd:BitmapData = ResourceUtil.instance.getInstanceByClassName("ui_popup","local.view.storage.StorageTileBg") as BitmapData;
+			this.graphics.beginBitmapFill( bmd,null,true,true);
+			this.graphics.drawRect( 0,0,GameSetting.SCREEN_WIDTH , bmd.height );
+			this.graphics.endFill();
 			
-			menuBar = new ToggleBar();
+			bmd = ResourceUtil.instance.getInstanceByClassName("ui_popup","local.view.storage.StorageTitle_en") as BitmapData;
+			var title:Bitmap = new Bitmap(bmd);
+			title.x = (GameSetting.SCREEN_WIDTH-bmd.width)>>1 ;
+			title.y = -10-bmd.height>>1 ;
+			addChild(title) ;
+			
+			btnClose = new PopUpCloseButton();
+			btnClose.x = GameSetting.SCREEN_WIDTH - btnClose.width-10 ;
+			btnClose.y = -btnClose.height>> 1 ;
+			addChild(btnClose);
+			
+			container = new Sprite();
+			container.graphics.beginFill(0,0);
+			container.graphics.drawRect(0,0,GameSetting.SCREEN_WIDTH-30, 213);
+			container.graphics.endFill();
+			container.y = 115 ;
+			container.x = 15 ;
+			addChild(container);
+			
+			menuBar = new ToggleBar(15);
 			_btns= Vector.<MovieClip>([
 				new StorageMenuButton("all") ,new StorageMenuButton("home"),new StorageMenuButton("business") ,new StorageMenuButton("decor"),
 				new StorageMenuButton("industry") ,new StorageMenuButton("community"),new StorageMenuButton("wonder") ,new StorageMenuButton("comp")
 			]);
 			menuBar.buttons = _btns ;
 			addChild(menuBar);
-			menuBar.x = 10 ;
-			menuBar.y= 65 ;
+			menuBar.x = 15 ;
+			menuBar.y= 42 ;
 			menuBar.addEventListener(ToggleBarEvent.TOGGLE_CHANGE , toggleChangeHandler);
 		}
 		
@@ -195,7 +218,7 @@ package local.view.storage
 			
 			x = ( GameSetting.SCREEN_WIDTH-width)>>1 ;
 			y=0;
-			TweenLite.to( this , 0.3 , { y:-height+15 , onComplete: function():void{ 
+			TweenLite.to( this , 0.3 , { y:-334 , onComplete: function():void{ 
 				mouseChildren = true ;
 			} ,ease:Sine.easeOut  });
 		}
