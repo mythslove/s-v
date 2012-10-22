@@ -52,6 +52,9 @@ package
 				_loading.width = stage.fullScreenWidth ;
 				_loading.height = stage.fullScreenHeight ;
 			}else{
+				if(stage.fullScreenWidth>480){
+					GameSetting.isIpad = true ; //高清
+				}
 				_loading = new IPHONE_LOADING() as Bitmap;
 				_loading.height = stage.fullScreenWidth ;
 				_loading.width = stage.fullScreenHeight ;
