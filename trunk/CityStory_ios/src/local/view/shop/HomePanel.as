@@ -53,6 +53,8 @@ package local.view.shop
 			_scroll.addScrollControll( _content , container , 3 ,20 );
 			if(GameData.isShowTutor){
 				_scroll.scrollLock = true ;
+			}else{
+				_scroll.scrollLock = false ;
 			}
 			
 			var itemRenders:Vector.<ShopItemRenderer> = ShopModel.instance.homesRenderers ;
