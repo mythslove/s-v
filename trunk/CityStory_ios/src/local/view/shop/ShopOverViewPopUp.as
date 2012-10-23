@@ -6,22 +6,16 @@ package local.view.shop
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
-	import flash.filters.BitmapFilterQuality;
-	import flash.filters.DropShadowFilter;
-	import flash.filters.GlowFilter;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
-	import flash.text.Font;
 	
 	import local.comm.GameData;
 	import local.comm.GameSetting;
 	import local.enum.BuildingType;
 	import local.map.GameWorld;
-	import local.util.EmbedsManager;
 	import local.util.PopUpManager;
 	import local.view.base.BaseView;
 	import local.view.btn.PopUpCloseButton;
-	import local.view.control.DynamicBitmapTF;
 	import local.view.tutor.TutorView;
 	import local.vo.TutorItemVO;
 	
@@ -49,20 +43,6 @@ package local.view.shop
 			super();
 			homeButtonBg.mouseChildren = homeButtonBg.mouseEnabled = false ;
 			addEventListener(MouseEvent.CLICK , onMouseHandler );
-			
-			
-			Font.registerFont( EmbedsManager.GROBOLD);
-			
-			var filters:Array = [
-				new DropShadowFilter(3,45,0xffffff,1,3,3,0.5,1,true),
-				new GlowFilter(0xEA7A03,1,5,5,10,BitmapFilterQuality.HIGH),
-				new DropShadowFilter(1,90,0xA0450A,1,1.3,1.3,20),
-				new DropShadowFilter(3,90,0xA0450A,0.5,3,3,0.5)
-			];
-			var title:DynamicBitmapTF = new DynamicBitmapTF("grobold",400,NaN,"MARKET","center",2,60,false,0xFECF2D,true,false,filters);
-			title.x = -200;
-			title.y = -240;
-			addChild( title );
 		}
 		
 		override protected function addedToStageHandler(e:Event):void
