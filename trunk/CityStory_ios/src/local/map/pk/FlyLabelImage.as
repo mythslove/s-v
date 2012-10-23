@@ -10,7 +10,7 @@ package local.map.pk
 	import local.enum.PickupType;
 	import local.map.GameWorld;
 	import local.util.EmbedsManager;
-	import local.util.ResourceUtil;
+	import local.util.EmbedsManager;
 	
 	import pxBitmapFont.PxTextAlign;
 	import pxBitmapFont.PxTextField;
@@ -28,22 +28,22 @@ package local.map.pk
 			switch( pkType)
 			{
 				case PickupType.COIN:
-					bmp.bitmapData = ResourceUtil.instance.getInstanceByClassName("ui_pk","local.view.pk.Coin") as BitmapData;
+					bmp.bitmapData = EmbedsManager.instance.getPKBmd("Coin") as BitmapData;
 					break ;
 				case PickupType.EXP:
-					bmp.bitmapData = ResourceUtil.instance.getInstanceByClassName("ui_pk","local.view.pk.Exp") as BitmapData;
+					bmp.bitmapData = EmbedsManager.instance.getPKBmd("Exp") as BitmapData;
 					break ;
 				case PickupType.GOOD:
-					bmp.bitmapData = ResourceUtil.instance.getInstanceByClassName("ui_pk","local.view.pk.Goods") as BitmapData;
+					bmp.bitmapData = EmbedsManager.instance.getPKBmd("Goods") as BitmapData;
 					break ;
 				case PickupType.ENERGY:
-					bmp.bitmapData = ResourceUtil.instance.getInstanceByClassName("ui_pk","local.view.pk.Energy") as BitmapData;
+					bmp.bitmapData = EmbedsManager.instance.getPKBmd("Energy") as BitmapData;
 					break ;
 				case PickupType.CASH:
-					bmp.bitmapData = ResourceUtil.instance.getInstanceByClassName("ui_pk","local.view.pk.Cash") as BitmapData
+					bmp.bitmapData = EmbedsManager.instance.getPKBmd("Cash") as BitmapData
 					break ;
 				default: //component
-					bmp.bitmapData = ResourceUtil.instance.getInstanceByClassName("ui_pk","local.view.pk."+pkType) as BitmapData
+					bmp.bitmapData = EmbedsManager.instance.getPKBmd(pkType) as BitmapData
 					break ;
 			}
 			bmp.scaleX = bmp.scaleY = 0.5 ;

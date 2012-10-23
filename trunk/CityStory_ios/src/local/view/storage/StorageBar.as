@@ -22,7 +22,6 @@ package local.view.storage
 	import local.model.ShopModel;
 	import local.model.StorageModel;
 	import local.util.BuildingFactory;
-	import local.util.ResourceUtil;
 	import local.view.base.BaseView;
 	import local.view.btn.PopUpCloseButton;
 	import local.view.control.ScrollControllerH;
@@ -63,12 +62,12 @@ package local.view.storage
 		
 		private function init():void
 		{
-			var bmd:BitmapData = ResourceUtil.instance.getInstanceByClassName("ui_popup","local.view.storage.StorageTileBg") as BitmapData;
+			var bmd:BitmapData = new StorageTileBg(0,0);
 			this.graphics.beginBitmapFill( bmd,null,true,true);
 			this.graphics.drawRect( 0,0,GameSetting.SCREEN_WIDTH , bmd.height );
 			this.graphics.endFill();
 			
-			bmd = ResourceUtil.instance.getInstanceByClassName("ui_popup","local.view.storage.StorageTitle_en") as BitmapData;
+			bmd = new StorageTitle_en(0,0);
 			var title:Bitmap = new Bitmap(bmd);
 			title.x = (GameSetting.SCREEN_WIDTH-bmd.width)>>1 ;
 			title.y = -10-bmd.height>>1 ;
@@ -94,7 +93,7 @@ package local.view.storage
 			]);
 			menuBar.buttons = _btns ;
 			addChild(menuBar);
-			menuBar.x = 15 ;
+			menuBar.x = (GameSetting.SCREEN_WIDTH-menuBar.width)>>1 ;
 			menuBar.y= 42 ;
 			menuBar.addEventListener(ToggleBarEvent.TOGGLE_CHANGE , toggleChangeHandler);
 		}
@@ -228,4 +227,9 @@ package local.view.storage
 			super.removedFromStageHandler(e);
 		}
 	}
+	
+	
+	
+	
+	StorageTileBg,StorageTitle_en;
 }

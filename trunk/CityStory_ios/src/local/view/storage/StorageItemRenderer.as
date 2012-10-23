@@ -4,16 +4,15 @@ package local.view.storage
 	import bing.utils.FixScale;
 	
 	import flash.display.Bitmap;
-	import flash.display.BitmapData;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.text.TextField;
+	import flash.text.TextFieldAutoSize;
 	
 	import local.model.CompsModel;
 	import local.model.ShopModel;
 	import local.util.EmbedsManager;
 	import local.util.GameUtil;
-	import local.util.ResourceUtil;
 	import local.view.base.BaseView;
 	import local.view.base.BuildingThumb;
 	import local.vo.BaseBuildingVO;
@@ -33,6 +32,7 @@ package local.view.storage
 		public function StorageItemRenderer()
 		{
 			super();
+			txtTitle.autoSize = TextFieldAutoSize.CENTER ;
 			mouseChildren = false ;
 		}
 		
@@ -44,7 +44,7 @@ package local.view.storage
 				var compVO:ComponentVO = CompsModel.instance.allComps[ vo.toString() ];
 				GameUtil.boldTextField( txtTitle , compVO.title );
 				GameUtil.boldTextField( txtCount , CompsModel.instance.getCompCount(vo.toString())+"/"+CompsModel.MAX_COUNT );
-				var bmp:Bitmap = new Bitmap(ResourceUtil.instance.getInstanceByClassName("ui_pk","local.view.pk."+vo.toString()) as BitmapData ) ;
+				var bmp:Bitmap = new Bitmap( EmbedsManager.instance.getPKBmd(vo.toString()) ) ;
 				FixScale.setScale(bmp, 120 , 90);
 				imgContainer.addChild( bmp );
 				bmp.x = -bmp.width>>1 ;
@@ -61,6 +61,7 @@ package local.view.storage
 				imgContainer.addChild( img );
 				img.center();
 			}
+			txtTitle.y += (50-txtTitle.height)>>1 ;
 		}
 		
 		override protected function removedFromStageHandler(e:Event):void

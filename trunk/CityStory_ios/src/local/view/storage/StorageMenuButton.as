@@ -1,11 +1,9 @@
 package local.view.storage
 {
 	import flash.display.Bitmap;
-	import flash.display.BitmapData;
 	import flash.display.MovieClip;
 	
 	import local.util.GameUtil;
-	import local.util.ResourceUtil;
 	
 	public class StorageMenuButton extends MovieClip
 	{
@@ -21,28 +19,28 @@ package local.view.storage
 			var icon:Bitmap = new Bitmap();
 			switch(name){
 				case "all":
-					icon.bitmapData = ResourceUtil.instance.getInstanceByClassName(resId,"local.view.storage.StorageAllButtonIcon") as BitmapData;
+					icon.bitmapData = new StorageAllButtonIcon(0,0);
 					break ;
 				case "home":
-					icon.bitmapData = ResourceUtil.instance.getInstanceByClassName(resId,"local.view.storage.StorageHomeButtonIcon") as BitmapData;
+					icon.bitmapData = new StorageHomeButtonIcon(0,0);
 					break ;
 				case "business":
-					icon.bitmapData = ResourceUtil.instance.getInstanceByClassName(resId,"local.view.storage.StorageBusinessButtonIcon") as BitmapData;
+					icon.bitmapData = new StorageBusinessButtonIcon(0,0);
 					break ;
 				case "decor":
-					icon.bitmapData = ResourceUtil.instance.getInstanceByClassName(resId,"local.view.storage.StorageDecorButtonIcon") as BitmapData;
+					icon.bitmapData = new StorageDecorButtonIcon(0,0);
 					break ;
 				case "industry":
-					icon.bitmapData = ResourceUtil.instance.getInstanceByClassName(resId,"local.view.storage.StorageIndustryButtonIcon") as BitmapData;
+					icon.bitmapData = new StorageIndustryButtonIcon(0,0);
 					break ;
 				case "community":
-					icon.bitmapData = ResourceUtil.instance.getInstanceByClassName(resId,"local.view.storage.StorageCommunityeButtonIcon") as BitmapData;
+					icon.bitmapData = new StorageCommunityButtonIcon(0,0);
 					break ;
 				case "wonder":
-					icon.bitmapData = ResourceUtil.instance.getInstanceByClassName(resId,"local.view.storage.StorageWondersButtonIcon") as BitmapData;
+					icon.bitmapData = new StorageWondersButtonIcon(0,0);
 					break ;
 				case "comp":
-					icon.bitmapData = ResourceUtil.instance.getInstanceByClassName(resId,"local.view.storage.StorageCompButtonIcon") as BitmapData;
+					icon.bitmapData = new StorageCompButtonIcon(0,0);
 					break ;
 			}
 			icon.x = (width-icon.width)>> 1; 
@@ -62,4 +60,9 @@ package local.view.storage
 			}
 		}
 	}
+	
+	
+	StorageAllButtonIcon,StorageBusinessButtonIcon,StorageCommunityButtonIcon,StorageCompButtonIcon,StorageDecorButtonIcon,StorageWondersButtonIcon,
+	StorageHomeButtonIcon,StorageIndustryButtonIcon;
+	
 }
