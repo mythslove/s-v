@@ -180,11 +180,11 @@ package local.view.shop
 			x = GameSetting.SCREEN_WIDTH>>1 ;
 			y = GameSetting.SCREEN_HEIGHT>>1 ;
 			scaleX = scaleY = 1 ; 
-			
+			alpha =1 ;
 			if(isLeft){
-				TweenLite.from( this , 0.3 , { x:x+400*GameSetting.GAMESCALE , ease: Back.easeOut , onComplete:tweenOver });
+				TweenLite.from( this , 0.5 , { x:x+400*GameSetting.GAMESCALE , alpha:0 , ease: Back.easeOut , onComplete:tweenOver });
 			}else{
-				TweenLite.from( this , 0.3 , { scaleX:0 , scaleY:0 , ease: Back.easeOut , onComplete:tweenOver });
+				TweenLite.from( this , 0.5 , { scaleX:0.7 , scaleY:0.7 , alpha:0 , ease: Back.easeOut , onComplete:tweenOver });
 			}
 			touchable = false ;
 		}
@@ -234,9 +234,9 @@ package local.view.shop
 		private function close():void{
 			touchable=false;
 			if(isLeft){
-				TweenLite.to( this , 0.3 , { x:x+400*GameSetting.GAMESCALE , ease: Back.easeIn , onComplete:onTweenCom});
+				TweenLite.to( this , 0.5 , { x:x+400*GameSetting.GAMESCALE, alpha:0 , ease: Back.easeIn , onComplete:onTweenCom});
 			}else{
-				TweenLite.to( this , 0.3 , { scaleX:0 , scaleY:0 , ease: Back.easeIn , onComplete:onTweenCom});
+				TweenLite.to( this , 0.5 , { scaleX:0.7 , scaleY:0.7 , alpha:0 , ease: Back.easeIn , onComplete:onTweenCom});
 			}
 		}
 		
