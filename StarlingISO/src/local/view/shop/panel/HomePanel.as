@@ -41,7 +41,7 @@ package local.view.shop.panel
 			this._tabBar = new TabBar();
 			_tabBar.direction = TabBar.DIRECTION_HORIZONTAL;
 			_tabBar.tabInitializer = tabInitializer ;
-			_tabBar.gap = 5*GameSetting.GAMESCALE ;
+			_tabBar.gap = 8*GameSetting.GAMESCALE ;
 			this._tabBar.onChange.add(tabBar_onChange);
 			this.addChild(this._tabBar);
 			this._tabBar.dataProvider = new ListCollection(
