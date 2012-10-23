@@ -101,7 +101,7 @@ package local.util
 			var file:File = new File( File.applicationStorageDirectory.url+"res/"+GameSetting.fdId+".bin");
 			trace(file.nativePath);
 			if(!file.exists) {
-				file = new File(File.applicationDirectory.url+"res/village.bin");
+				file = new File(File.applicationDirectory.url+"res/config/village.bin");
 			}
 			if(file.exists)
 			{
