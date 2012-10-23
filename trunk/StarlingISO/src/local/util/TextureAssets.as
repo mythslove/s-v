@@ -9,6 +9,7 @@ package local.util
 	import flash.display.BitmapData;
 	import flash.geom.Matrix;
 	import flash.geom.Rectangle;
+	import flash.system.System;
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
 	
@@ -128,6 +129,7 @@ package local.util
 				groundTexture = null ;
 				_resNameHash = null ;
 				ResourceUtil.instance.resNameHash = null ;
+				System.gc() ;
 			}
 			
 		}

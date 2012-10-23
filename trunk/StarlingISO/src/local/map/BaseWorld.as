@@ -34,8 +34,10 @@ package local.map
 	import local.vo.LandVO;
 	
 	import starling.core.Starling;
+	import starling.display.BlendMode;
 	import starling.display.DisplayObject;
 	import starling.display.Image;
+	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.events.Touch;
@@ -81,8 +83,16 @@ package local.map
 		
 		private function addBackground():void
 		{
+			if(!GameSetting.isIpad){
+				var quad:Quad = new Quad(GameSetting.MAP_WIDTH , GameSetting.MAP_HEIGHT , 0x859E21 , false );
+				this.setBackGround( quad );
+				return ;
+			}
+			
+			
 			var offset:Number ;
 			var map:Sprite = new Sprite();
+			map.blendMode = BlendMode.NONE ;
 			
 			var tiledImg:TileImage = new TileImage(EmbedManager.createTextureByName("MAPBLOCK"));
 			tiledImg.setSize( GameSetting.MAP_WIDTH,GameSetting.MAP_HEIGHT);
