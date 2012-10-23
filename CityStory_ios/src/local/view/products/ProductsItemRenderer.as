@@ -4,7 +4,6 @@ package local.view.products
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
-	import flash.text.TextFormat;
 	
 	import local.model.PlayerModel;
 	import local.util.GameUtil;
@@ -53,13 +52,6 @@ package local.view.products
 			
 			//标题
 			GameUtil.boldTextField( txtTitle , proVO.title );
-			while(txtTitle.textWidth>txtTitle.width){
-				var tf:TextFormat =txtTitle.defaultTextFormat ;
-				tf.size = int(tf.size)-2 ;
-				txtTitle.defaultTextFormat = tf ;
-				this.txtTitle.text = proVO.title ;
-			}
-			txtTitle.y = ( 40 - txtTitle.textHeight)>>1 ;
 			
 			//玩家等级限制，是否lock
 			if(PlayerModel.instance.me.level<proVO.requireLv)
