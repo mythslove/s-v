@@ -78,12 +78,9 @@ package local.view.shop
 			GameWorld.instance.stopRun();
 			x = GameSetting.SCREEN_WIDTH>>1 ;
 			y = GameSetting.SCREEN_HEIGHT>>1 ;
+			scaleX = scaleY = 1 ;
 			
-			var temp:int = 200*GameSetting.GAMESCALE ;
-			if(isLeft){
-				temp = -200*GameSetting.GAMESCALE ;
-			}
-			TweenLite.from( this , 0.3 , { x:x-temp , ease: Back.easeOut , onComplete:showTweenOver });
+			TweenLite.from( this , 0.3 , { x:x-400*GameSetting.GAMESCALE  , ease: Back.easeOut , onComplete:showTweenOver });
 		}
 		private function showTweenOver():void{
 			if(GameSetting.SCREEN_WIDTH%480==0) {
@@ -144,11 +141,11 @@ package local.view.shop
 		private function close():void{
 			GameWorld.instance.visible=true;
 			touchable=false;
-			var temp:int = 200*GameSetting.GAMESCALE ;
 			if(isLeft){
-				temp = -200*GameSetting.GAMESCALE ;
+				TweenLite.to( this , 0.3 , { x:x-400*GameSetting.GAMESCALE , ease: Back.easeIn , onComplete:onTweenCom});
+			}else{
+				TweenLite.to( this , 0.3 , { scaleX:0 , scaleY:0 , ease: Back.easeIn , onComplete:onTweenCom});
 			}
-			TweenLite.to( this , 0.3 , { x:x+temp , ease: Back.easeIn , onComplete:onTweenCom});
 		}
 		private function onTweenCom():void{
 			PopUpManager.instance.removeCurrentPopup() ;
