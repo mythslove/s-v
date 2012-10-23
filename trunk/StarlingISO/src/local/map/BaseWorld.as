@@ -83,7 +83,7 @@ package local.map
 		
 		private function addBackground():void
 		{
-			if(!GameSetting.isIpad){
+			if(Starling.current.nativeStage.fullScreenWidth%480==0){
 				var quad:Quad = new Quad(GameSetting.MAP_WIDTH , GameSetting.MAP_HEIGHT , 0x859E21 , false );
 				this.setBackGround( quad );
 				return ;
@@ -92,10 +92,10 @@ package local.map
 			
 			var offset:Number ;
 			var map:Sprite = new Sprite();
-			map.blendMode = BlendMode.NONE ;
 			
 			var tiledImg:TileImage = new TileImage(EmbedManager.createTextureByName("MAPBLOCK"));
 			tiledImg.setSize( GameSetting.MAP_WIDTH,GameSetting.MAP_HEIGHT);
+			tiledImg.blendMode = BlendMode.NONE ;
 			map.addChild( tiledImg );
 			
 			var img:Image = EmbedManager.getMapImage("bottomsea1");
