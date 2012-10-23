@@ -2,7 +2,6 @@ package bing.starling.component
 {
 	import flash.geom.Point;
 	
-	import starling.display.BlendMode;
 	import starling.display.Image;
 	import starling.textures.Texture;
 	
@@ -12,18 +11,12 @@ package bing.starling.component
 		{
 			super(texture);
 			texture.repeat = true ;
-			blendMode = BlendMode.NONE ;
 		}
 		
 		public function setSize( w:Number , h:Number):void
 		{
-			var factor:Number = w/h ;
-			var tile:int = w/texture.width ;
-			
-			
-			
-			var horizontally:int = tile ;
-			var vertically:int = tile/factor ;
+			var horizontally :int= Math.ceil(w/texture.width) ;
+			var vertically:int = Math.ceil(h/texture.height) ;
 			setTexCoords(1,new Point(horizontally,0));
 			setTexCoords(2,new Point(0,vertically));
 			setTexCoords(3,new Point(horizontally,vertically));
