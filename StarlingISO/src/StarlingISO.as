@@ -53,7 +53,7 @@ package
 				_loading.height = stage.fullScreenHeight ;
 			}else{
 				if(stage.fullScreenWidth>480){
-//					GameSetting.isIpad = true ; //高清
+					GameSetting.isIpad = true ; //高清
 				}
 				_loading = new IPHONE_LOADING() as Bitmap;
 				_loading.height = stage.fullScreenWidth ;
@@ -171,11 +171,11 @@ package
 				GameSetting.SCREEN_WIDTH = _starling.stage.stageWidth = 1136 ;
 			}else if( stage.fullScreenWidth % 960==0 ){
 				//iphone4,4s , 如果需要高清，则注释下面五行
-				GameSetting.SCREEN_WIDTH = _starling.stage.stageWidth = 480;
-				GameSetting.SCREEN_HEIGHT = _starling.stage.stageHeight  = 320 ;
-				GameSetting.MAP_WIDTH /=2 ;
-				GameSetting.MAP_HEIGHT /=2 ;
-				GameSetting.GRID_SIZE /=2 ;
+//				GameSetting.SCREEN_WIDTH = _starling.stage.stageWidth = 480;
+//				GameSetting.SCREEN_HEIGHT = _starling.stage.stageHeight  = 320 ;
+//				GameSetting.MAP_WIDTH /=2 ;
+//				GameSetting.MAP_HEIGHT /=2 ;
+//				GameSetting.GRID_SIZE /=2 ;
 			}
 			else if( stage.fullScreenWidth%480==0){
 				//3GS , 如果需要高清，注释下面两行

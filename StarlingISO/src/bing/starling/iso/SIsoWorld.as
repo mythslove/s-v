@@ -3,6 +3,7 @@ package bing.starling.iso
 	import flash.geom.Point;
 	
 	import starling.animation.IAnimatable;
+	import starling.display.DisplayObject;
 	import starling.display.Sprite;
 	import starling.events.Event;
 	
@@ -12,7 +13,7 @@ package bing.starling.iso
 		protected var _gridZ:int ;
 		protected var _size:int ;
 		
-		protected var _backGround:Sprite ;
+		protected var _backGround:DisplayObject ;
 		protected var _scenesLayer:Sprite = new Sprite();
 		protected var _scenes:Vector.<SIsoScene> = new Vector.<SIsoScene>();
 		
@@ -106,7 +107,7 @@ package bing.starling.iso
 		/********************************************************
 		 * 设置背景
 		 * ********************************************************/
-		public function setBackGround( ground:Sprite ):void
+		public function setBackGround( ground:DisplayObject ):void
 		{
 			if(_backGround && this.contains( _backGround) ){
 				this.removeChild( _backGround );
