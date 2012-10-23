@@ -80,7 +80,7 @@ package local.view.shop
 			y = GameSetting.SCREEN_HEIGHT>>1 ;
 			scaleX = scaleY = 1 ;
 			alpha = 1 ;
-			TweenLite.from( this , 0.5 , { x:x-400*GameSetting.GAMESCALE , alpha:0  , ease: Back.easeOut , onComplete:showTweenOver });
+			TweenLite.from( this , 0.4 , { x:x-400*GameSetting.GAMESCALE , alpha:0  , ease: Back.easeOut , onComplete:showTweenOver });
 		}
 		private function showTweenOver():void{
 			if(GameSetting.SCREEN_WIDTH%480==0) {
@@ -142,9 +142,9 @@ package local.view.shop
 			GameWorld.instance.visible=true;
 			touchable=false;
 			if(isLeft){
-				TweenLite.to( this , 0.5 , { x:x-400*GameSetting.GAMESCALE , alpha:0 , ease: Back.easeIn , onComplete:onTweenCom});
+				TweenLite.to( this , 0.4 , { x:x-400*GameSetting.GAMESCALE , alpha:0 , ease: Back.easeIn , onComplete:onTweenCom});
 			}else{
-				TweenLite.to( this , 0.5 , { scaleX:0.7 , scaleY:0.7 , alpha:0 , ease: Back.easeIn , onComplete:onTweenCom});
+				TweenLite.to( this , 0.4 , { scaleX:0.7 , scaleY:0.7 , alpha:0 , ease: Back.easeIn , onComplete:onTweenCom});
 			}
 		}
 		private function onTweenCom():void{
