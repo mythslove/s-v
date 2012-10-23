@@ -37,7 +37,6 @@ package local.map
 	import starling.display.BlendMode;
 	import starling.display.DisplayObject;
 	import starling.display.Image;
-	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.events.Touch;
@@ -83,12 +82,11 @@ package local.map
 		
 		private function addBackground():void
 		{
-			if(Starling.current.nativeStage.fullScreenWidth%480==0){
-				var quad:Quad = new Quad(GameSetting.MAP_WIDTH , GameSetting.MAP_HEIGHT , 0x859E21 , false );
-				this.setBackGround( quad );
-				return ;
-			}
-			
+//			if(Starling.current.nativeStage.fullScreenWidth%480==0){
+//				var quad:Quad = new Quad(GameSetting.MAP_WIDTH , GameSetting.MAP_HEIGHT , 0x859E21 , false );
+//				this.setBackGround( quad );
+//				return ;
+//			}
 			
 			var offset:Number ;
 			var map:Sprite = new Sprite();
