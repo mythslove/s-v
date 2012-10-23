@@ -65,8 +65,8 @@ package local.view.shop.panel
 		private function tabInitializer(tab:Button , item:Object ):void
 		{
 			tab.defaultSkin = StyleSetting.TAB_UP_SKIN() ;
-			tab.downSkin =  StyleSetting.TAB_DOWN_SKIN() ;
-			tab.selectedUpSkin = StyleSetting.TAB_SELECTED_BUTTON() ;
+			tab.downSkin =  StyleSetting.TAB_SELECTED_SKIN() ;
+			tab.selectedUpSkin = tab.downSkin ;
 			tab.label = item.label ;
 			tab.defaultLabelProperties.textFormat = new TextFormat("Verdana",18*GameSetting.GAMESCALE,0xffffff,true);
 			tab.paddingLeft = tab.paddingRight = 4*GameSetting.GAMESCALE ;

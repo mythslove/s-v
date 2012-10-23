@@ -1,8 +1,6 @@
 package local.comm
 {
-	import feathers.display.Scale3Image;
 	import feathers.display.Scale9Image;
-	import feathers.textures.Scale3Textures;
 	import feathers.textures.Scale9Textures;
 	
 	import flash.geom.Rectangle;
@@ -25,14 +23,11 @@ package local.comm
 		
 		
 		//tabButton
-		public static const tabButtonUpTexture:Scale3Textures = new Scale3Textures(EmbedManager.getUITexture("TabButtonUp"),10*GameSetting.GAMESCALE,10*GameSetting.GAMESCALE) ;
-		public static function TAB_UP_SKIN():Scale3Image{ return new Scale3Image( tabButtonUpTexture);  }
+		public static const tabButtonUpTexture:Texture = EmbedManager.getUITexture("TabMenuButtonUp") ;
+		public static function TAB_UP_SKIN():Image{ return new Image( tabButtonUpTexture);  }
 		
-		public static const tabButtonDownTexture:Scale3Textures = new Scale3Textures(EmbedManager.getUITexture("TabButtonDown"),10*GameSetting.GAMESCALE,10*GameSetting.GAMESCALE) ;
-		public static function TAB_DOWN_SKIN():Scale3Image{ return new Scale3Image( tabButtonDownTexture ); }
-		
-		public static const tabButtonSelectedTexture:Scale3Textures = new Scale3Textures(EmbedManager.getUITexture("TabButtonSelected"),10*GameSetting.GAMESCALE,10*GameSetting.GAMESCALE) ;
-		public static function TAB_SELECTED_BUTTON():Scale3Image{ return new Scale3Image( tabButtonSelectedTexture ); }
+		public static const tabButtonSelectedTexture:Texture = EmbedManager.getUITexture("TabMenuButtonSelected") ;
+		public static function TAB_SELECTED_SKIN():Image{ return new Image( tabButtonSelectedTexture ); }
 		
 		
 		//shopItemBg
