@@ -14,6 +14,7 @@ package local.view.bottom
 	import local.view.base.GameButton;
 	import local.view.building.EditorBuildingButtons;
 	import local.view.shop.ShopOverViewPopUp;
+	import local.view.storage.StorageBar;
 	
 	import starling.display.Image;
 	import starling.display.Sprite;
@@ -115,7 +116,7 @@ package local.view.bottom
 		 */		
 		public function showStorage():void
 		{
-//			addChild( StorageBar.instance);
+			addChild( StorageBar.instance);
 		}
 		
 		

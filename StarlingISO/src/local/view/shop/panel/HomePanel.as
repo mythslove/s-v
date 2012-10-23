@@ -12,8 +12,6 @@ package local.view.shop.panel
 	import local.model.ShopModel;
 	import local.vo.BaseBuildingVO;
 	
-	import org.osmf.layout.LayoutMode;
-	
 	import starling.events.Event;
 	
 	public class HomePanel extends ShopPanel
@@ -41,7 +39,7 @@ package local.view.shop.panel
 		{
 			
 			this._tabBar = new TabBar();
-			_tabBar.direction = LayoutMode.HORIZONTAL;
+			_tabBar.direction = TabBar.DIRECTION_HORIZONTAL;
 			_tabBar.tabInitializer = tabInitializer ;
 			_tabBar.gap = 5*GameSetting.GAMESCALE ;
 			this._tabBar.onChange.add(tabBar_onChange);
