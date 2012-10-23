@@ -21,7 +21,7 @@ package local.map.pk
 	import local.map.GameWorld;
 	import local.model.CompsModel;
 	import local.model.PlayerModel;
-	import local.util.ResourceUtil;
+	import local.util.EmbedsManager;
 	import local.view.CenterViewLayer;
 	
 	public class PickupImages extends Sprite
@@ -54,21 +54,21 @@ package local.map.pk
 			switch( pkType)
 			{
 				case PickupType.COIN:
-					bmp.bitmapData = ResourceUtil.instance.getInstanceByClassName("ui_pk","local.view.pk.Coin") as BitmapData ;
+					bmp.bitmapData = EmbedsManager.instance.getPKBmd("Coin") as BitmapData ;
 					break ;
 				case PickupType.EXP:
-					bmp.bitmapData = ResourceUtil.instance.getInstanceByClassName("ui_pk","local.view.pk.Exp") as BitmapData ;
+					bmp.bitmapData = EmbedsManager.instance.getPKBmd("Exp") as BitmapData ;
 					break ;
 				case PickupType.GOOD:
-					bmp.bitmapData = ResourceUtil.instance.getInstanceByClassName("ui_pk","local.view.pk.Goods") as BitmapData ;
+					bmp.bitmapData = EmbedsManager.instance.getPKBmd("Goods") as BitmapData ;
 					break ;
 				case PickupType.ENERGY:
-					bmp.bitmapData = ResourceUtil.instance.getInstanceByClassName("ui_pk","local.view.pk.Energy") as BitmapData ;
+					bmp.bitmapData = EmbedsManager.instance.getPKBmd("Energy") as BitmapData ;
 					break ;
 				default: //comp
 					instance.mouseEnabled = false ;
 					instance.isComp = true ;
-					bmp.bitmapData = ResourceUtil.instance.getInstanceByClassName("ui_pk","local.view.pk."+pkType) as BitmapData ;
+					bmp.bitmapData = EmbedsManager.instance.getPKBmd(pkType) as BitmapData ;
 					break ;
 			}
 			bmp.x = -bmp.width>>1 ;
@@ -92,7 +92,7 @@ package local.map.pk
 			if( isComp ){
 				fly();
 			}else{
-				_timeoutId = setTimeout( fly , Math.random()*2000 );
+				_timeoutId = setTimeout( fly , 2000+Math.random()*2000 );
 			}
 		}
 			

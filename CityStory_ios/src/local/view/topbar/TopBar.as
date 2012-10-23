@@ -3,7 +3,6 @@ package local.view.topbar
 	import com.greensock.TweenLite;
 	
 	import flash.display.Bitmap;
-	import flash.display.BitmapData;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
@@ -12,8 +11,8 @@ package local.view.topbar
 	import local.comm.GameData;
 	import local.map.item.BaseBuilding;
 	import local.model.PlayerModel;
+	import local.util.EmbedsManager;
 	import local.util.PopUpManager;
-	import local.util.ResourceUtil;
 	import local.view.alert.PopulationAlert;
 	import local.view.base.BaseView;
 	import local.vo.PlayerVO;
@@ -77,7 +76,7 @@ package local.view.topbar
 		
 		private function flyGoods( targetPoint:Point , time:Number ):void
 		{
-			var bmp:Bitmap = new Bitmap ( ResourceUtil.instance.getInstanceByClassName("ui_pk","local.view.pk.Goods") as BitmapData );
+			var bmp:Bitmap = new Bitmap ( EmbedsManager.instance.getPKBmd("Goods") );
 			bmp.scaleX = bmp.scaleY = 0.5 ;
 			bmp.x = goodsBar.x+x  ;
 			bmp.y = goodsBar.y ;

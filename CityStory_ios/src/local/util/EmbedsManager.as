@@ -6,9 +6,9 @@ package local.util
 	import flash.display.BitmapData;
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
-	import flash.utils.getDefinitionByName;
 	
 	import local.comm.GameSetting;
+	import local.view.pk.*;
 	import local.vo.BitmapAnimResVO;
 	import local.vo.RoadResVO;
 	
@@ -129,6 +129,28 @@ package local.util
 		public static const VerdanaSmallFnt_iphone:Class;
 		[Embed(source="../resource/font/VerdanaSmall_iphone.png") ]
 		public static const VerdanaSmall_iphone:Class;
+		
+		
+		
+		
+		
+		//==================swf中的图片资源==============================
+		public static const CashBMD:BitmapData = new Cash(0,0);
+		public static const CoinBMD:BitmapData = new Coin(0,0);
+		public static const EnergyBMD:BitmapData = new Energy(0,0);
+		public static const ExpBMD:BitmapData = new Exp(0,0);
+		public static const GoodsBMD:BitmapData = new Goods(0,0);
+		public static const StoneBMD:BitmapData = new Stone(0,0);
+		public static const WoodBMD:BitmapData = new Wood(0,0);
+		
+		/**
+		 * 返回pickup bitmapData 
+		 * @param name
+		 * @return 
+		 */		
+		public function getPKBmd( name:String ):BitmapData{
+			return EmbedsManager[name+"BMD"] ;
+		}
 		
 		
 		
