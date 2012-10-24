@@ -254,6 +254,7 @@ package bing.res
 				{
 					this.dispatchEvent( e );
 				}
+				trace("加载失败:"+resVO.url);
 			}
 		}
 		
