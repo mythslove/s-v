@@ -6,6 +6,7 @@ package local.util
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
 	import flash.utils.getTimer;
+	import flash.utils.setInterval;
 	
 	import local.comm.GameSetting;
 	import local.comm.GlobalDispatcher;
@@ -33,6 +34,11 @@ package local.util
 		//=======================================
 		
 		private var _bytes:ByteArray = new ByteArray();
+		
+		public function start():void
+		{
+			setInterval(saveVillage,60000);
+		}
 		
 		/**
 		 * 保存村庄信息 
@@ -154,5 +160,17 @@ package local.util
 				GlobalDispatcher.instance.dispatchEvent( new VillageEvent(VillageEvent.NEW_VILLAGE));
 			}
 		}
+		
+		/**
+		 * 上传村庄信息文件
+		 */		
+		public function uploadFile():void
+		{
+			_bytes.position = 0 ;
+			if(_bytes.bytesAvailable){
+				
+			}
+		}
+			
 	}
 }
