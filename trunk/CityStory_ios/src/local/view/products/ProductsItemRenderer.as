@@ -9,6 +9,7 @@ package local.view.products
 	import local.util.GameUtil;
 	import local.util.PopUpManager;
 	import local.view.base.BaseView;
+	import local.view.base.ThumbCache;
 	import local.view.btn.YellowButton;
 	import local.view.shop.ShopItemPrice;
 	import local.vo.PlayerVO;
@@ -52,6 +53,10 @@ package local.view.products
 			
 			//标题
 			GameUtil.boldTextField( txtTitle , proVO.title );
+			
+			//缩略图
+			var tc:ThumbCache = new ThumbCache( proVO.name , "res/product/"+proVO.name+".png");
+			iconContainer.addChild( tc );
 			
 			//玩家等级限制，是否lock
 			if(PlayerModel.instance.me.level<proVO.requireLv)
