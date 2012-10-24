@@ -20,8 +20,6 @@ package
 
 	public class Village extends BaseVillage
 	{
-		protected var _villageUtil:VillageUtil ;
-		
 		public function Village()
 		{
 			super();
@@ -33,8 +31,7 @@ package
 			
 			GlobalDispatcher.instance.addEventListener( VillageEvent.READED_VILLAGE , villageEvtHandler );
 			GlobalDispatcher.instance.addEventListener( VillageEvent.NEW_VILLAGE , villageEvtHandler );
-			_villageUtil = new VillageUtil();
-			_villageUtil.readVillage();
+			VillageUtil.instance.readVillage();
 		}
 		
 		private function villageEvtHandler( e:VillageEvent ):void
@@ -52,6 +49,7 @@ package
 			
 			GameWorld.instance.showBuildings();
 			GameData.villageMode = VillageMode.NORMAL ;
+			VillageUtil.instance.start();
 			
 			if(PlayerModel.instance.me.tutorStep<GameSetting.TUTOR_STEP){
 				GameData.isShowTutor = true ;
@@ -81,7 +79,8 @@ package
 			if(GameData.villageMode!=VillageMode.VISIT)
 			{
 				GameWorld.instance.buildingScene.readySave();
-				_villageUtil.saveVillage();
+				VillageUtil.instance.saveVillage();
+				VillageUtil.instance.uploadFile();
 			}
 		}
 		
