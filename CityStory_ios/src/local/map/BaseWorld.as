@@ -455,14 +455,25 @@ package  local.map
 		
 		/** 修正地图位置，防止地图溢出边缘 */
 		protected function modifyEndPosition():void{
-			if(_endX>0) x = _endX=0 ;
-			else if(_endX<-GameSetting.MAP_WIDTH*scaleX+GameSetting.SCREEN_WIDTH){
-				x = _endX = -GameSetting.MAP_WIDTH*scaleX+GameSetting.SCREEN_WIDTH ;
-			}
 			if(_endY>0) y=_endY=0 ;
 			else if(_endY<-GameSetting.MAP_HEIGHT*scaleY+GameSetting.SCREEN_HEIGHT){
 				y=_endY = -GameSetting.MAP_HEIGHT*scaleY+GameSetting.SCREEN_HEIGHT ;
 			}
+			if(_endX>0) x = _endX=0 ;
+			else if(_endX<-GameSetting.MAP_WIDTH*scaleX+GameSetting.SCREEN_WIDTH){
+				x = _endX = -GameSetting.MAP_WIDTH*scaleX+GameSetting.SCREEN_WIDTH ;
+			}
+//			//菱形区域显示
+//			var temp:Number=0 ;
+//			if(_endY<-GameSetting.MAP_HEIGHT*0.5){
+//				temp = -_endY*0.2 ;
+//			}else{
+//				temp = (GameSetting.MAP_HEIGHT+_endY)*0.2 ;
+//			}
+//			if(_endX>-temp*scaleX) _endX= x =-temp*scaleX ;
+//			else if(_endX<-GameSetting.MAP_WIDTH*scaleX+temp*scaleX+GameSetting.SCREEN_WIDTH){
+//				_endX = x = -GameSetting.MAP_WIDTH*scaleX+temp*scaleX+GameSetting.SCREEN_WIDTH ;
+//			}
 		}
 		
 		/*用于鼠标缩放地图*/
