@@ -34,9 +34,9 @@ package com.longtailvideo.jwplayer.view {
 			margin: 8, 
 			out: 0.5, 
 			over: 1, 
-			timeout: 5,
-			hide: "true",
-			position: "bottom-left"
+//			timeout: 5,
+			hide: "false",
+			position: "top-left"
 		}
 		/** Reference to the player **/
 		protected var _player:IPlayer;
@@ -84,23 +84,29 @@ package com.longtailvideo.jwplayer.view {
 		}
 		
 		protected function loadFile():void {
-			var versionRE:RegExp = /(\d+)\.(\d+)\./;
-			var versionInfo:Array = versionRE.exec(_player.version);
-			var prefix:String = getConfigParam('prefix');
-			if (getConfigParam('file') && prefix) {
-				try {
-					if (RootReference.root.loaderInfo.url.indexOf("https://") == 0) {
-						prefix = prefix.replace("http://", "https://secure");
-					}
-				} catch(e:Error) {}
-				defaults['file'] = prefix + versionInfo[1] + "/" + versionInfo[2] + "/" + getConfigParam('file');
-			}
-			
-			if (getConfigParam('file') && RootReference.root.loaderInfo.url.indexOf("http")==0) {
+//			var versionRE:RegExp = /(\d+)\.(\d+)\./;
+//			var versionInfo:Array = versionRE.exec(_player.version);
+//			var prefix:String = getConfigParam('prefix');
+//			if (getConfigParam('file') && prefix) {
+//				try {
+//					if (RootReference.root.loaderInfo.url.indexOf("https://") == 0) {
+//						prefix = prefix.replace("http://", "https://secure");
+//					}
+//				} catch(e:Error) {}
+//				defaults['file'] = prefix + versionInfo[1] + "/" + versionInfo[2] + "/" + getConfigParam('file');
+//			}
+//			
+//			if (getConfigParam('file') && RootReference.root.loaderInfo.url.indexOf("http")==0) {
+//				loader = new Loader();
+//				loader.contentLoaderInfo.addEventListener(Event.COMPLETE, loaderHandler);
+//				loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, errorHandler);
+//				loader.load(new URLRequest(getConfigParam('file')));
+//			}
+			if(_player.config.logo){
 				loader = new Loader();
 				loader.contentLoaderInfo.addEventListener(Event.COMPLETE, loaderHandler);
 				loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, errorHandler);
-				loader.load(new URLRequest(getConfigParam('file')));
+				loader.load(new URLRequest(_player.config.logo));
 			}
 		}
 		
