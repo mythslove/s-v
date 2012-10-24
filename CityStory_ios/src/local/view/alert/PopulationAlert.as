@@ -42,8 +42,8 @@ package local.view.alert
 		{
 			btnPop.txtLabel.text = GameUtil.localizationString("popalert.popinfo.button") ;
 			btnCap.txtLabel.text = GameUtil.localizationString("popalert.capinfo.button") ;
-			GameUtil.boldTextField( txtPopInfo , GameUtil.localizationString("popalert.popinfo") );
-			GameUtil.boldTextField( txtCapInfo , GameUtil.localizationString("popalert.capinfo") );
+			txtPopInfo.text =  GameUtil.localizationString("popalert.popinfo") ;
+			txtCapInfo.text = GameUtil.localizationString("popalert.capinfo") ;
 			GameUtil.boldTextField( txtPopTitle , GameUtil.localizationString("pop")+": "+PlayerModel.instance.getCurrentPop() );
 			GameUtil.boldTextField( txtCapTitle , GameUtil.localizationString("cap")+": "+ PlayerModel.instance.me.cap);
 		}
