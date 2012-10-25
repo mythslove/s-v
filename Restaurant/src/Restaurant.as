@@ -144,12 +144,12 @@ package
 				GameSetting.SCREEN_WIDTH = _starling.stage.stageWidth = 1024;
 				GameSetting.SCREEN_HEIGHT =_starling.stage.stageHeight  = 768 ;
 			}
-			else if( stage.fullScreenWidth%960==0)
+			else if( stage.fullScreenWidth%480==0)
 			{
 				GameSetting.SCREEN_WIDTH = _starling.stage.stageWidth = 960;
 				GameSetting.SCREEN_HEIGHT = _starling.stage.stageHeight  = 640 ;
 			}
-			else
+			else 
 			{
 				GameSetting.SCREEN_WIDTH = _starling.stage.stageWidth = 960;
 				GameSetting.SCREEN_HEIGHT = _starling.stage.stageHeight  = 640 ;
