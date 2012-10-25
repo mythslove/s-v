@@ -9,23 +9,17 @@ package local.comm
 		
 		
 		//地图大小
-		public static var MAP_WIDTH:int = 4000;
-		public static var MAP_HEIGHT:int = 2800;
+		public static var MAP_WIDTH:int = 3000;
+		public static var MAP_HEIGHT:int = 2200;
 		
 		/** 网格大小 */		
-		public static var GRID_SIZE:int = 60 ;
+		public static var GRID_SIZE:int = 50 ;
 		
 		/** 地图大小*/
-		public static var GRID_X:int = 30 ;
-		public static var GRID_Z:int = 30 ;
+		public static var GRID_X:int = 10 ;
+		public static var GRID_Z:int = 10 ;
 		
 		/** 地图的最大缩放值 */
 		public static var minZoom:Number=0.7 ;
-		
-		public static var isIpad:Boolean ;
-		
-		public static function get GAMESCALE():Number{
-			return isIpad? 1 : 0.5 ;
-		}
 	}
 }
