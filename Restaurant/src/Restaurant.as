@@ -11,12 +11,14 @@ package
 	import flash.display.*;
 	import flash.events.Event;
 	import flash.geom.Rectangle;
+	import flash.net.registerClassAlias;
 	import flash.utils.ByteArray;
 	
 	import local.MainGame;
 	import local.comm.GameSetting;
 	import local.util.EmbedManager;
 	import local.util.ResourceUtil;
+	import local.vo.PlayerVO;
 	
 	import starling.core.Starling;
 	
@@ -56,8 +58,14 @@ package
 			addChild(_loading);
 			
 			TweenPlugin.activate([BezierPlugin]);
-//			registerVO();
+			registerVO();
 			loadConfig();
+		}
+		
+		
+		private function registerVO():void
+		{
+			registerClassAlias( "PlayerVO",PlayerVO );
 		}
 		
 		private function loadConfig():void
