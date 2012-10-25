@@ -8,6 +8,7 @@ package
 	import flash.events.Event;
 	import flash.geom.Rectangle;
 	
+	import local.MainGame;
 	import local.comm.GameSetting;
 	
 	import starling.core.Starling;
@@ -67,15 +68,18 @@ package
 				GameSetting.SCREEN_WIDTH = _starling.stage.stageWidth = 1024;
 				GameSetting.SCREEN_HEIGHT =_starling.stage.stageHeight  = 768 ;
 			}
-			else if( stage.fullScreenWidth%480==0)
+			else if( stage.fullScreenWidth%960==0)
 			{
 				GameSetting.SCREEN_WIDTH = _starling.stage.stageWidth = 960;
 				GameSetting.SCREEN_HEIGHT = _starling.stage.stageHeight  = 640 ;
 			}
 			else
 			{
-				GameSetting.SCREEN_WIDTH = _starling.stage.stageWidth = stage.fullScreenWidth;
-				GameSetting.SCREEN_HEIGHT = _starling.stage.stageHeight  = stage.fullScreenHeight ;
+				GameSetting.SCREEN_WIDTH = _starling.stage.stageWidth = 960;
+				GameSetting.SCREEN_HEIGHT = _starling.stage.stageHeight  = 640 ;
+				var view:Rectangle = new Rectangle(0,0,960,640) ;
+				view.x = (stage.fullScreenWidth-view.x )>>1 ;
+				_starling.viewPort = view ;
 			}
 			_starling.stage3D.addEventListener(Event.CONTEXT3D_CREATE , contextCreatedHandler );
 		}
