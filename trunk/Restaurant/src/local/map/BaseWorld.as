@@ -255,7 +255,7 @@ package local.map
 			}else{
 				temp = (GameSetting.MAP_HEIGHT+_endY)*0.4 ;
 			}
-			if(_endX>-temp*scaleX) _endX= x =-temp*scaleX ;
+			if(_endX>-temp*scaleX) _endX = x =-temp*scaleX ;
 			else if(_endX<-GameSetting.MAP_WIDTH*scaleX+temp*scaleX+GameSetting.SCREEN_WIDTH){
 				_endX = x = -GameSetting.MAP_WIDTH*scaleX+temp*scaleX+GameSetting.SCREEN_WIDTH ;
 			}
