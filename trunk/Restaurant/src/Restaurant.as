@@ -154,7 +154,7 @@ package
 				GameSetting.SCREEN_WIDTH = _starling.stage.stageWidth = 960;
 				GameSetting.SCREEN_HEIGHT = _starling.stage.stageHeight  = 640 ;
 				var view:Rectangle = new Rectangle(0,0,960,640) ;
-				view.x = (stage.fullScreenWidth-view.x )>>1 ;
+				view.x = (stage.fullScreenWidth-960 )>>1 ;
 				_starling.viewPort = view ;
 			}
 			_starling.stage3D.addEventListener(Event.CONTEXT3D_CREATE , contextCreatedHandler );
