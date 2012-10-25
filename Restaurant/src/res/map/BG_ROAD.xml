@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://texturepacker.com-->
+<!-- $TexturePacker:SmartUpdate:61ee438ef3097a881e8d6c04183d6fc4$ -->
+<TextureAtlas imagePath="BG_ROAD.png">
+    <SubTexture name="BG_ROAD_1" x="0" y="0" width="1024" height="459"/>
+    <SubTexture name="BG_ROAD_2" x="0" y="461" width="1024" height="447"/>
+</TextureAtlas>
