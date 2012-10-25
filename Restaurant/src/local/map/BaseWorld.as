@@ -55,7 +55,7 @@ package local.map
 		private function addBackground():void
 		{
 			var map:Sprite = new Sprite();
-			var quad:Quad = new Quad(GameSetting.MAP_WIDTH , GameSetting.MAP_HEIGHT , 0x859E21 , false );
+			var quad:Quad = new Quad(GameSetting.MAP_WIDTH , GameSetting.MAP_HEIGHT , 0x7DB643 , false );
 			map.addChild( quad );
 			
 			var roads:Sprite = new Sprite();
