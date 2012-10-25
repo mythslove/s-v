@@ -11,7 +11,10 @@ package local.map
 	import flash.geom.Point;
 	
 	import local.comm.GameSetting;
+	import local.map.scene.RoomScene;
+	import local.model.PlayerModel;
 	import local.util.EmbedManager;
+	import local.vo.PlayerVO;
 	
 	import starling.core.Starling;
 	import starling.display.Image;
@@ -25,6 +28,14 @@ package local.map
 	
 	public class BaseWorld extends SIsoWorld
 	{
+		public var wallScene:SIsoScene ; //墙
+		public var wallDecorScene:SIsoScene ; //墙上装饰
+		public var floorScene:SIsoScene;//地板
+		public var roomScene:RoomScene ; //房间内部
+		public var iconScene:SIsoScene ; //显示icon层
+		public var topScene:SIsoScene ; //最上层,显示移动的建筑，以及显示一些特效动画
+		public var effectScene:SIsoScene ; //特效层
+		
 		/**===============用于地图移动和缩放=========================*/
 		protected var _moveSpeed:Number =0.5 ; //移动的速度
 		public var runUpdate:Boolean = true ; //是否运行建筑 的update
@@ -38,15 +49,6 @@ package local.map
 		public function BaseWorld()
 		{
 			super( GameSetting.MAX_SIZE,GameSetting.MAX_SIZE,GameSetting.GRID_SIZE);
-			
-			GameSetting.MAP_WIDTH +=(GameSetting.MAX_SIZE-GameSetting.DEFAULT_SIZE) *GameSetting.GRID_SIZE*2 ;
-			GameSetting.MAP_HEIGHT +=(GameSetting.MAX_SIZE-GameSetting.DEFAULT_SIZE) *GameSetting.GRID_SIZE ;
-			
-			this.x = (GameSetting.SCREEN_WIDTH-GameSetting.MAP_WIDTH*scaleX)>>1 ;
-			y=-150 ;
-			this.panTo(GameSetting.MAP_WIDTH*0.5,330-(GameSetting.MAX_SIZE-GameSetting.DEFAULT_SIZE) *GameSetting.GRID_SIZE*0.5 );
-			_endX = x ;
-			_endY = y ;
 			addBackground();
 		}
 		
@@ -77,13 +79,46 @@ package local.map
 		{
 			super.addedToStageHandler(e);
 			
+			//添加场景层
+			floorScene= new SIsoScene(GameSetting.GRID_SIZE , GameSetting.MAX_SIZE, GameSetting.MAX_SIZE );
+			floorScene.touchable = false ;
+			wallScene = new SIsoScene(GameSetting.GRID_SIZE , GameSetting.MAX_SIZE, GameSetting.MAX_SIZE );
+			wallDecorScene = new SIsoScene(GameSetting.GRID_SIZE , GameSetting.MAX_SIZE, GameSetting.MAX_SIZE );
+			roomScene  = new RoomScene();
+			iconScene = new SIsoScene(GameSetting.GRID_SIZE);
+			effectScene = new SIsoScene(GameSetting.GRID_SIZE);
+			topScene = new SIsoScene(GameSetting.GRID_SIZE);
+			addScene( wallScene );
+			addScene( wallDecorScene );
+			addScene(floorScene);
+			addScene(roomScene);
+			addScene(iconScene);
+			addScene( effectScene );
+			addScene(topScene);
+			
 			//显示地图网格
 			var gridScene:SIsoScene = new SIsoScene(GameSetting.GRID_SIZE);
 			gridScene.addChild( new SIsoGrid(GameSetting.MAX_SIZE,GameSetting.MAX_SIZE,GameSetting.GRID_SIZE)) as SIsoGrid ;
 			gridScene.flatten() ;
 			this.addScene(gridScene);
+			//初始化地图
+			initMap();
 			//添加侦听
 			configListeners();
+		}
+		
+		/** 初始化地图 */
+		public function initMap( isHome:Boolean=true ):void
+		{
+			var player:PlayerVO = isHome? PlayerModel.instance.me : null ;
+			
+			GameSetting.MAP_WIDTH +=(GameSetting.MAX_SIZE-GameSetting.DEFAULT_SIZE) *GameSetting.GRID_SIZE*2 ;
+			GameSetting.MAP_HEIGHT +=(GameSetting.MAX_SIZE-GameSetting.DEFAULT_SIZE) *GameSetting.GRID_SIZE ;
+			
+			_endX = x = (GameSetting.SCREEN_WIDTH-GameSetting.MAP_WIDTH*scaleX)>>1 ;
+			_endY = y = -150 ;
+			
+			this.panTo(GameSetting.MAP_WIDTH*0.5,330-(player.mapSize-GameSetting.DEFAULT_SIZE) *GameSetting.GRID_SIZE*0.5 );
 		}
 		
 		protected function configListeners():void
