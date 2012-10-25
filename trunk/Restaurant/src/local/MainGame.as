@@ -1,7 +1,5 @@
 package local
 {
-	import bing.starling.iso.SIsoWorld;
-	
 	import flash.desktop.NativeApplication;
 	import flash.events.Event;
 	
@@ -9,16 +7,16 @@ package local
 	import local.comm.GameSetting;
 	import local.comm.GlobalDispatcher;
 	import local.event.VillageEvent;
+	import local.map.GameWorld;
 	
 	import starling.display.*;
 	import starling.events.Event;
 	
-	public class MainGame extends SIsoWorld
+	public class MainGame extends Sprite
 	{
 		
 		public function MainGame()
 		{
-			super( GameSetting.GRID_X,GameSetting.GRID_Z,GameSetting.GRID_SIZE );
 			addEventListener(starling.events.Event.ADDED_TO_STAGE , addedHandler );
 		}
 		
@@ -37,6 +35,7 @@ package local
 			GlobalDispatcher.instance.addEventListener( VillageEvent.NEW_VILLAGE , villageEvtHandler );
 			
 //			VillageUtil.instance.readVillage();
+			addChild( GameWorld.instance );
 		}
 		
 		

@@ -1,5 +1,9 @@
 package
 {
+	import bing.res.ResLoadedEvent;
+	import bing.res.ResProgressEvent;
+	import bing.res.ResVO;
+	
 	import com.greensock.plugins.BezierPlugin;
 	import com.greensock.plugins.TweenPlugin;
 	
@@ -7,9 +11,12 @@ package
 	import flash.display.*;
 	import flash.events.Event;
 	import flash.geom.Rectangle;
+	import flash.utils.ByteArray;
 	
 	import local.MainGame;
 	import local.comm.GameSetting;
+	import local.util.EmbedManager;
+	import local.util.ResourceUtil;
 	
 	import starling.core.Starling;
 	
@@ -50,8 +57,69 @@ package
 			
 			TweenPlugin.activate([BezierPlugin]);
 //			registerVO();
-//			loadConfig();
+			loadConfig();
 		}
+		
+		private function loadConfig():void
+		{
+			ResourceUtil.instance.addEventListener("GameConfig" , gameConfigHandler );
+			ResourceUtil.instance.loadRes( new ResVO("GameConfig" , "config/config.bin") );
+		}
+		
+		
+		private function gameConfigHandler( e:ResLoadedEvent ):void
+		{
+			ResourceUtil.instance.removeEventListener("GameConfig" , gameConfigHandler );
+			var bytes:ByteArray = e.resVO.resObject as ByteArray ;
+			
+			
+			ResourceUtil.instance.deleteRes( "GameConfig");
+			loadRes();
+		}
+		
+		/*加载初始资源*/
+		private function loadRes():void
+		{
+			var resVOs:Array = [] ;
+//			var allBuildingHash:Dictionary = ShopModel.instance.allBuildingHash ;
+//			if( allBuildingHash){
+//				var baseVO:BaseBuildingVO ;
+//				for ( var name:String in allBuildingHash){
+//					baseVO =  allBuildingHash[name] as BaseBuildingVO ;
+//					if(baseVO.url){
+//						resVOs.push( new ResVO(name , baseVO.url ) ) ;
+//					}
+//				}
+//			}
+			resVOs.push( new ResVO("game_map_png","map/BG_ROAD.png"));
+			resVOs.push( new ResVO("game_map_xml","map/BG_ROAD.xml"));
+			ResourceUtil.instance.addEventListener(ResProgressEvent.RES_LOAD_PROGRESS , gameInitResHandler );
+			ResourceUtil.instance.addEventListener("gameInitRes" , gameInitResHandler );
+			ResourceUtil.instance.queueLoad( "gameInitRes" , resVOs , 10 );
+		}
+		
+		private function gameInitResHandler( e:Event ):void
+		{
+			switch( e.type )
+			{
+				case ResProgressEvent.RES_LOAD_PROGRESS:
+					if((e as ResProgressEvent ).queueName=="gameInitRes"){
+						trace( Math.ceil( (e as ResProgressEvent ).loaded / (e as ResProgressEvent ).total *100 )+"%"  );
+					}
+					break ;
+				case "gameInitRes":
+					ResourceUtil.instance.removeEventListener(ResProgressEvent.RES_LOAD_PROGRESS , gameInitResHandler );
+					ResourceUtil.instance.removeEventListener("gameInitRes" , gameInitResHandler );
+//					EmbedManager.ui_png = ResourceUtil.instance.getResVOByResId("game_ui_png").resObject as Bitmap;
+//					EmbedManager.ui_xml = XML(ResourceUtil.instance.getResVOByResId("game_ui_xml").resObject);
+					EmbedManager.map_png = ResourceUtil.instance.getResVOByResId("game_map_png").resObject as Bitmap;
+					EmbedManager.map_xml = XML(ResourceUtil.instance.getResVOByResId("game_map_xml").resObject);
+					
+					initGame();
+					break ;
+			}
+		}
+		
 		
 		private function initGame():void
 		{
@@ -63,7 +131,7 @@ package
 			_starling.antiAliasing = 0 ;
 			_starling.enableErrorChecking = false ;
 			
-			if(stage.fullScreenWidth%2048==0){
+			if(stage.fullScreenWidth%1024==0){
 				//ipad3
 				GameSetting.SCREEN_WIDTH = _starling.stage.stageWidth = 1024;
 				GameSetting.SCREEN_HEIGHT =_starling.stage.stageHeight  = 768 ;
