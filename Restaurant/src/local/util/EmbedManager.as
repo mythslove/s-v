@@ -14,6 +14,8 @@ package local.util
 		public static var map_png:Bitmap;
 		public static var map_xml:XML ;
 		
+		[Embed(source="../assets/map/Wall.png")]
+		public static const WALL:Class ;
 		
 		
 		private static var _textureDic:Dictionary = new Dictionary() ;
