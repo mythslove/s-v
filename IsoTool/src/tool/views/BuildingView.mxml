@@ -255,6 +255,8 @@
 				ContainerUtil.removeChildren( container );
 				animView.showBitmap( null );
 				resFile = null ;
+				roadsView.btnAddRoadPoint.enabled = false ;
+				roadsView.btnAddRoadLayer.enabled = true ;
 			}
 			
 			/*显示demo  */
@@ -300,8 +302,8 @@
 				  click="saveBuildings()"/>
 		<s:Label x="10" y="46" text="gridX"/>
 		<s:Label x="9" y="76" text="gridZ"/>
-		<s:TextInput id="txtGridX" x="46" y="39" width="55" text="2" textAlign="center"/>
-		<s:TextInput id="txtGridZ" x="46" y="69" width="55" text="2" textAlign="center"/>
+		<s:TextInput id="txtGridX" x="46" y="39" width="55" text="1" textAlign="center"/>
+		<s:TextInput id="txtGridZ" x="46" y="69" width="55" text="1" textAlign="center"/>
 		<s:Button y="52" right="47" width="93" height="27" label="设置"
 				  click="gridBtn_clickHandler(event)"/>
 		<s:Button left="10" bottom="10" width="70" height="30" label="重置"
