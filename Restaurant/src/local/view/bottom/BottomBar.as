@@ -28,7 +28,7 @@ package local.view.bottom
 		{
 			var img:Image =EmbedManager.getUIImage("ShopButton");
 			btnMarket = new GameButton(img);
-			btnMarket.x = GameSetting.SCREEN_WIDTH - btnMarket.pivotX-10 ;
+			btnMarket.x = GameSetting.SCREEN_WIDTH - btnMarket.pivotX-5 ;
 			btnMarket.y = -btnMarket.pivotY-5 ;
 			addChild(btnMarket);
 			btnMarket.addEventListener(Event.TRIGGERED , onClickHandler );
@@ -42,8 +42,8 @@ package local.view.bottom
 			
 			img = EmbedManager.getUIImage("MenuButton");
 			btnMenu = new GameButton(img);
-			btnMenu.x = img.width*0.5+10 ;
-			btnMenu.y = -btnEditor.pivotY-5;
+			btnMenu.x = img.width*0.5+5 ;
+			btnMenu.y = -btnMenu.pivotY-5;
 			addChild( btnMenu );
 			btnMenu.addEventListener(Event.TRIGGERED , onClickHandler );
 			
