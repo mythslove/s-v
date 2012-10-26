@@ -67,10 +67,10 @@ package local.map.cell
 						img = new Image( TextureAssets.instance.buildingLayerTexture.getTexture( tempName )  ) ;
 						img.touchable = false ;
 					}
-					img.x =  _bavos[0].offsetX*GameSetting.GAMESCALE ;
-					img.y =  _bavos[0].offsetY*GameSetting.GAMESCALE ;
-					img.scaleX =  _bavos[0].scaleX ;
-					img.scaleY =  _bavos[0].scaleY ;
+					img.x =  vo.offsetX*GameSetting.GAMESCALE ;
+					img.y =  vo.offsetY*GameSetting.GAMESCALE ;
+					img.scaleX =  vo.scaleX ;
+					img.scaleY =  vo.scaleY ;
 					
 					addChild(img);
 				}
