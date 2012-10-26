@@ -2,7 +2,7 @@ package local.vo
 {
 	public class FoodVO
 	{
-		public var name:String ;
+		public var name:String="" ;
 		public var requireLv:int ;
 		public var costCash:int ;
 		public var costCoin:int ;
@@ -11,6 +11,6 @@ package local.vo
 		public var earnCoin:int ; //可以收获的钱
 		public var earnExp:int ;//可以收获的经验
 		public var expireTime:int ; //过期时间
-		public var materials:Array ;//需要的原料
+		public var materials:String ="" ;//需要的原料
 	}
 }

@@ -18,7 +18,7 @@ package
 	import local.comm.GameSetting;
 	import local.util.EmbedManager;
 	import local.util.ResourceUtil;
-	import local.vo.PlayerVO;
+	import local.vo.*;
 	
 	import starling.core.Starling;
 	
@@ -66,6 +66,8 @@ package
 		private function registerVO():void
 		{
 			registerClassAlias( "PlayerVO",PlayerVO );
+			registerClassAlias( "BaseItemVO",BaseItemVO );
+			registerClassAlias( "FoodVO",FoodVO );
 		}
 		
 		private function loadConfig():void
