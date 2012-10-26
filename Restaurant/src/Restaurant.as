@@ -69,6 +69,7 @@ package
 		{
 			registerClassAlias( "PlayerVO",PlayerVO );
 			registerClassAlias( "BaseItemVO",BaseItemVO );
+			registerClassAlias( "ItemVO",ItemVO );
 			registerClassAlias( "FoodVO",FoodVO );
 		}
 		
