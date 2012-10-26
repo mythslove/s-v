@@ -3,6 +3,10 @@ package local.enum
 	public class ItemType
 	{
 		/**
+		 *  墙
+		 */		
+		public static const WALL:String = "wall";
+		/**
 		 * 墙纸
 		 */		
 		public static const WALL_PAPER:String = "wallpaper";

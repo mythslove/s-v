@@ -13,9 +13,11 @@ package
 	import flash.geom.Rectangle;
 	import flash.net.registerClassAlias;
 	import flash.utils.ByteArray;
+	import flash.utils.Dictionary;
 	
 	import local.MainGame;
 	import local.comm.GameSetting;
+	import local.model.ShopModel;
 	import local.util.EmbedManager;
 	import local.util.ResourceUtil;
 	import local.vo.*;
@@ -82,6 +84,8 @@ package
 			ResourceUtil.instance.removeEventListener("GameConfig" , gameConfigHandler );
 			var bytes:ByteArray = e.resVO.resObject as ByteArray ;
 			
+			ShopModel.instance.allItemsHash = bytes.readObject() as Dictionary;
+			ShopModel.instance.baseItems = bytes.readObject() as Vector.<BaseItemVO> ;
 			
 			ResourceUtil.instance.deleteRes( "GameConfig");
 			loadRes();
@@ -91,16 +95,19 @@ package
 		private function loadRes():void
 		{
 			var resVOs:Array = [] ;
-//			var allBuildingHash:Dictionary = ShopModel.instance.allBuildingHash ;
-//			if( allBuildingHash){
-//				var baseVO:BaseBuildingVO ;
-//				for ( var name:String in allBuildingHash){
-//					baseVO =  allBuildingHash[name] as BaseBuildingVO ;
-//					if(baseVO.url){
-//						resVOs.push( new ResVO(name , baseVO.url ) ) ;
-//					}
-//				}
-//			}
+			var allItemsHash:Dictionary = ShopModel.instance.allItemsHash ;
+			if( allItemsHash){
+				var baseVO:BaseItemVO ;
+				for ( var name:String in allItemsHash){
+					baseVO =  allItemsHash[name] as BaseItemVO ;
+					if(baseVO.directions==4){
+						resVOs.push( new ResVO(name+"_1" , baseVO.getDirectionUrl(1 ))  ) ;
+						resVOs.push( new ResVO(name+"_2" , baseVO.getDirectionUrl(2 ))  ) ;
+					} else{
+						resVOs.push( new ResVO(name , baseVO.url ) ) ;
+					}
+				}
+			}
 			resVOs.push( new ResVO("game_map_png","map/BG_ROAD.png"));
 			resVOs.push( new ResVO("game_map_xml","map/BG_ROAD.xml"));
 			ResourceUtil.instance.addEventListener(ResProgressEvent.RES_LOAD_PROGRESS , gameInitResHandler );
