@@ -14,6 +14,7 @@ package local.view
 	import local.view.topbar.TopBar;
 	
 	import starling.display.Image;
+	import starling.events.Event;
 	
 	public class CenterViewLayer extends Sprite
 	{
@@ -47,12 +48,12 @@ package local.view
 			topBar.x = (GameSetting.SCREEN_WIDTH-topBar.width)>>1; 
 			addChild(topBar);
 			
-			var img:Image = EmbedManager.getUIImage("QuestButtonUp") ;
+			var img:Image = EmbedManager.getUIImage("GoalButton") ;
 			questBtn = new GameButton( img );
 			questBtn.x= img.width*0.5 + 5;
-			questBtn.y = 100 ;
+			questBtn.y = 150 ;
 			addChild(questBtn);
-			questBtn.onRelease.add( questBtnClick );
+			questBtn.addEventListener(Event.TRIGGERED , questBtnClick );
 		}
 		
 		/**
@@ -109,7 +110,7 @@ package local.view
 			}
 		}
 		
-		private function questBtnClick( btn:Button ):void
+		private function questBtnClick( e:Event ):void
 		{
 			
 		}

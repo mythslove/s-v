@@ -2,22 +2,13 @@ package local.view.bottom
 {
 	import com.greensock.TweenLite;
 	
-	import feathers.controls.Button;
-	
-	import local.comm.GameData;
 	import local.comm.GameSetting;
-	import local.enum.VillageMode;
-	import local.map.GameWorld;
-	import local.map.item.BaseBuilding;
 	import local.util.EmbedManager;
-	import local.util.PopUpManager;
 	import local.view.base.GameButton;
-	import local.view.building.EditorBuildingButtons;
-	import local.view.shop.ShopOverViewPopUp;
-	import local.view.storage.StorageBar;
 	
 	import starling.display.Image;
 	import starling.display.Sprite;
+	import starling.events.Event;
 	
 	public class BottomBar extends Sprite
 	{
@@ -25,6 +16,7 @@ package local.view.bottom
 		public var btnEditor:GameButton ;
 		public var btnDone:GameButton ;
 		public var btnStorage:GameButton ;
+		public var btnMenu:GameButton; 
 		
 		public function BottomBar()
 		{
@@ -34,60 +26,67 @@ package local.view.bottom
 		
 		private function init():void
 		{
-			var img:Image =EmbedManager.getUIImage("MarketButtonUp");
+			var img:Image =EmbedManager.getUIImage("ShopButton");
 			btnMarket = new GameButton(img);
-			btnMarket.x = GameSetting.SCREEN_WIDTH - btnMarket.pivotX-5 ;
+			btnMarket.x = GameSetting.SCREEN_WIDTH - btnMarket.pivotX-10 ;
 			btnMarket.y = -btnMarket.pivotY-5 ;
 			addChild(btnMarket);
-			btnMarket.onRelease.add( onClickHandler );
+			btnMarket.addEventListener(Event.TRIGGERED , onClickHandler );
 			
-			img = EmbedManager.getUIImage("EditorButtonUp");
+			img = EmbedManager.getUIImage("EditorButton");
 			btnEditor = new GameButton(img);
-			btnEditor.x = btnMarket.x-img.width-40*GameSetting.GAMESCALE ;
+			btnEditor.x = btnMarket.x-img.width-70 ;
 			btnEditor.y = -btnEditor.pivotY-5;
 			addChild( btnEditor );
-			btnEditor.onRelease.add( onClickHandler );
+			btnEditor.addEventListener(Event.TRIGGERED , onClickHandler );
 			
-			img = EmbedManager.getUIImage("BottomBarStorageButtonUp");
-			btnStorage = new GameButton(img);
-			btnStorage.x = btnStorage.pivotX+5*GameSetting.GAMESCALE;
-			btnStorage.y = -btnStorage.pivotY-5*GameSetting.GAMESCALE;
-			btnStorage.setVisible( false );
-			addChild( btnStorage );
-			btnStorage.onRelease.add( onClickHandler );
+			img = EmbedManager.getUIImage("MenuButton");
+			btnMenu = new GameButton(img);
+			btnMenu.x = img.width*0.5+10 ;
+			btnMenu.y = -btnEditor.pivotY-5;
+			addChild( btnMenu );
+			btnMenu.addEventListener(Event.TRIGGERED , onClickHandler );
 			
-			img = EmbedManager.getUIImage("DoneButtonUp");
-			btnDone = new GameButton(img);
-			btnDone.x = GameSetting.SCREEN_WIDTH - btnDone.pivotX-5*GameSetting.GAMESCALE ;
-			btnDone.y = -btnDone.pivotY-5*GameSetting.GAMESCALE;
-			btnDone.setVisible( false );
-			addChild( btnDone );
-			btnDone.onRelease.add( onClickHandler );
+//			img = EmbedManager.getUIImage("BottomBarStorageButtonUp");
+//			btnStorage = new GameButton(img);
+//			btnStorage.x = btnStorage.pivotX+5;
+//			btnStorage.y = -btnStorage.pivotY-5;
+//			btnStorage.setVisible( false );
+//			addChild( btnStorage );
+//			btnStorage.addEventListener(Event.TRIGGERED , onClickHandler );
+//			
+//			img = EmbedManager.getUIImage("DoneButtonUp");
+//			btnDone = new GameButton(img);
+//			btnDone.x = GameSetting.SCREEN_WIDTH - btnDone.pivotX-5 ;
+//			btnDone.y = -btnDone.pivotY-5;
+//			btnDone.setVisible( false );
+//			addChild( btnDone );
+//			btnDone.addEventListener(Event.TRIGGERED , onClickHandler );
 		}
 		
-		private function onClickHandler( btn:Button ):void
+		private function onClickHandler( e:Event ):void
 		{
-			switch( btn )
-			{
-				case btnMarket:
-					PopUpManager.instance.addQueuePopUp( ShopOverViewPopUp.instance , true );
-					break ;
-				case btnEditor:
-					GameData.villageMode = VillageMode.EDIT ;
-					break ;
-				case btnDone:
-					if(GameData.villageMode==VillageMode.EXPAND){
-						GameWorld.instance.topScene.clear();
-					}else{
-						checkTopSceneBuilding();
-					}
-					GameData.villageMode = VillageMode.NORMAL ;
-					break ;
-				case btnStorage:
-					checkTopSceneBuilding();
-					GameData.villageMode = VillageMode.BUILDING_STORAGE ;
-					break ;
-			}
+//			switch( e.target )
+//			{
+//				case btnMarket:
+//					PopUpManager.instance.addQueuePopUp( ShopOverViewPopUp.instance , true );
+//					break ;
+//				case btnEditor:
+//					GameData.villageMode = VillageMode.EDIT ;
+//					break ;
+//				case btnDone:
+//					if(GameData.villageMode==VillageMode.EXPAND){
+//						GameWorld.instance.topScene.clear();
+//					}else{
+//						checkTopSceneBuilding();
+//					}
+//					GameData.villageMode = VillageMode.NORMAL ;
+//					break ;
+//				case btnStorage:
+//					checkTopSceneBuilding();
+//					GameData.villageMode = VillageMode.BUILDING_STORAGE ;
+//					break ;
+//			}
 		}
 		
 		
@@ -97,18 +96,18 @@ package local.view.bottom
 		
 		private function checkTopSceneBuilding():void
 		{
-			var world:GameWorld = GameWorld.instance ;
-			if( world.topScene.numChildren>0){
-				var building:BaseBuilding = world.topScene.getChildAt(0) as BaseBuilding;
-				if( building ){
-					building.nodeX = BaseBuilding.cachePos.x ;
-					building.nodeZ = BaseBuilding.cachePos.y ;
-					building.addToWorldFromTopScene();
-					if(EditorBuildingButtons.instance.parent){
-						EditorBuildingButtons.instance.parent.removeChild( EditorBuildingButtons.instance );
-					}
-				}
-			}
+//			var world:GameWorld = GameWorld.instance ;
+//			if( world.topScene.numChildren>0){
+//				var building:BaseBuilding = world.topScene.getChildAt(0) as BaseBuilding;
+//				if( building ){
+//					building.nodeX = BaseBuilding.cachePos.x ;
+//					building.nodeZ = BaseBuilding.cachePos.y ;
+//					building.addToWorldFromTopScene();
+//					if(EditorBuildingButtons.instance.parent){
+//						EditorBuildingButtons.instance.parent.removeChild( EditorBuildingButtons.instance );
+//					}
+//				}
+//			}
 		}
 		
 		/**
@@ -116,7 +115,7 @@ package local.view.bottom
 		 */		
 		public function showStorage():void
 		{
-			addChild( StorageBar.instance);
+//			addChild( StorageBar.instance);
 		}
 		
 		

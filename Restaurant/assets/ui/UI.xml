@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://texturepacker.com-->
+<!-- $TexturePacker:SmartUpdate:8f190313ddda5a4a730e20aaaa69cec5$ -->
+<TextureAtlas imagePath="UI.png">
+    <SubTexture name="EditorButton" x="1" y="215" width="74" height="113"/>
+    <SubTexture name="GoalButton" x="1" y="109" width="97" height="104"/>
+    <SubTexture name="MenuButton" x="1" y="1" width="104" height="106"/>
+    <SubTexture name="SellButton" x="107" y="99" width="102" height="104"/>
+    <SubTexture name="ShopButton" x="107" y="1" width="104" height="96"/>
+    <SubTexture name="StashButton" x="100" y="205" width="94" height="90"/>
+</TextureAtlas>
