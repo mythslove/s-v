@@ -8,8 +8,10 @@ package local
 	import local.event.VillageEvent;
 	import local.map.GameWorld;
 	import local.model.PlayerModel;
+	import local.util.PopUpManager;
 	import local.util.TextureAssets;
 	import local.util.VillageUtil;
+	import local.view.CenterViewLayer;
 	
 	import starling.display.*;
 	import starling.events.Event;
@@ -50,8 +52,8 @@ package local
 			
 			
 			addChild( GameWorld.instance );
-//			addChild(CenterViewLayer.instance);
-//			addChild(PopUpManager.instance);
+			addChild(CenterViewLayer.instance);
+			addChild(PopUpManager.instance);
 //			
 //			GameData.villageMode = VillageMode.NORMAL ;
 			GameWorld.instance.showItems();
