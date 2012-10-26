@@ -36,5 +36,15 @@ package local.enum
 		 * 炉灶 
 		 */		
 		public static const STOVE:String = "stove";
+		
+		/**
+		 * 柜台，放食物
+		 */		
+		public static const COUNTER:String = "counter";
+		
+		/**
+		 * 人 
+		 */		
+		public static const CHARACTER:String = "character";
 	}
 }
