@@ -28,11 +28,13 @@ package local.view.storage
 		
 		private var isBuilding:Boolean = true ;
 		public var vo:Object ; //如果是建筑时，则是StorageBuildingVO ,如果是String ，则为Component的名称
+		private var _titleY:Number ;
 		
 		public function StorageItemRenderer()
 		{
 			super();
 			txtTitle.autoSize = TextFieldAutoSize.CENTER ;
+			_titleY = txtTitle.y ;
 			mouseChildren = false ;
 		}
 		
@@ -61,7 +63,7 @@ package local.view.storage
 				imgContainer.addChild( img );
 				img.center();
 			}
-			txtTitle.y += (50-txtTitle.height)>>1 ;
+			txtTitle.y = _titleY+ (50-txtTitle.height)>>1 ;
 		}
 		
 		override protected function removedFromStageHandler(e:Event):void
