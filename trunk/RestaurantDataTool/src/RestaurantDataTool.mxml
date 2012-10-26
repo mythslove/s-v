@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" minWidth="400" minHeight="400"
+					   xmlns:s="library://ns.adobe.com/flex/spark" width="400" height="500" showStatusBar="false"
+					   xmlns:mx="library://ns.adobe.com/flex/mx" creationComplete="init()">
+	
+	<fx:Script>
+		<![CDATA[
+			
+			import mx.controls.Alert;
+			
+			private var shopBaseBuildingHash:Dictionary ;
+			private var shopBaseBuildings:Vector.<BaseItemVO>;
+			
+			private var file:File ;
+			
+			private function init():void
+			{
+				registerClassAlias("BaseItemVO" , BaseItemVO ) ;
+				registerClassAlias("FoodVO" , FoodVO ) ;
+			}
+			
+			private function selectBBV():void
+			{
+				file = new File();
+				file.addEventListener(Event.SELECT , onSelectedBBVFile );
+				file.browseForOpen("选择建筑配置文件" , [ new FileFilter("建筑配置文件(XML)","*.xml;*.XML")] );
+			}
+			
+			private function onSelectedBBVFile(e:Event ):void
+			{
+				file.removeEventListener(Event.SELECT , onSelectedBBVFile );
+				txtBBV.text = file.name ;
+				
+				var stream:FileStream = new FileStream();
+				stream.open( file,FileMode.READ );
+				var bytes:ByteArray = new ByteArray();
+				stream.readBytes( bytes);
+				bytes.position =0  ;
+				var config:XML = XML( bytes.toString());
+				shopBaseBuildingHash = new Dictionary();
+				shopBaseBuildings = new Vector.<BaseItemVO>();
+				if( config)
+				{
+					var len:int = config.children().length();
+					var item:* ;
+					for( var i:int = 0 ; i<len ; ++i )
+					{
+						var baseVO:BaseItemVO = new BaseItemVO();
+						item = config.children()[i];
+						var attNamesList:XMLList = item.@*;
+						for (var j:int = 0; j < attNamesList.length(); j++)
+						{ 
+							var key:String = attNamesList[j].name() ;
+							if( baseVO.hasOwnProperty(key)){
+								switch(typeof  baseVO[key])
+								{
+									case "string":
+										baseVO[key] = String( attNamesList[j] ).replace( /&amp;/g ,"&") ;
+										break ;
+									case "int":
+										baseVO[key] = String( attNamesList[j] ) ;
+										break ;
+									case "number":
+										baseVO[key] = Number( attNamesList[j] ) ;
+										break;
+								}
+								
+							}
+						} 
+						shopBaseBuildingHash[baseVO.name] = baseVO ;
+						shopBaseBuildings.push( baseVO );
+					}
+				}
+				else
+				{
+					trace("没有Shop数据");
+				}
+			}
+			
+//			private function parseBaseProduct( products:* , baseVO:BaseBuildingVO ):void
+//			{
+//				var len:int = products.length();
+//				var item:* ;
+//				baseVO.products  = new Vector.<ProductVO>( len , true);
+//				for( var i:int = 0 ; i<len ; ++i )
+//				{
+//					var pvo:ProductVO = new ProductVO();
+//					baseVO.products[i] = pvo ;
+//					item = products[i];
+//					var attNamesList:XMLList = item.@*;
+//					for (var j:int = 0; j < attNamesList.length(); j++)
+//					{ 
+//						var key:String = String( attNamesList[j].name()) ;
+//						if( pvo.hasOwnProperty(key)){
+//							switch(typeof  pvo[key])
+//							{
+//								case "string":
+//									pvo[key] = String( attNamesList[j] ).replace( /&amp;/g ,"&") ;
+//									break ;
+//								case "int":
+//									pvo[key] = String( attNamesList[j] ) ;
+//									break ;
+//								case "number":
+//									pvo[key] = Number( attNamesList[j] ) ;
+//									break;
+//							}
+//							
+//						}
+//					} 
+//				}
+//			}
+//			
+//			
+//			
+//			
+//			private function selectLevel():void{
+//				file = new File();
+//				file.addEventListener(Event.SELECT , onSelectedLevelFile );
+//				file.browseForOpen("选择升级配置文件" , [ new FileFilter("升级配置文件(XML)","*.xml;*.XML")] );
+//			}
+//			private function onSelectedLevelFile(e:Event):void{
+//				file.removeEventListener(Event.SELECT , onSelectedLevelFile );
+//				txtLevel.text = file.name ;
+//				levelHash =new Dictionary();
+//				
+//				var stream:FileStream = new FileStream();
+//				stream.open( file,FileMode.READ );
+//				var bytes:ByteArray = new ByteArray();
+//				stream.readBytes( bytes);
+//				bytes.position =0  ;
+//				var config:XML = XML( bytes.toString());
+//				if( config)
+//				{
+//					var len:int = config.children().length();
+//					var item:* ;
+//					for( var i:int = 0 ; i<len ; ++i )
+//					{
+//						var level:LevelVO = new LevelVO();
+//						item = config.children()[i];
+//						var attNamesList:XMLList = item.@*;
+//						for (var j:int = 0; j < attNamesList.length(); j++)
+//						{ 
+//							var key:String = attNamesList[j].name() ;
+//							if( level.hasOwnProperty(key)){
+//								switch(typeof  level[key])
+//								{
+//									case "string":
+//										level[key] = String( attNamesList[j] ).replace( /&amp;/g ,"&") ;
+//										break ;
+//									case "int":
+//										level[key] = String( attNamesList[j] ) ;
+//										break ;
+//									case "number":
+//										level[key] = Number( attNamesList[j] ) ;
+//										break;
+//								}
+//								
+//							}
+//						} 
+//						levelHash[level.level] = level ;
+//					}
+//				}
+//				else
+//				{
+//					trace("没有玩家升级数据");
+//				}
+//			}
+//			
+//			
+//			
+//			private function selectComp():void
+//			{
+//				file = new File();
+//				file.addEventListener(Event.SELECT , onSelectedCompFile );
+//				file.browseForOpen("选择Component配置文件" , [ new FileFilter("Component配置文件(XML)","*.xml;*.XML")] );
+//			}
+//			private function onSelectedCompFile(e:Event):void{
+//				file.removeEventListener(Event.SELECT , onSelectedCompFile );
+//				txtComp.text = file.name ;
+//				compHash =new Dictionary();
+//				
+//				var stream:FileStream = new FileStream();
+//				stream.open( file,FileMode.READ );
+//				var bytes:ByteArray = new ByteArray();
+//				stream.readBytes( bytes);
+//				bytes.position =0  ;
+//				var config:XML = XML( bytes.toString());
+//				if( config)
+//				{
+//					var len:int = config.children().length();
+//					var item:* ;
+//					for( var i:int = 0 ; i<len ; ++i )
+//					{
+//						var compVO:ComponentVO = new ComponentVO();
+//						item = config.children()[i];
+//						var attNamesList:XMLList = item.@*;
+//						for (var j:int = 0; j < attNamesList.length(); j++)
+//						{ 
+//							var key:String = attNamesList[j].name() ;
+//							if( compVO.hasOwnProperty(key)){
+//								switch(typeof  compVO[key])
+//								{
+//									case "string":
+//										compVO[key] = String( attNamesList[j] ).replace( /&amp;/g ,"&") ;
+//										break ;
+//									case "int":
+//										compVO[key] = String( attNamesList[j] );
+//										break ;
+//									case "number":
+//										compVO[key] = Number( attNamesList[j] ) ;
+//										break;
+//								}
+//								
+//							}
+//						} 
+//						compHash[compVO.name] = compVO ;
+//					}
+//				}
+//				else
+//				{
+//					trace("没有Component数据");
+//				}
+//			}
+//			
+//			
+//			
+//			
+//			
+//			
+//			private function selectQuest():void{
+//				file = new File();
+//				file.addEventListener(Event.SELECT , onSelectedQuestFile );
+//				file.browseForOpen("选择任务配置文件" , [ new FileFilter("任务配置文件(XML)","*.xml;*.XML")] );
+//			}
+//			private function onSelectedQuestFile(e:Event):void
+//			{
+//				file.removeEventListener(Event.SELECT , onSelectedQuestFile );
+//				txtQuest.text = file.name ;
+//				quests = new Vector.<QuestVO>();
+//				var stream:FileStream = new FileStream();
+//				stream.open( file,FileMode.READ );
+//				var bytes:ByteArray = new ByteArray();
+//				stream.readBytes( bytes);
+//				bytes.position =0  ;
+//				var config:XML = XML( bytes.toString());
+//				if( config)
+//				{
+//					var len:int = config.children().length();
+//					var item:* ;
+//					for( var i:int = 0 ; i<len ; ++i )
+//					{
+//						var questVO:QuestVO = new QuestVO();
+//						item = config.children()[i];
+//						if(item.children().length()>0)
+//						{
+//							parseTasks( item.children() , questVO );
+//						}
+//						var attNamesList:XMLList = item.@*;
+//						for (var j:int = 0; j < attNamesList.length(); j++)
+//						{ 
+//							var key:String = attNamesList[j].name() ;
+//							if( questVO.hasOwnProperty(key)){
+//								switch(typeof  questVO[key])
+//								{
+//									case "string":
+//										questVO[key] = String( attNamesList[j] ).replace( /&amp;/g ,"&") ;
+//										break ;
+//									case "int":
+//										questVO[key] = String( attNamesList[j] ) ;
+//										break ;
+//									case "number":
+//										questVO[key] = Number( attNamesList[j] ) ;
+//										break;
+//								}
+//								
+//							}
+//						} 
+//						quests.push( questVO);
+//					}
+//				}
+//				else
+//				{
+//					trace("没有任务数据");
+//				}
+//			}
+//			private function parseTasks(tasks:* , questVO:QuestVO ):void
+//			{
+//				var len:int = tasks.length();
+//				var item:* ;
+//				questVO.tasks  = new Vector.<QuestTaskVO>( len , true);
+//				for( var i:int = 0 ; i<len ; ++i )
+//				{
+//					var taskVO:QuestTaskVO = new QuestTaskVO();
+//					questVO.tasks[i] = taskVO ;
+//					item = tasks[i];
+//					var attNamesList:XMLList = item.@*;
+//					for (var j:int = 0; j < attNamesList.length(); j++)
+//					{ 
+//						var key:String = String( attNamesList[j].name()) ;
+//						if( taskVO.hasOwnProperty(key)){
+//							switch(typeof  taskVO[key])
+//							{
+//								case "string":
+//									taskVO[key] = String( attNamesList[j] ).replace( /&amp;/g ,"&");
+//									break ;
+//								case "int":
+//									taskVO[key] = String( attNamesList[j] );
+//									break ;
+//								case "number":
+//									taskVO[key] = Number( attNamesList[j] );
+//									break;
+//							}
+//							
+//						}
+//					} 
+//				}
+//			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			protected function export_clickHandler(event:MouseEvent):void
+			{
+				file = new File();
+				file.addEventListener(Event.SELECT , onSelectedSaveFile);
+				file.browseForSave("保存");
+			}
+			private function onSelectedSaveFile( e:Event ):void
+			{
+				file.removeEventListener(Event.SELECT , onSelectedSaveFile);
+				var stream:FileStream = new FileStream();
+				stream.open( file , FileMode.WRITE );
+				
+				var bytes:ByteArray = new ByteArray();
+				bytes.writeObject( shopBaseBuildingHash );
+				bytes.writeObject( shopBaseBuildings );
+//				bytes.writeObject( levelHash );
+//				bytes.writeObject( compHash );
+//				bytes.writeObject( quests );
+				
+				stream.writeBytes( bytes );
+				stream.close();
+				Alert.show("导出成功！");
+			}
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<s:Label x="19" y="23" text="基础建筑配置"/>
+	<s:TextInput id="txtBBV" x="19" y="42" width="288" enabled="false"/>
+	<s:Button x="316" y="452" width="74" height="38" label="生成" click="export_clickHandler(event)"/>
+	<s:Button x="320" y="42" label="选择" click="selectBBV()"/>
+</s:WindowedApplication>
