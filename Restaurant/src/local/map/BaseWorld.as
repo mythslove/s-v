@@ -50,7 +50,7 @@ package local.map
 			super( GameSetting.MAX_SIZE,GameSetting.MAX_SIZE,GameSetting.GRID_SIZE);
 			_endX = x = (GameSetting.SCREEN_WIDTH-GameSetting.MAP_WIDTH*scaleX)>>1 ;
 			_endY = y = -150 ;
-			this.panTo(GameSetting.MAP_WIDTH*0.5,337 );
+			this.panTo(GameSetting.MAP_WIDTH*0.5,300 );
 			
 			addBackground();
 		}
@@ -112,7 +112,7 @@ package local.map
 		public function initMap( isHome:Boolean=true ):void
 		{
 			var player:PlayerVO = isHome? PlayerModel.instance.me : null ;
-			
+			GameSetting.MAP_HEIGHT -= (GameSetting.MAX_SIZE-player.mapSize)*GameSetting.GRID_SIZE ;
 			addWalls( player );
 		}
 		

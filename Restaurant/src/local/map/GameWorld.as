@@ -84,7 +84,7 @@ package local.map
 		
 		public function expandLand():void
 		{
-			this.panTo(GameSetting.MAP_WIDTH*0.5,337-(GameSetting.MAX_SIZE-GameSetting.DEFAULT_SIZE) *GameSetting.GRID_SIZE*0.5 );
+			GameSetting.MAP_HEIGHT -= (GameSetting.MAX_SIZE-PlayerModel.instance.me.mapSize)*GameSetting.GRID_SIZE ;
 		}
 	}
 }
