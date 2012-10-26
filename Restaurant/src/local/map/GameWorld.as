@@ -1,6 +1,7 @@
 package local.map
 {
 	import local.comm.GameSetting;
+	import local.map.item.BaseItem;
 	import local.map.item.Floor;
 	import local.model.PlayerModel;
 	import local.model.ShopModel;
@@ -70,8 +71,9 @@ package local.map
 				}
 				floorScene.sortAll() ;
 				
-				
-				
+				var table :BaseItem = ItemFactory.createItemByBaseVO( ShopModel.instance.allItemsHash["Autumn Table"] as BaseItemVO) as BaseItem;
+				table.nodeX = table.nodeZ = 2 ;
+				roomScene.addIsoObject( table);
 				run() ;
 			}
 		}
