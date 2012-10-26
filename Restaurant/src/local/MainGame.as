@@ -4,11 +4,11 @@ package local
 	import flash.events.Event;
 	
 	import local.comm.GameData;
-	import local.comm.GameSetting;
 	import local.comm.GlobalDispatcher;
 	import local.event.VillageEvent;
 	import local.map.GameWorld;
 	import local.model.PlayerModel;
+	import local.util.TextureAssets;
 	import local.util.VillageUtil;
 	
 	import starling.display.*;
@@ -27,7 +27,7 @@ package local
 			removeEventListener(starling.events.Event.ADDED_TO_STAGE , addedHandler );
 			
 			//动态生成材质
-//			TextureAssets.instance.createBuildingTexture() ;
+			TextureAssets.instance.createBuildingTexture() ;
 			
 //			var bmp:Bitmap = new Bitmap( TextureAssets.instance.buildingLayerBmd);
 //			bmp.scaleX  = bmp.scaleY = 1 ;

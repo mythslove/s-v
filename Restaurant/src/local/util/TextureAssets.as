@@ -67,10 +67,19 @@ package local.util
 			{
 				//拼接图片
 				var baseVO:BaseItemVO ;
-				var resVO:ResVO ;
 				for ( var name:String in allItemsHash){
 					baseVO =  allItemsHash[name] as BaseItemVO ;
-					resVO = ResourceUtil.instance.getResVOByResId(name);
+					if(baseVO.directions==4){
+						check( baseVO , name+"_1");
+						check( baseVO , name+"_2");
+					}else{
+						check( baseVO , name);
+					}
+				}
+				
+				function check( baseVO:BaseItemVO , name:String ):void
+				{
+					var resVO:ResVO = ResourceUtil.instance.getResVOByResId(name);
 					if(resVO){
 						if(baseVO.type==ItemType.FLOOR || baseVO.type==ItemType.WALL_DECOR || baseVO.type==ItemType.WALL_PAPER){
 							parseBarvos( name , groundLayerBmd , groundName2Rect , resVO.resObject as Vector.<BitmapAnimResVO> , groundMaxRect );
@@ -80,9 +89,8 @@ package local.util
 					}
 				}
 				
-				
 				//绑定的材质
-				resVO = new ResVO("WALL_LEFT")  ;
+				var resVO:ResVO = new ResVO("WALL_LEFT")  ;
 				ResourceUtil.instance.parseAnimFile( resVO, new WALL_LEFT() as ByteArray) ;
 				parseBarvos( resVO.resId , groundLayerBmd , groundName2Rect , resVO.resObject as Vector.<BitmapAnimResVO> , groundMaxRect );
 				resVO = new ResVO("WALL_RIGHT")  ;
@@ -129,20 +137,22 @@ package local.util
 			var ext:String ;
 			var mat:Matrix = new Matrix();
 			for each( var vo:BitmapAnimResVO in barvos){
-				if(!_resNameHash.hasOwnProperty(vo.resName)){
-					for( var i:int = 0 ; i<vo.bmds.length ; ++i){
-						mat.identity() ;
-						bmd = vo.bmds[i] ;
-						rect  = maxRect.insert( bmd.width , bmd.height , MaxRectsBinPack.ContactPointRule) ;
-						mat.translate( rect.x , rect.y );
-						layerBmd.draw( bmd , mat );
-						ext = i<10?"00"+i :  ( i<100?"0"+i:i+"") ;
-						name2Rect.put( vo.resName+"_"+ext , rect ) ;
-						bmd.dispose() ;
+				if(vo.bmds){
+					if(!_resNameHash.hasOwnProperty(vo.resName)){
+						for( var i:int = 0 ; i<vo.bmds.length ; ++i){
+							mat.identity() ;
+							bmd = vo.bmds[i] ;
+							rect  = maxRect.insert( bmd.width , bmd.height , MaxRectsBinPack.ContactPointRule) ;
+							mat.translate( rect.x , rect.y );
+							layerBmd.draw( bmd , mat );
+							ext = i<10?"00"+i :  ( i<100?"0"+i:i+"") ;
+							name2Rect.put( vo.resName+"_"+ext , rect ) ;
+							bmd.dispose() ;
+						}
+						_resNameHash[vo.resName] = vo ;
+					}else{
+						trace("相同材质:"+vo.resName);
 					}
-					_resNameHash[vo.resName] = vo ;
-				}else{
-					trace("相同材质:"+vo.resName);
 				}
 				++layer ;
 				vo.bmds = null ;
