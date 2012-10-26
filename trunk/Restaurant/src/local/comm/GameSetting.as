@@ -9,8 +9,8 @@ package local.comm
 		
 		
 		//地图大小
-		public static var MAP_WIDTH:int = 2048;
-		public static var MAP_HEIGHT:int = 1000;
+		public static var MAP_WIDTH:int = 3000;
+		public static var MAP_HEIGHT:int = 1600;
 		
 		/** 网格大小 */		
 		public static var GRID_SIZE:int = 60 ;
@@ -19,7 +19,7 @@ package local.comm
 		public static var DEFAULT_SIZE:int = 7 ;
 		
 		/** 最大地图  */		
-		public static var MAX_SIZE:int = 7 ;
+		public static var MAX_SIZE:int = 15 ;
 		
 		/** 地图的最大缩放值 */
 		public static var minZoom:Number= 0.8 ;

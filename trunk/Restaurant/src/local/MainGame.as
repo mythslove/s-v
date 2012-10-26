@@ -54,7 +54,7 @@ package local
 //			addChild(PopUpManager.instance);
 //			
 //			GameData.villageMode = VillageMode.NORMAL ;
-//			GameWorld.instance.showBuildings();
+			GameWorld.instance.showItems();
 			VillageUtil.instance.startIntervalSave() ;
 			
 			NativeApplication.nativeApplication.addEventListener(flash.events.Event.ACTIVATE , activateHandler);

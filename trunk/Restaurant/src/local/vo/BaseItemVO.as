@@ -1,5 +1,7 @@
 package local.vo
 {
+	import local.enum.ItemType;
+
 	public class BaseItemVO
 	{
 		public var name:String="" ;

@@ -191,5 +191,16 @@ package local.util
 		{
 			return new PixelsImage(groundLayerTexture.getTexture(name) , groundLayerBmd , groundLayerTexture.getRegion(name)  ); 
 		}
+		/**
+		 *地面层动画 
+		 * @param name
+		 * @param regions
+		 * @param fps
+		 * @return 
+		 */		
+		public function createGDLayerPixelsMovieClip( name:String ,regions:Vector.<Rectangle>, fps:Number ):PixelsMovieClip
+		{
+			return new PixelsMovieClip(groundLayerTexture.getTextures(name),  groundLayerBmd , regions ,fps );
+		}
 	}
 }
