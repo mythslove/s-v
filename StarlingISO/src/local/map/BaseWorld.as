@@ -37,6 +37,7 @@ package local.map
 	import starling.display.BlendMode;
 	import starling.display.DisplayObject;
 	import starling.display.Image;
+	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.events.Touch;
@@ -361,6 +362,7 @@ package local.map
 						}
 						_endX = offsetX;
 						_endY = offsetY ;
+						modifyEndPosition();
 					}
 				}
 				else if( touch.phase == TouchPhase.ENDED)
@@ -565,13 +567,20 @@ package local.map
 		}
 		
 		private function modifyEndPosition():void{
-			if(_endX>0) x = _endX=0 ;
-			else if(_endX<-GameSetting.MAP_WIDTH*scaleX+GameSetting.SCREEN_WIDTH){
-				x = _endX = -GameSetting.MAP_WIDTH*scaleX+GameSetting.SCREEN_WIDTH ;
-			}
 			if(_endY>0) y=_endY=0 ;
 			else if(_endY<-GameSetting.MAP_HEIGHT*scaleY+GameSetting.SCREEN_HEIGHT){
 				y=_endY = -GameSetting.MAP_HEIGHT*scaleY+GameSetting.SCREEN_HEIGHT ;
+			}
+			
+			var temp:Number=0 ;
+			if(_endY<-GameSetting.MAP_HEIGHT*0.5){
+				temp = -_endY*0.2 ;
+			}else{
+				temp = (GameSetting.MAP_HEIGHT+_endY)*0.2 ;
+			}
+			if(_endX>-temp*scaleX) _endX = x =-temp*scaleX ;
+			else if(_endX<-GameSetting.MAP_WIDTH*scaleX+temp*scaleX+GameSetting.SCREEN_WIDTH){
+				_endX = x = -GameSetting.MAP_WIDTH*scaleX+temp*scaleX+GameSetting.SCREEN_WIDTH ;
 			}
 		}
 		
