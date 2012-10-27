@@ -9,6 +9,7 @@ package local
 	import local.map.GameWorld;
 	import local.model.PlayerModel;
 	import local.util.PopUpManager;
+	import local.util.StyleSetting;
 	import local.util.TextureAssets;
 	import local.util.VillageUtil;
 	import local.view.CenterViewLayer;
@@ -30,6 +31,7 @@ package local
 			
 			//动态生成材质
 			TextureAssets.instance.createBuildingTexture() ;
+			StyleSetting.instance.init() ;
 			
 //			var bmp:Bitmap = new Bitmap( TextureAssets.instance.buildingLayerBmd);
 //			bmp.scaleX  = bmp.scaleY = 1 ;

@@ -1,10 +1,12 @@
 package local.map
 {
+	import bing.starling.component.TileImage;
 	import bing.starling.iso.SIsoScene;
 	import bing.starling.iso.SIsoWorld;
 	
 	import com.greensock.TweenLite;
 	
+	import flash.display.Bitmap;
 	import flash.events.MouseEvent;
 	import flash.geom.Matrix;
 	import flash.geom.Point;
@@ -17,17 +19,20 @@ package local.map
 	import local.vo.PlayerVO;
 	
 	import starling.core.Starling;
+	import starling.display.BlendMode;
 	import starling.display.Image;
-	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
+	import starling.textures.Texture;
 	import starling.utils.deg2rad;
 	
 	public class BaseWorld extends SIsoWorld
 	{
+		private var _tileImg:TileImage ;
+		
 		public var wallScene:SIsoScene ; //墙
 		public var floorScene:SIsoScene;//地板
 		public var roomScene:RoomScene ; //房间内部
@@ -58,8 +63,15 @@ package local.map
 		private function addBackground():void
 		{
 			var map:Sprite = new Sprite();
-			var quad:Quad = new Quad(GameSetting.MAP_WIDTH , GameSetting.MAP_HEIGHT , 0x7DB643 , false );
-			map.addChild( quad );
+//			var quad:Quad = new Quad(GameSetting.MAP_WIDTH , GameSetting.MAP_HEIGHT , 0x7DB643 , false );
+//			map.addChild( quad );
+			
+			var tileBmd:Bitmap = new EmbedManager.BG_TILE() as Bitmap;
+			_tileImg = new TileImage( Texture.fromBitmap(tileBmd,false));
+			_tileImg.blendMode = BlendMode.NONE ;
+			map.addChild( _tileImg );
+			tileBmd.bitmapData.dispose();
+			tileBmd = null ;
 			
 			var roads:Sprite = new Sprite();
 			var img:Image = EmbedManager.getMapImage("BG_ROAD_1");
@@ -113,6 +125,7 @@ package local.map
 		{
 			var player:PlayerVO = isHome? PlayerModel.instance.me : null ;
 			GameSetting.MAP_HEIGHT -= (GameSetting.MAX_SIZE-player.mapSize)*GameSetting.GRID_SIZE ;
+			_tileImg.setSize( GameSetting.MAP_WIDTH , GameSetting.MAP_HEIGHT );
 			addWalls( player );
 		}
 		
