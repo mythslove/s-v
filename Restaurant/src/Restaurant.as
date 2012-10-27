@@ -111,6 +111,7 @@ package
 			}
 			resVOs.push( new ResVO("game_ui_png","skin/UI.png"));
 			resVOs.push( new ResVO("game_ui_xml","skin/UI.xml"));
+			resVOs.push( new ResVO("verdana_fnt","skin/verdana.fnt"));
 			resVOs.push( new ResVO("game_map_png","map/BG_ROAD.png"));
 			resVOs.push( new ResVO("game_map_xml","map/BG_ROAD.xml"));
 			ResourceUtil.instance.addEventListener(ResProgressEvent.RES_LOAD_PROGRESS , gameInitResHandler );
@@ -132,6 +133,7 @@ package
 					ResourceUtil.instance.removeEventListener("gameInitRes" , gameInitResHandler );
 					EmbedManager.ui_png = ResourceUtil.instance.getResVOByResId("game_ui_png").resObject as Bitmap;
 					EmbedManager.ui_xml = XML(ResourceUtil.instance.getResVOByResId("game_ui_xml").resObject);
+					EmbedManager.verdana_fnt = XML(ResourceUtil.instance.getResVOByResId("verdana_fnt").resObject);
 					EmbedManager.map_png = ResourceUtil.instance.getResVOByResId("game_map_png").resObject as Bitmap;
 					EmbedManager.map_xml = XML(ResourceUtil.instance.getResVOByResId("game_map_xml").resObject);
 					

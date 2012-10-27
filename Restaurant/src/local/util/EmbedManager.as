@@ -13,9 +13,10 @@ package local.util
 		public static var ui_xml:XML ;
 		public static var map_png:Bitmap;
 		public static var map_xml:XML ;
+		public static var verdana_fnt:XML ;
 		
-		[Embed(source="../assets/map/Wall.png")]
-		public static const WALL:Class ;
+		[Embed(source="../assets/map/BG_TILE.jpg")]
+		public static const BG_TILE:Class ;
 		
 		
 		private static var _textureDic:Dictionary = new Dictionary() ;
