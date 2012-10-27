@@ -17,6 +17,8 @@ package local.view.topbar
 		
 		public function DingBar()
 		{
+			touchable = false ;
+			
 			var texture:Scale3Textures = new Scale3Textures(EmbedManager.getUITexture("TopbarDefaultBG"),20,10);
 			var scale3Img:Scale3Image = new Scale3Image(texture) ;
 			scale3Img.y = 10 ;
@@ -33,7 +35,6 @@ package local.view.topbar
 			_tf = new TextField(120,scale3Img.height,"100","Verdana",30,0xffffff,true);
 			_tf.x = 35;
 			_tf.y = 10 ;
-			_tf.touchable = false ;
 			_tf.vAlign = VAlign.CENTER ;
 			_tf.hAlign = HAlign.LEFT ;
 			addChild( _tf );
