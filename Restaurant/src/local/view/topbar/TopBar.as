@@ -11,6 +11,7 @@ package local.view.topbar
 		public var cashBar:CashBar ;
 		public var coinBar:CoinBar;
 		public var lvBar:LevelBar;
+		public var dingBar:DingBar ;
 		//============================
 		
 		public function TopBar()
@@ -21,14 +22,22 @@ package local.view.topbar
 		
 		private function init():void
 		{
+			lvBar = new LevelBar();
+			lvBar.x = 30 ;
+			addChild( lvBar );
+			
+			
 			cashBar = new CashBar();
+			cashBar.x = lvBar.x + 250;
 			addChild( cashBar );
 			
 			coinBar = new CoinBar();
+			coinBar.x = cashBar.x +250 ;
 			addChild( coinBar );
 			
-			lvBar = new LevelBar();
-			addChild( lvBar );
+			dingBar = new DingBar();
+			dingBar.x = coinBar.x +250 ;
+			addChild( dingBar );
 		}
 		
 		override protected function addedToStageHandler(e:Event):void

@@ -16,10 +16,9 @@ package local.util
 		//=======================================
 		
 		public  var verdana:BitmapFont ;
+		public var titleFont:BitmapFont ;
 		
 		public var btnLabelTextFormat:BitmapFontTextFormat ;
-		
-		
 		
 		private  var _verdanaRender:BitmapFontTextRenderer ;
 		
@@ -29,7 +28,13 @@ package local.util
 			EmbedManager.verdana_fnt = null ;
 			TextField.registerBitmapFont( verdana , "Verdana" );
 			
+			titleFont = new BitmapFont( EmbedManager.getUITexture("TitleFont"),EmbedManager.titleFont_fnt );
+			EmbedManager.titleFont_fnt = null ;
+			TextField.registerBitmapFont( titleFont , "TitleFont" );
+			
+			
 			btnLabelTextFormat = new BitmapFontTextFormat(verdana,30) ;
+			
 			_verdanaRender = new BitmapFontTextRenderer();
 		}
 		

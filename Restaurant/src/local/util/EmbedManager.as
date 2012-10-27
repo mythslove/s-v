@@ -14,6 +14,7 @@ package local.util
 		public static var map_png:Bitmap;
 		public static var map_xml:XML ;
 		public static var verdana_fnt:XML ;
+		public static var titleFont_fnt:XML ;
 		
 		[Embed(source="../assets/map/BG_TILE.jpg")]
 		public static const BG_TILE:Class ;
