@@ -65,7 +65,6 @@ package local.map
 			var map:Sprite = new Sprite();
 //			var quad:Quad = new Quad(GameSetting.MAP_WIDTH , GameSetting.MAP_HEIGHT , 0x7DB643 , false );
 //			map.addChild( quad );
-			
 			var tileBmd:Bitmap = new EmbedManager.BG_TILE() as Bitmap;
 			_tileImg = new TileImage( Texture.fromBitmap(tileBmd,false));
 			_tileImg.blendMode = BlendMode.NONE ;
