@@ -35,7 +35,7 @@ package local.view.bottom
 			
 			img = EmbedManager.getUIImage("EditorButton");
 			btnEditor = new GameButton(img);
-			btnEditor.x = btnMarket.x-img.width-70 ;
+			btnEditor.x = btnMarket.x-img.width-50 ;
 			btnEditor.y = -btnEditor.pivotY-5;
 			addChild( btnEditor );
 			btnEditor.addEventListener(Event.TRIGGERED , onClickHandler );

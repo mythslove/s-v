@@ -111,7 +111,8 @@ package
 			}
 			resVOs.push( new ResVO("game_ui_png","skin/UI.png"));
 			resVOs.push( new ResVO("game_ui_xml","skin/UI.xml"));
-			resVOs.push( new ResVO("verdana_fnt","skin/verdana.fnt"));
+			resVOs.push( new ResVO("verdana_fnt","skin/Verdana.fnt"));
+			resVOs.push( new ResVO("titleFont_fnt","skin/TitleFont.fnt"));
 			resVOs.push( new ResVO("game_map_png","map/BG_ROAD.png"));
 			resVOs.push( new ResVO("game_map_xml","map/BG_ROAD.xml"));
 			ResourceUtil.instance.addEventListener(ResProgressEvent.RES_LOAD_PROGRESS , gameInitResHandler );
@@ -134,6 +135,7 @@ package
 					EmbedManager.ui_png = ResourceUtil.instance.getResVOByResId("game_ui_png").resObject as Bitmap;
 					EmbedManager.ui_xml = XML(ResourceUtil.instance.getResVOByResId("game_ui_xml").resObject);
 					EmbedManager.verdana_fnt = XML(ResourceUtil.instance.getResVOByResId("verdana_fnt").resObject);
+					EmbedManager.titleFont_fnt = XML(ResourceUtil.instance.getResVOByResId("titleFont_fnt").resObject);
 					EmbedManager.map_png = ResourceUtil.instance.getResVOByResId("game_map_png").resObject as Bitmap;
 					EmbedManager.map_xml = XML(ResourceUtil.instance.getResVOByResId("game_map_xml").resObject);
 					
@@ -149,7 +151,7 @@ package
 			Starling.handleLostContext = true; // not necessary on iOS. Saves a lot of memory!
 			
 			_starling = new Starling( MainGame , stage , new Rectangle(0,0,stage.fullScreenWidth,stage.fullScreenHeight) ,  null, "auto", "baseline" );
-			_starling.showStats = true ;
+//			_starling.showStats = true ;
 			_starling.antiAliasing = 0 ;
 			_starling.enableErrorChecking = false ;
 			
