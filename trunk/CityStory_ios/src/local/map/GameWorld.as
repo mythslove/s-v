@@ -47,6 +47,7 @@ package local.map
 				if(myModel.expandBuilding){ //有扩地
 					buildingScene.addBuilding( BuildingFactory.createBuildingByVO( myModel.expandBuilding ) , false , true );
 					visibleExpandSigns(false);
+					GameData.hasExpanding = true ;
 				}
 				tempShowBuilding(myModel.basicTrees);
 				tempShowBuilding(myModel.business);

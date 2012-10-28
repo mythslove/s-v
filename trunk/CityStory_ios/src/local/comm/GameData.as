@@ -57,7 +57,7 @@ package  local.comm
 					world.topScene.visible = false ;
 					world.topScene.clearAndDisposeChild();
 					world.iconScene.visible = true ;
-					world.visibleExpandSigns( true ) ;
+					if(!GameData.hasExpanding) world.visibleExpandSigns( true ) ;
 					world.buildingScene.checkRoadsAndIcons();
 					world.sortIcons();
 					break ;
