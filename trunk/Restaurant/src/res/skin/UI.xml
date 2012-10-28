@@ -1,25 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker http://texturepacker.com-->
-<!-- $TexturePacker:SmartUpdate:d30fc1ab54ca98a113460e88bb9cda51$ -->
+<!-- $TexturePacker:SmartUpdate:e49dbbf472c6d9aa7662dd7f03772513$ -->
 <TextureAtlas imagePath="UI.png">
-    <SubTexture name="CashIcon" x="162" y="756" width="100" height="67"/>
-    <SubTexture name="CoinIcon" x="1" y="783" width="110" height="109"/>
-    <SubTexture name="DingIcon" x="359" y="384" width="75" height="90"/>
-    <SubTexture name="EditorButton" x="258" y="213" width="100" height="98"/>
-    <SubTexture name="ExpBarBg" x="359" y="558" width="64" height="35"/>
-    <SubTexture name="ExpIcon" x="258" y="312" width="100" height="96"/>
-    <SubTexture name="ExpLoadingBar" x="265" y="649" width="64" height="35"/>
-    <SubTexture name="GoalButton" x="258" y="504" width="100" height="93"/>
-    <SubTexture name="GrayBg" x="1" y="893" width="99" height="109"/>
-    <SubTexture name="MenuButton" x="359" y="202" width="100" height="90"/>
-    <SubTexture name="PopUpBg1" x="1" y="1" width="329" height="211"/>
-    <SubTexture name="PopUpBg2" x="1" y="651" width="160" height="131"/>
-    <SubTexture name="PopUpCloseButton" x="359" y="475" width="71" height="82"/>
-    <SubTexture name="SellButton" x="162" y="651" width="102" height="104"/>
-    <SubTexture name="ShopButton" x="258" y="409" width="100" height="94"/>
-    <SubTexture name="StashButton" x="359" y="293" width="94" height="90"/>
-    <SubTexture name="TitleFont" x="1" y="470" width="256" height="180"/>
-    <SubTexture name="TopbarDefaultBG" x="258" y="598" width="74" height="50"/>
-    <SubTexture name="Verdana" x="1" y="213" width="256" height="256"/>
-    <SubTexture name="YellowBg" x="331" y="1" width="139" height="200"/>
+    <SubTexture name="Button1" x="451" y="72" width="60" height="70"/>
+    <SubTexture name="Button2" x="451" y="1" width="60" height="70"/>
+    <SubTexture name="CashIcon" x="1" y="946" width="100" height="67"/>
+    <SubTexture name="ChairIcon" x="456" y="300" width="44" height="62"/>
+    <SubTexture name="CoinIcon" x="1" y="640" width="110" height="109"/>
+    <SubTexture name="DingIcon" x="419" y="173" width="75" height="90"/>
+    <SubTexture name="EditorButton" x="1" y="750" width="100" height="98"/>
+    <SubTexture name="ExpBarBg" x="419" y="264" width="64" height="35"/>
+    <SubTexture name="ExpIcon" x="1" y="849" width="100" height="96"/>
+    <SubTexture name="ExpLoadingBar" x="359" y="447" width="64" height="35"/>
+    <SubTexture name="GoalButton" x="141" y="549" width="100" height="93"/>
+    <SubTexture name="GrayBg" x="141" y="439" width="99" height="109"/>
+    <SubTexture name="MenuButton" x="258" y="410" width="100" height="90"/>
+    <SubTexture name="PageButton" x="282" y="501" width="35" height="45"/>
+    <SubTexture name="PopUpBg1" x="258" y="1" width="192" height="171"/>
+    <SubTexture name="PopUpBg2" x="258" y="173" width="160" height="131"/>
+    <SubTexture name="PopUpCloseButton" x="213" y="643" width="71" height="82"/>
+    <SubTexture name="SellButton" x="258" y="305" width="102" height="104"/>
+    <SubTexture name="ShopButton" x="112" y="643" width="100" height="94"/>
+    <SubTexture name="StashButton" x="361" y="305" width="94" height="90"/>
+    <SubTexture name="TabelIcon" x="456" y="363" width="50" height="38"/>
+    <SubTexture name="TitleFont" x="1" y="258" width="256" height="180"/>
+    <SubTexture name="TopbarDefaultBG" x="361" y="396" width="74" height="50"/>
+    <SubTexture name="Verdana" x="1" y="1" width="256" height="256"/>
+    <SubTexture name="WhiteRight" x="241" y="501" width="40" height="44"/>
+    <SubTexture name="YellowBg" x="1" y="439" width="139" height="200"/>
 </TextureAtlas>

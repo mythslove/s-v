@@ -72,7 +72,7 @@ package  local.util
 		 * @param priority 弹出的优先级
 		 * @param modal 是否是模式窗口
 		 */		
-		public function addQueuePopUp( mc:DisplayObject ,  modal:Boolean=true , priority:int = 0 , maskAlpha:Number=0 ):void
+		public function addQueuePopUp( mc:DisplayObject ,  modal:Boolean=true , priority:int = 0 , maskAlpha:Number=0.0 ):void
 		{
 			if(!mc || this.contains(mc)) return ;
 			
@@ -214,6 +214,8 @@ class PopupMask extends Quad
 	public function PopupMask( color:uint=0 )
 	{
 		super(GameSetting.SCREEN_WIDTH,GameSetting.SCREEN_HEIGHT ,color);
+		pivotX = GameSetting.SCREEN_WIDTH>>1 ;
+		pivotY = GameSetting.SCREEN_HEIGHT>>1 ;
 		addEventListener(Event.ADDED_TO_STAGE , addedHandler) ;
 	}
 	
