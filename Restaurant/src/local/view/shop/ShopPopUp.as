@@ -66,7 +66,7 @@ package local.view.shop
 			var title:TextField = new TextField(300 , 70,"MARKET","TitleFont",70, 0x330000 ,false);
 			title.touchable = false ;
 			title.x = 6+_bg.width>>1 ;
-			title.y = 16 ;
+			title.y = 26 ;
 			title.hAlign = HAlign.CENTER ;
 			title.pivotX = title.width>> 1 ;
 			addChild( title );
