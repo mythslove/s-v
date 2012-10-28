@@ -51,7 +51,7 @@ package local.view
 			var img:Image = EmbedManager.getUIImage("GoalButton") ;
 			questBtn = new GameButton( img );
 			questBtn.x= img.width*0.5 + 5;
-			questBtn.y = 150 ;
+			questBtn.y = 200 ;
 			addChild(questBtn);
 			questBtn.addEventListener(Event.TRIGGERED , questBtnClick );
 		}

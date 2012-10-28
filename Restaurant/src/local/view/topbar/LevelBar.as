@@ -25,7 +25,7 @@ package local.view.topbar
 			var scale3Img:Scale3Image = new Scale3Image(texture) ;
 			scale3Img.x = 20 ;
 			scale3Img.y = 23 ;
-			scale3Img.width = 150 ;
+			scale3Img.width = 180 ;
 			addChild(scale3Img);
 			
 			texture = new Scale3Textures(EmbedManager.getUITexture("ExpLoadingBar"),20,10);
@@ -43,14 +43,14 @@ package local.view.topbar
 			img.y = img.pivotY*iconScale + 5 ;
 			addChild(img);
 			
-			_tf = new TextField(120,scale3Img.height,"100/300","Verdana",23,0xffffff,true);
+			_tf = new TextField(150,scale3Img.height,"100/300","Verdana",23,0xffffff,true);
 			_tf.x = 35;
 			_tf.y = 22 ;
 			_tf.vAlign = VAlign.CENTER ;
 			_tf.hAlign = HAlign.LEFT ;
 			addChild( _tf );
 			
-			_lv = new TextField(img.width*iconScale , scale3Img.height,"13","TitleFont",35,0x663100 ,false);
+			_lv = new TextField(img.width*iconScale , scale3Img.height,"13","TitleFont",35,0 ,false);
 			_lv.x = img.x - img.width*0.5*iconScale;
 			_lv.y = _tf.y ;
 			_lv.vAlign = VAlign.CENTER ;
