@@ -65,22 +65,28 @@ package local.util
 			tab.selectedUpSkin =new Scale3Image(button2Texture);
 			switch(item.toString()){
 				case ShopPopUp.TAB_WALL_PAPER:
+					tab.defaultIcon = EmbedManager.getUIImage("WPaperIcon");
 					break ;
 				case ShopPopUp.TAB_WALL_DECO:
+					tab.defaultIcon = EmbedManager.getUIImage("WDecoIcon");
 					break ;
 				case ShopPopUp.TAB_TABLE:
 					tab.defaultIcon = EmbedManager.getUIImage("TabelIcon");
 					break ;
 				case ShopPopUp.TAB_FLOOR:
+					tab.defaultIcon = EmbedManager.getUIImage("FloorIcon");
 					break ;
 				case ShopPopUp.TAB_CHAIR:
 					tab.defaultIcon = EmbedManager.getUIImage("ChairIcon");
 					break ;
 				case ShopPopUp.TAB_DECOR:
+					tab.defaultIcon = EmbedManager.getUIImage("DecorIcon");
 					break ;
 				case ShopPopUp.TAB_STOVE:
+					tab.defaultIcon = EmbedManager.getUIImage("StoveIcon");
 					break ;
 				case ShopPopUp.TAB_COUNTER:
+					tab.defaultIcon = EmbedManager.getUIImage("CounterIcon");
 					break ;
 					
 			}
