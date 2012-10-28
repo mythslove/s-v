@@ -28,15 +28,15 @@ package local.view.topbar
 			
 			
 			cashBar = new CashBar();
-			cashBar.x = lvBar.x + 250;
+			cashBar.x = lvBar.x + 270;
 			addChild( cashBar );
 			
 			coinBar = new CoinBar();
-			coinBar.x = cashBar.x +250 ;
+			coinBar.x = cashBar.x +230 ;
 			addChild( coinBar );
 			
 			dingBar = new DingBar();
-			dingBar.x = coinBar.x +250 ;
+			dingBar.x = coinBar.x +230 ;
 			addChild( dingBar );
 		}
 		

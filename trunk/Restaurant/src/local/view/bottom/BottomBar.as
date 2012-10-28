@@ -4,7 +4,9 @@ package local.view.bottom
 	
 	import local.comm.GameSetting;
 	import local.util.EmbedManager;
+	import local.util.PopUpManager;
 	import local.view.base.GameButton;
+	import local.view.shop.ShopPopUp;
 	
 	import starling.display.Image;
 	import starling.display.Sprite;
@@ -66,11 +68,11 @@ package local.view.bottom
 		
 		private function onClickHandler( e:Event ):void
 		{
-//			switch( e.target )
-//			{
-//				case btnMarket:
-//					PopUpManager.instance.addQueuePopUp( ShopOverViewPopUp.instance , true );
-//					break ;
+			switch( e.target )
+			{
+				case btnMarket:
+					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , true );
+					break ;
 //				case btnEditor:
 //					GameData.villageMode = VillageMode.EDIT ;
 //					break ;
@@ -86,7 +88,7 @@ package local.view.bottom
 //					checkTopSceneBuilding();
 //					GameData.villageMode = VillageMode.BUILDING_STORAGE ;
 //					break ;
-//			}
+			}
 		}
 		
 		

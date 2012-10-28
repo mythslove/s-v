@@ -2,6 +2,9 @@ package local.util
 {
 	import feathers.controls.text.BitmapFontTextRenderer;
 	import feathers.text.BitmapFontTextFormat;
+	import feathers.textures.Scale9Textures;
+	
+	import flash.geom.Rectangle;
 	
 	import starling.text.BitmapFont;
 	import starling.text.TextField;
@@ -22,6 +25,8 @@ package local.util
 		
 		private  var _verdanaRender:BitmapFontTextRenderer ;
 		
+		public var popup2Texture:Scale9Textures ;
+		
 		public  function init():void
 		{
 			verdana = new BitmapFont( EmbedManager.getUITexture("Verdana"),EmbedManager.verdana_fnt );
@@ -36,6 +41,8 @@ package local.util
 			btnLabelTextFormat = new BitmapFontTextFormat(verdana,30) ;
 			
 			_verdanaRender = new BitmapFontTextRenderer();
+			
+			popup2Texture = new Scale9Textures(EmbedManager.getUITexture("PopUpBg2"),new Rectangle(58,47,46,32));
 		}
 		
 		public function verdanaRenderFactory():BitmapFontTextRenderer { return _verdanaRender; }

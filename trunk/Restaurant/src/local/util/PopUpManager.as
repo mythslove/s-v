@@ -12,6 +12,8 @@ package  local.util
 			super();
 			if(_instance) throw new Error("只能有一个");
 			else _instance = this ;
+			x = GameSetting.SCREEN_WIDTH >> 1 ;
+			y = GameSetting.SCREEN_HEIGHT >> 1 ;
 		}
 		public static function get instance():PopUpManager
 		{
