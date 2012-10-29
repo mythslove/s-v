@@ -24,7 +24,6 @@ package local.model
 		
 		/** 商店里所有的建筑 数据，key为name , value 为BaseItemVO */
 		public var allItemsHash:Dictionary  ;
-	
 		
 		public var baseWallpaper:Vector.<BaseItemVO> = new Vector.<BaseItemVO>() ;
 		
@@ -52,37 +51,42 @@ package local.model
 			//遍历所有的建筑数据
 			for each(var baseVO:BaseItemVO in baseItems)
 			{
-				switch( baseVO.type)
+				if( baseVO.onSale)
 				{
-					case ItemType.DECOR :
-						baseDecors.push( baseVO );
-						break ;
-					case ItemType.WALL_PAPER :
-						baseWallpaper.push( baseVO  );
-						break ;
-					case ItemType.WALL_DECOR :
-						baseWalldecor.push( baseVO  );
-						break ;
-					case ItemType.CHAIR :
-						baseChair.push( baseVO );
-						break ;
-					case ItemType.COUNTER :
-						baseCounter.push( baseVO );
-						break ;
-					case ItemType.FLOOR :
-						baseFloor.push( baseVO );
-						break ;
-					case ItemType.STOVE :
-						baseStove.push( baseVO );
-						break ;
-					case ItemType.TABLE :
-						baseTable.push( baseVO );
-						break ;
-					case ItemType.CHARACTER :
-						baseCharacter.push( baseVO );
-						break ;
+					switch( baseVO.type)
+					{
+						case ItemType.DECOR :
+							baseDecors.push( baseVO );
+							break ;
+						case ItemType.WALL_PAPER :
+							baseWallpaper.push( baseVO  );
+							break ;
+						case ItemType.WALL_DECOR :
+							baseWalldecor.push( baseVO  );
+							break ;
+						case ItemType.CHAIR :
+							baseChair.push( baseVO );
+							break ;
+						case ItemType.COUNTER :
+							baseCounter.push( baseVO );
+							break ;
+						case ItemType.FLOOR :
+							baseFloor.push( baseVO );
+							break ;
+						case ItemType.STOVE :
+							baseStove.push( baseVO );
+							break ;
+						case ItemType.TABLE :
+							baseTable.push( baseVO );
+							break ;
+						case ItemType.CHARACTER :
+							baseCharacter.push( baseVO );
+							break ;
+					}
 				}
 			}
 		}
+		
+		
 	}
 }
