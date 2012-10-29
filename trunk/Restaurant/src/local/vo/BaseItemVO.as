@@ -31,5 +31,13 @@ package local.vo
 		public function getDirectionUrl( forward:int ):String{
 			return type+"/"+name+"_"+forward+".bd" ;
 		}
+		
+		public function isWallLayer():Boolean{
+			if(type==ItemType.WALL_DECOR || type==ItemType.WALL_PAPER || type==ItemType.FLOOR
+				||type==ItemType.WALL){
+				return true ;
+			}
+			return false ;
+		}
 	}
 }

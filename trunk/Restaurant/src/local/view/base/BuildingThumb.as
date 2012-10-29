@@ -20,13 +20,17 @@ package local.view.base
 		 * @param maxW 最大的宽度
 		 * @param maxH 最大的高度
 		 */	
-		public function BuildingThumb(name:String ,  maxW:int , maxH:int)
+		public function BuildingThumb(name:String , isWallLayer:Boolean,  maxW:int , maxH:int)
 		{
 			var resVO:ResVO = ResourceUtil.instance.getResVOByResId(name);
 			if(resVO.resObject is Vector.<BitmapAnimResVO>)
 			{
 				var barvo:Vector.<BitmapAnimResVO> = resVO.resObject as Vector.<BitmapAnimResVO> ;
-				_img = new Image(TextureAssets.instance.buildingLayerTexture.getTexture(barvo[0].resName+"_000"));
+				if(isWallLayer){
+					_img = new Image(TextureAssets.instance.groundLayerTexture.getTexture(barvo[0].resName+"_000"));
+				}else{
+					_img = new Image(TextureAssets.instance.buildingLayerTexture.getTexture(barvo[0].resName+"_000"));
+				}
 				_img.x=barvo[0].offsetX ;
 				_img.y=barvo[0].offsetY ;
 			}

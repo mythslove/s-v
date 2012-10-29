@@ -87,6 +87,7 @@ package
 			
 			ShopModel.instance.allItemsHash = bytes.readObject() as Dictionary;
 			ShopModel.instance.baseItems = bytes.readObject() as Vector.<BaseItemVO> ;
+			ShopModel.instance.initShopData();
 			
 			ResourceUtil.instance.deleteRes( "GameConfig");
 			loadRes();
