@@ -1,5 +1,19 @@
 <quests>
-	<item qid="" title="" info="" icon="" completeMsg="" rewards="" restrictLevel="" restrictQuest="">
-		<task sum="" title="" info="" skipCash="" questType="" sonType=""/>
+	<item qid="1" title="First Quest" info="This is a quest1" icon="" completeMsg="" rewards="exp=10&coin=15" restrictLevel="0" restrictQuest="">
+		<task sum="3" title="Build a decoration" info="" skipCash="1" questType="build_bd_by_type" sonType="decoration"/>
+	</item>
+	<item qid="2" title="Second Quest" info="This is a quest2" icon="" completeMsg="" rewards="exp=10&coin=15" restrictLevel="0" restrictQuest="">
+		<task sum="2" title="Build a decoration" info="" skipCash="1" questType="build_bd_by_type" sonType="decoration"/>
+		<task sum="1" title="Build a homes" info="" skipCash="1" questType="build_bd_by_type" sonType="home"/>
+	</item>
+	<item qid="3" title="Third Quest" info="This is a quest3" icon="" completeMsg="" rewards="exp=10&coin=15" restrictLevel="0" restrictQuest="">
+		<task sum="4" title="Build a decoration" info="" skipCash="2" questType="build_bd_by_type" sonType="decoration"/>
+		<task sum="5" title="Build 5 homes" info="" skipCash="3" questType="build_bd_by_type" sonType="home"/>
+	</item>
+	<item qid="4" title="The costume Party" info="This is a quest4" icon="" completeMsg="" rewards="exp=10&good=15" restrictLevel="3" restrictQuest="">
+		<task sum="5" title="Begin The Municipal Costume Contest" info="Remember the rules!You can't wear your *main* Halloween costume.ou have to come up with a completely new one.The winner gets a prizer! " skipCash="1" questType="build_bd_by_type" sonType="decoration"/>
+	</item>
+	<item qid="5" title="GO Quest" info="This is a quest5" icon="" completeMsg="" rewards="exp=10&coin=15" restrictLevel="5" restrictQuest="">
+		<task sum="6" title="Build a decoration" info="" skipCash="1" questType="build_bd_by_type" sonType="decoration"/>
 	</item>
 </quests>
