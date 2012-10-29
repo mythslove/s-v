@@ -21,7 +21,7 @@ package local.view.shop
 	public class ShopPanel extends Sprite
 	{
 		public var container:Sprite ;
-		protected var _scroll:HPageScroller = new HPageScroller() ;
+		public var scroll:HPageScroller = new HPageScroller() ;
 		protected var _content:Sprite = new Sprite() ;
 		public function get content():Sprite{return _content;}
 		
@@ -55,8 +55,8 @@ package local.view.shop
 			_content.addEventListener(MouseEvent.ROLL_OUT , mouseHandler );
 			_content.addEventListener(MouseEvent.RELEASE_OUTSIDE , mouseHandler );
 			_content.addEventListener(MouseEvent.MOUSE_MOVE , mouseHandler );
-			_scroll.addEventListener( HPageScroller.SCROLL_POSITION_CHANGE , scrollChangeHandler );
-			_scroll.addEventListener( HPageScroller.SCROLL_OVER , scrollChangeHandler );
+			scroll.addEventListener( HPageScroller.SCROLL_POSITION_CHANGE , scrollChangeHandler );
+			scroll.addEventListener( HPageScroller.SCROLL_OVER , scrollChangeHandler );
 			
 			nextPageBtn.addEventListener(MouseEvent.CLICK , pageClickHandler );
 			prevPageBtn.addEventListener(MouseEvent.CLICK , pageClickHandler );
@@ -67,16 +67,16 @@ package local.view.shop
 		 */		
 		public function refreshPageButton():void
 		{
-			prevPageBtn.visible = _scroll.hasPrevPage() ;
-			nextPageBtn.visible = _scroll.hasNextPage() ;
+			prevPageBtn.visible = scroll.hasPrevPage() ;
+			nextPageBtn.visible = scroll.hasNextPage() ;
 		}
 		
 		private function scrollChangeHandler( e:Event ):void
 		{
 			if(e.type == HPageScroller.SCROLL_OVER )
 			{
-				prevPageBtn.visible = _scroll.hasPrevPage() ;
-				nextPageBtn.visible = _scroll.hasNextPage() ;
+				prevPageBtn.visible = scroll.hasPrevPage() ;
+				nextPageBtn.visible = scroll.hasNextPage() ;
 			}
 			else
 			{
@@ -89,8 +89,8 @@ package local.view.shop
 		private function pageClickHandler(e:MouseEvent):void
 		{
 			e.stopPropagation() ;
-			if(e.target == nextPageBtn) _scroll.nextPage();
-			else _scroll.prevPage() ;
+			if(e.target == nextPageBtn) scroll.nextPage();
+			else scroll.prevPage() ;
 		}
 		
 		protected function onItemHandler( e:MouseEvent):void
@@ -173,7 +173,7 @@ package local.view.shop
 			{
 				item = _content.getChildAt(i) as ShopItemRenderer ;
 				if( item && item.baseVO && item.baseVO.name==buildName ){
-					_scroll.scrollToItem( item , false );
+					scroll.scrollToItem( item , false );
 					break ;
 				}
 			}

@@ -2,28 +2,28 @@ package local.view.quests
 {
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
-	import flash.events.Event;
 	import flash.net.URLVariables;
 	import flash.text.TextField;
 	
 	import local.util.GameUtil;
 	import local.vo.QuestVO;
 	
-	public class QuestListItemRenderer extends MovieClip
+	public class QuestListItemRenderer extends Sprite
 	{
 		public var flag:MovieClip;
 		public var txtTitle:TextField ;
 		public var txtGoodsCoin:TextField;
 		public var txtExp:TextField ;
 		public var container:Sprite;
+		public var goodsCoinMC:MovieClip;
 		//====================================
 		public var questVO:QuestVO ;
 		
 		public function QuestListItemRenderer()
 		{
 			super();
-			stop();
 			flag.stop();
+			goodsCoinMC.stop();
 			mouseChildren = false ;
 		}
 		
@@ -33,13 +33,13 @@ package local.view.quests
 			if( vo.rewards){
 				var urlVar:URLVariables = new URLVariables( vo.rewards);
 				if(urlVar.hasOwnProperty("good") ){
-					this.gotoAndStop(2);
+					goodsCoinMC.gotoAndStop("good");
 					GameUtil.boldTextField( txtGoodsCoin , "+"+ urlVar["good"] );
 				} else if(urlVar.hasOwnProperty("goods") ){
-					this.gotoAndStop(2);
+					goodsCoinMC.gotoAndStop("good");
 					GameUtil.boldTextField( txtGoodsCoin , "+"+ urlVar["goods"] );
 				} else{
-					gotoAndStop(1);
+					goodsCoinMC.gotoAndStop("coin");
 				}
 				if(urlVar.hasOwnProperty("coin")){
 					GameUtil.boldTextField( txtGoodsCoin , "+"+ urlVar["coin"] );

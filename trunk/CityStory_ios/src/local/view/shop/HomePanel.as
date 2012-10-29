@@ -49,13 +49,8 @@ package local.view.shop
 		private function toggleChangeHandler( e:ToggleBarEvent ):void
 		{
 			ContainerUtil.removeChildren(_content);
-			_scroll.removeScrollControll();
-			_scroll.addScrollControll( _content , container , 3 ,20 );
-			if(GameData.isShowTutor){
-				_scroll.scrollLock = true ;
-			}else{
-				_scroll.scrollLock = false ;
-			}
+			scroll.removeScrollControll();
+			scroll.addScrollControll( _content , container , 3 ,20 );
 			
 			var itemRenders:Vector.<ShopItemRenderer> = ShopModel.instance.homesRenderers ;
 			if(!itemRenders) return ;
@@ -64,21 +59,21 @@ package local.view.shop
 			for( var i:int = 0 ; i <len ; ++i ) {
 				render = itemRenders[i] ;
 				if(e.selectedName==TAB_ALL){
-					_scroll.addItem( render );
+					scroll.addItem( render );
 				}
 				else if(e.selectedName==TAB_RESIDENCE){
 					if( render.baseVO.subClass==BuildingType.HOME_RESIDENCE){
-						_scroll.addItem( render );
+						scroll.addItem( render );
 					}
 				}
 				else if(e.selectedName==TAB_CONDOS){
 					if( render.baseVO.subClass==BuildingType.HOME_CONDOS){
-						_scroll.addItem( render );
+						scroll.addItem( render );
 					}
 				}
 				else if(e.selectedName==TAB_MANSIONS){
 					if( render.baseVO.subClass==BuildingType.HOME_MANSIONS){
-						_scroll.addItem( render );
+						scroll.addItem( render );
 					}
 				}
 			}

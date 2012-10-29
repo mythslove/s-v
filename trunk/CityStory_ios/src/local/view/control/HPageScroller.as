@@ -275,6 +275,7 @@ package local.view.control
 				_container.removeEventListener(MouseEvent.RELEASE_OUTSIDE, onMouseHandler );
 				_container=  null ;
 			}
+			if(_content)_content.x = _content.y = 0 ;
 			_content =  null ;
 		}
 	}
