@@ -2,6 +2,7 @@ package local.view.shop
 {
 	import com.greensock.TweenLite;
 	import com.greensock.easing.Back;
+	import com.greensock.easing.Sine;
 	
 	import feathers.controls.TabBar;
 	import feathers.data.ListCollection;
@@ -20,11 +21,11 @@ package local.view.shop
 	import starling.utils.HAlign;
 	import starling.utils.VAlign;
 	
-	public class ShopPopUp extends BaseView
+	public class ShopBar extends BaseView
 	{
-		private static var _instance:ShopPopUp; 
-		public static function get instance():ShopPopUp {
-			if(!_instance)  _instance= new ShopPopUp();
+		private static var _instance:ShopBar; 
+		public static function get instance():ShopBar {
+			if(!_instance)  _instance= new ShopBar();
 			return _instance ;
 		}
 		//-----------------------------------------------------------
@@ -41,11 +42,9 @@ package local.view.shop
 		private var _bg:Scale9Image ;
 		private var _menuBar:TabBar ;
 		
-		public function ShopPopUp()
+		public function ShopBar()
 		{
 			super();
-			pivotX = 960 >> 1 ;
-			pivotY = 640 >> 1 ;
 			init();
 			configListeners();
 		}
@@ -54,52 +53,29 @@ package local.view.shop
 			//背景
 			_bg = new Scale9Image(StyleSetting.instance.popup1Texture );
 			_bg.touchable = false ;
-			_bg.width = 960 ;
-			_bg.height = 640 ;
+			_bg.width = GameSetting.SCREEN_WIDTH ;
+			_bg.height = 320 ;
 			addChild( _bg );
 			//关闭按钮
-			_closeButton = new GameButton(EmbedManager.getUIImage("PopUpCloseButton"));
+			_closeButton = new GameButton(EmbedManager.getUIImage("Button1"));
+			_closeButton.defaultIcon = EmbedManager.getUIImage("WhiteRight")
 			_closeButton.x = _bg.width - _closeButton.defaultSkin.width*0.5-10;
-			_closeButton.y =  _closeButton.defaultSkin.height*0.5 + 10;
+			_closeButton.y = -_closeButton.pivotY ;
 			addChild(_closeButton);
-			//标题
-			var title:TextField = new TextField(300 , 70,"MARKET","TitleFont",70, 0x330000 ,false);
-			title.touchable = false ;
-			title.x = 6+_bg.width>>1 ;
-			title.y = 26 ;
-			title.hAlign = HAlign.CENTER ;
-			title.pivotX = title.width>> 1 ;
-			addChild( title );
-			title = new TextField(300 , 70,"MARKET","TitleFont",70, 0xff9900 ,false);
-			title.touchable = false ;
-			title.x = _bg.width>>1 ;
-			title.y = 20 ;
-			title.hAlign = HAlign.CENTER ;
-			title.pivotX = title.width>> 1 ;
-			addChild( title );
 			//tabBar
 			_menuBar = new TabBar();
 			_menuBar.direction = TabBar.DIRECTION_HORIZONTAL;
 			_menuBar.tabInitializer = StyleSetting.instance.tabInitializer  ;
 			_menuBar.gap = 8 ;
-			_menuBar.y = 110;
-			_menuBar.x = 40;
+			_menuBar.y = -30;
+			_menuBar.x = 40 ;
 			this.addChild(_menuBar);
 			this._menuBar.dataProvider = new ListCollection(
 				[
 					TAB_WALL_PAPER,TAB_WALL_DECO ,TAB_TABLE,TAB_FLOOR,TAB_CHAIR
 					,TAB_DECOR,TAB_STOVE,TAB_COUNTER
 				]);
-			_menuBar.width = _menuBar.maxWidth = _bg.width-80  ;
-		}
-		
-		override protected function addedToStageHandler(e:Event):void
-		{
-			super.addedToStageHandler(e);
-			CenterViewLayer.instance.visible = false ;
-			
-			scaleX = scaleY = 0 ;
-			TweenLite.to( this , 0.3 , {  scaleX:1 , scaleY:1 , ease: Back.easeOut });
+			_menuBar.width = _menuBar.maxWidth = this._menuBar.dataProvider.length*(82+8)-8  ;
 		}
 		
 		private function configListeners():void
@@ -112,19 +88,36 @@ package local.view.shop
 		
 		
 		
+		
 		private function onCloseHandler( e:Event ):void{
 			close();
 		}
 		private function close():void
 		{
 			touchable = false ;
-			TweenLite.to( this , 0.3 , {  scaleX:0 , scaleY:0 , ease: Back.easeIn , onComplete:onCloseTweenOver });
+			TweenLite.to( this , 0.25 , { y:0 , onComplete:tweenOver} ) ;
 		}
-		private function onCloseTweenOver():void
+		private function tweenOver():void{
+			if(parent){
+				parent.removeChild(this);
+			}
+//			GameData.villageMode = VillageMode.EDIT ;
+		}
+		override protected function addedToStageHandler(e:Event):void
 		{
-			touchable = true ;
-			CenterViewLayer.instance.visible = true ;
-			PopUpManager.instance.removeCurrentPopup() ;
+			super.addedToStageHandler(e);
+			
+			x = ( GameSetting.SCREEN_WIDTH-width)>>1 ;
+			y=0;
+			TweenLite.to( this , 0.25 , { y:-314 , onComplete: function():void{ 
+				touchable = true ;
+			} ,ease:Sine.easeOut  });
+			
+//			tabBar_onChange(menuBar);
+		}
+		override protected function removedFromStageHandler(e:Event):void
+		{
+			super.removedFromStageHandler(e);
 		}
 	}
 }

@@ -4,9 +4,8 @@ package local.view.bottom
 	
 	import local.comm.GameSetting;
 	import local.util.EmbedManager;
-	import local.util.PopUpManager;
 	import local.view.base.GameButton;
-	import local.view.shop.ShopPopUp;
+	import local.view.shop.ShopBar;
 	
 	import starling.display.Image;
 	import starling.display.Sprite;
@@ -18,7 +17,7 @@ package local.view.bottom
 		public var btnEditor:GameButton ;
 		public var btnDone:GameButton ;
 		public var btnStorage:GameButton ;
-		public var btnMenu:GameButton; 
+		public var btnMenu:GameButton;
 		
 		public function BottomBar()
 		{
@@ -71,7 +70,7 @@ package local.view.bottom
 			switch( e.target )
 			{
 				case btnMarket:
-					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance , true );
+					showShop();
 					break ;
 //				case btnEditor:
 //					GameData.villageMode = VillageMode.EDIT ;
@@ -120,7 +119,9 @@ package local.view.bottom
 //			addChild( StorageBar.instance);
 		}
 		
-		
+		public function showShop():void{
+			addChild(ShopBar.instance);
+		}
 		
 		
 		

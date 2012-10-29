@@ -9,7 +9,7 @@ package local.util
 	
 	import flash.geom.Rectangle;
 	
-	import local.view.shop.ShopPopUp;
+	import local.view.shop.ShopBar;
 	
 	import starling.display.Image;
 	import starling.text.BitmapFont;
@@ -37,6 +37,8 @@ package local.util
 		public var button1Texture:Scale3Textures ;
 		public var button2Texture:Scale3Textures ;
 		
+		public var grayBgTexture:Scale9Textures ;
+		
 		public  function init():void
 		{
 			verdana = new BitmapFont( EmbedManager.getUITexture("Verdana"),EmbedManager.verdana_fnt );
@@ -55,37 +57,39 @@ package local.util
 		
 			button1Texture = new Scale3Textures(EmbedManager.getUITexture("Button1") , 10 , 30 );
 			button2Texture = new Scale3Textures(EmbedManager.getUITexture("Button2") , 10 , 30 );
+			
+			grayBgTexture = new Scale9Textures(EmbedManager.getUITexture("GrayBg") , new Rectangle(30,30,20,20) );
 		}
 		
 		public function bitmapFontRenderFactory():BitmapFontTextRenderer { return _bitmapFontRender; }
 		
 		public function tabInitializer(tab:Button , item:Object ):void
 		{
-			tab.defaultSkin = new Scale3Image(button1Texture);
-			tab.selectedUpSkin =new Scale3Image(button2Texture);
+			tab.defaultSkin = new Image(EmbedManager.getUITexture("TabMenuDefaultBg"));
+			tab.selectedUpSkin =new Image(EmbedManager.getUITexture("TabMenuSelectedBg"));
 			switch(item.toString()){
-				case ShopPopUp.TAB_WALL_PAPER:
+				case ShopBar.TAB_WALL_PAPER:
 					tab.defaultIcon = EmbedManager.getUIImage("WPaperIcon");
 					break ;
-				case ShopPopUp.TAB_WALL_DECO:
+				case ShopBar.TAB_WALL_DECO:
 					tab.defaultIcon = EmbedManager.getUIImage("WDecoIcon");
 					break ;
-				case ShopPopUp.TAB_TABLE:
+				case ShopBar.TAB_TABLE:
 					tab.defaultIcon = EmbedManager.getUIImage("TabelIcon");
 					break ;
-				case ShopPopUp.TAB_FLOOR:
+				case ShopBar.TAB_FLOOR:
 					tab.defaultIcon = EmbedManager.getUIImage("FloorIcon");
 					break ;
-				case ShopPopUp.TAB_CHAIR:
+				case ShopBar.TAB_CHAIR:
 					tab.defaultIcon = EmbedManager.getUIImage("ChairIcon");
 					break ;
-				case ShopPopUp.TAB_DECOR:
+				case ShopBar.TAB_DECOR:
 					tab.defaultIcon = EmbedManager.getUIImage("DecorIcon");
 					break ;
-				case ShopPopUp.TAB_STOVE:
+				case ShopBar.TAB_STOVE:
 					tab.defaultIcon = EmbedManager.getUIImage("StoveIcon");
 					break ;
-				case ShopPopUp.TAB_COUNTER:
+				case ShopBar.TAB_COUNTER:
 					tab.defaultIcon = EmbedManager.getUIImage("CounterIcon");
 					break ;
 					

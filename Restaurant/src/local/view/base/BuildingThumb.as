@@ -6,7 +6,6 @@ package local.view.base
 	import local.util.ResourceUtil;
 	import local.util.TextureAssets;
 	import local.vo.BitmapAnimResVO;
-	import local.vo.RoadResVO;
 	
 	import starling.display.Image;
 	import starling.display.Sprite;
@@ -30,13 +29,6 @@ package local.view.base
 				_img = new Image(TextureAssets.instance.buildingLayerTexture.getTexture(barvo[0].resName+"_000"));
 				_img.x=barvo[0].offsetX ;
 				_img.y=barvo[0].offsetY ;
-			}
-			else if( resVO.resObject is RoadResVO )
-			{
-				var roadResVO:RoadResVO = resVO.resObject as RoadResVO ;
-				_img = new Image(TextureAssets.instance.groundLayerTexture.getTexture(name));
-				_img.x=roadResVO.offsetXs[name];
-				_img.y=roadResVO.offsetYs[name];
 			}
 			addChild(_img);
 			FixScale.setScale( this , maxW , maxH );

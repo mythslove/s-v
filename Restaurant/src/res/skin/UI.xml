@@ -1,37 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker http://texturepacker.com-->
-<!-- $TexturePacker:SmartUpdate:db3a160710557fe7b2bc15c618dfe2b2$ -->
+<!-- $TexturePacker:SmartUpdate:46de3c0b577eb10acc03bcd983693eed$ -->
 <TextureAtlas imagePath="UI.png">
     <SubTexture name="Button1" x="451" y="72" width="60" height="70"/>
     <SubTexture name="Button2" x="451" y="1" width="60" height="70"/>
-    <SubTexture name="CashIcon" x="1" y="946" width="100" height="67"/>
-    <SubTexture name="ChairIcon" x="456" y="305" width="44" height="62"/>
-    <SubTexture name="CoinIcon" x="1" y="640" width="110" height="109"/>
-    <SubTexture name="CounterIcon" x="333" y="547" width="54" height="55"/>
-    <SubTexture name="DecorIcon" x="359" y="432" width="52" height="60"/>
-    <SubTexture name="DingIcon" x="419" y="173" width="75" height="90"/>
-    <SubTexture name="EditorButton" x="1" y="750" width="100" height="98"/>
-    <SubTexture name="ExpBarBg" x="245" y="688" width="64" height="35"/>
-    <SubTexture name="ExpIcon" x="1" y="849" width="100" height="96"/>
-    <SubTexture name="ExpLoadingBar" x="361" y="396" width="64" height="35"/>
-    <SubTexture name="FloorIcon" x="241" y="501" width="90" height="45"/>
-    <SubTexture name="GoalButton" x="141" y="549" width="100" height="93"/>
-    <SubTexture name="GrayBg" x="141" y="439" width="99" height="109"/>
-    <SubTexture name="MenuButton" x="258" y="410" width="100" height="90"/>
-    <SubTexture name="PageButton" x="332" y="501" width="35" height="45"/>
+    <SubTexture name="CashIcon" x="263" y="467" width="100" height="67"/>
+    <SubTexture name="ChairIcon" x="458" y="143" width="47" height="66"/>
+    <SubTexture name="CoinIcon" x="258" y="173" width="104" height="103"/>
+    <SubTexture name="CounterIcon" x="450" y="358" width="54" height="55"/>
+    <SubTexture name="DecorIcon" x="458" y="210" width="52" height="60"/>
+    <SubTexture name="DingIcon" x="205" y="569" width="75" height="90"/>
+    <SubTexture name="DoneButton" x="263" y="376" width="114" height="90"/>
+    <SubTexture name="EditorButton" x="258" y="277" width="100" height="98"/>
+    <SubTexture name="ExpBarBg" x="431" y="322" width="64" height="35"/>
+    <SubTexture name="ExpIcon" x="1" y="773" width="100" height="96"/>
+    <SubTexture name="ExpLoadingBar" x="162" y="533" width="66" height="35"/>
+    <SubTexture name="FloorIcon" x="104" y="662" width="80" height="40"/>
+    <SubTexture name="GoalButton" x="162" y="439" width="100" height="93"/>
+    <SubTexture name="GrayBg" x="102" y="865" width="78" height="79"/>
+    <SubTexture name="GreenButton" x="378" y="432" width="71" height="71"/>
+    <SubTexture name="MenuButton" x="104" y="571" width="100" height="90"/>
+    <SubTexture name="OrangeButton" x="378" y="360" width="71" height="71"/>
+    <SubTexture name="PageButton" x="185" y="662" width="35" height="45"/>
     <SubTexture name="PopUpBg1" x="258" y="1" width="192" height="171"/>
-    <SubTexture name="PopUpBg2" x="258" y="173" width="160" height="131"/>
-    <SubTexture name="PopUpCloseButton" x="242" y="547" width="71" height="82"/>
-    <SubTexture name="SellButton" x="258" y="305" width="102" height="104"/>
-    <SubTexture name="ShopButton" x="112" y="643" width="100" height="94"/>
-    <SubTexture name="StashButton" x="361" y="305" width="94" height="90"/>
-    <SubTexture name="StoveIcon" x="245" y="630" width="70" height="57"/>
-    <SubTexture name="TabelIcon" x="456" y="368" width="50" height="38"/>
+    <SubTexture name="PopUpBg2" x="1" y="439" width="160" height="131"/>
+    <SubTexture name="PopUpCloseButton" x="359" y="277" width="71" height="82"/>
+    <SubTexture name="SellButton" x="1" y="571" width="102" height="104"/>
+    <SubTexture name="ShopButton" x="1" y="870" width="100" height="94"/>
+    <SubTexture name="ShopItemRenderBg" x="281" y="617" width="84" height="81"/>
+    <SubTexture name="ShopItemRenderBg1" x="281" y="535" width="84" height="81"/>
+    <SubTexture name="StashButton" x="363" y="173" width="94" height="90"/>
+    <SubTexture name="StorageButton" x="1" y="676" width="100" height="96"/>
+    <SubTexture name="StoveIcon" x="1" y="965" width="70" height="57"/>
+    <SubTexture name="TabMenuDefaultBg" x="102" y="784" width="80" height="80"/>
+    <SubTexture name="TabMenuSelectedBg" x="102" y="703" width="80" height="80"/>
+    <SubTexture name="TabelIcon" x="221" y="660" width="50" height="38"/>
+    <SubTexture name="TableIcon" x="431" y="271" width="66" height="50"/>
     <SubTexture name="TitleFont" x="1" y="258" width="256" height="180"/>
-    <SubTexture name="TopbarDefaultBG" x="419" y="264" width="74" height="40"/>
+    <SubTexture name="TopbarDefaultBG" x="102" y="945" width="74" height="40"/>
     <SubTexture name="Verdana" x="1" y="1" width="256" height="256"/>
-    <SubTexture name="WDecoIcon" x="213" y="643" width="31" height="62"/>
-    <SubTexture name="WPaperIcon" x="314" y="547" width="18" height="60"/>
-    <SubTexture name="WhiteRight" x="368" y="493" width="40" height="44"/>
-    <SubTexture name="YellowBg" x="1" y="439" width="139" height="200"/>
+    <SubTexture name="WDecoIcon" x="450" y="414" width="31" height="62"/>
+    <SubTexture name="WPaperIcon" x="482" y="414" width="18" height="60"/>
+    <SubTexture name="WhiteCancel" x="183" y="708" width="40" height="46"/>
+    <SubTexture name="WhiteRight" x="183" y="755" width="40" height="44"/>
 </TextureAtlas>
