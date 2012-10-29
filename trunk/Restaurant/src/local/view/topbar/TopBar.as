@@ -26,7 +26,6 @@ package local.view.topbar
 			lvBar.x = 30 ;
 			addChild( lvBar );
 			
-			
 			cashBar = new CashBar();
 			cashBar.x = lvBar.x + 270;
 			addChild( cashBar );

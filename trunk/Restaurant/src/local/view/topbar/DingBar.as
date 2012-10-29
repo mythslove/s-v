@@ -28,11 +28,11 @@ package local.view.topbar
 			var img:Image = EmbedManager.getUIImage("DingIcon");
 			img.pivotX = img.width>>1 ;
 			img.pivotY = img.height>>1 ;
-			img.scaleX = img.scaleY = 0.7;
-			img.y = img.pivotY*0.7 + 5 ;
+			img.scaleX = img.scaleY = 0.6;
+			img.y = img.pivotY*0.6 + 5 ;
 			addChild(img);
 			
-			_tf = new TextField(120,scale3Img.height,"100","Verdana",30,0xffffff,true);
+			_tf = new TextField(120,scale3Img.height,"100","Verdana",25,0xffffff,true);
 			_tf.x = 35;
 			_tf.y = 10 ;
 			_tf.vAlign = VAlign.CENTER ;

@@ -73,11 +73,17 @@ package local.map
 			tileBmd = null ;
 			
 			var roads:Sprite = new Sprite();
-			var img:Image = EmbedManager.getMapImage("BG_ROAD_1");
-			var offsetX:Number = img.width ;
+			var img:Image = EmbedManager.getMapImage("BG_ROAD_2");
+			img.x = 462 ;
 			roads.addChild( img );
-			img = EmbedManager.getMapImage("BG_ROAD_2");
-			img.x = offsetX ;
+			
+			img = EmbedManager.getMapImage("BG_ROAD_1");
+			img.y = 184 ;
+			roads.addChild( img );
+			
+			img = EmbedManager.getMapImage("BG_ROAD_3");
+			img.x = 1024 ;
+			img.y = 140 ;
 			roads.addChild( img );
 			
 			roads.rotation = deg2rad(-26);

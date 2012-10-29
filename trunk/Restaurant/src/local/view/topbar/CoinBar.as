@@ -28,11 +28,11 @@ package local.view.topbar
 			var img:Image = EmbedManager.getUIImage("CoinIcon");
 			img.pivotX = img.width>>1 ;
 			img.pivotY = img.height>>1 ;
-			img.scaleX = img.scaleY = 0.6;
-			img.y = img.pivotY*0.6 + 5 ;
+			img.scaleX = img.scaleY = 0.5;
+			img.y = img.pivotY*0.5 + 5 ;
 			addChild(img);
 			
-			_tf = new TextField(150,scale3Img.height,"40,000","Verdana",30,0xffffff,true);
+			_tf = new TextField(150,scale3Img.height,"40,000","Verdana",25,0xffffff,true);
 			_tf.x = 35;
 			_tf.y = 10 ;
 			_tf.touchable = false ;

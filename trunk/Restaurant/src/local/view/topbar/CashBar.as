@@ -28,10 +28,11 @@ package local.view.topbar
 			var img:Image = EmbedManager.getUIImage("CashIcon");
 			img.pivotX = img.width>>1 ;
 			img.pivotY = img.height>>1 ;
-			img.y = img.pivotY + 5 ;
+			img.scaleX = img.scaleY = 0.8 ;
+			img.y = img.pivotY*0.8 + 5 ;
 			addChild(img);
 			
-			_tf = new TextField(130,scale3Img.height,"300","Verdana",30,0xffffff,true);
+			_tf = new TextField(130,scale3Img.height,"300","Verdana",25,0xffffff,true);
 			_tf.x = 50;
 			_tf.y = 10 ;
 			_tf.touchable = false ;
