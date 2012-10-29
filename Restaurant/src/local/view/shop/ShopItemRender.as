@@ -25,14 +25,15 @@ package local.view.shop
 			baseVO = value as BaseItemVO;
 			show();
 		}
-		
 		private var _index:int ;
 		public function get index():int{ return _index ; };
 		public function set index(value:int):void{ _index = value ;}
-		
 		private var _owner:List ;
 		public function get owner():List{ return _owner ;}
 		public function set owner(value:List):void{ _owner = value ;}
+		private var _isSelected:Boolean 
+		public function get isSelected():Boolean{ return _isSelected ;}
+		public function set isSelected(value:Boolean):void{ _isSelected = value ;}
 		
 		
 		public var baseVO:BaseItemVO ;
@@ -55,7 +56,7 @@ package local.view.shop
 			addChild(bg);
 			
 			//图片
-			var img:BuildingThumb = new BuildingThumb( baseVO.name , 150 , 150 );
+			var img:BuildingThumb = new BuildingThumb( baseVO.name, baseVO.isWallLayer() , 150 , 150 );
 			img.touchable = false ;
 			img.x=_wid>>1;
 			img.y = _het>>1 ;
@@ -65,7 +66,7 @@ package local.view.shop
 			
 			//价格
 			var price:int = baseVO.costCoin>0 ? baseVO.costCoin : baseVO.costCash ;
-			var txtTitle:TextField =new TextField(_wid-10,50,price,"Verdana",20,0,true) ;
+			var txtTitle:TextField =new TextField(_wid-10,50,price+"","Verdana",20,0,true) ;
 			txtTitle.touchable = false;
 			txtTitle.hAlign = HAlign.CENTER ;
 			txtTitle.autoScale = true ;

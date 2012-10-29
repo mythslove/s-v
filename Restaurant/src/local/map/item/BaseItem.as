@@ -35,11 +35,7 @@ package local.map.item
 		{
 			var barvo:Vector.<BitmapAnimResVO> = ResourceUtil.instance.getResVOByResId( name ).resObject as  Vector.<BitmapAnimResVO> ;
 			
-			var itemOrGround:Boolean = true ;
-			if(itemVO.baseVO.type==ItemType.WALL_DECOR || itemVO.baseVO.type==ItemType.WALL_PAPER || itemVO.baseVO.type==ItemType.FLOOR
-				||itemVO.baseVO.type==ItemType.WALL){
-				itemOrGround = false ;
-			}
+			var itemOrGround:Boolean = !itemVO.baseVO.isWallLayer() ;
 			_itemObject = new ItemObject( name , barvo , itemOrGround );
 			addChildAt(_itemObject,0)
 			this.scaleX = itemVO.rotation ;

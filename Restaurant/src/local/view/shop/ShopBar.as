@@ -3,17 +3,24 @@ package local.view.shop
 	import com.greensock.TweenLite;
 	import com.greensock.easing.Sine;
 	
+	import feathers.controls.List;
+	import feathers.controls.Scroller;
 	import feathers.controls.TabBar;
+	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.data.ListCollection;
 	import feathers.display.Scale3Image;
 	import feathers.display.Scale9Image;
+	import feathers.layout.TiledRowsLayout;
 	
 	import local.comm.GameSetting;
+	import local.model.ShopModel;
 	import local.util.EmbedManager;
 	import local.util.StyleSetting;
 	import local.view.base.BaseView;
 	import local.view.base.GameButton;
 	
+	import starling.display.Image;
+	import starling.display.Sprite;
 	import starling.events.Event;
 	
 	public class ShopBar extends BaseView
@@ -36,6 +43,11 @@ package local.view.shop
 		private var _closeButton:GameButton ;
 		private var _bg:Scale9Image ;
 		private var _menuBar:TabBar ;
+		private var container:Sprite ;
+		private var _list:List ;
+		private var _layout:TiledRowsLayout ;
+		private var _prevBtn:GameButton ;
+		private var _nextBtn:GameButton ;
 		
 		public function ShopBar()
 		{
@@ -71,14 +83,80 @@ package local.view.shop
 					,TAB_DECOR,TAB_STOVE,TAB_COUNTER
 				]);
 			_menuBar.width = _menuBar.maxWidth = this._menuBar.dataProvider.length*(82+8)-8  ;
+			//contaner
+			container = new Sprite();
+			container.x = 100 ;
+			container.y = 100;
+			addChild(container);
+			//list
+			_layout = new TiledRowsLayout();
+			_layout.paging = TiledRowsLayout.PAGING_HORIZONTAL;
+			_layout.useSquareTiles = false;
+			_layout.gap = 5 ;
+			_layout.tileHorizontalAlign = TiledRowsLayout.HORIZONTAL_ALIGN_CENTER;
+			_layout.horizontalAlign = TiledRowsLayout.HORIZONTAL_ALIGN_CENTER;
+			
+			_list = new List();
+			_list.width = _list.maxWidth = GameSetting.SCREEN_WIDTH-200 ;
+			_list.height = 140;
+			_list.itemRendererFactory = function():IListItemRenderer { return new ShopItemRender(); };
+			_list.layout = _layout;
+			_list.scrollerProperties.snapToPages = true;
+			_list.scrollerProperties.scrollBarDisplayMode = Scroller.SCROLL_BAR_DISPLAY_MODE_NONE;
+			_list.scrollerProperties.horizontalScrollPolicy = Scroller.SCROLL_POLICY_ON;
+			container.addChild(_list);
+			//page按钮
+			_prevBtn = new GameButton(new Scale3Image(StyleSetting.instance.button2Texture));
+			_prevBtn.defaultIcon = EmbedManager.getUIImage("PageButton") ;
+			_prevBtn.x = -_prevBtn.pivotX*2 ;
+			_prevBtn.scaleX = -1 ;
+			_prevBtn.y = 50 ;
+			container.addChild(_prevBtn);
+			
+			_nextBtn = new GameButton(new Scale3Image(StyleSetting.instance.button2Texture));
+			_nextBtn.defaultIcon = EmbedManager.getUIImage("PageButton") ;
+			_nextBtn.x = _list.width + _nextBtn.pivotX*2 ;
+			_nextBtn.y = _prevBtn.y ;
+			container.addChild(_nextBtn);
 		}
 		
 		private function configListeners():void
 		{
 			_closeButton.addEventListener(Event.TRIGGERED , onCloseHandler );
+			_menuBar.addEventListener(Event.CHANGE , menuChangeHandler);
 		}
 		
-		
+		private function menuChangeHandler( e:Event ):void{
+			if(_menuBar.selectedItem){
+				switch(_menuBar.selectedItem)
+				{
+					case TAB_WALL_PAPER:
+						_list.dataProvider = new ListCollection(ShopModel.instance.baseWallpaper);
+						break ;
+					case TAB_WALL_DECO:
+						_list.dataProvider = new ListCollection(ShopModel.instance.baseWalldecor);
+						break ;
+					case TAB_TABLE:
+						_list.dataProvider = new ListCollection(ShopModel.instance.baseTable);
+						break ;
+					case TAB_FLOOR:
+						_list.dataProvider = new ListCollection(ShopModel.instance.baseFloor);
+						break ;
+					case TAB_CHAIR:
+						_list.dataProvider = new ListCollection(ShopModel.instance.baseChair);
+						break ;
+					case TAB_DECOR:
+						_list.dataProvider = new ListCollection(ShopModel.instance.baseDecors);
+						break ;
+					case TAB_STOVE:
+						_list.dataProvider = new ListCollection(ShopModel.instance.baseStove);
+						break ;
+					case TAB_COUNTER:
+						_list.dataProvider = new ListCollection(ShopModel.instance.baseCounter);
+						break ;
+				}
+			}
+		}
 		
 		
 		
