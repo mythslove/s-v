@@ -54,8 +54,8 @@ package local.map
 		{
 			super( GameSetting.MAX_SIZE,GameSetting.MAX_SIZE,GameSetting.GRID_SIZE);
 			_endX = x = (GameSetting.SCREEN_WIDTH-GameSetting.MAP_WIDTH*scaleX)>>1 ;
-			_endY = y = -150 ;
-			this.panTo(GameSetting.MAP_WIDTH*0.5,300 );
+			_endY = y = -100 ;
+			this.panTo(GameSetting.MAP_WIDTH/2,300 );
 			
 			addBackground();
 		}
