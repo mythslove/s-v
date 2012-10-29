@@ -39,6 +39,9 @@ package local.util
 		
 		public var grayBgTexture:Scale9Textures ;
 		
+		public var ShopItemRenderBgTexture:Scale9Textures ;
+		public var ShopItemRenderBg1Texture:Scale9Textures ;
+		
 		public  function init():void
 		{
 			verdana = new BitmapFont( EmbedManager.getUITexture("Verdana"),EmbedManager.verdana_fnt );
@@ -59,6 +62,9 @@ package local.util
 			button2Texture = new Scale3Textures(EmbedManager.getUITexture("Button2") , 10 , 30 );
 			
 			grayBgTexture = new Scale9Textures(EmbedManager.getUITexture("GrayBg") , new Rectangle(30,30,20,20) );
+			
+			ShopItemRenderBgTexture= new Scale9Textures(EmbedManager.getUITexture("ShopItemRenderBg") , new Rectangle(40,30,17,17) );
+			ShopItemRenderBg1Texture= new Scale9Textures(EmbedManager.getUITexture("ShopItemRenderBg1") , new Rectangle(40,30,17,14) );
 		}
 		
 		public function bitmapFontRenderFactory():BitmapFontTextRenderer { return _bitmapFontRender; }

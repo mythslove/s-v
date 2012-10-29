@@ -86,7 +86,7 @@ package local.view.shop
 			//contaner
 			container = new Sprite();
 			container.x = 100 ;
-			container.y = 100;
+			container.y = 60;
 			addChild(container);
 			//list
 			_layout = new TiledRowsLayout();
@@ -110,7 +110,7 @@ package local.view.shop
 			_prevBtn.defaultIcon = EmbedManager.getUIImage("PageButton") ;
 			_prevBtn.x = -_prevBtn.pivotX*2 ;
 			_prevBtn.scaleX = -1 ;
-			_prevBtn.y = 50 ;
+			_prevBtn.y = _list.height>>1 ;
 			container.addChild(_prevBtn);
 			
 			_nextBtn = new GameButton(new Scale3Image(StyleSetting.instance.button2Texture));

@@ -5,11 +5,13 @@ package local.view.shop
 	import feathers.core.FeathersControl;
 	import feathers.display.Scale9Image;
 	
+	import local.util.EmbedManager;
 	import local.util.GameUtil;
 	import local.util.StyleSetting;
 	import local.view.base.BuildingThumb;
 	import local.vo.BaseItemVO;
 	
+	import starling.display.Image;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
@@ -37,8 +39,8 @@ package local.view.shop
 		
 		
 		public var baseVO:BaseItemVO ;
-		private var _wid:int = 120 ;
-		private var _het:int = 120 ;
+		private var _wid:int = 180 ;
+		private var _het:int = 180 ;
 		private var _isMove:Boolean;
 		
 		public function ShopItemRender()
@@ -50,28 +52,34 @@ package local.view.shop
 		{
 			this.removeChildren(0,-1,true);
 			
-			var bg:Scale9Image = new Scale9Image( StyleSetting.instance.grayBgTexture );
+			var bg:Scale9Image = new Scale9Image( StyleSetting.instance.ShopItemRenderBgTexture );
 			bg.width = _wid;
 			bg.height = _het;
 			addChild(bg);
 			
 			//图片
-			var img:BuildingThumb = new BuildingThumb( baseVO.name, baseVO.isWallLayer() , 150 , 150 );
+			var thumbName:String = baseVO.directions==2? baseVO.name: baseVO.name+"_1"
+			var img:BuildingThumb = new BuildingThumb(  thumbName , baseVO.isWallLayer() , 150 , 150 );
 			img.touchable = false ;
 			img.x=_wid>>1;
 			img.y = _het>>1 ;
 			addChild( img );
-			if(baseVO.xSpan==1 && baseVO.zSpan==1 && img.height*1.2<140) img.setScale(1.2) ; 
 			img.center();
 			
 			//价格
+			var icon:Image = baseVO.costCoin>0 ? EmbedManager.getUIImage("CoinIcon"):EmbedManager.getUIImage("CashIcon");
+			icon.touchable = false ;
+			icon.scaleX = icon.scaleY = 0.4 ;
+			icon.x= 20 ;
+			icon.y = 20;
+			addChild( icon );
 			var price:int = baseVO.costCoin>0 ? baseVO.costCoin : baseVO.costCash ;
-			var txtTitle:TextField =new TextField(_wid-10,50,price+"","Verdana",20,0,true) ;
-			txtTitle.touchable = false;
-			txtTitle.hAlign = HAlign.CENTER ;
-			txtTitle.autoScale = true ;
-			txtTitle.y = 5 ;
-			addChild(txtTitle);
+			var txtPrice:TextField =new TextField(_wid,50,price+"","verdana",25,0xffffff ,true) ;
+			txtPrice.touchable = false;
+			txtPrice.hAlign = HAlign.CENTER ;
+			txtPrice.autoScale = true ;
+			txtPrice.y = icon.y ;
+			addChild(txtPrice);
 		}
 		
 		private function onTouchHandler( e:TouchEvent ):void
