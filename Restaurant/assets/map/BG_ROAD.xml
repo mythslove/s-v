@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker http://texturepacker.com-->
-<!-- $TexturePacker:SmartUpdate:61ee438ef3097a881e8d6c04183d6fc4$ -->
+<!-- $TexturePacker:SmartUpdate:f73e632fa2d6199b48e71d24a2c09991$ -->
 <TextureAtlas imagePath="BG_ROAD.png">
-    <SubTexture name="BG_ROAD_1" x="0" y="0" width="1024" height="459"/>
-    <SubTexture name="BG_ROAD_2" x="0" y="461" width="1024" height="447"/>
+    <SubTexture name="BG_ROAD_1" x="0" y="309" width="1024" height="275"/>
+    <SubTexture name="BG_ROAD_2" x="0" y="586" width="573" height="184"/>
+    <SubTexture name="BG_ROAD_3" x="0" y="0" width="1024" height="307"/>
 </TextureAtlas>
