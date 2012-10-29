@@ -37,6 +37,8 @@ package local.view.quests
 		private var _content:Sprite = new Sprite() ;
 		private var _renders:Vector.<QuestListItemRenderer> = new Vector.<QuestListItemRenderer>();
 		
+		public var isLeft:Boolean;
+		
 		public function QuestListPopUp(){
 			super();
 			container.graphics.beginFill(0,0);
@@ -62,16 +64,23 @@ package local.view.quests
 		override protected function addedToStageHandler( e:Event ):void
 		{
 			super.addedToStageHandler(e);
-			mouseChildren=true;
+			mouseChildren=false;
 			GameWorld.instance.stopRun();
 			x = GameSetting.SCREEN_WIDTH>>1 ;
 			y = GameSetting.SCREEN_HEIGHT>>1 ;
-			TweenLite.from( this , 0.2 , { x:x-200 , ease: Back.easeOut , onComplete:showTweenOver });
+			var temp:int = 200 ;
+			if(isLeft){
+				temp = -200 ;
+			}
+			mouseChildren = false ;
+			showList();
+			
+			TweenLite.from( this , 0.3 , { x:x-temp , ease: Back.easeOut , onComplete:showTweenOver });
 		}
 		
 		private function showTweenOver():void{
+			mouseChildren=true;
 			if(GameSetting.SCREEN_WIDTH<1024) GameWorld.instance.visible=false;
-			showList();
 		}
 		
 		private function onMouseHandler( e:MouseEvent ):void
@@ -131,7 +140,12 @@ package local.view.quests
 		protected function onItemHandler( e:MouseEvent):void
 		{
 			e.stopPropagation();
-			
+			if(e.target is QuestListItemRenderer){
+				isLeft = false ;
+				PopUpManager.instance.addQueuePopUp( QuestInfoPopUp.instance );
+				QuestInfoPopUp.instance.show( (e.target as QuestListItemRenderer).questVO );
+				close();
+			}
 		}
 		
 		
@@ -173,15 +187,20 @@ package local.view.quests
 		
 		private function close():void{
 			mouseChildren=false;
-			TweenLite.to( this , 0.2 , { x:x+200 , ease: Back.easeIn , onComplete:onTweenCom});
+			var temp:int = 200 ;
+			if(isLeft){
+				temp = -200 ;
+			}
+			TweenLite.to( this , 0.3 , { x:x+temp , ease: Back.easeIn , onComplete:onTweenCom});
 		}
+		
 		private function onTweenCom():void{
 			PopUpManager.instance.removeCurrentPopup() ;
 		}
-		
 		override protected function removedFromStageHandler(e:Event):void{
 			super.removedFromStageHandler(e);
 			GameWorld.instance.run();
+			isLeft = false ;
 			GameWorld.instance.visible=true;
 		}
 	}

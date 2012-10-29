@@ -29,8 +29,8 @@ package local.view.shop
 		}
 		//=====================================
 		public var btnClose:PopUpCloseButton ;
-		public var container:Sprite;
 		public var btnBack:BackButton ;
+		public var container:Sprite;
 		public var btnCash:PopUpCashButton ;
 		public var btnCoin:PopUpCoinButton ;
 		//=====================================
@@ -47,18 +47,15 @@ package local.view.shop
 		override protected function addedToStageHandler( e:Event ):void
 		{
 			super.addedToStageHandler(e);
-			mouseChildren=true;
+			mouseChildren=false;
 			GameWorld.instance.stopRun();
 			x = GameSetting.SCREEN_WIDTH>>1 ;
 			y = GameSetting.SCREEN_HEIGHT>>1 ;
-			var temp:int = 200 ;
-			if(isLeft){
-				temp = -200 ;
-			}
 			TweenLite.from( this , 0.3 , { x:x-200 , ease: Back.easeOut , onComplete:showTweenOver });
 		}
 		
 		private function showTweenOver():void{
+			mouseChildren=true;
 			if(GameSetting.SCREEN_WIDTH<1024) {
 				GameWorld.instance.visible=false;
 			}
@@ -94,6 +91,11 @@ package local.view.shop
 			{
 				case BuildingType.HOME:
 					container.addChild(HomePanel.instance) ;
+					if(GameData.isShowTutor){
+						HomePanel.instance.scroll.scrollLock = true ;
+					}else{
+						HomePanel.instance.scroll.scrollLock = false ;
+					}
 					break ;
 				case BuildingType.DECORATION:
 					container.addChild(DecorationPanel.instance) ;

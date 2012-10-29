@@ -37,7 +37,7 @@ package local.util
 					temp = StringUtil.stringFormat (temp , param );
 				}
 			}else{
-				temp = "";
+				temp = key;
 			}
 			return temp;
 		}
