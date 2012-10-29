@@ -11,5 +11,6 @@ package
 		public var zSpan:int = 1; 
 		public var earnExp:int =1 ;
 		public var directions:int = 2 ;
+		public var onSale:Boolean = true ;
 	}
 }
