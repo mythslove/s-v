@@ -13,6 +13,7 @@ package local.vo
 		public var zSpan:int = 1; 
 		public var earnExp:int =1 ;
 		public var directions:int = 2 ;// 有几个方向
+		public var onSale:Boolean = true ;
 		
 		/**
 		 * 返回资源url 
