@@ -63,6 +63,9 @@
 									case "number":
 										baseVO[key] = Number( attNamesList[j] ) ;
 										break;
+									case "boolean":
+										baseVO[key] = attNamesList[j]=="true"||attNamesList[j]=="1" ? true : false ;
+										break ;
 								}
 								
 							}
