@@ -5,8 +5,10 @@ package local.model
 	import local.comm.GameData;
 	import local.comm.GameSetting;
 	import local.enum.QuestType;
+	import local.util.PopUpManager;
 	import local.util.QuestUtil;
 	import local.view.CenterViewLayer;
+	import local.view.levelup.LevelUpPopUp;
 	import local.view.tutor.TutorView;
 	import local.vo.LevelVO;
 	import local.vo.PlayerVO;
@@ -53,13 +55,12 @@ package local.model
 					me.maxExp = levelVO.maxExp ;
 					me.maxEnergy = levelVO.maxEnergy ;
 					me.maxGoods = levelVO.maxGoods ;
+					PopUpManager.instance.addQueuePopUp( new LevelUpPopUp(  levelVO ) );
 				}else{
 					me.maxExp *= 2 ;
 					me.maxEnergy *= 2 ;
 					me.maxGoods *= 2 ;
 				}
-//				var levelUpPopUp:
-				
 				//更新显示玩家属性
 				CenterViewLayer.instance.topBar.showPlayerProperties() ;
 			}

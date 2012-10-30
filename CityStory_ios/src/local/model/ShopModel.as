@@ -82,6 +82,54 @@ package local.model
 				}
 			}
 		}
+		
+		/**
+		 * 返回解锁的数量 
+		 * @param lv 玩家当前等级
+		 * @param count 数量
+		 * @return 
+		 */		
+		public function getUnlockBuildings( lv:int , count:int = 3 ):Vector.<BaseBuildingVO>
+		{
+			var buildings:Vector.<BaseBuildingVO> = new Vector.<BaseBuildingVO>() ;
+			for each( var render:ShopItemRenderer in homesRenderers){
+				if(render.baseVO.requireLv==lv){
+					buildings.push( render.baseVO);
+					if( buildings.length==count) return buildings ;
+				}
+			}
+			for each( var render:ShopItemRenderer in businessRenderers){
+				if(render.baseVO.requireLv==lv){
+					buildings.push( render.baseVO);
+					if( buildings.length==count) return buildings ;
+				}
+			}
+			for each( var render:ShopItemRenderer in industryRenderers){
+				if(render.baseVO.requireLv==lv){
+					buildings.push( render.baseVO);
+					if( buildings.length==count) return buildings ;
+				}
+			}
+			for each( var render:ShopItemRenderer in communityRenderers){
+				if(render.baseVO.requireLv==lv){
+					buildings.push( render.baseVO);
+					if( buildings.length==count) return buildings ;
+				}
+			}
+			for each( var render:ShopItemRenderer in wondersRenderers){
+				if(render.baseVO.requireLv==lv){
+					buildings.push( render.baseVO);
+					if( buildings.length==count) return buildings ;
+				}
+			}
+			for each( var render:ShopItemRenderer in decorsRenderers){
+				if(render.baseVO.requireLv==lv){
+					buildings.push( render.baseVO);
+					if( buildings.length==count) return buildings ;
+				}
+			}
+		}
+				
 
 	}
 }
