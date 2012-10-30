@@ -1,5 +1,7 @@
 package local.map
 {
+	import flash.geom.Point;
+	
 	import local.comm.GameSetting;
 	import local.map.item.BaseItem;
 	import local.map.item.Floor;
@@ -78,8 +80,35 @@ package local.map
 			}
 		}
 		
-		
-		
+		/**
+		 * 添加Item到移动的的层上面，主要是从商店和收藏箱中的Item
+		 * @param item
+		 */	
+		public function addItemToTopScene( item:BaseItem ):void
+		{
+			//放在当前屏幕中间
+			var offsetY:Number = (item.itemVO.baseVO.xSpan+item.itemVO.baseVO.zSpan)*0.5*_size;
+			var p:Point = pixelPointToGrid( GameSetting.SCREEN_WIDTH*0.5 , GameSetting.SCREEN_HEIGHT*0.5 , 0,  offsetY );
+			item.nodeX = p.x ;
+			item.nodeZ = p.y ;
+			
+			topScene.clearAndDisposeChild();
+			topScene.addIsoObject( item , false );
+			item.drawBottomGrid();
+			item.bottom.updateItemGridLayer();
+			
+//			var moveBtns:MoveBuildingButtons  = MoveBuildingButtons.instance ;
+//			building.addChild( moveBtns );
+//			if(building.bottom.getWalkable()){
+//				if( !moveBtns.okBtn.enabled){
+//					moveBtns.okBtn.enabled = true  ;
+//				}
+//			}else{
+//				if( moveBtns.okBtn.enabled){
+//					moveBtns.okBtn.enabled = false ;
+//				}
+//			}
+		}
 		
 		
 		
