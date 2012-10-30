@@ -19,7 +19,6 @@ package local.view.shop
 	import local.view.base.BaseView;
 	import local.view.base.GameButton;
 	
-	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.Event;
 	
@@ -88,14 +87,14 @@ package local.view.shop
 			container.x = 100 ;
 			container.y = 60;
 			addChild(container);
-			//list
+			//listLayout
 			_layout = new TiledRowsLayout();
 			_layout.paging = TiledRowsLayout.PAGING_HORIZONTAL;
 			_layout.useSquareTiles = false;
 			_layout.gap = 5 ;
 			_layout.tileHorizontalAlign = TiledRowsLayout.HORIZONTAL_ALIGN_CENTER;
 			_layout.horizontalAlign = TiledRowsLayout.HORIZONTAL_ALIGN_CENTER;
-			
+			//list
 			_list = new List();
 			_list.width = _list.maxWidth = GameSetting.SCREEN_WIDTH-200 ;
 			_list.height = 140;
