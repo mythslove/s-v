@@ -30,6 +30,9 @@ package local.util
 		
 		private var _resHash:Dictionary = new Dictionary();
 		
+		[Embed(source="../resource/font/FRAHV.TTF", fontName="Frahv",embedAsCFF="false")]
+		public static const FRAHV:Class ;
+		
 		//================地图上行走的人和车=================================
 		[ Embed(source="../resource/character/Fairy.bd", mimeType="application/octet-stream") ]
 		public static const Fairy:Class ;

@@ -11,10 +11,12 @@ package local.view.quests
 	import flash.events.MouseEvent;
 	import flash.filters.GlowFilter;
 	import flash.geom.Rectangle;
+	import flash.text.Font;
 	import flash.text.TextField;
 	
 	import local.comm.GameSetting;
 	import local.map.GameWorld;
+	import local.util.EmbedsManager;
 	import local.util.GameUtil;
 	import local.util.PopUpManager;
 	import local.view.base.BaseView;
@@ -64,10 +66,11 @@ package local.view.quests
 			container.addChild(_content);
 			_scroll = new ScrollControllerH();
 			
-			var fitlers:Array = [ new GlowFilter(0x653200,1,10,10,15), new GlowFilter(0xffffff,1,8,8,15)];
-			txtTitle = new DynamicBitmapTF("Verdana",GameSetting.SCREEN_WIDTH-200 , 60 , "" , "center",4,40,true,0xFFEA58,false,false,fitlers);
+			Font.registerFont( EmbedsManager.FRAHV);
+			var fitlers:Array = [ new GlowFilter(0x653200,1,8,8,15), new GlowFilter(0xffffff,1,8,8,15)];
+			txtTitle = new DynamicBitmapTF("Frahv",GameSetting.SCREEN_WIDTH-200 , NaN , "" , "center",2,60,false,0xFFEA58,true,false,fitlers);
 			txtTitle.x = -(GameSetting.SCREEN_WIDTH-200)>>1 ;
-			txtTitle.y = 20-GameSetting.SCREEN_HEIGHT*0.5 ;
+			txtTitle.y = 10-GameSetting.SCREEN_HEIGHT*0.5 ;
 			addChild(txtTitle);
 			
 			btnClose.addEventListener(MouseEvent.CLICK , onMouseHandler );
