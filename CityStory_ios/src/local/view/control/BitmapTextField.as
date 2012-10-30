@@ -11,7 +11,7 @@
 	public class BitmapTextField extends Sprite
 	{
 		
-		[Inspectable(type = "String",defaultValue = "Verdana")]
+		[Inspectable(type = "String",defaultValue = "Trebuchet MS")]
 		public function set font( value:String ):void
 		{
 			var format:TextFormat = txt.defaultTextFormat;
@@ -97,7 +97,7 @@
 			var format:TextFormat = txt.defaultTextFormat ;
 			format.bold = true ;
 			format.align="center";
-			format.font="Verdana";
+			format.font="Trebuchet MS";
 			format.size = 20 ;
 			txt.defaultTextFormat = format ;
 			txt.textColor = 0xffffff ;

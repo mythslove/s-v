@@ -34,12 +34,12 @@ package local.util
 		public static function setTabMenuFormat( tf:BitmapTextField ):void{
 			var format:TextFormat = tf.defaultTextFormat ;
 			format.font = "Verdana";
+			format.bold = true ;
 			format.size = 17 ;
 			format.color = 0xffffff ;
-			tf.filters = tabDefaultGlowfilters ;
-			tf.bold = true ;
-			tf.align = TextAlign.CENTER ;
+			format.align = TextAlign.CENTER ;
 			tf.defaultTextFormat = format ;
+			tf.filters = tabDefaultGlowfilters ;
 		}
 		
 		
@@ -54,15 +54,16 @@ package local.util
 		 * @param color
 		 * @param size
 		 */		
-		public static function setWhiteGropFilter( tf:BitmapTextField ,color:int = 0xffffff , size:int=20 ):void
+		public static function setWhiteGropFilter( tf:BitmapTextField ,color:int = 0xffffff , size:int=22 ):void
 		{
 			var format:TextFormat = tf.defaultTextFormat ;
 			format.font = "Verdana";
 			format.size = size ;
+			format.bold = true ;
 			format.color = color ;
+			format.bold = true ;
+			format.align = TextAlign.CENTER ;
 			tf.filters = grayDropFilters ;
-			tf.bold = true ;
-			tf.align = TextAlign.CENTER ;
 			tf.defaultTextFormat = format ;
 		}
 	}
