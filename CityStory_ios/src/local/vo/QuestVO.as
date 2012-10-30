@@ -96,21 +96,17 @@ package local.vo
 		public function checkComplete():Boolean
 		{
 			if (tasks!=null){
-				var len:int = tasks.length ;
-				var task:QuestTaskVO ;
-				for(var i:int  = 0 ; i<len ; i++){
-					if( tasks[i] is QuestTaskVO){
-						task = tasks[i]  as QuestTaskVO;
-						if(task.isComplete ){
-							if(!task.isSendAnalysis){
-								//统计
-								AnalysisUtil.send("Progress-Quest Goal Finished",
-									{"Goal with Quest Name":title+"-"+task.info});
-								task.isSendAnalysis = true ;
-							}
-						}else{
-							return false ;
+				for each( var task:QuestTaskVO in tasks)
+				{
+					if(task.isComplete ){
+						if(!task.isSendAnalysis){
+							//统计
+							AnalysisUtil.send("Progress-Quest Goal Finished",
+								{"Goal with Quest Name":title+"-"+task.info});
+							task.isSendAnalysis = true ;
 						}
+					}else{
+						return false ;
 					}
 				}
 			}
