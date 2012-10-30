@@ -79,6 +79,7 @@ package
 			PlayerModel.instance.levels =  bytes.readObject() as Dictionary ;
 			CompsModel.instance.allComps = bytes.readObject() as Dictionary ;
 			QuestModel.instance.allQuestArray = bytes.readObject() as Vector.<QuestVO>  ;
+			QuestModel.instance.initQuestData();
 			ResourceUtil.instance.deleteRes( "GameConfig");
 			loadRes();
 		}

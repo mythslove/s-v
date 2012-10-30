@@ -66,7 +66,7 @@ package local.view.quests
 			
 //			Font.registerFont( EmbedsManager.FRAHV);
 			var fitlers:Array = [ new GlowFilter(0x653200,1,8,8,15), new GlowFilter(0xffffff,1,8,8,15)];
-			txtTitle = new DynamicBitmapTF("Verdana",GameSetting.SCREEN_WIDTH-200 , NaN , "" , "center",2,50,true,0xFFEA58,false,false,fitlers);
+			txtTitle = new DynamicBitmapTF("Verdana",GameSetting.SCREEN_WIDTH-200 , NaN , "" , "center",0,50,true,0xFFEA58,false,false,fitlers);
 			txtTitle.x = -(GameSetting.SCREEN_WIDTH-200)>>1 ;
 			txtTitle.y = -305 ;
 			addChild(txtTitle);
@@ -82,7 +82,6 @@ package local.view.quests
 			GameWorld.instance.stopRun();
 			x = GameSetting.SCREEN_WIDTH>>1 ;
 			y = GameSetting.SCREEN_HEIGHT>>1 ;
-			
 			
 			TweenLite.from( this , 0.3 , { x:x-200 , ease: Back.easeOut , onComplete:showTweenOver });
 		}

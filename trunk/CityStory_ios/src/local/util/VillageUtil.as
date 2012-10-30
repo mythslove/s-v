@@ -142,6 +142,7 @@ package local.util
 					StorageModel.instance.business =  stream.readObject() as Vector.<StorageBuildingVO> ;
 					//读任务
 					QuestModel.instance.currentQuests = stream.readObject() as Vector.<QuestVO>;
+					QuestModel.instance.checkCacheCurrentQuests();
 					QuestModel.instance.completedQuests = stream.readObject() as Dictionary ;
 					//掉落物
 					var bytes:ByteArray = new ByteArray();

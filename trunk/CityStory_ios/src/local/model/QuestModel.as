@@ -27,11 +27,51 @@ package local.model
 		/** 所有的quest */
 		public var allQuestArray:Vector.<QuestVO> ; 
 		
+		/**所有的quest hash , key为qid，value为questVO*/
+		public var allQuestHash:Dictionary = new Dictionary();
+		
 		/** 当前的quests */
 		public var currentQuests:Vector.<QuestVO> ;
 		
 		/** 完成了的quests ，key为qid，value为questVO*/
 		public var completedQuests:Dictionary  ;
+		
+		/**
+		 * 初始化任务数据 
+		 */		
+		public function initQuestData():void
+		{
+			for each( var vo:QuestVO in allQuestArray){
+				allQuestHash[ vo.qid] = vo ;
+			}
+		}
+		
+		/**
+		 * 检查玩家缓存的quests数据
+		 */		
+		public function checkCacheCurrentQuests():void
+		{
+			if(currentQuests){
+				var len:int = currentQuests.length ; 
+				var oldVO:QuestVO ;
+				var newVO:QuestVO ;
+				for( var i:int ; i<len ; ++i)
+				{
+					oldVO = currentQuests[i] ;
+					newVO = allQuestHash[oldVO.qid] as QuestVO;
+					if(newVO){
+						newVO.acceptTime = oldVO.acceptTime ;
+						newVO.isComplete = oldVO.isComplete ;
+						newVO.isAccept = oldVO.isAccept ;
+						for ( var j:int  = 0 ; j<newVO.tasks.length ; ++j){
+							newVO.tasks[j].current = oldVO.tasks[j].current ;
+							newVO.tasks[j].isSkipped = oldVO.tasks[j].isSkipped ;
+						}
+						currentQuests[i] = newVO ;
+					}
+				}
+			}
+		}
 		
 		/**
 		 * 获得当前最新的quests
