@@ -177,6 +177,7 @@ package local.view.shop
 		
 		
 		//=======================================================
+		
 		private function onCloseHandler( e:Event ):void{ close(); }
 		private function close():void
 		{

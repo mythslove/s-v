@@ -11,7 +11,10 @@ package local.map
 	import flash.geom.Matrix;
 	import flash.geom.Point;
 	
+	import local.comm.GameData;
 	import local.comm.GameSetting;
+	import local.enum.VillageMode;
+	import local.map.item.BaseItem;
 	import local.map.item.Wall;
 	import local.map.scene.RoomScene;
 	import local.model.PlayerModel;
@@ -39,6 +42,12 @@ package local.map
 		public var iconScene:SIsoScene ; //显示icon层
 		public var topScene:SIsoScene ; //最上层,显示移动的建筑，以及显示一些特效动画
 		public var effectScene:SIsoScene ; //特效层
+		
+		
+		protected var _mouseItem:BaseItem ; //鼠标按下时的Item
+		protected var _mouseDownPos:Point = new Point(); //鼠标点击的位置
+		protected var _worldPos:Point = new Point(); //鼠标点击时场景的世界位置
+		public var currentSelected:BaseItem ; //当前选中的Item
 		
 		/**===============用于地图移动和缩放=========================*/
 		protected var _moveSpeed:Number =0.5 ; //移动的速度
@@ -237,6 +246,34 @@ package local.map
 				_endY = y ;
 			}
 		}
+		
+		private function moveTopBuilding( mouseX:Number , mouseY:Number ):void
+		{
+			var span:int = _mouseItem.itemVO.baseVO.xSpan ;
+			var offsetY:Number = (span-1)*_size ;
+			var p:Point = pixelPointToGrid(mouseX,mouseY , 0 ,offsetY ); 
+			if(_mouseItem.nodeX!=p.x || _mouseItem.nodeZ!=p.y) {
+				_mouseItem.nodeX = p.x ;
+				_mouseItem.nodeZ= p.y ;
+				_mouseItem.bottom.updateItemGridLayer();
+				
+				if(GameData.villageMode==VillageMode.ITEM_SHOP || GameData.villageMode==VillageMode.ITEM_STORAGE )
+				{
+//					var moveBtns:MoveBuildingButtons  = MoveBuildingButtons.instance ;
+//					if(_mouseItem.bottom.getWalkable()){
+//						if( !moveBtns.okBtn.enabled){
+//							moveBtns.okBtn.enabled = true  ;
+//						}
+//					}else{
+//						if( moveBtns.okBtn.enabled){
+//							moveBtns.okBtn.enabled = false ;
+//						}
+//					}
+				}
+			}
+		}
+		
+		
 		
 		//================缩放地图=======================
 		private var _zoomObj:Object = {"value":1};

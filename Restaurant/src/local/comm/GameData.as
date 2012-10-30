@@ -54,8 +54,8 @@ package local.comm
 					world.topScene.visible = true ;
 					world.iconScene.visible = false ;
 					break ;
-				case VillageMode.BUILDING_STORAGE :
-				case VillageMode.BUILDING_SHOP :
+				case VillageMode.ITEM_STORAGE :
+				case VillageMode.ITEM_SHOP :
 					world.roomScene.touchable = false ;
 					world.runUpdate = false ;
 					world.floorScene.touchable = false ;

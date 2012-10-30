@@ -2,7 +2,9 @@ package local.map.item
 {
 	import flash.geom.Point;
 	
+	import local.comm.GameSetting;
 	import local.enum.ItemType;
+	import local.map.cell.ItemBottomGrid;
 	import local.map.cell.ItemObject;
 	import local.util.ResourceUtil;
 	import local.vo.BitmapAnimResVO;
@@ -14,6 +16,7 @@ package local.map.item
 		
 		protected var _itemObject:ItemObject ;
 		public var itemVO:ItemVO ;
+		public var bottom:ItemBottomGrid ; //底座
 		
 		public function BaseItem(itemVO:ItemVO )
 		{
@@ -44,43 +47,29 @@ package local.map.item
 		/**添加底座*/		
 		public function drawBottomGrid():void
 		{
-//			if(!bottom){
-//				bottom = new BuildingBottomGrid(this);
-//				addChildAt(bottom,0);
-//				bottom.drawGrid();
-//				if(_itemObject){
-//					_itemObject.y -= GameSetting.GRID_SIZE*0.25 ;
-//					_itemObject.alpha = 0.6 ;
-//				}else if( _roadObject){
-//					_roadObject.y -= GameSetting.GRID_SIZE*0.25 ;
-//					_roadObject.alpha = 0.6 ;
-//				}else if(_buildStatusObj){
-//					_buildStatusObj.y -= GameSetting.GRID_SIZE*0.25 ;
-//					_buildStatusObj.alpha = 0.6 ;
-//				}
-//			}
+			if(!bottom){
+				bottom = new ItemBottomGrid(this);
+				addChildAt(bottom,0);
+				bottom.drawGrid();
+				if(_itemObject){
+					_itemObject.alpha = 0.6 ;
+				}
+			}
 		}
 		
 		/** 移除底座*/
 		public function removeBottomGrid():void
 		{
-//			if(bottom) {
-//				bottom.dispose();
-//				if(bottom.parent){
-//					bottom.parent.removeChild(bottom);
-//				}
-//				bottom = null ;
-//				if(_itemObject){
-//					_itemObject.y += GameSetting.GRID_SIZE*0.25 ;
-//					_itemObject.alpha = 1 ;
-//				}else if( _roadObject){
-//					_roadObject.y += GameSetting.GRID_SIZE*0.25 ;
-//					_roadObject.alpha = 1 ;
-//				}else if(_buildStatusObj){
-//					_buildStatusObj.y += GameSetting.GRID_SIZE*0.25 ;
-//					_buildStatusObj.alpha =1 ;
-//				}
-//			}
+			if(bottom) {
+				bottom.dispose();
+				if(bottom.parent){
+					bottom.parent.removeChild(bottom);
+				}
+				bottom = null ;
+				if(_itemObject){
+					_itemObject.alpha = 1 ;
+				}
+			}
 		}
 		
 		/**
@@ -138,7 +127,9 @@ package local.map.item
 		{
 			super.dispose();
 			if(_itemObject) _itemObject.dispose();
+			if(bottom)  bottom.dispose();
 			_itemObject = null ;
+			bottom = null ;
 		}
 	}
 }

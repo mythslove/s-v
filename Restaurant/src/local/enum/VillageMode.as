@@ -20,11 +20,11 @@ package local.enum
 		/**
 		 * 添加商店中的建筑
 		 */		
-		public static const BUILDING_SHOP:String = "buildingShop";
+		public static const ITEM_SHOP:String = "itemShop";
 		/**
 		 * 添加收藏箱中的建筑
 		 */		
-		public static const BUILDING_STORAGE:String = "buildingStorage";
+		public static const ITEM_STORAGE:String = "itemStorage";
 		
 		/**
 		 * 扩地 

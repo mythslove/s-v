@@ -7,8 +7,13 @@ package local.view.shop
 	import feathers.core.FeathersControl;
 	import feathers.display.Scale9Image;
 	
+	import local.comm.GameData;
+	import local.enum.VillageMode;
+	import local.map.GameWorld;
+	import local.map.item.BaseItem;
 	import local.util.EmbedManager;
 	import local.util.GameUtil;
+	import local.util.ItemFactory;
 	import local.util.StyleSetting;
 	import local.view.base.BuildingThumb;
 	import local.vo.BaseItemVO;
@@ -49,6 +54,9 @@ package local.view.shop
 		public function ShopItemRender()
 		{
 			super();
+			this.width = _wid ;
+			this.height = _het ;
+			addEventListener(TouchEvent.TOUCH , onTouchHandler );
 		}
 		
 		private function show():void
@@ -100,10 +108,10 @@ package local.view.shop
 					_isMove = true ;
 				}else if(touch.phase==TouchPhase.ENDED){
 					if(!_isMove){
-//						var building:BaseBuilding = BuildingFactory.createBuildingByBaseVO( baseVO );
-//						GameWorld.instance.addBuildingToTopScene( building);
-//						GameData.villageMode=VillageMode.BUILDING_SHOP ;
-//						PopUpManager.instance.removeCurrentPopup();
+						var item:BaseItem = ItemFactory.createItemByBaseVO( baseVO );
+						GameWorld.instance.addItemToTopScene( item);
+						GameData.villageMode=VillageMode.ITEM_SHOP ;
+						ShopBar.instance.removeFromParent();
 					}
 				}
 			}

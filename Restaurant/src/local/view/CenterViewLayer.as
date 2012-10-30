@@ -81,14 +81,14 @@ package local.view
 					bottomBar.btnStorage.visible = true ;
 					topBar.visible = false ;
 					break ;
-				case VillageMode.BUILDING_STORAGE :
+				case VillageMode.ITEM_STORAGE :
 					bottomBar.btnDone.visible = false ;
 					bottomBar.btnStorage.visible = false ;
 					questBtn.visible = false ;
 					bottomBar.showStorage();
 					topBar.visible = false ;
 					break ;
-				case VillageMode.BUILDING_SHOP :
+				case VillageMode.ITEM_SHOP :
 					bottomBar.visible = false ;
 					topBar.visible = false ;
 					questBtn.visible = false ;
