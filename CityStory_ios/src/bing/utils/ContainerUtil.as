@@ -14,9 +14,12 @@ package bing.utils
 		 * 清空容器中的对象 
 		 * @param displayObjectContainer 
 		 */		
-		public static function removeChildren( displayObjectContainer:DisplayObjectContainer ):void {
+		public static function removeChildren( displayObjectContainer:DisplayObjectContainer , dispose:Boolean=false ):void {
 			while( displayObjectContainer.numChildren>0 ){
-				displayObjectContainer.removeChildAt( 0 );
+				var obj:DisplayObject = displayObjectContainer.removeChildAt( 0 );
+				if(dispose && obj.hasOwnProperty("dispose")){
+					obj["dispose"]();
+				}
 			}
 		}
 	

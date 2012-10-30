@@ -23,9 +23,11 @@ package local.util
 		
 		
 		
+		public static var blueGlowFilters:Array = [ new GlowFilter(0x007ab6,1,4,4,12)];
 		
+		public static var yellowGlowFilters:Array = [ new GlowFilter(0xae7000,1,4,4,12)];
 		
-		
+		public static var greenGlowFilters:Array = [ new GlowFilter(0x009345,1,4,4,12)];
 		
 		
 		//tabMenu标题样式 ========================

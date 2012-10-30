@@ -45,5 +45,11 @@ package local.view.btn
 				txtLabel.text = _label ;
 			}
 		}
+		
+		override public function dispose():void{
+			super.dispose();
+			txtLabel.dispose();
+			txtLabel = null ;
+		}
 	}
 }

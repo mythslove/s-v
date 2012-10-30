@@ -20,7 +20,7 @@ package local.view.btn
 		override public function setStyle():void
 		{
 			txtLabel.size = "20";
-			txtLabel.filters = [ new GlowFilter(0x44946a,1,4,4,20)];
+			txtLabel.filters = TextStyle.greenGlowFilters;
 		}
 	}
 }

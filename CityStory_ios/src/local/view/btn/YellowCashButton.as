@@ -14,9 +14,10 @@ package local.view.btn
 			super();
 		}
 		
-		override public function setStyle():void{
-			super.setStyle();
-			TextStyle.setWhiteGropFilter(txtCash);
+		override public function setStyle():void
+		{
+			txtLabel.filters = TextStyle.yellowGlowFilters ;
+			txtCash.filters = TextStyle.yellowGlowFilters ;
 		}
 		
 		public function get cash():String
@@ -37,6 +38,12 @@ package local.view.btn
 			if( txtCash.text!=_cash){
 				txtCash.text = _cash ;
 			}
+		}
+		
+		override public function dispose():void{
+			super.dispose();
+			txtCash.dispose();
+			txtCash = null ;
 		}
 	}
 }
