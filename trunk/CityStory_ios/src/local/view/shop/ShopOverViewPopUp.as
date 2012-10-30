@@ -3,6 +3,7 @@ package local.view.shop
 	import com.greensock.TweenLite;
 	import com.greensock.easing.Back;
 	
+	import flash.display.Bitmap;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -16,6 +17,7 @@ package local.view.shop
 	import local.util.PopUpManager;
 	import local.view.base.BaseView;
 	import local.view.btn.PopUpCloseButton;
+	import local.view.title.MarketTitle;
 	import local.view.tutor.TutorView;
 	import local.vo.TutorItemVO;
 	
@@ -42,6 +44,10 @@ package local.view.shop
 		public function ShopOverViewPopUp(){
 			super();
 			homeButtonBg.mouseChildren = homeButtonBg.mouseEnabled = false ;
+			var title:Bitmap = new Bitmap( new MarketTitle(0,0));
+			title.x = -title.width>>1 ;
+			title.y = 20-GameSetting.SCREEN_HEIGHT*0.5 ;
+			addChild(title);
 			addEventListener(MouseEvent.CLICK , onMouseHandler );
 		}
 		

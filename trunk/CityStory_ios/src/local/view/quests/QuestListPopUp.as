@@ -5,6 +5,7 @@ package local.view.quests
 	import com.greensock.TweenLite;
 	import com.greensock.easing.Back;
 	
+	import flash.display.Bitmap;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -18,6 +19,7 @@ package local.view.quests
 	import local.view.btn.PageButton;
 	import local.view.btn.PopUpCloseButton;
 	import local.view.control.HPageScroller;
+	import local.view.title.GoalsTitle;
 	import local.vo.QuestVO;
 
 	public class QuestListPopUp extends BaseView
@@ -41,6 +43,12 @@ package local.view.quests
 		
 		public function QuestListPopUp(){
 			super();
+			
+			var title:Bitmap = new Bitmap( new GoalsTitle(0,0));
+			title.x = -title.width>>1 ;
+			title.y = 20-GameSetting.SCREEN_HEIGHT*0.5 ;
+			addChild(title);
+			
 			container.graphics.beginFill(0,0);
 			container.graphics.drawRect(0,0,840,380);
 			container.graphics.endFill();

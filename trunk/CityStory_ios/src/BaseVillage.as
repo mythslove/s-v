@@ -103,6 +103,7 @@ package
 				}
 			}
 			resVOs.push( new ResVO("localization_config" , "config/localization_"+GameSetting.local+".bin") );
+			resVOs.push( new ResVO("ui_title" , "swf/title_"+GameSetting.local+".swf",false) );
 			resVOs.push( new ResVO("ui_pk","swf/pickup.swf",false));
 			resVOs.push( new ResVO("ui_popup","swf/popup.swf",false));
 			resVOs.push( new ResVO("ui_bar","swf/"+GameSetting.device+"/bar.swf",false));

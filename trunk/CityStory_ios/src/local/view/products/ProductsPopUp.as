@@ -5,6 +5,7 @@ package local.view.products
 	import com.greensock.TweenLite;
 	import com.greensock.easing.Back;
 	
+	import flash.display.Bitmap;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -17,6 +18,7 @@ package local.view.products
 	import local.view.btn.PopUpCloseButton;
 	import local.view.iap.PopUpCashButton;
 	import local.view.iap.PopUpCoinButton;
+	import local.view.title.ContractsTitle;
 	import local.vo.ProductVO;
 	
 	public class ProductsPopUp extends BaseView
@@ -41,6 +43,11 @@ package local.view.products
 		
 		public function ProductsPopUp(){
 			super();
+			
+			var title:Bitmap = new Bitmap( new ContractsTitle(0,0));
+			title.x = -title.width>>1 ;
+			title.y = 20-GameSetting.SCREEN_HEIGHT*0.5 ;
+			addChild(title);
 			btnClose.addEventListener(MouseEvent.CLICK , onMouseHandler );
 		}
 		
