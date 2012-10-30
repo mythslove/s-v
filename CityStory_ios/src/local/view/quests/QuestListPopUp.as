@@ -46,7 +46,7 @@ package local.view.quests
 			
 			var title:Bitmap = new Bitmap( new GoalsTitle(0,0));
 			title.x = -title.width>>1 ;
-			title.y = 20-GameSetting.SCREEN_HEIGHT*0.5 ;
+			title.y = -300 ;
 			addChild(title);
 			
 			container.graphics.beginFill(0,0);

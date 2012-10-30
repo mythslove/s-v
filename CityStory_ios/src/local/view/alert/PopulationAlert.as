@@ -44,7 +44,7 @@ package local.view.alert
 		{
 			var title:Bitmap = new Bitmap( new PopulationTitle(0,0));
 			title.x = -title.width>>1 ;
-			title.y = 20-GameSetting.SCREEN_HEIGHT*0.5 ;
+			title.y = -300 ;
 			addChild(title);
 			
 			btnPop.txtLabel.text = GameUtil.localizationString("popalert.popinfo.button") ;
