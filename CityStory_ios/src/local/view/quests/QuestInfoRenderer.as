@@ -25,6 +25,7 @@ package local.view.quests
 		public function QuestInfoRenderer()
 		{
 			super();
+			btnContainer.y+=2;
 			imgContainer.mouseChildren = imgContainer.mouseEnabled = false ;
 			txtInfo.mouseEnabled=txtTitle.mouseEnabled=txtProgress.mouseEnabled=false;
 		}
@@ -49,7 +50,7 @@ package local.view.quests
 				var blueCashBtn:BlueCashButton = new BlueCashButton();
 				blueCashBtn.label = GameUtil.localizationString("quest.info.item.button.skip");
 				blueCashBtn.cash = vo.skipCash+"";
-				blueCashBtn.x = btnContainer.numChildren*blueCashBtn.width + 10 ;
+				blueCashBtn.x = btnContainer.numChildren*(blueCashBtn.width + 10) ;
 				btnContainer.addChild( blueCashBtn );
 			}
 			btnContainer.x = width-btnContainer.width>>1 ;
