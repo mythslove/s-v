@@ -3,6 +3,7 @@ package local.view.alert
 	import com.greensock.TweenLite;
 	import com.greensock.easing.Back;
 	
+	import flash.display.Bitmap;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
@@ -18,6 +19,7 @@ package local.view.alert
 	import local.view.btn.PopUpCloseButton;
 	import local.view.shop.ShopOverViewPopUp;
 	import local.view.shop.ShopPopUp;
+	import local.view.title.PopulationTitle;
 	
 	public class PopulationAlert extends BaseView
 	{
@@ -40,6 +42,11 @@ package local.view.alert
 		
 		private function init():void
 		{
+			var title:Bitmap = new Bitmap( new PopulationTitle(0,0));
+			title.x = -title.width>>1 ;
+			title.y = 20-GameSetting.SCREEN_HEIGHT*0.5 ;
+			addChild(title);
+			
 			btnPop.txtLabel.text = GameUtil.localizationString("popalert.popinfo.button") ;
 			btnCap.txtLabel.text = GameUtil.localizationString("popalert.capinfo.button") ;
 			txtPopInfo.text =  GameUtil.localizationString("popalert.popinfo") ;
