@@ -33,9 +33,9 @@ package local.util
 		public static var tabSeletectedGlowfilters:Array=[ new GlowFilter(0xAE7000,1,3,3,20)];
 		public static function setTabMenuFormat( tf:BitmapTextField ):void{
 			var format:TextFormat = tf.defaultTextFormat ;
-			format.font = "Verdana";
+			format.font = "Trebuchet MS";
 			format.bold = true ;
-			format.size = 17 ;
+			format.size = 22 ;
 			format.color = 0xffffff ;
 			format.align = TextAlign.CENTER ;
 			tf.defaultTextFormat = format ;
@@ -57,7 +57,7 @@ package local.util
 		public static function setWhiteGropFilter( tf:BitmapTextField ,color:int = 0xffffff , size:int=22 ):void
 		{
 			var format:TextFormat = tf.defaultTextFormat ;
-			format.font = "Verdana";
+			format.font = "Trebuchet MS";
 			format.size = size ;
 			format.bold = true ;
 			format.color = color ;
