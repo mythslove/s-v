@@ -17,7 +17,7 @@ package local.view.btn
 		override public function setStyle():void
 		{
 			txtLabel.size="24";
-			txtLabel.filters= TextStyle.tabSeletectedGlowfilters ;
+			txtLabel.filters= TextStyle.yellowGlowFilters ;
 		}
 	}
 }

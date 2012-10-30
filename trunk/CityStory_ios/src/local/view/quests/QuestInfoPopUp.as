@@ -107,6 +107,7 @@ package local.view.quests
 						render = _renders[i] ;
 					}else{
 						render = new QuestInfoRenderer();
+						_renders.push( render );
 					}
 					_content.addChild( render);
 					render.x+= 450*i ;
