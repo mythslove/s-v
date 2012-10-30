@@ -4,6 +4,7 @@ package local.model
 	import bing.iso.path.Grid;
 	
 	import flash.geom.Vector3D;
+	import flash.utils.Dictionary;
 	
 	import local.comm.GameSetting;
 	import local.map.item.BaseMapObject;
@@ -19,11 +20,18 @@ package local.model
 		}
 		//=======================================
 		
+		/** 墙的Hash , key为nodeX-nodeZ-direction , value 为wall对象  */		
+		public var wallNodeHash:Dictionary = new Dictionary();
+		
 		/** 游戏的数据 */
 		public var gameGridData:Grid  ;
 		
 		/**格子位置对建筑数据映射，当点击某个格子时，能知道当前点击了哪个建筑 */		
 		private var _grid2Building:HashMap = new HashMap();
+		
+		
+		
+		
 		
 		public function MapGridDataModel()
 		{

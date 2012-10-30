@@ -1,5 +1,6 @@
 package local.map
 {
+	import bing.iso.path.Grid;
 	import bing.starling.component.TileImage;
 	import bing.starling.iso.SIsoScene;
 	import bing.starling.iso.SIsoWorld;
@@ -13,10 +14,12 @@ package local.map
 	
 	import local.comm.GameData;
 	import local.comm.GameSetting;
+	import local.enum.ItemType;
 	import local.enum.VillageMode;
 	import local.map.item.BaseItem;
 	import local.map.item.Wall;
 	import local.map.scene.RoomScene;
+	import local.model.MapGridDataModel;
 	import local.model.PlayerModel;
 	import local.util.EmbedManager;
 	import local.vo.PlayerVO;
@@ -152,6 +155,7 @@ package local.map
 				wall.nodeZ = i ;
 				wall.direction = 2 ;
 				wallScene.addIsoObject( wall , false );
+				MapGridDataModel.instance.wallNodeHash[wall.nodeX+"-"+wall.nodeZ+"-"+wall.direction] = wall ;
 			}
 			for( i = 0 ; i<player.mapSize ; ++ i){
 				wall = new Wall();
@@ -159,6 +163,7 @@ package local.map
 				wall.nodeZ = 0 ;
 				wall.direction = 3 ;
 				wallScene.addIsoObject( wall ,false );
+				MapGridDataModel.instance.wallNodeHash[wall.nodeX+"-"+wall.nodeZ+"-"+wall.direction] = wall ;
 			}
 			wallScene.sortAll() ;
 		}
@@ -193,25 +198,96 @@ package local.map
 					_endX = x ;
 					_endY = y ;
 					_isMove = false ;
+					if(touch.target.parent.parent is BaseItem){
+						_mouseItem = touch.target.parent.parent as BaseItem ;
+					}else{
+						_mouseItem = null ;
+					}
 				}
 				else if( touch.phase==TouchPhase.MOVED)
 				{
 					_isMove = true ;
-					//如果不是编辑状态，则移动地图
-					var offsetX:int =  _endX+touch.globalX-touch.previousGlobalX ;
-					var offsetY:int =  _endY+touch.globalY-touch.previousGlobalY ;
+					if( _mouseItem && _mouseItem.parent == topScene)  {
+						//如果是编译状态，则移动建筑
+						moveTopBuilding( pos.x,pos.y);
+//						if(EditorBuildingButtons.instance.parent){
+//							EditorBuildingButtons.instance.parent.removeChild( EditorBuildingButtons.instance );
+//						}
+					}else {
+						//如果不是编辑状态，则移动地图
+						var offsetX:int =  _endX+touch.globalX-touch.previousGlobalX ;
+						var offsetY:int =  _endY+touch.globalY-touch.previousGlobalY ;
+						
+						if(offsetX>0) offsetX=0 ;
+						else if(offsetX<-GameSetting.MAP_WIDTH*scaleX+GameSetting.SCREEN_WIDTH){
+							offsetX = -GameSetting.MAP_WIDTH*scaleX+GameSetting.SCREEN_WIDTH ;
+						}
+						if(offsetY>0) offsetY=0 ;
+						else if(offsetY<-GameSetting.MAP_HEIGHT*scaleY+GameSetting.SCREEN_HEIGHT){
+							offsetY = -GameSetting.MAP_HEIGHT*scaleY+GameSetting.SCREEN_HEIGHT ;
+						}
+						_endX = offsetX;
+						_endY = offsetY ;
+						modifyEndPosition();
+					}
+				}
+				else if( touch.phase == TouchPhase.ENDED)
+				{
+					if(_mouseItem && _mouseItem.parent == topScene)
+					{
+						if(GameData.villageMode == VillageMode.EDIT )
+						{
+							if(_mouseItem.bottom.getWalkable()){
+								_mouseItem.addToWorldFromTopScene();
+								_mouseItem = null ;
+								currentSelected = null ;
+//								if(EditorBuildingButtons.instance.parent){
+//									EditorBuildingButtons.instance.parent.removeChild( EditorBuildingButtons.instance );
+//								}
+							}else{
+//								_mouseItem.addChild( EditorBuildingButtons.instance );
+							}
+						}
+					}
+					else if(!_isMove)
+					{
+						if(_mouseItem && touch.target.parent.parent==_mouseItem)
+						{
+							if(touch.target.parent.parent!=currentSelected  ){
+//								if(currentSelected) currentSelected.flash(false);
+								currentSelected = touch.target.parent.parent as BaseItem ;
+							}
+							//判断是不是在好友村庄
+							if(GameData.villageMode!=VillageMode.VISIT){
+								currentSelected.onClick();
+							}else{
+//								currentSelected.flash(true);
+							}
+						}
+						else if(currentSelected) 
+						{
+							if( currentSelected.parent==topScene && GameData.villageMode == VillageMode.EDIT && currentSelected.bottom.getWalkable()){
+								currentSelected.addToWorldFromTopScene();
+								_mouseItem=null;
+//								if(EditorBuildingButtons.instance.parent){
+//									EditorBuildingButtons.instance.parent.removeChild( EditorBuildingButtons.instance );
+//								}
+							}
+//							currentSelected.flash(false);
+							currentSelected = null ;
+//							CenterViewLayer.instance.gameTip.hide() ; //隐藏gameTip
+						}
+						else if(GameData.villageMode==VillageMode.EXPAND)
+						{
+							//用点击区域来判断
+//							clickExpandButton( pixelPointToGrid(root.mouseX , root.mouseY,0,0,_size*4 ) );
+						}
+						//隐藏gameTip
+//						if( currentSelected && CenterViewLayer.instance.gameTip.currentBuilding!=currentSelected){
+//							CenterViewLayer.instance.gameTip.hide() ;
+//						}
+					}
 					
-					if(offsetX>0) offsetX=0 ;
-					else if(offsetX<-GameSetting.MAP_WIDTH*scaleX+GameSetting.SCREEN_WIDTH){
-						offsetX = -GameSetting.MAP_WIDTH*scaleX+GameSetting.SCREEN_WIDTH ;
-					}
-					if(offsetY>0) offsetY=0 ;
-					else if(offsetY<-GameSetting.MAP_HEIGHT*scaleY+GameSetting.SCREEN_HEIGHT){
-						offsetY = -GameSetting.MAP_HEIGHT*scaleY+GameSetting.SCREEN_HEIGHT ;
-					}
-					_endX = offsetX;
-					_endY = offsetY ;
-					modifyEndPosition();
 				}
 			}
 			else if(e.touches.length==2)
@@ -252,10 +328,20 @@ package local.map
 			var span:int = _mouseItem.itemVO.baseVO.xSpan ;
 			var offsetY:Number = (span-1)*_size ;
 			var p:Point = pixelPointToGrid(mouseX,mouseY , 0 ,offsetY ); 
+			if(p.x<0) p.x = 0 ;
+			if(p.y<0) p.y = 0 ;
 			if(_mouseItem.nodeX!=p.x || _mouseItem.nodeZ!=p.y) {
 				_mouseItem.nodeX = p.x ;
 				_mouseItem.nodeZ= p.y ;
 				_mouseItem.bottom.updateItemGridLayer();
+				var gridModel:MapGridDataModel = MapGridDataModel.instance ;
+				var size:int = PlayerModel.instance.me.mapSize ;
+				if( _mouseItem.itemVO.baseVO.type==ItemType.WALL_DECOR || _mouseItem.itemVO.baseVO.type==ItemType.WALL_PAPER) 
+				{
+					if(_mouseItem.screenX!=0){
+						_mouseItem.itemObject.scaleX = _mouseItem.screenX<0 ? 1: -1 ;
+					}
+				}
 				
 				if(GameData.villageMode==VillageMode.ITEM_SHOP || GameData.villageMode==VillageMode.ITEM_STORAGE )
 				{
