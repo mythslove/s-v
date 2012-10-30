@@ -1,5 +1,7 @@
 package local.view.shop
 {
+	import bing.utils.FixScale;
+	
 	import feathers.controls.List;
 	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.core.FeathersControl;
@@ -17,6 +19,7 @@ package local.view.shop
 	import starling.events.TouchPhase;
 	import starling.text.TextField;
 	import starling.utils.HAlign;
+	import starling.utils.VAlign;
 	
 	public class ShopItemRender extends FeathersControl implements IListItemRenderer
 	{
@@ -69,16 +72,17 @@ package local.view.shop
 			//价格
 			var icon:Image = baseVO.costCoin>0 ? EmbedManager.getUIImage("CoinIcon"):EmbedManager.getUIImage("CashIcon");
 			icon.touchable = false ;
-			icon.scaleX = icon.scaleY = 0.4 ;
-			icon.x= 20 ;
+			FixScale.setScale( icon , 60 , 40);
+			icon.x = 30 ;
 			icon.y = 20;
 			addChild( icon );
 			var price:int = baseVO.costCoin>0 ? baseVO.costCoin : baseVO.costCash ;
-			var txtPrice:TextField =new TextField(_wid,50,price+"","verdana",25,0xffffff ,true) ;
+			var txtPrice:TextField =new TextField( _wid-icon.x-icon.width , 40 , price+"" , "Verdana" , 30 , 0xffffff ,true ) ;
 			txtPrice.touchable = false;
-			txtPrice.hAlign = HAlign.CENTER ;
-			txtPrice.autoScale = true ;
-			txtPrice.y = icon.y ;
+			txtPrice.hAlign = HAlign.LEFT ;
+			txtPrice.vAlign = VAlign.CENTER ;
+			txtPrice.x = icon.x + icon.width+5 ;
+			txtPrice.y = icon.y  ;
 			addChild(txtPrice);
 		}
 		
