@@ -2,13 +2,19 @@ package local.map.item
 {
 	import bing.starling.component.PixelsImage;
 	
+	import feathers.display.Sprite;
+	
 	import local.util.ResourceUtil;
 	import local.util.TextureAssets;
 	import local.vo.BitmapAnimResVO;
 
 	public class Wall extends BaseMapObject
 	{
+		private var _container:Sprite ;
+		
 		public var direction:int ;
+		public var wallPaper:BaseItem;
+		public var wallDecor:BaseItem ;
 		
 		public function Wall()
 		{
@@ -25,6 +31,10 @@ package local.map.item
 			img.scaleX = barVO.scaleX ;
 			img.scaleY = barVO.scaleY ;
 			addChild(img);
+			
+			_container = new Sprite();
+			addChild(_container);
 		}
+		
 	}
 }

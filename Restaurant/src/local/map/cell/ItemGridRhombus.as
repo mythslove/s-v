@@ -2,7 +2,6 @@ package local.map.cell
 {
 	import bing.iso.path.Grid;
 	
-	import local.model.MapGridDataModel;
 	import local.util.EmbedManager;
 	
 	import starling.display.Image;
@@ -26,14 +25,14 @@ package local.map.cell
 		 * 更新单元格
 		 * @param parentNodeX
 		 * @param parentNodeZ
+		 * @param grid
 		 */		
-		public function updateItemGridRhombus(parentNodeX:int , parentNodeZ:int ):void
+		public function updateItemGridRhombus(parentNodeX:int , parentNodeZ:int , grid:Grid):void
 		{
 			var curNodeX:int = parentNodeX + nodeX ;
 			var curNodeZ :int = parentNodeZ + nodeZ;
 			
-			var gameGrid:Grid = MapGridDataModel.instance.gameGridData ;
-			if(gameGrid.checkInGrid(curNodeX,curNodeZ)  && gameGrid.getNode(curNodeX,curNodeZ).walkable  )
+			if(grid.checkInGrid(curNodeX,curNodeZ)  && grid.getNode(curNodeX,curNodeZ).walkable  )
 			{
 				setWalkabled(true);
 			}else{

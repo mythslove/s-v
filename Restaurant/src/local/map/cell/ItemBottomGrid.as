@@ -1,12 +1,17 @@
 package local.map.cell
 {
+	import bing.iso.path.Grid;
 	import bing.starling.iso.SIsoUtils;
 	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
 	
 	import local.comm.GameSetting;
+	import local.enum.ItemType;
 	import local.map.item.BaseItem;
+	import local.map.item.Wall;
+	import local.model.MapGridDataModel;
+	import local.model.PlayerModel;
 	
 	import starling.display.Sprite;
 	
@@ -54,7 +59,6 @@ package local.map.cell
 				bottom.x = screenPos.x-GameSetting.GRID_SIZE ;
 				bottom.y = screenPos.y ;
 				this.addChild( bottom );
-				bottom.updateItemGridRhombus( _item.nodeX , _item.nodeZ );
 				++i ;
 			}
 		}
@@ -65,10 +69,26 @@ package local.map.cell
 		 */		
 		public function updateItemGridLayer():void
 		{
-			var len:int = this.numChildren ;
-			for( var i:int =0  ; i<len ; ++i  )
+			var gameGrid:Grid = MapGridDataModel.instance.gameGridData ;
+			var rhombus:ItemGridRhombus ;
+			if(_item.itemVO.baseVO.type==ItemType.WALL_PAPER || _item.itemVO.baseVO.type==ItemType.WALL_DECOR)
 			{
-				(this.getChildAt(i) as ItemGridRhombus ).updateItemGridRhombus(_item.nodeX,_item.nodeZ);
+				var temp:Boolean ;
+				rhombus = this.getChildAt(0) as ItemGridRhombus ;
+				var size:int = PlayerModel.instance.me.mapSize ;
+				if( _item.nodeX>=0 && _item.nodeZ>=0 && _item.nodeX<size && _item.nodeZ<size
+					&&(_item.nodeX==0 || _item.nodeZ==0 ) ){
+					temp = true ;
+				}
+				rhombus.setWalkabled( temp );
+			}
+			else
+			{
+				var len:int = this.numChildren ;
+				for( var i:int =0  ; i<len ; ++i  )
+				{
+					(this.getChildAt(i) as ItemGridRhombus ).updateItemGridRhombus(_item.nodeX,_item.nodeZ,gameGrid);
+				}
 			}
 		}
 		

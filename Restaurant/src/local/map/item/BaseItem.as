@@ -14,9 +14,12 @@ package local.map.item
 	{
 		public static var cachePos:Point = new Point();
 		
-		protected var _itemObject:ItemObject ;
 		public var itemVO:ItemVO ;
 		public var bottom:ItemBottomGrid ; //底座
+		protected var _itemObject:ItemObject ;
+		public function get itemObject():ItemObject{
+			return _itemObject;
+		}
 		
 		public function BaseItem(itemVO:ItemVO )
 		{
