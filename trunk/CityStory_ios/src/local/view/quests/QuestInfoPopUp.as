@@ -118,6 +118,9 @@ package local.view.quests
 				txtTitle.text = _vo.title ;
 				GameUtil.boldTextField( txtRewards , GameUtil.localizationString("rewards")+":" );
 			}
+			if(!vo.isAccept){
+				vo.isAccept = true ;
+			}
 		}
 		
 		
