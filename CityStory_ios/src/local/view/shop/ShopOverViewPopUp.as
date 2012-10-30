@@ -116,8 +116,14 @@ package local.view.shop
 					close();
 					break ;
 				case btnCommunity:
+					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance );
+					ShopPopUp.instance.show(BuildingType.COMMUNITY);
+					close();
 					break ;
 				case btnWonders:
+					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance );
+					ShopPopUp.instance.show(BuildingType.WONDERS);
+					close();
 					break ;
 			}
 		}

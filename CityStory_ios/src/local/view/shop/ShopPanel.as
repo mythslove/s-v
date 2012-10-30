@@ -48,6 +48,7 @@ package local.view.shop
 			nextPageBtn.x = 873;
 			nextPageBtn.y = 250 ;
 			addChild(nextPageBtn);
+			prevPageBtn.visible = nextPageBtn.visible = false ;
 			
 			_content.addEventListener(MouseEvent.CLICK , onItemHandler );
 			_content.addEventListener(MouseEvent.MOUSE_DOWN , mouseHandler );
