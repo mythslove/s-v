@@ -109,10 +109,10 @@ package local.view.quests
 						_renders.push( render );
 					}
 					_content.addChild( render);
-					render.x+= 450*i ;
+					render.x= 450*i ;
 					render.show( _vo.tasks[i] );
 				}
-				_scroll.addScrollControll( _content , container , new Rectangle(0,0,840,260));
+				_scroll.addScrollControll( _content , container);
 				
 				txtInfo.text = _vo.info ;
 				txtTitle.text = _vo.title ;
