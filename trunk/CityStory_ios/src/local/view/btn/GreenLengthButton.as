@@ -10,15 +10,17 @@ package local.view.btn
 	 * 比较长的绿色按钮  
 	 * @author zhouzhanglin
 	 */	
-	public class GreenLengthButton extends Button
+	public class GreenLengthButton extends LabelButton
 	{
-		public var txtLabel:BitmapTextField;
-		
 		public function GreenLengthButton()
 		{
 			super();
-			txtLabel.size = "22";
-			txtLabel.filters = [ new GlowFilter(0x44946a,1,3,3,20)];
+		}
+		
+		override public function setStyle():void
+		{
+			txtLabel.size = "20";
+			txtLabel.filters = [ new GlowFilter(0x44946a,1,4,4,20)];
 		}
 	}
 }

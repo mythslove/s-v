@@ -18,7 +18,11 @@ package local.view.btn
 		public function LabelButton()
 		{
 			super();
-			
+			setStyle();
+		}
+		
+		public function setStyle():void
+		{
 			TextStyle.setWhiteGropFilter( txtLabel );
 		}
 		

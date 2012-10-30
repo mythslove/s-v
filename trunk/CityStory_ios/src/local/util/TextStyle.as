@@ -29,13 +29,14 @@ package local.util
 		
 		
 		//tabMenu标题样式 ========================
-		public static var tabDefaultGlowfilters:Array=[ new GlowFilter(0x3082ab,1,3,3,20)];
-		public static var tabSeletectedGlowfilters:Array=[ new GlowFilter(0xAE7000,1,3,3,20)];
+		public static var tabDefaultGlowfilters:Array=[ new GlowFilter(0x3082ab,1,4,4,20)];
+		public static var tabSeletectedGlowfilters:Array=[ new GlowFilter(0xAE7000,1,4,4,20)];
 		public static function setTabMenuFormat( tf:BitmapTextField ):void{
 			var format:TextFormat = tf.defaultTextFormat ;
-			format.font = "Trebuchet MS";
+			format.font = "Verdana";//Trebuchet MS
 			format.bold = true ;
-			format.size = 22 ;
+			format.size = 17 ;
+			format.letterSpacing = 0 ;
 			format.color = 0xffffff ;
 			format.align = TextAlign.CENTER ;
 			tf.defaultTextFormat = format ;
@@ -54,14 +55,15 @@ package local.util
 		 * @param color
 		 * @param size
 		 */		
-		public static function setWhiteGropFilter( tf:BitmapTextField ,color:int = 0xffffff , size:int=22 ):void
+		public static function setWhiteGropFilter( tf:BitmapTextField ,color:int = 0xffffff , size:int=20 ):void
 		{
 			var format:TextFormat = tf.defaultTextFormat ;
-			format.font = "Trebuchet MS";
+			format.font = "Verdana";
 			format.size = size ;
 			format.bold = true ;
 			format.color = color ;
 			format.bold = true ;
+			format.letterSpacing = 0 ;
 			format.align = TextAlign.CENTER ;
 			tf.filters = grayDropFilters ;
 			tf.defaultTextFormat = format ;

@@ -12,6 +12,10 @@ package local.view.btn
 		public function YellowButton()
 		{
 			super();
+		}
+		
+		override public function setStyle():void
+		{
 			txtLabel.size="24";
 			txtLabel.filters= TextStyle.tabSeletectedGlowfilters ;
 		}
