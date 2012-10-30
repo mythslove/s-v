@@ -3,12 +3,17 @@ package local.view.quests
 	import bing.utils.ContainerUtil;
 	
 	import flash.display.Sprite;
+	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	
 	import local.enum.QuestType;
+	import local.model.ShopModel;
 	import local.util.GameUtil;
+	import local.util.PopUpManager;
 	import local.view.btn.BlueCashButton;
 	import local.view.btn.GreenButton;
+	import local.view.shop.ShopPopUp;
+	import local.vo.BaseBuildingVO;
 	import local.vo.QuestTaskVO;
 	
 	public class QuestInfoRenderer extends Sprite
@@ -28,10 +33,12 @@ package local.view.quests
 			btnContainer.y+=2;
 			imgContainer.mouseChildren = imgContainer.mouseEnabled = false ;
 			txtInfo.mouseEnabled=txtTitle.mouseEnabled=txtProgress.mouseEnabled=false;
+			addEventListener(MouseEvent.CLICK , onClickHandler );
 		}
 		
 		public function show( vo:QuestTaskVO ):void
 		{
+			this.taskVO = vo ;
 			txtInfo.text = vo.info ;
 			GameUtil.boldTextField( txtTitle , vo.title );
 			txtTitle.height = txtTitle.textHeight+4 ;
@@ -54,6 +61,24 @@ package local.view.quests
 				btnContainer.addChild( blueCashBtn );
 			}
 			btnContainer.x = width-btnContainer.width>>1 ;
+		}
+		
+		private function onClickHandler( e:MouseEvent ):void
+		{
+			e.stopPropagation();
+			if(e.target is BlueCashButton)
+			{
+				
+			}
+			else if(e.target is GreenButton)
+			{
+				var baseVO:BaseBuildingVO = ShopModel.instance.allBuildingHash[ taskVO.sonType ] as BaseBuildingVO;
+				if(baseVO){
+					PopUpManager.instance.addQueuePopUp( ShopPopUp.instance );
+					ShopPopUp.instance.scrollToBuilding( baseVO.type , baseVO.name );
+					PopUpManager.instance.removeCurrentPopup();
+				}
+			}
 		}
 	}
 }
