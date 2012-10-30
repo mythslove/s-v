@@ -5,6 +5,7 @@ package local.view.shop
 	import com.greensock.TweenLite;
 	import com.greensock.easing.Back;
 	
+	import flash.display.Bitmap;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -19,6 +20,7 @@ package local.view.shop
 	import local.view.btn.PopUpCloseButton;
 	import local.view.iap.PopUpCashButton;
 	import local.view.iap.PopUpCoinButton;
+	import local.view.title.*;
 	
 	public class ShopPopUp extends BaseView
 	{
@@ -34,12 +36,16 @@ package local.view.shop
 		public var btnCash:PopUpCashButton ;
 		public var btnCoin:PopUpCoinButton ;
 		//=====================================
+		private var title:Bitmap ;
 		
 		public var isLeft:Boolean ;
 		
 		public function ShopPopUp()
 		{
 			super();
+			title = new Bitmap();
+			title.y = 20-GameSetting.SCREEN_HEIGHT*0.5 ;
+			addChild(title);
 			btnClose.addEventListener(MouseEvent.CLICK , onMouseHandler );
 			btnBack.addEventListener(MouseEvent.CLICK , onMouseHandler );
 		}
@@ -87,6 +93,8 @@ package local.view.shop
 		public function show( type:String ):void
 		{
 			ContainerUtil.removeChildren( container );
+			if(title.bitmapData) 
+				title.bitmapData.dispose();
 			switch( type )
 			{
 				case BuildingType.HOME:
@@ -96,23 +104,30 @@ package local.view.shop
 					}else{
 						HomePanel.instance.scroll.scrollLock = false ;
 					}
+					title.bitmapData = new HomeTitle(0,0);
 					break ;
 				case BuildingType.DECORATION:
 					container.addChild(DecorationPanel.instance) ;
+					title.bitmapData = new DecorationsTitle(0,0);
 					break ;
 				case BuildingType.BUSINESS:
 					container.addChild(BusinessPanel.instance) ;
+					title.bitmapData = new BusinessTitle(0,0);
 					break ;
 				case BuildingType.INDUSTRY:
 					container.addChild(IndustryPanel.instance) ;
+					title.bitmapData = new IndustryTitle(0,0);
 					break ;
 				case BuildingType.COMMUNITY:
 					container.addChild(CommunityPanel.instance) ;
+					title.bitmapData = new CommunityTitle(0,0);
 					break ;
 				case BuildingType.WONDERS:
 					container.addChild(WonderPanel.instance) ;
+					title.bitmapData = new WondersTitle(0,0);
 					break ;
 			}
+			title.x = -title.width>>1 ;
 		}
 		
 		/**
