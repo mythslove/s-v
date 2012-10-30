@@ -44,7 +44,7 @@ package local.view.shop
 		{
 			super();
 			title = new Bitmap();
-			title.y = 20-GameSetting.SCREEN_HEIGHT*0.5 ;
+			title.y = -300 ;
 			addChild(title);
 			btnClose.addEventListener(MouseEvent.CLICK , onMouseHandler );
 			btnBack.addEventListener(MouseEvent.CLICK , onMouseHandler );

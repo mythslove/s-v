@@ -66,9 +66,9 @@ package local.view.quests
 			
 //			Font.registerFont( EmbedsManager.FRAHV);
 			var fitlers:Array = [ new GlowFilter(0x653200,1,8,8,15), new GlowFilter(0xffffff,1,8,8,15)];
-			txtTitle = new DynamicBitmapTF("Verdana",GameSetting.SCREEN_WIDTH-200 , NaN , "" , "center",2,57,true,0xFFEA58,false,false,fitlers);
+			txtTitle = new DynamicBitmapTF("Verdana",GameSetting.SCREEN_WIDTH-200 , NaN , "" , "center",2,50,true,0xFFEA58,false,false,fitlers);
 			txtTitle.x = -(GameSetting.SCREEN_WIDTH-200)>>1 ;
-			txtTitle.y = 10-GameSetting.SCREEN_HEIGHT*0.5 ;
+			txtTitle.y = -305 ;
 			addChild(txtTitle);
 			
 			btnClose.addEventListener(MouseEvent.CLICK , onMouseHandler );

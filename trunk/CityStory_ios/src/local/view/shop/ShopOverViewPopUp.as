@@ -46,7 +46,7 @@ package local.view.shop
 			homeButtonBg.mouseChildren = homeButtonBg.mouseEnabled = false ;
 			var title:Bitmap = new Bitmap( new MarketTitle(0,0));
 			title.x = -title.width>>1 ;
-			title.y = 20-GameSetting.SCREEN_HEIGHT*0.5 ;
+			title.y = -300 ;
 			addChild(title);
 			addEventListener(MouseEvent.CLICK , onMouseHandler );
 		}
