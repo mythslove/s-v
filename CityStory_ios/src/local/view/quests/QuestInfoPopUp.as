@@ -11,6 +11,7 @@ package local.view.quests
 	import flash.events.MouseEvent;
 	import flash.filters.GlowFilter;
 	import flash.geom.Rectangle;
+	import flash.net.URLVariables;
 	import flash.text.TextField;
 	
 	import local.comm.GameSetting;
@@ -55,7 +56,8 @@ package local.view.quests
 			goodsCoinMC.stop() ;
 			goodsCoinMC.mouseChildren = goodsCoinMC.mouseEnabled = false ;
 			txtGoodsCoin.mouseEnabled = txtExp.mouseEnabled = txtInfo.mouseEnabled = txtRewards.mouseEnabled=false;
-			
+			txtGoodsCoin.text="";
+			txtExp.text = "";
 			
 			container.graphics.beginFill(0,0);
 			container.graphics.drawRect(0,0,840,260);
@@ -117,6 +119,26 @@ package local.view.quests
 				txtInfo.text = _vo.info ;
 				txtTitle.text = _vo.title ;
 				GameUtil.boldTextField( txtRewards , GameUtil.localizationString("rewards")+":" );
+				if(_vo.rewards){
+					var urlVar:URLVariables = new URLVariables( _vo.rewards);
+					if(urlVar.hasOwnProperty("good") ){
+						goodsCoinMC.gotoAndStop("good");
+						GameUtil.boldTextField( txtGoodsCoin , "+"+ urlVar["good"] );
+					} else if(urlVar.hasOwnProperty("goods") ){
+						goodsCoinMC.gotoAndStop("good");
+						GameUtil.boldTextField( txtGoodsCoin , "+"+ urlVar["goods"] );
+					} else{
+						goodsCoinMC.gotoAndStop("coin");
+					}
+					if(urlVar.hasOwnProperty("coin")){
+						GameUtil.boldTextField( txtGoodsCoin , "+"+ urlVar["coin"] );
+					}else if(urlVar.hasOwnProperty("coins")){
+						GameUtil.boldTextField( txtGoodsCoin , "+"+ urlVar["coins"] );
+					}
+					if(urlVar.hasOwnProperty("exp")){
+						GameUtil.boldTextField( txtExp , "+"+ urlVar["exp"] );
+					}
+				}
 			}
 			if(!vo.isAccept){
 				vo.isAccept = true ;

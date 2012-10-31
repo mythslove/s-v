@@ -46,6 +46,9 @@ package local.view.quests
 				}else if(urlVar.hasOwnProperty("coins")){
 					GameUtil.boldTextField( txtGoodsCoin , "+"+ urlVar["coins"] );
 				}
+				if(urlVar.hasOwnProperty("exp")){
+					GameUtil.boldTextField( txtExp , "+"+ urlVar["exp"] );
+				}
 			}
 			
 			if(!vo.isAccept){
