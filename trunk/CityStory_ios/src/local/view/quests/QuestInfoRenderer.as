@@ -10,8 +10,10 @@ package local.view.quests
 	import local.model.ShopModel;
 	import local.util.GameUtil;
 	import local.util.PopUpManager;
+	import local.util.TextStyle;
 	import local.view.btn.BlueCashButton;
 	import local.view.btn.GreenButton;
+	import local.view.control.DynamicBitmapTF;
 	import local.view.shop.ShopPopUp;
 	import local.vo.BaseBuildingVO;
 	import local.vo.QuestTaskVO;
@@ -46,19 +48,27 @@ package local.view.quests
 			ContainerUtil.removeChildren( imgContainer );
 			btnContainer.x = 0 ;
 			ContainerUtil.removeChildren( btnContainer ,true );
-			if(vo.questType==QuestType.OWN_BD_BY_NAME || vo.questType==QuestType.BUILD_BD_BY_NAME){
-				if(vo.sonType){
-					var greenBtn:GreenButton = new GreenButton();
-					greenBtn.label = GameUtil.localizationString("quest.info.item.button.buy");
-					btnContainer.addChild( greenBtn );
+			if(!vo.isComplete){
+				if(vo.questType==QuestType.OWN_BD_BY_NAME || vo.questType==QuestType.BUILD_BD_BY_NAME){
+					if(vo.sonType){
+						var greenBtn:GreenButton = new GreenButton();
+						greenBtn.label = GameUtil.localizationString("quest.info.item.button.buy");
+						btnContainer.addChild( greenBtn );
+					}
+				}
+				if( vo.skipCash>0){
+					var blueCashBtn:BlueCashButton = new BlueCashButton();
+					blueCashBtn.label = GameUtil.localizationString("quest.info.item.button.skip");
+					blueCashBtn.cash = vo.skipCash+"";
+					blueCashBtn.x = btnContainer.numChildren*(blueCashBtn.width + 10) ;
+					btnContainer.addChild( blueCashBtn );
 				}
 			}
-			if( vo.skipCash>0){
-				var blueCashBtn:BlueCashButton = new BlueCashButton();
-				blueCashBtn.label = GameUtil.localizationString("quest.info.item.button.skip");
-				blueCashBtn.cash = vo.skipCash+"";
-				blueCashBtn.x = btnContainer.numChildren*(blueCashBtn.width + 10) ;
-				btnContainer.addChild( blueCashBtn );
+			else
+			{
+				var tf:DynamicBitmapTF = new DynamicBitmapTF("Trebuchet MS",
+					200,NaN,"Completed!","center",2,30,true,0xffffff,false,false,TextStyle.blackGlowfilters);
+				btnContainer.addChild(tf);
 			}
 			btnContainer.x = width-btnContainer.width>>1 ;
 		}
