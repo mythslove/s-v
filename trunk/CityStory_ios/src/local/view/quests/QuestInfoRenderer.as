@@ -6,6 +6,7 @@ package local.view.quests
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	
+	import local.comm.GameSetting;
 	import local.enum.QuestType;
 	import local.model.ShopModel;
 	import local.util.GameUtil;
@@ -66,7 +67,7 @@ package local.view.quests
 			}
 			else
 			{
-				var tf:DynamicBitmapTF = new DynamicBitmapTF("Trebuchet MS",
+				var tf:DynamicBitmapTF = new DynamicBitmapTF(GameSetting.DEFAULT_FONT,
 					200,NaN,"Completed!","center",2,30,true,0xffffff,false,false,TextStyle.blackGlowfilters);
 				btnContainer.addChild(tf);
 			}
