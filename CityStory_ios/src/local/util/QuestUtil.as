@@ -112,12 +112,12 @@ package local.util
 			for(var i:int  = 0 ; i<len ; ++i ){
 				task = questVO.tasks[i]  as QuestTaskVO;
 				if(task.isComplete ){
-//					if(!task.isSendAnalysis){
-//						//统计
-//						AnalysisUtil.send("Progress-Quest Goal Finished",
-//							{"Goal with Quest Name":title+"-"+item.intro});
-//						item.isSendAnalysis = true ;
-//					}
+					if(!task.isSendAnalysis){
+						//统计
+						AnalysisUtil.send("Progress-Quest Goal Finished",
+							{"Goal with Quest Name":questVO.title+"-"+task.info});
+						task.isSendAnalysis = true ;
+					}
 				}else{
 					return false ;
 				}

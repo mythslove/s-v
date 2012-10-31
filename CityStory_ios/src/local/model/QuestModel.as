@@ -66,6 +66,7 @@ package local.model
 						for ( var j:int  = 0 ; j<newVO.tasks.length ; ++j){
 							newVO.tasks[j].current = oldVO.tasks[j].current ;
 							newVO.tasks[j].isSkipped = oldVO.tasks[j].isSkipped ;
+							newVO.tasks[j].isSendAnalysis = oldVO.tasks[j].isSendAnalysis ;
 						}
 						currentQuests[i] = newVO ;
 					}
