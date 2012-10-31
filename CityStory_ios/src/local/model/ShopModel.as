@@ -98,36 +98,37 @@ package local.model
 					if( buildings.length==count) return buildings ;
 				}
 			}
-			for each( var render:ShopItemRenderer in businessRenderers){
+			for each( render in businessRenderers){
 				if(render.baseVO.requireLv==lv){
 					buildings.push( render.baseVO);
 					if( buildings.length==count) return buildings ;
 				}
 			}
-			for each( var render:ShopItemRenderer in industryRenderers){
+			for each( render in industryRenderers){
 				if(render.baseVO.requireLv==lv){
 					buildings.push( render.baseVO);
 					if( buildings.length==count) return buildings ;
 				}
 			}
-			for each( var render:ShopItemRenderer in communityRenderers){
+			for each( render in communityRenderers){
 				if(render.baseVO.requireLv==lv){
 					buildings.push( render.baseVO);
 					if( buildings.length==count) return buildings ;
 				}
 			}
-			for each( var render:ShopItemRenderer in wondersRenderers){
+			for each( render in wondersRenderers){
 				if(render.baseVO.requireLv==lv){
 					buildings.push( render.baseVO);
 					if( buildings.length==count) return buildings ;
 				}
 			}
-			for each( var render:ShopItemRenderer in decorsRenderers){
+			for each( render in decorsRenderers){
 				if(render.baseVO.requireLv==lv){
 					buildings.push( render.baseVO);
 					if( buildings.length==count) return buildings ;
 				}
 			}
+			return buildings ;
 		}
 				
 
