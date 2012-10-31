@@ -356,35 +356,51 @@ package local.map.item
 			
 			if( buildingVO.buildClick >= buildingVO.baseVO.click )
 			{
-				var flag:Boolean = MapGridDataModel.instance.checkAroundBuilding(this,BuildingType.DECORATION,BuildingType.DECORATION_ROAD) ;
-				if(flag){
-					if( buildingVO.baseVO.type==BuildingType.BUSINESS || buildingVO.baseVO.type==BuildingType.INDUSTRY ){
-						buildingVO.status = BuildingStatus.LACK_MATERIAL ;
-					}else{
-						buildingVO.status = BuildingStatus.PRODUCTION ;
-						startProduct();
-					}
-				}else{
-					buildingVO.status = BuildingStatus.NO_ROAD ;
+				if(buildingVO.baseVO.buildComps)
+				{
+					//跳出comp窗口
 				}
-				removeChild(_buildStatusObj);
-				_buildStatusObj.dispose();
-				_buildStatusObj = null ;
-				
-				//修建完成后的任务判断
-				QuestUtil.instance.handleCount( QuestType.BUILD_BD_BY_NAME  , buildingVO.name );
-				QuestUtil.instance.handleCount( QuestType.BUILD_BD_BY_TYPE  , buildingVO.baseVO.type );
-				QuestUtil.instance.handleOwn( QuestType.OWN_BD_BY_NAME , buildingVO.name );
-				QuestUtil.instance.handleOwn( QuestType.OWN_BD_BY_TYPE , buildingVO.baseVO.type );
-				
-				if(GameData.isShowTutor){
-					PlayerModel.instance.changeTutorStep();
-					GameWorld.instance.removeTutor();
-					CenterViewLayer.instance.questBtn.showTutor();
+				else
+				{
+					buildComplete();
 				}
 			}
 			showUI();
 		}
+		
+		/**
+		 * 建筑完成 
+		 */		
+		public function buildComplete():void
+		{
+			var flag:Boolean = MapGridDataModel.instance.checkAroundBuilding(this,BuildingType.DECORATION,BuildingType.DECORATION_ROAD) ;
+			if(flag){
+				if( buildingVO.baseVO.type==BuildingType.BUSINESS || buildingVO.baseVO.type==BuildingType.INDUSTRY ){
+					buildingVO.status = BuildingStatus.LACK_MATERIAL ;
+				}else{
+					buildingVO.status = BuildingStatus.PRODUCTION ;
+					startProduct();
+				}
+			}else{
+				buildingVO.status = BuildingStatus.NO_ROAD ;
+			}
+			removeChild(_buildStatusObj);
+			_buildStatusObj.dispose();
+			_buildStatusObj = null ;
+			
+			//修建完成后的任务判断
+			QuestUtil.instance.handleCount( QuestType.BUILD_BD_BY_NAME  , buildingVO.name );
+			QuestUtil.instance.handleCount( QuestType.BUILD_BD_BY_TYPE  , buildingVO.baseVO.type );
+			QuestUtil.instance.handleOwn( QuestType.OWN_BD_BY_NAME , buildingVO.name );
+			QuestUtil.instance.handleOwn( QuestType.OWN_BD_BY_TYPE , buildingVO.baseVO.type );
+			
+			if(GameData.isShowTutor){
+				PlayerModel.instance.changeTutorStep();
+				GameWorld.instance.removeTutor();
+				CenterViewLayer.instance.questBtn.showTutor();
+			}
+		}
+		
 		override public function dispose():void
 		{
 			super.dispose();

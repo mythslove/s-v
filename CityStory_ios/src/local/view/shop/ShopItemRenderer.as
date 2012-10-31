@@ -23,6 +23,7 @@ package local.view.shop
 		public var imgContainer:Sprite;
 		public var txtPopGoods:TextField ; //显示人口和商品数据
 		public var txtCoin:TextField ;
+		public var compFlag:Sprite;
 		//===========================
 		public var baseVO:BaseBuildingVO ;
 		private var _inited:Boolean ;
@@ -113,6 +114,10 @@ package local.view.shop
 				removeChild( _itemLock );
 				_itemLock = null ;
 				mouseEnabled = true ;
+			}
+			//是否需要comp
+			if(!baseVO.buildComps){
+				removeChild(compFlag);
 			}
 		}
 		
