@@ -76,7 +76,8 @@ package local.map.cell
 				var temp:Boolean ;
 				rhombus = this.getChildAt(0) as ItemGridRhombus ;
 				var size:int = PlayerModel.instance.me.mapSize ;
-				if( (_item.nodeX^_item.nodeZ)>0 && _item.nodeX<size && _item.nodeZ<size){
+				if( _item.nodeX>=0 && _item.nodeZ>=0 && _item.nodeX<size && _item.nodeZ<size
+					&&(_item.nodeX==0 || _item.nodeZ==0 ) ){
 					temp = true ;
 				}
 				rhombus.setWalkabled( temp );
