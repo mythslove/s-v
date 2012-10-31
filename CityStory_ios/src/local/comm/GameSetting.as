@@ -34,5 +34,11 @@ package local.comm
 		
 		/**任务有多少步骤  */		
 		public static const TUTOR_STEP:int = 3 ;
+		
+		/**
+		 * 默认字体 
+		 */		
+		public static const DEFAULT_FONT:String = "Trebuchet MS";
+		
 	}
 }
