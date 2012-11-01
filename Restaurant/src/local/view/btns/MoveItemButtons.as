@@ -46,6 +46,8 @@ package local.view.btns
 			addChild(okBtn);
 			addChild(cancelBtn);
 			
+			cancelBtn.disabledSkin.width=cancelBtn.defaultSkin.width =okBtn.disabledSkin.width=okBtn.defaultSkin.width = 80 ;
+			
 			cancelBtn.addEventListener(Event.TRIGGERED , onClickHandler) ;
 			okBtn.addEventListener(Event.TRIGGERED , onClickHandler) ;
 		}
