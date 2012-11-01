@@ -135,7 +135,28 @@ package local.map.item
 		 */		
 		public function rotate():void
 		{
+			var barvo:Vector.<BitmapAnimResVO> ;
+			var itemOrGround:Boolean = !itemVO.baseVO.isWallLayer() ;
 			
+			if(itemVO.baseVO.directions==4) {
+				itemVO.direction++;
+				if(itemVO.direction>4) itemVO.direction=1 ;
+				
+				var temp:int = itemVO.direction>2 ? itemVO.direction-2 : itemVO.direction;
+				barvo = ResourceUtil.instance.getResVOByResId( name+"_"+temp ).resObject as  Vector.<BitmapAnimResVO> ;
+				_itemObject.updateUI( name , barvo , itemOrGround );
+				
+				if( temp==2) _itemObject.scaleX = 1;
+				else _itemObject.scaleX = -1; 
+			} 
+			else if( itemVO.baseVO.directions==2)
+			{
+				itemVO.direction++;
+				if(itemVO.direction>3) itemVO.direction=2 ;
+				
+				if( itemVO.direction==2) _itemObject.scaleX = 1;
+				else _itemObject.scaleX = -1; 
+			}
 		}
 		
 		override public function dispose():void
