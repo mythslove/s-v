@@ -12,6 +12,8 @@ package local.view.shop
 	import feathers.display.Scale9Image;
 	import feathers.layout.TiledRowsLayout;
 	
+	import flash.utils.setTimeout;
+	
 	import local.comm.GameSetting;
 	import local.model.ShopModel;
 	import local.util.EmbedManager;
@@ -126,6 +128,12 @@ package local.view.shop
 		{
 			_closeButton.addEventListener(Event.TRIGGERED , onCloseHandler );
 			_menuBar.addEventListener(Event.CHANGE , menuChangeHandler);
+			
+			_prevBtn.addEventListener(Event.TRIGGERED , onPageHandler );
+			_nextBtn.addEventListener(Event.TRIGGERED , onPageHandler );
+			
+			_list.addEventListener( "scrollComplete" , listScrollHandler );
+			_list.addEventListener("scroll", listScrollHandler );
 		}
 		
 		private function menuChangeHandler( e:Event ):void{
@@ -161,10 +169,42 @@ package local.view.shop
 		}
 		
 		
+		private function onPageHandler( e:Event ):void
+		{
+			var page:int = _list.horizontalScrollPosition / _list.maxHorizontalScrollPosition ;
+			if(e.target== _prevBtn){
+				_list.scrollToDisplayIndex( (page-1)*3 , 0.3 );
+			}else{
+				_list.scrollToDisplayIndex( (page+1)*3 , 0.3 );
+			}
+		}
 		
-		
-		
-		
+		private function listScrollHandler( e:Event ):void
+		{
+			switch(e.type)
+			{
+				case "scroll":
+					if( _nextBtn.visible || _prevBtn.visible){
+						_nextBtn.visible = _prevBtn.visible = false ;
+					}
+					break ;
+				case "scrollComplete":
+					var maxPage:int = _list.maxHorizontalScrollPosition / _list.maxWidth ;
+					var page:int = _list.horizontalScrollPosition / _list.maxHorizontalScrollPosition ;
+					if(maxPage==0){
+						_nextBtn.visible = _prevBtn.visible = false ;
+					}else if(page==0){
+						_prevBtn.visible = false ;
+						_nextBtn.visible = true ;
+					}else if(page==maxPage){
+						_prevBtn.visible = true ;
+						_nextBtn.visible = false ;
+					}else{
+						_nextBtn.visible = _prevBtn.visible = true ;
+					}
+					break ;
+			}
+		}
 		
 		
 		
@@ -183,8 +223,10 @@ package local.view.shop
 		
 		private function onCloseHandler( e:Event ):void{ 
 			close();
-			var bottomBar:BottomBar = CenterViewLayer.instance.bottomBar;
-			bottomBar.btnMarket.visible=bottomBar.btnEditor.visible=bottomBar.btnMenu.visible = true ;
+			setTimeout(function():void{
+				var bottomBar:BottomBar = CenterViewLayer.instance.bottomBar;
+				bottomBar.btnMarket.visible=bottomBar.btnEditor.visible=bottomBar.btnMenu.visible = true ;
+			},200);
 		}
 		private function close():void
 		{

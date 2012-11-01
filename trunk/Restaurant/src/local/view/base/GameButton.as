@@ -92,8 +92,8 @@ package local.view.base
 			if(_tempVisible==value) return ;
 			_tempVisible = value ;
 			if( value){
-				scaleY = scaleX = 0 ;
 				touchable = false ;
+				super.visible = true ;
 				TweenLite.to( this , 0.3 , { scaleX: _tempScaleX , scaleY:_tempScaleY , ease:Back.easeOut , onComplete: onTweenCom} );
 			}else{
 				_tempScaleX = scaleX<0 ? -1 :1  ;
