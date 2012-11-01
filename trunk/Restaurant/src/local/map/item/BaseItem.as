@@ -40,12 +40,16 @@ package local.map.item
 			var barvo:Vector.<BitmapAnimResVO> ;
 			var itemOrGround:Boolean = !itemVO.baseVO.isWallLayer() ;
 			if(itemVO.baseVO.directions==4) {
-				
+				var temp:int = itemVO.direction>2 ? itemVO.direction-2 : itemVO.direction;
+				barvo = ResourceUtil.instance.getResVOByResId( name+"_"+temp ).resObject as  Vector.<BitmapAnimResVO> ;
+				_itemObject = new ItemObject( name , barvo , itemOrGround );
 			} else {
 				barvo = ResourceUtil.instance.getResVOByResId( name ).resObject as  Vector.<BitmapAnimResVO> ;
+				_itemObject = new ItemObject( name , barvo , itemOrGround );
+				if( itemVO.direction==2) _itemObject.scaleX = 1;
+				else _itemObject.scaleX = -1; 
 			}
-			_itemObject = new ItemObject( name , barvo , itemOrGround );
-			addChildAt(_itemObject,0)
+			addChildAt(_itemObject,0) ;
 		}
 		
 		/**添加底座*/		
