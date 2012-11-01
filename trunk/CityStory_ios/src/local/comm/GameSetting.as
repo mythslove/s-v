@@ -18,8 +18,10 @@ package local.comm
 		public static var GRID_X:int = 68 ;
 		public static var GRID_Z:int = 68 ;
 		
-		/** 地图的最大缩放值 */
+		/** 地图的最小缩放值 */
 		public static var minZoom:Number=0.7 ;
+		/** 地图的最大缩放值 */
+		public static var maxZoom:Number=2.3 ;
 		
 		/** 本地语言 */
 		public static var local:String = "en";

@@ -425,6 +425,7 @@ package  local.map
 								
 								// scale
 								var sizeDiff:Number = currentVector.length / previousVector.length;
+								sizeDiff = sizeDiff>1 ? 1+(sizeDiff-1)*1.2 : 1-(1-sizeDiff)*1.2 ;
 								changeWorldScale( sizeDiff , _middle.x , _middle.y );
 							}
 						}
@@ -491,7 +492,7 @@ package  local.map
 		private var _zoomTween:TweenLite ;
 		protected function changeWorldScale( value:Number , px:Number , py:Number , time:Number=0.2):void
 		{
-			if(scaleX*value>GameSetting.minZoom && scaleX*value<2.3) 
+			if(scaleX*value>GameSetting.minZoom && scaleX*value<GameSetting.maxZoom) 
 			{
 				var prevScale:Number = scaleX ;
 				var prevX:Number =x , prevY:Number = y ;

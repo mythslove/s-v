@@ -45,6 +45,8 @@ package
 				if(stage.fullScreenWidth==2048){
 					scaleX = scaleY = 2;
 				}
+				GameSetting.minZoom = 0.5 ;
+				GameSetting.maxZoom = 2;
 			}else if( stage.stage.fullScreenHeight >= 1136){
 				//iphone5
 				GameSetting.SCREEN_HEIGHT  = 640 ;
