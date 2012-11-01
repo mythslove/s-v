@@ -4,9 +4,13 @@ package local.map.cell
 	import starling.display.MovieClip;
 	import starling.display.Sprite;
 	
-	public class TableObject extends Sprite implements IAnimatable
+	/**
+	 * 柜台上的物品 
+	 * @author zhouzhanglin
+	 */	
+	public class CounterObject extends Sprite implements IAnimatable
 	{
-		public function TableObject()
+		public function CounterObject()
 		{
 			super();
 		}
