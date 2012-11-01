@@ -48,21 +48,21 @@ package local.view.bottom
 			addChild( btnMenu );
 			btnMenu.addEventListener(Event.TRIGGERED , onClickHandler );
 			
-//			img = EmbedManager.getUIImage("BottomBarStorageButtonUp");
-//			btnStorage = new GameButton(img);
-//			btnStorage.x = btnStorage.pivotX+5;
-//			btnStorage.y = -btnStorage.pivotY-5;
-//			btnStorage.setVisible( false );
-//			addChild( btnStorage );
-//			btnStorage.addEventListener(Event.TRIGGERED , onClickHandler );
-//			
-//			img = EmbedManager.getUIImage("DoneButtonUp");
-//			btnDone = new GameButton(img);
-//			btnDone.x = GameSetting.SCREEN_WIDTH - btnDone.pivotX-5 ;
-//			btnDone.y = -btnDone.pivotY-5;
-//			btnDone.setVisible( false );
-//			addChild( btnDone );
-//			btnDone.addEventListener(Event.TRIGGERED , onClickHandler );
+			img = EmbedManager.getUIImage("StorageButton");
+			btnStorage = new GameButton(img);
+			btnStorage.x = btnStorage.pivotX+5;
+			btnStorage.y = -btnStorage.pivotY-5;
+			btnStorage.setVisible( false );
+			addChild( btnStorage );
+			btnStorage.addEventListener(Event.TRIGGERED , onClickHandler );
+			
+			img = EmbedManager.getUIImage("DoneButton");
+			btnDone = new GameButton(img);
+			btnDone.x = GameSetting.SCREEN_WIDTH - btnDone.pivotX-5 ;
+			btnDone.y = -btnDone.pivotY-5;
+			btnDone.setVisible( false );
+			addChild( btnDone );
+			btnDone.addEventListener(Event.TRIGGERED , onClickHandler );
 		}
 		
 		private function onClickHandler( e:Event ):void

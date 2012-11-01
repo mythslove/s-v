@@ -66,36 +66,32 @@ package local.view
 			{
 				case VillageMode.NORMAL :
 					bottomBar.visible = true ;
-					bottomBar.btnMarket.visible = true ;
-					bottomBar.btnEditor.visible = true ;
+					bottomBar.btnMarket.visible =  bottomBar.btnEditor.visible =  bottomBar.btnMenu.visible = true ;
+					bottomBar.btnDone.visible = bottomBar.btnStorage.visible = false ;
 					questBtn.visible = true ;
-					bottomBar.btnDone.visible = false ;
-					bottomBar.btnStorage.visible = false ;
 					topBar.visible = true ;
 					break ;
 				case VillageMode.EDIT :
-					bottomBar.btnMarket.visible = false ;
-					bottomBar.btnEditor.visible = false ;
+					bottomBar.btnMarket.visible =  bottomBar.btnEditor.visible =  bottomBar.btnMenu.visible = false ;
+					bottomBar.btnDone.visible = bottomBar.btnStorage.visible = true ;
 					questBtn.visible = false ;
-					bottomBar.btnDone.visible = true ;
-					bottomBar.btnStorage.visible = true ;
 					topBar.visible = false ;
 					break ;
 				case VillageMode.ITEM_STORAGE :
-					bottomBar.btnDone.visible = false ;
-					bottomBar.btnStorage.visible = false ;
+					bottomBar.btnMarket.visible =  bottomBar.btnEditor.visible =  bottomBar.btnMenu.visible = false ;
+					bottomBar.btnDone.visible = bottomBar.btnStorage.visible = false ;
 					questBtn.visible = false ;
 					bottomBar.showStorage();
 					topBar.visible = false ;
 					break ;
 				case VillageMode.ITEM_SHOP :
-					bottomBar.visible = false ;
+					bottomBar.btnDone.visible = bottomBar.btnStorage.visible = true ;
+					bottomBar.btnMarket.visible =  bottomBar.btnEditor.visible =  bottomBar.btnMenu.visible = false ;
 					topBar.visible = false ;
 					questBtn.visible = false ;
 					break ;
 				case VillageMode.EXPAND :
-					bottomBar.btnMarket.visible = false ;
-					bottomBar.btnEditor.visible = false ;
+					bottomBar.btnMarket.visible =  bottomBar.btnEditor.visible =  bottomBar.btnMenu.visible = false ;
 					questBtn.visible = false ;
 					bottomBar.btnDone.visible = true ;
 					bottomBar.btnStorage.visible = false ;
