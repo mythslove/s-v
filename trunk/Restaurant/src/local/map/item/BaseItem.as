@@ -39,17 +39,13 @@ package local.map.item
 		{
 			var barvo:Vector.<BitmapAnimResVO> ;
 			var itemOrGround:Boolean = !itemVO.baseVO.isWallLayer() ;
-			
-			if(itemVO.baseVO.directions==4)
-			{
+			if(itemVO.baseVO.directions==4) {
 				
-			}
-			else
-			{
+			} else {
 				barvo = ResourceUtil.instance.getResVOByResId( name ).resObject as  Vector.<BitmapAnimResVO> ;
-				_itemObject = new ItemObject( name , barvo , itemOrGround );
-				addChildAt(_itemObject,0)
 			}
+			_itemObject = new ItemObject( name , barvo , itemOrGround );
+			addChildAt(_itemObject,0)
 		}
 		
 		/**添加底座*/		
