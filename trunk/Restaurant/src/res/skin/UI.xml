@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker http://texturepacker.com-->
-<!-- $TexturePacker:SmartUpdate:0dbc67e7943bfcdea20cee013dd46239$ -->
+<!-- $TexturePacker:SmartUpdate:13a92eb7405c8a3cd8d50416d19027ef$ -->
 <TextureAtlas imagePath="UI.png">
-    <SubTexture name="Button1" x="451" y="72" width="60" height="70"/>
-    <SubTexture name="Button2" x="451" y="1" width="60" height="70"/>
+    <SubTexture name="Button1" x="356" y="593" width="60" height="70"/>
+    <SubTexture name="Button1Disabled" x="451" y="1" width="60" height="70"/>
+    <SubTexture name="Button2" x="451" y="72" width="60" height="70"/>
     <SubTexture name="CashIcon" x="104" y="662" width="100" height="67"/>
-    <SubTexture name="ChairIcon" x="356" y="593" width="46" height="64"/>
+    <SubTexture name="ChairIcon" x="458" y="143" width="46" height="64"/>
     <SubTexture name="CoinIcon" x="258" y="173" width="104" height="103"/>
-    <SubTexture name="CounterIcon" x="358" y="719" width="54" height="55"/>
-    <SubTexture name="DecorIcon" x="358" y="658" width="52" height="60"/>
+    <SubTexture name="CounterIcon" x="268" y="788" width="54" height="55"/>
+    <SubTexture name="DecorIcon" x="358" y="664" width="52" height="60"/>
     <SubTexture name="DingIcon" x="102" y="730" width="75" height="90"/>
     <SubTexture name="DoneButton" x="263" y="439" width="114" height="90"/>
     <SubTexture name="EditorButton" x="258" y="277" width="100" height="98"/>
@@ -41,8 +42,8 @@
     <SubTexture name="TitleFont" x="1" y="258" width="256" height="180"/>
     <SubTexture name="TopbarDefaultBG" x="188" y="975" width="74" height="40"/>
     <SubTexture name="Verdana" x="1" y="1" width="256" height="256"/>
-    <SubTexture name="WDecoIcon" x="359" y="277" width="31" height="62"/>
-    <SubTexture name="WPaperIcon" x="378" y="439" width="18" height="60"/>
-    <SubTexture name="WhiteCancel" x="391" y="264" width="40" height="46"/>
-    <SubTexture name="WhiteRight" x="432" y="264" width="40" height="44"/>
+    <SubTexture name="WDecoIcon" x="458" y="208" width="31" height="62"/>
+    <SubTexture name="WPaperIcon" x="490" y="208" width="18" height="60"/>
+    <SubTexture name="WhiteCancel" x="268" y="844" width="40" height="46"/>
+    <SubTexture name="WhiteRight" x="268" y="891" width="40" height="44"/>
 </TextureAtlas>
