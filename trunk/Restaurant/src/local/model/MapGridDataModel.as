@@ -1,6 +1,5 @@
 package local.model
 {
-	import bing.ds.HashMap;
 	import bing.iso.path.Grid;
 	
 	import flash.geom.Vector3D;
@@ -8,6 +7,10 @@ package local.model
 	
 	import local.comm.GameSetting;
 	import local.map.item.BaseMapObject;
+	import local.map.item.Floor;
+	import local.map.item.Wall;
+	import local.map.item.WallDecor;
+	import local.map.item.WallPaper;
 	import local.vo.PlayerVO;
 
 	public class MapGridDataModel
@@ -20,14 +23,34 @@ package local.model
 		}
 		//=======================================
 		
-		/** 墙的Hash , key为nodeX-nodeZ-direction , value 为wall对象  */		
-		public var wallNodeHash:Dictionary = new Dictionary();
-		
 		/** 游戏的数据 */
 		public var gameGridData:Grid  ;
 		
+		/** 墙的Hash , key为nodeX-nodeZ-direction , value 为wall对象  */		
+		private var _wallNodeHash:Dictionary = new Dictionary();
+		
+		private var _wallPaperHash:Dictionary = new Dictionary();
+		
+		private var _wallDecorHash:Dictionary = new Dictionary();
+		
+		private var _floorHash:Dictionary = new Dictionary();
+		
 		/**格子位置对建筑数据映射，当点击某个格子时，能知道当前点击了哪个建筑 */		
-		private var _grid2Building:HashMap = new HashMap();
+		private var _roomItemHash:Dictionary = new Dictionary();
+		
+		
+		public function addWallGridData( wall:Wall ):void
+		{
+			var points:Vector.<Vector3D> = wall.spanPosition ;
+			for each( var p:Vector3D in points) {
+				_wallNodeHash[ p.x+"-"+p.z+"-"+wall.direction] = wall ;
+			}
+		}
+		public function getWallByData( x:int,z:int,direction:int):Wall
+		{
+			return _wallNodeHash[x+"-"+z+"-"+direction] as Wall ;
+		}
+		
 		
 		
 		
@@ -44,40 +67,29 @@ package local.model
 			}
 		}
 		
-		public function addBuildingGridData( building:BaseMapObject ):void
+		public function addRoomItemGridData( roomItem:BaseMapObject ):void
 		{
-			var points:Vector.<Vector3D> = building.spanPosition ;
-			for each( var point:Vector3D in points)
+			var points:Vector.<Vector3D> = roomItem.spanPosition ;
+			for each( var p:Vector3D in points)
 			{
-				var p:Vector3D = point.clone();
-				_grid2Building.put( p.x+"-"+p.z , building );
+				_roomItemHash[ p.x+"-"+p.z] = roomItem ;
 			}
 		}
 		
-		public function removeBuildingGridData( building:BaseMapObject ):void
+		public function removeRoomItemGridData( roomItem:BaseMapObject ):void
 		{
-			var points:Vector.<Vector3D> = building.spanPosition ;
-			for each( var point:Vector3D in points)
+			var points:Vector.<Vector3D> = roomItem.spanPosition ;
+			for each( var p:Vector3D in points)
 			{
-				var p:Vector3D = point.clone();
-				_grid2Building.remove( p.x+"-"+p.z );
+				delete _roomItemHash[ p.x+"-"+p.z] ;
 			}
 		}
 		
-//		public function getBuildingByData( x:int,z:int , subClass:String = null ):BaseBuilding
-//		{
-//			var build:BaseBuilding = _grid2Building.getValue(x+"-"+z) as BaseBuilding ;
-//			if(build && subClass ){
-//				if( build.buildingVO.baseVO.subClass==subClass) return build ; 
-//				else return null ;
-//			}
-//			return build;
-//		}
-		
-		public function getMapObject( x:int , z:int ):BaseMapObject
+		public function getRoomItemByData( x:int,z:int):BaseMapObject
 		{
-			return  _grid2Building.getValue(x+"-"+z) as BaseMapObject ;
+			return _roomItemHash[x+"-"+z] as BaseMapObject ;
 		}
+		
 		
 		/**
 		 * 判断建筑周围是否有相应的建筑 
@@ -86,13 +98,13 @@ package local.model
 		 * @param subType
 		 * @return  找到的话返回true , 否则返回false
 		 */		
-//		public function checkAroundBuilding( building:BaseBuilding , type:String , subType:String = null ):Boolean
+//		public function checkAroundBuilding( building:BaseItem , type:String , subType:String = null ):Boolean
 //		{
-//			var temp:BaseBuilding ;
+//			var temp:BaseItem ;
 //			//左上 , 
 //			 var i:int = building.nodeZ ; var j:int = i+building.buildingVO.baseVO.span ;
 //			for( i ; i<j ; ++i){
-//				temp = _grid2Building.getValue( (building.nodeX-1)*GameSetting.GRID_SIZE+"-"+i*GameSetting.GRID_SIZE ) as BaseBuilding;
+//				temp = _grid2Building.getValue( (building.nodeX-1)*GameSetting.GRID_SIZE+"-"+i*GameSetting.GRID_SIZE ) as BaseItem;
 //				if( temp && temp.buildingVO.baseVO.type==type){
 //					if(subType){
 //						if(subType == temp.buildingVO.baseVO.subClass)	return true;
@@ -104,7 +116,7 @@ package local.model
 //			//左下
 //			i = building.nodeX ; j=i+building.buildingVO.baseVO.span ;
 //			for( i ; i<j ; ++i){
-//				temp = _grid2Building.getValue( i*GameSetting.GRID_SIZE+"-"+ (building.nodeZ+building.buildingVO.baseVO.span)*GameSetting.GRID_SIZE ) as BaseBuilding;
+//				temp = _grid2Building.getValue( i*GameSetting.GRID_SIZE+"-"+ (building.nodeZ+building.buildingVO.baseVO.span)*GameSetting.GRID_SIZE ) as BaseItem;
 //				if( temp && temp.buildingVO.baseVO.type==type){
 //					if(subType){
 //						if(subType == temp.buildingVO.baseVO.subClass)	return true;
@@ -116,7 +128,7 @@ package local.model
 //			//右上
 //			i = building.nodeX ; j=i+building.buildingVO.baseVO.span ;
 //			for( i ; i<j ; ++i){
-//				temp = _grid2Building.getValue( i*GameSetting.GRID_SIZE+"-"+ (building.nodeZ-1)*GameSetting.GRID_SIZE ) as BaseBuilding;
+//				temp = _grid2Building.getValue( i*GameSetting.GRID_SIZE+"-"+ (building.nodeZ-1)*GameSetting.GRID_SIZE ) as BaseItem;
 //				if( temp && temp.buildingVO.baseVO.type==type){
 //					if(subType){
 //						if(subType == temp.buildingVO.baseVO.subClass)	return true;
@@ -128,7 +140,7 @@ package local.model
 //			//右下
 //			i = building.nodeZ ; j = i+building.buildingVO.baseVO.span ;
 //			for( i ; i<j ; ++i){
-//				temp = _grid2Building.getValue( (building.nodeX+building.buildingVO.baseVO.span)*GameSetting.GRID_SIZE+"-"+i*GameSetting.GRID_SIZE ) as BaseBuilding;
+//				temp = _grid2Building.getValue( (building.nodeX+building.buildingVO.baseVO.span)*GameSetting.GRID_SIZE+"-"+i*GameSetting.GRID_SIZE ) as BaseItem;
 //				if( temp && temp.buildingVO.baseVO.type==type){
 //					if(subType){
 //						if(subType == temp.buildingVO.baseVO.subClass)	return true;
@@ -140,10 +152,81 @@ package local.model
 //			return false;
 //		}
 		
-		public function clearBuildingGridData():void
+		
+		public function addWallPaperGridData( wallPaper:WallPaper ):void
 		{
-			_grid2Building.clear();
+			var points:Vector.<Vector3D> = wallPaper.spanPosition ;
+			for each( var p:Vector3D in points) {
+				_wallPaperHash[ p.x+"-"+p.z] = wallPaper ;
+			}
 		}
 		
+		public function removeWallPaperGridData( wallPaper:WallPaper ):void
+		{
+			var points:Vector.<Vector3D> = wallPaper.spanPosition ;
+			for each( var p:Vector3D in points) {
+				delete _wallPaperHash[ p.x+"-"+p.z] ;
+			}
+		}
+		
+		public function getWallPaperByData( x:int,z:int):WallPaper
+		{
+			return _wallPaperHash[x+"-"+z] as WallPaper ;
+		}
+		
+		
+		
+		
+		
+		
+		public function addWallDecorGridData( wallDecor:WallDecor ):void
+		{
+			var points:Vector.<Vector3D> = wallDecor.spanPosition ;
+			for each( var p:Vector3D in points) {
+				_wallDecorHash[ p.x+"-"+p.z] = wallDecor ;
+			}
+		}
+		
+		public function removeWallDecorGridData( wallDecor:WallDecor ):void
+		{
+			var points:Vector.<Vector3D> = wallDecor.spanPosition ;
+			for each( var p:Vector3D in points) {
+				delete _wallDecorHash[ p.x+"-"+p.z] ;
+			}
+		}
+		
+		public function getWallDecorGridData( x:int,z:int):WallDecor
+		{
+			return _wallDecorHash[x+"-"+z] as WallDecor ;
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		public function addFloorGridData( floor:Floor ):void
+		{
+			var points:Vector.<Vector3D> = floor.spanPosition ;
+			for each( var p:Vector3D in points) {
+				_floorHash[ p.x+"-"+p.z] = floor ;
+			}
+		}
+		
+		public function removeFloorGridData( floor:Floor ):void
+		{
+			var points:Vector.<Vector3D> = floor.spanPosition ;
+			for each( var p:Vector3D in points) {
+				delete _floorHash[ p.x+"-"+p.z] ;
+			}
+		}
+		
+		public function getFloorGridData( x:int,z:int):Floor
+		{
+			return _floorHash[x+"-"+z] as Floor ;
+		}
 	}
 }

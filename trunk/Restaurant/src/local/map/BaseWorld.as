@@ -165,7 +165,7 @@ package local.map
 				wall.nodeZ = i ;
 				wall.direction = 2 ;
 				wallScene.addIsoObject( wall , false );
-				MapGridDataModel.instance.wallNodeHash[wall.nodeX+"-"+wall.nodeZ+"-"+wall.direction] = wall ;
+				MapGridDataModel.instance.addWallGridData( wall );
 			}
 			for( i = 0 ; i<player.mapSize ; ++ i){
 				wall = new Wall();
@@ -173,7 +173,7 @@ package local.map
 				wall.nodeZ = 0 ;
 				wall.direction = 3 ;
 				wallScene.addIsoObject( wall ,false );
-				MapGridDataModel.instance.wallNodeHash[wall.nodeX+"-"+wall.nodeZ+"-"+wall.direction] = wall ;
+				MapGridDataModel.instance.addWallGridData( wall );
 			}
 			wallScene.sortAll() ;
 		}
