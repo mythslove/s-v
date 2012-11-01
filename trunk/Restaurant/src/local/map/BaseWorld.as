@@ -1,6 +1,5 @@
 package local.map
 {
-	import bing.iso.path.Grid;
 	import bing.starling.component.TileImage;
 	import bing.starling.iso.SIsoScene;
 	import bing.starling.iso.SIsoWorld;
@@ -18,7 +17,10 @@ package local.map
 	import local.enum.VillageMode;
 	import local.map.item.BaseItem;
 	import local.map.item.Wall;
+	import local.map.scene.FloorScene;
 	import local.map.scene.RoomScene;
+	import local.map.scene.WallDecorScene;
+	import local.map.scene.WallPaperScene;
 	import local.model.MapGridDataModel;
 	import local.model.PlayerModel;
 	import local.util.EmbedManager;
@@ -39,9 +41,11 @@ package local.map
 	{
 		private var _tileImg:TileImage ;
 		
-		public var wallScene:SIsoScene ; //墙
-		public var floorScene:SIsoScene;//地板
-		public var roomScene:RoomScene ; //房间内部
+		public var wallScene:SIsoScene ; //墙层
+		public var wallPaperScene:WallPaperScene ; //墙纸层
+		public var wallDecorScene:WallDecorScene ; //墙装饰
+		public var floorScene:FloorScene;//地板层
+		public var roomScene:RoomScene ; //房间内部物品层
 		public var iconScene:SIsoScene ; //显示icon层
 		public var topScene:SIsoScene ; //最上层,显示移动的建筑，以及显示一些特效动画
 		public var effectScene:SIsoScene ; //特效层
@@ -112,14 +116,20 @@ package local.map
 			super.addedToStageHandler(e);
 			
 			//添加场景层
-			floorScene= new SIsoScene(GameSetting.GRID_SIZE , GameSetting.MAX_SIZE, GameSetting.MAX_SIZE );
+			floorScene = new FloorScene();
 			floorScene.touchable = false ;
 			wallScene = new SIsoScene(GameSetting.GRID_SIZE , GameSetting.MAX_SIZE, GameSetting.MAX_SIZE );
+			wallScene.touchable = false ;
 			roomScene  = new RoomScene();
+			wallPaperScene = new WallPaperScene();
+			wallDecorScene = new WallDecorScene();
 			iconScene = new SIsoScene(GameSetting.GRID_SIZE);
 			effectScene = new SIsoScene(GameSetting.GRID_SIZE);
+			effectScene.touchable = false ;
 			topScene = new SIsoScene(GameSetting.GRID_SIZE);
 			addScene( wallScene );
+			addScene( wallPaperScene );
+			addScene( wallDecorScene );
 			addScene(floorScene);
 			addScene(roomScene);
 			addScene(iconScene);
