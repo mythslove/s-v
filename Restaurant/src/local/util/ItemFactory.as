@@ -4,6 +4,8 @@ package local.util
 	import local.map.item.BaseItem;
 	import local.map.item.Floor;
 	import local.map.item.Wall;
+	import local.map.item.WallDecor;
+	import local.map.item.WallPaper;
 	import local.vo.BaseItemVO;
 	import local.vo.ItemVO;
 	
@@ -21,6 +23,12 @@ package local.util
 			{
 				case ItemType.FLOOR:
 					item = new Floor( itemVO );
+					break ;
+				case ItemType.WALL_DECOR:
+					item = new WallDecor();
+					break ;
+				case ItemType.WALL_PAPER:
+					item = new WallPaper();
 					break ;
 				default:
 					item = new BaseItem( itemVO );
