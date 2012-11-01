@@ -8,6 +8,7 @@ package local.map
 	import local.model.PlayerModel;
 	import local.model.ShopModel;
 	import local.util.ItemFactory;
+	import local.view.btns.MoveItemButtons;
 	import local.vo.BaseItemVO;
 	import local.vo.PlayerVO;
 	
@@ -97,17 +98,17 @@ package local.map
 			item.drawBottomGrid();
 			item.bottom.updateItemGridLayer();
 			
-//			var moveBtns:MoveBuildingButtons  = MoveBuildingButtons.instance ;
-//			building.addChild( moveBtns );
-//			if(building.bottom.getWalkable()){
-//				if( !moveBtns.okBtn.enabled){
-//					moveBtns.okBtn.enabled = true  ;
-//				}
-//			}else{
-//				if( moveBtns.okBtn.enabled){
-//					moveBtns.okBtn.enabled = false ;
-//				}
-//			}
+			var moveBtns:MoveItemButtons  = MoveItemButtons.instance ;
+			item.addChild( moveBtns );
+			if(item.bottom.getWalkable()){
+				if( !moveBtns.okBtn.enabled){
+					moveBtns.okBtn.enabled = true  ;
+				}
+			}else{
+				if( moveBtns.okBtn.enabled){
+					moveBtns.okBtn.enabled = false ;
+				}
+			}
 		}
 		
 		
