@@ -2,8 +2,6 @@ package local.map.item
 {
 	import flash.geom.Point;
 	
-	import local.comm.GameSetting;
-	import local.enum.ItemType;
 	import local.map.cell.ItemBottomGrid;
 	import local.map.cell.ItemObject;
 	import local.util.ResourceUtil;
@@ -39,11 +37,19 @@ package local.map.item
 		
 		override public function showUI():void
 		{
-			var barvo:Vector.<BitmapAnimResVO> = ResourceUtil.instance.getResVOByResId( name ).resObject as  Vector.<BitmapAnimResVO> ;
-			
+			var barvo:Vector.<BitmapAnimResVO> ;
 			var itemOrGround:Boolean = !itemVO.baseVO.isWallLayer() ;
-			_itemObject = new ItemObject( name , barvo , itemOrGround );
-			addChildAt(_itemObject,0)
+			
+			if(itemVO.baseVO.directions==4)
+			{
+				
+			}
+			else
+			{
+				barvo = ResourceUtil.instance.getResVOByResId( name ).resObject as  Vector.<BitmapAnimResVO> ;
+				_itemObject = new ItemObject( name , barvo , itemOrGround );
+				addChildAt(_itemObject,0)
+			}
 		}
 		
 		/**添加底座*/		
@@ -124,6 +130,13 @@ package local.map.item
 		{
 		}
 		
+		/**
+		 * 旋转 
+		 */		
+		public function rotate():void
+		{
+			
+		}
 		
 		override public function dispose():void
 		{

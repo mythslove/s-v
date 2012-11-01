@@ -19,6 +19,17 @@ package local.map.cell
 		
 		public function ItemObject( name:String , bavos:Vector.<BitmapAnimResVO> , itemOrGround:Boolean )
 		{
+			updateUI(name , bavos , itemOrGround) ;
+		}
+		
+		/**
+		 * 更新显示  
+		 * @param name
+		 * @param bavos
+		 * @param itemOrGround 在材质中属性哪个层
+		 */		
+		public function updateUI(name:String , bavos:Vector.<BitmapAnimResVO> , itemOrGround:Boolean):void
+		{
 			this._bavos = bavos ;
 			this._itemOrGround = itemOrGround ;
 			this.name = name ;
@@ -27,6 +38,7 @@ package local.map.cell
 		
 		private function init():void
 		{
+			this.removeChildren();
 			var len:int = _bavos.length ;
 			var vo:BitmapAnimResVO ;
 			var img:Image ;
