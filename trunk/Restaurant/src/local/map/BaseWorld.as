@@ -24,6 +24,7 @@ package local.map
 	import local.model.MapGridDataModel;
 	import local.model.PlayerModel;
 	import local.util.EmbedManager;
+	import local.view.btns.MoveItemButtons;
 	import local.vo.PlayerVO;
 	
 	import starling.core.Starling;
@@ -355,16 +356,16 @@ package local.map
 				
 				if(GameData.villageMode==VillageMode.ITEM_SHOP || GameData.villageMode==VillageMode.ITEM_STORAGE )
 				{
-//					var moveBtns:MoveBuildingButtons  = MoveBuildingButtons.instance ;
-//					if(_mouseItem.bottom.getWalkable()){
-//						if( !moveBtns.okBtn.enabled){
-//							moveBtns.okBtn.enabled = true  ;
-//						}
-//					}else{
-//						if( moveBtns.okBtn.enabled){
-//							moveBtns.okBtn.enabled = false ;
-//						}
-//					}
+					var moveBtns:MoveItemButtons  = MoveItemButtons.instance ;
+					if(_mouseItem.bottom.getWalkable()){
+						if( !moveBtns.okBtn.enabled){
+							moveBtns.okBtn.enabled = true  ;
+						}
+					}else{
+						if( moveBtns.okBtn.enabled){
+							moveBtns.okBtn.enabled = false ;
+						}
+					}
 				}
 			}
 		}
