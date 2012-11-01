@@ -9,7 +9,7 @@ package local.vo
 		public var statusTime:Number=0;		//状态时间
 		public var nodeX:int;					//X网格坐标
 		public var nodeZ:int;					//z网格坐标
-		public var rotation:int = 1 ; //方向
+		public var direction:int = 2 ; //方向
 		
 		private var _baseVO:BaseItemVO;
 		public function get baseVO():BaseItemVO
