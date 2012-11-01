@@ -2,6 +2,8 @@ package local.view.btns
 {
 	import com.greensock.TweenLite;
 	
+	import feathers.display.Scale3Image;
+	
 	import local.comm.GameData;
 	import local.enum.ItemType;
 	import local.enum.VillageMode;
@@ -10,6 +12,7 @@ package local.view.btns
 	import local.model.PlayerModel;
 	import local.util.EmbedManager;
 	import local.util.ItemFactory;
+	import local.util.StyleSetting;
 	import local.view.base.BaseView;
 	import local.view.base.GameButton;
 	import local.vo.BaseItemVO;
@@ -32,14 +35,22 @@ package local.view.btns
 		public function MoveItemButtons()
 		{
 			super();
-			cancelBtn = new GameButton(EmbedManager.getUIImage("Button1")  );
-			cancelBtn.disabledSkin = EmbedManager.getUIImage("Button1Disabled") ;
+			var img:Scale3Image = new Scale3Image(StyleSetting.instance.button1Texture);
+			img.width = 70 ;
+			cancelBtn = new GameButton(img );
+			img = new Scale3Image(StyleSetting.instance.button1DisabledTexture);
+			img.width = 70 ;
+			cancelBtn.disabledSkin = img ;
 			cancelBtn.defaultIcon = EmbedManager.getUIImage("WhiteCancel");
 			cancelBtn.x = -100 ;
 			cancelBtn.y = -100 ;
 			
-			okBtn = new GameButton(EmbedManager.getUIImage("Button1"));
-			okBtn.disabledSkin = EmbedManager.getUIImage("Button1Disabled") ;
+			img = new Scale3Image(StyleSetting.instance.button1Texture);
+			img.width = 70 ;
+			okBtn =new GameButton(img );
+			img = new Scale3Image(StyleSetting.instance.button1DisabledTexture);
+			img.width = 70 ;
+			okBtn.disabledSkin = img ;
 			okBtn.defaultIcon = EmbedManager.getUIImage("WhiteRight");
 			okBtn.x = 100 ;
 			okBtn.y = -100 ;

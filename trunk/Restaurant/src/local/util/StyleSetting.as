@@ -36,6 +36,7 @@ package local.util
 		
 		public var button1Texture:Scale3Textures ;
 		public var button2Texture:Scale3Textures ;
+		public var button1DisabledTexture:Scale3Textures ;
 		
 		public var grayBgTexture:Scale9Textures ;
 		
@@ -60,6 +61,7 @@ package local.util
 		
 			button1Texture = new Scale3Textures(EmbedManager.getUITexture("Button1") , 10 , 30 );
 			button2Texture = new Scale3Textures(EmbedManager.getUITexture("Button2") , 10 , 30 );
+			button1DisabledTexture = new Scale3Textures(EmbedManager.getUITexture("Button1Disabled") , 10 , 30 );
 			
 			grayBgTexture = new Scale9Textures(EmbedManager.getUITexture("GrayBg") , new Rectangle(30,30,20,20) );
 			
