@@ -40,7 +40,6 @@ package local.comm
 					world.roomScene.touchable = true ;
 					world.roomScene.alpha=1;
 					world.runUpdate = true ;
-					world.floorScene.touchable = false ;
 					world.topScene.visible = false ;
 					world.topScene.clearAndDisposeChild();
 					world.iconScene.visible = true ;
@@ -49,7 +48,6 @@ package local.comm
 				case VillageMode.EDIT :
 					world.roomScene.touchable = true ;
 					world.runUpdate = false ;
-					world.floorScene.touchable = true ;
 					world.topScene.clearAndDisposeChild();
 					world.topScene.visible = true ;
 					world.iconScene.visible = false ;
@@ -58,12 +56,10 @@ package local.comm
 				case VillageMode.ITEM_SHOP :
 					world.roomScene.touchable = false ;
 					world.runUpdate = false ;
-					world.floorScene.touchable = false ;
 					world.topScene.visible = true ;
 					world.iconScene.visible = false ;
 					break ;
 				case VillageMode.VISIT:
-					world.floorScene.touchable = false ;
 					world.topScene.visible = false ;
 					world.iconScene.visible = false ;
 					world.runUpdate = true ;
