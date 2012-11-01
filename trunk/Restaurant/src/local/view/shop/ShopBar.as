@@ -16,8 +16,10 @@ package local.view.shop
 	import local.model.ShopModel;
 	import local.util.EmbedManager;
 	import local.util.StyleSetting;
+	import local.view.CenterViewLayer;
 	import local.view.base.BaseView;
 	import local.view.base.GameButton;
+	import local.view.bottom.BottomBar;
 	
 	import starling.display.Sprite;
 	import starling.events.Event;
@@ -179,7 +181,11 @@ package local.view.shop
 		
 		//=======================================================
 		
-		private function onCloseHandler( e:Event ):void{ close(); }
+		private function onCloseHandler( e:Event ):void{ 
+			close();
+			var bottomBar:BottomBar = CenterViewLayer.instance.bottomBar;
+			bottomBar.btnMarket.visible=bottomBar.btnEditor.visible=bottomBar.btnMenu.visible = true ;
+		}
 		private function close():void
 		{
 			touchable = false ;
