@@ -235,7 +235,6 @@ package local.view.shop
 		}
 		private function tweenOver():void{
 			if(parent) parent.removeChild(this);
-//			GameData.villageMode = VillageMode.EDIT ;
 		}
 		override protected function addedToStageHandler(e:Event):void {
 			super.addedToStageHandler(e);
@@ -244,8 +243,6 @@ package local.view.shop
 			TweenLite.to( this , 0.2 , { y:-250 , onComplete: function():void{ 
 				touchable = true ;
 			} ,ease:Sine.easeOut  });
-			
-//			tabBar_onChange(menuBar);
 		}
 	}
 }
