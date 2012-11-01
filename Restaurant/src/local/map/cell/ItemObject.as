@@ -16,6 +16,7 @@ package local.map.cell
 	{
 		private var _bavos:Vector.<BitmapAnimResVO> ;
 		private var _itemOrGround:Boolean ;
+		public var container:Sprite ;
 		
 		public function ItemObject( name:String , bavos:Vector.<BitmapAnimResVO> , itemOrGround:Boolean )
 		{
@@ -39,6 +40,7 @@ package local.map.cell
 		private function init():void
 		{
 			this.removeChildren();
+			
 			var len:int = _bavos.length ;
 			var vo:BitmapAnimResVO ;
 			var img:Image ;
@@ -76,8 +78,7 @@ package local.map.cell
 				else
 				{
 					if(vo.roads){
-						var container:Sprite = new Sprite();
-						container.name = "container";
+						if(!container) container = new Sprite();
 						container.x =vo.offsetX ;
 						container.y = vo.offsetY ;
 						addChild(container);
@@ -113,5 +114,11 @@ package local.map.cell
 			}
 		}
 		
+		override public function dispose():void
+		{
+			super.dispose();
+			container = null ;
+			_bavos = null ;
+		}
 	}
 }
