@@ -4,6 +4,8 @@ package local.map.item
 	
 	public class WallDecor extends BaseItem
 	{
+		public var direction:int ;
+		
 		public function WallDecor(itemVO:ItemVO)
 		{
 			super(itemVO);

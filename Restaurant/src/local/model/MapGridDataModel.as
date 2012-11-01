@@ -157,7 +157,7 @@ package local.model
 		{
 			var points:Vector.<Vector3D> = wallPaper.spanPosition ;
 			for each( var p:Vector3D in points) {
-				_wallPaperHash[ p.x+"-"+p.z] = wallPaper ;
+				_wallPaperHash[ p.x+"-"+p.z+"-"+wallPaper.direction] = wallPaper ;
 			}
 		}
 		
@@ -165,13 +165,13 @@ package local.model
 		{
 			var points:Vector.<Vector3D> = wallPaper.spanPosition ;
 			for each( var p:Vector3D in points) {
-				delete _wallPaperHash[ p.x+"-"+p.z] ;
+				delete _wallPaperHash[ p.x+"-"+p.z+"-"+wallPaper.direction] ;
 			}
 		}
 		
-		public function getWallPaperByData( x:int,z:int):WallPaper
+		public function getWallPaperByData( x:int,z:int,direction:int):WallPaper
 		{
-			return _wallPaperHash[x+"-"+z] as WallPaper ;
+			return _wallPaperHash[x+"-"+z+"-"+direction] as WallPaper ;
 		}
 		
 		
@@ -183,7 +183,7 @@ package local.model
 		{
 			var points:Vector.<Vector3D> = wallDecor.spanPosition ;
 			for each( var p:Vector3D in points) {
-				_wallDecorHash[ p.x+"-"+p.z] = wallDecor ;
+				_wallDecorHash[ p.x+"-"+p.z+"-"+wallDecor.direction] = wallDecor ;
 			}
 		}
 		
@@ -191,13 +191,13 @@ package local.model
 		{
 			var points:Vector.<Vector3D> = wallDecor.spanPosition ;
 			for each( var p:Vector3D in points) {
-				delete _wallDecorHash[ p.x+"-"+p.z] ;
+				delete _wallDecorHash[ p.x+"-"+p.z+"-"+wallDecor.direction] ;
 			}
 		}
 		
-		public function getWallDecorGridData( x:int,z:int):WallDecor
+		public function getWallDecorGridData( x:int,z:int,direction:int):WallDecor
 		{
-			return _wallDecorHash[x+"-"+z] as WallDecor ;
+			return _wallDecorHash[x+"-"+z+"-"+direction] as WallDecor ;
 		}
 		
 		

@@ -44,7 +44,6 @@ package local.map.item
 			var itemOrGround:Boolean = !itemVO.baseVO.isWallLayer() ;
 			_itemObject = new ItemObject( name , barvo , itemOrGround );
 			addChildAt(_itemObject,0)
-			this.scaleX = itemVO.rotation ;
 		}
 		
 		/**添加底座*/		
