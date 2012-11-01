@@ -2,7 +2,11 @@ package local.view.bottom
 {
 	import com.greensock.TweenLite;
 	
+	import flash.utils.setTimeout;
+	
+	import local.comm.GameData;
 	import local.comm.GameSetting;
+	import local.enum.VillageMode;
 	import local.util.EmbedManager;
 	import local.view.base.GameButton;
 	import local.view.shop.ShopBar;
@@ -120,7 +124,10 @@ package local.view.bottom
 		}
 		
 		public function showShop():void{
-			addChild(ShopBar.instance);
+			btnMarket.visible=btnEditor.visible=btnMenu.visible = false ;
+			setTimeout( function():void{
+				addChild(ShopBar.instance);
+			},200);
 		}
 		
 		
