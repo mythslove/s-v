@@ -25,6 +25,7 @@
 				registerClassAlias("ComponentVO" , ComponentVO ) ;
 				registerClassAlias("QuestVO" , QuestVO ) ;
 				registerClassAlias("QuestTaskVO" , QuestTaskVO ) ;
+				registerClassAlias("IapVO" , IapVO ) ;
 			}
 			
 			private function selectBBV():void
