@@ -13,6 +13,7 @@
 			private var levelHash:Dictionary ;
 			private var compHash:Dictionary ;
 			private var quests:Vector.<QuestVO> ;
+			private var iaps:Vector.<IapVO> ;
 			
 			private var file:File ;
 			
@@ -400,6 +401,72 @@
 			
 			
 			
+			private function selectIap():void{
+				file = new File();
+				file.addEventListener(Event.SELECT , onSelectedIapFile );
+				file.browseForOpen("选择IAP配置文件" , [ new FileFilter("IAP配置文件(XML)","*.xml;*.XML")] );
+			}
+			private function onSelectedIapFile(e:Event):void
+			{
+				file.removeEventListener(Event.SELECT , onSelectedIapFile );
+				txtIap.text = file.name ;
+				iaps = new Vector.<IapVO>();
+				
+				var stream:FileStream = new FileStream();
+				stream.open( file,FileMode.READ );
+				var bytes:ByteArray = new ByteArray();
+				stream.readBytes( bytes);
+				bytes.position =0  ;
+				var config:XML = XML( bytes.toString());
+				if( config)
+				{
+					var len:int = config.children().length();
+					var item:* ;
+					for( var i:int = 0 ; i<len ; ++i )
+					{
+						var iapVO:IapVO = new IapVO();
+						item = config.children()[i];
+						var attNamesList:XMLList = item.@*;
+						for (var j:int = 0; j < attNamesList.length(); j++)
+						{ 
+							var key:String = attNamesList[j].name() ;
+							if( iapVO.hasOwnProperty(key)){
+								switch(typeof  iapVO[key])
+								{
+									case "string":
+										iapVO[key] = String( attNamesList[j] ).replace( /&amp;/g ,"&") ;
+										break ;
+									case "int":
+										iapVO[key] = String( attNamesList[j] );
+										break ;
+									case "number":
+										iapVO[key] = Number( attNamesList[j] ) ;
+										break;
+								}
+								
+							}
+						} 
+						iaps.push(iapVO);
+					}
+				}
+				else
+				{
+					trace("没有IAP数据");
+				}
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			protected function export_clickHandler(event:MouseEvent):void
 			{
 				file = new File();
@@ -419,6 +486,7 @@
 				bytes.writeObject( levelHash );
 				bytes.writeObject( compHash );
 				bytes.writeObject( quests );
+				bytes.writeObject( iaps );
 				
 				stream.writeBytes( bytes );
 				stream.close();
@@ -445,5 +513,8 @@
 	<s:Button x="320" y="224" label="选择" click="selectComp()"/>
 	<s:Label x="20" y="266" text="任务配置"/>
 	<s:TextInput id="txtQuest" x="19" y="284" width="288" enabled="false"/>
+	<s:Label x="20" y="326" text="IAP配置"/>
+	<s:TextInput id="txtIap" x="19" y="344" width="288" enabled="false"/>
 	<s:Button x="320" y="284" label="选择" click="selectQuest()"/>
+	<s:Button x="320" y="344" label="选择" click="selectIap()"/>
 </s:WindowedApplication>
