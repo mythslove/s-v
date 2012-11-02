@@ -129,6 +129,9 @@ package local.view.control
 			switch(e.type)
 			{
 				case MouseEvent.MOUSE_DOWN:
+					if( Math.abs(_content.x -_endPos)>1 ){
+						return ;
+					}
 					_isMouseDown = true ;
 					_container.mouseChildren = true  ;
 					_mouseTime  = getTimer() ;
@@ -185,7 +188,7 @@ package local.view.control
 		
 		private function onEnterFrame( e:Event ):void
 		{
-			if( Math.abs(_content.x -_endPos)>3 ){
+			if( Math.abs(_content.x -_endPos)>2 ){
 				_content.x  += (_endPos-_content.x)*speed ;
 			}else{
 				_content.x = _endPos ;

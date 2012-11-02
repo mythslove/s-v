@@ -63,6 +63,7 @@ package local.model
 						break ;
 					case BuildingType.HOME :
 						homesRenderers.push( new ShopItemRenderer(baseVO) );
+						homesRenderers.push( new ShopItemRenderer(baseVO) );
 						break ;
 					case BuildingType.DECORATION :
 						decorsRenderers.push( new ShopItemRenderer(baseVO) );
