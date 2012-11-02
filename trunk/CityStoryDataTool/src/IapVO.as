@@ -3,7 +3,9 @@ package
 	public class IapVO
 	{
 		public var type:String="" ;
-		public var gems:int; //兑换需要多少cash/gem
-		public var dollar:int;//要花多少美元
+		public var iapId:String="" ;
+		public var value:int ; //可兑换多少
+		
+		public var cash:int;//要花多少gem或dollor
 	}
 }
