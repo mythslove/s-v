@@ -76,7 +76,7 @@ package local.map
 				
 				var table :BaseItem = ItemFactory.createItemByBaseVO( ShopModel.instance.allItemsHash["Autumn Table"] as BaseItemVO) as BaseItem;
 				table.nodeX = table.nodeZ = 2 ;
-				roomScene.addIsoObject( table);
+				roomScene.addItem( table);
 				run() ;
 			}
 		}

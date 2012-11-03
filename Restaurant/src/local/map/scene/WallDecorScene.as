@@ -4,6 +4,7 @@ package local.map.scene
 	
 	import local.comm.GameSetting;
 	import local.map.item.BaseItem;
+	import local.map.item.WallDecor;
 	import local.model.MapGridDataModel;
 	
 	public class WallDecorScene extends SIsoScene
@@ -19,7 +20,7 @@ package local.map.scene
 		 * @param isSort是否进行深度排序
 		 * @return 
 		 */		
-		public function addItem( item:BaseItem , isSort:Boolean=true , isInit:Boolean=false ):BaseItem
+		public function addItem( item:WallDecor , isSort:Boolean=true , isInit:Boolean=false ):BaseItem
 		{
 			this.addIsoObject( item,isSort );
 			MapGridDataModel.instance.addWallDecorGridData( item );
@@ -30,7 +31,7 @@ package local.map.scene
 		 * 移除建筑 
 		 * @param building
 		 */		
-		public function removeItem( item:BaseItem ):void
+		public function removeItem( item:WallDecor ):void
 		{
 			this.removeIsoObject( item );
 			MapGridDataModel.instance.removeWallDecorGridData(item);
