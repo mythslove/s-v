@@ -28,6 +28,11 @@ package local.map.item
 			nodeZ = itemVO.nodeZ ;
 		}
 		
+		public function recoverStatus():void
+		{
+			
+		}
+		
 		override public function advanceTime(passedTime:Number):void
 		{
 			if(_itemObject) {
