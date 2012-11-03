@@ -25,10 +25,10 @@ package local.util
 					item = new Floor( itemVO );
 					break ;
 				case ItemType.WALL_DECOR:
-					item = new WallDecor();
+					item = new WallDecor(itemVO );
 					break ;
 				case ItemType.WALL_PAPER:
-					item = new WallPaper();
+					item = new WallPaper(itemVO );
 					break ;
 				default:
 					item = new BaseItem( itemVO );
