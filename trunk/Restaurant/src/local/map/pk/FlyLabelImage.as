@@ -1,5 +1,7 @@
 package local.map.pk
 {
+	import bing.utils.FixScale;
+	
 	import com.greensock.TweenLite;
 	
 	import local.comm.GameSetting;
@@ -37,10 +39,11 @@ package local.map.pk
 					break ;
 			}
 			bmp.pivotY =  bmp.height>>1 ;
+			FixScale.setScale( bmp , 50 , 40 );
 			addChild(bmp);
 			
 			//文字
-			txt = new TextField( 200,60,"","Verdana",30,0xffffff,true );
+			txt = new TextField( 200,60,"","Verdana",35,0xffffff );
 			txt.hAlign = HAlign.RIGHT;
 			txt.vAlign = VAlign.CENTER ;
 			txt.text = value>0 ? "+"+value : ""+value ;

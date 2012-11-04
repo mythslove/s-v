@@ -351,6 +351,7 @@ package local.map
 				{
 					if(_mouseItem.screenX!=0){
 						_mouseItem.itemObject.scaleX = _mouseItem.screenX<0 ? 1: -1 ;
+						_mouseItem.itemVO.direction = _mouseItem.itemObject.scaleX==1? 2 : 3 ;
 					}
 				}
 				
