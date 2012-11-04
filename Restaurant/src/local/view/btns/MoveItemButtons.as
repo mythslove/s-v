@@ -67,34 +67,29 @@ package local.view.btns
 			scaleX = scaleY = 0 ;
 			var value:Number = 1/GameWorld.instance.scaleX ;
 			TweenLite.to( this , 0.25 , { scaleX:value , scaleY:value } );
-//			if(GameData.isShowTutor){
-//				cancelBtn.enabled = false ;
-//			}else{
-//				cancelBtn.enabled = true ;
-//			}
 		}
 		
 		private function onClickHandler( e:Event ):void
 		{
-			var building:BaseItem = GameWorld.instance.topScene.getChildAt(0) as BaseItem ;
+			var item:BaseItem = GameWorld.instance.topScene.getChildAt(0) as BaseItem ;
 			switch( e.target )
 			{
 				case okBtn:
 					if( GameData.villageMode==VillageMode.ITEM_STORAGE)
 					{
-						building.storageToWorld();
+						item.storageToWorld();
 						GameData.villageMode = VillageMode.EDIT ;
 					}
 					else if( GameData.villageMode==VillageMode.ITEM_SHOP)
 					{
-						building.shopToWorld();
-						var baseVO:BaseItemVO = building.itemVO.baseVO ;
-						if( baseVO.type==ItemType.FLOOR || baseVO.type==ItemType.WALL_PAPER )
+						item.shopToWorld();
+						var baseVO:BaseItemVO = item.itemVO.baseVO ;
+						if( baseVO.isWallLayer() )
 						{
 							var me:PlayerVO = PlayerModel.instance.me ;
 							if( me.cash>= baseVO.costCash && me.coin>= baseVO.costCoin ){
-								building = ItemFactory.createItemByBaseVO( baseVO );
-								GameWorld.instance.addItemToTopScene( building );
+								item = ItemFactory.createItemByBaseVO( baseVO );
+								GameWorld.instance.addItemToTopScene( item );
 								return ;
 							}else if( (baseVO.costCash>0 && me.cash<baseVO.costCash)||(baseVO.costCoin>0 && me.coin<baseVO.costCoin) ){
 								GameData.villageMode = VillageMode.NORMAL ;

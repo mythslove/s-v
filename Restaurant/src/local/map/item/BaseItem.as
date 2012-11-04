@@ -2,8 +2,13 @@ package local.map.item
 {
 	import flash.geom.Point;
 	
+	import local.enum.PickupType;
+	import local.map.GameWorld;
 	import local.map.cell.ItemBottomGrid;
 	import local.map.cell.ItemObject;
+	import local.map.pk.FlyLabelImage;
+	import local.model.PlayerModel;
+	import local.model.RoomItemsModel;
 	import local.util.ResourceUtil;
 	import local.vo.BitmapAnimResVO;
 	import local.vo.ItemVO;
@@ -126,6 +131,24 @@ package local.map.item
 		 */		
 		public function shopToWorld():void
 		{
+			//减钱
+			var flyImg:FlyLabelImage ;
+			if( itemVO.baseVO.costCash>0 ){
+				PlayerModel.instance.changeCash( -itemVO.baseVO.costCash );
+				flyImg = new FlyLabelImage( PickupType.CASH , -itemVO.baseVO.costCash ) ;
+			}else if(itemVO.baseVO.costCoin>0 ){
+				PlayerModel.instance.changeCoin( -itemVO.baseVO.costCoin );
+				flyImg = new FlyLabelImage( PickupType.COIN , -itemVO.baseVO.costCoin ) ;
+			}
+			if(flyImg){
+				flyImg.x = screenX ;
+				flyImg.y = screenY-20 ;
+				GameWorld.instance.effectScene.addChild( flyImg );
+			}
+			//添加到地图上
+			addToWorldFromTopScene();
+			//添加到房间数据中
+			RoomItemsModel.instance.addItemVO( itemVO );
 		}
 		
 		/**
