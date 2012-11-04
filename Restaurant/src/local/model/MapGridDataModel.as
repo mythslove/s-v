@@ -157,7 +157,7 @@ package local.model
 		{
 			var points:Vector.<Vector3D> = wallPaper.spanPosition ;
 			for each( var p:Vector3D in points) {
-				_wallPaperHash[ p.x+"-"+p.z+"-"+wallPaper.direction] = wallPaper ;
+				_wallPaperHash[ p.x+"-"+p.z+"-"+wallPaper.itemVO.direction] = wallPaper ;
 			}
 		}
 		
@@ -165,7 +165,7 @@ package local.model
 		{
 			var points:Vector.<Vector3D> = wallPaper.spanPosition ;
 			for each( var p:Vector3D in points) {
-				delete _wallPaperHash[ p.x+"-"+p.z+"-"+wallPaper.direction] ;
+				delete _wallPaperHash[ p.x+"-"+p.z+"-"+wallPaper.itemVO.direction] ;
 			}
 		}
 		
@@ -183,7 +183,7 @@ package local.model
 		{
 			var points:Vector.<Vector3D> = wallDecor.spanPosition ;
 			for each( var p:Vector3D in points) {
-				_wallDecorHash[ p.x+"-"+p.z+"-"+wallDecor.direction] = wallDecor ;
+				_wallDecorHash[ p.x+"-"+p.z+"-"+wallDecor.itemVO..direction] = wallDecor ;
 			}
 		}
 		
@@ -191,7 +191,7 @@ package local.model
 		{
 			var points:Vector.<Vector3D> = wallDecor.spanPosition ;
 			for each( var p:Vector3D in points) {
-				delete _wallDecorHash[ p.x+"-"+p.z+"-"+wallDecor.direction] ;
+				delete _wallDecorHash[ p.x+"-"+p.z+"-"+wallDecor.itemVO.direction] ;
 			}
 		}
 		

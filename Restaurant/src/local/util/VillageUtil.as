@@ -9,6 +9,8 @@ package local.util
 	import local.comm.GlobalDispatcher;
 	import local.event.VillageEvent;
 	import local.model.PlayerModel;
+	import local.model.RoomItemsModel;
+	import local.vo.ItemVO;
 	import local.vo.PlayerVO;
 	
 	public class VillageUtil
@@ -46,6 +48,14 @@ package local.util
 				//写玩家信息
 				_bytes.writeObject( PlayerModel.instance.me );
 				//地图上的建筑
+				_bytes.writeObject( RoomItemsModel.instance.wallDecors);
+				_bytes.writeObject( RoomItemsModel.instance.wallPapers);
+				_bytes.writeObject( RoomItemsModel.instance.floors);
+				_bytes.writeObject( RoomItemsModel.instance.chairs);
+				_bytes.writeObject( RoomItemsModel.instance.tables);
+				_bytes.writeObject( RoomItemsModel.instance.counters);
+				_bytes.writeObject( RoomItemsModel.instance.decorations);
+				_bytes.writeObject( RoomItemsModel.instance.stoves);
 				//收藏箱中的信息
 				//写任务
 				//Component
@@ -91,6 +101,14 @@ package local.util
 					PlayerModel.instance.me.coin = 10000 ;
 					/*-----------------测试数据---------------------------------------*/
 					//读取地图信息
+					RoomItemsModel.instance.wallDecors = stream.readObject() as Vector.<ItemVO>;
+					RoomItemsModel.instance.wallPapers = stream.readObject() as Vector.<ItemVO>;
+					RoomItemsModel.instance.floors = stream.readObject() as Vector.<ItemVO>;
+					RoomItemsModel.instance.chairs = stream.readObject() as Vector.<ItemVO>;
+					RoomItemsModel.instance.tables = stream.readObject() as Vector.<ItemVO>;
+					RoomItemsModel.instance.counters = stream.readObject() as Vector.<ItemVO>;
+					RoomItemsModel.instance.decorations = stream.readObject() as Vector.<ItemVO>;
+					RoomItemsModel.instance.stoves = stream.readObject() as Vector.<ItemVO>;
 					//读取收藏箱信息
 					//读任务
 					//掉落物

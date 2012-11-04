@@ -3,13 +3,19 @@ package local.map
 	import flash.geom.Point;
 	
 	import local.comm.GameSetting;
+	import local.enum.ItemType;
 	import local.map.item.BaseItem;
 	import local.map.item.Floor;
+	import local.map.item.WallDecor;
+	import local.map.item.WallPaper;
+	import local.model.MapGridDataModel;
 	import local.model.PlayerModel;
+	import local.model.RoomItemsModel;
 	import local.model.ShopModel;
 	import local.util.ItemFactory;
 	import local.view.btns.MoveItemButtons;
 	import local.vo.BaseItemVO;
+	import local.vo.ItemVO;
 	import local.vo.PlayerVO;
 	
 	import starling.animation.Juggler;
@@ -61,25 +67,58 @@ package local.map
 			if( isHome ) //显示自己的村庄
 			{
 				var player:PlayerVO = PlayerModel.instance.me ;
-				
+				var itemsModel:RoomItemsModel = RoomItemsModel.instance;
+				tempShowItem( itemsModel.wallDecors);
+				tempShowItem( itemsModel.wallPapers);
+				tempShowItem( itemsModel.chairs);
+				tempShowItem( itemsModel.counters);
+				tempShowItem( itemsModel.tables);
+				tempShowItem( itemsModel.stoves);
+				tempShowItem( itemsModel.decorations);
+				tempShowItem( itemsModel.floors);
 				for( var i:int = 0 ; i<player.mapSize ; ++i)
 				{
 					for( var j:int = 0 ; j<player.mapSize ; ++j)
 					{
-						var floor:Floor = ItemFactory.createItemByBaseVO( ShopModel.instance.allItemsHash["Chef Floor"] as BaseItemVO) as Floor;
-						floor.nodeX = i ;
-						floor.nodeZ = j ;
-						floorScene.addIsoObject( floor , false );
+						if( !MapGridDataModel.instance.getFloorGridData(i,j)){
+							var floor:Floor = ItemFactory.createItemByBaseVO( ShopModel.instance.allItemsHash["Chef Floor"] as BaseItemVO) as Floor;
+							floor.nodeX = i ;
+							floor.nodeZ = j ;
+							floorScene.addIsoObject( floor , false );
+						}
 					}
 				}
 				floorScene.sortAll() ;
-				
-				var table :BaseItem = ItemFactory.createItemByBaseVO( ShopModel.instance.allItemsHash["Autumn Table"] as BaseItemVO) as BaseItem;
-				table.nodeX = table.nodeZ = 2 ;
-				roomScene.addItem( table);
+				wallDecorScene.sortAll() ;
+				wallPaperScene.sortAll() ;
+				roomScene.sortAll() ;
 				run() ;
 			}
 		}
+		private function tempShowItem( itemVOS:Vector.<ItemVO>):void{
+			if(itemVOS){
+				var item:BaseItem ;
+				for each( var itemVO:ItemVO in itemVOS){
+					item = ItemFactory.createItemByVO( itemVO );
+					switch( itemVO.baseVO.type)
+					{
+						case ItemType.FLOOR:
+							floorScene.addItem( item as Floor);
+							break ;
+						case ItemType.WALL_DECOR:
+							wallDecorScene.addItem( item as WallDecor);
+							break ;
+						case ItemType.WALL_PAPER:
+							wallPaperScene.addItem( item as WallPaper);
+							break ;
+						default:
+							roomScene.addItem( item);
+							break ;
+					}	
+				}
+			}
+		}
+		
 		
 		/**
 		 * 添加Item到移动的的层上面，主要是从商店和收藏箱中的Item
