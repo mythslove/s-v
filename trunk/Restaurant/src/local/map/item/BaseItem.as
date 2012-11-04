@@ -2,6 +2,7 @@ package local.map.item
 {
 	import flash.geom.Point;
 	
+	import local.enum.ItemType;
 	import local.enum.PickupType;
 	import local.map.GameWorld;
 	import local.map.cell.ItemBottomGrid;
@@ -156,6 +157,25 @@ package local.map.item
 		 */		
 		public function addToWorldFromTopScene():void
 		{
+			var world:GameWorld = GameWorld.instance ;
+			world.topScene.removeIsoObject( this );
+			switch( itemVO.baseVO.type)
+			{
+				case ItemType.FLOOR:
+					world.floorScene.addItem( this as Floor);
+					break ;
+				case ItemType.WALL_DECOR:
+					world.wallDecorScene.addItem( this as WallDecor);
+					break ;
+				case ItemType.WALL_PAPER:
+					world.wallPaperScene.addItem( this as WallPaper);
+					break ;
+				default:
+					world.roomScene.addItem( this);
+					break ;
+			}	
+			world.roomScene.touchable = true ;
+			this.removeBottomGrid();
 		}
 		
 		/**
