@@ -20,7 +20,7 @@ package local.map.scene
 		 * @param isSort是否进行深度排序
 		 * @return 
 		 */		
-		public function addItem( item:WallDecor , isSort:Boolean=true , isInit:Boolean=false ):BaseItem
+		public function addItem( item:WallDecor , isSort:Boolean=true):BaseItem
 		{
 			this.addIsoObject( item,isSort );
 			MapGridDataModel.instance.addWallDecorGridData( item );
