@@ -70,6 +70,7 @@ package
 			registerClassAlias( "PlayerVO",PlayerVO );
 			registerClassAlias( "BaseItemVO",BaseItemVO );
 			registerClassAlias( "ItemVO",ItemVO );
+			registerClassAlias( "StorageItemVO",StorageItemVO );
 			registerClassAlias( "FoodVO",FoodVO );
 		}
 		
