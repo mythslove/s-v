@@ -79,7 +79,7 @@
 				var zPan:int = int(txtGridZ.text) ;
 				container.graphics.clear();
 				
-				container.graphics.beginFill(0);
+				container.graphics.beginFill(0xffffff);
 				container.graphics.moveTo( 0,0);
 				
 				var p:Vector3D = new Vector3D();
