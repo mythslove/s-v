@@ -6,6 +6,7 @@ package local.map.scene
 	import local.map.item.BaseItem;
 	import local.map.item.Floor;
 	import local.model.MapGridDataModel;
+	import local.model.StorageModel;
 	
 	public class FloorScene extends SIsoScene
 	{
@@ -23,6 +24,11 @@ package local.map.scene
 		public function addItem( item:Floor , isSort:Boolean=true ):BaseItem
 		{
 			this.addIsoObject( item,isSort );
+			var floor:Floor = MapGridDataModel.instance.getFloorGridData(item.position.x , item.position.z );
+			if(floor){
+				this.removeItem(floor);
+				StorageModel.instance.addItemToStorage(floor);
+			}
 			MapGridDataModel.instance.addFloorGridData(item);
 			return item;
 		}
