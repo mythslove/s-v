@@ -32,7 +32,7 @@
 				var road:RoadComponent ;
 				var tf:TextField ;
 				for( var i:int = 0 ; i <len ; ++i ){
-					rho = new Rhombus( Setting.SIZE );
+					rho = new Rhombus( Setting.SIZE , 0xffffff );
 					if(i==len*0.25 || i==len*0.5 || i==len*0.75){
 						++row ; col = 0 ;
 					}
