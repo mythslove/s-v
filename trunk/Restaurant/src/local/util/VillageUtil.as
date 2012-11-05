@@ -10,8 +10,10 @@ package local.util
 	import local.event.VillageEvent;
 	import local.model.PlayerModel;
 	import local.model.RoomItemsModel;
+	import local.model.StorageModel;
 	import local.vo.ItemVO;
 	import local.vo.PlayerVO;
+	import local.vo.StorageItemVO;
 	
 	public class VillageUtil
 	{
@@ -57,6 +59,14 @@ package local.util
 				_bytes.writeObject( RoomItemsModel.instance.decorations);
 				_bytes.writeObject( RoomItemsModel.instance.stoves);
 				//收藏箱中的信息
+				_bytes.writeObject( StorageModel.instance.floors );
+				_bytes.writeObject( StorageModel.instance.wallPapers);
+				_bytes.writeObject( StorageModel.instance.wallDecors);
+				_bytes.writeObject( StorageModel.instance.chairs);
+				_bytes.writeObject( StorageModel.instance.tables);
+				_bytes.writeObject( StorageModel.instance.counters);
+				_bytes.writeObject( StorageModel.instance.decors);
+				_bytes.writeObject( StorageModel.instance.stoves);
 				//写任务
 				//Component
 			}
@@ -110,6 +120,14 @@ package local.util
 					RoomItemsModel.instance.decorations = stream.readObject() as Vector.<ItemVO>;
 					RoomItemsModel.instance.stoves = stream.readObject() as Vector.<ItemVO>;
 					//读取收藏箱信息
+					StorageModel.instance.wallDecors = stream.readObject() as Vector.<StorageItemVO>;
+					StorageModel.instance.wallPapers = stream.readObject() as Vector.<StorageItemVO>;
+					StorageModel.instance.floors = stream.readObject() as Vector.<StorageItemVO>;
+					StorageModel.instance.chairs = stream.readObject() as Vector.<StorageItemVO>;
+					StorageModel.instance.tables = stream.readObject() as Vector.<StorageItemVO>;
+					StorageModel.instance.counters = stream.readObject() as Vector.<StorageItemVO>;
+					StorageModel.instance.decors = stream.readObject() as Vector.<StorageItemVO>;
+					StorageModel.instance.stoves = stream.readObject() as Vector.<StorageItemVO>;
 					//读任务
 					//掉落物
 				}
