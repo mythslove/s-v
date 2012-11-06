@@ -7,9 +7,12 @@ package local.view.bottom
 	import local.comm.GameData;
 	import local.comm.GameSetting;
 	import local.enum.VillageMode;
+	import local.map.GameWorld;
+	import local.map.item.BaseItem;
 	import local.util.EmbedManager;
 	import local.view.base.GameButton;
 	import local.view.shop.ShopBar;
+	import local.view.storage.StorageBar;
 	
 	import starling.display.Image;
 	import starling.display.Sprite;
@@ -76,21 +79,20 @@ package local.view.bottom
 				case btnMarket:
 					showShop();
 					break ;
-//				case btnEditor:
-//					GameData.villageMode = VillageMode.EDIT ;
-//					break ;
-//				case btnDone:
-//					if(GameData.villageMode==VillageMode.EXPAND){
-//						GameWorld.instance.topScene.clear();
-//					}else{
-//						checkTopSceneBuilding();
-//					}
-//					GameData.villageMode = VillageMode.NORMAL ;
-//					break ;
-//				case btnStorage:
-//					checkTopSceneBuilding();
-//					GameData.villageMode = VillageMode.BUILDING_STORAGE ;
-//					break ;
+				case btnEditor:
+					GameData.villageMode = VillageMode.EDIT ;
+					break ;
+				case btnDone:
+					if(GameData.villageMode==VillageMode.EXPAND){
+						GameWorld.instance.topScene.clear();
+					}else{
+						checkTopSceneBuilding();
+					}
+					GameData.villageMode = VillageMode.NORMAL ;
+					break ;
+				case btnStorage:
+					showStorage();
+					break ;
 			}
 		}
 		
@@ -101,18 +103,18 @@ package local.view.bottom
 		
 		private function checkTopSceneBuilding():void
 		{
-//			var world:GameWorld = GameWorld.instance ;
-//			if( world.topScene.numChildren>0){
-//				var building:BaseBuilding = world.topScene.getChildAt(0) as BaseBuilding;
-//				if( building ){
-//					building.nodeX = BaseBuilding.cachePos.x ;
-//					building.nodeZ = BaseBuilding.cachePos.y ;
-//					building.addToWorldFromTopScene();
-//					if(EditorBuildingButtons.instance.parent){
-//						EditorBuildingButtons.instance.parent.removeChild( EditorBuildingButtons.instance );
+			var world:GameWorld = GameWorld.instance ;
+			if( world.topScene.numChildren>0){
+				var item:BaseItem = world.topScene.getChildAt(0) as BaseItem;
+				if( item ){
+					item.nodeX = BaseItem.cachePos.x ;
+					item.nodeZ = BaseItem.cachePos.y ;
+					item.addToWorldFromTopScene();
+//					if(EditorItemButtons.instance.parent){
+//						EditorItemButtons.instance.parent.removeChild( EditorItemButtons.instance );
 //					}
-//				}
-//			}
+				}
+			}
 		}
 		
 		/**
@@ -120,9 +122,15 @@ package local.view.bottom
 		 */		
 		public function showStorage():void
 		{
-//			addChild( StorageBar.instance);
+			btnStorage.visible = btnDone.visible = btnMarket.visible=btnEditor.visible=btnMenu.visible = false ;
+			checkTopSceneBuilding();
+			setTimeout( function():void{
+				addChild(StorageBar.instance);
+			},200);
 		}
-		
+		/**
+		 * 显示商店 
+		 */		
 		public function showShop():void{
 			btnMarket.visible=btnEditor.visible=btnMenu.visible = false ;
 			setTimeout( function():void{

@@ -2,8 +2,10 @@ package local.map.item
 {
 	import flash.geom.Point;
 	
+	import local.comm.GameData;
 	import local.enum.ItemType;
 	import local.enum.PickupType;
+	import local.enum.VillageMode;
 	import local.map.GameWorld;
 	import local.map.cell.ItemBottomGrid;
 	import local.map.cell.ItemObject;
@@ -109,6 +111,30 @@ package local.map.item
 		
 		public function onClick():void
 		{
+			var world:GameWorld = GameWorld.instance ;
+			if(GameData.villageMode==VillageMode.EDIT){
+				cachePos.x = nodeX;
+				cachePos.y = nodeZ;
+//				if(this is Road){
+//					world.roadScene.removeRoad( this as Road );
+//				}else{
+//					world.buildingScene.removeBuilding( this );
+//				}
+//				world.topScene.addIsoObject( this );
+//				world.roadScene.mouseChildren = world.buildingScene.mouseChildren = false ;
+//				this.drawBottomGrid();
+//				
+//				var editorBtns:EditorBuildingButtons = EditorBuildingButtons.instance ;
+//				addChild( editorBtns );
+//				editorBtns.stashButton.enabled = editorBtns.rotateButton.enabled = editorBtns.sellButton.enabled = true ;
+//				if( buildingVO.status==BuildingStatus.BUILDING){
+//					editorBtns.stashButton.enabled = editorBtns.rotateButton.enabled = false ;
+//				}else if( buildingVO.baseVO.type==BuildingType.DECORATION && 
+//					(buildingVO.baseVO.subClass==BuildingType.DECORATION_GROUND || buildingVO.baseVO.subClass==BuildingType.DECORATION_ROAD) ){
+//					editorBtns.rotateButton.enabled = false ;
+//				}
+				
+			}
 		}
 		
 		override public function set nodeX(value:int):void{
