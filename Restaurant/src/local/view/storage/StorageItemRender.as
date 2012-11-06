@@ -1,7 +1,5 @@
-package local.view.shop
+package local.view.storage
 {
-	import bing.utils.FixScale;
-	
 	import feathers.controls.List;
 	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.core.FeathersControl;
@@ -11,14 +9,14 @@ package local.view.shop
 	import local.enum.VillageMode;
 	import local.map.GameWorld;
 	import local.map.item.BaseItem;
-	import local.util.EmbedManager;
+	import local.model.ShopModel;
 	import local.util.GameUtil;
 	import local.util.ItemFactory;
 	import local.util.StyleSetting;
 	import local.view.base.BuildingThumb;
 	import local.vo.BaseItemVO;
+	import local.vo.StorageItemVO;
 	
-	import starling.display.Image;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
@@ -26,13 +24,13 @@ package local.view.shop
 	import starling.utils.HAlign;
 	import starling.utils.VAlign;
 	
-	public class ShopItemRender extends FeathersControl implements IListItemRenderer
+	public class StorageItemRender extends FeathersControl implements IListItemRenderer
 	{
 		private var _data:Object ;
 		public function get data():Object{ return _data ; }
 		public function set data(value:Object):void{
 			_data = value;
-			baseVO = value as BaseItemVO;
+			itemVO = value as StorageItemVO;
 			show();
 		}
 		private var _index:int ;
@@ -46,12 +44,12 @@ package local.view.shop
 		public function set isSelected(value:Boolean):void{ _isSelected = value ;}
 		
 		
-		public var baseVO:BaseItemVO ;
+		public var itemVO:StorageItemVO ;
 		private var _wid:int = 180 ;
 		private var _het:int = 180 ;
 		private var _isMove:Boolean;
 		
-		public function ShopItemRender()
+		public function StorageItemRender()
 		{
 			super();
 			this.width = _wid ;
@@ -69,7 +67,8 @@ package local.view.shop
 			addChild(bg);
 			
 			//图片
-			var thumbName:String = baseVO.directions==2? baseVO.name: baseVO.name+"_1";
+			var baseVO:BaseItemVO = ShopModel.instance.allItemsHash[itemVO.name] as BaseItemVO ;
+			var thumbName:String = baseVO.directions==2? baseVO.name: baseVO.name+"_1" ;
 			var img:BuildingThumb = new BuildingThumb(  thumbName , baseVO.isWallLayer() , 150 , 150 );
 			img.touchable = false ;
 			img.x=_wid>>1;
@@ -77,21 +76,12 @@ package local.view.shop
 			addChild( img );
 			img.center();
 			
-			//价格
-			var icon:Image = baseVO.costCoin>0 ? EmbedManager.getUIImage("CoinIcon"):EmbedManager.getUIImage("CashIcon");
-			icon.touchable = false ;
-			FixScale.setScale( icon , 60 , 40);
-			icon.x = 30 ;
-			icon.y = 20;
-			addChild( icon );
-			var price:int = baseVO.costCoin>0 ? baseVO.costCoin : baseVO.costCash ;
-			var txtPrice:TextField =new TextField( _wid-icon.x-icon.width , 40 , price+"" , "Verdana" , 30 , 0xffffff ,true ) ;
-			txtPrice.touchable = false;
-			txtPrice.hAlign = HAlign.LEFT ;
-			txtPrice.vAlign = VAlign.CENTER ;
-			txtPrice.x = icon.x + icon.width+5 ;
-			txtPrice.y = icon.y  ;
-			addChild(txtPrice);
+			var txtCount:TextField =new TextField( _wid , 40 , itemVO.num+"" , "Verdana" , 30 , 0xffffff ,true ) ;
+			txtCount.touchable = false;
+			txtCount.hAlign = HAlign.LEFT ;
+			txtCount.vAlign = VAlign.CENTER ;
+			txtCount.y = 130 ;
+			addChild(txtCount);
 		}
 		
 		private function onTouchHandler( e:TouchEvent ):void
@@ -108,10 +98,10 @@ package local.view.shop
 					_isMove = true ;
 				}else if(touch.phase==TouchPhase.ENDED){
 					if(!_isMove){
-						var item:BaseItem = ItemFactory.createItemByBaseVO( baseVO );
+						var item:BaseItem = ItemFactory.createItemByBaseVO( ShopModel.instance.allItemsHash[itemVO.name] as BaseItemVO );
 						GameWorld.instance.addItemToTopScene( item);
-						GameData.villageMode=VillageMode.ITEM_SHOP ;
-						ShopBar.instance.removeFromParent();
+						GameData.villageMode=VillageMode.ITEM_STORAGE ;
+						StorageBar.instance.removeFromParent();
 					}
 				}
 			}
@@ -122,7 +112,7 @@ package local.view.shop
 			super.dispose();
 			_data = null ;
 			_owner = null ;
-			baseVO = null ;
+			itemVO = null ;
 		}
 	}
 }
