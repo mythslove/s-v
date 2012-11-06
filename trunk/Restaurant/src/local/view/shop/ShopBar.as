@@ -68,7 +68,7 @@ package local.view.shop
 			addChild( _bg );
 			//关闭按钮
 			_closeButton = new GameButton( new Scale3Image(StyleSetting.instance.button1Texture));
-			_closeButton.defaultSkin.width = 80 ;
+			_closeButton.defaultSkin.width = 70 ;
 			_closeButton.defaultIcon = EmbedManager.getUIImage("WhiteRight")
 			_closeButton.x = _bg.width - _closeButton.defaultSkin.width*0.5-10;
 			_closeButton.y = -_closeButton.pivotY ;
