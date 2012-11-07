@@ -81,7 +81,6 @@ package local.view
 					bottomBar.btnMarket.visible =  bottomBar.btnEditor.visible =  bottomBar.btnMenu.visible = false ;
 					bottomBar.btnDone.visible = bottomBar.btnStorage.visible = false ;
 					questBtn.visible = false ;
-					bottomBar.showStorage();
 					topBar.visible = false ;
 					break ;
 				case VillageMode.ITEM_SHOP :

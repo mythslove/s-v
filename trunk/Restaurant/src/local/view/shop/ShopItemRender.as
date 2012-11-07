@@ -109,8 +109,8 @@ package local.view.shop
 				}else if(touch.phase==TouchPhase.ENDED){
 					if(!_isMove){
 						var item:BaseItem = ItemFactory.createItemByBaseVO( baseVO );
-						GameWorld.instance.addItemToTopScene( item);
 						GameData.villageMode=VillageMode.ITEM_SHOP ;
+						GameWorld.instance.addItemToTopScene( item);
 						ShopBar.instance.removeFromParent();
 					}
 				}
