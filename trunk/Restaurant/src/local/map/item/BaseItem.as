@@ -12,6 +12,7 @@ package local.map.item
 	import local.map.pk.FlyLabelImage;
 	import local.model.PlayerModel;
 	import local.model.RoomItemsModel;
+	import local.model.StorageModel;
 	import local.util.ResourceUtil;
 	import local.vo.BitmapAnimResVO;
 	import local.vo.ItemVO;
@@ -151,6 +152,11 @@ package local.map.item
 		 */		
 		public function storageToWorld():void
 		{
+			addToWorldFromTopScene();
+			
+			//添加到地图数据中，并且从收藏箱数据中删除
+			RoomItemsModel.instance.addItemVO( itemVO );
+			StorageModel.instance.deleteStorageVO( itemVO.name , itemVO.baseVO.type );
 		}
 		
 		/**

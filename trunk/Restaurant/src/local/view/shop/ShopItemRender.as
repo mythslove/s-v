@@ -47,8 +47,8 @@ package local.view.shop
 		
 		
 		public var baseVO:BaseItemVO ;
-		private var _wid:int = 180 ;
-		private var _het:int = 180 ;
+		private var _wid:int = 160 ;
+		private var _het:int = 160 ;
 		private var _isMove:Boolean;
 		
 		public function ShopItemRender()

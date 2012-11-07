@@ -45,8 +45,8 @@ package local.view.storage
 		
 		
 		public var itemVO:StorageItemVO ;
-		private var _wid:int = 180 ;
-		private var _het:int = 180 ;
+		private var _wid:int = 160 ;
+		private var _het:int = 160 ;
 		private var _isMove:Boolean;
 		
 		public function StorageItemRender()
@@ -69,7 +69,7 @@ package local.view.storage
 			//图片
 			var baseVO:BaseItemVO = ShopModel.instance.allItemsHash[itemVO.name] as BaseItemVO ;
 			var thumbName:String = baseVO.directions==2? baseVO.name: baseVO.name+"_1" ;
-			var img:BuildingThumb = new BuildingThumb(  thumbName , baseVO.isWallLayer() , 150 , 150 );
+			var img:BuildingThumb = new BuildingThumb(  thumbName , baseVO.isWallLayer() , _wid-10 , _het-10 );
 			img.touchable = false ;
 			img.x=_wid>>1;
 			img.y = _het>>1 ;
@@ -78,9 +78,9 @@ package local.view.storage
 			
 			var txtCount:TextField =new TextField( _wid , 40 , itemVO.num+"" , "Verdana" , 30 , 0xffffff ,true ) ;
 			txtCount.touchable = false;
-			txtCount.hAlign = HAlign.LEFT ;
+			txtCount.hAlign = HAlign.CENTER ;
 			txtCount.vAlign = VAlign.CENTER ;
-			txtCount.y = 130 ;
+			txtCount.y = _het-50 ;
 			addChild(txtCount);
 		}
 		
@@ -99,8 +99,8 @@ package local.view.storage
 				}else if(touch.phase==TouchPhase.ENDED){
 					if(!_isMove){
 						var item:BaseItem = ItemFactory.createItemByBaseVO( ShopModel.instance.allItemsHash[itemVO.name] as BaseItemVO );
-						GameWorld.instance.addItemToTopScene( item);
 						GameData.villageMode=VillageMode.ITEM_STORAGE ;
+						GameWorld.instance.addItemToTopScene( item);
 						StorageBar.instance.removeFromParent();
 					}
 				}

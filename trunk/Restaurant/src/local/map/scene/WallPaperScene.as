@@ -6,6 +6,7 @@ package local.map.scene
 	import local.map.item.BaseItem;
 	import local.map.item.WallPaper;
 	import local.model.MapGridDataModel;
+	import local.model.RoomItemsModel;
 	import local.model.StorageModel;
 	
 	public class WallPaperScene extends SIsoScene
@@ -27,6 +28,7 @@ package local.map.scene
 			var wallPaper:WallPaper = MapGridDataModel.instance.getWallPaperByData(item.position.x , item.position.z , item.itemVO.direction );
 			if(wallPaper){
 				this.removeItem(wallPaper);
+				RoomItemsModel.instance.removeItem(wallPaper);
 				StorageModel.instance.addItemToStorage(wallPaper);
 			}
 			MapGridDataModel.instance.addWallPaperGridData( item );

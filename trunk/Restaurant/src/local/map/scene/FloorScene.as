@@ -6,6 +6,7 @@ package local.map.scene
 	import local.map.item.BaseItem;
 	import local.map.item.Floor;
 	import local.model.MapGridDataModel;
+	import local.model.RoomItemsModel;
 	import local.model.StorageModel;
 	
 	public class FloorScene extends SIsoScene
@@ -27,6 +28,7 @@ package local.map.scene
 			var floor:Floor = MapGridDataModel.instance.getFloorGridData(item.position.x , item.position.z );
 			if(floor){
 				this.removeItem(floor);
+				RoomItemsModel.instance.removeItem(floor);
 				StorageModel.instance.addItemToStorage(floor);
 			}
 			MapGridDataModel.instance.addFloorGridData(item);

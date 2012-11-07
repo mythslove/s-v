@@ -98,9 +98,10 @@ package local.view.shop
 			_layout.useSquareTiles = false;
 			_layout.gap = 5 ;
 			_layout.tileHorizontalAlign = TiledRowsLayout.HORIZONTAL_ALIGN_CENTER;
-			_layout.horizontalAlign = TiledRowsLayout.HORIZONTAL_ALIGN_CENTER;
+			_layout.horizontalAlign = TiledRowsLayout.HORIZONTAL_ALIGN_LEFT;
 			//list
 			_list = new List();
+			_list.y = 10 ;
 			_list.width = _list.maxWidth = GameSetting.SCREEN_WIDTH-200 ;
 			_list.height = 140;
 			_list.itemRendererFactory = function():IListItemRenderer { return new ShopItemRender(); };
