@@ -14,6 +14,7 @@ package local.map.item
 	import local.model.RoomItemsModel;
 	import local.model.StorageModel;
 	import local.util.ResourceUtil;
+	import local.view.btns.EditItemButtons;
 	import local.vo.BitmapAnimResVO;
 	import local.vo.ItemVO;
 	
@@ -116,25 +117,31 @@ package local.map.item
 			if(GameData.villageMode==VillageMode.EDIT){
 				cachePos.x = nodeX;
 				cachePos.y = nodeZ;
-//				if(this is Road){
-//					world.roadScene.removeRoad( this as Road );
-//				}else{
-//					world.buildingScene.removeBuilding( this );
-//				}
-//				world.topScene.addIsoObject( this );
-//				world.roadScene.mouseChildren = world.buildingScene.mouseChildren = false ;
-//				this.drawBottomGrid();
-//				
-//				var editorBtns:EditorBuildingButtons = EditorBuildingButtons.instance ;
-//				addChild( editorBtns );
-//				editorBtns.stashButton.enabled = editorBtns.rotateButton.enabled = editorBtns.sellButton.enabled = true ;
-//				if( buildingVO.status==BuildingStatus.BUILDING){
-//					editorBtns.stashButton.enabled = editorBtns.rotateButton.enabled = false ;
-//				}else if( buildingVO.baseVO.type==BuildingType.DECORATION && 
-//					(buildingVO.baseVO.subClass==BuildingType.DECORATION_GROUND || buildingVO.baseVO.subClass==BuildingType.DECORATION_ROAD) ){
-//					editorBtns.rotateButton.enabled = false ;
-//				}
+				switch( itemVO.baseVO.type)
+				{
+					case ItemType.FLOOR:
+						world.floorScene.removeItem( this as Floor);
+						break ;
+					case ItemType.WALL_DECOR:
+						world.wallDecorScene.removeItem( this as WallDecor);
+						break ;
+					case ItemType.WALL_PAPER:
+						world.wallPaperScene.removeItem( this as WallPaper);
+						break ;
+					default:
+						world.roomScene.removeItem( this);
+						break ;
+				}
+				world.topScene.addIsoObject( this , false );
+				world.roomScene.touchable =world.wallDecorScene.touchable = world.floorScene.touchable = false ;
+				this.drawBottomGrid();
 				
+				var editorBtns:EditItemButtons = EditItemButtons.instance ;
+				addChild( editorBtns );
+				editorBtns.stashButton.enabled = editorBtns.sellButton.enabled = true ;
+				if( !itemVO.baseVO.isWallLayer()){
+					//可以旋转
+				}
 			}
 		}
 		

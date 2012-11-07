@@ -24,11 +24,13 @@ package local.map
 	import local.model.MapGridDataModel;
 	import local.model.PlayerModel;
 	import local.util.EmbedManager;
+	import local.view.btns.EditItemButtons;
 	import local.view.btns.MoveItemButtons;
 	import local.vo.PlayerVO;
 	
 	import starling.core.Starling;
 	import starling.display.BlendMode;
+	import starling.display.DisplayObject;
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.Event;
@@ -221,9 +223,9 @@ package local.map
 					if( _mouseItem && _mouseItem.parent == topScene)  {
 						//如果是编译状态，则移动建筑
 						moveTopBuilding( pos.x,pos.y);
-//						if(EditorBuildingButtons.instance.parent){
-//							EditorBuildingButtons.instance.parent.removeChild( EditorBuildingButtons.instance );
-//						}
+						if(EditItemButtons.instance.parent){
+							EditItemButtons.instance.parent.removeChild( EditItemButtons.instance );
+						}
 					}else {
 						//如果不是编辑状态，则移动地图
 						var offsetX:int =  _endX+touch.globalX-touch.previousGlobalX ;
@@ -252,11 +254,11 @@ package local.map
 								_mouseItem.addToWorldFromTopScene();
 								_mouseItem = null ;
 								currentSelected = null ;
-//								if(EditorBuildingButtons.instance.parent){
-//									EditorBuildingButtons.instance.parent.removeChild( EditorBuildingButtons.instance );
-//								}
+								if(EditItemButtons.instance.parent){
+									EditItemButtons.instance.parent.removeChild( EditItemButtons.instance );
+								}
 							}else{
-//								_mouseItem.addChild( EditorBuildingButtons.instance );
+								_mouseItem.addChild( EditItemButtons.instance );
 							}
 						}
 					}
@@ -280,9 +282,9 @@ package local.map
 							if( currentSelected.parent==topScene && GameData.villageMode == VillageMode.EDIT && currentSelected.bottom.getWalkable()){
 								currentSelected.addToWorldFromTopScene();
 								_mouseItem=null;
-//								if(EditorBuildingButtons.instance.parent){
-//									EditorBuildingButtons.instance.parent.removeChild( EditorBuildingButtons.instance );
-//								}
+								if(EditItemButtons.instance.parent){
+									EditItemButtons.instance.parent.removeChild( EditItemButtons.instance );
+								}
 							}
 //							currentSelected.flash(false);
 							currentSelected = null ;
@@ -404,12 +406,26 @@ package local.map
 					_endY = y = _zoomM.ty ;
 					
 					modifyEndPosition();
+					changeIconSize();
 				}} );
 			}
 			_endX = x;
 			_endY = y ;
 		}
-		
+
+		protected function changeIconSize():void
+		{
+			if(MoveItemButtons.instance.parent) {
+				MoveItemButtons.instance.scaleY =MoveItemButtons.instance.scaleX = 1/scaleX ;
+			} else if(EditItemButtons.instance.parent) {
+				EditItemButtons.instance.scaleY =EditItemButtons.instance.scaleX = 1/scaleX ;
+			}
+			var obj:DisplayObject ;
+			for( var i:int = 0 ; i <effectScene.numChildren ; ++i ){
+				obj = effectScene.getChildAt(i) ;
+				obj.scaleY = obj.scaleX = 1/scaleX ;
+			}
+		}
 		
 		private function modifyEndPosition():void{
 			if(_endY>0) y=_endY=0 ;
