@@ -62,7 +62,7 @@ package local.view.storage
 		private function init():void
 		{
 			//背景
-			_bg = new Scale9Image(StyleSetting.instance.popup1Texture );
+			_bg = new Scale9Image(StyleSetting.instance.grayBgTexture );
 			_bg.touchable = false ;
 			_bg.width = GameSetting.SCREEN_WIDTH ;
 			_bg.height = 250 ;
