@@ -6,8 +6,10 @@ package local.model
 	import flash.utils.Dictionary;
 	
 	import local.comm.GameSetting;
+	import local.map.item.BaseItem;
 	import local.map.item.BaseMapObject;
 	import local.map.item.Floor;
+	import local.map.item.Table;
 	import local.map.item.Wall;
 	import local.map.item.WallDecor;
 	import local.map.item.WallPaper;
@@ -90,6 +92,11 @@ package local.model
 			return _roomItemHash[x+"-"+z] as BaseMapObject ;
 		}
 		
+		
+		public function getNearTableByChair( chair:BaseItem ):Table
+		{
+			
+		}
 		
 		/**
 		 * 判断建筑周围是否有相应的建筑 
