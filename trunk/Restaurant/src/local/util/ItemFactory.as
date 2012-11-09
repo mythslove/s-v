@@ -2,6 +2,7 @@ package local.util
 {
 	import local.enum.ItemType;
 	import local.map.item.BaseItem;
+	import local.map.item.Chair;
 	import local.map.item.Floor;
 	import local.map.item.Wall;
 	import local.map.item.WallDecor;
@@ -29,6 +30,9 @@ package local.util
 					break ;
 				case ItemType.WALL_PAPER:
 					item = new WallPaper(itemVO );
+					break ;
+				case ItemType.CHAIR:
+					item = new Chair( itemVO );
 					break ;
 				default:
 					item = new BaseItem( itemVO );
