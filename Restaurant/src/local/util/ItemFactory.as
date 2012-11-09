@@ -46,7 +46,6 @@ package local.util
 		{
 			var bvo:ItemVO = new ItemVO();
 			bvo.name = baseVO.name ;
-			bvo.baseVO = baseVO;
 			return createItemByVO( bvo );
 		}
 	}
