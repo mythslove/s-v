@@ -220,7 +220,7 @@ package local.map.item
 					world.roomScene.addItem( this);
 					break ;
 			}	
-			world.roomScene.touchable = true ;
+			world.wallDecorScene.touchable = world.roomScene.touchable = true ;
 			this.removeBottomGrid();
 		}
 		

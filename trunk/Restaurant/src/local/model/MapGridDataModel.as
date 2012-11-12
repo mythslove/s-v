@@ -172,7 +172,7 @@ package local.model
 		{
 			var points:Vector.<Vector3D> = wallDecor.spanPosition ;
 			for each( var p:Vector3D in points) {
-				_wallDecorHash[ p.x+"-"+p.z+"-"+wallDecor.itemVO..direction] = wallDecor ;
+				_wallDecorHash[ p.x+"-"+p.z+"-"+wallDecor.itemVO.direction] = wallDecor ;
 			}
 		}
 		
