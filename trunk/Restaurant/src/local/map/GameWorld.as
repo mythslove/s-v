@@ -1,6 +1,8 @@
 package local.map
 {
 	import flash.geom.Point;
+	import flash.utils.clearInterval;
+	import flash.utils.setInterval;
 	
 	import local.comm.GameSetting;
 	import local.enum.ItemType;
@@ -30,6 +32,7 @@ package local.map
 		}
 		//-----------------------------------------------------------------
 		private var _juggle:Juggler = new Juggler() ;
+		private var _guestIntervalId:int ;
 		
 		public function GameWorld()
 		{
@@ -40,23 +43,29 @@ package local.map
 		public function run():void{ 
 			_juggle.add(this);
 			touchable=true ;
+			_guestIntervalId = setInterval( addQuest , 5000 );
 		}
 		public function stopRun():void{ 
 			_juggle.remove(this);
 			touchable=false ;
+			clearInterval(_guestIntervalId);
 		}
 		
 		private function onEnterFrame( e:EnterFrameEvent ):void
 		{
-			if(runUpdate)	{
+			if(runUpdate){
 				roomScene.advanceTime(e.passedTime) ;
 			}
 			if(x!=_endX) x += ( _endX-x)*_moveSpeed ; //缓动地图
 			if(y!=_endY) y += (_endY-y)*_moveSpeed ;
 		}
 		
-		
-		
+		private function addQuest():void
+		{
+			if(runUpdate){
+				door.openDoor();
+			}
+		}
 		
 		
 		/** 

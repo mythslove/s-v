@@ -130,10 +130,10 @@ package local.map
 			effectScene = new SIsoScene(GameSetting.GRID_SIZE);
 			effectScene.touchable = false ;
 			topScene = new SIsoScene(GameSetting.GRID_SIZE);
+			addScene(floorScene);
 			addScene( wallScene );
 			addScene( wallPaperScene );
 			addScene( wallDecorScene );
-			addScene(floorScene);
 			addScene(roomScene);
 			addScene(iconScene);
 			addScene( effectScene );
