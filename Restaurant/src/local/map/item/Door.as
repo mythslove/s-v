@@ -68,5 +68,11 @@ package local.map.item
 			_frameSprite.play("close");
 			_frameSprite.getCurrentFrameMovieClip().addEventListener(Event.COMPLETE , animCompleteHandler );
 		}
+		
+		override public function dispose():void{
+			_frameSprite.destroy();
+			_frameSprite = null ;
+			super.dispose();
+		}
 	}
 }
