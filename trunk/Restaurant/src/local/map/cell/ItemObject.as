@@ -69,8 +69,8 @@ package local.map.cell
 						mc = new MovieClip( textureAtlas.getTextures(tempName) , (Starling.current.nativeStage.frameRate/vo.rate)>>0 ) ;
 						mc.touchable = false ;
 					}
-					mc.x = vo.offsetX>>0 ;
-					mc.y = vo.offsetY>>0 ;
+					mc.x = vo.offsetX  ;
+					mc.y = vo.offsetY  ;
 					mc.scaleX = vo.scaleX ;
 					mc.scaleY = vo.scaleY ;
 					addChild( mc );
@@ -94,8 +94,8 @@ package local.map.cell
 							img = new Image( textureAtlas.getTexture( tempName )  ) ;
 							img.touchable = false ;
 						}
-						img.x =  vo.offsetX>>0 ;
-						img.y =  vo.offsetY>>0 ;
+						img.x =  vo.offsetX  ;
+						img.y =  vo.offsetY  ;
 						img.scaleX = vo.scaleX ;
 						img.scaleY = vo.scaleY ;
 						

@@ -34,8 +34,8 @@ package local.map.item
 			_frameSprite.addFrame( new MovieClip( textures.slice(0,1) as Vector.<Texture> , 1000 ) ,"normal") ;
 			_frameSprite.addFrame( new MovieClip( textures.slice(0,6) as Vector.<Texture> , fps )  ,"open") ;
 			_frameSprite.addFrame( new MovieClip( textures.slice(7) as Vector.<Texture>, fps )  ,"close")  ;
-			_frameSprite.x = vo.offsetX>>0 ;
-			_frameSprite.y = vo.offsetY>>0 ;
+			_frameSprite.x = vo.offsetX  ;
+			_frameSprite.y = vo.offsetY  ;
 			_frameSprite.scaleX = vo.scaleX ;
 			_frameSprite.scaleY = vo.scaleY ;
 			addChild(_frameSprite);
