@@ -52,7 +52,6 @@
 						{ 
 							var key:String = attNamesList[j].name() ;
 							if( baseVO.hasOwnProperty(key)){
-								trace(typeof  baseVO[key]);
 								switch(typeof  baseVO[key])
 								{
 									case "string":
