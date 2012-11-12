@@ -94,8 +94,8 @@ package local.map.cell
 							img = new Image( textureAtlas.getTexture( tempName )  ) ;
 							img.touchable = false ;
 						}
-						img.x =  vo.offsetX ;
-						img.y =  vo.offsetY ;
+						img.x =  vo.offsetX>>0 ;
+						img.y =  vo.offsetY>>0 ;
 						img.scaleX = vo.scaleX ;
 						img.scaleY = vo.scaleY ;
 						
