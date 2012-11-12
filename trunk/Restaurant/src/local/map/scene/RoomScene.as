@@ -71,7 +71,7 @@ package local.map.scene
 					if(GameData.villageMode==VillageMode.NORMAL){
 						(item as Chair).autoDirectionByTable();
 					}else{
-						( item as Chair).nearTable = null ;
+						( item as Chair).clearTempData();
 					}
 				}
 			}

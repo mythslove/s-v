@@ -7,6 +7,7 @@ package local.map.item
 	public class Chair extends BaseItem
 	{
 		public var nearTable:Table ;
+		public var hasGuest:Boolean ; //是否已经有客人坐上去了
 		
 		public function Chair(itemVO:ItemVO)
 		{
@@ -16,6 +17,14 @@ package local.map.item
 		override public function addToWorldFromTopScene():void{
 			super.addToWorldFromTopScene();
 			autoDirectionByTable();
+		}
+		
+		/**
+		 * 清除临时数据 
+		 */		
+		public function clearTempData():void{
+			nearTable = null ;
+			hasGuest = false ;
 		}
 		
 		public function autoDirectionByTable():void

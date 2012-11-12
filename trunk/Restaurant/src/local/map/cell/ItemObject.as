@@ -112,6 +112,13 @@ package local.map.cell
 					( getChildAt(i) as MovieClip ).advanceTime( passedTime );
 				}
 			}
+			if(container){
+				for( var i:int = 0 ; i<container.numChildren ; ++i){
+					if(container.getChildAt(i) is MovieClip ){
+						( container.getChildAt(i) as MovieClip ).advanceTime( passedTime );
+					}
+				}
+			}
 		}
 		
 		override public function dispose():void
