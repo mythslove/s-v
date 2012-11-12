@@ -31,9 +31,9 @@ package local.map.item
 			var vo:BitmapAnimResVO=(ResourceUtil.instance.getResVOByResId( name ).resObject as  Vector.<BitmapAnimResVO>)[0] ;
 			var textures:Vector.<Texture> = TextureAssets.instance.groundLayerTexture.getTextures(vo.resName+"_") ;
 			var fps:int = (Starling.current.nativeStage.frameRate/vo.rate)>>0 ;
-			_frameSprite.addFrame( new MovieClip( textures.slice(0,1) as Vector.<Texture> , fps ) ,"normal") ;
-			_frameSprite.addFrame( new MovieClip( textures.slice(1,6) as Vector.<Texture> , fps )  ,"open") ;
-			_frameSprite.addFrame( new MovieClip( textures.slice(6) as Vector.<Texture>, fps )  ,"close")  ;
+			_frameSprite.addFrame( new MovieClip( textures.slice(0,1) as Vector.<Texture> , 1000 ) ,"normal") ;
+			_frameSprite.addFrame( new MovieClip( textures.slice(0,6) as Vector.<Texture> , fps )  ,"open") ;
+			_frameSprite.addFrame( new MovieClip( textures.slice(7) as Vector.<Texture>, fps )  ,"close")  ;
 			_frameSprite.x = vo.offsetX>>0 ;
 			_frameSprite.y = vo.offsetY>>0 ;
 			_frameSprite.scaleX = vo.scaleX ;
@@ -55,11 +55,12 @@ package local.map.item
 		{
 			_frameSprite.getCurrentFrameMovieClip().removeEventListener(Event.COMPLETE , animCompleteHandler );
 			if(_frameSprite.getCurrentFrameLabel()=="open") {
-				setTimeout(closeDoor , 500 );
+				setTimeout(closeDoor , 1000 );
+				_frameSprite.getCurrentFrameMovieClip().pause();
 			}else{
 				_frameSprite.play("normal");
+				_frameSprite.stop();
 			}
-			_frameSprite.stop();
 		}
 		
 		private function closeDoor():void
