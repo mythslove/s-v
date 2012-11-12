@@ -9,7 +9,6 @@ package local.model
 	import local.map.item.BaseItem;
 	import local.map.item.BaseMapObject;
 	import local.map.item.Floor;
-	import local.map.item.Table;
 	import local.map.item.Wall;
 	import local.map.item.WallDecor;
 	import local.map.item.WallPaper;
@@ -93,9 +92,47 @@ package local.model
 		}
 		
 		
-		public function getNearTableByChair( chair:BaseItem ):Table
+		public function getNearRoomItemByType( building:BaseItem , type:String ):Vector.<BaseItem>
 		{
-			
+			var items:Vector.<BaseItem> = new Vector.<BaseItem>() ;
+			var temp:BaseItem ;
+			//左上 , 
+			 var i:int = building.nodeZ ; var j:int = i+building.itemVO.baseVO.xSpan ;
+			for( i ; i<j ; ++i){
+				temp = _roomItemHash[ (building.nodeX-1)*GameSetting.GRID_SIZE+"-"+i*GameSetting.GRID_SIZE ] as BaseItem;
+				if( temp && temp.itemVO.baseVO.type==type){
+					items.push(temp);
+					break ;
+				}
+			}
+			//左下
+			i = building.nodeX ; j=i+building.itemVO.baseVO.xSpan ;
+			for( i ; i<j ; ++i){
+				temp = _roomItemHash[ i*GameSetting.GRID_SIZE+"-"+ (building.nodeZ+building.itemVO.baseVO.xSpan)*GameSetting.GRID_SIZE ] as BaseItem;
+				if( temp && temp.itemVO.baseVO.type==type){
+					items.push(temp);
+					break ;
+				}
+			}
+			//右上
+			i = building.nodeX ; j=i+building.itemVO.baseVO.xSpan ;
+			for( i ; i<j ; ++i){
+				temp = _roomItemHash[ i*GameSetting.GRID_SIZE+"-"+ (building.nodeZ-1)*GameSetting.GRID_SIZE ] as BaseItem;
+				if( temp && temp.itemVO.baseVO.type==type){
+					items.push(temp);
+					break ;
+				}
+			}
+			//右下
+			i = building.nodeZ ; j = i+building.itemVO.baseVO.xSpan ;
+			for( i ; i<j ; ++i){
+				temp = _roomItemHash[ (building.nodeX+building.itemVO.baseVO.xSpan)*GameSetting.GRID_SIZE+"-"+i*GameSetting.GRID_SIZE ] as BaseItem;
+				if( temp && temp.itemVO.baseVO.type==type){
+					items.push(temp);
+					break ;
+				}
+			}
+			return items;
 		}
 		
 		/**
@@ -109,48 +146,48 @@ package local.model
 //		{
 //			var temp:BaseItem ;
 //			//左上 , 
-//			 var i:int = building.nodeZ ; var j:int = i+building.buildingVO.baseVO.span ;
+//			 var i:int = building.nodeZ ; var j:int = i+building.itemVO.baseVO.span ;
 //			for( i ; i<j ; ++i){
 //				temp = _grid2Building.getValue( (building.nodeX-1)*GameSetting.GRID_SIZE+"-"+i*GameSetting.GRID_SIZE ) as BaseItem;
-//				if( temp && temp.buildingVO.baseVO.type==type){
+//				if( temp && temp.itemVO.baseVO.type==type){
 //					if(subType){
-//						if(subType == temp.buildingVO.baseVO.subClass)	return true;
+//						if(subType == temp.itemVO.baseVO.subClass)	return true;
 //					}else{
 //						return true;
 //					}
 //				}
 //			}
 //			//左下
-//			i = building.nodeX ; j=i+building.buildingVO.baseVO.span ;
+//			i = building.nodeX ; j=i+building.itemVO.baseVO.span ;
 //			for( i ; i<j ; ++i){
-//				temp = _grid2Building.getValue( i*GameSetting.GRID_SIZE+"-"+ (building.nodeZ+building.buildingVO.baseVO.span)*GameSetting.GRID_SIZE ) as BaseItem;
-//				if( temp && temp.buildingVO.baseVO.type==type){
+//				temp = _grid2Building.getValue( i*GameSetting.GRID_SIZE+"-"+ (building.nodeZ+building.itemVO.baseVO.span)*GameSetting.GRID_SIZE ) as BaseItem;
+//				if( temp && temp.itemVO.baseVO.type==type){
 //					if(subType){
-//						if(subType == temp.buildingVO.baseVO.subClass)	return true;
+//						if(subType == temp.itemVO.baseVO.subClass)	return true;
 //					}else{
 //						return true;
 //					}
 //				}
 //			}
 //			//右上
-//			i = building.nodeX ; j=i+building.buildingVO.baseVO.span ;
+//			i = building.nodeX ; j=i+building.itemVO.baseVO.span ;
 //			for( i ; i<j ; ++i){
 //				temp = _grid2Building.getValue( i*GameSetting.GRID_SIZE+"-"+ (building.nodeZ-1)*GameSetting.GRID_SIZE ) as BaseItem;
-//				if( temp && temp.buildingVO.baseVO.type==type){
+//				if( temp && temp.itemVO.baseVO.type==type){
 //					if(subType){
-//						if(subType == temp.buildingVO.baseVO.subClass)	return true;
+//						if(subType == temp.itemVO.baseVO.subClass)	return true;
 //					}else{
 //						return true;
 //					}
 //				}
 //			}
 //			//右下
-//			i = building.nodeZ ; j = i+building.buildingVO.baseVO.span ;
+//			i = building.nodeZ ; j = i+building.itemVO.baseVO.span ;
 //			for( i ; i<j ; ++i){
-//				temp = _grid2Building.getValue( (building.nodeX+building.buildingVO.baseVO.span)*GameSetting.GRID_SIZE+"-"+i*GameSetting.GRID_SIZE ) as BaseItem;
-//				if( temp && temp.buildingVO.baseVO.type==type){
+//				temp = _grid2Building.getValue( (building.nodeX+building.itemVO.baseVO.span)*GameSetting.GRID_SIZE+"-"+i*GameSetting.GRID_SIZE ) as BaseItem;
+//				if( temp && temp.itemVO.baseVO.type==type){
 //					if(subType){
-//						if(subType == temp.buildingVO.baseVO.subClass)	return true;
+//						if(subType == temp.itemVO.baseVO.subClass)	return true;
 //					}else{
 //						return true;
 //					}

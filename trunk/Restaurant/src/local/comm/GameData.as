@@ -39,6 +39,7 @@ package local.comm
 				case VillageMode.NORMAL :
 					world.roomScene.touchable = true ;
 					world.roomScene.alpha=1;
+					world.roomScene.updateChairs();
 					world.runUpdate = true ;
 					world.topScene.visible = false ;
 					world.topScene.clearAndDisposeChild();
@@ -47,6 +48,7 @@ package local.comm
 					break ;
 				case VillageMode.EDIT :
 					world.roomScene.touchable = true ;
+					world.roomScene.updateChairs();
 					world.runUpdate = false ;
 					world.topScene.clearAndDisposeChild();
 					world.topScene.visible = true ;

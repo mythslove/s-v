@@ -55,9 +55,16 @@ package local.map.item
 			var barvo:Vector.<BitmapAnimResVO> ;
 			var itemOrGround:Boolean = !itemVO.baseVO.isWallLayer() ;
 			if(itemVO.baseVO.directions==4) {
-				var temp:int = itemVO.direction>2 ? itemVO.direction-2 : itemVO.direction;
+				var temp:int = itemVO.direction;
+				if(temp==4) temp=1 ;
+				else if( temp==3) temp=2;
+				
 				barvo = ResourceUtil.instance.getResVOByResId( name+"_"+temp ).resObject as  Vector.<BitmapAnimResVO> ;
 				_itemObject = new ItemObject( name , barvo , itemOrGround );
+				
+				if( itemVO.direction<3) _itemObject.scaleX = 1;
+				else _itemObject.scaleX = -1; 
+				
 			} else {
 				barvo = ResourceUtil.instance.getResVOByResId( name ).resObject as  Vector.<BitmapAnimResVO> ;
 				_itemObject = new ItemObject( name , barvo , itemOrGround );
@@ -218,27 +225,37 @@ package local.map.item
 		}
 		
 		/**
-		 * 旋转 
+		 * 按顺时针方向旋转
 		 */		
 		public function rotate():void
 		{
+			itemVO.direction++;
+			rototeToDirection();
+		}
+		
+		/**
+		 * 旋转成itemVO.direction方向 
+		 */		
+		public function rototeToDirection():void
+		{
 			var barvo:Vector.<BitmapAnimResVO> ;
 			var itemOrGround:Boolean = !itemVO.baseVO.isWallLayer() ;
+			if(itemVO.direction>4) itemVO.direction =1 ;
 			
-			if(itemVO.baseVO.directions==4) {
-				itemVO.direction++;
-				if(itemVO.direction>4) itemVO.direction=1 ;
+			if(itemVO.baseVO.directions==4) 
+			{
+				var temp:int = itemVO.direction;
+				if(temp==4) temp=1 ;
+				else if( temp==3) temp=2;
 				
-				var temp:int = itemVO.direction>2 ? itemVO.direction-2 : itemVO.direction;
 				barvo = ResourceUtil.instance.getResVOByResId( name+"_"+temp ).resObject as  Vector.<BitmapAnimResVO> ;
 				_itemObject.updateUI( name , barvo , itemOrGround );
 				
-				if( temp==2) _itemObject.scaleX = 1;
+				if( itemVO.direction<3) _itemObject.scaleX = 1;
 				else _itemObject.scaleX = -1; 
 			} 
 			else if( itemVO.baseVO.directions==2)
 			{
-				itemVO.direction++;
 				if(itemVO.direction>3) itemVO.direction=2 ;
 				
 				if( itemVO.direction==2) _itemObject.scaleX = 1;
