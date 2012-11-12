@@ -6,6 +6,8 @@ package local.view
 	import feathers.core.ITextRenderer;
 	import feathers.display.Sprite;
 	
+	import flash.utils.setTimeout;
+	
 	import local.comm.GameSetting;
 	import local.enum.VillageMode;
 	import local.util.EmbedManager;
@@ -66,14 +68,18 @@ package local.view
 			{
 				case VillageMode.NORMAL :
 					bottomBar.visible = true ;
-					bottomBar.btnMarket.visible =  bottomBar.btnEditor.visible =  bottomBar.btnMenu.visible = true ;
+					setTimeout(function():void{
+						bottomBar.btnMarket.visible =  bottomBar.btnEditor.visible =  bottomBar.btnMenu.visible = true ;
+					},200);
 					bottomBar.btnDone.visible = bottomBar.btnStorage.visible = false ;
 					questBtn.visible = true ;
 					topBar.visible = true ;
 					break ;
 				case VillageMode.EDIT :
 					bottomBar.btnMarket.visible =  bottomBar.btnEditor.visible =  bottomBar.btnMenu.visible = false ;
-					bottomBar.btnDone.visible = bottomBar.btnStorage.visible = true ;
+					setTimeout(function():void{
+						bottomBar.btnDone.visible = bottomBar.btnStorage.visible = true ;
+					},200);
 					questBtn.visible = false ;
 					topBar.visible = false ;
 					break ;
