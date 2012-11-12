@@ -5,6 +5,7 @@ package local.comm
 	
 	import local.enum.VillageMode;
 	import local.map.GameWorld;
+	import local.model.MapGridDataModel;
 	import local.view.CenterViewLayer;
 
 	public class GameData
@@ -44,6 +45,7 @@ package local.comm
 					world.topScene.visible = false ;
 					world.topScene.clearAndDisposeChild();
 					world.iconScene.visible = true ;
+					MapGridDataModel.instance.gameGridData.calculateLinks();
 //					world.sortIcons();
 					break ;
 				case VillageMode.EDIT :
