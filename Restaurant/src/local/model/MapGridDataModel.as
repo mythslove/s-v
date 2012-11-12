@@ -1,5 +1,6 @@
 package local.model
 {
+	import bing.iso.path.AStar;
 	import bing.iso.path.Grid;
 	
 	import flash.geom.Vector3D;
@@ -39,6 +40,10 @@ package local.model
 		/**格子位置对建筑数据映射，当点击某个格子时，能知道当前点击了哪个建筑 */		
 		private var _roomItemHash:Dictionary = new Dictionary();
 		
+		/**
+		 * 寻路数据 
+		 */		
+		public var astar:AStar ;
 		
 		public function addWallGridData( wall:Wall ):void
 		{
@@ -66,6 +71,7 @@ package local.model
 					gameGridData.setWalkable( i , j , true );
 				}
 			}
+			astar = new AStar(gameGridData);
 		}
 		
 		public function addRoomItemGridData( roomItem:BaseMapObject ):void
@@ -134,67 +140,6 @@ package local.model
 			}
 			return items;
 		}
-		
-		/**
-		 * 判断建筑周围是否有相应的建筑 
-		 * @param building
-		 * @param type
-		 * @param subType
-		 * @return  找到的话返回true , 否则返回false
-		 */		
-//		public function checkAroundBuilding( building:BaseItem , type:String , subType:String = null ):Boolean
-//		{
-//			var temp:BaseItem ;
-//			//左上 , 
-//			 var i:int = building.nodeZ ; var j:int = i+building.itemVO.baseVO.span ;
-//			for( i ; i<j ; ++i){
-//				temp = _grid2Building.getValue( (building.nodeX-1)*GameSetting.GRID_SIZE+"-"+i*GameSetting.GRID_SIZE ) as BaseItem;
-//				if( temp && temp.itemVO.baseVO.type==type){
-//					if(subType){
-//						if(subType == temp.itemVO.baseVO.subClass)	return true;
-//					}else{
-//						return true;
-//					}
-//				}
-//			}
-//			//左下
-//			i = building.nodeX ; j=i+building.itemVO.baseVO.span ;
-//			for( i ; i<j ; ++i){
-//				temp = _grid2Building.getValue( i*GameSetting.GRID_SIZE+"-"+ (building.nodeZ+building.itemVO.baseVO.span)*GameSetting.GRID_SIZE ) as BaseItem;
-//				if( temp && temp.itemVO.baseVO.type==type){
-//					if(subType){
-//						if(subType == temp.itemVO.baseVO.subClass)	return true;
-//					}else{
-//						return true;
-//					}
-//				}
-//			}
-//			//右上
-//			i = building.nodeX ; j=i+building.itemVO.baseVO.span ;
-//			for( i ; i<j ; ++i){
-//				temp = _grid2Building.getValue( i*GameSetting.GRID_SIZE+"-"+ (building.nodeZ-1)*GameSetting.GRID_SIZE ) as BaseItem;
-//				if( temp && temp.itemVO.baseVO.type==type){
-//					if(subType){
-//						if(subType == temp.itemVO.baseVO.subClass)	return true;
-//					}else{
-//						return true;
-//					}
-//				}
-//			}
-//			//右下
-//			i = building.nodeZ ; j = i+building.itemVO.baseVO.span ;
-//			for( i ; i<j ; ++i){
-//				temp = _grid2Building.getValue( (building.nodeX+building.itemVO.baseVO.span)*GameSetting.GRID_SIZE+"-"+i*GameSetting.GRID_SIZE ) as BaseItem;
-//				if( temp && temp.itemVO.baseVO.type==type){
-//					if(subType){
-//						if(subType == temp.itemVO.baseVO.subClass)	return true;
-//					}else{
-//						return true;
-//					}
-//				}
-//			}
-//			return false;
-//		}
 		
 		
 		public function addWallPaperGridData( wallPaper:WallPaper ):void

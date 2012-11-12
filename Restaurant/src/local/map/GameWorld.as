@@ -92,6 +92,7 @@ package local.map
 				wallDecorScene.sortAll() ;
 				wallPaperScene.sortAll() ;
 				roomScene.sortAll() ;
+				MapGridDataModel.instance.gameGridData.calculateLinks();
 				run() ;
 			}
 		}
