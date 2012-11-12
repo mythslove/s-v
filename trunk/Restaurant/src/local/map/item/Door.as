@@ -46,7 +46,7 @@ package local.map.item
 			Starling.juggler.remove(_mc);
 		}
 		
-		public function playAnim():void
+		public function openDoor():void
 		{
 			if(!_mc.isPlaying) {
 				Starling.juggler.add(_mc);
