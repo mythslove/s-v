@@ -2,8 +2,11 @@ package local.map.scene
 {
 	import bing.starling.iso.SIsoScene;
 	
+	import local.comm.GameData;
 	import local.comm.GameSetting;
+	import local.enum.VillageMode;
 	import local.map.item.BaseItem;
+	import local.map.item.Chair;
 	import local.model.MapGridDataModel;
 	
 	public class RoomScene extends SIsoScene
@@ -57,6 +60,19 @@ package local.map.scene
 				MapGridDataModel.instance.addRoomItemGridData( item );
 			}
 		}
-
+		
+		
+		public function updateChairs():void
+		{
+			for each( var item:BaseItem in children){
+				if(item is Chair){
+					if(GameData.villageMode==VillageMode.NORMAL){
+						(item as Chair).autoDirectionByTable();
+					}else{
+						( item as Chair).nearTable = null ;
+					}
+				}
+			}
+		}
 	}
 }
