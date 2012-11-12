@@ -15,8 +15,7 @@ package local.map
 	import local.comm.GameSetting;
 	import local.enum.ItemType;
 	import local.enum.VillageMode;
-	import local.map.item.BaseItem;
-	import local.map.item.Wall;
+	import local.map.item.*;
 	import local.map.scene.FloorScene;
 	import local.map.scene.RoomScene;
 	import local.map.scene.WallDecorScene;
@@ -26,6 +25,7 @@ package local.map
 	import local.util.EmbedManager;
 	import local.view.btns.EditItemButtons;
 	import local.view.btns.MoveItemButtons;
+	import local.vo.ItemVO;
 	import local.vo.PlayerVO;
 	
 	import starling.core.Starling;
@@ -52,7 +52,7 @@ package local.map
 		public var iconScene:SIsoScene ; //显示icon层
 		public var topScene:SIsoScene ; //最上层,显示移动的建筑，以及显示一些特效动画
 		public var effectScene:SIsoScene ; //特效层
-		
+		public var door:Door;
 		
 		protected var _mouseItem:BaseItem ; //鼠标按下时的Item
 		protected var _mouseDownPos:Point = new Point(); //鼠标点击的位置
@@ -179,6 +179,14 @@ package local.map
 				MapGridDataModel.instance.addWallGridData( wall );
 			}
 			wallScene.sortAll() ;
+			//添加门
+			var itemVO:ItemVO = new ItemVO();
+			itemVO.nodeZ = 1 ;
+			itemVO.name="Door";
+			itemVO.direction = 2 ;
+			door = new Door(itemVO);
+			door.touchable=false;
+			wallDecorScene.addItem( door , false );
 		}
 		
 		protected function configListeners():void
