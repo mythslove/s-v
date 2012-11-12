@@ -181,7 +181,7 @@ package local.map
 			wallScene.sortAll() ;
 			//添加门
 			var itemVO:ItemVO = new ItemVO();
-			itemVO.nodeZ = 1 ;
+			itemVO.nodeZ = 2 ;
 			itemVO.name="Door";
 			itemVO.direction = 2 ;
 			door = new Door(itemVO);
