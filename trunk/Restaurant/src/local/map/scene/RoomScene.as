@@ -61,7 +61,9 @@ package local.map.scene
 			}
 		}
 		
-		
+		/**
+		 * 更新所有的凳子 
+		 */		
 		public function updateChairs():void
 		{
 			for each( var item:BaseItem in children){
