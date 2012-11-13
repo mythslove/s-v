@@ -113,7 +113,7 @@ package local.map.cell
 				}
 			}
 			if(container){
-				for( var i:int = 0 ; i<container.numChildren ; ++i){
+				for( i = 0 ; i<container.numChildren ; ++i){
 					if(container.getChildAt(i) is MovieClip ){
 						( container.getChildAt(i) as MovieClip ).advanceTime( passedTime );
 					}
