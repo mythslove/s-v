@@ -4,6 +4,7 @@ package local.util
 	import local.map.item.BaseItem;
 	import local.map.item.Chair;
 	import local.map.item.Floor;
+	import local.map.item.Stove;
 	import local.map.item.Table;
 	import local.map.item.Wall;
 	import local.map.item.WallDecor;
@@ -38,6 +39,9 @@ package local.util
 				case ItemType.TABLE:
 					item = new Table( itemVO ) ;
 					break ;
+				case ItemType.STOVE:
+					item = new Stove( itemVO );
+					break;
 				default:
 					item = new BaseItem( itemVO );
 					break ;
