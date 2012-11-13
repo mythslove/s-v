@@ -108,6 +108,7 @@ package local.map.cell
 		public function advanceTime(passedTime:Number):void
 		{
 			for( var i:int = 0 ; i<numChildren ; ++i){
+				
 				if(getChildAt(i) is MovieClip ){
 					( getChildAt(i) as MovieClip ).advanceTime( passedTime );
 				}
