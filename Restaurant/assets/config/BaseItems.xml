@@ -4,4 +4,5 @@
 	<item name="Autumn Table" type="table" costCoin="3" />
 	<item name="Chair1" type="chair" costCoin="3"  directions="4"/>
 	<item name="WallPaper1" type="wallpaper" costCoin="3" />
+	<item name="Stove1" type="stove" directions="2"  costCoin="10"/>
 </baseItems>
