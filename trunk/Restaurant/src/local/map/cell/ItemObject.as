@@ -7,6 +7,7 @@ package local.map.cell
 	
 	import starling.animation.IAnimatable;
 	import starling.core.Starling;
+	import starling.display.DisplayObject;
 	import starling.display.Image;
 	import starling.display.MovieClip;
 	import starling.display.Sprite;
@@ -120,6 +121,12 @@ package local.map.cell
 					}
 				}
 			}
+		}
+		
+		public function addItem( obj:DisplayObject ):void
+		{
+			container.removeChildren(0,-1,true);
+			container.addChild( obj );
 		}
 		
 		override public function dispose():void
