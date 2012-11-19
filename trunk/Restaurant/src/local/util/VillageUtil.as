@@ -131,6 +131,10 @@ package local.util
 					//读任务
 					//掉落物
 				}
+				catch( e:Error)
+				{
+					trace(e.message);
+				}
 				finally
 				{
 					stream.close();
