@@ -123,9 +123,9 @@ package local.map.cell
 			}
 		}
 		
-		public function addItem( obj:DisplayObject ):void
+		public function addItem( obj:DisplayObject , dispose:Boolean = true ):void
 		{
-			container.removeChildren(0,-1,true);
+			container.removeChildren(0,-1,dispose);
 			container.addChild( obj );
 		}
 		

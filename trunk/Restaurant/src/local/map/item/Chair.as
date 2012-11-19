@@ -53,6 +53,13 @@ package local.map.item
 			}
 		}
 		
+		
+		public function addCharacter( character:Character ):void
+		{
+			_itemObject.addItem( character ,false);
+		}
+ 			
+		
 		override public function dispose():void
 		{
 			super.dispose();
