@@ -1,5 +1,6 @@
 package local.map.scene
 {
+	import bing.starling.iso.SIsoObject;
 	import bing.starling.iso.SIsoScene;
 	
 	import local.comm.GameData;
@@ -7,6 +8,7 @@ package local.map.scene
 	import local.enum.VillageMode;
 	import local.map.item.BaseItem;
 	import local.map.item.Chair;
+	import local.map.item.Character;
 	import local.model.MapGridDataModel;
 	
 	public class RoomScene extends SIsoScene
@@ -73,6 +75,21 @@ package local.map.scene
 					}else{
 						( item as Chair).clearTempData();
 					}
+				}
+			}
+		}
+		
+		public function addCharacters():void
+		{
+			
+		}
+		
+		public function removeCharacters():void
+		{
+			for each( var obj:SIsoObject in children){
+				if( obj is Character){
+					removeIsoObject( obj );
+					obj.dispose();
 				}
 			}
 		}
