@@ -131,7 +131,7 @@ package local.map.item
 		{
 			var astar:AStar = MapGridDataModel.instance.astar ;
 			
-			if(MapGridDataModel.instance..getNode(endNodeX,endNodeZ).walkable )
+			if(MapGridDataModel.instance.gameGridData.getNode(endNodeX,endNodeZ).walkable )
 			{
 				if(MapGridDataModel.instance.gameGridData.getNode(nodeX,nodeZ).walkable)
 				{
