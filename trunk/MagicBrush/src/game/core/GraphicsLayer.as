@@ -3,7 +3,6 @@ package game.core
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.Shape;
-	import flash.events.Event;
 	import flash.events.TouchEvent;
 	
 	import game.comm.GameSetting;
@@ -18,7 +17,6 @@ package game.core
 		public var layer3:Bitmap = new Bitmap();
 		public var drawShap:Shape = new Shape();
 		public var selectedLayer:Bitmap ;
-		private var _drawTick:int ;
 		
 		public function GraphicsLayer()
 		{
@@ -56,40 +54,22 @@ package game.core
 					case TouchEvent.TOUCH_BEGIN:
 						drawShap.graphics.lineStyle(GameSetting.penSize*2 , GameSetting.color, GameSetting.penAlpha );
 						drawShap.graphics.moveTo(mouseX , mouseY);
-						addEventListener(Event.ENTER_FRAME , addedHandler );
 						break;
 					case TouchEvent.TOUCH_MOVE :
 						drawShap.graphics.lineTo(mouseX , mouseY);
 						break ;
 					default:
 						if(GameSetting.blur>0){
-							drawShap.filters = [GameUtil.blurFilter] ;
+							drawShap.filters = GameUtil.blurFilter ;
 						}
 						//重置
 						selectedLayer.bitmapData.draw( drawShap) ;
 						drawShap.graphics.clear() ;
 						drawShap.filters = null ;
-						removeEventListener(Event.ENTER_FRAME , addedHandler );
 						break ;
 				}
 			}
 		}
 		
-		private function updateDraw( e:Event ):void
-		{
-			++_drawTick;
-			if(_drawTick>=1)
-			{
-				if(GameSetting.blur>0){
-					drawShap.filters = GameUtil.blurFilter ;
-				}
-				//重置
-				selectedLayer.bitmapData.draw( drawShap) ;
-				drawShap.graphics.clear() ;
-				drawShap.filters = null ;
-				_drawTick = 0;
-			}
-		}
-				
 	}
 }
