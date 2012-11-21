@@ -63,6 +63,8 @@
 			{
 				if(currentRoad)
 				{
+					currentRoad.x = currentRoad.x>> 0 ;
+					currentRoad.y = currentRoad.y>> 0 ;
 					switch(e.keyCode)
 					{
 						case Keyboard.A:
@@ -104,6 +106,8 @@
 							break ;
 						case MouseEvent.MOUSE_MOVE:
 							if(e.buttonDown){
+								currentRoad.x = currentRoad.x>>0 ;
+								currentRoad.y= currentRoad.y>>0 ;
 								txtOffsetX.text = (currentRoad.x-currentRoad.rightX) +"";
 								txtOffsetY.text = (currentRoad.y-currentRoad.rightY) +"";
 							}

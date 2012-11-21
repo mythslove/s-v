@@ -45,6 +45,8 @@
 			{
 				if(_animObject)
 				{
+					_animObject.x = _animObject.x>> 0 ;
+					_animObject.y = _animObject.y>> 0 ;
 					switch(e.keyCode)
 					{
 						case Keyboard.A:
@@ -120,10 +122,10 @@
 						default:
 							e.target.alpha = 1 ;
 							e.target.stopDrag() ;
-							e.target.vo.offsetX = e.target.x ;
-							e.target.vo.offsetY = e.target.y ;
-							animView.txtPivotX.text =  e.target.x+"";
-							animView.txtPivotY.text =  e.target.y+"";
+							e.target.vo.offsetX = e.target.x>>0 ;
+							e.target.vo.offsetY = e.target.y>>0 ;
+							animView.txtPivotX.text = e.target.vo.offsetX+"";
+							animView.txtPivotY.text = e.target.vo.offsetY+"";
 							animView.txtScaleX.text = e.target.scaleX+"";
 							animView.txtScaleY.text = e.target.scaleY+"";
 							break ;
