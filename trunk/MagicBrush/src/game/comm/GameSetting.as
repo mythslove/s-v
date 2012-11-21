@@ -12,9 +12,9 @@ package game.comm
 		
 		public static var status:String = AppStatus.DRAW ;
 		
-		public static var blur:Number = 0.0 ;
+		public static var blur:Number = 10.0 ;
 		
-		public static var penSize:Number = 10 ;
+		public static var penSize:Number = 20 ;
 		
 		public static var penAlpha:Number = 1.0 ;
 	}

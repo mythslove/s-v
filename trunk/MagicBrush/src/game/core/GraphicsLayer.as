@@ -7,6 +7,7 @@ package game.core
 	
 	import game.comm.GameSetting;
 	import game.enums.AppStatus;
+	import game.util.GameUtil;
 	
 	public class GraphicsLayer extends BaseGraphicsLayer
 	{
@@ -16,7 +17,6 @@ package game.core
 		public var layer3:Bitmap = new Bitmap();
 		public var drawShap:Shape = new Shape();
 		public var selectedLayer:Bitmap ;
-		public var pen:Pen ;
 		
 		public function GraphicsLayer()
 		{
@@ -39,8 +39,6 @@ package game.core
 			layer3 = new Bitmap( new BitmapData(canvas.width,canvas.height,true,0xffffff));
 			addChild(layer3);
 			selectedLayer = layer1 ;
-			pen = new Pen();
-			addChild(pen);
 		}
 		
 		override protected function onTouchHandler(e:TouchEvent):void
@@ -56,16 +54,18 @@ package game.core
 					case TouchEvent.TOUCH_BEGIN:
 						drawShap.graphics.lineStyle(GameSetting.penSize*2 , GameSetting.color, GameSetting.penAlpha );
 						drawShap.graphics.moveTo(mouseX , mouseY);
+						if(GameSetting.blur>0){
+							drawShap.filters = [GameUtil.blurFilter] ;
+						}
 						break;
 					case TouchEvent.TOUCH_MOVE :
 						drawShap.graphics.lineTo(mouseX , mouseY);
-						pen.x = mouseX;
-						pen.y = mouseY ;
 						break ;
 					default:
 						//重置
 						selectedLayer.bitmapData.draw( drawShap) ;
 						drawShap.graphics.clear() ;
+						drawShap.filters = null ;
 						break ;
 				}
 			}
