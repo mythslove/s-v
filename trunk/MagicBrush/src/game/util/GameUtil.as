@@ -7,15 +7,17 @@ package game.util
 	public class GameUtil
 	{
 		private static  var _blurFilter:BlurFilter ;
+		private static var _blurs:Array ;
 		
-		public static function get blurFilter():BlurFilter
+		public static function get blurFilter():Array
 		{
 			if(!_blurFilter){
 				_blurFilter = new BlurFilter();
+				_blurs = [_blurFilter];
 			}
 			_blurFilter.blurX = GameSetting.blur ;
 			_blurFilter.blurY = GameSetting.blur ;
-			return _blurFilter ;
+			return _blurs ;
 		}
 	}
 }
