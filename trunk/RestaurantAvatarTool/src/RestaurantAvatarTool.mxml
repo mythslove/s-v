@@ -1,8 +1,296 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
-					   xmlns:s="library://ns.adobe.com/flex/spark" 
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" showStatusBar="false" 
+					   xmlns:s="library://ns.adobe.com/flex/spark" width="900" height="640" creationComplete="init();"
 					   xmlns:mx="library://ns.adobe.com/flex/mx">
 	<fx:Declarations>
 		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
 	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import com.greensock.TweenMax;
+			
+			import ghostcat.fileformat.swf.SWFDecoder;
+			import ghostcat.fileformat.swf.tag.SymbolClassTag;
+			
+			import mx.collections.ArrayCollection;
+			import mx.core.UIComponent;
+			import mx.events.ColorPickerEvent;
+			
+			import spark.events.IndexChangeEvent;
+			
+			[Embed(source="sprite 85.swf",symbol="Man")]
+			private const MAN:Class ;
+			[Embed(source="sprite 83.swf",symbol="Man")]
+			private const MAN_BA:Class ;
+			[Embed(source="avatar_asset.swf",mimeType="application/octet-stream")]
+			private const AVATAR:Class ;
+			
+			private var loader:Loader ;
+			private var domain:ApplicationDomain ;
+			private var swfDecoder:SWFDecoder ;
+			private var bytes:ByteArray ;
+			private var all:Array ;
+			private var man:MovieClip ;
+			private var man_ba:MovieClip;
+			
+			private function init():void
+			{
+				bytes = new AVATAR() as ByteArray;
+				loader = new Loader();
+				loader.contentLoaderInfo.addEventListener(Event.COMPLETE , loadedHandler );
+				var context:LoaderContext = new LoaderContext(false,ApplicationDomain.currentDomain) ;
+				context.allowCodeImport = true ;
+				loader.loadBytes(bytes,context);
+			}
+			
+			private function loadedHandler(e:Event):void
+			{
+				domain = loader.contentLoaderInfo.applicationDomain;
+				//破解swf
+				bytes.position=0;
+				swfDecoder = new SWFDecoder(bytes);
+				all = swfDecoder.getTags(SymbolClassTag)[0].symbolClasses ;
+				types.dataProvider = new ArrayCollection([
+					"Pants","Shirt","hair","Hat","Eyes","EyeBrow","Mouth","Beard","Extra"
+				]);
+				//显示人
+				man = new MAN() as MovieClip;
+				man.x = -150 ;
+				man_ba = new MAN_BA() as MovieClip;
+				man_ba.x = 150 ;
+				man_ba.scaleX = man_ba.scaleY =man.scaleX = man.scaleY = 4 ;
+				container.addChild( man);
+				container.addChild( man_ba);
+			}
+			
+			protected function hairColorPicker_changeHandler(event:ColorPickerEvent):void
+			{
+				var head:Sprite = man.getChildByName("head") as Sprite;
+				TweenMax.to(head.getChildByName("hair_mc"), 0, {colorMatrixFilter:{colorize:hairColorPicker.selectedColor, amount:1}});
+				head = man_ba.getChildByName("head") as Sprite;
+				TweenMax.to(head.getChildByName("hair_mc"), 0, {colorMatrixFilter:{colorize:hairColorPicker.selectedColor, amount:1}});
+			}
+			
+			protected function skinColorPicker_changeHandler(event:ColorPickerEvent):void
+			{
+				var skins:Vector.<DisplayObject> = ContainerUtil.getChildsByName("skin",man) ;
+				for each(var obj:DisplayObject in skins )
+				{
+				      TweenMax.to(obj, 0, {colorMatrixFilter:{colorize:skinColorPicker.selectedColor, amount:1}});
+				}
+				skins = ContainerUtil.getChildsByName("skin",man_ba) ;
+				for each(obj in skins )
+				{
+					TweenMax.to(obj, 0, {colorMatrixFilter:{colorize:skinColorPicker.selectedColor, amount:1}});
+				}
+			}
+			
+			protected function types_changeHandler(event:IndexChangeEvent):void
+			{
+				var type:String = String(types.selectedItem);
+				var len:int=all.length;
+				var temp:Array=["clear"];
+				for( var i:int = 0 ; i<len ; ++i )
+				{
+					var key:String = all[i] ;
+					if( key.indexOf(type)==0 && key.indexOf("Icon")==-1 && key.indexOf("_ba")==-1 ){
+						temp.push( key );
+					}
+				}
+				lists.dataProvider = new ArrayCollection( temp );
+			}
+			
+			protected function lists_changeHandler(event:IndexChangeEvent):void
+			{
+				switch(String(types.selectedItem))
+				{
+					case "Pants":
+						changePants();
+						break ;
+					case "Shirt": 
+						changeShirt();
+						break ;
+					case "hair": 
+						changeHair();
+						break ;
+					case "Hat": 
+						changeHat();
+						break ;
+					case "Eyes": 
+						changeFaces("eyes_mc");
+						break ;
+					case "EyeBrow": 
+						changeFaces("eyebrow_mc");
+						break ;
+					case "Mouth": 
+						changeFaces("mouth_mc");
+						break ;
+					case "Beard": 
+						changeFaces("beard_mc");
+						break ;
+					case "Extra":
+						changeFaces("clothes");
+						break ;
+				}
+			}
+			
+			private function changeFaces( temp:String ):void
+			{
+				var skin:String = String(lists.selectedItem) ;
+				changeSkin( man , skin );
+				function changeSkin(mc:MovieClip , param:String):void{
+					var head:Sprite = mc.getChildByName("head") as Sprite;
+					var obj:DisplayObject = ( new (domain.getDefinition(param) as Class)) as Sprite; 
+					ContainerUtil.removeChildren( ((head.getChildByName(temp) as Sprite) .getChildByName("clothes") as Sprite) );
+					if(obj){
+						obj.x = obj.y = 0 ;
+						((head.getChildByName(temp) as Sprite).getChildByName("clothes") as Sprite).addChild(obj) ;
+					}
+				}
+			}
+			
+			private function changeHat():void
+			{
+				var skin:String = String(lists.selectedItem) ;
+				changeSkin( man , skin );
+				changeSkin( man_ba , skin+"_ba" );
+				function changeSkin(mc:MovieClip , param:String):void{
+					var head:Sprite = mc.getChildByName("head") as Sprite;
+					var obj:DisplayObject = ( new (domain.getDefinition(param) as Class)) as Sprite; //帽子
+					ContainerUtil.removeChildren( ((head.getChildByName("cap") as Sprite) .getChildByName("clothes") as Sprite) );
+					if(obj){
+						obj.x = obj.y = 0 ;
+						((head.getChildByName("cap") as Sprite).getChildByName("clothes") as Sprite).addChild(obj) ;
+					}
+				}
+			}
+			
+			private function changeHair():void
+			{
+				var skin:String = String(lists.selectedItem) ;
+				changeSkin( man , skin );
+				changeSkin( man_ba , skin+"_ba" );
+				function changeSkin(mc:MovieClip , param:String):void{
+					var head:Sprite = mc.getChildByName("head") as Sprite;
+					var obj:DisplayObject = ( new (domain.getDefinition(param) as Class)) as Sprite; //头发
+					ContainerUtil.removeChildren( ((head.getChildByName("hair_mc") as Sprite) .getChildByName("clothes") as Sprite) );
+					if(obj){
+						obj.x = obj.y = 0 ;
+						((head.getChildByName("hair_mc") as Sprite).getChildByName("clothes") as Sprite).addChild(obj) ;
+					}
+				}
+				
+			}
+			
+			private function changeShirt():void
+			{
+				var skin:String = String(lists.selectedItem) ;
+				changeSkin( man , skin );
+				changeSkin( man_ba , skin+"_ba" );
+				function changeSkin(mc:MovieClip , param:String):void{
+					var shirt:Sprite = ( new (domain.getDefinition(param) as Class)) as Sprite;
+					
+					var obj:DisplayObject = shirt.getChildByName("left_hand1") ; 
+					if(obj){
+						obj.x = obj.y = 0 ;
+						ContainerUtil.removeChildren( ((mc.getChildByName("left_hand_1") as Sprite) .getChildByName("clothes") as Sprite) );
+						((mc.getChildByName("left_hand_1") as Sprite) .getChildByName("clothes") as Sprite).addChild(obj) ;
+					}
+					obj = shirt.getChildByName("left_hand2") ;//膀
+					if(obj){
+						obj.x = obj.y = 0 ;
+						ContainerUtil.removeChildren( ((mc.getChildByName("left_hand_2") as Sprite) .getChildByName("clothes") as Sprite) );
+						((mc.getChildByName("left_hand_2") as Sprite) .getChildByName("clothes") as Sprite).addChild(obj) ;
+					}
+					obj = shirt.getChildByName("right_hand1") ;
+					if(obj){
+						obj.x = obj.y = 0 ;
+						ContainerUtil.removeChildren( ((mc.getChildByName("rigth_hand_1") as Sprite) .getChildByName("clothes") as Sprite) );
+						((mc.getChildByName("rigth_hand_1") as Sprite) .getChildByName("clothes") as Sprite).addChild(obj) ;
+					}
+					obj = shirt.getChildByName("right_hand2") ;//膀
+					if(obj){
+						obj.x = obj.y = 0 ;
+						ContainerUtil.removeChildren( ((mc.getChildByName("rigth_hand_2") as Sprite) .getChildByName("clothes") as Sprite) );
+						((mc.getChildByName("rigth_hand_2") as Sprite) .getChildByName("clothes") as Sprite).addChild(obj) ;
+					}
+					obj = shirt.getChildByName("body") ;
+					if(obj){
+						obj.x = obj.y = 0 ;
+						ContainerUtil.removeChildren( ((mc.getChildByName("body") as Sprite) .getChildByName("clothes") as Sprite) );
+						((mc.getChildByName("body") as Sprite) .getChildByName("clothes") as Sprite).addChild(obj) ;
+					}
+				}
+			
+			}
+			
+			private function changePants():void
+			{
+				var skin:String = String(lists.selectedItem) ;
+				changeSkin( man , skin );
+				changeSkin( man_ba , skin+"_ba" );
+				function changeSkin(mc:MovieClip , param:String):void{
+					var pant:Sprite = ( new (domain.getDefinition(param) as Class)) as Sprite; //下身
+					var obj:DisplayObject = pant.getChildByName("left_crural1") ; 
+					if(obj){
+						obj.x = obj.y = 0 ;
+						ContainerUtil.removeChildren( ((mc.getChildByName("left_crura1") as Sprite) .getChildByName("clothes") as Sprite) );
+						((mc.getChildByName("left_crura1") as Sprite) .getChildByName("clothes") as Sprite).addChild(obj) ;
+					}
+					obj = pant.getChildByName("left_crural2") ;
+					if(obj){
+						obj.x = obj.y = 0 ;
+						ContainerUtil.removeChildren( ((mc.getChildByName("left_crura2") as Sprite) .getChildByName("clothes") as Sprite) );
+						((mc.getChildByName("left_crura2") as Sprite) .getChildByName("clothes") as Sprite).addChild(obj) ;
+					}
+					obj = pant.getChildByName("shoes_left") ;
+					if(obj){
+						obj.x = obj.y = 0 ;
+						ContainerUtil.removeChildren( ((mc.getChildByName("left_crura3") as Sprite) .getChildByName("clothes") as Sprite) );
+						((mc.getChildByName("left_crura3") as Sprite) .getChildByName("clothes") as Sprite).addChild(obj) ;
+					}
+					obj = pant.getChildByName("right_crural1") ;
+					if(obj){
+						obj.x = obj.y = 0 ;
+						ContainerUtil.removeChildren( ((mc.getChildByName("right_crura1") as Sprite) .getChildByName("clothes") as Sprite) );
+						((mc.getChildByName("right_crura1") as Sprite) .getChildByName("clothes") as Sprite).addChild(obj) ;
+					}
+					obj = pant.getChildByName("right_crural2") ; 
+					if(obj){
+						obj.x = obj.y = 0 ;
+						ContainerUtil.removeChildren( ((mc.getChildByName("right_crura2") as Sprite) .getChildByName("clothes") as Sprite) );
+						((mc.getChildByName("right_crura2") as Sprite) .getChildByName("clothes") as Sprite).addChild(obj) ;
+					}
+					obj = pant.getChildByName("shoes_right") ; 
+					if(obj){
+						obj.x = obj.y = 0 ;
+						ContainerUtil.removeChildren( ((mc.getChildByName("right_crura3") as Sprite) .getChildByName("clothes") as Sprite) );
+						((mc.getChildByName("right_crura3") as Sprite) .getChildByName("clothes") as Sprite).addChild(obj) ;
+					}
+					obj = pant.getChildByName("pigu") ; 
+					if(obj){
+						ContainerUtil.removeChildren( ((mc.getChildByName("pigu") as Sprite) .getChildByName("clothes") as Sprite) );
+						((mc.getChildByName("pigu") as Sprite) .getChildByName("clothes") as Sprite).addChild(obj) ;
+					}
+				}
+			}
+			
+		]]>
+	</fx:Script>
+	<s:HGroup x="0" y="0" width="100%" height="100%">
+		<s:BorderContainer id="avatarContainer" width="80%" height="100%" backgroundColor="#073300">
+			<mx:UIComponent id="container" horizontalCenter="0" verticalCenter="50"/>
+		</s:BorderContainer>
+		<s:BorderContainer width="200" height="100%">
+			<s:DropDownList id="types" x="10" y="125" width="178" height="21"
+							change="types_changeHandler(event)"></s:DropDownList>
+			<s:List id="lists" x="10" top="154" bottom="5" width="178" change="lists_changeHandler(event)"></s:List>
+			<s:Label x="10" y="70" text="skin"/>
+			<s:Label x="127" y="70" text="hair"/>
+			<mx:ColorPicker id="skinColorPicker" x="9" y="89" width="61" height="27"
+							change="skinColorPicker_changeHandler(event)"/>
+			<mx:ColorPicker id="hairColorPicker" x="127" y="90" width="61" height="27"
+							change="hairColorPicker_changeHandler(event)"/>
+		</s:BorderContainer>
+	</s:HGroup>
 </s:WindowedApplication>
