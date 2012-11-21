@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009"
+				   xmlns:s="library://ns.adobe.com/flex/spark"
+				   xmlns:mx="library://ns.adobe.com/flex/mx"
+				   width="300" height="148" backgroundColor="#E0E0E0" borderColor="#A1A1A1"
+				   borderWeight="2" dropShadowVisible="true">
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<s:Label x="101" y="59" fontSize="25" fontWeight="bold" text="Wait..."/>
+</s:BorderContainer>
