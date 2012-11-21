@@ -3,8 +3,6 @@ package game.core
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.Shape;
-	import flash.events.Event;
-	import flash.events.MouseEvent;
 	import flash.events.TouchEvent;
 	
 	import game.comm.GameSetting;
@@ -18,6 +16,7 @@ package game.core
 		public var layer3:Bitmap = new Bitmap();
 		public var drawShap:Shape = new Shape();
 		public var selectedLayer:Bitmap ;
+		public var pen:Pen ;
 		
 		public function GraphicsLayer()
 		{
@@ -40,6 +39,8 @@ package game.core
 			layer3 = new Bitmap( new BitmapData(canvas.width,canvas.height,true,0xffffff));
 			addChild(layer3);
 			selectedLayer = layer1 ;
+			pen = new Pen();
+			addChild(pen);
 		}
 		
 		override protected function onTouchHandler(e:TouchEvent):void
@@ -51,16 +52,16 @@ package game.core
 				{
 					case TouchEvent.TOUCH_BEGIN:
 						initDraw();
-						addEventListener(Event.ENTER_FRAME , updateDrawHandler );
 						break;
 					case TouchEvent.TOUCH_MOVE :
 						drawShap.graphics.lineTo(mouseX , mouseY);
+						pen.x = mouseX;
+						pen.y = mouseY ;
 						break ;
 					default:
 						//重置
 						selectedLayer.bitmapData.draw( drawShap) ;
 						drawShap.graphics.clear() ;
-						removeEventListener(Event.ENTER_FRAME , updateDrawHandler );
 						break ;
 				}
 			}
@@ -72,9 +73,5 @@ package game.core
 			drawShap.graphics.moveTo(mouseX , mouseY);
 		}
 		
-		private function updateDrawHandler(e:Event):void
-		{
-			
-		}
 	}
 }

@@ -11,5 +11,9 @@ package game.comm
 		public static var color:uint = 0xffff00 ; 
 		
 		public static var status:String = AppStatus.DRAW ;
+		
+		public static var blur:Number = 0.0 ;
+		
+		public static var penSize:Number = 15 ;
 	}
 }
