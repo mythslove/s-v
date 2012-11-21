@@ -13,8 +13,11 @@
 			import ghostcat.fileformat.swf.tag.SymbolClassTag;
 			
 			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
 			import mx.core.UIComponent;
 			import mx.events.ColorPickerEvent;
+			import mx.graphics.codec.PNGEncoder;
+			import mx.managers.PopUpManager;
 			
 			import spark.events.IndexChangeEvent;
 			
@@ -32,6 +35,7 @@
 			private var all:Array ;
 			private var man:MovieClip ;
 			private var man_ba:MovieClip;
+			private var exportFile:File ;
 			
 			private function init():void
 			{
@@ -41,6 +45,9 @@
 				var context:LoaderContext = new LoaderContext(false,ApplicationDomain.currentDomain) ;
 				context.allowCodeImport = true ;
 				loader.loadBytes(bytes,context);
+				
+				exportFile = new File();
+				exportFile.addEventListener(Event.SELECT , saveFileSelected );
 			}
 			
 			private function loadedHandler(e:Event):void
@@ -140,6 +147,10 @@
 				changeSkin( man , skin );
 				function changeSkin(mc:MovieClip , param:String):void{
 					var head:Sprite = mc.getChildByName("head") as Sprite;
+					if(param=="clear"){
+						ContainerUtil.removeChildren( ((head.getChildByName(temp) as Sprite) .getChildByName("clothes") as Sprite) );
+						return ;	
+					}
 					var obj:DisplayObject = ( new (domain.getDefinition(param) as Class)) as Sprite; 
 					ContainerUtil.removeChildren( ((head.getChildByName(temp) as Sprite) .getChildByName("clothes") as Sprite) );
 					if(obj){
@@ -156,6 +167,11 @@
 				changeSkin( man_ba , skin+"_ba" );
 				function changeSkin(mc:MovieClip , param:String):void{
 					var head:Sprite = mc.getChildByName("head") as Sprite;
+					if(param=="clear"){
+						ContainerUtil.removeChildren( ((head.getChildByName("cap") as Sprite) .getChildByName("clothes") as Sprite) );
+						return ;	
+					}
+					
 					var obj:DisplayObject = ( new (domain.getDefinition(param) as Class)) as Sprite; //帽子
 					ContainerUtil.removeChildren( ((head.getChildByName("cap") as Sprite) .getChildByName("clothes") as Sprite) );
 					if(obj){
@@ -172,6 +188,11 @@
 				changeSkin( man_ba , skin+"_ba" );
 				function changeSkin(mc:MovieClip , param:String):void{
 					var head:Sprite = mc.getChildByName("head") as Sprite;
+					if(param=="clear"){
+						ContainerUtil.removeChildren( ((head.getChildByName("hair_mc") as Sprite) .getChildByName("clothes") as Sprite) );
+						return ;	
+					}
+					
 					var obj:DisplayObject = ( new (domain.getDefinition(param) as Class)) as Sprite; //头发
 					ContainerUtil.removeChildren( ((head.getChildByName("hair_mc") as Sprite) .getChildByName("clothes") as Sprite) );
 					if(obj){
@@ -189,7 +210,9 @@
 				changeSkin( man_ba , skin+"_ba" );
 				function changeSkin(mc:MovieClip , param:String):void{
 					var shirt:Sprite = ( new (domain.getDefinition(param) as Class)) as Sprite;
-					
+					if(param=="clear"){
+						return ;	
+					}
 					var obj:DisplayObject = shirt.getChildByName("left_hand1") ; 
 					if(obj){
 						obj.x = obj.y = 0 ;
@@ -231,6 +254,9 @@
 				changeSkin( man_ba , skin+"_ba" );
 				function changeSkin(mc:MovieClip , param:String):void{
 					var pant:Sprite = ( new (domain.getDefinition(param) as Class)) as Sprite; //下身
+					if(param=="clear"){
+						return ;	
+					}
 					var obj:DisplayObject = pant.getChildByName("left_crural1") ; 
 					if(obj){
 						obj.x = obj.y = 0 ;
@@ -275,6 +301,105 @@
 				}
 			}
 			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			protected function button1_clickHandler(event:MouseEvent):void
+			{
+				_selectedMC = man ;
+				exportFile.browseForDirectory("选择保存位置")
+			}
+			
+			protected function button2_clickHandler(event:MouseEvent):void
+			{
+				_selectedMC = man_ba ;
+				exportFile.browseForDirectory("选择保存位置")
+			}
+			
+			
+			
+			private var _pbar:HandleProgressBar = new HandleProgressBar();
+			private var _selectedMC:MovieClip;
+			private var _exportFrames:int =1 ;
+			private var _exportScale:Number =1 ;
+			//------------------导入图片---------------------
+			private var maxW:int;
+			private var maxH:int;
+			private var minX:int ; 
+			private var minY:int ; 
+			private var tempFrame:int = 0 ;
+			private function saveFileSelected( e:Event ):void
+			{
+				PopUpManager.addPopUp(_pbar,this,true);
+				PopUpManager.centerPopUp( _pbar);
+				maxH =  int.MIN_VALUE;
+				maxW = int.MIN_VALUE ;
+				minX = int.MAX_VALUE ;
+				minY = int.MAX_VALUE;
+				tempFrame = 0 ;
+				if(!_exportScale || _exportScale ===0) {
+					_exportScale = 1;
+				}
+				_exportFrames = _selectedMC.totalFrames;
+				if(_exportFrames>0){
+					_selectedMC.gotoAndPlay(1);
+					addEventListener(Event.ENTER_FRAME , onEnterFrameHandler);
+				}
+			}
+			private function onEnterFrameHandler( e:Event ):void
+			{
+				var rect:Rectangle = _selectedMC.getBounds(_selectedMC);
+				if(maxW<rect.right) maxW = rect.right  ; 
+				if(maxH<rect.bottom) maxH = rect.bottom ; 
+				
+				if(minX>rect.x) minX = rect.x; 
+				if(minY>rect.y) minY = rect.y; 
+				tempFrame++;
+				if(tempFrame==_exportFrames*2){
+					maxW-=minX;
+					maxH-=minY ;
+					tempFrame = 0 ;
+					_selectedMC.gotoAndPlay(1);
+					removeEventListener(Event.ENTER_FRAME , onEnterFrameHandler);
+					addEventListener(Event.ENTER_FRAME ,enterFrameExportHandler);
+				}
+			}
+			private function enterFrameExportHandler( e:Event ):void
+			{
+				var bmd:BitmapData = new BitmapData(maxW*_exportScale,maxH*_exportScale,true,0xffffff);
+				var matrix:Matrix = new Matrix(1,0,0,1,-minX,-minY);
+				matrix.scale( _exportScale , _exportScale );
+				bmd.draw( _selectedMC , matrix );
+				var stream:FileStream = new FileStream();
+				try{
+					var name:String= tempFrame<10?"00"+tempFrame :  ( tempFrame<100?"0"+tempFrame:tempFrame+"") ;
+					name = _selectedMC==man ? "man"+name : "man_ba"+name ;
+					var file:File = new File(exportFile.nativePath+"/"+name+".png");
+					stream.open( file , FileMode.WRITE);
+					var pngEncoder:PNGEncoder = new PNGEncoder();
+					var bytes:ByteArray = pngEncoder.encode( bmd );
+					stream.writeBytes( bytes, 0 , bytes.bytesAvailable );
+				}catch(e:Error){
+					trace(e);
+				}finally{
+					stream.close();
+				}
+				tempFrame++;
+				if(tempFrame==_exportFrames){
+					tempFrame = 0 ;
+					PopUpManager.removePopUp(_pbar);
+					removeEventListener(Event.ENTER_FRAME ,enterFrameExportHandler);
+					Alert.show("Success!");
+				}
+			}
+			
 		]]>
 	</fx:Script>
 	<s:HGroup x="0" y="0" width="100%" height="100%">
@@ -291,6 +416,9 @@
 							change="skinColorPicker_changeHandler(event)"/>
 			<mx:ColorPicker id="hairColorPicker" x="127" y="90" width="61" height="27"
 							change="hairColorPicker_changeHandler(event)"/>
+			<s:Button x="9" y="6" width="69" height="56" label="输出Man"
+					  click="button1_clickHandler(event)"/>
+			<s:Button x="105" y="8" height="52" label="输出ManBa" click="button2_clickHandler(event)"/>
 		</s:BorderContainer>
 	</s:HGroup>
 </s:WindowedApplication>
