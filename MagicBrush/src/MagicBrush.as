@@ -1,6 +1,5 @@
 package
 {
-	import flash.display.Graphics;
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
@@ -49,7 +48,7 @@ package
 		{
 			addChild( new GraphicsLayer );
 			addChild( new GUILayer);
-			addChild( new Stats );
+//			addChild( new Stats );
 		}
 	}
 }
