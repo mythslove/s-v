@@ -49,6 +49,7 @@ package
 		{
 			addChild( new GraphicsLayer );
 			addChild( new GUILayer);
+			addChild( new Stats );
 		}
 	}
 }
