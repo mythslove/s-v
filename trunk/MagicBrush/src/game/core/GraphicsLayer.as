@@ -45,13 +45,17 @@ package game.core
 		
 		override protected function onTouchHandler(e:TouchEvent):void
 		{
-			if(GameSetting.status==AppStatus.ZOOM){
+			if(GameSetting.status==AppStatus.ZOOM)
+			{
 				super.onTouchHandler(e);
-			}else if(GameSetting.status==AppStatus.DRAW){
+			}
+			else if(GameSetting.status==AppStatus.DRAW)
+			{
 				switch(e.type)
 				{
 					case TouchEvent.TOUCH_BEGIN:
-						initDraw();
+						drawShap.graphics.lineStyle(GameSetting.penSize*2 , GameSetting.color, GameSetting.penAlpha );
+						drawShap.graphics.moveTo(mouseX , mouseY);
 						break;
 					case TouchEvent.TOUCH_MOVE :
 						drawShap.graphics.lineTo(mouseX , mouseY);
@@ -65,12 +69,6 @@ package game.core
 						break ;
 				}
 			}
-		}
-		
-		private function initDraw():void
-		{
-			drawShap.graphics.lineStyle(25,GameSetting.color,1);
-			drawShap.graphics.moveTo(mouseX , mouseY);
 		}
 		
 	}
