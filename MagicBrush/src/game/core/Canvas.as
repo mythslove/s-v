@@ -17,7 +17,7 @@ package game.core
 		
 		private function init():void
 		{
-			this.graphics.beginFill( 0xffffff);
+			this.graphics.beginFill( 0x282828);
 			this.graphics.drawRect(0,0,_wid,_het);
 			this.graphics.endFill();
 		}

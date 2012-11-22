@@ -138,13 +138,13 @@ package game.core
 					
 					scaleX = _zoomM.a ;
 					scaleY = _zoomM.d ;
-					x = (GameSetting.SCREEN_WIDTH-640*scaleX)>> 1 ;
-					y = (GameSetting.SCREEN_HEIGHT-480*scaleY)>> 1 ;
+					x = (GameSetting.SCREEN_WIDTH-GameSetting.canvasW*scaleX)>> 1 ;
+					y = (GameSetting.SCREEN_HEIGHT-GameSetting.canvasH*scaleY)>> 1 ;
 				}} );
 				
 			}
-			this.x = (GameSetting.SCREEN_WIDTH-640*scaleX)>> 1 ;
-			this.y = (GameSetting.SCREEN_HEIGHT-480*scaleY)>> 1 ;
+			this.x = (GameSetting.SCREEN_WIDTH-GameSetting.canvasW*scaleX)>> 1 ;
+			this.y = (GameSetting.SCREEN_HEIGHT-GameSetting.canvasH*scaleY)>> 1 ;
 		}
 		
 		/*用于鼠标缩放地图*/

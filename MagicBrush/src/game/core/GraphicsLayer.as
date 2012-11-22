@@ -26,9 +26,9 @@ package game.core
 		}
 		private function init ():void
 		{
-			this.x = (GameSetting.SCREEN_WIDTH-640)>> 1 ;
-			this.y = (GameSetting.SCREEN_HEIGHT-480)>> 1 ;
-			canvas = new Canvas(640,480);
+			this.x = (GameSetting.SCREEN_WIDTH-GameSetting.canvasW)>> 1 ;
+			this.y = (GameSetting.SCREEN_HEIGHT-GameSetting.canvasH)>> 1 ;
+			canvas = new Canvas(GameSetting.canvasW,GameSetting.canvasH);
 			addChild(canvas);
 			layer1 = new Bitmap( new BitmapData(canvas.width,canvas.height,true,0xffffff));
 			addChild(layer1);
