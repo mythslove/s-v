@@ -53,6 +53,12 @@ package game.gui.control
 		// 																						 //
 		// --------------------------------------------------------------------------------------//
 		
+		private var _showBar:Boolean;
+		
+		public function ScrollControllerV( showBar:Boolean=true){
+			this._showBar = showBar; 
+		}
+		
 		/**
 		 * Add scroll logic to a given view.
 		 * 
@@ -90,7 +96,7 @@ package game.gui.control
 			this.containerViewport = containerViewport;
 			
 			// Initialize the scroll bar
-			initScrollBar();
+			if(_showBar) initScrollBar();
 			
 			// Start listening to touch events
 			_container.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown  );
@@ -620,7 +626,7 @@ package game.gui.control
 			_previousScrollPositions['t-1'] = scrollRect.y;
 			
 			// Update the scroll bar
-			updateScrollBar();
+			if(_scrollBar)updateScrollBar();
 			
 			// Send an update event
 			var event:Event = new Event(SCROLL_POSITION_CHANGE);
