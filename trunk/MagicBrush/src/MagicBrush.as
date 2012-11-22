@@ -18,7 +18,7 @@ package
 			stage.frameRate = 30 ;
 			stage.align = StageAlign.TOP_LEFT;
 			stage.scaleMode = StageScaleMode.NO_SCALE;
-			stage.color = 0xD4D4D4 ;
+			stage.color = 0x323232 ;
 			
 			if(stage.fullScreenWidth >= 1024){
 				//ipad1,2,3

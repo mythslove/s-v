@@ -17,5 +17,8 @@ package game.comm
 		public static var penSize:Number = 10 ;
 		
 		public static var penAlpha:Number = 1.0 ;
+		
+		public static var canvasW:int = 640 ;
+		public static var canvasH:int = 480 ;
 	}
 }
