@@ -2,6 +2,7 @@ package game.gui.app
 {
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
+	import flash.events.TouchEvent;
 	
 	import game.comm.GameSetting;
 	import game.gui.control.Button;
@@ -74,6 +75,7 @@ package game.gui.app
 			graphics.drawRect(0,0,_wid,GameSetting.SCREEN_HEIGHT);
 			graphics.endFill();
 			init();
+			configListeners();
 		}
 		
 		private function init():void
@@ -115,6 +117,22 @@ package game.gui.app
 				_content.addChild(line);
 			}
 			++_btnCount ;
+		}
+		
+		private function configListeners():void
+		{
+			this.addEventListener(TouchEvent.TOUCH_TAP , onTouchHandler );
+			this.addEventListener(TouchEvent.TOUCH_BEGIN , onTouchHandler );
+			this.addEventListener(TouchEvent.TOUCH_END , onTouchHandler );
+			this.addEventListener(TouchEvent.TOUCH_OUT , onTouchHandler );
+			this.addEventListener(TouchEvent.TOUCH_ROLL_OUT , onTouchHandler );
+		}
+		private function onTouchHandler(e:TouchEvent):void
+		{
+			if(e.target is Button){
+				var btn:Button = e.target as Button ;
+				btn.touchHandler(e);
+			}
 		}
 	}
 }
