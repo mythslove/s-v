@@ -5,7 +5,6 @@ package
 	import flash.display.StageScaleMode;
 	
 	import game.comm.GameSetting;
-	import game.core.GraphicsLayer;
 	import game.gui.GUILayer;
 	
 	public class MagicBrush extends Sprite
@@ -52,7 +51,6 @@ package
 		
 		private function init():void
 		{
-			addChild( new GraphicsLayer );
 			addChild( new GUILayer);
 //			addChild( new Stats );
 		}
