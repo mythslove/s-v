@@ -36,8 +36,8 @@ package game.core
 		{
 			if(Multitouch.supportsTouchEvents){
 				Multitouch.inputMode = MultitouchInputMode.TOUCH_POINT ;
-				stage.addEventListener(TouchEvent.TOUCH_BEGIN , onTouchHandler ) ;
-				this.addEventListener(TouchEvent.TOUCH_MOVE , onTouchHandler ) ;
+				this.addEventListener(TouchEvent.TOUCH_BEGIN , onTouchHandler ) ;
+				stage.addEventListener(TouchEvent.TOUCH_MOVE , onTouchHandler ) ;
 				stage.addEventListener(TouchEvent.TOUCH_END , onTouchHandler ) ;
 			}else{
 				stage.addEventListener(MouseEvent.MOUSE_WHEEL , onMouseWheelHandler);

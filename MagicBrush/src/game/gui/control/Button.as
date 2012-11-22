@@ -81,17 +81,17 @@ package game.gui.control
 			switch(e.type)
 			{
 				case TouchEvent.TOUCH_BEGIN:
-					if(this.down){
+					if(!_selected && this.down){
 						skin.bitmapData = down.bitmapData;
 					}
 					break ;
 				case TouchEvent.TOUCH_END:
-					if(this.up){
+					if(!_selected && this.up){
 						skin.bitmapData = up.bitmapData;
 					}
 					break ;
 				default:
-					if(this.up){
+					if(!_selected && this.up){
 						skin.bitmapData = up.bitmapData;
 					}
 					break ;

@@ -2,6 +2,7 @@ package game.core
 {
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
+	import flash.display.BlendMode;
 	import flash.display.Shape;
 	import flash.events.TouchEvent;
 	
@@ -48,12 +49,13 @@ package game.core
 			{
 				super.onTouchHandler(e);
 			}
-			else if(GameSetting.status==AppStatus.DRAW)
+			else
 			{
 				switch(e.type)
 				{
 					case TouchEvent.TOUCH_BEGIN:
-						drawShap.graphics.lineStyle(GameSetting.penSize*2 , GameSetting.color, GameSetting.penAlpha );
+						var color:uint = GameSetting.status==AppStatus.ERASER ? canvas.color : GameSetting.color ;
+						drawShap.graphics.lineStyle(GameSetting.penSize*2 , color , GameSetting.penAlpha );
 						drawShap.graphics.moveTo(mouseX , mouseY);
 						break;
 					case TouchEvent.TOUCH_MOVE :
@@ -64,7 +66,8 @@ package game.core
 							drawShap.filters = GameUtil.blurFilter ;
 						}
 						//重置
-						selectedLayer.bitmapData.draw( drawShap) ;
+						var mode:String = GameSetting.status==AppStatus.ERASER ? BlendMode.ERASE : null  ;
+						selectedLayer.bitmapData.draw( drawShap,null,null,mode) ;
 						drawShap.graphics.clear() ;
 						drawShap.filters = null ;
 						break ;

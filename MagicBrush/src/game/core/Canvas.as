@@ -6,6 +6,7 @@ package game.core
 	{
 		private var _wid:Number ;
 		private var _het:Number ;
+		public var color:uint = 0x282828 ;
 		
 		public function Canvas( wid:Number , het:Number )
 		{
@@ -17,7 +18,7 @@ package game.core
 		
 		private function init():void
 		{
-			this.graphics.beginFill( 0x282828);
+			this.graphics.beginFill( color);
 			this.graphics.drawRect(0,0,_wid,_het);
 			this.graphics.endFill();
 		}
