@@ -5,6 +5,7 @@ package game.gui.app
 	import flash.events.TouchEvent;
 	
 	import game.comm.GameSetting;
+	import game.core.Pen;
 	import game.enums.AppStatus;
 	import game.gui.control.Button;
 	import game.gui.control.ScrollControllerV;
@@ -147,21 +148,41 @@ package game.gui.app
 		{
 			if(e.target is Button){
 				var btn:Button = e.target as Button ;
-				if(btn==drawButton){
-					selectedButton = btn ;
-					eraserButton.selected = false ;
-					moveButton.selected = false ;
-					GameSetting.status = AppStatus.DRAW; 
-				}else if(btn==eraserButton){
-					selectedButton = btn ;
-					moveButton.selected = false ;
-					drawButton.selected = false ;
-					GameSetting.status = AppStatus.ERASER; 
-				}else if(btn==moveButton){
-					selectedButton = btn ;
-					drawButton.selected = false ;
-					eraserButton.selected = false ;
-					GameSetting.status = AppStatus.ZOOM;
+				if(e.type==TouchEvent.TOUCH_TAP)
+				{
+					switch( btn )
+					{
+						case drawButton:
+							selectedButton = btn ;
+							eraserButton.selected = false ;
+							moveButton.selected = false ;
+							GameSetting.status = AppStatus.DRAW; 
+							break ;
+						case eraserButton:
+							selectedButton = btn ;
+							moveButton.selected = false ;
+							drawButton.selected = false ;
+							GameSetting.status = AppStatus.ERASER; 
+							break ;
+						case moveButton:
+							selectedButton = btn ;
+							drawButton.selected = false ;
+							eraserButton.selected = false ;
+							GameSetting.status = AppStatus.ZOOM;
+							break ;
+						case zoomInButton:
+							if(GameSetting.penSize>1){
+								GameSetting.penSize--;
+							}
+							Pen.instance.show();
+							break ;
+						case zoomOutButton:
+							if(GameSetting.penSize<20){
+								GameSetting.penSize++;
+							}
+							Pen.instance.show();
+							break ;
+					}
 				}
 				btn.touchHandler(e);
 			}
