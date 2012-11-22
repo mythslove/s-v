@@ -2,9 +2,10 @@ package game.gui
 {
 	import flash.display.Sprite;
 	
+	import game.gui.screen.AppSceen;
+	
 	public class GUILayer extends Sprite
 	{
-		
 		public function GUILayer()
 		{
 			super();
@@ -13,6 +14,7 @@ package game.gui
 		
 		private function init():void
 		{
+			addChild( AppSceen.instance );
 		}
 	}
 }

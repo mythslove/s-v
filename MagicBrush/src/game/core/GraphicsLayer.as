@@ -26,7 +26,7 @@ package game.core
 		}
 		private function init ():void
 		{
-			this.x = (GameSetting.SCREEN_WIDTH-GameSetting.canvasW)>> 1 ;
+			this.x = 50+(GameSetting.SCREEN_WIDTH-GameSetting.canvasW)>> 1 ;
 			this.y = (GameSetting.SCREEN_HEIGHT-GameSetting.canvasH)>> 1 ;
 			canvas = new Canvas(GameSetting.canvasW,GameSetting.canvasH);
 			addChild(canvas);

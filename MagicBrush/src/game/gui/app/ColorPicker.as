@@ -1,4 +1,4 @@
-package game.gui
+package game.gui.app
 {
 	import flash.display.Sprite;
 	

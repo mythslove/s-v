@@ -138,7 +138,7 @@ package game.core
 					
 					scaleX = _zoomM.a ;
 					scaleY = _zoomM.d ;
-					x = (GameSetting.SCREEN_WIDTH-GameSetting.canvasW*scaleX)>> 1 ;
+					x =50+ (GameSetting.SCREEN_WIDTH-GameSetting.canvasW*scaleX)>> 1 ;
 					y = (GameSetting.SCREEN_HEIGHT-GameSetting.canvasH*scaleY)>> 1 ;
 				}} );
 				
