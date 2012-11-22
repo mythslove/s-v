@@ -21,6 +21,7 @@ package game.gui.screen
 		public function AppSceen()
 		{
 			super();
+			mouseEnabled = false ;
 			init();
 		}
 		
