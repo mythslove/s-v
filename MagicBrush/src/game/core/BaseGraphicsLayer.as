@@ -47,7 +47,6 @@ package game.core
 		/*多点缩放地图*/
 		protected function onTouchHandler( e:TouchEvent ):void
 		{
-			e.stopPropagation();
 			switch(e.type)
 			{
 				case TouchEvent.TOUCH_BEGIN:
