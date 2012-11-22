@@ -22,7 +22,7 @@ package game.gui.control
 		private var disabled:Bitmap;
 		private var skin:Bitmap = new Bitmap();
 		
-		public function Button(up:* , down:* , selected_up:*=null , disabled:* = null )
+		public function Button(up:* , down:* , selected_up:*=null , disabled:* = null , configTouch:Boolean=false )
 		{
 			super();
 			if(up){
@@ -64,7 +64,8 @@ package game.gui.control
 			mouseChildren = false ;
 			skin.bitmapData = this.up.bitmapData;
 			addChild(skin);
-			configListeners();
+			if(configTouch)
+				configListeners();
 		}
 		
 		private function configListeners():void
@@ -75,7 +76,7 @@ package game.gui.control
 			this.addEventListener(TouchEvent.TOUCH_ROLL_OUT , touchHandler );
 		}
 		
-		private function touchHandler(e:TouchEvent):void
+		public function touchHandler(e:TouchEvent):void
 		{
 			switch(e.type)
 			{

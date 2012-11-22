@@ -43,6 +43,7 @@ package game.core
 		
 		override protected function onTouchHandler(e:TouchEvent):void
 		{
+			e.stopPropagation();
 			if(GameSetting.status==AppStatus.ZOOM)
 			{
 				super.onTouchHandler(e);
