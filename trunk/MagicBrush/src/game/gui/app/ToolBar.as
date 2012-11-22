@@ -103,7 +103,7 @@ package game.gui.app
 		private function addButton(button:Button, addLine:Boolean=true):void
 		{
 			button.x = ( _wid-button.width)>>1 ;
-			button.y =  button.height*_btnCount + 20*(_btnCount+1) ; 
+			button.y =  80*_btnCount + 20*(_btnCount+1) ; 
 			if(_btnCount==0){
 				button.y -=10 ;
 			}
@@ -111,7 +111,7 @@ package game.gui.app
 			if(addLine){
 				var line:Bitmap = new Bitmap(_line.bitmapData);
 				line.x = ( _wid-line.width)>>1 ;
-				line.y = button.y + button.height+10;
+				line.y = button.y + 80+10;
 				_content.addChild(line);
 			}
 			++_btnCount ;

@@ -5,8 +5,8 @@ package game.gui.control
 	import flash.display.Shape;
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
-	import flash.events.MouseEvent;
 	import flash.events.TimerEvent;
+	import flash.events.TouchEvent;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	import flash.utils.Timer;
@@ -99,7 +99,7 @@ package game.gui.control
 			if(_showBar) initScrollBar();
 			
 			// Start listening to touch events
-			_container.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown  );
+			_container.addEventListener(TouchEvent.TOUCH_BEGIN, onMouseDown  );
 		}
 		
 		/** Remove scroll logic of this controller. */
@@ -110,11 +110,11 @@ package game.gui.control
 			
 			if (_container)
 			{
-				_container.removeEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
-				_container.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
-//				_container.removeEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
-				_container.removeEventListener(MouseEvent.MOUSE_UP, onMouseUp);
-				_container.removeEventListener(MouseEvent.RELEASE_OUTSIDE, onMouseUp );
+				_container.removeEventListener(TouchEvent.TOUCH_BEGIN, onMouseDown  );
+				_container.removeEventListener(TouchEvent.TOUCH_MOVE, onMouseMove);
+				_container.removeEventListener(TouchEvent.TOUCH_OUT, onMouseOut);
+				_container.removeEventListener(TouchEvent.TOUCH_END, onMouseUp);
+				_container.removeEventListener(TouchEvent.TOUCH_ROLL_OUT, onMouseUp );
 				_container.removeEventListener(Event.ENTER_FRAME, onEnterFrame);
 			}
 			
@@ -681,7 +681,7 @@ package game.gui.control
 		// --------------------------------------------------------------------------------------//
 		
 		
-		private function onMouseDown( event : MouseEvent ) : void
+		private function onMouseDown( event : TouchEvent ) : void
 		{
 			_container.mouseChildren = true  ;
 			// The user starts touching the screen
@@ -693,10 +693,10 @@ package game.gui.control
 			_currentFingerPosition = _previousFingerPosition;
 			
 			// Start listening to touch and frame events
-			_container.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove );
-			_container.addEventListener(MouseEvent.MOUSE_OUT, onMouseOut );
-			_container.addEventListener(MouseEvent.MOUSE_UP, onMouseUp );
-			_container.addEventListener(MouseEvent.RELEASE_OUTSIDE, onMouseUp );
+			_container.addEventListener(TouchEvent.TOUCH_MOVE, onMouseMove );
+			_container.addEventListener(TouchEvent.TOUCH_OUT, onMouseOut );
+			_container.addEventListener(TouchEvent.TOUCH_END, onMouseUp );
+			_container.addEventListener(TouchEvent.TOUCH_ROLL_OUT, onMouseUp );
 			_container.addEventListener(Event.ENTER_FRAME, onEnterFrame );
 			
 			// DEBUG INFO
@@ -706,14 +706,14 @@ package game.gui.control
 			}
 		}
 		
-		private function onMouseUp( event : MouseEvent ) : void
+		private function onMouseUp( event : TouchEvent ) : void
 		{
 			_container.mouseChildren = true  ;
 			// Stop listening to touch events
-			_container.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
-//			_container.removeEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
-			_container.removeEventListener(MouseEvent.MOUSE_UP, onMouseUp);
-			_container.removeEventListener(MouseEvent.RELEASE_OUTSIDE, onMouseUp );
+			_container.removeEventListener(TouchEvent.TOUCH_MOVE, onMouseMove);
+			_container.removeEventListener(TouchEvent.TOUCH_OUT, onMouseOut);
+			_container.removeEventListener(TouchEvent.TOUCH_END, onMouseUp);
+			_container.removeEventListener(TouchEvent.TOUCH_ROLL_OUT, onMouseUp );
 			
 			// If we get a mouse down and a mouse up between two frames, we need to either stop the scrolling,
 			// either update the speed.
@@ -741,29 +741,26 @@ package game.gui.control
 			}
 		}
 		
-		private function onMouseOut( event : MouseEvent ) : void
+		private function onMouseOut( event : TouchEvent ) : void
 		{
 			// If it was a mouse out outside of the container, we consider it as a mouse up
 			if (!_container.getBounds(_container.stage).contains(event.stageX, event.stageY))
 				onMouseUp(event);
 		}
 		
-		private function onMouseMove( event : MouseEvent) : void
+		private function onMouseMove( event : TouchEvent) : void
 		{
-			if(event.buttonDown)
+			_container.mouseChildren = false  ;
+			// Indicate we received a touch and it hasn't been processed yet
+			_pendingTouch = true;
+			
+			// Update finger position
+			_currentFingerPosition = event.stageY;
+			
+			// DEBUG INFO
+			if (DEBUG)
 			{
-				_container.mouseChildren = false  ;
-				// Indicate we received a touch and it hasn't been processed yet
-				_pendingTouch = true;
-				
-				// Update finger position
-				_currentFingerPosition = event.stageY;
-				
-				// DEBUG INFO
-				if (DEBUG)
-				{
-					trace('xx onMouseMove - currentFingerPosition = ' + _currentFingerPosition);
-				}
+				trace('xx onMouseMove - currentFingerPosition = ' + _currentFingerPosition);
 			}
 		}
 		

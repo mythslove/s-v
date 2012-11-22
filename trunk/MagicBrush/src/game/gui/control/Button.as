@@ -77,7 +77,6 @@ package game.gui.control
 		
 		private function touchHandler(e:TouchEvent):void
 		{
-			e.stopPropagation();
 			switch(e.type)
 			{
 				case TouchEvent.TOUCH_BEGIN:
