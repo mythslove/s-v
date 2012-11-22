@@ -694,7 +694,7 @@ package game.gui.control
 			
 			// Start listening to touch and frame events
 			_container.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove );
-//			_container.addEventListener(MouseEvent.MOUSE_OUT, onMouseOut );
+			_container.addEventListener(MouseEvent.MOUSE_OUT, onMouseOut );
 			_container.addEventListener(MouseEvent.MOUSE_UP, onMouseUp );
 			_container.addEventListener(MouseEvent.RELEASE_OUTSIDE, onMouseUp );
 			_container.addEventListener(Event.ENTER_FRAME, onEnterFrame );
