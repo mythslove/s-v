@@ -5,6 +5,7 @@ package game.gui.app
 	import flash.events.TouchEvent;
 	
 	import game.comm.GameSetting;
+	import game.enums.AppStatus;
 	import game.gui.control.Button;
 	import game.gui.control.ScrollControllerV;
 	
@@ -67,6 +68,7 @@ package game.gui.app
 		private var _scroll:ScrollControllerV ;
 		private var _wid:int = 100 ;
 		private var _btnCount:int ;
+		private var _selectedButton:Button ;
 		
 		public function ToolBar()
 		{
@@ -78,6 +80,19 @@ package game.gui.app
 			configListeners();
 		}
 		
+		public function get selectedButton():Button
+		{
+			return _selectedButton;
+		}
+
+		public function set selectedButton(value:Button):void
+		{
+			if(value!=_selectedButton){
+				_selectedButton = value;
+				_selectedButton.selected = true ;
+			}
+		}
+
 		private function init():void
 		{
 			addChild(_content);
@@ -87,6 +102,7 @@ package game.gui.app
 			moveButton = new Button(MoveButtonUp , MoveButtonDown , MoveButtonDown );
 			addButton(moveButton);
 			drawButton = new Button(DrawButtonUp , DrawButtonDown , DrawButtonDown );
+			drawButton.selected = true ;
 			addButton(drawButton);
 			eraserButton = new Button(EraserButtonUp , EraserButtonDown , EraserButtonDown );
 			addButton(eraserButton);
@@ -131,6 +147,22 @@ package game.gui.app
 		{
 			if(e.target is Button){
 				var btn:Button = e.target as Button ;
+				if(btn==drawButton){
+					selectedButton = btn ;
+					eraserButton.selected = false ;
+					moveButton.selected = false ;
+					GameSetting.status = AppStatus.DRAW; 
+				}else if(btn==eraserButton){
+					selectedButton = btn ;
+					moveButton.selected = false ;
+					drawButton.selected = false ;
+					GameSetting.status = AppStatus.ERASER; 
+				}else if(btn==moveButton){
+					selectedButton = btn ;
+					drawButton.selected = false ;
+					eraserButton.selected = false ;
+					GameSetting.status = AppStatus.ZOOM;
+				}
 				btn.touchHandler(e);
 			}
 		}
