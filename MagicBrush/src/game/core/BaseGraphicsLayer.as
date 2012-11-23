@@ -115,7 +115,7 @@ package game.core
 		private var _zoomTween:TweenLite ;
 		protected function changeWorldScale( value:Number , px:Number , py:Number , time:Number=0.2):void
 		{
-			if(scaleX*value>0.5 && scaleX*value<2.2 ) 
+			if(scaleX*value>1 && scaleX*value<2.2 ) 
 			{
 				var prevScale:Number = scaleX ;
 				var prevX:Number =x , prevY:Number = y ;
