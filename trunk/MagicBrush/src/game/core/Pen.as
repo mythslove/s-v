@@ -30,7 +30,7 @@ package game.core
 				layer.addChild( this );
 			}
 			this.graphics.clear();
-			this.graphics.lineStyle( 5,0xffffff,1,true);
+			this.graphics.lineStyle( 3 ,0xffffff,1,true);
 			this.graphics.drawCircle( 0,0,GameSetting.penSize );
 			this.graphics.endFill();
 			alpha = 1 ;
