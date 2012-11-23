@@ -6,7 +6,7 @@ package
 	
 	import game.comm.GameSetting;
 	import game.gui.GUILayer;
-	
+	//http://as3-hhh.googlecode.com/svn/trunk/
 	public class MagicBrush extends Sprite
 	{
 		public function MagicBrush()
