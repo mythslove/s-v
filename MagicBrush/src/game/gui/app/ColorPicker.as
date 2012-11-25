@@ -5,7 +5,6 @@ package game.gui.app
 	import flash.display.GradientType;
 	import flash.display.InteractiveObject;
 	import flash.display.Shape;
-	import flash.display.SimpleButton;
 	import flash.display.SpreadMethod;
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -21,9 +20,9 @@ package game.gui.app
 	{
 		public var colorBtn1:Sprite,colorBtn2:Sprite,colorBtn3:Sprite,colorBtn4:Sprite,colorBtn5:Sprite,colorBtn6:Sprite;
 		public var colorPicker:Sprite , colorSliderBar:Sprite ;
-		public var sizeBarBg:Sprite , sizeBar:Sprite , btnSize:SimpleButton ;
-		public var alphaBarBg:Sprite , alphaBar:Sprite , btnAlpha:SimpleButton ;
-		public var blurBarBg:Sprite , blurBar:Sprite , btnBlur:SimpleButton ;
+		public var sizeBarBg:Sprite , sizeBar:Sprite , btnSize:Sprite ;
+		public var alphaBarBg:Sprite , alphaBar:Sprite , btnAlpha:Sprite ;
+		public var blurBarBg:Sprite , blurBar:Sprite , btnBlur:Sprite ;
 		public var txtSize:TextField , txtAlpha:TextField , txtBlur:TextField;
 		public var txtSizeValue:TextField , txtAlphaValue:TextField , txtBlurValue:TextField;
 		public var txtColor:TextField ;
@@ -71,7 +70,7 @@ package game.gui.app
 				}
 			}
 			//创建取色控件
-			_multiColorBar = new Bitmap( new MultiColorBmd());
+			_multiColorBar = new Bitmap( new MultiColorBmd(),"auto",true);
 			_multiColorSprite = new Sprite();
 			_multiColorSprite.mouseChildren = false ;
 			_multiColorSprite.x = colorSliderBar.x-_multiColorBar.width*0.5 ;
@@ -80,6 +79,9 @@ package game.gui.app
 			_multiColorSprite.addChild( _multiColorBar);
 			colorSliderBar.y= 0 ; colorSliderBar.x = _multiColorBar.width>>1 ;
 			_multiColorSprite.addChild( colorSliderBar);
+			_multiColorSprite.graphics.beginFill(0,0);
+			_multiColorSprite.graphics.drawRect(colorSliderBar.x,0,colorSliderBar.width , _multiColorBar.height);
+			_multiColorSprite.graphics.endFill();
 			//色彩
 			_colorSprite = new Sprite();
 			_colorSprite.x = 140 ;
@@ -105,6 +107,7 @@ package game.gui.app
 			_selectedShape.graphics.drawRect(0,0,60,50);
 			_selectedShape.graphics.endFill();
 			addChild(_selectedShape);
+			//下面的slider
 		}
 		
 		private function addListeners():void
@@ -115,7 +118,19 @@ package game.gui.app
 
 			_multiColorSprite.addEventListener(TouchEvent.TOUCH_BEGIN , onColorSpriteSliderHandler );
 			_multiColorSprite.addEventListener(TouchEvent.TOUCH_END , onColorSpriteSliderHandler );
-			_multiColorSprite.addEventListener(TouchEvent.TOUCH_MOVE , onColorSpriteSliderHandler );
+			_multiColorSprite.addEventListener(TouchEvent.TOUCH_OUT, onColorSpriteSliderHandler );
+			
+			btnSize.addEventListener(TouchEvent.TOUCH_BEGIN , onSizeBtnHandler);
+			btnSize.addEventListener(TouchEvent.TOUCH_END , onSizeBtnHandler );
+			btnSize.addEventListener(TouchEvent.TOUCH_OUT , onSizeBtnHandler );
+			
+			btnAlpha.addEventListener(TouchEvent.TOUCH_BEGIN , onAlphaBtnHandler);
+			btnAlpha.addEventListener(TouchEvent.TOUCH_END , onAlphaBtnHandler );
+			btnAlpha.addEventListener(TouchEvent.TOUCH_OUT , onAlphaBtnHandler );
+			
+			btnBlur.addEventListener(TouchEvent.TOUCH_BEGIN , onBlurBtnHandler);
+			btnBlur.addEventListener(TouchEvent.TOUCH_END , onBlurBtnHandler );
+			btnBlur.addEventListener(TouchEvent.TOUCH_OUT , onBlurBtnHandler );
 			
 			addEventListener(TouchEvent.TOUCH_TAP , onClickHandler );
 		}
@@ -143,18 +158,14 @@ package game.gui.app
 			e.stopPropagation();
 			switch(e.type)
 			{
-				case TouchEvent.TOUCH_END:
-					_colorHueTarget = _multiColorBar.bitmapData.getPixel( 5 , colorSliderBar.y - _colorSprite.y);
-					redrawBigGradient();
-					setSelectedColor();
+				case TouchEvent.TOUCH_BEGIN:
+					colorSliderBar.startTouchDrag(e.touchPointID , true , new Rectangle(colorSliderBar.x,1,0,_multiColorBar.height-2));
 					break ;
 				default:
-					colorSliderBar.y = e.localY+_colorSprite.y+5 ;
-					if(colorSliderBar.y>_colorSprite.y+_multiColorBar.height){
-						colorSliderBar.y = _colorSprite.y + _multiColorBar.height ;
-					}else if( colorSliderBar.y<_colorSprite.y){
-						colorSliderBar.y = _colorSprite.y ;
-					}
+					colorSliderBar.stopTouchDrag( e.touchPointID );
+					_colorHueTarget = _multiColorBar.bitmapData.getPixel( 5 , colorSliderBar.y);
+					redrawBigGradient();
+					setSelectedColor();
 					break ;
 			}
 		}
@@ -203,6 +214,73 @@ package game.gui.app
 					break;
 			}
 		}
+		
+		private function onSizeBtnHandler( e:TouchEvent ):void
+		{
+			e.stopPropagation();
+			switch(e.type)
+			{
+				case TouchEvent.TOUCH_BEGIN:
+					btnSize.startTouchDrag( e.touchPointID , true , new Rectangle(sizeBarBg.x,sizeBarBg.y,sizeBarBg.width,0));
+					stage.addEventListener(TouchEvent.TOUCH_MOVE , onSizeBtnHandler );
+					break ;
+				default:
+					sizeBar.width = btnSize.x-sizeBar.x ;
+					//1-30
+					GameSetting.penSize =( 30* sizeBar.width / sizeBarBg.width )>> 0 ;
+					txtSizeValue.text = GameSetting.penSize+"";
+					if(e.type==TouchEvent.TOUCH_END){
+						btnSize.stopTouchDrag(e.touchPointID);
+						stage.removeEventListener(TouchEvent.TOUCH_MOVE , onSizeBtnHandler );
+					}
+					break ;
+			}
+		}
+		
+		private function onAlphaBtnHandler( e:TouchEvent ):void
+		{
+			e.stopPropagation();
+			switch(e.type)
+			{
+				case TouchEvent.TOUCH_BEGIN:
+					btnAlpha.startTouchDrag( e.touchPointID , true , new Rectangle(alphaBarBg.x,alphaBarBg.y,alphaBarBg.width,0));
+					stage.addEventListener(TouchEvent.TOUCH_MOVE , onAlphaBtnHandler );
+					break ;
+				default:
+					alphaBar.width = btnAlpha.x-alphaBar.x ;
+					//1-100
+					GameSetting.penSize =( 100* alphaBar.width / alphaBarBg.width )>> 0 ;
+					txtAlphaValue.text = GameSetting.penAlpha+"";
+					if(e.type==TouchEvent.TOUCH_END){
+						btnAlpha.stopTouchDrag(e.touchPointID);
+						stage.removeEventListener(TouchEvent.TOUCH_MOVE , onAlphaBtnHandler );
+					}
+					break ;
+			}
+		}
+		
+		private function onBlurBtnHandler( e:TouchEvent ):void
+		{
+			e.stopPropagation();
+			switch(e.type)
+			{
+				case TouchEvent.TOUCH_BEGIN:
+					btnBlur.startTouchDrag( e.touchPointID , true , new Rectangle(blurBarBg.x,blurBarBg.y,blurBarBg.width,0));
+					stage.addEventListener(TouchEvent.TOUCH_MOVE , onBlurBtnHandler );
+					break ;
+				default:
+					blurBar.width = btnBlur.x-blurBar.x ;
+					//1-30
+					GameSetting.blur =( 30* blurBar.width / blurBarBg.width )>> 0 ;
+					txtBlurValue.text = GameSetting.blur+"";
+					if(e.type==TouchEvent.TOUCH_END){
+						btnBlur.stopTouchDrag(e.touchPointID);
+						stage.removeEventListener(TouchEvent.TOUCH_MOVE , onBlurBtnHandler );
+					}
+					break ;
+			}
+		}
+		
 		
 		private function setSelectedColor():void
 		{
