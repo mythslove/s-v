@@ -9,6 +9,7 @@ package game.gui.app
 	import game.enums.AppStatus;
 	import game.gui.control.Button;
 	import game.gui.control.ScrollControllerV;
+	import game.util.PopUpManager;
 	
 	public class ToolBar extends Sprite
 	{
@@ -181,6 +182,13 @@ package game.gui.app
 								GameSetting.penSize++;
 							}
 							Pen.instance.show();
+							break ;
+						case colorButton:
+							if( PopUpManager.instance.isInPop(ColorPicker.instance) ){
+								PopUpManager.instance.removePopUp(ColorPicker.instance);
+							}else{
+								PopUpManager.instance.addPopUp(ColorPicker.instance,false,true) ;
+							}
 							break ;
 					}
 				}
