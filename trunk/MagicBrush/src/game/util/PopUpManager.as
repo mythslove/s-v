@@ -1,4 +1,4 @@
-package  local.util
+package game.util
 {
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;

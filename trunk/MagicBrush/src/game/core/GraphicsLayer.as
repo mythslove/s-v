@@ -55,7 +55,8 @@ package game.core
 				{
 					case TouchEvent.TOUCH_BEGIN:
 						var color:uint = GameSetting.status==AppStatus.ERASER ? canvas.color : GameSetting.color ;
-						drawShap.graphics.lineStyle(GameSetting.penSize*2 , color , GameSetting.penAlpha );
+						var alpha:Number =  GameSetting.status==AppStatus.ERASER ? 1 : GameSetting.penAlpha ;
+						drawShap.graphics.lineStyle(GameSetting.penSize*2 , color , alpha );
 						drawShap.graphics.moveTo(mouseX , mouseY);
 						break;
 					case TouchEvent.TOUCH_MOVE :

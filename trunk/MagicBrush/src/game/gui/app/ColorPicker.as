@@ -108,6 +108,15 @@ package game.gui.app
 			_selectedShape.graphics.endFill();
 			addChild(_selectedShape);
 			//下面的slider
+			sizeBar.width = GameSetting.penSize*sizeBarBg.width/21 ;
+			btnSize.x = sizeBar.x + sizeBar.width ;
+			txtSizeValue.text = GameSetting.penSize+"";
+			alphaBar.width = GameSetting.penAlpha*100*alphaBarBg.width/101  ;
+			blurBar.width = GameSetting.blur*blurBarBg.width/21  ;
+			btnAlpha.x = alphaBar.x + alphaBar.width ;
+			btnBlur.x = blurBar.x + blurBar.width ;
+			txtBlurValue.text = GameSetting.blur+"";
+			txtAlphaValue.text = GameSetting.penAlpha*100+"";
 		}
 		
 		private function addListeners():void
@@ -172,9 +181,12 @@ package game.gui.app
 		
 		private function addedHandler(e:Event):void
 		{
-			removeEventListener(Event.ADDED_TO_STAGE , addedHandler );
 			x = GameSetting.SCREEN_WIDTH - 800 ;
 			y = (GameSetting.SCREEN_HEIGHT-550)>>1 ;
+			
+			sizeBar.width = GameSetting.penSize*sizeBarBg.width/21 ;
+			btnSize.x = sizeBar.x + sizeBar.width ;
+			txtSizeValue.text = GameSetting.penSize+"";
 		}
 		
 		private function onClickHandler( e:TouchEvent ):void
@@ -226,8 +238,9 @@ package game.gui.app
 					break ;
 				default:
 					sizeBar.width = btnSize.x-sizeBar.x ;
-					//1-30
-					GameSetting.penSize =( 30* sizeBar.width / sizeBarBg.width )>> 0 ;
+					//1-20
+					GameSetting.penSize =( 21* sizeBar.width / sizeBarBg.width )>> 0 ;
+					GameSetting.penSize = GameSetting.penSize==0?1:GameSetting.penSize ;					
 					txtSizeValue.text = GameSetting.penSize+"";
 					if(e.type==TouchEvent.TOUCH_END){
 						btnSize.stopTouchDrag(e.touchPointID);
@@ -249,8 +262,9 @@ package game.gui.app
 				default:
 					alphaBar.width = btnAlpha.x-alphaBar.x ;
 					//1-100
-					GameSetting.penSize =( 100* alphaBar.width / alphaBarBg.width )>> 0 ;
-					txtAlphaValue.text = GameSetting.penAlpha+"";
+					var alpha:int =( 101* alphaBar.width / alphaBarBg.width )>> 0 ;
+					txtAlphaValue.text = alpha+"";
+					GameSetting.penAlpha = alpha*0.01;
 					if(e.type==TouchEvent.TOUCH_END){
 						btnAlpha.stopTouchDrag(e.touchPointID);
 						stage.removeEventListener(TouchEvent.TOUCH_MOVE , onAlphaBtnHandler );
@@ -270,8 +284,8 @@ package game.gui.app
 					break ;
 				default:
 					blurBar.width = btnBlur.x-blurBar.x ;
-					//1-30
-					GameSetting.blur =( 30* blurBar.width / blurBarBg.width )>> 0 ;
+					//0-20
+					GameSetting.blur = ( 21* blurBar.width / blurBarBg.width )>> 0 ;
 					txtBlurValue.text = GameSetting.blur+"";
 					if(e.type==TouchEvent.TOUCH_END){
 						btnBlur.stopTouchDrag(e.touchPointID);

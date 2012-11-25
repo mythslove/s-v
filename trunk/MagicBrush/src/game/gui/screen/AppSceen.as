@@ -1,10 +1,8 @@
 package game.gui.screen
 {
 	import flash.display.Sprite;
-	import flash.events.Event;
 	
 	import game.core.GraphicsLayer;
-	import game.gui.app.ColorPicker;
 	import game.gui.app.ToolBar;
 	
 	
@@ -33,7 +31,6 @@ package game.gui.screen
 			addChild(graphicsLayer);
 			toolBar = new ToolBar();
 			addChild(toolBar);
-			addChild( ColorPicker.instance);
 		}
 	}
 }
