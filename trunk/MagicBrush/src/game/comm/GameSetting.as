@@ -14,7 +14,7 @@ package game.comm
 		
 		public static var blur:Number = 20.0 ;
 		
-		public static var penSize:Number = 10 ;
+		public static var penSize:int = 10 ;
 		
 		public static var penAlpha:Number = 1.0 ;
 		
