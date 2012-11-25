@@ -1,11 +1,17 @@
 package
 {
+	import bing.res.ResLoadedEvent;
+	import bing.res.ResVO;
+	
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
+	import flash.events.Event;
 	
 	import game.comm.GameSetting;
 	import game.gui.GUILayer;
+	import game.util.ResourceUtil;
+
 	//http://developer.yahoo.com/flash/astra-flex/
 	public class MagicBrush extends Sprite
 	{
@@ -47,10 +53,24 @@ package
 				}
 			}
 			
-			init();
+			loadRes();
 		}
 		
-		private function init():void
+		private function loadRes():void
+		{
+			var resVOs:Array = [] ;
+			resVOs.push( new ResVO("GUI" , "GUI.swf",false) );
+			ResourceUtil.instance.addEventListener("APP_RES" , resLoadedHandler );
+			ResourceUtil.instance.queueLoad( "APP_RES" , resVOs );
+		}
+		
+		private function resLoadedHandler( e:Event ):void
+		{
+			ResourceUtil.instance.removeEventListener("APP_RES" , resLoadedHandler );
+			initApp();
+		}
+		
+		private function initApp():void
 		{
 			addChild( new GUILayer);
 //			addChild( new Stats );

@@ -4,7 +4,9 @@ package game.gui.screen
 	import flash.events.Event;
 	
 	import game.core.GraphicsLayer;
+	import game.gui.app.ColorPicker;
 	import game.gui.app.ToolBar;
+	
 	
 	public class AppSceen extends Sprite
 	{
@@ -31,6 +33,7 @@ package game.gui.screen
 			addChild(graphicsLayer);
 			toolBar = new ToolBar();
 			addChild(toolBar);
+			addChild( ColorPicker.instance);
 		}
 	}
 }
