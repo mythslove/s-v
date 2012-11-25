@@ -19,5 +19,15 @@ package game.util
 			_blurFilter.blurY = GameSetting.blur ;
 			return _blurs ;
 		}
+		
+		
+		public static function rgb2String( color:uint ):String 
+		{
+			var temp:String = "#";
+			temp+=((color & 0xFF0000) >>> 16).toString(16);
+			temp+=((color & 0x00FF00) >>> 8).toString(16);
+			temp+=((color & 0x0000FF) >>> 0).toString(16);
+			return temp ;
+		}
 	}
 }
