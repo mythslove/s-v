@@ -1,6 +1,5 @@
 package
 {
-	import bing.res.ResLoadedEvent;
 	import bing.res.ResVO;
 	
 	import flash.display.Sprite;
@@ -10,6 +9,7 @@ package
 	
 	import game.comm.GameSetting;
 	import game.gui.GUILayer;
+	import game.util.PopUpManager;
 	import game.util.ResourceUtil;
 
 	//http://developer.yahoo.com/flash/astra-flex/
@@ -73,6 +73,7 @@ package
 		private function initApp():void
 		{
 			addChild( new GUILayer);
+			addChild(PopUpManager.instance);
 //			addChild( new Stats );
 		}
 	}
