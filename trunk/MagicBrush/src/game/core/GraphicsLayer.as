@@ -4,10 +4,12 @@ package game.core
 	import flash.display.BitmapData;
 	import flash.display.BlendMode;
 	import flash.display.Shape;
+	import flash.events.Event;
 	import flash.events.TouchEvent;
 	
 	import game.comm.GameSetting;
 	import game.enums.AppStatus;
+	import game.gui.app.LayerControl;
 	import game.util.GameUtil;
 	
 	public class GraphicsLayer extends BaseGraphicsLayer
