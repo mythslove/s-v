@@ -56,9 +56,6 @@ package game.core
 		
 		private function removedHandler(e:Event):void
 		{
-			if(parent){
-				parent.removeChild(this);
-			}
 			removeEventListener(Event.ENTER_FRAME , update );
 			addEventListener(Event.ADDED_TO_STAGE , addedHander );
 		}
