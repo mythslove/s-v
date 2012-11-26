@@ -4,7 +4,7 @@ package game.gui.app
 	import flash.display.BitmapData;
 	import flash.display.Sprite;
 	import flash.events.Event;
-	import flash.events.MouseEvent;
+	import flash.events.TouchEvent;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
@@ -98,7 +98,7 @@ package game.gui.app
 		{
 			removeEventListener(Event.ADDED_TO_STAGE , addedHandler );
 			x = GameSetting.SCREEN_WIDTH ;
-			addEventListener(MouseEvent.MOUSE_DOWN , onTapHandler );
+			addEventListener(TouchEvent.TOUCH_TAP , onTapHandler );
 		}
 		
 		private function onTapHandler( e:Event):void
