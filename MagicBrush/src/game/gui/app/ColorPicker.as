@@ -14,7 +14,9 @@ package game.gui.app
 	import flash.text.TextField;
 	
 	import game.comm.GameSetting;
+	import game.gui.control.PopupCloseButton;
 	import game.util.GameUtil;
+	import game.util.PopUpManager;
 	
 	public class ColorPicker extends Sprite
 	{
@@ -33,6 +35,7 @@ package game.gui.app
 			return _instance ;
 		}
 		//===============================================
+		private var btnClose:PopupCloseButton ;
 		private var _multiColorSprite:Sprite = new Sprite();
 		private var _multiColorBar:Bitmap ;
 		private var _colors:Array= [0x000000, 0x000000];  
@@ -69,6 +72,11 @@ package game.gui.app
 					}
 				}
 			}
+			//关闭按钮
+			btnClose = new PopupCloseButton();
+			btnClose.x=-btnClose.width+10;
+			btnClose.y=-btnClose.height+30;
+			addChild(btnClose);
 			//创建取色控件
 			_multiColorBar = new Bitmap( new MultiColorBmd(),"auto",true);
 			_multiColorSprite = new Sprite();
@@ -224,6 +232,9 @@ package game.gui.app
 					redrawBigGradient();
 					setSelectedColor();
 					break;
+				case btnClose:
+					PopUpManager.instance.removePopUp( this );
+					break ;
 			}
 		}
 		
