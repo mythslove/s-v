@@ -12,7 +12,6 @@ package
 	import game.util.PopUpManager;
 	import game.util.ResourceUtil;
 
-	//http://developer.yahoo.com/flash/astra-flex/
 	public class MagicBrush extends Sprite
 	{
 		public function MagicBrush()
