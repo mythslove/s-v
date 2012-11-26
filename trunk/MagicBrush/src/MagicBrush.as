@@ -23,7 +23,6 @@ package
 			stage.align = StageAlign.TOP_LEFT;
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 			stage.color = 0x323232 ;
-//			stage.quality="low";
 			
 			if(stage.fullScreenWidth%1024==0){
 				//ipad1,2,3
