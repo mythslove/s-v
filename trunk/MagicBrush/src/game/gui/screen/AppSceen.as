@@ -44,6 +44,7 @@ package game.gui.screen
 		
 		private function layerChangedHandler(e:Event):void
 		{
+			graphicsLayer.setChildIndex(graphicsLayer.drawShap , graphicsLayer.numChildren-1  );
 			if(layerControl.selectedLayer==1){
 				graphicsLayer.selectedLayer = graphicsLayer.layer1 ;
 			}else if(layerControl.selectedLayer==2){
@@ -51,6 +52,7 @@ package game.gui.screen
 			}else{
 				graphicsLayer.selectedLayer = graphicsLayer.layer3 ;
 			}
+			graphicsLayer.setChildIndex(graphicsLayer.drawShap ,  graphicsLayer.getChildIndex(graphicsLayer.selectedLayer)+1 );
 		}
 	}
 }
