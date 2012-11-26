@@ -184,11 +184,7 @@ package game.gui.app
 							Pen.instance.show();
 							break ;
 						case colorButton:
-							if( PopUpManager.instance.isInPop(ColorPicker.instance) ){
-								PopUpManager.instance.removePopUp(ColorPicker.instance);
-							}else{
-								PopUpManager.instance.addPopUp(ColorPicker.instance,false,true) ;
-							}
+							PopUpManager.instance.addPopUp(ColorPicker.instance) ;
 							break ;
 					}
 				}
