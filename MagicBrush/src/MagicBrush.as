@@ -11,7 +11,7 @@ package
 	import game.gui.GUILayer;
 	import game.util.PopUpManager;
 	import game.util.ResourceUtil;
-
+//http://www.lorenzonuvoletta.com/create-an-infinite-scrolling-world-with-starling-and-nape/
 	public class MagicBrush extends Sprite
 	{
 		public function MagicBrush()
