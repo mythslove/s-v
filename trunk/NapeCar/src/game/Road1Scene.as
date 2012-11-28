@@ -6,6 +6,8 @@ package game
 	import flash.ui.Keyboard;
 	import flash.ui.KeyboardType;
 	
+	import gui.CarControlGUI;
+	
 	import nape.geom.Vec2;
 	import nape.phys.Body;
 	import nape.phys.BodyType;
@@ -40,12 +42,13 @@ package game
 		private var _car:Car ;
 		private var _wall:Body ;
 		private var _map:Sprite = new Sprite();
+		private var _gui:CarControlGUI ;
 		
 		public function Road1Scene()
 		{
 			super();
-			touchable=false ;
 			_map.y=20;
+			_map.touchable = false ;
 			addChild(_map);
 			addEventListener(Event.ADDED_TO_STAGE , addedHandler );
 		}
@@ -64,8 +67,10 @@ package game
 			_car = new Car(_space);
 			_map.addChild(_car);
 			
+			_gui = new CarControlGUI();
+			addChild(_gui);
+			
 			addEventListener(Event.ENTER_FRAME , update );
-			stage.addEventListener(KeyboardEvent.KEY_DOWN , onKey);
 		}
 		
 		private function addWall():void
@@ -74,15 +79,6 @@ package game
 			_wall.shapes.add( new Polygon(Polygon.rect(-50,0,50,stage.stageHeight)));
 			_wall.shapes.add( new Polygon(Polygon.rect(MAP_WID,0,50,stage.stageHeight)));
 			_wall.space = _space ;
-		}
-		
-		private function onKey(e:KeyboardEvent):void
-		{
-			if( e.keyCode==Keyboard.LEFT){
-				_car.w2.velocity.x-=25;
-			}else if( e.keyCode==Keyboard.RIGHT){
-				_car.w1.velocity.x+=25;
-			}
 		}
 		
 		private function createRoads():void
@@ -120,6 +116,11 @@ package game
 		{
 			_space.step(1/60);
 			panForeground();
+			if(_gui.direction==1){
+				_car.w2.velocity.x-=35;
+			}else if(_gui.direction==2){
+				_car.w1.velocity.x+=35;
+			}
 		}
 		
 		private function panForeground():void
