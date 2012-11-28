@@ -26,10 +26,16 @@ package game
 		private const CARWHELL:Class;
 		//=================================
 		
-		private var _carBody:Body,w1:Body,w2:Body ;
+		private var _space:Space ;
+		private var _carBody:Body,_w1:Body,_w2:Body ;
 		private var _carTexture:Texture , _carWheelTexture:Texture ;
 		
-		private var _space:Space ;
+		public function get w1():Body{
+			return _w1;
+		}
+		public function get w2():Body{
+			return _w2;
+		}
 		
 		public function Car( space:Space )
 		{
@@ -43,57 +49,59 @@ package game
 			removeEventListener(Event.ADDED_TO_STAGE, addedHandler );
 			_carTexture = Texture.fromBitmap( new CARBODY as Bitmap,false) ;
 			_carWheelTexture = Texture.fromBitmap( new CARWHELL as Bitmap,false) ;
+			var img:Image ;
 			
-			var offsetX:Number=100 , offsetY:Number = 300;
+			var offsetX:Number=stage.stageWidth>>1  , offsetY:Number = 300;
 			var body:Body = new Body();
-			body.shapes.add(new Polygon(Polygon.box(100,40)));
+			body.shapes.add(new Polygon(Polygon.box(_carTexture.width,_carTexture.height)));
 			body.position.setxy(offsetX,offsetY);
 			img = new Image(_carTexture); 
+			img.pivotX = _carTexture.width>>1 ;
+			img.pivotY = _carTexture.height>>1 ;
 			body.graphic = img;
 			body.graphicUpdate = graphicUpdate ;
 			body.space = _space;
 			addChild( img);
 			
-			var img:Image ;
-			w1= circle(offsetX+5,offsetY+_carTexture.height-_carWheelTexture.height*0.5,_carWheelTexture.width*0.5);
-			w1.space = _space;
+			_w1= circle(offsetX+5,offsetY+_carTexture.height-_carWheelTexture.height*0.5,_carWheelTexture.width*0.5);
+			_w1.space = _space;
 			img = new Image(_carWheelTexture); 
 			img.pivotX = _carWheelTexture.width>>1 ;
 			img.pivotY = _carWheelTexture.height>>1 ;
-			w1.graphic = img ;
-			w1.graphicUpdate = graphicUpdate ;
+			_w1.graphic = img ;
+			_w1.graphicUpdate = graphicUpdate ;
 			addChild( img);
 			
-			w2 = circle(offsetX+_carTexture.width-_carWheelTexture.width-5, w1.position.y,_carWheelTexture.width*0.5);
-			w2.space = _space;
+			_w2 = circle(offsetX+_carTexture.width-_carWheelTexture.width-5, _w1.position.y,_carWheelTexture.width*0.5);
+			_w2.space = _space;
 			img = new Image(_carWheelTexture); 
 			img.pivotX = _carWheelTexture.width>>1 ;
 			img.pivotY = _carWheelTexture.height>>1 ;
-			w2.graphic = img;
-			w2.graphicUpdate = graphicUpdate ;
+			_w2.graphic = img;
+			_w2.graphicUpdate = graphicUpdate ;
 			addChild( img);
 			
-			var lin1:LineJoint = new LineJoint(body,w1,new Vec2(5,0),new Vec2(27,27),
-				new Vec2(0,1), 0,60);
+			var lin1:LineJoint = new LineJoint(body,_w1,new Vec2(-54,0),new Vec2(),
+				new Vec2(0,1), 0,50);
 			lin1.space = _space;
 			lin1.ignore = true; //prevent wheel colliding
 			
-			var lin2:LineJoint = new LineJoint(body,w2,new Vec2(80,0),new Vec2(27,27),
-				new Vec2(0,1), 0,60);
+			var lin2:LineJoint = new LineJoint(body,_w2,new Vec2(54,0),new Vec2(),
+				new Vec2(0,1), 0,50);
 			lin2.space = _space;
 			lin2.ignore = true; //prevent wheel colliding
 			
-//			var spr1:DistanceJoint = new DistanceJoint(body,w1,new Vec2(5,-10), new Vec2(27,27),40,40);
-//			spr1.stiff = false;
-//			spr1.frequency = 5;
-//			spr1.damping = 1;
-//			spr1.space = _space;
-//			
-//			var spr2:DistanceJoint= new DistanceJoint(body,w2,new Vec2(80,-10), new Vec2(27,27),40,40);
-//			spr2.stiff = false;
-//			spr2.frequency = 5;
-//			spr2.damping = 1;
-//			spr2.space = _space;
+			var spr1:DistanceJoint = new DistanceJoint(body,_w1,new Vec2(-54,-10), new Vec2(),40,55);
+			spr1.stiff = false;
+			spr1.frequency = 5;
+			spr1.damping = 1;
+			spr1.space = _space;
+			
+			var spr2:DistanceJoint= new DistanceJoint(body,_w2,new Vec2(54,-10), new Vec2(),40,55);
+			spr2.stiff = false;
+			spr2.frequency = 5;
+			spr2.damping = 1;
+			spr2.space = _space;
 		}
 		
 		private function graphicUpdate(body:Body):void
