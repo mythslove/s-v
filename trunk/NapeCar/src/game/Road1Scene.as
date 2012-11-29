@@ -57,7 +57,7 @@ package game
 		private function addedHandler(e:Event):void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE , addedHandler );
-			PhysicsData.registerMaterial("road",Material.wood());
+			PhysicsData.registerMaterial("road",Material.glass());
 			PhysicsData.registerMaterial("tie",Material.steel());
 			PhysicsData.registerCbType("road",_groundType);
 			
