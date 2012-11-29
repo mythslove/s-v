@@ -2,6 +2,7 @@ package game
 {
 	import flash.display.Bitmap;
 	
+	import nape.callbacks.CbType;
 	import nape.constraint.DistanceJoint;
 	import nape.constraint.LineJoint;
 	import nape.geom.Vec2;
@@ -25,7 +26,7 @@ package game
 		[Embed(source="../assets/CarWheel.png")]
 		private const CARWHELL:Class;
 		//=================================
-		
+		private var _carType:CbType ;
 		private var _space:Space ;
 		private var _carBody:Body,_w1:Body,_w2:Body ;
 		private var _carTexture:Texture , _carWheelTexture:Texture ;
@@ -37,10 +38,11 @@ package game
 			return _w2;
 		}
 		
-		public function Car( space:Space )
+		public function Car( space:Space , carType:CbType )
 		{
 			super();
 			this._space = space ;
+			this._carType = carType;
 			addEventListener(Event.ADDED_TO_STAGE, addedHandler );
 		}
 		
@@ -53,6 +55,7 @@ package game
 			
 			var offsetX:Number=stage.stageWidth>>1  , offsetY:Number = 360;
 			var body:Body = new Body(null, new Vec2(offsetX,offsetY));
+			body.cbType = _carType ;
 			body.shapes.add(new Polygon(Polygon.box(_carTexture.width,_carTexture.height)));
 			img = new Image(_carTexture); 
 			img.pivotX = _carTexture.width>>1 ;
