@@ -5,9 +5,9 @@ package game
 	import nape.constraint.LineJoint;
 	import nape.geom.Vec2;
 	import nape.phys.Body;
-	import nape.phys.BodyType;
 	import nape.phys.Material;
 	import nape.shape.Circle;
+	import nape.shape.Polygon;
 	import nape.space.Space;
 	
 	import starling.display.DisplayObject;
@@ -49,14 +49,24 @@ package game
 			_carTexture = AssetsManager.createTextureByName("CarBodyTexture");
 			_carWheelTexture= AssetsManager.createTextureByName("CarWheelTexture");
 			
-			var offsetX:int=100  , offsetY:int = 360;
+			var offsetX:int=100  , offsetY:int = 300;
 			
-			var img:Image= new Image(_carTexture);
+			/*var img:Image= new Image(_carTexture);
 			_carBody = PhysicsData.createBody("CarBody",img) ; 
 			_carBody.cbType = _carType ;
 			_carBody.space = _space;
-			_carBody.graphicUpdate = graphicUpdate ;
 			_carBody.position.setxy( offsetX , offsetY );
+			addChild( img);*/
+			
+			_carBody = new Body(null, new Vec2(offsetX,offsetY));
+			_carBody.cbType = _carType ;
+			_carBody.shapes.add(new Polygon(Polygon.box(_carTexture.width,_carTexture.height)));
+			var img:Image = new Image(_carTexture); 
+			img.pivotX = _carTexture.width>>1 ;
+			img.pivotY = _carTexture.height>>1 ;
+			_carBody.graphic = img;
+			_carBody.graphicUpdate = graphicUpdate ;
+			_carBody.space = _space;
 			addChild( img);
 			
 			_w1= circle(offsetX+20,offsetY+_carTexture.height-_carWheelTexture.height*0.5,_carWheelTexture.width*0.5);
