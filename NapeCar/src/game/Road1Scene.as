@@ -145,9 +145,9 @@ package game
 			_space.step(1/60);
 			panForeground();
 			if(_gui.direction==1){
-				_car.w2.velocity.x=-150;
+				_car.w2.velocity.x-=200;
 			}else if(_gui.direction==2){
-				_car.w1.velocity.x=150;
+				_car.w1.velocity.x=200;
 			}
 		}
 		
