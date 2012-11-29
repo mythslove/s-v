@@ -8,6 +8,12 @@ package game
 	
 	import gui.CarControlGUI;
 	
+	import nape.callbacks.CbEvent;
+	import nape.callbacks.CbType;
+	import nape.callbacks.InteractionCallback;
+	import nape.callbacks.InteractionListener;
+	import nape.callbacks.InteractionType;
+	import nape.dynamics.CollisionArbiter;
 	import nape.geom.Vec2;
 	import nape.phys.Body;
 	import nape.phys.BodyType;
@@ -22,6 +28,7 @@ package game
 	import starling.events.KeyboardEvent;
 	import starling.textures.Texture;
 	import starling.textures.TextureAtlas;
+	
 	import utils.BodyFromGraphic;
 	
 	public class Road1Scene extends Sprite
@@ -44,6 +51,9 @@ package game
 		private var _wall:Body ;
 		private var _map:Sprite = new Sprite();
 		private var _gui:CarControlGUI ;
+		private var _listener:InteractionListener ;
+		private var _groundType:CbType = new CbType() ;
+		private var _carType:CbType = new CbType();
 		
 		public function Road1Scene()
 		{
@@ -65,13 +75,28 @@ package game
 			_space = new Space( new Vec2(0,400));
 			addWall();
 			createRoads();
-			_car = new Car(_space);
+			_car = new Car(_space , _carType );
 			_map.addChild(_car);
 			
 			_gui = new CarControlGUI();
 			addChild(_gui);
 			
+			//create listener last
+			_listener = new InteractionListener(CbEvent.BEGIN, InteractionType.COLLISION, _groundType, _carType, onContact);
+			_space.listeners.add(_listener);
+			
 			addEventListener(Event.ENTER_FRAME , update );
+		}
+		
+		private function onContact(callback:InteractionCallback):void
+		{
+			var i:int = callback.arbiters.length;
+			while (--i > -1) {
+				
+				var arbiter:CollisionArbiter = callback.arbiters.at(i).collisionArbiter;		
+				
+				trace(arbiter);
+			}
 		}
 		
 		private function addWall():void
@@ -87,6 +112,7 @@ package game
 			var img:Image ;
 			_road1=BodyFromGraphic.bitmapToBody(BodyType.STATIC , Material.wood() ,  _road1Bmp.bitmapData );
 			_road1.position.setxy( 0,GameSetting.SCREEN_HEIGHT-_road1Texture.height) ;
+			_road1.cbType = _groundType ;
 			_road1.space = _space ;
 			img = new Image(_road1Texture);
 			_road1.graphic = img;
@@ -95,6 +121,7 @@ package game
 			
 			_road2=BodyFromGraphic.bitmapToBody(BodyType.STATIC , Material.wood() , _road2Bmp.bitmapData );
 			_road2.position.setxy( _road1Texture.width ,GameSetting.SCREEN_HEIGHT-_road2Texture.height-20) ;
+			_road2.cbType = _groundType ;
 			_road2.space = _space ;
 			img = new Image(_road2Texture);
 			_road2.graphic = img;
