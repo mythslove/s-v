@@ -38,7 +38,7 @@ package game
 		[Embed(source="../assets/2.png")]
 		private var ROAD2:Class ;
 		//===============================
-		public const MAP_WID:int = 2048 ;
+		public const MAP_WID:int = 2048*20 ;
 		
 		private var _road1Bmp:Bitmap = new ROAD1();
 		private var _road2Bmp:Bitmap = new ROAD2();
@@ -110,7 +110,7 @@ package game
 		private function createRoads():void
 		{
 			var img:Image ;
-			_road1=BodyFromGraphic.bitmapToBody(BodyType.STATIC , Material.wood() ,  _road1Bmp.bitmapData );
+			_road1=BodyFromGraphic.bitmapToBody(BodyType.KINEMATIC , Material.wood() ,  _road1Bmp.bitmapData );
 			_road1.position.setxy( 0,GameSetting.SCREEN_HEIGHT-_road1Texture.height) ;
 			_road1.cbType = _groundType ;
 			_road1.space = _space ;
@@ -119,8 +119,8 @@ package game
 			_road1.graphicUpdate = graphicUpdate ;
 			_map.addChild( img );
 			
-			_road2=BodyFromGraphic.bitmapToBody(BodyType.STATIC , Material.wood() , _road2Bmp.bitmapData );
-			_road2.position.setxy( _road1Texture.width ,GameSetting.SCREEN_HEIGHT-_road2Texture.height-20) ;
+			_road2=BodyFromGraphic.bitmapToBody(BodyType.KINEMATIC , Material.wood() , _road2Bmp.bitmapData );
+			_road2.position.setxy( _road1Texture.width ,GameSetting.SCREEN_HEIGHT-_road2Texture.height) ;
 			_road2.cbType = _groundType ;
 			_road2.space = _space ;
 			img = new Image(_road2Texture);
@@ -144,12 +144,16 @@ package game
 		{
 			_space.step(1/60);
 			panForeground();
+			
+			_car.carBody.applyLocalImpulse( new Vec2(200,0),new Vec2(80,0));
+			if(_car.carBody.velocity.x>800) _car.carBody.velocity.x = 800 ;
+			
 			if(_gui.direction==1){
-				_car.w2.applyLocalImpulse( new Vec2(-50,0));
-				if(_car.w2.velocity.x<-250) _car.w2.velocity.x = -250 ;
+				_car.carBody.applyLocalImpulse( new Vec2(0,-10));
+				if(_car.w1.velocity.y>50) _car.w1.velocity.y = 50 ;
 			}else if(_gui.direction==2){
-				_car.w1.applyLocalImpulse( new Vec2(50,0));
-				if(_car.w1.velocity.x>250) _car.w1.velocity.x = 250 ;
+				_car.w2.applyLocalImpulse( new Vec2(0,-10));
+				if(_car.w2.velocity.y>50) _car.w2.velocity.y = 50 ;
 			}
 		}
 		
@@ -158,6 +162,12 @@ package game
 			_map.x = GameSetting.SCREEN_WIDTH*0.5  - _car.w1.position.x-50 ;
 			if(_map.x>0 ) _map.x =0 ;
 			else if(_map.x+MAP_WID<GameSetting.SCREEN_WIDTH) _map.x = GameSetting.SCREEN_WIDTH-MAP_WID ;
+			
+			if(_road1.position.x+_map.x+1024<0) {
+				_road1.position.x = _road2.position.x + 1024 ;
+			}else if(_road2.position.x+_map.x+1024<0) {
+				_road2.position.x = _road1.position.x + 1024 ;
+			}
 		}
 	}
 }
