@@ -59,19 +59,19 @@ package gui
 		
 		private function leftTouch(e:TouchEvent):void
 		{
-			direction = 0;
-			if(e.getTouch(_leftBtn,TouchPhase.BEGAN))
+			direction = 1;
+			if(e.getTouch(_leftBtn,TouchPhase.ENDED))
 			{
-				direction = 1;
+				direction = 0;
 			}
 		}
 		
 		private function righTouch(e:TouchEvent):void
 		{
-			direction = 0;
-			if(e.getTouch(_rightBtn,TouchPhase.BEGAN))
+			direction = 2;
+			if(e.getTouch(_leftBtn,TouchPhase.ENDED))
 			{
-				direction = 2 ;
+				direction = 0;
 			}
 		}
 				
