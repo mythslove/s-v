@@ -22,6 +22,7 @@ package game
 	import starling.events.KeyboardEvent;
 	import starling.textures.Texture;
 	import starling.textures.TextureAtlas;
+	import utils.BodyFromGraphic;
 	
 	public class Road1Scene extends Sprite
 	{
