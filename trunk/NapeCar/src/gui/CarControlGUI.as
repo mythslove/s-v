@@ -9,7 +9,6 @@ package gui
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.Event;
-	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
 	import starling.textures.Texture;
@@ -74,6 +73,5 @@ package gui
 				direction = 0;
 			}
 		}
-				
 	}
 }
