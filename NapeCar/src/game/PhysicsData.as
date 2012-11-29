@@ -201,7 +201,7 @@ package  game{
 			
 			
 			
-			anchor = (false) ? body.localCOM.copy() : Vec2.get(0,0);
+			anchor = (true) ? body.localCOM.copy() : Vec2.get(0,0);
 			body.translateShapes(Vec2.weak(-anchor.x,-anchor.y));
 			body.position.setxy(0,0);
 			

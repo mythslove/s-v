@@ -16,7 +16,9 @@ package game
 	import nape.phys.Material;
 	import nape.shape.Polygon;
 	import nape.space.Space;
+	import nape.util.BitmapDebug;
 	
+	import starling.core.Starling;
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.Event;
@@ -36,6 +38,7 @@ package game
 		private var _listener:InteractionListener ;
 		private var _groundType:CbType = new CbType() ;
 		private var _carType:CbType = new CbType();
+		private var _debug:BitmapDebug = null ;//new BitmapDebug(960,640);
 		
 		public function Road1Scene()
 		{
@@ -43,6 +46,11 @@ package game
 			_map.touchable = false ;
 			addChild(_map);
 			addEventListener(Event.ADDED_TO_STAGE , addedHandler );
+			
+			if(_debug){
+				_debug.drawConstraints = true;
+				Starling.current.nativeOverlay.addChild(_debug.display);
+			}
 		}
 				
 		
@@ -93,7 +101,7 @@ package game
 		{
 			var img:Image = new Image(AssetsManager.createTextureAtlas("RoadTexture").getTexture("road1"));
 			_road1 = PhysicsData.createBody("road1",img);
-			_road1.position.setxy( 0,GameSetting.SCREEN_HEIGHT-img.texture.height) ; 
+			_road1.position.setxy( 0,GameSetting.SCREEN_HEIGHT-img.texture.height) ;
 			_road1.type = BodyType.KINEMATIC ;
 			_road1.space = _space ;
 			_map.addChild( img );
@@ -101,7 +109,7 @@ package game
 			img = new Image(AssetsManager.createTextureAtlas("RoadTexture").getTexture("road2"));
 			_road2 = PhysicsData.createBody("road2",img);
 			_road2.type = BodyType.KINEMATIC ;
-			_road2.position.setxy( 1024 ,GameSetting.SCREEN_HEIGHT-img.texture.height) ;
+			_road2.position.setxy( 1024 ,GameSetting.SCREEN_HEIGHT-img.texture.height) ;trace(img.texture.height);
 			_road2.space = _space ;
 			_map.addChild( img );
 			
@@ -123,6 +131,12 @@ package game
 		private function update(e:Event):void
 		{
 			_space.step(1/60);
+			if(_debug){
+				_debug.clear();
+				_debug.draw(_space);
+				_debug.flush();
+			}
+			
 			panForeground();
 			
 			if(_gui.direction==1){
