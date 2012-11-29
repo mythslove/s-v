@@ -49,19 +49,13 @@ package game
 			_carTexture = AssetsManager.createTextureByName("CarBodyTexture");
 			_carWheelTexture= AssetsManager.createTextureByName("CarWheelTexture");
 			
-			var offsetX:Number=100  , offsetY:Number = 360;
+			var offsetX:int=100  , offsetY:int = 360;
 			
-			var img:Image= new Image(_carTexture);  
-			img.pivotX = _carTexture.width>>1 ;
-			img.pivotY = _carTexture.height>>1 ;
-			_carBody = new Body(null, new Vec2(offsetX,offsetY)); //PhysicsData.createBody("CarBody",img) ; // 
-			_carBody.graphic = img ;
-			_carBody.graphicUpdate = graphicUpdate ;
-			addChild( img);
-			
-			_carBody.setShapeMaterials( Material.steel() );
+			var img:Image= new Image(_carTexture);
+			_carBody = PhysicsData.createBody("CarBody",img) ; 
 			_carBody.cbType = _carType ;
 			_carBody.space = _space;
+			_carBody.graphicUpdate = graphicUpdate ;
 			_carBody.position.setxy( offsetX , offsetY );
 			addChild( img);
 			
