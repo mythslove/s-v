@@ -27,7 +27,7 @@ package game
 	
 	public class Road1Scene extends Sprite
 	{
-		public const MAP_WID:int = 2048*20 ;
+		public const MAP_WID:int = 1024*4 ;
 		
 		private var _road1:Body , _road2:Body , _road3:Body , _road4:Body;
 		private var _space:Space ;
@@ -57,12 +57,13 @@ package game
 		private function addedHandler(e:Event):void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE , addedHandler );
+			PhysicsData.registerMaterial("default",Material.glass());
 			PhysicsData.registerMaterial("road",Material.glass());
 			PhysicsData.registerMaterial("tie",Material.steel());
 			PhysicsData.registerCbType("road",_groundType);
 			
 			
-			_space = new Space( new Vec2(0,400));
+			_space = new Space( new Vec2(0,800));
 			addWall();
 			createRoads();
 			_car = new Car(_space , _carType );
@@ -152,22 +153,6 @@ package game
 			_map.x = GameSetting.SCREEN_WIDTH*0.5  - _car.w1.position.x-200 ;
 			if(_map.x>0 ) _map.x =0 ;
 			else if(_map.x+MAP_WID<GameSetting.SCREEN_WIDTH) _map.x = GameSetting.SCREEN_WIDTH-MAP_WID ;
-			
-			_road4.graphic.visible = _road4.position.x+_map.x<=GameSetting.SCREEN_WIDTH ? true : false ;
-			_road3.graphic.visible = _road3.position.x+_map.x<=GameSetting.SCREEN_WIDTH ? true : false ;
-			_road2.graphic.visible = _road2.position.x+_map.x<=GameSetting.SCREEN_WIDTH ? true : false ;
-			_road1.graphic.visible = _road1.position.x+_map.x<=GameSetting.SCREEN_WIDTH ? true : false ;
-			
-			
-			if(_road4.position.x+_map.x+1024<0) {
-				_road4.position.x = _road3.position.x+1024 ;
-			}else if(_road3.position.x+_map.x+1024<0) {
-				_road3.position.x = _road2.position.x+1024 ;
-			}else if(_road2.position.x+_map.x+1024<0) {
-				_road2.position.x = _road1.position.x+1024 ;
-			}else if(_road1.position.x+_map.x+1024<0) {
-				_road1.position.x = _road4.position.x+1024 ;
-			}
 		}
 	}
 }
