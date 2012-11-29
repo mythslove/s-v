@@ -2,10 +2,6 @@ package game
 {
 	import comm.GameSetting;
 	
-	import flash.display.Bitmap;
-	import flash.ui.Keyboard;
-	import flash.ui.KeyboardType;
-	
 	import gui.CarControlGUI;
 	
 	import nape.callbacks.CbEvent;
@@ -21,32 +17,18 @@ package game
 	import nape.shape.Polygon;
 	import nape.space.Space;
 	
-	import starling.display.DisplayObject;
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.Event;
-	import starling.events.KeyboardEvent;
-	import starling.textures.Texture;
-	import starling.textures.TextureAtlas;
 	
-	import utils.BodyFromGraphic;
+	import utils.AssetsManager;
 	
 	public class Road1Scene extends Sprite
 	{
-		[Embed(source="../assets/1.png")]
-		private var ROAD1:Class ;
-		[Embed(source="../assets/2.png")]
-		private var ROAD2:Class ;
-		//===============================
 		public const MAP_WID:int = 2048*20 ;
 		
-		private var _road1Bmp:Bitmap = new ROAD1();
-		private var _road2Bmp:Bitmap = new ROAD2();
+		private var _road1:Body , _road2:Body , _road3:Body , _road4:Body;
 		private var _space:Space ;
-		private var _roadTextureAtlas:TextureAtlas ;
-		private var _road1Texture:Texture , _road2Texture:Texture ;
-		private var _road1:Body , _road2:Body;
-		private var _road1Polygon:Polygon , _road2Polygon:Polygon ;
 		private var _car:Car ;
 		private var _wall:Body ;
 		private var _map:Sprite = new Sprite();
@@ -58,7 +40,6 @@ package game
 		public function Road1Scene()
 		{
 			super();
-			_map.y=20;
 			_map.touchable = false ;
 			addChild(_map);
 			addEventListener(Event.ADDED_TO_STAGE , addedHandler );
@@ -68,9 +49,10 @@ package game
 		private function addedHandler(e:Event):void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE , addedHandler );
+			PhysicsData.registerMaterial("road",Material.wood());
+			PhysicsData.registerMaterial("tie",Material.steel());
+			PhysicsData.registerCbType("road",_groundType);
 			
-			_road1Texture = Texture.fromBitmap( _road1Bmp , false );
-			_road2Texture = Texture.fromBitmap( _road2Bmp , false );
 			
 			_space = new Space( new Vec2(0,400));
 			addWall();
@@ -109,35 +91,33 @@ package game
 		
 		private function createRoads():void
 		{
-			var img:Image ;
-			_road1=BodyFromGraphic.bitmapToBody(BodyType.KINEMATIC , Material.wood() ,  _road1Bmp.bitmapData );
-			_road1.position.setxy( 0,GameSetting.SCREEN_HEIGHT-_road1Texture.height) ;
-			_road1.cbType = _groundType ;
+			var img:Image = new Image(AssetsManager.createTextureAtlas("RoadTexture").getTexture("road1"));
+			_road1 = PhysicsData.createBody("road1",img);
+			_road1.position.setxy( 0,GameSetting.SCREEN_HEIGHT-img.texture.height) ; 
+			_road1.type = BodyType.KINEMATIC ;
 			_road1.space = _space ;
-			img = new Image(_road1Texture);
-			_road1.graphic = img;
-			_road1.graphicUpdate = graphicUpdate ;
 			_map.addChild( img );
 			
-			_road2=BodyFromGraphic.bitmapToBody(BodyType.KINEMATIC , Material.wood() , _road2Bmp.bitmapData );
-			_road2.position.setxy( _road1Texture.width ,GameSetting.SCREEN_HEIGHT-_road2Texture.height) ;
-			_road2.cbType = _groundType ;
+			img = new Image(AssetsManager.createTextureAtlas("RoadTexture").getTexture("road2"));
+			_road2 = PhysicsData.createBody("road2",img);
+			_road2.type = BodyType.KINEMATIC ;
+			_road2.position.setxy( 1024 ,GameSetting.SCREEN_HEIGHT-img.texture.height) ;
 			_road2.space = _space ;
-			img = new Image(_road2Texture);
-			_road2.graphic = img;
-			_road2.graphicUpdate = graphicUpdate ;
 			_map.addChild( img );
-		}
-		
-		private function graphicUpdate(body:Body):void
-		{
-			if(body.graphic && body.graphic is DisplayObject)
-			{
-				var gra:DisplayObject = body.graphic as DisplayObject;
-				gra.x = body.position.x;
-				gra.y = body.position.y;
-				gra.rotation = body.rotation;
-			}
+			
+			img = new Image(AssetsManager.createTextureAtlas("RoadTexture").getTexture("road3"));
+			_road3 = PhysicsData.createBody("road3",img);
+			_road3.type = BodyType.KINEMATIC ;
+			_road3.position.setxy( 1024*2 ,GameSetting.SCREEN_HEIGHT-img.texture.height) ;
+			_road3.space = _space ;
+			_map.addChild( img );
+			
+			img = new Image(AssetsManager.createTextureAtlas("RoadTexture").getTexture("road4"));
+			_road4 = PhysicsData.createBody("road4",img);
+			_road4.type = BodyType.KINEMATIC ;
+			_road4.position.setxy( 1024*3 ,GameSetting.SCREEN_HEIGHT-img.texture.height) ;
+			_road4.space = _space ;
+			_map.addChild( img );
 		}
 		
 		private function update(e:Event):void
@@ -145,28 +125,35 @@ package game
 			_space.step(1/60);
 			panForeground();
 			
-			_car.carBody.applyLocalImpulse( new Vec2(200,0),new Vec2(80,0));
-			if(_car.carBody.velocity.x>800) _car.carBody.velocity.x = 800 ;
-			
 			if(_gui.direction==1){
-				_car.carBody.applyLocalImpulse( new Vec2(0,-10));
-				if(_car.w1.velocity.y>50) _car.w1.velocity.y = 50 ;
+				_car.w1.applyLocalImpulse( new Vec2(-100,0));
+				if(_car.w1.velocity.x<-300) _car.w1.velocity.x = -300 ;
 			}else if(_gui.direction==2){
-				_car.w2.applyLocalImpulse( new Vec2(0,-10));
-				if(_car.w2.velocity.y>50) _car.w2.velocity.y = 50 ;
+				_car.w2.applyLocalImpulse( new Vec2(100,0));
+				if(_car.w2.velocity.x>300) _car.w2.velocity.x = 300 ;
 			}
 		}
 		
 		private function panForeground():void
 		{
-			_map.x = GameSetting.SCREEN_WIDTH*0.5  - _car.w1.position.x-50 ;
+			_map.x = GameSetting.SCREEN_WIDTH*0.5  - _car.w1.position.x-200 ;
 			if(_map.x>0 ) _map.x =0 ;
 			else if(_map.x+MAP_WID<GameSetting.SCREEN_WIDTH) _map.x = GameSetting.SCREEN_WIDTH-MAP_WID ;
 			
+			_road1.graphic.visible = _road1.position.x+_map.x<=GameSetting.SCREEN_WIDTH ? true : false ;
+			_road2.graphic.visible = _road1.position.x+_map.x<=GameSetting.SCREEN_WIDTH ? true : false ;
+			_road3.graphic.visible = _road1.position.x+_map.x<=GameSetting.SCREEN_WIDTH ? true : false ;
+			_road4.graphic.visible = _road1.position.x+_map.x<=GameSetting.SCREEN_WIDTH ? true : false ;
+			
+			
 			if(_road1.position.x+_map.x+1024<0) {
-				_road1.position.x = _road2.position.x + 1024 ;
+				_road1.position.x = 1024*3 ;
 			}else if(_road2.position.x+_map.x+1024<0) {
-				_road2.position.x = _road1.position.x + 1024 ;
+				_road2.position.x = 1024*3 ;
+			}else if(_road3.position.x+_map.x+1024<0) {
+				_road3.position.x = 1024*3 ;
+			}else if(_road4.position.x+_map.x+1024<0) {
+				_road4.position.x = 1024*3 ;
 			}
 		}
 	}

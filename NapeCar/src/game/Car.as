@@ -1,15 +1,13 @@
 package game
 {
-	import flash.display.Bitmap;
-	
 	import nape.callbacks.CbType;
 	import nape.constraint.DistanceJoint;
 	import nape.constraint.LineJoint;
 	import nape.geom.Vec2;
 	import nape.phys.Body;
+	import nape.phys.BodyType;
 	import nape.phys.Material;
 	import nape.shape.Circle;
-	import nape.shape.Polygon;
 	import nape.space.Space;
 	
 	import starling.display.DisplayObject;
@@ -18,13 +16,10 @@ package game
 	import starling.events.Event;
 	import starling.textures.Texture;
 	
+	import utils.AssetsManager;
+	
 	public class Car extends Sprite
 	{
-		[Embed(source="../assets/CarBody.png")]
-		private const CARBODY:Class;
-		[Embed(source="../assets/CarWheel.png")]
-		private const CARWHELL:Class;
-		//=================================
 		private var _carType:CbType ;
 		private var _space:Space ;
 		private var _carBody:Body,_w1:Body,_w2:Body ;
@@ -51,20 +46,23 @@ package game
 		private function addedHandler( e:Event ):void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, addedHandler );
-			_carTexture = Texture.fromBitmap( new CARBODY as Bitmap,false) ;
-			_carWheelTexture = Texture.fromBitmap( new CARWHELL as Bitmap,false) ;
-			var img:Image ;
+			_carTexture = AssetsManager.createTextureByName("CarBodyTexture");
+			_carWheelTexture= AssetsManager.createTextureByName("CarWheelTexture");
 			
 			var offsetX:Number=100  , offsetY:Number = 360;
-			_carBody = new Body(null, new Vec2(offsetX,offsetY));
-			_carBody.cbType = _carType ;
-			_carBody.shapes.add(new Polygon(Polygon.box(_carTexture.width,_carTexture.height)));
-			img = new Image(_carTexture); 
+			
+			var img:Image= new Image(_carTexture);  
 			img.pivotX = _carTexture.width>>1 ;
 			img.pivotY = _carTexture.height>>1 ;
-			_carBody.graphic = img;
+			_carBody = new Body(null, new Vec2(offsetX,offsetY)); //PhysicsData.createBody("CarBody",img) ; // 
+			_carBody.graphic = img ;
 			_carBody.graphicUpdate = graphicUpdate ;
+			addChild( img);
+			
+			_carBody.setShapeMaterials( Material.steel() );
+			_carBody.cbType = _carType ;
 			_carBody.space = _space;
+			_carBody.position.setxy( offsetX , offsetY );
 			addChild( img);
 			
 			_w1= circle(offsetX+20,offsetY+_carTexture.height-_carWheelTexture.height*0.5,_carWheelTexture.width*0.5);
