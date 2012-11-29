@@ -140,11 +140,11 @@ package game
 			panForeground();
 			
 			if(_gui.direction==1){
-				_car.w1.applyLocalImpulse( new Vec2(-100,0));
-				if(_car.w1.velocity.x<-300) _car.w1.velocity.x = -300 ;
+				_car.w2.applyLocalImpulse( new Vec2(-80,0));
+				if(_car.w2.velocity.x<-200) _car.w1.velocity.x = -200 ;
 			}else if(_gui.direction==2){
-				_car.w2.applyLocalImpulse( new Vec2(100,0));
-				if(_car.w2.velocity.x>300) _car.w2.velocity.x = 300 ;
+				_car.w1.applyLocalImpulse( new Vec2(80,0));
+				if(_car.w1.velocity.x>200) _car.w2.velocity.x = 200 ;
 			}
 		}
 		
