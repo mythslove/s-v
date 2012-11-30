@@ -60,7 +60,6 @@ package game
 			PhysicsData.registerMaterial("default",Material.sand());
 			PhysicsData.registerMaterial("road",Material.sand());
 			var tie:Material = Material.steel() ;
-			tie.density =  5 ;
 			PhysicsData.registerMaterial("tie",tie );
 			PhysicsData.registerCbType("road",_groundType);
 			
@@ -143,11 +142,11 @@ package game
 			panForeground();
 			
 			if(_gui.direction==1){
-				_car.w2.applyLocalImpulse( Vec2.weak(-150,0) );
-				if(_car.w2.velocity.x<-400) _car.w2.velocity.x = -400 ;
+				_car.w2.applyLocalImpulse( Vec2.weak(-250,0) );
+				if(_car.w2.velocity.x<-500) _car.w2.velocity.x = -500 ;
 			}else if(_gui.direction==2){
-				_car.w1.applyLocalImpulse( Vec2.weak(150,0) );
-				if(_car.w1.velocity.x>400) _car.w1.velocity.x = 400 ;
+				_car.w1.applyLocalImpulse( Vec2.weak(250,0) );
+				if(_car.w1.velocity.x>500) _car.w1.velocity.x = 500 ;
 			}
 		}
 		

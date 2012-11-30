@@ -125,6 +125,8 @@ package game
 		private function circle(x:Number,y:Number,r:Number):Body {
 			var b:Body = new Body();
 			var materail:Material = Material.rubber() ; 
+			materail.elasticity = 0.4 ;
+			materail.rollingFriction = 0.05 ; 
 			b.shapes.add(new Circle(r,null,materail));
 			b.position.setxy(x,y);
 			return b;

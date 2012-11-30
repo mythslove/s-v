@@ -39,6 +39,7 @@ package gui
 			_leftBtn.pivotY = texture.height>>1 ;
 			_leftBtn.upSkin = new Image (texture);
 			_leftBtn.downSkin = _leftBtn.upSkin;
+			_leftBtn.hoverSkin = _leftBtn.upSkin;
 			_leftBtn.scaleX = -1 ;
 			_leftBtn.x = 100 ;
 			_leftBtn.y = GameSetting.SCREEN_HEIGHT-_leftBtn.upSkin.height  ;
@@ -47,8 +48,9 @@ package gui
 			_rightBtn = new Button();
 			_rightBtn.pivotX = texture.width>>1 ;
 			_rightBtn.pivotY = texture.height>>1 ;
-			_rightBtn.upSkin = new Image (texture);;
+			_rightBtn.upSkin = new Image (texture);
 			_rightBtn.downSkin = _rightBtn.upSkin;
+			_rightBtn.hoverSkin = _rightBtn.upSkin;
 			_rightBtn.x = GameSetting.SCREEN_WIDTH-100 ;
 			_rightBtn.y = GameSetting.SCREEN_HEIGHT-_rightBtn.upSkin.height  ;
 			addChild(_rightBtn);
