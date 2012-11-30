@@ -62,6 +62,7 @@ package game
 			PhysicsData.registerMaterial("default",Material.sand());
 			PhysicsData.registerMaterial("road",Material.sand());
 			var tie:Material = Material.steel() ;
+			tie.elasticity = 0;
 			PhysicsData.registerMaterial("tie",tie );
 			PhysicsData.registerCbType("road",_groundType);
 			
