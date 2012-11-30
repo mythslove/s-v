@@ -60,12 +60,13 @@ package game
 			_carBody.space = _space;
 			addChild( img);
 			
-			_w1= circle(36,36,_carWheelTexture.width>>1 );
-			_w1.compound = compound ;
-			_w1.space = _space;
+			
 			img = new Image(_carWheelTexture); 
 			img.pivotX = _carWheelTexture.width>>1 ;
 			img.pivotY = _carWheelTexture.height>>1 ;
+			_w1= circle(36,36,_carWheelTexture.width>>1 );
+			_w1.compound = compound ;
+			_w1.space = _space;
 			_w1.graphic = img ;
 			_w1.graphicUpdate = graphicUpdate ;
 			addChildAt( img,0);
