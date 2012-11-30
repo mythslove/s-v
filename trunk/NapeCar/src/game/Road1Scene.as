@@ -27,7 +27,7 @@ package game
 	
 	public class Road1Scene extends Sprite
 	{
-		public const MAP_WID:int = 1024*20 ;
+		public const MAP_WID:int = 1024*100 ;
 		
 		private var _road1:Body , _road2:Body , _road3:Body , _road4:Body;
 		private var _space:Space ;
@@ -132,7 +132,7 @@ package game
 			_road4.space = _space ;
 			_map.addChild( img );
 			
-			for(var i:int = 4 ; i<20; i+=4){
+			for(var i:int = 4 ; i<100; i+=4){
 				
 				//===============
 				img = new Image(AssetsManager.createTextureAtlas("RoadTexture").getTexture("road1"));
@@ -177,7 +177,7 @@ package game
 			
 			if(_gui.direction==1){
 				_car.w1.rotation-=0.2;
-				_car.w1.applyLocalImpulse( Vec2.weak(-600,0) );
+				_car.w1.applyLocalImpulse( Vec2.weak(-600,0)  );
 			}else if(_gui.direction==2){
 				_car.w1.rotation+=0.2 ;
 				_car.w1.applyLocalImpulse( Vec2.weak(600,0) );
