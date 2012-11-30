@@ -184,6 +184,8 @@ package game
 			}
 			if(_car.w1.velocity.x<-300) _car.w1.velocity.x = -300 ;
 			if(_car.w1.velocity.x>400) _car.w1.velocity.x = 400 ;
+			
+			trace(_car.carBody.velocity.x);
 		}
 		
 		private function panForeground():void
