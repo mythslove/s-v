@@ -1,14 +1,18 @@
 package  game{
 
+import flash.display.DisplayObject;
 import flash.geom.Rectangle;
 import flash.utils.Dictionary;
 
 import nape.callbacks.CbType;
 import nape.dynamics.InteractionFilter;
+import nape.geom.AABB;
 import nape.geom.Vec2;
 import nape.phys.Body;
+import nape.phys.BodyType;
 import nape.phys.FluidProperties;
 import nape.phys.Material;
+import nape.shape.Circle;
 import nape.shape.Polygon;
 import nape.shape.Shape;
 
@@ -16,7 +20,7 @@ import starling.display.DisplayObject;
 
 public class PhysicsData {
 
-	public static function createBody(name:String,graphic:DisplayObject=null):Body {
+	public static function createBody(name:String,graphic:starling.display.DisplayObject=null):Body {
 		var xret:BodyPair = lookup(name);
 		if(graphic==null) return xret.body.copy();
 
@@ -31,7 +35,7 @@ public class PhysicsData {
 			var gp:Vec2 = b.localToWorld(offset);
 			graphic.x = gp.x;
 			graphic.y = gp.y;
-			graphic.rotation = (b.rotation*180/Math.PI)%360;
+			graphic.rotation = b.rotation;
 		}	
 
 		return ret;
@@ -216,7 +220,7 @@ public class PhysicsData {
 				
 					
 						s = new Polygon(
-							[   Vec2.weak(0,392.5)   ,  Vec2.weak(1023.5,392)   ,  Vec2.weak(804,236.5)   ,  Vec2.weak(792,232.5)   ,  Vec2.weak(39,131.5)   ,  Vec2.weak(-0.5,132)   ],
+							[   Vec2.weak(1023.5,292)   ,  Vec2.weak(1023,30.5)   ,  Vec2.weak(526,77.5)   ,  Vec2.weak(463,86.5)   ,  Vec2.weak(0,292.5)   ],
 							mat,
 							filt
 						);
@@ -226,7 +230,7 @@ public class PhysicsData {
 						s.cbType = cbType;
 					
 						s = new Polygon(
-							[   Vec2.weak(985,131.5)   ,  Vec2.weak(977,135.5)   ,  Vec2.weak(961.5,149)   ,  Vec2.weak(916,194.5)   ,  Vec2.weak(1023.5,392)   ,  Vec2.weak(1023,130.5)   ,  Vec2.weak(992,130.5)   ],
+							[   Vec2.weak(-0.5,32)   ,  Vec2.weak(0,292.5)   ,  Vec2.weak(200,60.5)   ,  Vec2.weak(29,32.5)   ],
 							mat,
 							filt
 						);
@@ -236,7 +240,7 @@ public class PhysicsData {
 						s.cbType = cbType;
 					
 						s = new Polygon(
-							[   Vec2.weak(916,194.5)   ,  Vec2.weak(892,212.5)   ,  Vec2.weak(1023.5,392)   ],
+							[   Vec2.weak(200,60.5)   ,  Vec2.weak(0,292.5)   ,  Vec2.weak(331,78.5)   ],
 							mat,
 							filt
 						);
@@ -246,7 +250,7 @@ public class PhysicsData {
 						s.cbType = cbType;
 					
 						s = new Polygon(
-							[   Vec2.weak(892,212.5)   ,  Vec2.weak(872,223.5)   ,  Vec2.weak(1023.5,392)   ],
+							[   Vec2.weak(331,78.5)   ,  Vec2.weak(0,292.5)   ,  Vec2.weak(405,85.5)   ],
 							mat,
 							filt
 						);
@@ -256,7 +260,7 @@ public class PhysicsData {
 						s.cbType = cbType;
 					
 						s = new Polygon(
-							[   Vec2.weak(872,223.5)   ,  Vec2.weak(839,234.5)   ,  Vec2.weak(1023.5,392)   ],
+							[   Vec2.weak(835,3.5)   ,  Vec2.weak(759,26.5)   ,  Vec2.weak(873,-0.5)   ],
 							mat,
 							filt
 						);
@@ -266,7 +270,7 @@ public class PhysicsData {
 						s.cbType = cbType;
 					
 						s = new Polygon(
-							[   Vec2.weak(839,234.5)   ,  Vec2.weak(813,237.5)   ,  Vec2.weak(1023.5,392)   ],
+							[   Vec2.weak(906,0.5)   ,  Vec2.weak(873,-0.5)   ,  Vec2.weak(692,43.5)   ,  Vec2.weak(1023,30.5)   ,  Vec2.weak(968,12.5)   ,  Vec2.weak(939,5.5)   ],
 							mat,
 							filt
 						);
@@ -276,7 +280,7 @@ public class PhysicsData {
 						s.cbType = cbType;
 					
 						s = new Polygon(
-							[   Vec2.weak(678,156.5)   ,  Vec2.weak(656,152.5)   ,  Vec2.weak(608,152.5)   ,  Vec2.weak(779.5,225)   ,  Vec2.weak(737,186.5)   ,  Vec2.weak(717,172.5)   ,  Vec2.weak(704,165.5)   ],
+							[   Vec2.weak(405,85.5)   ,  Vec2.weak(0,292.5)   ,  Vec2.weak(463,86.5)   ],
 							mat,
 							filt
 						);
@@ -286,7 +290,7 @@ public class PhysicsData {
 						s.cbType = cbType;
 					
 						s = new Polygon(
-							[   Vec2.weak(423,20.5)   ,  Vec2.weak(404,10.5)   ,  Vec2.weak(371,0.5)   ,  Vec2.weak(324,-0.5)   ,  Vec2.weak(521.5,113)   ,  Vec2.weak(446,37.5)   ],
+							[   Vec2.weak(759,26.5)   ,  Vec2.weak(692,43.5)   ,  Vec2.weak(873,-0.5)   ],
 							mat,
 							filt
 						);
@@ -296,7 +300,7 @@ public class PhysicsData {
 						s.cbType = cbType;
 					
 						s = new Polygon(
-							[   Vec2.weak(388,4.5)   ,  Vec2.weak(371,0.5)   ,  Vec2.weak(404,10.5)   ],
+							[   Vec2.weak(526,77.5)   ,  Vec2.weak(1023,30.5)   ,  Vec2.weak(620,59.5)   ],
 							mat,
 							filt
 						);
@@ -306,57 +310,7 @@ public class PhysicsData {
 						s.cbType = cbType;
 					
 						s = new Polygon(
-							[   Vec2.weak(289,6.5)   ,  Vec2.weak(264,14.5)   ,  Vec2.weak(202,40.5)   ,  Vec2.weak(110,88.5)   ,  Vec2.weak(39,131.5)   ,  Vec2.weak(552,135.5)   ,  Vec2.weak(324,-0.5)   ,  Vec2.weak(323,-0.5)   ],
-							mat,
-							filt
-						);
-						s.body = body;
-						s.fluidEnabled = false;
-						s.fluidProperties = prop;
-						s.cbType = cbType;
-					
-						s = new Polygon(
-							[   Vec2.weak(608,152.5)   ,  Vec2.weak(592,150.5)   ,  Vec2.weak(792,232.5)   ,  Vec2.weak(779.5,225)   ],
-							mat,
-							filt
-						);
-						s.body = body;
-						s.fluidEnabled = false;
-						s.fluidProperties = prop;
-						s.cbType = cbType;
-					
-						s = new Polygon(
-							[   Vec2.weak(813,237.5)   ,  Vec2.weak(804,236.5)   ,  Vec2.weak(1023.5,392)   ],
-							mat,
-							filt
-						);
-						s.body = body;
-						s.fluidEnabled = false;
-						s.fluidProperties = prop;
-						s.cbType = cbType;
-					
-						s = new Polygon(
-							[   Vec2.weak(521.5,113)   ,  Vec2.weak(324,-0.5)   ,  Vec2.weak(552,135.5)   ],
-							mat,
-							filt
-						);
-						s.body = body;
-						s.fluidEnabled = false;
-						s.fluidProperties = prop;
-						s.cbType = cbType;
-					
-						s = new Polygon(
-							[   Vec2.weak(592,150.5)   ,  Vec2.weak(576,146.5)   ,  Vec2.weak(39,131.5)   ,  Vec2.weak(792,232.5)   ],
-							mat,
-							filt
-						);
-						s.body = body;
-						s.fluidEnabled = false;
-						s.fluidProperties = prop;
-						s.cbType = cbType;
-					
-						s = new Polygon(
-							[   Vec2.weak(576,146.5)   ,  Vec2.weak(552,135.5)   ,  Vec2.weak(39,131.5)   ],
+							[   Vec2.weak(620,59.5)   ,  Vec2.weak(1023,30.5)   ,  Vec2.weak(692,43.5)   ],
 							mat,
 							filt
 						);
@@ -386,7 +340,7 @@ public class PhysicsData {
 				
 					
 						s = new Polygon(
-							[   Vec2.weak(1023.5,393)   ,  Vec2.weak(1023,132.5)   ,  Vec2.weak(219,191.5)   ,  Vec2.weak(205,197.5)   ,  Vec2.weak(0,393.5)   ],
+							[   Vec2.weak(1023.5,302)   ,  Vec2.weak(1023,40.5)   ,  Vec2.weak(985,37.5)   ,  Vec2.weak(811,57.5)   ,  Vec2.weak(0,302.5)   ],
 							mat,
 							filt
 						);
@@ -396,7 +350,7 @@ public class PhysicsData {
 						s.cbType = cbType;
 					
 						s = new Polygon(
-							[   Vec2.weak(-0.5,132)   ,  Vec2.weak(0,393.5)   ,  Vec2.weak(101,169.5)   ,  Vec2.weak(57,140.5)   ,  Vec2.weak(39,132.5)   ],
+							[   Vec2.weak(331,1.5)   ,  Vec2.weak(297,-0.5)   ,  Vec2.weak(476,64.5)   ,  Vec2.weak(403,28.5)   ,  Vec2.weak(364,11.5)   ],
 							mat,
 							filt
 						);
@@ -406,7 +360,7 @@ public class PhysicsData {
 						s.cbType = cbType;
 					
 						s = new Polygon(
-							[   Vec2.weak(629,3.5)   ,  Vec2.weak(589,14.5)   ,  Vec2.weak(555,29.5)   ,  Vec2.weak(503,57.5)   ,  Vec2.weak(673,-0.5)   ],
+							[   Vec2.weak(740,46.5)   ,  Vec2.weak(687,46.5)   ,  Vec2.weak(645,52.5)   ,  Vec2.weak(600,66.5)   ,  Vec2.weak(790,57.5)   ],
 							mat,
 							filt
 						);
@@ -416,7 +370,7 @@ public class PhysicsData {
 						s.cbType = cbType;
 					
 						s = new Polygon(
-							[   Vec2.weak(309,100.5)   ,  Vec2.weak(293,112.5)   ,  Vec2.weak(270.5,135)   ,  Vec2.weak(242,170.5)   ,  Vec2.weak(418,80.5)   ,  Vec2.weak(366,80.5)   ,  Vec2.weak(345,84.5)   ,  Vec2.weak(328,90.5)   ],
+							[   Vec2.weak(-0.5,42)   ,  Vec2.weak(0,302.5)   ,  Vec2.weak(46,43.5)   ,  Vec2.weak(21,41.5)   ],
 							mat,
 							filt
 						);
@@ -426,7 +380,7 @@ public class PhysicsData {
 						s.cbType = cbType;
 					
 						s = new Polygon(
-							[   Vec2.weak(708,1.5)   ,  Vec2.weak(674,-0.5)   ,  Vec2.weak(984,132.5)   ,  Vec2.weak(934,101.5)   ,  Vec2.weak(865,63.5)   ,  Vec2.weak(799,31.5)   ,  Vec2.weak(759,15.5)   ,  Vec2.weak(734,7.5)   ],
+							[   Vec2.weak(46,43.5)   ,  Vec2.weak(0,302.5)   ,  Vec2.weak(63,41.5)   ],
 							mat,
 							filt
 						);
@@ -436,7 +390,7 @@ public class PhysicsData {
 						s.cbType = cbType;
 					
 						s = new Polygon(
-							[   Vec2.weak(101,169.5)   ,  Vec2.weak(0,393.5)   ,  Vec2.weak(134,186.5)   ],
+							[   Vec2.weak(63,41.5)   ,  Vec2.weak(0,302.5)   ,  Vec2.weak(135,27.5)   ],
 							mat,
 							filt
 						);
@@ -446,7 +400,7 @@ public class PhysicsData {
 						s.cbType = cbType;
 					
 						s = new Polygon(
-							[   Vec2.weak(134,186.5)   ,  Vec2.weak(0,393.5)   ,  Vec2.weak(155,193.5)   ],
+							[   Vec2.weak(135,27.5)   ,  Vec2.weak(0,302.5)   ,  Vec2.weak(498,73.5)   ,  Vec2.weak(476,64.5)   ,  Vec2.weak(297,-0.5)   ,  Vec2.weak(296,-0.5)   ,  Vec2.weak(261,1.5)   ,  Vec2.weak(226,6.5)   ],
 							mat,
 							filt
 						);
@@ -456,7 +410,7 @@ public class PhysicsData {
 						s.cbType = cbType;
 					
 						s = new Polygon(
-							[   Vec2.weak(155,193.5)   ,  Vec2.weak(0,393.5)   ,  Vec2.weak(174,197.5)   ],
+							[   Vec2.weak(905,38.5)   ,  Vec2.weak(852,46.5)   ,  Vec2.weak(825,53.5)   ,  Vec2.weak(819,56.5)   ,  Vec2.weak(985,37.5)   ],
 							mat,
 							filt
 						);
@@ -466,7 +420,7 @@ public class PhysicsData {
 						s.cbType = cbType;
 					
 						s = new Polygon(
-							[   Vec2.weak(174,197.5)   ,  Vec2.weak(0,393.5)   ,  Vec2.weak(205,197.5)   ],
+							[   Vec2.weak(600,66.5)   ,  Vec2.weak(565,74.5)   ,  Vec2.weak(790,57.5)   ],
 							mat,
 							filt
 						);
@@ -476,7 +430,7 @@ public class PhysicsData {
 						s.cbType = cbType;
 					
 						s = new Polygon(
-							[   Vec2.weak(418,80.5)   ,  Vec2.weak(242,170.5)   ,  Vec2.weak(226,186.5)   ,  Vec2.weak(437,78.5)   ],
+							[   Vec2.weak(565,74.5)   ,  Vec2.weak(532,79.5)   ,  Vec2.weak(0,302.5)   ,  Vec2.weak(811,57.5)   ,  Vec2.weak(790,57.5)   ],
 							mat,
 							filt
 						);
@@ -486,7 +440,7 @@ public class PhysicsData {
 						s.cbType = cbType;
 					
 						s = new Polygon(
-							[   Vec2.weak(437,78.5)   ,  Vec2.weak(226,186.5)   ,  Vec2.weak(461,73.5)   ],
+							[   Vec2.weak(498,73.5)   ,  Vec2.weak(0,302.5)   ,  Vec2.weak(518,79.5)   ],
 							mat,
 							filt
 						);
@@ -496,17 +450,7 @@ public class PhysicsData {
 						s.cbType = cbType;
 					
 						s = new Polygon(
-							[   Vec2.weak(461,73.5)   ,  Vec2.weak(226,186.5)   ,  Vec2.weak(984,132.5)   ,  Vec2.weak(674,-0.5)   ,  Vec2.weak(673,-0.5)   ,  Vec2.weak(503,57.5)   ],
-							mat,
-							filt
-						);
-						s.body = body;
-						s.fluidEnabled = false;
-						s.fluidProperties = prop;
-						s.cbType = cbType;
-					
-						s = new Polygon(
-							[   Vec2.weak(219,191.5)   ,  Vec2.weak(1023,132.5)   ,  Vec2.weak(984,132.5)   ,  Vec2.weak(226,186.5)   ],
+							[   Vec2.weak(518,79.5)   ,  Vec2.weak(0,302.5)   ,  Vec2.weak(532,79.5)   ],
 							mat,
 							filt
 						);
@@ -528,7 +472,7 @@ public class PhysicsData {
 			body.cbType = cbtype("road");
 
 			
-				mat = material("road");
+				mat = material("default");
 				filt = filter("default");
 				prop = fprop("default");
 				cbType = cbtype("null");
@@ -536,7 +480,7 @@ public class PhysicsData {
 				
 					
 						s = new Polygon(
-							[   Vec2.weak(1023.5,314)   ,  Vec2.weak(1023,52.5)   ,  Vec2.weak(989,51.5)   ,  Vec2.weak(642,113.5)   ,  Vec2.weak(618,119.5)   ,  Vec2.weak(0,314.5)   ],
+							[   Vec2.weak(0,292.5)   ,  Vec2.weak(1023.5,292)   ,  Vec2.weak(559,86.5)   ,  Vec2.weak(463,71.5)   ,  Vec2.weak(-0.5,31)   ],
 							mat,
 							filt
 						);
@@ -546,7 +490,7 @@ public class PhysicsData {
 						s.cbType = cbType;
 					
 						s = new Polygon(
-							[   Vec2.weak(53,59.5)   ,  Vec2.weak(26,54.5)   ,  Vec2.weak(-0.5,54)   ,  Vec2.weak(0,314.5)   ,  Vec2.weak(93,92.5)   ,  Vec2.weak(66,68.5)   ],
+							[   Vec2.weak(1023,31.5)   ,  Vec2.weak(1004,31.5)   ,  Vec2.weak(980,34.5)   ,  Vec2.weak(836,58.5)   ,  Vec2.weak(1023.5,292)   ],
 							mat,
 							filt
 						);
@@ -556,7 +500,7 @@ public class PhysicsData {
 						s.cbType = cbType;
 					
 						s = new Polygon(
-							[   Vec2.weak(369,25.5)   ,  Vec2.weak(346,32.5)   ,  Vec2.weak(307,52.5)   ,  Vec2.weak(521,95.5)   ,  Vec2.weak(468,59.5)   ,  Vec2.weak(438,41.5)   ,  Vec2.weak(417,31.5)   ,  Vec2.weak(396,25.5)   ],
+							[   Vec2.weak(836,58.5)   ,  Vec2.weak(709,76.5)   ,  Vec2.weak(1023.5,292)   ],
 							mat,
 							filt
 						);
@@ -566,7 +510,7 @@ public class PhysicsData {
 						s.cbType = cbType;
 					
 						s = new Polygon(
-							[   Vec2.weak(307,52.5)   ,  Vec2.weak(275,73.5)   ,  Vec2.weak(521,95.5)   ],
+							[   Vec2.weak(709,76.5)   ,  Vec2.weak(618,85.5)   ,  Vec2.weak(1023.5,292)   ],
 							mat,
 							filt
 						);
@@ -576,7 +520,7 @@ public class PhysicsData {
 						s.cbType = cbType;
 					
 						s = new Polygon(
-							[   Vec2.weak(275,73.5)   ,  Vec2.weak(230,99.5)   ,  Vec2.weak(555,114.5)   ,  Vec2.weak(521,95.5)   ],
+							[   Vec2.weak(108,1.5)   ,  Vec2.weak(75,7.5)   ,  Vec2.weak(42,16.5)   ,  Vec2.weak(-0.5,31)   ,  Vec2.weak(357,49.5)   ,  Vec2.weak(141,-0.5)   ,  Vec2.weak(140,-0.5)   ],
 							mat,
 							filt
 						);
@@ -586,7 +530,7 @@ public class PhysicsData {
 						s.cbType = cbType;
 					
 						s = new Polygon(
-							[   Vec2.weak(93,92.5)   ,  Vec2.weak(0,314.5)   ,  Vec2.weak(113,105.5)   ],
+							[   Vec2.weak(618,85.5)   ,  Vec2.weak(559,86.5)   ,  Vec2.weak(1023.5,292)   ],
 							mat,
 							filt
 						);
@@ -596,7 +540,7 @@ public class PhysicsData {
 						s.cbType = cbType;
 					
 						s = new Polygon(
-							[   Vec2.weak(113,105.5)   ,  Vec2.weak(0,314.5)   ,  Vec2.weak(139,114.5)   ],
+							[   Vec2.weak(168,0.5)   ,  Vec2.weak(141,-0.5)   ,  Vec2.weak(264,26.5)   ,  Vec2.weak(188,3.5)   ],
 							mat,
 							filt
 						);
@@ -606,107 +550,7 @@ public class PhysicsData {
 						s.cbType = cbType;
 					
 						s = new Polygon(
-							[   Vec2.weak(139,114.5)   ,  Vec2.weak(0,314.5)   ,  Vec2.weak(168,117.5)   ],
-							mat,
-							filt
-						);
-						s.body = body;
-						s.fluidEnabled = false;
-						s.fluidProperties = prop;
-						s.cbType = cbType;
-					
-						s = new Polygon(
-							[   Vec2.weak(793,4.5)   ,  Vec2.weak(763,17.5)   ,  Vec2.weak(751.5,26)   ,  Vec2.weak(735.5,42)   ,  Vec2.weak(721,59.5)   ,  Vec2.weak(827,-0.5)   ,  Vec2.weak(813,0.5)   ],
-							mat,
-							filt
-						);
-						s.body = body;
-						s.fluidEnabled = false;
-						s.fluidProperties = prop;
-						s.cbType = cbType;
-					
-						s = new Polygon(
-							[   Vec2.weak(856,0.5)   ,  Vec2.weak(828,-0.5)   ,  Vec2.weak(827,-0.5)   ,  Vec2.weak(676,98.5)   ,  Vec2.weak(989,51.5)   ,  Vec2.weak(920,18.5)   ,  Vec2.weak(883,5.5)   ],
-							mat,
-							filt
-						);
-						s.body = body;
-						s.fluidEnabled = false;
-						s.fluidProperties = prop;
-						s.cbType = cbType;
-					
-						s = new Polygon(
-							[   Vec2.weak(721,59.5)   ,  Vec2.weak(699,81.5)   ,  Vec2.weak(827,-0.5)   ],
-							mat,
-							filt
-						);
-						s.body = body;
-						s.fluidEnabled = false;
-						s.fluidProperties = prop;
-						s.cbType = cbType;
-					
-						s = new Polygon(
-							[   Vec2.weak(168,117.5)   ,  Vec2.weak(0,314.5)   ,  Vec2.weak(186,115.5)   ],
-							mat,
-							filt
-						);
-						s.body = body;
-						s.fluidEnabled = false;
-						s.fluidProperties = prop;
-						s.cbType = cbType;
-					
-						s = new Polygon(
-							[   Vec2.weak(230,99.5)   ,  Vec2.weak(201,111.5)   ,  Vec2.weak(0,314.5)   ,  Vec2.weak(580,122.5)   ,  Vec2.weak(555,114.5)   ],
-							mat,
-							filt
-						);
-						s.body = body;
-						s.fluidEnabled = false;
-						s.fluidProperties = prop;
-						s.cbType = cbType;
-					
-						s = new Polygon(
-							[   Vec2.weak(186,115.5)   ,  Vec2.weak(0,314.5)   ,  Vec2.weak(201,111.5)   ],
-							mat,
-							filt
-						);
-						s.body = body;
-						s.fluidEnabled = false;
-						s.fluidProperties = prop;
-						s.cbType = cbType;
-					
-						s = new Polygon(
-							[   Vec2.weak(699,81.5)   ,  Vec2.weak(676,98.5)   ,  Vec2.weak(827,-0.5)   ],
-							mat,
-							filt
-						);
-						s.body = body;
-						s.fluidEnabled = false;
-						s.fluidProperties = prop;
-						s.cbType = cbType;
-					
-						s = new Polygon(
-							[   Vec2.weak(580,122.5)   ,  Vec2.weak(0,314.5)   ,  Vec2.weak(596,122.5)   ],
-							mat,
-							filt
-						);
-						s.body = body;
-						s.fluidEnabled = false;
-						s.fluidProperties = prop;
-						s.cbType = cbType;
-					
-						s = new Polygon(
-							[   Vec2.weak(596,122.5)   ,  Vec2.weak(0,314.5)   ,  Vec2.weak(618,119.5)   ],
-							mat,
-							filt
-						);
-						s.body = body;
-						s.fluidEnabled = false;
-						s.fluidProperties = prop;
-						s.cbType = cbType;
-					
-						s = new Polygon(
-							[   Vec2.weak(642,113.5)   ,  Vec2.weak(989,51.5)   ,  Vec2.weak(676,98.5)   ],
+							[   Vec2.weak(463,71.5)   ,  Vec2.weak(357,49.5)   ,  Vec2.weak(-0.5,31)   ],
 							mat,
 							filt
 						);
@@ -736,7 +580,7 @@ public class PhysicsData {
 				
 					
 						s = new Polygon(
-							[   Vec2.weak(50,52.5)   ,  Vec2.weak(-0.5,53)   ,  Vec2.weak(0,313.5)   ,  Vec2.weak(120,93.5)   ],
+							[   Vec2.weak(0,302.5)   ,  Vec2.weak(1023.5,302)   ,  Vec2.weak(212,57.5)   ,  Vec2.weak(39,37.5)   ,  Vec2.weak(-0.5,41)   ],
 							mat,
 							filt
 						);
@@ -746,7 +590,7 @@ public class PhysicsData {
 						s.cbType = cbType;
 					
 						s = new Polygon(
-							[   Vec2.weak(120,93.5)   ,  Vec2.weak(0,313.5)   ,  Vec2.weak(184,122.5)   ],
+							[   Vec2.weak(283,46.5)   ,  Vec2.weak(233,57.5)   ,  Vec2.weak(438,70.5)   ,  Vec2.weak(378,52.5)   ,  Vec2.weak(336,46.5)   ],
 							mat,
 							filt
 						);
@@ -756,7 +600,7 @@ public class PhysicsData {
 						s.cbType = cbType;
 					
 						s = new Polygon(
-							[   Vec2.weak(1023,51.5)   ,  Vec2.weak(991,51.5)   ,  Vec2.weak(978,54.5)   ,  Vec2.weak(963,62.5)   ,  Vec2.weak(924,88.5)   ,  Vec2.weak(1023.5,313)   ],
+							[   Vec2.weak(692,1.5)   ,  Vec2.weak(659,11.5)   ,  Vec2.weak(620,28.5)   ,  Vec2.weak(547,64.5)   ,  Vec2.weak(1023.5,302)   ,  Vec2.weak(762,1.5)   ,  Vec2.weak(715,-0.5)   ,  Vec2.weak(714,-0.5)   ],
 							mat,
 							filt
 						);
@@ -766,7 +610,7 @@ public class PhysicsData {
 						s.cbType = cbType;
 					
 						s = new Polygon(
-							[   Vec2.weak(924,88.5)   ,  Vec2.weak(891,105.5)   ,  Vec2.weak(1023.5,313)   ],
+							[   Vec2.weak(1023,41.5)   ,  Vec2.weak(1003,41.5)   ,  Vec2.weak(985,43.5)   ,  Vec2.weak(1023.5,302)   ],
 							mat,
 							filt
 						);
@@ -776,7 +620,7 @@ public class PhysicsData {
 						s.cbType = cbType;
 					
 						s = new Polygon(
-							[   Vec2.weak(184,122.5)   ,  Vec2.weak(0,313.5)   ,  Vec2.weak(213,132.5)   ],
+							[   Vec2.weak(985,43.5)   ,  Vec2.weak(967,42.5)   ,  Vec2.weak(1023.5,302)   ],
 							mat,
 							filt
 						);
@@ -786,7 +630,7 @@ public class PhysicsData {
 						s.cbType = cbType;
 					
 						s = new Polygon(
-							[   Vec2.weak(670,2.5)   ,  Vec2.weak(645,-0.5)   ,  Vec2.weak(623,-0.5)   ,  Vec2.weak(780.5,90)   ,  Vec2.weak(742,43.5)   ,  Vec2.weak(724,27.5)   ,  Vec2.weak(709,17.5)   ,  Vec2.weak(693,9.5)   ],
+							[   Vec2.weak(967,42.5)   ,  Vec2.weak(902,30.5)   ,  Vec2.weak(1023.5,302)   ],
 							mat,
 							filt
 						);
@@ -796,7 +640,7 @@ public class PhysicsData {
 						s.cbType = cbType;
 					
 						s = new Polygon(
-							[   Vec2.weak(589,3.5)   ,  Vec2.weak(559,11.5)   ,  Vec2.weak(532,21.5)   ,  Vec2.weak(483,44.5)   ,  Vec2.weak(390,97.5)   ,  Vec2.weak(622,-0.5)   ],
+							[   Vec2.weak(902,30.5)   ,  Vec2.weak(797,6.5)   ,  Vec2.weak(762,1.5)   ,  Vec2.weak(1023.5,302)   ],
 							mat,
 							filt
 						);
@@ -806,7 +650,7 @@ public class PhysicsData {
 						s.cbType = cbType;
 					
 						s = new Polygon(
-							[   Vec2.weak(891,105.5)   ,  Vec2.weak(875,111.5)   ,  Vec2.weak(1023.5,313)   ],
+							[   Vec2.weak(118,38.5)   ,  Vec2.weak(39,37.5)   ,  Vec2.weak(204,56.5)   ,  Vec2.weak(198,53.5)   ,  Vec2.weak(171,46.5)   ],
 							mat,
 							filt
 						);
@@ -816,7 +660,7 @@ public class PhysicsData {
 						s.cbType = cbType;
 					
 						s = new Polygon(
-							[   Vec2.weak(875,111.5)   ,  Vec2.weak(855,116.5)   ,  Vec2.weak(1023.5,313)   ],
+							[   Vec2.weak(438,70.5)   ,  Vec2.weak(233,57.5)   ,  Vec2.weak(212,57.5)   ,  Vec2.weak(1023.5,302)   ,  Vec2.weak(499,80.5)   ],
 							mat,
 							filt
 						);
@@ -826,7 +670,7 @@ public class PhysicsData {
 						s.cbType = cbType;
 					
 						s = new Polygon(
-							[   Vec2.weak(1023.5,313)   ,  Vec2.weak(855,116.5)   ,  Vec2.weak(840,118.5)   ,  Vec2.weak(0,313.5)   ],
+							[   Vec2.weak(547,64.5)   ,  Vec2.weak(516,76.5)   ,  Vec2.weak(1023.5,302)   ],
 							mat,
 							filt
 						);
@@ -836,107 +680,7 @@ public class PhysicsData {
 						s.cbType = cbType;
 					
 						s = new Polygon(
-							[   Vec2.weak(213,132.5)   ,  Vec2.weak(0,313.5)   ,  Vec2.weak(236,138.5)   ],
-							mat,
-							filt
-						);
-						s.body = body;
-						s.fluidEnabled = false;
-						s.fluidProperties = prop;
-						s.cbType = cbType;
-					
-						s = new Polygon(
-							[   Vec2.weak(236,138.5)   ,  Vec2.weak(0,313.5)   ,  Vec2.weak(260,142.5)   ],
-							mat,
-							filt
-						);
-						s.body = body;
-						s.fluidEnabled = false;
-						s.fluidProperties = prop;
-						s.cbType = cbType;
-					
-						s = new Polygon(
-							[   Vec2.weak(260,142.5)   ,  Vec2.weak(0,313.5)   ,  Vec2.weak(280,142.5)   ],
-							mat,
-							filt
-						);
-						s.body = body;
-						s.fluidEnabled = false;
-						s.fluidProperties = prop;
-						s.cbType = cbType;
-					
-						s = new Polygon(
-							[   Vec2.weak(780.5,90)   ,  Vec2.weak(623,-0.5)   ,  Vec2.weak(622,-0.5)   ,  Vec2.weak(350,118.5)   ,  Vec2.weak(0,313.5)   ,  Vec2.weak(797.5,107)   ],
-							mat,
-							filt
-						);
-						s.body = body;
-						s.fluidEnabled = false;
-						s.fluidProperties = prop;
-						s.cbType = cbType;
-					
-						s = new Polygon(
-							[   Vec2.weak(280,142.5)   ,  Vec2.weak(0,313.5)   ,  Vec2.weak(303,137.5)   ],
-							mat,
-							filt
-						);
-						s.body = body;
-						s.fluidEnabled = false;
-						s.fluidProperties = prop;
-						s.cbType = cbType;
-					
-						s = new Polygon(
-							[   Vec2.weak(390,97.5)   ,  Vec2.weak(350,118.5)   ,  Vec2.weak(622,-0.5)   ],
-							mat,
-							filt
-						);
-						s.body = body;
-						s.fluidEnabled = false;
-						s.fluidProperties = prop;
-						s.cbType = cbType;
-					
-						s = new Polygon(
-							[   Vec2.weak(303,137.5)   ,  Vec2.weak(0,313.5)   ,  Vec2.weak(318,132.5)   ],
-							mat,
-							filt
-						);
-						s.body = body;
-						s.fluidEnabled = false;
-						s.fluidProperties = prop;
-						s.cbType = cbType;
-					
-						s = new Polygon(
-							[   Vec2.weak(318,132.5)   ,  Vec2.weak(0,313.5)   ,  Vec2.weak(350,118.5)   ],
-							mat,
-							filt
-						);
-						s.body = body;
-						s.fluidEnabled = false;
-						s.fluidProperties = prop;
-						s.cbType = cbType;
-					
-						s = new Polygon(
-							[   Vec2.weak(797.5,107)   ,  Vec2.weak(0,313.5)   ,  Vec2.weak(809,114.5)   ],
-							mat,
-							filt
-						);
-						s.body = body;
-						s.fluidEnabled = false;
-						s.fluidProperties = prop;
-						s.cbType = cbType;
-					
-						s = new Polygon(
-							[   Vec2.weak(809,114.5)   ,  Vec2.weak(0,313.5)   ,  Vec2.weak(823,118.5)   ],
-							mat,
-							filt
-						);
-						s.body = body;
-						s.fluidEnabled = false;
-						s.fluidProperties = prop;
-						s.cbType = cbType;
-					
-						s = new Polygon(
-							[   Vec2.weak(823,118.5)   ,  Vec2.weak(0,313.5)   ,  Vec2.weak(840,118.5)   ],
+							[   Vec2.weak(516,76.5)   ,  Vec2.weak(499,80.5)   ,  Vec2.weak(1023.5,302)   ],
 							mat,
 							filt
 						);
@@ -958,8 +702,8 @@ public class PhysicsData {
 }
 }
 
-import nape.geom.Vec2;
 import nape.phys.Body;
+import nape.geom.Vec2;
 
 class BodyPair {
 	public var body:Body;

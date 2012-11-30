@@ -38,7 +38,7 @@ package game
 		private var _listener:InteractionListener ;
 		private var _groundType:CbType = new CbType() ;
 		private var _carType:CbType = new CbType();
-		private var _debug:BitmapDebug ; //=new BitmapDebug(960,640);
+		private var _debug:BitmapDebug ;// =new BitmapDebug(960,640);
 		
 		public function Road1Scene()
 		{
@@ -57,13 +57,15 @@ package game
 		private function addedHandler(e:Event):void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE , addedHandler );
-			PhysicsData.registerMaterial("default",Material.glass());
-			PhysicsData.registerMaterial("road",Material.glass());
-			PhysicsData.registerMaterial("tie",Material.steel());
+			PhysicsData.registerMaterial("default",Material.sand());
+			PhysicsData.registerMaterial("road",Material.sand());
+			var tie:Material = Material.steel() ;
+			tie.density =  5 ;
+			PhysicsData.registerMaterial("tie",tie );
 			PhysicsData.registerCbType("road",_groundType);
 			
 			
-			_space = new Space( new Vec2(0,800));
+			_space = new Space( new Vec2(0,980));
 			addWall();
 			createRoads();
 			_car = new Car(_space , _carType );
@@ -95,37 +97,38 @@ package game
 			_wall = new Body(BodyType.STATIC);
 			_wall.shapes.add( new Polygon(Polygon.rect(-50,0,50,stage.stageHeight)));
 			_wall.shapes.add( new Polygon(Polygon.rect(MAP_WID,0,50,stage.stageHeight)));
+			_wall.shapes.add( new Polygon(Polygon.rect(0,stage.stageHeight-50,stage.stageWidth,50)));
 			_wall.space = _space ;
 		}
 		
 		private function createRoads():void
 		{
-			var img:Image = new Image(AssetsManager.createTextureAtlas("RoadTexture").getTexture("road4"));
-			_road4 = PhysicsData.createBody("road4",img);
-			_road4.position.setxy( 0,GameSetting.SCREEN_HEIGHT-img.texture.height) ;
-			_road4.type = BodyType.KINEMATIC ;
-			_road4.space = _space ;
-			_map.addChild( img );
-			
-			img = new Image(AssetsManager.createTextureAtlas("RoadTexture").getTexture("road3"));
-			_road3 = PhysicsData.createBody("road3",img);
-			_road3.type = BodyType.KINEMATIC ;
-			_road3.position.setxy( 1024 ,GameSetting.SCREEN_HEIGHT-img.texture.height) ;
-			_road3.space = _space ;
+			var img:Image = new Image(AssetsManager.createTextureAtlas("RoadTexture").getTexture("road1"));
+			_road1 = PhysicsData.createBody("road1",img);
+			_road1.position.setxy( 0,GameSetting.SCREEN_HEIGHT-img.texture.height) ;
+			_road1.type = BodyType.KINEMATIC ;
+			_road1.space = _space ;
 			_map.addChild( img );
 			
 			img = new Image(AssetsManager.createTextureAtlas("RoadTexture").getTexture("road2"));
 			_road2 = PhysicsData.createBody("road2",img);
 			_road2.type = BodyType.KINEMATIC ;
-			_road2.position.setxy( 1024*2 ,GameSetting.SCREEN_HEIGHT-img.texture.height) ;
+			_road2.position.setxy( 1024 ,GameSetting.SCREEN_HEIGHT-img.texture.height) ;
 			_road2.space = _space ;
 			_map.addChild( img );
 			
-			img = new Image(AssetsManager.createTextureAtlas("RoadTexture").getTexture("road1"));
-			_road1 = PhysicsData.createBody("road1",img);
-			_road1.type = BodyType.KINEMATIC ;
-			_road1.position.setxy( 1024*3 ,GameSetting.SCREEN_HEIGHT-img.texture.height) ;
-			_road1.space = _space ;
+			img = new Image(AssetsManager.createTextureAtlas("RoadTexture").getTexture("road3"));
+			_road3 = PhysicsData.createBody("road3",img);
+			_road3.type = BodyType.KINEMATIC ;
+			_road3.position.setxy( 1024*2 ,GameSetting.SCREEN_HEIGHT-img.texture.height) ;
+			_road3.space = _space ;
+			_map.addChild( img );
+			
+			img = new Image(AssetsManager.createTextureAtlas("RoadTexture").getTexture("road4"));
+			_road4 = PhysicsData.createBody("road4",img);
+			_road4.type = BodyType.KINEMATIC ;
+			_road4.position.setxy( 1024*3 ,GameSetting.SCREEN_HEIGHT-img.texture.height) ;
+			_road4.space = _space ;
 			_map.addChild( img );
 		}
 		
@@ -140,11 +143,11 @@ package game
 			panForeground();
 			
 			if(_gui.direction==1){
-				_car.w2.applyLocalImpulse( new Vec2(-80,0));
-				if(_car.w2.velocity.x<-200) _car.w1.velocity.x = -200 ;
+				_car.w2.applyLocalImpulse( Vec2.weak(-150,0) );
+				if(_car.w2.velocity.x<-400) _car.w2.velocity.x = -400 ;
 			}else if(_gui.direction==2){
-				_car.w1.applyLocalImpulse( new Vec2(80,0));
-				if(_car.w1.velocity.x>200) _car.w2.velocity.x = 200 ;
+				_car.w1.applyLocalImpulse( Vec2.weak(150,0) );
+				if(_car.w1.velocity.x>400) _car.w1.velocity.x = 400 ;
 			}
 		}
 		
@@ -153,6 +156,7 @@ package game
 			_map.x = GameSetting.SCREEN_WIDTH*0.5  - _car.w1.position.x-200 ;
 			if(_map.x>0 ) _map.x =0 ;
 			else if(_map.x+MAP_WID<GameSetting.SCREEN_WIDTH) _map.x = GameSetting.SCREEN_WIDTH-MAP_WID ;
+			
 		}
 	}
 }

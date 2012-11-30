@@ -9,6 +9,7 @@ package gui
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.Event;
+	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
 	import starling.textures.Texture;
@@ -59,7 +60,8 @@ package gui
 		private function leftTouch(e:TouchEvent):void
 		{
 			direction = 1;
-			if(e.getTouch(_leftBtn,TouchPhase.ENDED))
+			var touch:Touch = e.touches[0] ;
+			if(touch.phase == TouchPhase.ENDED)
 			{
 				direction = 0;
 			}
@@ -68,7 +70,8 @@ package gui
 		private function righTouch(e:TouchEvent):void
 		{
 			direction = 2;
-			if(e.getTouch(_leftBtn,TouchPhase.ENDED))
+			var touch:Touch = e.touches[0] ;
+			if(touch.phase == TouchPhase.ENDED)
 			{
 				direction = 0;
 			}
