@@ -56,7 +56,6 @@ package game
 			var img:Image = new Image(_carTexture); 
 			_carBody = PhysicsData.createBody("CarBody", img);
 			_carBody.compound = compound ;
-			_carBody.cbType = _carType ;
 			_carBody.space = _space;
 			addChild( img);
 			
@@ -66,6 +65,7 @@ package game
 			img.pivotY = _carWheelTexture.height>>1 ;
 			_w1= circle(36,36,_carWheelTexture.width>>1 );
 			_w1.compound = compound ;
+			_w1.cbType = _carType ;
 			_w1.space = _space;
 			_w1.graphic = img ;
 			_w1.graphicUpdate = graphicUpdate ;
@@ -75,6 +75,7 @@ package game
 			img.pivotX = _carWheelTexture.width>>1 ;
 			img.pivotY = _carWheelTexture.height>>1 ;
 			_w2 =  circle(139,36,_carWheelTexture.width>>1 );
+			_w2.cbType = _carType ;
 			_w2.compound = compound ;
 			_w2.space = _space;
 			_w2.graphic = img;
@@ -94,18 +95,18 @@ package game
 			lin2.ignore = true; //prevent wheel colliding
 			
 			var spr1:DistanceJoint = new DistanceJoint(_carBody,_w1,new Vec2(36,0), new Vec2(),0,70);
-			spr1.stiff = false;
+			spr1.stiff = false ;
 			spr1.compound = compound ;
-			spr1.frequency = 5;
-			spr1.damping = 1;
+			spr1.frequency = 10;
+			spr1.damping = 2 ;
 			spr1.ignore = true ;
 			spr1.space = _space;
 			
 			var spr2:DistanceJoint= new DistanceJoint(_carBody,_w2,new Vec2(139,0), new Vec2(),0,70);
-			spr2.stiff = false;
+			spr2.stiff = false ;
 			spr2.compound = compound ;
-			spr2.frequency = 5;
-			spr2.damping = 1;
+			spr2.frequency =10 ;
+			spr2.damping = 2;
 			spr2.ignore = true ;
 			spr2.space = _space;
 			
@@ -126,8 +127,7 @@ package game
 		private function circle(x:Number,y:Number,r:Number):Body {
 			var b:Body = new Body();
 			var materail:Material = Material.rubber() ; 
-			materail.elasticity = 0.1 ;
-			materail.rollingFriction = 0.05 ; 
+			materail.elasticity = 0.05 ;
 			b.shapes.add(new Circle(r,null,materail));
 			b.position.setxy(x,y);
 			return b;
