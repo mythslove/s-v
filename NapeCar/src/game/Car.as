@@ -82,35 +82,35 @@ package game
 			_w2.graphicUpdate = graphicUpdate ;
 			addChildAt( img,0);
 			
-			var lin1:LineJoint = new LineJoint(_carBody,_w1,new Vec2(36,64),new Vec2(),
-				new Vec2(0,1), 0,30);
+			var lin1:LineJoint = new LineJoint(_carBody,_w1,new Vec2(36,60),new Vec2(),
+				new Vec2(0,1), 0,70);
+			lin1.frequency = 0.5 ;
 			lin1.compound = compound ;
 			lin1.space = _space;
 			lin1.ignore = true; //prevent wheel colliding
 			
-			var lin2:LineJoint = new LineJoint(_carBody,_w2,new Vec2(139,64),new Vec2(),
-				new Vec2(0,1), 0,30);
+			var lin2:LineJoint = new LineJoint(_carBody,_w2,new Vec2(139,60),new Vec2(),
+				new Vec2(0,1), 0,70);
+			lin2.frequency = 0.5 ;
 			lin2.compound = compound ;
 			lin2.space = _space;
 			lin2.ignore = true; //prevent wheel colliding
 			
 			var spr1:DistanceJoint = new DistanceJoint(_carBody,_w1,new Vec2(36,0), new Vec2(),0,70);
-			spr1.stiff = false ;
 			spr1.compound = compound ;
-			spr1.frequency = 10;
-			spr1.damping = 2 ;
+			spr1.frequency = 0.5;
+//			spr1.damping = 5 ;
 			spr1.ignore = true ;
 			spr1.space = _space;
 			
 			var spr2:DistanceJoint= new DistanceJoint(_carBody,_w2,new Vec2(139,0), new Vec2(),0,70);
-			spr2.stiff = false ;
 			spr2.compound = compound ;
-			spr2.frequency =10 ;
-			spr2.damping = 2;
+			spr2.frequency =0.5 ;
+//			spr2.damping = 5 ;
 			spr2.ignore = true ;
 			spr2.space = _space;
 			
-			compound.translate( Vec2.weak(100,300));
+			compound.translate( Vec2.weak(100,200));
 		}
 		
 		private function graphicUpdate(body:Body):void
@@ -127,7 +127,7 @@ package game
 		private function circle(x:Number,y:Number,r:Number):Body {
 			var b:Body = new Body();
 			var materail:Material = Material.rubber() ; 
-			materail.elasticity = 0.05 ;
+			materail.density = 5  ;
 			b.shapes.add(new Circle(r,null,materail));
 			b.position.setxy(x,y);
 			return b;

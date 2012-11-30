@@ -39,7 +39,7 @@ package game
 		private var _groundType:CbType = new CbType() ;
 		private var _carType:CbType = new CbType();
 		private var _w1OnGround:Boolean , _w2OnGround:Boolean ;
-		private var _debug:BitmapDebug ;//=new BitmapDebug(960,640);
+		private var _debug:BitmapDebug ; //=new BitmapDebug(960,640);
 		
 		public function Road1Scene()
 		{
@@ -144,14 +144,14 @@ package game
 			panForeground();
 			
 			if(_gui.direction==1){
-				_car.w2.rotation-=0.4;
-				_car.w2.applyLocalImpulse( Vec2.weak(-800,0) );
+				_car.w1.rotation-=0.2;
+				_car.w1.applyLocalImpulse( Vec2.weak(-500,0) );
 			}else if(_gui.direction==2){
-				_car.w1.rotation+=0.4 ;
-				_car.w1.applyLocalImpulse( Vec2.weak(800,0) );
+				_car.w1.rotation+=0.2 ;
+				_car.w1.applyLocalImpulse( Vec2.weak(500,0) );
 			}
-			if(_car.w2.velocity.x<-400) _car.w2.velocity.x = -400 ;
-			if(_car.w1.velocity.x>400) _car.w1.velocity.x = 400 ;
+			if(_car.w1.velocity.x<-300) _car.w1.velocity.x = -300 ;
+			if(_car.w1.velocity.x>300) _car.w1.velocity.x = 300 ;
 		}
 		
 		private function panForeground():void
