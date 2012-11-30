@@ -182,7 +182,7 @@ package game
 				_car.w1.rotation+=0.2 ;
 				_car.w1.applyLocalImpulse( Vec2.weak(600,0) );
 			}
-			if(_car.w1.velocity.x<-400) _car.w1.velocity.x = -400 ;
+			if(_car.w1.velocity.x<-300) _car.w1.velocity.x = -300 ;
 			if(_car.w1.velocity.x>400) _car.w1.velocity.x = 400 ;
 		}
 		
