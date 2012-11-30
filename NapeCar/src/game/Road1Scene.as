@@ -27,7 +27,7 @@ package game
 	
 	public class Road1Scene extends Sprite
 	{
-		public const MAP_WID:int = 1024*4 ;
+		public const MAP_WID:int = 1024*20 ;
 		
 		private var _road1:Body , _road2:Body , _road3:Body , _road4:Body;
 		private var _space:Space ;
@@ -131,6 +131,38 @@ package game
 			_road4.position.setxy( 1024*3 ,GameSetting.SCREEN_HEIGHT-img.texture.height) ;
 			_road4.space = _space ;
 			_map.addChild( img );
+			
+			for(var i:int = 4 ; i<20; i+=4){
+				
+				//===============
+				img = new Image(AssetsManager.createTextureAtlas("RoadTexture").getTexture("road1"));
+				_road1 = PhysicsData.createBody("road1",img);
+				_road1.position.setxy( 1024*i,GameSetting.SCREEN_HEIGHT-img.texture.height) ;
+				_road1.type = BodyType.KINEMATIC ;
+				_road1.space = _space ;
+				_map.addChild( img );
+				
+				img = new Image(AssetsManager.createTextureAtlas("RoadTexture").getTexture("road2"));
+				_road2 = PhysicsData.createBody("road2",img);
+				_road2.type = BodyType.KINEMATIC ;
+				_road2.position.setxy( 1024*(i+1) ,GameSetting.SCREEN_HEIGHT-img.texture.height) ;
+				_road2.space = _space ;
+				_map.addChild( img );
+				
+				img = new Image(AssetsManager.createTextureAtlas("RoadTexture").getTexture("road3"));
+				_road3 = PhysicsData.createBody("road3",img);
+				_road3.type = BodyType.KINEMATIC ;
+				_road3.position.setxy( 1024*(i+2) ,GameSetting.SCREEN_HEIGHT-img.texture.height) ;
+				_road3.space = _space ;
+				_map.addChild( img );
+				
+				img = new Image(AssetsManager.createTextureAtlas("RoadTexture").getTexture("road4"));
+				_road4 = PhysicsData.createBody("road4",img);
+				_road4.type = BodyType.KINEMATIC ;
+				_road4.position.setxy( 1024*(i+3) ,GameSetting.SCREEN_HEIGHT-img.texture.height) ;
+				_road4.space = _space ;
+				_map.addChild( img );
+			}
 		}
 		
 		private function update(e:Event):void
@@ -145,13 +177,13 @@ package game
 			
 			if(_gui.direction==1){
 				_car.w1.rotation-=0.2;
-				_car.w1.applyLocalImpulse( Vec2.weak(-500,0) );
+				_car.w1.applyLocalImpulse( Vec2.weak(-600,0) );
 			}else if(_gui.direction==2){
 				_car.w1.rotation+=0.2 ;
-				_car.w1.applyLocalImpulse( Vec2.weak(500,0) );
+				_car.w1.applyLocalImpulse( Vec2.weak(600,0) );
 			}
-			if(_car.w1.velocity.x<-300) _car.w1.velocity.x = -300 ;
-			if(_car.w1.velocity.x>300) _car.w1.velocity.x = 300 ;
+			if(_car.w1.velocity.x<-400) _car.w1.velocity.x = -400 ;
+			if(_car.w1.velocity.x>400) _car.w1.velocity.x = 400 ;
 		}
 		
 		private function panForeground():void
