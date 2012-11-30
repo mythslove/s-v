@@ -38,7 +38,7 @@ package game
 		private var _listener:InteractionListener ;
 		private var _groundType:CbType = new CbType() ;
 		private var _carType:CbType = new CbType();
-		private var _debug:BitmapDebug ;// =new BitmapDebug(960,640);
+		private var _debug:BitmapDebug ; //=new BitmapDebug(960,640);
 		
 		public function Road1Scene()
 		{
@@ -49,6 +49,8 @@ package game
 			
 			if(_debug){
 				_debug.drawConstraints = true;
+				_debug.drawCollisionArbiters=true;
+//				_debug.drawBodyDetail=true;
 				Starling.current.nativeOverlay.addChild(_debug.display);
 			}
 		}
