@@ -49,8 +49,8 @@ package game
 			addEventListener(Event.ADDED_TO_STAGE , addedHandler );
 			
 			if(_debug){
-				_debug.drawConstraints = true;
-				_debug.drawCollisionArbiters=true;
+				_debug.drawConstraints = true ;
+				_debug.drawCollisionArbiters=true ;
 //				_debug.drawBodyDetail=true;
 				Starling.current.nativeOverlay.addChild(_debug.display);
 			}
@@ -67,7 +67,7 @@ package game
 			PhysicsData.registerCbType("road",_groundType);
 			
 			
-			_space = new Space( new Vec2(0,1000));
+			_space = new Space( new Vec2(0,2000));
 			addWall();
 			createRoads();
 			_car = new Car(_space , _carType );
@@ -131,38 +131,33 @@ package game
 			_road4.position.setxy( 1024*3 ,GameSetting.SCREEN_HEIGHT-img.texture.height) ;
 			_road4.space = _space ;
 			_map.addChild( img );
-			
-			for(var i:int = 4 ; i<100; i+=4){
-				
-				//===============
-				img = new Image(AssetsManager.createTextureAtlas("RoadTexture").getTexture("road1"));
-				_road1 = PhysicsData.createBody("road1",img);
-				_road1.position.setxy( 1024*i,GameSetting.SCREEN_HEIGHT-img.texture.height) ;
-				_road1.type = BodyType.KINEMATIC ;
-				_road1.space = _space ;
-				_map.addChild( img );
-				
-				img = new Image(AssetsManager.createTextureAtlas("RoadTexture").getTexture("road2"));
-				_road2 = PhysicsData.createBody("road2",img);
-				_road2.type = BodyType.KINEMATIC ;
-				_road2.position.setxy( 1024*(i+1) ,GameSetting.SCREEN_HEIGHT-img.texture.height) ;
-				_road2.space = _space ;
-				_map.addChild( img );
-				
-				img = new Image(AssetsManager.createTextureAtlas("RoadTexture").getTexture("road3"));
-				_road3 = PhysicsData.createBody("road3",img);
-				_road3.type = BodyType.KINEMATIC ;
-				_road3.position.setxy( 1024*(i+2) ,GameSetting.SCREEN_HEIGHT-img.texture.height) ;
-				_road3.space = _space ;
-				_map.addChild( img );
-				
-				img = new Image(AssetsManager.createTextureAtlas("RoadTexture").getTexture("road4"));
-				_road4 = PhysicsData.createBody("road4",img);
-				_road4.type = BodyType.KINEMATIC ;
-				_road4.position.setxy( 1024*(i+3) ,GameSetting.SCREEN_HEIGHT-img.texture.height) ;
-				_road4.space = _space ;
-				_map.addChild( img );
+		}
+		
+		private function getMinRoad():Body
+		{
+			var minBody:Body = _road1 ;
+			var body:Body ;
+			for( var i:int = 2 ; i<5 ; ++i)
+			{
+				body = this["_road"+i] as Body ;
+				if(body.position.x < minBody.position.x){
+					minBody = body ;
+				}
 			}
+			return minBody ;
+		}
+		private function getMaxRoad():Body
+		{
+			var maxBody:Body = _road1 ;
+			var body:Body ;
+			for( var i:int = 2 ; i<5 ; ++i)
+			{
+				body = this["_road"+i] as Body ;
+				if(body.position.x > maxBody.position.x){
+					maxBody = body ;
+				}
+			}
+			return maxBody ;
 		}
 		
 		private function update(e:Event):void
@@ -184,8 +179,6 @@ package game
 			}
 			if(_car.w1.velocity.x<-300) _car.w1.velocity.x = -300 ;
 			if(_car.w1.velocity.x>400) _car.w1.velocity.x = 400 ;
-			
-			trace(_car.carBody.velocity.x);
 		}
 		
 		private function panForeground():void
@@ -194,6 +187,24 @@ package game
 			if(_map.x>0 ) _map.x =0 ;
 			else if(_map.x+MAP_WID<GameSetting.SCREEN_WIDTH) _map.x = GameSetting.SCREEN_WIDTH-MAP_WID ;
 			
+			var road:Body ;
+			for( var i:int = 1 ; i<5 ; ++i)
+			{
+				road = this["_road"+i] as Body ;
+				if(_car.carBody.velocity.x>0){
+					//正方向，向右
+					if(road.position.x+_map.x+1024<0 && getMinRoad()==road){
+						road.position.x = getMaxRoad().position.x+1024 ;
+						break ;
+					}
+				}else{
+					//向方向，向左
+					if(road.position.x+_map.x-GameSetting.SCREEN_WIDTH>0 && getMaxRoad()==road ){
+						road.position.x = getMinRoad().position.x-1024 ;
+						break ;
+					}
+				}
+			}
 		}
 	}
 }
