@@ -1,11 +1,11 @@
-<track>
+ï»¿<track>
 	<item>
 		<id>1</id>
 		<name>track1</name>
 		<costCoin>0</costCoin>
 		<costCash>0</costCash>
 		<requireLevel>1</requireLevel>
-		<info>ÈüµÀÃèÊö</info>
+		<info></info>
 		<elasticity>-1</elasticity>
 		<dynamicFriction>0.45</dynamicFriction>
 		<staticFriction>0.6</staticFriction>
