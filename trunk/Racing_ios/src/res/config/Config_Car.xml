@@ -1,18 +1,18 @@
-<car>
-	<!-- Ò»¸öitem´ú±íÒ»Á¾³µ , nameÎªÃû×Ö, costCoin´óÓÚ0Ê±±íÊ¾Âò³µÐèÒªµÄcoin , costCash´óÓÚ0Ê±±íÊ¾Âò³µÐèÒªµÄcash
-		requireLevel Âò´Ë³µÒªÇóÍæ¼ÒµÄµÈ¼¶
+ï»¿<car>
+	<!-- ä¸€ä¸ªitemä»£è¡¨ä¸€è¾†è½¦ , nameä¸ºåå­—, costCoinå¤§äºŽ0æ—¶è¡¨ç¤ºä¹°è½¦éœ€è¦çš„coin , costCashå¤§äºŽ0æ—¶è¡¨ç¤ºä¹°è½¦éœ€è¦çš„cash
+		requireLevel ä¹°æ­¤è½¦è¦æ±‚çŽ©å®¶çš„ç­‰çº§
 	-->
 	<item id="1" name="Car" costCoin="0" costCash="0" requireLevel="1">
-		<!-- levels±íÊ¾¿ÉÒÔÉýµÄ¼¶Êý£¬add±íÊ¾Ã¿ÉýÒ»¼¶µÄÔöÁ¿ -->
-		<density default="2" levels="10" add="0.2" />
-		<impulse default="50" levels="10" add="10" />
-		<velocity default="300" levels="10" add="10" />
-		<frequency default="5" levels="10" add="1" />
+		<!-- levelsè¡¨ç¤ºå¯ä»¥å‡çš„çº§æ•°ï¼Œaddè¡¨ç¤ºæ¯å‡ä¸€çº§çš„å¢žé‡ -->
+		<density value="2" levels="10" add="0.2" />
+		<impulse value="50" levels="10" add="10" />
+		<velocity value="300" levels="10" add="10" />
+		<frequency value="5" levels="10" add="1" />
 	</item>
 	<item id="2" name="Truck"  costCoin="0" costCash="0" requireLevel="4">
-		<density default="2" levels="10" add="0.2"/>
-		<impulse default="50" levels="10" add="10" />
-		<velocity default="300" levels="10" add="10" />
-		<frequency default="5" levels="10" add="1" />
+		<density value="2" levels="10" add="0.2"/>
+		<impulse value="50" levels="10" add="10" />
+		<velocity value="300" levels="10" add="10" />
+		<frequency value="5" levels="10" add="1" />
 	</item>
 </car>
