@@ -62,12 +62,12 @@ package game
 			removeEventListener(Event.ADDED_TO_STAGE , addedHandler );
 			PhysicsData.registerMaterial("default",Material.sand());
 			PhysicsData.registerMaterial("road",Material.sand());
-			var tie:Material = Material.wood();
+			var tie:Material = Material.wood() ;
 			PhysicsData.registerMaterial("tie",tie );
 			PhysicsData.registerCbType("road",_groundType);
 			
 			
-			_space = new Space( new Vec2(0,2000));
+			_space = new Space( new Vec2(0,500));
 			addWall();
 			createRoads();
 			_car = new Car(_space , _carType );
@@ -154,13 +154,13 @@ package game
 			
 			if(_gui.direction==1){
 				_car.w1.rotation-=0.2;
-				_car.w1.applyLocalImpulse( Vec2.weak(-600,0)  );
+				_car.w1.applyLocalImpulse( Vec2.weak(-50,0)  );
 			}else if(_gui.direction==2){
 				_car.w1.rotation+=0.2 ;
-				_car.w1.applyLocalImpulse( Vec2.weak(600,0) );
+				_car.w1.applyLocalImpulse( Vec2.weak(50,0) );
 			}
 			if(_car.w1.velocity.x<-300) _car.w1.velocity.x = -300 ;
-			if(_car.w1.velocity.x>400) _car.w1.velocity.x = 400 ;
+			if(_car.w1.velocity.x>300) _car.w1.velocity.x = 300 ;
 		}
 		
 		private function panForeground():void

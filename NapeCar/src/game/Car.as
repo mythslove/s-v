@@ -85,30 +85,32 @@ package game
 			var lin1:LineJoint = new LineJoint(_carBody,_w1,new Vec2(36,60),new Vec2(),
 				new Vec2(0,1), 0,10);
 			lin1.compound = compound ;
-			lin1.frequency = 0.1 ;
+			lin1.stiff = false;
+			lin1.frequency = 5 ;
 			lin1.space = _space;
 			lin1.ignore = true; //prevent wheel colliding
 			
 			var lin2:LineJoint = new LineJoint(_carBody,_w2,new Vec2(139,60),new Vec2(),
 				new Vec2(0,1), 0 ,10 );
 			lin2.compound = compound ;
-			lin2.frequency = 0.1 ;
+			lin2.stiff = false;
+			lin2.frequency = 5 ;
 			lin2.space = _space;
 			lin2.ignore = true; //prevent wheel colliding
 			
-			var spr1:DistanceJoint = new DistanceJoint(_carBody,_w1,new Vec2(36,0), new Vec2(),0,60);
-			spr1.compound = compound ;
-			spr1.frequency = 0.1 ;
-			spr1.stiff = false;
-			spr1.ignore = true ;
-			spr1.space = _space;
-			
-			var spr2:DistanceJoint= new DistanceJoint(_carBody,_w2,new Vec2(139,0), new Vec2(),0,60);
-			spr2.compound = compound ;
-			spr2.frequency =0.1 ;
-			spr2.stiff = false;
-			spr2.ignore = true ;
-			spr2.space = _space;
+//			var spr1:DistanceJoint = new DistanceJoint(_carBody,_w1,new Vec2(36,0), new Vec2(),0,60);
+//			spr1.compound = compound ;
+//			spr1.frequency = 0.1 ;
+//			spr1.stiff = false;
+//			spr1.ignore = true ;
+//			spr1.space = _space;
+//			
+//			var spr2:DistanceJoint= new DistanceJoint(_carBody,_w2,new Vec2(139,0), new Vec2(),0,60);
+//			spr2.compound = compound ;
+//			spr2.frequency =0.1 ;
+//			spr2.stiff = false;
+//			spr2.ignore = true ;
+//			spr2.space = _space;
 			
 			compound.translate( Vec2.weak(100,200));
 		}
@@ -127,7 +129,7 @@ package game
 		private function circle(x:Number,y:Number,r:Number):Body {
 			var b:Body = new Body();
 			var materail:Material = Material.rubber() ; 
-			materail.density = 4  ;
+			materail.density = 2  ;
 			b.shapes.add(new Circle(r,null,materail));
 			b.position.setxy(x,y);
 			return b;
