@@ -104,33 +104,15 @@ package game
 		
 		private function createRoads():void
 		{
-			var img:Image = new Image(AssetsManager.createTextureAtlas("RoadTexture").getTexture("road1"));
-			_road1 = PhysicsData.createBody("road1",img);
-			_road1.position.setxy( 0,GameSetting.SCREEN_HEIGHT-img.texture.height) ;
-			_road1.type = BodyType.KINEMATIC ;
-			_road1.space = _space ;
-			_map.addChild( img );
-			
-			img = new Image(AssetsManager.createTextureAtlas("RoadTexture").getTexture("road2"));
-			_road2 = PhysicsData.createBody("road2",img);
-			_road2.type = BodyType.KINEMATIC ;
-			_road2.position.setxy( 1024 ,GameSetting.SCREEN_HEIGHT-img.texture.height) ;
-			_road2.space = _space ;
-			_map.addChild( img );
-			
-			img = new Image(AssetsManager.createTextureAtlas("RoadTexture").getTexture("road3"));
-			_road3 = PhysicsData.createBody("road3",img);
-			_road3.type = BodyType.KINEMATIC ;
-			_road3.position.setxy( 1024*2 ,GameSetting.SCREEN_HEIGHT-img.texture.height) ;
-			_road3.space = _space ;
-			_map.addChild( img );
-			
-			img = new Image(AssetsManager.createTextureAtlas("RoadTexture").getTexture("road4"));
-			_road4 = PhysicsData.createBody("road4",img);
-			_road4.type = BodyType.KINEMATIC ;
-			_road4.position.setxy( 1024*3 ,GameSetting.SCREEN_HEIGHT-img.texture.height) ;
-			_road4.space = _space ;
-			_map.addChild( img );
+			for( var i:int  = 1 ; i<5 ; ++i)
+			{
+				var img:Image = new Image(AssetsManager.createTextureAtlas("RoadTexture").getTexture("road"+i));
+				this["_road"+i] = PhysicsData.createBody("road"+i,img);
+				this["_road"+i] .position.setxy( 1024*(i-1) ,GameSetting.SCREEN_HEIGHT-img.texture.height) ;
+				this["_road"+i] .type = BodyType.KINEMATIC ;
+				this["_road"+i] .space = _space ;
+				_map.addChild( img );
+			}
 		}
 		
 		private function getMinRoad():Body
@@ -193,14 +175,14 @@ package game
 				road = this["_road"+i] as Body ;
 				if(_car.carBody.velocity.x>0){
 					//正方向，向右
-					if(road.position.x+_map.x+1024<0 && getMinRoad()==road){
-						road.position.x = getMaxRoad().position.x+1024 ;
+					if(road.position.x+_map.x+road.bounds.width<0 && getMinRoad()==road){
+						road.position.x = getMaxRoad().position.x+road.bounds.width ;
 						break ;
 					}
 				}else{
 					//向方向，向左
 					if(road.position.x+_map.x-GameSetting.SCREEN_WIDTH>0 && getMaxRoad()==road ){
-						road.position.x = getMinRoad().position.x-1024 ;
+						road.position.x = getMinRoad().position.x-road.bounds.width ;
 						break ;
 					}
 				}
