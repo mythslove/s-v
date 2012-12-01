@@ -1,4 +1,4 @@
-package  game.gui.util
+package game.util
 {
 	import game.comm.GameSetting;
 	
