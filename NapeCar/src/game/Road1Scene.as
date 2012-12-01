@@ -67,7 +67,7 @@ package game
 			PhysicsData.registerCbType("road",_groundType);
 			
 			
-			_space = new Space( new Vec2(0,2000));
+			_space = new Space( new Vec2(0,1000));
 			addWall();
 			createRoads();
 			_car = new Car(_space , _carType );
