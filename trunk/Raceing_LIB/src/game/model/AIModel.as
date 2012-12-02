@@ -1,6 +1,8 @@
 package game.model
 {
 	import bing.res.ResVO;
+	
+	import game.vos.AIVO;
 
 	public class AIModel
 	{
@@ -11,13 +13,12 @@ package game.model
 		}
 		//===============================
 		
-		public function AIModel()
-		{
-			
-		}
+		public var aiCars:Vector.<AIVO>;
 		
 		public function parseConfig( resVO:ResVO ):void
 		{
+			var config:XML = XML (resVO.resObject ) ;
+			aiCars = new Vector.<AIVO>();
 			
 		}
 	}

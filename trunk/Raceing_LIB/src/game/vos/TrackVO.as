@@ -13,5 +13,14 @@ package game.vos
 		public var staticFriction:Number ;
 		public var density:Number ;
 		public var rollingFriction:Number ;
+		
+		public function get roadUrl():String
+		{
+			return "track/Road"+id+".png";
+		}
+		public function get roadXMLUrl():String
+		{
+			return "track/Road"+id+".xml";
+		}
 	}
 }

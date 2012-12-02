@@ -10,5 +10,14 @@ package game.vos
 		public var costCash:int ; //买/解锁需要花多少cash
 		public var requireLevel:int ; //买/解锁需要玩家的等级
 		public var carParams:Dictionary ;//参数，key为CarParamVO的name , value为CarParamVO对象
+		
+		public function get bodyUrl():String
+		{
+			return "car/CarBody"+id+".png";
+		}
+		public function get wheelUrl():String
+		{
+			return "car/CarWheel"+id+".png";
+		}
 	}
 }
