@@ -10,9 +10,9 @@ package game.core.track
 	 */	
 	public class ContestModeTrack1 extends BaseTrack
 	{
-		public function ContestModeTrack1( trackVO:TrackVO, space:Space, px:Number, py:Number)
+		public function ContestModeTrack1( trackVO:TrackVO, space:Space)
 		{
-			super(trackVO,space, px, py);
+			super(trackVO,space);
 		}
 	}
 }

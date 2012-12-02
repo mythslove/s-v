@@ -10,9 +10,9 @@ package game.core.track
 	 */	
 	public class TimeModeTrack1 extends BaseTrack
 	{
-		public function TimeModeTrack1( trackVO:TrackVO, space:Space, px:Number, py:Number)
+		public function TimeModeTrack1( trackVO:TrackVO, space:Space)
 		{
-			super(trackVO,space, px, py);
+			super(trackVO,space);
 		}
 	}
 }
