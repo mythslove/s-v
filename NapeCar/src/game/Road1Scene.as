@@ -39,7 +39,7 @@ package game
 		private var _groundType:CbType = new CbType() ;
 		private var _carType:CbType = new CbType();
 		private var _w1OnGround:Boolean , _w2OnGround:Boolean ;
-		private var _debug:BitmapDebug ; //=new BitmapDebug(960,640);
+		private var _debug:BitmapDebug ;//=new BitmapDebug(960,640);
 		
 		public function Road1Scene()
 		{

@@ -1,16 +1,20 @@
 package game
 {
+	import flash.events.MouseEvent;
+	
 	import nape.callbacks.CbType;
 	import nape.constraint.DistanceJoint;
 	import nape.constraint.LineJoint;
 	import nape.geom.Vec2;
 	import nape.phys.Body;
 	import nape.phys.Compound;
+	import nape.phys.MassMode;
 	import nape.phys.Material;
 	import nape.shape.Circle;
 	import nape.shape.Polygon;
 	import nape.space.Space;
 	
+	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.display.Image;
 	import starling.display.Sprite;
@@ -55,6 +59,7 @@ package game
 
 			var img:Image = new Image(_carTexture); 
 			_carBody = PhysicsData.createBody("CarBody", img);
+			_carBody.mass = _carBody.gravMass = 2;
 			_carBody.compound = compound ;
 			_carBody.space = _space;
 			addChild( img);
@@ -63,7 +68,7 @@ package game
 			img = new Image(_carWheelTexture); 
 			img.pivotX = _carWheelTexture.width>>1 ;
 			img.pivotY = _carWheelTexture.height>>1 ;
-			_w1= circle(36,36,_carWheelTexture.width>>1 );
+			_w1= circle(36,56,_carWheelTexture.width>>1 );
 			_w1.compound = compound ;
 			_w1.cbType = _carType ;
 			_w1.space = _space;
@@ -74,7 +79,7 @@ package game
 			img = new Image(_carWheelTexture); 
 			img.pivotX = _carWheelTexture.width>>1 ;
 			img.pivotY = _carWheelTexture.height>>1 ;
-			_w2 =  circle(139,36,_carWheelTexture.width>>1 );
+			_w2 =  circle(139,56,_carWheelTexture.width>>1 );
 			_w2.cbType = _carType ;
 			_w2.compound = compound ;
 			_w2.space = _space;
@@ -83,7 +88,7 @@ package game
 			addChildAt( img,0);
 			
 			var lin1:LineJoint = new LineJoint(_carBody,_w1,new Vec2(36,60),new Vec2(),
-				new Vec2(0,1), 0,10);
+				new Vec2(0,1), 0,5);
 			lin1.compound = compound ;
 			lin1.stiff = false;
 			lin1.frequency = 5 ;
@@ -91,7 +96,7 @@ package game
 			lin1.ignore = true; //prevent wheel colliding
 			
 			var lin2:LineJoint = new LineJoint(_carBody,_w2,new Vec2(139,60),new Vec2(),
-				new Vec2(0,1), 0 ,10 );
+				new Vec2(0,1), 0 ,5 );
 			lin2.compound = compound ;
 			lin2.stiff = false;
 			lin2.frequency = 5 ;
@@ -128,8 +133,8 @@ package game
 		
 		private function circle(x:Number,y:Number,r:Number):Body {
 			var b:Body = new Body();
-			var materail:Material = Material.rubber() ; 
-			materail.density = 2  ;
+			var materail:Material = Material.rubber() ;
+			materail.density = 1 ;
 			b.shapes.add(new Circle(r,null,materail));
 			b.position.setxy(x,y);
 			return b;
