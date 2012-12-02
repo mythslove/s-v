@@ -21,11 +21,18 @@ package game.core.scene
 		{
 			removeEventListener(Event.ADDED_TO_STAGE , addedHandler);
 			addEventListener(Event.REMOVED_FROM_STAGE , removedHandler );
+			loadRes();
+		}
+		
+		//加载此地图中所有要用到的图片
+		private function loadRes():void
+		{
+			//添加loading
 		}
 		
 		private function removedHandler( e:Event ):void
 		{
-			
+			removeEventListener(Event.REMOVED_FROM_STAGE , removedHandler );
 		}
 	}
 }
