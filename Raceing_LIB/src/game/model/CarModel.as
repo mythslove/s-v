@@ -1,5 +1,11 @@
 package game.model
 {
+	import bing.res.ResVO;
+	
+	import game.vos.CarVO;
+	
+	import nape.geom.Vec2;
+
 	public class CarModel
 	{
 		private static var _instance:CarModel;
@@ -8,8 +14,17 @@ package game.model
 			return _instance ;
 		}
 		//===============================
+		public var cars:Vector.<CarVO> ;
+		
 		public function CarModel()
 		{
+			
+		}
+		
+		public function parseConfig( resVO:ResVO ):void
+		{
+			cars = new Vector.<CarVO>();
+			
 		}
 	}
 }
