@@ -4,9 +4,14 @@ package game.gui.base
 	
 	public class Thumb extends Sprite
 	{
-		public function Thumb()
+		private var _url:String ;
+		private var _showLoading:Boolean ;
+		
+		public function Thumb( url:String , showLoading:Boolean = false )
 		{
 			super();
+			this._url = url ;
+			this._showLoading = showLoading ;
 		}
 	}
 }
