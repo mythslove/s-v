@@ -1,13 +1,20 @@
 package
 {
+	import bing.res.ResPool;
+	import bing.res.ResProgressEvent;
+	import bing.res.ResVO;
+	
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
 	import flash.events.Event;
 	import flash.geom.Rectangle;
+	import flash.net.registerClassAlias;
 	
 	import game.StarlingAppliaction;
 	import game.comm.GameSetting;
+	import game.model.CarModel;
+	import game.vos.*;
 	
 	import starling.core.Starling;
 	
@@ -23,8 +30,42 @@ package
 			stage.align = StageAlign.TOP_LEFT;
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 			stage.frameRate = 60 ;
-			init();
+			//添加loading
+			loadRes();
 		}
+		private function loadRes():void
+		{
+			ResPool.instance.cdns=Vector.<String>(["res/"]);
+			ResPool.instance.maxLoadNum = 4 ;
+			var resVOs:Array=[];
+			resVOs.push( new ResVO("Config_Car","config/Config_Car.xml"));
+			resVOs.push( new ResVO("Config_AI","config/Config_AI.xml"));
+			resVOs.push( new ResVO("Config_Track","config/Config_Track.xml"));
+			ResPool.instance.addEventListener(ResProgressEvent.RES_LOAD_PROGRESS , resLoadHandler );
+			ResPool.instance.addEventListener("loadConfig" , resLoadHandler );
+			ResPool.instance.queueLoad( "loadConfig",resVOs,3);
+		}
+		
+		private function resLoadHandler(e:Event):void
+		{
+			switch(e.type)
+			{
+				case ResProgressEvent.RES_LOAD_PROGRESS:
+					var evt:ResProgressEvent = e as ResProgressEvent ;
+					trace(evt.loaded/evt.total);
+					break ;
+				case "loadConfig":
+					ResPool.instance.removeEventListener(ResProgressEvent.RES_LOAD_PROGRESS , resLoadHandler );
+					ResPool.instance.removeEventListener("loadConfig" , resLoadHandler );
+					CarModel.instance.parseConfig( ResPool.instance.getResVOByResId("Config_Car"));
+					CarModel.instance.parseConfig( ResPool.instance.getResVOByResId("Config_AI"));
+					CarModel.instance.parseConfig( ResPool.instance.getResVOByResId("Config_Track"));
+					init();
+					break ;
+			}
+		}
+		
+		
 		
 		private function init():void
 		{
@@ -53,6 +94,7 @@ package
 		{
 			_starling.stage3D.removeEventListener(Event.CONTEXT3D_CREATE , contextCreatedHandler );
 			_starling.start() ;
+			//移除loading
 		}
 	}
 }
