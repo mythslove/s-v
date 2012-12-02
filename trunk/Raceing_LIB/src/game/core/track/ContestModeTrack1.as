@@ -5,12 +5,12 @@ package game.core.track
 	import nape.space.Space;
 
 	/**
-	 *  时间模式地图1
+	 * 竞赛模式地图1 
 	 * @author zzhanglin
 	 */	
-	public class TimeModeTrack1 extends BaseTrack
+	public class ContestModeTrack1 extends BaseTrack
 	{
-		public function TimeModeTrack1( trackVO:TrackVO, space:Space, px:Number, py:Number)
+		public function ContestModeTrack1( trackVO:TrackVO, space:Space, px:Number, py:Number)
 		{
 			super(trackVO,space, px, py);
 		}
