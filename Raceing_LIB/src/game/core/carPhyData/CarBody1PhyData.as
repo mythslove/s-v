@@ -17,7 +17,7 @@ import nape.shape.Shape;
 
 import starling.display.DisplayObject;
 
-public class Car1BodyPhyData {
+public class CarBody1PhyData {
 
 	public static function createBody(name:String,graphic:DisplayObject=null):Body {
 		var xret:BodyPair = lookup(name);
