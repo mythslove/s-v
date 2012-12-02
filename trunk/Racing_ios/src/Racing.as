@@ -60,6 +60,9 @@ package
 					CarModel.instance.parseConfig( ResPool.instance.getResVOByResId("Config_Car"));
 					CarModel.instance.parseConfig( ResPool.instance.getResVOByResId("Config_AI"));
 					CarModel.instance.parseConfig( ResPool.instance.getResVOByResId("Config_Track"));
+					ResPool.instance.deleteRes("Config_Car");
+					ResPool.instance.deleteRes("Config_AI");
+					ResPool.instance.deleteRes("Config_Track");
 					init();
 					break ;
 			}
