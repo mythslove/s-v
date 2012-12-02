@@ -17,11 +17,6 @@ package game.model
 		//===============================
 		public var cars:Vector.<CarVO> ;
 		
-		public function CarModel()
-		{
-			
-		}
-		
 		public function parseConfig( resVO:ResVO ):void
 		{
 			var config:XML = XML(resVO.resObject);
