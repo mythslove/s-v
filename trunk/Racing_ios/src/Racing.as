@@ -13,7 +13,9 @@ package
 	
 	import game.StarlingAppliaction;
 	import game.comm.GameSetting;
+	import game.model.AIModel;
 	import game.model.CarModel;
+	import game.model.TrackModel;
 	import game.vos.*;
 	
 	import starling.core.Starling;
@@ -58,8 +60,8 @@ package
 					ResPool.instance.removeEventListener(ResProgressEvent.RES_LOAD_PROGRESS , resLoadHandler );
 					ResPool.instance.removeEventListener("loadConfig" , resLoadHandler );
 					CarModel.instance.parseConfig( ResPool.instance.getResVOByResId("Config_Car"));
-					CarModel.instance.parseConfig( ResPool.instance.getResVOByResId("Config_AI"));
-					CarModel.instance.parseConfig( ResPool.instance.getResVOByResId("Config_Track"));
+					AIModel.instance.parseConfig( ResPool.instance.getResVOByResId("Config_AI"));
+					TrackModel.instance.parseConfig( ResPool.instance.getResVOByResId("Config_Track"));
 					ResPool.instance.deleteRes("Config_Car");
 					ResPool.instance.deleteRes("Config_AI");
 					ResPool.instance.deleteRes("Config_Track");
