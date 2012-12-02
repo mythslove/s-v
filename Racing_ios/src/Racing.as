@@ -54,7 +54,7 @@ package
 			{
 				case ResProgressEvent.RES_LOAD_PROGRESS:
 					var evt:ResProgressEvent = e as ResProgressEvent ;
-					trace(evt.loaded/evt.total);
+					trace(evt.loaded/evt.total*100+"%");
 					break ;
 				case "loadConfig":
 					ResPool.instance.removeEventListener(ResProgressEvent.RES_LOAD_PROGRESS , resLoadHandler );
