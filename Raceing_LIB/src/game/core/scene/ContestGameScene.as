@@ -90,12 +90,13 @@ package game.core.scene
 			addChild(_map);
 			_track = TrackFactory.createTrack(_trackVO,_space);
 			_map.addChild(_track);
-			_carBot = CarFactory.createCar( _carGroup , _carBotVO.carVO , _space , 100 , 200 );
+			_carBot = CarFactory.createCar( _carGroup , _carBotVO.carVO , _space , 400 , 300 );
 			_map.addChild(_carBot);
-			_car =  CarFactory.createCar( _carGroup , _playerCarVO.carVO , _space , 200 , 200 );
+			_car =  CarFactory.createCar( _carGroup , _playerCarVO.carVO , _space , 300 , 300 );
 			_map.addChild(_car);
 			
 			deleteResVOs();
+			updateHandler(null);
 			addEventListener(starling.events.Event.ENTER_FRAME , updateHandler );
 		}
 		
