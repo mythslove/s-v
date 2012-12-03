@@ -13,7 +13,7 @@ package game.vos
 		
 		public function get carUrl():String
 		{
-			return "car/Car"+id+".xml";
+			return "car/Car"+id+".png";
 		}
 		public function get carXMLUrl():String
 		{

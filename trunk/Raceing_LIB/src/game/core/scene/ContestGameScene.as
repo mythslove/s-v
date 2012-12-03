@@ -33,7 +33,7 @@ package game.core.scene
 		private var _track:BaseTrack ;
 		private var _space:Space;
 		private var _carGroup:InteractionGroup = new InteractionGroup(true);
-		private var _debug:BitmapDebug = new BitmapDebug(GameSetting.SCREEN_WIDTH,GameSetting.SCREEN_HEIGHT);
+		private var _debug:BitmapDebug ;//= new BitmapDebug(GameSetting.SCREEN_WIDTH,GameSetting.SCREEN_HEIGHT);
 		
 		/**
 		 *  竞赛游戏场景
@@ -81,7 +81,8 @@ package game.core.scene
 			ResPool.instance.removeEventListener( "ContestGameSceneRes" , resLoadedHandler );
 			_space = new Space(new Vec2(0,500));
 			if(_debug){
-//				_debug.drawBodyDetail = true ;
+				_debug.drawConstraints = true ;
+				_debug.drawCollisionArbiters=true ;
 				Starling.current.nativeStage.addChild( _debug.display );
 			}
 			_track = TrackFactory.createTrack(_trackVO,_space);
