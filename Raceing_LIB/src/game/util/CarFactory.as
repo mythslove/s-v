@@ -9,7 +9,7 @@ package game.util
 
 	public class CarFactory
 	{
-		public static function createCar(group:InteractionGroup ,carVO:CarVO , space:Space , px:Number, py:Number)
+		public static function createCar(group:InteractionGroup ,carVO:CarVO , space:Space , px:Number, py:Number):BaseCar
 		{
 			var car:BaseCar ;
 			switch( carVO.id )

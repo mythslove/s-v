@@ -31,7 +31,7 @@ package game.core.track
 			{
 //				var img:Image = new Image(AssetsManager.createTextureAtlas("RoadTexture").getTexture("road"+i));
 				body = Road1PhyData.createBody("road"+i);
-				body.position.setxy( len ,GameSetting.SCREEN_HEIGHT-body.bounds.height) ;
+				body.position.setxy( len ,GameSetting.SCREEN_HEIGHT) ;
 				body.type = BodyType.KINEMATIC ;
 				body.space = _space ;
 				this["_road"+i] = body ;

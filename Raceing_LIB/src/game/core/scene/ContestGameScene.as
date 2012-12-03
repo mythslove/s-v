@@ -47,13 +47,13 @@ package game.core.scene
 			this._trackVO = trackVO;
 			this._playerCarVO = playerCarVO ;
 			this._carBotVO = _trackVO.competitors[competitorIndex] ;
-			addEventListener(Event.ADDED_TO_STAGE , addedHandler);
+			addEventListener(starling.events.Event.ADDED_TO_STAGE , addedHandler);
 		}
 		
 		private function addedHandler( e:starling.events.Event ):void
 		{
-			removeEventListener(Event.ADDED_TO_STAGE , addedHandler);
-			addEventListener(Event.REMOVED_FROM_STAGE , removedHandler );
+			removeEventListener(starling.events.Event.ADDED_TO_STAGE , addedHandler);
+			addEventListener(starling.events.Event.REMOVED_FROM_STAGE , removedHandler );
 			loadRes();
 		}
 		
@@ -65,21 +65,24 @@ package game.core.scene
 				new ResVO("road",_trackVO.roadUrl),
 				new ResVO("roadXML",_trackVO.roadXMLUrl),
 				new ResVO("car"+_playerCarVO.carVO.id ,_playerCarVO.carVO.carUrl),
-				new ResVO("carXML"+_playerCarVO.carVO.id , _playerCarVO.carVO.carXMLUrl),
-				new ResVO("car"+_carBotVO.carVO.id ,_carBotVO.carVO.carUrl),
-				new ResVO("carXML"+_carBotVO.carVO.id , _carBotVO.carVO.carXMLUrl)
+				new ResVO("carXML"+_playerCarVO.carVO.id , _playerCarVO.carVO.carXMLUrl)
 			];
-			ResPool.instance.addEventListener( this.name , resLoadedHandler );
-			ResPool.instance.queueLoad( this.name , resVOArray);
+			if(_playerCarVO.carVO.id!=_carBotVO.carVO.id)
+			{
+				resVOArray.push(new ResVO("car"+_carBotVO.carVO.id ,_carBotVO.carVO.carUrl));
+				resVOArray.push(new ResVO("carXML"+_carBotVO.carVO.id , _carBotVO.carVO.carXMLUrl));
+			}
+			ResPool.instance.addEventListener( "ContestGameSceneRes" , resLoadedHandler );
+			ResPool.instance.queueLoad( "ContestGameSceneRes" , resVOArray);
 		}
 		
-		private function resLoadedHandler(e:flash.events.Event):Void
+		private function resLoadedHandler(e:flash.events.Event):void
 		{
+			ResPool.instance.removeEventListener( "ContestGameSceneRes" , resLoadedHandler );
 			trace("游戏场景资源下载完成");
-			var space:Space = new Space(new Vec2(0,500));
+			_space = new Space(new Vec2(0,500));
 			if(_debug){
 				_debug.drawBodyDetail = true ;
-				_debug.drawCollisionArbiters = true ;
 				Starling.current.nativeStage.addChild( _debug.display );
 			}
 			_track = TrackFactory.createTrack(_trackVO,_space);
@@ -89,10 +92,10 @@ package game.core.scene
 			_car =  CarFactory.createCar( _carGroup , _playerCarVO.carVO , _space , 200 , 300 );
 			addChild(_car);
 			
-			addEventListener(Event.ENTER_FRAME , updateHandler );
+			addEventListener(starling.events.Event.ENTER_FRAME , updateHandler );
 		}
 		
-		private function updateHandler(e:starling.events.Event):Void
+		private function updateHandler(e:starling.events.Event):void
 		{
 			_space.step(1/60);
 			if(_debug){
@@ -102,9 +105,9 @@ package game.core.scene
 			}
 		}
 		
-		private function removedHandler( e:Event ):void
+		private function removedHandler( e:starling.events.Event ):void
 		{
-			removeEventListener(Event.REMOVED_FROM_STAGE , removedHandler );
+			removeEventListener(starling.events.Event.REMOVED_FROM_STAGE , removedHandler );
 		}
 	}
 }
