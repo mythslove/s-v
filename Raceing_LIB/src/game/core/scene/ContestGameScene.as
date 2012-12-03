@@ -4,7 +4,9 @@ package game.core.scene
 	import bing.res.ResVO;
 	
 	import flash.events.Event;
+	import flash.ui.Keyboard;
 	
+	import game.comm.GameSetting;
 	import game.core.car.BaseCar;
 	import game.core.track.BaseTrack;
 	import game.util.CarFactory;
@@ -21,6 +23,7 @@ package game.core.scene
 	import starling.core.Starling;
 	import starling.display.Sprite;
 	import starling.events.Event;
+	import starling.events.KeyboardEvent;
 	
 	public class ContestGameScene extends Sprite
 	{
@@ -67,8 +70,7 @@ package game.core.scene
 				new ResVO("car"+_playerCarVO.carVO.id ,_playerCarVO.carVO.carUrl),
 				new ResVO("carXML"+_playerCarVO.carVO.id , _playerCarVO.carVO.carXMLUrl)
 			];
-			if(_playerCarVO.carVO.id!=_carBotVO.carVO.id)
-			{
+			if(_playerCarVO.carVO.id != _carBotVO.carVO.id){
 				resVOArray.push(new ResVO("car"+_carBotVO.carVO.id ,_carBotVO.carVO.carUrl));
 				resVOArray.push(new ResVO("carXML"+_carBotVO.carVO.id , _carBotVO.carVO.carXMLUrl));
 			}
@@ -96,9 +98,52 @@ package game.core.scene
 			_map.addChild(_car);
 			
 			deleteResVOs();
-			updateHandler(null);
 			addEventListener(starling.events.Event.ENTER_FRAME , updateHandler );
+			stage.addEventListener(KeyboardEvent.KEY_DOWN , onKeyDownHandler);
 		}
+		
+		private function onKeyDownHandler(e:KeyboardEvent):void
+		{
+			if(e.keyCode==Keyboard.RIGHT){
+				_car.leftWheel.rotation+=0.2 ;
+				_car.leftWheel.applyLocalImpulse( Vec2.weak(_playerCarVO.carVO.carParams["impulse"].value,0));
+			}else if(e.keyCode==Keyboard.LEFT){
+				_car.leftWheel.rotation-=0.2 ;
+				_car.leftWheel.applyLocalImpulse( Vec2.weak(-_playerCarVO.carVO.carParams["impulse"].value,0));
+			}
+			var velocity:Number = _playerCarVO.carVO.carParams["velocity"].value ;
+			if(_car.leftWheel.velocity.x<-velocity)  _car.leftWheel.velocity.x = - velocity ;
+			if(_car.leftWheel.velocity.x>velocity)  _car.leftWheel.velocity.x = velocity ;
+		}
+		
+		private function updateHandler(e:starling.events.Event):void
+		{
+			_space.step(1/60);
+			if(_debug){
+				_debug.clear();
+				_debug.draw(_space);
+				_debug.flush();
+			}
+			
+			_map.x = GameSetting.SCREEN_WIDTH*0.5 - _car.leftWheel.position.x -  300 ;
+			if(_map.x>0 ) _map.x =0 ;
+			else if(_map.x+_track.len<GameSetting.SCREEN_WIDTH) _map.x = GameSetting.SCREEN_WIDTH-_track.len ;
+			
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		//===============清除资源=========================
 		
 		private function deleteResVOs():void
 		{
@@ -112,21 +157,11 @@ package game.core.scene
 				ResPool.instance.deleteRes("carXML"+_carBotVO.carVO.id);
 			}
 		}
-		
-		private function updateHandler(e:starling.events.Event):void
-		{
-			_space.step(1/60);
-			if(_debug){
-				_debug.clear();
-				_debug.draw(_space);
-				_debug.flush();
-			}
-		}
-		
 		private function removedHandler( e:starling.events.Event ):void
 		{
 			removeEventListener(starling.events.Event.REMOVED_FROM_STAGE , removedHandler );
 			removeEventListener(starling.events.Event.ENTER_FRAME , updateHandler );
+			stage.removeEventListener(KeyboardEvent.KEY_DOWN , onKeyDownHandler);
 			_space.clear();
 			_space=  null ;
 			_carBotVO = null ;
