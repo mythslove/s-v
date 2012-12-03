@@ -6,6 +6,7 @@ package game.core.track
 	
 	import nape.phys.Body;
 	import nape.phys.BodyType;
+	import nape.phys.Material;
 	import nape.shape.Polygon;
 	import nape.space.Space;
 	
@@ -27,7 +28,13 @@ package game.core.track
 		override protected function createBody():void
 		{
 			super.createBody();
-			
+			var material:Material = new Material();
+			_trackVO.elasticity = _trackVO.elasticity ;
+			_trackVO.dynamicFriction = _trackVO.dynamicFriction ;
+			_trackVO.staticFriction = _trackVO.staticFriction ;
+			_trackVO.density = _trackVO.density ;
+			_trackVO.rollingFriction = _trackVO.rollingFriction ;
+				
 			var body:Body ;
 			for( var i:int  = 1 ; i<5 ; ++i)
 			{
@@ -35,6 +42,7 @@ package game.core.track
 				body = Road1PhyData.createBody("road"+i , img );
 				body.position.setxy( len ,GameSetting.SCREEN_HEIGHT) ;
 				body.type = BodyType.KINEMATIC ;
+				body.setShapeMaterials(material);
 				body.space = _space ;
 				this["_road"+i] = body ;
 				len+=body.bounds.width ;
