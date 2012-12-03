@@ -1,14 +1,14 @@
 <particleEmitterConfig>
   <texture name="texture.png"/>
   <sourcePosition x="300.00" y="300.00"/>
-  <sourcePositionVariance x="12.5" y="0"/>
-  <speed value="240"/>
+  <sourcePositionVariance x="12.5" y="12.5"/>
+  <speed value="85"/>
   <speedVariance value="0"/>
-  <particleLifeSpan value="0.33"/>
-  <particleLifespanVariance value="0.2"/>
-  <angle value="171.67000000000002"/>
+  <particleLifeSpan value="0.43"/>
+  <particleLifespanVariance value="0.38"/>
+  <angle value="182.69"/>
   <angleVariance value="0"/>
-  <gravity x="0" y="500"/>
+  <gravity x="0" y="267.44"/>
   <radialAcceleration value="0.00"/>
   <tangentialAcceleration value="0"/>
   <radialAccelVariance value="0.00"/>
@@ -17,9 +17,9 @@
   <startColorVariance red="0" green="0" blue="0" alpha="0"/>
   <finishColor red="1" green="1" blue="1" alpha="1"/>
   <finishColorVariance red="0" green="0" blue="0" alpha="0"/>
-  <maxParticles value="14.22"/>
+  <maxParticles value="15.69"/>
   <startParticleSize value="19.36"/>
-  <startParticleSizeVariance value="10"/>
+  <startParticleSizeVariance value="13.02"/>
   <finishParticleSize value="0"/>
   <FinishParticleSizeVariance value="0"/>
   <duration value="-1.00"/>
