@@ -6,12 +6,12 @@ package game.core.scene
 	import starling.display.Sprite;
 	import starling.events.Event;
 	
-	public class GameScene extends Sprite
+	public class ContestGameScene extends Sprite
 	{
 		private var _car:BaseCar ;
 		private var _track:BaseTrack;
 		
-		public function GameScene()
+		public function ContestGameScene()
 		{
 			super();
 			addEventListener(Event.ADDED_TO_STAGE , addedHandler);
