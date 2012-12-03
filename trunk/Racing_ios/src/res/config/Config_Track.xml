@@ -2,14 +2,18 @@
 	<item>
 		<id>1</id>
 		<name>track1</name>
+		<requireLevel>1</requireLevel>
 		<costCoin>0</costCoin>
 		<costCash>0</costCash>
-		<requireLevel>1</requireLevel>
-		<info></info>
+		<info>赛道的介绍</info>
 		<elasticity>-1</elasticity>
 		<dynamicFriction>0.45</dynamicFriction>
 		<staticFriction>0.6</staticFriction>
 		<density>1.6</density>
 		<rollingFriction>16</rollingFriction>
+		<competitors>
+			<competitor carId="1"  name="jake" head="" earnExp="10" earnCoin="10" density="1" impulse="50" velocity="300" frequency="5" />
+			<competitor carId="1"  name="mike" head="" earnExp="20" earnCoin="10" density="2" impulse="55" velocity="310" frequency="5" />
+		</competitors>
 	</item>
 </track>
