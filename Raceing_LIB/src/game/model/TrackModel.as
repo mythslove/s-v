@@ -12,11 +12,23 @@ package game.model
 			return _instance ;
 		}
 		//===============================
-		public var tracks:Vector.<TrackVO> ;
 		
+		/**
+		 * 解锁的赛道 id 
+		 */		
+		public var unlockTracks:Vector.<int> = new Vector.<int>();
+		
+		/**
+		 * 所有的赛道 
+		 */		
+		public var tracks:Vector.<TrackVO> = new Vector.<TrackVO>();
+		
+		/**
+		 * 解析所有的赛道数据 
+		 * @param resVO
+		 */		
 		public function parseConfig( resVO:ResVO ):void
 		{
-			tracks = new Vector.<TrackVO>();
 			var config:XML = XML(resVO.resObject);
 			for each( var item:* in config.children())
 			{
