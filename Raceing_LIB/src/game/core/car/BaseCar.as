@@ -11,11 +11,11 @@ package game.core.car
 	
 	public class BaseCar extends Sprite
 	{
-		private var _space:Space ;
-		private var _px:Number ;
-		private var _py:Number ;
-		private var _carGroup:InteractionGroup;
-		private var _carVO:CarVO ;
+		protected var _space:Space ;
+		protected var _px:Number ;
+		protected var _py:Number ;
+		protected var _carGroup:InteractionGroup;
+		protected var _carVO:CarVO ;
 		
 		public var carBody:Body ;
 		public var leftWheel:Body;

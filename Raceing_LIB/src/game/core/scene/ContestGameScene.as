@@ -79,20 +79,33 @@ package game.core.scene
 		private function resLoadedHandler(e:flash.events.Event):void
 		{
 			ResPool.instance.removeEventListener( "ContestGameSceneRes" , resLoadedHandler );
-			trace("游戏场景资源下载完成");
 			_space = new Space(new Vec2(0,500));
 			if(_debug){
-				_debug.drawBodyDetail = true ;
+//				_debug.drawBodyDetail = true ;
 				Starling.current.nativeStage.addChild( _debug.display );
 			}
 			_track = TrackFactory.createTrack(_trackVO,_space);
 			addChild(_track);
-			_carBot = CarFactory.createCar( _carGroup , _carBotVO.carVO , _space , 400 , 300 );
+			_carBot = CarFactory.createCar( _carGroup , _carBotVO.carVO , _space , 100 , 200 );
 			addChild(_carBot);
-			_car =  CarFactory.createCar( _carGroup , _playerCarVO.carVO , _space , 200 , 300 );
+			_car =  CarFactory.createCar( _carGroup , _playerCarVO.carVO , _space , 200 , 200 );
 			addChild(_car);
 			
+			deleteResVOs();
 			addEventListener(starling.events.Event.ENTER_FRAME , updateHandler );
+		}
+		
+		private function deleteResVOs():void
+		{
+			ResPool.instance.deleteRes("road");
+			ResPool.instance.deleteRes("roadXML");
+			ResPool.instance.deleteRes("car"+_playerCarVO.carVO.id);
+			ResPool.instance.deleteRes("carXML"+_playerCarVO.carVO.id);
+			if(_playerCarVO.carVO.id!=_carBotVO.carVO.id)
+			{
+				ResPool.instance.deleteRes("car"+_carBotVO.carVO.id);
+				ResPool.instance.deleteRes("carXML"+_carBotVO.carVO.id);
+			}
 		}
 		
 		private function updateHandler(e:starling.events.Event):void
