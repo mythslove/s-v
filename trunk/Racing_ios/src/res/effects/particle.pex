@@ -8,7 +8,7 @@
   <particleLifespanVariance value="0.38"/>
   <angle value="182.69"/>
   <angleVariance value="0"/>
-  <gravity x="0" y="267.44"/>
+  <gravity x="0" y="400"/>
   <radialAcceleration value="0.00"/>
   <tangentialAcceleration value="0"/>
   <radialAccelVariance value="0.00"/>
@@ -17,10 +17,10 @@
   <startColorVariance red="0" green="0" blue="0" alpha="0"/>
   <finishColor red="1" green="1" blue="1" alpha="1"/>
   <finishColorVariance red="0" green="0" blue="0" alpha="0"/>
-  <maxParticles value="15.69"/>
-  <startParticleSize value="19.36"/>
+  <maxParticles value="10"/>
+  <startParticleSize value="20"/>
   <startParticleSizeVariance value="13.02"/>
-  <finishParticleSize value="0"/>
+  <finishParticleSize value="10"/>
   <FinishParticleSizeVariance value="0"/>
   <duration value="-1.00"/>
   <emitterType value="0"/>
