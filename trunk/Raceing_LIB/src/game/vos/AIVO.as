@@ -27,7 +27,7 @@ package game.vos
 			var carVO:CarVO = ObjectUtil.copyObj(CarModel.instance.carsHash[carId] ) as CarVO ;
 			for( var key:String in carVO.carParams)
 			{
-				carVO.carParams[key] = this[key] ;
+				carVO.carParams[key].value = this[key] ;
 			}
 			return  carVO;
 		}

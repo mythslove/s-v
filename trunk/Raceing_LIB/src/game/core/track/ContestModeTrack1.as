@@ -6,6 +6,7 @@ package game.core.track
 	
 	import nape.phys.Body;
 	import nape.phys.BodyType;
+	import nape.shape.Polygon;
 	import nape.space.Space;
 	
 	import starling.display.Image;
@@ -17,7 +18,6 @@ package game.core.track
 	public class ContestModeTrack1 extends BaseTrack
 	{
 		private var _road1:Body , _road2:Body , _road3:Body , _road4:Body ;
-		public var len:int ; //路的长度
 		
 		public function ContestModeTrack1( trackVO:TrackVO, space:Space)
 		{
@@ -38,6 +38,7 @@ package game.core.track
 				len+=body.bounds.width ;
 //				_map.addChild( img );
 			}
+			createWall();
 		}
 	}
 }
