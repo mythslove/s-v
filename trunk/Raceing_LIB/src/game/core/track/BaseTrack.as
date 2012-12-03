@@ -50,5 +50,16 @@ package game.core.track
 			wall.shapes.add( new Polygon(Polygon.rect(len-50,0,50,GameSetting.SCREEN_HEIGHT)));
 			wall.space = _space ;
 		}
+		
+		override public function dispose():void
+		{
+			super.dispose();
+			_trackVO = null ;
+			_textureAltas.dispose();
+			_textureAltas = null ;
+			_texture.dispose();
+			_texture = null ;
+			_space = null ;
+		}
 	}
 }
