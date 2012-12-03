@@ -9,7 +9,8 @@ package game.core.scene
 	public class ContestGameScene extends Sprite
 	{
 		private var _car:BaseCar ;
-		private var _track:BaseTrack;
+		private var _carBot:BaseCar ;
+		private var _track:BaseTrack ;
 		
 		public function ContestGameScene()
 		{
