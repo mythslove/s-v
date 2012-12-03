@@ -1,0 +1,18 @@
+﻿<car>
+	<!-- 一个item代表一辆车 , name为名字, costCoin大于0时表示买车需要的coin , costCash大于0时表示买车需要的cash
+		requireLevel 买此车要求玩家的等级
+	-->
+	<item id="1" name="Car" costCoin="0" costCash="0" requireLevel="1">
+		<!-- levels表示可以升的级数，add表示每升一级的增量 -->
+		<density value="1" levels="10" add="0.2" />
+		<impulse value="50" levels="10" add="10" />
+		<velocity value="300" levels="10" add="10" />
+		<frequency value="5" levels="10" add="1" />
+	</item>
+	<item id="2" name="Truck"  costCoin="0" costCash="0" requireLevel="4">
+		<density value="1" levels="10" add="0.2"/>
+		<impulse value="50" levels="10" add="10" />
+		<velocity value="300" levels="10" add="10" />
+		<frequency value="5" levels="10" add="1" />
+	</item>
+</car>
