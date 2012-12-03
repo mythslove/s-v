@@ -52,7 +52,7 @@ package game.core.car
 			img = new Image(carWheelTexture); 
 			img.pivotX = carWheelTexture.width>>1 ;
 			img.pivotY = carWheelTexture.height>>1 ;
-			leftWheel= circle(-w1X,wY,carWheelTexture.width*0.5-1 ,material);
+			leftWheel= circle(w1X,wY,carWheelTexture.width*0.5-1 ,material);
 			leftWheel.compound = compound ;
 			leftWheel.space = _space;
 			leftWheel.graphic = img ;
@@ -75,12 +75,14 @@ package game.core.car
 			lin1.stiff = false;
 			lin1.frequency = _carVO.carParams["frequency"].value ;
 			lin1.space = _space;
+			lin1.damping= 0.1 ;
 			lin1.ignore = true; 
 			
 			var lin2:LineJoint = new LineJoint(carBody,rightWheel,new Vec2(w2X,wY),new Vec2(),
 				new Vec2(0,1), -5 ,5 );
 			lin2.compound = compound ;
 			lin2.stiff = false;
+			lin2.damping=  0.1;
 			lin2.frequency = _carVO.carParams["frequency"].value ;
 			lin2.space = _space;
 			lin2.ignore = true; 
