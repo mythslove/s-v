@@ -2,6 +2,7 @@ package
 {
 	import bing.res.ResPool;
 	import bing.res.ResProgressEvent;
+	import bing.res.ResType;
 	import bing.res.ResVO;
 	
 	import flash.display.Sprite;
@@ -51,7 +52,9 @@ package
 			var resVOs:Array=[];
 			resVOs.push( new ResVO("Config_Car","config/Config_Car.xml"));
 			resVOs.push( new ResVO("Config_Track","config/Config_Track.xml"));
-			resVOs.push( new ResVO("DustParticle_PEX","effects/particle.pex"));
+			var vo:ResVO = new ResVO("DustParticle_PEX","effects/particle.pex") ;
+			vo.resType = ResType.TEXT ;
+			resVOs.push( vo );
 			ResPool.instance.addEventListener(ResProgressEvent.RES_LOAD_PROGRESS , resLoadHandler );
 			ResPool.instance.addEventListener("loadConfig" , resLoadHandler );
 			ResPool.instance.queueLoad( "loadConfig",resVOs,3);
