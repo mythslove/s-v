@@ -5,7 +5,6 @@ package game.core.scene
 	
 	import flash.events.Event;
 	
-	import game.comm.GameSetting;
 	import game.core.car.BaseCar;
 	import game.core.track.BaseTrack;
 	import game.util.CarFactory;
@@ -126,6 +125,14 @@ package game.core.scene
 		private function removedHandler( e:starling.events.Event ):void
 		{
 			removeEventListener(starling.events.Event.REMOVED_FROM_STAGE , removedHandler );
+			removeEventListener(starling.events.Event.ENTER_FRAME , updateHandler );
+			_space.clear();
+			_space=  null ;
+			_carBotVO = null ;
+			_carBot = null ;
+			_track=null ;
+			_trackVO =null ;
+			_map.removeChildren(0,-1,true);
 		}
 	}
 }
