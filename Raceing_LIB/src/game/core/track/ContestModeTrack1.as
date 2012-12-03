@@ -32,7 +32,7 @@ package game.core.track
 			for( var i:int  = 1 ; i<5 ; ++i)
 			{
 				var img:Image = new Image(_textureAltas.getTexture("road"+i));
-				body = Road1PhyData.createBody("road"+i);
+				body = Road1PhyData.createBody("road"+i , img );
 				body.position.setxy( len ,GameSetting.SCREEN_HEIGHT) ;
 				body.type = BodyType.KINEMATIC ;
 				body.space = _space ;
