@@ -1,4 +1,4 @@
-package  game.core.carPhyData{
+package  game.core.phyData{
 
 import flash.geom.Rectangle;
 import flash.utils.Dictionary;
