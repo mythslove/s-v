@@ -21,6 +21,9 @@ package game.core.track
 	{
 		private var _texture:Texture ;
 		protected var _textureAltas:TextureAtlas;
+		public function get textureAltas():TextureAtlas{
+			return _textureAltas;
+		}
 		
 		protected var _space:Space ;
 		protected var _trackVO:TrackVO ;

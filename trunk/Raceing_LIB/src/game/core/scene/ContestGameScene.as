@@ -26,6 +26,7 @@ package game.core.scene
 	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.events.KeyboardEvent;
+	import starling.textures.Texture;
 	
 	public class ContestGameScene extends BaseContestGameScene
 	{
@@ -41,7 +42,6 @@ package game.core.scene
 		private var _robotCarWheelCbType:CbType = new CbType();
 		private var _roadCbType:CbType = new CbType();
 		private var _carOnRoad:Boolean , _botOnRoad:Boolean  ;
-		
 		
 		/**
 		 *  竞赛游戏场景
@@ -76,13 +76,16 @@ package game.core.scene
 			_track.roadCompound.cbType = _roadCbType ;
 			_map.addChild(_track);
 			
+			var dustTexture:Texture =  _track.textureAltas.getTexture("dustTexture") ;
 			_carBot = CarFactory.createCar( _carGroup , _carBotVO.carVO , _space , 400 , 300 );
 			_carBot.leftWheel.cbType = _robotCarWheelCbType ;
+			_carBot.createParticles(dustTexture);
 			_map.addChild(_carBot);
 			
 			_car =  CarFactory.createCar( _carGroup , _playerCarVO.carVO , _space , 300 , 300 );
 			_car.leftWheel.cbType = _carWheelCbType ;
 			_car.carBody.cbType = _carBodyCbType ;
+			_car.createParticles(dustTexture);
 			_map.addChild(_car);
 			
 			deleteResVOs();
@@ -98,6 +101,8 @@ package game.core.scene
 			_space.listeners.add( new InteractionListener(CbEvent.BEGIN,InteractionType.COLLISION,_robotCarWheelCbType,_roadCbType,
 				function carRoadCallBack( callback:InteractionCallback ):void {
 					_botOnRoad = true ;
+					_carBot.leftWheelParticle.start(.2);
+					_carBot.rightWheelParticle.start(.2);
 				}
 			));
 			_space.listeners.add( new InteractionListener(CbEvent.END,InteractionType.COLLISION,_robotCarWheelCbType,_roadCbType,
@@ -108,6 +113,8 @@ package game.core.scene
 			_space.listeners.add( new InteractionListener(CbEvent.BEGIN,InteractionType.COLLISION,_carWheelCbType,_roadCbType,
 				function carRoadCallBack( callback:InteractionCallback ):void {
 					_carOnRoad = true ;
+					_car.leftWheelParticle.start(.2);
+					_car.rightWheelParticle.start(.2);
 				}
 			));
 			_space.listeners.add( new InteractionListener(CbEvent.END,InteractionType.COLLISION,_carWheelCbType,_roadCbType,

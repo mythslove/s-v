@@ -11,7 +11,10 @@ package game.core.car
 	import nape.phys.Compound;
 	import nape.space.Space;
 	
+	import starling.core.Starling;
 	import starling.display.Sprite;
+	import starling.extensions.PDParticleSystem;
+	import starling.extensions.ParticleSystem;
 	import starling.textures.Texture;
 	import starling.textures.TextureAtlas;
 	
@@ -30,6 +33,10 @@ package game.core.car
 		public var leftWheel:Body;
 		public var rightWheel:Body;
 		public var compound:Compound; 
+		
+		public var leftWheelParticle:PDParticleSystem ;
+		public var rightWheelParticle:PDParticleSystem ;
+		public var gasParticle:PDParticleSystem ;
 		
 		public function BaseCar( group:InteractionGroup , carVO:CarVO ,  space:Space , px:Number, py:Number )
 		{
@@ -54,6 +61,15 @@ package game.core.car
 			_textureAltas = new TextureAtlas(_texture,textureXML);
 		}
 		
+		public function createParticles( dustTexture:Texture ):void
+		{
+			var dustPex:XML = XML(ResPool.instance.getResVOByResId("DustParticle_PEX").resObject);
+			leftWheelParticle = new PDParticleSystem(dustPex,dustTexture);
+			rightWheelParticle = new PDParticleSystem(dustPex,dustTexture);
+			Starling.juggler.add( leftWheelParticle );
+			Starling.juggler.add( rightWheelParticle );
+		}
+		
 		override public function dispose():void
 		{
 			super.dispose();
@@ -65,6 +81,12 @@ package game.core.car
 			_carGroup = null ;
 			_space = null ;
 			compound = null ;
+			Starling.juggler.remove( leftWheelParticle );
+			Starling.juggler.remove( rightWheelParticle );
+			leftWheelParticle.dispose();
+			leftWheelParticle = null ;
+			rightWheelParticle.dispose() ;
+			rightWheelParticle = null ;
 		}
 	}
 }
