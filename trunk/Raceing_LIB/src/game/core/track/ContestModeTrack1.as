@@ -18,8 +18,6 @@ package game.core.track
 	 */	
 	public class ContestModeTrack1 extends BaseTrack
 	{
-		private var _road1:Body , _road2:Body , _road3:Body , _road4:Body ;
-		
 		public function ContestModeTrack1( trackVO:TrackVO, space:Space)
 		{
 			super(trackVO,space);
@@ -35,19 +33,59 @@ package game.core.track
 			_trackVO.density = _trackVO.density ;
 			_trackVO.rollingFriction = _trackVO.rollingFriction ;
 				
-			var body:Body ;
+			var roadBody:Body ;
 			for( var i:int  = 1 ; i<5 ; ++i)
 			{
 				var img:Image = new Image(_textureAltas.getTexture("road"+i));
-				body = Road1PhyData.createBody("road"+i , img );
-				body.position.setxy( len ,GameSetting.SCREEN_HEIGHT) ;
-				body.type = BodyType.KINEMATIC ;
-				body.setShapeMaterials(material);
-				body.space = _space ;
-				this["_road"+i] = body ;
-				len+=body.bounds.width ;
+				roadBody = Road1PhyData.createBody("road"+i , img );
+				roadBody.compound = roadCompound ;
+				roadBody.position.setxy( len ,GameSetting.SCREEN_HEIGHT) ;
+				roadBody.type = BodyType.KINEMATIC ;
+				roadBody.setShapeMaterials(material);
+				roadBody.space = _space ;
+				len+=roadBody.bounds.width ;
 				addChild( img );
 			}
+			
+			for(  i  = 1 ; i<5 ; ++i)
+			{
+				img = new Image(_textureAltas.getTexture("road"+i));
+				roadBody = Road1PhyData.createBody("road"+i , img );
+				roadBody.compound = roadCompound ;
+				roadBody.position.setxy( len ,GameSetting.SCREEN_HEIGHT) ;
+				roadBody.type = BodyType.KINEMATIC ;
+				roadBody.setShapeMaterials(material);
+				roadBody.space = _space ;
+				len+=roadBody.bounds.width ;
+				addChild( img );
+			}
+			
+			for( i  = 1 ; i<5 ; ++i)
+			{
+				img = new Image(_textureAltas.getTexture("road"+i));
+				roadBody = Road1PhyData.createBody("road"+i , img );
+				roadBody.compound = roadCompound ;
+				roadBody.position.setxy( len ,GameSetting.SCREEN_HEIGHT) ;
+				roadBody.type = BodyType.KINEMATIC ;
+				roadBody.setShapeMaterials(material);
+				roadBody.space = _space ;
+				len+=roadBody.bounds.width ;
+				addChild( img );
+			}
+			
+			for( i  = 1 ; i<5 ; ++i)
+			{
+				img = new Image(_textureAltas.getTexture("road"+i));
+				roadBody = Road1PhyData.createBody("road"+i , img );
+				roadBody.compound = roadCompound ;
+				roadBody.position.setxy( len ,GameSetting.SCREEN_HEIGHT) ;
+				roadBody.type = BodyType.KINEMATIC ;
+				roadBody.setShapeMaterials(material);
+				roadBody.space = _space ;
+				len+=roadBody.bounds.width ;
+				addChild( img );
+			}
+			
 			createWall();
 		}
 	}

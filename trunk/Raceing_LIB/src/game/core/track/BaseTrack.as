@@ -9,7 +9,7 @@ package game.core.track
 	
 	import nape.phys.Body;
 	import nape.phys.BodyType;
-	import nape.phys.Material;
+	import nape.phys.Compound;
 	import nape.shape.Polygon;
 	import nape.space.Space;
 	
@@ -24,7 +24,9 @@ package game.core.track
 		
 		protected var _space:Space ;
 		protected var _trackVO:TrackVO ;
+		
 		public var len:int ; //路的长度
+		public var roadCompound:Compound = new Compound();
 		
 		public function BaseTrack( trackVO:TrackVO , space:Space )
 		{
@@ -60,6 +62,7 @@ package game.core.track
 			_texture.dispose();
 			_texture = null ;
 			_space = null ;
+			roadCompound = null ;
 		}
 	}
 }
