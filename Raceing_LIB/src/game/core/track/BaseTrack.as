@@ -1,5 +1,9 @@
 package game.core.track
 {
+	import bing.res.ResPool;
+	
+	import flash.display.Bitmap;
+	
 	import game.comm.GameSetting;
 	import game.vos.TrackVO;
 	
@@ -10,9 +14,14 @@ package game.core.track
 	import nape.space.Space;
 	
 	import starling.display.Sprite;
+	import starling.textures.Texture;
+	import starling.textures.TextureAtlas;
 	
 	public class BaseTrack extends Sprite
 	{
+		private var _texture:Texture ;
+		protected var _textureAltas:TextureAtlas;
+		
 		protected var _space:Space ;
 		protected var _trackVO:TrackVO ;
 		public var len:int ; //路的长度
@@ -27,7 +36,11 @@ package game.core.track
 		
 		protected function createBody():void
 		{
+			var textureBmp:Bitmap = ResPool.instance.getResVOByResId("road").resObject as Bitmap;
+			var textureXML:XML = XML(ResPool.instance.getResVOByResId("roadXML").resObject) ;
 			
+			_texture = Texture.fromBitmap( textureBmp , false  );
+			_textureAltas = new TextureAtlas(_texture,textureXML);
 		}
 		
 		protected function createWall():void

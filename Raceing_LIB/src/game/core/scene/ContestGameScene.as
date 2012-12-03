@@ -34,6 +34,7 @@ package game.core.scene
 		private var _space:Space;
 		private var _carGroup:InteractionGroup = new InteractionGroup(true);
 		private var _debug:BitmapDebug ;//= new BitmapDebug(GameSetting.SCREEN_WIDTH,GameSetting.SCREEN_HEIGHT);
+		private var _map:Sprite; 
 		
 		/**
 		 *  竞赛游戏场景
@@ -85,12 +86,15 @@ package game.core.scene
 				_debug.drawCollisionArbiters=true ;
 				Starling.current.nativeStage.addChild( _debug.display );
 			}
+			_map = new Sprite();
+			_map.touchable = false ;
+			addChild(_map);
 			_track = TrackFactory.createTrack(_trackVO,_space);
-			addChild(_track);
+			_map.addChild(_track);
 			_carBot = CarFactory.createCar( _carGroup , _carBotVO.carVO , _space , 100 , 200 );
-			addChild(_carBot);
+			_map.addChild(_carBot);
 			_car =  CarFactory.createCar( _carGroup , _playerCarVO.carVO , _space , 200 , 200 );
-			addChild(_car);
+			_map.addChild(_car);
 			
 			deleteResVOs();
 			addEventListener(starling.events.Event.ENTER_FRAME , updateHandler );
