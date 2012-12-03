@@ -75,14 +75,14 @@ package game.core.car
 			lin1.stiff = false;
 			lin1.frequency = _carVO.carParams["frequency"].value ;
 			lin1.space = _space;
-			lin1.damping= 0.1 ;
+			lin1.damping= lin1.frequency*0.01 ;
 			lin1.ignore = true; 
 			
 			var lin2:LineJoint = new LineJoint(carBody,rightWheel,new Vec2(w2X,wY),new Vec2(),
 				new Vec2(0,1), -5 ,5 );
 			lin2.compound = compound ;
 			lin2.stiff = false;
-			lin2.damping=  0.1;
+			lin2.damping= lin2.frequency*0.01;
 			lin2.frequency = _carVO.carParams["frequency"].value ;
 			lin2.space = _space;
 			lin2.ignore = true; 
