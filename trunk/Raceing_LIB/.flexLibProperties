@@ -3,6 +3,9 @@
   <includeClasses>
     <classEntry path="game.vos.PlayerVO"/>
     <classEntry path="game.vos.CarVO"/>
+    <classEntry path="game.vos.PlayerCarVO"/>
+    <classEntry path="game.util.TrackFactory"/>
+    <classEntry path="game.util.CarFactory"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
