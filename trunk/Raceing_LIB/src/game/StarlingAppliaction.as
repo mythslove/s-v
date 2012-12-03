@@ -16,7 +16,7 @@ package game
 			addEventListener(Event.ADDED_TO_STAGE , addedHandler );
 		}
 		
-		private function addedHandler(e:Event):Void
+		private function addedHandler(e:Event):void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE , addedHandler );
 			
