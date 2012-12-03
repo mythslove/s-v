@@ -1,6 +1,10 @@
 package game.vos
 {
+	import bing.utils.ObjectUtil;
+	
 	import flash.utils.Dictionary;
+	
+	import game.model.CarModel;
 
 	/**
 	 * 机器车 
@@ -13,10 +17,20 @@ package game.vos
 		public var head:String ;
 		public var earnExp:int ;
 		public var earnCoin:int ;
+		
 		public var density:Number ;
 		public var impulse:Number ;
 		public var velocity:Number ;
 		public var frequency:Number ;
+		
+		public function get carVO():CarVO{
+			var carVO:CarVO = ObjectUtil.copyObj(CarModel.instance.carsHash[carId] ) as CarVO ;
+			for( var key:String in carVO.carParams)
+			{
+				carVO.carParams[key] = this[key] ;
+			}
+			return  carVO;
+		}
 		
 	}
 }

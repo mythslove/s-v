@@ -1,6 +1,7 @@
 package game.model
 {
 	import bing.res.ResVO;
+	import bing.utils.ObjectUtil;
 	
 	import flash.utils.Dictionary;
 	
@@ -25,6 +26,11 @@ package game.model
 		 * 商店中的车 
 		 */		
 		public var cars:Vector.<CarVO> = new Vector.<CarVO>();
+		
+		/**
+		 * 商店中的车,key为车的id , value为CarVO 
+		 */		
+		public var carsHash:Dictionary = new Dictionary();
 		
 		/**
 		 * 解析商店中的车的配置 
@@ -52,10 +58,19 @@ package game.model
 					paramVO.add = Number( child.@add);
 					carVO.carParams[paramVO.name] = paramVO ;
 				}
+				carsHash[carVO.id]=carVO;
 			}
 		}
 		
-		
-		
+		/**
+		 * 初始化一个默认的PlayerCarVO
+		 */		
+		public function initDefaultPlayerCarVO():PlayerCarVO
+		{
+			var vo:PlayerCarVO = new PlayerCarVO();
+			vo.carVO = ObjectUtil.copyObj( cars[0] ) as CarVO ;
+			playerCars.push(vo);
+			return vo ;
+		}
 	}
 }

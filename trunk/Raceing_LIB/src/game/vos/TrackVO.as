@@ -1,5 +1,7 @@
 package game.vos
 {
+	
+
 	public class TrackVO
 	{
 		public var id:int ;
@@ -23,6 +25,5 @@ package game.vos
 		{
 			return "track/Road"+id+".xml";
 		}
-		
 	}
 }

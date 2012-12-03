@@ -24,7 +24,7 @@ package game.core.track
 			super(trackVO,space);
 		}
 		
-		override public function createBody():void
+		override protected function createBody():void
 		{
 			var body:Body ;
 			for( var i:int  = 1 ; i<5 ; ++i)
