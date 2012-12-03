@@ -1,5 +1,11 @@
 package game.core.car
 {
+	import bing.res.ResPool;
+	import bing.res.ResVO;
+	
+	import flash.display.Bitmap;
+	import flash.display.BitmapData;
+	
 	import game.core.phyData.CarBody1PhyData;
 	import game.vos.CarParamVO;
 	import game.vos.CarVO;
@@ -13,6 +19,8 @@ package game.core.car
 	import nape.space.Space;
 	
 	import starling.display.DisplayObject;
+	import starling.display.Image;
+	import starling.textures.Texture;
 	
 	public class Car1 extends BaseCar
 	{
@@ -25,52 +33,57 @@ package game.core.car
 		{
 			super.createBody();
 			
-//			var img:Image = new Image(_carTexture); 
-			carBody = CarBody1PhyData.createBody("Car1Body");
+			var carTexture:Texture = _textureAltas.getTexture("CarBody");
+			var carWheelTexture:Texture = _textureAltas.getTexture("CarWheel");
+
+			var img:Image = new Image(carTexture); 
+			carBody = CarBody1PhyData.createBody("CarBody",img);
 			carBody.mass = carBody.gravMass = 2;
 			carBody.compound = compound ;
 			carBody.space = _space;
-//			addChild( img);
+			addChild( img);
 			
 			
 			var material:Material = Material.rubber();
 			material.density = _carVO.carParams["density"].value  ;
+			var w1X:int = -48 , w2X:int = 55 ;
+			var wY:int = 30 ;
 			
-//			img = new Image(_carWheelTexture); 
-//			img.pivotX = _carWheelTexture.width>>1 ;
-//			img.pivotY = _carWheelTexture.height>>1 ;
-			leftWheel= circle(36,56,22,material);//_carWheelTexture.width>>1 
+			img = new Image(carWheelTexture); 
+			img.pivotX = carWheelTexture.width>>1 ;
+			img.pivotY = carWheelTexture.height>>1 ;
+			leftWheel= circle(-w1X,wY,carWheelTexture.width*0.5-1 ,material);
 			leftWheel.compound = compound ;
 			leftWheel.space = _space;
-//			leftWheel.graphic = img ;
+			leftWheel.graphic = img ;
 			leftWheel.graphicUpdate = graphicUpdate ;
-//			addChildAt( img,0);
+			addChildAt( img,0);
 			
-//			img = new Image(_carWheelTexture); 
-//			img.pivotX = _carWheelTexture.width>>1 ;
-//			img.pivotY = _carWheelTexture.height>>1 ;
-			rightWheel =  circle(139,56, 22,material ); //_carWheelTexture.width>>1
+			img = new Image(carWheelTexture); 
+			img.pivotX = carWheelTexture.width>>1 ;
+			img.pivotY = carWheelTexture.height>>1 ;
+			rightWheel =  circle(w2X,wY,carWheelTexture.width*0.5-1,material ); 
 			rightWheel.compound = compound ;
 			rightWheel.space = _space;
-//			rightWheel.graphic = img;
+			rightWheel.graphic = img;
 			rightWheel.graphicUpdate = graphicUpdate ;
-//			addChildAt( img,0);
+			addChildAt( img,0);
 			
-			var lin1:LineJoint = new LineJoint( carBody,leftWheel,new Vec2(36,60),new Vec2(),
-				new Vec2(0,1), 0,5);
+			var lin1:LineJoint = new LineJoint( carBody,leftWheel,new Vec2(w1X,wY),new Vec2(),
+				new Vec2(0,1), -5,5);
 			lin1.compound = compound ;
 			lin1.stiff = false;
 			lin1.frequency = _carVO.carParams["frequency"].value ;
 			lin1.space = _space;
-			lin1.ignore = true; //prevent wheel colliding
+			lin1.ignore = true; 
 			
-			var lin2:LineJoint = new LineJoint(carBody,rightWheel,new Vec2(139,60),new Vec2(),
-				new Vec2(0,1), 0 ,5 );
+			var lin2:LineJoint = new LineJoint(carBody,rightWheel,new Vec2(w2X,wY),new Vec2(),
+				new Vec2(0,1), -5 ,5 );
 			lin2.compound = compound ;
 			lin2.stiff = false;
 			lin2.frequency = _carVO.carParams["frequency"].value ;
 			lin2.space = _space;
-			lin2.ignore = true; //prevent wheel colliding
+			lin2.ignore = true; 
 			
 			compound.translate( Vec2.weak(_px,_py));
 		}

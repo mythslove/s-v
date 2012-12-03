@@ -1,5 +1,9 @@
 package game.core.car
 {
+	import bing.res.ResPool;
+	
+	import flash.display.Bitmap;
+	
 	import game.vos.CarVO;
 	
 	import nape.dynamics.InteractionGroup;
@@ -8,6 +12,8 @@ package game.core.car
 	import nape.space.Space;
 	
 	import starling.display.Sprite;
+	import starling.textures.Texture;
+	import starling.textures.TextureAtlas;
 	
 	public class BaseCar extends Sprite
 	{
@@ -16,6 +22,9 @@ package game.core.car
 		protected var _py:Number ;
 		protected var _carGroup:InteractionGroup;
 		protected var _carVO:CarVO ;
+		
+		private var _texture:Texture ;
+		protected var _textureAltas:TextureAtlas;
 		
 		public var carBody:Body ;
 		public var leftWheel:Body;
@@ -37,6 +46,18 @@ package game.core.car
 		{
 			compound = new Compound();
 			compound.group = _carGroup ;
+			
+			var textureBmp:Bitmap = ResPool.instance.getResVOByResId("car"+_carVO.id).resObject as Bitmap;
+			var textureXML:XML = XML(ResPool.instance.getResVOByResId("carXML"+_carVO.id).resObject) ;
+			
+			_texture = Texture.fromBitmap( textureBmp , false  );
+			_textureAltas = new TextureAtlas(_texture,textureXML);
+		}
+		
+		override public function dispose():void
+		{
+			super.dispose();
+			
 		}
 	}
 }

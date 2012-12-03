@@ -185,7 +185,7 @@ public class CarBody1PhyData {
 			body.translateShapes(Vec2.weak(-anchor.x,-anchor.y));
 			body.position.setxy(0,0);
 
-			bodies["Car1Body"] = new BodyPair(body,anchor);
+			bodies["CarBody"] = new BodyPair(body,anchor);
 		
 	}
 }
