@@ -17,9 +17,10 @@ package game.core.track
 			super();
 			this._space = space ;
 			this._trackVO = trackVO ;
+			createBody();
 		}
 		
-		public function createBody():void
+		protected function createBody():void
 		{
 			
 		}

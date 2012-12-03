@@ -11,13 +11,13 @@ package game.vos
 		public var requireLevel:int ; //买/解锁需要玩家的等级
 		public var carParams:Dictionary ;//参数，key为CarParamVO的name , value为CarParamVO对象
 		
-		public function get bodyUrl():String
+		public function get carUrl():String
 		{
-			return "car/CarBody"+id+".png";
+			return "car/Car"+id+".xml";
 		}
-		public function get wheelUrl():String
+		public function get carXMLUrl():String
 		{
-			return "car/CarWheel"+id+".png";
+			return "car/Car"+id+".xml";
 		}
 	}
 }
