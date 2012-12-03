@@ -11,7 +11,12 @@ package game.core.scene
 	import game.vos.PlayerCarVO;
 	import game.vos.TrackVO;
 	
+	import nape.callbacks.CbEvent;
 	import nape.callbacks.CbType;
+	import nape.callbacks.InteractionCallback;
+	import nape.callbacks.InteractionListener;
+	import nape.callbacks.InteractionType;
+	import nape.dynamics.CollisionArbiter;
 	import nape.dynamics.InteractionGroup;
 	import nape.geom.Vec2;
 	import nape.space.Space;
@@ -33,8 +38,9 @@ package game.core.scene
 		private var _map:Sprite; 
 		private var _carBodyCbType:CbType = new CbType();
 		private var _carWheelCbType:CbType = new CbType();
+		private var _robotCarWheelCbType:CbType = new CbType();
 		private var _roadCbType:CbType = new CbType();
-		private var _carOnRoad:Boolean , _botOnRoad:Boolean ;
+		private var _carOnRoad:Boolean , _botOnRoad:Boolean  ;
 		
 		
 		/**
@@ -54,6 +60,7 @@ package game.core.scene
 		override protected function createPhySpace():void
 		{
 			_space = new Space(new Vec2(0,500));
+			addListeners();
 			
 			if(_debug){
 				_debug.drawConstraints = true ;
@@ -66,10 +73,11 @@ package game.core.scene
 			addChild(_map);
 			
 			_track = TrackFactory.createTrack(_trackVO,_space);
+			_track.roadCompound.cbType = _roadCbType ;
 			_map.addChild(_track);
 			
 			_carBot = CarFactory.createCar( _carGroup , _carBotVO.carVO , _space , 400 , 300 );
-			_carBot.leftWheel.cbType = _carWheelCbType ;
+			_carBot.leftWheel.cbType = _robotCarWheelCbType ;
 			_map.addChild(_carBot);
 			
 			_car =  CarFactory.createCar( _carGroup , _playerCarVO.carVO , _space , 300 , 300 );
@@ -82,6 +90,42 @@ package game.core.scene
 			addEventListener(starling.events.Event.ENTER_FRAME , updateHandler );
 			stage.addEventListener(KeyboardEvent.KEY_DOWN , onKeyDownHandler);
 		}
+		
+		
+		
+		private function addListeners():void
+		{
+			_space.listeners.add( new InteractionListener(CbEvent.BEGIN,InteractionType.COLLISION,_robotCarWheelCbType,_roadCbType,
+				function carRoadCallBack( callback:InteractionCallback ):void
+				{
+					var i:int = callback.arbiters.length;
+					while (--i > -1) {
+						var arbiter:CollisionArbiter = callback.arbiters.at(i).collisionArbiter;		
+						_botOnRoad =  arbiter.body2==_carBot.leftWheel ;
+					}
+				}
+			));
+			_space.listeners.add( new InteractionListener(CbEvent.BEGIN,InteractionType.COLLISION,_carWheelCbType,_roadCbType,
+				function carRoadCallBack( callback:InteractionCallback ):void
+				{
+					var i:int = callback.arbiters.length;
+					while (--i > -1) {
+						var arbiter:CollisionArbiter = callback.arbiters.at(i).collisionArbiter;		
+						_carOnRoad =  arbiter.body2==_car.leftWheel ;
+					}
+				}
+			));
+			_space.listeners.add( new InteractionListener(CbEvent.BEGIN,InteractionType.COLLISION,_carBodyCbType,_roadCbType,
+				function carRoadCallBack( callback:InteractionCallback ):void {
+					var rotate:Number = (_car.carBody.rotation*180/Math.PI)%360 ;
+					if(rotate>120 || rotate<-120){
+						trace("挂了");
+					}
+				}
+			));
+			
+		}
+		
 		
 		private function onKeyDownHandler(e:KeyboardEvent):void
 		{
