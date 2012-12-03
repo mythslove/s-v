@@ -4,15 +4,16 @@ package game.vos
 	{
 		public var id:int ;
 		public var name:String ;
+		public var requireLevel:int ;
 		public var costCoin:int ;
 		public var costCash:int ;
-		public var requireLevel:int ;
 		public var info:String;
-		public var elasticity:Number ;
-		public var dynamicFriction:Number ;
-		public var staticFriction:Number ;
-		public var density:Number ;
-		public var rollingFriction:Number ;
+		public var elasticity:Number;
+		public var dynamicFriction:Number;
+		public var staticFriction:Number;
+		public var density:Number;
+		public var rollingFriction:Number;
+		public var competitors:Vector.<AIVO> ;
 		
 		public function get roadUrl():String
 		{
@@ -22,5 +23,6 @@ package game.vos
 		{
 			return "track/Road"+id+".xml";
 		}
+		
 	}
 }
