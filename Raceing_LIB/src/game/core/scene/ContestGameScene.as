@@ -1,8 +1,5 @@
 package game.core.scene
 {
-	import bing.res.ResPool;
-	import bing.res.ResVO;
-	
 	import flash.events.Event;
 	import flash.ui.Keyboard;
 	
@@ -11,10 +8,10 @@ package game.core.scene
 	import game.core.track.BaseTrack;
 	import game.util.CarFactory;
 	import game.util.TrackFactory;
-	import game.vos.AIVO;
 	import game.vos.PlayerCarVO;
 	import game.vos.TrackVO;
 	
+	import nape.callbacks.CbType;
 	import nape.dynamics.InteractionGroup;
 	import nape.geom.Vec2;
 	import nape.space.Space;
@@ -25,11 +22,8 @@ package game.core.scene
 	import starling.events.Event;
 	import starling.events.KeyboardEvent;
 	
-	public class ContestGameScene extends Sprite
+	public class ContestGameScene extends BaseContestGameScene
 	{
-		private var _playerCarVO:PlayerCarVO ;
-		private var _carBotVO:AIVO ;
-		private var _trackVO:TrackVO ;
 		private var _car:BaseCar ;
 		private var _carBot:BaseCar ;
 		private var _track:BaseTrack ;
@@ -37,6 +31,11 @@ package game.core.scene
 		private var _carGroup:InteractionGroup = new InteractionGroup(true);
 		private var _debug:BitmapDebug ;//= new BitmapDebug(GameSetting.SCREEN_WIDTH,GameSetting.SCREEN_HEIGHT);
 		private var _map:Sprite; 
+		private var _carBodyCbType:CbType = new CbType();
+		private var _carWheelCbType:CbType = new CbType();
+		private var _roadCbType:CbType = new CbType();
+		private var _carOnRoad:Boolean , _botOnRoad:Boolean ;
+		
 		
 		/**
 		 *  竞赛游戏场景
@@ -46,58 +45,40 @@ package game.core.scene
 		 */		
 		public function ContestGameScene( trackVO:TrackVO , playerCarVO:PlayerCarVO , competitorIndex:int = 0 )
 		{
-			super();
-			this._trackVO = trackVO;
-			this._playerCarVO = playerCarVO ;
-			this._carBotVO = _trackVO.competitors[competitorIndex] ;
-			addEventListener(starling.events.Event.ADDED_TO_STAGE , addedHandler);
+			super(trackVO,playerCarVO,competitorIndex);
 		}
 		
-		private function addedHandler( e:starling.events.Event ):void
+		/**
+		 * 创建物理空间
+		 */		
+		override protected function createPhySpace():void
 		{
-			removeEventListener(starling.events.Event.ADDED_TO_STAGE , addedHandler);
-			addEventListener(starling.events.Event.REMOVED_FROM_STAGE , removedHandler );
-			loadRes();
-		}
-		
-		//加载此地图中所有要用到的图片
-		private function loadRes():void
-		{
-			//添加loading
-			var resVOArray:Array = [
-				new ResVO("road",_trackVO.roadUrl),
-				new ResVO("roadXML",_trackVO.roadXMLUrl),
-				new ResVO("car"+_playerCarVO.carVO.id ,_playerCarVO.carVO.carUrl),
-				new ResVO("carXML"+_playerCarVO.carVO.id , _playerCarVO.carVO.carXMLUrl)
-			];
-			if(_playerCarVO.carVO.id != _carBotVO.carVO.id){
-				resVOArray.push(new ResVO("car"+_carBotVO.carVO.id ,_carBotVO.carVO.carUrl));
-				resVOArray.push(new ResVO("carXML"+_carBotVO.carVO.id , _carBotVO.carVO.carXMLUrl));
-			}
-			ResPool.instance.addEventListener( "ContestGameSceneRes" , resLoadedHandler );
-			ResPool.instance.queueLoad( "ContestGameSceneRes" , resVOArray);
-		}
-		
-		private function resLoadedHandler(e:flash.events.Event):void
-		{
-			ResPool.instance.removeEventListener( "ContestGameSceneRes" , resLoadedHandler );
 			_space = new Space(new Vec2(0,500));
+			
 			if(_debug){
 				_debug.drawConstraints = true ;
 				_debug.drawCollisionArbiters=true ;
 				Starling.current.nativeStage.addChild( _debug.display );
 			}
+			
 			_map = new Sprite();
 			_map.touchable = false ;
 			addChild(_map);
+			
 			_track = TrackFactory.createTrack(_trackVO,_space);
 			_map.addChild(_track);
+			
 			_carBot = CarFactory.createCar( _carGroup , _carBotVO.carVO , _space , 400 , 300 );
+			_carBot.leftWheel.cbType = _carWheelCbType ;
 			_map.addChild(_carBot);
+			
 			_car =  CarFactory.createCar( _carGroup , _playerCarVO.carVO , _space , 300 , 300 );
+			_car.leftWheel.cbType = _carWheelCbType ;
+			_car.carBody.cbType = _carBodyCbType ;
 			_map.addChild(_car);
 			
 			deleteResVOs();
+			
 			addEventListener(starling.events.Event.ENTER_FRAME , updateHandler );
 			stage.addEventListener(KeyboardEvent.KEY_DOWN , onKeyDownHandler);
 		}
@@ -129,6 +110,15 @@ package game.core.scene
 			if(_map.x>0 ) _map.x =0 ;
 			else if(_map.x+_track.len<GameSetting.SCREEN_WIDTH) _map.x = GameSetting.SCREEN_WIDTH-_track.len ;
 			
+			//机器车自动走
+			if(_botOnRoad){
+				_carBot.leftWheel.rotation+=0.2 ;
+				_carBot.leftWheel.applyLocalImpulse( Vec2.weak(_carBotVO.carVO.carParams["impulse"].value,0));
+				var velocity:Number = _carBotVO.carVO.carParams["velocity"].value ;
+				if(_carBot.leftWheel.velocity.x>velocity) {
+					_carBot.leftWheel.velocity.x = velocity ;
+				}
+			}
 		}
 		
 		
@@ -144,30 +134,18 @@ package game.core.scene
 		
 		
 		//===============清除资源=========================
-		
-		private function deleteResVOs():void
+		override protected function removedHandler( e:starling.events.Event ):void
 		{
-			ResPool.instance.deleteRes("road");
-			ResPool.instance.deleteRes("roadXML");
-			ResPool.instance.deleteRes("car"+_playerCarVO.carVO.id);
-			ResPool.instance.deleteRes("carXML"+_playerCarVO.carVO.id);
-			if(_playerCarVO.carVO.id!=_carBotVO.carVO.id)
-			{
-				ResPool.instance.deleteRes("car"+_carBotVO.carVO.id);
-				ResPool.instance.deleteRes("carXML"+_carBotVO.carVO.id);
-			}
-		}
-		private function removedHandler( e:starling.events.Event ):void
-		{
-			removeEventListener(starling.events.Event.REMOVED_FROM_STAGE , removedHandler );
+			super.removedHandler(e);
 			removeEventListener(starling.events.Event.ENTER_FRAME , updateHandler );
 			stage.removeEventListener(KeyboardEvent.KEY_DOWN , onKeyDownHandler);
 			_space.clear();
 			_space=  null ;
-			_carBotVO = null ;
 			_carBot = null ;
 			_track=null ;
-			_trackVO =null ;
+			_carBodyCbType = null ;
+			_roadCbType = null ;
+			_carWheelCbType = null ;
 			_map.removeChildren(0,-1,true);
 		}
 	}
