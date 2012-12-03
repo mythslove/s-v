@@ -6,6 +6,7 @@ package game.model
 	
 	import game.vos.CarParamVO;
 	import game.vos.CarVO;
+	import game.vos.PlayerCarVO;
 
 	public class CarModel
 	{
@@ -15,12 +16,23 @@ package game.model
 			return _instance ;
 		}
 		//===============================
-		public var cars:Vector.<CarVO> ;
+		/**
+		 * 玩家拥有的车 
+		 */		
+		public var playerCars:Vector.<PlayerCarVO> = new Vector.<PlayerCarVO>();
 		
+		/**
+		 * 商店中的车 
+		 */		
+		public var cars:Vector.<CarVO> = new Vector.<CarVO>();
+		
+		/**
+		 * 解析商店中的车的配置 
+		 * @param resVO
+		 */		
 		public function parseConfig( resVO:ResVO ):void
 		{
 			var config:XML = XML(resVO.resObject);
-			cars = new Vector.<CarVO>();
 			for each( var item:* in config.children())
 			{
 				var carVO:CarVO = new CarVO();
@@ -42,5 +54,8 @@ package game.model
 				}
 			}
 		}
+		
+		
+		
 	}
 }
