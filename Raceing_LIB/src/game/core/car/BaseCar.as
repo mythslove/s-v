@@ -57,7 +57,14 @@ package game.core.car
 		override public function dispose():void
 		{
 			super.dispose();
-			
+			_texture.dispose();
+			_texture = null ;
+			_textureAltas.dispose();
+			_textureAltas = null ;
+			_carVO = null ;
+			_carGroup = null ;
+			_space = null ;
+			compound = null ;
 		}
 	}
 }
