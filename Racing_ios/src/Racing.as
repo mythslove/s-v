@@ -45,6 +45,7 @@ package
 		private function loadRes():void
 		{
 			ResPool.instance.cdns=Vector.<String>(["res/"]);
+			ResPool.instance.isRemote = false ;
 			ResPool.instance.maxLoadNum = 4 ;
 			var resVOs:Array=[];
 			resVOs.push( new ResVO("Config_Car","config/Config_Car.xml"));
