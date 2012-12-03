@@ -26,17 +26,19 @@ package game.core.track
 		
 		override protected function createBody():void
 		{
+			super.createBody();
+			
 			var body:Body ;
 			for( var i:int  = 1 ; i<5 ; ++i)
 			{
-//				var img:Image = new Image(AssetsManager.createTextureAtlas("RoadTexture").getTexture("road"+i));
+				var img:Image = new Image(_textureAltas.getTexture("road"+i));
 				body = Road1PhyData.createBody("road"+i);
 				body.position.setxy( len ,GameSetting.SCREEN_HEIGHT) ;
 				body.type = BodyType.KINEMATIC ;
 				body.space = _space ;
 				this["_road"+i] = body ;
 				len+=body.bounds.width ;
-//				_map.addChild( img );
+				addChild( img );
 			}
 			createWall();
 		}
