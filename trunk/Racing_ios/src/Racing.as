@@ -40,6 +40,7 @@ package
 		{
 			registerClassAlias("CarVO",CarVO);
 			registerClassAlias("PlayCarVO",PlayerCarVO);
+			registerClassAlias("CarParamVO",CarParamVO);
 		}
 		
 		private function loadRes():void
