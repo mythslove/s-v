@@ -13,7 +13,6 @@ package
 	
 	import game.StarlingAppliaction;
 	import game.comm.GameSetting;
-	import game.model.AIModel;
 	import game.model.CarModel;
 	import game.model.TrackModel;
 	import game.vos.*;
@@ -49,7 +48,6 @@ package
 			ResPool.instance.maxLoadNum = 4 ;
 			var resVOs:Array=[];
 			resVOs.push( new ResVO("Config_Car","config/Config_Car.xml"));
-			resVOs.push( new ResVO("Config_AI","config/Config_AI.xml"));
 			resVOs.push( new ResVO("Config_Track","config/Config_Track.xml"));
 			ResPool.instance.addEventListener(ResProgressEvent.RES_LOAD_PROGRESS , resLoadHandler );
 			ResPool.instance.addEventListener("loadConfig" , resLoadHandler );
@@ -68,10 +66,8 @@ package
 					ResPool.instance.removeEventListener(ResProgressEvent.RES_LOAD_PROGRESS , resLoadHandler );
 					ResPool.instance.removeEventListener("loadConfig" , resLoadHandler );
 					CarModel.instance.parseConfig( ResPool.instance.getResVOByResId("Config_Car"));
-					AIModel.instance.parseConfig( ResPool.instance.getResVOByResId("Config_AI"));
 					TrackModel.instance.parseConfig( ResPool.instance.getResVOByResId("Config_Track"));
 					ResPool.instance.deleteRes("Config_Car");
-					ResPool.instance.deleteRes("Config_AI");
 					ResPool.instance.deleteRes("Config_Track");
 					init();
 					break ;
