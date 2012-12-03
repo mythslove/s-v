@@ -33,8 +33,16 @@ package
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 			stage.frameRate = 60 ;
 			//添加loading
+			registerVO();
 			loadRes();
 		}
+		
+		private function registerVO():void
+		{
+			registerClassAlias("CarVO",CarVO);
+			registerClassAlias("PlayCarVO",PlayerCarVO);
+		}
+		
 		private function loadRes():void
 		{
 			ResPool.instance.cdns=Vector.<String>(["res/"]);
