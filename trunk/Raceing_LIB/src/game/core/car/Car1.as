@@ -81,5 +81,6 @@ package game.core.car
 			
 			compound.translate( Vec2.weak(_px,_py));
 		}
+		
 	}
 }
