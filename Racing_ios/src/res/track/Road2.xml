@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker http://texturepacker.com-->
-<!-- $TexturePacker:SmartUpdate:8aa60bf3615d8495bc1c1bfd962527bc$ -->
+<!-- $TexturePacker:SmartUpdate:de1d537a7ef14a2c58c2c0cf0f145163$ -->
 <TextureAtlas imagePath="Road1.png">
-    <SubTexture name="dustTexture" x="0" y="1839" width="64" height="64"/>
-    <SubTexture name="road1" x="0" y="1558" width="25" height="279"/>
-    <SubTexture name="road2" x="0" y="0" width="2048" height="410"/>
-    <SubTexture name="road3" x="0" y="1152" width="1193" height="404"/>
-    <SubTexture name="road4" x="0" y="811" width="2048" height="339"/>
-    <SubTexture name="road5" x="0" y="412" width="2048" height="397"/>
+    <SubTexture name="bridgeTexture" x="0" y="1709" width="50" height="20"/>
+    <SubTexture name="dustTexture" x="0" y="1643" width="64" height="64"/>
+    <SubTexture name="road1" x="0" y="1231" width="2046" height="410" frameX="0" frameY="-102" frameWidth="2048" frameHeight="512"/>
+    <SubTexture name="road2" x="0" y="432" width="2048" height="416" frameX="0" frameY="-96" frameWidth="2048" frameHeight="512"/>
+    <SubTexture name="road3" x="0" y="850" width="2048" height="379"/>
+    <SubTexture name="road4" x="0" y="0" width="2048" height="430" frameX="0" frameY="-82" frameWidth="2048" frameHeight="512"/>
 </TextureAtlas>
