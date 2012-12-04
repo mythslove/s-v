@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://texturepacker.com-->
+<!-- $TexturePacker:SmartUpdate:9e4c9ef8151defb6b167c55b2abec8ee$ -->
+<TextureAtlas imagePath="Road2.png">
+    <SubTexture name="dustTexture" x="0" y="764" width="64" height="64"/>
+    <SubTexture name="road1" x="0" y="263" width="2048" height="189"/>
+    <SubTexture name="road2" x="0" y="454" width="2048" height="157"/>
+    <SubTexture name="road3" x="0" y="613" width="2048" height="149"/>
+    <SubTexture name="road4" x="0" y="0" width="2048" height="261"/>
+</TextureAtlas>
