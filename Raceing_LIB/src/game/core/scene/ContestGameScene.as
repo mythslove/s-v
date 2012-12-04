@@ -73,18 +73,18 @@ package game.core.scene
 			addChild(_map);
 			
 			_track = TrackFactory.createTrack(_trackVO,_space);
-			_track.roadCompound.cbType = _roadCbType ;
+			_track.roadCompound.cbTypes.add(_roadCbType) ;
 			_map.addChild(_track);
 			
 			var dustTexture:Texture =  _track.textureAltas.getTexture("dustTexture") ;
 			_carBot = CarFactory.createCar( _carGroup , _carBotVO.carVO , _space , 400 , 300 );
-			_carBot.leftWheel.cbType = _robotCarWheelCbType ;
+			_carBot.leftWheel.cbTypes.add( _robotCarWheelCbType) ;
 			_carBot.createParticles(dustTexture);
 			_map.addChild(_carBot);
 			
 			_car =  CarFactory.createCar( _carGroup , _playerCarVO.carVO , _space , 300 , 300 );
-			_car.leftWheel.cbType = _carWheelCbType ;
-			_car.carBody.cbType = _carBodyCbType ;
+			_car.leftWheel.cbTypes.add( _carWheelCbType) ;
+			_car.carBody.cbTypes.add( _carBodyCbType) ;
 			_car.createParticles(dustTexture);
 			_map.addChild(_car);
 			

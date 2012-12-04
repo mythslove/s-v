@@ -32,6 +32,7 @@ package game.core.car
 
 			var img:Image = new Image(carTexture); 
 			carBody = CarBody1PhyData.createBody("CarBody",img);
+			carBody.graphicUpdate = graphicUpdate ;
 			carBody.mass = carBody.gravMass = 2;
 			carBody.compound = compound ;
 			carBody.space = _space;
@@ -98,9 +99,10 @@ package game.core.car
 		{
 			if(body.graphic && body.graphic is DisplayObject)
 			{
+				var gp:Vec2 = body.localToWorld(body.graphicOffset);
 				var gra:DisplayObject = body.graphic as DisplayObject;
-				gra.x = body.position.x;
-				gra.y = body.position.y;
+				gra.x = gp.x;
+				gra.y = gp.y;
 				gra.rotation = body.rotation ;
 				if(leftWheelParticle)
 				{
