@@ -1,7 +1,7 @@
 package game.util
 {
 	import game.core.track.BaseTrack;
-	import game.core.track.ContestModeTrack1;
+	import game.core.track.*;
 	import game.vos.TrackVO;
 	
 	import nape.space.Space;
@@ -16,6 +16,8 @@ package game.util
 				case 1:
 					track = new ContestModeTrack1(trackVO , space );
 					break ;
+				case 2:
+					track = new ContestModeTrack2(trackVO , space );
 			}
 			return track;
 		}
