@@ -78,13 +78,13 @@ package game.core.scene
 			_map.addChild(_track);
 			
 			var dustTexture:Texture =  _track.textureAltas.getTexture("dustTexture") ;
-			_carBot = CarFactory.createCar( _carGroup , _carBotVO.carVO , _space , 400 , 300 );
+			_carBot = CarFactory.createCar( _carGroup , _carBotVO.carVO , _space , 400 , GameSetting.SCREEN_HEIGHT-400 );
 			_carBot.leftWheel.cbTypes.add( _carWheelCbType) ;
 			_carBot.rightWheel.cbTypes.add( _carWheelCbType) ;
 			_carBot.createParticles(dustTexture);
 			_map.addChild(_carBot);
 			
-			_car =  CarFactory.createCar( _carGroup , _playerCarVO.carVO , _space , 300 , 300 );
+			_car =  CarFactory.createCar( _carGroup , _playerCarVO.carVO , _space , 300 , GameSetting.SCREEN_HEIGHT-400 );
 			_car.leftWheel.cbTypes.add( _carWheelCbType) ;
 			_car.rightWheel.cbTypes.add( _carWheelCbType) ;
 			_car.carBody.cbTypes.add(_carBodyCbType);
@@ -166,7 +166,6 @@ package game.core.scene
 						_car.breakCar();
 						stage.removeEventListener(TouchEvent.TOUCH , onTouchHandler);
 						_car.dustParticle.stop();
-						_carBot.dustParticle.stop();
 						setTimeout(gameOver,3000);
 					}
 				}
@@ -201,11 +200,6 @@ package game.core.scene
 		private function updateHandler(e:starling.events.Event):void
 		{
 			_space.step(1/60);
-			if(_debug){
-				_debug.clear();
-				_debug.draw(_space);
-				_debug.flush();
-			}
 			moveCar();
 			_map.x = GameSetting.SCREEN_WIDTH*0.5 - _car.carBody.position.x-100 ;
 			if(_map.x>0 ) _map.x =0 ;
@@ -217,6 +211,12 @@ package game.core.scene
 				if(_carBot.leftWheel.velocity.x>_carBot.maxVelocity) {
 					_carBot.leftWheel.velocity.x = _carBot.maxVelocity ;
 				}
+			}
+			
+			if(_debug){
+				_debug.clear();
+				_debug.draw(_space);
+				_debug.flush();
 			}
 		}
 		

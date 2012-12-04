@@ -5,6 +5,7 @@ package game.core.track
 	import game.vos.TrackVO;
 	
 	import nape.constraint.DistanceJoint;
+	import nape.dynamics.InteractionGroup;
 	import nape.geom.Vec2;
 	import nape.phys.Body;
 	import nape.phys.BodyType;
@@ -38,10 +39,10 @@ package game.core.track
 			_trackVO.rollingFriction = _trackVO.rollingFriction ;
 				
 			var roadBody:Body ;
-			for( var i:int  = 0 ; i<20 ; ++i)
+			for( var i:int  = 1 ; i<2 ; ++i)
 			{
-				var img:Image = new Image(_textureAltas.getTexture("road1"));
-				roadBody = Road2PhyData.createBody("road1" , img );
+				var img:Image = new Image(_textureAltas.getTexture("road"+i));
+				roadBody = Road2PhyData.createBody("road"+i , img );
 				roadBody.cbTypes.add(roadType);
 				roadBody.graphicUpdate = graphicUpdate ;
 				roadBody.compound = roadCompound ;
@@ -55,10 +56,10 @@ package game.core.track
 			
 			var bridge:Compound = createBridgeBlocks() ;
 			bridge.space = _space ;
-			bridge.translate(Vec2.get(len+25,GameSetting.SCREEN_HEIGHT-270) );
+			bridge.translate(Vec2.get(len-30,GameSetting.SCREEN_HEIGHT-400) );
 			len+=400 ;
 			
-			for( i  = 2 ; i<6 ; ++i)
+			for( i  = 2 ; i<5 ; ++i)
 			{
 				img = new Image(_textureAltas.getTexture("road"+i));
 				roadBody = Road2PhyData.createBody("road"+i , img );
@@ -79,6 +80,7 @@ package game.core.track
 		{
 			var comp:Compound = new Compound();
 			var wid:int = 50 , het:int = 20 ;
+			const num:int = 9 ;
 			
 			var wood:Material = Material.wood() ;
 			wood.density=10 ;
@@ -87,17 +89,28 @@ package game.core.track
 			var head:Body = new Body(BodyType.KINEMATIC);
 			head.shapes.add( new Polygon(Polygon.box(wid,het),wood));
 			head.compound = comp;
-			
-			for( var i:int = 1 ; i< 8 ; ++i)
+			var interGroup:InteractionGroup = new InteractionGroup(false);
+			for( var i:int = 1 ; i<= num ; ++i)
 			{
-				var type:BodyType = i==7?BodyType.KINEMATIC : BodyType.DYNAMIC ;
-				var block:Body = new Body(type,Vec2.weak(wid*i,0) );
+				var type:BodyType = i==num?BodyType.KINEMATIC : BodyType.DYNAMIC ;
+				var block:Body = new Body(type,Vec2.get(wid*i,0) );
 				block.shapes.add( new Polygon(Polygon.box(wid,het),wood));
+				block.mass = block.gravMass = 0;
+				var img:Image = new Image(_textureAltas.getTexture("bridgeTexture"));
+				img.pivotX = img.width>>1 ;
+				img.pivotY = img.height>>1 ;
+				block.graphic = img ;
+				block.graphicUpdate = graphicUpdate ;
+				addChildAt(img,0);
 				block.cbTypes.add(roadType);
+				block.group = interGroup ;
 				block.compound = comp; 
 				
 				var joint:DistanceJoint = new DistanceJoint( head,block, Vec2.weak(wid/2 ,0), Vec2.get(-wid/2 ,0) , 0 , 1 );
-				joint.frequency=0.1 ;
+				joint.frequency= 10 ;
+				joint.ignore = true ;
+				joint.damping = 0.1 ;
+				joint.stiff = false ;
 				joint.compound = comp; 
 				
 				head = block ;
