@@ -36,9 +36,23 @@ package game.core.track
 			_trackVO.rollingFriction = _trackVO.rollingFriction ;
 				
 			var roadBody:Body ;
-			for( var i:int  = 1 ; i<5 ; ++i)
+			for( var i:int  = 0 ; i<20 ; ++i)
 			{
-				var img:Image = new Image(_textureAltas.getTexture("road"+i));
+				var img:Image = new Image(_textureAltas.getTexture("road1"));
+				roadBody = Road2PhyData.createBody("road1" , img );
+				roadBody.cbTypes.add(roadType);
+				roadBody.graphicUpdate = graphicUpdate ;
+				roadBody.compound = roadCompound ;
+				roadBody.position.setxy( len ,GameSetting.SCREEN_HEIGHT) ;
+				roadBody.type = BodyType.KINEMATIC ;
+				roadBody.setShapeMaterials(material);
+				roadBody.space = _space ;
+				len+=roadBody.bounds.width ;
+				addChild( img );
+			}
+			for( i  = 2 ; i<6 ; ++i)
+			{
+				img = new Image(_textureAltas.getTexture("road"+i));
 				roadBody = Road2PhyData.createBody("road"+i , img );
 				roadBody.cbTypes.add(roadType);
 				roadBody.graphicUpdate = graphicUpdate ;
