@@ -33,7 +33,6 @@ package game.core.track
 		public var len:int ; //路的长度
 		public var roadCompound:Compound = new Compound();
 		public var roadType:CbType = new CbType();
-		public var bridgeType:CbType = new CbType();
 		
 		public function BaseTrack( trackVO:TrackVO , space:Space )
 		{
@@ -74,6 +73,7 @@ package game.core.track
 			_texture = null ;
 			_space = null ;
 			roadCompound = null ;
+			roadType = null ;
 		}
 	}
 }

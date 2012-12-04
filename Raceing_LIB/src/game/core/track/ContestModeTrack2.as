@@ -4,9 +4,11 @@ package game.core.track
 	import game.core.phyData.Road2PhyData;
 	import game.vos.TrackVO;
 	
+	import nape.constraint.DistanceJoint;
 	import nape.geom.Vec2;
 	import nape.phys.Body;
 	import nape.phys.BodyType;
+	import nape.phys.Compound;
 	import nape.phys.Material;
 	import nape.shape.Polygon;
 	import nape.space.Space;
@@ -50,6 +52,12 @@ package game.core.track
 				len+=roadBody.bounds.width ;
 				addChild( img );
 			}
+			
+			var bridge:Compound = createBridgeBlocks() ;
+			bridge.space = _space ;
+			bridge.translate(Vec2.get(len+25,GameSetting.SCREEN_HEIGHT-270) );
+			len+=400 ;
+			
 			for( i  = 2 ; i<6 ; ++i)
 			{
 				img = new Image(_textureAltas.getTexture("road"+i));
@@ -65,6 +73,36 @@ package game.core.track
 				addChild( img );
 			}
 			createWall();
+		}
+		
+		private function createBridgeBlocks():Compound
+		{
+			var comp:Compound = new Compound();
+			var wid:int = 50 , het:int = 20 ;
+			
+			var wood:Material = Material.wood() ;
+			wood.density=10 ;
+			wood.elasticity = 0.01 ;
+			
+			var head:Body = new Body(BodyType.KINEMATIC);
+			head.shapes.add( new Polygon(Polygon.box(wid,het),wood));
+			head.compound = comp;
+			
+			for( var i:int = 1 ; i< 8 ; ++i)
+			{
+				var type:BodyType = i==7?BodyType.KINEMATIC : BodyType.DYNAMIC ;
+				var block:Body = new Body(type,Vec2.weak(wid*i,0) );
+				block.shapes.add( new Polygon(Polygon.box(wid,het),wood));
+				block.cbTypes.add(roadType);
+				block.compound = comp; 
+				
+				var joint:DistanceJoint = new DistanceJoint( head,block, Vec2.weak(wid/2 ,0), Vec2.get(-wid/2 ,0) , 0 , 1 );
+				joint.frequency=0.1 ;
+				joint.compound = comp; 
+				
+				head = block ;
+			}
+			return comp ;
 		}
 		
 		private function graphicUpdate(body:Body):void

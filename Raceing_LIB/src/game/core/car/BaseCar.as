@@ -7,6 +7,7 @@ package game.core.car
 	
 	import game.vos.CarVO;
 	
+	import nape.constraint.Constraint;
 	import nape.dynamics.InteractionGroup;
 	import nape.geom.Vec2;
 	import nape.phys.Body;
@@ -104,6 +105,15 @@ package game.core.car
 			return b;
 		}
 		
+		public function breakCar():void
+		{
+			var len:int   = compound.constraints.length ;
+			for( var i:int = 0; i<len ; ++i){
+				var constraint:Constraint = compound.constraints.at(i);
+				constraint.breakUnderForce = true ;
+				constraint.active= false;
+			}
+		}
 		
 		override public function dispose():void
 		{

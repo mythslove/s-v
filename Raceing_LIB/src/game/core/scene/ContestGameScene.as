@@ -1,6 +1,7 @@
 package game.core.scene
 {
 	import flash.ui.Keyboard;
+	import flash.utils.setTimeout;
 	
 	import game.comm.GameSetting;
 	import game.core.car.BaseCar;
@@ -39,7 +40,7 @@ package game.core.scene
 		private var _track:BaseTrack ;
 		private var _space:Space;
 		private var _carGroup:InteractionGroup = new InteractionGroup(true);
-		private var _debug:BitmapDebug ;//= new BitmapDebug(GameSetting.SCREEN_WIDTH,GameSetting.SCREEN_HEIGHT);
+		private var _debug:BitmapDebug;//= new BitmapDebug(GameSetting.SCREEN_WIDTH,GameSetting.SCREEN_HEIGHT);
 		private var _map:Sprite; 
 		private var _carBodyCbType:CbType = new CbType();
 		private var _carWheelCbType:CbType = new CbType();
@@ -162,7 +163,11 @@ package game.core.scene
 				function( callback:InteractionCallback ):void {
 					var rotate:Number = (_car.carBody.rotation*180/Math.PI)%360 ;
 					if(rotate>120 || rotate<-120){
-						gameOver();
+						_car.breakCar();
+						stage.removeEventListener(TouchEvent.TOUCH , onTouchHandler);
+						_car.dustParticle.stop();
+						_carBot.dustParticle.stop();
+						setTimeout(gameOver,3000);
 					}
 				}
 			));
@@ -172,9 +177,6 @@ package game.core.scene
 		private function gameOver():void
 		{
 			removeEventListener(starling.events.Event.ENTER_FRAME , updateHandler );
-			stage.removeEventListener(TouchEvent.TOUCH , onTouchHandler);
-			_car.dustParticle.stop();
-			_carBot.dustParticle.stop();
 		}
 		
 		
@@ -205,7 +207,7 @@ package game.core.scene
 				_debug.flush();
 			}
 			moveCar();
-			_map.x = GameSetting.SCREEN_WIDTH*0.5 - _car.leftWheel.position.x-100 ;
+			_map.x = GameSetting.SCREEN_WIDTH*0.5 - _car.carBody.position.x-100 ;
 			if(_map.x>0 ) _map.x =0 ;
 			else if(_map.x+_track.len<GameSetting.SCREEN_WIDTH) _map.x = GameSetting.SCREEN_WIDTH-_track.len ;
 			//机器车自动走
