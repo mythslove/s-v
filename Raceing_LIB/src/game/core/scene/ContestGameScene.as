@@ -41,7 +41,7 @@ package game.core.scene
 		private var _carWheelCbType:CbType = new CbType();
 		private var _robotCarWheelCbType:CbType = new CbType();
 		private var _roadCbType:CbType = new CbType();
-		private var _carOnRoad:Boolean , _botOnRoad:Boolean  ;
+		private var _carLeftWheelOnRoad:Boolean , _botCarLeftWheelOnRoad:Boolean  ;
 		
 		/**
 		 *  竞赛游戏场景
@@ -100,26 +100,26 @@ package game.core.scene
 		{
 			_space.listeners.add( new InteractionListener(CbEvent.BEGIN,InteractionType.COLLISION,_robotCarWheelCbType,_roadCbType,
 				function carRoadCallBack( callback:InteractionCallback ):void {
-					_botOnRoad = true ;
+					_botCarLeftWheelOnRoad = true ;
 					_carBot.leftWheelParticle.start(.2);
 					_carBot.rightWheelParticle.start(.2);
 				}
 			));
 			_space.listeners.add( new InteractionListener(CbEvent.END,InteractionType.COLLISION,_robotCarWheelCbType,_roadCbType,
 				function carRoadCallBack( callback:InteractionCallback ):void {
-					_botOnRoad = false ;
+					_botCarLeftWheelOnRoad = false ;
 				}
 			));
 			_space.listeners.add( new InteractionListener(CbEvent.BEGIN,InteractionType.COLLISION,_carWheelCbType,_roadCbType,
 				function carRoadCallBack( callback:InteractionCallback ):void {
-					_carOnRoad = true ;
+					_carLeftWheelOnRoad = true ;
 					_car.leftWheelParticle.start(.2);
 					_car.rightWheelParticle.start(.2);
 				}
 			));
 			_space.listeners.add( new InteractionListener(CbEvent.END,InteractionType.COLLISION,_carWheelCbType,_roadCbType,
 				function carRoadCallBack( callback:InteractionCallback ):void {
-					_carOnRoad = false ;
+					_carLeftWheelOnRoad = false ;
 				}
 			));
 			_space.listeners.add( new InteractionListener(CbEvent.BEGIN,InteractionType.COLLISION,_carBodyCbType,_roadCbType,
@@ -138,12 +138,12 @@ package game.core.scene
 		{
 			if(e.keyCode==Keyboard.RIGHT){
 				_car.leftWheel.rotation+=0.2 ;
-				if(_carOnRoad) {
+				if(_carLeftWheelOnRoad) {
 					_car.leftWheel.applyLocalImpulse( Vec2.weak(_playerCarVO.carVO.carParams["impulse"].value,0));
 				}
 			}else if(e.keyCode==Keyboard.LEFT){
 				_car.leftWheel.rotation-=0.2 ;
-				if(_carOnRoad) {
+				if(_carLeftWheelOnRoad) {
 					_car.leftWheel.applyLocalImpulse( Vec2.weak(-_playerCarVO.carVO.carParams["impulse"].value,0));
 				}
 			}
@@ -167,7 +167,7 @@ package game.core.scene
 			else if(_map.x+_track.len<GameSetting.SCREEN_WIDTH) _map.x = GameSetting.SCREEN_WIDTH-_track.len ;
 			//机器车自动走
 			_carBot.leftWheel.rotation+=0.2 ;
-			if(_botOnRoad){
+			if(_botCarLeftWheelOnRoad){
 				_carBot.leftWheel.applyLocalImpulse( Vec2.weak(_carBotVO.carVO.carParams["impulse"].value,0));
 				var velocity:Number = _carBotVO.carVO.carParams["velocity"].value ;
 				if(_carBot.leftWheel.velocity.x>velocity) {
