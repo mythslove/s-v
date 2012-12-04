@@ -99,31 +99,31 @@ package game.core.scene
 		private function addListeners():void
 		{
 			_space.listeners.add( new InteractionListener(CbEvent.BEGIN,InteractionType.COLLISION,_robotCarWheelCbType,_roadCbType,
-				function carRoadCallBack( callback:InteractionCallback ):void {
+				function( callback:InteractionCallback ):void {
 					_botCarLeftWheelOnRoad = true ;
 					_carBot.leftWheelParticle.start(.2);
 					_carBot.rightWheelParticle.start(.2);
 				}
 			));
 			_space.listeners.add( new InteractionListener(CbEvent.END,InteractionType.COLLISION,_robotCarWheelCbType,_roadCbType,
-				function carRoadCallBack( callback:InteractionCallback ):void {
+				function( callback:InteractionCallback ):void {
 					_botCarLeftWheelOnRoad = false ;
 				}
 			));
 			_space.listeners.add( new InteractionListener(CbEvent.BEGIN,InteractionType.COLLISION,_carWheelCbType,_roadCbType,
-				function carRoadCallBack( callback:InteractionCallback ):void {
+				function( callback:InteractionCallback ):void {
 					_carLeftWheelOnRoad = true ;
 					_car.leftWheelParticle.start(.2);
 					_car.rightWheelParticle.start(.2);
 				}
 			));
 			_space.listeners.add( new InteractionListener(CbEvent.END,InteractionType.COLLISION,_carWheelCbType,_roadCbType,
-				function carRoadCallBack( callback:InteractionCallback ):void {
+				function( callback:InteractionCallback ):void {
 					_carLeftWheelOnRoad = false ;
 				}
 			));
 			_space.listeners.add( new InteractionListener(CbEvent.BEGIN,InteractionType.COLLISION,_carBodyCbType,_roadCbType,
-				function carRoadCallBack( callback:InteractionCallback ):void {
+				function( callback:InteractionCallback ):void {
 					var rotate:Number = (_car.carBody.rotation*180/Math.PI)%360 ;
 					if(rotate>120 || rotate<-120){
 						trace("挂了");
