@@ -8,11 +8,15 @@ package game.core.car
 	import game.vos.CarVO;
 	
 	import nape.dynamics.InteractionGroup;
+	import nape.geom.Vec2;
 	import nape.phys.Body;
 	import nape.phys.Compound;
+	import nape.phys.Material;
+	import nape.shape.Circle;
 	import nape.space.Space;
 	
 	import starling.core.Starling;
+	import starling.display.DisplayObject;
 	import starling.display.Sprite;
 	import starling.extensions.PDParticleSystem;
 	import starling.extensions.ParticleSystem;
@@ -76,6 +80,30 @@ package game.core.car
 			addChildAt(dustParticle,0);
 			dustParticle.start();
 		}
+		
+		protected function graphicUpdate(body:Body):void
+		{
+			if(body.graphic && body.graphic is DisplayObject)
+			{
+				var gp:Vec2 = body.localToWorld(body.graphicOffset);
+				var gra:DisplayObject = body.graphic as DisplayObject;
+				gra.x = gp.x;
+				gra.y = gp.y;
+				gra.rotation = body.rotation ;
+				if(dustParticle && body==leftWheel){
+					dustParticle.emitterX  = gp.x-body.bounds.width ;
+					dustParticle.emitterY = gp.y ;
+				}
+			}
+		}
+		
+		protected function circle(x:Number,y:Number,r:Number , material:Material ):Body {
+			var b:Body = new Body();
+			b.shapes.add(new Circle(r,null,material));
+			b.position.setxy(x,y);
+			return b;
+		}
+		
 		
 		override public function dispose():void
 		{
