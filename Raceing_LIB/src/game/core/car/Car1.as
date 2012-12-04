@@ -64,8 +64,8 @@ package game.core.car
 			rightWheel.graphicUpdate = graphicUpdate ;
 			addChildAt( img,0);
 			
-			var lin1:LineJoint = new LineJoint( carBody,leftWheel,new Vec2(w1X,wY),new Vec2(),
-				new Vec2(0,1), -5,5);
+			var lin1:LineJoint = new LineJoint( carBody,leftWheel,Vec2.get(w1X,wY),Vec2.get(),
+				Vec2.get(0,1), -5,5);
 			lin1.compound = compound ;
 			lin1.stiff = false;
 			lin1.frequency = _carVO.carParams["frequency"].value ;
@@ -73,8 +73,8 @@ package game.core.car
 			lin1.damping= lin1.frequency*0.01 ;
 			lin1.ignore = true; 
 			
-			var lin2:LineJoint = new LineJoint(carBody,rightWheel,new Vec2(w2X,wY),new Vec2(),
-				new Vec2(0,1), -5 ,5 );
+			var lin2:LineJoint = new LineJoint(carBody,rightWheel,Vec2.get(w2X,wY),Vec2.get(),
+				Vec2.get(0,1), -5 ,5 );
 			lin2.compound = compound ;
 			lin2.stiff = false;
 			lin2.damping= lin2.frequency*0.01;

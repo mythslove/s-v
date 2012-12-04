@@ -40,6 +40,7 @@ package game.core.track
 			{
 				var img:Image = new Image(_textureAltas.getTexture("road"+i));
 				roadBody = Road1PhyData.createBody("road"+i , img );
+				roadBody.cbTypes.add(roadType);
 				roadBody.graphicUpdate = graphicUpdate ;
 				roadBody.compound = roadCompound ;
 				roadBody.position.setxy( len ,GameSetting.SCREEN_HEIGHT) ;
@@ -54,6 +55,7 @@ package game.core.track
 			{
 				img = new Image(_textureAltas.getTexture("road"+i));
 				roadBody = Road1PhyData.createBody("road"+i , img );
+				roadBody.cbTypes.add(roadType);
 				roadBody.graphicUpdate = graphicUpdate ;
 				roadBody.compound = roadCompound ;
 				roadBody.position.setxy( len ,GameSetting.SCREEN_HEIGHT) ;
@@ -68,6 +70,7 @@ package game.core.track
 			{
 				img = new Image(_textureAltas.getTexture("road"+i));
 				roadBody = Road1PhyData.createBody("road"+i , img );
+				roadBody.cbTypes.add(roadType);
 				roadBody.graphicUpdate = graphicUpdate ;
 				roadBody.compound = roadCompound ;
 				roadBody.position.setxy( len ,GameSetting.SCREEN_HEIGHT) ;
@@ -82,6 +85,7 @@ package game.core.track
 			{
 				img = new Image(_textureAltas.getTexture("road"+i));
 				roadBody = Road1PhyData.createBody("road"+i , img );
+				roadBody.cbTypes.add(roadType);
 				roadBody.graphicUpdate = graphicUpdate ;
 				roadBody.compound = roadCompound ;
 				roadBody.position.setxy( len ,GameSetting.SCREEN_HEIGHT) ;

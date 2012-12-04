@@ -16,6 +16,9 @@ package game.core.scene
 	import nape.callbacks.InteractionCallback;
 	import nape.callbacks.InteractionListener;
 	import nape.callbacks.InteractionType;
+	import nape.callbacks.OptionType;
+	import nape.dynamics.Arbiter;
+	import nape.dynamics.ArbiterList;
 	import nape.dynamics.CollisionArbiter;
 	import nape.dynamics.InteractionGroup;
 	import nape.geom.Vec2;
@@ -39,9 +42,7 @@ package game.core.scene
 		private var _map:Sprite; 
 		private var _carBodyCbType:CbType = new CbType();
 		private var _carWheelCbType:CbType = new CbType();
-		private var _robotCarWheelCbType:CbType = new CbType();
-		private var _roadCbType:CbType = new CbType();
-		private var _carLeftWheelOnRoad:Boolean , _botCarLeftWheelOnRoad:Boolean  ;
+		private var _carLeftWheelOnRoad:Boolean , _botCarLeftWheelOnRoad:Boolean , _carRightWheelOnRoad:Boolean , _botCarRightWheelOnRoad:Boolean  ;
 		
 		/**
 		 *  竞赛游戏场景
@@ -59,8 +60,7 @@ package game.core.scene
 		 */		
 		override protected function createPhySpace():void
 		{
-			_space = new Space(new Vec2(0,500));
-			addListeners();
+			_space = new Space(Vec2.get(0,500));
 			
 			if(_debug){
 				_debug.drawConstraints = true ;
@@ -73,22 +73,24 @@ package game.core.scene
 			addChild(_map);
 			
 			_track = TrackFactory.createTrack(_trackVO,_space);
-			_track.roadCompound.cbTypes.add(_roadCbType) ;
 			_map.addChild(_track);
 			
 			var dustTexture:Texture =  _track.textureAltas.getTexture("dustTexture") ;
 			_carBot = CarFactory.createCar( _carGroup , _carBotVO.carVO , _space , 400 , 300 );
-			_carBot.leftWheel.cbTypes.add( _robotCarWheelCbType) ;
+			_carBot.leftWheel.cbTypes.add( _carWheelCbType) ;
+			_carBot.rightWheel.cbTypes.add( _carWheelCbType) ;
 			_carBot.createParticles(dustTexture);
 			_map.addChild(_carBot);
 			
 			_car =  CarFactory.createCar( _carGroup , _playerCarVO.carVO , _space , 300 , 300 );
 			_car.leftWheel.cbTypes.add( _carWheelCbType) ;
-			_car.carBody.cbTypes.add( _carBodyCbType) ;
+			_car.rightWheel.cbTypes.add( _carWheelCbType) ;
+			_car.carBody.cbTypes.add(_carBodyCbType);
 			_car.createParticles(dustTexture);
 			_map.addChild(_car);
 			
 			deleteResVOs();
+			addListeners();
 			
 			addEventListener(starling.events.Event.ENTER_FRAME , updateHandler );
 			stage.addEventListener(KeyboardEvent.KEY_DOWN , onKeyDownHandler);
@@ -98,31 +100,57 @@ package game.core.scene
 		
 		private function addListeners():void
 		{
-			_space.listeners.add( new InteractionListener(CbEvent.BEGIN,InteractionType.COLLISION,_robotCarWheelCbType,_roadCbType,
+			_space.listeners.add( new InteractionListener(CbEvent.BEGIN,InteractionType.COLLISION,_carWheelCbType,_track.roadType,
 				function( callback:InteractionCallback ):void {
-					_botCarLeftWheelOnRoad = true ;
-					_carBot.leftWheelParticle.start(.2);
-					_carBot.rightWheelParticle.start(.2);
+					var list:ArbiterList = callback.arbiters ;
+					for(var i:int = 0 ; i<list.length ; ++i){
+						var arbiter:Arbiter = list.at(i) ;
+						switch(arbiter.body2)
+						{
+							case _car.leftWheel :
+								_carLeftWheelOnRoad = true ;
+								_car.leftWheelParticle.start(.2);
+								break ;
+							case _car.rightWheel :
+								_carRightWheelOnRoad = true ;
+								_car.rightWheelParticle.start(.2);
+								break ;
+							case _carBot.leftWheel :
+								_botCarLeftWheelOnRoad = true ;
+								_carBot.leftWheelParticle.start(.2);
+								break ;
+							case _carBot.rightWheel :
+								_botCarRightWheelOnRoad = true ;
+								_carBot.rightWheelParticle.start(.2);
+								break ;
+						}
+					}
 				}
 			));
-			_space.listeners.add( new InteractionListener(CbEvent.END,InteractionType.COLLISION,_robotCarWheelCbType,_roadCbType,
+			_space.listeners.add( new InteractionListener(CbEvent.END,InteractionType.COLLISION,_carWheelCbType,_track.roadType,
 				function( callback:InteractionCallback ):void {
-					_botCarLeftWheelOnRoad = false ;
+					var list:ArbiterList = callback.arbiters ;
+					for(var i:int = 0 ; i<list.length ; ++i){
+						var arbiter:Arbiter = list.at(i) ;
+						switch(arbiter.body2)
+						{
+							case _car.leftWheel :
+								_carLeftWheelOnRoad = false ;
+								break ;
+							case _car.rightWheel :
+								_carRightWheelOnRoad = false ;
+								break ;
+							case _carBot.leftWheel :
+								_botCarLeftWheelOnRoad = false ;
+								break ;
+							case _carBot.rightWheel :
+								_botCarRightWheelOnRoad = false ;
+								break ;
+						}
+					}
 				}
 			));
-			_space.listeners.add( new InteractionListener(CbEvent.BEGIN,InteractionType.COLLISION,_carWheelCbType,_roadCbType,
-				function( callback:InteractionCallback ):void {
-					_carLeftWheelOnRoad = true ;
-					_car.leftWheelParticle.start(.2);
-					_car.rightWheelParticle.start(.2);
-				}
-			));
-			_space.listeners.add( new InteractionListener(CbEvent.END,InteractionType.COLLISION,_carWheelCbType,_roadCbType,
-				function( callback:InteractionCallback ):void {
-					_carLeftWheelOnRoad = false ;
-				}
-			));
-			_space.listeners.add( new InteractionListener(CbEvent.BEGIN,InteractionType.COLLISION,_carBodyCbType,_roadCbType,
+			_space.listeners.add( new InteractionListener(CbEvent.BEGIN,InteractionType.COLLISION,_carBodyCbType,_track.roadType,
 				function( callback:InteractionCallback ):void {
 					var rotate:Number = (_car.carBody.rotation*180/Math.PI)%360 ;
 					if(rotate>120 || rotate<-120){
@@ -139,12 +167,12 @@ package game.core.scene
 			if(e.keyCode==Keyboard.RIGHT){
 				_car.leftWheel.rotation+=0.2 ;
 				if(_carLeftWheelOnRoad) {
-					_car.leftWheel.applyLocalImpulse( Vec2.weak(_playerCarVO.carVO.carParams["impulse"].value,0));
+					_car.leftWheel.applyLocalImpulse( Vec2.get(_playerCarVO.carVO.carParams["impulse"].value,0));
 				}
 			}else if(e.keyCode==Keyboard.LEFT){
 				_car.leftWheel.rotation-=0.2 ;
 				if(_carLeftWheelOnRoad) {
-					_car.leftWheel.applyLocalImpulse( Vec2.weak(-_playerCarVO.carVO.carParams["impulse"].value,0));
+					_car.leftWheel.applyLocalImpulse( Vec2.get(-_playerCarVO.carVO.carParams["impulse"].value,0));
 				}
 			}
 			
@@ -199,7 +227,6 @@ package game.core.scene
 			_carBot = null ;
 			_track=null ;
 			_carBodyCbType = null ;
-			_roadCbType = null ;
 			_carWheelCbType = null ;
 			_map.removeChildren(0,-1,true);
 		}

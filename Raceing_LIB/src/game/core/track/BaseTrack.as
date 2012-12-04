@@ -7,6 +7,7 @@ package game.core.track
 	import game.comm.GameSetting;
 	import game.vos.TrackVO;
 	
+	import nape.callbacks.CbType;
 	import nape.phys.Body;
 	import nape.phys.BodyType;
 	import nape.phys.Compound;
@@ -30,6 +31,8 @@ package game.core.track
 		
 		public var len:int ; //路的长度
 		public var roadCompound:Compound = new Compound();
+		public var roadType:CbType = new CbType();
+		public var bridgeType:CbType = new CbType();
 		
 		public function BaseTrack( trackVO:TrackVO , space:Space )
 		{
