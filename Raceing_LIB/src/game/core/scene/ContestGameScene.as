@@ -182,7 +182,7 @@ package game.core.scene
 				_debug.flush();
 			}
 			
-			_map.x = GameSetting.SCREEN_WIDTH*0.5 - _car.leftWheel.position.x -  300 ;
+			_map.x = GameSetting.SCREEN_WIDTH*0.5 - _car.leftWheel.position.x-100 ;
 			if(_map.x>0 ) _map.x =0 ;
 			else if(_map.x+_track.len<GameSetting.SCREEN_WIDTH) _map.x = GameSetting.SCREEN_WIDTH-_track.len ;
 			//机器车自动走

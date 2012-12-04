@@ -69,6 +69,8 @@ package game.core.car
 			var dustPex:XML = XML(ResPool.instance.getResVOByResId("DustParticle_PEX").resObject);
 			dustParticle = new PDParticleSystem(dustPex,dustTexture);
 			Starling.juggler.add( dustParticle );
+			addChildAt(dustParticle,0);
+			dustParticle.start();
 		}
 		
 		override public function dispose():void
