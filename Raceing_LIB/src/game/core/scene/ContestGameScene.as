@@ -1,6 +1,5 @@
 package game.core.scene
 {
-	import flash.events.Event;
 	import flash.ui.Keyboard;
 	
 	import game.comm.GameSetting;
@@ -16,10 +15,8 @@ package game.core.scene
 	import nape.callbacks.InteractionCallback;
 	import nape.callbacks.InteractionListener;
 	import nape.callbacks.InteractionType;
-	import nape.callbacks.OptionType;
 	import nape.dynamics.Arbiter;
 	import nape.dynamics.ArbiterList;
-	import nape.dynamics.CollisionArbiter;
 	import nape.dynamics.InteractionGroup;
 	import nape.geom.Vec2;
 	import nape.space.Space;
@@ -163,12 +160,12 @@ package game.core.scene
 			if(e.keyCode==Keyboard.RIGHT){
 				_car.leftWheel.rotation+=0.2 ;
 				if(_carLeftWheelOnRoad) {
-					_car.leftWheel.applyLocalImpulse( Vec2.get(_playerCarVO.carVO.carParams["impulse"].value,0));
+					_car.leftWheel.applyLocalImpulse( Vec2.get(_car.maxImpulse,0));
 				}
 			}else if(e.keyCode==Keyboard.LEFT){
 				_car.leftWheel.rotation-=0.2 ;
 				if(_carLeftWheelOnRoad) {
-					_car.leftWheel.applyLocalImpulse( Vec2.get(-_playerCarVO.carVO.carParams["impulse"].value,0));
+					_car.leftWheel.applyLocalImpulse( Vec2.get(-_car.maxImpulse,0));
 				}
 			}
 			
@@ -191,7 +188,7 @@ package game.core.scene
 			//机器车自动走
 			_carBot.leftWheel.rotation+=0.2 ;
 			if(_botCarLeftWheelOnRoad){
-				_carBot.leftWheel.applyLocalImpulse( Vec2.weak(_carBotVO.carVO.carParams["impulse"].value,0));
+				_carBot.leftWheel.applyLocalImpulse( Vec2.weak(_carBot.maxImpulse,0));
 				if(_carBot.leftWheel.velocity.x>_carBot.maxVelocity) {
 					_carBot.leftWheel.velocity.x = _carBot.maxVelocity ;
 				}

@@ -37,6 +37,7 @@ package game.core.car
 		public var dustParticle:PDParticleSystem ;
 		public var gasParticle:PDParticleSystem ;
 		public var maxVelocity:Number ;
+		public var maxImpulse:Number ;
 		
 		public function BaseCar( group:InteractionGroup , carVO:CarVO ,  space:Space , px:Number, py:Number )
 		{
@@ -47,6 +48,7 @@ package game.core.car
 			this._carGroup = group ;
 			this._carVO = carVO ;
 			this.maxVelocity = carVO.carParams["velocity"].value ;
+			this.maxImpulse = carVO.carParams["impulse"].value;
 			createBody();
 		}
 		
