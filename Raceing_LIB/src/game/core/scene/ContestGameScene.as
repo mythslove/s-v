@@ -162,11 +162,19 @@ package game.core.scene
 				function( callback:InteractionCallback ):void {
 					var rotate:Number = (_car.carBody.rotation*180/Math.PI)%360 ;
 					if(rotate>120 || rotate<-120){
-						trace("挂了");
+						gameOver();
 					}
 				}
 			));
 			
+		}
+		
+		private function gameOver():void
+		{
+			removeEventListener(starling.events.Event.ENTER_FRAME , updateHandler );
+			stage.removeEventListener(TouchEvent.TOUCH , onTouchHandler);
+			_car.dustParticle.stop();
+			_carBot.dustParticle.stop();
 		}
 		
 		

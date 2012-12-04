@@ -6,12 +6,9 @@ package game.core.car
 	import nape.constraint.LineJoint;
 	import nape.dynamics.InteractionGroup;
 	import nape.geom.Vec2;
-	import nape.phys.Body;
 	import nape.phys.Material;
-	import nape.shape.Circle;
 	import nape.space.Space;
 	
-	import starling.display.DisplayObject;
 	import starling.display.Image;
 	import starling.textures.Texture;
 	
@@ -84,29 +81,5 @@ package game.core.car
 			
 			compound.translate( Vec2.weak(_px,_py));
 		}
-		
-		private function graphicUpdate(body:Body):void
-		{
-			if(body.graphic && body.graphic is DisplayObject)
-			{
-				var gp:Vec2 = body.localToWorld(body.graphicOffset);
-				var gra:DisplayObject = body.graphic as DisplayObject;
-				gra.x = gp.x;
-				gra.y = gp.y;
-				gra.rotation = body.rotation ;
-				if(dustParticle && body==leftWheel){
-					dustParticle.emitterX  = gp.x ;
-					dustParticle.emitterY = gp.y ;
-				}
-			}
-		}
-		
-		private function circle(x:Number,y:Number,r:Number , material:Material ):Body {
-			var b:Body = new Body();
-			b.shapes.add(new Circle(r,null,material));
-			b.position.setxy(x,y);
-			return b;
-		}
-		
 	}
 }
