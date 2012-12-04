@@ -109,19 +109,21 @@ package game.core.scene
 						{
 							case _car.leftWheel :
 								_carLeftWheelOnRoad = true ;
-								_car.leftWheelParticle.start(.2);
+								if(_car.leftWheel.velocity.x>=_car.maxVelocity)  _car.leftWheelParticle.start(.2);
+								else if(_car.leftWheel.velocity.x<=-_car.maxVelocity)  _car.leftWheelParticle.start(.2);
 								break ;
 							case _car.rightWheel :
 								_carRightWheelOnRoad = true ;
-								_car.rightWheelParticle.start(.2);
+								if(_car.rightWheel.velocity.x>=_car.maxVelocity)  _car.rightWheelParticle.start(.2);
+								else if(_car.rightWheel.velocity.x<=-_car.maxVelocity)  _car.rightWheelParticle.start(.2);
 								break ;
 							case _carBot.leftWheel :
 								_botCarLeftWheelOnRoad = true ;
-								_carBot.leftWheelParticle.start(.2);
+								if(_carBot.leftWheel.velocity.x>=_carBot.maxVelocity)  _carBot.leftWheelParticle.start(.2);
 								break ;
 							case _carBot.rightWheel :
 								_botCarRightWheelOnRoad = true ;
-								_carBot.rightWheelParticle.start(.2);
+								if(_carBot.rightWheel.velocity.x>=_carBot.maxVelocity)  _carBot.rightWheelParticle.start(.2);
 								break ;
 						}
 					}
@@ -176,9 +178,8 @@ package game.core.scene
 				}
 			}
 			
-			var velocity:Number = _playerCarVO.carVO.carParams["velocity"].value ;
-			if(_car.leftWheel.velocity.x<-velocity)  _car.leftWheel.velocity.x = - velocity ;
-			if(_car.leftWheel.velocity.x>velocity)  _car.leftWheel.velocity.x = velocity ;
+			if(_car.leftWheel.velocity.x<-_car.maxVelocity)  _car.leftWheel.velocity.x = - _car.maxVelocity ;
+			if(_car.leftWheel.velocity.x>_car.maxVelocity)  _car.leftWheel.velocity.x = _car.maxVelocity ;
 		}
 		
 		private function updateHandler(e:starling.events.Event):void
@@ -197,9 +198,8 @@ package game.core.scene
 			_carBot.leftWheel.rotation+=0.2 ;
 			if(_botCarLeftWheelOnRoad){
 				_carBot.leftWheel.applyLocalImpulse( Vec2.weak(_carBotVO.carVO.carParams["impulse"].value,0));
-				var velocity:Number = _carBotVO.carVO.carParams["velocity"].value ;
-				if(_carBot.leftWheel.velocity.x>velocity) {
-					_carBot.leftWheel.velocity.x = velocity ;
+				if(_carBot.leftWheel.velocity.x>_carBot.maxVelocity) {
+					_carBot.leftWheel.velocity.x = _carBot.maxVelocity ;
 				}
 			}
 		}

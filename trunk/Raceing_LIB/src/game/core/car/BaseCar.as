@@ -37,6 +37,7 @@ package game.core.car
 		public var leftWheelParticle:PDParticleSystem ;
 		public var rightWheelParticle:PDParticleSystem ;
 		public var gasParticle:PDParticleSystem ;
+		public var maxVelocity:Number ;
 		
 		public function BaseCar( group:InteractionGroup , carVO:CarVO ,  space:Space , px:Number, py:Number )
 		{
@@ -46,6 +47,7 @@ package game.core.car
 			this._py = py ;
 			this._carGroup = group ;
 			this._carVO = carVO ;
+			this.maxVelocity = carVO.carParams["velocity"].value ;
 			createBody();
 		}
 		
