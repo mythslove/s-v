@@ -11,6 +11,7 @@ package
 	import flash.events.Event;
 	import flash.geom.Rectangle;
 	import flash.net.registerClassAlias;
+	import flash.system.Capabilities;
 	
 	import game.StarlingAppliaction;
 	import game.comm.GameSetting;
@@ -32,6 +33,11 @@ package
 			stage.align = StageAlign.TOP_LEFT;
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 			stage.frameRate = 60 ;
+			
+			if(Capabilities.os.toLowerCase().indexOf("windows")==-1){
+				GameSetting.TEXTURE_TYPE=".atf";
+			}
+			
 			//添加loading
 			registerVO();
 			loadRes();
