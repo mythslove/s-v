@@ -26,10 +26,14 @@ package game.core.scene
 	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.events.KeyboardEvent;
+	import starling.events.Touch;
+	import starling.events.TouchEvent;
+	import starling.events.TouchPhase;
 	import starling.textures.Texture;
 	
 	public class ContestGameScene extends BaseContestGameScene
 	{
+		private var _moveDirection:int = 0 ;//无,1为left,2为right 
 		private var _car:BaseCar ;
 		private var _carBot:BaseCar ;
 		private var _track:BaseTrack ;
@@ -90,10 +94,21 @@ package game.core.scene
 			addListeners();
 			
 			addEventListener(starling.events.Event.ENTER_FRAME , updateHandler );
-			stage.addEventListener(KeyboardEvent.KEY_DOWN , onKeyDownHandler);
+			stage.addEventListener(TouchEvent.TOUCH , onTouchHandler);
 		}
 		
-		
+		private function onTouchHandler(e:TouchEvent):void
+		{
+			var beginTouch:Touch = e.getTouch(stage,TouchPhase.BEGAN) ;
+			if(beginTouch){
+				if(beginTouch.globalX<GameSetting.SCREEN_WIDTH*0.5) _moveDirection = 1 ;
+				else _moveDirection = 2 ;
+			}
+			var endTouch:Touch= e.getTouch(stage,TouchPhase.ENDED) ;
+			if(endTouch){
+				_moveDirection = 0 ;
+			}
+		}
 		
 		private function addListeners():void
 		{
@@ -155,14 +170,14 @@ package game.core.scene
 		}
 		
 		
-		private function onKeyDownHandler(e:KeyboardEvent):void
+		private function moveCar():void
 		{
-			if(e.keyCode==Keyboard.RIGHT){
+			if(_moveDirection==2){
 				_car.leftWheel.rotation+=0.2 ;
 				if(_carLeftWheelOnRoad) {
 					_car.leftWheel.applyLocalImpulse( Vec2.get(_car.maxImpulse,0));
 				}
-			}else if(e.keyCode==Keyboard.LEFT){
+			}else if(_moveDirection==1){
 				_car.leftWheel.rotation-=0.2 ;
 				if(_carLeftWheelOnRoad) {
 					_car.leftWheel.applyLocalImpulse( Vec2.get(-_car.maxImpulse,0));
@@ -181,7 +196,7 @@ package game.core.scene
 				_debug.draw(_space);
 				_debug.flush();
 			}
-			
+			moveCar();
 			_map.x = GameSetting.SCREEN_WIDTH*0.5 - _car.leftWheel.position.x-100 ;
 			if(_map.x>0 ) _map.x =0 ;
 			else if(_map.x+_track.len<GameSetting.SCREEN_WIDTH) _map.x = GameSetting.SCREEN_WIDTH-_track.len ;
@@ -212,7 +227,7 @@ package game.core.scene
 		{
 			super.removedHandler(e);
 			removeEventListener(starling.events.Event.ENTER_FRAME , updateHandler );
-			stage.removeEventListener(KeyboardEvent.KEY_DOWN , onKeyDownHandler);
+			stage.removeEventListener(TouchEvent.TOUCH , onTouchHandler);
 			_space.clear();
 			_space=  null ;
 			_carBot = null ;
