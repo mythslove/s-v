@@ -1,5 +1,6 @@
 package game.vos
 {
+	import game.comm.GameSetting;
 	
 
 	public class TrackVO
@@ -19,7 +20,7 @@ package game.vos
 		
 		public function get roadUrl():String
 		{
-			return "track/Road"+id+".png";
+			return "track/Road"+id+GameSetting.TEXTURE_TYPE;
 		}
 		public function get roadXMLUrl():String
 		{
