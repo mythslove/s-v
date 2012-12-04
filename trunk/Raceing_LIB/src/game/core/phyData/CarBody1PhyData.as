@@ -4,6 +4,7 @@ import flash.geom.Rectangle;
 import flash.utils.Dictionary;
 
 import nape.callbacks.CbType;
+import nape.callbacks.CbTypeList;
 import nape.dynamics.InteractionFilter;
 import nape.geom.AABB;
 import nape.geom.Vec2;
@@ -30,12 +31,7 @@ public class CarBody1PhyData {
 		var offset:Vec2 = Vec2.get(bounds.x-xret.anchor.x, bounds.y-xret.anchor.y);
 
 		ret.graphic = graphic;
-		ret.graphicUpdate = function(b:Body):void {
-			var gp:Vec2 = b.localToWorld(offset);
-			graphic.x = gp.x;
-			graphic.y = gp.y;
-			graphic.rotation = b.rotation ;
-		}	
+        ret.graphicOffset = offset;
 
 		return ret;
 	}
@@ -88,13 +84,17 @@ public class CarBody1PhyData {
 			return fprops[name] as FluidProperties;
 		}
 	}
-	private static function cbtype(name:String):CbType {
-		if(name=="null") return null;
-		else {
-			if(types==null || types[name] === undefined)
-				throw "Error: CbType with name '"+name+"' has not been registered";
-			return types[name] as CbType;
-		}	
+	private static function cbtype(outtypes:CbTypeList, name:String):void {
+        var names:Array = name.split(",");
+        for(var i:int = 0; i<names.length; i++) {
+            var name:String = names[i].replace( /^([\s|\t|\n]+)?(.*)([\s|\t|\n]+)?$/gm, "$2" );
+            if(name=="") continue;
+
+            if(types[name] === undefined)
+                throw "Error: CbType with name '"+name+"' has not been registered";
+            
+            outtypes.add(types[name] as CbType);
+        }
 	}
 
 	private static function lookup(name:String):BodyPair {
@@ -118,65 +118,74 @@ public class CarBody1PhyData {
 
 		
 			body = new Body();
-			body.cbType = cbtype("null");
+            cbtype(body.cbTypes,"");
 
 			
 				mat = material("default");
 				filt = filter("default");
 				prop = fprop("default");
-				cbType = cbtype("null");
 
 				
 					
 						s = new Polygon(
-							[   Vec2.weak(0,54)   ,  Vec2.weak(0,62)   ,  Vec2.weak(21,61)   ,  Vec2.weak(14,53)   ],
+							[   Vec2.weak(146,24)   ,  Vec2.weak(142,21.5)   ,  Vec2.weak(136,19.5)   ,  Vec2.weak(128,17.5)   ,  Vec2.weak(120,20.5)   ,  Vec2.weak(145.5,28)   ],
 							mat,
 							filt
 						);
 						s.body = body;
 						s.fluidEnabled = false;
 						s.fluidProperties = prop;
-						s.cbType = cbType;
+                        cbtype(s.cbTypes,"");
 					
 						s = new Polygon(
-							[   Vec2.weak(158,59)   ,  Vec2.weak(160,40)   ,  Vec2.weak(150,31)   ,  Vec2.weak(114,19)   ,  Vec2.weak(47,6)   ,  Vec2.weak(36,14)   ,  Vec2.weak(21,61)   ,  Vec2.weak(121,64)   ],
+							[   Vec2.weak(-0.5,54)   ,  Vec2.weak(0,61.5)   ,  Vec2.weak(18,61.5)   ,  Vec2.weak(13,52.5)   ],
 							mat,
 							filt
 						);
 						s.body = body;
 						s.fluidEnabled = false;
 						s.fluidProperties = prop;
-						s.cbType = cbType;
+                        cbtype(s.cbTypes,"");
 					
 						s = new Polygon(
-							[   Vec2.weak(107,6)   ,  Vec2.weak(92,0)   ,  Vec2.weak(64,0)   ,  Vec2.weak(47,6)   ,  Vec2.weak(114,19)   ],
+							[   Vec2.weak(13,52.5)   ,  Vec2.weak(18,61.5)   ,  Vec2.weak(119,63.5)   ,  Vec2.weak(159.5,46)   ,  Vec2.weak(120,20.5)   ,  Vec2.weak(112.5,19)   ,  Vec2.weak(35.5,14)   ,  Vec2.weak(20.5,32)   ],
 							mat,
 							filt
 						);
 						s.body = body;
 						s.fluidEnabled = false;
 						s.fluidProperties = prop;
-						s.cbType = cbType;
+                        cbtype(s.cbTypes,"");
 					
 						s = new Polygon(
-							[   Vec2.weak(14,53)   ,  Vec2.weak(21,61)   ,  Vec2.weak(36,14)   ,  Vec2.weak(21,32)   ],
+							[   Vec2.weak(157.5,58)   ,  Vec2.weak(159.5,46)   ,  Vec2.weak(119,63.5)   ],
 							mat,
 							filt
 						);
 						s.body = body;
 						s.fluidEnabled = false;
 						s.fluidProperties = prop;
-						s.cbType = cbType;
+                        cbtype(s.cbTypes,"");
 					
 						s = new Polygon(
-							[   Vec2.weak(146,23)   ,  Vec2.weak(133,19)   ,  Vec2.weak(114,19)   ,  Vec2.weak(150,31)   ],
+							[   Vec2.weak(106,5.5)   ,  Vec2.weak(96,0.5)   ,  Vec2.weak(65,-0.5)   ,  Vec2.weak(49,4.5)   ,  Vec2.weak(35.5,14)   ,  Vec2.weak(112.5,19)   ,  Vec2.weak(111.5,13)   ],
 							mat,
 							filt
 						);
 						s.body = body;
 						s.fluidEnabled = false;
 						s.fluidProperties = prop;
-						s.cbType = cbType;
+                        cbtype(s.cbTypes,"");
+					
+						s = new Polygon(
+							[   Vec2.weak(145.5,28)   ,  Vec2.weak(120,20.5)   ,  Vec2.weak(159.5,46)   ,  Vec2.weak(160,41)   ],
+							mat,
+							filt
+						);
+						s.body = body;
+						s.fluidEnabled = false;
+						s.fluidProperties = prop;
+                        cbtype(s.cbTypes,"");
 					
 				
 			

@@ -4,12 +4,14 @@ package game.core.track
 	import game.core.phyData.Road1PhyData;
 	import game.vos.TrackVO;
 	
+	import nape.geom.Vec2;
 	import nape.phys.Body;
 	import nape.phys.BodyType;
 	import nape.phys.Material;
 	import nape.shape.Polygon;
 	import nape.space.Space;
 	
+	import starling.display.DisplayObject;
 	import starling.display.Image;
 
 	/**
@@ -38,6 +40,7 @@ package game.core.track
 			{
 				var img:Image = new Image(_textureAltas.getTexture("road"+i));
 				roadBody = Road1PhyData.createBody("road"+i , img );
+				roadBody.graphicUpdate = graphicUpdate ;
 				roadBody.compound = roadCompound ;
 				roadBody.position.setxy( len ,GameSetting.SCREEN_HEIGHT) ;
 				roadBody.type = BodyType.KINEMATIC ;
@@ -51,6 +54,7 @@ package game.core.track
 			{
 				img = new Image(_textureAltas.getTexture("road"+i));
 				roadBody = Road1PhyData.createBody("road"+i , img );
+				roadBody.graphicUpdate = graphicUpdate ;
 				roadBody.compound = roadCompound ;
 				roadBody.position.setxy( len ,GameSetting.SCREEN_HEIGHT) ;
 				roadBody.type = BodyType.KINEMATIC ;
@@ -64,6 +68,7 @@ package game.core.track
 			{
 				img = new Image(_textureAltas.getTexture("road"+i));
 				roadBody = Road1PhyData.createBody("road"+i , img );
+				roadBody.graphicUpdate = graphicUpdate ;
 				roadBody.compound = roadCompound ;
 				roadBody.position.setxy( len ,GameSetting.SCREEN_HEIGHT) ;
 				roadBody.type = BodyType.KINEMATIC ;
@@ -77,6 +82,7 @@ package game.core.track
 			{
 				img = new Image(_textureAltas.getTexture("road"+i));
 				roadBody = Road1PhyData.createBody("road"+i , img );
+				roadBody.graphicUpdate = graphicUpdate ;
 				roadBody.compound = roadCompound ;
 				roadBody.position.setxy( len ,GameSetting.SCREEN_HEIGHT) ;
 				roadBody.type = BodyType.KINEMATIC ;
@@ -87,6 +93,18 @@ package game.core.track
 			}
 			
 			createWall();
+		}
+		
+		private function graphicUpdate(body:Body):void
+		{
+			if(body.graphic && body.graphic is DisplayObject)
+			{
+				var gp:Vec2 = body.localToWorld(body.graphicOffset);
+				var gra:DisplayObject = body.graphic as DisplayObject;
+				gra.x = gp.x;
+				gra.y = gp.y;
+				gra.rotation = body.rotation ;
+			}
 		}
 	}
 }
