@@ -136,16 +136,18 @@ package game.core.scene
 		
 		private function onKeyDownHandler(e:KeyboardEvent):void
 		{
-			if(_carOnRoad)
-			{
-				if(e.keyCode==Keyboard.RIGHT){
-					_car.leftWheel.rotation+=0.2 ;
+			if(e.keyCode==Keyboard.RIGHT){
+				_car.leftWheel.rotation+=0.2 ;
+				if(_carOnRoad) {
 					_car.leftWheel.applyLocalImpulse( Vec2.weak(_playerCarVO.carVO.carParams["impulse"].value,0));
-				}else if(e.keyCode==Keyboard.LEFT){
-					_car.leftWheel.rotation-=0.2 ;
+				}
+			}else if(e.keyCode==Keyboard.LEFT){
+				_car.leftWheel.rotation-=0.2 ;
+				if(_carOnRoad) {
 					_car.leftWheel.applyLocalImpulse( Vec2.weak(-_playerCarVO.carVO.carParams["impulse"].value,0));
 				}
 			}
+			
 			var velocity:Number = _playerCarVO.carVO.carParams["velocity"].value ;
 			if(_car.leftWheel.velocity.x<-velocity)  _car.leftWheel.velocity.x = - velocity ;
 			if(_car.leftWheel.velocity.x>velocity)  _car.leftWheel.velocity.x = velocity ;
@@ -164,8 +166,8 @@ package game.core.scene
 			if(_map.x>0 ) _map.x =0 ;
 			else if(_map.x+_track.len<GameSetting.SCREEN_WIDTH) _map.x = GameSetting.SCREEN_WIDTH-_track.len ;
 			//机器车自动走
+			_carBot.leftWheel.rotation+=0.2 ;
 			if(_botOnRoad){
-				_carBot.leftWheel.rotation+=0.2 ;
 				_carBot.leftWheel.applyLocalImpulse( Vec2.weak(_carBotVO.carVO.carParams["impulse"].value,0));
 				var velocity:Number = _carBotVO.carVO.carParams["velocity"].value ;
 				if(_carBot.leftWheel.velocity.x>velocity) {
