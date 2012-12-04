@@ -3,6 +3,7 @@ package game.core.track
 	import bing.res.ResPool;
 	
 	import flash.display.Bitmap;
+	import flash.utils.ByteArray;
 	
 	import game.comm.GameSetting;
 	import game.vos.TrackVO;
@@ -44,10 +45,14 @@ package game.core.track
 		
 		protected function createBody():void
 		{
-			var textureBmp:Bitmap = ResPool.instance.getResVOByResId("road").resObject as Bitmap;
 			var textureXML:XML = XML(ResPool.instance.getResVOByResId("roadXML").resObject) ;
 			
-			_texture = Texture.fromBitmap( textureBmp , false  );
+			var roadObject:Object = ResPool.instance.getResVOByResId("road").resObject ;
+			if(roadObject is ByteArray){
+				_texture = Texture.fromAtfData( roadObject as ByteArray , 1  , false  );
+			}else if(roadObject is Bitmap){
+				_texture = Texture.fromBitmap( roadObject as Bitmap , false );
+			}
 			_textureAltas = new TextureAtlas(_texture,textureXML);
 		}
 		
