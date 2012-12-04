@@ -85,16 +85,6 @@ package game.core.car
 			compound.translate( Vec2.weak(_px,_py));
 		}
 		
-		override public function createParticles(dustTexture:Texture ):void
-		{
-			super.createParticles(dustTexture);
-			leftWheelParticle.emitterXVariance = leftWheelParticle.emitterXVariance = 3+ leftWheel.bounds.width*0.5 ;
-			rightWheelParticle.emitterXVariance = rightWheelParticle.emitterXVariance = 3+rightWheel.bounds.width*0.5;
-			addChild(leftWheelParticle);
-			addChild(rightWheelParticle);
-		}
-		
-		
 		private function graphicUpdate(body:Body):void
 		{
 			if(body.graphic && body.graphic is DisplayObject)
@@ -104,28 +94,9 @@ package game.core.car
 				gra.x = gp.x;
 				gra.y = gp.y;
 				gra.rotation = body.rotation ;
-				if(leftWheelParticle)
-				{
-					if(body==leftWheel) {
-						leftWheelParticle.rotation = carBody.rotation ;
-						leftWheelParticle.x = body.position.x ;
-						leftWheelParticle.y = body.position.y ;
-						if(leftWheel.velocity.x>0){
-							leftWheelParticle.emitAngle = 230 ;
-						}else{
-							leftWheelParticle.emitAngle = 0 ;
-						}
-						
-					}else if(body==rightWheel){
-						rightWheelParticle.rotation = carBody.rotation ;
-						rightWheelParticle.x = body.position.x ;
-						rightWheelParticle.y = body.position.y ;
-						if(rightWheel.velocity.x>0){
-							rightWheelParticle.emitAngle = 230 ;
-						}else{
-							rightWheelParticle.emitAngle = 0 ;
-						}
-					}
+				if(dustParticle && body==leftWheel){
+					dustParticle.emitterX  = gp.x ;
+					dustParticle.emitterY = gp.y ;
 				}
 			}
 		}
