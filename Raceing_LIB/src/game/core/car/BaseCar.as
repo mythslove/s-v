@@ -34,8 +34,7 @@ package game.core.car
 		public var rightWheel:Body;
 		public var compound:Compound; 
 		
-		public var leftWheelParticle:PDParticleSystem ;
-		public var rightWheelParticle:PDParticleSystem ;
+		public var dustParticle:PDParticleSystem ;
 		public var gasParticle:PDParticleSystem ;
 		public var maxVelocity:Number ;
 		
@@ -66,10 +65,8 @@ package game.core.car
 		public function createParticles( dustTexture:Texture ):void
 		{
 			var dustPex:XML = XML(ResPool.instance.getResVOByResId("DustParticle_PEX").resObject);
-			leftWheelParticle = new PDParticleSystem(dustPex,dustTexture);
-			rightWheelParticle = new PDParticleSystem(dustPex,dustTexture);
-			Starling.juggler.add( leftWheelParticle );
-			Starling.juggler.add( rightWheelParticle );
+			dustParticle = new PDParticleSystem(dustPex,dustTexture);
+			Starling.juggler.add( dustParticle );
 		}
 		
 		override public function dispose():void
@@ -83,12 +80,9 @@ package game.core.car
 			_carGroup = null ;
 			_space = null ;
 			compound = null ;
-			Starling.juggler.remove( leftWheelParticle );
-			Starling.juggler.remove( rightWheelParticle );
-			leftWheelParticle.dispose();
-			leftWheelParticle = null ;
-			rightWheelParticle.dispose() ;
-			rightWheelParticle = null ;
+			Starling.juggler.remove( dustParticle );
+			dustParticle.dispose();
+			dustParticle = null ;
 		}
 	}
 }
