@@ -2,6 +2,7 @@ package
 {
 	import bing.res.ResPool;
 	import bing.res.ResProgressEvent;
+	import bing.res.ResType;
 	import bing.res.ResVO;
 	
 	import flash.display.Sprite;
@@ -10,6 +11,7 @@ package
 	import flash.events.Event;
 	import flash.geom.Rectangle;
 	import flash.net.registerClassAlias;
+	import flash.system.Capabilities;
 	
 	import game.StarlingAppliaction;
 	import game.comm.GameSetting;
@@ -31,6 +33,9 @@ package
 			stage.align = StageAlign.TOP_LEFT;
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 			stage.frameRate = 60 ;
+			if(Capabilities.os.toLowerCase().indexOf("windows")==-1){
+				GameSetting.TEXTURE_TYPE=".atf";
+			}
 			registerVO();
 			loadRes();
 		}
@@ -49,10 +54,14 @@ package
 			var resVOs:Array=[];
 			resVOs.push( new ResVO("Config_Car","config/Config_Car.xml"));
 			resVOs.push( new ResVO("Config_Track","config/Config_Track.xml"));
+			var vo:ResVO = new ResVO("DustParticle_PEX","effects/particle.pex") ;
+			vo.resType = ResType.TEXT ;
+			resVOs.push( vo );
 			ResPool.instance.addEventListener(ResProgressEvent.RES_LOAD_PROGRESS , resLoadHandler );
 			ResPool.instance.addEventListener("loadConfig" , resLoadHandler );
 			ResPool.instance.queueLoad( "loadConfig",resVOs,3);
 		}
+		
 		
 		private function resLoadHandler(e:Event):void
 		{
