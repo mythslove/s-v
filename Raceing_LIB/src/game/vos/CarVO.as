@@ -1,6 +1,8 @@
 package game.vos
 {
 	import flash.utils.Dictionary;
+	
+	import game.comm.GameSetting;
 
 	public class CarVO
 	{
@@ -13,7 +15,7 @@ package game.vos
 		
 		public function get carUrl():String
 		{
-			return "car/Car"+id+".png";
+			return "car/Car"+id+GameSetting.TEXTURE_TYPE ;
 		}
 		public function get carXMLUrl():String
 		{

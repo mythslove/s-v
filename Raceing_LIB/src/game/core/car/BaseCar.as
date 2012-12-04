@@ -3,6 +3,7 @@ package game.core.car
 	import bing.res.ResPool;
 	
 	import flash.display.Bitmap;
+	import flash.utils.ByteArray;
 	
 	import game.vos.CarVO;
 	
@@ -57,10 +58,13 @@ package game.core.car
 			compound = new Compound();
 			compound.group = _carGroup ;
 			
-			var textureBmp:Bitmap = ResPool.instance.getResVOByResId("car"+_carVO.id).resObject as Bitmap;
 			var textureXML:XML = XML(ResPool.instance.getResVOByResId("carXML"+_carVO.id).resObject) ;
-			
-			_texture = Texture.fromBitmap( textureBmp , false  );
+			var carObject:Object = ResPool.instance.getResVOByResId("car"+_carVO.id).resObject ;
+			if(carObject is ByteArray){
+				_texture = Texture.fromAtfData( carObject as ByteArray , 1  , false  );
+			}else if(carObject is Bitmap){
+				_texture = Texture.fromBitmap( carObject as Bitmap , false );
+			} 
 			_textureAltas = new TextureAtlas(_texture,textureXML);
 		}
 		
