@@ -109,21 +109,15 @@ package game.core.scene
 						{
 							case _car.leftWheel :
 								_carLeftWheelOnRoad = true ;
-								if(_car.leftWheel.velocity.x>_car.maxVelocity-10)  _car.leftWheelParticle.start(.2);
-								else if(_car.leftWheel.velocity.x<-_car.maxVelocity+10)  _car.leftWheelParticle.start(.2);
 								break ;
 							case _car.rightWheel :
 								_carRightWheelOnRoad = true ;
-								if(_car.rightWheel.velocity.x>=_car.maxVelocity)  _car.rightWheelParticle.start(.2);
-								else if(_car.rightWheel.velocity.x<=-_car.maxVelocity)  _car.rightWheelParticle.start(.2);
 								break ;
 							case _carBot.leftWheel :
 								_botCarLeftWheelOnRoad = true ;
-								if(_carBot.leftWheel.velocity.x>=_carBot.maxVelocity)  _carBot.leftWheelParticle.start(.2);
 								break ;
 							case _carBot.rightWheel :
 								_botCarRightWheelOnRoad = true ;
-								if(_carBot.rightWheel.velocity.x>=_carBot.maxVelocity)  _carBot.rightWheelParticle.start(.2);
 								break ;
 						}
 					}
