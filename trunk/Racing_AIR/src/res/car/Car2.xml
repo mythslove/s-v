@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://texturepacker.com-->
+<!-- $TexturePacker:SmartUpdate:96d35a7bb40f0a8d4e11211eac3ce020$ -->
+<TextureAtlas imagePath="Car2.png">
+    <SubTexture name="CarBody" x="0" y="0" width="198" height="69"/>
+    <SubTexture name="CarWheel" x="200" y="0" width="40" height="40"/>
+    <SubTexture name="dustTexture" x="0" y="71" width="64" height="64"/>
+</TextureAtlas>
