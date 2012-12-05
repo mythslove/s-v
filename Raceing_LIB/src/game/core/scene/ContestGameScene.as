@@ -43,7 +43,8 @@ package game.core.scene
 		private var _map:Sprite; 
 		private var _carBodyCbType:CbType = new CbType();
 		private var _carWheelCbType:CbType = new CbType();
-		private var _carLeftWheelOnRoad:Boolean , _botCarLeftWheelOnRoad:Boolean , _carRightWheelOnRoad:Boolean , _botCarRightWheelOnRoad:Boolean  ;
+		private var _carLeftWheelOnRoad:Boolean , _carRightWheelOnRoad:Boolean ;
+		private var _botCarLeftWheelOnRoad:Boolean, _botCarRightWheelOnRoad:Boolean  ;
 		
 		/**
 		 *  竞赛游戏场景
@@ -61,7 +62,7 @@ package game.core.scene
 		 */		
 		override protected function createPhySpace():void
 		{
-			_space = new Space(Vec2.get(0,500));
+			_space = new Space(Vec2.get(0,600));
 			
 			if(_debug){
 				_debug.drawConstraints = true ;
@@ -187,15 +188,29 @@ package game.core.scene
 				if(_carLeftWheelOnRoad) {
 					_car.leftWheel.applyLocalImpulse( Vec2.get(_car.maxImpulse,0));
 				}
+				if(_playerCarVO.carVO.drive==2){
+					_car.rightWheel.rotation+=0.2 ;
+					if(_carRightWheelOnRoad ){
+						_car.rightWheel.applyLocalImpulse( Vec2.get( _car.maxImpulse,0));
+					}
+				}
 			}else if(_moveDirection==1){
 				_car.leftWheel.rotation-=0.2 ;
 				if(_carLeftWheelOnRoad) {
 					_car.leftWheel.applyLocalImpulse( Vec2.get(-_car.maxImpulse,0));
 				}
+				if(_playerCarVO.carVO.drive==2){
+					_car.rightWheel.rotation-=0.2 ;
+					if(_carRightWheelOnRoad ){
+						_car.rightWheel.applyLocalImpulse( Vec2.get( -_car.maxImpulse,0));
+					}
+				}
 			}
 			
 			if(_car.leftWheel.velocity.x<-_car.maxVelocity)  _car.leftWheel.velocity.x = - _car.maxVelocity ;
 			if(_car.leftWheel.velocity.x>_car.maxVelocity)  _car.leftWheel.velocity.x = _car.maxVelocity ;
+			if(_car.rightWheel.velocity.x<-_car.maxVelocity)  _car.rightWheel.velocity.x = - _car.maxVelocity ;
+			if(_car.rightWheel.velocity.x>_car.maxVelocity)  _car.rightWheel.velocity.x = _car.maxVelocity ;
 		}
 		
 		private function updateHandler(e:starling.events.Event):void
@@ -205,15 +220,20 @@ package game.core.scene
 			_map.x = GameSetting.SCREEN_WIDTH*0.5 - _car.carBody.position.x-100 ;
 			if(_map.x>0 ) _map.x =0 ;
 			else if(_map.x+_track.len<GameSetting.SCREEN_WIDTH) _map.x = GameSetting.SCREEN_WIDTH-_track.len ;
+			
 			//机器车自动走
-			_carBot.leftWheel.rotation+=0.2 ;
 			if(_botCarLeftWheelOnRoad){
 				_carBot.leftWheel.applyLocalImpulse( Vec2.weak(_carBot.maxImpulse,0));
-				if(_carBot.leftWheel.velocity.x>_carBot.maxVelocity) {
-					_carBot.leftWheel.velocity.x = _carBot.maxVelocity ;
+			}
+			if(_carBotVO.drive == 2 ){
+				if(_botCarRightWheelOnRoad){
+					_carBot.rightWheel.applyLocalImpulse( Vec2.weak(_carBot.maxImpulse,0));
 				}
 			}
+			if(_carBot.leftWheel.velocity.x>_carBot.maxVelocity)  _carBot.leftWheel.velocity.x = _carBot.maxVelocity ; 
+			if(_carBot.rightWheel.velocity.x>_carBot.maxVelocity)  _carBot.rightWheel.velocity.x = _carBot.maxVelocity ;
 			
+			//debug
 			if(_debug){
 				_debug.clear();
 				_debug.draw(_space);

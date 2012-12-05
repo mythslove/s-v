@@ -23,6 +23,7 @@ package game.vos
 		public var velocity:Number ;
 		public var frequency:Number ;
 		public var mass:Number ;
+		public var drive:int ;
 		
 		public function get carVO():CarVO{
 			var carVO:CarVO = ObjectUtil.copyObj(CarModel.instance.carsHash[carId] ) as CarVO ;

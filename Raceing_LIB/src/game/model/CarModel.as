@@ -48,6 +48,7 @@ package game.model
 				carVO.costCoin = int( item.@costCoin );
 				carVO.costCash = int( item.@costCash );
 				carVO.requireLevel = int( item.@requireLevel );
+				carVO.drive = int( item.@drive );
 				carVO.carParams = new Dictionary();
 				for each( var child:* in item.children())
 				{

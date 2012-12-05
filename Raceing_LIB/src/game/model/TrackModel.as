@@ -62,6 +62,7 @@ package game.model
 					ai.impulse = Number(competitor.@impulse);
 					ai.velocity = Number(competitor.@velocity);
 					ai.mass = Number(competitor.@mass);
+					ai.drive = int(competitor.@drive);
 				}
 			}
 		}
