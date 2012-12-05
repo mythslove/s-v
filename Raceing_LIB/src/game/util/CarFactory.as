@@ -1,7 +1,7 @@
 package game.util
 {
 	import game.core.car.BaseCar;
-	import game.core.car.Car1;
+	import game.core.car.*;
 	import game.vos.CarVO;
 	
 	import nape.dynamics.InteractionGroup;
@@ -16,6 +16,9 @@ package game.util
 			{
 				case 1:
 					car  = new Car1(group ,carVO , space , px, py);
+					break ;
+				case 2:
+					car  = new Car2(group ,carVO , space , px, py);
 					break ;
 			}
 			return car;
