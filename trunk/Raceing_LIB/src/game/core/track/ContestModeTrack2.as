@@ -95,7 +95,7 @@ package game.core.track
 				var type:BodyType = i==num?BodyType.KINEMATIC : BodyType.DYNAMIC ;
 				var block:Body = new Body(type,Vec2.get(wid*i,0) );
 				block.shapes.add( new Polygon(Polygon.box(wid,het),wood));
-				block.mass = block.gravMass = 1;
+				block.mass = block.gravMass = 2 ;
 				var img:Image = new Image(_textureAltas.getTexture("bridgeTexture"));
 				img.pivotX = img.width>>1 ;
 				img.pivotY = img.height>>1 ;

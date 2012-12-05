@@ -44,7 +44,7 @@ package game.core.car
 			img = new Image(carWheelTexture); 
 			img.pivotX = carWheelTexture.width>>1 ;
 			img.pivotY = carWheelTexture.height>>1 ;
-			leftWheel= circle(w1X,wY,carWheelTexture.width*0.5-1 ,material);
+			leftWheel= circle(w1X,wY,carWheelTexture.width*0.5-2 ,material);
 			leftWheel.compound = compound ;
 			leftWheel.space = _space;
 			leftWheel.graphic = img ;
@@ -54,7 +54,7 @@ package game.core.car
 			img = new Image(carWheelTexture); 
 			img.pivotX = carWheelTexture.width>>1 ;
 			img.pivotY = carWheelTexture.height>>1 ;
-			rightWheel =  circle(w2X,wY,carWheelTexture.width*0.5-1,material ); 
+			rightWheel =  circle(w2X,wY,carWheelTexture.width*0.5-2,material ); 
 			rightWheel.compound = compound ;
 			rightWheel.space = _space;
 			rightWheel.graphic = img;
