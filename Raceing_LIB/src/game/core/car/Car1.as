@@ -30,7 +30,7 @@ package game.core.car
 			var img:Image = new Image(carTexture); 
 			carBody = CarBody1PhyData.createBody("CarBody",img);
 			carBody.graphicUpdate = graphicUpdate ;
-			carBody.mass = carBody.gravMass = 2;
+			carBody.mass = carBody.gravMass = _carVO.carParams["mass"].value ;
 			carBody.compound = compound ;
 			carBody.space = _space;
 			addChild( img);
