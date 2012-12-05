@@ -31,7 +31,6 @@ package game.core.scene
 		protected function addedHandler( e:starling.events.Event ):void
 		{
 			removeEventListener(starling.events.Event.ADDED_TO_STAGE , addedHandler);
-			addEventListener(starling.events.Event.REMOVED_FROM_STAGE , removedHandler );
 			loadRes();
 		}
 		
@@ -91,9 +90,9 @@ package game.core.scene
 			}
 		}
 		
-		protected  function removedHandler( e:starling.events.Event ):void
+		override public function dispose():void
 		{
-			removeEventListener(starling.events.Event.REMOVED_FROM_STAGE , removedHandler );
+			super.dispose();
 			_carBotVO = null ;
 			_trackVO =null ;
 			_playerCarVO = null ;
