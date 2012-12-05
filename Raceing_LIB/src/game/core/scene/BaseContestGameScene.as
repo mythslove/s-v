@@ -63,10 +63,10 @@ package game.core.scene
 		protected function createGameBg():void
 		{
 			var quad:Quad = new Quad(GameSetting.SCREEN_WIDTH , GameSetting.SCREEN_HEIGHT);
-			quad.setVertexColor(0,0xCEE7FF);
-			quad.setVertexColor(1,0xCEE7FF);
-			quad.setVertexColor(2,0xB5B5FF);
-			quad.setVertexColor(3,0xB5B5FF);
+			quad.setVertexColor(0,0x4D8DCA);
+			quad.setVertexColor(1,0x4D8DCA);
+			quad.setVertexColor(2,0xBAC9D3);
+			quad.setVertexColor(3,0xBAC9D3);
 			addChildAt(quad,0);
 		}
 		
