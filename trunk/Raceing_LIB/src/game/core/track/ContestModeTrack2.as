@@ -95,7 +95,7 @@ package game.core.track
 				var type:BodyType = i==num?BodyType.KINEMATIC : BodyType.DYNAMIC ;
 				var block:Body = new Body(type,Vec2.get(wid*i,0) );
 				block.shapes.add( new Polygon(Polygon.box(wid,het),wood));
-				block.mass = block.gravMass = 0;
+				block.mass = block.gravMass = 1;
 				var img:Image = new Image(_textureAltas.getTexture("bridgeTexture"));
 				img.pivotX = img.width>>1 ;
 				img.pivotY = img.height>>1 ;
@@ -109,7 +109,9 @@ package game.core.track
 				var joint:DistanceJoint = new DistanceJoint( head,block, Vec2.weak(wid/2 ,0), Vec2.get(-wid/2 ,0) , 0 , 1 );
 				joint.frequency= 10 ;
 				joint.ignore = true ;
-				joint.damping = 0.1 ;
+				joint.breakUnderForce = false ;
+				joint.breakUnderError = false ;
+				joint.damping = 1 ;
 				joint.stiff = false ;
 				joint.compound = comp; 
 				
