@@ -1,4 +1,4 @@
-package  game.core.phyData{
+package game.core.phyData{
 
 import flash.geom.Rectangle;
 import flash.utils.Dictionary;
@@ -128,7 +128,7 @@ public class CarBody1PhyData {
 				
 					
 						s = new Polygon(
-							[   Vec2.weak(146,24)   ,  Vec2.weak(142,21.5)   ,  Vec2.weak(136,19.5)   ,  Vec2.weak(128,17.5)   ,  Vec2.weak(120,20.5)   ,  Vec2.weak(145.5,28)   ],
+							[   Vec2.weak(145,22.5)   ,  Vec2.weak(140,23)   ,  Vec2.weak(134,43.5)   ,  Vec2.weak(143,42.5)   ,  Vec2.weak(145.5,28)   ],
 							mat,
 							filt
 						);
@@ -138,7 +138,7 @@ public class CarBody1PhyData {
                         cbtype(s.cbTypes,"");
 					
 						s = new Polygon(
-							[   Vec2.weak(-0.5,54)   ,  Vec2.weak(0,61.5)   ,  Vec2.weak(18,61.5)   ,  Vec2.weak(13,52.5)   ],
+							[   Vec2.weak(18,61.5)   ,  Vec2.weak(23.5,57)   ,  Vec2.weak(22.5,53)   ,  Vec2.weak(13,52.5)   ],
 							mat,
 							filt
 						);
@@ -148,7 +148,7 @@ public class CarBody1PhyData {
                         cbtype(s.cbTypes,"");
 					
 						s = new Polygon(
-							[   Vec2.weak(13,52.5)   ,  Vec2.weak(18,61.5)   ,  Vec2.weak(119,63.5)   ,  Vec2.weak(159.5,46)   ,  Vec2.weak(120,20.5)   ,  Vec2.weak(112.5,19)   ,  Vec2.weak(35.5,14)   ,  Vec2.weak(20.5,32)   ],
+							[   Vec2.weak(158,60)   ,  Vec2.weak(158,49)   ,  Vec2.weak(147.5,45)   ],
 							mat,
 							filt
 						);
@@ -158,7 +158,7 @@ public class CarBody1PhyData {
                         cbtype(s.cbTypes,"");
 					
 						s = new Polygon(
-							[   Vec2.weak(157.5,58)   ,  Vec2.weak(159.5,46)   ,  Vec2.weak(119,63.5)   ],
+							[   Vec2.weak(159,39.5)   ,  Vec2.weak(154.5,37)   ,  Vec2.weak(147.5,45)   ,  Vec2.weak(158,49)   ,  Vec2.weak(159.5,46)   ],
 							mat,
 							filt
 						);
@@ -168,7 +168,7 @@ public class CarBody1PhyData {
                         cbtype(s.cbTypes,"");
 					
 						s = new Polygon(
-							[   Vec2.weak(106,5.5)   ,  Vec2.weak(96,0.5)   ,  Vec2.weak(65,-0.5)   ,  Vec2.weak(49,4.5)   ,  Vec2.weak(35.5,14)   ,  Vec2.weak(112.5,19)   ,  Vec2.weak(111.5,13)   ],
+							[   Vec2.weak(137,20)   ,  Vec2.weak(134,20.5)   ,  Vec2.weak(134,43.5)   ,  Vec2.weak(140,23)   ],
 							mat,
 							filt
 						);
@@ -178,7 +178,67 @@ public class CarBody1PhyData {
                         cbtype(s.cbTypes,"");
 					
 						s = new Polygon(
-							[   Vec2.weak(145.5,28)   ,  Vec2.weak(120,20.5)   ,  Vec2.weak(159.5,46)   ,  Vec2.weak(160,41)   ],
+							[   Vec2.weak(13,52.5)   ,  Vec2.weak(22.5,53)   ,  Vec2.weak(49,4.5)   ,  Vec2.weak(35.5,14)   ,  Vec2.weak(20.5,32)   ],
+							mat,
+							filt
+						);
+						s.body = body;
+						s.fluidEnabled = false;
+						s.fluidProperties = prop;
+                        cbtype(s.cbTypes,"");
+					
+						s = new Polygon(
+							[   Vec2.weak(128,17.5)   ,  Vec2.weak(120.5,19)   ,  Vec2.weak(128,49.5)   ,  Vec2.weak(134,43.5)   ,  Vec2.weak(134,20.5)   ],
+							mat,
+							filt
+						);
+						s.body = body;
+						s.fluidEnabled = false;
+						s.fluidProperties = prop;
+                        cbtype(s.cbTypes,"");
+					
+						s = new Polygon(
+							[   Vec2.weak(154.5,37)   ,  Vec2.weak(145.5,28)   ,  Vec2.weak(143,42.5)   ,  Vec2.weak(147.5,45)   ],
+							mat,
+							filt
+						);
+						s.body = body;
+						s.fluidEnabled = false;
+						s.fluidProperties = prop;
+                        cbtype(s.cbTypes,"");
+					
+						s = new Polygon(
+							[   Vec2.weak(120.5,19)   ,  Vec2.weak(112.5,19)   ,  Vec2.weak(39,43.5)   ,  Vec2.weak(46.5,49)   ,  Vec2.weak(119,63.5)   ,  Vec2.weak(123.5,59)   ,  Vec2.weak(128,49.5)   ],
+							mat,
+							filt
+						);
+						s.body = body;
+						s.fluidEnabled = false;
+						s.fluidProperties = prop;
+                        cbtype(s.cbTypes,"");
+					
+						s = new Polygon(
+							[   Vec2.weak(106,5.5)   ,  Vec2.weak(96,0.5)   ,  Vec2.weak(66,-0.5)   ,  Vec2.weak(49,4.5)   ,  Vec2.weak(31,43.5)   ,  Vec2.weak(39,43.5)   ,  Vec2.weak(112.5,19)   ,  Vec2.weak(111.5,13)   ],
+							mat,
+							filt
+						);
+						s.body = body;
+						s.fluidEnabled = false;
+						s.fluidProperties = prop;
+                        cbtype(s.cbTypes,"");
+					
+						s = new Polygon(
+							[   Vec2.weak(50,56.5)   ,  Vec2.weak(57,63)   ,  Vec2.weak(119,63.5)   ,  Vec2.weak(46.5,49)   ],
+							mat,
+							filt
+						);
+						s.body = body;
+						s.fluidEnabled = false;
+						s.fluidProperties = prop;
+                        cbtype(s.cbTypes,"");
+					
+						s = new Polygon(
+							[   Vec2.weak(31,43.5)   ,  Vec2.weak(49,4.5)   ,  Vec2.weak(25,48.5)   ],
 							mat,
 							filt
 						);
