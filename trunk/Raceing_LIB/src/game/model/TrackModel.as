@@ -61,6 +61,7 @@ package game.model
 					ai.frequency = Number(competitor.@frequency);
 					ai.impulse = Number(competitor.@impulse);
 					ai.velocity = Number(competitor.@velocity);
+					ai.mass = Number(competitor.@mass);
 				}
 			}
 		}

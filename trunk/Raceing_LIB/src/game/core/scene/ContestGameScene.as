@@ -158,6 +158,7 @@ package game.core.scene
 					}
 				}
 			));
+			
 			_space.listeners.add( new InteractionListener(CbEvent.BEGIN,InteractionType.COLLISION,_carBodyCbType,_track.roadType,
 				function( callback:InteractionCallback ):void {
 					var rotate:Number = (_car.carBody.rotation*180/Math.PI)%360 ;
