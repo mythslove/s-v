@@ -22,7 +22,7 @@ package game
 			removeEventListener(Event.ADDED_TO_STAGE , addedHandler );
 			
 			var playerCarVO:PlayerCarVO = CarModel.instance.initDefaultPlayerCarVO() ;
-			var scene:ContestGameScene = new ContestGameScene( TrackModel.instance.tracks[0],playerCarVO);
+			var scene:ContestGameScene = new ContestGameScene( TrackModel.instance.tracks[1],playerCarVO);
 			addChild(scene);
 			scene.addEventListener(GameControlEvent.GAME_OVER , gameOver);
 		}
@@ -33,7 +33,7 @@ package game
 			this.removeChildren(0,-1,true);
 			
 			var playerCarVO:PlayerCarVO = CarModel.instance.initDefaultPlayerCarVO() ;
-			var scene:ContestGameScene = new ContestGameScene( TrackModel.instance.tracks[0],playerCarVO);
+			var scene:ContestGameScene = new ContestGameScene( TrackModel.instance.tracks[1],playerCarVO);
 			addChild(scene);
 			scene.addEventListener(GameControlEvent.GAME_OVER , gameOver);
 		}

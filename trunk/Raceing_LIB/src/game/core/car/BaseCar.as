@@ -56,6 +56,7 @@ package game.core.car
 			this.maxVelocity = carVO.carParams["velocity"].value ;
 			this.maxImpulse = carVO.carParams["impulse"].value;
 			createBody();
+			createParticles();
 		}
 		
 		protected function createBody():void
@@ -73,9 +74,10 @@ package game.core.car
 			_textureAltas = new TextureAtlas(_texture,textureXML);
 		}
 		
-		public function createParticles( dustTexture:Texture ):void
+		protected function createParticles():void
 		{
 			var dustPex:XML = XML(ResPool.instance.getResVOByResId("DustParticle_PEX").resObject);
+			var dustTexture :Texture = _textureAltas.getTexture("dustTexture");
 			dustParticle = new PDParticleSystem(dustPex,dustTexture);
 			Starling.juggler.add( dustParticle );
 			addChildAt(dustParticle,0);

@@ -6,13 +6,10 @@ import flash.utils.Dictionary;
 import nape.callbacks.CbType;
 import nape.callbacks.CbTypeList;
 import nape.dynamics.InteractionFilter;
-import nape.geom.AABB;
 import nape.geom.Vec2;
 import nape.phys.Body;
-import nape.phys.BodyType;
 import nape.phys.FluidProperties;
 import nape.phys.Material;
-import nape.shape.Circle;
 import nape.shape.Polygon;
 import nape.shape.Shape;
 
@@ -128,7 +125,7 @@ public class CarBody2PhyData {
 				
 					
 						s = new Polygon(
-							[   Vec2.weak(0,45)   ,  Vec2.weak(38,59.5)   ,  Vec2.weak(31,16.5)   ,  Vec2.weak(9,12.5)   ],
+							[   Vec2.weak(197,31)   ,  Vec2.weak(174,21.5)   ,  Vec2.weak(158,19.5)   ,  Vec2.weak(143,19.5)   ,  Vec2.weak(5.5,27)   ,  Vec2.weak(5,34.5)   ,  Vec2.weak(154,60)   ,  Vec2.weak(196,43)   ],
 							mat,
 							filt
 						);
@@ -138,7 +135,7 @@ public class CarBody2PhyData {
                         cbtype(s.cbTypes,"");
 					
 						s = new Polygon(
-							[   Vec2.weak(241,50)   ,  Vec2.weak(235,33.5)   ,  Vec2.weak(203,22.5)   ,  Vec2.weak(180,19.5)   ,  Vec2.weak(39.5,59)   ,  Vec2.weak(176,61)   ,  Vec2.weak(211,59)   ],
+							[   Vec2.weak(8.5,18)   ,  Vec2.weak(5.5,27)   ,  Vec2.weak(143,19.5)   ,  Vec2.weak(101,-0.5)   ,  Vec2.weak(55,-0.5)   ,  Vec2.weak(19,11.5)   ],
 							mat,
 							filt
 						);
@@ -148,7 +145,7 @@ public class CarBody2PhyData {
                         cbtype(s.cbTypes,"");
 					
 						s = new Polygon(
-							[   Vec2.weak(31,16.5)   ,  Vec2.weak(38,59.5)   ,  Vec2.weak(39.5,59)   ,  Vec2.weak(77,-0.5)   ,  Vec2.weak(76,-0.5)   ],
+							[   Vec2.weak(1.5,38)   ,  Vec2.weak(0,46)   ,  Vec2.weak(51.5,60)   ,  Vec2.weak(154,60)   ,  Vec2.weak(5,34.5)   ],
 							mat,
 							filt
 						);
@@ -158,27 +155,7 @@ public class CarBody2PhyData {
                         cbtype(s.cbTypes,"");
 					
 						s = new Polygon(
-							[   Vec2.weak(227,28.5)   ,  Vec2.weak(203,22.5)   ,  Vec2.weak(235,33.5)   ],
-							mat,
-							filt
-						);
-						s.body = body;
-						s.fluidEnabled = false;
-						s.fluidProperties = prop;
-                        cbtype(s.cbTypes,"");
-					
-						s = new Polygon(
-							[   Vec2.weak(123,-0.5)   ,  Vec2.weak(77,-0.5)   ,  Vec2.weak(39.5,59)   ,  Vec2.weak(162,19)   ,  Vec2.weak(134,3.5)   ],
-							mat,
-							filt
-						);
-						s.body = body;
-						s.fluidEnabled = false;
-						s.fluidProperties = prop;
-                        cbtype(s.cbTypes,"");
-					
-						s = new Polygon(
-							[   Vec2.weak(180,19.5)   ,  Vec2.weak(162,19)   ,  Vec2.weak(39.5,59)   ],
+							[   Vec2.weak(197,50)   ,  Vec2.weak(196,43)   ,  Vec2.weak(154,60)   ],
 							mat,
 							filt
 						);
@@ -200,8 +177,8 @@ public class CarBody2PhyData {
 }
 }
 
-import nape.phys.Body;
 import nape.geom.Vec2;
+import nape.phys.Body;
 
 class BodyPair {
 	public var body:Body;
