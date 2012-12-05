@@ -38,8 +38,8 @@ package game.core.car
 			
 			var material:Material = Material.rubber();
 			material.density = _carVO.carParams["density"].value  ;
-			var w1X:int = -57 , w2X:int = 80 ;
-			var wY:int = 30 ;
+			var w1X:int = -60 , w2X:int = 75 ;
+			var wY:int = 35 ;
 			
 			img = new Image(carWheelTexture); 
 			img.pivotX = carWheelTexture.width>>1 ;
@@ -49,7 +49,7 @@ package game.core.car
 			leftWheel.space = _space;
 			leftWheel.graphic = img ;
 			leftWheel.graphicUpdate = graphicUpdate ;
-			addChildAt( img,0);
+			addChild( img);
 			
 			img = new Image(carWheelTexture); 
 			img.pivotX = carWheelTexture.width>>1 ;
@@ -59,7 +59,7 @@ package game.core.car
 			rightWheel.space = _space;
 			rightWheel.graphic = img;
 			rightWheel.graphicUpdate = graphicUpdate ;
-			addChildAt( img,0);
+			addChild( img);
 			
 			var lin1:LineJoint = new LineJoint( carBody,leftWheel,Vec2.get(w1X,wY),Vec2.get(),
 				Vec2.get(0,1), -5,5);

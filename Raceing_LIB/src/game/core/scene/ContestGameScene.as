@@ -81,14 +81,12 @@ package game.core.scene
 			_carBot = CarFactory.createCar( _carGroup , _carBotVO.carVO , _space , 400 , GameSetting.SCREEN_HEIGHT-400 );
 			_carBot.leftWheel.cbTypes.add( _carWheelCbType) ;
 			_carBot.rightWheel.cbTypes.add( _carWheelCbType) ;
-			_carBot.createParticles(dustTexture);
 			_map.addChild(_carBot);
 			
 			_car =  CarFactory.createCar( _carGroup , _playerCarVO.carVO , _space , 300 , GameSetting.SCREEN_HEIGHT-400 );
 			_car.leftWheel.cbTypes.add( _carWheelCbType) ;
 			_car.rightWheel.cbTypes.add( _carWheelCbType) ;
 			_car.carBody.cbTypes.add(_carBodyCbType);
-			_car.createParticles(dustTexture);
 			_map.addChild(_car);
 			
 			deleteResVOs();
