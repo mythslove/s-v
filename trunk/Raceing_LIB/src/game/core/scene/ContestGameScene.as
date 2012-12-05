@@ -184,23 +184,23 @@ package game.core.scene
 		private function moveCar():void
 		{
 			if(_moveDirection==2){
-				_car.leftWheel.rotation+=0.2 ;
+				_car.leftWheel.rotation+=0.3 ;
 				if(_carLeftWheelOnRoad) {
 					_car.leftWheel.applyLocalImpulse( Vec2.get(_car.maxImpulse,0));
 				}
 				if(_playerCarVO.carVO.drive==2){
-					_car.rightWheel.rotation+=0.2 ;
+					_car.rightWheel.rotation+=0.3 ;
 					if(_carRightWheelOnRoad ){
 						_car.rightWheel.applyLocalImpulse( Vec2.get( _car.maxImpulse,0));
 					}
 				}
 			}else if(_moveDirection==1){
-				_car.leftWheel.rotation-=0.2 ;
+				_car.leftWheel.rotation-=0.3 ;
 				if(_carLeftWheelOnRoad) {
 					_car.leftWheel.applyLocalImpulse( Vec2.get(-_car.maxImpulse,0));
 				}
 				if(_playerCarVO.carVO.drive==2){
-					_car.rightWheel.rotation-=0.2 ;
+					_car.rightWheel.rotation-=0.3 ;
 					if(_carRightWheelOnRoad ){
 						_car.rightWheel.applyLocalImpulse( Vec2.get( -_car.maxImpulse,0));
 					}
