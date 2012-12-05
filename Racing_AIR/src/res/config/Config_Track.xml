@@ -12,8 +12,8 @@
 		<density>1.6</density>
 		<rollingFriction>16</rollingFriction>
 		<competitors>
-			<competitor carId="1"  name="jake" head="" earnExp="10" earnCoin="10" density="1" impulse="40" velocity="220" frequency="5" />
-			<competitor carId="1"  name="mike" head="" earnExp="20" earnCoin="10" density="2" impulse="40" velocity="220" frequency="5" />
+			<competitor carId="1"  name="jake" head="" earnExp="10" earnCoin="10" density="1.2" impulse="20" velocity="220" frequency="5"  mass="3" drive="2"/>
+			<competitor carId="1"  name="mike" head="" earnExp="20" earnCoin="10" density="2" impulse="20" velocity="220" frequency="5" mass="3" drive="2"/>
 		</competitors>
 	</item>
 	<item>
@@ -29,7 +29,7 @@
 		<density>1.6</density>
 		<rollingFriction>16</rollingFriction>
 		<competitors>
-			<competitor carId="1"  name="jake" head="" earnExp="10" earnCoin="10" density="1" impulse="40" velocity="220" frequency="5" />
+			<competitor carId="1"  name="jake" head="" earnExp="10" earnCoin="10" density="1" impulse="40" velocity="220" frequency="5"  mass="2" drive="2"/>
 		</competitors>
 	</item>
 </track>
