@@ -114,48 +114,40 @@ package game.core.scene
 		private function addListeners():void
 		{
 			_space.listeners.add( new InteractionListener(CbEvent.BEGIN,InteractionType.COLLISION,_carWheelCbType,_track.roadType,
-				function( callback:InteractionCallback ):void {
-					var list:ArbiterList = callback.arbiters ;
-					for(var i:int = 0 ; i<list.length ; ++i){
-						var arbiter:Arbiter = list.at(i) ;
-						switch(arbiter.body2)
-						{
-							case _car.leftWheel :
-								_carLeftWheelOnRoad = true ;
-								break ;
-							case _car.rightWheel :
-								_carRightWheelOnRoad = true ;
-								break ;
-							case _carBot.leftWheel :
-								_botCarLeftWheelOnRoad = true ;
-								break ;
-							case _carBot.rightWheel :
-								_botCarRightWheelOnRoad = true ;
-								break ;
-						}
+				function( callback:InteractionCallback ):void 
+				{
+					switch(callback.int1.castBody) {
+						case _car.leftWheel :
+							_carLeftWheelOnRoad = true ;
+							break ;
+						case _car.rightWheel :
+							_carRightWheelOnRoad = true ;
+							break ;
+						case _carBot.leftWheel :
+							_botCarLeftWheelOnRoad = true ;
+							break ;
+						case _carBot.rightWheel :
+							_botCarRightWheelOnRoad = true ;
+							break ;
 					}
 				}
 			));
 			_space.listeners.add( new InteractionListener(CbEvent.END,InteractionType.COLLISION,_carWheelCbType,_track.roadType,
-				function( callback:InteractionCallback ):void {
-					var list:ArbiterList = callback.arbiters ;
-					for(var i:int = 0 ; i<list.length ; ++i){
-						var arbiter:Arbiter = list.at(i) ;
-						switch(arbiter.body2)
-						{
-							case _car.leftWheel :
-								_carLeftWheelOnRoad = false ;
-								break ;
-							case _car.rightWheel :
-								_carRightWheelOnRoad = false ;
-								break ;
-							case _carBot.leftWheel :
-								_botCarLeftWheelOnRoad = false ;
-								break ;
-							case _carBot.rightWheel :
-								_botCarRightWheelOnRoad = false ;
-								break ;
-						}
+				function( callback:InteractionCallback ):void 
+				{
+					switch(callback.int1.castBody) {
+						case _car.leftWheel :
+							_carLeftWheelOnRoad = false ;
+							break ;
+						case _car.rightWheel :
+							_carRightWheelOnRoad = false ;
+							break ;
+						case _carBot.leftWheel :
+							_botCarLeftWheelOnRoad = false ;
+							break ;
+						case _carBot.rightWheel :
+							_botCarRightWheelOnRoad = false ;
+							break ;
 					}
 				}
 			));
