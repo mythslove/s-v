@@ -1,11 +1,11 @@
 package game.core.scene
 {
-	import flash.ui.Keyboard;
 	import flash.utils.setTimeout;
 	
 	import game.comm.GameSetting;
 	import game.core.car.BaseCar;
 	import game.core.track.BaseTrack;
+	import game.events.GameControlEvent;
 	import game.util.CarFactory;
 	import game.util.TrackFactory;
 	import game.vos.PlayerCarVO;
@@ -26,7 +26,6 @@ package game.core.scene
 	import starling.core.Starling;
 	import starling.display.Sprite;
 	import starling.events.Event;
-	import starling.events.KeyboardEvent;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
@@ -176,6 +175,7 @@ package game.core.scene
 		private function gameOver():void
 		{
 			removeEventListener(starling.events.Event.ENTER_FRAME , updateHandler );
+			this.dispatchEvent(new GameControlEvent(GameControlEvent.GAME_OVER));
 		}
 		
 		
@@ -233,18 +233,17 @@ package game.core.scene
 		
 		
 		//===============清除资源=========================
-		override protected function removedHandler( e:starling.events.Event ):void
+		override public function dispose():void
 		{
-			super.removedHandler(e);
+			super.dispose();
 			removeEventListener(starling.events.Event.ENTER_FRAME , updateHandler );
-			stage.removeEventListener(TouchEvent.TOUCH , onTouchHandler);
 			_space.clear();
 			_space=  null ;
 			_carBot = null ;
 			_track=null ;
 			_carBodyCbType = null ;
 			_carWheelCbType = null ;
-			_map.removeChildren(0,-1,true);
+			_map = null ;
 		}
 	}
 }
