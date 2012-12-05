@@ -15,6 +15,7 @@ package game.core.track
 	import nape.shape.Polygon;
 	import nape.space.Space;
 	
+	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.textures.Texture;
 	import starling.textures.TextureAtlas;
