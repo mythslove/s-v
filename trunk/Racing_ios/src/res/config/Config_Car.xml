@@ -10,4 +10,12 @@
 		<frequency value="5" levels="10" add="1" />
 		<mass value="2" levels="10" add="0.1" />
 	</item>
+	<item id="2" name="Super Car" costCoin="0" costCash="0" requireLevel="1" drive="1">
+		<!-- levels表示可以升的级数，add表示每升一级的增量 -->
+		<density value="1" levels="10" add="0.2" />
+		<impulse value="50" levels="10" add="10" />
+		<velocity value="300" levels="10" add="10" />
+		<frequency value="5" levels="10" add="1" />
+		<mass value="2" levels="10" add="0.1" />
+	</item>
 </car>
