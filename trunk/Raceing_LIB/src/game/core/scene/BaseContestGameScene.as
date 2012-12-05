@@ -5,8 +5,10 @@ package game.core.scene
 	
 	import flash.events.Event;
 	
+	import game.comm.GameSetting;
 	import game.vos.*;
 	
+	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.Event;
 	
@@ -54,7 +56,18 @@ package game.core.scene
 		private function resLoadedHandler(e:flash.events.Event):void
 		{
 			ResPool.instance.removeEventListener( "ContestGameSceneRes" , resLoadedHandler );
+			createGameBg();
 			createPhySpace();
+		}
+		
+		protected function createGameBg():void
+		{
+			var quad:Quad = new Quad(GameSetting.SCREEN_WIDTH , GameSetting.SCREEN_HEIGHT);
+			quad.setVertexColor(0,0xCEE7FF);
+			quad.setVertexColor(1,0xCEE7FF);
+			quad.setVertexColor(2,0xB5B5FF);
+			quad.setVertexColor(3,0xB5B5FF);
+			addChildAt(quad,0);
 		}
 		
 		/**
