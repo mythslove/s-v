@@ -20,6 +20,7 @@ package game.core.scene
 	import nape.dynamics.ArbiterList;
 	import nape.dynamics.InteractionGroup;
 	import nape.geom.Vec2;
+	import nape.phys.Body;
 	import nape.space.Space;
 	import nape.util.BitmapDebug;
 	
@@ -90,6 +91,15 @@ package game.core.scene
 			_map.addChild(_car);
 			
 			addListeners();
+			
+			//初始化位置
+			var len:int = _space.bodies.length ;
+			for (var i:int = 0; i <len ; ++i) {
+				var body:Body = _space.bodies.at(i);
+				if (body.userData.graphicUpdate) {
+					body.userData.graphicUpdate(body);
+				}
+			}
 			
 			addEventListener(starling.events.Event.ENTER_FRAME , updateHandler );
 			stage.addEventListener(TouchEvent.TOUCH , onTouchHandler);
@@ -175,23 +185,23 @@ package game.core.scene
 			if(_moveDirection==2){
 				_car.leftWheel.rotation+=0.2 ;
 				if(_carLeftWheelOnRoad) {
-					_car.leftWheel.applyLocalImpulse( Vec2.fromPolar(_car.maxImpulse,_car.carBody.rotation) );
+					_car.leftWheel.applyImpulse( Vec2.fromPolar(_car.maxImpulse,_car.carBody.rotation) );
 				}
 				if(_playerCarVO.carVO.drive==2){
 					_car.rightWheel.rotation+=0.2 ;
 					if(_carRightWheelOnRoad ){
-						_car.rightWheel.applyLocalImpulse( Vec2.fromPolar(_car.maxImpulse,_car.carBody.rotation)  );
+						_car.rightWheel.applyImpulse( Vec2.fromPolar(_car.maxImpulse,_car.carBody.rotation)  );
 					}
 				}
 			}else if(_moveDirection==1){
 				_car.leftWheel.rotation-=0.2 ;
 				if(_carLeftWheelOnRoad) {
-					_car.leftWheel.applyLocalImpulse( Vec2.fromPolar( -_car.maxImpulse,_car.carBody.rotation)  );
+					_car.leftWheel.applyImpulse( Vec2.fromPolar( -_car.maxImpulse,_car.carBody.rotation)  );
 				}
 				if(_playerCarVO.carVO.drive==2){
 					_car.rightWheel.rotation-=0.2 ;
 					if(_carRightWheelOnRoad ){
-						_car.rightWheel.applyLocalImpulse( Vec2.fromPolar( -_car.maxImpulse,_car.carBody.rotation)  );
+						_car.rightWheel.applyImpulse( Vec2.fromPolar( -_car.maxImpulse,_car.carBody.rotation)  );
 					}
 				}
 			}
@@ -205,6 +215,14 @@ package game.core.scene
 		private function updateHandler(e:starling.events.Event):void
 		{
 			_space.step(1/60);
+			var len:int = _space.liveBodies.length; 
+			for (var i:int = 0; i <len ; ++i) {
+				var body:Body = _space.liveBodies.at(i);
+				if (body.userData.graphicUpdate) {
+					body.userData.graphicUpdate(body);
+				}
+			}
+			
 			moveCar();
 			_map.x = GameSetting.SCREEN_WIDTH*0.5 - _car.carBody.position.x-100 ;
 			if(_map.x>0 ) _map.x =0 ;
@@ -212,11 +230,11 @@ package game.core.scene
 			
 			//机器车自动走
 			if(_botCarLeftWheelOnRoad){
-				_carBot.leftWheel.applyLocalImpulse( Vec2.fromPolar( _carBot.maxImpulse,_carBot.carBody.rotation));
+				_carBot.leftWheel.applyImpulse( Vec2.fromPolar( _carBot.maxImpulse,_carBot.carBody.rotation));
 			}
 			if(_carBotVO.drive == 2 ){
 				if(_botCarRightWheelOnRoad){
-					_carBot.rightWheel.applyLocalImpulse( Vec2.fromPolar( _carBot.maxImpulse,_carBot.carBody.rotation) );
+					_carBot.rightWheel.applyImpulse( Vec2.fromPolar( _carBot.maxImpulse,_carBot.carBody.rotation) );
 				}
 			}
 			if(_carBot.leftWheel.velocity.x>_carBot.maxVelocity)  _carBot.leftWheel.velocity.x = _carBot.maxVelocity ; 

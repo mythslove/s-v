@@ -5,6 +5,7 @@ package game.core.car
 	import flash.display.Bitmap;
 	import flash.utils.ByteArray;
 	
+	import game.util.GameUtil;
 	import game.vos.CarVO;
 	
 	import nape.constraint.Constraint;
@@ -86,16 +87,16 @@ package game.core.car
 		
 		protected function graphicUpdate(body:Body):void
 		{
-			if(body.graphic && body.graphic is DisplayObject)
+			if(body.userData.graphic && body.userData.graphic is DisplayObject)
 			{
-				var gp:Vec2 = body.localToWorld(body.graphicOffset);
-				var gra:DisplayObject = body.graphic as DisplayObject;
-				gra.x = gp.x;
-				gra.y = gp.y;
-				gra.rotation = body.rotation ;
+				var obj:DisplayObject = body.userData.graphic as DisplayObject ;
+				obj.x = body.position.x ;
+				obj.y = body.position.y ;
+				obj.rotation = body.rotation;
+				
 				if(dustParticle && body==leftWheel){
-					dustParticle.emitterX  = gp.x-body.bounds.width ;
-					dustParticle.emitterY = gp.y ;
+					dustParticle.emitterX  = body.position.x-body.bounds.width ;
+					dustParticle.emitterY = body.position.y ;
 				}
 			}
 		}

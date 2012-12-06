@@ -29,7 +29,7 @@ package game.core.car
 
 			var img:Image = new Image(carTexture); 
 			carBody = CarBody1PhyData.createBody("CarBody",img);
-			carBody.graphicUpdate = graphicUpdate ;
+			carBody.userData.graphicUpdate = CarBody1PhyData.flashGraphicsUpdate ;
 			carBody.mass = carBody.gravMass = _carVO.carParams["mass"].value ;
 			carBody.compound = compound ;
 			carBody.space = _space;
@@ -47,8 +47,8 @@ package game.core.car
 			leftWheel= circle(w1X,wY,carWheelTexture.width*0.5-2 ,material);
 			leftWheel.compound = compound ;
 			leftWheel.space = _space;
-			leftWheel.graphic = img ;
-			leftWheel.graphicUpdate = graphicUpdate ;
+			leftWheel.userData.graphic = img ;
+			leftWheel.userData.graphicUpdate = graphicUpdate ;
 			addChildAt( img,0);
 			
 			img = new Image(carWheelTexture); 
@@ -57,8 +57,8 @@ package game.core.car
 			rightWheel =  circle(w2X,wY,carWheelTexture.width*0.5-2,material ); 
 			rightWheel.compound = compound ;
 			rightWheel.space = _space;
-			rightWheel.graphic = img;
-			rightWheel.graphicUpdate = graphicUpdate ;
+			rightWheel.userData.graphic = img;
+			rightWheel.userData.graphicUpdate = graphicUpdate ;
 			addChildAt( img,0);
 			
 			var lin1:LineJoint = new LineJoint( carBody,leftWheel,Vec2.weak(w1X,wY),Vec2.weak(),
