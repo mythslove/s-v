@@ -407,22 +407,40 @@ class QueueLoader
 	public function QueueLoader( name:String , resArray:Array, maxNum:int =2 )
 	{
 		this.name = name ;
-		_resArray = resArray ;
+		
+		//去除相同的resId
+		var dic:Dictionary = new Dictionary();
+		_resArray = [];
+		for( var i:int=0 ; i<resArray.length ; ++i){
+			if(!dic[resArray[i].resId]){
+				dic[resArray[i].resId] = true ;
+				_resArray.push( resArray[i]);
+			}
+		}
+		
 		_queueHash = new Dictionary(true) ;
-		_total= resArray.length ;
+		_total= _resArray.length ;
 		_queueLoaded = 0;
-		for( var i:int=0 ; i<maxNum && i<_total ; ++i){
+		for( i=0 ; i<maxNum && i<_total ; ++i){
 			startQueueLoad();
 		}
 	}
 	
 	protected function startQueueLoad():void
 	{
-		var content:ResVO = _resArray.shift();
-		content.isQueue = true ;
-		this._queueHash[content.resId] = content;
-		ResPool.instance.addEventListener( content.resId , resObjectLoadedHandler );
-		ResPool.instance.loadRes( content );
+		if(_resArray && _resArray.length>0){
+			var content:ResVO = _resArray.shift();
+			content.isQueue = true ;
+			this._queueHash[content.resId] = content;
+			ResPool.instance.addEventListener( content.resId , resObjectLoadedHandler );
+			ResPool.instance.loadRes( content );
+		}else{
+			_resArray = null ;
+			_queueHash = null ;
+			ResPool.instance.dispatchEvent( new ResLoadedEvent( name ) );
+			_queueHash = null ;
+			_resArray = null ;
+		}
 	}
 	protected function resObjectLoadedHandler(e:Event):void
 	{

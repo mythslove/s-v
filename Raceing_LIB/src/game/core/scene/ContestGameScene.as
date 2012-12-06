@@ -89,7 +89,6 @@ package game.core.scene
 			_car.carBody.cbTypes.add(_carBodyCbType);
 			_map.addChild(_car);
 			
-			deleteResVOs();
 			addListeners();
 			
 			addEventListener(starling.events.Event.ENTER_FRAME , updateHandler );

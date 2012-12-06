@@ -32,8 +32,8 @@ package game
 			e.target.removeEventListener(GameControlEvent.GAME_OVER , gameOver);
 			this.removeChildren(0,-1,true);
 			
-			var playerCarVO:PlayerCarVO = CarModel.instance.initDefaultPlayerCarVO() ;
-			var scene:ContestGameScene = new ContestGameScene( TrackModel.instance.tracks[1],playerCarVO);
+			var playerCarVO:PlayerCarVO = CarModel.instance.initDefaultPlayerCarVO(1) ;
+			var scene:ContestGameScene = new ContestGameScene( TrackModel.instance.tracks[0],playerCarVO);
 			addChild(scene);
 			scene.addEventListener(GameControlEvent.GAME_OVER , gameOver);
 		}
