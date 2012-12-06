@@ -175,23 +175,23 @@ package game.core.scene
 			if(_moveDirection==2){
 				_car.leftWheel.rotation+=0.2 ;
 				if(_carLeftWheelOnRoad) {
-					_car.leftWheel.applyLocalImpulse( Vec2.get(_car.maxImpulse,0));
+					_car.leftWheel.applyLocalImpulse( Vec2.fromPolar(_car.maxImpulse,_car.carBody.rotation) );
 				}
 				if(_playerCarVO.carVO.drive==2){
 					_car.rightWheel.rotation+=0.2 ;
 					if(_carRightWheelOnRoad ){
-						_car.rightWheel.applyLocalImpulse( Vec2.get( _car.maxImpulse,0));
+						_car.rightWheel.applyLocalImpulse( Vec2.fromPolar(_car.maxImpulse,_car.carBody.rotation)  );
 					}
 				}
 			}else if(_moveDirection==1){
 				_car.leftWheel.rotation-=0.2 ;
 				if(_carLeftWheelOnRoad) {
-					_car.leftWheel.applyLocalImpulse( Vec2.get(-_car.maxImpulse,0));
+					_car.leftWheel.applyLocalImpulse( Vec2.fromPolar( -_car.maxImpulse,_car.carBody.rotation)  );
 				}
 				if(_playerCarVO.carVO.drive==2){
 					_car.rightWheel.rotation-=0.2 ;
 					if(_carRightWheelOnRoad ){
-						_car.rightWheel.applyLocalImpulse( Vec2.get( -_car.maxImpulse,0));
+						_car.rightWheel.applyLocalImpulse( Vec2.fromPolar( -_car.maxImpulse,_car.carBody.rotation)  );
 					}
 				}
 			}
@@ -212,11 +212,11 @@ package game.core.scene
 			
 			//机器车自动走
 			if(_botCarLeftWheelOnRoad){
-				_carBot.leftWheel.applyLocalImpulse( Vec2.weak(_carBot.maxImpulse,0));
+				_carBot.leftWheel.applyLocalImpulse( Vec2.fromPolar( _carBot.maxImpulse,_carBot.carBody.rotation));
 			}
 			if(_carBotVO.drive == 2 ){
 				if(_botCarRightWheelOnRoad){
-					_carBot.rightWheel.applyLocalImpulse( Vec2.weak(_carBot.maxImpulse,0));
+					_carBot.rightWheel.applyLocalImpulse( Vec2.fromPolar( _carBot.maxImpulse,_carBot.carBody.rotation) );
 				}
 			}
 			if(_carBot.leftWheel.velocity.x>_carBot.maxVelocity)  _carBot.leftWheel.velocity.x = _carBot.maxVelocity ; 
