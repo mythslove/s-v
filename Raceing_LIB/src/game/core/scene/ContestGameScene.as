@@ -62,7 +62,7 @@ package game.core.scene
 		 */		
 		override protected function createPhySpace():void
 		{
-			_space = new Space(Vec2.get(0,600));
+			_space = new Space(Vec2.weak(0,600));
 			
 			if(_debug){
 				_debug.drawConstraints = true ;
