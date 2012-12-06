@@ -1,6 +1,6 @@
 <particleEmitterConfig>
   <texture name="texture.png"/>
-  <sourcePosition x="30.00" y="30.00"/>
+  <sourcePosition x="300.00" y="300.00"/>
   <sourcePositionVariance x="2" y="0"/>
   <speed value="50"/>
   <speedVariance value="50"/>
@@ -17,7 +17,7 @@
   <startColorVariance red="0" green="0" blue="0" alpha="0"/>
   <finishColor red="1" green="1" blue="1" alpha="0.05"/>
   <finishColorVariance red="0" green="0" blue="0" alpha="0"/>
-  <maxParticles value="45.07"/>
+  <maxParticles value="20"/>
   <startParticleSize value="48.92"/>
   <startParticleSizeVariance value="27.43"/>
   <finishParticleSize value="70"/>
