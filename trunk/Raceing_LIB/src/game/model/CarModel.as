@@ -66,10 +66,10 @@ package game.model
 		/**
 		 * 初始化一个默认的PlayerCarVO
 		 */		
-		public function initDefaultPlayerCarVO():PlayerCarVO
+		public function initDefaultPlayerCarVO(index:int = 0):PlayerCarVO
 		{
 			var vo:PlayerCarVO = new PlayerCarVO();
-			vo.carVO = ObjectUtil.copyObj( cars[1] ) as CarVO ;
+			vo.carVO = ObjectUtil.copyObj( cars[index] ) as CarVO ;
 			playerCars.push(vo);
 			return vo ;
 		}

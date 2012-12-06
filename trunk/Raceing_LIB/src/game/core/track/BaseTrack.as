@@ -45,9 +45,9 @@ package game.core.track
 		
 		protected function createBody():void
 		{
-			var textureXML:XML = XML(ResPool.instance.getResVOByResId("roadXML").resObject) ;
+			var textureXML:XML = XML(ResPool.instance.getResVOByResId("roadXML"+_trackVO.id).resObject) ;
 			
-			var roadObject:Object = ResPool.instance.getResVOByResId("road").resObject ;
+			var roadObject:Object = ResPool.instance.getResVOByResId("road"+_trackVO.id).resObject ;
 			if(roadObject is ByteArray){
 				_texture = Texture.fromAtfData( roadObject as ByteArray , 1  , false  );
 			}else if(roadObject is Bitmap){

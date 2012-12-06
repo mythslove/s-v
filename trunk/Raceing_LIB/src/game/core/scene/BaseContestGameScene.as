@@ -39,15 +39,13 @@ package game.core.scene
 		{
 			//添加loading
 			var resVOArray:Array = [
-				new ResVO("road",_trackVO.roadUrl),
-				new ResVO("roadXML",_trackVO.roadXMLUrl),
+				new ResVO("road"+_trackVO.id , _trackVO.roadUrl),
+				new ResVO("roadXML"+_trackVO.id,_trackVO.roadXMLUrl),
 				new ResVO("car"+_playerCarVO.carVO.id ,_playerCarVO.carVO.carUrl),
-				new ResVO("carXML"+_playerCarVO.carVO.id , _playerCarVO.carVO.carXMLUrl)
+				new ResVO("carXML"+_playerCarVO.carVO.id , _playerCarVO.carVO.carXMLUrl),
+				new ResVO("car"+_carBotVO.carVO.id ,_carBotVO.carVO.carUrl),
+				new ResVO("carXML"+_carBotVO.carVO.id , _carBotVO.carVO.carXMLUrl)
 			];
-			if(_playerCarVO.carVO.id != _carBotVO.carVO.id){
-				resVOArray.push(new ResVO("car"+_carBotVO.carVO.id ,_carBotVO.carVO.carUrl));
-				resVOArray.push(new ResVO("carXML"+_carBotVO.carVO.id , _carBotVO.carVO.carXMLUrl));
-			}
 			ResPool.instance.addEventListener( "ContestGameSceneRes" , resLoadedHandler );
 			ResPool.instance.queueLoad( "ContestGameSceneRes" , resVOArray);
 		}
@@ -75,19 +73,6 @@ package game.core.scene
 		protected function createPhySpace():void
 		{
 			
-		}
-		
-		protected function deleteResVOs():void
-		{
-			ResPool.instance.deleteRes("road");
-			ResPool.instance.deleteRes("roadXML");
-			ResPool.instance.deleteRes("car"+_playerCarVO.carVO.id);
-			ResPool.instance.deleteRes("carXML"+_playerCarVO.carVO.id);
-			if(_playerCarVO.carVO.id!=_carBotVO.carVO.id)
-			{
-				ResPool.instance.deleteRes("car"+_carBotVO.carVO.id);
-				ResPool.instance.deleteRes("carXML"+_carBotVO.carVO.id);
-			}
 		}
 		
 		override public function dispose():void
