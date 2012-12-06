@@ -55,8 +55,8 @@ package game.core.track
 			
 			var bridge:Compound = createBridgeBlocks() ;
 			bridge.space = _space ;
-			bridge.translate(Vec2.get(len-30,GameSetting.SCREEN_HEIGHT-400) );
-			len+=400 ;
+			bridge.translate(Vec2.weak(len+20 ,GameSetting.SCREEN_HEIGHT-400) );
+			len+=420 ;
 			
 			for( i  = 2 ; i<5 ; ++i)
 			{
