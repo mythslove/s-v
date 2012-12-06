@@ -38,7 +38,7 @@ package game.core.car
 			
 			var material:Material = Material.rubber();
 			material.density = _carVO.carParams["density"].value  ;
-			var w1X:int = -60 , w2X:int = 78 ;
+			var w1X:int = -58 , w2X:int = 78 ;
 			var wY:int = 35 ;
 			
 			img = new Image(carWheelTexture); 
@@ -62,7 +62,7 @@ package game.core.car
 			addChild( img);
 			
 			var lin1:LineJoint = new LineJoint( carBody,leftWheel,Vec2.weak(w1X,wY),Vec2.weak(),
-				Vec2.weak(0,1), -5,5);
+				Vec2.weak(0,1), -3,3);
 			lin1.compound = compound ;
 			lin1.stiff = false;
 			lin1.frequency = _carVO.carParams["frequency"].value ;
@@ -71,7 +71,7 @@ package game.core.car
 			lin1.ignore = true; 
 			
 			var lin2:LineJoint = new LineJoint(carBody,rightWheel,Vec2.weak(w2X,wY),Vec2.weak(),
-				Vec2.weak(0,1), -5 ,5 );
+				Vec2.weak(0,1), -3 ,3 );
 			lin2.compound = compound ;
 			lin2.stiff = false;
 			lin2.damping= lin2.frequency*0.01;
