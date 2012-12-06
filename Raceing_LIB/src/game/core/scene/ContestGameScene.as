@@ -21,6 +21,7 @@ package game.core.scene
 	import nape.dynamics.InteractionGroup;
 	import nape.geom.Vec2;
 	import nape.phys.Body;
+	import nape.phys.Compound;
 	import nape.space.Space;
 	import nape.util.BitmapDebug;
 	
@@ -89,10 +90,16 @@ package game.core.scene
 			_car.rightWheel.cbTypes.add( _carWheelCbType) ;
 			_car.carBody.cbTypes.add(_carBodyCbType);
 			_map.addChild(_car);
-			
-			addListeners();
-			
 			//初始化位置
+			refreshAllBodies();
+			//添加侦听
+			addListeners();
+			addEventListener(starling.events.Event.ENTER_FRAME , updateHandler );
+			stage.addEventListener(TouchEvent.TOUCH , onTouchHandler);
+		}
+		
+		private function refreshAllBodies():void
+		{
 			var len:int = _space.bodies.length ;
 			for (var i:int = 0; i <len ; ++i) {
 				var body:Body = _space.bodies.at(i);
@@ -100,9 +107,16 @@ package game.core.scene
 					body.userData.graphicUpdate(body);
 				}
 			}
-			
-			addEventListener(starling.events.Event.ENTER_FRAME , updateHandler );
-			stage.addEventListener(TouchEvent.TOUCH , onTouchHandler);
+			len = _space.compounds.length;
+			for( i = 0 ; i<len ; ++i){
+				var compound:Compound =_space.compounds.at(i);
+				for( var j:int = 0 ; j<compound.bodies.length ; ++j){
+					body = compound.bodies.at(j);
+					if (body.userData.graphicUpdate) {
+						body.userData.graphicUpdate(body);
+					}
+				}
+			}
 		}
 		
 		private function onTouchHandler(e:TouchEvent):void
