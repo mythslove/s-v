@@ -14,7 +14,6 @@ package game.core.track
 	import nape.shape.Polygon;
 	import nape.space.Space;
 	
-	import starling.display.DisplayObject;
 	import starling.display.Image;
 
 	/**
@@ -44,7 +43,7 @@ package game.core.track
 				var img:Image = new Image(_textureAltas.getTexture("road"+i));
 				roadBody = Road2PhyData.createBody("road"+i , img );
 				roadBody.cbTypes.add(roadType);
-				roadBody.graphicUpdate = graphicUpdate ;
+				roadBody.userData.graphicUpdate = Road2PhyData.flashGraphicsUpdate ;
 				roadBody.compound = roadCompound ;
 				roadBody.position.setxy( len ,GameSetting.SCREEN_HEIGHT) ;
 				roadBody.type = BodyType.KINEMATIC ;
@@ -64,7 +63,7 @@ package game.core.track
 				img = new Image(_textureAltas.getTexture("road"+i));
 				roadBody = Road2PhyData.createBody("road"+i , img );
 				roadBody.cbTypes.add(roadType);
-				roadBody.graphicUpdate = graphicUpdate ;
+				roadBody.userData.graphicUpdate = Road2PhyData.flashGraphicsUpdate ;
 				roadBody.compound = roadCompound ;
 				roadBody.position.setxy( len ,GameSetting.SCREEN_HEIGHT) ;
 				roadBody.type = BodyType.KINEMATIC ;
@@ -84,52 +83,42 @@ package game.core.track
 			
 			var wood:Material = Material.wood() ;
 			wood.density=10 ;
-			wood.elasticity = 0.01 ;
+			wood.elasticity = 0.05 ;
+			wood.rollingFriction = 4 ;
 			
-			var head:Body = new Body(BodyType.KINEMATIC);
-			head.shapes.add( new Polygon(Polygon.box(wid,het),wood));
-			head.compound = comp;
+			//碰撞组
 			var interGroup:InteractionGroup = new InteractionGroup(false);
-			for( var i:int = 1 ; i<= num ; ++i)
+			var head:Body ;
+			for( var i:int = 0 ; i< num ; ++i)
 			{
-				var type:BodyType = i==num?BodyType.KINEMATIC : BodyType.DYNAMIC ;
-				var block:Body = new Body(type,Vec2.get(wid*i,0) );
+				var type:BodyType = (i==0||i==num-1)?BodyType.KINEMATIC : BodyType.DYNAMIC ;
+				var block:Body = new Body(type,Vec2.weak(wid*i,0) );
 				block.shapes.add( new Polygon(Polygon.box(wid,het),wood));
-				block.mass = block.gravMass = 2 ;
 				var img:Image = new Image(_textureAltas.getTexture("bridgeTexture"));
 				img.pivotX = img.width>>1 ;
 				img.pivotY = img.height>>1 ;
-				block.graphic = img ;
-				block.graphicUpdate = graphicUpdate ;
-				addChildAt(img,0);
+				block.userData.graphic = img ;
+				block.userData.graphicOffset = Vec2.get();
+				block.userData.graphicUpdate = Road2PhyData.flashGraphicsUpdate ;
 				block.cbTypes.add(roadType);
 				block.group = interGroup ;
 				block.compound = comp; 
-				
-				var joint:DistanceJoint = new DistanceJoint( head,block, Vec2.weak(wid/2 ,0), Vec2.get(-wid/2 ,0) , 0 , 1 );
-				joint.frequency= 10 ;
-				joint.ignore = true ;
-				joint.breakUnderForce = false ;
-				joint.breakUnderError = false ;
-				joint.damping = 1 ;
-				joint.stiff = false ;
-				joint.compound = comp; 
-				
+				block.mass = block.gravMass=2 ;
+				addChildAt(img,0);
+				//结点
+				if(head){
+					var joint:DistanceJoint = new DistanceJoint( head,block, Vec2.weak(wid/2 ,0), Vec2.weak(-wid/2 ,0) , 0 , 1 );
+					joint.frequency= 10 ;
+					joint.ignore = true ;
+					joint.breakUnderForce = false ;
+					joint.breakUnderError = false ;
+					joint.damping = 5 ;
+					joint.stiff = false ;
+					joint.compound = comp; 
+				}
 				head = block ;
 			}
 			return comp ;
-		}
-		
-		private function graphicUpdate(body:Body):void
-		{
-			if(body.graphic && body.graphic is DisplayObject)
-			{
-				var gp:Vec2 = body.localToWorld(body.graphicOffset);
-				var gra:DisplayObject = body.graphic as DisplayObject;
-				gra.x = gp.x;
-				gra.y = gp.y;
-				gra.rotation = body.rotation ;
-			}
 		}
 	}
 }
