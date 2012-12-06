@@ -46,6 +46,8 @@ package game.model
 				vo.staticFriction=Number(item.staticFriction);
 				vo.density=Number(item.density);
 				vo.rollingFriction=Number(item.rollingFriction);
+				vo.gravity = int(item.gravity);
+				vo.bgColors = String(item.bgColors).split(",") ;
 				
 				vo.competitors = new Vector.<AIVO>();
 				for each( var competitor:* in item.competitors.children() )

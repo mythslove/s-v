@@ -38,7 +38,7 @@ package game.core.car
 			
 			var material:Material = Material.rubber();
 			material.density = _carVO.carParams["density"].value  ;
-			var w1X:int = -60 , w2X:int = 77 ;
+			var w1X:int = -60 , w2X:int = 78 ;
 			var wY:int = 35 ;
 			
 			img = new Image(carWheelTexture); 
