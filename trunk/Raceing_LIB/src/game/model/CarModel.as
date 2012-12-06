@@ -69,7 +69,7 @@ package game.model
 		public function initDefaultPlayerCarVO():PlayerCarVO
 		{
 			var vo:PlayerCarVO = new PlayerCarVO();
-			vo.carVO = ObjectUtil.copyObj( cars[1] ) as CarVO ;
+			vo.carVO = ObjectUtil.copyObj( cars[0] ) as CarVO ;
 			playerCars.push(vo);
 			return vo ;
 		}
