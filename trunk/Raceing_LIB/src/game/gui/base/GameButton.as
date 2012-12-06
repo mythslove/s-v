@@ -1,4 +1,4 @@
-package local.view.base
+package game.gui.base
 {
 	import feathers.controls.Button;
 	
@@ -63,11 +63,5 @@ package local.view.base
 		public function get enabled():Boolean{
 			return touchable;
 		}
-		
-		override public function dispose():void{
-			super.dispose();
-			removeEventListener(TouchEvent.TOUCH , onTouchHandler );
-		}
-		
 	}
 }
