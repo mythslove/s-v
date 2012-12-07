@@ -13,6 +13,7 @@
 		<rollingFriction>16</rollingFriction>
 		<bgColors>0x4D8DCA,0xBAC9D3</bgColors>
 		<gravity>600</gravity>
+		<position>290</position>
 		<competitors>
 			<competitor carId="1"  name="jake" head="" earnExp="10" earnCoin="10" density="1.2" impulse="50" velocity="250" frequency="5"  mass="3" drive="2"/>
 			<competitor carId="1"  name="mike" head="" earnExp="20" earnCoin="10" density="2" impulse="50" velocity="250" frequency="5" mass="3" drive="2"/>
@@ -32,6 +33,7 @@
 		<rollingFriction>16</rollingFriction>
 		<bgColors>0x4D8DCA,0xBAC9D3</bgColors>
 		<gravity>600</gravity>
+		<position>410</position>
 		<competitors>
 			<competitor carId="1"  name="jake" head="" earnExp="10" earnCoin="10" density="1" impulse="50" velocity="250" frequency="5"  mass="2" drive="2"/>
 		</competitors>
