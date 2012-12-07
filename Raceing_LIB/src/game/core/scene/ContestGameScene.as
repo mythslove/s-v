@@ -80,12 +80,12 @@ package game.core.scene
 			_map.addChild(_track);
 			
 			var dustTexture:Texture =  _track.textureAltas.getTexture("dustTexture") ;
-			_carBot = CarFactory.createCar( _carGroup , _carBotVO.carVO , _space , 400 , GameSetting.SCREEN_HEIGHT-400 );
+			_carBot = CarFactory.createCar( _carGroup , _carBotVO.carVO , _space , 400 , GameSetting.SCREEN_HEIGHT-_trackVO.position );
 			_carBot.leftWheel.cbTypes.add( _carWheelCbType) ;
 			_carBot.rightWheel.cbTypes.add( _carWheelCbType) ;
 			_map.addChild(_carBot);
 			
-			_car =  CarFactory.createCar( _carGroup , _playerCarVO.carVO , _space , 300 , GameSetting.SCREEN_HEIGHT-400 );
+			_car =  CarFactory.createCar( _carGroup , _playerCarVO.carVO , _space , 300 , GameSetting.SCREEN_HEIGHT-_trackVO.position );
 			_car.leftWheel.cbTypes.add( _carWheelCbType) ;
 			_car.rightWheel.cbTypes.add( _carWheelCbType) ;
 			_car.carBody.cbTypes.add(_carBodyCbType);
@@ -247,6 +247,9 @@ package game.core.scene
 			_map.x = GameSetting.SCREEN_WIDTH*0.5 - _car.carBody.position.x-100 ;
 			if(_map.x>0 ) _map.x =0 ;
 			else if(_map.x+_track.len<GameSetting.SCREEN_WIDTH) _map.x = GameSetting.SCREEN_WIDTH-_track.len ;
+			_map.y = GameSetting.SCREEN_HEIGHT*0.5 - _car.carBody.position.y ;
+			if(_map.y<0) _map.y = 0 ;
+			else if(_map.y>300) _map.y=0300 ;
 			
 			//机器车自动走
 			if(_botCarLeftWheelOnRoad){
