@@ -84,7 +84,6 @@ package game.core.track
 			var wood:Material = Material.wood() ;
 			wood.density=10 ;
 			wood.elasticity = 0.05 ;
-			wood.rollingFriction = 4 ;
 			
 			//碰撞组
 			var interGroup:InteractionGroup = new InteractionGroup(false);
