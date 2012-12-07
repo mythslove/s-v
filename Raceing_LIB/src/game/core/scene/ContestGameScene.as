@@ -221,9 +221,9 @@ package game.core.scene
 			}
 			//旋转车身
 			if(_moveDirection==2){
-				_car.carBody.applyImpulse( Vec2.get(0,30) ,_car.rightWheel.position);
+				_car.carBody.applyImpulse( Vec2.get(0,40) ,_car.rightWheel.position);
 			}else if(_moveDirection==1){
-				_car.carBody.applyImpulse( Vec2.get(0,30), _car.leftWheel.position );
+				_car.carBody.applyImpulse( Vec2.get(0,40), _car.leftWheel.position );
 			}
 			
 			if(_car.leftWheel.velocity.x<-_car.maxVelocity)  _car.leftWheel.velocity.x = - _car.maxVelocity ;
