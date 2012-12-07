@@ -249,7 +249,7 @@ package game.core.scene
 			else if(_map.x+_track.len<GameSetting.SCREEN_WIDTH) _map.x = GameSetting.SCREEN_WIDTH-_track.len ;
 			_map.y = GameSetting.SCREEN_HEIGHT*0.5 - _car.carBody.position.y ;
 			if(_map.y<0) _map.y = 0 ;
-			else if(_map.y>300) _map.y=0300 ;
+			else if(_map.y>300) _map.y=300 ;
 			
 			//机器车自动走
 			if(_botCarLeftWheelOnRoad){
