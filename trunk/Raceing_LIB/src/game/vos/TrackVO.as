@@ -18,6 +18,7 @@ package game.vos
 		public var rollingFriction:Number;
 		public var bgColors:Array ;
 		public var gravity:int ;
+		public var position:int ;
 		public var competitors:Vector.<AIVO> ;
 		
 		public function get roadUrl():String
