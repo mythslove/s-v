@@ -221,7 +221,7 @@ package game.core.scene
 			}
 			//旋转车身
 			if(_moveDirection==2){
-				_car.carBody.applyImpulse( Vec2.fromPolar(30,Math.PI/2-_car.carBody.rotation) ,_car.rightWheel.position);
+				_car.carBody.applyImpulse( Vec2.fromPolar(30,_car.carBody.rotation+Math.PI/2) ,_car.rightWheel.position);
 			}else if(_moveDirection==1){
 				_car.carBody.applyImpulse( Vec2.fromPolar(30,_car.carBody.rotation+Math.PI/2) , _car.leftWheel.position );
 			}
