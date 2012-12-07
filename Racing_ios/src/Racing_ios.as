@@ -21,11 +21,11 @@ package
 	
 	import starling.core.Starling;
 	
-	public class Racing extends Sprite
+	public class Racing_ios extends Sprite
 	{
 		private var _starling:Starling ;
 		
-		public function Racing()
+		public function Racing_ios()
 		{
 			super();
 			
