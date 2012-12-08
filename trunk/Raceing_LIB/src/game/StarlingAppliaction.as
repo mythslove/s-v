@@ -28,17 +28,22 @@ package game
 			var scene:BaseContestGameScene = GameSceneFactory.createGameSceneFactory(TrackModel.instance.tracks[1],playerCarVO);
 			addChild(scene);
 			scene.addEventListener(GameControlEvent.GAME_OVER , gameOver);
+			scene.addEventListener(GameControlEvent.GAME_SUCCESS , gameOver);
 		}
 		
 		private function gameOver( e:GameControlEvent):void
 		{
 			e.target.removeEventListener(GameControlEvent.GAME_OVER , gameOver);
+			e.target.removeEventListener(GameControlEvent.GAME_SUCCESS , gameOver);
 			this.removeChildren(0,-1,true);
+			
+			
 			
 			var playerCarVO:PlayerCarVO = CarModel.instance.initDefaultPlayerCarVO() ;
 			var scene:ContestGameScene = new ContestGameScene( TrackModel.instance.tracks[1],playerCarVO);
 			addChild(scene);
 			scene.addEventListener(GameControlEvent.GAME_OVER , gameOver);
+			scene.addEventListener(GameControlEvent.GAME_SUCCESS , gameOver);
 		}
 	}
 }

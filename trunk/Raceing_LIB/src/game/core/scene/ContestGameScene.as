@@ -29,6 +29,7 @@ package game.core.scene
 	import nape.util.BitmapDebug;
 	
 	import starling.core.Starling;
+	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.events.Touch;
@@ -38,6 +39,7 @@ package game.core.scene
 	
 	public class ContestGameScene extends BaseContestGameScene
 	{
+		protected var _botRrrived:Boolean ;//机器已经到达
 		protected var _gameOver:Boolean;
 		protected var _startFlag:Boolean ;
 		protected var _carX:Number = 300 ;
@@ -98,6 +100,12 @@ package game.core.scene
 			_car.rightWheel.cbTypes.add( _carWheelCbType) ;
 			_car.carBody.cbTypes.add(_carBodyCbType);
 			_map.addChild(_car);
+			
+			var endLine:Quad = new Quad(50,GameSetting.SCREEN_HEIGHT*3,0xffcc00);
+			endLine.alpha = .5 ;
+			endLine.x = _track.len-400-50/2;
+			endLine.y = -GameSetting.SCREEN_HEIGHT ;
+			_map.addChild( endLine );
 			//初始化位置
 			refreshAllBodies();
 			//添加侦听
@@ -211,7 +219,7 @@ package game.core.scene
 			_space.listeners.add( new InteractionListener(CbEvent.BEGIN,InteractionType.COLLISION,_carBodyCbType,_track.roadType,
 				function():void{
 					var rotate:Number = (_car.carBody.rotation*180/Math.PI)%360 ;
-					if(rotate>120 || rotate<-120){
+					if(rotate>110 || rotate<-110){
 						_gameOver = true ;
 						_car.breakCar();
 						stage.removeEventListener(TouchEvent.TOUCH , onTouchHandler);
@@ -228,6 +236,11 @@ package game.core.scene
 			this.dispatchEvent(new GameControlEvent(GameControlEvent.GAME_OVER));
 		}
 		
+		protected function gameSuccess():void
+		{
+			removeEventListener(starling.events.Event.ENTER_FRAME , updateHandler );
+			this.dispatchEvent(new GameControlEvent(GameControlEvent.GAME_SUCCESS));
+		}
 		
 		protected function moveCar():void
 		{
@@ -281,6 +294,7 @@ package game.core.scene
 		protected function updateHandler(e:starling.events.Event):void
 		{
 			_space.step(1/60);
+			//更新所有对象
 			var len:int = _space.liveBodies.length; 
 			for (var i:int = 0; i <len ; ++i) {
 				var body:Body = _space.liveBodies.at(i);
@@ -288,18 +302,37 @@ package game.core.scene
 					body.userData.graphicUpdate(body);
 				}
 			}
-	
-			if(_startFlag && !_gameOver ) moveCar();
+			//英雄位置
+			if(_startFlag && !_gameOver ) {
+				if(_car.carBody.position.x<_track.len-400){
+					moveCar();
+				}else{
+					if(_botRrrived){
+						gameOver();
+					}else{
+						gameSuccess();
+					}
+					return ;
+				}
+			}
 			
+			//机器车自动走
+			if(!_botRrrived && _startFlag && !_gameOver ) 
+			{
+				if(_carBot.carBody.position.x<_track.len-400) {
+					moveRobot();
+				} else{
+					_botRrrived = true ;
+				}
+			}
+			
+			//更新地图位置
 			_map.x = GameSetting.SCREEN_WIDTH*0.5 - _car.carBody.position.x-100 ;
 			if(_map.x>0 ) _map.x =0 ;
 			else if(_map.x+_track.len<GameSetting.SCREEN_WIDTH) _map.x = GameSetting.SCREEN_WIDTH-_track.len ;
 			_map.y = GameSetting.SCREEN_HEIGHT*0.5 - _car.carBody.position.y ;
 			if(_map.y<0) _map.y = 0 ;
 			else if(_map.y>300) _map.y=300 ;
-			
-			//机器车自动走
-			if(_startFlag && !_gameOver ) moveRobot();
 			
 			//debug
 			if(_debug){
