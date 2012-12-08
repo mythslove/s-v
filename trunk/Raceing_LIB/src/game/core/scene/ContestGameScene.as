@@ -1,5 +1,8 @@
 package game.core.scene
 {
+	import flash.events.TimerEvent;
+	import flash.utils.Timer;
+	import flash.utils.setInterval;
 	import flash.utils.setTimeout;
 	
 	import game.comm.GameSetting;
@@ -35,18 +38,23 @@ package game.core.scene
 	
 	public class ContestGameScene extends BaseContestGameScene
 	{
-		private var _moveDirection:int = 0 ;//无,1为left,2为right 
-		private var _car:BaseCar ;
-		private var _carBot:BaseCar ;
-		private var _track:BaseTrack ;
-		private var _space:Space;
-		private var _carGroup:InteractionGroup = new InteractionGroup(true);
-		private var _debug:BitmapDebug;//= new BitmapDebug(GameSetting.SCREEN_WIDTH,GameSetting.SCREEN_HEIGHT);
-		private var _map:Sprite; 
-		private var _carBodyCbType:CbType = new CbType();
-		private var _carWheelCbType:CbType = new CbType();
-		private var _carLeftWheelOnRoad:Boolean , _carRightWheelOnRoad:Boolean ;
-		private var _botCarLeftWheelOnRoad:Boolean, _botCarRightWheelOnRoad:Boolean  ;
+		protected var _gameOver:Boolean;
+		protected var _startFlag:Boolean ;
+		protected var _carX:Number = 300 ;
+		protected var _botX:Number =400 ;
+		protected var _car:BaseCar ;
+		protected var _carBot:BaseCar ;
+		protected var _moveDirection:int = 0 ;//无,1为left,2为right 
+		
+		protected var _track:BaseTrack ;
+		protected var _space:Space;
+		protected var _carGroup:InteractionGroup = new InteractionGroup(true);
+		protected var _debug:BitmapDebug;//= new BitmapDebug(GameSetting.SCREEN_WIDTH,GameSetting.SCREEN_HEIGHT);
+		protected var _map:Sprite; 
+		protected var _carBodyCbType:CbType = new CbType();
+		protected var _carWheelCbType:CbType = new CbType();
+		protected var _carLeftWheelOnRoad:Boolean , _carRightWheelOnRoad:Boolean ;
+		protected var _botCarLeftWheelOnRoad:Boolean, _botCarRightWheelOnRoad:Boolean  ;
 		
 		/**
 		 *  竞赛游戏场景
@@ -80,12 +88,12 @@ package game.core.scene
 			_map.addChild(_track);
 			
 			var dustTexture:Texture =  _track.textureAltas.getTexture("dustTexture") ;
-			_carBot = CarFactory.createCar( _carGroup , _carBotVO.carVO , _space , 400 , GameSetting.SCREEN_HEIGHT-_trackVO.position );
+			_carBot = CarFactory.createCar( _carGroup , _carBotVO.carVO , _space , _botX , GameSetting.SCREEN_HEIGHT-_trackVO.position );
 			_carBot.leftWheel.cbTypes.add( _carWheelCbType) ;
 			_carBot.rightWheel.cbTypes.add( _carWheelCbType) ;
 			_map.addChild(_carBot);
 			
-			_car =  CarFactory.createCar( _carGroup , _playerCarVO.carVO , _space , 300 , GameSetting.SCREEN_HEIGHT-_trackVO.position );
+			_car =  CarFactory.createCar( _carGroup , _playerCarVO.carVO , _space , _carX , GameSetting.SCREEN_HEIGHT-_trackVO.position );
 			_car.leftWheel.cbTypes.add( _carWheelCbType) ;
 			_car.rightWheel.cbTypes.add( _carWheelCbType) ;
 			_car.carBody.cbTypes.add(_carBodyCbType);
@@ -94,11 +102,38 @@ package game.core.scene
 			refreshAllBodies();
 			//添加侦听
 			addListeners();
+			updateHandler(null);
 			addEventListener(starling.events.Event.ENTER_FRAME , updateHandler );
 			stage.addEventListener(TouchEvent.TOUCH , onTouchHandler);
+			
+			//开始计时器
+			var timer:Timer = new Timer(1000,3);
+			timer.addEventListener(TimerEvent.TIMER , onTimerHandler);
+			timer.addEventListener(TimerEvent.TIMER_COMPLETE , onTimerHandler);
+			timer.start();
 		}
 		
-		private function refreshAllBodies():void
+		protected function onTimerHandler( e:TimerEvent ):void
+		{
+			switch(e.type)
+			{
+				case TimerEvent.TIMER:
+					trace( (e.target as Timer).currentCount );
+					break ;
+				case TimerEvent.TIMER_COMPLETE:
+					e.target.removeEventListener(TimerEvent.TIMER , onTimerHandler);
+					e.target.removeEventListener(TimerEvent.TIMER_COMPLETE , onTimerHandler);
+					startGame();
+					break ;
+			}
+		}
+		
+		protected function startGame():void
+		{
+			_startFlag = true ;
+		}
+		
+		protected function refreshAllBodies():void
 		{
 			var len:int = _space.bodies.length ;
 			for (var i:int = 0; i <len ; ++i) {
@@ -119,7 +154,7 @@ package game.core.scene
 			}
 		}
 		
-		private function onTouchHandler(e:TouchEvent):void
+		protected function onTouchHandler(e:TouchEvent):void
 		{
 			var beginTouch:Touch = e.getTouch(stage,TouchPhase.BEGAN) ;
 			if(beginTouch){
@@ -132,7 +167,7 @@ package game.core.scene
 			}
 		}
 		
-		private function addListeners():void
+		protected function addListeners():void
 		{
 			_space.listeners.add( new InteractionListener(CbEvent.BEGIN,InteractionType.COLLISION,_carWheelCbType,_track.roadType,
 				function( callback:InteractionCallback ):void 
@@ -174,9 +209,10 @@ package game.core.scene
 			));
 			
 			_space.listeners.add( new InteractionListener(CbEvent.BEGIN,InteractionType.COLLISION,_carBodyCbType,_track.roadType,
-				function( callback:InteractionCallback ):void {
+				function():void{
 					var rotate:Number = (_car.carBody.rotation*180/Math.PI)%360 ;
 					if(rotate>120 || rotate<-120){
+						_gameOver = true ;
 						_car.breakCar();
 						stage.removeEventListener(TouchEvent.TOUCH , onTouchHandler);
 						_car.dustParticle.stop();
@@ -184,47 +220,40 @@ package game.core.scene
 					}
 				}
 			));
-			
 		}
 		
-		private function gameOver():void
+		protected function gameOver():void
 		{
 			removeEventListener(starling.events.Event.ENTER_FRAME , updateHandler );
 			this.dispatchEvent(new GameControlEvent(GameControlEvent.GAME_OVER));
 		}
 		
 		
-		private function moveCar():void
+		protected function moveCar():void
 		{
 			if(_moveDirection==2){
 				_car.leftWheel.rotation+=0.2 ;
 				if(_carLeftWheelOnRoad) {
-					_car.leftWheel.applyImpulse( Vec2.fromPolar(_car.maxImpulse,_car.carBody.rotation) );
+					_car.carBody.applyImpulse( Vec2.fromPolar(_car.maxImpulse,_car.carBody.rotation) );
 				}
 				if(_playerCarVO.carVO.drive==2){
 					_car.rightWheel.rotation+=0.2 ;
 					if(_carRightWheelOnRoad ){
-						_car.rightWheel.applyImpulse( Vec2.fromPolar(_car.maxImpulse,_car.carBody.rotation)  );
+						_car.carBody.applyImpulse( Vec2.fromPolar(_car.maxImpulse,_car.carBody.rotation)  );
 					}
 				}
 			}else if(_moveDirection==1){
 				_car.leftWheel.rotation-=0.2 ;
 				if(_carLeftWheelOnRoad) {
-					_car.leftWheel.applyImpulse( Vec2.fromPolar( -_car.maxImpulse,_car.carBody.rotation)  );
+					_car.carBody.applyImpulse( Vec2.fromPolar( -_car.maxImpulse,_car.carBody.rotation)  );
 				}
 				if(_playerCarVO.carVO.drive==2){
 					_car.rightWheel.rotation-=0.2 ;
 					if(_carRightWheelOnRoad ){
-						_car.rightWheel.applyImpulse( Vec2.fromPolar( -_car.maxImpulse,_car.carBody.rotation)  );
+						_car.carBody.applyImpulse( Vec2.fromPolar( -_car.maxImpulse,_car.carBody.rotation)  );
 					}
 				}
 			}
-			//旋转车身
-			/*if(_moveDirection==2){
-				_car.carBody.applyImpulse( Vec2.fromPolar(30,_car.carBody.rotation+Math.PI/2) ,_car.rightWheel.position);
-			}else if(_moveDirection==1){
-				_car.carBody.applyImpulse( Vec2.fromPolar(30,_car.carBody.rotation+Math.PI/2) , _car.leftWheel.position );
-			}*/
 			
 			if(_car.leftWheel.velocity.x<-_car.maxVelocity)  _car.leftWheel.velocity.x = - _car.maxVelocity ;
 			if(_car.leftWheel.velocity.x>_car.maxVelocity)  _car.leftWheel.velocity.x = _car.maxVelocity ;
@@ -232,7 +261,24 @@ package game.core.scene
 			if(_car.rightWheel.velocity.x>_car.maxVelocity)  _car.rightWheel.velocity.x = _car.maxVelocity ;
 		}
 		
-		private function updateHandler(e:starling.events.Event):void
+		/**
+		 * 移动机器人 
+		 */		
+		protected function moveRobot():void
+		{
+			if(_botCarLeftWheelOnRoad){
+				_carBot.carBody.applyImpulse( Vec2.fromPolar( _carBot.maxImpulse,_carBot.carBody.rotation));
+			}
+			if(_carBotVO.drive == 2 ){
+				if(_botCarRightWheelOnRoad){
+					_carBot.carBody.applyImpulse( Vec2.fromPolar( _carBot.maxImpulse,_carBot.carBody.rotation) );
+				}
+			}
+			if(_carBot.leftWheel.velocity.x>_carBot.maxVelocity)  _carBot.leftWheel.velocity.x = _carBot.maxVelocity ; 
+			if(_carBot.rightWheel.velocity.x>_carBot.maxVelocity)  _carBot.rightWheel.velocity.x = _carBot.maxVelocity ;
+		}
+		
+		protected function updateHandler(e:starling.events.Event):void
 		{
 			_space.step(1/60);
 			var len:int = _space.liveBodies.length; 
@@ -242,8 +288,9 @@ package game.core.scene
 					body.userData.graphicUpdate(body);
 				}
 			}
+	
+			if(_startFlag && !_gameOver ) moveCar();
 			
-			moveCar();
 			_map.x = GameSetting.SCREEN_WIDTH*0.5 - _car.carBody.position.x-100 ;
 			if(_map.x>0 ) _map.x =0 ;
 			else if(_map.x+_track.len<GameSetting.SCREEN_WIDTH) _map.x = GameSetting.SCREEN_WIDTH-_track.len ;
@@ -252,16 +299,7 @@ package game.core.scene
 			else if(_map.y>300) _map.y=300 ;
 			
 			//机器车自动走
-			if(_botCarLeftWheelOnRoad){
-				_carBot.leftWheel.applyImpulse( Vec2.fromPolar( _carBot.maxImpulse,_carBot.carBody.rotation));
-			}
-			if(_carBotVO.drive == 2 ){
-				if(_botCarRightWheelOnRoad){
-					_carBot.rightWheel.applyImpulse( Vec2.fromPolar( _carBot.maxImpulse,_carBot.carBody.rotation) );
-				}
-			}
-			if(_carBot.leftWheel.velocity.x>_carBot.maxVelocity)  _carBot.leftWheel.velocity.x = _carBot.maxVelocity ; 
-			if(_carBot.rightWheel.velocity.x>_carBot.maxVelocity)  _carBot.rightWheel.velocity.x = _carBot.maxVelocity ;
+			if(_startFlag && !_gameOver ) moveRobot();
 			
 			//debug
 			if(_debug){

@@ -1,9 +1,12 @@
 package game
 {
+	import game.comm.GameMode;
+	import game.core.scene.BaseContestGameScene;
 	import game.core.scene.ContestGameScene;
 	import game.events.GameControlEvent;
 	import game.model.CarModel;
 	import game.model.TrackModel;
+	import game.util.GameSceneFactory;
 	import game.vos.PlayerCarVO;
 	
 	import starling.display.Sprite;
@@ -22,7 +25,7 @@ package game
 			removeEventListener(Event.ADDED_TO_STAGE , addedHandler );
 			
 			var playerCarVO:PlayerCarVO = CarModel.instance.initDefaultPlayerCarVO() ;
-			var scene:ContestGameScene = new ContestGameScene( TrackModel.instance.tracks[1],playerCarVO);
+			var scene:BaseContestGameScene = GameSceneFactory.createGameSceneFactory(TrackModel.instance.tracks[1],playerCarVO);
 			addChild(scene);
 			scene.addEventListener(GameControlEvent.GAME_OVER , gameOver);
 		}
