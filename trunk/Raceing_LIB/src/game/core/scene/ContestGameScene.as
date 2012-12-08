@@ -118,7 +118,7 @@ package game.core.scene
 			switch(e.type)
 			{
 				case TimerEvent.TIMER:
-					trace("开始倒计时:"+ (e.target as Timer).currentCount );
+					trace("Time:"+ (e.target as Timer).currentCount );
 					break ;
 				case TimerEvent.TIMER_COMPLETE:
 					e.target.removeEventListener(TimerEvent.TIMER , onTimerHandler);
