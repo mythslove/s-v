@@ -1,4 +1,9 @@
 ﻿<track>
+	<!--  gameMode:1为竞争模式 , 2为追赶模式 , 3为旋转模式  
+	position为路底到路面的距离+车的高度/2 
+	gravity为当前地图的重力
+	bgColors为地图的背景颜色
+	-->
 	<item>
 		<id>1</id>
 		<name>track1</name>
@@ -14,6 +19,7 @@
 		<bgColors>0x4D8DCA,0xBAC9D3</bgColors>
 		<gravity>600</gravity>
 		<position>290</position>
+		<gameMode>2</gameMode>
 		<competitors>
 			<competitor carId="1"  name="jake" head="" earnExp="10" earnCoin="10" density="1.2" impulse="50" velocity="250" frequency="5"  mass="3" drive="2"/>
 			<competitor carId="1"  name="mike" head="" earnExp="20" earnCoin="10" density="2" impulse="50" velocity="250" frequency="5" mass="3" drive="2"/>
@@ -34,6 +40,7 @@
 		<bgColors>0x4D8DCA,0xBAC9D3</bgColors>
 		<gravity>600</gravity>
 		<position>410</position>
+		<gameMode>3</gameMode>
 		<competitors>
 			<competitor carId="1"  name="jake" head="" earnExp="10" earnCoin="10" density="1" impulse="50" velocity="250" frequency="5"  mass="2" drive="2"/>
 		</competitors>
