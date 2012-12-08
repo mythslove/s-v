@@ -49,6 +49,7 @@ package game.model
 				vo.gravity = int(item.gravity);
 				vo.bgColors = String(item.bgColors).split(",") ;
 				vo.position = int(item.position);
+				vo.gameMode = int(item.gameMode);
 				
 				vo.competitors = new Vector.<AIVO>();
 				for each( var competitor:* in item.competitors.children() )

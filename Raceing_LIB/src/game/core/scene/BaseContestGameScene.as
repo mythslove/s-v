@@ -55,6 +55,8 @@ package game.core.scene
 			ResPool.instance.removeEventListener( "ContestGameSceneRes" , resLoadedHandler );
 			createGameBg();
 			createPhySpace();
+			//地图有点大，所以删除地图
+			ResPool.instance.deleteRes("road"+_trackVO.id);
 		}
 		
 		protected function createGameBg():void
