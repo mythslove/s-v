@@ -84,7 +84,7 @@
 						shopBaseBuildingHash[baseVO.name] = baseVO ;
 						shopBaseBuildings.push( baseVO );
 					}
-					shopBaseBuildings.sort(baseBuildingCompare);
+//					shopBaseBuildings.sort(baseBuildingCompare);
 				}
 				else
 				{
@@ -123,7 +123,7 @@
 						}
 					} 
 				}
-				baseVO.products.sort(productCompare);
+//				baseVO.products.sort(productCompare);
 			}
 			private function baseBuildingCompare( vo1:BaseBuildingVO , vo2:BaseBuildingVO):int
 			{
