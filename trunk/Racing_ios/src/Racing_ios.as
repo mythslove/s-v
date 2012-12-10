@@ -58,9 +58,8 @@ package
 			var resVOs:Array=[];
 			resVOs.push( new ResVO("Config_Car","config/Config_Car.xml"));
 			resVOs.push( new ResVO("Config_Track","config/Config_Track.xml"));
-			var vo:ResVO = new ResVO("DustParticle_PEX","effects/particle.pex") ;
-			vo.resType = ResType.TEXT ;
-			resVOs.push( vo );
+			resVOs.push( new ResVO("GasParticle_PEX","effects/gas.pex") ) ;
+			resVOs.push( new ResVO("ClayParticle_PEX","effects/clay.pex") );
 			ResPool.instance.addEventListener(ResProgressEvent.RES_LOAD_PROGRESS , resLoadHandler );
 			ResPool.instance.addEventListener("loadConfig" , resLoadHandler );
 			ResPool.instance.queueLoad( "loadConfig",resVOs,3);
