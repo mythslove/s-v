@@ -91,6 +91,7 @@ package bing.res
 			{
 				case "txt":
 				case "xml":
+				case "pex":
 				case "ini":
 					resVO.resType = ResType.TEXT;
 					break ;
