@@ -9,6 +9,7 @@ package bing.res
 		public static const SWF:String = "swf"; //swf
 		public static const IMG:String="img"; //图片
 		public static const TEXT:String = "text"; //文本
+		public static const PEX:String = "pex"; //粒子
 		public static const BINARY:String = "binary"; //二进制
 	}
 }

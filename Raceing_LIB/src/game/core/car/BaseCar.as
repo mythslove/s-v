@@ -41,7 +41,6 @@ package game.core.car
 		public var rightWheel:Body;
 		public var compound:Compound; 
 		
-		public var dustParticle:PDParticleSystem ;
 		public var gasParticle:PDParticleSystem ;
 		public var maxVelocity:Number ;
 		public var maxImpulse:Number ;
@@ -77,12 +76,12 @@ package game.core.car
 		
 		protected function createParticles():void
 		{
-			var dustPex:XML = XML(ResPool.instance.getResVOByResId("DustParticle_PEX").resObject);
-			var dustTexture :Texture = _textureAltas.getTexture("dustTexture");
-			dustParticle = new PDParticleSystem(dustPex,dustTexture);
-			Starling.juggler.add( dustParticle );
-			addChildAt(dustParticle,0);
-			dustParticle.start();
+			var dustPex:XML = XML(ResPool.instance.getResVOByResId("GasParticle_PEX").resObject);
+			var dustTexture:Texture = _textureAltas.getTexture("dustTexture");
+			gasParticle = new PDParticleSystem(dustPex,dustTexture);
+			Starling.juggler.add( gasParticle );
+			addChildAt(gasParticle,0);
+			gasParticle.start();
 		}
 		
 		protected function graphicUpdate(body:Body):void
@@ -94,9 +93,9 @@ package game.core.car
 				obj.y = body.position.y ;
 				obj.rotation = body.rotation;
 				
-				if(dustParticle && body==leftWheel){
-					dustParticle.emitterX  = body.position.x-body.bounds.width ;
-					dustParticle.emitterY = body.position.y ;
+				if(gasParticle && body==leftWheel){
+					gasParticle.emitterX  = body.position.x-body.bounds.width ;
+					gasParticle.emitterY = body.position.y ;
 				}
 			}
 		}
@@ -129,9 +128,9 @@ package game.core.car
 			_carGroup = null ;
 			_space = null ;
 			compound = null ;
-			Starling.juggler.remove( dustParticle );
-			dustParticle.dispose();
-			dustParticle = null ;
+			Starling.juggler.remove( gasParticle );
+			gasParticle.dispose();
+			gasParticle = null ;
 		}
 	}
 }

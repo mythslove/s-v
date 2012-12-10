@@ -1,5 +1,7 @@
 package game.core.scene
 {
+	import bing.res.ResPool;
+	
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
 	import flash.utils.setInterval;
@@ -35,6 +37,7 @@ package game.core.scene
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
+	import starling.extensions.PDParticleSystem;
 	import starling.textures.Texture;
 	
 	public class ContestGameScene extends BaseContestGameScene
@@ -57,6 +60,9 @@ package game.core.scene
 		protected var _carWheelCbType:CbType = new CbType();
 		protected var _carLeftWheelOnRoad:Boolean , _carRightWheelOnRoad:Boolean ;
 		protected var _botCarLeftWheelOnRoad:Boolean, _botCarRightWheelOnRoad:Boolean  ;
+		
+		//前后轮胎的粒子
+		protected var _leftClayParticle:PDParticleSystem  , _rightClayParticle:PDParticleSystem ;
 		
 		/**
 		 *  竞赛游戏场景
@@ -89,7 +95,16 @@ package game.core.scene
 			_track = TrackFactory.createTrack(_trackVO,_space);
 			_map.addChild(_track);
 			
-			var dustTexture:Texture =  _track.textureAltas.getTexture("dustTexture") ;
+			//创建粒子
+			var clayTexture:Texture =  _track.textureAltas.getTexture("dustTexture") ;
+			var clayTextureXML:XML = XML(ResPool.instance.getResVOByResId("ClayParticle_PEX").resObject) ;
+			_leftClayParticle = new PDParticleSystem(clayTextureXML,clayTexture);
+			_rightClayParticle = new PDParticleSystem(clayTextureXML,clayTexture);
+			_map.addChildAt(_leftClayParticle,0);
+			_map.addChildAt(_rightClayParticle,0);
+			Starling.juggler.add( _leftClayParticle );
+			Starling.juggler.add( _rightClayParticle );
+			
 			_carBot = CarFactory.createCar( _carGroup , _carBotVO.carVO , _space , _botX , GameSetting.SCREEN_HEIGHT-_trackVO.position );
 			_carBot.leftWheel.cbTypes.add( _carWheelCbType) ;
 			_carBot.rightWheel.cbTypes.add( _carWheelCbType) ;
@@ -101,6 +116,7 @@ package game.core.scene
 			_car.carBody.cbTypes.add(_carBodyCbType);
 			_map.addChild(_car);
 			
+			//结束位置
 			var endLine:Quad = new Quad(50,GameSetting.SCREEN_HEIGHT*3,0xffcc00);
 			endLine.alpha = .5 ;
 			endLine.x = _track.len-400-50/2;
@@ -223,7 +239,7 @@ package game.core.scene
 						_gameOver = true ;
 						_car.breakCar();
 						stage.removeEventListener(TouchEvent.TOUCH , onTouchHandler);
-						_car.dustParticle.stop();
+						_car.gasParticle.stop();
 						setTimeout(gameOver,3000);
 					}
 				}
@@ -267,11 +283,36 @@ package game.core.scene
 					}
 				}
 			}
-			
 			if(_car.leftWheel.velocity.x<-_car.maxVelocity)  _car.leftWheel.velocity.x = - _car.maxVelocity ;
 			if(_car.leftWheel.velocity.x>_car.maxVelocity)  _car.leftWheel.velocity.x = _car.maxVelocity ;
 			if(_car.rightWheel.velocity.x<-_car.maxVelocity)  _car.rightWheel.velocity.x = - _car.maxVelocity ;
 			if(_car.rightWheel.velocity.x>_car.maxVelocity)  _car.rightWheel.velocity.x = _car.maxVelocity ;
+			
+			//泥土粒子
+			_leftClayParticle.emitterX = _car.leftWheel.position.x ;
+			_leftClayParticle.emitterY = _car.leftWheel.position.y+_car.leftWheel.bounds.height*0.3 ;
+			_rightClayParticle.emitterX = _car.rightWheel.position.x ;
+			_rightClayParticle.emitterY = _car.rightWheel.position.y+_car.rightWheel.bounds.height*0.3 ;
+			if(_moveDirection ==2 && _carLeftWheelOnRoad){
+				if(_car.leftWheel.velocity.x>0)
+				{
+					if(_car.leftWheel.velocity.x<_car.maxVelocity*0.6){
+						_leftClayParticle.start(0.2);
+					}
+				}else if( -_car.leftWheel.velocity.x<_car.maxVelocity*0.6){
+					_leftClayParticle.start(0.2);
+				}
+			}
+			if(_moveDirection ==1 && _carRightWheelOnRoad){
+				if(_car.rightWheel.velocity.x>0)
+				{
+					if(_car.rightWheel.velocity.x<_car.maxVelocity*0.6){
+						_rightClayParticle.start(0.2);
+					}
+				}else if( -_car.rightWheel.velocity.x<_car.maxVelocity*0.6){
+					_rightClayParticle.start(0.2);
+				}
+			}
 		}
 		
 		/**
@@ -366,6 +407,9 @@ package game.core.scene
 			_carBodyCbType = null ;
 			_carWheelCbType = null ;
 			_map = null ;
+			_leftClayParticle.dispose();
+			_rightClayParticle.dispose();
+			_leftClayParticle = _rightClayParticle = null ;
 		}
 	}
 }
