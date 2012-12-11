@@ -293,7 +293,7 @@ package game.core.scene
 			_leftClayParticle.emitterY = _car.leftWheel.position.y+_car.leftWheel.bounds.height*0.3 ;
 			_rightClayParticle.emitterX = _car.rightWheel.position.x ;
 			_rightClayParticle.emitterY = _car.rightWheel.position.y+_car.rightWheel.bounds.height*0.3 ;
-			if(_moveDirection ==2 && _carLeftWheelOnRoad){
+			if(_moveDirection>0 && _carLeftWheelOnRoad){
 				if(_car.leftWheel.velocity.x>0)
 				{
 					if(_car.leftWheel.velocity.x<_car.maxVelocity*0.6){
@@ -303,7 +303,7 @@ package game.core.scene
 					_leftClayParticle.start(0.2);
 				}
 			}
-			if(_moveDirection ==1 && _carRightWheelOnRoad){
+			if(_moveDirection>0 && _carRightWheelOnRoad){
 				if(_car.rightWheel.velocity.x>0)
 				{
 					if(_car.rightWheel.velocity.x<_car.maxVelocity*0.6){
