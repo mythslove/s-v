@@ -59,6 +59,7 @@ package game.core.scene
 		protected var _carBodyCbType:CbType = new CbType();
 		protected var _carWheelCbType:CbType = new CbType();
 		protected var _carLeftWheelOnRoad:Boolean , _carRightWheelOnRoad:Boolean ;
+		protected var _carLeftWheelOnBridge:Boolean , _carRightWheelOnBridge:Boolean ;
 		protected var _botCarLeftWheelOnRoad:Boolean, _botCarRightWheelOnRoad:Boolean  ;
 		
 		//前后轮胎的粒子
@@ -199,9 +200,15 @@ package game.core.scene
 					switch(callback.int1.castBody) {
 						case _car.leftWheel :
 							_carLeftWheelOnRoad = true ;
+							if(callback.int2.cbTypes.length==3 && callback.int2.cbTypes.at(2)==_track.bridgeType ){
+								_carLeftWheelOnBridge = true ;
+							}
 							break ;
 						case _car.rightWheel :
 							_carRightWheelOnRoad = true ;
+							if(callback.int2.cbTypes.length==3 && callback.int2.cbTypes.at(2)==_track.bridgeType ){
+								_carRightWheelOnBridge = true ;
+							}
 							break ;
 						case _carBot.leftWheel :
 							_botCarLeftWheelOnRoad = true ;
@@ -218,9 +225,15 @@ package game.core.scene
 					switch(callback.int1.castBody) {
 						case _car.leftWheel :
 							_carLeftWheelOnRoad = false ;
+							if(callback.int2.cbTypes.length==3 && callback.int2.cbTypes.at(2)==_track.bridgeType ){
+								_carLeftWheelOnBridge = false ;
+							}
 							break ;
 						case _car.rightWheel :
 							_carRightWheelOnRoad = false ;
+							if(callback.int2.cbTypes.length==3 && callback.int2.cbTypes.at(2)==_track.bridgeType ){
+								_carRightWheelOnBridge = false ;
+							}
 							break ;
 						case _carBot.leftWheel :
 							_botCarLeftWheelOnRoad = false ;
@@ -293,7 +306,7 @@ package game.core.scene
 			_leftClayParticle.emitterY = _car.leftWheel.position.y+_car.leftWheel.bounds.height*0.3 ;
 			_rightClayParticle.emitterX = _car.rightWheel.position.x ;
 			_rightClayParticle.emitterY = _car.rightWheel.position.y+_car.rightWheel.bounds.height*0.3 ;
-			if(_moveDirection>0 && _carLeftWheelOnRoad){
+			if(_moveDirection>0 && _carLeftWheelOnRoad && !_carLeftWheelOnBridge){
 				if(_car.leftWheel.velocity.x>0)
 				{
 					if(_car.leftWheel.velocity.x<_car.maxVelocity*0.4){
@@ -303,7 +316,7 @@ package game.core.scene
 					_leftClayParticle.start(0.1);
 				}
 			}
-			if(_playerCarVO.carVO.drive==2 && _moveDirection>0 &&_carRightWheelOnRoad){
+			if(_playerCarVO.carVO.drive==2 && _moveDirection>0 &&_carRightWheelOnRoad&& !_carRightWheelOnBridge){
 				if(_car.rightWheel.velocity.x>0)
 				{
 					if(_car.rightWheel.velocity.x<_car.maxVelocity*0.4){
