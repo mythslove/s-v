@@ -309,20 +309,28 @@ package game.core.scene
 			if(_moveDirection>0 && _carLeftWheelOnRoad && !_carLeftWheelOnBridge){
 				if(_car.leftWheel.velocity.x>0)
 				{
-					if(_car.leftWheel.velocity.x<_car.maxVelocity*0.4){
+					if(_car.leftWheel.velocity.x<_car.maxVelocity*0.5){
+						_leftClayParticle.gravityX= _car.leftWheel.velocity.x-_car.maxVelocity ;
+						_leftClayParticle.gravityX= _leftClayParticle.gravityX<-10 ? -10 : _leftClayParticle.gravityX ;
 						_leftClayParticle.start(0.1);
 					}
-				}else if( -_car.leftWheel.velocity.x<_car.maxVelocity*0.4){
+				}else if( -_car.leftWheel.velocity.x<_car.maxVelocity*0.5){
+					_leftClayParticle.gravityX= _car.maxVelocity-_car.leftWheel.velocity.x ;
+					_leftClayParticle.gravityX= _leftClayParticle.gravityX>10 ? 10 : _leftClayParticle.gravityX ;
 					_leftClayParticle.start(0.1);
 				}
 			}
 			if(_playerCarVO.carVO.drive==2 && _moveDirection>0 &&_carRightWheelOnRoad&& !_carRightWheelOnBridge){
 				if(_car.rightWheel.velocity.x>0)
 				{
-					if(_car.rightWheel.velocity.x<_car.maxVelocity*0.4){
+					if(_car.rightWheel.velocity.x<_car.maxVelocity*0.5){
+						_rightClayParticle.gravityX= _car.rightWheel.velocity.x-_car.maxVelocity ;
+						_rightClayParticle.gravityX=_rightClayParticle.gravityX<-10 ? -10 : _rightClayParticle.gravityX ;
 						_rightClayParticle.start(0.1);
 					}
-				}else if( -_car.rightWheel.velocity.x<_car.maxVelocity*0.4){
+				}else if( -_car.rightWheel.velocity.x<_car.maxVelocity*0.5){
+					_rightClayParticle.gravityX= _car.maxVelocity-_car.rightWheel.velocity.x;
+					_rightClayParticle.gravityX=_rightClayParticle.gravityX>10 ? 10 : _rightClayParticle.gravityX ;
 					_rightClayParticle.start(0.1);
 				}
 			}
