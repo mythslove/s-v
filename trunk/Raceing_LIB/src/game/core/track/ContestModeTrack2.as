@@ -101,6 +101,7 @@ package game.core.track
 				block.userData.graphicOffset = Vec2.get();
 				block.userData.graphicUpdate = Road2PhyData.flashGraphicsUpdate ;
 				block.cbTypes.add(roadType);
+				block.cbTypes.add(bridgeType);
 				block.group = interGroup ;
 				block.compound = comp; 
 				block.mass = block.gravMass=2 ;
