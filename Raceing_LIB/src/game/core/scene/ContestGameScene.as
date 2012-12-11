@@ -303,7 +303,7 @@ package game.core.scene
 					_leftClayParticle.start(0.1);
 				}
 			}
-			if(_moveDirection>0 &&_carRightWheelOnRoad){
+			if(_playerCarVO.carVO.drive==2 && _moveDirection>0 &&_carRightWheelOnRoad){
 				if(_car.rightWheel.velocity.x>0)
 				{
 					if(_car.rightWheel.velocity.x<_car.maxVelocity*0.4){
