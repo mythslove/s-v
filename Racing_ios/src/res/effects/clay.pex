@@ -20,7 +20,7 @@
   <maxParticles value="60"/>
   <startParticleSize value="15"/>
   <startParticleSizeVariance value="0"/>
-  <finishParticleSize value="5"/>
+  <finishParticleSize value="10"/>
   <FinishParticleSizeVariance value="0"/>
   <duration value="-1.00"/>
   <emitterType value="0"/>
