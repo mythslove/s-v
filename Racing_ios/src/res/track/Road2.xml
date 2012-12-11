@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker http://texturepacker.com-->
-<!-- $TexturePacker:SmartUpdate:de1d537a7ef14a2c58c2c0cf0f145163$ -->
-<TextureAtlas imagePath="Road1.png">
-    <SubTexture name="bridgeTexture" x="0" y="1709" width="50" height="20"/>
-    <SubTexture name="dustTexture" x="0" y="1643" width="64" height="64"/>
+<!-- $TexturePacker:SmartUpdate:fa88ce1b1e2047ab794a491656f2ab76$ -->
+<TextureAtlas imagePath="Road2.png">
+    <SubTexture name="bridgeTexture" x="0" y="1691" width="50" height="20"/>
+    <SubTexture name="dustTexture" x="0" y="1643" width="56" height="46" frameX="-4" frameY="-13" frameWidth="64" frameHeight="64"/>
     <SubTexture name="road1" x="0" y="1231" width="2046" height="410" frameX="0" frameY="-102" frameWidth="2048" frameHeight="512"/>
     <SubTexture name="road2" x="0" y="432" width="2048" height="416" frameX="0" frameY="-96" frameWidth="2048" frameHeight="512"/>
     <SubTexture name="road3" x="0" y="850" width="2048" height="379"/>
