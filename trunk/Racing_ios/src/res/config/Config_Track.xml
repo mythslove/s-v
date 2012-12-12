@@ -17,7 +17,7 @@
 		<density>1.6</density>
 		<rollingFriction>16</rollingFriction>
 		<bgColors>0x4D8DCA,0xBAC9D3</bgColors>
-		<gravity>1100</gravity>
+		<gravity>1000</gravity>
 		<position>290</position>
 		<gameMode>1</gameMode>
 		<competitors>
@@ -38,7 +38,7 @@
 		<density>1.6</density>
 		<rollingFriction>16</rollingFriction>
 		<bgColors>0x4D8DCA,0xBAC9D3</bgColors>
-		<gravity>1100</gravity>
+		<gravity>1000</gravity>
 		<position>410</position>
 		<gameMode>1</gameMode>
 		<competitors>
