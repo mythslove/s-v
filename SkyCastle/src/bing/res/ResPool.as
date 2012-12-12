@@ -11,6 +11,7 @@ package bing.res
 	import flash.system.LoaderContext;
 	import flash.system.SecurityDomain;
 	import flash.utils.Dictionary;
+	import flash.utils.getDefinitionByName;
 	
 	/**
 	 * 资源加载错误
@@ -58,7 +59,7 @@ package bing.res
 			cdns=new Vector.<String>() ;
 			_currentLoadNum = 0 ;
 			_currContext = new LoaderContext(false , ApplicationDomain.currentDomain);
-			_newContext = new LoaderContext(false , new ApplicationDomain() );
+			_newContext = new LoaderContext(false ,  new ApplicationDomain());
 		}
 		
 		/**
@@ -90,6 +91,7 @@ package bing.res
 			{
 				case "txt":
 				case "xml":
+				case "pex":
 				case "ini":
 					resVO.resType = ResType.TEXT;
 					break ;
@@ -133,7 +135,7 @@ package bing.res
 			loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR , ioErrorHandler );
 			var url:String = cdns[resVO.loadError]+resVO.url ;
 			if(isRemote){
-				if( resVO.isNewContext ){
+				if(resVO.isNewContext){
 					_newContext.securityDomain = SecurityDomain.currentDomain;
 					loader.load( new URLRequest(url) ,_newContext);
 				}else{
@@ -141,7 +143,11 @@ package bing.res
 					loader.load( new URLRequest(url) ,_currContext);
 				}
 			}else{
-				loader.load( new URLRequest(url) );
+				if(resVO.isNewContext){
+					loader.load( new URLRequest(url) ,_newContext);
+				}else{
+					loader.load( new URLRequest(url) ,_currContext);
+				}
 			}
 			_currentLoadNum++;
 		}
@@ -402,22 +408,40 @@ class QueueLoader
 	public function QueueLoader( name:String , resArray:Array, maxNum:int =2 )
 	{
 		this.name = name ;
-		_resArray = resArray ;
+		
+		//去除相同的resId
+		var dic:Dictionary = new Dictionary();
+		_resArray = [];
+		for( var i:int=0 ; i<resArray.length ; ++i){
+			if(!dic[resArray[i].resId]){
+				dic[resArray[i].resId] = true ;
+				_resArray.push( resArray[i]);
+			}
+		}
+		
 		_queueHash = new Dictionary(true) ;
-		_total= resArray.length ;
+		_total= _resArray.length ;
 		_queueLoaded = 0;
-		for( var i:int=0 ; i<maxNum && i<_total ; ++i){
+		for( i=0 ; i<maxNum && i<_total ; ++i){
 			startQueueLoad();
 		}
 	}
 	
 	protected function startQueueLoad():void
 	{
-		var content:ResVO = _resArray.shift();
-		content.isQueue = true ;
-		this._queueHash[content.resId] = content;
-		ResPool.instance.addEventListener( content.resId , resObjectLoadedHandler );
-		ResPool.instance.loadRes( content );
+		if(_resArray && _resArray.length>0){
+			var content:ResVO = _resArray.shift();
+			content.isQueue = true ;
+			this._queueHash[content.resId] = content;
+			ResPool.instance.addEventListener( content.resId , resObjectLoadedHandler );
+			ResPool.instance.loadRes( content );
+		}else{
+			_resArray = null ;
+			_queueHash = null ;
+			ResPool.instance.dispatchEvent( new ResLoadedEvent( name ) );
+			_queueHash = null ;
+			_resArray = null ;
+		}
 	}
 	protected function resObjectLoadedHandler(e:Event):void
 	{
