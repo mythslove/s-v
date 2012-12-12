@@ -1,7 +1,7 @@
 package bing.utils
 {
 	import flash.geom.Point;
-
+	
 	public class MathUtil
 	{
 		/**
@@ -63,6 +63,88 @@ package bing.utils
 			var A:Number = (pt1.y-pt2.y)/(pt1.x- pt2.x);  
 			var B:Number = (pt1.y-A*pt1.y);  
 			return Math.abs(A*pt3.x + B -pt3.y)/Math.sqrt(A*A + 1);  
+		}
+		
+		/**
+		 * 判断点在多边形内  
+		 * @param checkPoint 要判断的点
+		 * @param dotPolygon 多边形的点的二维数组
+		 * @return 
+		 */		
+		public static function checkPointInPolygon(checkPoint:Point, dotPolygon:Array):Boolean 
+		{
+			var nCount:uint = dotPolygon.length;
+			if (nCount < 3) return false; //多边形不存在
+			var isBeside:Boolean = false;//记录是否在多边形的边上
+			
+			var maxX:Number;
+			var maxY:Number;
+			var minX:Number;
+			var minY:Number;
+			var i:uint;
+			
+			maxX = dotPolygon[0][0];
+			minX = dotPolygon[0][0];
+			maxY = dotPolygon[0][1];
+			minY = dotPolygon[0][1];
+			for (i = 1; i < nCount; i++) {
+				if (dotPolygon[i][0] >= maxX) {
+					maxX = dotPolygon[i][0];
+				} else if (dotPolygon[i][0] <= minX) {
+					minX = dotPolygon[i][0];
+				}
+				
+				if (dotPolygon[i][1] >= maxY) {
+					maxY = dotPolygon[i][1];
+				} else if (dotPolygon[i][1] <= minY) {
+					minY = dotPolygon[i][1];
+				}
+			}
+			if ((checkPoint.x > maxX) || (checkPoint.x < minX) || (checkPoint.y > maxY) || (checkPoint.y < minY)) {
+				//return [-1, " ? "];//如果在多边形矩形区域外
+			}
+			
+			var nCross:uint = 0;
+			var p1:Array = new Array();
+			var p2:Array = new Array();
+			var vx, vy:Number;
+			for (i = 0; i < nCount; i++) {
+				p1 = dotPolygon[i];
+				p2 = dotPolygon[(i + 1) % nCount];
+				
+				//求解 y=dot[1] 与 p1p2 的交点
+				
+				if (p1[1] == p2[1]) {// p1p2 与 y = dot[1] 平行
+					if (checkPoint.y == p1[1] && checkPoint.x >= Math.min(p1[0], p2[0]) && checkPoint.x <= Math.max(p1[0], p2[0])) {
+						isBeside = true;
+						continue;
+					}
+				}
+				
+				if (checkPoint.y < Math.min(p1[1], p2[1]) || checkPoint.y > Math.max(p1[1], p2[1])) {// 交点在p1p2延长线上，包括 y=dot[1] 与 p1p2 平行的情形
+					continue;
+				}
+				
+				//求交点的 x 坐标，包括p1p2为垂直线的情形
+				vx = (checkPoint.y - p1[1]) * (p2[0] - p1[0]) / (p2[1] - p1[1]) + p1[0];
+				if (vx > checkPoint.x) {
+					if (checkPoint.y == p1[1] || checkPoint.y == p2[1]) {
+						if (checkPoint.y == Math.max(p1[1], p2[1])) {
+							nCross ++;//y=dot[1] 与 p1p2 交于纵坐标较大的端点
+						}
+					} else {
+						nCross ++;//只统计单侧交点
+					}
+				} else if (vx == checkPoint.x) {
+					isBeside = true;
+				}
+			}
+			if (isBeside) {
+				return true ;//[0, nCross];//多边形边
+			} else if (nCross % 2 == 1) {//单边交点为偶数，点在多边形之外
+				return true ;//[1, nCross];//多边形内
+			}
+			return false ;//[-1, nCross];//多边形外
 		}
 	}
 }
